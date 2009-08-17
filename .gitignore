@@ -1,0 +1,8 @@
+tmp/*
+log/*
+*~
+Thumbs.db
+*.swp
+lib/sql/*
+public/db/*
+public/rubysysadm/*
