@@ -4,6 +4,14 @@ class Token:
   def __init__(self, token, lexeme, value, pos, len):
     self.token, self.lexeme, self.value = token, lexeme, value
     self.pos, self.len = pos, len
+#
+#
+#
+class Parser:
+  def __init__(self, toks):
+    self.toks=toks
+  def parseTree(self):
+    
 class Lexer:
   def __init__(self, src):
     self.src=src
