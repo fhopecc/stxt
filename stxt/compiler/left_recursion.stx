@@ -1,0 +1,87 @@
+左遞迴文法
+----------
+在內容無關文法中，若一個非終端元 r 其右方展開式第一個符號也為 r，
+則 r 是直接左遞迴。若 r 經過展開後，右方展開式第一個符號也為 r，
+則 r 是間接左遞迴。
+
+code.基本算術文法
+expr   = expr + term  | expr - term | term
+term   = term * digit | digit
+digit  = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0
+::
+
+左遞迴文法轉後置文法
+------------------
+
+<table><title>左遞迴文法轉後置文法的語意動作表</title>
+<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+<thead>
+<row>
+<entry>展開規則</entry>
+<entry>語意動作</entry>
+</row>
+</thead>
+<tbody>
+<row><entry><![CDATA[<expr>   ::= <expr1>+<term1>]]></entry>
+<entry>
+<![CDATA[
+<expr>.a ::= <expr1>.a || <term1>.a || +
+]]>
+</entry>
+</row>
+<row><entry><![CDATA[<expr>   ::= <expr1>-<term1>]]></entry>
+<entry>
+<![CDATA[
+<expr>.a ::= <expr1>.a || <term1>.a || -
+]]>
+</entry>
+</row>
+<row><entry><![CDATA[<expr>   ::= <term1>]]></entry>
+<entry>
+<![CDATA[
+<expr>.a ::= <term1>.a
+]]>
+</entry>
+</row>
+<row><entry><![CDATA[<term>   ::= <term1>*<digit1>]]></entry>
+<entry>
+<![CDATA[
+<term>.a   ::= <term1>.a ||<digit1>.a || *
+]]>
+</entry>
+</row>
+<row><entry><![CDATA[<term>   ::= <term1>/<digit1>]]></entry>
+<entry>
+<![CDATA[
+<term>.a   ::= <term1>.a ||<digit1>.a || /
+]]>
+</entry>
+</row>
+<row><entry><![CDATA[<term>   ::= <digit1>]]></entry>
+<entry>
+<![CDATA[
+<term>.a   ::= <digit1>.a 
+]]>
+</entry>
+</row>
+<row>
+<entry><![CDATA[<digit>  ::= 1]]></entry>
+<entry>
+<![CDATA[
+<digit>.t ::= 1
+]]>
+</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</example>
+</sect1>
+<sect1 id="PredictiveParse"><title>預測剖析法</title>
+<para>
+對源碼詞串的剖析，一般是由左而右的讀取，
+正讀取到的詞稱為讀取詞，
+預測剖析法為遞降剖析法的一種，
+它利用一個副程序表示每個非終結文法元。
+預測剖析法主要是利用展開規則的右邊的展開式的第一個文法元，
+來判斷要選用那個展開式。

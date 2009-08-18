@@ -37,7 +37,7 @@ if T.ts < O.wts
 else
   T.read(O)
   O.rts = max(T.ts, O.rts)
-
+::
 令 Tw 表示最後寫入 O 的交易，上面則意指 T.ts < Tw.ts，
 由於 T.r(O) 與 Tw.w(O) 互為衝突動作，故依上述限制 T.r(O) 
 必須早於 Tw.w(O)，所以讀取物件 O 的動作違反上述限制，
@@ -57,7 +57,6 @@ else
   T.write(O)
   O.wts = T.ts
 ::
-
 湯瑪式寫入法則(Thomas Write Rule)
 ---------------------------------
 若 T1.ts < T2.ts，則 T1 對 A 的寫入會被 T2 對 A 的寫入
