@@ -7,11 +7,9 @@ class Token:
   def error_msg(self):
     return self.token+'('+str(self.pos)+')'+ \
         '['+self.lexeme.decode('utf8').encode('cp950')+']'
-           
 class ParseTreeNode:
-  def __init__(self, type):
-    self.token, self.lexeme, self.value = token, lexeme, value
-    self.pos, self.len = pos, len
+  def __init__(self, type, token):
+    self.type, self.token = type, token
 #
 # book     = book sect1
 # sect1    = HEAD1 content1
@@ -24,8 +22,8 @@ class ParseTreeNode:
 # ::
 # Removing left recursive
 # ======================= 
-# book     = book_
-# book_    = '' | sect1 book_
+# book     = sect1 book_ | ''
+# book_    = sect1 book_ | ''
 # sect1    = HEAD1 content1
 # content1 = content1_
 # content1_= '' | sect2 content1_ | block content1_ 
@@ -42,48 +40,66 @@ class Parser:
     l = Lexer(src='abcd')
     l.run()
     self.tokens = l.tokens
-    self.current_token = self.tokens[self.pos]
-  def next_token(self):
-    self.pos += 1
-    self.current_token = self.tokens[self.pos]
+    self.advance()
+  def advance(self):
+    try:
+      self.lookahead = self.tokens[self.pos]
+      self.pos += 1
+    except:
+      self.lookahead = None
   def accept(self, token):
-    if self.current_token.token == token:
-      print 'accept' + self.current_token.error_msg()
-      self.next_token()
+    if self.lookahead.token == token:
+      print 'accept ' + self.lookahead.error_msg()
+      self.advance()
       return True
     return False
   def expect(self, token):
-    if self.accept(token):
-      return True
-    raise ValueError("expect " + token + ", but was " +
-      self.current_token.error_msg())
+    if not self.accept(token):
+      raise ValueError("expect " + token + ", but was " + \
+      self.lookahead.error_msg())
   def parse(self):
-    return self.book()
-  def book(self):
-    return self.book_()
-  def book_(self):
-    if self.sect1():
-      return self.book_()
-    else:
-      return True
-  def sect1(self):
-    if self.expect('HEAD1'):
-      return self.content1()
-  # content1 = content1_
-  def content1(self):
-    return self.content1_()
-  # content1_= '' | sect2 content1_ | block content1_ 
-  def content1_(self):
-    if self.sect2():
-      return self.content1_()
-    elif self.block():
-      return self.content1_()
+    self.book()
     return True
-  # sect2    = HEAD2 content2
+  # book = sect1 book_ | ''
+  def book(self):
+    if self.lookahead == None:
+      return
+    elif self.lookahead.token == 'HEAD1':
+      self.sect1()
+      self.book_()
+  # book_ = sect1 book_ | ''
+  def book_(self):
+    if self.lookahead == None:
+      return
+    elif self.lookahead.token == 'HEAD1':
+      self.sect1()
+      self.book_()
+  # sect1 = HEAD1 content1
+  def sect1(self):
+    self.expect('HEAD1')
+    self.content1()
+  # content1 = sect2 content1_ | block content1_
+  def content1(self):
+    if self.lookahead.token == 'HEAD2':
+      self.sect2()
+      self.content1_()
+    else:
+      self.block()
+      self.content1_()
+  # content1_= sect2 content1_ | block content1_  | ''
+  def content1_(self):
+    if self.lookahead == None:
+      return
+    elif self.lookahead.token == 'HEAD2':
+      self.sect2()
+      self.content1_()
+    else:
+      self.block()
+      self.content1_()
+  # sect2 = HEAD2 content2
   def sect2(self):
-    if self.accept('HEAD2'):
-      return self.content2()
-    return False
+    if self.expect('HEAD2'):
+      self.content2()
   # content2 = content2_
   def content2(self):
     return self.content2_()
@@ -92,31 +108,28 @@ class Parser:
     if self.block():
       return self.content2_()
     return True
-  # block    = PARA | code | list EMPTYLINE
+  # block = PARA | code | list EMPTYLINE
   def block(self):
-    if self.accept('PARA'):
-      return True
-    elif self.code():
-      return True
-    elif self.list():
-      return self.expect('EMPTYLINE')
-    return False
+    if self.lookahead.token == 'PARA':
+      self.expect('PARA')
+    elif self.lookahead.token == 'CODEHEAD':
+      self.code()
+    elif self.lookahead.token == 'LISTITEM':
+      self.list()
+      self.expect('EMPTYLINE')
+  # code = CODEHEAD CODEBLOCK   
+  def code(self):
+    self.expect('CODEHEAD')
+    self.expect('CODEBLOCK')
   # list = LISTITEM list_ 
   def list(self):
-    if self.accept('LISTITEM'):
-      return self.list_()
-    return False
-  # list_ = '' | LISTITEM list_ 
+    self.expect('LISTITEM')
+    self.list_()
+  # list_ = LISTITEM list_ | ''
   def list_(self):
-    if self.accept('LISTITEM'):
-      return self.list_()
-    return True
-  # code     = CODEHEAD CODEBLOCK   
-  def code(self):
-    if self.accept('CODEHEAD'):
-      if self.accept('CODEBLOCK'):
-        return True
-    return False
+    if self.lookahead.token == 'LISTITEM':
+      self.expect('LISTITEM')
+      self.list_()
 class Lexer:
   def __init__(self, src):
     self.src=src
@@ -176,10 +189,10 @@ class RTxtLexerTest(unittest.TestCase):
   def testSource(self):
     l = Lexer(src='abcd')
     self.assertEqual('abcd', l.src)
-    l.run()
-    for t in l.tokens:
-      print t.token+'['+t.lexeme.decode('utf8').encode('cp950')+']'
-    print 'There are ' + str(len(l.tokens)) + ' tokens.'
+    #l.run()
+    #for t in l.tokens:
+    #  print t.token+'['+t.lexeme.decode('utf8').encode('cp950')+']'
+    #print 'There are ' + str(len(l.tokens)) + ' tokens.'
 class STXTParserTest(unittest.TestCase):
   def testSource(self):
     p = Parser(src='abcd')
@@ -188,4 +201,6 @@ class STXTParserTest(unittest.TestCase):
     p = Parser(src='abcd')
     self.assert_(p.parse())
 if __name__ == '__main__':
-  unittest.main()
+  p = Parser(src='abcd')
+  p.parse()
+  #unittest.main()
