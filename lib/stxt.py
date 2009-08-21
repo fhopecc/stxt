@@ -86,18 +86,16 @@ class Lexer:
   def LEXERROR(self,m):
     raise ValueError('LexError at (' + 
           str(self.src[self.cur:]).decode('utf8').encode('cp950')+')')
-class ParseTreeNode:
-  def __init__(self, type, token=None):
-    self.type, self.token, self.children= type, token, []
-    self.title, self.parent = '', None
-    if not token == None: self.value = token.value
+class TreeNode:
+  def __init__(self):
+    self.parent, self.children = None, []
   def append(self, *nodes):
     for n in nodes: 
       n.parent = self
       self.children.append(n)
     return self
   def isRoot(self):
-    return self.parent == None
+    return self.parent is None
   def height(self):
     if self.isRoot(): return 0
     c, h = self, 0
@@ -105,17 +103,81 @@ class ParseTreeNode:
       c = c.parent
       h += 1
     return h
+class ParseTreeNode(TreeNode):
+  def __init__(self, type, token=None):
+    TreeNode.__init__(self)
+    self.type, self.token= type, token, 
+    if not token is None: self.value = token.value
   def print_type_tree(self):
     print '*' * self.height() + self.type
     for c in self.children: c.print_type_tree()
   def print_postfix_tree(self):
     for c in self.children: c.print_postfix_tree()
     print '*' * self.height() + self.type
-class DocTreeNode:
-  def __init__(self, type, value, *attr):
-    self.type, self.token, self.children= type, token, []
-    self.title, self.parent = '', None
-    if not token is None: self.value = token.value
+  def to_doctree(self):
+    if self.type in ('book'):
+      n = DocTreeNode(self.type)
+      if len(self.children) == 2:
+        n.append(*self.children[0].to_doctree())
+      return n
+    elif self.type in ('sect1s', 'content1', 'content2'):
+      l = [self.children[0].to_doctree()]
+      for c in self.children[1].to_doctree():
+        l.append(c)
+      return l
+    elif self.type in ('list'):
+      n = DocTreeNode(self.type)
+      n.append(self.children[0].to_doctree())
+      for c in self.children[1].to_doctree():
+        n.append(c)
+      return n
+    elif self.type in ('sect1s_', 'content1_', 'content2_', \
+                       'list_'):
+      if len(self.children) == 2:
+        l = [self.children[0].to_doctree()]
+        for c in self.children[1].to_doctree():
+          l.append(c)
+        return l
+      return []
+    elif self.type in ('HEAD1', 'HEAD2'):
+      return self.value
+    elif self.type in ('sect1', 'sect2'):
+      n = DocTreeNode(self.type)
+      n.title = self.children[0].to_doctree()
+      for c in self.children[1].to_doctree():
+        n.append(c)
+      return n
+    elif self.type in ('PARA', 'LISTITEM'):
+      return DocTreeNode(self.type, self.value)
+    elif self.type in ('block'):
+      return self.children[0].to_doctree()
+    elif self.type in ('code'):
+      n = DocTreeNode(self.type)
+      n.title = self.children[0].to_doctree().value
+      n.append(self.children[1].to_doctree())
+      return n
+    elif self.type in ('CODEHEAD'):
+      return DocTreeNode(self.type, \
+          re.match(r'code\.(.*)$', self.token.lexeme).group(1))
+    elif self.type in ('CODEBLOCK'):
+      return DocTreeNode(self.type, \
+          re.sub(r'::\n', '', self.token.lexeme))
+    else:
+      #print 'yes ' + self.type
+      #n = DocTreeNode(self.type)
+      #for c in self.children:
+      #  n.append(c.to_doctree())
+      #return n
+      raise ValueError, "no definition for " + self.type
+class DocTreeNode(TreeNode):
+  def __init__(self, type, value='', **attr):
+    TreeNode.__init__(self)
+    self.type, self.value = type, value
+    self.name, self.title = str(id(self)), ''
+  def print_type_tree(self):
+    print '+' * self.height() + self.type
+    for c in self.children: c.print_type_tree()
+
 # book     = sect1s EOF | EOF
 # sect1s   = sect1s sect1 | sect1
 # sect1    = HEAD1 content1
@@ -280,9 +342,11 @@ if __name__ == '__main__':
   #p = parse_file(r"d:\stxt\stxt\db\timestamp.stx")
   p = parse_file(r"d:\stxt\stxt\db\concurrent_control.stx")
   p.parse()
-  p.tree.print_type_tree()
-  print '-' * 10
-  p.tree.print_postfix_tree()
+  dtree = p.tree.to_doctree()
+  dtree.print_type_tree()
+  #p.tree.print_type_tree()
+  #print '-' * 10
+  #p.tree.print_postfix_tree()
   #print to_html(p.tree).decode('utf8').encode('cp950')
 
   #with open(r'd:\stxt\html\db.html', 'w') as f:
