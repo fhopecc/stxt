@@ -115,7 +115,7 @@ class DocTreeNode:
   def __init__(self, type, value, *attr):
     self.type, self.token, self.children= type, token, []
     self.title, self.parent = '', None
-    if not token == None: self.value = token.value
+    if not token is None: self.value = token.value
 # book     = sect1s EOF | EOF
 # sect1s   = sect1s sect1 | sect1
 # sect1    = HEAD1 content1
@@ -142,7 +142,7 @@ class DocTreeNode:
 # list     = LISTITEM list_ 
 # list_    = LISTITEM list_ | ''
 def parse_file(f):
- return Parser(tokenize_file(f))
+  return Parser(tokenize_file(f))
 class Parser:
   def __init__(self, lexer):
     self.lexer, self.pos = lexer, 0
