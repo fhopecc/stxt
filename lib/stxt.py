@@ -5,11 +5,12 @@ class Token:
   def __init__(self, lexer, token, lexeme, value, pos, len):
     self.token, self.lexeme, self.value = token, lexeme, value
     self.lexer, self.pos, self.len = lexer, pos, len
+    self.name = str(id(self))
   def to_str(self):
     line_num = self.lexer.src.count('\n', 0, self.pos) + 1
-    output =  self.token+'('+str(line_num)+':'+str(self.pos)+') at '
-    output += self.lexer.file 
-    output += '{\n'+self.lexeme+'\n}'
+    output = self.token + '[' + self.name + ']' + \
+             '('+str(line_num)+':'+str(self.pos)+') at ' + \
+             self.lexer.file + '{\n'+self.lexeme+'\n}'
     return output
   def to_cp950_str(self):
     return self.to_str().decode('utf8').encode('cp950')
@@ -24,11 +25,11 @@ class Lexer:
     self.src, self.file = src, '_STRING_'
     self.grammar=[(re.compile(r'^<(.*)>\n', re.M), 
                    self.INCLUDE),
-                  (re.compile(r'(^.*)\n=+\n', re.M), 
+                  (re.compile(r'^(\[(.*)\])?(.*)\n=+\n', re.M), 
                    self.HEAD1),
-                  (re.compile(r'(^.*)\n-+\n', re.M), 
+                  (re.compile(r'^(\[(.*)\])?(.*)\n-+\n', re.M), 
                    self.HEAD2),
-                  (re.compile(r'^code\.(.*)\n', re.M), 
+                  (re.compile(r'^code(\[(.*)\])?\.(.*)\n', re.M), 
                    self.CODEHEAD),
                   (re.compile(r'((.+\n)+)(^::\n\n)', re.M), 
                    self.CODEBLOCK),
@@ -57,15 +58,18 @@ class Lexer:
     for t in l.tokens: self.tokens.append(t)
   def HEAD1(self,m):
     lexeme = m.group(0)
-    tok = Token(self, 'HEAD1', lexeme, m.group(1), self.cur+1, len(lexeme))
+    tok = Token(self, 'HEAD1', lexeme, m.group(3), self.cur+1, len(lexeme))
+    if m.group(1): tok.name = m.group(2)
     self.tokens.append(tok)
   def HEAD2(self,m):
     lexeme = m.group(0)
-    tok = Token(self, 'HEAD2', lexeme, m.group(1), self.cur+1, len(lexeme))
+    tok = Token(self, 'HEAD2', lexeme, m.group(3), self.cur+1, len(lexeme))
+    if m.group(1): tok.name = m.group(2)
     self.tokens.append(tok)
   def CODEHEAD(self,m):
     lexeme = m.group(0)
-    tok = Token(self, 'CODEHEAD', lexeme, m.group(1), self.cur+1, len(lexeme))
+    tok = Token(self, 'CODEHEAD', lexeme, m.group(3), self.cur+1, len(lexeme))
+    if m.group(1): tok.name = m.group(2)
     self.tokens.append(tok)
   def CODEBLOCK(self,m):
     lexeme = m.group(0)
@@ -88,7 +92,7 @@ class Lexer:
           str(self.src[self.cur:]).decode('utf8').encode('cp950')+')')
 class TreeNode:
   def __init__(self):
-    self.parent, self.children = None, []
+    self.parent, self.children, self.name = None, [], str(id(self))
   def append(self, *nodes):
     for n in nodes: 
       n.parent = self
@@ -107,7 +111,8 @@ class ParseTreeNode(TreeNode):
   def __init__(self, type, token=None):
     TreeNode.__init__(self)
     self.type, self.token= type, token, 
-    if not token is None: self.value = token.value
+    if not token is None: 
+      self.name, self.value = token.name, token.value
   def print_type_tree(self):
     print '*' * self.height() + self.type
     for c in self.children: c.print_type_tree()
@@ -139,11 +144,10 @@ class ParseTreeNode(TreeNode):
           l.append(c)
         return l
       return []
-    elif self.type in ('HEAD1', 'HEAD2'):
-      return self.value
     elif self.type in ('sect1', 'sect2'):
       n = DocTreeNode(self.type)
-      n.title = self.children[0].to_doctree()
+      h = self.children[0]
+      n.name, n.title = h.name, h.value
       for c in self.children[1].to_doctree():
         n.append(c)
       return n
@@ -153,31 +157,51 @@ class ParseTreeNode(TreeNode):
       return self.children[0].to_doctree()
     elif self.type in ('code'):
       n = DocTreeNode(self.type)
-      n.title = self.children[0].to_doctree().value
+      h = self.children[0]
+      n.name, n.title = h.name, h.value
       n.append(self.children[1].to_doctree())
       return n
-    elif self.type in ('CODEHEAD'):
-      return DocTreeNode(self.type, \
-          re.match(r'code\.(.*)$', self.token.lexeme).group(1))
     elif self.type in ('CODEBLOCK'):
-      return DocTreeNode(self.type, \
-          re.sub(r'::\n', '', self.token.lexeme))
+      return DocTreeNode(self.type, self.value, self.token)
     else:
-      #print 'yes ' + self.type
-      #n = DocTreeNode(self.type)
-      #for c in self.children:
-      #  n.append(c.to_doctree())
-      #return n
       raise ValueError, "no definition for " + self.type
-class DocTreeNode(TreeNode):
-  def __init__(self, type, value='', **attr):
-    TreeNode.__init__(self)
-    self.type, self.value = type, value
-    self.name, self.title = str(id(self)), ''
-  def print_type_tree(self):
-    print '+' * self.height() + self.type
-    for c in self.children: c.print_type_tree()
-
+class DocTreeNode(ParseTreeNode):
+  def __init__(self, type, value='', token=None,**attr):
+    ParseTreeNode.__init__(self, type, token)
+    self.value, self.title = value, ''
+    self.number, self.occurence = None, 0
+  def section_number(self):
+    if self.number is None: return '' 
+    else: 
+      if self.parent.number is None: return str(self.number)
+      else: return self.parent.section_number()+'.'+str(self.number)
+  def number_children(self):
+    cs = self.children
+    if self.type in ('book'):
+      for i, c in enumerate([c for c in cs if c.type == 'sect1']):
+        c.number = i + 1
+        c.number_children()
+    elif self.type in ('sect1'):
+      for i, c in enumerate([c for c in cs if c.type == 'sect1']):
+        c.number = i + 1
+  def _count_occurence(self, type, o=0):
+    for c in self.children:
+      if c.type in [type]:
+        o = o+1
+        c.occurence = o
+      o = c._count_occurence(type, o)
+    return o
+  def count_occurence(self):
+    for type in ['code', 'table']:
+      if self.type in [type]:
+        o = o+1
+        self.occurence = o
+      self._count_occurence(type)
+  def print_tree(self):
+    out = '+' * self.height() + self.type + '[' + self.name + ']' \
+           +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
+    for c in self.children: out += c.print_tree()
+    return out
 # book     = sect1s EOF | EOF
 # sect1s   = sect1s sect1 | sect1
 # sect1    = HEAD1 content1
@@ -337,13 +361,16 @@ if __name__ == '__main__':
   #l = tokenize_file(r"d:\stxt\stxt\db\concurrent_control.stx")
   #l.run()
   #for t in l.tokens:
-  #  print t.token+'['+t.lexeme.decode('utf8').encode('cp950')+']'
+  #  print t.to_cp950_str()
   #print 'There are ' + str(len(l.tokens)) + ' tokens.'
   #p = parse_file(r"d:\stxt\stxt\db\timestamp.stx")
   p = parse_file(r"d:\stxt\stxt\db\concurrent_control.stx")
   p.parse()
   dtree = p.tree.to_doctree()
+  dtree.number_children()
+  dtree.count_occurence()
   dtree.print_type_tree()
+  print dtree.print_tree().decode('utf8').encode('cp950')
   #p.tree.print_type_tree()
   #print '-' * 10
   #p.tree.print_postfix_tree()
