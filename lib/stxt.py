@@ -124,6 +124,8 @@ class ParseTreeNode(TreeNode):
       n = DocTreeNode(self.type)
       if len(self.children) == 2:
         n.append(*self.children[0].to_doctree())
+      n.number_children()
+      n.count_occurence()
       return n
     elif self.type in ('sect1s', 'content1', 'content2'):
       l = [self.children[0].to_doctree()]
@@ -367,8 +369,6 @@ if __name__ == '__main__':
   p = parse_file(r"d:\stxt\stxt\db\concurrent_control.stx")
   p.parse()
   dtree = p.tree.to_doctree()
-  dtree.number_children()
-  dtree.count_occurence()
   dtree.print_type_tree()
   print dtree.print_tree().decode('utf8').encode('cp950')
   #p.tree.print_type_tree()
