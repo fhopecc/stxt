@@ -326,28 +326,6 @@ class Parser:
     if self.has_seen('LISTITEM'):
       n.append(self.match('LISTITEM'), self.list_())
     return n
-def to_html(tree):
-  if tree.type == 'sect1':
-    html =  '<h1>' + tree.title +'</h1>\n'
-  elif tree.type == 'sect2':
-    html =  '<h2>' + tree.title +'</h2>\n'
-  elif tree.type == 'code':
-    html = '<h4>程式碼：' + tree.title +'</h4>\n'
-  elif tree.type == 'CODEBLOCK':
-    html = '<pre>\n' + tree.value + '</pre>\n'
-  elif tree.type == 'PARA':
-    html = '<p>\n' + tree.value + '</p>\n'
-  else:
-    html = ' ' * tree.height() + tree.type + '\n'
-  for c in tree.children:
-    if c.type == 'list':
-      html += '<ul>\n'
-      for i in c.children:
-        html += '<li>' + i.value + '</li>\n'
-      html += '</ul>\n'
-    else:
-      html += to_html(c)
-  return html
 class RTxtLexerTest(unittest.TestCase):
   def testSource(self):
     l = Lexer(src='abcd')
@@ -374,8 +352,6 @@ if __name__ == '__main__':
   #p.tree.print_type_tree()
   #print '-' * 10
   #p.tree.print_postfix_tree()
-  #print to_html(p.tree).decode('utf8').encode('cp950')
-
   #with open(r'd:\stxt\html\db.html', 'w') as f:
   #  f.write('<html>\n'+to_html(p.tree)+'</html>')
   #unittest.main()
