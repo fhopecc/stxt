@@ -9,6 +9,12 @@ class Outputter:
   def output(self):
     print self.doctree.print_tree().decode('utf8').encode('cp950')
 class WEBOutputter(Outputter):
+  def make_sect_list(self):
+    o = '主題列表<br/>'
+    for sect1 in self.doctree.children:
+      o += r'<a href="%s.html">%s.%s</a><br/>' %\
+           (sect1.section_number(), sect1.section_number(), sect1.title)
+    return o
   def to_web(self):
     for sect1 in self.doctree.children:
       t = ''
@@ -19,20 +25,21 @@ class WEBOutputter(Outputter):
       with open(fn, 'w') as f:
         f.write(t % 
             {'title': sect1.title, 
+             'sect_list': self.make_sect_list(), 
              'content':self.to_html(sect1)
             })
   def to_html(self, tree):
     html = ''
     if tree.type == 'sect1':
-      html =  '<h1>' + tree.title +'</h1>\n'
+      html =  '<h1>%s.%s</h1>\n'%(tree.section_number(), tree.title)
       for c in tree.children:
         html += self.to_html(c)
     elif tree.type == 'sect2':
-      html =  '<h2>' + tree.title +'</h2>\n'
+      html =  '<h2>%s.%s</h2>\n'%(tree.section_number(), tree.title)
       for c in tree.children:
         html += self.to_html(c)
     elif tree.type == 'code':
-      html  = '<h4>程式碼：' + tree.title +'</h4>\n'
+      html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
       html += '<pre>\n' + tree.children[0].value + '</pre>\n'
     elif tree.type == 'PARA':
       html = '<p>\n' + tree.value + '</p>\n'

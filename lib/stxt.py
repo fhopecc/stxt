@@ -184,7 +184,7 @@ class DocTreeNode(ParseTreeNode):
         c.number = i + 1
         c.number_children()
     elif self.type in ('sect1'):
-      for i, c in enumerate([c for c in cs if c.type == 'sect1']):
+      for i, c in enumerate([c for c in cs if c.type == 'sect2']):
         c.number = i + 1
   def _count_occurence(self, type, o=0):
     for c in self.children:
