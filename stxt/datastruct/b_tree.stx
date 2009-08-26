@@ -1,238 +1,34 @@
 B-樹
 ====
 B-樹是符合下面限制的樹：
-B-樹每個節點會存放數個鍵值，且滿足以下條件：
+* 每個節點最多有 m 個子樹
+* 除了根及葉，每個節點至少有 m/2 個子樹
+* 根若不是葉，至少有 2 個子樹
+* 非葉節點，至少有 2 個子樹
+
 令 x 為 B-樹的節點，且節點存放 n(x) 的鍵值，
 令 ki 表示第 i 位置的鍵值，
 則鍵值應滿足：
-      k1 < k2 < k3...
-    
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mn>2</mml:mn>
-    </mml:msub>
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mn>3</mml:mn>
-    </mml:msub>
-    <mml:mo>...</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mrow>
-        <mml:mi>n</mml:mi>
-        <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-        <mml:mo>&minus;</mml:mo>
-        <mml:mn>1</mml:mn>
-      </mml:mrow>
-    </mml:msub>
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mrow>
-        <mml:mi>n</mml:mi>
-        <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-      </mml:mrow>
-    </mml:msub>
-  </mml:math>
-</inlineequation>
-</para>
-</listitem>
-<listitem>
+
 B-樹每個節點會存放一指標，用來指出此節點的型態，
-節點有兩種型態：<emphasis>葉</emphasis>和<emphasis>內部節點</emphasis>，
-沒有父節點的節點稱為<emphasis>根</emphasis>。
+節點有兩種型態：葉和內部節點，
+沒有父節點的節點稱為根。
 </listitem>
 <listitem>若 x 為內部節點，則有 n(x)+1 的指標指向不同子樹，
 每個子樹也是 B-樹，
 令 k<subscript>c(i)</subscript>為第 i 個指標指向的子樹 c(i) 的任意節點，
 則滿足
-<inlineequation>
-  <mml:math> 
-  <mml:mrow> 
-  <mml:mo>{</mml:mo>
-  <mml:mtable columnalign="left"> 
-    <mml:mtr><mml:mtd> 
-      <mml:msub>
-        <mml:mi>k</mml:mi>
-        <mml:mrow>
-          <mml:mi>c</mml:mi>
-          <mml:mfenced> <mml:mi>1</mml:mi> </mml:mfenced>
-        </mml:mrow>
-      </mml:msub>
-      <mml:mo>&leq;</mml:mo>
-      <mml:msub>
-        <mml:mi>k</mml:mi>
-        <mml:mn>1</mml:mn>
-      </mml:msub>
-    </mml:mtd></mml:mtr> 
-    <mml:mtr><mml:mtd> 
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mrow>
-        <mml:mi>i</mml:mi>
-        <mml:mo>&minus;</mml:mo>
-        <mml:mn>1</mml:mn>
-      </mml:mrow>
-    </mml:msub>
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mrow>
-        <mml:mi>c</mml:mi>
-        <mml:mfenced> <mml:mi>i</mml:mi> </mml:mfenced>
-      </mml:mrow>
-    </mml:msub>
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>k</mml:mi>
-      <mml:mi>i</mml:mi>
-    </mml:msub>
-    </mml:mtd></mml:mtr> 
-    <mml:mtr><mml:mtd> 
-      <mml:msub>
-        <mml:mi>k</mml:mi>
-        <mml:mrow>
-          <mml:mi>n</mml:mi>
-          <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-        </mml:mrow>
-      </mml:msub>
-      <mml:mo>&leq;</mml:mo>
-      <mml:msub>
-        <mml:mi>k</mml:mi>
-        <mml:mrow>
-          <mml:mi>c</mml:mi>
-          <mml:mfenced> 
-            <mml:mrow>
-              <mml:mi>n</mml:mi>
-              <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-              <mml:mo>+</mml:mo>
-              <mml:mn>1</mml:mn>
-            </mml:mrow>
-          </mml:mfenced>
-        </mml:mrow>
-      </mml:msub>
-    </mml:mtd></mml:mtr>
-  </mml:mtable>
-  </mml:mrow>
-  </mml:math>
-</inlineequation>
-</listitem>
-<listitem>
 每個 B-樹都有一個最小因子，用來控制子樹的數目，
 令最小因子為 m 則，除根葉外的節點 x，
 其子樹數目 n(x)+1 滿足式：
-<inlineequation>
-  <mml:math> 
-    <mml:mi>m</mml:mi>
-    <mml:mo>&leq;</mml:mo>
-    <mml:mi>n</mml:mi>
-    <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-    <mml:mo>+</mml:mo>
-    <mml:mn>1</mml:mn>
-    <mml:mo>&leq;</mml:mo>
-    <mml:mn>2</mml:mn>
-    <mml:mi>m</mml:mi>
-  </mml:math>
-</inlineequation>
+
 ，同理可推得鍵值數目必須滿足式：
-<inlineequation>
-  <mml:math> 
-    <mml:mi>m</mml:mi>
-    <mml:mo>-</mml:mo>
-    <mml:mn>1</mml:mn>
-    <mml:mo>&leq;</mml:mo>
-    <mml:mi>n</mml:mi>
-    <mml:mfenced> <mml:mi>x</mml:mi> </mml:mfenced>
-    <mml:mo>&leq;</mml:mo>
-    <mml:mn>2</mml:mn>
-    <mml:mi>m</mml:mi>
-    <mml:mo>-</mml:mo>
-    <mml:mn>1</mml:mn>
-  </mml:math>
-</inlineequation>
 ，而葉其子樹數目為 0，但其鍵值數目同內部節點。
-</listitem>
-<listitem>葉等高</listitem>
-</itemizedlist>
-</sect2>
-<sect2><title>B-樹定理</title>
+葉等高
+B-樹定理
 <para>
 令 h 為 B-樹的高度，n 為其鍵值數目，m 為最小因子，則
-<inlineequation>
-  <mml:math> 
-    <mml:mi>h</mml:mi>
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>log</mml:mi>
-      <mml:mi>m</mml:mi>
-    </mml:msub>
-    <mml:mfrac>
-      <mml:mrow>
-        <mml:mi>n</mml:mi>
-        <mml:mo>+</mml:mo>
-        <mml:mn>1</mml:mn>
-      </mml:mrow>
-      <mml:mn>2</mml:mn>
-    </mml:mfrac> 
-  </mml:math>
-</inlineequation>
-</para>
-<para>
-<emphasis>證明：</emphasis>
-<equation>
-  <mml:math> 
-    <mml:mrow>
-      <mml:mi>n</mml:mi>
-      <mml:mo>&geq;</mml:mo>
-      <mml:mn>1</mml:mn>
-      <mml:mo>+</mml:mo>
-      <mml:mo>(</mml:mo>
-      <mml:mi>m</mml:mi>
-      <mml:mo>-</mml:mo>
-      <mml:mn>1</mml:mn> 
-      <mml:mo>)</mml:mo>
-      <mml:msubsup> 
-        <mml:mo>&Sigma;</mml:mo>
-        <mml:mrow>
-          <mml:mi>i</mml:mi>
-          <mml:mo>=</mml:mo>
-          <mml:mn>1</mml:mn>
-        </mml:mrow>
-        <mml:mi>h</mml:mi> 
-      </mml:msubsup>
-      <mml:mn>2</mml:mn> 
-      <mml:msup> 
-        <mml:mi>m</mml:mi>
-        <mml:mrow>
-          <mml:mi>i</mml:mi>
-          <mml:mo>-</mml:mo>
-          <mml:mn>1</mml:mn>
-        </mml:mrow>
-      </mml:msup>
-      <mml:mo>=</mml:mo>
-    </mml:mrow>
-
-    <mml:mrow>
-    <mml:mo>=</mml:mo>
-    </mml:mrow>
-
-
-    <mml:mo>&leq;</mml:mo>
-    <mml:msub>
-      <mml:mi>log</mml:mi>
-      <mml:mi>m</mml:mi>
-    </mml:msub>
-    <mml:mfrac>
-      <mml:mrow>
-        <mml:mi>n</mml:mi>
-        <mml:mo>+</mml:mo>
-        <mml:mn>1</mml:mn>
-      </mml:mrow>
-      <mml:mn>2</mml:mn>
-    </mml:mfrac> 
-  </mml:math>
+證明：
 </equation>
 </para>
 </sect2>
