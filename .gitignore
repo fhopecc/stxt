@@ -3,6 +3,7 @@ log/*
 *~
 Thumbs.db
 *.swp
+*.pyc
 lib/sql/*
 public/db/*
 public/rubysysadm/*

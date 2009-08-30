@@ -1,7 +1,7 @@
 import os, fnmatch
 def clear_tmps(dir):
   for root, dirs, files in os.walk(dir):
-    for f in [f for f in files if fnmatch.fnmatch(f, '*~')]:
+    for f in [f for f in files if fnmatch.fnmatch(f, '*~|*.pyc')]:
       p = os.path.join(root, f)
       os.remove(p)
       print 'remove ' + p

@@ -29,8 +29,6 @@ class Lexer:
                    self.HEAD1),
                   (re.compile(r'^(\[(.*)\])?(.*)\n-+\n', re.M), 
                    self.HEAD2),
-                  (re.compile(r'^(\[(.*)\])?(.*)\n~+\n', re.M), 
-                   self.HEAD3),
                   (re.compile(r'^code(\[(.*)\])?\.(.*)\n', re.M), 
                    self.CODEHEAD),
                   (re.compile(r'((.+\n)+)(^::\n\n)', re.M), 
