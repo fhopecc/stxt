@@ -97,11 +97,10 @@ lexer = lex.lex(debug=True)
 
 # Parser 
 def p_book(p):
-  r'book : sect1'
-def p_book_children(p):
-  r'book : book sect1'
+  '''book : sect1          
+          | book sect1'''
 def p_sect1(p):
-  r'sect1 : HEAD1 content1'
+  '''sect1 : HEAD1 content1'''
 def p_content1(p):
   '''content1 : sect2
               | block'''
@@ -111,38 +110,60 @@ def p_content1_children(p):
 def p_sect2(p):
   r'sect2 : HEAD2 content2'
 def p_content2(p):
-  r'content2 : block'
+  '''content2 : sect3
+             | block'''
 def p_content2_children(p):
-  r'content2 : content2 block'
+  '''content2 : content2 sect3
+              | content2 block'''
 def p_block(p):
   '''block : PARA
            | code
            | list EMPTYLINE
            | olist EMPTYLINE
+           | footnotes EMPTYLINE
   '''
 def p_code(p):
   r'code : CODEHEAD CODEBLOCK'
+def p_npara(p): #nested paragraph
+  '''npara : ilines EMPTYLINE
+           | npara ilines EMPTYLINE
+  '''
+def p_ilines(p):
+  '''ilines : INDENTLINE
+            | ilines INDENTLINE
+  '''
 def p_olistitem(p):
-  r'olist : OLI'
+  '''olistitem : OLI               
+               | OLI npara
+  '''
 def p_olist(p):
-  r'olist : olist OLI'
+  '''olist : olistitem
+           | olist olistitem 
+  '''
+def p_listitem(p):
+  '''listitem : LI
+              | LI npara
+  '''
 def p_list(p):
-  r'list : LI'
-def p_lists(p):
-  r'list : list LI'
+  '''list : listitem
+          | list listitem
+  '''
+def p_footnotes(p):
+  '''footnotes : FOOTNOTE
+               | footnotes FOOTNOTE'''
 def p_error(t):
     print ("Syntax error at '%s'" \
           % str(t)).decode('utf8').encode('cp950')
 yacc.yacc()
 if __name__ == '__main__':
   # Give the lexer some input
-  lexer.writetab('lextab')
-  lexer.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  #lexer.writetab('lextab')
+  #lexer.read(r"d:\stxt\stxt\db\concurrent_control.stx")
 
   # Tokenize
-  while True:
-    tok = lexer.token()
-    if not tok: break      # No more input
-    print str(tok).decode('utf8').encode('cp950')
-  #parser = yacc.yacc()
-  #parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  #while True:
+  #  tok = lexer.token()
+  #  if not tok: break      # No more input
+  #  print str(tok).decode('utf8').encode('cp950')
+  parser = yacc.yacc()
+  parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")

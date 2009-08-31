@@ -271,6 +271,7 @@ class Lexer:
         raise ValueError("Expected a string")
     self.lexdata = s
     self.lexpos = 0
+    self.lineno = 1
     self.lexlen = len(s)
   # ------------------------------------------------------------
   # read() - Read string from a file into the lexer
