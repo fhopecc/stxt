@@ -1,96 +1,6 @@
-# coding=utf-8
-from __future__ import with_statement
-import os, re, unittest
-class Token:
-  def __init__(self, lexer, token, lexeme, value, pos, len):
-    self.token, self.lexeme, self.value = token, lexeme, value
-    self.lexer, self.pos, self.len = lexer, pos, len
-    self.name = str(id(self))
-  def to_str(self):
-    line_num = self.lexer.src.count('\n', 0, self.pos) + 1
-    output = self.token + '[' + self.name + ']' + \
-             '('+str(line_num)+':'+str(self.pos)+') at ' + \
-             self.lexer.file + '{\n'+self.lexeme+'\n}'
-    return output
-  def to_cp950_str(self):
-    return self.to_str().decode('utf8').encode('cp950')
-def tokenize_file(f):
-  fn = f
-  with open(f) as f:
-    l = Lexer(f.read())
-    l.file = fn
-    return l
-class Lexer:
-  def __init__(self, src):
-    self.src, self.file = src, '_STRING_'
-    self.grammar=[(re.compile(r'^<(.*)>\n', re.M), 
-                   self.INCLUDE),
-                  (re.compile(r'^(\[(.*)\])?(.*)\n=+\n', re.M), 
-                   self.HEAD1),
-                  (re.compile(r'^(\[(.*)\])?(.*)\n-+\n', re.M), 
-                   self.HEAD2),
-                  (re.compile(r'^code(\[(.*)\])?\.(.*)\n', re.M), 
-                   self.CODEHEAD),
-                  (re.compile(r'((.+\n)+)(^::\n\n)', re.M), 
-                   self.CODEBLOCK),
-                  (re.compile(r'\* (.*)\n', re.M), 
-                   self.LISTITEM),
-                  (re.compile(r'((.+\n)+)(\n|\Z)', re.M), 
-                   self.PARA),
-                  (re.compile(r'^\s*$\n', re.M), 
-                   self.EMPTYLINE),
-                  (re.compile(r'.*',re.M),
-                   self.LEXERROR)
-                 ]
-  def run(self):
-    self.cur, self.tokens = 0, []
-    while self.cur < len(self.src):
-      for p in self.grammar:
-        m = p[0].match(self.src, self.cur)
-        if m:
-          p[1](m)
-          self.cur += len(m.group(0))
-          break
-  def INCLUDE(self,m):
-    lexeme = m.group(0)
-    l = tokenize_file(m.group(1))
-    l.run()
-    for t in l.tokens: self.tokens.append(t)
-  def HEAD1(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'HEAD1', lexeme, m.group(3), self.cur+1, len(lexeme))
-    if m.group(1): tok.name = m.group(2)
-    self.tokens.append(tok)
-  def HEAD2(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'HEAD2', lexeme, m.group(3), self.cur+1, len(lexeme))
-    if m.group(1): tok.name = m.group(2)
-    self.tokens.append(tok)
-  def CODEHEAD(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'CODEHEAD', lexeme, m.group(3), self.cur+1, len(lexeme))
-    if m.group(1): tok.name = m.group(2)
-    self.tokens.append(tok)
-  def CODEBLOCK(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'CODEBLOCK', lexeme, m.group(1), self.cur+1, len(lexeme))
-    self.tokens.append(tok)
-  def PARA(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'PARA', lexeme, m.group(1), self.cur+1, len(lexeme))
-    self.tokens.append(tok)
-  def LISTITEM(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'LISTITEM', lexeme, m.group(1), self.cur+1, len(lexeme))
-    self.tokens.append(tok)
-  def EMPTYLINE(self,m):
-    lexeme = m.group(0)
-    tok = Token(self, 'EMPTYLINE', lexeme, 0, self.cur+1, len(lexeme))
-    self.tokens.append(tok)
-  def LEXERROR(self,m):
-    raise ValueError('LexError at (' + 
-          str(self.src[self.cur:]).decode('utf8').encode('cp950')+')')
-class TreeNode:
+# coding=utf8
+import sys, lex, yacc
+class TreeNode(object):
   def __init__(self):
     self.parent, self.children, self.name = None, [], str(id(self))
   def append(self, *nodes):
@@ -113,9 +23,10 @@ class ParseTreeNode(TreeNode):
     self.type, self.token= type, token, 
     if not token is None: 
       self.name, self.value = token.name, token.value
-  def print_type_tree(self):
-    print '*' * self.height() + self.type
-    for c in self.children: c.print_type_tree()
+  def print_type_tree(self, level_limit=10):
+    if self.height() < level_limit:
+      print '*' * self.height() + self.type
+    for c in self.children: c.print_type_tree(level_limit)
   def print_postfix_tree(self):
     for c in self.children: c.print_postfix_tree()
     print '*' * self.height() + self.type
@@ -172,6 +83,13 @@ class DocTreeNode(ParseTreeNode):
     ParseTreeNode.__init__(self, type, token)
     self.value, self.title = value, ''
     self.number, self.occurence = None, 0
+  def __str__(self):
+    m = "%s:\n[\n%s\n]" % (self.type, self.value)
+    for c in self.children:
+      m+=str(c)
+    return m
+  def __repr__(self):
+    return str(self)
   def section_number(self):
     if self.number is None: return '' 
     else: 
@@ -204,154 +122,232 @@ class DocTreeNode(ParseTreeNode):
            +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
     for c in self.children: out += c.print_tree()
     return out
-# book     = sect1s EOF | EOF
-# sect1s   = sect1s sect1 | sect1
-# sect1    = HEAD1 content1
-# content1 = content1 sect2 | content1 block | sect2 | block
-# sect2    = HEAD2 content2
-# content2 = content2 block | block
-# block    = PARA | code | list EMPTYLINE
-# code     = CODEHEAD CODEBLOCK
-# list     = list LISTITEM | LISTITEM 
-# ::
-# Removing left recursive
-# ======================= 
-# book     = sect1s EOF | EOF
-# sect1s   = sect1 sect1s_
-# sect1s_  = sect1 sect1s_ | ''
-# sect1    = HEAD1 content1
-# content1 = sect2 content1_ | block content1_
-# content1_= sect2 content1_ | block content1_ | ''
-# sect2    = HEAD2 content2
-# content2 = block content2_
-# content2_= block content2_ | ''
-# block    = PARA | code | list
-# code     = CODEHEAD  CODEBLOCK   
-# list     = LISTITEM list_ 
-# list_    = LISTITEM list_ | ''
-def parse_file(f):
-  return Parser(tokenize_file(f))
-class Parser:
-  def __init__(self, lexer):
-    self.lexer, self.pos = lexer, 0
-    self.lexer.run()
-    self.tokens = self.lexer.tokens
-    self.tokens.append(Token(self.lexer, 'EOF', \
-      '_EOF_', None, len(self.lexer.src),0))
-    self.advance()
-  def has_seen(self, *tokens):
-    if self.lookahead.token in tokens: return True
-    return False
-  def advance(self):
-    try:
-      self.lookahead = self.tokens[self.pos]
-      self.pos += 1
-    except:
-      self.lookahead = None
-  def match(self, token):
-    if self.lookahead.token == token:
-      print 'match ' + self.lookahead.to_cp950_str()
-      n = ParseTreeNode(token, self.lookahead)
-      self.advance()
-      return n
-    raise ValueError("match " + token + ", but was " + \
-    self.lookahead.to_cp950_str())
-  def parse(self):
-    self.tree = self.book()
-    return True
-  # book = sect1s EOF | EOF
-  def book(self):
-    n = ParseTreeNode('book')
-    if self.has_seen('HEAD1'):
-      return n.append(self.sect1s(), self.match('EOF'))
-    else: return n.append(self.match('EOF'))
-  # sect1s = sect1 sect1s_
-  def sect1s(self):
-    return ParseTreeNode('sect1s').append(self.sect1(), self.sect1s_())
-  # sect1s_ = sect1 sect1s_ | ''
-  def sect1s_(self):
-    n = ParseTreeNode('sect1s_')
-    if self.has_seen('HEAD1'):
-      n.append(self.sect1(), self.sect1s_())
-    return n
-  # sect1 = HEAD1 content1
-  def sect1(self):
-    return ParseTreeNode('sect1').append(self.match('HEAD1'), \
-           self.content1())
-  # content1 = sect2 content1_ | block content1_
-  def content1(self):
-    n = ParseTreeNode('content1')
-    if self.has_seen('HEAD2'):
-      return n.append(self.sect2(), self.content1_())
-    elif self.has_seen('PARA', 'CODEHEAD', 'LISTITEM'):
-      return n.append(self.block(), self.content1_())
-  # content1_= sect2 content1_ | block content1_ | ''
-  def content1_(self):
-    n = ParseTreeNode('content1_')
-    if self.has_seen('HEAD2'):
-      n.append(self.sect2(), self.content1_())
-    elif self.has_seen('PARA', 'CODEHEAD', 'LISTITEM'):
-      n.append(self.block(), self.content1_())
-    return n
-  # sect2 = HEAD2 content2
-  def sect2(self):
-    return ParseTreeNode('sect2').append(self.match('HEAD2'), self.content2())
-  # content2 = block content2_
-  def content2(self):
-    return ParseTreeNode('content2').append(self.block(), self.content2_())
-  # content2_= block content2_ | ''
-  def content2_(self):
-    n = ParseTreeNode('content2_')
-    if self.has_seen('PARA', 'CODEHEAD', 'LISTITEM'):
-      n.append(self.block(), self.content2_())
-    return n
-  # block = PARA | code | list EMPTYLINE
-  def block(self):
-    n = ParseTreeNode('block')
-    if self.has_seen('PARA'): return n.append(self.match('PARA'))
-    elif self.has_seen('CODEHEAD'): return n.append(self.code())
-    elif self.has_seen('LISTITEM'):
-      return n.append(self.list(), self.match('EMPTYLINE'))
-  # code = CODEHEAD CODEBLOCK   
-  def code(self):
-    return ParseTreeNode('code').append(self.match('CODEHEAD'), \
-           self.match('CODEBLOCK'))
-  # list = LISTITEM list_ 
-  def list(self):
-    return ParseTreeNode('list').append(self.match('LISTITEM'), \
-           self.list_())
-  # list_ = LISTITEM list_ | ''
-  def list_(self):
-    n = ParseTreeNode('list_')
-    if self.has_seen('LISTITEM'):
-      n.append(self.match('LISTITEM'), self.list_())
-    return n
-class RTxtLexerTest(unittest.TestCase):
-  def testSource(self):
-    l = Lexer(src='abcd')
-    self.assertEqual('abcd', l.src)
-class STXTParserTest(unittest.TestCase):
-  def testSource(self):
-    p = Parser(src='abcd')
-    self.assertEqual('abcd', p.src)
-  def testParse(self):
-    p = Parser(src='abcd')
-    self.assert_(p.parse())
+# Lexer
+tokens = [
+          'INCLUDE', 
+          'HEAD1', 
+          'HEAD2', 
+          'HEAD3', 
+          'LI',
+          'OLI', 
+          'CODEHEAD', 
+          'CODEBLOCK', 
+          'FOOTNOTE', 
+          'INDENTLINE', 
+          'EMPTYLINE', 
+          'PARA'] 
+def t_INCLUDE(t):
+  r'^<(?P<file>.*)>\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.lexer.include_lexer = t.lexer.clone()
+  t.lexer.include_lexer.read(t.lexer.lexmatch.group('file'))
+  return t.lexer.include_lexer.token()
+def t_HEAD1(t):
+  r'^(\[(.*)\])?(?P<title>.*)\n=+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('title')
+  return t
+def t_HEAD2(t):
+  r'^(\[(.*)\])?(.*)\n-+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_HEAD3(t):
+  r'^(\[(.*)\])?(.*)\n~+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_INDENTLINE(t):
+  r'^ +(?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  return t
+def t_LI(t):
+  r'\* (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  return t
+def t_OLI(t):
+  r'# (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  return t
+def t_CODEHEAD(t):
+  r'^code(\[(.*)\])?\.(?P<title>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_CODEBLOCK(t):
+  r'((.+\n)+)(^::\n\n)'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_FOOTNOTE(t):
+  r'^\.\. \[#] (?P<content>.+)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('FOOTNOTE', 
+              t.lexer.lexmatch.group('content'))
+  return t
+def t_EMPTYLINE(t):
+  r'^\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_PARA(t):
+  r'((.+\n)+)(\n|\Z)'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+# Define a rule so we can track line numbers
+#def t_newline(t):
+#  r'\n+'
+#  t.lexer.lineno += len(t.value)
+# A string containing ignored characters (spaces and tabs)
+#t_ignore  = ' \t'
+# Error handling rule
+def t_error(t):
+  print "Error happened at " + \
+         str(t).decode('utf8').encode('cp950')
+  sys.exit()
+lexer = lex.lex(debug=True)
+# Parser 
+def p_book(p):
+  '''book : sect1          
+          | book sect1'''
+  if len(p) == 2:
+    p[0] = DocTreeNode('book', '')
+    p[0].append(p[1])
+  else:
+    p[1].append(p[2])
+    p[0] = p[1]
+def p_sect1(p):
+  '''sect1 : HEAD1 content1s'''
+  p[0] = DocTreeNode('sect1', p[1])
+  for c in p[2]:
+    p[0].append(c) 
+def p_content1s(p):
+  '''content1s : sect2
+               | block
+               | content1s sect2
+               | content1s block'''
+  if len(p) == 2:
+    p[0] = [p[1]]
+  else:
+    p[1].append(p[2])
+    p[0] = p[1]
+def p_sect2(p):
+  r'sect2 : HEAD2 content2s'
+  p[0] = DocTreeNode('sect2', p[1])
+  for c in p[2]:
+    #print "c is " 
+    #print str(c).decode('utf8').encode('cp950')
+    p[0].append(c) 
+def p_content2s(p):
+  '''content2s : sect3
+               | block
+               | content2s sect3
+               | content2s block'''
+  if len(p) == 2:
+    p[0] = [p[1]]
+  else:
+    p[1].append(p[2])
+    p[0] = p[1]
+def p_sect3(p):
+  r'sect3 : HEAD3 content3s'
+  p[0] = DocTreeNode('sect3', p[1])
+  for c in p[2]:
+    p[0].append(c) 
+def p_content3s(p):
+  '''content3s : block
+               | content3s block'''
+  if len(p) == 2:
+    p[0] = [p[1]]
+  else:
+    p[1].append(p[2])
+    p[0] = p[1]
+def p_block(p):
+  '''block : PARA
+           | code
+           | list EMPTYLINE
+           | olist EMPTYLINE
+           | footnotes EMPTYLINE
+  '''
+  if isinstance(p[1], str):
+    p[0] = DocTreeNode('para', p[1])
+  else:
+    p[0] = p[1]
+def p_code(p):
+  r'code : CODEHEAD CODEBLOCK'
+  p[0] = DocTreeNode('code', p[2])
+  p[0].title = p[1]
+def p_nparas(p): #nested paragraph
+  '''nparas : npara EMPTYLINE
+            | nparas npara EMPTYLINE
+  '''
+  if len(p) == 3:
+    p[0] = [p[1]]
+  elif len(p) == 4:
+    p[0] = p[1].append(p[2])
+def p_npara(p):
+  '''npara : INDENTLINE
+           | npara INDENTLINE
+  '''
+  if len(p) == 2:
+    p[0] = DocTreeNode('npara', p[1])
+  else:
+    p[0] = p[1].value +  p[2]
+def p_olistitem(p):
+  '''olistitem : OLI
+               | OLI nparas
+  '''
+  p[0] = DocTreeNode('olistitem', p[1])
+  if len(p) == 3 and p[2]:
+    for npara in p[2]:
+      p[0].append(npara)
+  #print str(p[0]).decode('utf8').encode('cp950')
+def p_olist(p):
+  '''olist : olistitem
+           | olist olistitem 
+  '''
+  if len(p) == 2:
+    p[0] = DocTreeNode('olist', '')
+    p[0].append(p[1])
+  else:
+    p[0] = p[1].append(p[2])
+def p_listitem(p):
+  '''listitem : LI
+              | LI nparas
+  '''
+  p[0] = DocTreeNode('listitem', p[1])
+  if len(p) == 3 and p[2]:
+    for npara in p[2]:
+      p[0].append(npara)
+  #print ">>>>" +  str(p[0]).decode('utf8').encode('cp950')
+def p_list(p):
+  '''list : listitem
+          | list listitem
+  '''
+  if len(p) == 2:
+    p[0] = DocTreeNode('list', '')
+    p[0].append(p[1])
+  else:
+    p[0] = p[1].append(p[2])
+def p_footnotes(p):
+  '''footnotes : FOOTNOTE
+               | footnotes FOOTNOTE'''
+  if len(p) == 2:
+    p[0] = DocTreeNode('footnotes', '')
+    p[0].append(DocTreeNode('FOOTNOTE', p[1]))
+  else:
+    p[1].append(DocTreeNode('FOOTNOTE', p[2]))
+    p[0] = p[1]
+def p_error(t):
+    print ("Syntax error at '%s'" \
+          % str(t)).decode('utf8').encode('cp950')
+yacc.yacc()
 if __name__ == '__main__':
-  #l = tokenize_file(r"d:\stxt\stxt\db\concurrent_control.stx")
-  #l.run()
-  #for t in l.tokens:
-  #  print t.to_cp950_str()
-  #print 'There are ' + str(len(l.tokens)) + ' tokens.'
-  #p = parse_file(r"d:\stxt\stxt\db\timestamp.stx")
-  p = parse_file(r"d:\stxt\stxt\db\concurrent_control.stx")
-  p.parse()
-  dtree = p.tree.to_doctree()
-  dtree.print_type_tree()
-  print dtree.print_tree().decode('utf8').encode('cp950')
-  #p.tree.print_type_tree()
-  #print '-' * 10
-  #p.tree.print_postfix_tree()
-  #with open(r'd:\stxt\html\db.html', 'w') as f:
-  #  f.write('<html>\n'+to_html(p.tree)+'</html>')
-  #unittest.main()
+  # Give the lexer some input
+  lexer.writetab('lextab')
+  lexer.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  # Tokenize
+  while True:
+    tok = lexer.token()
+    if not tok: break      # No more input
+    print str(tok).decode('utf8').encode('cp950')
+  parser = yacc.yacc()
+  d = parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  d.print_type_tree(3)

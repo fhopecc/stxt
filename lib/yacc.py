@@ -282,7 +282,7 @@ class LRParser:
     def read(self, f):
         self.file = f
         with open(f) as f:
-          self.parse(f.read())
+          return self.parse(f.read())
 
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
