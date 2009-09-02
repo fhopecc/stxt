@@ -3,9 +3,10 @@ from __future__ import with_statement
 import os, re, unittest, stxt
 class Outputter:
   def __init__(self, file):
-    p = stxt.parse_file(r"d:\stxt\stxt\db\concurrent_control.stx")
-    p.parse()
-    self.doctree = p.tree.to_doctree()
+    d = stxt.parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+    d.number_children()
+    d.count_occurence()
+    self.doctree = d
   def output(self):
     print self.doctree.print_tree().decode('utf8').encode('cp950')
 class WEBOutputter(Outputter):
@@ -21,7 +22,7 @@ class WEBOutputter(Outputter):
       tfn = r'd:\stxt\template\web_section.html'
       with open(tfn) as f:
         t = f.read()
-      fn = r'd:\stxt\public\db\%s.html' % sect1.section_number() 
+      fn = r'd:\stxt\structedtext\\db\%s.html' % sect1.section_number() 
       with open(fn, 'w') as f:
         f.write(t % 
             {'title': sect1.title, 
@@ -38,15 +39,35 @@ class WEBOutputter(Outputter):
       html =  '<h2>%s.%s</h2>\n'%(tree.section_number(), tree.title)
       for c in tree.children:
         html += self.to_html(c)
+    elif tree.type == 'sect3':
+      html =  '<h3>%s</h3>\n'% tree.title
+      for c in tree.children:
+        html += self.to_html(c)
     elif tree.type == 'code':
       html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
-      html += '<pre>\n' + tree.children[0].value + '</pre>\n'
-    elif tree.type == 'PARA':
+      html += '<pre>\n' + tree.value + '</pre>\n'
+    elif tree.type in ('para', 'npara'):
       html = '<p>\n' + tree.value + '</p>\n'
-    elif tree.type == 'list':
+    elif tree.type in ('list'):
       html += '<ul>\n'
       for c in tree.children:
-        html += '<li>' + c.value + '</li>\n'
+        html += '<li>' 
+        for np in c.children:
+          html += self.to_html(np)
+        html += c.value + '</li>\n'
+      html += '</ul>\n'
+    elif tree.type == 'olist':
+      html += '<ol>\n'
+      for c in tree.children:
+        html += '<li>' + c.value
+        for np in c.children:
+          html += self.to_html(np)
+        html += '</li>\n'
+      html += '</ol>\n'
+    elif tree.type == 'footnotes':
+      html += '<ul>\n'
+      for c in tree.children:
+        html += '<li>' + c.value+ '</li>\n'
       html += '</ul>\n'
     else:
       raise ValueError, 'No output function for ' + tree.type

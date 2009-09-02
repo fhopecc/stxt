@@ -1,13 +1,16 @@
 # The original train of thought:
 # At the first, there seems to be 3 solution:
-# (1) Only Tree nodes solution, every node can only contains Tree instances as
-#	its sub nodes, no other type of attributes except a node value
-# (2) Node/Normal solution, just like the file system's dir/file, the setattr
-#	do different things depend on the type of attribute(Tree or Non-Tree)
-# (3) Since inheritance is a tree, maybe it's possible to make use of that
+# (1) Only Tree nodes solution, every node can only contains Tree 
+# instances asits sub nodes, 
+# no other type of attributes except a node value
+# (2) Node/Normal solution, just like the file system's dir/file, 
+# the setattr	do different things depend 
+# on the type of attribute(Tree or Non-Tree)
+# (3) Since inheritance is a tree, maybe it's possible 
+# to make use of that
 #
-# At last, I choosed (1) because it's the simplest, especially for the node
-#	value retrival:
+# At last, I choosed (1) because it's the simplest, 
+# especially for the node	value retrival:
 #	root.branch.br1()
 #	while (2) is more complicated, for example, its program flow chart
 #	<attr existed>
@@ -28,8 +31,8 @@
 #      |                 \--N--[attr = value]
 #      |
 #      \--N--<new Tree>
-#   As you can see, *1, *2 lead to inconsistant, to get a value, you don't know
-#	you should use:
+#   As you can see, *1, *2 lead to inconsistant, to get a value, 
+#   you don't know you should use:
 #	root.branch.node() or root.branch.node
 #	because the conditions of the program varias quickly !
 #	(3) seems too complicated, I have no idea about how to make use of that :-)

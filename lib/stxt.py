@@ -154,17 +154,28 @@ def t_INCLUDE(t):
   t.lexer.include_lexer.read(t.lexer.lexmatch.group('file'))
   return t.lexer.include_lexer.token()
 def t_HEAD1(t):
-  r'^(\[(.*)\])?(?P<title>.*)\n=+\n'
+  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+\n'
   t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('title')
+  t.value = DocTreeNode('sect1') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
   return t
 def t_HEAD2(t):
-  r'^(\[(.*)\])?(.*)\n-+\n'
+  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n-+\n'
   t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('sect2') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
   return t
 def t_HEAD3(t):
-  r'^(\[(.*)\])?(.*)\n~+\n'
+  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+\n'
   t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('sect3') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
   return t
 def t_INDENTLINE(t):
   r'^ +(?P<content>.*)\n'
@@ -182,8 +193,12 @@ def t_OLI(t):
   t.value = t.lexer.lexmatch.group('content')
   return t
 def t_CODEHEAD(t):
-  r'^code(\[(.*)\])?\.(?P<title>.*)\n'
+  r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('code') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
   return t
 def t_CODEBLOCK(t):
   r'((.+\n)+)(^::\n\n)'
@@ -227,7 +242,7 @@ def p_book(p):
     p[0] = p[1]
 def p_sect1(p):
   '''sect1 : HEAD1 content1s'''
-  p[0] = DocTreeNode('sect1', p[1])
+  p[0] = p[1]
   for c in p[2]:
     p[0].append(c) 
 def p_content1s(p):
@@ -242,10 +257,8 @@ def p_content1s(p):
     p[0] = p[1]
 def p_sect2(p):
   r'sect2 : HEAD2 content2s'
-  p[0] = DocTreeNode('sect2', p[1])
+  p[0] = p[1]
   for c in p[2]:
-    #print "c is " 
-    #print str(c).decode('utf8').encode('cp950')
     p[0].append(c) 
 def p_content2s(p):
   '''content2s : sect3
@@ -259,7 +272,7 @@ def p_content2s(p):
     p[0] = p[1]
 def p_sect3(p):
   r'sect3 : HEAD3 content3s'
-  p[0] = DocTreeNode('sect3', p[1])
+  p[0] = p[1]
   for c in p[2]:
     p[0].append(c) 
 def p_content3s(p):
@@ -283,8 +296,8 @@ def p_block(p):
     p[0] = p[1]
 def p_code(p):
   r'code : CODEHEAD CODEBLOCK'
-  p[0] = DocTreeNode('code', p[2])
-  p[0].title = p[1]
+  p[0] = p[1]
+  p[0].value = p[2]
 def p_nparas(p): #nested paragraph
   '''nparas : npara EMPTYLINE
             | nparas npara EMPTYLINE
@@ -342,14 +355,14 @@ def p_footnotes(p):
                | footnotes FOOTNOTE'''
   if len(p) == 2:
     p[0] = DocTreeNode('footnotes', '')
-    p[0].append(DocTreeNode('FOOTNOTE', p[1]))
+    p[0].append(p[1])
   else:
-    p[1].append(DocTreeNode('FOOTNOTE', p[2]))
+    p[1].append(p[2])
     p[0] = p[1]
 def p_error(t):
     print ("Syntax error at '%s'" \
           % str(t)).decode('utf8').encode('cp950')
-yacc.yacc()
+parser = yacc.yacc()
 if __name__ == '__main__':
   # Give the lexer some input
   lexer.writetab('lextab')
