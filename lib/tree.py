@@ -99,7 +99,8 @@ Get more details in the methods and operators below.
 	]
 
 	def __init__(self, value, _node_items={}, **kwargs):
-		""""root = Tree(value)" create a Tree instance as the root node with node 'value'.
+		""""root = Tree(value)" create a Tree instance as the root node with node 
+    'value'.
 A Tree instance can only contain sub Tree instances as its attributes or key
 indexed items, as the sub Tree nodes, except its builtins: some operators and
 internal methods, such as:
@@ -685,4 +686,18 @@ def pathconv(path):
 ### class FastTree(Tree): pass
 
 ### class ImmutableTree(Tree): pass
+if __name__ == '__main__':
+  value, value1, value2 = 1,2,3
+  root = Tree(value)
+  root = Tree(value, data=value1, extra=value2)
+  root.branch = value
+  root.branch = Tree(value)
+  root.branch[key] = value
+  root.branch[x][y] = value
+  value = root.branch()
+  value = root.branch[key]()
+  setNode(root, ['branch', 'br1'], value)
+  setNode(root, ('branch', 'br1', (key,), 'br2'), value)
+  for pathseq, node in root.branch('traverse'): print pathseq, node()
+  #other = Tree(value); root.update(other)
 

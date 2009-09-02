@@ -3,6 +3,7 @@ import sys, lex, yacc
 class TreeNode(object):
   def __init__(self):
     self.parent, self.children, self.name = None, [], str(id(self))
+    self.unvisited = []
   def append(self, *nodes):
     for n in nodes: 
       n.parent = self
@@ -17,6 +18,16 @@ class TreeNode(object):
       c = c.parent
       h += 1
     return h
+  def _dfs(self, unvisited):
+    for c in self.children:
+      c._dfs(unvisited)
+    unvisited.append(self)
+  def dfs(self):
+    unvisited = []
+    self._dfs(unvisited)
+    #print unvisited
+    for n in unvisited:
+      yield n
 class ParseTreeNode(TreeNode):
   def __init__(self, type, token=None):
     TreeNode.__init__(self)
@@ -350,4 +361,6 @@ if __name__ == '__main__':
     print str(tok).decode('utf8').encode('cp950')
   parser = yacc.yacc()
   d = parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
-  d.print_type_tree(3)
+  #d.print_type_tree(3)
+  for c in d.dfs():
+    print c.type
