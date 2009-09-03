@@ -1,3 +1,21 @@
+並行控制
+========
+並行系統若沒有適當控制會引發下述的問題：
+
+遺失更新
+--------
+table[lost_update].交易 A 於 t4 遺失一筆更新
+  交易A     時間   交易B
+=========== ==== ===========
+A.read(p)    t1   
+             t2  B.read(p)   
+A.update(p)  t3  
+             t4  B.update(p)
+=========== ==== ===========
+
+B 於 t4 異動 p 時，沒看到 A 於 t3 的更新，
+所以 A 於 t4 遺失一筆更新。
+
 <d:\stxt\stxt\db\transaction.stx>
 <d:\stxt\stxt\db\timestamp.stx>
 <d:\stxt\stxt\db\lock.stx>

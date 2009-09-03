@@ -1,3 +1,4 @@
+@import url("/css/pygments_style.css");
 #sidebar {float:left;width:13%}
 #content {padding: 0 13% 0 13%}
 #rightbar {float:right;width:13%}

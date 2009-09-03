@@ -1,6 +1,21 @@
 # coding=utf-8
 from __future__ import with_statement
 import os, re, unittest, stxt
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
+
+def f_code(tree):
+  html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
+  #html += tree.value + '</pre>\n'
+  html += highlight(tree.value, PythonLexer(),
+      HtmlFormatter()).decode('ascii').encode('utf8')
+  #print highlight(tree.value, PythonLexer(), HtmlFormatter())
+  return html
+def f_table(tree):
+  html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
+  html += '<pre>\n' + tree.value + '</pre>\n'
+  return html
 class Outputter:
   def __init__(self, file):
     d = stxt.parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
@@ -44,8 +59,9 @@ class WEBOutputter(Outputter):
       for c in tree.children:
         html += self.to_html(c)
     elif tree.type == 'code':
-      html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
-      html += '<pre>\n' + tree.value + '</pre>\n'
+      return f_code(tree)
+    elif tree.type == 'table':
+      return f_table(tree)
     elif tree.type in ('para', 'npara'):
       html = '<p>\n' + tree.value + '</p>\n'
     elif tree.type in ('list'):

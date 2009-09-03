@@ -143,6 +143,8 @@ tokens = [
           'OLI', 
           'CODEHEAD', 
           'CODEBLOCK', 
+          'TABLEHEAD', 
+          'TABLEBLOCK', 
           'FOOTNOTE', 
           'INDENTLINE', 
           'EMPTYLINE', 
@@ -177,6 +179,18 @@ def t_HEAD3(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+def t_TABLEHEAD(t):
+  r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('table') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
+  return t
+def t_TABLEBLOCK(t):
+  r'(.+\n)+=[= ]+\n\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
 def t_INDENTLINE(t):
   r'^ +(?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -201,8 +215,10 @@ def t_CODEHEAD(t):
   t.value.title = m.group('title')
   return t
 def t_CODEBLOCK(t):
-  r'((.+\n)+)(^::\n\n)'
+  r'(?P<code>(.+\n)+)(^::\n\n)'
   t.lexer.lineno += t.lexeme.count('\n')
+  m = t.lexer.lexmatch
+  t.value = m.group('code')
   return t
 def t_FOOTNOTE(t):
   r'^\.\. \[#] (?P<content>.+)\n'
@@ -286,6 +302,7 @@ def p_content3s(p):
 def p_block(p):
   '''block : PARA
            | code
+           | table
            | list EMPTYLINE
            | olist EMPTYLINE
            | footnotes EMPTYLINE
@@ -296,6 +313,10 @@ def p_block(p):
     p[0] = p[1]
 def p_code(p):
   r'code : CODEHEAD CODEBLOCK'
+  p[0] = p[1]
+  p[0].value = p[2]
+def p_table(p):
+  r'table : TABLEHEAD TABLEBLOCK'
   p[0] = p[1]
   p[0].value = p[2]
 def p_nparas(p): #nested paragraph

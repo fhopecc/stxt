@@ -32,9 +32,9 @@ Aj 為交易 Tj 的動作，若 Ti.ts < Tj.ts，則 Ai 應比 Aj
 依上述限制，交易 T 正要讀取物件 O 時，應有下面的行為：
 
 code.交易 T 讀取物件 O
-if T.ts < O.wts 
+if T.ts < O.wts:
   T.abort
-else
+else:
   T.read(O)
   O.rts = max(T.ts, O.rts)
 ::
@@ -50,11 +50,11 @@ T 立即放棄並重新啟動交易。
 依上述限制，交易 T 正要寫入物件 O 時，應有下面的行為：
 
 code[t_write_o].交易 T 寫入物件 O 
-if T.ts < O.rts 
+if T.ts < O.rts:
   T.abort
-elif T.ts < O.wts
+elif T.ts < O.wts:
   T.skip
-else
+else:
   T.write(O)
   O.wts = T.ts
 ::
