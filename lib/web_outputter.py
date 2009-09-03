@@ -24,10 +24,10 @@ class WEBOutputter(Outputter):
         t = f.read()
       fn = r'd:\stxt\structedtext\\db\%s.html' % sect1.section_number() 
       with open(fn, 'w') as f:
-        f.write(t % 
+        f.write(t % \
             {'title': sect1.title, 
              'sect_list': self.make_sect_list(), 
-             'content':self.to_html(sect1)
+             'content': self.to_html(sect1)
             })
   def to_html(self, tree):
     html = ''
@@ -51,10 +51,10 @@ class WEBOutputter(Outputter):
     elif tree.type in ('list'):
       html += '<ul>\n'
       for c in tree.children:
-        html += '<li>' 
+        html += '<li>\n' + c.value 
         for np in c.children:
           html += self.to_html(np)
-        html += c.value + '</li>\n'
+        html += '</li>\n'
       html += '</ul>\n'
     elif tree.type == 'olist':
       html += '<ol>\n'

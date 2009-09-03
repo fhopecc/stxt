@@ -313,7 +313,8 @@ def p_npara(p):
   if len(p) == 2:
     p[0] = DocTreeNode('npara', p[1])
   else:
-    p[0] = p[1].value +  p[2]
+    p[1].value +=  p[2]
+    p[0] = p[1]
 def p_olistitem(p):
   '''olistitem : OLI
                | OLI nparas

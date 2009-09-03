@@ -7,6 +7,9 @@ handlers:
   static_dir: db
 - url: /css
   static_dir: css
+- url: /
+  static_files: index.html
+  upload: index.html
 
 skip_files: |
  ^(.*/)?(
