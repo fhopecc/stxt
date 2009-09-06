@@ -1490,12 +1490,12 @@ class Grammar(object):
             self.Prodnames[prodname] = [ p ]
         return 0
 
-    # -----------------------------------------------------------------------------
+    # ----------------------------------------------------------------
     # set_start()
     #
     # Sets the starting symbol and creates the augmented grammar.  Production 
     # rule 0 is S' -> start where start is the start symbol.
-    # -----------------------------------------------------------------------------
+    # ----------------------------------------------------------------
 
     def set_start(self,start=None):
         if not start:
@@ -1506,12 +1506,12 @@ class Grammar(object):
         self.Nonterminals[start].append(0)
         self.Start = start
 
-    # -----------------------------------------------------------------------------
+    # ----------------------------------------------------------------
     # find_unreachable()
     #
     # Find all of the nonterminal symbols that can't be reached from the starting
     # symbol.  Returns a list of nonterminals that can't be reached.
-    # -----------------------------------------------------------------------------
+    # ----------------------------------------------------------------
 
     def find_unreachable(self):
         

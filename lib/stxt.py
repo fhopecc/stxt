@@ -141,6 +141,7 @@ tokens = [
           'HEAD3', 
           'LI',
           'OLI', 
+          'DLI', 
           'CODEHEAD', 
           'CODEBLOCK', 
           'TABLEHEAD', 
@@ -179,33 +180,6 @@ def t_HEAD3(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
-def t_TABLEHEAD(t):
-  r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = DocTreeNode('table') 
-  m = t.lexer.lexmatch
-  t.value.name = m.group('name')
-  t.value.title = m.group('title')
-  return t
-def t_TABLEBLOCK(t):
-  r'(.+\n)+=[= ]+\n\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  return t
-def t_INDENTLINE(t):
-  r'^ +(?P<content>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('content')
-  return t
-def t_LI(t):
-  r'\* (?P<content>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('content')
-  return t
-def t_OLI(t):
-  r'# (?P<content>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('content')
-  return t
 def t_CODEHEAD(t):
   r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -219,6 +193,41 @@ def t_CODEBLOCK(t):
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
   t.value = m.group('code')
+  return t
+def t_TABLEHEAD(t):
+  r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('table') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
+  return t
+def t_TABLEBLOCK(t):
+  r'(.+\n)+=[= ]+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_INDENTLINE(t):
+  r'^ +(?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  return t
+def t_OLI(t):
+  r'# (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  t.value = DocTreeNode('olistitem', t.value)
+  return t
+def t_LI(t):
+  r'\* (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  t.value = DocTreeNode('listitem', t.value)
+  return t
+def t_DLI(t):
+  r'(?P<title>[^#*\n][^\n]+)\n(?=^  .*\n)'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('title')
+  t.value = DocTreeNode('dlistitem', t.value)
   return t
 def t_FOOTNOTE(t):
   r'^\.\. \[#] (?P<content>.+)\n'
@@ -303,8 +312,8 @@ def p_block(p):
   '''block : PARA
            | code
            | table
+           | list
            | list EMPTYLINE
-           | olist EMPTYLINE
            | footnotes EMPTYLINE
   '''
   if isinstance(p[1], str):
@@ -316,7 +325,8 @@ def p_code(p):
   p[0] = p[1]
   p[0].value = p[2]
 def p_table(p):
-  r'table : TABLEHEAD TABLEBLOCK'
+  '''table : TABLEHEAD TABLEBLOCK
+           | TABLEHEAD TABLEBLOCK EMPTYLINE'''
   p[0] = p[1]
   p[0].value = p[2]
 def p_nparas(p): #nested paragraph
@@ -326,7 +336,8 @@ def p_nparas(p): #nested paragraph
   if len(p) == 3:
     p[0] = [p[1]]
   elif len(p) == 4:
-    p[0] = p[1].append(p[2])
+    p[1].append(p[2])
+    p[0] = p[1]
 def p_npara(p):
   '''npara : INDENTLINE
            | npara INDENTLINE
@@ -336,39 +347,29 @@ def p_npara(p):
   else:
     p[1].value +=  p[2]
     p[0] = p[1]
-def p_olistitem(p):
-  '''olistitem : OLI
-               | OLI nparas
-  '''
-  p[0] = DocTreeNode('olistitem', p[1])
-  if len(p) == 3 and p[2]:
-    for npara in p[2]:
-      p[0].append(npara)
-  #print str(p[0]).decode('utf8').encode('cp950')
-def p_olist(p):
-  '''olist : olistitem
-           | olist olistitem 
-  '''
-  if len(p) == 2:
-    p[0] = DocTreeNode('olist', '')
-    p[0].append(p[1])
-  else:
-    p[0] = p[1].append(p[2])
 def p_listitem(p):
-  '''listitem : LI
-              | LI nparas
+  '''listitem : LI 
+              | OLI 
+              | DLI
+              | LI  nparas
+              | OLI nparas
+              | DLI nparas
   '''
-  p[0] = DocTreeNode('listitem', p[1])
+  p[0] = p[1]
   if len(p) == 3 and p[2]:
     for npara in p[2]:
       p[0].append(npara)
-  #print ">>>>" +  str(p[0]).decode('utf8').encode('cp950')
 def p_list(p):
   '''list : listitem
           | list listitem
   '''
   if len(p) == 2:
-    p[0] = DocTreeNode('list', '')
+    if p[1].type == 'listitem':
+      p[0] = DocTreeNode('list', '')
+    elif p[1].type == 'olistitem':
+      p[0] = DocTreeNode('olist', '')
+    elif p[1].type == 'dlistitem':
+      p[0] = DocTreeNode('dlist', '')
     p[0].append(p[1])
   else:
     p[0] = p[1].append(p[2])
@@ -388,14 +389,14 @@ parser = yacc.yacc()
 if __name__ == '__main__':
   # Give the lexer some input
   lexer.writetab('lextab')
-  lexer.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  lexer.read(r"d:\stxt\doc\net\x_25.stx")
   # Tokenize
   while True:
     tok = lexer.token()
     if not tok: break      # No more input
     print str(tok).decode('utf8').encode('cp950')
-  parser = yacc.yacc()
-  d = parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+  #parser = yacc.yacc()
+  #d = parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
   #d.print_type_tree(3)
-  for c in d.dfs():
-    print c.type
+  #for c in d.dfs():
+  #  print c.type

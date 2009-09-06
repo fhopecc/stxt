@@ -1,6 +1,6 @@
 # coding=utf-8
 from __future__ import with_statement
-import os, re, unittest, stxt
+import sys, os, re, unittest, stxt
 from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import HtmlFormatter
@@ -16,9 +16,12 @@ def f_table(tree):
   html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
   html += '<pre>\n' + tree.value + '</pre>\n'
   return html
+
 class Outputter:
   def __init__(self, file):
-    d = stxt.parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+    #d = stxt.parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
+    self.file = file
+    d = stxt.parser.read(file)
     d.number_children()
     d.count_occurence()
     self.doctree = d
@@ -37,7 +40,10 @@ class WEBOutputter(Outputter):
       tfn = r'd:\stxt\template\web_section.html'
       with open(tfn) as f:
         t = f.read()
-      fn = r'd:\stxt\structedtext\\db\%s.html' % sect1.section_number() 
+      m = re.match(r".*\\([^\\]*)\\.*$", self.file)
+      lastdir = m.group(1)
+      fn = r'd:\stxt\structedtext\%s\%s.html' % \
+            (lastdir, sect1.section_number())
       with open(fn, 'w') as f:
         f.write(t % \
             {'title': sect1.title, 
@@ -80,6 +86,15 @@ class WEBOutputter(Outputter):
           html += self.to_html(np)
         html += '</li>\n'
       html += '</ol>\n'
+    elif tree.type == 'dlist':
+      html += '<dl>\n'
+      for c in tree.children:
+        html += '<dt>%s</dt>\n' % c.value
+        html += '<dd>'
+        for np in c.children:
+          html += self.to_html(np)
+        html += '</dd>'
+      html += '</dl>\n'
     elif tree.type == 'footnotes':
       html += '<ul>\n'
       for c in tree.children:
@@ -98,7 +113,14 @@ class WEBOutputter(Outputter):
     #  else:
     #    html += to_html(c)
     #return html
-if __name__ == '__main__':
-  o = WEBOutputter(r"d:\stxt\stxt\db\concurrent_control.stx")
-  #o.output()
+def to_web(fn):
+  o = WEBOutputter(fn)
   o.to_web()
+
+if __name__ == '__main__':
+  usage = os.path.basename(__file__) + " filename"
+  try:
+    #o = WEBOutputter(r"d:\stxt\stxt\db\concurrent_control.stx")
+    to_web(sys.argv[1])
+  except IndexError:
+    print usage

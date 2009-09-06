@@ -1,0 +1,96 @@
+TCP
+---
+連線的建立與結束
+
+三向握手建立連線
+			
+
+三向握手建立連線
+			
+
+四向握手結束連線
+			
+
+四向握手結束連線2
+			
+重傳時限
+--------
+由於網路的動態性，
+所以重傳時限(Retransmission Timeout)必須要能動態決定，
+其決定方式如下：
+計算 RTO 程序
+估算 RTT
+SRTT = ( ALPHA * SRTT ) + ((1-ALPHA) * RTT)
+RTO = min[UBOUND,max[LBOUND,(BETA*SRTT)]]
+
+來回時間(Round Trip Time, RTT)
+是傳送某序號的封包，到接收到此序號的 ACK 的時間長度，
+平滑來回時間(Smoothed Round Trip Time, SRTT)
+如上式所定義。
+ALPHA 就是平滑因子(Smoothed factor)，
+用來計算 SRTT，其可能值為 .8 到 .9。
+UBOUND 及 LBOUND 分別為 RTO 的上下限。
+BETA 為延遲變異因子(Delay variance factor)，
+其可能值為 1.3 到 2.0。
+
+
+緩啟動(slow start)及擁塞避免機制
+
+為避免傳送過多資料至一個情況未明的網路中，
+緩啟動機制會漸進的探測網路情形，增加傳輸量，
+並設定一個緩啟動閾，當變數值超過閾時，便啟動擁塞避免機制，
+以避免擁塞。
+
+
+傳送方維護一個擁塞視窗(Congestion window, cwnd)，
+czwnd 為傳送方在接收到下一個 ACK 前，所能傳送封包的最大值。A
+接收方則維護一個廣播視窗(advertised window, rwnd)，
+rwnd 為接收方未處理封包的限度。cwnd 及 rwnd 值控制了資料傳輸行為。
+
+
+初始視窗(Initial Window, IW)是 cwnd 的初始值，
+至少應為 2*SMSS 且不能大於 2 個區段。SMSS 指
+傳送方最大區段值(Sender Maximum Segement Size)，
+也有學者定義
+IW = min (4*SMSS, max (2*SMSS, 4380 bytes))。
+
+
+參數緩啟動閾(Slow Start Threshold, ssthresh)，
+則用來決定啟動擁塞控制的時間。
+當 cwnd &lt; ssthresh 則執行緩啟動機制，
+反之 cwnd > ssthresh 則執行擁塞避免機制，
+而當 cwnd = ssthresh 則可任意執行緩啟動或擁塞避免機制。
+
+
+在緩啟動機制下，
+每次接收 ACK 後，cwnd 最多可增加 SMSS 的大小，
+直到 cwnd > ssthresh 才停止，轉成擁塞避免機制。
+
+
+在擁塞避免機制下，
+每次 RTT，cwnd 僅增加一個區段的大小，
+直到察覺到擁塞時才停止。cwnd 的行為如式 cwnd += SMSS*SMSS/cwnd       
+
+
+傳送方可用重傳時限來察覺到封包遺失，此即為隱性擁塞訊號，
+當察覺到擁塞時，會重設緩啟動閾如式：
+ssthresh = max (FlightSize / 2, 2*SMSS)
+其中 FlightSize 指未確認資料大小。
+
+
+
+RFC2581
+TCP Congestion Control
+
+IETF
+1999
+
+
+
+
+應用層
+&filesharing;
+
+歷屆試題
+
+

@@ -1,0 +1,62 @@
+ATM
+===
+非同步傳輸模式(ATM, Asynchronous Transfer Mode) 
+是由國際電信聯盟(ITU)的前身國際電話電報諮詢委員會(CCITT)
+所制定的高速網路傳輸協定。
+
+傳輸模式是表示傳輸、多工、解多工和交換資訊的一種特定方法，
+亦即規範如何傳送與接收資訊的方法。
+
+細胞
+----
+ATM 之細胞（Cell）長度為53 bytes。
+這53 bytes包含
+* 細胞標頭: 5 bytes
+* 細胞資訊欄位: 48 bytes。
+ATM 需另外加上識別碼來識別資訊的對象。
+識別碼即由5 bytes的細胞標頭擔綱。
+在 ATM 交換機即依該細胞標頭進行細胞交換。
+
+ATM 是目前被 ANSI 及 ITU 認可為寬頻整體服務數位
+網路(Broadband ISDN，B-ISDN)的基礎，配合SONET與相關技術，
+其傳輸速率可由1.5 Mbps 到 10 Gbps，一般以 155.520 Mbps 
+(OC-3) 或是 622.080 Mbps (OC-12) 居多，點與點之間的距離可
+由 100 公尺到 40 公里，所以同時可以適用於區域網路(LAN)與
+廣域網路(WAN)。
+
+使用 ATM 時，在傳送資料之前必須先建立好通路，
+而且在通訊的傳送和接收方並不需要同步的動作，
+所以傳輸信號並不需要附帶時序信號，
+減少傳送和接收方的聯繫工作和關連性，
+因此特別適合即時性的應用，
+如會議視訊 (video conference)、
+隨選視訊(Video On Demand，VOD)、
+多媒體或是電傳視訊資料等。
+
+服務等級
+--------
+ATM適應層（ATM Adaptation Layer；AAL）
+服務等級可區分成固定速率（Constant Bit Rate；CBR）、
+可變速率（Variable Bit Rate；VBR）、備便速率（Available Bit
+ Rate；ABR）、不指定速率（Unspecified Bit Rate；UBR）以及
+最小細胞速率（Minimum Cell Rate；MCR）。
+至於ATM 適應層內容則有1，2，3，4與5層與上述不同速率服務等級相互輝映。
+
+中華電信數據通信分公司目前提供之hiLink超高速數據交換網路服務，現提供下列四種服務種類：
+
+* 固定位元速率CBR(Constant Bit Rate)：
+  提供用戶固定的頻寬，
+  可應用在高解析度的視訊、語音、電路模擬等即時性服務。
+
+* 即時變動位元速率rt-VBR(Real-Time Variable Bit Rate)：
+  為可變動頻寬，可應用於突發性且即時性的資料服務，
+  如：即時球賽、演唱會轉播及視訊會議等。
+
+* 非即時變動位元速率nrt-VBR(Non-Real-Time Variable Bit Rate)：
+  可變動頻寬，應用於航空訂位、
+  銀行交易等具突發性但無須即時反應之資料服務。
+
+* 可用位元速率ABR(Available Bit Rate)：
+  應用於廣域與區域網路互連、分散式資料傳送，如一般ISP。
+
+
