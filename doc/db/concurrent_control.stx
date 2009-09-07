@@ -65,7 +65,7 @@ p = 30
 ~~~~~~~~
 若有上述的問題，則會產生錯誤加總(incorrect summary)問題。
 
-table[incorrect_sum].交易 A 發生不可重覆讀取
+table[incorrect_sum].交易 A 發生錯誤加總
   帳戶p1  帳戶p2      帳戶p3
 ========= ====== ================
        40     50               30

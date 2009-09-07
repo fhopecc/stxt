@@ -36,3 +36,11 @@
 
 若一個交插交易排程 A 等於一個序列排程 X，A 稱為可序列的排程，
 並認為 A 是正確的排程。
+
+假設交易 A 的操作為 A.ops = {opa1, opa2, opa3}，
+交易 B 的操作為 B.ops = {opb1, opb2, opb3}，
+排程 S1 = {opa1, opa2, opa3, opb1, opb2, opb3} 及
+S2 = {opb1, opb2, opb3, opa1, opa2, opa3} 都為序列排程，
+都是先執行完一個交易的操作，才執行另一個交易的操作。
+
+I1 = {opb1, opa1, opb2, opb3, opa2, opa3} 則為交插排程。
