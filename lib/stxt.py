@@ -145,10 +145,10 @@ tokens = [
           'CODEHEAD', 
           'CODEBLOCK', 
           'TABLEHEAD', 
-          'TABLEBLOCK', 
           'FOOTNOTE', 
           'INDENTLINE', 
           'EMPTYLINE', 
+          'LINE', 
           'PARA'] 
 def t_INCLUDE(t):
   r'^<(?P<file>.*)>\n'
@@ -202,10 +202,6 @@ def t_TABLEHEAD(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
-def t_TABLEBLOCK(t):
-  r'(.+\n)+=[= ]+\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  return t
 def t_INDENTLINE(t):
   r'^ +(?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -239,8 +235,12 @@ def t_EMPTYLINE(t):
   r'^\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
-def t_PARA(t):
-  r'((.+\n)+)(\n|\Z)'
+def t_TABLEBLOCK(t):
+  r'(.+\n)+=[= ]+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  return t
+def t_LINE(t):
+  r'(.+)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
 # Define a rule so we can track line numbers
