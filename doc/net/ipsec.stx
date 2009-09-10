@@ -31,13 +31,13 @@ IPsec 的應用
 ------------
 IPsec 的主要用途即是建立安全的通訊管道。IPsec 的應用可分為兩類：
 
-建立區域網路內部的安全通訊：
+建立區域網路內部的安全通訊:
   在這種模式下，雙方的個人電腦都必須具備IPsec 的能力。
   這類應用主要是為了防範區域網路內的駭客。
   例如，將總經理與財務經理之間的全部傳輸內容予以加密，
   避免員工看到機密的財務資訊。
 
-區域網路之間透過網際網路安全地傳輸資料：
+區域網路之間透過網際網路安全地傳輸資料:
   在這種模式下，區域網路對外的路由器或防火牆必需要具備IPsec 的能力，
   至於區域網路內的個人電腦使用一般的IP即可。
   此種模式可建立 VPN，讓區域網路不必再架設昂貴的專線，
@@ -98,12 +98,12 @@ IPsec 的使用模式
 ~~~~~~~~~~~~~~~~
 IPsec 提供了兩種使用模式：
 
-傳輸模式(Transport mode)：
+傳輸模式(Transport mode):
   僅加密或認證上層協定的資料。例如，
   在區域網路中有兩台電腦A與B，A與B可直接建立連線(不必經由路由器或防火牆)，
   且A與B具有處理IPsec 封包的能力時，則可使用IPsec 的傳輸模式。
 
-通道模式(Tunnel mode)：
+通道模式(Tunnel mode):
   IPsec 會加密或認證整個封包，然後在最外面再加上一個新的IP表頭。
   當IPsec 連線兩端的電腦有一端或兩端不具處理IPSec封包能力，
   而必須透過具有IPsec 能力的路由器或防火牆來代為處理IPSec封包時，
@@ -113,13 +113,13 @@ IPsec 的協定
 ------------
 若從功能面來看，IPsec 包含了三種協定，分別提供不同的功能。
 
-金鑰交換協定：
+金鑰交換協定:
   負責建立安全聯結與交換金鑰。
 
-認證表頭 (Authentication Header，AH)：
+認證表頭 (Authentication Header，AH):
   主要提供認證的功能。
 
-資料封裝加密 (Encapsulating Security Payload，ESP)：
+資料封裝加密 (Encapsulating Security Payload，ESP):
   主要提供加密的功能，也可選擇性地再加上認證的功能。
 
 建立IPsec 連線使一定會使用金鑰交換協定。
@@ -159,19 +159,19 @@ IPsec 在制訂時，即考慮到相容性與彈性的問題。
 
 安全聯結中有三個最重要的參數，三者合起來可共同定義(或識別)安全聯結：
 
-SPI, Security Parameters Index(安全係數索引)：
+SPI, Security Parameters Index(安全係數索引):
   SPI是由IPsec 接收端在自行定義的數值，長度為32位元，會記載於每個IPsec 封包中。
   例如，A、B、C同時要以IPsec 傳送資料給X，
   則X會定義三個SPI值，之後便可利用IPsec 封包中的SPI欄位，
   辨識該封包隸屬哪個安全聯結。
 
-Security Protocol ID(安全協定ID)：
+Security Protocol ID(安全協定ID):
   指定要使用AH或是ESP表頭。
   每項安全聯結僅能在AH或ESP中擇其一，不能同時指定這兩者。
   因此，若要同時使用AH與ESP來傳輸資料時，則必須用到兩項安全聯結；
   若要同時使用AH與ESP建立雙向傳輸關係，則需要四項安全聯結。
 
-IP destination address(IP目的位址)：
+IP destination address(IP目的位址):
   安全聯結的單方關係是以接收端的IP位址來定義。
 
 建立安全聯結
@@ -243,30 +243,31 @@ IPsec(Internet Protocol Security)為以 IP 封包為單位加密信息方式，
 # 來源可靠性，確認IP封包發送者的身份。
 # 請注意，封包認證並無法防止網路上的第三者窺伺封包內容。
   若不想讓其他人讀取封包內容，必須使用ESP封包加密的機制。
+
 # 保護不受重送攻擊。
 
 AH表頭欄位
 ~~~~~~~~~~
 AH表頭實際上包含了以下幾個欄位：
 
-Next Header(8個位元)：
+Next Header(8個位元):
   記載後續表頭的類型。
 
-Payload Length(8個位元)：
+Payload Length(8個位元):
   記載Authentication Data欄位的長度，單位為32位元Word)，再減去2。
 
-Reserved(16個位元)：
+Reserved(16個位元):
   保留將來之用（目前都置為0）。
 
-Security Parameters Index(32個位元)：
+Security Parameters Index(32個位元):
   用來識別安全聯結。
   與IP地址一同用來標識安全參數。
 
-Sequence Number(32個位元)：
+Sequence Number(32個位元):
   IP封包序號，可用來防止重送攻擊。
   單調遞增的數值，用來防止重放攻擊。
 
-Authentication Data(長度不定)：
+Authentication Data(長度不定):
   儲存IP封包的ICV或MAC。
 
 演算法
@@ -301,7 +302,7 @@ AH協定支援傳輸模式和通道模式。傳輸模式又稱為點對點(End-t
 使用此模式時，傳送端與接收端都必須移植IPsec 功能。
 若要建立區域網路內兩台電腦的IPsec 連線，即可使用傳輸模式。
 
-傳輸模式：
+傳輸模式:
   使用傳輸模式時，原來的IP封包的格式大致不變，
   僅在原有的IP表頭與TCP表頭之間加上AH表頭。
   然後針對整個封包計算ICV，再將ICV記錄到AH表頭中。
@@ -313,7 +314,7 @@ AH協定支援傳輸模式和通道模式。傳輸模式又稱為點對點(End-t
   因此，HMAC在計算時，會排除這些變動欄位。
   同理，使用ESP協定加密封包時，也會排除這些變動欄位。
 
-通道模式： 
+通道模式:
   通道模式又稱為中介(End-to-intermediate)模式。
   使用此模式時，傳送端與接收端有一方未移植IPsec 功能，
   而必須透過其他裝置來處理。
@@ -373,26 +374,26 @@ ESP表頭欄位
 ~~~~~~~~~~~
 ESP表頭中主要包含下列欄位：
 
-Security Parameters Index：
+Security Parameters Index:
   用來識別安全聯結。
 
-Sequence Number(32個位元)：
+Sequence Number(32個位元):
   IP封包序號，可用來防止重送攻擊。
 
-Payload Data(長度不定)：
+Payload Data(長度不定):
   指封包所負載的資料，內容包括上層協定的表頭，以及實際要傳送的資料。
 
-Padding(0至255 bytes)：
+Padding(0至255 bytes):
   這個欄位必須特殊，目的是為了將Payload Data補足一定的長度，
   以符合加密法對區塊的要求。
 
-Pad Length(8個位元)：
+Pad Length(8個位元):
   用來記載padding的長度。
 
-Next Header(8個位元)：
+Next Header(8個位元):
   記載後續表頭的類型。
 
-Authentication Data(長度不定)：
+Authentication Data(長度不定):
   用來記載ICV。
 
 演算法
@@ -497,6 +498,7 @@ IPsec 相關設定在Windows是由群組原則(Group Policy)來負責，以方�
 
 # 通道設定(IPsec  Tunneling)：這就是先前提到的通道模式功能。
   這個規則並沒有指定IPsec通道：
+
   # 不使用通道模式。
   # 由這個IP位址來指定通道的結束點
   # 使用通道模式，並指定對方的IP位址。

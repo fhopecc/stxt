@@ -7,16 +7,19 @@ tokens = [
           'HEAD1', 
           'HEAD2', 
           'HEAD3', 
-          'LI',
-          'OLI', 
-          'DLI', 
           'CODEHEAD', 
-          'CODEENDLINE', 
+          'CODEBLOCK', 
           'TABLEHEAD', 
           'ROWSEP', 
           'FOOTNOTE', 
-          'INDENTLINE', 
+          'LI',           # list start
+          #'L2LI',         # level2 list start
+          'OL', 
+          #'L2OL', 
+          'DL', 
           'EMPTYLINE', 
+          'L3LINE', 
+          'L2LINE', 
           'LINE'] 
 def t_INCLUDE(t):
   r'^<(?P<file>.*)>\n'
@@ -70,29 +73,36 @@ def t_TABLEHEAD(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
-def t_INDENTLINE(t):
-  r'^ +(?P<content>.*)\n'
+def t_DL(t):
+  r'(?P<content>.*):\n'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
+  t.value = DocTreeNode('dlistitem', t.value)
   return t
-def t_OLI(t):
+def t_OL(t):
   r'# (?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
   t.value = DocTreeNode('olistitem', t.value)
   return t
+#def t_L2OL(t):
+#  r'  # (?P<content>.*)\n'
+#  t.lexer.lineno += t.lexeme.count('\n')
+#  t.value = t.lexer.lexmatch.group('content')
+#  t.value = DocTreeNode('olistitem', t.value)
+#  return t
 def t_LI(t):
   r'\* (?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
   t.value = DocTreeNode('listitem', t.value)
   return t
-def t_DLI(t):
-  r'(?P<title>[^#*\n][^\n]+)\n(?=^  .*\n)'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('title')
-  t.value = DocTreeNode('dlistitem', t.value)
-  return t
+#def t_L2LI(t):
+#  r'  \* (?P<content>.*)\n'
+#  t.lexer.lineno += t.lexeme.count('\n')
+#  t.value = t.lexer.lexmatch.group('content')
+#  t.value = DocTreeNode('listitem', t.value)
+#  return t
 def t_FOOTNOTE(t):
   r'^\.\. \[#] (?P<content>.+)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -107,11 +117,15 @@ def t_EMPTYLINE(t):
   r'^\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
+def t_L2LINE(t):
+  r'^  (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  return t
 def t_LINE(t):
-  r'(.+)\n'
+  r'^[^ ](.+)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
-
 # Define a rule so we can track line numbers
 #def t_newline(t):
 #  r'\n+'

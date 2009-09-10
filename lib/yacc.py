@@ -279,10 +279,10 @@ class LRParser:
     # ------------------------------------------------------------
     # read() - parse a file
     # ------------------------------------------------------------
-    def read(self, f):
+    def read(self, f, debug=0):
         self.file = f
         with open(f) as f:
-          return self.parse(f.read())
+          return self.parse(f.read(), debug=debug)
 
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

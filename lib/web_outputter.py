@@ -1,6 +1,6 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re, unittest, stxt
+import sys, os, re, unittest, stxt_parser
 from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import HtmlFormatter
@@ -21,7 +21,8 @@ class Outputter:
   def __init__(self, file):
     #d = stxt.parser.read(r"d:\stxt\stxt\db\concurrent_control.stx")
     self.file = file
-    d = stxt.parser.read(file)
+    #d = stxt.parser.read(file)
+    d = stxt_parser.parser.read(file)
     d.number_children()
     d.count_occurence()
     self.doctree = d

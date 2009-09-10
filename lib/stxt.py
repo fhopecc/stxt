@@ -145,6 +145,7 @@ tokens = [
           'CODEHEAD', 
           'CODEBLOCK', 
           'TABLEHEAD', 
+          'TABLEBLOCK', 
           'FOOTNOTE', 
           'INDENTLINE', 
           'EMPTYLINE', 
@@ -325,8 +326,7 @@ def p_code(p):
   p[0] = p[1]
   p[0].value = p[2]
 def p_table(p):
-  '''table : TABLEHEAD TABLEBLOCK
-           | TABLEHEAD TABLEBLOCK EMPTYLINE'''
+  '''table : TABLEHEAD TABLEBLOCK'''
   p[0] = p[1]
   p[0].value = p[2]
 def p_nparas(p): #nested paragraph

@@ -9,6 +9,8 @@ handlers:
   static_dir: db
 - url: /ds
   static_dir: ds
+- url: /hltb
+  static_dir: hltb
 - url: /css
   static_dir: css
 - url: /
