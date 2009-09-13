@@ -38,7 +38,7 @@ ATM 是目前被 ANSI 及 ITU 認可為寬頻整體服務數位
 ATM適應層（ATM Adaptation Layer；AAL）
 服務等級可區分成固定速率（Constant Bit Rate；CBR）、
 可變速率（Variable Bit Rate；VBR）、備便速率（Available Bit
- Rate；ABR）、不指定速率（Unspecified Bit Rate；UBR）以及
+Rate；ABR）、不指定速率（Unspecified Bit Rate；UBR）以及
 最小細胞速率（Minimum Cell Rate；MCR）。
 至於ATM 適應層內容則有1，2，3，4與5層與上述不同速率服務等級相互輝映。
 
@@ -46,17 +46,14 @@ ATM適應層（ATM Adaptation Layer；AAL）
 
 * 固定位元速率CBR(Constant Bit Rate)：
   提供用戶固定的頻寬，
+
   可應用在高解析度的視訊、語音、電路模擬等即時性服務。
 
 * 即時變動位元速率rt-VBR(Real-Time Variable Bit Rate)：
   為可變動頻寬，可應用於突發性且即時性的資料服務，
   如：即時球賽、演唱會轉播及視訊會議等。
-
 * 非即時變動位元速率nrt-VBR(Non-Real-Time Variable Bit Rate)：
   可變動頻寬，應用於航空訂位、
   銀行交易等具突發性但無須即時反應之資料服務。
-
 * 可用位元速率ABR(Available Bit Rate)：
   應用於廣域與區域網路互連、分散式資料傳送，如一般ISP。
-
-

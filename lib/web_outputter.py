@@ -69,7 +69,7 @@ class WEBOutputter(Outputter):
       return f_code(tree)
     elif tree.type == 'table':
       return f_table(tree)
-    elif tree.type in ('para', 'npara'):
+    elif tree.type in ('para', 'l2para'):
       html = '<p>\n' + tree.value + '</p>\n'
     elif tree.type in ('list'):
       html += '<ul>\n'

@@ -9,6 +9,8 @@ handlers:
   static_dir: db
 - url: /ds
   static_dir: ds
+- url: /csec
+  static_dir: csec
 - url: /hltb
   static_dir: hltb
 - url: /css

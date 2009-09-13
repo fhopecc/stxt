@@ -10,7 +10,8 @@ tokens = [
           'CODEHEAD', 
           'CODEBLOCK', 
           'TABLEHEAD', 
-          'ROWSEP', 
+          'TABLEBLOCK', 
+          #'ROWSEP', 
           'FOOTNOTE', 
           'LI',           # list start
           #'L2LI',         # level2 list start
@@ -51,6 +52,20 @@ def t_HEAD3(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+def t_TABLEHEAD(t):
+  r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('table') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
+  return t
+def t_TABLEBLOCK(t):
+  r'(.+\n)+=[= ]+\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  m = t.lexer.lexmatch
+  t.value = m.group(0)
+  return t
 def t_CODEHEAD(t):
   r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -65,25 +80,26 @@ def t_CODEBLOCK(t):
   m = t.lexer.lexmatch
   t.value = m.group('code')
   return t
-def t_TABLEHEAD(t):
-  r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = DocTreeNode('table') 
-  m = t.lexer.lexmatch
-  t.value.name = m.group('name')
-  t.value.title = m.group('title')
-  return t
-def t_DL(t):
-  r'(?P<content>.*):\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('content')
-  t.value = DocTreeNode('dlistitem', t.value)
-  return t
 def t_OL(t):
   r'# (?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
   t.value = DocTreeNode('olistitem', t.value)
+  return t
+def t_LI(t):
+  r'\* (?P<content>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  t.value = DocTreeNode('listitem', t.value)
+  return t
+def t_DL(t):
+  r'^(?P<content>(?!(table|code|# |\* |  )).*)\n  ((?P<line>.*)\n)'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = t.lexer.lexmatch.group('content')
+  t.value = DocTreeNode('dlistitem', t.value)
+  line = t.lexer.lexmatch.group('line')
+  if line:
+    t.value.append(DocTreeNode('l2para', line))
   return t
 #def t_L2OL(t):
 #  r'  # (?P<content>.*)\n'
@@ -91,12 +107,6 @@ def t_OL(t):
 #  t.value = t.lexer.lexmatch.group('content')
 #  t.value = DocTreeNode('olistitem', t.value)
 #  return t
-def t_LI(t):
-  r'\* (?P<content>.*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  t.value = t.lexer.lexmatch.group('content')
-  t.value = DocTreeNode('listitem', t.value)
-  return t
 #def t_L2LI(t):
 #  r'  \* (?P<content>.*)\n'
 #  t.lexer.lineno += t.lexeme.count('\n')
@@ -109,10 +119,10 @@ def t_FOOTNOTE(t):
   t.value = DocTreeNode('FOOTNOTE', 
               t.lexer.lexmatch.group('content'))
   return t
-def t_ROWSEP(t):
-  r'(^=[= ]*)\n'
-  t.lexer.lineno += t.lexeme.count('\n')
-  return t
+#def t_ROWSEP(t):
+#  r'(^=[= ]*)\n'
+#  t.lexer.lineno += t.lexeme.count('\n')
+#  return t
 def t_EMPTYLINE(t):
   r'^\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -141,6 +151,7 @@ lexer = lex.lex(debug=True)
 if __name__ == '__main__':
   # Give the lexer some input
   lexer.writetab('lextab')
+  #lexer.read(r"d:\stxt\doc\net\ipsec.stx")
   lexer.read(r"d:\stxt\doc\net\ipsec.stx")
   # Tokenize
   while True:
