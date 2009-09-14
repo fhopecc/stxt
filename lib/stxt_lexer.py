@@ -93,7 +93,7 @@ def t_LI(t):
   t.value = DocTreeNode('listitem', t.value)
   return t
 def t_DL(t):
-  r'^(?P<content>(?!(table|code|# |\* |  )).*)\n  ((?P<line>.*)\n)'
+  r'^(?P<content>(?!(table|code|# |\* |  )).+)\n  ((?P<line>.*)\n)'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
   t.value = DocTreeNode('dlistitem', t.value)

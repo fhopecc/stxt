@@ -100,8 +100,8 @@ def p_listitem(p):
 def p_list(p):
   '''list : listitem
           | list listitem
-          | list listitem EMPTYLINE
   '''
+  #| list listitem EMPTYLINE
   if len(p) == 2:
     if p[1].type == 'listitem':
       p[0] = DocTreeNode('list', '')
