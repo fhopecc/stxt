@@ -462,25 +462,25 @@ class Lexer:
 # --------------------------------------------------------------------
 # get_caller_module_dict()
 #
-# This function returns a dictionary containing all of the symbols defined within
+# This function returns a dictionary containing all of the symbols 
+# defined within
 # a caller further down the call stack.  This is used to get the environment
 # associated with the yacc() call if none was provided.
 # --------------------------------------------------------------------
 
 def get_caller_module_dict(levels):
   try:
-      raise RuntimeError
+    raise RuntimeError
   except RuntimeError:
-      e,b,t = sys.exc_info()
-      f = t.tb_frame
-      while levels > 0:
-          f = f.f_back                   
-          levels -= 1
-      ldict = f.f_globals.copy()
-      if f.f_globals != f.f_locals:
-          ldict.update(f.f_locals)
-
-      return ldict
+    e,b,t = sys.exc_info()
+    f = t.tb_frame
+    while levels > 0:
+      f = f.f_back                   
+      levels -= 1
+    ldict = f.f_globals.copy()
+    if f.f_globals != f.f_locals:
+      ldict.update(f.f_locals)
+    return ldict
 
 # --------------------------------------------------------------------
 # _funcs_to_names()
