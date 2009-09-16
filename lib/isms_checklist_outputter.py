@@ -17,18 +17,21 @@ def disp(tree):
   return globals()['f_' + tree.type](tree)
 
 def f_toc(tree): 
+  total = 0
   html = '<table>'
   for sect1 in tree.children:
-    html += '<tr><td>%s</td><td>%s</td></tr>' % \
-        (tree.title, len(tree.children[0].children))
+    total += len(sect1.children[0].children)
+    html += '<tr><td>%s</td><td>%s</td><td>%s</td></tr>' % \
+        (sect1.title, len(sect1.children[0].children), total)
   html += '</table>'
   html += '<br/>'
+  html += 'total : %s ' % total
   return html
 
 def f_sect1(tree):
-  tds = r'<tr><th>稽核項目</th><th>受檢單位</th>' + \
+  tds = r'<tr><th>編號</th><th>稽核項目</th><th>受檢單位</th>' + \
         r'<th>事實狀況</th><th>改進建議事項</th></tr>'
-  html = '<tr><th>%s</th><th colspan="3">%s</th></tr>\n%s'% \
+  html = '<tr><th>%s</th><th colspan="4">%s</th></tr>\n%s'% \
       (tree.section_number(), tree.title, tds)
   html += disp(tree.children[0])
   html += r'<br/>'
@@ -40,7 +43,7 @@ def f_olist(tree):
   index = 0
   for li in tree.children:
     index += 1
-    html += '<tr><td>%s.%s</td><td>%s</td><td></td><td></td></tr>\n' % \
+    html += '<tr><td>%s.%s</td><td>%s</td><td></td><td></td><td></td></tr>\n' % \
           (sect_num, index, disp(li))
   return html
 
