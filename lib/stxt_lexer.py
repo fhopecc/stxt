@@ -75,7 +75,7 @@ def t_CODEHEAD(t):
   t.value.title = m.group('title')
   return t
 def t_CODEBLOCK(t):
-  r'(?P<code>(.+\n)+)(^::\n\n)'
+  r'(?P<code>(.+\n)+)(^::\n)'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
   t.value = m.group('code')
@@ -152,7 +152,7 @@ if __name__ == '__main__':
   # Give the lexer some input
   lexer.writetab('lextab')
   #lexer.read(r"d:\stxt\doc\net\ipsec.stx")
-  lexer.read(r"d:\stxt\doc\net\ipsec.stx")
+  lexer.read(r"d:\stxt\doc\db\tcl_ansi.stx")
   # Tokenize
   while True:
     tok = lexer.token()

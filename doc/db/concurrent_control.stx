@@ -2,6 +2,12 @@
 ========
 <d:\stxt\doc\db\transaction.stx>
 <d:\stxt\doc\db\concurrent_problem.stx>
-<d:\stxt\doc\db\timestamp.stx>
 <d:\stxt\doc\db\lock.stx>
+<d:\stxt\doc\db\timestamp.stx>
+<d:\stxt\doc\db\two_phase_commit.stx>
+<d:\stxt\doc\db\isolation_level_ansi.stx>
 <d:\stxt\doc\db\oracle_lock.stx>
+<d:\stxt\doc\db\tcl_ansi.stx>
+<d:\stxt\doc\db\tcl_transact_sql.stx>
+<d:\stxt\doc\db\deadlock.stx>
+<d:\stxt\doc\db\starvation.stx>
