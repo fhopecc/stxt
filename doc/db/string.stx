@@ -1,0 +1,2 @@
+set sqlblanklines on
+讓 SQL*PLUS 可辨識含空白行的字串值
