@@ -209,10 +209,11 @@ wound/wait
   則 Y 必須等待 O 釋放。
 
 table.wait/die VS wound/wait
-
-
-O 要求被 Y 鎖定的資源
-Y 要求被 O 鎖定的資源
+   動作               wait/die wound/wait
+===================== ======== ==========
+O 要求被 Y 鎖定的資源  O wait    Y die
+Y 要求被 O 鎖定的資源  Y die     Y wait
+===================== ======== ==========
 
 二階段鎖定法
 ~~~~~~~~~~~~

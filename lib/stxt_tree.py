@@ -1,9 +1,18 @@
 # coding=utf8
 import sys
-class TreeNode(object):
-  def __init__(self):
-    self.parent, self.children, self.name = None, [], str(id(self))
-    self.unvisited = []
+class DocTreeNode(object):
+  def __init__(self, type, value='', title=''):
+    self.type, self.value, self.title = type, value, title
+    self.parent, self.children = None, []
+    self.number = None     # It's section number
+    self.occurence = None  # It's table number
+  def __str__(self):
+    m = "%s:\n[\n%s\n]" % (self.type, self.value)
+    for c in self.children:
+      m+=str(c)
+    return m
+  def __repr__(self):
+    return str(self)
   def append(self, *nodes):
     for n in nodes: 
       n.parent = self
@@ -18,94 +27,25 @@ class TreeNode(object):
       c = c.parent
       h += 1
     return h
+
   def _dfs(self, unvisited):
     for c in self.children:
       c._dfs(unvisited)
     unvisited.append(self)
+
   def dfs(self):
+    '''depth-first search
+         It calls _dfs() to construct a list of nodes in dfs order, then
+         it enumerates the list to implement the generator.
+       TODO: 
+         Modify it not constructing node first, just find the next
+         node on demand.
+    '''
     unvisited = []
     self._dfs(unvisited)
-    #print unvisited
     for n in unvisited:
       yield n
-class ParseTreeNode(TreeNode):
-  def __init__(self, type, token=None):
-    TreeNode.__init__(self)
-    self.type, self.token= type, token, 
-    if not token is None: 
-      self.name, self.value = token.name, token.value
-  def print_type_tree(self, level_limit=10):
-    if self.height() < level_limit:
-      print '*' * self.height() + self.type
-    for c in self.children: c.print_type_tree(level_limit)
-  def print_postfix_tree(self):
-    for c in self.children: c.print_postfix_tree()
-    print '*' * self.height() + self.type
-  def to_doctree(self):
-    if self.type in ('book'):
-      n = DocTreeNode(self.type)
-      if len(self.children) == 2:
-        n.append(*self.children[0].to_doctree())
-      n.number_children()
-      n.count_occurence()
-      return n
-    elif self.type in ('sect1s', 'content1', 'content2'):
-      l = [self.children[0].to_doctree()]
-      for c in self.children[1].to_doctree():
-        l.append(c)
-      return l
-    elif self.type in ('list'):
-      n = DocTreeNode(self.type)
-      n.append(self.children[0].to_doctree())
-      for c in self.children[1].to_doctree():
-        n.append(c)
-      return n
-    elif self.type in ('sect1s_', 'content1_', 'content2_', \
-                       'list_'):
-      if len(self.children) == 2:
-        l = [self.children[0].to_doctree()]
-        for c in self.children[1].to_doctree():
-          l.append(c)
-        return l
-      return []
-    elif self.type in ('sect1', 'sect2'):
-      n = DocTreeNode(self.type)
-      h = self.children[0]
-      n.name, n.title = h.name, h.value
-      for c in self.children[1].to_doctree():
-        n.append(c)
-      return n
-    elif self.type in ('PARA', 'LISTITEM'):
-      return DocTreeNode(self.type, self.value)
-    elif self.type in ('block'):
-      return self.children[0].to_doctree()
-    elif self.type in ('code'):
-      n = DocTreeNode(self.type)
-      h = self.children[0]
-      n.name, n.title = h.name, h.value
-      n.append(self.children[1].to_doctree())
-      return n
-    elif self.type in ('CODEBLOCK'):
-      return DocTreeNode(self.type, self.value, self.token)
-    else:
-      raise ValueError, "no definition for " + self.type
-class DocTreeNode(ParseTreeNode):
-  def __init__(self, type, value='', token=None,**attr):
-    ParseTreeNode.__init__(self, type, token)
-    self.value, self.title = value, ''
-    self.number, self.occurence = None, 0
-  def __str__(self):
-    m = "%s:\n[\n%s\n]" % (self.type, self.value)
-    for c in self.children:
-      m+=str(c)
-    return m
-  def __repr__(self):
-    return str(self)
-  def section_number(self):
-    if self.number is None: return '' 
-    else: 
-      if self.parent.number is None: return str(self.number)
-      else: return self.parent.section_number()+'.'+str(self.number)
+
   def number_children(self):
     cs = self.children
     if self.type in ('book'):
@@ -115,6 +55,23 @@ class DocTreeNode(ParseTreeNode):
     elif self.type in ('sect1'):
       for i, c in enumerate([c for c in cs if c.type == 'sect2']):
         c.number = i + 1
+        c.number_children()
+    elif self.type in ('sect2'):
+      for i, c in enumerate([c for c in cs if c.type == 'sect3']):
+        c.number = i + 1
+
+  def section_number(self, level=0):
+    '''Return a list of section numbers by level.
+    '''
+    if self.number is None: return '' 
+    else: 
+      if self.parent.number is None: return [self.number]
+      elif level == 0: return [self.number]
+      else: 
+        ns = self.parent.section_number(level-1)
+        ns.append(self.number)
+        return ns
+
   def _count_occurence(self, type, o=0):
     for c in self.children:
       if c.type in [type]:
@@ -122,12 +79,23 @@ class DocTreeNode(ParseTreeNode):
         c.occurence = o
       o = c._count_occurence(type, o)
     return o
+
   def count_occurence(self):
     for type in ['code', 'table']:
       if self.type in [type]:
         o = o+1
         self.occurence = o
       self._count_occurence(type)
+
+  def print_type_tree(self, level_limit=10):
+    if self.height() < level_limit:
+      print '*' * self.height() + self.type
+    for c in self.children: c.print_type_tree(level_limit)
+
+  def print_postfix_tree(self):
+    for c in self.children: c.print_postfix_tree()
+    print '*' * self.height() + self.type
+
   def print_tree(self):
     out = '+' * self.height() + self.type + '[' + self.name + ']' \
            +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
