@@ -10,8 +10,8 @@ def disp(tree):
 def make_sect_list(doctree):
   o = '主題列表<br/>'
   for sect1 in doctree.children:
-    o += r'<a href="%s">%s%s</a><br/>' %\
-         (f_filename(sect1), f_section_number(sect1), sect1.title)
+    o += r'<a href="%s.html">%s%s</a><br/>' %\
+         (f_section_number(sect1), f_section_number(sect1), sect1.title)
   return o
 
 def to_web(file):
@@ -24,8 +24,8 @@ def to_web(file):
     for sect1 in d.children:
       m = re.match(r".*\\([^\\]*)\\.*$", file)
       bookdir = m.group(1)
-      fn = r'd:\stxt\structedtext\%s\%s' % \
-            (bookdir, f_filename(sect1))
+      fn = r'd:\stxt\structedtext\%s\%s.html' % \
+            (bookdir, str(sect1.number))
       with open(fn, 'w') as f:
         f.write(t % \
             {'title': sect1.title, 
@@ -36,29 +36,38 @@ def to_web(file):
 def to_html(tree):
   return disp(tree)
 
+def f_section_number(tree):
+  ns = tree.section_number(0)[0]
+  cdigits = ['零','一','二','三','四','五','六','七','八','九']
+  if tree.type == 'sect2':
+    return cdigits[ns] + '.'
+  elif tree.type == 'sect3':
+    return '(' + cdigits[ns] + ')' + ' '
+
 def f_sect1(tree):
-  html = '<h1>%s%s</h1>\n'%(f_section_number(tree), tree.title)
+  html = '<h1>%s</h1>\n' % tree.title
   for c in tree.children:
     html += to_html(c)
   return html
 
 def f_sect2(tree):
-  html = '<h2>%s%s</h2>\n'%(f_section_number(tree), tree.title)
+  html = '<h2>%s%s</h2>\n' % (f_section_number(tree), tree.title)
   for c in tree.children:
     html += to_html(c)
   return html
 
 def f_sect3(tree):
-  html =  '<h3>%s</h3>\n'% tree.title
+  html =  '<h3>%s%s</h3>\n' % (f_section_number(tree), tree.title)
   for c in tree.children:
     html += to_html(c)
   return html
 
 def f_code(tree):
-  html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
-  #html += tree.value + '</pre>\n'
-  html += highlight(tree.value, PythonLexer(),
-      HtmlFormatter()).decode('ascii').encode('utf8')
+  html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
+  html += '<pre>' + tree.value + '</pre>\n'
+  #html += highlight(tree.value, PythonLexer(),
+      #HtmlFormatter())
+  #.decode('ascii').encode('utf8')
   #print highlight(tree.value, PythonLexer(), HtmlFormatter())
   return html
 
@@ -110,19 +119,6 @@ def f_footnotes(tree):
     html += '<li>' + c.value+ '</li>\n'
   html += '</ul>\n'
   return html
-
-def f_section_number(tree):
-  ns = tree.section_number(3)
-  w = ''
-  for n in ns:
-    w += str(n) + '.'
-  return w
-
-def f_filename(tree):
-  fn = tree.section_number()[0]
-  if tree.name:
-    fn = tree.name
-  return '%s.html' % fn
 
 if __name__ == '__main__':
   usage = os.path.basename(__file__) + " filename"
