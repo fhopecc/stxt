@@ -57,8 +57,8 @@ def f_sect3(tree):
 def f_code(tree):
   html  = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
   #html += tree.value + '</pre>\n'
-  html += highlight(tree.value, PythonLexer(),
-      HtmlFormatter()).decode('ascii').encode('utf8')
+  html += '<pre>%s</pre>\n' % tree.value
+  #highlight(tree.value.decode('utf8'), PythonLexer(), HtmlFormatter())
   #print highlight(tree.value, PythonLexer(), HtmlFormatter())
   return html
 
