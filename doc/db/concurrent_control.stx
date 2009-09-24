@@ -1,5 +1,5 @@
-並行控制
-========
+[concurrent_control]並行控制
+============================
 <d:\stxt\doc\db\transaction.stx>
 <d:\stxt\doc\db\concurrent_problem.stx>
 <d:\stxt\doc\db\lock.stx>

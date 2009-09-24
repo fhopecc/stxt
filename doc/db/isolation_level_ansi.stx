@@ -1,5 +1,5 @@
-SQL語言的隔離性等級
-===================
+[isolation_level_ansi]SQL語言的隔離性等級
+=========================================
 ANSI-SQL 和 Transact-SQL 能指定四種交易的隔離性等級(Isolation Level)，
 其語法如下所示：
 
