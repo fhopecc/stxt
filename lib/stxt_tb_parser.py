@@ -5,7 +5,7 @@ import sys, unicodedata, unittest
 # Lexer
 def vlen(str):
   "visual width len: a chinese character'len is two times of ascii's"
-  str = unicode(str)
+  #str = unicode(str)
   len = 0
   for c in str:
     if unicodedata.east_asian_width(c) == 'W':
@@ -15,7 +15,7 @@ def vlen(str):
   return len
 
 def vsubstr(str, start, end):
-  str = unicode(str)
+  #str = unicode(str)
   w = ''
   p = 0
   for c in str:
@@ -36,12 +36,16 @@ t4               B.update(p)
 ==== =========== ===========
 ''' 
   def testvlen(self):
-    self.assertEqual(vlen(u'時間'), vlen('===='))
+    self.assertEqual(vlen('時間'.decode('utf8')), vlen('===='))
     self.assertEqual(vlen(u'交易A      '), vlen('==========='))
     self.assertNotEqual(len(u'時間'), len('===='))
 
   def testvsubstr(self):
     self.assertEqual(u'時', vsubstr(u'時間', 0, 2))
+    self.assertEqual(vsubstr(u'時間 交易A       交易B', ),
+                     vsubstr(u'時間', 0, 2))
+    
+
     #print vsubstr(unicode('時間'.decode('utf8')), 0, 2)
 
 if __name__ == '__main__':

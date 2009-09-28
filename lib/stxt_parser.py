@@ -160,9 +160,9 @@ def p_footnotes(p):
   else:
     p[1].append(p[2])
     p[0] = p[1]
-#def p_error(t):
-#    print ("Syntax error at '%s'" \
-#          % str(t)).decode('utf8').encode('cp950')
+def p_error(t):
+  print ("Error is happened at \n%s" \
+          % str(t)).decode('utf8').encode('cp950')
 parser = yacc.yacc()
 if __name__ == '__main__':
   # Give the lexer some input
