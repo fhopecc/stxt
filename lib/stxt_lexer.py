@@ -147,7 +147,8 @@ def t_error(t):
   print "Error happened at " + \
          str(t).decode('utf8').encode('cp950')
   sys.exit()
-lexer = lex.lex(debug=True)
+#lexer = lex.lex(debug=True)
+lexer = lex.lex()
 if __name__ == '__main__':
   # Give the lexer some input
   lexer.writetab('lextab')

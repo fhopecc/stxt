@@ -15,7 +15,7 @@ def to_html(file):
   title = os.path.basename(file)
   with open(r'd:\stxt\template\single_html.html') as tfn:
     t = tfn.read()
-    return t % {'title': title,  'content': disp(d) }
+    return t % {'title': title, 'content': disp(d)}
 
 def f_book(tree):
   html = ''
