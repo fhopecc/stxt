@@ -1,9 +1,9 @@
 # coding=utf-8
 from __future__ import with_statement
 import sys, os, re, unittest, stxt_parser
-from pygments import highlight
-from pygments.lexers import PythonLexer
-from pygments.formatters import HtmlFormatter
+#from pygments import highlight
+#from pygments.lexers import PythonLexer
+#from pygments.formatters import HtmlFormatter
 def disp(tree):
   return globals()['f_' + tree.type](tree)
 
@@ -67,6 +67,11 @@ def f_table(tree):
   html += '<pre>\n' + tree.value + '</pre>\n'
   return html
 
+def f_image(tree):
+  html  = '<h4>圖%s：%s</h4>\n'%(tree.occurence,  tree.title)
+  html += '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
+  return html
+
 def f_para(tree):
   return '<p>\n' + tree.value + '</p>\n'
 
@@ -123,6 +128,8 @@ def f_filename(tree):
   if tree.name:
     fn = tree.name
   return '%s.html' % fn
+
+  
 
 if __name__ == '__main__':
   usage = os.path.basename(__file__) + " filename"

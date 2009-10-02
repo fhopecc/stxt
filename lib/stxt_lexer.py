@@ -1,5 +1,5 @@
 # coding=utf8
-import sys, stxt_tree, lex
+import sys, lex, unittest
 from stxt_tree import DocTreeNode
 # Lexer
 tokens = [
@@ -8,10 +8,10 @@ tokens = [
           'HEAD2', 
           'HEAD3', 
           'CODEHEAD', 
-          'IMAGE', 
           'CODEBLOCK', 
           'TABLEHEAD', 
           'TABLEBLOCK', 
+          'IMAGEHEAD', 
           #'ROWSEP', 
           'FOOTNOTE', 
           'LI',           # list start
@@ -29,6 +29,7 @@ def t_INCLUDE(t):
   t.lexer.include_lexer = t.lexer.clone()
   t.lexer.include_lexer.read(t.lexer.lexmatch.group('file'))
   return t.lexer.include_lexer.token()
+
 def t_HEAD1(t):
   r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -37,6 +38,7 @@ def t_HEAD1(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
 def t_HEAD2(t):
   r'^(\[(?P<name>.*)\])?(?P<title>.*)\n-+\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -45,6 +47,7 @@ def t_HEAD2(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
 def t_HEAD3(t):
   r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -54,10 +57,10 @@ def t_HEAD3(t):
   t.value.title = m.group('title')
   return t
 
-def t_IMAGE(t):
- r'^image(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
+def t_IMAGEHEAD(t):
+  r'^image(\[(?P<name>.*)\])?\.(?P<title>.*)(\n|$)'
   t.lexer.lineno += t.lexeme.count('\n')
-  t.value = DocTreeNode('table') 
+  t.value = DocTreeNode('image') 
   m = t.lexer.lexmatch
   t.value.name = m.group('name')
   t.value.title = m.group('title')
@@ -71,12 +74,14 @@ def t_TABLEHEAD(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
 def t_TABLEBLOCK(t):
   r'(.+\n)+=[= ]+\n'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
   t.value = m.group(0)
   return t
+
 def t_CODEHEAD(t):
   r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -85,12 +90,14 @@ def t_CODEHEAD(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
 def t_CODEBLOCK(t):
   r'(?P<code>(.+\n)+)(^::\n)'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
   t.value = m.group('code')
   return t
+
 def t_OL(t):
   r'# (?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
@@ -160,13 +167,32 @@ def t_error(t):
   sys.exit()
 #lexer = lex.lex(debug=True)
 lexer = lex.lex()
-if __name__ == '__main__':
-  # Give the lexer some input
-  lexer.writetab('lextab')
-  #lexer.read(r"d:\stxt\doc\net\ipsec.stx")
-  lexer.read(r"d:\stxt\doc\db\tcl_ansi.stx")
-  # Tokenize
-  while True:
+
+class UnitTest(unittest.TestCase):
+  def testIMAGEHEAD(self):
+    case = 'image[name].this is a image title'
+    lexer.input(case)
     tok = lexer.token()
-    if not tok: break      # No more input
-    print str(tok).decode('utf8').encode('cp950')
+    self.assertEqual(tok.type, 'IMAGEHEAD')
+    self.assertEqual(tok.value.name, 'name')
+    self.assertEqual(tok.value.title, 'this is a image title')
+
+    # imagehead must having name block
+    case = 'image.this is a image title'
+    lexer.input(case)
+    tok = lexer.token()
+    self.assertEqual(tok.type, 'IMAGEHEAD')
+    self.assertEqual(tok.value.name, None)
+    self.assertEqual(tok.value.title, 'this is a image title')
+
+if __name__ == '__main__':
+  unittest.main()
+  # Give the lexer some input
+  #lexer.writetab('lextab')
+  #lexer.read(r"d:\stxt\doc\net\ipsec.stx")
+  #lexer.read(r"d:\stxt\doc\db\tcl_ansi.stx")
+  # Tokenize
+  #while True:
+  #  tok = lexer.token()
+  #  if not tok: break      # No more input
+  #  print str(tok).decode('utf8').encode('cp950')

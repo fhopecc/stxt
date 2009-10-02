@@ -81,7 +81,7 @@ class DocTreeNode(object):
     return o
 
   def count_occurence(self):
-    for type in ['code', 'table']:
+    for type in ['code', 'table', 'image']:
       if self.type in [type]:
         o = o+1
         self.occurence = o
