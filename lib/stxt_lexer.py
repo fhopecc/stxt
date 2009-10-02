@@ -8,6 +8,7 @@ tokens = [
           'HEAD2', 
           'HEAD3', 
           'CODEHEAD', 
+          'IMAGE', 
           'CODEBLOCK', 
           'TABLEHEAD', 
           'TABLEBLOCK', 
@@ -52,6 +53,16 @@ def t_HEAD3(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
+def t_IMAGE(t):
+ r'^image(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
+  t.lexer.lineno += t.lexeme.count('\n')
+  t.value = DocTreeNode('table') 
+  m = t.lexer.lexmatch
+  t.value.name = m.group('name')
+  t.value.title = m.group('title')
+  return t
+
 def t_TABLEHEAD(t):
   r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
