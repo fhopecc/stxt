@@ -2,6 +2,7 @@ import os, fnmatch
 def istmp(f):
   return fnmatch.fnmatch(f, '*~') or \
     fnmatch.fnmatch(f, '*.pyc') or \
+    fnmatch.fnmatch(f, '*.swp') or \
     fnmatch.fnmatch(f, 'log') or \
     fnmatch.fnmatch(f, 'log2') or \
     fnmatch.fnmatch(f, 'lextab.py') or \
