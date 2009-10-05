@@ -1,6 +1,7 @@
 # coding=utf8
 import sys, stxt_tree, lex
 from stxt_tree import DocTreeNode
+import stxt_tb_parser
 # Lexer
 tokens = [
           'INCLUDE', 
@@ -71,12 +72,14 @@ def t_TABLEHEAD(t):
   t.value.name = m.group('name')
   t.value.title = m.group('title')
   return t
+
 def t_TABLEBLOCK(t):
   r'(.+\n)+=[= ]+\n'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
   t.value = m.group(0)
   return t
+
 def t_CODEHEAD(t):
   r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')

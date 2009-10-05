@@ -44,11 +44,13 @@ def p_content2s(p):
   else:
     p[1].append(p[2])
     p[0] = p[1]
+
 def p_sect3(p):
   r'sect3 : HEAD3 content3s'
   p[0] = p[1]
   for c in p[2]:
     p[0].append(c) 
+
 def p_content3s(p):
   '''content3s : content
                | content3s content'''
@@ -101,7 +103,6 @@ def p_list(p):
   '''list : listitem
           | list listitem
   '''
-  #| list listitem EMPTYLINE
   if len(p) == 2:
     if p[1].type == 'listitem':
       p[0] = DocTreeNode('list', '')
@@ -117,6 +118,7 @@ def p_code(p):
   r'code : CODEHEAD CODEBLOCK'
   p[0] = p[1]
   p[0].value = p[2]
+
 def p_para(p):
   '''para : LINE
           | para LINE
@@ -128,6 +130,7 @@ def p_para(p):
       p[1] = DocTreeNode('para', p[1])
     p[1].value +=  p[2]
     p[0] = p[1]
+
 def p_l2para(p):
   '''l2para : L2LINE
             | l2para L2LINE
@@ -151,6 +154,7 @@ def p_table(p): # nested 2 level paragraph
   '''table : TABLEHEAD TABLEBLOCK'''
   p[1].value = p[2]
   p[0] = p[1]
+
 def p_footnotes(p):
   '''footnotes : FOOTNOTE
                | footnotes FOOTNOTE'''
@@ -160,10 +164,13 @@ def p_footnotes(p):
   else:
     p[1].append(p[2])
     p[0] = p[1]
+
 def p_error(t):
   print ("Error is happened at \n%s" \
           % str(t)).decode('utf8').encode('cp950')
+
 parser = yacc.yacc()
+
 if __name__ == '__main__':
   # Give the lexer some input
   #lexer.writetab('lextab')
