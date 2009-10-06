@@ -1,10 +1,12 @@
 # coding=utf8 
-import sys, yacc
+import sys, yacc, unittest
 from stxt_lexer import *
 # Parser 
 def p_book(p):
   '''book : sect1          
-          | book sect1'''
+          | book sect1
+          | content
+          | book content'''
   if len(p) == 2:
     p[0] = DocTreeNode('book', '')
     p[0].append(p[1])
@@ -66,6 +68,8 @@ def p_content(p):
              | code EMPTYLINE
              | table
              | table EMPTYLINE
+             | image
+             | image EMPTYLINE
              | list
              | list EMPTYLINE
              | footnotes EMPTYLINE
@@ -119,6 +123,10 @@ def p_code(p):
   p[0] = p[1]
   p[0].value = p[2]
 
+def p_image(p):
+  r'image : IMAGEHEAD'
+  p[0] = p[1]
+
 def p_para(p):
   '''para : LINE
           | para LINE
@@ -171,7 +179,25 @@ def p_error(t):
 
 parser = yacc.yacc()
 
+class UnitTest(unittest.TestCase):
+  def testIMAGEHEAD(self):
+    case = 'image[name].this is a image title'
+    book = parser.parse(case)
+    self.assertEqual(book.type, 'book')
+    self.assertEqual(book.children[0].type, 'image')
+    self.assertEqual(book.children[0].name, 'name')
+    self.assertEqual(book.children[0].title, 'this is a image title')
+
+    # imagehead must having name block
+    #case = 'image.this is a image title'
+    #lexer.input(case)
+    #tok = lexer.token()
+    #self.assertEqual(tok.type, 'IMAGEHEAD')
+    #self.assertEqual(tok.value.name, None)
+    #self.assertEqual(tok.value.title, 'this is a image title')
+
 if __name__ == '__main__':
+  unittest.main()
   # Give the lexer some input
   #lexer.writetab('lextab')
   #lexer.read(r"d:\stxt\doc\net\x_25.stx")
@@ -183,7 +209,7 @@ if __name__ == '__main__':
   #d = parser.read(r"d:\stxt\doc\net\atm.stx", debug=1)
   #d = parser.read(r"d:\stxt\doc\net\net.stx", debug=1)
   #d = parser.read(r"d:\stxt\doc\net\ipsec.stx", debug=1)
-  d = parser.read(r"d:\stxt\doc\db\db.stx", debug=1)
-  d.print_type_tree(7)
+  #d = parser.read(r"d:\stxt\doc\db\db.stx", debug=1)
+  #d.print_type_tree(7)
   #for c in d.dfs():
   #  print c.type
