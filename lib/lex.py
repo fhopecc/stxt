@@ -1,3 +1,4 @@
+# coding=utf8
 # --------------------------------------------------------------------
 # ply: lex.py
 #
@@ -68,12 +69,12 @@ class LexError(Exception):
 
 # Token class.  This class is used to represent the tokens produced.
 class LexToken(object):
-    def __str__(self):
-      return "%s:at %s:%s:%s\n[\n%s\n]" % \
-             (self.type, self.lexer.file, self.lineno, self.lexpos,\
-              self.lexeme)
-    def __repr__(self):
-        return str(self)
+  def __str__(self):
+    return unicode("%s:at %s:%s:%s\n" % \
+           (self.type, self.lexer.file, self.lineno, self.lexpos))
+
+  def __repr__(self):
+    return str(self)
 
 # This object is a stand-in for a logging object created by the 
 # logging module.  

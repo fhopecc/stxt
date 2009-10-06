@@ -13,7 +13,6 @@ tokens = [
           'TABLEHEAD', 
           'TABLEBLOCK', 
           'IMAGEHEAD', 
-          #'ROWSEP', 
           'FOOTNOTE', 
           'LI',           # list start
           #'L2LI',         # level2 list start
@@ -80,7 +79,7 @@ def t_TABLEBLOCK(t):
   r'(.+\n)+=[= ]+\n'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
-  t.value = m.group(0)
+  t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
   return t
 
 def t_CODEHEAD(t):
@@ -138,30 +137,23 @@ def t_FOOTNOTE(t):
   t.value = DocTreeNode('FOOTNOTE', 
               t.lexer.lexmatch.group('content'))
   return t
-#def t_ROWSEP(t):
-#  r'(^=[= ]*)\n'
-#  t.lexer.lineno += t.lexeme.count('\n')
-#  return t
+
 def t_EMPTYLINE(t):
   r'^\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
+
 def t_L2LINE(t):
   r'^  (?P<content>.*)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   t.value = t.lexer.lexmatch.group('content')
   return t
+
 def t_LINE(t):
   r'^[^ ](.+)\n'
   t.lexer.lineno += t.lexeme.count('\n')
   return t
-# Define a rule so we can track line numbers
-#def t_newline(t):
-#  r'\n+'
-#  t.lexer.lineno += len(t.value)
-# A string containing ignored characters (spaces and tabs)
-#t_ignore  = ' \t'
-# Error handling rule
+
 def t_error(t):
   print "Error happened at " + \
          str(t).decode('utf8').encode('cp950')
@@ -185,6 +177,34 @@ class UnitTest(unittest.TestCase):
     self.assertEqual(tok.type, 'IMAGEHEAD')
     self.assertEqual(tok.value.name, None)
     self.assertEqual(tok.value.title, 'this is a image title')
+
+  def testTABLEBLOCK(self):
+    testcase = '''時間 交易A       交易B
+==== =========== ===========
+t1   A.read(p)    
+t2   A.update(p)  
+t3               B.read(p)   
+t4               B.update(p)
+==== =========== ===========
+'''
+    lexer.input(testcase)   
+    d = lexer.token().value
+    self.assertEqual('table', d.type)
+    header = d.children[0]
+    self.assertEqual('tr', header.type)
+    th1 = header.children[0]
+    self.assertEqual('th', th1.type)
+    self.assertEqual(u'時間', th1.value)
+    th2 = header.children[1]
+    self.assertEqual(u'交易A', th2.value)
+    
+    r2 = d.children[1]
+    self.assertEqual('tr', r2.type)
+    td1 = r2.children[0]
+    self.assertEqual('td', td1.type)
+    self.assertEqual('t1', td1.value)
+    td2 = r2.children[1]
+    self.assertEqual('A.read(p)', td2.value)
 
 if __name__ == '__main__':
   unittest.main()

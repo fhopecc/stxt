@@ -52,8 +52,7 @@ def t_LINE(t):
   return t
 
 def t_error(t):
-  print "Error happened at " + \
-         str(t).decode('utf8').encode('cp950')
+  print 'lexerror:' + str(t) + t.lexeme
   sys.exit()
 
 lexer = lex.lex()
@@ -102,10 +101,14 @@ def p_lines(p):
     p[0] = p[1]
 
 def p_error(t):
-  print ("Error is happened at \n%s" \
-          % str(t)).decode('utf8').encode('cp950')
+  print 'parse error:' + str(t) + t.lexeme
+  sys.exit()
 
 parser = yacc.yacc()
+
+def parse(input):
+  d = parser.parse(input, lexer=lexer)
+  return d
 
 class VisualLenthTest(unittest.TestCase):
   def testVLen(self):
@@ -168,6 +171,11 @@ t4               B.update(p)
     self.assertEqual('t1', td1.value)
     td2 = r2.children[1]
     self.assertEqual('A.read(p)', td2.value)
+
+  def testParseError(self):
+    testcase = '''時間 交易A       交易B
+==== =========== ===========中文'''
+    self.assertRaises(SystemExit, parser.parse, testcase.decode('utf8'))
 
 if __name__ == '__main__':
   unittest.main()
