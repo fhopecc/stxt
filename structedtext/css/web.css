@@ -5,7 +5,6 @@
 table { 
   border:1px solid; 
   border-collapse:collapse; 
-  width:200px; 
 } 
 tr { border:1px solid;text-align:center;font-style:bold }
 td { border:1px solid; }

@@ -63,7 +63,7 @@ def f_code(tree):
   return html
 
 def f_table(tree):
-  html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
+  html = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
   if tree.children:
     html += '<table>\n'
     for row in tree.children:
@@ -71,6 +71,7 @@ def f_table(tree):
       for col in row.children:
         html += '<td>%s</td>\n' % col.value.encode('utf8')
       html += '</tr>\n' 
+    html += '</table>\n'
   else:
     html += '<pre>%s</pre>\n' % tree.value 
   return html

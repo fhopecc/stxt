@@ -82,7 +82,7 @@ def t_TABLEBLOCK(t):
   try:                    
     t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
   except SyntaxError:
-    print "SyntaxError:" + str(t)
+    print >>sys.stderr, "SyntaxError:" + str(t)
     t.value = m.group(0)
   return t
 
@@ -159,7 +159,7 @@ def t_LINE(t):
   return t
 
 def t_error(t):
-  print "Error happened at " + \
+  print >> sys.stderr, "Error happened at " + \
          str(t).decode('utf8').encode('cp950')
   sys.exit()
 #lexer = lex.lex(debug=True)

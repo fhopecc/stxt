@@ -1,23 +1,28 @@
 # coding=utf8
-import sys
+import sys, unittest
 class DocTreeNode(object):
-  def __init__(self, type, value='', title=''):
-    self.type, self.value, self.title = type, value, title
+  def __init__(self, type, value='', title='', name=''):
+    self.type, self.value, self.title, self.name = type, value, title, name
     self.parent, self.children = None, []
     self.number = None     # It's section number
     self.occurence = None  # It's table number
+    self.name_table = None  
+
   def __str__(self):
     m = "%s:\n[\n%s\n]" % (self.type, self.value)
     for c in self.children:
       m+=str(c)
     return m
+
   def __repr__(self):
     return str(self)
+
   def append(self, *nodes):
     for n in nodes: 
       n.parent = self
       self.children.append(n)
     return self
+
   def isRoot(self):
     return self.parent is None
   def height(self):
@@ -45,6 +50,17 @@ class DocTreeNode(object):
     self._dfs(unvisited)
     for n in unvisited:
       yield n
+
+  def __make_name_table__(self):
+    self.name_table = {}
+    for c in self.dfs():
+      if c.name:
+        self.name_table[c.name] = c
+
+  def find_by_name(self, name):
+    if not self.name_table:
+      self.__make_name_table__()
+    return self.name_table[name]
 
   def number_children(self):
     cs = self.children
@@ -101,3 +117,13 @@ class DocTreeNode(object):
            +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
     for c in self.children: out += c.print_tree()
     return out
+
+class UnitTest(unittest.TestCase):
+  def testNameTable(self):
+    r = DocTreeNode('book', 'book value', name='book')
+    r.append(DocTreeNode('child', 'child value', name='child'))
+    self.assertEqual('book value', r.find_by_name('book').value)
+    self.assertEqual('child value', r.find_by_name('child').value)
+
+if __name__ == '__main__':
+  unittest.main()

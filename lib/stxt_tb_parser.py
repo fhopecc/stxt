@@ -52,7 +52,7 @@ def t_LINE(t):
   return t
 
 def t_error(t):
-  print 'lexerror:' + str(t) + t.lexeme
+  print >>sys.stderr, 'lexerror:' + str(t) + t.lexeme
   raise SyntaxError('lexerror')
 
 lexer = lex.lex()
