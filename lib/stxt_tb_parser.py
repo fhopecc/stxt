@@ -178,11 +178,3 @@ t4               B.update(p)
 
 if __name__ == '__main__':
   unittest.main()
-  #testcase = u'==== =========== ===========\n'
-  #lexer.input(testcase)
-  #tok = lexer.token()
-  #cols = tok.value
-  #vals = parse_row(cols, u't3               B.read(p)')
-  #self.assertEqual(u't3', vals[0])
-  #self.assertEqual(u'', vals[1])
-  #self.assertEqual(u'B.read(p)', vals[2])
