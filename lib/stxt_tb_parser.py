@@ -45,7 +45,7 @@ def t_ROWSEP(t):
   return t
 
 def t_LINE(t):
-  r'(?P<line>[^ ]+.*)\n'
+  r'(?P<line>.+)\n'
   m = t.lexer.lexmatch
   line = m.group('line')
   t.value = line
@@ -53,7 +53,7 @@ def t_LINE(t):
 
 def t_error(t):
   print 'lexerror:' + str(t) + t.lexeme
-  sys.exit()
+  raise SyntaxError('lexerror')
 
 lexer = lex.lex()
 
@@ -101,8 +101,7 @@ def p_lines(p):
     p[0] = p[1]
 
 def p_error(t):
-  print 'parse error:' + str(t) + t.lexeme
-  sys.exit()
+  raise SyntaxError('parse error:' + str(t))
 
 parser = yacc.yacc()
 
@@ -175,7 +174,7 @@ t4               B.update(p)
   def testParseError(self):
     testcase = '''時間 交易A       交易B
 ==== =========== ===========中文'''
-    self.assertRaises(SystemExit, parser.parse, testcase.decode('utf8'))
+    self.assertRaises(SyntaxError, parser.parse, testcase.decode('utf8'))
 
 if __name__ == '__main__':
   unittest.main()

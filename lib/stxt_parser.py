@@ -161,9 +161,13 @@ def p_l2para(p):
 def p_table(p): # nested 2 level paragraph
   '''table : TABLEHEAD TABLEBLOCK'''
   #p[1].value = p[2]
-  p[2].title = p[1].title
-  p[2].name = p[1].name
-  p[0] = p[2]
+  if type(p[2]) == str:
+    p[1].value = p[2]
+    p[0] = p[1]
+  else:
+    p[2].title = p[1].title
+    p[2].name = p[1].name
+    p[0] = p[2]
 
 def p_footnotes(p):
   '''footnotes : FOOTNOTE
@@ -199,7 +203,7 @@ class UnitTest(unittest.TestCase):
     #self.assertEqual(tok.value.title, 'this is a image title')
 
   def testTable(self):
-    testcase = '''table.test table
+    testcase = '''table.交易
 時間 交易A       交易B
 ==== =========== ===========
 t1   A.read(p)    
@@ -212,6 +216,7 @@ t4               B.update(p)
     self.assertEqual(book.type, 'book')
     d = book.children[0]
     self.assertEqual('table', d.type)
+    self.assertEqual('交易', d.title)
     header = d.children[0]
     self.assertEqual('tr', header.type)
     th1 = header.children[0]
@@ -228,7 +233,31 @@ t4               B.update(p)
     td2 = r2.children[1]
     self.assertEqual('A.read(p)', td2.value)
 
+  def testTableSubparserError(self):
+    testcase = '''table.交易
+時間 交易A       交易B
+==== =========== ===========ddd
+t1   A.read(p)    
+t2   A.update(p)  
+t3               B.read(p)   
+t4               B.update(p)
+==== =========== ===========
+'''
+    book = parser.parse(testcase)
+    self.assertEqual(book.type, 'book')
+    d = book.children[0]
+    self.assertEqual('table', d.type)
+    self.assertEqual('交易', d.title)
 
+    block = '''時間 交易A       交易B
+==== =========== ===========ddd
+t1   A.read(p)    
+t2   A.update(p)  
+t3               B.read(p)   
+t4               B.update(p)
+==== =========== ===========
+'''
+    self.assertEqual(block, d.value)
 
 if __name__ == '__main__':
   unittest.main()

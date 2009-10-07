@@ -64,7 +64,15 @@ def f_code(tree):
 
 def f_table(tree):
   html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
-  html += '<pre>\n' + tree.value + '</pre>\n'
+  if tree.children:
+    html += '<table>\n'
+    for row in tree.children:
+      html += '<tr>\n' 
+      for col in row.children:
+        html += '<td>%s</td>\n' % col.value.encode('utf8')
+      html += '</tr>\n' 
+  else:
+    html += '<pre>%s</pre>\n' % tree.value 
   return html
 
 def f_image(tree):
@@ -128,8 +136,6 @@ def f_filename(tree):
   if tree.name:
     fn = tree.name
   return '%s.html' % fn
-
-  
 
 if __name__ == '__main__':
   usage = os.path.basename(__file__) + " filename"

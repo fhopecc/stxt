@@ -79,7 +79,11 @@ def t_TABLEBLOCK(t):
   r'(.+\n)+=[= ]+\n'
   t.lexer.lineno += t.lexeme.count('\n')
   m = t.lexer.lexmatch
-  t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
+  try:                    
+    t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
+  except SyntaxError:
+    print "SyntaxError:" + str(t)
+    t.value = m.group(0)
   return t
 
 def t_CODEHEAD(t):
@@ -205,6 +209,29 @@ t4               B.update(p)
     self.assertEqual('t1', td1.value)
     td2 = r2.children[1]
     self.assertEqual('A.read(p)', td2.value)
+
+  def testTableSubparserError(self):
+    testcase = '''table.交易
+時間 交易A       交易B
+==== =========== ===========ddd
+t1   A.read(p)    
+t2   A.update(p)  
+t3               B.read(p)   
+t4               B.update(p)
+==== =========== ===========
+'''
+    lexer.input(testcase)   
+    d = lexer.token()
+    d = lexer.token()
+    block = '''時間 交易A       交易B
+==== =========== ===========ddd
+t1   A.read(p)    
+t2   A.update(p)  
+t3               B.read(p)   
+t4               B.update(p)
+==== =========== ===========
+'''
+    self.assertEqual(block, d.value)
 
 if __name__ == '__main__':
   unittest.main()
