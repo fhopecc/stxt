@@ -121,7 +121,7 @@ def f_footnotes(tree):
   return html
 
 if __name__ == '__main__':
-  usage = os.path.basename(__file__) + " filename"
+  usage  = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
   try:
     to_web(sys.argv[1])
   except IndexError:

@@ -31,11 +31,17 @@ def p_content1s(p):
   else:
     p[1].append(p[2])
     p[0] = p[1]
+
 def p_sect2(p):
-  r'sect2 : HEAD2 content2s'
+  'sect2 : HEAD2 content2s'
   p[0] = p[1]
   for c in p[2]:
     p[0].append(c) 
+
+def p_sect2title(p):
+  'sect2 : HEAD2 EMPTYLINE'
+  p[0] = p[1]
+
 def p_content2s(p):
   '''content2s : sect3
                | content
@@ -180,7 +186,7 @@ def p_footnotes(p):
     p[0] = p[1]
 
 def p_error(t):
-  print ("Error is happened at \n%s" \
+  print ("Parse Error:\n%s" \
           % str(t)).decode('utf8').encode('cp950')
 
 parser = yacc.yacc()

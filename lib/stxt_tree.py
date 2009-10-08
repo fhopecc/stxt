@@ -25,6 +25,7 @@ class DocTreeNode(object):
 
   def isRoot(self):
     return self.parent is None
+
   def height(self):
     if self.isRoot(): return 0
     c, h = self, 0

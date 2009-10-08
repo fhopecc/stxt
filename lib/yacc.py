@@ -282,7 +282,7 @@ class LRParser:
     def read(self, f, debug=0):
         self.file = f
         with open(f) as f:
-          return self.parse(f.read(), debug=debug)
+          return self.parse(f.read(), debug=debug, tracking=1)
 
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

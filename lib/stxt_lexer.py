@@ -159,7 +159,7 @@ def t_LINE(t):
   return t
 
 def t_error(t):
-  print >> sys.stderr, "Error happened at " + \
+  print >> sys.stderr, "Lexer Error:" + \
          str(t).decode('utf8').encode('cp950')
   sys.exit()
 #lexer = lex.lex(debug=True)

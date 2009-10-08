@@ -49,7 +49,7 @@ def f_sect2(tree):
   return html
 
 def f_sect3(tree):
-  html =  '<h3>%s</h3>\n'% tree.title
+  html =  '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
   for c in tree.children:
     html += to_html(c)
   return html
