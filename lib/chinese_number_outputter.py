@@ -14,27 +14,14 @@ def make_sect_list(doctree):
          (f_section_number(sect1), f_section_number(sect1), sect1.title)
   return o
 
-def to_web(file):
-  # make doctree
+def to_html(file):
   d = stxt_parser.parser.read(file)
   d.number_children()
   d.count_occurence()
-  with open(r'd:\stxt\template\web_section.html') as tfn:
+  title = os.path.basename(file)
+  with open(r'd:\stxt\template\single_html.html') as tfn:
     t = tfn.read()
-    for sect1 in d.children:
-      m = re.match(r".*\\([^\\]*)\\.*$", file)
-      bookdir = m.group(1)
-      fn = r'd:\stxt\structedtext\%s\%s.html' % \
-            (bookdir, str(sect1.number))
-      with open(fn, 'w') as f:
-        f.write(t % \
-            {'title': sect1.title, 
-             'sect_list': make_sect_list(d), 
-             'content': to_html(sect1)
-            })
-
-def to_html(tree):
-  return disp(tree)
+    return t % {'title': title, 'content': disp(d)}
 
 def f_section_number(tree):
   ns = tree.section_number(0)[0]
@@ -44,22 +31,28 @@ def f_section_number(tree):
   elif tree.type == 'sect3':
     return '(' + cdigits[ns] + ')' + ' '
 
+def f_book(tree):
+  html = ''
+  for sect1 in tree.children:
+    html += disp(sect1)
+  return html
+
 def f_sect1(tree):
   html = '<h1>%s</h1>\n' % tree.title
   for c in tree.children:
-    html += to_html(c)
+    html += disp(c)
   return html
 
 def f_sect2(tree):
   html = '<h2>%s%s</h2>\n' % (f_section_number(tree), tree.title)
   for c in tree.children:
-    html += to_html(c)
+    html += disp(c)
   return html
 
 def f_sect3(tree):
   html =  '<h3>%s%s</h3>\n' % (f_section_number(tree), tree.title)
   for c in tree.children:
-    html += to_html(c)
+    html += disp(c)
   return html
 
 def f_code(tree):
@@ -87,7 +80,7 @@ def f_list(tree):
   for c in tree.children:
     html += '<li>\n' + c.value 
     for np in c.children:
-      html += to_html(np)
+      html += disp(np)
     html += '</li>\n'
   html += '</ul>\n'
   return html
@@ -97,7 +90,7 @@ def f_olist(tree):
   for c in tree.children:
     html += '<li>' + c.value
     for np in c.children:
-      html += to_html(np)
+      html += disp(np)
     html += '</li>\n'
   html += '</ol>\n'
   return html
@@ -108,7 +101,7 @@ def f_dlist(tree):
     html += '<dt>%s</dt>\n' % c.value
     html += '<dd>'
     for np in c.children:
-      html += to_html(np)
+      html += disp(np)
     html += '</dd>'
   html += '</dl>\n'
   return html
@@ -123,6 +116,6 @@ def f_footnotes(tree):
 if __name__ == '__main__':
   usage  = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
   try:
-    to_web(sys.argv[1])
+    print to_html(sys.argv[1])
   except IndexError:
     print usage
