@@ -12,7 +12,7 @@
 以及那個欄位的資料類型。
 
 資料類型是什麼呢？就是所謂的定義域，定義了某個欄位所允許的可能值，
-詳請參見[s_domain_integrity]_。
+詳請參見[domain_integrity]。
 建立上面提過的顧客表格的 sql，如[create_table]_所示。
 
 code.create table
@@ -63,10 +63,10 @@ alter table customers
 
 primary key
 ~~~~~~~~~~~
-primary key 用來定義主鍵，請參見[s_primary_key]_。
+primary key 用來定義主鍵，請參見[primary_key]。
 
 我們可以運用 create table 於建置新表格時設定主鍵，
-如[create_primary_key]_所示
+如[create_primary_key]所示
 
 code.create primary key
 create table customer 

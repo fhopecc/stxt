@@ -5,8 +5,8 @@ set nocompatible
 set encoding=utf8
 set foldmethod=syntax
 set expandtab
-set textwidth=70
-set shiftwidth=2
+set shiftwidth=4
+set textwidth=80
 set number "print the line number in front of line 
 set cindent "apply c indent when open a new line
 syntax on
