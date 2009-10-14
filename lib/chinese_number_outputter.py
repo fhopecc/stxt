@@ -22,6 +22,7 @@ def num2BCNum(arabic):
         integerPartReverse = arabic[::-1] 
     else: 
         integerPartReverse := (arabic[0:posOfDecimalPoint])[::-1] 
+
     # 從個位數起以每四位數為一小節 
     for iSection in range(0,(len(integerPartReverse)/4)+1):
         sSectionArabic = integerPartReverse[iSection*4+1:iSection*4+1+4] 
@@ -30,23 +31,20 @@ def num2BCNum(arabic):
         for i in range(1, len(sSectionArabic)):
             iDigit = int(sSectionArabic[i])
             if iDigit = 0:
-            # 1. 避免 ’零’ 的重覆出現 *) 
-            # 2. 個位數的 0 不必轉成 ’零’ *) 
-if (not bInZero) and (i <> 1) then sSection := '零' + sSection;
-bInZero := True; 
-end 
-else 
-begin 
-case i of 
-2: sSection := '拾' + sSection;
-3: sSection := '佰' + sSection;
-4: sSection := '仟' + sSection;
-end; 
-sSection := Copy(_ChineseNumeric, 2 * iDigit + 1, 2) + 
-sSection; 
-bInZero := False; 
-end; 
-end; 
+            # 1. 避免 ’零’ 的重覆出現
+            # 2. 個位數的 0 不必轉成 ’零’
+                if (not bInZero) and (i <> 1): 
+                    sSection = '零' + sSection
+                    bInZero = True 
+                else:
+                    if i == 2:
+                        sSection = '拾' + sSection
+                    elif i == 3:
+                        sSection = '佰' + sSection
+                    elif i == 4:
+                        sSection = '仟' + sSection
+            sSection = _ChineseNumeric[iDigit] + sSection 
+            bInZero = False
 
 (* 加上該小節的位數 *) 
 if len(sSection) = 0 then 
@@ -83,6 +81,7 @@ if Copy(result, 1, 2) = '點' then result := '零' + result;
 (* 是否為負數 *) 
 if isMinus then result := '負' + result;
 end;
+
 def disp(tree):
   return globals()['f_' + tree.type](tree)
 
