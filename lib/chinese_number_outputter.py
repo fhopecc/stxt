@@ -5,82 +5,82 @@ from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import HtmlFormatter
 
-def num2BCNum(arabic):
-    _ChineseNumeric = '零壹貳參肆伍陸柒捌玖'
-    result = ''
-    bInZero = True; 
-    arabic = str(arabic); # 將數字轉成阿拉伯數字字串
-    if arabic[1] == '-':
-        isMinus = True; 
-        arabic = arabic[1:len(arabic)]
-    else 
-      isMinus = False; 
-      posOfDecimalPoint = arabic.find('.') # 取得小數點的位置 
-
-     # 先處理整數的部分 
-    if posOfDecimalPoint == -1:
-        integerPartReverse = arabic[::-1] 
-    else: 
-        integerPartReverse := (arabic[0:posOfDecimalPoint])[::-1] 
-
-    # 從個位數起以每四位數為一小節 
-    for iSection in range(0,(len(integerPartReverse)/4)+1):
-        sSectionArabic = integerPartReverse[iSection*4+1:iSection*4+1+4] 
-        sSection = ''
-        # 以下的 i 控制: 個十百千位四個位數 
-        for i in range(1, len(sSectionArabic)):
-            iDigit = int(sSectionArabic[i])
-            if iDigit = 0:
-            # 1. 避免 ’零’ 的重覆出現
-            # 2. 個位數的 0 不必轉成 ’零’
-                if (not bInZero) and (i <> 1): 
-                    sSection = '零' + sSection
-                    bInZero = True 
-                else:
-                    if i == 2:
-                        sSection = '拾' + sSection
-                    elif i == 3:
-                        sSection = '佰' + sSection
-                    elif i == 4:
-                        sSection = '仟' + sSection
-            sSection = _ChineseNumeric[iDigit] + sSection 
-            bInZero = False
-
-(* 加上該小節的位數 *) 
-if len(sSection) = 0 then 
-begin 
-if (len(result) > 0) and (Copy(result, 1, 2) <> '零') then
-result :='零' + result;
-end 
-else 
-begin 
-case iSection of 
-0: result := sSection; 
-1: result := sSection + '萬' + result;
-2: result := sSection +'億' + result;
-3: result := sSection +'兆' + result;
-end; 
-end; 
-end; 
-
-(* 處理小數點右邊的部分 *) 
-if posOfDecimalPoint > 0 then 
-begin 
-AppendStr(result, '點');
-for i := posOfDecimalPoint + 1 to len(arabic) do 
-begin 
-iDigit := Ord(arabic[i]) - 48; 
-AppendStr(result, Copy(_ChineseNumeric, 2 * iDigit + 1, 2)); 
-end; 
-end; 
-
-(* 其他例外狀況的處理 *) 
-if len(result) = 0 then result := '零';
-if Copy(result, 1, 2) = '點' then result := '零' + result;
-
-(* 是否為負數 *) 
-if isMinus then result := '負' + result;
-end;
+# def num2BCNum(arabic):
+#     _ChineseNumeric = '零壹貳參肆伍陸柒捌玖'
+#     result = ''
+#     bInZero = True; 
+#     arabic = str(arabic); # 將數字轉成阿拉伯數字字串
+#     if arabic[1] == '-':
+#         isMinus = True; 
+#         arabic = arabic[1:len(arabic)]
+#     else 
+#       isMinus = False; 
+#       posOfDecimalPoint = arabic.find('.') # 取得小數點的位置 
+# 
+#      # 先處理整數的部分 
+#     if posOfDecimalPoint == -1:
+#         integerPartReverse = arabic[::-1] 
+#     else: 
+#         integerPartReverse := (arabic[0:posOfDecimalPoint])[::-1] 
+# 
+#     # 從個位數起以每四位數為一小節 
+#     for iSection in range(0,(len(integerPartReverse)/4)+1):
+#         sSectionArabic = integerPartReverse[iSection*4+1:iSection*4+1+4] 
+#         sSection = ''
+#         # 以下的 i 控制: 個十百千位四個位數 
+#         for i in range(1, len(sSectionArabic)):
+#             iDigit = int(sSectionArabic[i])
+#             if iDigit = 0:
+#             # 1. 避免 ’零’ 的重覆出現
+#             # 2. 個位數的 0 不必轉成 ’零’
+#                 if (not bInZero) and (i <> 1): 
+#                     sSection = '零' + sSection
+#                     bInZero = True 
+#                 else:
+#                     if i == 2:
+#                         sSection = '拾' + sSection
+#                     elif i == 3:
+#                         sSection = '佰' + sSection
+#                     elif i == 4:
+#                         sSection = '仟' + sSection
+#             sSection = _ChineseNumeric[iDigit] + sSection 
+#             bInZero = False
+# 
+# (* 加上該小節的位數 *) 
+# if len(sSection) = 0 then 
+# begin 
+# if (len(result) > 0) and (Copy(result, 1, 2) <> '零') then
+# result :='零' + result;
+# end 
+# else 
+# begin 
+# case iSection of 
+# 0: result := sSection; 
+# 1: result := sSection + '萬' + result;
+# 2: result := sSection +'億' + result;
+# 3: result := sSection +'兆' + result;
+# end; 
+# end; 
+# end; 
+# 
+# (* 處理小數點右邊的部分 *) 
+# if posOfDecimalPoint > 0 then 
+# begin 
+# AppendStr(result, '點');
+# for i := posOfDecimalPoint + 1 to len(arabic) do 
+# begin 
+# iDigit := Ord(arabic[i]) - 48; 
+# AppendStr(result, Copy(_ChineseNumeric, 2 * iDigit + 1, 2)); 
+# end; 
+# end; 
+# 
+# (* 其他例外狀況的處理 *) 
+# if len(result) = 0 then result := '零';
+# if Copy(result, 1, 2) = '點' then result := '零' + result;
+# 
+# (* 是否為負數 *) 
+# if isMinus then result := '負' + result;
+# end;
 
 def disp(tree):
   return globals()['f_' + tree.type](tree)

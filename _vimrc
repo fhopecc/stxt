@@ -2,6 +2,7 @@ cd d:\stxt
 lang mes en_US
 
 set nocompatible
+set backspace=2 "let backspace can delete back a char
 set encoding=utf8
 set foldmethod=syntax
 set expandtab
