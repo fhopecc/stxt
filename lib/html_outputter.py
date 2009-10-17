@@ -2,9 +2,9 @@
 # for single html
 from __future__ import with_statement
 import sys, os, re, unittest, stxt_parser
-from pygments import highlight
-from pygments.lexers import PythonLexer
-from pygments.formatters import HtmlFormatter
+#from pygments import highlight
+#from pygments.lexers import PythonLexer
+#from pygments.formatters import HtmlFormatter
 def disp(tree):
   return globals()['f_' + tree.type](tree)
 

@@ -5,5 +5,8 @@ Thumbs.db
 *.swp
 *.pyc
 lib/sql/*
-public/db/*
-public/rubysysadm/*
+structedtext/db/*
+structedtext/ds/*
+structedtext/csec/*
+structedtext/net/*
+structedtext/index.yaml

@@ -14,8 +14,7 @@ def make_sect_list(doctree):
                  (f_filename(sect1), f_section_number(sect1), sect1.title)
     return o
 
-
-def to_web(file):
+def to_slides(file):
     # make doctree
     d = stxt_parser.parser.read(file)
     d.number_children()
@@ -36,6 +35,9 @@ def to_web(file):
 
 def to_html(tree):
     return disp(tree)
+
+def f_index(tree):
+
 
 def f_sect1(tree):
     html = '<h1>%s%s</h1>\n'%(f_section_number(tree), tree.title)
@@ -139,24 +141,9 @@ def f_filename(tree):
         fn = tree.name
     return '%s.html' % fn
 
-def f_questions(tree):
-    html = '<h3>習題</h3>\n'
-    for i in range(0,len(tree.children)):
-        c1 = tree.children[i]
-        html += '<h4>題%s：%s</h4>\n' % (i+1, c1.title)
-        for c2 in c1.children:
-            html += to_html(c2)
-    return html
-
-def f_answer(tree):
-    html = '<h4>答：</h4>\n'
-    for c in tree.children:
-        html += to_html(c)
-    return html
-
 if __name__ == '__main__':
-    usage = os.path.basename(__file__) + " filename"
+    usage = os.path.basename(__file__) + "dir filename"
     try:
-        to_web(sys.argv[1])
+        to_slides(sys.argv[1], sys.argv[2])
     except IndexError:
         print usage

@@ -11,16 +11,18 @@
 <d:\stxt\doc\db\pk.stx>
 <d:\stxt\doc\db\fk.stx>
 
-question.96高2-3
+question[96h2-3].96高2-3
 在關聯式資料庫的綱要(Schema)中，
 有鍵值限制(Key Constraint)、
 個體整合限制(Entity Integrity Constraint)以及參考整合限制(Referential Integrity Constraint)三種，試分別說明之。(30 分)
-答：
-鍵值限制請參閱[key_constraint'%>。
+answer.
+鍵值限制請參閱[key_constraint]。
+
 個體整合限制請參閱[entity_integrity]。
 
 參考整合限制請參閱[referntial_integrity]。
-question.96警2-4
+
+question[96p2-4].96警2-4
 為確保資料庫內的資料能正確被處理，
 遵循完整性法則(Integrity Rules)是有其必要的。
 請回答下列各問題：
