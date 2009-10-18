@@ -1,10 +1,17 @@
+[index]資料庫理論
+=================
+本書內容包括：
+
+# [關聯式模型:rel_mod]
+# [SQL 語言:sql]
+# [交易處理:transaction]
+# [實體關係圖:erd]
+
 <d:\stxt\doc\db\rel_mod.stx>
-<d:\stxt\doc\db\ddl.stx>
-<d:\stxt\doc\db\dml.stx>
-<d:\stxt\doc\db\concurrent_control.stx>
+<d:\stxt\doc\db\sql.stx>
+<d:\stxt\doc\db\transaction.stx>
 <d:\stxt\doc\db\recovery.stx>
-<d:\stxt\doc\ds\b_tree.stx>
 <d:\stxt\doc\db\eerd.stx>
 <d:\stxt\doc\db\erd2table.stx>
 <d:\stxt\doc\db\pivot_table.stx>
-<d:\stxt\doc\db\sql_aggregator.stx>
+<d:\stxt\doc\ds\b_tree.stx>

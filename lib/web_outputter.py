@@ -4,19 +4,29 @@ import sys, os, re, unittest, stxt_parser
 #from pygments import highlight
 #from pygments.lexers import PythonLexer
 #from pygments.formatters import HtmlFormatter
+sourcefile = ""
+
 def disp(tree):
     return globals()['f_' + tree.type](tree)
 
-def make_sect_list(doctree):
-    o = '主題列表<br/>'
-    for sect1 in doctree.children:
-        o += r'<a href="%s">%s%s</a><br/>' %\
+def make_sect1_list(tree):
+    o = ''
+    for sect1 in tree.children:
+        o += r'<a href="%s">%s%s</a>' %\
                  (f_filename(sect1), f_section_number(sect1), sect1.title)
     return o
 
+def make_sect2_list(tree):
+    o = '主題列表<br/>'
+    sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
+    for sect2 in sect2s:
+        o += r'<a href="%s">%s%s</a><br/>' %\
+                 (f_filename(sect2), f_section_number(sect2), sect2.title)
+    return o
 
 def to_web(file):
     # make doctree
+    sourcefile = file
     d = stxt_parser.parser.read(file)
     d.number_children()
     d.count_occurence()
@@ -30,7 +40,8 @@ def to_web(file):
             with open(fn, 'w') as f:
                 f.write(t % \
                         {'title': sect1.title, 
-                         'sect_list': make_sect_list(d), 
+                         'sect1_list': make_sect1_list(d), 
+                         'sect2_list': make_sect2_list(sect1), 
                          'content': to_html(sect1)
                         })
 
@@ -47,7 +58,26 @@ def f_sect2(tree):
     html = '<h2>%s%s</h2>\n'%(f_section_number(tree), tree.title)
     for c in tree.children:
         html += to_html(c)
-    return html
+
+    t = '' # template string
+    with open(r'd:\stxt\template\web_section.html') as tfn:
+        t = tfn.read()
+
+    m = re.match(r".*\\([^\\]*)\\.*$", sourcefile)
+    bookdir = m.group(1)
+
+    fn = r'd:\stxt\structedtext\%s\%s' % \
+                (bookdir, f_filename(tree))
+
+    with open(fn, 'w') as f:
+        f.write(t % \
+                {'title': tree.title, 
+                 'sect1_list': make_sect1_list(tree.parent.parent), 
+                 'sect2_list': make_sect2_list(tree.parent), 
+                 'content': html
+                })
+    print 'generate %s' % fn
+    return ''
 
 def f_sect3(tree):
     html =    '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
@@ -127,14 +157,10 @@ def f_footnotes(tree):
     return html
 
 def f_section_number(tree):
-    ns = tree.section_number(3)
-    w = ''
-    for n in ns:
-        w += str(n) + '.'
-    return w
+    return '.'.join([str(n) for n in tree.section_number(3)]) + '.'
 
 def f_filename(tree):
-    fn = tree.section_number()[0]
+    fn = '_'.join([str(n) for n in tree.section_number(3)])
     if tree.name:
         fn = tree.name
     return '%s.html' % fn
@@ -156,7 +182,8 @@ def f_answer(tree):
 
 if __name__ == '__main__':
     usage = os.path.basename(__file__) + " filename"
-    try:
-        to_web(sys.argv[1])
-    except IndexError:
-        print usage
+#    try:
+    sourcefile = sys.argv[1]
+    to_web(sys.argv[1])
+#except IndexError:
+#        print usage
