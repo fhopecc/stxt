@@ -31,6 +31,10 @@ def p_sect1_only_questions(p):
     p[0] = p[1]
     p[0].append(p[2])
 
+def p_sect1title(p):
+    'sect1 : HEAD1 EMPTYLINE'
+    p[0] = p[1]
+
 def p_content1s(p):
     '''content1s : sect2
                  | content

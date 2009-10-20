@@ -7,54 +7,42 @@ import sys, os, re, unittest, stxt_parser
 def disp(tree):
     return globals()['f_' + tree.type](tree)
 
-def make_sect_list(doctree):
-    o = '主題列表<br/>'
-    for sect1 in doctree.children:
-        o += r'<a href="%s">%s%s</a><br/>' %\
-                 (f_filename(sect1), f_section_number(sect1), sect1.title)
-    return o
-
-def to_slides(file):
+def to_slides(dir, file):
     # make doctree
     d = stxt_parser.parser.read(file)
     d.number_children()
     d.count_occurence()
-    with open(r'd:\stxt\template\web_section.html') as tfn:
-        t = tfn.read()
-        for sect1 in d.children:
-            m = re.match(r".*\\([^\\]*)\\.*$", file)
-            bookdir = m.group(1)
-            fn = r'd:\stxt\structedtext\%s\%s' % \
-                        (bookdir, f_filename(sect1))
-            with open(fn, 'w') as f:
-                f.write(t % \
-                        {'title': sect1.title, 
-                         'sect_list': make_sect_list(d), 
-                         'content': to_html(sect1)
-                        })
-
-def to_html(tree):
-    return disp(tree)
-
-def f_index(tree):
-
+    for sect1 in d.children:
+        disp(sect1)
 
 def f_sect1(tree):
     html = '<h1>%s%s</h1>\n'%(f_section_number(tree), tree.title)
-    for c in tree.children:
-        html += to_html(c)
-    return html
+
+    t = ''
+    with open(r'd:\stxt\template\slides.html') as tfn:
+        t = tfn.read()
+
+    sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
+    for sect2 in sect2s:
+        fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(sect2))
+        with open(fn, 'w') as f:
+            f.write(t % \
+                    {'title': sect2.title, 
+                     'content': disp(sect2)
+                    })
 
 def f_sect2(tree):
-    html = '<h2>%s%s</h2>\n'%(f_section_number(tree), tree.title)
+    html =  '<h2>%s</h2>\n'% tree.title
+    html += '<div id="h2child">'
     for c in tree.children:
-        html += to_html(c)
+        html += disp(c)
+    html += '</div>'
     return html
 
 def f_sect3(tree):
-    html =    '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
+    html = '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
     for c in tree.children:
-        html += to_html(c)
+        html += disp(c)
     return html
 
 def f_code(tree):
@@ -80,8 +68,8 @@ def f_table(tree):
     return html
 
 def f_image(tree):
-    html    = '<h4>圖%s：%s</h4>\n'%(tree.occurence,    tree.title)
-    html += '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
+    html = '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
+    html += '<h4>%s</h4>\n' % tree.title
     return html
 
 def f_para(tree):
@@ -95,7 +83,7 @@ def f_list(tree):
     for c in tree.children:
         html += '<li>\n' + c.value 
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</li>\n'
     html += '</ul>\n'
     return html
@@ -105,7 +93,7 @@ def f_olist(tree):
     for c in tree.children:
         html += '<li>' + c.value
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</li>\n'
     html += '</ol>\n'
     return html
@@ -116,7 +104,7 @@ def f_dlist(tree):
         html += '<dt>%s</dt>\n' % c.value
         html += '<dd>'
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</dd>'
     html += '</dl>\n'
     return html
@@ -136,14 +124,15 @@ def f_section_number(tree):
     return w
 
 def f_filename(tree):
-    fn = tree.section_number()[0]
+    fn = '_'.join([str(n) for n in tree.section_number(3)])
     if tree.name:
         fn = tree.name
     return '%s.html' % fn
 
 if __name__ == '__main__':
-    usage = os.path.basename(__file__) + "dir filename"
+    usage = os.path.basename(__file__) + " dir filename"
     try:
+        dir, filename = sys.argv[1], sys.argv[2]
         to_slides(sys.argv[1], sys.argv[2])
     except IndexError:
         print usage

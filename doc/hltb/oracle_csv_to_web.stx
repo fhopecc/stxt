@@ -1,9 +1,10 @@
-花蓮縣地方稅務局內網資料轉送網站系統規格書
-==========================================
+花蓮縣地方稅務局地方稅平台及公文管理資料轉送網站系統規格書
+==========================================================
 系統目標
 --------
-將內網資料透過中介主機轉送給外網網站系統應用，
-進行特定線上查詢功能。
+匯出網站所需地方稅平台及公文管理資料，
+並透過中介主機轉送給外網網站系統應用，
+提供民眾透過網站進行線上查詢。
 
 系統功能
 --------
@@ -58,6 +59,22 @@ to_csv.py
 程式能連入內網 Oracle 資料庫，並執行 SQL 查詢相關資料，
 並將查詢結果以 CSV 格式存成檔案。
 
+dump_oacase.py
+~~~~~~~~~~~~~~
+以 CSV 格式匯出最近 6 月之公文檔案資料，並存成 oacase.txt。
+
+dump_webdata.py
+~~~~~~~~~~~~~~~
+# 以 CSV 格式匯出區里檔，並存成 houseno_neigsect.txt。
+
+# 以 CSV 格式匯出房屋稅籍編號檔，並存成 houseno.txt。
+
+# 以 CSV 格式匯出退稅未兌領支票檔，並存成 checksearch.txt。
+
+# 以 CSV 格式匯出長期約定轉帳納稅檔，並存成 wtg070.txt。
+
+# 以 CSV 格式匯出地方稅欠稅情形檔，並存成 owetax.txt。
+
 to_middle.py
 ~~~~~~~~~~~~
 程式能將檔案以 FTP 協定傳送至中介主機 tmp/to_web 目錄下。
@@ -106,19 +123,37 @@ web:
 # 轉檔主機作業系統版本需為 Windows XP 
 # 中介主機需安裝 FileZilla 伺服器
 
-檔案佈署
---------
+檔案佈署規格
+------------
 task/to_csv.py:
-  將 SQL 匯出 CSV 檔案
+  將 SQL 查詢結果匯出成 CSV 檔案
 
-task/dump_webdat.py:
-  將網站所需資料匯出 CSV 檔案
+task/dump_webdata.py:
+  將地方稅務線上查詢資料匯出成 CSV 檔案
+
+task/dump_oacase.py
+  將公文申辦進度資料匯出成 CSV 檔案
 
 task/to_middle.py:
   檔案能轉送至中介主機 
 
 trans:tmp/to_middle:
   此資料夾存放需轉送至中介主機之資料檔案
+
+trans:tmp/to_middle/houseno_neigsect.txt:
+  CSV 格式區里檔
+
+trans:tmp/to_middle/houseno.txt:
+  CSV 格式房屋稅籍編號檔
+
+trans:tmp/to_middle/checksearch.txt:
+  CSV 格式退稅未兌領支票檔
+
+trans:tmp/to_middle/wtg070.txt:
+  CSV 格式長期約定轉帳納稅檔
+
+trans:tmp/to_middle/owetax.txt:
+  CSV 格式地方稅欠稅情形檔
 
 middle:to_web:
   此資料夾存放需提供給 web 之資料檔案
