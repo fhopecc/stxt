@@ -16,7 +16,7 @@ tokens = [
           'QUESTION', 
           'ANSWER', 
           'FOOTNOTE', 
-          'LI',           # list start
+          'LI',            # list start
           #'L2LI',         # level2 list start
           'OL', 
           #'L2OL', 
@@ -25,12 +25,13 @@ tokens = [
           #'L3LINE', 
           'L2LINE', 
           'LINE'] 
+
 def t_INCLUDE(t):
     r'^<(?P<file>.*)>\n'
     t.lexer.lineno += t.lexeme.count('\n')
     t.lexer.include_lexer = t.lexer.clone()
     t.lexer.include_lexer.read(t.lexer.lexmatch.group('file'))
-    return t.lexer.include_lexer.token()
+#return t.lexer.include_lexer.token()
 
 def t_HEAD1(t):
     r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+\n'

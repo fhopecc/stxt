@@ -4,40 +4,76 @@ import sys, os, re, unittest, stxt_parser
 #from pygments import highlight
 #from pygments.lexers import PythonLexer
 #from pygments.formatters import HtmlFormatter
+dir = ''
+file = ''
+template = ''
 def disp(tree):
     return globals()['f_' + tree.type](tree)
 
-def to_slides(dir, file):
+def to_slides(_dir, _file):
     # make doctree
+    global dir
+    global file
+    global template
+    dir = _dir
+    file = _file
+    with open(r'd:\stxt\template\slides.html') as tfn:
+        template = tfn.read()
+
     d = stxt_parser.parser.read(file)
     d.number_children()
     d.count_occurence()
+
+    html = '<h2>投影片索引</h2>\n'
     for sect1 in d.children:
+        html += '<h3><a href="%s">%s%s</a></h3>\n' % \
+               (f_filename(sect1), f_section_number(sect1), sect1.title)
         disp(sect1)
+    # write index.html
+    fn = r'd:\stxt\structedtext\%s\index.html' % dir
+    with open(fn, 'w') as f:
+        f.write(template % \
+                {'title': '投影片索引', 
+                 'content': html
+                })
+    print 'write %s' % fn
 
 def f_sect1(tree):
-    html = '<h1>%s%s</h1>\n'%(f_section_number(tree), tree.title)
-
-    t = ''
-    with open(r'd:\stxt\template\slides.html') as tfn:
-        t = tfn.read()
+    global dir, template
+    html = '<h2>%s</h2>\n' % tree.title
 
     sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
     for sect2 in sect2s:
-        fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(sect2))
-        with open(fn, 'w') as f:
-            f.write(t % \
-                    {'title': sect2.title, 
-                     'content': disp(sect2)
-                    })
+        html += '<h3><a href="%s">%s%s</a></h3>\n' % \
+               (f_filename(sect2), f_section_number(sect2), sect2.title)
+        disp(sect2)
+
+    fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(tree))
+    with open(fn, 'w') as f:
+        f.write(template % \
+                {'title': tree.title, 
+                 'content': html
+                })
 
 def f_sect2(tree):
-    html =  '<h2>%s</h2>\n'% tree.title
-    html += '<div id="h2child">'
+    global dir, template
+    html = '<h2>%s</h2>\n' % tree.title
+    html += '<div id="content2">'
     for c in tree.children:
         html += disp(c)
     html += '</div>'
-    return html
+
+    html += '<div id="footer">'
+    p = tree.previous(tree.type)
+    n = tree.next(tree.type)
+    html += '</div>'
+
+    fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(tree))
+    with open(fn, 'w') as f:
+        f.write(template % \
+                {'title': tree.title, 
+                 'content': html
+                })
 
 def f_sect3(tree):
     html = '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
@@ -132,7 +168,6 @@ def f_filename(tree):
 if __name__ == '__main__':
     usage = os.path.basename(__file__) + " dir filename"
     try:
-        dir, filename = sys.argv[1], sys.argv[2]
         to_slides(sys.argv[1], sys.argv[2])
     except IndexError:
         print usage

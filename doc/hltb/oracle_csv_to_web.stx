@@ -98,7 +98,9 @@ Windows XP 排定的工作
 定期能連入內網 Oracle 資料庫，並執行 SQL 查詢相關資料，
 並將查詢結果以 CSV 格式存成檔案。
 
-排定每天 2:35 AM 執行 to_csv.py，負責轉檔。 
+排定每天 2:35 AM 執行 dump_webdata.py，負責匯出地方稅平台資料檔。 
+
+排定每天 2:50 AM 執行 dump_oacase.py，負責匯出公文管理資料檔。 
 
 排定每天 3:05 AM 執行 to_middle.py，
 此程式能將檔案以 FTP 協定傳送至中介主機 to_web 目錄下。

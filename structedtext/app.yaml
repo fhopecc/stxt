@@ -7,6 +7,8 @@ handlers:
   static_dir: net
 - url: /db
   static_dir: db
+- url: /db_slides
+  static_dir: db_slides
 - url: /ds
   static_dir: ds
 - url: /csec
