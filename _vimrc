@@ -3,7 +3,6 @@ lang mes en_US
 
 set nocompatible
 set backspace=2 "let backspace can delete back a char
-set tabstop=4
 set encoding=utf8
 set foldmethod=syntax
 set expandtab
@@ -11,6 +10,7 @@ set shiftwidth=4
 set textwidth=80
 set number "print the line number in front of line 
 set cindent "apply c indent when open a new line
+set ruler   " show line and column number in the bottom
 syntax on
 
 map <F5> :w<enter>:!%<enter>

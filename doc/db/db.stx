@@ -5,12 +5,11 @@
 # [關聯式模型:rel_mod]
 # [SQL 語言:sql]
 # [交易處理:transaction]
-# [實體關係圖:erd]
+# [實體關係模型:erd]
 
 <d:\stxt\doc\db\rel_mod.stx>
 <d:\stxt\doc\db\sql.stx>
 <d:\stxt\doc\db\transaction.stx>
-<d:\stxt\doc\db\recovery.stx>
 <d:\stxt\doc\db\eerd.stx>
 <d:\stxt\doc\db\erd2table.stx>
 <d:\stxt\doc\db\pivot_table.stx>

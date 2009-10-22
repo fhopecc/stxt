@@ -2,14 +2,33 @@
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<title>%(title)s</title>
 <style type="text/css">
 body {font-family:"標楷體";font-size:18px}
 h2 {font-size:28px;border-bottom:solid 2px;text-align:center}
-#content2 {padding-right:10%%}
+#content2 {}
 h3 {font-size:18px}
 p  {font-size:16px}
 </style>
-<title>%(title)s</title>
+<script language="javascript">
+ function click(e) {
+  next = document.getElementById("next")
+  prev = document.getElementById("prev")
+  if (navigator.appName == 'Netscape'
+           && e.which == 3) {
+//window.location = prev;
+      return 0
+      }
+   else {
+      if (navigator.appName == 'Microsoft Internet Explorer'
+          && event.button==2)
+         //window.location = prev;
+          return 0
+         }
+       window.location = next.value;
+ }
+document.onmousedown=click
+</script>
 </head>
 <body>
 <div id="content">

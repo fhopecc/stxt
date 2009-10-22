@@ -1,10 +1,10 @@
 # coding=utf8
-import sys, lex, unittest
+import sys, lex
 from stxt_tree import DocTreeNode
-import stxt_tb_parser
+import stxt_tb_parser, logger
 # Lexer
 tokens = [
-          'INCLUDE', 
+#         'INCLUDE', 
           'HEAD1', 
           'HEAD2', 
           'HEAD3', 
@@ -26,12 +26,25 @@ tokens = [
           'L2LINE', 
           'LINE'] 
 
+def find_column(input,token):
+    last_cr = input.rfind('\n',0,token.lexpos)
+    if last_cr < 0:
+	last_cr = 0
+    column = (token.lexpos - last_cr) + 1
+    return column
+
 def t_INCLUDE(t):
-    r'^<(?P<file>.*)>\n'
+    r'^<(?P<file>.*)>(\n|$)'
     t.lexer.lineno += t.lexeme.count('\n')
     t.lexer.include_lexer = t.lexer.clone()
-    t.lexer.include_lexer.read(t.lexer.lexmatch.group('file'))
-#return t.lexer.include_lexer.token()
+    column = find_column(t.lexer.lexdata, t)
+    file = t.lexer.lexmatch.group('file')
+    try:
+        t.lexer.include_lexer.read(file)
+    except IOError:
+        raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
+               (t.lexer.file, t.lexer.lineno, column, file))
+    return t.lexer.include_lexer.token()
 
 def t_HEAD1(t):
     r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+\n'
@@ -177,13 +190,27 @@ def t_LINE(t):
     return t
 
 def t_error(t):
-    print >> sys.stderr, "Lexer Error:" + \
-                 str(t).decode('utf8').encode('cp950')
+    if t is None:
+        logger.info('Lexer Error: $')
+    logger.info('Lexer Error:[%s]' % t.lexeme[0])
     sys.exit()
 #lexer = lex.lex(debug=True)
 lexer = lex.lex()
 
+import unittest
 class UnitTest(unittest.TestCase):
+    def testInclude(self):
+        case = r'<d:\stxt\lib\db\sql.stx>'
+        lexer.input(case)
+        self.assertRaises(IOError, lexer.token)
+
+        case = r'<test.stx>'
+        lexer.input(case)
+        tok = lexer.token()
+        self.assertEqual(tok.type, 'HEAD1')
+        tok = lexer.token()
+        self.assertEqual(tok.type, 'LINE')
+
     def testIMAGEHEAD(self):
         case = 'image[name].this is a image title'
         lexer.input(case)
@@ -204,7 +231,7 @@ class UnitTest(unittest.TestCase):
         case = 'question[name].this is a question title'
         lexer.input(case)
         tok = lexer.token()
-        self.assertEqual(tok.type, 'QUESTION')
+        self.assertEqual('QUESTION', tok.type,)
         self.assertEqual(tok.value.name, 'name')
         self.assertEqual(tok.value.title, 'this is a question title')
 

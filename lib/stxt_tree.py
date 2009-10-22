@@ -118,18 +118,28 @@ class DocTreeNode(object):
                      +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
         for c in self.children: out += c.print_tree()
         return out
-       
-    def previous(self, type):
-        es = [e for e \
-                 in self.parent.children \
-                 if e.type == type]
-        prev = None
-        for e in es:
-            if self is e:
-                break
-            prev = e
 
+    def order(self):
+        "order is defined as the node's position among sibling"
+        return self.sibling().index(self)
+        
+    def sibling(self, order=None):
+        if not order:
+            return self.parent.children
+        else:
+            return self.parent.children[order]
+       
 class UnitTest(unittest.TestCase):
+    def testSibling(self):
+        r = DocTreeNode('book', 'book value', name='book')
+        r.append(DocTreeNode('sect1', 'child1 value', name='child1'))
+        r.append(DocTreeNode('sect1', 'child2 value', name='child2'))
+
+        self.assertEqual(0, r.find_by_name('child1').order())
+
+        self.assertEqual('child2 value', 
+                r.find_by_name('child1').sibling(1).value)
+
     def testNameTable(self):
         r = DocTreeNode('book', 'book value', name='book')
         r.append(DocTreeNode('child', 'child value', name='child'))
@@ -138,10 +148,12 @@ class UnitTest(unittest.TestCase):
 
     def testPrevious(self):
         r = DocTreeNode('book', 'book value', name='book')
-        r.append(DocTreeNode('sect1', 'child1 value', name='child1'))
-        r.append(DocTreeNode('sect1', 'child2 value', name='child2'))
-        self.assertEqual('child1 value',
-                         r.find_by_name('child2').previous('sect1').value)
+        r.append(DocTreeNode('sect1', 'sect1 value', name='child1'))
+        r.append(DocTreeNode('sect2', 'sect2 value', name='child2'))
+        r.append(DocTreeNode('sect1', 'sect1 value', name='child3'))
+        sect1s = [c for c in r.children if c.type == 'sect1']
+        child3 = r.find_by_name('child3')
+        self.assertEqual(1, sect1s.index(child3))
 
 if __name__ == '__main__':
     unittest.main()

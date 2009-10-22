@@ -1,10 +1,12 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re, unittest, stxt_parser
+import sys, os, re, unittest, stxt_parser, logger
 #from pygments import highlight
 #from pygments.lexers import PythonLexer
 #from pygments.formatters import HtmlFormatter
 sourcefile = ""
+template   = ""
+webdir     = ""
 
 def disp(tree):
     return globals()['f_' + tree.type](tree)
@@ -26,38 +28,62 @@ def make_sect2_list(tree):
 
 def to_web(file):
     # make doctree
+    global sourcefile
+    global template
+    global webdir
+
     sourcefile = file
+    m = re.match(r".*\\([^\\]*)\\.*$", file)
+    webdir = m.group(1)
+
+    with open(r'd:\stxt\template\web_section.html') as tfn:
+        template = tfn.read()
+
     d = stxt_parser.parser.read(file)
     d.number_children()
     d.count_occurence()
-    with open(r'd:\stxt\template\web_section.html') as tfn:
-        t = tfn.read()
-        for sect1 in d.children:
-            m = re.match(r".*\\([^\\]*)\\.*$", file)
-            bookdir = m.group(1)
-            fn = r'd:\stxt\structedtext\%s\%s' % \
-                        (bookdir, f_filename(sect1))
-            with open(fn, 'w') as f:
-                f.write(t % \
-                        {'title': sect1.title, 
-                         'sect1_list': make_sect1_list(d), 
-                         'sect2_list': make_sect2_list(sect1), 
-                         'content': to_html(sect1)
-                        })
+    
+    index = r'd:\stxt\structedtext\%s\%s' % (webdir, 'index.html')
+    html = ''
+    for sect1 in d.children:
+        html += '<h1><a href="%s">%s%s</a></h1>\n' % \
+               (f_filename(sect1), f_section_number(sect1), sect1.title)
+        disp(sect1)
 
-def to_html(tree):
-    return disp(tree)
+    # write index.html
+    with open(index, 'w') as f:
+        f.write(template % \
+                {'title': '主索引', 
+                 'sect1_list': "",
+                 'sect2_list': "",
+                 'content': html
+                })
+    logger.info('generate %s' % index)
 
 def f_sect1(tree):
-    html = '<h1>%s%s</h1>\n'%(f_section_number(tree), tree.title)
-    for c in tree.children:
-        html += to_html(c)
-    return html
+    global webdir, template
+    html    = '<h1>%s</h1>\n' % tree.title
+    content = [c for c in tree.children if c.type != 'sect2']
+    for c in content:
+        html += disp(c)
+
+    sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
+    for sect2 in sect2s:
+        disp(sect2)
+
+    fn = r'd:\stxt\structedtext\%s\%s' % (webdir, f_filename(tree))
+    with open(fn, 'w') as f:
+        f.write(template % \
+                {'title': tree.title, 
+                 'sect1_list': make_sect1_list(tree.parent), 
+                 'sect2_list': make_sect2_list(tree), 
+                 'content': html
+                })
 
 def f_sect2(tree):
     html = '<h2>%s%s</h2>\n'%(f_section_number(tree), tree.title)
     for c in tree.children:
-        html += to_html(c)
+        html += disp(c)
 
     t = '' # template string
     with open(r'd:\stxt\template\web_section.html') as tfn:
@@ -76,13 +102,13 @@ def f_sect2(tree):
                  'sect2_list': make_sect2_list(tree.parent), 
                  'content': html
                 })
-    print 'generate %s' % fn
+    logger.info('generate %s' % fn)
     return ''
 
 def f_sect3(tree):
     html =    '<h3>%s%s</h3>\n'% (f_section_number(tree), tree.title)
     for c in tree.children:
-        html += to_html(c)
+        html += disp(c)
     return html
 
 def f_code(tree):
@@ -123,7 +149,7 @@ def f_list(tree):
     for c in tree.children:
         html += '<li>\n' + c.value 
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</li>\n'
     html += '</ul>\n'
     return html
@@ -133,7 +159,7 @@ def f_olist(tree):
     for c in tree.children:
         html += '<li>' + c.value
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</li>\n'
     html += '</ol>\n'
     return html
@@ -144,7 +170,7 @@ def f_dlist(tree):
         html += '<dt>%s</dt>\n' % c.value
         html += '<dd>'
         for np in c.children:
-            html += to_html(np)
+            html += disp(np)
         html += '</dd>'
     html += '</dl>\n'
     return html
@@ -171,19 +197,23 @@ def f_questions(tree):
         c1 = tree.children[i]
         html += '<h4>題%s：%s</h4>\n' % (i+1, c1.title)
         for c2 in c1.children:
-            html += to_html(c2)
+            html += disp(c2)
     return html
 
 def f_answer(tree):
     html = '<h4>答：</h4>\n'
     for c in tree.children:
-        html += to_html(c)
+        html += disp(c)
     return html
 
+def usage():
+    usage = os.path.basename(__file__) + " filename\n"
+    usage += 'filename: structed text file'
+    return usage
+
 if __name__ == '__main__':
-    usage = os.path.basename(__file__) + " filename"
-#    try:
-    sourcefile = sys.argv[1]
-    to_web(sys.argv[1])
-#except IndexError:
-#        print usage
+    try:
+        sourcefile = sys.argv[1]
+        to_web(sys.argv[1])
+    except IndexError:
+        logger.info(usage())
