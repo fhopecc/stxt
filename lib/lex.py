@@ -67,14 +67,23 @@ class LexError(Exception):
          self.args = (message.decode('utf8').encode('cp950'),)
          self.text = s
 
+def find_column(input, lexpos):
+    last_cr = input.rfind('\n', 0 ,lexpos)
+    if last_cr < 0:last_cr = 0
+    column = (lexpos - last_cr) + 1
+    return column
+
+
+
 # Token class.  This class is used to represent the tokens produced.
 class LexToken(object):
-  def __str__(self):
-    return unicode("%s:at %s:%s:%s\n" % \
-           (self.type, self.lexer.file, self.lineno, self.lexpos))
+    def __str__(self):
+        col = find_column(self.lexer.lexdata, self.lexpos)
+        return unicode("%s:at %s:%s:%s\n" % \
+           (self.type, self.lexer.file, self.lineno, col))
 
-  def __repr__(self):
-    return str(self)
+    def __repr__(self):
+        return str(self)
 
 # This object is a stand-in for a logging object created by the 
 # logging module.  

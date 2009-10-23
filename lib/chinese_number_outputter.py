@@ -83,117 +83,140 @@ from pygments.formatters import HtmlFormatter
 # end;
 
 def disp(tree):
-  return globals()['f_' + tree.type](tree)
+    return globals()['f_' + tree.type](tree)
 
 def make_sect_list(doctree):
-  o = '主題列表<br/>'
-  for sect1 in doctree.children:
-    o += r'<a href="%s.html">%s%s</a><br/>' %\
-         (f_section_number(sect1), f_section_number(sect1), sect1.title)
-  return o
+    o = '主題列表<br/>'
+    for sect1 in doctree.children:
+        o += r'<a href="%s.html">%s%s</a><br/>' %\
+                 (f_section_number(sect1), f_section_number(sect1), sect1.title)
+    return o
 
 def to_html(file):
-  d = stxt_parser.parser.read(file)
-  d.number_children()
-  d.count_occurence()
-  title = os.path.basename(file)
-  with open(r'd:\stxt\template\single_html.html') as tfn:
-    t = tfn.read()
-    return t % {'title': title, 'content': disp(d)}
+    d = stxt_parser.parser.read(file)
+    d.number_children()
+    d.count_occurence()
+    title = os.path.basename(file)
+    with open(r'd:\stxt\template\chinese.html') as tfn:
+        t = tfn.read()
+        return t % {'title': title, 'content': disp(d)}
 
 def f_section_number(tree):
-  ns = tree.section_number(0)[0]
-  cdigits = ['零','一','二','三','四','五','六','七','八','九','十']
-  if tree.type == 'sect2':
-    return cdigits[ns] + '.'
-  elif tree.type == 'sect3':
-    return '(' + cdigits[ns] + ')' + ' '
+    ns = tree.section_number(0)[0]
+    cdigits = ['零','一','二','三','四','五','六','七','八','九','十',
+               '十一','十二','十三','十四','十五','十六','十七','十九','二十'
+               '二十一','二十二','二十三','二十四','二十五','二十六',
+               '二十七','二十八','二十九', '三十', 
+               '三十一','三十二','三十三','三十四','三十五','三十六',
+               '三十七','三十八','三十九'
+              ]
+    if tree.type == 'sect2':
+        return cdigits[ns] + '.'
+    elif tree.type == 'sect3':
+        return '(' + cdigits[ns] + ')' + ' '
 
 def f_book(tree):
-  html = ''
-  for sect1 in tree.children:
-    html += disp(sect1)
-  return html
+    html = ''
+    for sect1 in tree.children:
+        html += disp(sect1)
+    return html
 
 def f_sect1(tree):
-  html = '<h1>%s</h1>\n' % tree.title
-  for c in tree.children:
-    html += disp(c)
-  return html
+    html = '<h1>%s</h1>\n' % tree.title
+    for c in tree.children:
+        html += disp(c)
+    return html
 
 def f_sect2(tree):
-  html = '<h2>%s%s</h2>\n' % (f_section_number(tree), tree.title)
-  for c in tree.children:
-    html += disp(c)
-  return html
+    html = '<h2>%s%s</h2>\n' % (f_section_number(tree), tree.title)
+    for c in tree.children:
+        html += disp(c)
+    return html
 
 def f_sect3(tree):
-  html =  '<h3>%s%s</h3>\n' % (f_section_number(tree), tree.title)
-  for c in tree.children:
-    html += disp(c)
-  return html
+    html =    '<h3>%s%s</h3>\n' % (f_section_number(tree), tree.title)
+    for c in tree.children:
+        html += disp(c)
+    return html
 
 def f_code(tree):
-  html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
-  html += '<pre>' + tree.value + '</pre>\n'
-  #html += highlight(tree.value, PythonLexer(),
-      #HtmlFormatter())
-  #.decode('ascii').encode('utf8')
-  #print highlight(tree.value, PythonLexer(), HtmlFormatter())
-  return html
+    html    = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    html += '<pre>' + tree.value + '</pre>\n'
+    #html += highlight(tree.value, PythonLexer(),
+            #HtmlFormatter())
+    #.decode('ascii').encode('utf8')
+    #print highlight(tree.value, PythonLexer(), HtmlFormatter())
+    return html
 
 def f_table(tree):
-  html  = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
-  html += '<pre>\n' + tree.value + '</pre>\n'
-  return html
+    html    = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    html += '<pre>\n' + tree.value + '</pre>\n'
+    return html
 
 def f_para(tree):
-  return '<p>\n' + tree.value + '</p>\n'
+    return '<p>\n' + tree.value + '</p>\n'
 
 def f_l2para(tree):
-  return '<p>\n' + tree.value + '</p>\n'
+    return '<p>\n' + tree.value + '</p>\n'
 
 def f_list(tree):
-  html = '<ul>\n'
-  for c in tree.children:
-    html += '<li>\n' + c.value 
-    for np in c.children:
-      html += disp(np)
-    html += '</li>\n'
-  html += '</ul>\n'
-  return html
+    html = '<ul>\n'
+    for c in tree.children:
+        html += '<li>\n' + c.value 
+        for np in c.children:
+            html += disp(np)
+        html += '</li>\n'
+    html += '</ul>\n'
+    return html
 
 def f_olist(tree):
-  html = '<ol>\n'
-  for c in tree.children:
-    html += '<li>' + c.value
-    for np in c.children:
-      html += disp(np)
-    html += '</li>\n'
-  html += '</ol>\n'
-  return html
+    html = '<ol>\n'
+    for c in tree.children:
+        html += '<li>' + c.value
+        for np in c.children:
+            html += disp(np)
+        html += '</li>\n'
+    html += '</ol>\n'
+    return html
 
 def f_dlist(tree):
-  html = '<dl>\n'
-  for c in tree.children:
-    html += '<dt>%s</dt>\n' % c.value
-    html += '<dd>'
-    for np in c.children:
-      html += disp(np)
-    html += '</dd>'
-  html += '</dl>\n'
-  return html
+    html = '<dl>\n'
+    for c in tree.children:
+        html += '<dt>%s</dt>\n' % c.value
+        html += '<dd>'
+        for np in c.children:
+            html += disp(np)
+        html += '</dd>'
+    html += '</dl>\n'
+    return html
 
 def f_footnotes(tree):
-  html = '<ul>\n'
-  for c in tree.children:
-    html += '<li>' + c.value+ '</li>\n'
-  html += '</ul>\n'
-  return html
+    html = '<ul>\n'
+    for c in tree.children:
+        html += '<li>' + c.value+ '</li>\n'
+    html += '</ul>\n'
+    return html
+
+def f_questions(tree):
+    html = '<h3>習題</h3>\n'
+    for i in range(0,len(tree.children)):
+        c1 = tree.children[i]
+        html += '<h4>題%s：%s</h4>\n' % (i+1, c1.title)
+        for c2 in c1.children:
+            html += disp(c2)
+    return html
+
+def f_answer(tree):
+    html = '<h4>答：</h4>\n'
+    for c in tree.children:
+        html += disp(c)
+    return html
+
+
 
 if __name__ == '__main__':
-  usage  = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
-  try:
-    print to_html(sys.argv[1])
-  except IndexError:
-    print usage
+    usage = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
+    try:
+        print to_html(sys.argv[1])
+    except IndexError:
+        print usage
