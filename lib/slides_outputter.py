@@ -58,7 +58,7 @@ def f_sect1(tree):
 def f_sect2(tree):
     global dir, template
     html = '<h2>%s</h2>\n' % tree.title
-    html += '<div id="content2">'
+    html += '<div id="content">'
     for c in tree.children:
         html += disp(c)
     html += '</div>'
@@ -78,7 +78,6 @@ def f_sect2(tree):
          html += '<a href="%s">下一片</a>\n' % f_filename(next)
          html += '<input id="next" type="hidden" value="%s"/>\n' % f_filename(next)
     html += '</div>'
-
     fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(tree))
     with open(fn, 'w') as f:
         f.write(template % \

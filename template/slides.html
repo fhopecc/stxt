@@ -4,35 +4,46 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <title>%(title)s</title>
 <style type="text/css">
-body {font-family:"標楷體";font-size:18px}
+body {font-family:"標楷體";font-size:24px}
 h2 {font-size:28px;border-bottom:solid 2px;text-align:center}
-#content2 {}
-h3 {font-size:18px}
-p  {font-size:16px}
+dt {font-style:bold}
+#content {margin-left:20%%}
 </style>
 <script language="javascript">
- function click(e) {
-  next = document.getElementById("next")
-  prev = document.getElementById("prev")
-  if (navigator.appName == 'Netscape'
-           && e.which == 3) {
-//window.location = prev;
-      return 0
-      }
-   else {
-      if (navigator.appName == 'Microsoft Internet Explorer'
-          && event.button==2)
-         //window.location = prev;
-          return 0
-         }
-       window.location = next.value;
- }
-document.onmousedown=click
+//偵測瀏覽器版本
+var browser = navigator.appName;
+var PageUp  = 33
+var PageDown= 34
+if(browser=="Netscape"){    //如果瀏覽器為Netscape或者Firefox
+    //開始監聽鍵盤事件
+    document.captureEvents(Event.KEYDOWN)
+    document.onkeydown=function(event){
+        next = document.getElementById("next")
+        prev = document.getElementById("prev")
+        if(event.which==PageDown){
+            window.location = next.value;
+        }
+        else if(event.which==PageUp){
+            window.location = prev.value;
+        }
+    }
+}
+else{    //假設瀏覽器不為Nescape則猜測為ie
+    //開始監聽鍵盤事件
+    document.onkeydown = function(){
+        next = document.getElementById("next")
+        prev = document.getElementById("prev")
+        if(event.whitch==PageDown){
+            window.location = next.value;
+        }
+        else if(event.whitch==PageUp){
+            window.location = prev.value;
+        }
+    }
+}
 </script>
 </head>
 <body>
-<div id="content">
 %(content)s
-</div>
 </body>
 </html>
