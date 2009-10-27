@@ -190,10 +190,12 @@ def t_LINE(t):
     return t
 
 def t_error(t):
-    if t is None:
-        logger.info('Lexer Error: $')
-    logger.info('Lexer Error:[%s]' % t.lexeme[0])
-    sys.exit()
+    logger.info('%s:%s:%s encounter illegal character [%s]' % (
+                t.lexer.file, t.lexer.lineno, 
+                find_column(t.lexer.lexdata, t), t.value[0]
+               ))
+#t.lexer.skip(1)
+    sys.exit(1)
 #lexer = lex.lex(debug=True)
 lexer = lex.lex()
 

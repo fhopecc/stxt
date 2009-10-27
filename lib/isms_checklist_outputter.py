@@ -190,6 +190,20 @@ def f_dlist(tree):
     html += '</dl>\n'
     return html
 
+def f_table(tree):
+    html = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    if tree.children:
+        html += '<table>\n'
+        for row in tree.children:
+            html += '<tr>\n' 
+            for col in row.children:
+                html += '<td>%s</td>\n' % col.value.encode('utf8')
+            html += '</tr>\n' 
+        html += '</table>\n'
+    else:
+        html += '<pre>%s</pre>\n' % tree.value 
+    return html
+
 def f_footnotes(tree):
     html = '<ul>\n'
     for c in tree.children:

@@ -7,9 +7,21 @@
 body {font-family:"標楷體";font-size:24px}
 h2 {font-size:28px;border-bottom:solid 2px;text-align:center}
 dt {font-style:bold}
-#content {margin-left:20%%}
+#content {margin-left:20%%;margin-right:20%%}
+img {display:block;margin-left:auto;margin-right:auto}
+table { border:1px solid;border-collapse:collapse } 
+tr { border:1px solid;text-align:center;font-style:bold }
+td { border:1px solid }
 </style>
 <script language="javascript">
+function next_slide() {
+    next = document.getElementById("next")
+    window.location = next.value;
+}
+function prev_slide() {
+    prev = document.getElementById("prev")
+    window.location = prev.value;
+}
 //偵測瀏覽器版本
 var browser = navigator.appName;
 var PageUp  = 33
@@ -18,26 +30,22 @@ if(browser=="Netscape"){    //如果瀏覽器為Netscape或者Firefox
     //開始監聽鍵盤事件
     document.captureEvents(Event.KEYDOWN)
     document.onkeydown=function(event){
-        next = document.getElementById("next")
-        prev = document.getElementById("prev")
         if(event.which==PageDown){
-            window.location = next.value;
+            next_slide()
         }
         else if(event.which==PageUp){
-            window.location = prev.value;
+            prev_slide()
         }
     }
 }
 else{    //假設瀏覽器不為Nescape則猜測為ie
     //開始監聽鍵盤事件
     document.onkeydown = function(){
-        next = document.getElementById("next")
-        prev = document.getElementById("prev")
         if(event.whitch==PageDown){
-            window.location = next.value;
+            next_slide()
         }
         else if(event.whitch==PageUp){
-            window.location = prev.value;
+            prev_slide()
         }
     }
 }
