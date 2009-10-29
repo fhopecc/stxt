@@ -122,7 +122,7 @@ def f_book(tree):
     return html
 
 def f_sect1(tree):
-    html = '<h1>%s</h1>\n' % tree.title
+    html = '<h2>%s</h2>\n' % tree.title
     html += '<div class="sect1">'
     for c in tree.children:
         html += disp(c)
@@ -130,7 +130,7 @@ def f_sect1(tree):
     return html
 
 def f_sect2(tree):
-    html = '<h2>%s%s</h2>\n' % (f_section_number(tree), tree.title)
+    html = '<div class="h2">%s%s</div>\n' % (f_section_number(tree), tree.title)
     html += '<div class="sect2">'
     for c in tree.children:
         html += disp(c)
@@ -138,7 +138,7 @@ def f_sect2(tree):
     return html
 
 def f_sect3(tree):
-    html =  '<h3>%s%s</h3>\n' % (f_section_number(tree), tree.title)
+    html =  '<div class="h3">%s%s</div>\n' % (f_section_number(tree), tree.title)
     html += '<div class="sect3">'
     for c in tree.children:
         html += disp(c)

@@ -1,6 +1,6 @@
 # coding=utf8
 import sys, unittest
-class DocTreeNode(object):
+class Tree(object):
     def __init__(self, type, value='', title='', name=''):
         self.type, self.value, self.title, self.name = type, value, title, name
         self.parent, self.children = None, []
@@ -16,6 +16,33 @@ class DocTreeNode(object):
 
     def __repr__(self):
         return str(self)
+
+    # OK to rename __setattr__
+	def setattr(self, attr_name, value):
+		# #1
+		if attr_name in self.__used_names:
+			raise TreeAttrExc(_("Attribute name '%s' is reserved" % attr_name))
+		try:
+			# If self.attribute exists
+			existed = getattr(self, attr_name)
+			if isinstance(value, Tree):
+				subtree = value
+				self.__dict__[attr_name] = subtree
+				# Replace the node directly
+			else:
+				# self.__dict__[attr_name]._Tree__node_value = value
+				# This will lead to raise TreeExc at #1, because the setattr operation of 
+				#	'self.__dict__[attr_name].attribute = value' has been affected by self.__setattr__()
+				subtree = existed
+				subtree.__dict__['_Tree__node_value'] = value
+				# Only replace the node value
+		except AttributeError:
+		# if self.attribute does not exists, assign it a EMPTY node
+			if isinstance(value, Tree):
+				subtree = value
+				self.__dict__[attr_name] = subtree
+			else:
+				self.__dict__[attr_name] = Tree(value)
 
     def append(self, *nodes):
         for n in nodes: 
@@ -154,6 +181,8 @@ class UnitTest(unittest.TestCase):
         sect1s = [c for c in r.children if c.type == 'sect1']
         child3 = r.find_by_name('child3')
         self.assertEqual(1, sect1s.index(child3))
+
+DocTreeNode = Tree
 
 if __name__ == '__main__':
     unittest.main()

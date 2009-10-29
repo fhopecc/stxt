@@ -1,5 +1,8 @@
-花蓮縣地方稅務局地方稅平台及公文管理資料轉送網站系統規格書
-==========================================================
+花蓮縣地方稅務局
+================
+
+地方稅平台及公文管理資料轉送網站系統規格書
+==========================================
 系統目標
 --------
 匯出網站所需地方稅平台及公文管理資料，
@@ -77,7 +80,7 @@ dump_webdata.py
 
 to_middle.py
 ~~~~~~~~~~~~
-程式能將檔案以 FTP 協定傳送至中介主機 tmp/to_web 目錄下。
+程式能將檔案以 FTP 協定傳送至中介主機 to_web 目錄下。
 
 中介主機於每小時前 30 分鐘切換至內網，
 後 30 分鐘切換至外網，
@@ -91,6 +94,12 @@ FileZilla
 並接受網站主機下載資料檔案。
 
 此 FTP 開啟 2100 埠接受連線，其傳檔帳號為 web_export。
+
+D:\web_export
+  此資料夾為 FTP Server 的共享資料夾
+
+D:\web_export\to_web
+  此資料夾存放需提供給 web 之資料檔案
 
 Windows XP 排定的工作
 ~~~~~~~~~~~~~~~~~~~~~
@@ -113,11 +122,19 @@ trans:
   轉檔主機，於內網執行相關查詢 SQL 匯出 CSV 檔案，
   並定期轉送至中介主機。
 
+  內網位址：trans.hltb.local
+
 middle:
   中介主機以 30 分鐘的頻率切換內外網。
 
+  內網位址：middle.hltb.local
+
+  外網位址：middle.hltb.gov.tw
+
 web:
   本局網站主機，定時至中介主機下載內網資料檔，供民眾查詢。
+
+  外網位址：www.hltb.gov.tw
 
 環境需求
 --------
@@ -157,7 +174,10 @@ trans:tmp/to_middle/wtg070.txt:
 trans:tmp/to_middle/owetax.txt:
   CSV 格式地方稅欠稅情形檔
 
-middle:to_web:
+middle:D:\web_export
+  此資料夾為 FTP Server 的共享資料夾
+
+middle:D:\web_export\to_web:
   此資料夾存放需提供給 web 之資料檔案
 
 lib/inner_to_web/sql/case_proc.sql:
