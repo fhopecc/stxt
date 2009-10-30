@@ -3,6 +3,9 @@
 關聯式模型依照 CJ Date 的說法，包含三個主要項目，
 分別是物件、完整性及運算子。
 
+物件
+  就是資料結構。
+
 完整性
   完整性是資料庫設計的一部分，
   表示整個資料庫要遵守的限制，
@@ -28,20 +31,20 @@ table.關聯式模型架構
        主鍵
        鍵限制
        實體完整性
-資料庫 參考完整性
        函數相依
        第二標準式
        第三標準式
        BCNF 標準式
        第四標準式
        第五標準式
+資料庫 外鍵
+       參考完整性
 ====== ============
 
 <d:\stxt\doc\db\value.stx>
 <d:\stxt\doc\db\domain.stx>
 <d:\stxt\doc\db\relation.stx>
 <d:\stxt\doc\db\rel_var.stx>
-<d:\stxt\doc\db\pk.stx>
 <d:\stxt\doc\db\fk.stx>
 
 question[96h2-3].96高2-3

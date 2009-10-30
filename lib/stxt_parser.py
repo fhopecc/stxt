@@ -103,6 +103,8 @@ def p_content(p):
                | list
                | list EMPTYLINE
                | footnotes EMPTYLINE
+               | theorem
+               | define
     '''
     p[0] = p[1]
 
@@ -114,6 +116,7 @@ def p_dlisthead(p):
     if len(p) == 3 and p[2]:
         l2p = p[0].children[0]
         l2p.value = l2p.value + p[2].value
+
 def p_listhead(p):
     '''listhead : LI
                 | OL
@@ -124,6 +127,7 @@ def p_listhead(p):
     p[0] = p[1]
     if len(p) == 3 and p[2]:
         p[0].value += p[2].value
+
 def p_listitem(p):
     '''listitem : listhead
                 | listitem EMPTYLINE
@@ -134,6 +138,7 @@ def p_listitem(p):
         #for l2para in p[2]:
         #p[0].append(l2para)
         p[0].append(p[3])
+
 def p_list(p):
     '''list : listitem
             | list listitem
@@ -235,6 +240,27 @@ def p_questions(p):
         p[1].append(p[2])
         p[0] = p[1]
 
+def p_theorem(p):
+    r'theorem : THEOREM contents'
+    p[0] = p[1]
+    for c in p[2]:
+        p[0].append(c)
+
+def p_theorem_with_proof(p):
+    r'theorem : THEOREM contents PROOF contents'
+    p[0] = p[1]
+    for c in p[2]:
+        p[0].append(c)
+    for c in p[4]:
+        p[3].append(c)
+    p[0].append(p[3])
+
+def p_define(p):
+    r'define : DEFINE contents'
+    p[0] = p[1]
+    for c in p[2]:
+        p[0].append(c)
+
 def p_error(t):
     print ("Parse Error:\n%s" \
                     % str(t)).decode('utf8').encode('cp950')
@@ -318,6 +344,58 @@ answer.
         self.assertEqual(2, len(answer.children))
         para1 = answer.children[0]
         self.assertEqual(para1.type, 'para')
+
+    def testTheorem(self):
+        case ='''theorem[reflective].反身性規則
+若 a 是一個欄位集，且 a 包含 b，則 a → b。
+'''
+        book = parser.parse(case)
+        self.assertEqual(book.type, 'book')
+        theorem = book.children[0]
+        self.assertEqual(theorem.type, 'theorem')
+        self.assertEqual(theorem.name, 'reflective')
+        self.assertEqual(theorem.title, '反身性規則')
+        self.assertEqual(1, len(theorem.children))
+        para1 = theorem.children[0]
+        self.assertEqual(para1.type, 'para')
+
+    def testDefine(self):
+        case ='''define[reflective].反身性規則
+若 a 是一個欄位集，且 a 包含 b，則 a → b。
+'''
+        book = parser.parse(case)
+        self.assertEqual(book.type, 'book')
+        theorem = book.children[0]
+        self.assertEqual(theorem.type, 'define')
+        self.assertEqual(theorem.name, 'reflective')
+        self.assertEqual(theorem.title, '反身性規則')
+        self.assertEqual(1, len(theorem.children))
+        para1 = theorem.children[0]
+        self.assertEqual(para1.type, 'para')
+
+    def testTheoremWithAnswer(self):
+        case ='''theorem[decomposition].分解
+若 a → bc，則 a → b 且 a → c 。
+proof.
+* bc 包含 b，bc → b，引用<%=xref 'reflective'%>。
+* bc 包含 c，bc → c，引用<%=xref 'reflective'%>。
+* a → bc 且 bc → b，則 a → b，引用<%=xref 'transitivity'%>。
+* a → bc 且 bc → c，則 a → c，引用<%=xref 'transitivity'%>。
+'''
+        book = parser.parse(case)
+        self.assertEqual(book.type, 'book')
+        theorem = book.children[0]
+        self.assertEqual(theorem.type, 'theorem')
+        self.assertEqual(theorem.name, 'decomposition')
+        self.assertEqual(theorem.title, '分解')
+        self.assertEqual(2, len(theorem.children))
+        para = theorem.children[0]
+        self.assertEqual(para.type, 'para')
+        proof = theorem.children[1]
+        self.assertEqual(proof.type, 'proof')
+        self.assertEqual(len(proof.children), 1)
+        para1 = proof.children[0]
+        self.assertEqual(para1.type, 'list')
 
     def testTable(self):
         testcase = '''table.交易

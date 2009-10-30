@@ -13,6 +13,9 @@ tokens = [
           'TABLEHEAD', 
           'TABLEBLOCK', 
           'IMAGEHEAD', 
+          'DEFINE', 
+          'THEOREM', 
+          'PROOF', 
           'QUESTION', 
           'ANSWER', 
           'FOOTNOTE', 
@@ -95,6 +98,30 @@ def t_ANSWER(t):
     r'^answer\.(\n|$)'
     t.lexer.lineno += t.lexeme.count('\n')
     t.value = DocTreeNode('answer') 
+    return t
+
+def t_THEOREM(t):
+    r'^theorem(\[(?P<name>.*)\])?\.(?P<title>.*)(\n|$)'
+    t.lexer.lineno += t.lexeme.count('\n')
+    t.value = DocTreeNode('theorem') 
+    m = t.lexer.lexmatch
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    return t
+
+def t_DEFINE(t):
+    r'^define(\[(?P<name>.*)\])?\.(?P<title>.*)(\n|$)'
+    t.lexer.lineno += t.lexeme.count('\n')
+    t.value = DocTreeNode('define') 
+    m = t.lexer.lexmatch
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    return t
+
+def t_PROOF(t):
+    r'^proof\.(\n|$)'
+    t.lexer.lineno += t.lexeme.count('\n')
+    t.value = DocTreeNode('proof') 
     return t
 
 def t_TABLEHEAD(t):
@@ -243,6 +270,28 @@ class UnitTest(unittest.TestCase):
         tok = lexer.token()
         self.assertEqual(tok.type, 'ANSWER')
 
+    def testTHEOREM(self):
+        case = 'theorem[name].this is a theorem title'
+        lexer.input(case)
+        tok = lexer.token()
+        self.assertEqual('THEOREM', tok.type,)
+        self.assertEqual(tok.value.name, 'name')
+        self.assertEqual(tok.value.title, 'this is a theorem title')
+
+    def testDEFINE(self):
+        case = 'define[name].this is a define title'
+        lexer.input(case)
+        tok = lexer.token()
+        self.assertEqual('DEFINE', tok.type,)
+        self.assertEqual(tok.value.name, 'name')
+        self.assertEqual(tok.value.title, 'this is a define title')
+
+    def testPROOF(self):
+        case = 'proof.'
+        lexer.input(case)
+        tok = lexer.token()
+        self.assertEqual(tok.type, 'PROOF')
+ 
     def testTABLEBLOCK(self):
         testcase = '''時間 交易A       交易B
 ==== =========== ===========
