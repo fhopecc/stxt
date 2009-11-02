@@ -43,20 +43,30 @@ def to_web(file):
     d.number_children()
     d.count_occurence()
     
-    index = r'd:\stxt\structedtext\%s\%s' % (webdir, 'index.html')
     html = ''
     for sect1 in d.children:
         html += '<h1><a href="%s">%s%s</a></h1>\n' % \
                (f_filename(sect1), f_section_number(sect1), sect1.title)
         disp(sect1)
+    f_index(d)
+
+def f_index(tree):
+    o = ''
+    for sect1 in tree.children:
+        o += '<h4><a href="%s">%s%s</a></h4>\n' % \
+             (f_filename(sect1), f_section_number(sect1), sect1.title)
+        for sect2 in (c for c in sect1.children if c.type == 'sect2'):
+            o += r'<h4><a href="%s">%s%s</a><h4/>' % \
+                 (f_filename(sect2), f_section_number(sect2), sect2.title)
 
     # write index.html
+    index = r'd:\stxt\structedtext\%s\%s' % (webdir, 'index.html')
     with open(index, 'w') as f:
         f.write(template % \
                 {'title': '主索引', 
                  'sect1_list': "",
                  'sect2_list': "",
-                 'content': html
+                 'content': o
                 })
     logger.info('generate %s' % index)
 
@@ -112,7 +122,7 @@ def f_sect3(tree):
     return html
 
 def f_code(tree):
-    html    = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    html    = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,  tree.title)
     #html += tree.value + '</pre>\n'
     html += '<pre>%s</pre>\n' % tree.value
     #highlight(tree.value.decode('utf8'), PythonLexer(), HtmlFormatter())
@@ -120,7 +130,7 @@ def f_code(tree):
     return html
 
 def f_table(tree):
-    html = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    html = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
     if tree.children:
         html += '<table>\n'
         for row in tree.children:
@@ -134,7 +144,7 @@ def f_table(tree):
     return html
 
 def f_image(tree):
-    html    = '<h4>圖%s：%s</h4>\n'%(tree.occurence,    tree.title)
+    html    = '<h4>圖%s：%s</h4>\n'%(tree.occurence,  tree.title)
     html += '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
     return html
 
@@ -202,6 +212,24 @@ def f_questions(tree):
 
 def f_answer(tree):
     html = '<h4>答：</h4>\n'
+    for c in tree.children:
+        html += disp(c)
+    return html
+
+def f_define(tree):
+    html = '<h4>定義%s：%s</h4>\n'%(tree.occurence,  tree.title)
+    for c in tree.children:
+        html += disp(c)
+    return html
+
+def f_theorem(tree):
+    html = '<h4>定理%s：%s</h4>\n'%(tree.occurence,  tree.title)
+    for c in tree.children:
+        html += disp(c)
+    return html
+
+def f_proof(tree):
+    html = '<h4>證明：</h4>\n'
     for c in tree.children:
         html += disp(c)
     return html

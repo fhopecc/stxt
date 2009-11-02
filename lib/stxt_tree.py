@@ -125,7 +125,7 @@ class Tree(object):
         return o
 
     def count_occurence(self):
-        for type in ['code', 'table', 'image']:
+        for type in ['code', 'table', 'image', 'define', 'theorem']:
             if self.type in [type]:
                 o = o+1
                 self.occurence = o
