@@ -103,17 +103,21 @@ def to_html(file):
 
 def f_section_number(tree):
     ns = tree.section_number(0)[0]
-    cdigits = ['零','一','二','三','四','五','六','七','八','九','十',
+    cbd = ['零','壹','貳','參','肆','伍','陸','柒','捌','玖','拾']
+    cd = ['零','一','二','三','四','五','六','七','八','九','十',
                '十一','十二','十三','十四','十五','十六','十七','十九','二十'
                '二十一','二十二','二十三','二十四','二十五','二十六',
                '二十七','二十八','二十九', '三十', 
                '三十一','三十二','三十三','三十四','三十五','三十六',
                '三十七','三十八','三十九'
               ]
+ 
     if tree.type == 'sect2':
-        return cdigits[ns] + '.'
+        return cbd[ns] + '.'
     elif tree.type == 'sect3':
-        return '(' + cdigits[ns] + ')' + ' '
+        return cd[ns] + '.'
+    elif tree.type == 'sect4':
+        return '(' + cd[ns] + ')' + ' '
 
 def f_book(tree):
     html = ''
@@ -217,8 +221,6 @@ def f_answer(tree):
     for c in tree.children:
         html += disp(c)
     return html
-
-
 
 if __name__ == '__main__':
     usage = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
