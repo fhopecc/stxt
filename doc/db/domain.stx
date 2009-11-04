@@ -21,6 +21,13 @@ id name   sex birthday
 分別表示男性及女性，
 性別型態反應了人的性別只有男女兩種的事實。
 
+code[select_one].選取陳水扁
+select * 
+from human
+where name = '陳水扁'
+::
+name 
+
 型態完整性
 ~~~~~~~~~~
 表任何欄值一定是屬於欄其型態的單元值。

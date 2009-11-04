@@ -14,6 +14,8 @@ set ruler   " show line and column number in the bottom
 syntax on
 set hlsearch "Highlighten the searched string
 
+map <F3> :w<enter>:! lib\slides_outputter.py db_slides doc\db\db_slides.stx<enter>
+
 map <F5> :w<enter>:!%<enter>
 map! <F5> <esc>:w<enter>:!%<enter>
 
