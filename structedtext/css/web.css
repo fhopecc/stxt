@@ -7,4 +7,5 @@ table {
   border-collapse:collapse; 
 } 
 tr { border:1px solid;text-align:center;font-style:bold }
+th { font-weight:bold}
 td { border:1px solid; }
