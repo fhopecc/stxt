@@ -114,6 +114,8 @@ Windows XP 排定的工作
 排定每天 3:05 AM 執行 to_middle.py，
 此程式能將檔案以 FTP 協定傳送至中介主機 to_web 目錄下。
 
+WEB 網站 3:35 AM 執行至中介主機抓檔。
+
 主機佈署規格
 ------------
 (trans) -> (middle) -> (web)

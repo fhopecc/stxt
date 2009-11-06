@@ -1,6 +1,14 @@
+:%s/^% code '\([^']*\)', \'\([^']*\)\' do/code[\2].\1/cg
+:%s/^% table '\([^']*\)', \'\([^']*\)\' do/table[\2].\1/cg
+:%s/<%section '\([^']*\)' do%>/\1/g
 :%s/<%=xref '\([a-zA-Z_]*\)'%>/[\1]/cg
 :%s/\([^']*\)', '\(\w*\)/[\2].\1/cg
 :%s/% example '\(.*\)/question.\1/cg
+:%s/% section '\(.*\)/\1/cg
+:%s/% paragraph do//g
+:%s/% end//g
+:%s/' do\s*$//g
+:%s/<%end%>//g
 :%s/^答：/answer./cg
 :%s/更新遺失/遺失更新/g
 :%s/想使用/要求/g

@@ -1,0 +1,9 @@
+投影
+~~~~
+從一個表中取出所需要的欄。
+
+code[projection_alge].projection
+R[id, name]
+::
+
+上述代數式表示取出供應商的編號及名稱組成新的表。

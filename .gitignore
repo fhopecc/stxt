@@ -5,6 +5,8 @@ Thumbs.db
 *.swp
 *.pyc
 lib/sql/*
+lib/dist/*
+lib/build/*
 structedtext/db/*
 structedtext/ds/*
 structedtext/csec/*

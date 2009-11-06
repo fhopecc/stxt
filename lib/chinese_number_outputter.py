@@ -1,9 +1,9 @@
 # coding=utf-8
 from __future__ import with_statement
 import sys, os, re, unittest, stxt_parser
-from pygments import highlight
-from pygments.lexers import PythonLexer
-from pygments.formatters import HtmlFormatter
+#from pygments import highlight
+#from pygments.lexers import PythonLexer
+#from pygments.formatters import HtmlFormatter
 
 # def num2BCNum(arabic):
 #     _ChineseNumeric = '零壹貳參肆伍陸柒捌玖'
@@ -159,8 +159,17 @@ def f_code(tree):
     return html
 
 def f_table(tree):
-    html    = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
-    html += '<pre>\n' + tree.value + '</pre>\n'
+    html    = '<h4>表%s：%s</h4>\n'%(tree.occurence, tree.title)
+    if tree.children:
+        html += '<table>\n'
+        for row in tree.children:
+            html += '<tr>\n' 
+            for col in row.children:
+                html += '<td>%s</td>\n' % col.value.encode('utf8')
+            html += '</tr>\n' 
+        html += '</table>\n'
+    else:
+        html += '<pre>%s</pre>\n' % tree.value 
     return html
 
 def f_para(tree):
@@ -223,7 +232,7 @@ def f_answer(tree):
     return html
 
 if __name__ == '__main__':
-    usage = 'USAGE:' + os.path.basename(__file__) + " stxt" + '\n'
+    usage = 'USAGE:' + os.path.basename(sys.argv[0]) + " stxt" + '\n'
     try:
         print to_html(sys.argv[1])
     except IndexError:
