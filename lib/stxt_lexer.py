@@ -3,8 +3,11 @@ import sys, lex
 from stxt_tree import DocTreeNode
 import stxt_tb_parser, logger
 # Lexer
+states = (
+    ('table', 'exclusive'),
+)
+
 tokens = [
-#         'INCLUDE', 
           'HEAD1', 
           'HEAD2', 
           'HEAD3', 
@@ -124,25 +127,61 @@ def t_PROOF(t):
     t.value = DocTreeNode('proof') 
     return t
 
-def t_TABLEHEAD(t):
+def t_table(t):
     r'^table(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
     t.lexer.lineno += t.lexeme.count('\n')
     t.value = DocTreeNode('table') 
     m = t.lexer.lexmatch
+    t.type = 'TABLEHEAD'
     t.value.name = m.group('name')
     t.value.title = m.group('title')
+    t.lexer.block_start = t.lexer.lexpos# + len(m.group(0))
+    t.lexer.read_head_sep = False
+    t.lexer.begin('table')
     return t
 
-def t_TABLEBLOCK(t):
-    r'(.+\n)+=[= ]+\n'
-    t.lexer.lineno += t.lexeme.count('\n')
-    m = t.lexer.lexmatch
-    try:                                        
-        t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
-    except SyntaxError:
-        print >>sys.stderr, "SyntaxError:" + str(t)
-        t.value = m.group(0)
-    return t
+def t_table_sep(t):
+    r'=[= ]+\n'
+    if t.lexer.read_head_sep:
+        m = t.lexer.lexmatch
+        block_end = t.lexer.lexpos #+ len(m.group(0))
+        t.value = t.lexer.lexdata[t.lexer.block_start:block_end]
+        t.type = 'TABLEBLOCK'
+        try:
+            t.value = stxt_tb_parser.parse(t.value.decode('utf8'))
+        except SyntaxError:
+            print >>sys.stderr, "SyntaxError:" + str(t)
+        except UnicodeDecodeError:
+            print >>sys.stderr, "DecodeError:" + t.value
+            #sys.exit(1)
+        t.lexer.begin('INITIAL') 
+        return t
+    else:
+        t.lexer.read_head_sep = True
+
+def t_table_line(t):
+    r'.+\n'
+    pass
+
+def t_table_error(t):
+    logger.info('state(table)%s:%s:%s encounter illegal character [%s]' % (
+                t.lexer.file, t.lexer.lineno, 
+                find_column(t.lexer.lexdata, t), t.value[0]
+               ))
+#t.lexer.skip(1)
+    sys.exit(1)
+#
+
+#def t_TABLEBLOCK(t):
+#    r'(.+\n)+=[= ]+\n'
+#    t.lexer.lineno += t.lexeme.count('\n')
+#    m = t.lexer.lexmatch
+#    try:                                        
+#        t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
+#    except SyntaxError:
+##        print >>sys.stderr, "SyntaxError:" + str(t)
+#        t.value = m.group(0)
+#    return t
 
 def t_CODEHEAD(t):
     r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
@@ -291,9 +330,38 @@ class UnitTest(unittest.TestCase):
         lexer.input(case)
         tok = lexer.token()
         self.assertEqual(tok.type, 'PROOF')
- 
+
+    def testSingleColumnTable(self):
+        testcase = '''table[angles].angles
+name
+======
+金叔分
+曹晶蓮
+李美紅
+======
+'''
+        lexer.input(testcase)     
+        d = lexer.token()
+        self.assertEqual('TABLEHEAD', d.type)
+        self.assertEqual('angles', d.value.name)
+        self.assertEqual('angles', d.value.title)
+        d = lexer.token().value
+        self.assertEqual('table', d.type)
+        header = d.children[0]
+        self.assertEqual('tr', header.type)
+        th1 = header.children[0]
+        self.assertEqual('th', th1.type)
+        self.assertEqual(u'name', th1.value)
+
+        r1 = d.children[1]
+        self.assertEqual('tr', r1.type)
+        td1 = r1.children[0]
+        self.assertEqual('td', td1.type)
+        self.assertEqual(u'金叔分', td1.value)
+
     def testTABLEBLOCK(self):
-        testcase = '''時間 交易A       交易B
+        testcase = '''table[name].title
+時間 交易A       交易B
 ==== =========== ===========
 t1   A.read(p)    
 t2   A.update(p)  
@@ -302,6 +370,10 @@ t4               B.update(p)
 ==== =========== ===========
 '''
         lexer.input(testcase)     
+        d = lexer.token()
+        self.assertEqual('TABLEHEAD', d.type)
+        self.assertEqual('name', d.value.name)
+        self.assertEqual('title', d.value.title)
         d = lexer.token().value
         self.assertEqual('table', d.type)
         header = d.children[0]
@@ -319,29 +391,6 @@ t4               B.update(p)
         self.assertEqual('t1', td1.value)
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
-
-    def testTableSubparserError(self):
-        testcase = '''table.交易
-時間 交易A       交易B
-==== =========== ===========ddd
-t1   A.read(p)    
-t2   A.update(p)  
-t3               B.read(p)   
-t4               B.update(p)
-==== =========== ===========
-'''
-        lexer.input(testcase)     
-        d = lexer.token()
-        d = lexer.token()
-        block = '''時間 交易A       交易B
-==== =========== ===========ddd
-t1   A.read(p)    
-t2   A.update(p)  
-t3               B.read(p)   
-t4               B.update(p)
-==== =========== ===========
-'''
-        self.assertEqual(block, d.value)
 
 if __name__ == '__main__':
     unittest.main()
