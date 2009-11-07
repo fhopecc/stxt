@@ -30,3 +30,41 @@ code[emp_have_all_skills].找出會所有技能的員工姓名
 (employees_skills[e_id, s_id] DIVIDEBY skills[id as s_id] 
 JOIN employees)[name]
 ::
+
+table[tax_payments].繳稅檔
+id payer  date     area tax    amount
+== ====== ======== ==== ====== ======
+ 1 李白   0981107  鳳林 地價稅   1000 
+ 2 李白   0980307  鳳林 土增稅    420 
+ 3 李白   0980307  鳳林 契稅      320 
+ 4 杜甫   0980501  花蓮 房屋稅    200
+ 5 杜甫   0980401  花蓮 牌照稅   7120
+ 6 杜甫   0980301  花蓮 地價稅    200
+ 7 蘇軾   0980402  玉里 土增稅    300
+ 8 蘇軾   0981102  玉里 地價稅    300
+ 9 蘇軾   0980430  玉里 牌照稅   3060 
+10 蘇軾   0980430  玉里 契稅       70
+11 蘇軾   0980501  玉里 娛樂稅   4400
+12 蘇軾   0980530  玉里 房屋稅    200 
+12 蘇軾   0980330  玉里 印花稅   3400 
+== ====== ======== ==== ====== ======
+
+table[taxes].稅種檔
+id name  
+== ======
+ 1 地價稅  
+ 2 土增稅
+ 3 房屋稅
+ 4 契稅
+ 5 印花稅 
+ 6 娛樂稅 
+ 7 牌照稅 
+== ======
+
+code[all_taxes_payers].所有稅都繳名單
+select payer, tax
+from tax_payments
+divide
+select name as tax
+from taxes
+::

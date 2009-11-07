@@ -1,0 +1,9 @@
+def fibo_generator():
+   current, previous = 0, 1
+   while True:
+      yield current
+      current, previous = previous, current + previous
+
+f = fibo_generator()
+for x in range(20):
+   print( f.__next__(), end=' ')
