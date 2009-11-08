@@ -3,7 +3,10 @@
 從一個表中取出所需要的欄。
 
 code[projection_alge].projection
-R[id, name]
+select name 
+from employees
 ::
 
-上述代數式表示取出供應商的編號及名稱組成新的表。
+像是本局辦理研習時，
+要產出所有員工的簽到表可以上述 SQL 表示，
+此 SQL 表示員工表取出所有員工名稱組成新的表。

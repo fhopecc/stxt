@@ -28,16 +28,18 @@ define.擴充性規則
 define.遞移性規則
 若 a → b 且 b → c，則 a → c。
 
+theorem.阿姆斯壯公理是正確的
 阿姆斯壯公理是正確的
 
+theorem.阿姆斯壯公理是完全的
 阿姆斯壯公理是完全的
 
 衍生定理
 ~~~~~~~~
-自我定義
-  a → a
-證明：
-  因為 a 包含 a，所以 a → a。
+theorem.自我定義
+a → a
+proof.
+因為 a 包含 a，所以 a → a。
 
 theorem[decomposition].分解
 若 a → bc，則 a → b 且 a → c 。
