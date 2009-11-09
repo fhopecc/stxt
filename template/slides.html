@@ -9,17 +9,17 @@ h2 {font-size:28px;border-bottom:solid 2px;text-align:center}
 dt {font-style:bold}
 #content {margin-left:20%%;margin-right:20%%}
 img {display:block;margin-left:auto;margin-right:auto}
-table { border:1px solid;border-collapse:collapse } 
-tr { border:1px solid;text-align:center;font-style:bold }
-td { border:1px solid }
+table { border:1px black solid;border-collapse:collapse } 
+tr { border:1px black solid;text-align:center;font-style:bold }
+td { border:1px black solid }
 </style>
 <script language="javascript">
 function next_slide() {
-    next = document.getElementById("next")
+    var next = document.getElementById("next")
     window.location = next.value;
 }
 function prev_slide() {
-    prev = document.getElementById("prev")
+    var prev = document.getElementById("prev")
     window.location = prev.value;
 }
 //偵測瀏覽器版本
@@ -41,10 +41,11 @@ if(browser=="Netscape"){    //如果瀏覽器為Netscape或者Firefox
 else{    //假設瀏覽器不為Nescape則猜測為ie
     //開始監聽鍵盤事件
     document.onkeydown = function(){
-        if(event.whitch==PageDown){
+        e = window.event
+        if(e.keyCode==PageDown){
             next_slide()
         }
-        else if(event.whitch==PageUp){
+        else if(e.keyCode==PageUp){
             prev_slide()
         }
     }

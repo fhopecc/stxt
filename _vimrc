@@ -16,8 +16,8 @@ set hlsearch "Highlighten the searched string
 
 map <F3> :w<enter>:! lib\slides_outputter.py db_slides doc\db\db_slides.stx<enter>
 
-map <F5> :w<enter>:!%<enter>
-map! <F5> <esc>:w<enter>:!%<enter>
+map <F6> :w<enter>:!task\make_doc.py<enter>
+map! <F6> <esc>:w<enter>:!%<enter>
 
 map <F10> :w<enter>:so doc\db\term_consist.vim<enter>
 

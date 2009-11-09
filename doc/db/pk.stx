@@ -74,9 +74,9 @@ K 為超鍵，若不存在 K 的子集 J，使得 J 也為 超鍵，
 請參見[primary_key_sql]。
 
 humans 的候選鍵如下：
-#(id)
-#(name)
-#(birthday)
+# id
+# name
+# birthday
 
 但最適合作主鍵的應該是 id。
 name 及 birthday 本身都具有意義。

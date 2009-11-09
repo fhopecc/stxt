@@ -70,12 +70,12 @@ def f_sect2(tree):
     next = order+1
     if prev > -1:
          prev = sect2s[prev]
-         html += '<a href="%s">上一片</a>\n' % f_filename(prev)
+#html += '<a href="%s">上一片</a>\n' % f_filename(prev)
          html += '<input id="prev" type="hidden" value="%s"/>\n' % f_filename(prev)
 
     if next < len(sect2s):
          next = sect2s[next]
-         html += '<a href="%s">下一片</a>\n' % f_filename(next)
+#html += '<a href="%s">下一片</a>\n' % f_filename(next)
          html += '<input id="next" type="hidden" value="%s"/>\n' % f_filename(next)
     html += '</div>'
     fn = r'd:\stxt\structedtext\%s\%s' % (dir, f_filename(tree))
@@ -92,12 +92,7 @@ def f_sect3(tree):
     return html
 
 def f_code(tree):
-    html    = '<h4>程式碼%s：%s</h4>\n'%(tree.occurence,    tree.title)
-    #html += tree.value + '</pre>\n'
-    html += '<pre>%s</pre>\n' % tree.value
-    #highlight(tree.value.decode('utf8'), PythonLexer(), HtmlFormatter())
-    #print highlight(tree.value, PythonLexer(), HtmlFormatter())
-    return html
+    return '<pre>%s</pre>\n' % tree.value
 
 def f_table(tree):
     html = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
