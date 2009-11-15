@@ -137,31 +137,41 @@ def t_table(t):
     t.value.title = m.group('title')
     t.lexer.block_start = t.lexer.lexpos# + len(m.group(0))
     t.lexer.read_head_sep = False
+    t.lexer.table_block_lineno = t.lexer.lineno
     t.lexer.begin('table')
     return t
 
 def t_table_sep(t):
-    r'=[= ]+\n'
+    r'=[= ]*'
     if t.lexer.read_head_sep:
         m = t.lexer.lexmatch
         block_end = t.lexer.lexpos #+ len(m.group(0))
-        t.value = t.lexer.lexdata[t.lexer.block_start:block_end]
-        t.type = 'TABLEBLOCK'
+        t.block = t.lexer.lexdata[t.lexer.block_start:block_end]
         try:
-            t.value = stxt_tb_parser.parse(t.value.decode('utf8'))
+            t.value = stxt_tb_parser.parse(t.block.decode('utf8'))
         except SyntaxError:
-            print >>sys.stderr, "SyntaxError:" + str(t)
+            logger.info('state(table)%s:%s:%s:%s illegal char [%s] block is [%s]' % (
+                t.lexer.file, t.lexer.lineno, 
+                find_column(t.lexer.lexdata, t), t.lexer.lexpos, \
+                t.lexer.lexdata[t.lexpos], t.block
+               ))
         except UnicodeDecodeError:
             print >>sys.stderr, "DecodeError:" + t.value
             #sys.exit(1)
         t.lexer.begin('INITIAL') 
+        t.type = 'TABLEBLOCK'
+        t.lineno = t.lexer.table_block_lineno 
         return t
     else:
         t.lexer.read_head_sep = True
 
 def t_table_line(t):
-    r'.+\n'
-    pass
+    r'[^\n]+'
+    pass 
+
+def t_table_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value) 
 
 def t_table_error(t):
     logger.info('state(table)%s:%s:%s encounter illegal character [%s]' % (
@@ -256,142 +266,16 @@ def t_LINE(t):
     t.lexer.lineno += t.lexeme.count('\n')
     return t
 
+def t_NEWLINE(t):
+    r'\n'
+    t.lexer.lineno += t.lexeme.count('\n')
+
 def t_error(t):
-    logger.info('%s:%s:%s encounter illegal character [%s]' % (
-                t.lexer.file, t.lexer.lineno, 
-                find_column(t.lexer.lexdata, t), t.value[0]
-               ))
-#t.lexer.skip(1)
+    logger.info('%s:%s:%s illegal char[%s]:%s' % ( \
+                t.lexer.file, t.lexer.lineno, \
+                find_column(t.lexer.lexdata, t), t.value[0], \
+                str(ord(t.value[0]))))
     sys.exit(1)
+#t.lexer.skip(1)
 #lexer = lex.lex(debug=True)
 lexer = lex.lex()
-
-import unittest
-class UnitTest(unittest.TestCase):
-    def testInclude(self):
-        case = r'<d:\stxt\lib\db\sql.stx>'
-        lexer.input(case)
-        self.assertRaises(IOError, lexer.token)
-
-        case = r'<test.stx>'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'HEAD1')
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'LINE')
-
-    def testIMAGEHEAD(self):
-        case = 'image[name].this is a image title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'IMAGEHEAD')
-        self.assertEqual(tok.value.name, 'name')
-        self.assertEqual(tok.value.title, 'this is a image title')
-
-        # imagehead must having name block
-        case = 'image.this is a image title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'IMAGEHEAD')
-        self.assertEqual(tok.value.name, None)
-        self.assertEqual(tok.value.title, 'this is a image title')
-
-    def testQUESTION(self):
-        case = 'question[name].this is a question title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual('QUESTION', tok.type,)
-        self.assertEqual(tok.value.name, 'name')
-        self.assertEqual(tok.value.title, 'this is a question title')
-
-    def testANSWER(self):
-        case = 'answer.'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'ANSWER')
-
-    def testTHEOREM(self):
-        case = 'theorem[name].this is a theorem title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual('THEOREM', tok.type,)
-        self.assertEqual(tok.value.name, 'name')
-        self.assertEqual(tok.value.title, 'this is a theorem title')
-
-    def testDEFINE(self):
-        case = 'define[name].this is a define title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual('DEFINE', tok.type,)
-        self.assertEqual(tok.value.name, 'name')
-        self.assertEqual(tok.value.title, 'this is a define title')
-
-    def testPROOF(self):
-        case = 'proof.'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual(tok.type, 'PROOF')
-
-    def testSingleColumnTable(self):
-        testcase = '''table[angles].angles
-name
-======
-金叔分
-曹晶蓮
-李美紅
-======
-'''
-        lexer.input(testcase)     
-        d = lexer.token()
-        self.assertEqual('TABLEHEAD', d.type)
-        self.assertEqual('angles', d.value.name)
-        self.assertEqual('angles', d.value.title)
-        d = lexer.token().value
-        self.assertEqual('table', d.type)
-        header = d.children[0]
-        self.assertEqual('tr', header.type)
-        th1 = header.children[0]
-        self.assertEqual('th', th1.type)
-        self.assertEqual(u'name', th1.value)
-
-        r1 = d.children[1]
-        self.assertEqual('tr', r1.type)
-        td1 = r1.children[0]
-        self.assertEqual('td', td1.type)
-        self.assertEqual(u'金叔分', td1.value)
-
-    def testTABLEBLOCK(self):
-        testcase = '''table[name].title
-時間 交易A       交易B
-==== =========== ===========
-t1   A.read(p)    
-t2   A.update(p)  
-t3               B.read(p)   
-t4               B.update(p)
-==== =========== ===========
-'''
-        lexer.input(testcase)     
-        d = lexer.token()
-        self.assertEqual('TABLEHEAD', d.type)
-        self.assertEqual('name', d.value.name)
-        self.assertEqual('title', d.value.title)
-        d = lexer.token().value
-        self.assertEqual('table', d.type)
-        header = d.children[0]
-        self.assertEqual('tr', header.type)
-        th1 = header.children[0]
-        self.assertEqual('th', th1.type)
-        self.assertEqual(u'時間', th1.value)
-        th2 = header.children[1]
-        self.assertEqual(u'交易A', th2.value)
-        
-        r2 = d.children[1]
-        self.assertEqual('tr', r2.type)
-        td1 = r2.children[0]
-        self.assertEqual('td', td1.type)
-        self.assertEqual('t1', td1.value)
-        td2 = r2.children[1]
-        self.assertEqual('A.read(p)', td2.value)
-
-if __name__ == '__main__':
-    unittest.main()

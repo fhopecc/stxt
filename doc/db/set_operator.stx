@@ -23,7 +23,7 @@ theorem.積的紀錄數目
 proof.
 由乘法原理可證。
 
-table.angles
+table[angles].angles
 name
 ======
 金叔分

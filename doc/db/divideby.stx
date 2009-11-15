@@ -46,7 +46,7 @@ id name
 code[all_taxes_payers].所有稅都繳名單
 select payer, tax
 from tax_payments
-divide
+divideby
 select name as tax
 from taxes
 ::
