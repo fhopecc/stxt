@@ -1,5 +1,277 @@
 關聯式模型
 ==========
+SQL 的威力
+----------
+我發現你們常問的問題，也就是你們不懂的部份，
+卻是 SQL 最具威力的一面。
+
+先回憶你們常問的問題，再轉從基礎談起。
+
+子查詢
+------
+子查詢就是任意的 select 語句，會傳回一個表。
+
+子查詢可以使用外查詢變數，
+這些變數在該子查詢的任何一次計算中都起常數的作用。
+
+子查詢(2)
+---------
+若 civil_services 為全國公職名冊，
+下述程式利用 exists 描述本局具公職身份的員工名冊。
+
+如[emp_are_civ.sql]便引用其外查詢的表變數「e」。
+
+code[emp_are_civ.sql].具公職身份的員工名冊
+select name
+from employees e
+where exists
+      (select 1
+       from civil_services c
+       where e.name = c.name);
+::
+
+exists 語法
+-----------
+code[exists.bnf].exists 語法
+[not] exists (subquery)
+::
+
+exists 接受一個子查詢作為參數，
+用來測試子查詢是否產出任何紀錄。
+若有結果則條件為真，若無條件為假，
+判斷為真時才會繼續執行外查詢。
+
+exists 子查詢執行特性
+---------------------
+子查詢通常只執行到產生一行為止，
+而不是等到產出全部結果才停止。
+在這裡寫任何有副作用的子查詢都是不明智的（比如調用序列函數）；
+這些副作用是否發生是很難判斷的。
+
+not exists 
+----------
+not exists 則是相對於 exists，判斷為假才會繼續執行外查詢。
+
+下述程式利用 not exists 描述本局不具公職身份的員工名冊。
+
+code[emp_not_civ.sql].不具公職身份的員工名冊
+select name
+from employees e
+where not exists
+      (select 1
+       from civil_services c
+       where e.name = c.name);
+::
+
+exists 慣寫法 
+------------
+因為結果只取決子查詢是否產生任何紀錄，
+而不取決於紀錄內容，
+所以子查詢的產出結果表通常是無用的。
+因此慣寫法常將子查詢寫成「select 1 form...」的形式，
+如[emp_are_civ.sql]
+
+表達全稱量詞
+------------
+sql 並未提供全稱量詞，
+只提供存在量詞 exists，
+但可用一個雙重否定律利用 exists 表達全稱量詞。
+
+稅種檔
+------
+table[taxes].稅種檔
+id name  
+== ======
+ 1 地價稅  
+ 2 土增稅
+ 3 房屋稅
+ 4 契稅
+ 5 印花稅 
+ 6 娛樂稅 
+ 7 牌照稅 
+== ======
+
+taxes 為稅種檔，紀錄所有應收的稅，
+
+繳稅檔
+------
+table[tax_payments].繳稅檔
+id payer  date     area tax    amount
+== ====== ======== ==== ====== ======
+ 1 李白   0981107  鳳林 地價稅   1000 
+ 2 李白   0980307  鳳林 土增稅    420 
+ 3 李白   0980307  鳳林 契稅      320 
+ 4 杜甫   0980501  花蓮 房屋稅    200
+ 5 杜甫   0980401  花蓮 牌照稅   7120
+ 6 杜甫   0980301  花蓮 地價稅    200
+ 7 蘇軾   0980402  玉里 土增稅    300
+ 8 蘇軾   0981102  玉里 地價稅    300
+ 9 蘇軾   0980430  玉里 牌照稅   3060 
+10 蘇軾   0980430  玉里 契稅       70
+11 蘇軾   0980501  玉里 娛樂稅   4400
+12 蘇軾   0980530  玉里 房屋稅    200 
+13 蘇軾   0980330  玉里 印花稅   3400 
+== ====== ======== ==== ====== ======
+tax_payments 為繳稅紀錄檔，紀錄所有繳稅紀錄檔。
+
+所有稅都繳名單
+--------------
+「所有稅都繳」為全稱量詞句，
+以雙重否定律可轉成「不存在一個稅他沒有繳的」存在量詞句，
+其程式如下：
+
+code[all_taxes_payers.sql].所有稅都繳名單
+select distinct payer
+from tax_payments as tp1
+where not exists
+      (select 1
+       from taxes
+       where not exists
+             (select 1
+              from tax_payments as tp2
+              where (tp1.payer = tp2.payer)
+              and (tp2.tax = taxes.name)));
+::
+
+in 語法
+-------
+code[in.bnf].in 語法
+c [not] in (subquery)
+c1[,c2,c3...] [not] in (subquery)
+::
+第一列語法中 c 代表外查詢每次所傳回指定欄值，
+傳入的子查詢，必須只為單欄表，其欄型態必須和 c 相同。
+
+若 c 存在子查詢表中，結果為真，否則為假。
+
+in 語法(2)
+----------
+第二列語法中
+c1[,c2,c3...] 代表外查詢每次所傳回的一筆當次紀錄，
+並選擇指定欄成為比較紀錄，
+傳入的子查詢的欄數，必須和比較紀錄欄數一樣，且各對應欄型態必須相同。
+若比較紀錄存在子查詢所傳回表中，
+則當次紀錄會加入查詢結果表。
+
+和 EXISTS 一樣，子查詢不會完全執行。
+
+查詢表指定欄位內容重覆的紀錄
+----------------------------
+in 語法可應用在查詢表指定欄位內容重覆的紀錄。
+
+如下查詢出非單人科室員工名單，
+即等同查詢表其欄 dep_id 內容重覆的紀錄。
+
+因為只有局長室僅一人，所以會傳回非局長的所有員工。
+
+code[dep_id_not_unique.bnf].非單人科室員工名單
+select name 
+from employees
+where dep_id in (select dep_id
+                 from employees 
+                 group by dep_id 
+                 having count(*) > 1)
+::
+
+in 值組
+-------
+值組為用括弧括起來且以逗號分隔的單元值串，
+可視為單欄表。
+
+code[in_values.bnf].in 值組語法
+c [not] in (v1, v2,...)
+::
+
+第二列語法應用在(v1, v2,...)所指定的值組，
+此語法的比較紀錄只能有一欄，
+
+若 c 存在值組中，結果為真，否則為假。
+
+查詢出鳳林及玉里的繳稅紀錄
+--------------------------
+如下式查詢出鳳林及玉里的繳稅紀錄。
+
+code[tax_payment_in_area.sql].查詢出鳳林及玉里的繳稅紀錄
+select * 
+from tax_payments
+where area in ('鳳林', '玉里')
+::
+
+not in
+------
+not in 意義如下，
+若 c 不存在於所有值組的值中，結果為真，否則為假。
+
+查詢不在鳳林或玉里的繳稅紀錄
+----------------------------
+如下式查詢出不在鳳林或玉里的繳稅紀錄。
+
+code[tax_payment_not_in_area.sql].查詢不在鳳林或玉里的繳稅紀錄
+select * 
+from tax_payments
+where area not in ('鳳林', '玉里')
+::
+
+用 in 取代多個 or 條件式 
+------------------------
+in 可用來取代多個 or 條件式。
+
+為民服務問卷結果表
+------------------
+如 questionnaires 為民服務問卷結果表，
+各欄意義如下：
+* id: 問卷編號
+* name: 受訪者姓名 
+* ltax: 是否來本局辦理過地價稅？
+* litax: 是否來本局辦理過土增稅？
+* htax: 是否來本局辦理過房屋稅？
+* vtax: 是否來本局辦理過牌照稅？
+* atax: 是否來本局辦理過娛樂稅？
+* dtax: 是否來本局辦理過契稅？
+
+table[questionnaires].為民服務問卷表
+id name   ltax litax htax atax atax dtax
+== ====== ==== ===== ==== ==== ==== ====
+ 1 劉邦      Y     N    Y    N    Y    N
+ 2 李世民    N     N    N    N    N    N
+ 3 朱元章    Y     Y    Y    N    N    N
+== ====== ==== ===== ==== ==== ==== ====
+
+查詢至少來本局辦過一個稅的受訪者名單
+------------------------------------
+查詢至少來本局辦過一個稅的受訪者名單程式如下：
+
+code[least_one_tax.sql].查詢至少來本局辦過一個稅的受訪者名單
+select * 
+from questionnaires
+where ltax = 'Y'
+      or litax = 'Y'
+      or htax = 'Y'
+      or vtax = 'Y'
+      or atax = 'Y'
+      or dtax = 'Y'
+::
+
+查詢至少來本局辦過一個稅的受訪者名單(2)
+---------------------------------------
+可用 in 改寫成下：
+
+code[least_one_tax_with_in.sql].用 in 查詢至少來本局辦過一個稅的受訪者名單
+select * 
+from questionnaires
+where 'Y' in (ltax, litax, htax, vtax, atax, dtax);
+::
+
+一般人不知道 c 也可寫成常數，
+而值組也可寫成外查詢的欄變數組。
+
+回到基礎
+--------
+見識到 SQL 的威力，現在回到 SQL 的基礎。
+
+SQL 基礎是關聯式模型，
+先來了解什麼是「模型」。
+
 永遠無法說出一張圖
 ------------------
 image[DSCF1252.jpg].妳是否可以讓一個沒看過此圖的人，用說的讓她畫的一模一樣

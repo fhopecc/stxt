@@ -72,7 +72,7 @@ tax_payments 為繳稅紀錄檔，紀錄所有繳稅紀錄檔。
 
 code[all_taxes_payers.sql].所有稅都繳名單
 select distinct payer
-from tax_payments AS PS1 
+from tax_payments as tp1
 where not exists
       (select 1
        from taxes
