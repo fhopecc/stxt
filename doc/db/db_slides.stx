@@ -2,10 +2,115 @@
 ==========
 SQL 的威力
 ----------
-我發現你們常問的問題，也就是你們不懂的部份，
+我發現常被問的問題，也就是一般人不懂的部份，
 卻是 SQL 最具威力的一面。
 
 先回憶你們常問的問題，再轉從基礎談起。
+
+[case]case
+----------
+case 表示式是一種通用的條件資料表達式，
+類似於其它語言中的 if/else 語句。
+
+code[case.bnf].case 語法
+case when condition then result
+     [when ...]
+     [else result]
+end
+::
+condition 是條件式。
+如果結果為 true ，那麼 case 資料表達式的結果就是符合條件的 result。
+
+如果結果為 false，那麼以相同方式搜尋任何隨後的 when 子句。
+
+如果沒有 when condition 為真，那麼 case 資料表達式的結果就是在 else 子句裡的值。 
+
+如果省略 else 子句而且沒有匹配的條件，結果為 null。
+
+員工檔
+------
+table[employees_fk].employees
+id dep_id boss_id name   gender
+== ====== ======= ====== ======
+ 1      1       8 廖美慧 F
+ 2      1       1 陳文靈 F
+ 3      1       1 金叔分 F
+ 4      2       8 吳美央 F
+ 5      2       4 賴力密 F
+ 6      2       4 賴怡君 F
+ 7      2       4 洪慧貞 F
+ 8      3    null 林全碌 M
+== ====== ======= ====== ======
+
+case 和代碼說明
+---------------
+case 常用在把代碼轉成說明文字。
+
+如下員工姓名性別清單，將性別代碼轉成中文碼。
+
+code[employees_name_gender_list.bnf].員工姓名性別清單
+select name, 
+       case when gender = 'M' then '男性'
+            when gender = 'F' then '女性'
+       end gender
+from employees;
+::
+
+簡易形式
+--------
+下述語法上述通用形式的一個特殊的變種：
+
+code[simple_case.bnf].簡易 case 語法
+case expression
+    when value then result
+    [when ...]
+    [else result]
+end
+::
+先計算 expression 的值，
+然後與所有在 when 子句裡的 value 比較，直到找到一個相等，並傳回它。 
+
+如果沒有找到匹配的，則傳回在 else 子句裡的 result 。
+
+這類似於 C 裡的 switch 語句。
+
+上面的例子可以用簡單 case 語法來寫：
+
+code[name_gender_list_simple_case.sql].員工姓名性別清單
+select name, 
+       case gender 
+       when 'M' then '男性'
+       when 'F' then '女性'
+       end gender
+from employees;
+::
+
+避免除以零
+----------
+case 表達式並只找到第一個成功值便傳回，後面的 when 則不執行， 
+所以可用來避免除以零錯誤，如下式，稅額以美金計。
+
+code[case_avoid_div_0.bnf].避免除以零
+select payer,  case when amount <> 0 then amount/34
+                    else 0 
+               end
+from tax_payments
+::
+
+case 和 group by
+----------------
+利用 case 將文字值轉成 0 與 1 的數字，再與 group by 搭配，
+可輕易作出統計。
+
+如下科室男女員工數統計表。
+
+code[dep_genders_report.bnf].科室男女員工數統計表
+select dep_id,
+       sum(case when gender = 'M' then 1 else 0 end) AS males,
+       sum(case when gender = 'F' then 1 else 0 end) AS females
+from employees
+group by dep_id;
+::
 
 子查詢
 ------
@@ -76,6 +181,14 @@ exists 慣寫法
 sql 並未提供全稱量詞，
 只提供存在量詞 exists，
 但可用一個雙重否定律利用 exists 表達全稱量詞。
+
+雙重否定律簡言之就是「負負得正」，「否定 + 否定 = 肯定」。
+
+雙重否定的句子如下：
+
+「眼見很多學生上課時打瞌睡，老師不得不承認自己教學法比較沉悶。」
+
+「不得不」包含兩個否定詞。
 
 稅種檔
 ------
@@ -264,6 +377,76 @@ where 'Y' in (ltax, litax, htax, vtax, atax, dtax);
 
 一般人不知道 c 也可寫成常數，
 而值組也可寫成外查詢的欄變數組。
+
+[any_some]any/some
+------------------
+code[any_some.bnf].any/some 語法
+expression operator any (subquery)
+expression operator some (subquery)
+::
+expression 若是欄名，代表外查詢每次所傳回的一筆當次紀錄中欄名為 expression 的值，
+若是常數則代表該常數。
+
+operator 是一個簡單比較運算子，包含 = 及 <>。
+
+any 右式是一個圓括弧括起來的子查詢，結果必須為單欄表，其欄型態必須和 expression 之型態相同。
+
+左式將依 operator 指定比較運算對子查詢的紀錄與 expression 的值逐行計算和比較。
+如果一筆結果為真，則 any 的結果就是真。 
+如果所有紀錄比較結果都不為真，那麼結果是假
+
+子查詢若為空表則為假。
+
+some 是 any 的同義詞。 
+
+in 等效於 = any
+---------------
+in 等效於 = any。
+
+如非單人科室員工名單可用 = any 改寫成如下式：
+
+code[dep_with_muti_mem_list_use_eq_any.sql].非單人科室員工名單
+select name 
+from employees
+where dep_id = any (select dep_id
+                    from employees 
+                    group by dep_id 
+                    having count(*) > 1)
+::
+
+[all]all
+--------
+code[any_some.bnf].any/some 語法
+expression operator ALL(subquery)
+::
+
+左式將依 operator 指定的比較運算對子查詢的紀錄逐行計算和比較。
+若所有紀錄比較結果都為 true， 那麼 ALL 的結果就是 true。
+否則為 false。
+
+查詢繳稅額大於所有蘇軾繳稅額的名單如下式：
+
+code[amount_gt_all_su_list.sql].繳稅額大於所有蘇軾繳稅額的名單
+select payer
+from tax_payments t1
+where aomunt <> all (select t2.amount
+                     from tax_payments t2
+                     where payer = '蘇軾')
+::
+
+子查詢若為空表則為 true。
+
+not in 等效於 <> all
+--------------------
+not in 等效於 <> all
+
+如不在鳳林或玉里的繳稅紀錄可用 <> any 改寫成如下式：
+
+code[tax_payment_not_in_area.sql].查詢不在鳳林或玉里的繳稅紀錄
+select * 
+from tax_payments
+where area <> all ('鳳林', '玉里')
+::
 
 回到基礎
 --------

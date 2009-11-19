@@ -1,0 +1,102 @@
+[any_some]any/some
+------------------
+code[any_some.bnf].any/some 語法
+expression operator any (subquery)
+expression operator some (subquery)
+::
+expression 若是欄名，代表外查詢每次所傳回的一筆當次紀錄中欄名為 expression 的值，
+若是常數則代表該常數。
+
+operator 是一個簡單比較運算子，包含 = 及 <>。
+
+any 右式是一個圓括弧括起來的子查詢，結果必須為單欄表，其欄型態必須和 expression 之型態相同。
+
+左式將依 operator 指定比較運算對子查詢的紀錄與 expression 的值逐行計算和比較。
+如果一筆結果為真，則 any 的結果就是真。 
+如果所有紀錄比較結果都不為真，那麼結果是假
+
+子查詢若為空表則為假。
+
+some 是 any 的同義詞。 
+
+如果沒有為真的紀錄且至少有一個右式結果為 null，
+那麼 any 構造的結果將是 null，而不是 false。
+
+紀錄建構子
+~~~~~~~~~~
+code[row_constructor_any.bnf].紀錄建構子語法
+row_constructor operator any (subquery)
+row_constructor operator some (subquery)
+::
+
+左式將依 operator 指定比較運算對子查詢的紀錄與紀錄建構子逐行計算和比較。
+如果一筆紀錄與左式相等，則 any 的結果就是真。 
+如果所有紀錄比較結果都不為真，那麼結果是假
+
+左式紀錄或子查詢紀錄裡的 null 是按照三值邏輯規則進行計算的。
+如果兩紀錄對應的成員都是非空並且相等，那麼兩行相等；
+如果任意對應成員為非 null 且不等，那麼該兩行不等；
+否則傳回 null。
+
+in 等效於 = any
+~~~~~~~~~~~~~~~
+in 等效於 = any。
+
+如非單人科室員工名單可用 = any 改寫成如下式：
+
+code[dep_with_muti_mem_list_use_eq_any.sql].非單人科室員工名單
+select name 
+from employees
+where dep_id = any (select dep_id
+                    from employees 
+                    group by dep_id 
+                    having count(*) > 1)
+::
+
+[all]all
+--------
+code[any_some.bnf].any/some 語法
+expression operator ALL(subquery)
+::
+
+左式將依 operator 指定的比較運算對子查詢的紀錄逐行計算和比較。
+若所有紀錄比較結果都為 true， 那麼 ALL 的結果就是 true。
+否則為 false。
+
+查詢繳稅額大於所有蘇軾繳稅額的名單如下式：
+
+code[amount_gt_all_su_list.sql].繳稅額大於所有蘇軾繳稅額的名單
+select payer
+from tax_payments t1
+where aomunt <> all (select t2.amount
+                     from tax_payments t2
+                     where payer = '蘇軾')
+::
+
+子查詢若為空表則為 true。
+
+紀錄建構子
+~~~~~~~~~~
+code[row_constructor_all.bnf].紀錄建構子語法
+row_constructor operator ALL (subquery)
+::
+左式將依 operator 指定比較運算對子查詢的紀錄與紀錄建構子逐行計算和比較。
+若所有紀錄比較結果都為 true， 那麼 ALL 的結果就是 true。
+否則為 false。
+
+左式紀錄或子查詢紀錄裡的 null 是按照三值邏輯規則進行計算的。
+如果兩紀錄對應的成員都是非空並且相等，那麼兩行相等；
+如果任意對應成員為非 null 且不等，那麼該兩行不等；
+否則傳回 null。
+
+not in 等效於 <> all
+~~~~~~~~~~~~~~~~~~~~
+not in 等效於 <> all
+
+如不在鳳林或玉里的繳稅紀錄可用 <> any 改寫成如下式：
+
+code[tax_payment_not_in_area.sql].查詢不在鳳林或玉里的繳稅紀錄
+select * 
+from tax_payments
+where area <> all ('鳳林', '玉里')
+::
