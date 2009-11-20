@@ -22,7 +22,39 @@ where dep_id in (select dep_id
         cb = lexer.token()
         self.assertEqual(2, cb.lineno)
         self.assertEqual('CODEBLOCK', cb.type)
- 
+
+        case2 = '''code.建立正式機資料庫相關目錄
+cd /data/eltdb/admin
+mkdir ELTUD
+cd ELTUD
+mkdir bdump  cdump  udump
+cd /data/eltdb/oradata
+mkdir ELTUD
+cd /data/eltbat
+mkdir -p arch/ELTUD
+mkdir -p oradata/ELTUD
+::
+# 於測試機上建立正式機資料庫相關目錄：(時間09:20)
+# 登入 VERITAS 主機並切換目錄至 c:\VERITAS\NetBackup\db\altnames
+code.test
+mkdir -p oradata/ELTUD
+::
+'''
+        lexer.input(case2)
+        ch = lexer.token()
+        self.assertEqual(1, ch.lineno)
+        self.assertEqual('CODEHEAD', ch.type)
+        self.assertEqual(None, ch.value.name)
+        self.assertEqual('建立正式機資料庫相關目錄', 
+                ch.value.title)
+        cb = lexer.token()
+        self.assertEqual(2, cb.lineno)
+        self.assertEqual('CODEBLOCK', cb.type)
+        self.assertEqual('cd ', cb.value[0:3])
+        ol = lexer.token()
+        self.assertEqual(12, ol.lineno)
+        self.assertEqual('OL', ol.type)
+
     def testInclude(self):
         case = r'<d:\stxt\lib\db\sql.stx>'
         lexer.input(case)

@@ -5,6 +5,7 @@ import stxt_tb_parser, logger
 # Lexer
 states = (
     ('table', 'exclusive'),
+    ('code', 'exclusive'),
 )
 
 tokens = [
@@ -178,37 +179,48 @@ def t_table_error(t):
                 t.lexer.file, t.lexer.lineno, 
                 find_column(t.lexer.lexdata, t), t.value[0]
                ))
-#t.lexer.skip(1)
     sys.exit(1)
-#
 
-#def t_TABLEBLOCK(t):
-#    r'(.+\n)+=[= ]+\n'
-#    t.lexer.lineno += t.lexeme.count('\n')
-#    m = t.lexer.lexmatch
-#    try:                                        
-#        t.value = stxt_tb_parser.parse(m.group(0).decode('utf8'))
-#    except SyntaxError:
-##        print >>sys.stderr, "SyntaxError:" + str(t)
-#        t.value = m.group(0)
-#    return t
-
-def t_CODEHEAD(t):
+def t_code(t):
     r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
     t.lexer.lineno += t.lexeme.count('\n')
+    t.type = 'CODEHEAD'
     t.value = DocTreeNode('code') 
     m = t.lexer.lexmatch
     t.value.name = m.group('name')
     t.value.title = m.group('title')
+    t.lexer.block_start = t.lexer.lexpos# + len(m.group(0))
+    t.lexer.block_start_lineno = t.lexer.lineno
+    t.lexer.begin('code')
     return t
 
-def t_CODEBLOCK(t):
-    r'(?P<code>(.+\n)+)(^::\n)'
-    t.lexer.lineno += t.lexeme.count('\n')
-    m = t.lexer.lexmatch
-    t.value = m.group('code')
+def t_code_sep(t):
+    r'::\n'
+    t.lexer.lineno += 1
+    block_end = t.lexer.lexpos - 3
+    t.block = t.lexer.lexdata[t.lexer.block_start:block_end]
+    t.type = 'CODEBLOCK'
+    t.value = t.block
+    t.lineno = t.lexer.block_start_lineno 
+    t.lexer.begin('INITIAL')
     return t
 
+def t_code_line(t):
+    r'[^\n]+'
+    pass 
+
+def t_code_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value) 
+ 
+def t_code_error(t):
+    msg = 'state(code)%s:%s:%s illegal char [%s]' % (
+                t.lexer.file, t.lexer.lineno, 
+                find_column(t.lexer.lexdata, t), t.value[0]
+               )
+    logger.info(msg)
+    raise SyntaxError, msg
+    
 def t_OL(t):
     r'# (?P<content>.*)\n'
     t.lexer.lineno += t.lexeme.count('\n')
@@ -276,6 +288,4 @@ def t_error(t):
                 find_column(t.lexer.lexdata, t), t.value[0], \
                 str(ord(t.value[0]))))
     sys.exit(1)
-#t.lexer.skip(1)
-#lexer = lex.lex(debug=True)
 lexer = lex.lex()
