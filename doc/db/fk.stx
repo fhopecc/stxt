@@ -16,7 +16,7 @@
 
 外鍵可以是空值。
 
-table[departments_fk].departments
+table[departments].departments
 id name   
 == ======
  1 資訊科
@@ -24,7 +24,7 @@ id name
  3 局長室
 == ======
 
-table[employees_fk].employees
+table[employees].employees
 id dep_id boss_id name   gender
 == ====== ======= ====== ======
  1      1       8 廖美慧 F
