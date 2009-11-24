@@ -20,6 +20,8 @@ handlers:
 - url: /
   static_files: index.html
   upload: index.html
+- url: /sqls
+  script: run_rest.py
 
 skip_files: |
  ^(.*/)?(

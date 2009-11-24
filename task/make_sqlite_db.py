@@ -27,7 +27,8 @@ def export_table(name):
     conn.commit()
 
 def create_table(cursor):
-    ts = ['departments', 'humans', 'tax_payments', 'employees', 'taxes']
+    ts = ['departments', 'humans', 'tax_payments', 'employees', 
+          'taxes', 'angles', 'masters']
     for t in ts:
         try:
             cursor.execute('drop table %s;' % t);
@@ -35,13 +36,15 @@ def create_table(cursor):
             continue
     cursor.execute('CREATE TABLE departments(id integer, name text);')
     cursor.execute('CREATE TABLE employees(id integer, dep_id integer, \
-                    boss_id integer,name text, gender text);')
+                    boss_id integer,name text, gender text, title text);')
     cursor.execute('CREATE TABLE humans(id integer, name text, sex text, \
                      birthday text, primary key(id));')
     cursor.execute('CREATE TABLE tax_payments(id integer primary key, \
                     payer text, date text, area text, tax text,  \
-                    amonut integer);')
+                    amount integer);')
     cursor.execute('CREATE TABLE taxes(id integer primary key, name text);')
+    cursor.execute('CREATE TABLE angles(name text);')
+    cursor.execute('CREATE TABLE masters(name text);')
 
 def usage():
     print "Extract the table into csv format." 
@@ -50,7 +53,8 @@ def usage():
     print "table_name: table name to export"
 
 if __name__ == '__main__':
-    ts = ['departments', 'humans', 'tax_payments', 'employees', 'taxes']
+    ts = ['departments', 'humans', 'tax_payments', 'employees', 
+          'taxes', 'angles', 'masters']
     conn = sqlite3.connect('test.db')
     c = conn.cursor()
     create_table(c)

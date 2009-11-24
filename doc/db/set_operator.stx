@@ -31,7 +31,7 @@ name
 李美紅
 ======
 
-table.masters
+table[masters].masters
 name
 ======
 陳英南
@@ -52,6 +52,13 @@ matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數�
 3 * 3 = 9
 
 共 9 筆。
+
+對應的 SQL 如下：
+
+code[matches.sql].matches 的sql
+select a.name angle, m.name master
+from angles a cross join masters m
+::
 
 table.matches
 angle  master
@@ -86,11 +93,11 @@ define[union].聯集
 code[mover.sql].搬公文員工名冊
 select name 
 from employees
-where  sex = 'M'
+where gender = 'M'
 union 
-select name 
-from employees e join departments d on a.dep_id = d.id
-where d.name = '行政科'
+select e.name 
+from employees e join departments d on e.dep_id = d.id
+where d.name = '行政室'
 ::
 
 差集
@@ -112,8 +119,8 @@ code[night_auditor.sql].夜值班督勤主管名單
 select name 
 from employees
 where title in ('科長', '主任', '股長')
-minus 
+except 
 select name 
 from employees 
-where sex = 'F'
+where gender = 'F'
 ::
