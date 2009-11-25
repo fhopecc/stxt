@@ -1,0 +1,48 @@
+[limit]限制筆數
+---------------
+限制結果紀錄筆數，常與 order by 搭配。
+
+limit
+~~~~~
+標準 sql 是使用 limit 語法。
+
+code[top_10_tax_payments.sql].查詢前10多繳稅額紀錄
+select * 
+from tax_payments
+order by amount desc
+limit 10
+::
+
+ronum 虛擬欄
+~~~~~~~~~~~~~~
+在 oracle 是以虛擬欄 rownum 來完成，
+取得前 10 筆的員工名單如下：
+
+code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
+select * 
+from tax_payments
+where rownum < 10
+order by amount desc
+::
+
+top
+~~~
+sql server 是用 top，此語法還提供比率的功能。
+
+code.語法
+SELECT TOP number [percent] table_column1, table_column2···
+FROM table_name;
+::
+
+code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
+select top 10 * 
+from tax_payments
+order by amount desc
+::
+
+code[top_10_tax_payments_rownum.sql].查詢繳稅額排名前半紀錄
+select top 50 percent * 
+from tax_payments
+order by amount desc
+::
+

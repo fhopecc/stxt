@@ -15,18 +15,20 @@ def index(environ, start_response):
 
     t = Template(filename=r"template\sqls.html", escape=pyratemp.HTML) 
 
+    def result(): return ''
+
     status = '200 OK'
     response_headers = [('Content-type','text/html')]
     start_response(status, response_headers)
-    return [t(tables=tables, result='', id=id).encode("utf-8")]
+    return [t(tables=tables, result=result, id=id).encode("utf-8")]
 
 def show(environ, start_response):
     req = Request(environ)
-    session = environ['paste.session.factory']()
-    user = 'unknown'
-    if session.has_key('user'):
-        user = session['user']
-    print 'user %s is loggon' % user
+#session = environ['paste.session.factory']()
+#    user = 'unknown'
+#    if session.has_key('user'):
+#        user = session['user']
+#    print 'user %s is loggon' % user
 
     id, r = '', ''
     if req.GET.has_key('id'):

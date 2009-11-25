@@ -48,20 +48,6 @@ select * from suppliers
 where city='高雄'
 ::
 
-限制筆數
-~~~~~~~~
-限制筆數
-
-ronum 虛擬欄位
-~~~~~~~~~~~~~~
-在 Oracle 是以虛擬欄位 rownum 來完成，
-取得前 10 筆的供應商如下：
-
-code.rownum
-select * from suppliers
-where rownum < 10
-::
-
 合併
 ~~~~
 合併

@@ -2,10 +2,8 @@ from wsgiref.simple_server import make_server
 from lib import rest
 
 from paste.exceptions.errormiddleware import ErrorMiddleware
-from paste.session import SessionMiddleware
 
 app = ErrorMiddleware(rest.route, debug=True)
-app = SessionMiddleware(app)
 
 httpd = make_server('', 80, app)
 
