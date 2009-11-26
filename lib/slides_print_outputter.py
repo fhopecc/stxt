@@ -33,7 +33,6 @@ def to_slides(_dir, _file):
                 {'title': '投影片索引', 
                  'content': html
                 })
-    print 'write %s' % fn
 
 def f_sect1(tree):
     global dir, template
@@ -49,6 +48,7 @@ def f_sect1(tree):
                 {'title': tree.title, 
                  'content': html
                 })
+    print 'produce %s' % fn
 
 def f_sect2(tree):
     global dir, template

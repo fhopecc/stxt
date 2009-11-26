@@ -1,42 +1,5 @@
 [dml]資料操作語言
 -----------------
-投影、別名
-~~~~~~~~~~
-投影就是將抽取表格上的欄位，組合成新的表格。
-在 SQL 中，我們是利用 select 來完成此項運算。
-
-code.select 語法
-select [distinct] *|cex1,cex2... 
-from table;
-::
-
-字元 * 表示選取所有的欄位
-
-若於 select 後加入 distinct 修飾，則合併重覆欄.
-
-cex=col[[as]alias]
-其中 col 為欄位名，alias 為欄位的別名, as 字可加可不加.
-
-code.投影
-select id, name from suppliers
-::
-
-投影運算以 SQL 表示如[projection_sql]_所示，
-此 SQL 表示取出供應商的編號及名稱組成新的表格，
-其等同於[projection_alge]_之代數式。
-
-code.選取所有欄位
-select * from suppliers;
-::
-
-選出 suppliers 所有的欄位.
-
-code.select ex3
-select distinct id, name, deptno from emp;
-::
-
-從 emp 表中，選出 id, name 及 deptno 三欄成為新表, 並合併重覆欄.
-
 限制
 ~~~~
 限制運算以 SQL 表示如[restriction_sql]_，
