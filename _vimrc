@@ -5,8 +5,9 @@ set nocompatible
 set backspace=2 "let backspace can delete back a char
 set encoding=utf8
 set foldmethod=syntax
-set expandtab
+set tabstop=4
 set shiftwidth=4
+set expandtab
 set textwidth=80
 set number "print the line number in front of line 
 set cindent "apply c indent when open a new line

@@ -10,5 +10,7 @@ lib/build/*
 structedtext/db/*
 structedtext/ds/*
 structedtext/csec/*
+structedtext/db_slides/*
+structedtext/hltb/*
 structedtext/net/*
 structedtext/index.yaml
