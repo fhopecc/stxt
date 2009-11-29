@@ -1,12 +1,11 @@
-限制
-~~~~
-從一個表中取出符合條件的紀錄，
-常見條件如下：
+[restriction]限制
+~~~~~~~~~~~~~~~~~
+從一個表中取出符合條件的紀錄，常見條件如下：
 * 相等條件
 * 範圍條件 
 * 布林運算子
 
-table[tax_payments].繳稅檔
+table[tax_payments].
 id payer  date     area tax    amount
 == ====== ======== ==== ====== ======
  1 李白   0981107  鳳林 地價稅   1000 
@@ -26,16 +25,16 @@ id payer  date     area tax    amount
 
 tax_payments 是用來記錄繳稅的檔案。
 
-code[restriction_alge].相等條件
+code[payer_in_fl.sql].相等條件
 select distinct payer
 from tax_payments 
 where area='鳳林'
 ::
 
-上述代數式表示位於鳳林的納稅人名單。
+上述 SQL 表示位於鳳林的納稅人名單。
 
 條件是作用於某個型態上布林函數，
-像是[restriction_alge]中的條件為相等條件，
+像是[payer_in_fl.sql]中的條件為相等條件，
 若某紀錄的 area 欄值等於右端的'鳳林'字串，
 則此紀錄會被選擇出來。
 
@@ -50,25 +49,24 @@ where amount < 100
 分別有大於、小於、大於等於及小於等於，
 對應的符號分別為 '>', '<', '>=' 及 '<='。
 
-code[bollean_operator].布林運算子
+code[fl_and_lt1000.sql].布林運算子
 select *
 from tax_payments 
-where amount < 100 and area='鳳林'
+where amount < 1000 and area='鳳林'
 ::
 
-上述代數式表示取出位於納稅人額小於 100 且位於鳳林的所有繳稅紀錄。
+上述代數式表示取出位於納稅人額小於 1000 且位於鳳林的所有繳稅紀錄。
 因為條件都是布林函數，所以可以用布林運算子串接。
 
-code[set_operator_equation].集合運算等式
+code[and_as_intersect.sql].集合運算等式
 select *
 from tax_payments 
 where area='鳳林' 
 intersect 
 select *
 from tax_payments 
-where area='鳳林' 
-where id < 100 
+where id < 1000
 ::
 
 布林運算子串接的條件，可用集合運算表示出來，
-如[set_operator_equation]為[bollean_operator]的等式。
+如[and_as_intersect]為[fl_and_lt1000.sql]的等式。

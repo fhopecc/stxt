@@ -1,0 +1,27 @@
+[order_by]order by
+------------------
+查詢產出輸出資料表後，可以進行排序。
+若沒有指定排序，則紀錄將以任意順序傳回。 
+實際順序將取決於掃瞄和連接規劃類型和在磁盤上的順序，
+但是肯定不確定。
+順序只能在明確用 order by 定義才能確定。
+
+order by 子句定義排序順序，語法如下：
+
+code[order_by.bnf].
+select select_list
+	from table_expression
+	order by column1 [asc | desc] [, column2 [asc | desc] ...]
+::
+
+column1 等指向表頭定義的欄名。
+
+[asc_desc]asc/desc
+~~~~~~~~~~~~~~~~~~
+定義的每個欄名都可附加 asc 或 desc，以指明排序方向。
+預設是 asc，表升序，先輸出小的數值，這裡的小是以 < 運算子的角度定義的。
+
+同理desc，表降序是以 > 運算子來判斷的。
+
+若定義多排序欄，
+則在前面的排序欄排序相等的情況下使用後面的排序做進一步排序。

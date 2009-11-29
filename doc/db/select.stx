@@ -1,9 +1,8 @@
-[select]select
---------------
-select 命令建立一個暫時虛擬表， 
-方法可能有組合資料表，視圖，刪除行，分組等等。 
-這個資料表最後傳遞給選擇紀錄資料表處理。 
-選擇紀錄資料表判斷中間資料表的哪個字串最終實際輸出。
+[select]
+--------
+從資料庫中檢索資料的過程或命令稱為查詢。 
+主要是使用 select 命令來定義查詢，
+select 命令建立一個暫時虛擬表。
 
 定義顯示表頭
 ~~~~~~~~~~~~
@@ -12,12 +11,20 @@ select *
 from table_expression
 ::
 最簡單表頭定義的是 *，
-代表 from 定義表所有欄位。
+表頭定義中 * 意指表頭為代表 from 資料表表示式所有欄。
+表頭定義也可選擇可用欄子集或者在檢索它們之前對欄值進行計算；
 
-code[select_star.sql].選出員工檔全部欄位
+code[select_star.sql].選出員工檔全部欄
 select * 
 from employees
 ::
+假設一個資料表稱為employees，
+這條命令將從 employees 中檢索所有紀錄和欄。 
+
+from 後為資料表表示式，
+可以是基本資料表，連接及子查詢的複雜構造。
+from employees 是最簡單的資料表表示式，
+它只讀取了一個資料表 employees。
 
 code.select 語法
 select c1, c2, ...
@@ -26,20 +33,16 @@ from table_expression
 另一種用逗號分隔的欄名陣列來定義表頭，
 每個欄名為 from 子句定義資料表中實際欄名或別名。。
 
-code[emp_namelist.sql].員工名單
-select name 
-from employees
-::
-像是本局辦理研習時，
-要產出所有員工的簽到表可以上述 SQL 表示，
-此 SQL 表示員工表取出所有員工名稱組成新的表。
+是本局辦理研習時，
+要產出所有員工的簽到表可以[emp_namelist.sql]表示，
+此 sql 表示員工表取出所有員工名稱組成新的表。
 
 code.select 語法
 select t1.c1, t2.c2, ...
 from table_expression
 ::
 
-如果超過一個資料表有相同欄名，那麼還必須指定表名或表別名。
+若超過一個資料表有相同欄名，那麼還必須指定表名或表別名。
 
 code[emp_namelist.sql].員工部門名單
 select e.name, d.name dep
@@ -51,21 +54,43 @@ from employees e join departments d on e.dep_id = d.id
 值表示式會為結果表每一筆紀錄進行一次計算，
 計算之前用該欄的數值代換任何值表示式裡引用的欄名。 
 
-下面 SQL 表示各人出生年份。
+下式表示各人出生年份。
 
 code[birth_year.sql].各人出生年份
 select name, substr(birthday, 0, 4) as year 
 from humans
 ::
 
+比如若 employees 表頭有 name 和 salary 的欄，
+分別代表員工名稱及月薪，
+則下式表每位員工月薪為幾美金：
+
+code[salary_in_dollar.sql].每位員工月薪為幾美金
+select name, salary / 34 
+from employees;
+::
+
 值表示式的並不一定要有引用來自 from 子句中表表示式裡面的表的欄名， 
 可以有任意常數。
 
-下面產出同員工筆數的體溫正常及不正常標籤，可拿來作門禁用。
+下式產出同員工筆數的體溫正常及不正常標籤，可拿來作門禁用。
 
-code[temp_tag.sql].體溫標籤。
-select 'NORMAL', 'FEVER'
+code[temp_tag.sql].體溫標籤
+select 'normal', 'fever'
 from employees
+::
+
+可以省略資料表表示式而用 select 命令當做一個計算器：
+
+code[select_no_from.sql].
+select 3 * 4;
+::
+
+表頭定義裡的表示式也可為函數，
+比如，可以呼叫函數 random()：
+
+code[select_random.sql].
+select random();
 ::
 
 別名
@@ -73,27 +98,35 @@ from employees
 code.語法
 name [as] alias
 ::
-其中 name 為欄名，alias 為欄的別名, as 字可加可不加。
+其中 name 為欄名，alias 為欄的別名，as 可加可不加。
 
-字串標籤
-~~~~~~~~
-select a as value, b + c as sum from ...
-如果沒有使用as聲明字串名字，那麼系統賦予一個預設值。
-對於簡單的字串引用， 它是該字串的名字。
-對於函數調用，它是函數的名字。對於複雜資料表達式，系統會生成一個通用的名字。
+下式將職稱姓名欄別名為 name_title。
 
 code[name_title_list.sql].職稱姓名表
 select name || title as name_title
 from employees
 ::
 
-注意: 輸出字串的命名和在from子句裡的命名是不一樣的 。 
-這個管道實際上允許您對同一個紀錄命名兩次，
-但是在選擇紀錄資料表中選擇的名字是要傳遞的名字。
+查詢表頭欄名和在 from 子句裡的欄名是不同。 
+
+預設欄名
+~~~~~~~~
+若表頭未定義欄別名，則系統會賦予預設值。
+對欄值引用， 預設是欄名。
+對於函數調用，預設是函數名。
+對於複雜表示式，系統應生成一個通用名。
+
+對[select_no_from.sql]會產出下表，欄名為表示式文字表示。
+
+table[select_no_from].
+3 * 4
+=====
+   12
+=====
 
 distinct
 ~~~~~~~~
-如果兩筆紀錄裡至少有一欄值不同，
+若兩筆紀錄裡至少有一欄值不同，
 則此兩筆紀錄為相異，否則為相同。
 
 若於 select 後加入 distinct 修飾，則合併相同紀錄。
@@ -105,26 +138,6 @@ select distinct title
 from employees
 ::
 
-相對 distinct 是 all。
+相對 distinct 是 all，因它是預設值，所以通常不寫。
 
-空值在這種考慮中認為是相同的。
-
-另外，我們還可以用任意資料表達式來判斷什麼行可以認為是獨立的：
-
-distinct on
-~~~~~~~~~~~
-在 postgre sql 中，
-select distinct on (expression [, expression ...]) select_list ...
-這裡 expression 是任意值資料表達式， 
-它為所有行計算。如果一個行集合裡所有行計算出的該資料表達式的值是一樣的，
-那麼我們認為它們是重複的並且因此只有第一筆紀錄保留在輸出中。
-請注意這裡的一個集合的"第一行"是不可預料的，
-除非您在足夠多的字串上對該查詢排了序，
-保證到達distinct過濾器的紀錄的順序是唯一的。 
-（distinct on處理是發生在order by排序後面的。）
-
-distinct on子句不是 sql 標準的一部分，
-有時候有人認為它是一個糟糕的風格，因為它的結果是不可判定的。
-如果用有選擇的group by和在from中的子查詢，
-那麼我們可以避免使用這個構造， 
-但是通常它是更方便的候選方法。
+兩個空值認為是相同的。

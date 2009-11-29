@@ -20,16 +20,20 @@ theorem.積的紀錄數目
 若 R 的紀錄數目為 count(R)，
 且 S 的紀錄數目為 count(S)，
 則 count(R TIMES S) = count(R) * count(S)，
+
 proof.
 由乘法原理可證。
 
-table[angles].angles
+本書以學生時期常玩的聯誼遊戲「小天使與小主人」來說明積運算，
+
+table[angles].
 name
 ======
 金叔分
 曹晶蓮
 李美紅
 ======
+angles 代表小天使是聯誼的女生名單。
 
 table[masters].masters
 name
@@ -39,26 +43,13 @@ name
 孫加成
 ======
 
-本書以學生時期常玩的聯誼遊戲「小天使與小主人」來說明積運算，
-小天使是聯誼的女生名單，而小主人是聯誼的男生名單，
-然後每個男生去抽一張小天使，
-每個女生去抽一張小主人，
-而小天使與小主人的所有可能配對就可以用積表示。
+masters 代表小主人是聯誼的男生名單，
 
-表 masters 為小主人名單，表 angles 為小天使名單， 
-所有可能配對為表 matches，而 matches 等於 angles 與 masters 的積，
-matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數為
+小天使小主人所有可能配對就可以用積表示。
+如[matches.alg]所示。
 
-3 * 3 = 9
-
-共 9 筆。
-
-對應的 SQL 如下：
-
-code[matches.sql].matches 的sql
-select a.name angle, m.name master
-from angles a cross join masters m
-::
+matches 等於 angles 與 masters 的積，
+表示小天使小主人所有可能配對，其結果表如下：
 
 table.matches
 angle  master
@@ -74,6 +65,12 @@ angle  master
 李美紅 孫加成
 ====== ======
 
+matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數為
+
+3 * 3 = 9
+
+共 9 筆，由[matches]表可見。
+
 聯集
 ~~~~
 define[union].聯集
@@ -88,7 +85,8 @@ define[union].聯集
 要聯集的兩個表，其表頭必須相等。
 
 例如某日局長要全體男員工及行政科的人必須去搬倉庫公文上車去銷毀，
-則搬公文員工名冊可由聯集表示。
+則搬公文員工名冊可由全體男員工及行政科員工的聯集表示，
+如下述 sql。
 
 code[mover.sql].搬公文員工名冊
 select name 
@@ -100,15 +98,36 @@ from employees e join departments d on e.dep_id = d.id
 where d.name = '行政室'
 ::
 
+交集
+~~~~
+define[intersect].交集
+紀錄 t 屬於 A 交集 B，
+若且唯若 t 屬於 A 且 t 屬於 B。
+
+要交集的兩個表，其表頭必須相等。
+
+因為資訊月局辦理資訊美少女選拔活動，
+條件是本局資訊科的女性同仁，
+則資訊美少女活動候選名單可用女性員工與資訊科員工交集表示，
+其 sql 如下示：
+
+code[e_girl_candidates.sql].資訊美少女活動候選名單
+select name 
+from employees
+where gender = 'F'
+intersect 
+select e.name 
+from employees e join departments d on e.dep_id = d.id
+where d.name = '資訊科'
+::
+
 差集
 ~~~~
-define[minus].差集
+define[except].差集
 紀錄 t 屬於 A 差集 B ，
 若且唯若 t 屬於 A 且 t 不屬於 B。
 
-表 A 與 B 的義集是這些表 A 所有紀錄去除
-且去除與表 B 相同的紀錄，
-可說從表 A 中刪除表 B 中有的資料。
+表 A 與 B 的差集是從表 A 中刪除表 B 中有的資料。
 
 要進行差集的兩個表，其表頭也必須相等。
 

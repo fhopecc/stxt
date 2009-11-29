@@ -69,6 +69,8 @@ def t_HEAD2(t):
     m = t.lexer.lexmatch
     t.value.name = m.group('name')
     t.value.title = m.group('title')
+    if len(t.value.title) < 1:
+        t.value.title = t.value.name
     return t
 
 def t_HEAD3(t):
@@ -136,6 +138,8 @@ def t_table(t):
     t.type = 'TABLEHEAD'
     t.value.name = m.group('name')
     t.value.title = m.group('title')
+    if len(t.value.title) < 1:
+        t.value.title = t.value.name
     t.lexer.block_start = t.lexer.lexpos# + len(m.group(0))
     t.lexer.read_head_sep = False
     t.lexer.table_block_lineno = t.lexer.lineno
@@ -189,6 +193,8 @@ def t_code(t):
     m = t.lexer.lexmatch
     t.value.name = m.group('name')
     t.value.title = m.group('title')
+    if not t.value.title: 
+        t.value.title = t.value.name
     t.lexer.block_start = t.lexer.lexpos# + len(m.group(0))
     t.lexer.block_start_lineno = t.lexer.lineno
     t.lexer.begin('code')

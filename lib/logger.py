@@ -6,7 +6,7 @@ from logging import handlers
 class CP950Formatter(logging.Formatter):
     def format(self, record):
         str = logging.Formatter.format(self, record)
-        return str.decode('utf8').encode('cp950')
+        return str.decode('utf8', 'ignore').encode('cp950', 'ignore')
 
 dblog = os.path.join(os.path.dirname(__file__),'..','db.log')
 logging.basicConfig(level=logging.DEBUG,

@@ -9,7 +9,6 @@ def export_table(name):
     # make doctree
     conn = sqlite3.connect('test.db')
     c = conn.cursor()
-    print stx
     d = stxt_parser.parser.read(stx)
     table = d.find_by_name(name)
 
@@ -19,7 +18,6 @@ def export_table(name):
             l -= 1
             sql = 'insert into %s values(?%s)' % \
             (name, ', ?' * l)
-            print sql
             if row.children[0].type == 'th': continue
             vs = [col.value.encode('utf8') for col in row.children]
             #vs[0] = int(vs[0])
@@ -35,10 +33,16 @@ def create_table(cursor):
         except sqlite3.OperationalError:
             continue
     cursor.execute('CREATE TABLE departments(id integer, name text);')
-    cursor.execute('CREATE TABLE employees(id integer, dep_id integer, \
-                    boss_id integer,name text, gender text, title text);')
-    cursor.execute('CREATE TABLE humans(id integer, name text, sex text, \
-                     birthday text, primary key(id));')
+
+    cursor.execute(
+        '''CREATE TABLE employees(
+               id integer, dep_id integer, boss_id integer,name text, 
+               gender text, title text, salary integer);''')
+
+    cursor.execute(
+        '''CREATE TABLE humans(id integer, name text, sex text,
+                               birthday text, primary key(id));''')
+
     cursor.execute('CREATE TABLE tax_payments(id integer primary key, \
                     payer text, date text, area text, tax text,  \
                     amount integer);')

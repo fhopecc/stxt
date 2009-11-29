@@ -1,5 +1,5 @@
-join
-----
+[join]
+------
 sql 提供的 join 有下紀錄幾種：
 * cross join
 * inner join
@@ -13,14 +13,35 @@ cross join
 code.語法
 t1 cross join t2
 ::
+cross join 即為關連式代數中的積，
 對每個從 t1 和 t2 來的紀錄的組合， 
 生成的資料表將包含這樣一筆紀錄：
 它包含所有 t1 裡面的字串後面跟著所有 t2 裡面的字串。
 如果兩資料表分別有 n 和 m 行，
 連接成的資料表將有 n * m 行。
 
+[matches.alg]對應的 SQL 如下：
+
+code[matches.sql].
+select a.name angle, m.name master
+from angles a cross join masters m
+::
+
 from t1 cross join t2 等效於 from t1, t2。 
+故 [matches.sql] 可改寫成如下：
+
+code[matches_comman.sql].
+select a.name angle, m.name master
+from angles a, masters m
+::
+
 它還等效於 from t1 inner join t2 on true。
+故 [matches.sql] 可改寫成如下：
+
+code[matches_comman.sql].
+select a.name angle, m.name master
+from angles a inner join masters m on true
+::
 
 條件連接(join)
 ~~~~~~~~~~~~~~
@@ -35,7 +56,7 @@ inner 是預設；left，right，和 full 隱含外連接。
 
 on 連接條件
 ~~~~~~~~~~~
-連接條件在on或using子句裡聲明，或者用關鍵字natural隱含地聲明。
+連接條件在 on 或 using子句裡聲明，或者用關鍵字natural隱含地聲明。
 
 連接條件判斷來自兩個源資料表中的那些行是"匹配"的。
 
@@ -44,11 +65,7 @@ on子句是最常見的連接條件的類型：
 如果兩個分別來自t1和t2的紀錄在on資料表達式上運算的結果為真，
 那麼它們就算是匹配的紀錄。
 
-code[emp_boss_list.sql].員工對應主管名單  
-select e1.name, e2.name as boss
-from employees e1 join employees e2 
-     on (e1.boss_id = e2.id)
-::
+如[emp_boss_list.sql]。
 
 using 連接條件
 ~~~~~~~~~~~~~~
@@ -103,6 +120,22 @@ inner join
 
 例見[emp_boss_list.sql]
 
+outer join
+~~~~~~~~~~
+inner join 要兩表內都有同樣的值，那一筆資料才會被選出。
+如果想要某表中每一筆的資料，即使它的值在另一個表中有沒有出現，
+那該怎麼辦呢？這時就需用到 outer join 的指令。
+
+outer join 是作用在兩個表上的運算子，
+其將表分成主表及副表，
+原本相等合併除去所有不滿足合併條件的紀錄，
+而外部合併則保留主表的所有紀錄，
+若沒有副表的紀錄則副表的欄設為 null 值。
+左外部合併運算子其左方表的是主表，
+右方表為副表；
+右外部合併運算子其右方表的是主表，
+左方表為副表。
+
 left outer join
 ~~~~~~~~~~~~~~~
 首先，執行一次內連接。
@@ -132,20 +165,3 @@ full outer join
 該行裡對應 t1 的紀錄用空值補齊。
 
 如果 t1 和 t2 有一個或者都是可以連接的資料表， 那麼所有類型的連接都可以串在一起或嵌套在一起。 您可以在join子句周圍使用圓括弧來控制連接順序， 如果沒有圓括弧，那麼join子句是從左向右嵌套的。
-
-外部合併
-~~~~~~~~
-外部合併是作用在兩個表上的運算子，
-其將表分成主表及副表，
-原本相等合併除去所有不滿足合併條件的紀錄，
-而外部合併則保留主表的所有紀錄，
-若沒有副表的紀錄則副表的欄設為 null 值。
-左外部合併運算子其左方表的是主表，
-右方表為副表；
-右外部合併運算子其右方表的是主表，
-左方表為副表。
-
-之前我們看到的左連接 (left join)，又稱內部連接 (inner join)。
-在這個情況下，要 兩個表內都有同樣的值，那一筆資料才會被選出。
-那如果我們想要紀錄出一個表中每一筆的資料， 無論它的值在另一個表中有沒有出現，
-那該怎麼辦呢？在這個時候，我們就需要用到 sql outer join (外部連接) 的指令。

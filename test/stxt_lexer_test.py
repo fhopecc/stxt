@@ -55,6 +55,7 @@ mkdir -p oradata/ELTUD
         self.assertEqual(12, ol.lineno)
         self.assertEqual('OL', ol.type)
 
+
     def testInclude(self):
         case = r'<d:\stxt\lib\db\sql.stx>'
         lexer.input(case)
@@ -204,6 +205,20 @@ name
         td1 = r1.children[0]
         self.assertEqual('td', td1.type)
         self.assertEqual(u'金叔分', td1.value)
+    def testTABLE_DEFAULT_TITLE(self):
+        case = '''table[angles].
+name
+======
+金叔分
+曹晶蓮
+李美紅
+======
+'''
+        lexer.input(case)     
+        d = lexer.token()
+        self.assertEqual('TABLEHEAD', d.type)
+        self.assertEqual('angles', d.value.name)
+        self.assertEqual('angles', d.value.title)
 
     def testTABLEBLOCK(self):
         case = '''table[name].title

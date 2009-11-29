@@ -5,9 +5,9 @@ from paste.exceptions.errormiddleware import ErrorMiddleware
 
 app = ErrorMiddleware(rest.route, debug=True)
 
-httpd = make_server('', 80, app)
+httpd = make_server('', 8080, app)
 
-print "Serving HTTP on port 80..."
+print "Serving HTTP on port 8080..."
 
 # Respond to requests until process is killed
 httpd.serve_forever()

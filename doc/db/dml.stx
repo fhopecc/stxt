@@ -1,28 +1,10 @@
-[dml]資料操作語言
------------------
-限制
-~~~~
-限制運算以 SQL 表示如[restriction_sql]_，
-在 where 字後面加上條件，
-此 SQL 表示取出位於高雄的供應商。
-
-code.restriction sql
-select * from suppliers
-where city='高雄'
-::
-
-合併
-~~~~
-合併
-
-卡積
-~~~~
-卡積
-
-集合運算子
-~~~~~~~~~~
-集合運算子
-
-摘要
-~~~~
-摘要
+<d:\stxt\doc\db\sql_command.stx>
+<d:\stxt\doc\db\value_expression.stx>
+<d:\stxt\doc\db\select.stx>
+<d:\stxt\doc\db\from.stx>
+<d:\stxt\doc\db\join.stx>
+<d:\stxt\doc\db\where.stx>
+<d:\stxt\doc\db\limit.stx>
+<d:\stxt\doc\db\order_by.stx>
+<d:\stxt\doc\db\advanced_query.stx>
+<d:\stxt\doc\db\sql_aggregator.stx>
