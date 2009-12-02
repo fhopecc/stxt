@@ -1,10 +1,10 @@
 import os
 docs = [r'doc\hltb\inner_audit\98\report.stx', 
-        r'doc\hltb\inner_audit\98\review_minutes.stx', 
-        r'doc\hltb\inner_audit\99\plan.stx', 
-        r'doc\hltb\yrx_draws.stx', 
-        r'doc\hltb\edb_report.stx', 
-        r'doc\hltb\edb_plan.stx'
+#        r'doc\hltb\inner_audit\98\review_minutes.stx', 
+#        r'doc\hltb\yrx_draws.stx', 
+#        r'doc\hltb\edb_report.stx', 
+#        r'doc\hltb\edb_plan.stx', 
+        r'doc\hltb\inner_audit\99\plan.stx'
        ]
 for doc in docs:
     bf = os.path.basename(doc) 

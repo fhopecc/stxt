@@ -149,19 +149,23 @@ count(distinct f1) 為 f1 唯一非空的紀錄數。
 ~~~~~~~~
 類型轉換能將值的資料類型轉換到另外一種資料類型。
 
-code[cast.bnf]
+code[cast.bnf].
 cast ( expression as type )
 ::
 
 若對已知類型的值表示式轉換，
 表示一個執行時類型轉換。 
 
+code[cast.sql].
+select cast('2009-11-11 12:30:33.000' as datetime)
+::
+
 若對於一個值表示式的值對類型而言不存在混淆的情況，
 那麼我們可以省略明確的類型轉換「比如，在給一個資料表字串賦值的時候」；
 
 可以用函數式語法定義一個類型轉換：
 
-code[cast.bnf]
+code[typename.bnf]
 typename ( expression )
 ::
 這只能用於名稱也是有效函數名稱的類型。 

@@ -4,12 +4,14 @@ code[any_some.bnf].any/some 語法
 expression operator any (subquery)
 expression operator some (subquery)
 ::
-expression 若是欄名，代表外查詢每次所傳回的一筆當次紀錄中欄名為 expression 的值，
+expression 若是欄名，
+代表外查詢每次所傳回的一筆當次紀錄中欄名為 expression 的值，
 若是常數則代表該常數。
 
 operator 是一個簡單比較運算子，包含 = 及 <>。
 
-any 右式是一個圓括弧括起來的子查詢，結果必須為單欄表，其欄型態必須和 expression 之型態相同。
+any 右式括弧子查詢，查詢結果必須為單欄表，
+其欄型態必須和 expression 之型態相同。
 
 左式將依 operator 指定比較運算對子查詢的紀錄與 expression 的值逐行計算和比較。
 如果一筆結果為真，則 any 的結果就是真。 

@@ -1,0 +1,112 @@
+[group_by_having]group by 和 having
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+透過 where 的過濾資料表可續用 group by 進行分組，
+然後用 having 過濾分組紀錄表。
+
+code[group_by.bnf].
+select select_list
+	from ...
+	[where ...]
+	group by grouping_column_reference [, grouping_column_reference]...
+::
+
+group by 會依分組欄集將相同分組值的紀錄當成一組，
+並對同組紀錄集作統計。
+分組欄集指定欄順序無任何意義。 
+
+分組後會將分組紀錄統計成一筆紀錄，
+此統計紀錄代表該組所有紀錄。 
+
+=> select * from test1;
+ x | y
+---+---
+ a | 3
+ c | 2
+ b | 5
+ a | 1
+(4 rows)
+
+=> select x from test1 group by x;
+x:
+---
+ a
+ b
+ c
+(3 rows)
+在第二個查詢裡，
+我們不能寫成 select * from test1 group by x，
+因為字串 y 裡沒有哪個值可以和每個組相關聯起來。
+被分組的字串可以在表頭定義中引用是因為它們每個組都有單一的數值。
+
+一般若一個資料表被分了組，那麼沒有在分組中引用的字串都不能引用，除了在聚集表示式中以外。 一個帶聚集表示式的例子是：
+
+=> select x, sum(y) from test1 group by x;
+ x | sum
+---+-----
+ a |   4
+ b |   5
+ c |   2
+(3 rows)
+這裡的 sum 是一個統計函數，
+它在整個組上計算一個數值。
+有關可用的統計函數的更多訊息可以在 section 9.15 中找到。
+
+提示: 沒有聚集表示式的分組實際上計算了一個字串中獨立數值的集合。
+我們也可以用 distinct 子句實現「參閱section 7.3.3」。
+
+這裡是另外一個例子：它計算每種產品的總銷售額。
+「而不是所有產品的總銷售額」。
+
+select pid, p.name, (sum(s.units) * p.price) as sales
+  from products p left join sales s using ( pid )
+  group by pid, p.name, p.price;
+在這個例子裡，字串pid， p.name，和p.price必須在group by子句裡，
+因為它們都在查詢表頭定義裡被引用到。
+「根據產品資料表具體的設置的不同，
+名字和價格可能和產品 id 完全無關，
+因此理論上額外的分組可能是不必的，
+但是這些尚未實現。」 字串s.units不必在group by列資料表裡，
+因為它只是在一個聚集表示式「sum(...)」 裡使用，
+它代資料表一組產品的銷售額。對於每種產品，
+這個查詢都傳回一個該產品的所有銷售額的總和。
+
+在嚴格的 sql 裡，group by只能對源資料表的列進行分組，
+但 postgresql 把這個擴展為也允許group by那些在表頭定義中的字串。
+也允許對值表示式進行分組，而不僅是簡單的字串．
+
+若一個資料表已經用group by子句分了組，
+然後您又只對其中的某些組感興趣，
+那麼就可以用having子句，它很像where子句，
+用於刪除一個分了組的資料表中的一些組。 語法是：
+
+select select_list from ... [where ...] group by ... 
+having boolean_expression
+在 having 子句中的表示式可以引用分組的表示式和未分組的表示式
+「後者必須涉及一個統計函數」。
+
+例子：
+
+=> select x, sum(y) from test1 group by x having sum(y) > 3;
+ x | sum
+---+-----
+ a |   4
+ b |   5
+(2 rows)
+
+=> select x, sum(y) from test1 group by x having x < 'c';
+ x | sum
+---+-----
+ a |   4
+ b |   5
+(2 rows)
+然後是一個更現實的例子：
+
+select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
+    from products p left join sales s using (product_id)
+    where s.date > current_date - interval '4 weeks'
+    group by product_id, p.name, p.price, p.cost
+    having sum(p.price * s.units) > 5000;
+在上例裡，where子句用於那些非分組的字串選擇資料行。 
+「表示式只是對那些最近四周發生的銷售為真」。
+而having子句選擇那些單價超過 5000 的組的行。
+請注意統計函數不需要在查詢中的所有地方都一樣。
