@@ -14,11 +14,11 @@ tokens = [
           'HEAD3', 
           'CODEHEAD', 
           'CODEBLOCK', 
+          'THEOREM', 
           'TABLEHEAD', 
           'TABLEBLOCK', 
           'IMAGEHEAD', 
           'DEFINE', 
-          'THEOREM', 
           'PROOF', 
           'QUESTION', 
           'ANSWER', 
@@ -295,3 +295,8 @@ def t_error(t):
                 str(ord(t.value[0]))))
     sys.exit(1)
 lexer = lex.lex()
+#if __name__ == '__main__':
+#    case = 'theorem[name].this is a theorem title'
+#    lexer.input(case)
+#    tok = lexer.token()
+#    print tok

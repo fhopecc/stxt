@@ -3,6 +3,8 @@ import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.stxt_lexer import lexer
 class UnitTest(unittest.TestCase):
+
+
     def testCODEBLOCK(self):
         case = '''code[dep_id_not_unique.bnf].非單人科室員工名單
 select name 
@@ -55,7 +57,6 @@ mkdir -p oradata/ELTUD
         self.assertEqual(12, ol.lineno)
         self.assertEqual('OL', ol.type)
 
-
     def testInclude(self):
         case = r'<d:\stxt\lib\db\sql.stx>'
         lexer.input(case)
@@ -98,19 +99,11 @@ mkdir -p oradata/ELTUD
         tok = lexer.token()
         self.assertEqual(tok.type, 'ANSWER')
 
-    def testTHEOREM(self):
-        case = 'theorem[name].this is a theorem title'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual('THEOREM', tok.type,)
-        self.assertEqual(tok.value.name, 'name')
-        self.assertEqual(tok.value.title, 'this is a theorem title')
-
     def testDEFINE(self):
         case = 'define[name].this is a define title'
         lexer.input(case)
         tok = lexer.token()
-        self.assertEqual('DEFINE', tok.type,)
+        self.assertEqual('DEFINE', tok.type)
         self.assertEqual(tok.value.name, 'name')
         self.assertEqual(tok.value.title, 'this is a define title')
 
@@ -139,34 +132,34 @@ mkdir -p oradata/ELTUD
          第五標準式
 ======== ============
 '''
-        lexer.input(case)     
-        th = lexer.token()
-        self.assertEqual(1, th.lineno)
-        self.assertEqual(2, th.lexer.lineno)
-        self.assertEqual('TABLEHEAD', th.type)
-        self.assertEqual(None, th.value.name)
-        self.assertEqual('關聯式模型架構', th.value.title)
+#        lexer.input(case)     
+#        th = lexer.token()
+#        self.assertEqual(1, th.lineno)
+#        self.assertEqual(2, th.lexer.lineno)
+#        self.assertEqual('TABLEHEAD', th.type)
+#        self.assertEqual(None, th.value.name)
+#        self.assertEqual('關聯式模型架構', th.value.title)
 
-        tb = lexer.token()
-        self.assertEqual('TABLEBLOCK', tb.type)
-        self.assertEqual(2, tb.lineno)
-        self.assertEqual(17, tb.lexer.lineno)
-        # len(case) - 1, the 1 specified eof char
-        self.assertEqual(len(case) - 1, tb.lexer.lexpos)
-
-        t  = tb.value
-        self.assertEqual('table', t.type)
-        header = t.children[0]
-        self.assertEqual('tr', header.type)
-        th1 = header.children[0]
-        self.assertEqual('th', th1.type)
-        self.assertEqual(u'物件', th1.value)
-
-        r1 = t.children[1]
-        self.assertEqual('tr', r1.type)
-        td1 = r1.children[0]
-        self.assertEqual('td', td1.type)
-        self.assertEqual(u'值', td1.value)
+#        tb = lexer.token()
+#        self.assertEqual('TABLEBLOCK', tb.type)
+#        self.assertEqual(2, tb.lineno)
+#        self.assertEqual(17, tb.lexer.lineno)
+#        # len(case) - 1, the 1 specified eof char
+#        self.assertEqual(len(case) - 1, tb.lexer.lexpos)
+#
+#        t  = tb.value
+#        self.assertEqual('table', t.type)
+#        header = t.children[0]
+#        self.assertEqual('tr', header.type)
+#        th1 = header.children[0]
+#        self.assertEqual('th', th1.type)
+#        self.assertEqual(u'物件', th1.value)
+#
+#        r1 = t.children[1]
+#        self.assertEqual('tr', r1.type)
+#        td1 = r1.children[0]
+#        self.assertEqual('td', td1.type)
+#        self.assertEqual(u'值', td1.value)
 
     def testSingleColumnTable(self):
         case = '''table[angles].angles
@@ -252,6 +245,20 @@ t4               B.update(p)
         self.assertEqual('t1', td1.value)
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
+
+#def testTABLEBLOCK(self):
+#        case = 'table[name]'
+#        lexer.input(case)     
+##        s = lexer.token()
+#        self.assertEqual('INSERT_ELEMENT', s.type)
+
+    def testTHEOREM(self):
+        case = 'theorem[name].this is a theorem title'
+        lexer.input(case)
+        tok = lexer.token()
+        self.assertEqual('THEOREM', tok.type)
+        self.assertEqual(tok.value.name, 'name')
+        self.assertEqual(tok.value.title, 'this is a theorem title')
 
 if __name__ == '__main__':
     unittest.main()
