@@ -1,5 +1,5 @@
 [group_by_having]group by 和 having
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 透過 where 的過濾資料表可續用 group by 進行分組，
 然後用 having 過濾分組紀錄表。
 
@@ -17,22 +17,10 @@ group by 會依分組欄集將相同分組值的紀錄當成一組，
 分組後會將分組紀錄統計成一筆紀錄，
 此統計紀錄代表該組所有紀錄。 
 
-=> select * from test1;
- x | y
----+---
- a | 3
- c | 2
- b | 5
- a | 1
-(4 rows)
+select * from test1;
 
-=> select x from test1 group by x;
-x:
----
- a
- b
- c
-(3 rows)
+select x from test1 group by x;
+
 在第二個查詢裡，
 我們不能寫成 select * from test1 group by x，
 因為字串 y 裡沒有哪個值可以和每個組相關聯起來。
@@ -40,13 +28,8 @@ x:
 
 一般若一個資料表被分了組，那麼沒有在分組中引用的字串都不能引用，除了在聚集表示式中以外。 一個帶聚集表示式的例子是：
 
-=> select x, sum(y) from test1 group by x;
- x | sum
----+-----
- a |   4
- b |   5
- c |   2
-(3 rows)
+select x, sum(y) from test1 group by x;
+
 這裡的 sum 是一個統計函數，
 它在整個組上計算一個數值。
 有關可用的統計函數的更多訊息可以在 section 9.15 中找到。
@@ -60,6 +43,7 @@ x:
 select pid, p.name, (sum(s.units) * p.price) as sales
   from products p left join sales s using ( pid )
   group by pid, p.name, p.price;
+
 在這個例子裡，字串pid， p.name，和p.price必須在group by子句裡，
 因為它們都在查詢表頭定義裡被引用到。
 「根據產品資料表具體的設置的不同，
@@ -86,19 +70,9 @@ having boolean_expression
 
 例子：
 
-=> select x, sum(y) from test1 group by x having sum(y) > 3;
- x | sum
----+-----
- a |   4
- b |   5
-(2 rows)
+select x, sum(y) from test1 group by x having sum(y) > 3;
 
-=> select x, sum(y) from test1 group by x having x < 'c';
- x | sum
----+-----
- a |   4
- b |   5
-(2 rows)
+select x, sum(y) from test1 group by x having x < 'c';
 然後是一個更現實的例子：
 
 select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
@@ -106,7 +80,8 @@ select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
     where s.date > current_date - interval '4 weeks'
     group by product_id, p.name, p.price, p.cost
     having sum(p.price * s.units) > 5000;
+
 在上例裡，where子句用於那些非分組的字串選擇資料行。 
 「表示式只是對那些最近四周發生的銷售為真」。
-而having子句選擇那些單價超過 5000 的組的行。
+而 having 子句選擇那些單價超過 5000 的組的行。
 請注意統計函數不需要在查詢中的所有地方都一樣。

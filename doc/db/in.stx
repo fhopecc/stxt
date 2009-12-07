@@ -1,5 +1,5 @@
-[in]in 謂詞
------------
+[in]
+----
 code[in.bnf].in 語法
 expression [not] in (subquery)
 ::
