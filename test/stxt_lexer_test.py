@@ -2,8 +2,10 @@
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.stxt_lexer import lexer
-class UnitTest(unittest.TestCase):
 
+class UnitTest(unittest.TestCase):
+    def setUp(self):
+        lexer.begin('INITIAL')
 
     def testCODEBLOCK(self):
         case = '''code[dep_id_not_unique.bnf].非單人科室員工名單
@@ -25,7 +27,7 @@ where dep_id in (select dep_id
         self.assertEqual(2, cb.lineno)
         self.assertEqual('CODEBLOCK', cb.type)
 
-        case2 = '''code.建立正式機資料庫相關目錄
+        case = '''code.建立正式機資料庫相關目錄
 cd /data/eltdb/admin
 mkdir ELTUD
 cd ELTUD
@@ -42,13 +44,13 @@ code.test
 mkdir -p oradata/ELTUD
 ::
 '''
-        lexer.input(case2)
+        lexer.input(case)
         ch = lexer.token()
         self.assertEqual(1, ch.lineno)
         self.assertEqual('CODEHEAD', ch.type)
         self.assertEqual(None, ch.value.name)
         self.assertEqual('建立正式機資料庫相關目錄', 
-                ch.value.title)
+                         ch.value.title)
         cb = lexer.token()
         self.assertEqual(2, cb.lineno)
         self.assertEqual('CODEBLOCK', cb.type)
@@ -58,6 +60,7 @@ mkdir -p oradata/ELTUD
         self.assertEqual('OL', ol.type)
 
     def testInclude(self):
+        self.assertEqual('INITIAL', lexer.lexstate)
         case = r'<d:\stxt\lib\db\sql.stx>'
         lexer.input(case)
         self.assertRaises(IOError, lexer.token)
@@ -132,34 +135,35 @@ mkdir -p oradata/ELTUD
          第五標準式
 ======== ============
 '''
-#        lexer.input(case)     
-#        th = lexer.token()
-#        self.assertEqual(1, th.lineno)
-#        self.assertEqual(2, th.lexer.lineno)
-#        self.assertEqual('TABLEHEAD', th.type)
-#        self.assertEqual(None, th.value.name)
-#        self.assertEqual('關聯式模型架構', th.value.title)
+        self.assertEqual('INITIAL', lexer.lexstate)
+        lexer.input(case)     
+        th = lexer.token()
+        self.assertEqual('table', lexer.lexstate)
+        self.assertEqual(2, th.lexer.lineno)
+        self.assertEqual('TABLEHEAD', th.type)
+        self.assertEqual(None, th.value.name)
+        self.assertEqual('關聯式模型架構', th.value.title)
 
-#        tb = lexer.token()
-#        self.assertEqual('TABLEBLOCK', tb.type)
-#        self.assertEqual(2, tb.lineno)
-#        self.assertEqual(17, tb.lexer.lineno)
-#        # len(case) - 1, the 1 specified eof char
-#        self.assertEqual(len(case) - 1, tb.lexer.lexpos)
-#
-#        t  = tb.value
-#        self.assertEqual('table', t.type)
-#        header = t.children[0]
-#        self.assertEqual('tr', header.type)
-#        th1 = header.children[0]
-#        self.assertEqual('th', th1.type)
-#        self.assertEqual(u'物件', th1.value)
-#
-#        r1 = t.children[1]
-#        self.assertEqual('tr', r1.type)
-#        td1 = r1.children[0]
-#        self.assertEqual('td', td1.type)
-#        self.assertEqual(u'值', td1.value)
+        tb = lexer.token()
+        self.assertEqual('TABLEBLOCK', tb.type)
+        self.assertEqual(2, tb.lineno)
+        self.assertEqual(17, tb.lexer.lineno)
+        # len(case) - 1, the 1 specified eof char
+        self.assertEqual(len(case) - 1, tb.lexer.lexpos)
+
+        t  = tb.value
+        self.assertEqual('table', t.type)
+        header = t.children[0]
+        self.assertEqual('tr', header.type)
+        th1 = header.children[0]
+        self.assertEqual('th', th1.type)
+        self.assertEqual(u'物件', th1.value)
+
+        r1 = t.children[1]
+        self.assertEqual('tr', r1.type)
+        td1 = r1.children[0]
+        self.assertEqual('td', td1.type)
+        self.assertEqual(u'值', td1.value)
 
     def testSingleColumnTable(self):
         case = '''table[angles].angles
@@ -198,6 +202,7 @@ name
         td1 = r1.children[0]
         self.assertEqual('td', td1.type)
         self.assertEqual(u'金叔分', td1.value)
+
     def testTABLE_DEFAULT_TITLE(self):
         case = '''table[angles].
 name
@@ -209,6 +214,7 @@ name
 '''
         lexer.input(case)     
         d = lexer.token()
+        self.assertEqual('table', lexer.lexstate)
         self.assertEqual('TABLEHEAD', d.type)
         self.assertEqual('angles', d.value.name)
         self.assertEqual('angles', d.value.title)
@@ -246,7 +252,7 @@ t4               B.update(p)
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
 
-#def testTABLEBLOCK(self):
+#    def testTABLEBLOCK(self):
 #        case = 'table[name]'
 #        lexer.input(case)     
 ##        s = lexer.token()
@@ -262,3 +268,13 @@ t4               B.update(p)
 
 if __name__ == '__main__':
     unittest.main()
+
+#tests = unittest.TestSuite()
+#    tests.addTest(UnitTest("testTHEOREM"))
+#    tests.addTest(UnitTest("testTABLEBLOCK"))
+#    tests.addTest(UnitTest("testTABLE_DEFAULT_TITLE"))
+#    tests.addTest(UnitTest("testCODEBLOCK"))
+#    tests.addTest(UnitTest("testInclude"))
+#    tests.addTest(UnitTest("testPROOF"))
+#    runner = unittest.TextTestRunner()
+#    runner.run(tests)

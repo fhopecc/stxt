@@ -10,6 +10,9 @@ sql 提供的 join 有下紀錄幾種：
 
 cross join
 ~~~~~~~~~~
+若在 from 子句中有多個資料表， 
+則資料表會依序 cross join 形成一個衍生資料表，
+
 code.語法
 t1 cross join t2
 ::

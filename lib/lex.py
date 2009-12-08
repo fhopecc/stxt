@@ -51,11 +51,11 @@ except AttributeError:
 # are for Python 2/3 compatibility.
 
 if sys.version_info[0] < 3:
-  def func_code(f):
-    return f.func_code
+    def func_code(f):
+        return f.func_code
 else:
-  def func_code(f):
-    return f.__code__
+    def func_code(f):
+        return f.__code__
 
 # This regular expression is used to match valid token names
 _is_identifier = re.compile(r'^[a-zA-Z0-9_]+$')
@@ -73,8 +73,6 @@ def find_column(input, lexpos):
     if last_cr < 0:last_cr = 0
     column = (lexpos - last_cr) + 1
     return column
-
-
 
 # Token class.  This class is used to represent the tokens produced.
 class LexToken(object):

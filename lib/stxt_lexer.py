@@ -9,6 +9,7 @@ states = (
 )
 
 tokens = [
+          'INSERT', 
           'HEAD1', 
           'HEAD2', 
           'HEAD3', 
@@ -39,6 +40,10 @@ def find_column(input,token):
 	last_cr = 0
     column = (token.lexpos - last_cr) + 1
     return column
+
+def t_INSERT(t):
+    r'^(table|image)[(?P<name>[^\]]*)](\n|$)'
+    t.lexer.lineno += t.lexeme.count('\n')
 
 def t_INCLUDE(t):
     r'^<(?P<file>.*)>(\n|$)'
@@ -233,6 +238,7 @@ def t_OL(t):
     t.value = t.lexer.lexmatch.group('content')
     t.value = DocTreeNode('olistitem', t.value)
     return t
+
 def t_LI(t):
     r'\* (?P<content>.*)\n'
     t.lexer.lineno += t.lexeme.count('\n')
@@ -294,7 +300,7 @@ def t_error(t):
                 find_column(t.lexer.lexdata, t), t.value[0], \
                 str(ord(t.value[0]))))
     sys.exit(1)
-lexer = lex.lex()
+lexer = lex.lex(debug=1)
 #if __name__ == '__main__':
 #    case = 'theorem[name].this is a theorem title'
 #    lexer.input(case)
