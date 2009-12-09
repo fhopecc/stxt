@@ -1,6 +1,7 @@
 [join]
 ------
-sql 提供的 join 有下紀錄幾種：
+資料表引用可串接不同的資料表形成一個暫時的衍生資料表，
+串接共分成以下幾種：
 * cross join
 * inner join
 * natural join
@@ -10,18 +11,14 @@ sql 提供的 join 有下紀錄幾種：
 
 cross join
 ~~~~~~~~~~
-若在 from 子句中有多個資料表， 
-則資料表會依序 cross join 形成一個衍生資料表，
-
 code.語法
 t1 cross join t2
 ::
-cross join 即為關連式代數中的積，
-對每個從 t1 和 t2 來的紀錄的組合， 
-生成的資料表將包含這樣一筆紀錄：
-它包含所有 t1 裡面的字串後面跟著所有 t2 裡面的字串。
-如果兩資料表分別有 n 和 m 行，
-連接成的資料表將有 n * m 行。
+cross join 即為關連式代數的積，
+將 t1 和 t2 組合成新資料表，
+新資料表中每筆紀錄包含 t1 所有欄位於後加上 t2 所有欄位。
+
+如果兩資料表分別有 n 和 m 筆紀錄，連接後資料表將有 n * m 筆紀錄。
 
 [matches.alg]對應的 SQL 如下：
 
@@ -30,7 +27,20 @@ select a.name angle, m.name master
 from angles a cross join masters m
 ::
 
-from t1 cross join t2 等效於 from t1, t2。 
+code[matches.bnf].
+from t1[, t2, t3]
+::
+
+若資料表引用以逗號分隔字串定義多個資料表， 
+則資料表會依序以 cross join 形成一個衍生資料表，
+所以下式：
+
+from t1 cross join t2 
+
+等效於下式：
+
+from t1, t2
+
 故 [matches.sql] 可改寫成如下：
 
 code[matches_comman.sql].
@@ -38,7 +48,10 @@ select a.name angle, m.name master
 from angles a, masters m
 ::
 
-它還等效於 from t1 inner join t2 on true。
+它還等效於下式條件連接：
+
+from t1 inner join t2 on true。
+
 故 [matches.sql] 可改寫成如下：
 
 code[matches_comman.sql].
@@ -49,8 +62,7 @@ from angles a inner join masters m on true
 條件連接(join)
 ~~~~~~~~~~~~~~
 code.語法
-t1 { [inner] | { left | right | full } [outer] } join t2 on boolean_expression
-t1 { [inner] | { left | right | full } [outer] } join t2 using ( join column list )
+t1 {[inner]|{ left | right | full }[outer]} join t2 using ( join column list )
 t1 natural { [inner] | { left | right | full } [outer] } join t2
 ::
 
@@ -59,6 +71,9 @@ inner 是預設；left，right，和 full 隱含外連接。
 
 on 連接條件
 ~~~~~~~~~~~
+code.語法
+t1 {[inner]|{ left | right | full }[outer]} join t2 on boolean_expression
+::
 連接條件在 on 或 using子句裡聲明，或者用關鍵字natural隱含地聲明。
 
 連接條件判斷來自兩個源資料表中的那些行是"匹配"的。
