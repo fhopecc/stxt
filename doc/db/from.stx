@@ -1,5 +1,5 @@
-[from]
-------
+[from]from
+----------
 from 定義查詢所要引用並作處理的的資料表。
 
 code[from.bnf]
@@ -45,7 +45,6 @@ select e1.name, e2.name as boss
 from employees e1 join employees e2 
      on (e1.boss_id = e2.id)
 ::
-
 
 別名覆蓋原名
 ~~~~~~~~~~~~

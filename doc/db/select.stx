@@ -41,7 +41,7 @@ from table_expression
 此 sql 表示員工表取出所有員工名稱組成新的表。
 
 表名引用
---------
+~~~~~~~~
 code.select 語法
 select t1.c1, t2.c2, ...
 from table_expression
