@@ -46,6 +46,9 @@ from employees e1 join employees e2
      on (e1.boss_id = e2.id)
 ::
 
+
+別名覆蓋原名
+~~~~~~~~~~~~
 別名成為其原資料表引用的新名稱，
 且不再能用該原資料表引用名去引用它了。
 因此下式是不合法的 sql 語法。
@@ -67,7 +70,8 @@ code[alias_cover_outer.sql].
 select e.name
 from employees e natural join angles as a
 ::
-是合法 sql，但是
+
+是合法 sql，但是下式：
 
 code[alias_cover_outer.sql].
 select e.name

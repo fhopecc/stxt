@@ -1,676 +1,272 @@
-關聯式模型
-==========
-資料庫的模型層次
+查詢運算
+========
+select
+--------
+從資料庫中檢索資料的過程或命令稱為查詢。 
+主要是使用 select 命令來定義查詢，
+select 命令建立一個暫時虛擬表。
+
+定義顯示表頭
+------------
+code.select 語法
+select *
+from table_expression
+::
+最簡單表頭定義的是 *，
+表頭定義中 * 意指表頭為代表 from 資料表表示式所有欄。
+表頭定義也可選擇可用欄子集或者在檢索它們之前對欄值進行計算；
+
+選出員工檔全部欄
 ----------------
-根據不同的應用需求，資料庫模型通常分成三層模型。
-# 外部層
-# 概念層
-# 內部層
-
-外部層
-------
-此層模型要能滿足使用者執行業務上所必要的功能，
-通常是指使用者可以看到的系統部份，
-沒有一定形式的資料表示及操作介介面。
-
-概念層
-------
-此層模型需能讓資料庫管理師以一致的方法定義、
-查詢、插入、更新及刪除資料庫儲存的資料，
-目前主流模型是關連式模型，
-以表為資料表示形式及操作介面，
-資料庫管理師不用去適應其它形式的介面。
-
-內部層
-------
-主要負責將資料永久的保存在硬體上，
-沒有一定形式的資料表示及操作介介面。
-
-此層模型要能處理下列問題
-# 那些資料需要加上索引，增進擷取效率。
-# 要採用何種內部儲存技術：B+-Tree 或雜湊式的儲存方式？
-# 在磁碟上如何將資料叢聚在一起。
-# 不考慮與裝置有關的存取細節，如：
-  磁碟機有幾軌，大小為何，如何劃分
-
-關聯式模型
-----------
-關聯式模型包含三個主要項目：
-# 表
-# 完整性
-# 運算子
-
-四則運算的比喻
---------------
-table.關聯式模型 vs. 四則運算
-關聯式模型 四則運算
-========== =======================
-表         數字
-運算子     加減乘除
-完整性     除法不可以除以 0 的限制
-========== =======================
-
-表
---
-關聯式模型中操作資料的基本元素為表，
-表可視為一組紀錄的集合。
-
-table[humans].humans
-id name   sex birthday
-== ====== === ========
- 1 陳水扁   M 19501012  
- 2 施明德   M 19410115
- 3 呂秀蓮   F 19440606
- 4 周美青   F 19521130
-== ====== === ========
-
-值
---
-值是關聯式模型表達真實世界的最小描述單位，
-用來描述紀錄的某個屬性。
-
-如「陳水扁」是一個值，
-用來描述 humans 第一筆紀錄的 name 欄，
-表示真實世界此人的姓名。
-
-常數
-----
-用來表示某項值的符號，
-且此符號永遠只表示某項值。
-
-如「1」是一個常數，在模型裡永遠表示數值 1 。
-
-如「陳水扁」是一個常數，在模型裡永遠表示字串值「陳水扁」。
-
-型態
-----
-型態為一群值的集合，可用來定義表中某欄所允許的可能值，
-所以表中同一欄具有同型態的值。
-
-性別型態包含兩個值，字元 'M' 及 'F'，
-分別表示男性及女性，
-對應到人的性別只有男女兩種的事實。
-
-如 humans 中欄 sex 被性別型態限制，值僅能為字元 'M' 或 'F'。
-
-相同型態的物件必需可以比較。
-
-欄
---
-欄(column)具有兩個屬性，欄名及型態，
-
-紀錄為字典，而欄名視為鍵，可存取紀錄的某一部份值。
-
-表頭
-----
-表頭為有限的欄集合，用來定義表的紀錄可分成幾欄，
-及每欄所允許的可能值，又稱為綱要(Schema)。
-
-如 humans 的表頭可以下面的欄集合表示：
-
-(id, name, sex, birthday)
-
-紀錄
-----
-紀錄(record)是表中的一列，
-表示一項事實。
-每一筆紀錄又可分為多個欄，
-每個欄具有一個值，
-用來描述紀錄的某個屬性。
-
-如表 humans 用來記錄許多自然人，
-每筆紀錄具有 4 欄為(id, name, sex, birthday)
-分別用來描述自然人的識別碼、姓名、性別及生日。
-
-紀錄可視為由以欄為鍵值的字典，
-令 t1 表示第 1 筆紀錄，
-則 t1(id) 則會查出數值 1，
-t1(name) 則會查出字串值「陳水扁」。
-
-表限制
-------
-表具有以下的特性：
-# 第一標準式：值必須是單元，無法再分割成其它單元值。
-# 型態完整性：同一欄的值要有相同的類型。
-# 表不可有重複欄名。
-# 欄在表中的次序沒有特定的意義。
-# 紀錄在表中的次序沒有特定的意義。
-# 表不可以有重複紀錄
-
-第一標準式
-----------
-值必須滿足一種完整性，就是第一標準式，
-限制表所有的值必須為單元值，不可是複合值。
-
-單元值意指無法把它分解成其它值。
-
-第一標準式(2)
--------------
-table.departments
-id name   boss   member
-== ====== ====== ==============================
- 1 資訊科 廖美慧 廖美慧, 陳文靈, 郭晶佑, 金叔分
- 2 行政科 吳美央 吳美央, 賴力密, 賴怡君, 洪慧貞
-== ====== ====== ==============================
-
-表 departments 用來紀錄真實世界的科室，
-其欄 id, name, boss 都為單元值，
-分別描述科室的識別碼、名稱及科長。
-
-但表示科室成員的 member 欄中不是單元值，
-像是資訊室的「廖美慧, 陳文靈, 郭晶佑, 金叔分」字串，
-可以再分解成「廖美慧」、「陳文靈」、「郭晶佑」及「金叔分」等四個值，
-這就不是單元值。
-
-第一標準式(3)
--------------
-由於關聯式模型最小操作單位是表，
-所以無法以此模型(SQL)來操作複合值，
-必須用其它語言來操作。
-
-當郭晶佑退休時，要用什麼操作表示呢？
-
-第一標準式(4)
--------------
-code.update
-update departments 
-set member = '廖美慧, 陳文靈, 金叔分'
-where name = '資訊科'
-::
-
-如上述 SQL 必須使用 update 指令來將 member 的字串改成無「郭晶佑」的字串，
-
-而無法以 SQL 的 delete 指令表示「郭晶佑」退休的事實。
-
-第一標準式(5)
--------------
-table[1NF_departments].departments
-id name   boss   member
-== ====== ====== ======
- 1 資訊科 廖美慧 廖美慧
- 2 資訊科 廖美慧 陳文靈
- 3 資訊科 廖美慧 郭晶佑
- 4 資訊科 廖美慧 金叔分
- 5 行政科 吳美央 賴力密
- 6 行政科 吳美央 賴怡君
- 7 行政科 吳美央 洪慧貞
- 8 行政科 吳美央 吳美央 
-== ====== ====== ======
-
-若我們將 member 作單值化後成為上表，
-就可以下述操作： 
-
-code.delete
-delete from departments where name = '郭晶佑'
-::
-
-表示「郭晶佑」退休的事實。
-此指令是不是比較直覺。
-
-超鍵
-----
-超鍵(Superkeys)是表中單欄或一組欄的集合，
-超鍵需要滿足唯一性(Uniqueness)，在表中絕不會有 2 列擁有相同值，
-只需透過超鍵的識別，就可以在表存取指定的值組。
-
-code.超鍵識別
-select * from humans
-where id   = 1
-and   name = '陳水扁'
-and   sex  = 'M'
-and   birthday = '19501012'
-::
-
-如上述 sql，只會得到一筆紀錄，
-因為欄集(id, name, sex, birthday)是表 humans 的超鍵，
-給所有超鍵條件，只會得到零或一筆紀錄。
-
-候選鍵
-------
-在每個表至少擁有一個候選鍵(Candidate Keys)，
-候選鍵是一個超鍵，不只滿足超鍵的唯一性，
-還需要滿足最小性(Minimality)，最小欄數的超鍵，
-在超鍵中沒有一個欄可以刪除，
-否則將違反唯一性。
-表的候選鍵需要同時滿足唯一性和最小性，簡單的說，
-候選鍵是最小欄數的超鍵，所以單一欄的超鍵一定是候選鍵。
-
-在 humans 中，(name, sex)是超鍵，
-但並非候選鍵，因為拿掉 sex，name 一樣是超鍵，
-因為 name 只有一欄，所以 name 是候選鍵。
-
-主鍵
-----
-主鍵(Primary Key)是表各候選鍵中的其中之一，
-而且只有一個，它是用來唯一定址表中的一筆紀錄。
-
-主鍵就扮演身份證號碼的角色，身份證用來代表一個人，
-主鍵代表一筆紀錄。
-
-這是一個經濟代表值，
-因為若用一個人的出生年月日、姓名及性別，
-也可代表一個人，但不如身份證號碼簡單。
-
-主鍵選擇原則
-------------
-在眾多候選鍵中如何挑選主鍵，選擇原則如下：
-
-絕對不是空值(實體完整性)：
-  候選鍵的欄值不能是空值，
-  如果是複合鍵，所有欄都保證不會是空值。
-
-永遠不會改變(Never Change)：
-  候選鍵的欄值永遠不會改變。
-
-本身不是識別值(Nonidentifying Value)：
-  候選鍵的欄值本身沒有其他意義，與原本資料沒有關係的欄，
-  通常是人造欄。
-
-簡短且簡單的值(Brevity and Simplicity)：
-  儘可能選擇單一欄的候選鍵。
-
-humans 的主鍵
--------------
-humans 的候選鍵如下：
-# (id)
-# (name)
-# (birthday)
-
-但最適合作主鍵的應該是 id。
-name 及 birthday 本身都具有意義。
-
-其它
-----
-替代鍵
-  在候選鍵中不是主鍵的其他候選鍵稱為替代鍵(Alternate Keys)，
-  因為這些是可以用來替代主鍵的侯選鍵。
-組合鍵
-  主鍵可以包含一或多個欄。
-  當主鍵包含多個欄時，稱為組合鍵(Composite Key)。
-
-  稅務資料庫的管理代碼就是組合鍵。
-鍵限制
-  鍵限制規定表至少要有一個主鍵。
-實體完整性限制
-  主鍵不可為空值，因為一個實體至少須滿足能與其它實體區別的限制。
-
-候選鍵
-------
-昨日奕云問我問題。
-
-關於一個房屋稅主檔，給定身份證，
-產出姓名及坐落作低收入戶驗證用。
-
-但錯了。
-
-發現了原來中文名地的候選鍵不止一個。
-
-後來玟玲解決這個問題(因為它知道怎麼 JRC 的候選鍵)。
-
-讓我想到
-
-# 如何找出超鍵
-# 業務科給的外檔如何應用
-
-再論超鍵條件
-------------
-向上述找出說明檔，必須用到超鍵條件
-
-給所有超鍵條件，只會得到零或一筆紀錄。
-
-如何找出超鍵
-------------
-# 問該系統負責人
-# TOAD 看看是否有定義 PK
-# TOAD 看看是否有定義成 UNIQUE 的欄位
-# 再不然自已試試看那些欄位作條件，只會得到零或一筆紀錄。
-
-業務科給的外檔如何應用
-----------------------
-# 明年開個 python 程式語言的課程(王長河)，
-  你們就可以如長河一樣用程式語言作這樣的事。
-
-# 你們把業務科的外檔轉成 csv ，
-  再用一支公用程式轉到正式機應用。
-
-外鍵
-----
-外鍵(Foreign Keys)是表的單一欄或一組欄的集合，
-它的值參考其他表的主鍵，扮演連結表的膠水功能，
-
-外鍵與參考主鍵的欄數必須相等，
-參考主鍵中的主鍵如果是單一欄，外鍵就是單一欄，
-參考主鍵是組合鍵，外鍵也必須是組合鍵。
-
-外鍵和參考主鍵的型態必須相同，但欄名可以不同，
-
-外鍵在表內不一定是主鍵。
-
-外鍵若參考同一個表的主鍵，稱為遞迴關係。
-
-外鍵可以是空值。
-
-員工隸屬關係
-------------
-像是員工隸屬那個科室的關係便可用外鍵表示。
-
-table.departments
-id name   
-== ======
- 1 資訊科 
- 2 行政科 
-== ======
-
-表 departments 用來紀錄真實世界的科室，
-欄 id, name 分別描述科室的識別碼及名稱。
-
-員工隸屬關係(2)
----------------
-table[employees].employees
-id dep_id boss_id name
-== ====== ======= ======
- 1      1       8 廖美慧 
- 2      1       1 陳文靈
- 3      1       1 金叔分
- 4      2       8 吳美央
- 5      2       4 賴力密 
- 6      2       4 賴怡君 
- 7      2       4 洪慧貞
- 8      3    null 林全碌
-== ====== ======= ======
-
-表 employees 表來描述員工，
-欄 id, name 分別描述科室的識別碼及名稱。
-而外鍵 dep_id 表示員工隸屬那個科室的關係。
-
-如 employees 第一筆紀錄中，員工名稱為「廖美慧」，
-其 dep_id 為 1，可由此知其部門紀錄的 id 為 1。
-
-查看 departments 中 id 為 1 的科室名稱為「資訊室」，
-由此可知廖美慧隸屬於資訊室。
-
-遞迴關係
---------
-員工之間的主管關係也可用外鍵表示，
-這是一個遞迴關係，因為員工的主管也是員工。
-
-外鍵 boss_id 表示員工主管，
-如 employees 第一筆紀錄中，員工名稱為「廖美慧」，
-其 boss_id 為 8，可由此知其主管紀錄的 id 為 8。
-查看同一表中 id 為 8 的員工名稱為「林全碌」，
-由此可知廖美慧主管為林全碌。
-
-參考完整性限制
---------------
-所有表的外鍵，其所參考表的主鍵必須存在，
-否則為空值，表示未參考任何實體。
-
-破壞參考完整性操作
-------------------
-孤兒紀錄
-  一筆找不到父資料表的子資料
-
-會產生孤兒紀錄的操作稱為破壞參考完整性操作，
-如下有四種：
-# 父表修改主鍵內容
-# 父表刪除紀錄
-# 子表插入之紀錄外鍵無對應主鍵 
-# 子表更新之外鍵無對應主鍵     
-
-參考完整性實作
---------------
-實作參考完整性最簡單的方法是禁止破壞參考完整性操作，
-但最沒有彈性。
-
-另一種方式是，當父表修改主鍵內容或刪除紀錄後，
-對子表關聯紀錄作出彌補操作，以維護參考完整性規則。
-
-table.參考完整性彌補操作
-破壞參考完整性操作       彌補操作
-======================== ==========================
-父表更新之紀錄有外鍵參考 連帶更新子表關聯紀錄
-                         子表關聯紀錄外鍵設為空值
-                         子表關聯紀錄外鍵設為預設值
-父表刪除之紀錄有外鍵參考 連帶刪除子表關聯紀錄
-                         子表關聯紀錄外鍵設為空值
-                         子表關聯紀錄外鍵設為預設值
-======================== ==========================
-
-習題
-----
-# 請寫出自已系統主檔的表頭？
-# 請寫出自已系統主檔的每欄的型態(邏輯上的)？
-# 請找出自已系統主檔的主鍵，並說明其是否為組合鍵？
-# 你認為身份證號碼適合作為自然人的主鍵嗎？
-# 請找出自已系統中一個具有外鍵的表？
-# 請找出自已系統具有遞迴關係的外鍵？
-# 請測試自已系統如何維持參考完整性？
-
-表格串接
-========
-集合運算子都為二元運算子，
-接受二個表型態的運算元，並傳回一個結果表。
-
-積 
---
-積就是集合論中的「卡式積」，將兩個表組合成一個表，
-其結果表頭為原來兩表表頭的串接，
-紀錄為其第一個表所有紀錄與第二個表所有紀錄的可能配對，
-定義如下：
-
-R(A1, A2,...,Am) TIMES S(B1, B2,..., Bm) = 
-R TIMES S(A1, A2,..., Am, B1, B2,..., Bm)
-
-由定義可知道，R 與 S 的積 RxS 的表頭等於 R 表頭加上 S 表頭。
-
-積的紀錄數目
-------------
-若 R 的紀錄數目為 count(R)，
-且 S 的紀錄數目為 count(S)，
-則 count(R TIMES S) = count(R) * count(S)，
-
-由乘法原理可證。
-
-table[angles].angles
---------------------
-table[angles].angles
-name
-======
-金叔分
-曹晶蓮
-李美紅
-======
-
-masters
--------
-table[masters].masters
-name
-======
-陳英南
-鄧慧雄
-孫加成
-======
-
-積 
---
-本書以學生時期常玩的聯誼遊戲「小天使與小主人」來說明積運算，
-小天使是聯誼的女生名單，而小主人是聯誼的男生名單，
-然後每個男生去抽一張小天使，
-每個女生去抽一張小主人，
-而小天使與小主人的所有可能配對就可以用積表示。
-
-表 masters 為小主人名單，表 angles 為小天使名單， 
-所有可能配對為表 matches，而 matches 等於 angles 與 masters 的積，
-matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數為
-
-3 * 3 = 9
-
-共 9 筆。
-
-sql
----
-code[matches.sql].matches 的sql
-select a.name angle, m.name master
-from angles a cross join masters m
-::
-
-matches
--------
-table.matches
-angle  master
-====== ======
-金叔分 陳英南
-金叔分 鄧慧雄
-金叔分 孫加成
-曹晶蓮 陳英南
-曹晶蓮 鄧慧雄
-曹晶蓮 孫加成
-李美紅 陳英南
-李美紅 鄧慧雄
-李美紅 孫加成
-====== ======
-
-聯集
-----
-紀錄 t 屬於 A 聯集 B ，
-若且唯若 t 屬於 A ，或 t 屬於 B。
-
-其中 A 表頭 Ha 必須等於 B 表頭 Hb。
-
-表 A 與 B 的聯集是這些表的所有紀錄合起來，
-且去除重覆的紀錄。
-
-要聯集的兩個表，其表頭必須相等。
-
-聯集
-----
-例如某日局長要全體男員工及行政科的人必須去搬倉庫公文上車去銷毀，
-則搬公文員工名冊可由聯集表示。
-
-code[mover.sql].搬公文員工名冊
-select name 
+code[select_star.sql].選出員工檔全部欄
+select * 
 from employees
-where gender = 'M'
-union 
-select e.name 
+::
+假設一個資料表稱為employees，
+這條命令將從 employees 中檢索所有紀錄和欄。 
+
+from 定義查詢所要引用並作處理的的資料表，
+資料表引用可以是基本資料表，連接及子查詢的複雜構造。
+
+from employees 是最簡單的資料表表示式，
+它只讀取了一個資料表 employees。
+
+欄名引用
+--------
+code.select 語法
+select c1, c2, ...
+from table_expression
+::
+另一種用逗號分隔的欄名陣列來定義表頭，
+每個欄名為 from 子句定義資料表中實際欄名或別名。。
+
+是本局辦理研習時，
+要產出所有員工的簽到表可以[emp_namelist.sql]表示，
+此 sql 表示員工表取出所有員工名稱組成新的表。
+
+表名引用
+--------
+code.select 語法
+select t1.c1, t2.c2, ...
+from table_expression
+::
+
+若超過一個資料表有相同欄名，那麼還必須指定表名或表別名。
+
+code[emp_namelist.sql].員工部門名單
+select e.name, d.name dep
 from employees e join departments d on e.dep_id = d.id
-where d.name = '行政室'
 ::
 
-差集
-----
-紀錄 t 屬於 A 差集 B ，
-若且唯若 t 屬於 A 且 t 不屬於 B。
+值表示式
+--------
+值表示式會為結果表每一筆紀錄進行一次計算，
+計算之前用該欄的數值代換任何值表示式裡引用的欄名。 
 
-表 A 與 B 的義集是這些表 A 所有紀錄去除
-且去除與表 B 相同的紀錄，
-可說從表 A 中刪除表 B 中有的資料。
+下式表示各人出生年份。
 
-要進行差集的兩個表，其表頭也必須相等。
+code[birth_year.sql].各人出生年份
+select name, substr(birthday, 0, 4) as year 
+from humans
+::
 
-例如本局夜值班督勤主管，必須為主管，且不能為女性，
-則夜值班督勤主管名單可由下面差集運算表示。
+每位員工月薪為幾美金
+--------------------
+比如若 employees 表頭有 name 和 salary 的欄，
+分別代表員工名稱及月薪，
+則下式表每位員工月薪為幾美金：
 
-code[night_auditor.sql].夜值班督勤主管名單
-select name 
+code[salary_in_dollar.sql].每位員工月薪為幾美金
+select name, salary / 34 
+from employees;
+::
+
+常數引用
+--------
+值表示式的並不一定要有引用來自 from 子句中表表示式裡面的表的欄名， 
+可以有任意常數。
+
+下式產出同員工筆數的體溫正常及不正常標籤，可拿來作門禁用。
+
+code[temp_tag.sql].體溫標籤
+select 'normal', 'fever'
 from employees
-where title in ('科長', '主任', '股長')
-except 
-select name 
-from employees 
-where gender = 'F'
 ::
 
-限制
+可以省略值表示式而用 select 命令當做一個計算器：
+
+code[select_no_from.sql].
+select 3 * 4;
+::
+
+函數引用
+--------
+表頭定義裡的表示式也可為函數，
+比如，可以呼叫函數 random()：
+
+code[select_random.sql].
+select random();
+::
+
+別名
 ----
-從一個表中取出符合條件的紀錄，
-常見條件如下：
-* 相等條件
-* 範圍條件 
-* 布林運算子
+code.語法
+name [as] alias
+::
+其中 name 為欄名，alias 為欄的別名，as 可加可不加。
 
-繳稅檔
-------
-table[tax_payments].繳稅檔
-id payer  date     area tax    amount
-== ====== ======== ==== ====== ======
- 1 李白   0981107  鳳林 地價稅   1000 
- 2 李白   0980307  鳳林 土增稅    420 
- 3 李白   0980307  鳳林 契稅      320 
- 4 杜甫   0980501  花蓮 房屋稅    200
- 5 杜甫   0980401  花蓮 牌照稅   7120
- 6 杜甫   0980301  花蓮 地價稅    200
- 7 蘇軾   0980402  玉里 土增稅    300
- 8 蘇軾   0981102  玉里 地價稅    300
- 9 蘇軾   0980430  玉里 牌照稅   3060 
-10 蘇軾   0980430  玉里 契稅       70
-11 蘇軾   0980501  玉里 娛樂稅   4400
-12 蘇軾   0980530  玉里 房屋稅    200 
-13 蘇軾   0980330  玉里 印花稅   3400 
-== ====== ======== ==== ====== ======
+下式將職稱姓名欄別名為 name_title。
 
-tax_payments 是用來記錄繳稅的檔案。
-
-相等條件
---------
-code[restriction_alge].相等條件
-select distinct payer
-from tax_payments 
-where area='鳳林'
+code[name_title_list.sql].職稱姓名表
+select name || title as name_title
+from employees
 ::
 
-上述代數式表示位於鳳林的納稅人名單。
+查詢表頭欄名和在 from 子句裡的欄名是不同。 
 
-條件是作用於某個型態上布林函數，
-像是[restriction_alge]中的條件為相等條件，
-若某紀錄的 area 欄值等於右端的'鳳林'字串，
-則此紀錄會被選擇出來。
-
-範圍條件
+預設欄名
 --------
-code[range_codition].範圍條件
-select *
-from tax_payments 
-where amount < 100
+若表頭未定義欄別名，則系統會賦予預設值。
+對欄值引用， 預設是欄名。
+對於函數調用，預設是函數名。
+對於複雜表示式，系統應生成一個通用名。
+
+對[select_no_from.sql]會產出下表，欄名為表示式文字表示。
+
+table[select_no_from].
+3 * 4
+=====
+   12
+=====
+
+distinct
+--------
+若兩筆紀錄裡至少有一欄值不同，
+則此兩筆紀錄為相異，否則為相同。
+
+若於 select 後加入 distinct 修飾，則合併相同紀錄。
+
+列出本局人員具有的職稱。
+
+code[title_list.sql].本局人員職稱列表
+select distinct title
+from employees
 ::
 
-上述代數式表示納稅額小於 100 的所有繳稅紀錄。
-此類條件稱為範圍條件，用來測試值是否符合指定範圍，
-分別有大於、小於、大於等於及小於等於，
-對應的符號分別為 '>', '<', '>=' 及 '<='。
+相對 distinct 是 all，因它是預設值，所以通常不寫。
 
-布林運算子
+兩個空值認為是相同的。
+
+from
+----
+from 定義查詢所要引用並作處理的的資料表。
+
+code[from.bnf]
+from table_reference [, table_reference [, ...]]
+::
+
+資料表引用
 ----------
-code[bollean_operator].布林運算子
-select *
-from tax_payments 
-where amount < 1000 and area='鳳林'
+code[table_reference.bnf]
+table_reference = basetable_name | derived_table_expression
 ::
 
-上述代數式表示取出位於納稅人額小於 1000 且位於鳳林的所有繳稅紀錄。
-因為條件都是布林函數，所以可以用布林運算子串接。
+資料表引用為基本資料表名稱或衍生資料表。
 
-集合運算等式
+基本資料表
+----------
+最簡單的資料表引用是引用磁碟上的一個資料表，
+即基本資料表。
+
+資料表別名
+----------
+from 的資料表引用可給定一個臨時別名，
+讓查詢其它部份可簡單引用此衍生資料表，
+此別名稱為資料表別名。
+
+別名可以是任意識別字。
+
+要建立一個資料表別名，如下式：
+
+from employees as e
+
+或者
+
+from employees as e
+
+as 關鍵字目前沒意義。 
+
+員工對應主管名單
+----------------
+資料表別名的典型應用是給長資料表名賦予比較短的識別字，
+好讓連接子句更好讀一些。比如：
+
+code[emp_boss_list.sql].員工對應主管名單  
+select e1.name, e2.name as boss
+from employees e1 join employees e2 
+     on (e1.boss_id = e2.id)
+::
+
+別名覆蓋原名
 ------------
-code[set_operator_equation].集合運算等式
-select *
-from tax_payments 
-where area='鳳林' 
-intersect 
-select *
-from tax_payments 
-where area='鳳林' 
-where id < 1000
+別名成為其原資料表引用的新名稱，
+且不再能用該原資料表引用名去引用它了。
+因此下式是不合法的 sql 語法。
+
+code[alias_cover_ori.sql].
+select employees.name 
+from employees e
 ::
 
-布林運算子串接的條件，可用集合運算表示出來，
-如[set_operator_equation]為[bollean_operator]的等式。
+括弧用於解決歧義，
+下式將連接的結果賦予別名 b：
 
-表格連接
-========
+select * from (masters as a cross join angles) as m
+
+若給 join 子句附加別名，
+則該別名就會隱藏 join 裡其它表名。比如
+
+code[alias_cover_outer.sql].
+select e.name
+from employees e natural join angles as a
+::
+
+是合法 sql，但是下式：
+
+code[alias_cover_outer.sql].
+select e.name
+from (employees e natural join angles) as a
+::
+是不合法的，資料表別名 e 在外查詢是看不到的。
+
+衍生資料表
+----------
+資料表引用可以各種方法修改或組合基本資料表，
+其結果為衍生資料表。
+
+衍生資料表包含子查詢，資料表連接或上述組合。
+
+子查詢
+------
+子查詢就是任意的 select 語句，邏輯上代表一個暫存表。
+
+子查詢可以使用外查詢變數，
+這些變數在該子查詢的任何一次計算中視為常數。
+
+如[emp_are_civ.sql]便引用其外查詢的表變數「e」。
+
+定義子查詢必須括弧且賦予一個別名，如下式：
+
+from (select * from table1) as alias_name
+
+此例等效於下式：
+
+from table1 as alias_name 
+
 join
 ----
-sql 提供的 join 有下紀錄幾種：
+資料表引用可串接不同的資料表形成一個暫時的衍生資料表，
+串接共分成以下幾種：
 * cross join
 * inner join
 * natural join
@@ -683,55 +279,88 @@ cross join
 code.語法
 t1 cross join t2
 ::
-對每個從 t1 和 t2 來的紀錄的組合， 
-生成的資料表將包含這樣一筆紀錄：
-它包含所有 t1 裡面的字串後面跟著所有 t2 裡面的字串。
-如果兩資料表分別有 n 和 m 行，
-連接成的資料表將有 n * m 行。
+cross join 即為關連式代數的積，
+將 t1 和 t2 組合成新資料表，
+新資料表中每筆紀錄包含 t1 所有欄位於後加上 t2 所有欄位。
 
-from t1 cross join t2 等效於 from t1, t2。 
-它還等效於 from t1 inner join t2 on true。
+如果兩資料表分別有 n 和 m 筆紀錄，連接後資料表將有 n * m 筆紀錄。
 
-條件連接(join)
---------------
-code.語法
-t1 { [inner] | { left | right | full } [outer] } join t2 on boolean_expression
-t1 { [inner] | { left | right | full } [outer] } join t2 using ( join column list )
-t1 natural { [inner] | { left | right | full } [outer] } join t2
-::
-
-inner 和 outer 對所有 join 類型都是可選的。 
-inner 是預設；left，right，和 full 隱含外連接。
-
-on 連接條件
+matches.sql
 -----------
-連接條件在on或using子句裡聲明，或者用關鍵字natural隱含地聲明。
+[matches.alg]對應的 SQL 如下：
 
-連接條件判斷來自兩個源資料表中的那些行是"匹配"的。
-
-on子句是最常見的連接條件的類型：
-它接收一個和where子句裡用的一樣的布爾值資料表達式。
-如果兩個分別來自t1和t2的紀錄在on資料表達式上運算的結果為真，
-那麼它們就算是匹配的紀錄。
-
-員工對應主管名單
-----------------
-code[emp_boss_list.sql].員工對應主管名單  
-select e1.name, e2.name as boss
-from employees e1 join employees e2 
-     on (e1.boss_id = e2.id)
+code[matches.sql].
+select a.name angle, m.name master
+from angles a cross join masters m
 ::
 
-using 連接條件
---------------
-using是個縮寫的概念：它接收一個用逗號分隔的字串名字紀錄資料表， 
-這些字串必須是連接資料表共有的，
+多資料表積
+----------
+code[matches.bnf].
+from t1[, t2, t3]
+::
 
-最終形成一個連接條件，資料表示這些字串對必須相同。 
-最後，join using 的輸出會為每一對相等的輸入字串輸出一個字串，
-後面跟著來自各個資料表的所有其它字串。 
+若資料表引用以逗號分隔字串定義多個資料表， 
+則資料表會依序以 cross join 形成一個衍生資料表，
+所以下式：
 
-因此，
+from t1 cross join t2 
+
+等效於下式：
+
+from t1, t2
+
+故 [matches.sql] 可改寫成如下：
+
+code[matches_comman.sql].
+select a.name angle, m.name master
+from angles a, masters m
+::
+
+以 inner join 表達 cross join
+------------------------------
+它還等效於下式條件連接：
+
+from t1 inner join t2 on true。
+
+故 [matches.sql] 可改寫成如下：
+
+code[matches_comman.sql].
+select a.name angle, m.name master
+from angles a inner join masters m on true
+::
+
+連接條件
+--------
+join 連接條件可使用 on, using 及 natural 定義。
+
+連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
+
+若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
+則這兩筆紀錄配對在一起。
+
+on 
+--
+code.語法
+t1 join t2 on boolean_expression
+::
+on 子句是最常見的連接條件的類型，
+它使用和 where 子句相同的謂詞表示式來定義連接條件，
+如下例：
+
+code[emp_boss_list.sql]
+
+using 
+-----
+code[using.bnf].語法
+t1 join t2 using ( c1, c2, ... )
+::
+using 利用逗號分隔字串定義一組連接欄名組， 
+連接欄名組的所有欄名必須是兩個連接資料表所共有，
+具各表的配對紀錄的連接欄名組其值必須相同，
+最後結果表之表頭為連接欄名組加上各個資料表的所有其它欄位。 
+
+由上述操作定義可知下式：
 
 using (a, b, c) 
 
@@ -739,53 +368,86 @@ using (a, b, c)
 
 on (t1.a = t2.a and t1.b = t2.b and t1.c = t2.c) 
     
-只不過是如果使用了on，那麼在結果裡 a，b，和 c字串每個都會有兩個， 
-而用using的時候每個字串就只會有一個。
+但若用 on 定義則結果表頭會有重覆連接欄名組(a, b, c)， 
+而用 using 則結果表頭只會有一組連接欄名組(a, b, c)。
 
 code[emp_angle.sql].員工有參加聯誼活動名單
 select * 
 from employees e join angles using(name)
 ::
 
-natural 連接條件
-----------------
-最後，natural 是 using 的縮寫形式：
-它形成一個 using 紀錄資料表，
-該紀錄資料表由那些在兩個資料表裡都出現了的字串名字組成。
-和using一樣，這些字串只在輸出資料表裡出現一次。
+natural
+-------
+code[natural_join.bnf].語法
+t1 natural join t2
+::
 
-員工有參加聯誼活動名單
-----------------------
+natural 是 using 的簡寫形式，
+它會轉成一組 using 之連接欄名組，
+其由兩個連接資料表都出現了的欄名組成。
+同 using，結果表頭只會有一組連接欄名組(a, b, c)。
+
 code[emp_angle_natural.sql].員工有參加聯誼活動名單
 select * 
 from employees e natural join angles
 ::
 
-條件連接類型
-------------
-條件連接可能的類型是：
+連接類型
+--------
+SQL 的連接類型如下列：
+
 * inner join
 * natural join
 * left join
 * right join
 * full join
 
+所有 join 類型都可為 inner 和 outer。
+
+預設連接類型是 inner，但 left，right，和 full 預設類型為 outer。
+
 inner join
 ----------
-對於 t1 的每一筆紀錄 r1，
-生成的連接資料表都有一筆紀錄對應 t2 中的每一個滿足和 r1 的連接條件的紀錄。
+code.語法
+t1 [inner] join t2 on boolean_expression
+::
+連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
 
-例見[emp_boss_list.sql]
+若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
+則這兩筆紀錄配對在一起成為連接紀錄。
+
+如下例：
+
+code[emp_boss_list.sql]
+
+outer join
+----------
+inner join 要符合連接條件的資料才會被選出。
+如果想要某表中每一筆的資料，即使它的值在另一個表中有沒有出現，
+那該怎麼辦呢？這時就需用到 outer join 的指令。
+
+outer join 是作用在兩個表上的運算子，
+其將表分成主表及副表，
+原本相等合併除去所有不滿足合併條件的紀錄，
+而外部合併則保留主表的所有紀錄，
+
+若沒有副表的紀錄則副表的欄設為 null 值。
+
+左外部合併運算子其左方表的是主表，右方表為副表；
+
+右外部合併運算子其右方表的是主表，左方表為副表。
 
 left outer join
 ---------------
-首先，執行一次內連接。
-然後，為 t1 裡那些和 t2 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄， 
-同時該連接紀錄裡對應 t2 的紀錄用空值補齊。
-因此， 生成的連接資料表裡無條件地包含來自 t1 裡的每一筆紀錄至少一個副本。
+code.語法
+t1 left outer join t2 on boolean_expression
+::
+先執行一次內連接，
+然後為 t1 不滿足連接條件的紀錄傳回一個連接紀錄， 
+該連接紀錄裡對應 t2 的紀錄用空值補齊。
 
-員工對應主管名單（含無主管員工） 
---------------------------------
+因此產出的連接資料表裡無條件地至少包含來自 t1 裡的每一筆紀錄。
+
 code[emp_boss_list.sql].員工對應主管名單（含無主管員工） 
 select e1.name, e2.name as boss
 from employees e1 left join employees e2 
@@ -794,203 +456,46 @@ from employees e1 left join employees e2
 
 right outer join
 ----------------
-首先，執行一次內連接。
-然後，為 t2 裡那些和 t1 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄，
-同時該連接紀錄裡對應 t1 的紀錄用空值補齊。
-因此， 生成的連接資料表裡無條件地包含來自 t2 裡的每一筆紀錄。
+code.語法
+t1 right outer join t2 on boolean_expression
+::
+先執行一次內連接，
+然後為 t2 不滿足連接條件的紀錄傳回一個連接紀錄， 
+該連接紀錄裡對應 t1 的紀錄用空值補齊。
+
+因此產出的連接資料表裡無條件地至少包含來自 t2 裡的每一筆紀錄。
+
+code[emp_boss_list_right.sql].員工對應主管名單（含無主管員工） 
+select e1.name as boss, e2.name
+from employees e1 right join employees e2 
+     on (e1.id = e2.boss_id)
+::
 
 full outer join
 ---------------
-首先，執行一次內連接。
-然後，為 t1 裡那些和 t2 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄， 
-同時該連接紀錄裡對應 t2 的紀錄用空值補齊。 
-同樣，為 t2 裡那些和 t1 裡的任何行都不滿足連接條件的紀錄傳回一個連接紀錄，
-該行裡對應 t1 的紀錄用空值補齊。
-
-如果 t1 和 t2 有一個或者都是可以連接的資料表， 那麼所有類型的連接都可以串在一起或嵌套在一起。 您可以在join子句周圍使用圓括弧來控制連接順序， 如果沒有圓括弧，那麼join子句是從左向右嵌套的。
-
-限制筆數
---------
-限制結果紀錄筆數，常與 order by 搭配。
-
-limit
------
-標準 sql 是使用 limit 語法。
-
-code[top_10_tax_payments.sql].查詢前10多繳稅額紀錄
-select * 
-from tax_payments
-order by amount desc
-limit 10
-::
-
-ronum 虛擬欄
---------------
-在 oracle 是以虛擬欄 rownum 來完成，
-取得前 10 筆的員工名單如下：
-
-code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
-select * 
-from tax_payments
-where rownum < 10
-order by amount desc
-::
-
-top
----
-sql server 是用 top，此語法還提供比率的功能。
-
 code.語法
-SELECT TOP number [percent] table_column1, table_column2···
-FROM table_name;
+t1 full outer join t2 on boolean_expression
 ::
+先執行一次左連接，再執行一次右連接，
+因此產出的連接資料表裡無條件地至少包含來自 t2 及 t1 的每一筆紀錄。
 
-code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
-select top 10 * 
-from tax_payments
-order by amount desc
-::
-
-code[top_10_tax_payments_rownum.sql].查詢繳稅額排名前半紀錄
-select top 50 percent * 
-from tax_payments
-order by amount desc
-::
-
-select
-------
-select 命令建立一個暫時虛擬表， 
-方法可能有組合資料表，視圖，刪除行，分組等等。 
-這個資料表最後傳遞給選擇紀錄資料表處理。 
-選擇紀錄資料表判斷中間資料表的哪個字串最終實際輸出。
-
-定義顯示表頭
-------------
-code.select 語法
-select *
-from table_expression
-::
-最簡單表頭定義的是 *，
-代表 from 定義表所有欄位。
-
-code[select_star.sql].選出員工檔全部欄位
-select * 
-from employees
-::
-
-定義顯示表頭
-------------
-code.select 語法
-select c1, c2, ...
-from table_expression
-::
-另一種用逗號分隔的欄名陣列來定義表頭，
-每個欄名為 from 子句定義資料表中實際欄名或別名。。
-
-code[emp_namelist.sql].員工名單
-select name 
-from employees
-::
-像是本局辦理研習時，
-要產出所有員工的簽到表可以上述 SQL 表示，
-此 SQL 表示員工表取出所有員工名稱組成新的表。
-
-定義顯示表頭
-------------
-code.select 語法
-select t1.c1, t2.c2, ...
-from table_expression
-::
-
-如果超過一個資料表有相同欄名，那麼還必須指定表名或表別名。
-
-code[emp_namelist.sql].員工部門名單
-select e.name, d.name dep
-from employees e join departments d on e.dep_id = d.id
-::
-
-值表示式
+套疊連接
 --------
-值表示式會為結果表每一筆紀錄進行一次計算，
-計算之前用該欄的數值代換任何值表示式裡引用的欄名。 
+由於連接接受兩個資料表並傳回一個連接資料表，
+故所有類型的連接都可相互套疊，
+並能用括弧來控制連接順序，如下式：
 
-下面 SQL 表示各人出生年份。
+from (t1 join t2) join t3
 
-code[birth_year.sql].各人出生年份
-select name, substr(birthday, 0, 4) as year 
-from humans
-::
+t1, t2 先連接後的結果表再與 t3 連接。
 
-值表示式
+左連結性
 --------
-值表示式的並不一定要有引用來自 from 子句中表表示式裡面的表的欄名， 
-可以有任意常數。
+join 是左連結性，所以若沒有括弧，則 join 子句是從左向右套疊。
+故下式：
 
-下面產出同員工筆數的體溫正常及不正常標籤，可拿來作門禁用。
+from t1 join t2 join t3
 
-code[temp_tag.sql].體溫標籤。
-select 'NORMAL', 'FEVER'
-from employees
-::
+等同於下式：
 
-別名
-----
-code.語法
-name [as] alias
-::
-其中 name 為欄名，alias 為欄的別名, as 字可加可不加。
-
-字串標籤
---------
-select a as value, b + c as sum from ...
-如果沒有使用as聲明字串名字，那麼系統賦予一個預設值。
-對於簡單的字串引用， 它是該字串的名字。
-對於函數調用，它是函數的名字。對於複雜資料表達式，
-系統會生成一個通用的名字。
-
-注意: 輸出字串的命名和在from子句裡的命名是不一樣的 。 
-這個管道實際上允許您對同一個紀錄命名兩次，
-但是在選擇紀錄資料表中選擇的名字是要傳遞的名字。
-
-code[name_title_list.sql].職稱姓名表
-select name || title as name_title
-from employees
-::
-
-distinct
---------
-如果兩筆紀錄裡至少有一欄值不同，
-則此兩筆紀錄為相異，否則為相同。
-
-若於 select 後加入 distinct 修飾，則合併相同紀錄。
-
-列出本局人員具有的職稱。
-
-code[title_list.sql].本局人員職稱列表
-select distinct title
-from employees
-::
-
-相對 distinct 是 all。
-
-空值在這種考慮中認為是相同的。
-
-另外，我們還可以用任意資料表達式來判斷什麼行可以認為是獨立的：
-
-distinct on
------------
-在 postgre sql 中，
-select distinct on (expression [, expression ...]) select_list ...
-這裡 expression 是任意值資料表達式， 
-它為所有行計算。如果一個行集合裡所有行計算出的該資料表達式的值是一樣的，
-那麼我們認為它們是重複的並且因此只有第一筆紀錄保留在輸出中。
-請注意這裡的一個集合的"第一行"是不可預料的，
-除非您在足夠多的字串上對該查詢排了序，
-保證到達distinct過濾器的紀錄的順序是唯一的。 
-（distinct on處理是發生在order by排序後面的。）
-
-distinct on子句不是 sql 標準的一部分，
-有時候有人認為它是一個糟糕的風格，因為它的結果是不可判定的。
-如果用有選擇的group by和在from中的子查詢，
-那麼我們可以避免使用這個構造， 
-但是通常它是更方便的候選方法。
+from (t1 join t2) join t3

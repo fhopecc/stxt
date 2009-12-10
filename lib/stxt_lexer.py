@@ -41,9 +41,9 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-def t_INSERT(t):
-    r'^(table|image)[(?P<name>[^\]]*)](\n|$)'
-    t.lexer.lineno += t.lexeme.count('\n')
+#def t_INSERT(t):
+#    r'^(table|image)[(?P<name>[^\]]*)](\n|$)'
+#    t.lexer.lineno += t.lexeme.count('\n')
 
 def t_INCLUDE(t):
     r'^<(?P<file>.*)>(\n|$)'
@@ -300,7 +300,8 @@ def t_error(t):
                 find_column(t.lexer.lexdata, t), t.value[0], \
                 str(ord(t.value[0]))))
     sys.exit(1)
-lexer = lex.lex(debug=1)
+#lexer = lex.lex(debug=1)
+lexer = lex.lex()
 #if __name__ == '__main__':
 #    case = 'theorem[name].this is a theorem title'
 #    lexer.input(case)

@@ -31,6 +31,8 @@ code[matches.bnf].
 from t1[, t2, t3]
 ::
 
+多資料表積
+~~~~~~~~~~
 若資料表引用以逗號分隔字串定義多個資料表， 
 則資料表會依序以 cross join 形成一個衍生資料表，
 所以下式：
@@ -48,7 +50,9 @@ select a.name angle, m.name master
 from angles a, masters m
 ::
 
-它還等效於下式條件連接：
+以 inner join 表達 cross join
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cross join 還等效於下式 inner join：
 
 from t1 inner join t2 on true。
 
@@ -59,42 +63,37 @@ select a.name angle, m.name master
 from angles a inner join masters m on true
 ::
 
-條件連接(join)
-~~~~~~~~~~~~~~
+連接條件
+~~~~~~~~
+join 連接條件可使用 on, using 及 natural 定義。
+
+連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
+
+若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
+則這兩筆紀錄配對在一起。
+
+on 
+~~
 code.語法
-t1 {[inner]|{ left | right | full }[outer]} join t2 using ( join column list )
-t1 natural { [inner] | { left | right | full } [outer] } join t2
+t1 join t2 on boolean_expression
 ::
+on 子句是最常見的連接條件的類型，
+它使用和 where 子句相同的謂詞表示式來定義連接條件，
+如下例：
 
-inner 和 outer 對所有 join 類型都是可選的。 
-inner 是預設；left，right，和 full 隱含外連接。
+code[emp_boss_list.sql]
 
-on 連接條件
-~~~~~~~~~~~
-code.語法
-t1 {[inner]|{ left | right | full }[outer]} join t2 on boolean_expression
+using 
+~~~~~
+code[using.bnf].語法
+t1 join t2 using ( c1, c2, ... )
 ::
-連接條件在 on 或 using子句裡聲明，或者用關鍵字natural隱含地聲明。
+using 利用逗號分隔字串定義一組連接欄名組， 
+連接欄名組的所有欄名必須是兩個連接資料表所共有，
+具各表的配對紀錄的連接欄名組其值必須相同，
+最後結果表之表頭為連接欄名組加上各個資料表的所有其它欄位。 
 
-連接條件判斷來自兩個源資料表中的那些行是"匹配"的。
-
-on子句是最常見的連接條件的類型：
-它接收一個和where子句裡用的一樣的布爾值資料表達式。
-如果兩個分別來自t1和t2的紀錄在on資料表達式上運算的結果為真，
-那麼它們就算是匹配的紀錄。
-
-如[emp_boss_list.sql]。
-
-using 連接條件
-~~~~~~~~~~~~~~
-using是個縮寫的概念：它接收一個用逗號分隔的字串名字紀錄資料表， 
-這些字串必須是連接資料表共有的，
-
-最終形成一個連接條件，資料表示這些字串對必須相同。 
-最後，join using 的輸出會為每一對相等的輸入字串輸出一個字串，
-後面跟著來自各個資料表的所有其它字串。 
-
-因此，
+由上述操作定義可知下式：
 
 using (a, b, c) 
 
@@ -102,64 +101,85 @@ using (a, b, c)
 
 on (t1.a = t2.a and t1.b = t2.b and t1.c = t2.c) 
     
-只不過是如果使用了on，那麼在結果裡 a，b，和 c字串每個都會有兩個， 
-而用using的時候每個字串就只會有一個。
+但若用 on 定義則結果表頭會有重覆連接欄名組(a, b, c)， 
+而用 using 則結果表頭只會有一組連接欄名組(a, b, c)。
 
 code[emp_angle.sql].員工有參加聯誼活動名單
 select * 
 from employees e join angles using(name)
 ::
 
-natural 連接條件
-~~~~~~~~~~~~~~~~
-最後，natural 是 using 的縮寫形式：
-它形成一個 using 紀錄資料表，
-該紀錄資料表由那些在兩個資料表裡都出現了的字串名字組成。
-和using一樣，這些字串只在輸出資料表裡出現一次。
+natural
+~~~~~~~
+code[natural_join.bnf].語法
+t1 natural join t2
+::
+
+natural 是 using 的簡寫形式，
+它會轉成一組 using 之連接欄名組，
+其由兩個連接資料表都出現了的欄名組成。
+同 using，結果表頭只會有一組連接欄名組(a, b, c)。
 
 code[emp_angle_natural.sql].員工有參加聯誼活動名單
 select * 
 from employees e natural join angles
 ::
 
-條件連接類型
-~~~~~~~~~~~~
-條件連接可能的類型是：
+連接類型
+~~~~~~~~
+SQL 的連接類型如下列：
+
 * inner join
 * natural join
 * left join
 * right join
 * full join
 
+所有 join 類型都可為 inner 和 outer。
+
+預設連接類型是 inner，但 left，right，和 full 預設類型為 outer。
+
 inner join
 ~~~~~~~~~~
-對於 t1 的每一筆紀錄 r1，
-生成的連接資料表都有一筆紀錄對應 t2 中的每一個滿足和 r1 的連接條件的紀錄。
+code.語法
+t1 [inner] join t2 on boolean_expression
+::
+連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
 
-例見[emp_boss_list.sql]
+若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
+則這兩筆紀錄配對在一起成為連接紀錄。
+
+如下例：
+
+code[emp_boss_list.sql]
 
 outer join
 ~~~~~~~~~~
-inner join 要兩表內都有同樣的值，那一筆資料才會被選出。
-如果想要某表中每一筆的資料，即使它的值在另一個表中有沒有出現，
+inner join 要符合連接條件的資料才會被選出，
+但若想要某表中每一筆的資料，即使它的值在另一個表中有沒有出現，
 那該怎麼辦呢？這時就需用到 outer join 的指令。
 
 outer join 是作用在兩個表上的運算子，
 其將表分成主表及副表，
 原本相等合併除去所有不滿足合併條件的紀錄，
 而外部合併則保留主表的所有紀錄，
+
 若沒有副表的紀錄則副表的欄設為 null 值。
-左外部合併運算子其左方表的是主表，
-右方表為副表；
-右外部合併運算子其右方表的是主表，
-左方表為副表。
+
+左外部合併運算子其左方表的是主表，右方表為副表；
+
+右外部合併運算子其右方表的是主表，左方表為副表。
 
 left outer join
 ~~~~~~~~~~~~~~~
-首先，執行一次內連接。
-然後，為 t1 裡那些和 t2 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄， 
-同時該連接紀錄裡對應 t2 的紀錄用空值補齊。
-因此， 生成的連接資料表裡無條件地包含來自 t1 裡的每一筆紀錄至少一個副本。
+code.語法
+t1 left outer join t2 on boolean_expression
+::
+先執行一次內連接，
+然後為 t1 不滿足連接條件的紀錄傳回一個連接紀錄， 
+該連接紀錄裡對應 t2 的紀錄用空值補齊。
+
+因此產出的連接資料表裡無條件地至少包含來自 t1 裡的每一筆紀錄。
 
 code[emp_boss_list.sql].員工對應主管名單（含無主管員工） 
 select e1.name, e2.name as boss
@@ -169,17 +189,46 @@ from employees e1 left join employees e2
 
 right outer join
 ~~~~~~~~~~~~~~~~
-首先，執行一次內連接。
-然後，為 t2 裡那些和 t1 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄，
-同時該連接紀錄裡對應 t1 的紀錄用空值補齊。
-因此， 生成的連接資料表裡無條件地包含來自 t2 裡的每一筆紀錄。
+code.語法
+t1 right outer join t2 on boolean_expression
+::
+先執行一次內連接，
+然後為 t2 不滿足連接條件的紀錄傳回一個連接紀錄， 
+該連接紀錄裡對應 t1 的紀錄用空值補齊。
+
+因此產出的連接資料表裡無條件地至少包含來自 t2 裡的每一筆紀錄。
+
+code[emp_boss_list_right.sql].員工對應主管名單（含無主管員工） 
+select e1.name as boss, e2.name
+from employees e1 right join employees e2 
+     on (e1.id = e2.boss_id)
+::
 
 full outer join
 ~~~~~~~~~~~~~~~
-首先，執行一次內連接。
-然後，為 t1 裡那些和 t2 裡任何一筆紀錄都不滿足連接條件的紀錄傳回一個連接紀錄， 
-同時該連接紀錄裡對應 t2 的紀錄用空值補齊。 
-同樣，為 t2 裡那些和 t1 裡的任何行都不滿足連接條件的紀錄傳回一個連接紀錄，
-該行裡對應 t1 的紀錄用空值補齊。
+code.語法
+t1 full outer join t2 on boolean_expression
+::
+先執行一次左連接，再執行一次右連接，
+因此產出的連接資料表裡無條件地至少包含來自 t2 及 t1 的每一筆紀錄。
 
-如果 t1 和 t2 有一個或者都是可以連接的資料表， 那麼所有類型的連接都可以串在一起或嵌套在一起。 您可以在join子句周圍使用圓括弧來控制連接順序， 如果沒有圓括弧，那麼join子句是從左向右嵌套的。
+套疊連接
+~~~~~~~~
+由於連接接受兩個資料表並傳回一個連接資料表，
+故所有類型的連接都可相互套疊，
+並能用括弧來控制連接順序，如下式：
+
+from (t1 join t2) join t3
+
+t1, t2 先連接後的結果表再與 t3 連接。
+
+左連結性
+~~~~~~~~
+join 是左連結性，所以若沒有括弧，則 join 子句是從左向右套疊。
+故下式：
+
+from t1 join t2 join t3
+
+等同於下式：
+
+from (t1 join t2) join t3

@@ -21,11 +21,14 @@ from employees
 假設一個資料表稱為employees，
 這條命令將從 employees 中檢索所有紀錄和欄。 
 
-from 後為資料表表示式，
-可以是基本資料表，連接及子查詢的複雜構造。
+from 定義查詢所要引用並作處理的的資料表，
+資料表引用可以是基本資料表，連接及子查詢的複雜構造。
+
 from employees 是最簡單的資料表表示式，
 它只讀取了一個資料表 employees。
 
+欄名引用
+~~~~~~~~
 code.select 語法
 select c1, c2, ...
 from table_expression
@@ -37,6 +40,8 @@ from table_expression
 要產出所有員工的簽到表可以[emp_namelist.sql]表示，
 此 sql 表示員工表取出所有員工名稱組成新的表。
 
+表名引用
+--------
 code.select 語法
 select t1.c1, t2.c2, ...
 from table_expression
@@ -80,7 +85,7 @@ select 'normal', 'fever'
 from employees
 ::
 
-可以省略資料表表示式而用 select 命令當做一個計算器：
+可以省略值表示式而用 select 命令當做一個計算器：
 
 code[select_no_from.sql].
 select 3 * 4;
