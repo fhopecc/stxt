@@ -9,3 +9,4 @@ for slide in slides:
     dir = os.path.basename(slide)
     dir = os.path.splitext(dir)[0]
     os.system(r'lib\slides_outputter.py %s %s' % (dir, slide))
+    os.system(r'lib\slides_print_outputter.py %s %s' % (dir, slide))
