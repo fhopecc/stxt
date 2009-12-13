@@ -65,7 +65,7 @@ _is_identifier = re.compile(r'^[a-zA-Z0-9_]+$')
 
 class LexError(Exception):
     def __init__(self,message,s):
-         self.args = (message.decode('utf8').encode('cp950'),)
+         self.args = (message,)
          self.text = s
 
 def find_column(input, lexpos):

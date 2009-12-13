@@ -73,4 +73,4 @@ t4               B.update(p)
         self.assertRaises(SyntaxError, parser.parse, testcase.decode('utf8'))
 
 if __name__ == '__main__':
-    unittest.main()
+    #unittest.main()
