@@ -282,6 +282,7 @@ class Lexer:
       self.lexpos = 0
       self.lineno = 1
       self.lexlen = len(s)
+      self.include_lexer = None
 
   # ------------------------------------------------------------
   # read() - Read string from a file into the lexer
@@ -1122,4 +1123,3 @@ def TOKEN(r):
 
 # Alternative spelling of the TOKEN decorator
 Token = TOKEN
-

@@ -10,9 +10,24 @@ states = (
 
 tokens = [
           'INSERT', 
-          'HEAD1', 
-          'HEAD2', 
-          'HEAD3', 
+          'H1SEP', 
+          'H2SEP', 
+          'H3SEP', 
+          'H4SEP', 
+          'H5SEP', 
+          'EMPTYLINE', 
+          'LINE',
+          'L1LINE',
+          'L2LINE', 
+          'L3LINE', 
+          'L4LINE', 
+          'L5LINE', 
+          'LI',            
+          'L1LI',
+          'L2LI', 
+          'L3LI', 
+          'L4LI', 
+          'L5LI', 
           'CODEHEAD', 
           'CODEBLOCK', 
           'THEOREM', 
@@ -24,19 +39,15 @@ tokens = [
           'QUESTION', 
           'ANSWER', 
           'FOOTNOTE', 
-          'LI',            # list start
-          #'L2LI',         # level2 list start
           'OL', 
-          #'L2OL', 
-          'DL', 
-          'EMPTYLINE', 
-          'LINE',
-          'L1LINE',
-          'L2LINE', 
-          'L3LINE', 
-          'L4LINE', 
-          'L5LINE' 
-          ] 
+          'DL' 
+         ] 
+
+t_H1SEP = r'^=+'
+t_H2SEP = r'^-+'
+t_H3SEP = r'^~+'
+t_H4SEP = r'^\*+'
+t_H5SEP = r'^\^+'
 
 def find_column(input,token):
     last_cr = input.rfind('\n',0,token.lexpos)
@@ -45,8 +56,18 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
+def t_LI(t):
+    r'(?P<s> *)(\* (?P<c>.*))'
+    s = t.lexer.lexmatch.group('s')
+    level = len(s) / 2
+    t.value = t.lexer.lexmatch.group('c')
+    t.value = DocTreeNode('listitem', t.value)
+    if level > 0:
+        t.type = 'L%sLI' % str(level)
+    return t
+
 def t_LINE(t):
-    r'(?P<s> *)(?P<l>[^ \n].+)'
+    r'(?P<s> *)(?P<l>[^ \n=\-~*^<#].+)'
     s = t.lexer.lexmatch.group('s')
     level = len(s) / 2
     t.value = t.lexer.lexmatch.group('l')
@@ -63,22 +84,12 @@ def t_NEWLINE(t):
     r'\n+'
     t.lexer.lineno += t.lexeme.count('\n')
 
-def t_HEADSEP(t):
-    r'^=+|^-+'
-    t.lexer.lineno += t.lexeme.count('\n')
-    t.value = DocTreeNode('sect1') 
-    m = t.lexer.lexmatch
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
-
 #def t_INSERT(t):
 #    r'^(table|image)[(?P<name>[^\]]*)](\n|$)'
 #    t.lexer.lineno += t.lexeme.count('\n')
 
 def t_INCLUDE(t):
-    r'^<(?P<file>.*)>(\n|$)'
-    t.lexer.lineno += t.lexeme.count('\n')
+    r'^<(?P<file>.*)>'
     t.lexer.include_lexer = t.lexer.clone()
     column = find_column(t.lexer.lexdata, t)
     file = t.lexer.lexmatch.group('file')
@@ -88,35 +99,6 @@ def t_INCLUDE(t):
         raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
                (t.lexer.file, t.lexer.lineno, column, file))
     return t.lexer.include_lexer.token()
-
-def t_HEAD1(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+\n'
-    t.lexer.lineno += t.lexeme.count('\n')
-    t.value = DocTreeNode('sect1') 
-    m = t.lexer.lexmatch
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
-
-def t_HEAD2(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n-+\n'
-    t.lexer.lineno += t.lexeme.count('\n')
-    t.value = DocTreeNode('sect2') 
-    m = t.lexer.lexmatch
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    if len(t.value.title) < 1:
-        t.value.title = t.value.name
-    return t
-
-def t_HEAD3(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+\n'
-    t.lexer.lineno += t.lexeme.count('\n')
-    t.value = DocTreeNode('sect3') 
-    m = t.lexer.lexmatch
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
 
 def t_IMAGEHEAD(t):
     r'^image(\[(?P<name>.*)\])?\.(?P<title>.*)(\n|$)'
@@ -268,13 +250,6 @@ def t_OL(t):
     t.lexer.lineno += t.lexeme.count('\n')
     t.value = t.lexer.lexmatch.group('content')
     t.value = DocTreeNode('olistitem', t.value)
-    return t
-
-def t_LI(t):
-    r'\* (?P<content>.*)\n'
-    t.lexer.lineno += t.lexeme.count('\n')
-    t.value = t.lexer.lexmatch.group('content')
-    t.value = DocTreeNode('listitem', t.value)
     return t
 
 def t_DL(t):
