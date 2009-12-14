@@ -114,5 +114,3 @@ parser = yacc.yacc()
 def parse(input):
     d = parser.parse(input, lexer=lexer)
     return d
-
-
