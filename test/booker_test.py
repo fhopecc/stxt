@@ -7,6 +7,15 @@ class UnitTest(unittest.TestCase):
     def setUp(self):
         lexer.begin('INITIAL')
 
+    def testINSERT(self):
+        case = r'table[test]'
+        lexer.input(case)
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('INSERT', t.type)
+        self.assertEqual('table', t.node_type)
+        self.assertEqual('test', t.name)
+
     def testHSEP(self):
         case = '''=========
 ---------
@@ -142,4 +151,8 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('五層縮排', t.value)
 
 if __name__ == '__main__':
-    unittest.main()
+# unittest.main()
+    tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testEMPTYLINE"))
+    runner = unittest.TextTestRunner()
+    runner.run(tests)

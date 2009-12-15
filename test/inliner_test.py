@@ -123,4 +123,9 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('test.sql', ref.value)
 
 if __name__ == '__main__':
-    unittest.main()
+#    unittest.main()
+
+    tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testEMPTYLINE"))
+    runner = unittest.TextTestRunner()
+    runner.run(tests)
