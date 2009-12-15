@@ -68,22 +68,23 @@ def find_column(input,token):
 #               (t.lexer.file, t.lexer.lineno, column, file))
 #    return t.lexer.include_lexer.token()
 
-def t_begin_include(t):
-    r'^<(?P<file>.*)>'
-    column = find_column(t.lexer.lexdata, t)
-    file = t.lexer.lexmatch.group('file')
-    try:
-        t.lexer.include_lexer.read(file)
-    except IOError:
-        raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
-               (t.lexer.file, t.lexer.lineno, column, file))
-    if t.lexer.last_lexers == None:
-        t.lexer.last_lexers = []
+#def t_begin_include(t):
+#    r'^<(?P<file>.*)>'
+#    column = find_column(t.lexer.lexdata, t)
+#    file = t.lexer.lexmatch.group('file')
+#    try:
+#        t.lexer.include_lexer.read(file)
+#    except IOError:
+#        raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
+#               (t.lexer.file, t.lexer.lineno, column, file))
+#    if t.lexer.last_lexers == None:
+#        t.lexer.last_lexers = []
+#
+#    t.lexer.last_lexers.push(t.lexer.clone())
+#    t.lexer.push_state('include')
 
-    t.lexer.last_lexers.push(t.lexer.clone())
-    t.lexer.push_state('include')
-
-def t_include_end(t):
+#def t_include_end(t):
+#    pass
 
 #def t_code(t):
 #    r'^code(\[(?P<name>.*)\])?\.(?P<title>.*)\n'
@@ -136,7 +137,8 @@ def t_INSERT(t):
     return t
 
 def t_LI(t):
-    r'^(?P<s>[ ]*)(\* (?P<c>.*))'
+    r'^\s *'
+#r'^(?P<s> *)(\* (?P<c>.*))'
     s = t.lexer.lexmatch.group('s')
     level = len(s) / 2
     t.value = t.lexer.lexmatch.group('c')
@@ -319,7 +321,7 @@ def t_error(t):
 
 
 #lexer = lex.lex(debug=1)
-lexer = lex3.lex(reflags=re.M)
+lexer = lex3.lex(debug=1, reflags=re.M)
 #if __name__ == '__main__':
 #    case = 'theorem[name].this is a theorem title'
 #    lexer.input(case)
