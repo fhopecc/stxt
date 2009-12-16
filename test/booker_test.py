@@ -10,6 +10,7 @@ class UnitTest(unittest.TestCase):
     def testINSERT(self):
         case = r'table[test]'
         lexer.input(case)
+        lexer.lineno = 1
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('INSERT', t.type)
@@ -81,6 +82,7 @@ class UnitTest(unittest.TestCase):
           * 五層縮排條列
         '''
         lexer.input(case)
+        lexer.lineno = 1
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('LI', t.type)
@@ -120,6 +122,7 @@ class UnitTest(unittest.TestCase):
           五層縮排
         '''
         lexer.input(case)
+        lexer.lineno = 1
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('LINE', t.type)
@@ -151,8 +154,12 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('五層縮排', t.value)
 
 if __name__ == '__main__':
-# unittest.main()
+#     unittest.main()
     tests = unittest.TestSuite()
     tests.addTest(UnitTest("testEMPTYLINE"))
+    tests.addTest(UnitTest("testLine"))
+    tests.addTest(UnitTest("testLI"))
+    tests.addTest(UnitTest("testHSEP"))
+    tests.addTest(UnitTest("testINSERT"))
     runner = unittest.TextTestRunner()
     runner.run(tests)

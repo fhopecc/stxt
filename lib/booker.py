@@ -56,17 +56,17 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-#def t_INCLUDE(t):
-#    r'^<(?P<file>.*)>'
-#    t.lexer.include_lexer = t.lexer.clone()
-#    column = find_column(t.lexer.lexdata, t)
-#    file = t.lexer.lexmatch.group('file')
-#    try:
-#        t.lexer.include_lexer.read(file)
-#    except IOError:
-#        raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
-#               (t.lexer.file, t.lexer.lineno, column, file))
-#    return t.lexer.include_lexer.token()
+def t_INCLUDE(t):
+    r'^<(?P<file>.*)>'
+    t.lexer.include_lexer = t.lexer.clone()
+    column = find_column(t.lexer.lexdata, t)
+    file = t.lexer.lexmatch.group('file')
+    try:
+        t.lexer.include_lexer.read(file)
+    except IOError:
+        raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
+               (t.lexer.file, t.lexer.lineno, column, file))
+    return t.lexer.include_lexer.token()
 
 #def t_begin_include(t):
 #    r'^<(?P<file>.*)>'
@@ -137,8 +137,7 @@ def t_INSERT(t):
     return t
 
 def t_LI(t):
-    r'^\s *'
-#r'^(?P<s> *)(\* (?P<c>.*))'
+    r'^(?P<s>[ ]*)(\*[ ](?P<c>.*))'
     s = t.lexer.lexmatch.group('s')
     level = len(s) / 2
     t.value = t.lexer.lexmatch.group('c')
@@ -314,16 +313,40 @@ def t_NEWLINE(t):
 #
 def t_error(t):
     c = t.value[0]
-    raise lex.LexError('illegal char[%s](%s) at %s:%s:%s\n%s' % (c, 
+    raise lex3.LexError('illegal char[%s](%s) at %s:%s:%s\n%s' % (c, 
                 str(ord(t.value[0])), t.lexer.file, t.lexer.lineno, 
                 find_column(t.lexer.lexdata, t), t.lexer.lexdata), 
                 t.lexer.lexdata)
 
 
 #lexer = lex.lex(debug=1)
-lexer = lex3.lex(debug=1, reflags=re.M)
+#lexer = lex3.lex(reflags=re.M, debug=1)
+__lexer__ = lex3.lex(reflags=re.M)
+class MutipleFileLexer(object):
+    def __init__(self):
+        self.current_lexer = __lexer__
+
+    def token(self):
+        if self.current_lexer.include_lexer:
+            t = self.current_lexer.include_lexer.token()
+            if t: return t
+        else:
+            self.current_lexer.include_lexer = None
+     
+        return self.current_lexer.token()
+
+    def begin(self, state):
+        self.current_lexer.begin(state)
+
+    def input(self, lexdata):
+        self.current_lexer.input(lexdata)
+        self.current_lexer.lineno = 1
+
+lexer = MutipleFileLexer()
+
 #if __name__ == '__main__':
 #    case = 'theorem[name].this is a theorem title'
 #    lexer.input(case)
 #    tok = lexer.token()
 #    print tok
+

@@ -677,31 +677,4 @@ def pathconv(path):
 
 ### class ImmutableTree(Tree): pass
 
-import unittest
-class UnitTest(unittest.TestCase):
-    def testTreeConstructor(self):
-        root = Tree('value', 
-                {'x' : 'v1', 'y' : 'v2'}, 
-                trunk='v3', 
-                branch='v4')
-        self.assertEqual('value', root())
-        self.assertEqual('v1', root['x']())
-        self.assertEqual('v2', root['y']())
-        self.assertEqual('v3', root.trunk())
-        self.assertEqual('v4', root.branch())
 
-    def testAttribute(self):
-        root = Tree('value')
-        root.dir = 'v1'
-        self.assertEqual('v1', root.dir())
-    
-    def testTraverse(self):                                            
-        root = Tree('value', 
-                {'x' : 'v1', 'y' : 'v2'}, 
-                trunk='v3', 
-                branch='v4')
-        for i in root('traverse'):
-            self.assertEqual('value', i)
-
-if __name__ == '__main__':
-    unittest.main()
