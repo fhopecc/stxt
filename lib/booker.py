@@ -1,5 +1,6 @@
 # coding=utf8
-import sys, re, lex3
+from __future__ import with_statement
+import sys, os, re, lex3
 from stxt_tree import DocTreeNode
 import stxt_tb_parser, logger
 # Lexer
@@ -10,24 +11,10 @@ import stxt_tb_parser, logger
 
 tokens = [
           'INSERT', 
-          'H1SEP', 
-          'H2SEP', 
-          'H3SEP', 
-          'H4SEP', 
-          'H5SEP', 
+          'H1SEP', 'H2SEP', 'H3SEP', 'H4SEP', 'H5SEP', 
           'EMPTYLINE', 
-          'LINE',
-          'L1LINE',
-          'L2LINE', 
-          'L3LINE', 
-          'L4LINE', 
-          'L5LINE', 
-          'LI',            
-          'L1LI',
-          'L2LI', 
-          'L3LI', 
-          'L4LI', 
-          'L5LI', 
+          'LINE', 'L1LINE', 'L2LINE', 'L3LINE', 'L4LINE', 'L5LINE', 
+          'LI', 'L1LI', 'L2LI', 'L3LI', 'L4LI', 'L5LI', 
           'CODEHEAD', 
           'CODEBLOCK', 
           'THEOREM', 
@@ -62,7 +49,10 @@ def t_INCLUDE(t):
     column = find_column(t.lexer.lexdata, t)
     file = t.lexer.lexmatch.group('file')
     try:
-        t.lexer.include_lexer.read(file)
+        with open(file) as f:
+            t.lexer.include_lexer.input(f.read())
+            t.lexer.include_lexer.file = file
+            t.lexer.include_lexer.lineno = 1
     except IOError:
         raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
                (t.lexer.file, t.lexer.lineno, column, file))
@@ -303,14 +293,6 @@ def t_NEWLINE(t):
 #                          t.lexer.lexmatch.group('content'))
 #    return t
 #
-#def t_L2LINE(t):
-##    r'^  (?P<content>.*)\n'
-#    t.lexer.lineno += t.lexeme.count('\n')
-##    t.value = t.lexer.lexmatch.group('content')
-#    return t
-#
-#
-#
 def t_error(t):
     c = t.value[0]
     raise lex3.LexError('illegal char[%s](%s) at %s:%s:%s\n%s' % (c, 
@@ -322,9 +304,12 @@ def t_error(t):
 #lexer = lex.lex(debug=1)
 #lexer = lex3.lex(reflags=re.M, debug=1)
 __lexer__ = lex3.lex(reflags=re.M)
+
 class MutipleFileLexer(object):
     def __init__(self):
         self.current_lexer = __lexer__
+        self.current_lexer.include_lexer = None
+        self.current_lexer.file = '__string__'
 
     def token(self):
         if self.current_lexer.include_lexer:
@@ -339,8 +324,14 @@ class MutipleFileLexer(object):
         self.current_lexer.begin(state)
 
     def input(self, lexdata):
+        self.current_lexer.include_lexer = None 
         self.current_lexer.input(lexdata)
         self.current_lexer.lineno = 1
+
+    def read(self, f):
+        self.file = f
+        with open(f) as f:
+           self.input(f.read())
 
 lexer = MutipleFileLexer()
 
@@ -349,4 +340,3 @@ lexer = MutipleFileLexer()
 #    lexer.input(case)
 #    tok = lexer.token()
 #    print tok
-

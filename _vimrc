@@ -20,6 +20,9 @@ map <F3> :w<enter>:! lib\slides_outputter.py db_slides doc\db\db_slides.stx<ente
 map <F6> :w<enter>:!task\make_doc.py<enter>
 map! <F6> <esc>:w<enter>:!%<enter>
 
+map <F8> :w<enter>:!test\booker_test.py<enter>
+map! <F8> <esc>:w<enter>!test\booker_test.pyp<enter>
+
 map <F10> :w<enter>:so doc\db\term_consist.vim<enter>
 
 map <F11> :w<enter>:bp<enter>
