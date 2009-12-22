@@ -1,165 +1,101 @@
-# coding=utf
+# coding=utf8
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from lib.booker import lexer
+from lib.booker_lexer import lexer
+from lib import booker
 
 class UnitTest(unittest.TestCase):
-    def setUp(self):
-        lexer.begin('INITIAL')
-
-    def testINSERT(self):
-        case = r'table[test]'
-        lexer.input(case)
-        lexer.lineno = 1
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('INSERT', t.type)
-        self.assertEqual('table', t.node_type)
-        self.assertEqual('test', t.name)
-
-    def testHSEP(self):
-        case = '''=========
----------
-~~~~~~~~~
-*********
-^^^^^^^^^
+    def testPara(self):
+        case = '''本書源自我的私人筆記，
+而我希望以嚴謹的數學方法來組織這個筆記，
+所以資料庫理論都是以定義為起始，
+再附帶用各種定理描述理論的結果，
+而每個定理希望都能給出形式化證明。
 '''
-        lexer.input(case)
-        t = lexer.token()
-        self.assertEqual('H1SEP', t.type)
+        doc = booker.parse(case)
+        self.assertEqual(doc.type, 'doc')
+        para = doc.children[0]
+        self.assertEqual('para', para.type)
+        self.assertEqual(case.replace('\n', ''), para.value)
 
-        t = lexer.token()
-        self.assertEqual('H2SEP', t.type)
+    def testQuestion(self):
+        case ='''question[96p2-4].96警2-4
+為確保資料庫內的資料能正確被處理，
+遵循完整性法則(Integrity Rules)是有其必要的。
+請回答下列各問題：
 
-        t = lexer.token()
-        self.assertEqual('H3SEP', t.type)
+寫出實體與參考完整性法則內涵。(8 分)
 
-        t = lexer.token()
-        self.assertEqual('H4SEP', t.type)
+DBMS 除了支援參考完整性外，還可能支援包括預設值、
+檢查範圍與NULL等完整性控制。
+試寫出後面三個完整性控制的主要用途，
+並利用SQL CREATE TABLE statement 舉出實例。(9 分)
 
-        t = lexer.token()
-        self.assertEqual('H5SEP', t.type)
+根據下面兩個關聯表(Crime_BK 與 Crime_Case)，
+利用 SQL CREATE TABLE statement 來建立相對應的資料表，
+以確保資料庫資料的完整性。(註：資料型別與長度可自訂)(8 分)
 
-    def testEMPTYLINE(self):
-        case = '''
-    
+Crime_BK = (ID, CName, Gender, Birth_of_Date)
+
+Crime_Case = (CrimeNo, CrimeType, Crime_Event_Date, ID,
+              Crim_BK.ID, Crime_Case.ID)
 '''
-        lexer.input(case)
-        t = lexer.token()
-        self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('EMPTYLINE', t.type)
+        doc = booker.parse(case)
+        self.assertEqual(doc.type, 'doc')
+        questions = doc.children[0]
+        self.assertEqual(questions.type, 'questions')
+        question = questions.children[0]
+        self.assertEqual(question.type, 'question')
+        self.assertEqual(question.name, '96p2-4')
+        self.assertEqual(question.title, '96警2-4')
+        self.assertEqual(6, len(question.children))
+        para1 = question.children[0]
+        self.assertEqual(para1.type, 'para')
 
-        t = lexer.token()
-        self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('EMPTYLINE', t.type)
+    def testQuestionWithAnswer(self):
+        case ='''question[96h2-3].96高2-3
+在關聯式資料庫的綱要(Schema)中，
+有鍵值限制(Key Constraint)、
+個體整合限制(Entity Integrity Constraint)以及參考整合限制(Referential Integrity Constraint)三種，試分別說明之。(30 分)
+answer.
+鍵值限制請參閱[key_constraint]。
 
-    def testInclude(self):
-        case = r'<d:\stxt\lib\db\sql.stx>'
-        lexer.input(case)
-        self.assertRaises(IOError, lexer.token)
+個體整合限制請參閱[entity_integrity]。
+'''
+        doc = booker.parse(case)
+        self.assertEqual(doc.type, 'doc')
+        questions = doc.children[0]
+        self.assertEqual(questions.type, 'questions')
+        question = questions.children[0]
+        self.assertEqual(question.type, 'question')
+        self.assertEqual(question.name, '96h2-3')
+        self.assertEqual(question.title, '96高2-3')
+        self.assertEqual(2, len(question.children))
+        para = question.children[0]
+        self.assertEqual(para.type, 'para')
+        answer = question.children[1]
+        self.assertEqual(answer.type, 'answer')
+        self.assertEqual(2, len(answer.children))
+        para1 = answer.children[0]
+        self.assertEqual(para1.type, 'para')
 
-        case = r'<test.stx>'
-        lexer.input(case)
-        tok = lexer.token()
-        self.assertEqual('test.stx', tok.lexer.file)
-        self.assertEqual('LINE', tok.type)
-        tok = lexer.token()
-        self.assertEqual('H1SEP', tok.type)
-
-        # lexer.input should reset include_lexer as None
-        case = '普通行'
-        lexer.input(case)
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LINE', t.type)
- 
-    def testLI(self):        
-        case = '''* 普通條列
-  * 一層縮排條列
-    * 二層縮排條列
-      * 三層縮排條列
-        * 四層縮排條列
-          * 五層縮排條列
-        '''
-        lexer.input(case)
-        lexer.lineno = 1
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LI', t.type)
-        self.assertEqual('普通條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1LI', t.type)
-        self.assertEqual('一層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('L2LI', t.type)
-        self.assertEqual('二層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(4, t.lexer.lineno)
-        self.assertEqual('L3LI', t.type)
-        self.assertEqual('三層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(5, t.lexer.lineno)
-        self.assertEqual('L4LI', t.type)
-        self.assertEqual('四層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(6, t.lexer.lineno)
-        self.assertEqual('L5LI', t.type)
-        self.assertEqual('五層縮排條列', t.value.value)
-
-    def testLine(self):        
-        case = '''普通行
-  一層縮排
-    二層縮排
-      三層縮排
-        四層縮排
-          五層縮排
-        '''
-        lexer.input(case)
-        lexer.lineno = 1
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LINE', t.type)
-        self.assertEqual('普通行', t.value)
-
-        t = lexer.token()
-        self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1LINE', t.type)
-        self.assertEqual('一層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('L2LINE', t.type)
-        self.assertEqual('二層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(4, t.lexer.lineno)
-        self.assertEqual('L3LINE', t.type)
-        self.assertEqual('三層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(5, t.lexer.lineno)
-        self.assertEqual('L4LINE', t.type)
-        self.assertEqual('四層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(6, t.lexer.lineno)
-        self.assertEqual('L5LINE', t.type)
-        self.assertEqual('五層縮排', t.value)
+    def testTheorem(self):
+        case ='''theorem[reflective].反身性規則
+若 a 是一個欄位集，且 a 包含 b，則 a → b。
+'''
+        doc = booker.parse(case)
+        self.assertEqual('doc', doc.type)
+        theorem = doc.children[0]
+        self.assertEqual('theorem', theorem.type)
+        self.assertEqual(theorem.name, 'reflective')
+        self.assertEqual(theorem.title, '反身性規則')
+        self.assertEqual(1, len(theorem.children))
+        para1 = theorem.children[0]
+        self.assertEqual(para1.type, 'para')
 
 if __name__ == '__main__':
-     unittest.main()
-#    tests = unittest.TestSuite()
-#    tests.addTest(UnitTest("testEMPTYLINE"))
-#    tests.addTest(UnitTest("testLine"))
-#    tests.addTest(UnitTest("testLI"))
-#    tests.addTest(UnitTest("testHSEP"))
-#    tests.addTest(UnitTest("testINSERT"))
-#    runner = unittest.TextTestRunner()
-#    runner.run(tests)
+#    unittest.main()
+    tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testPara"))
+    runner = unittest.TextTestRunner()
+    runner.run(tests)
