@@ -1,0 +1,204 @@
+條件式 
+======
+查詢條件 
+--------
+講師：張簡稜剛
+
+日期：20091224
+
+[where]
+-------
+where 子句 的語法是
+code[where.bnf].
+where search_condition
+::
+
+search_condition 是任意條件式，表示搜尋條件，
+條件式的結果只會是真或假。
+
+在完成 from 處理之後，
+產出的基礎表的每一筆紀錄都會依搜尋條件進行測試。
+
+若測試通過，則該筆紀錄便加入到結果資料表中，
+否則就把它拋棄。
+
+搜尋條件可以引用一些在 from 子句引用表裡的欄。
+
+連接條件
+--------
+內連接的連接條件可寫在 where 子句，
+也可寫在 join 子句裡。 
+比如，這些資料表表示式是等效的：
+
+from a, b where a.id = b.id and b.val > 5
+
+和
+
+from a inner join b on (a.id = b.id) where b.val > 5
+
+或
+
+from a natural join b where b.val > 5
+
+由於 from 子句裡的 join 語法可能不是每個產品都有，
+但大部份的產品都支援 where 子句，
+所以以 where 表示連接條件更具有可移值性。
+
+因為外部連接的 on/using 子句不等於 where 條件，
+所以外部連接在任何情況下都沒有選擇，
+必須在 from 子句完成，無法用 where 模擬，
+但 Oracle 是個例外。
+
+常見條件
+--------
+從一個表中取出符合條件的紀錄，常見條件如下：
+* 相等條件
+* 範圍條件 
+* 布林運算子
+
+tax_payments
+------------
+table[tax_payments].
+id payer  date     area tax    amount
+== ====== ======== ==== ====== ======
+ 1 李白   0981107  鳳林 地價稅   1000 
+ 2 李白   0980307  鳳林 土增稅    420 
+ 3 李白   0980307  鳳林 契稅      320 
+ 4 杜甫   0980501  花蓮 房屋稅    200
+ 5 杜甫   0980401  花蓮 牌照稅   7120
+ 6 杜甫   0980301  花蓮 地價稅    200
+ 7 蘇軾   0980402  玉里 土增稅    300
+ 8 蘇軾   0981102  玉里 地價稅    300
+ 9 蘇軾   0980430  玉里 牌照稅   3060 
+10 蘇軾   0980430  玉里 契稅       70
+11 蘇軾   0980501  玉里 娛樂稅   4400
+12 蘇軾   0980530  玉里 房屋稅    200 
+13 蘇軾   0980330  玉里 印花稅   3400 
+== ====== ======== ==== ====== ======
+
+tax_payments 是用來記錄繳稅的檔案。
+
+相等條件
+--------
+code[payer_in_fl.sql].相等條件
+select distinct payer
+from tax_payments 
+where area='鳳林'
+::
+
+上述 SQL 表示位於鳳林的納稅人名單。
+
+條件是作用於某個型態上布林函數，
+像是[payer_in_fl.sql]中的條件為相等條件，
+若某紀錄的 area 欄值等於右端的'鳳林'字串，
+則此紀錄會被選擇出來。
+
+範圍條件
+--------
+code[range_codition].範圍條件
+select *
+from tax_payments 
+where amount < 100
+::
+
+上述代數式表示納稅額小於 100 的所有繳稅紀錄。
+此類條件稱為範圍條件，用來測試值是否符合指定範圍，
+分別有大於、小於、大於等於及小於等於，
+對應的符號分別為 '>', '<', '>=' 及 '<='。
+
+code[fl_and_lt1000.sql].布林運算子
+select *
+from tax_payments 
+where amount < 1000 and area='鳳林'
+::
+
+上述代數式表示取出位於納稅人額小於 1000 且位於鳳林的所有繳稅紀錄。
+因為條件都是布林函數，所以可以用布林運算子串接。
+
+集合運算等式
+------------
+code[and_as_intersect.sql].集合運算等式
+select *
+from tax_payments 
+where area='鳳林' 
+intersect 
+select *
+from tax_payments 
+where id < 1000
+::
+
+布林運算子串接的條件，可用集合運算表示出來，
+如[and_as_intersect]為[fl_and_lt1000.sql]的等式。
+
+limit
+-----
+限制結果紀錄筆數，常與 order by 搭配。
+標準 sql 是使用 limit 語法。
+
+code[top_10_tax_payments.sql].查詢前10多繳稅額紀錄
+select * 
+from tax_payments
+order by amount desc
+limit 10
+::
+
+ronum 虛擬欄
+------------
+在 oracle 是以虛擬欄 rownum 來完成，
+取得前 10 筆的員工名單如下：
+
+code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
+select * 
+from tax_payments
+where rownum < 10
+order by amount desc
+::
+
+top
+---
+sql server 是用 top，此語法還提供比率的功能。
+
+code.語法
+SELECT TOP number [percent] table_column1, table_column2···
+FROM table_name;
+::
+
+code[top_10_tax_payments_rownum.sql].查詢前10多繳稅額紀錄
+select top 10 * 
+from tax_payments
+order by amount desc
+::
+
+code[top_10_tax_payments_rownum.sql].查詢繳稅額排名前半紀錄
+select top 50 percent * 
+from tax_payments
+order by amount desc
+::
+
+order_by
+--------
+查詢產出輸出資料表後，可以進行排序。
+若沒有指定排序，則紀錄將以任意順序傳回。 
+實際順序將取決於掃瞄和連接規劃類型和在磁盤上的順序，
+但是肯定不確定。
+順序只能在明確用 order by 定義才能確定。
+
+order by 子句定義排序順序，語法如下：
+
+code[order_by.bnf].
+select select_list
+	from table_expression
+	order by column1 [asc | desc] [, column2 [asc | desc] ...]
+::
+
+column1 等指向表頭定義的欄名。
+
+asc/desc
+--------
+定義的每個欄名都可附加 asc 或 desc，以指明排序方向。
+預設是 asc，表升序，先輸出小的數值，這裡的小是以 < 運算子的角度定義的。
+
+同理desc，表降序是以 > 運算子來判斷的。
+
+若定義多排序欄，
+則在前面的排序欄排序相等的情況下使用後面的排序做進一步排序。

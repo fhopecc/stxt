@@ -1,507 +1,366 @@
-條件式 
-======
-SQL 的查詢
-----------
+統計與字串處理
+==============
+統計與字串處理
+--------------
 講師：張簡稜剛
 
-日期：20091211
+日期：20091224
 
-select
+[group_by_having]group by 和 having
+-----------------------------------
+透過 where 的過濾資料表可續用 group by 進行分組，
+產出分組表，又可再續用 having 產出過濾分組表。
+
+code[group_by.bnf].
+select select_list
+    from ...
+    [where ...]
+    group by grouping_column_reference [, grouping_column_reference]...
+::
+
+分組運算
 --------
-從資料庫中檢索資料的過程或命令稱為查詢。 
-主要是使用 select 命令來定義查詢，
-select 命令建立一個暫時虛擬表。
+group by 會依分組欄集將相同分組值的紀錄當成一組，
+並對同組紀錄集作統計。
+分組欄集指定欄順序無任何意義。 
 
-定義顯示表頭
-------------
-code.select 語法
-select *
-from table_expression
-::
-最簡單表頭定義的是 *，
-表頭定義中 * 意指表頭為代表 from 資料表表示式所有欄。
-表頭定義也可選擇可用欄子集或者在檢索它們之前對欄值進行計算；
+分組後會將分組紀錄統計成一筆紀錄，
+此統計紀錄代表該組所有紀錄。 
 
-選出員工檔全部欄
-----------------
-code[select_star.sql].選出員工檔全部欄
-select * 
-from employees
-::
-假設一個資料表稱為employees，
-這條命令將從 employees 中檢索所有紀錄和欄。 
+select * from test1;
 
-from 定義查詢所要引用並作處理的的資料表，
-資料表引用可以是基本資料表，連接及子查詢的複雜構造。
+不可引用原有欄
+--------------
+select x from test1 group by x;
 
-from employees 是最簡單的資料表表示式，
-它只讀取了一個資料表 employees。
+在上述查詢裡，
+我們不能寫成 select * from test1 group by x，
+因為除了欄 x 裡，沒有其它值可以和每個組相關聯起來。
+分組欄集可以在表頭定義中引用是因為分組欄集在每組只有單一值。
 
-欄名引用
---------
-code.select 語法
-select c1, c2, ...
-from table_expression
-::
-另一種用逗號分隔的欄名陣列來定義表頭，
-每個欄名為 from 子句定義資料表中實際欄名或別名。。
+若資料表被分組，那麼沒有在分組欄集的欄都不能引用，
+除非使用統計表示式。
 
-是本局辦理研習時，
-要產出所有員工的簽到表可以[emp_namelist.sql]表示，
-此 sql 表示員工表取出所有員工名稱組成新的表。
+一個帶統計表示式的例子是：
 
-表名引用
---------
-code.select 語法
-select t1.c1, t2.c2, ...
-from table_expression
-::
+select x, sum(y) from test1 group by x;
 
-若超過一個資料表有相同欄名，那麼還必須指定表名或表別名。
+這裡的 sum 是一個統計函數，
+它在整個組上計算一個數值。
 
-code[emp_namelist.sql].員工部門名單
-select e.name, d.name dep
-from employees e join departments d on e.dep_id = d.id
-::
+distinct 同義式 
+---------------
+僅有分組欄集而沒有統計表示式的分組實際上等同計算了欄值中獨立數值的集合，
+可以用 distinct 子句實現，如下式：
 
-值表示式
---------
-值表示式會為結果表每一筆紀錄進行一次計算，
-計算之前用該欄的數值代換任何值表示式裡引用的欄名。 
+select x from test1 group by x;
 
-下式表示各人出生年份。
+select distinct x from test1;
 
-code[birth_year.sql].各人出生年份
-select name, substr(birthday, 0, 4) as year 
-from humans
-::
+這裡是另外一個例子：它計算每種產品的總銷售額。
+「而不是所有產品的總銷售額」。
 
-每位員工月薪為幾美金
---------------------
-比如若 employees 表頭有 name 和 salary 的欄，
-分別代表員工名稱及月薪，
-則下式表每位員工月薪為幾美金：
+select pid, p.name, (sum(s.units) * p.price) as sales
+  from products p left join sales s using ( pid )
+  group by pid, p.name, p.price;
 
-code[salary_in_dollar.sql].每位員工月薪為幾美金
-select name, salary / 34 
-from employees;
-::
+在這個例子裡，欄 pid， p.name，和p.price必須在group by子句裡，
+因為它們都在查詢表頭定義裡被引用到。
+「根據產品資料表具體的設置的不同，
+名字和價格可能和產品 id 完全無關，
+因此理論上額外的分組可能是不必的，
+但是這些尚未實現。」 
 
-常數引用
---------
-值表示式的並不一定要有引用來自 from 子句中表表示式裡面的表的欄名， 
-可以有任意常數。
+欄s.units不必在group by列資料表裡，
+因為它只是在一個統計表示式「sum(...)」 裡使用，
+它代資料表一組產品的銷售額。對於每種產品，
+這個查詢都傳回一個該產品的所有銷售額的總和。
 
-下式產出同員工筆數的體溫正常及不正常標籤，可拿來作門禁用。
+在嚴格的 SQL 裡，group by只能對源資料表的列進行分組，
+但 postgresql 把這個擴展為也允許group by那些在表頭定義中的字串。
+也允許對值表示式進行分組，而不僅是簡單的字串．
 
-code[temp_tag.sql].體溫標籤
-select 'normal', 'fever'
-from employees
-::
+若一個資料表已經用group by子句分了組，
+然後您又只對其中的某些組感興趣，
+那麼就可以用having子句，它很像where子句，
+用於刪除一個分了組的資料表中的一些組。 語法是：
 
-可以省略值表示式而用 select 命令當做一個計算器：
+select select_list from ... [where ...] group by ... 
+having boolean_expression
+在 having 子句中的表示式可以引用分組的表示式和未分組的表示式
+「後者必須涉及一個統計函數」。
 
-code[select_no_from.sql].
-select 3 * 4;
-::
+例子：
 
-函數引用
---------
-表頭定義裡的表示式也可為函數，
-比如，可以呼叫函數 random()：
+select x, sum(y) from test1 group by x having sum(y) > 3;
 
-code[select_random.sql].
-select random();
-::
+select x, sum(y) from test1 group by x having x < 'c';
+然後是一個更現實的例子：
 
-別名
+select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
+    from products p left join sales s using (product_id)
+    where s.date > current_date - interval '4 weeks'
+    group by product_id, p.name, p.price, p.cost
+    having sum(p.price * s.units) > 5000;
+
+在上例裡，where子句用於那些非分組欄集選擇資料行。 
+「表示式只是對那些最近四周發生的銷售為真」。
+而 having 子句選擇那些單價超過 5000 的組的行。
+請注意統計函數不需要在查詢中的所有地方都一樣。
+
+[statics]統計函數
+-----------------
+table[tax_pay_table].繳稅檔
+編 納稅            
+號 義務人 繳納日期 鄉鎮 稅種   金額
+== ====== ======== ==== ====== ====
+ 1 李白   0981107  鳳林 地價稅 1000 
+ 2 李白   0980307  鳳林 土增稅  420 
+ 3 李白   0980307  鳳林 契稅    320 
+ 4 杜甫   0980501  花蓮 房屋稅  200
+ 5 杜甫   0980401  花蓮 牌照稅 7120
+ 6 杜甫   0980301  花蓮 地價稅  200
+ 7 蘇軾   0980402  玉里 土增稅  300
+ 8 蘇軾   0981102  玉里 地價稅  300
+ 9 蘇軾   0980430  玉里 牌照稅 3060 
+10 蘇軾   0980430  玉里 契稅     70
+11 蘇軾   0980430  玉里 娛樂稅 4400
+12 蘇軾   0980430  玉里 房屋稅  200 
+== ====== ======== ==== ====== ====
+
+為什麼要有統計函數
+------------------
+當看報紙時，我們很少會從頭到尾逐字的讀，
+通常會先一覽全部的標題，
+當某個夠聳動的標題吸引住你後，
+你才會繼續讀這個標題之下的報導。
+
+標題扮演的角色就是一篇報導的摘要，
+也就是用最少的字(報紙標題很少超過20個字)來代表這篇文章，
+而且提供的資訊要能有效符合此文章的主題。
+
+統計函數就扮演上述報紙標題的角色，
+當看到 [tax_pay_table] 時，
+比如我想知道李白的繳稅金額，
+因為李白具有三筆紀錄，
+所以可能會用 (1000, 420, 320) 來表示繳稅金額，
+但太煩瑣了，我們想要用一個數字，
+來表示李白先生繳稅金額，
+這時就需要統計函數了。
+
+統計函數即是應用了所有母數整體的特性和數據的函數。
+所以統計函數雖只出現一個數目，
+但卻盡可能包含了整體數據的某一性質。
+
+總和
 ----
-code.語法
-name [as] alias
-::
-其中 name 為欄名，alias 為欄的別名，as 可加可不加。
+最常見的統計函數就是總和，把所有的數字加總起來，
+像李白的繳稅金額總和為 1740 可用來表示李白的繳稅金額這個特質。
 
-下式將職稱姓名欄別名為 name_title。
+總和通常用在數值型態的欄位，例如上述的繳稅金額。
 
-code[name_title_list.sql].職稱姓名表
-select name || title as name_title
-from employees
-::
-
-查詢表頭欄名和在 from 子句裡的欄名是不同。 
-
-預設欄名
---------
-若表頭未定義欄別名，則系統會賦予預設值。
-對欄值引用， 預設是欄名。
-對於函數調用，預設是函數名。
-對於複雜表示式，系統應生成一個通用名。
-
-對[select_no_from.sql]會產出下表，欄名為表示式文字表示。
-
-table[select_no_from].
-3 * 4
-=====
-   12
-=====
-
-distinct
---------
-若兩筆紀錄裡至少有一欄值不同，
-則此兩筆紀錄為相異，否則為相同。
-
-若於 select 後加入 distinct 修飾，則合併相同紀錄。
-
-列出本局人員具有的職稱。
-
-code[title_list.sql].本局人員職稱列表
-select distinct title
-from employees
-::
-
-相對 distinct 是 all，因它是預設值，所以通常不寫。
-
-兩個空值認為是相同的。
-
-from
+次數
 ----
-from 定義查詢所要引用並作處理的的資料表。
+另外一種常見的統計函數是次數，
+次數是針對某個欄位條件出現頻率，
+像杜甫的繳稅次數為 3 次。
 
-code[from.bnf]
-from table_reference [, table_reference [, ...]]
-::
-
-資料表引用
-----------
-code[table_reference.bnf]
-table_reference = basetable_name | derived_table_expression
-::
-
-資料表引用為基本資料表名稱或衍生資料表。
-
-基本資料表
-----------
-最簡單的資料表引用是引用磁碟上的一個資料表，
-即基本資料表。
-
-資料表別名
-----------
-from 的資料表引用可給定一個臨時別名，
-讓查詢其它部份可簡單引用此衍生資料表，
-此別名稱為資料表別名。
-
-別名可以是任意識別字。
-
-要建立一個資料表別名，如下式：
-
-from employees as e
-
-或者
-
-from employees as e
-
-as 關鍵字目前沒意義。 
-
-員工對應主管名單
-----------------
-資料表別名的典型應用是給長資料表名賦予比較短的識別字，
-好讓連接子句更好讀一些。比如：
-
-code[emp_boss_list.sql].員工對應主管名單  
-select e1.name, e2.name as boss
-from employees e1 join employees e2 
-     on (e1.boss_id = e2.id)
-::
-
-別名覆蓋原名
-------------
-別名成為其原資料表引用的新名稱，
-且不再能用該原資料表引用名去引用它了。
-因此下式是不合法的 sql 語法。
-
-code[alias_cover_ori.sql].
-select employees.name 
-from employees e
-::
-
-括弧用於解決歧義，
-下式將連接的結果賦予別名 b：
-
-select * from (masters as a cross join angles) as m
-
-若給 join 子句附加別名，
-則該別名就會隱藏 join 裡其它表名。比如
-
-code[alias_cover_outer.sql].
-select e.name
-from employees e natural join angles as a
-::
-
-是合法 sql，但是下式：
-
-code[alias_cover_outer.sql].
-select e.name
-from (employees e natural join angles) as a
-::
-是不合法的，資料表別名 e 在外查詢是看不到的。
-
-衍生資料表
-----------
-資料表引用可以各種方法修改或組合基本資料表，
-其結果為衍生資料表。
-
-衍生資料表包含子查詢，資料表連接或上述組合。
-
-子查詢
+平均值
 ------
-子查詢就是任意的 select 語句，邏輯上代表一個暫存表。
+整體如果均勻分配，每一個成員應該分配得到的數目，
+像上述每個人平均繳的地價稅為 500 元。
 
-子查詢可以使用外查詢變數，
-這些變數在該子查詢的任何一次計算中視為常數。
-
-如[emp_are_civ.sql]便引用其外查詢的表變數「e」。
-
-定義子查詢必須括弧且賦予一個別名，如下式：
-
-from (select * from table1) as alias_name
-
-此例等效於下式：
-
-from table1 as alias_name 
-
-join
-----
-資料表引用可串接不同的資料表形成一個暫時的衍生資料表，
-串接共分成以下幾種：
-* cross join
-* inner join
-* natural join
-* left join
-* right join
-* full join
-
-cross join
-----------
-code.語法
-t1 cross join t2
-::
-cross join 即為關連式代數的積，
-將 t1 和 t2 組合成新資料表，
-新資料表中每筆紀錄包含 t1 所有欄位於後加上 t2 所有欄位。
-
-如果兩資料表分別有 n 和 m 筆紀錄，連接後資料表將有 n * m 筆紀錄。
-
-matches.sql
------------
-[matches.alg]對應的 SQL 如下：
-
-code[matches.sql].
-select a.name angle, m.name master
-from angles a cross join masters m
-::
-
-多資料表積
-----------
-code[matches.bnf].
-from t1[, t2, t3]
-::
-
-若資料表引用以逗號分隔字串定義多個資料表， 
-則資料表會依序以 cross join 形成一個衍生資料表，
-所以下式：
-
-from t1 cross join t2 
-
-等效於下式：
-
-from t1, t2
-
-故 [matches.sql] 可改寫成如下：
-
-code[matches_comman.sql].
-select a.name angle, m.name master
-from angles a, masters m
-::
-
-以 inner join 表達 cross join
-------------------------------
-它還等效於下式條件連接：
-
-from t1 inner join t2 on true。
-
-故 [matches.sql] 可改寫成如下：
-
-code[matches_comman.sql].
-select a.name angle, m.name master
-from angles a inner join masters m on true
-::
-
-連接條件
---------
-join 連接條件可使用 on, using 及 natural 定義。
-
-連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
-
-若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
-則這兩筆紀錄配對在一起。
-
-on 
---
-code.語法
-t1 join t2 on boolean_expression
-::
-on 子句是最常見的連接條件的類型，
-它使用和 where 子句相同的謂詞表示式來定義連接條件，
-如下例：
-
-code[emp_boss_list.sql]
-
-using 
------
-code[using.bnf].語法
-t1 join t2 using ( c1, c2, ... )
-::
-using 利用逗號分隔字串定義一組連接欄名組， 
-連接欄名組的所有欄名必須是兩個連接資料表所共有，
-具各表的配對紀錄的連接欄名組其值必須相同，
-最後結果表之表頭為連接欄名組加上各個資料表的所有其它欄位。 
-
-由上述操作定義可知下式：
-
-using (a, b, c) 
-
-等效於 
-
-on (t1.a = t2.a and t1.b = t2.b and t1.c = t2.c) 
-    
-但若用 on 定義則結果表頭會有重覆連接欄名組(a, b, c)， 
-而用 using 則結果表頭只會有一組連接欄名組(a, b, c)。
-
-code[emp_angle.sql].員工有參加聯誼活動名單
-select * 
-from employees e join angles using(name)
-::
-
-natural
--------
-code[natural_join.bnf].語法
-t1 natural join t2
-::
-
-natural 是 using 的簡寫形式，
-它會轉成一組 using 之連接欄名組，
-其由兩個連接資料表都出現了的欄名組成。
-同 using，結果表頭只會有一組連接欄名組(a, b, c)。
-
-code[emp_angle_natural.sql].員工有參加聯誼活動名單
-select * 
-from employees e natural join angles
-::
-
-連接類型
---------
-SQL 的連接類型如下列：
-
-* inner join
-* natural join
-* left join
-* right join
-* full join
-
-所有 join 類型都可為 inner 和 outer。
-
-預設連接類型是 inner，但 left，right，和 full 預設類型為 outer。
-
-inner join
-----------
-code.語法
-t1 [inner] join t2 on boolean_expression
-::
-連接條件判斷來自兩個源資料表中的那些紀錄配對一起。
-
-若兩個分別來自 t1 和 t2 的紀錄符合連接條件，
-則這兩筆紀錄配對在一起成為連接紀錄。
-
-如下例：
-
-code[emp_boss_list.sql]
-
-outer join
-----------
-inner join 要符合連接條件的資料才會被選出。
-如果想要某表中每一筆的資料，即使它的值在另一個表中有沒有出現，
-那該怎麼辦呢？這時就需用到 outer join 的指令。
-
-outer join 是作用在兩個表上的運算子，
-其將表分成主表及副表，
-原本相等合併除去所有不滿足合併條件的紀錄，
-而外部合併則保留主表的所有紀錄，
-
-若沒有副表的紀錄則副表的欄設為 null 值。
-
-左外部合併運算子其左方表的是主表，右方表為副表；
-
-右外部合併運算子其右方表的是主表，左方表為副表。
-
-left outer join
----------------
-code.語法
-t1 left outer join t2 on boolean_expression
-::
-先執行一次內連接，
-然後為 t1 不滿足連接條件的紀錄傳回一個連接紀錄， 
-該連接紀錄裡對應 t2 的紀錄用空值補齊。
-
-因此產出的連接資料表裡無條件地至少包含來自 t1 裡的每一筆紀錄。
-
-code[emp_boss_list.sql].員工對應主管名單（含無主管員工） 
-select e1.name, e2.name as boss
-from employees e1 left join employees e2 
-     on (e1.boss_id = e2.id)
-::
-
-right outer join
+[string]字元類型
 ----------------
-code.語法
-t1 right outer join t2 on boolean_expression
-::
-先執行一次內連接，
-然後為 t2 不滿足連接條件的紀錄傳回一個連接紀錄， 
-該連接紀錄裡對應 t1 的紀錄用空值補齊。
+SQL 定義了兩種基本的字元類型： 
 
-因此產出的連接資料表裡無條件地至少包含來自 t2 裡的每一筆紀錄。
+table.字元類型
+名字                             描述
+================================ ======================
+character varying(n), varchar(n) 變長，有長度限制
+character(n), char(n)            定長,不足補空白
+text                             變長，無長度限制
+================================ ======================
 
-code[emp_boss_list_right.sql].員工對應主管名單（含無主管員工） 
-select e1.name as boss, e2.name
-from employees e1 right join employees e2 
-     on (e1.id = e2.boss_id)
-::
+對 character varying(n) 和 character(n) 而言，
+n 是一個正整數，指類型最多儲存 n 字元長字串。 
+試圖儲存更長的字串到這些類型的字串裡會產生一個錯誤， 
+除非超出長度的字元都是空白，這種情況下該字串將被截斷為最大長度。
 
-full outer join
----------------
-code.語法
-t1 full outer join t2 on boolean_expression
-::
-先執行一次左連接，再執行一次右連接，
-因此產出的連接資料表裡無條件地至少包含來自 t2 及 t1 的每一筆紀錄。
+若儲存字串的長度比 n 短， 
+類型 character 將會用空白填滿不足的長度；
+而類型為 character varying 的數值將儲存較短的字串。
 
-套疊連接
+若強制將字串轉換成 character(n) 或者 character varying(n)， 
+那麼超過長度的字串將被截斷成 n 個字元，而不會拋出錯誤。
+
+char(n) 和 varchar(n) 分別是 character(n) 和 character varying(n) 的別名， 
+
+沒有長度定義 n 的 character 等於 character(1)；
+
+若不帶長度定義 n 的 character varying，
+則該類型接受任何長度的字串。 
+
+text 類型，它可以儲存任何長度的字串。 
+儘管類型 text 不是SQL標準，但被很多 SQL 資料庫系統支援。
+
+類型 character 字串都用空白填充到指定的長度 n，
+並且以這種方式儲存和顯示。
+不過填充的空白在語意上並不重要。 
+在比較兩個 character 字串時，填充的空白都被忽略，
+在轉型成其它字串類時，character 字串空白會被刪除。
+但在 character varying 和 text 字串中，
+結尾的空白語意上是有含義的。
+
+這些類型的儲存需求是 4 字元加上實際的字串，
+若是 character 的話再加上填充的字元。
+
+長字串會自動被系統壓縮， 
+因此實際儲存空間需求可能會更少些。
+長字串也會儲存在後台資料表裡面，
+這樣就不會干擾對短字串值的快速訪問。 
+允許儲存的最長字串大概是 1 gb。 
+
+允許在資料類型定義的 n 最大值比這還小。 
+修改這個行為沒有甚麼意義，
+因為在多字元編碼下字元和字元的數目可能差別很大。 
+若您想儲存沒有特定上限的長字串，
+那麼使用 text 或者沒有長度定義詞的 character varying，
+而不要選擇一個任意長度限制。
+
+這三種類型之間沒有性能差別，
+只不過是在使用填充空白的類型的時候增加了儲存尺寸，
+通常應該使用 text 或者 character varying。
+
+字串函數和運算子
+----------------
+本節描述檢查和操作字串的函數和運算子。 
+
+字串包括 character， character varying，和 text 類型值。
+除非另外說明，所有下面列出的函數都可以處理這些類型， 
+不過要小心的是，在使用 character 類型的時候，
+它的自動填充的潛在影響。
+通常這裡描述的函數也能用於非字串 類型，
+我們只要先把那些資料轉化為字串資料表現形式就可以了。 有些函數還可以處理位串類型。
+
+SQL 定義了一些字串函數，
+它們有指定的語法，
+裡面是用某種特定的關鍵字，而不是逗號來分隔參數。 
+
+字串連接運算子  
+--------------
+string || string
+
+「||」為字串連接運算子，如下例：
+
+select 'sql' || ' tutorial' => 'sql tutorial'
+
+bit_length
+----------
+bit_length(string)    
+
+字串所佔的 byte 長度，如下例：
+
+select bit_length('jose') => 32
+
+char_length
+-----------
+char_length(string) 或 character_length(string) 
+    
+字串中的字元個數，如下例：    
+
+char_length('jose') => 4
+
+octet_length
+------------
+octet_length(string) => integer
+
+字串中的字元數
+
+octet_length('jose') => 4
+
+convert
+-------
+convert(string using conversion_name) 
+
+使用指定的轉換名字改變編碼。轉換可以透過 create conversion 定義。
+當然系統裡有一些預定義的轉換名字。
+參閱 table 9-7 獲取可用的轉換名。    
+
+convert('sql tutorial' using iso_8859_1_to_utf_8)
+
+傳回 unicode (utf-8) 編碼的 'sql tutorial'
+
+lower
+-----
+lower(string)
+    
+把字串轉化為小寫
+
+lower('Tom') => tom
+
+upper
+-----
+upper(string) => text
+
+把字串轉化為大寫。
+
+upper('tom') => TOM
+
+position
 --------
-由於連接接受兩個資料表並傳回一個連接資料表，
-故所有類型的連接都可相互套疊，
-並能用括弧來控制連接順序，如下式：
+position(substring in string) => integer
 
-from (t1 join t2) join t3
+定義的子字串的位置
 
-t1, t2 先連接後的結果表再與 t3 連接。
+position('om' in 'thomas') => 3
 
-左連結性
+overlay
+-------
+overlay(string placing string from integer [for integer])
+
+替換子字串    
+
+overlay('txxxxas' placing 'hom' from 2 for 4) => thomas
+
+position
 --------
-join 是左連結性，所以若沒有括弧，則 join 子句是從左向右套疊。
-故下式：
+position(substring in string) => integer
 
-from t1 join t2 join t3
+指定的子字串的位置    
 
-等同於下式：
+position('om' in 'thomas') => 3
 
-from (t1 join t2) join t3
+substring
+---------
+substring(string [from integer] [for integer]) => text     
+
+抽取子字串    
+
+substring('thomas' from 2 for 3) => hom
+
+substring(string from pattern) => text
+
+抽取匹配 posix 正則表示式的子字串    
+
+substring('thomas' from '...$') => mas
+
+substring(string from pattern for escape) => text    
+
+抽取匹配SQL正則表示式的子字串
+
+substring('thomas' from '%#"o_a#"_' for '#') =>     oma
+
+trim
+----
+trim([leading | trailing | both] [characters] from string) => text
+
+從字串 string 的開頭、結尾或兩邊
+刪除只包含 characters 「預設是一個空白」的最長的字串。
+
+trim(both 'x' from 'xtomxx')i => tom
+
+其它
+----
+set sqlblanklines on
+讓 SQL*plus 可辨識含空白行的字串值
