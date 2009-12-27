@@ -40,11 +40,11 @@ class UnitTest(unittest.TestCase):
 
 2.用戶端首先必須與 KDC 進行相互認證的工作，
   此一工作即是使用一對一認證。
-
 #.用戶端與 KDC 在確認彼此的身份之後，
   用戶端即送出 Msg1 訊息給 KDC：
 
   Msg1：“用戶端要與伺服端進行認證”
+Msg1：“用戶端要與伺服端進行認證”
 '''
         doc = booker.parse(case)
 
@@ -62,26 +62,67 @@ class UnitTest(unittest.TestCase):
 
     def testMList(self): 
         case='''#.安全性方法(IPsec  Security Methods)：
-  管理員可使用內建的兩種安全性方法：
-
   #.高(High)：使用ESP協定。
+    * 何謂 ESP
+
+      是吧
+      
+      多層
+      * 果然為 ESP
+        #.其實還滿簡單的
+          * OK啦
+            這是真的，
+            多層的
   #.中(Medium)：使用AH協定。
   #.自訂(Custom)：若要同時使用AH或ESP，可在此自訂安全性方法。
-
 '''
         doc = booker.parse(case)
 
         list = doc.children[0]
         l1 = list.children[0]
-        self.assertEqual('安全性方法(IPsec  Security Methods)：' \
-                         '管理員可使用內建的兩種安全性方法：', l1.value)
+        self.assertEqual('安全性方法(IPsec  Security Methods)：' , 
+                          l1.value)
         self.assertEqual(1, len(l1.children))
 
-        l2list = l1.children[0]
-        self.assertEqual(3, len(l2list.children))
-        l2l2 = l2list.children[1]
-        self.assertEqual('中(Medium)：使用AH協定。', l2l2.value) 
+        l1list = l1.children[0]
+        l1l1 = l1list.children[0]
+        self.assertEqual('高(High)：使用ESP協定。' , 
+                          l1l1.value)
+        self.assertEqual(1, len(l1l1.children))
 
+        l2list = l1l1.children[0]
+        self.assertEqual('list', l2list.type)
+
+
+        l2l1 = l2list.children[0]
+        self.assertEqual(3, len(l2l1.children))
+
+        para = l2l1.children[0]
+        self.assertEqual('para', para.type)
+
+        para = l2l1.children[1]
+        self.assertEqual('para', para.type)
+
+        l3list = l2l1.children[2]
+        self.assertEqual('list', l3list.type)
+
+        l3l1 = l3list.children[0]
+        self.assertEqual(1, len(l3l1.children))
+
+        l4list = l3l1.children[0]
+        self.assertEqual('olist', l4list.type)
+
+        l4l1 = l4list.children[0]
+        self.assertEqual(1, len(l4l1.children))
+ 
+        l5list = l4l1.children[0]
+        self.assertEqual('list', l5list.type)
+
+        l5l1 = l5list.children[0]
+        self.assertEqual(0, len(l5l1.children))
+        self.assertEqual('OK啦這是真的，多層的',
+                          l5l1.value)
+        
     def testTheorem(self):
         case ='''theorem[reflective].反身性規則
   若 a 是一個欄位集，且 a 包含 b，則 a → b。
@@ -208,18 +249,62 @@ t4               B.update(p)
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
 
+    def testSect1(self):
+        case = '''[db]簡明資料庫實務、理論及考試參考
+==================================
+本書源自我的私人筆記，
+而我希望以嚴謹的數學方法來組織這個筆記，
+所以資料庫理論都是以定義為起始，
+再附帶用各種定理描述理論的結果，
+而每個定理希望都能給出形式化證明。
+'''
+        doc = booker.parse(case)
+        s1 = doc.children[0]
+        self.assertEqual('sect1', s1.type)
+        self.assertEqual('db', s1.name)
+        self.assertEqual('簡明資料庫實務、理論及考試參考', s1.value)
+
+        self.assertEqual(1, len(s1.children))
+        
+        p = s1.children[0]
+        self.assertEqual('para', p.type)
+
+        case = '''電腦系統管理
+============
+電腦主機安全管制作業
+--------------------
+資安事件應變計畫及處理作業程序
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+由科長影印
+'''
+        doc = booker.parse(case)
+        s1 = doc.children[0]
+        self.assertEqual('sect1', s1.type)
+        self.assertEqual(1, len(s1.children))
+        
+        s2 = s1.children[0]
+        self.assertEqual('sect2', s2.type)
+        self.assertEqual(1, len(s2.children))
+    
+        s3 = s2.children[0]
+        self.assertEqual('sect3', s3.type)
+        self.assertEqual(1, len(s3.children))
+
+        p = s3.children[0]
+        self.assertEqual('para', p.type)
 
 if __name__ == '__main__':
 #    unittest.main()
     tests = unittest.TestSuite()
+    # TABLE parsing will failed in yacc debug mode    
+    '''tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testPara"))
-    tests.addTest(UnitTest("testList"))
-    tests.addTest(UnitTest("testMList"))
     tests.addTest(UnitTest("testTheorem"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testQuestion"))
     tests.addTest(UnitTest("testCode"))
-    # TABLE parsing will failed in yacc debug mode    
-    tests.addTest(UnitTest("testTable"))
+    tests.addTest(UnitTest("testMList"))
+    tests.addTest(UnitTest("testSect1"))'''
+    tests.addTest(UnitTest("testList"))
     runner = unittest.TextTestRunner()
     runner.run(tests)
