@@ -1,6 +1,6 @@
 # coding=utf8
 from stxt_tree import DocTreeNode
-import sys, lex, yacc, unicodedata, unittest
+import sys, lex, yacc, unicodedata
 
 # Visual Length:
 # These functions must pass unicode string as arguments
