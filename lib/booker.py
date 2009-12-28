@@ -232,4 +232,17 @@ parser = yacc.yacc()
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
    return parser.parse(source, lexer=lexer, debug=1)
-#    return parser.parse(source, lexer=lexer)
+   return parser.parse(source, lexer=lexer)
+
+def usage():
+    usage = os.path.basename(__file__) + " filename\n"
+    usage += 'filename: structed text file\n'
+    usage += 'dump the doctree'
+    return usage
+
+if __name__ == '__main__':
+    try:
+        with open(sys.argv[1]) as f:
+            d = parse(f.read())
+    except IndexError:
+        print usage()
