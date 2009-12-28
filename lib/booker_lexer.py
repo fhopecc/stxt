@@ -9,18 +9,17 @@ states = (
 )
 
 tokens = [
-          'INSERT', 
           'H1SEP', 'H2SEP', 'H3SEP', 'H4SEP', 'H5SEP', 
-          'EMPTYLINE', 
-          'LINE', 'L1LINE', 'L2LINE', 'L3LINE', 
-          'L4LINE', 'L5LINE', 'L6LINE',  
-          'LI', 'L1LI', 'L2LI', 'L3LI', 'L4LI', 'L5LI', 
-          'OL', 'L1OL', 'L2OL', 'L3OL', 'L4OL', 'L5OL', 
-          'IMAGE', 'DEFINE', 'THEOREM', 'QUESTION',
-          'PROOF', 'ANSWER', 
+          'DEFINE', 'THEOREM', 'PROOF', 
+          'QUESTION', 'ANSWER', 
+          'IMAGE',
           'FOOTNOTE', 'CITATION', 
           'CODE', 'CODEBLOCK',
-          'TABLE', 'TABLEBLOCK'
+          'TABLE', 'TABLEBLOCK',
+          'INSERT', 
+          'LINE', 'INDENT', 
+          'LI', 'OL', 
+          'EMPTYLINE', 
          ] 
 
 t_H1SEP = r'^=+$'
@@ -110,28 +109,20 @@ def t_INSERT(t):
     return t
 
 def t_LI(t):
-    r'^(?P<s>[ ]*)(\*[ ](?P<c>.*))'
-    s = t.lexer.lexmatch.group('s')
-    level = len(s) / 2
+    r'^\*[ ](?P<c>.*)'
     t.value = t.lexer.lexmatch.group('c')
     t.value = DocTreeNode('listitem', t.value)
-    if level > 0:
-        t.type = 'L%sLI' % str(level)
     return t
 
 def t_OL(t):
-    r'^(?P<s>[ ]*)((?P<n>\#|\d+)\.(?P<c>.*))'
-    s = t.lexer.lexmatch.group('s')
+    r'^(?P<n>\#|\d+)\.(?P<c>.*)'
     n = t.lexer.lexmatch.group('n')
-    level = len(s) / 2
     t.value = t.lexer.lexmatch.group('c')
     t.value = DocTreeNode('olistitem', t.value)
     if n != '#':
         t.value.number = int(n)
     else:
         t.value.number = '#'
-    if level > 0:
-        t.type = 'L%sOL' % str(level)
     return t
 
 def t_HEAD(t):
@@ -158,17 +149,19 @@ def t_FOOTNOTE(t):
     return t
 
 def t_LINE(t):
-    r'(?P<s>[ ]*)(?P<l>[^ \n=\-~*^<#:].+)'
-    s = t.lexer.lexmatch.group('s')
-    level = len(s) / 2
+    r'^(?P<l>[^ \n=\-~*^<#:].+)'
     t.value = t.lexer.lexmatch.group('l')
-    if level > 0:
-        t.type = 'L%sLINE' % str(level)
     return t
 
 def t_EMPTYLINE(t):
     r'^[ ]*\n'
     t.lexer.lineno += t.value.count('\n')
+    t.value = ''
+    return t
+
+def t_INDENT(t):
+    r'^[ ][ ](?P<l>.+)$'
+    t.value = t.lexer.lexmatch.group('l')
     return t
 
 def t_ANY_newline(t):

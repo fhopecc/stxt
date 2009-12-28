@@ -74,7 +74,7 @@ Massachusetts: Addison-Wesley, 1989.'''
         tok = lexer.token()
         self.assertEqual(tok.type, 'ANSWER')
     
-    def testSEP(self):
+    def testHSEP(self):
         case = '''=========
 ---------
 ~~~~~~~~~
@@ -105,6 +105,7 @@ Massachusetts: Addison-Wesley, 1989.'''
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
         self.assertEqual('EMPTYLINE', t.type)
+        self.assertEqual('', t.value)
 
         t = lexer.token()
         self.assertEqual(3, t.lexer.lineno)
@@ -122,14 +123,14 @@ Massachusetts: Addison-Wesley, 1989.'''
 
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1LINE', t.type)
+        self.assertEqual('INDENT', t.type)
 
         t = lexer.token()
         self.assertEqual('EMPTYLINE', t.type)
         self.assertEqual(4, t.lexer.lineno)
 
         t = lexer.token()
-        self.assertEqual('L1LINE', t.type)
+        self.assertEqual('INDENT', t.type)
         self.assertEqual(4, t.lexer.lineno)
 
     def testInclude(self):
@@ -154,14 +155,9 @@ Massachusetts: Addison-Wesley, 1989.'''
 
     def testOL(self):        
         case = '''#.普通條列
-  1.一層縮排條列
-    #.二層縮排條列
-      12.三層縮排條列
-        3.四層縮排條列
-          #.五層縮排條列
+12.數字條列
         '''
         lexer.input(case)
-        lexer.lineno = 1
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('OL', t.type)
@@ -170,43 +166,13 @@ Massachusetts: Addison-Wesley, 1989.'''
 
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1OL', t.type)
-        self.assertEqual(1, t.value.number)
-        self.assertEqual('一層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('L2OL', t.type)
-        self.assertEqual('#', t.value.number)
-        self.assertEqual('二層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(4, t.lexer.lineno)
-        self.assertEqual('L3OL', t.type)
+        self.assertEqual('OL', t.type)
         self.assertEqual(12, t.value.number)
-        self.assertEqual('三層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(5, t.lexer.lineno)
-        self.assertEqual('L4OL', t.type)
-        self.assertEqual(3, t.value.number)
-        self.assertEqual('四層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(6, t.lexer.lineno)
-        self.assertEqual('L5OL', t.type)
-        self.assertEqual('#', t.value.number)
-        self.assertEqual('五層縮排條列', t.value.value)
-
+        self.assertEqual('數字條列', t.value.value)
+ 
  
     def testLI(self):        
-        case = '''* 普通條列
-  * 一層縮排條列
-    * 二層縮排條列
-      * 三層縮排條列
-        * 四層縮排條列
-          * 五層縮排條列
-        '''
+        case = '* 普通條列'
         lexer.input(case)
         lexer.lineno = 1
         t = lexer.token()
@@ -214,38 +180,10 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual('LI', t.type)
         self.assertEqual('普通條列', t.value.value)
 
-        t = lexer.token()
-        self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1LI', t.type)
-        self.assertEqual('一層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('L2LI', t.type)
-        self.assertEqual('二層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(4, t.lexer.lineno)
-        self.assertEqual('L3LI', t.type)
-        self.assertEqual('三層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(5, t.lexer.lineno)
-        self.assertEqual('L4LI', t.type)
-        self.assertEqual('四層縮排條列', t.value.value)
-
-        t = lexer.token()
-        self.assertEqual(6, t.lexer.lineno)
-        self.assertEqual('L5LI', t.type)
-        self.assertEqual('五層縮排條列', t.value.value)
-
     def testLine(self):        
         case = '''普通行
   一層縮排
     二層縮排
-      三層縮排
-        四層縮排
-          五層縮排
         '''
         lexer.input(case)
         lexer.lineno = 1
@@ -256,28 +194,13 @@ Massachusetts: Addison-Wesley, 1989.'''
 
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
-        self.assertEqual('L1LINE', t.type)
+        self.assertEqual('INDENT', t.type)
         self.assertEqual('一層縮排', t.value)
 
         t = lexer.token()
         self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('L2LINE', t.type)
-        self.assertEqual('二層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(4, t.lexer.lineno)
-        self.assertEqual('L3LINE', t.type)
-        self.assertEqual('三層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(5, t.lexer.lineno)
-        self.assertEqual('L4LINE', t.type)
-        self.assertEqual('四層縮排', t.value)
-
-        t = lexer.token()
-        self.assertEqual(6, t.lexer.lineno)
-        self.assertEqual('L5LINE', t.type)
-        self.assertEqual('五層縮排', t.value)
+        self.assertEqual('INDENT', t.type)
+        self.assertEqual('  二層縮排', t.value)
 
     def testCODEBLOCK(self):
         case = '''code[dep_id_not_unique.sql].非單人科室員工名單
@@ -335,14 +258,13 @@ name
 李美紅
 ======''', tb.value)
  
-
 if __name__ == '__main__':
-     unittest.main()
-#    tests = unittest.TestSuite()
-#    tests.addTest(UnitTest("testEMPTYLINE"))
-#    tests.addTest(UnitTest("testLine"))
-#    tests.addTest(UnitTest("testLI"))
-#    tests.addTest(UnitTest("testHSEP"))
-#    tests.addTest(UnitTest("testINSERT"))
-#    runner = unittest.TextTestRunner()
-#    runner.run(tests)
+    unittest.main()
+    '''tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testEMPTYLINE"))
+    tests.addTest(UnitTest("testLine"))
+    tests.addTest(UnitTest("testLI"))
+    tests.addTest(UnitTest("testHSEP"))
+    tests.addTest(UnitTest("testINSERT"))
+    runner = unittest.TextTestRunner()
+    runner.run(tests)'''

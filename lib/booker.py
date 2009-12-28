@@ -127,35 +127,35 @@ def p_content(p):
     p[0] = p[1]
 
 def p_define(p):
-    '''define : DEFINE l1contents
+    '''define : DEFINE subdoc
     '''
     p[0] = p[1]
     for c in p[2]:
         p[0].append(c)
 
 def p_theorem(p):
-    '''theorem : THEOREM l1contents
+    '''theorem : THEOREM subdoc
     '''
     p[0] = p[1]
     for c in p[2]:
         p[0].append(c)
 
 def p_theorem_with_proof(p):
-    '''theorem : theorem PROOF l1contents'''
+    '''theorem : theorem PROOF subdoc'''
     p[0] = p[1]
     for c in p[3]:
         p[2].append(c)
     p[0].append(p[2])
 
 def p_question(p):
-    '''question : QUESTION l1contents
+    '''question : QUESTION subdoc
     '''
     p[0] = p[1]
     for c in p[2]:
         p[0].append(c)
 
 def p_question_with_answer(p):
-    '''question : question ANSWER l1contents'''
+    '''question : question ANSWER subdoc'''
     p[0] = p[1]
     for c in p[3]:
         p[2].append(c)
@@ -194,7 +194,7 @@ def p_list(p):
 
 def p_listitem(p):
     '''listitem : listhead
-                | listitem l1contents
+                | listitem subdoc
     '''
     if len(p) == 3: 
        for i, c in enumerate(p[2]): 
@@ -211,305 +211,25 @@ def p_listhead(p):
     p[1].is_onelinelabel = len(p) == 3
     p[0] = p[1]
 
-def p_l1contents(p):
-    '''l1contents : l1content
-                  | l1contents l1content
-                  | l1contents EMPTYLINE l1content
+def p_subdoc(p):
+    'subdoc : indent_block'
+    p[0] = parse(p[1], lexer= MutipleFileLexer()).children
+
+def p_indent_block(p):
+    '''indent_block : INDENT
+                    | indent_block EMPTYLINE
+                    | indent_block INDENT
     '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
+    if len(p) == 3:
+       p[1] += p[2] + '\n'
+    else: p[1] += '\n'
     p[0] = p[1]
-
-def p_l1content(p):
-    '''l1content : l1para
-                 | l1list
-    '''
-    p[0] = p[1]
-
-def p_l1para(p):
-    '''l1para : L1LINE
-              | l1para L1LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
-
-def p_l1list(p):
-    '''l1list : l1listitem
-              | l1list l1listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
-def p_l1listitem(p):
-    '''l1listitem : l1listhead
-                  | l1listitem l2contents
-    '''
-    if len(p) == 3: 
-       for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
-                p[1].value += c.value
-           else: p[1].append(c)
-    p[0] = p[1]
-
-def p_l1listhead(p):
-    '''l1listhead : L1LI
-                  | L1OL
-                  | l1listhead EMPTYLINE
-    '''
-    p[1].is_onelinelabel = len(p) == 3
-    p[0] = p[1]
-
-def p_l2contents(p):
-    '''l2contents : l2content
-                  | l2contents l2content
-                  | l2contents EMPTYLINE l2content
-    '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_l2content(p):
-    '''l2content : l2para
-                 | l2list
-    '''
-    p[0] = p[1]
-
-def p_l2para(p):
-    '''l2para : L2LINE
-              | l2para L2LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
-
-def p_l2list(p):
-    '''l2list : l2listitem
-              | l2list l2listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
-def p_l2listitem(p):
-    '''l2listitem : l2listhead
-                  | l2listitem l3contents
-    '''
-    if len(p) == 3: 
-       for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
-                p[1].value += c.value
-           else: p[1].append(c)
-    p[0] = p[1]
-
-def p_l2listhead(p):
-    '''l2listhead : L2LI
-                  | L2OL
-                  | l2listhead EMPTYLINE
-    '''
-    p[1].is_onelinelabel = len(p) == 3
-    p[0] = p[1]
-
-def p_l3contents(p):
-    '''l3contents : l3content
-                  | l3contents l3content
-                  | l3contents EMPTYLINE l3content
-    '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_l3content(p):
-    '''l3content : l3para
-                 | l3list
-    '''
-    p[0] = p[1]
-
-def p_l3para(p):
-    '''l3para : L3LINE
-              | l3para L3LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
-
-def p_l3list(p):
-    '''l3list : l3listitem
-              | l3list l3listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
-def p_l3listitem(p):
-    '''l3listitem : l3listhead
-                  | l3listitem l4contents
-    '''
-    if len(p) == 3: 
-       for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
-                p[1].value += c.value
-           else: p[1].append(c)
-    p[0] = p[1]
-
-def p_l3listhead(p):
-    '''l3listhead : L3LI
-                  | L3OL
-                  | l3listhead EMPTYLINE
-    '''
-    p[1].is_onelinelabel = len(p) == 3
-    p[0] = p[1]
-
-def p_l4contents(p):
-    '''l4contents : l4content
-                  | l4contents l4content
-                  | l4contents EMPTYLINE l4content
-    '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_l4content(p):
-    '''l4content : l4para
-                 | l4list
-    '''
-    p[0] = p[1]
-
-def p_l4para(p):
-    '''l4para : L4LINE
-              | l4para L4LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
-
-def p_l4list(p):
-    '''l4list : l4listitem
-              | l4list l4listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
-def p_l4listitem(p):
-    '''l4listitem : l4listhead
-                  | l4listitem l5contents
-    '''
-    if len(p) == 3: 
-       for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
-                p[1].value += c.value
-           else: p[1].append(c)
-    p[0] = p[1]
-
-def p_l4listhead(p):
-    '''l4listhead : L4LI
-                  | L4OL
-                  | l4listhead EMPTYLINE
-    '''
-    p[1].is_onelinelabel = len(p) == 3
-    p[0] = p[1]
-
-def p_l5contents(p):
-    '''l5contents : l5content
-                  | l5contents l5content
-                  | l5contents EMPTYLINE l5content
-    '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_l5content(p):
-    '''l5content : l5para
-                 | l5list
-    '''
-    p[0] = p[1]
-
-def p_l5para(p):
-    '''l5para : L5LINE
-              | l5para L5LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
-
-def p_l5list(p):
-    '''l5list : l5listitem
-              | l5list l5listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
-def p_l5listitem(p):
-    '''l5listitem : l5listhead
-                  | l5listitem l6contents
-    '''
-    if len(p) == 3: 
-       for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
-                p[1].value += c.value
-           else: p[1].append(c)
-    p[0] = p[1]
-
-def p_l5listhead(p):
-    '''l5listhead : L5LI
-                  | L5OL
-                  | l5listhead EMPTYLINE
-    '''
-    p[1].is_onelinelabel = len(p) == 3
-    p[0] = p[1]
-
-def p_l6contents(p):
-    '''l6contents : l6content
-                  | l6contents l6content
-                  | l6contents EMPTYLINE l6content
-    '''
-    if len(p) == 4: p[2] = p[3]
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_l6content(p):
-    'l6content : l6para'
-    p[0] = p[1]
-
-def p_l6para(p):
-    '''l6para : L6LINE
-              | l6para L6LINE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
 
-def parse(source):
+def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
    return parser.parse(source, lexer=lexer, debug=1)
 #    return parser.parse(source, lexer=lexer)

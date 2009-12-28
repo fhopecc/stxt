@@ -297,14 +297,14 @@ if __name__ == '__main__':
 #    unittest.main()
     tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))
+    '''tests.addTest(UnitTest("testTable"))'''
+    tests.addTest(UnitTest("testSect1"))
+    tests.addTest(UnitTest("testDefine"))
+    tests.addTest(UnitTest("testCode"))
     tests.addTest(UnitTest("testPara"))
     tests.addTest(UnitTest("testTheorem"))
-    tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testQuestion"))
-    tests.addTest(UnitTest("testCode"))
-    tests.addTest(UnitTest("testMList"))
-    tests.addTest(UnitTest("testSect1"))'''
     tests.addTest(UnitTest("testList"))
+    tests.addTest(UnitTest("testMList"))
     runner = unittest.TextTestRunner()
     runner.run(tests)
