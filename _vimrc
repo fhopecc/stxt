@@ -1,4 +1,4 @@
-cd d:\stxt
+cd \stxt
 lang mes en_US
 
 set nocompatible
