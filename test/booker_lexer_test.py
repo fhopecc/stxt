@@ -257,7 +257,20 @@ name
 曹晶蓮
 李美紅
 ======''', tb.value)
- 
+
+    def testLexError(self):
+        '''case = '#w.angles'
+        lexer.input(case)
+        t = lexer.token()
+        self.assertEqual(1, t.lineno)'''
+
+        lexer.read(r'test/test_wrong.stx')
+        t = lexer.token()
+        self.assertEqual(1, t.lineno)
+        t = lexer.token()
+        self.assertEqual(2, t.lineno)
+        t = lexer.token()
+
 if __name__ == '__main__':
     unittest.main()
     '''tests = unittest.TestSuite()

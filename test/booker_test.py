@@ -269,13 +269,15 @@ t4               B.update(p)
         p = s1.children[0]
         self.assertEqual('para', p.type)
 
-        case = '''電腦系統管理
-============
-電腦主機安全管制作業
---------------------
-資安事件應變計畫及處理作業程序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-由科長影印
+    def testMSect1(self):
+        case = '''資料庫管理
+==========
+資料庫表格空間使用與管理相關作業紀錄
+------------------------------------
+資料庫使用申請單（近一年）、授權（近一年）及稽核機制（近三個月）
+---------------------------------------------------------------
+備份策略
+~~~~~~~~~~
 '''
         doc = booker.parse(case)
         s1 = doc.children[0]
@@ -297,7 +299,7 @@ if __name__ == '__main__':
 #    unittest.main()
     tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))'''
+    '''tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testSect1"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testCode"))
@@ -305,6 +307,7 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testTheorem"))
     tests.addTest(UnitTest("testQuestion"))
     tests.addTest(UnitTest("testList"))
-    tests.addTest(UnitTest("testMList"))
+    tests.addTest(UnitTest("testMList"))'''
+    tests.addTest(UnitTest("testMSect1"))
     runner = unittest.TextTestRunner()
     runner.run(tests)

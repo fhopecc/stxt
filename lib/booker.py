@@ -5,6 +5,10 @@ from stxt_tree import DocTreeNode
 import yacc, stxt_tb_parser
 from booker_lexer import *
 
+precedence = (
+    ('left', 'H2'),
+)
+
 def p_doc(p):
     '''doc : sect1
            | content 
@@ -20,8 +24,8 @@ def p_doc(p):
 
 def p_sect1(p):
     '''sect1 : h1
-             | sect1 content
-             | sect1 sect2
+             | sect1 sect2s
+             | sect1 contents sect2s
     '''
     if len(p) == 3:
         p[1].append(p[2])
@@ -36,6 +40,13 @@ def p_h1(p):
         sect.value = sect.name
     p[0] = sect
 
+def p_sect2s(p):
+    '''sect2s : sect2
+              | sect2s sect2'''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
+
 def p_sect2(p):
     '''sect2 : h2
              | sect2 content
@@ -46,13 +57,14 @@ def p_sect2(p):
     p[0] = p[1]
 
 def p_h2(p):
-    r'h2 : para H2SEP'
+    r'h2 : para H2SEP %prec H2'
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect2', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
     p[0] = sect
+
 
 def p_sect3(p):
     '''sect3 : h3
@@ -244,5 +256,6 @@ if __name__ == '__main__':
     try:
         with open(sys.argv[1]) as f:
             d = parse(f.read())
+            d.dump_type_tree()
     except IndexError:
         print usage()

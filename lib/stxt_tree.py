@@ -131,10 +131,10 @@ class Tree(object):
                 self.occurence = o
             self._count_occurence(type)
 
-    def print_type_tree(self, level_limit=10):
+    def dump_type_tree(self, level_limit=10):
         if self.height() < level_limit:
             print '*' * self.height() + self.type
-        for c in self.children: c.print_type_tree(level_limit)
+        for c in self.children: c.dump_type_tree(level_limit)
 
     def print_postfix_tree(self):
         for c in self.children: c.print_postfix_tree()
