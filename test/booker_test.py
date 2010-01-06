@@ -278,13 +278,14 @@ t4               B.update(p)
 ---------------------------------------------------------------
 備份策略
 ~~~~~~~~~~
+備份策略
 '''
         doc = booker.parse(case)
         s1 = doc.children[0]
         self.assertEqual('sect1', s1.type)
-        self.assertEqual(1, len(s1.children))
+        self.assertEqual(2, len(s1.children))
         
-        s2 = s1.children[0]
+        s2 = s1.children[1]
         self.assertEqual('sect2', s2.type)
         self.assertEqual(1, len(s2.children))
     

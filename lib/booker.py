@@ -5,11 +5,6 @@ from stxt_tree import DocTreeNode
 import yacc, stxt_tb_parser
 from booker_lexer import *
 
-precedence = (
-    ('left', 'H1SEP'),
-    ('left', 'H2SEP'),
-)
-
 def p_doc(p):
     '''doc : sect1
            | content 
@@ -24,51 +19,29 @@ def p_doc(p):
         p[0] = p[1]
 
 def p_sect1(p):
-    '''sect1 : h1
-             | h1 sect2s'''
+    '''sect1 : H1
+             | H1 sect2s'''
     if len(p) == 3:
-        p[1].append(p[2])
+        for s in p[2]:
+            p[1].append(s)
     p[0] = p[1]
-
-def p_h1(p):
-    '''h1 : para H1SEP 
-          | para H1SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect1', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
 
 def p_sect2s(p):
     '''sect2s : sect2
-              | sect2s sect2'''
+              | sect2s sect2
+               '''
     if len(p) == 2: p[1] = [p[1]]
     else: p[1].append(p[2])
     p[0] = p[1]
 
 def p_sect2(p):
-    '''sect2 : h2
-             | h2 sect3s'''
+    '''sect2 : H2
+             | H2 sect3s'''
     if len(p) == 3:
-        p[1].append(p[2])
-    p[0] = p[1]
+        for s in p[2]:
+            p[1].append(s)
 
-def p_h2(p):
-    '''h2 : para H2SEP 
-          | para H2SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect2', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
+    p[0] = p[1]
 
 def p_sect3s(p):
     '''sect3s : sect3
@@ -78,21 +51,13 @@ def p_sect3s(p):
     p[0] = p[1]
 
 def p_sect3(p):
-    'sect3 : h3'
-    p[0] = p[1]
+    '''sect3 : H3
+             | H3 contents'''
 
-def p_h3(p):
-    '''h3 : para H3SEP 
-          | para H3SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect3', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
+    if len(p) == 3:
+        for s in p[2]:
+            p[1].append(s)
+    p[0] = p[1]
 
 """def p_sect4s(p):
     '''sect4s : sect4
@@ -262,6 +227,10 @@ def p_indent_block(p):
        p[1] += p[2] + '\n'
     else: p[1] += '\n'
     p[0] = p[1]
+
+def p_error(p):
+    print p
+    sys.exit(0)
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 

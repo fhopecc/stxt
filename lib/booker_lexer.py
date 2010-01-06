@@ -9,7 +9,7 @@ states = (
 )
 
 tokens = [
-          'H1SEP', 'H2SEP', 'H3SEP', 'H4SEP', 'H5SEP', 
+          'H1', 'H2', 'H3',# 'H4SEP', 'H5SEP', 
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
           'IMAGE',
@@ -22,11 +22,11 @@ tokens = [
           'EMPTYLINE', 
          ] 
 
-t_H1SEP = r'^=+$'
+"""t_H1SEP = r'^=+$'
 t_H2SEP = r'^-+$'
 t_H3SEP = r'^~+$'
 t_H4SEP = r'^\*+$'
-t_H5SEP = r'^\^+$'
+t_H5SEP = r'^\^+$'"""
 
 def t_include(t):
     r'^<(?P<file>.*)>'
@@ -146,6 +146,36 @@ def t_FOOTNOTE(t):
     else:
         t.type = 'CITATION'
         t.value = DocTreeNode('citation', content)
+    return t
+
+def t_H1(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+$'
+    m = t.lexer.lexmatch
+    t.lexer.lineno += m.group(0).count('\n')
+    t.value = DocTreeNode('sect1') 
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    return t
+
+def t_H2(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n-+$'
+    m = t.lexer.lexmatch
+    t.lexer.lineno += m.group(0).count('\n')
+
+    t.value = DocTreeNode('sect2') 
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    if len(t.value.title) < 1:
+        t.value.title = t.value.name
+    return t
+
+def t_H3(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+$'
+    m = t.lexer.lexmatch
+    t.lexer.lineno += m.group(0).count('\n')
+    t.value = DocTreeNode('sect3') 
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
     return t
 
 def t_LINE(t):
