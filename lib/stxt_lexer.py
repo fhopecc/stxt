@@ -233,7 +233,7 @@ def t_code_error(t):
     raise SyntaxError, msg
     
 def t_OL(t):
-    r'# (?P<content>.*)\n'
+    r'#.(?P<content>.*)\n'
     t.lexer.lineno += t.lexeme.count('\n')
     t.value = t.lexer.lexmatch.group('content')
     t.value = DocTreeNode('olistitem', t.value)

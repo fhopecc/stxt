@@ -151,6 +151,8 @@ overlay(string placing string from integer [for integer])
 
 overlay('txxxxas' placing 'hom' from 2 for 4) => thomas
 
+replace(char, str1, str2)
+
 position
 ~~~~~~~~
 position(substring in string) => integer
@@ -162,6 +164,8 @@ position('om' in 'thomas') => 3
 substring
 ~~~~~~~~~
 substring(string [from integer] [for integer]) => text     
+
+substr(str, int, int) => text
 
 抽取子字串    
 
@@ -177,7 +181,7 @@ substring(string from pattern for escape) => text
 
 抽取匹配SQL正則表示式的子字串
 
-substring('thomas' from '%#"o_a#"_' for '#') =>     oma
+substring('thomas' from '%#"o_a#"_' for '#') => oma
 
 trim
 ~~~~

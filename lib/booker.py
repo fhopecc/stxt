@@ -6,7 +6,8 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 precedence = (
-    ('left', 'H2'),
+    ('left', 'H1SEP'),
+    ('left', 'H2SEP'),
 )
 
 def p_doc(p):
@@ -24,20 +25,22 @@ def p_doc(p):
 
 def p_sect1(p):
     '''sect1 : h1
-             | sect1 sect2s
-             | sect1 contents sect2s
-    '''
+             | h1 sect2s'''
     if len(p) == 3:
         p[1].append(p[2])
     p[0] = p[1]
 
 def p_h1(p):
-    r'h1 : para H1SEP'
+    '''h1 : para H1SEP 
+          | para H1SEP contents'''
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect1', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
 
 def p_sect2s(p):
@@ -49,76 +52,99 @@ def p_sect2s(p):
 
 def p_sect2(p):
     '''sect2 : h2
-             | sect2 content
-             | sect2 sect3
-    '''
+             | h2 sect3s'''
     if len(p) == 3:
         p[1].append(p[2])
     p[0] = p[1]
 
 def p_h2(p):
-    r'h2 : para H2SEP %prec H2'
+    '''h2 : para H2SEP 
+          | para H2SEP contents'''
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect2', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
 
+def p_sect3s(p):
+    '''sect3s : sect3
+              | sect3s sect3'''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
 
 def p_sect3(p):
-    '''sect3 : h3
-             | sect3 content
-             | sect3 sect4
-    '''
-    if len(p) == 3:
-        p[1].append(p[2])
+    'sect3 : h3'
     p[0] = p[1]
 
 def p_h3(p):
-    r'h3 : para H3SEP'
+    '''h3 : para H3SEP 
+          | para H3SEP contents'''
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect3', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
+
+"""def p_sect4s(p):
+    '''sect4s : sect4
+              | sect4s sect4'''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
 
 def p_sect4(p):
     '''sect4 : h4
-             | sect4 content
-             | sect4 sect5
-    '''
+             | h4 sect5s'''
     if len(p) == 3:
         p[1].append(p[2])
     p[0] = p[1]
 
 def p_h4(p):
-    r'h4 : para H4SEP'
+    '''h4 : para H4SEP 
+          | para H4SEP contents'''
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect4', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
 
+def p_sect5s(p):
+    '''sect5s : sect5
+              | sect5s sect5'''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
+
 def p_sect5(p):
-    '''sect5 : h5
-             | sect5 content
-    '''
-    if len(p) == 3:
-        p[1].append(p[2])
+    'sect5 : h5'
     p[0] = p[1]
 
 def p_h5(p):
-    r'h5 : para H5SEP'
+    '''h5 : para H5SEP 
+          | para H5SEP contents'''
     m = re.match(HEADER_PATTERN, p[1].value)
     sect = DocTreeNode('sect5', m.group('h'))
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
-
+"""
 def p_contents(p):
     '''contents : content
                 | contents content'''
