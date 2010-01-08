@@ -23,76 +23,58 @@ def p_doc(p):
         p[1].append(p[2])
         p[0] = p[1]
 
-def p_sect1(p):
-    '''sect1 : h1
-             | h1 sect2s'''
+def p_sect(p):
+    '''sect1 : h1 content1s
+       sect2 : h2 content2s
+       sect3 : h3 content3s
+    '''
     if len(p) == 3:
         p[1].append(p[2])
     p[0] = p[1]
 
-def p_h1(p):
-    '''h1 : para H1SEP 
-          | para H1SEP contents'''
+def p_h(p):
+    'h1 : para H1SEP'
+    'h2 : para H2SEP'
+    'h3 : para H3SEP'
     m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect1', m.group('h'))
+
+    s = p[2][0]
+    if s == '=':
+        sect = DocTreeNode('sect1', m.group('h'))
+    elif s == '-':
+        sect = DocTreeNode('sect2', m.group('h'))
+    elif s == '~':
+        sect = DocTreeNode('sect3', m.group('h'))
+
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
     p[0] = sect
 
-def p_sect2s(p):
-    '''sect2s : sect2
-              | sect2s sect2'''
+def p_contents(p):
+
+    '''contents : content
+                | contents content'''
     if len(p) == 2: p[1] = [p[1]]
     else: p[1].append(p[2])
     p[0] = p[1]
 
-def p_sect2(p):
-    '''sect2 : h2
-             | h2 sect3s'''
-    if len(p) == 3:
-        p[1].append(p[2])
+def p_content(p):
+    '''content1 : sect2
+       content2 : sect3
+                | content
+       content  : para
+                | list
+                | theorem
+                | define
+                | question
+                | code
+                | table
+                | para EMPTYLINE
+    '''
     p[0] = p[1]
 
-def p_h2(p):
-    '''h2 : para H2SEP 
-          | para H2SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect2', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
 
-def p_sect3s(p):
-    '''sect3s : sect3
-              | sect3s sect3'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_sect3(p):
-    'sect3 : h3'
-    p[0] = p[1]
-
-def p_h3(p):
-    '''h3 : para H3SEP 
-          | para H3SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect3', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
 
 """def p_sect4s(p):
     '''sect4s : sect4
@@ -145,25 +127,6 @@ def p_h5(p):
             sect.append(c)
     p[0] = sect
 """
-def p_contents(p):
-    '''contents : content
-                | contents content'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_content(p):
-    '''content : para
-               | list
-               | theorem
-               | define
-               | question
-               | code
-               | table
-               | para EMPTYLINE
-    '''
-    p[0] = p[1]
-
 def p_define(p):
     '''define : DEFINE subdoc
     '''
