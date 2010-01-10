@@ -300,8 +300,8 @@ if __name__ == '__main__':
 #    unittest.main()
     tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))
-    tests.addTest(UnitTest("testSect1"))
+    '''tests.addTest(UnitTest("testSect1"))
+    tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testCode"))
     tests.addTest(UnitTest("testPara"))

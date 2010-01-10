@@ -75,22 +75,27 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual(tok.type, 'ANSWER')
     
     def testHSEP(self):
-        case = '''abcd
-=========
-def
+        case = '''=========
 ---------
-fcg
 ~~~~~~~~~
+*********
+^^^^^^^^^
 '''
         lexer.input(case)
         t = lexer.token()
-        self.assertEqual('H1', t.type)
+        self.assertEqual('H1SEP', t.type)
 
         t = lexer.token()
-        self.assertEqual('H2', t.type)
+        self.assertEqual('H2SEP', t.type)
 
         t = lexer.token()
-        self.assertEqual('H3', t.type)
+        self.assertEqual('H3SEP', t.type)
+
+        t = lexer.token()
+        self.assertEqual('H4SEP', t.type)
+
+        t = lexer.token()
+        self.assertEqual('H5SEP', t.type)
 
     def testEMPTYLINE(self):
         case = '''
@@ -137,7 +142,9 @@ fcg
         lexer.input(case)
         tok = lexer.token()
         self.assertEqual('test.stx', tok.lexer.file)
-        self.assertEqual('H1', tok.type)
+        self.assertEqual('LINE', tok.type)
+        tok = lexer.token()
+        self.assertEqual('H1SEP', tok.type)
 
         # lexer.input should reset include_lexer as None
         case = '普通行'
@@ -255,14 +262,14 @@ name
         '''case = '#w.angles'
         lexer.input(case)
         t = lexer.token()
-        self.assertEqual(1, t.lineno)'''
+        self.assertEqual(1, t.lineno)
 
-        """lexer.read(r'test/test_wrong.stx')
+        lexer.read(r'test/test_wrong.stx')
         t = lexer.token()
         self.assertEqual(1, t.lineno)
         t = lexer.token()
         self.assertEqual(2, t.lineno)
-        t = lexer.token()"""
+        t = lexer.token()'''
 
 if __name__ == '__main__':
     unittest.main()

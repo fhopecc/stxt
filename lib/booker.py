@@ -6,32 +6,29 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 def p_doc(p):
-    '''doc : sect1
-           | content 
-           | doc sect1
+    '''doc : content 
            | doc content
     '''
     if len(p) == 2:
         p[0] = DocTreeNode('doc', '')
         p[0].append(p[1])
     else:
+        last = p[1].children[-1]
+        s = re.match('sect(\d)', last.type)
+        if s:
+            n = s.group(1)
+
         p[1].append(p[2])
         p[0] = p[1]
 
-def p_sect(p):
-    '''sect1 : h1 content1s
-       sect2 : h2 content2s
-       sect3 : h3 content3s
-    '''
-    if len(p) == 3:
-        for s in p[2]:
-            p[1].append(s)
-    p[0] = p[1]
-
 def p_h(p):
-    'h1 : para H1SEP'
-    'h2 : para H2SEP'
-    'h3 : para H3SEP'
+    '''h : para H1SEP 
+         | para H1SEP contents
+         | para H2SEP
+         | para H2SEP contents
+         | para H3SEP
+         | para H3SEP contents
+    '''
     m = re.match(HEADER_PATTERN, p[1].value)
 
     s = p[2][0]
@@ -45,32 +42,40 @@ def p_h(p):
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
+
+    if len(p) == 4:
+        for c in p[3]:
+            sect.append(c)
     p[0] = sect
 
 def p_contents(p):
-
-    '''contents : content
-                | contents content'''
+    '''contents  : content
+                 | contents content '''
+    '''content1s : sect2
+                 | content
+                 | content1s sect2 
+                 | content1s content 
+       content2s : sect3
+                 | content
+                 | content2s sect3 
+                 | content2s content 
+    '''
     if len(p) == 2: p[1] = [p[1]]
     else: p[1].append(p[2])
     p[0] = p[1]
 
 def p_content(p):
-    '''content1 : sect2
-       content2 : sect3
-                | content
-       content  : para
+    '''content  : para
                 | list
                 | theorem
                 | define
                 | question
                 | code
                 | table
+                | h
                 | para EMPTYLINE
     '''
     p[0] = p[1]
-
-
 
 """def p_sect4s(p):
     '''sect4s : sect4
