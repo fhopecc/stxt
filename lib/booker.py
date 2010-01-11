@@ -6,19 +6,25 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 def p_doc(p):
-    '''doc : content 
-           | doc content
+    '''doc : h 
+           | doc h
     '''
     if len(p) == 2:
         p[0] = DocTreeNode('doc', '')
         p[0].append(p[1])
     else:
         last = p[1].children[-1]
-        s = re.match('sect(\d)', last.type)
-        if s:
-            n = s.group(1)
-
-        p[1].append(p[2])
+        l = last.snum - p[2].snum
+        if l == 0:
+            print "l == 0"
+            p[1].append(p[2])
+        if l == 1:    
+            print "l == 1"
+            last.append(p[2]) 
+        if l == 2:    
+            print "l == 2"
+            last = last.children[-1]                
+            last.append(p[2]) 
         p[0] = p[1]
 
 def p_h(p):
@@ -34,10 +40,13 @@ def p_h(p):
     s = p[2][0]
     if s == '=':
         sect = DocTreeNode('sect1', m.group('h'))
+        sect.snum = 1
     elif s == '-':
         sect = DocTreeNode('sect2', m.group('h'))
+        sect.snum = 2
     elif s == '~':
         sect = DocTreeNode('sect3', m.group('h'))
+        sect.snum = 3
 
     sect.name = m.group('n')
     if len(sect.value) < 1:
