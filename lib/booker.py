@@ -6,68 +6,57 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 def p_doc(p):
-    '''doc : h 
-           | doc h
+    '''doc : h1s
+           | contents
     '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('doc', '')
-        p[0].append(p[1])
-    else:
-        last = p[1].children[-1]
-        l = last.snum - p[2].snum
-        if l == 0:
-            print "l == 0"
-            p[1].append(p[2])
-        if l == 1:    
-            print "l == 1"
-            last.append(p[2]) 
-        if l == 2:    
-            print "l == 2"
-            last = last.children[-1]                
-            last.append(p[2]) 
-        p[0] = p[1]
+    doc = DocTreeNode('doc')
+    for c in p[1]:
+        doc.append(c)
 
 def p_h(p):
-    '''h : para H1SEP 
-         | para H1SEP contents
-         | para H2SEP
-         | para H2SEP contents
-         | para H3SEP
-         | para H3SEP contents
+    '''h1 : para H1SEP EMPTYLINE
+          | h1 content1s
+       h2 : para H2SEP EMPTYLINE
+          | h2 content2s
+       h3 : para H3SEP EMPTYLINE
+          | h3 contents
     '''
-    m = re.match(HEADER_PATTERN, p[1].value)
+    """m = re.match(HEADER_PATTERN, p[1].value)
 
     s = p[2][0]
     if s == '=':
         sect = DocTreeNode('sect1', m.group('h'))
-        sect.snum = 1
     elif s == '-':
         sect = DocTreeNode('sect2', m.group('h'))
-        sect.snum = 2
     elif s == '~':
         sect = DocTreeNode('sect3', m.group('h'))
-        sect.snum = 3
 
     sect.name = m.group('n')
     if len(sect.value) < 1:
         sect.value = sect.name
 
-    if len(p) == 4:
+    '''if len(p[3]) > 0:
         for c in p[3]:
-            sect.append(c)
-    p[0] = sect
+            sect.append(c)'''
+    p[0] = sect"""
 
 def p_contents(p):
     '''contents  : content
-                 | contents content '''
-    '''content1s : sect2
+                 | contents content
+       content1s : h2
                  | content
-                 | content1s sect2 
+                 | content1s h2 
                  | content1s content 
-       content2s : sect3
+       content2s : h3
                  | content
-                 | content2s sect3 
+                 | content2s h3 
                  | content2s content 
+       h1s       : h1
+                 | h1s h1
+       h2s       : h2
+                 | h2s h2
+       h3s       : h3
+                 | h3s h3
     '''
     if len(p) == 2: p[1] = [p[1]]
     else: p[1].append(p[2])
@@ -81,7 +70,6 @@ def p_content(p):
                 | question
                 | code
                 | table
-                | h
                 | para EMPTYLINE
     '''
     p[0] = p[1]
