@@ -5,21 +5,52 @@ from stxt_tree import DocTreeNode
 import yacc, stxt_tb_parser
 from booker_lexer import *
 
+precedence = (
+    ('nonassoc', 'PARA'),            # Unary minus operator
+    ('nonassoc', 'H2SEP'),
+)
+
 def p_doc(p):
-    '''doc : h1s
+    '''doc : sect1s
            | contents
     '''
     doc = DocTreeNode('doc')
     for c in p[1]:
         doc.append(c)
 
+def p_contents(p):
+    '''sect1s    : sect1
+                 | sect1s sect1
+       contents  : content
+                 | contents content
+       sect2s    : sect2
+                 | sect2s sect2
+       sect3s    : sect3
+                 | sect3s sect3
+    '''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
+
+def p_sect(p):
+    '''sect1 : h1
+             | h1 sect2s
+             | h1 contents
+             | h1 contents sect2s
+       sect2 : h2
+             | h2 sect3s
+             | h2 contents
+             | h2 contents sect3s
+       sect3 : h3
+             | h3 contents
+    '''
+    pass
+
+
 def p_h(p):
-    '''h1 : para H1SEP EMPTYLINE
-          | h1 content1s
-       h2 : para H2SEP EMPTYLINE
-          | h2 content2s
-       h3 : para H3SEP EMPTYLINE
-          | h3 contents
+    '''h1 : para H1SEP
+       h2 : para H2SEP
+       h3 : para H3SEP
     '''
     """m = re.match(HEADER_PATTERN, p[1].value)
 
@@ -40,30 +71,8 @@ def p_h(p):
             sect.append(c)'''
     p[0] = sect"""
 
-def p_contents(p):
-    '''contents  : content
-                 | contents content
-       content1s : h2
-                 | content
-                 | content1s h2 
-                 | content1s content 
-       content2s : h3
-                 | content
-                 | content2s h3 
-                 | content2s content 
-       h1s       : h1
-                 | h1s h1
-       h2s       : h2
-                 | h2s h2
-       h3s       : h3
-                 | h3s h3
-    '''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
 def p_content(p):
-    '''content  : para
+    '''content  : para %prec PARA
                 | list
                 | theorem
                 | define
