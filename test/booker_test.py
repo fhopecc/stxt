@@ -262,7 +262,7 @@ t4               B.update(p)
         s1 = doc.children[0]
         self.assertEqual('sect1', s1.type)
         self.assertEqual('db', s1.name)
-        self.assertEqual('簡明資料庫實務、理論及考試參考', s1.value)
+        self.assertEqual('簡明資料庫實務、理論及考試參考', s1.title)
 
         self.assertEqual(1, len(s1.children))
         
@@ -296,11 +296,55 @@ t4               B.update(p)
         p = s3.children[0]
         self.assertEqual('para', p.type)
 
+    def testMSect2(self):
+        case = '''資料庫管理
+==========
+內容
+
+資料庫表格空間使用與管理相關作業紀錄
+------------------------------------
+內容
+
+內容
+內容
+
+資料庫使用申請單（近一年）、授權（近一年）及稽核機制（近三個月）
+---------------------------------------------------------------
+內容
+
+備份策略
+~~~~~~~~~~
+備份策略
+'''
+        doc = booker.parse(case)
+        s1 = doc.children[0]
+        self.assertEqual('sect1', s1.type)
+       
+        p1 = s1.children[0]
+        self.assertEqual('para', p1.type)
+
+        s2 = s1.children[2]
+        self.assertEqual('sect2', s2.type)
+
+        p3 = s2.children[0]
+        self.assertEqual('para', p3.type)
+
+        s3 = s2.children[1]
+        self.assertEqual('sect3', s3.type)
+
+        p4 = s3.children[0]
+        self.assertEqual('para', p4.type)
+
+        self.assertEqual(3, len(s1.children))
+        self.assertEqual(2, len(s2.children))
+        self.assertEqual(1, len(s3.children))
+
+
 if __name__ == '__main__':
 #    unittest.main()
     tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))
+    '''tests.addTest(UnitTest("testTable"))'''
     tests.addTest(UnitTest("testSect1"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testCode"))
@@ -308,7 +352,8 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testTheorem"))
     tests.addTest(UnitTest("testQuestion"))
     tests.addTest(UnitTest("testList"))
-    tests.addTest(UnitTest("testMList"))'''
+    tests.addTest(UnitTest("testMList"))
     tests.addTest(UnitTest("testMSect1"))
+    tests.addTest(UnitTest("testMSect2"))
     runner = unittest.TextTestRunner()
     runner.run(tests)

@@ -6,58 +6,51 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 def p_doc(p):
-    '''doc : sect1
-           | content 
-           | doc sect1
-           | doc content
+    '''doc : sect1s
+           | contents 
     '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('doc', '')
-        p[0].append(p[1])
-    else:
-        p[1].append(p[2])
-        p[0] = p[1]
+    doc = DocTreeNode('doc')
 
-def p_sect1(p):
+    for c in p[1]: doc.append(c)
+
+    p[0] = doc
+
+def p_sects(p):
+    '''sect1s : sect1
+              | sect1s sect1
+       sect2s : sect2
+              | sect2s sect2 
+       sect3s : sect3
+              | sect3s sect3 
+    '''
+    if len(p) == 2: p[1] = [p[1]]
+    else: p[1].append(p[2])
+    p[0] = p[1]
+
+def p_sect(p):
     '''sect1 : H1
-             | H1 sect2s'''
-    if len(p) == 3:
-        for s in p[2]:
-            p[1].append(s)
-    p[0] = p[1]
-
-def p_sect2s(p):
-    '''sect2s : sect2
-              | sect2s sect2
-               '''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_sect2(p):
-    '''sect2 : H2
-             | H2 sect3s'''
-    if len(p) == 3:
-        for s in p[2]:
-            p[1].append(s)
-
-    p[0] = p[1]
-
-def p_sect3s(p):
-    '''sect3s : sect3
-              | sect3s sect3'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_sect3(p):
-    '''sect3 : H3
+             | H1 contents
+             | H1 sect2s
+       sect2 : H2
+             | H2 contents
+             | H2 sect3s
+       sect3 : H3
              | H3 contents'''
-
     if len(p) == 3:
         for s in p[2]:
             p[1].append(s)
     p[0] = p[1]
+
+def p_sect_with_contents(p):
+    '''sect1 : H1 contents sect2s
+       sect2 : H2 contents sect3s
+    '''
+    for s in p[2]:
+        p[1].append(s)
+    for s in p[3]:
+        p[1].append(s)
+    p[0] = p[1]
+ 
 
 """def p_sect4s(p):
     '''sect4s : sect4
