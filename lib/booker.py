@@ -6,7 +6,8 @@ import yacc, stxt_tb_parser
 from booker_lexer import *
 
 precedence = (
-    ('nonassoc', 'PARA'),            # Unary minus operator
+    ('nonassoc', 'CONT2CONTS'),            # Unary minus operator
+    ('nonassoc', 'PARA2CONTENT'),            # Unary minus operator
     ('nonassoc', 'H2SEP'),
 )
 
@@ -17,42 +18,58 @@ def p_doc(p):
     doc = DocTreeNode('doc')
     for c in p[1]:
         doc.append(c)
+    p[0] = doc
 
 def p_contents(p):
     '''sect1s    : sect1
                  | sect1s sect1
-       contents  : content
-                 | contents content
-       sect2s    : sect2
-                 | sect2s sect2
+       contents  : content 
+                 | contents content %prec CONT2CONTS
+       sect2s    : h2
+                 | h2 content
+                 | h2 sect2
+                 | sect2
+                 | sect2s sect2 
        sect3s    : sect3
                  | sect3s sect3
     '''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
+    if type(p[1]) != list:
+        p[1] = [p[1]]
+    if len(p) == 3:
+        if type(p[2]) != list:
+            p[1].append(p[2])
+        else: 
+            for c in p[2]:
+                p[1].append(c)
+    p[0] = p[1]
+                    
+def p_sects(p):
+    '''sect2s    : h2 contents'''
+    for c in p[2]: p[1].append(c)
     p[0] = p[1]
 
 def p_sect(p):
-    '''sect1 : h1
-             | h1 sect2s
+    '''sect1 : h1 sect2s
              | h1 contents
              | h1 contents sect2s
-       sect2 : h2
-             | h2 sect3s
-             | h2 contents
+       sect2 : h2 sect3s
              | h2 contents sect3s
-       sect3 : h3
-             | h3 contents
+       sect3 : h3 contents
     '''
-    pass
+    for c in p[2]:
+        p[1].append(c)
+    if len(p) == 4:
+        for c in p[3]:
+            p[1].append(c)
+    p[0] = p[1]
 
 
 def p_h(p):
-    '''h1 : para H1SEP
-       h2 : para H2SEP
-       h3 : para H3SEP
+    '''h1 : lines H1SEP
+       h2 : lines H2SEP
+       h3 : lines H3SEP
     '''
-    """m = re.match(HEADER_PATTERN, p[1].value)
+    m = re.match(HEADER_PATTERN, p[1].value)
 
     s = p[2][0]
     if s == '=':
@@ -66,20 +83,16 @@ def p_h(p):
     if len(sect.value) < 1:
         sect.value = sect.name
 
-    '''if len(p[3]) > 0:
-        for c in p[3]:
-            sect.append(c)'''
-    p[0] = sect"""
+    p[0] = sect
 
 def p_content(p):
-    '''content  : para %prec PARA
+    '''content  : para %prec PARA2CONTENT
                 | list
                 | theorem
                 | define
                 | question
                 | code
                 | table
-                | para EMPTYLINE
     '''
     p[0] = p[1]
 
@@ -182,8 +195,12 @@ def p_table(p):
     p[0] = table
 
 def p_para(p):
-    '''para : LINE
-            | para LINE
+    '''para : lines EMPTYLINE'''
+    p[0] = p[1]
+
+def p_lines(p):
+    '''lines : LINE
+             | lines LINE
     '''
     if len(p) == 2:
         p[0] = DocTreeNode('para', p[1])
