@@ -22,6 +22,10 @@ def p_sects(p):
               | sect2s sect2 
        sect3s : sect3
               | sect3s sect3 
+       sect4s : sect4
+              | sect4s sect4
+       sect5s : sect5
+              | sect5s sect5
     '''
     if len(p) == 2: p[1] = [p[1]]
     else: p[1].append(p[2])
@@ -35,7 +39,14 @@ def p_sect(p):
              | H2 contents
              | H2 sect3s
        sect3 : H3
-             | H3 contents'''
+             | H3 contents
+             | H3 sect4s
+       sect4 : H4
+             | H4 contents
+             | H4 sect5s
+       sect5 : H5
+             | H5 contents
+                          '''
     if len(p) == 3:
         for s in p[2]:
             p[1].append(s)
@@ -44,6 +55,8 @@ def p_sect(p):
 def p_sect_with_contents(p):
     '''sect1 : H1 contents sect2s
        sect2 : H2 contents sect3s
+       sect3 : H3 contents sect4s
+       sect4 : H4 contents sect5s
     '''
     for s in p[2]:
         p[1].append(s)
@@ -51,58 +64,6 @@ def p_sect_with_contents(p):
         p[1].append(s)
     p[0] = p[1]
  
-
-"""def p_sect4s(p):
-    '''sect4s : sect4
-              | sect4s sect4'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_sect4(p):
-    '''sect4 : h4
-             | h4 sect5s'''
-    if len(p) == 3:
-        p[1].append(p[2])
-    p[0] = p[1]
-
-def p_h4(p):
-    '''h4 : para H4SEP 
-          | para H4SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect4', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
-
-def p_sect5s(p):
-    '''sect5s : sect5
-              | sect5s sect5'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_sect5(p):
-    'sect5 : h5'
-    p[0] = p[1]
-
-def p_h5(p):
-    '''h5 : para H5SEP 
-          | para H5SEP contents'''
-    m = re.match(HEADER_PATTERN, p[1].value)
-    sect = DocTreeNode('sect5', m.group('h'))
-    sect.name = m.group('n')
-    if len(sect.value) < 1:
-        sect.value = sect.name
-    if len(p) == 4:
-        for c in p[3]:
-            sect.append(c)
-    p[0] = sect
-"""
 def p_contents(p):
     '''contents : content
                 | contents content'''
@@ -118,6 +79,7 @@ def p_content(p):
                | question
                | code
                | table
+               | footnotes
                | para EMPTYLINE
     '''
     p[0] = p[1]
@@ -221,6 +183,15 @@ def p_indent_block(p):
     else: p[1] += '\n'
     p[0] = p[1]
 
+def p_footnotes(p):
+    '''footnotes : FOOTNOTE
+                 | footnotes FOOTNOTE
+    '''
+    if len(p) == 2:
+        p[0] = DocTreeNode('footnotes')
+        p[0].append(p[1])
+    else: p[0] = p[1].append(p[2])
+
 def p_error(p):
     print p
     sys.exit(0)
@@ -231,13 +202,13 @@ parser = yacc.yacc()
 
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
-   return parser.parse(source, lexer=lexer, debug=1)
+    #return parser.parse(source, lexer=lexer, debug=1)
    return parser.parse(source, lexer=lexer)
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"
-    usage += 'filename: structed text file\n'
-    usage += 'dump the doctree'
+    usage += u'filename: structed text file\n'
+    usage += u'dump the doctree'
     return usage
 
 if __name__ == '__main__':

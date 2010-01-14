@@ -2,6 +2,7 @@
 from __future__ import with_statement
 import sys, os, re, lex3
 from stxt_tree import DocTreeNode
+from lex3 import TOKEN
 
 states = (
     ('code', 'exclusive'), 
@@ -9,7 +10,7 @@ states = (
 )
 
 tokens = [
-          'H1', 'H2', 'H3',# 'H4SEP', 'H5SEP', 
+          'H1', 'H2', 'H3', 'H4', 'H5', 
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
           'IMAGE',
@@ -125,8 +126,13 @@ def t_OL(t):
         t.value.number = '#'
     return t
 
+head  = r'image|question|answer|define|theorem|'
+head += r'proof'
+head  = r'^(?P<h>(%s))' % head
+head += r'(\[(?P<n>[^]]*)\])?\.(?P<title>.*)$'
+
+@TOKEN(head)
 def t_HEAD(t):
-    r'^(?P<h>\w+)(\[(?P<n>[^]]*)\])?\.(?P<title>.*)$'
     m = t.lexer.lexmatch
     t.type = m.group('h').upper()
     t.value = DocTreeNode(m.group('h')) 
@@ -137,11 +143,13 @@ def t_HEAD(t):
     return t
 
 def t_FOOTNOTE(t):
-    r'^\.\.[ ]\[(?P<id>[\w#]+)][ ](?P<c>.+)$'
+    r'^\.\.[ ](\[(?P<id>[\w#]+)][ ])?(?P<c>.+)$'
     m = t.lexer.lexmatch
     id = m.group('id')
     content = m.group('c')
     if id == '#':
+        t.value = DocTreeNode('footnote', content)
+    elif not id:
         t.value = DocTreeNode('footnote', content)
     else:
         t.type = 'CITATION'
@@ -171,6 +179,24 @@ def t_H2(t):
 
 def t_H3(t):
     r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+$'
+    m = t.lexer.lexmatch
+    t.lexer.lineno += m.group(0).count('\n')
+    t.value = DocTreeNode('sect3') 
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    return t
+
+def t_H4(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n\*+$'
+    m = t.lexer.lexmatch
+    t.lexer.lineno += m.group(0).count('\n')
+    t.value = DocTreeNode('sect3') 
+    t.value.name = m.group('name')
+    t.value.title = m.group('title')
+    return t
+
+def t_H5(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n\^+$'
     m = t.lexer.lexmatch
     t.lexer.lineno += m.group(0).count('\n')
     t.value = DocTreeNode('sect3') 

@@ -26,9 +26,18 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual('Knuth, Donald E., *The TeXbook*, Reading,', 
                           t.value.value)
 
+
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
         self.assertEqual('LINE', t.type)
+
+        case = r'.. this is a footnote'
+        lexer.input(case)
+        lexer.lineno = 1
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('FOOTNOTE', t.type)
+        self.assertEqual('this is a footnote', t.value.value)
 
     def testINSERT(self):
         case = r'table[test]'
