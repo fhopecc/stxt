@@ -168,11 +168,19 @@ def p_listhead(p):
 
 def p_subdoc(p):
     'subdoc : indent_block'
+    file = p.lexer.file()
+    m = re.match(r'<(?P<file>[^>]*)>', p[1])
+    if m:
+        file = m.group('file')
+        p[1] = p[1].replace('<%s>' % file, '')
+
     start, end = p.linespan(1)
-    slineno = start - 1
+    slineno = p.lexer.lexer.startlineno + start - 1
     indent = p.lexer.indent + 1
-    p[0] = parse(p[1], lexer = MutipleFileLexer(slineno, indent))
+    p[0] = parse(p[1], MutipleFileLexer(file, slineno, indent))
+
     if not p[0]: raise SyntaxError('subdoc error')
+    elif not p[0].children: raise SyntaxError('subdoc error')
     else: p[0] = p[0].children
 
 def p_indent_block(p):
@@ -182,14 +190,22 @@ def p_indent_block(p):
     '''
     if len(p) == 3:
        p[1] += p[2] + '\n'
-    else: p[1] += '\n'
+    else: 
+       p[1] += '\n'
+       if p.lexer.lexer.include_lexer:
+           p[1] = '<' + p.lexer.lexer.include_lexer.lexer.file + '>' + p[1]
     p[0] = p[1]
 
 def p_error(p):
-    lineno = p.lexer.startlineno + p.lexer.lineno
-    col = find_column(p.lexer.lexdata, p) + p.lexer.indent * 2
-    raise SyntaxError('%s at %s:%s:%s' % 
-                     (p.type, p.lexer.file, lineno, col))
+    lex = p.lexer
+    if lex.include_lexer:
+        lex = lex.include_lexer
+
+    lineno = lex.startlineno + lex.lineno
+    col = find_column(lex.lexdata, p) + lex.indent * 2
+    print '%s at %s:%s:%s' % (p.type, lex.file, lineno, col)
+    print lex.lexdata
+    sys.exit(0)
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
@@ -206,9 +222,6 @@ def usage():
     return usage
 
 if __name__ == '__main__':
-    try:
-        with open(sys.argv[1]) as f:
-            d = parse(f.read())
-            d.dump_type_tree()
-    except IndexError:
-        print usage()
+    with open(sys.argv[1]) as f:
+        d = parse(f.read(), lexer = MutipleFileLexer(sys.argv[1]))
+        d.dump_type_tree()

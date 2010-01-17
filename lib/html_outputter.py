@@ -7,8 +7,14 @@ import sys, os, re, unittest, booker
 #from pygments.formatters import HtmlFormatter
 def disp(tree):
     type = tree.type
+
+    head  = r'image|question|answer|define|theorem|'
+    head += r'proof'
+
     if re.match(r'sect\d', tree.type):
         type = 'sect'
+    elif re.match(head, tree.type):
+        type = 'element'
     return globals()['f_' + type](tree)
 
 def to_html(file):
@@ -42,9 +48,18 @@ def f_term(tree):
     html = '<div class="%s">\n%s\n</div>' % (tree.type, html)
     return html
 
-def f_question(tree):
-    html = '<div class="title">題%s：%s</div>\n' % \
-            (tree.order(), tree.value)
+def f_type_label(tree):
+    return {'define'  : '定義', 
+            'theorem' : '定理', 
+            'proof'   : '證明', 
+            'question': '題', 
+            'answer'  : '答', 
+            'image'   : '圖' 
+           }[tree.type]
+
+def f_element(tree):
+    html = '<div class="title">%s%s：%s</div>\n' % \
+            (f_type_label(tree), tree.order() + 1, tree.value)
     for c in tree.children: html += disp(c)
     html = '<div class="%s">\n%s\n</div>' % (tree.type, html)
     return html
@@ -55,8 +70,6 @@ def f_image(tree):
 
     html += '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
     return html
-
-
 
 def f_answer(tree):
     html = '<h4>答：</h4>\n'

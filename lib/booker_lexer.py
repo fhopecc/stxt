@@ -24,22 +24,14 @@ tokens = [
           'EMPTYLINE', 
          ] 
 
-"""t_H1SEP = r'^=+$'
-t_H2SEP = r'^-+$'
-t_H3SEP = r'^~+$'
-t_H4SEP = r'^\*+$'
-t_H5SEP = r'^\^+$'"""
-
 def t_include(t):
-    r'^<(?P<file>.*)>'
-    t.lexer.include_lexer = t.lexer.clone()
+    r'^<(?P<file>.*)>$'
     column = find_column(t.lexer.lexdata, t)
     file = t.lexer.lexmatch.group('file')
+    t.lexer.include_lexer = MutipleFileLexer(file)
     try:
         with open(file) as f:
             t.lexer.include_lexer.input(f.read())
-            t.lexer.include_lexer.file = file
-            t.lexer.include_lexer.lineno = 1
     except IOError:
         raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
                (t.lexer.file, t.lexer.lineno, column, file))
@@ -158,10 +150,11 @@ def t_COMMENT(t):
         t.value = Tree('citation', content)
     return t
 
-sep =  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
+#sep =  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
 
-@TOKEN(sep)
+#@TOKEN(sep)
 def t_H(t):
+    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
     m = t.lexer.lexmatch
     t.lexer.lineno += m.group(0).count('\n')
      
@@ -200,11 +193,16 @@ def t_ANY_newline(t):
 
 def t_ANY_error(t):
     c = t.value[0]
-    lineno = t.lexer.startlineno + t.lexer.lineno
-    col = find_column(t.lexer.lexdata, t) + t.lexer.indent * 2
+    lex = t.lexer
+    if t.lexer.include_lexer:
+        lex = t.lexer.include_lexer
+
+    lineno = lex.startlineno + lex.lineno
+    
+    col = find_column(lex.lexdata, t) + lex.indent * 2
     raise LexError('illegal char(%s) "%s" at %s:%s:%s' % 
                   (str(ord(t.value[0])), c, 
-                   t.lexer.file, lineno, col), c)
+                   lex.file, lineno, col), c)
 
 def find_column(input,token):
     last_cr = input.rfind('\n',0,token.lexpos)
@@ -214,21 +212,22 @@ def find_column(input,token):
     return column
 
 class MutipleFileLexer(object):
-    def __init__(self, startlineno = 0, indent = 0):
+    def __init__(self, f = '__string__', startlineno = 0, indent = 0):
         self.lexer = lex3.lex(reflags=re.M)
         self.lexer.include_lexer = None
-        self.lexer.file = '__string__'
+        self.lexer.file = f
         self.lexer.startlineno = startlineno
         self.lexer.indent = indent
         self.indent = indent
+
+    def file(self):
+        return self.lexer.file
 
     def token(self):
         if self.lexer.include_lexer:
             t = self.lexer.include_lexer.token()
             if t: return t
-        else:
-            self.lexer.include_lexer = None
-     
+            else: self.lexer.include_lexer = None
         return self.lexer.token()
 
     def begin(self, state):
@@ -238,11 +237,6 @@ class MutipleFileLexer(object):
         self.lexer.include_lexer = None 
         self.lexer.input(lexdata)
         self.lexer.lineno = 1
-
-    def read(self, f):
-        self.lexer.file = f
-        with open(f) as f:
-           self.input(f.read())
 
 lexer = MutipleFileLexer()
 

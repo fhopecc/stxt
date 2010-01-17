@@ -86,7 +86,7 @@ question[96p2-4].96警2-4
   Crime_BK = (ID, CName, Gender, Birth_of_Date)
 
   Crime_Case = (CrimeNo, CrimeType, Crime_Event_Date, ID,
-              Crim_BK.ID, Crime_Case.ID)
+  Crim_BK.ID, Crime_Case.ID)
 
 question.95關3-1
   假設某Relational Database Schema 為 R(A,B,C,D,E,F,G)

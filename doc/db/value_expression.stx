@@ -13,14 +13,14 @@
 
 值表示式可為下列內容：
 
-# 常數或字面值
-# 欄引用
-# 紀錄表示式
-# 運算式
-# 函數調用
-# 類型轉換
-# 純量子查詢
-# 統計表示式
+#.常數或字面值
+#.欄引用
+#.紀錄表示式
+#.運算式
+#.函數調用
+#.類型轉換
+#.純量子查詢
+#.統計表示式
 
 括弧裡的值表示式，
 可以用於子表示式分組和覆蓋優先級。
@@ -67,7 +67,7 @@ employees.name
 ~~~~~~
 運算式有三種語法︰
 
-code[op_expr.bnf]
+code[op_expr.bnf].
 expression operator expression (二元中序運算子)
 operator expression (單元前序運算子)
 expression operator (單元後序運算子)
@@ -83,7 +83,7 @@ and or not
 ~~~~~~~~
 函數調用是合法函數名後加上參數陣列：
 
-code[func_call.bnf]
+code[func_call.bnf].
 function ([expression [, expression ... ]] )
 ::
 
@@ -100,7 +100,7 @@ sqrt(2)
 比如給輸入求和或平均。
 
 一個統計表示式的語法是下列之一：
-code[statics_expr.bnf]
+code[statics_expr.bnf].
 aggregate_name (expression)
 aggregate_name (all expression)
 aggregate_name (distinct expression)
@@ -165,7 +165,7 @@ select cast('2009-11-11 12:30:33.000' as datetime)
 
 可以用函數式語法定義一個類型轉換：
 
-code[typename.bnf]
+code[typename.bnf].
 typename ( expression )
 ::
 這只能用於名稱也是有效函數名稱的類型。 

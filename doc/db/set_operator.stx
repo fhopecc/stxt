@@ -11,18 +11,18 @@
 定義如下：
 
 define[product].積
-R(A1, A2,...,Am) TIMES S(B1, B2,..., Bm) = 
-R TIMES S(A1, A2,..., Am, B1, B2,..., Bm)
+  R(A1, A2,...,Am) TIMES S(B1, B2,..., Bm) = 
+  R TIMES S(A1, A2,..., Am, B1, B2,..., Bm)
 
 由定義可知道，R 與 S 的積 RxS 的表頭等於 R 表頭加上 S 表頭。
 
 theorem.積的紀錄數目
-若 R 的紀錄數目為 count(R)，
-且 S 的紀錄數目為 count(S)，
-則 count(R TIMES S) = count(R) * count(S)，
+  若 R 的紀錄數目為 count(R)，
+  且 S 的紀錄數目為 count(S)，
+  則 count(R TIMES S) = count(R) * count(S)，
 
 proof.
-由乘法原理可證。
+  由乘法原理可證。
 
 本書以學生時期常玩的聯誼遊戲「小天使與小主人」來說明積運算，
 
@@ -74,8 +74,8 @@ matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數�
 聯集
 ~~~~
 define[union].聯集
-紀錄 t 屬於 A 聯集 B ，
-若且唯若 t 屬於 A ，或 t 屬於 B。
+  紀錄 t 屬於 A 聯集 B ，
+  若且唯若 t 屬於 A ，或 t 屬於 B。
 
 其中 A 表頭 Ha 必須等於 B 表頭 Hb。
 
@@ -101,8 +101,8 @@ where d.name = '行政室'
 交集
 ~~~~
 define[intersect].交集
-紀錄 t 屬於 A 交集 B，
-若且唯若 t 屬於 A 且 t 屬於 B。
+  紀錄 t 屬於 A 交集 B，
+  若且唯若 t 屬於 A 且 t 屬於 B。
 
 要交集的兩個表，其表頭必須相等。
 
@@ -124,8 +124,8 @@ where d.name = '資訊科'
 差集
 ~~~~
 define[except].差集
-紀錄 t 屬於 A 差集 B ，
-若且唯若 t 屬於 A 且 t 不屬於 B。
+  紀錄 t 屬於 A 差集 B ，
+  若且唯若 t 屬於 A 且 t 不屬於 B。
 
 表 A 與 B 的差集是從表 A 中刪除表 B 中有的資料。
 

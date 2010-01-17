@@ -1,7 +1,10 @@
 # coding=utf
+from __future__ import with_statement
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.booker_lexer import lexer
+from lib.booker_lexer import MutipleFileLexer
+from lib.booker_lexer import LexError
 
 class UnitTest(unittest.TestCase):
     def setUp(self):
@@ -260,17 +263,90 @@ name
 ======''', tb.value)
 
     def testLexError(self):
-        '''case = '#w.angles'
+        case = '#w.angles'
+        lexer = MutipleFileLexer('test_file')
         lexer.input(case)
-        t = lexer.token()
-        self.assertEqual(1, t.lineno)'''
+        self.assertRaises(LexError, lexer.token)
 
-        """lexer.read(r'test/test_wrong.stx')
+        try:
+            lexer.input(case)
+            t = lexer.token()
+        except LexError, e:
+            msg = 'illegal char(35) "#" at test_file:1:1'
+            self.assertEqual(msg, e.args[0])
+
+        lexer = MutipleFileLexer(r'test/test_wrong.stx')
+        with open(r'test/test_wrong.stx') as f:
+            lexer.input(f.read())
+
         t = lexer.token()
-        self.assertEqual(1, t.lineno)
         t = lexer.token()
-        self.assertEqual(2, t.lineno)
-        t = lexer.token()"""
+        self.assertRaises(LexError, lexer.token)
+
+        try:
+            lexer = MutipleFileLexer(r'test/test_wrong.stx')
+            with open(r'test/test_wrong.stx') as f:
+                lexer.input(f.read())
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+        except LexError, e:
+            msg = r'illegal char(35) "#" at test/test_wrong.stx:3:2'
+            self.assertEqual(msg, e.args[0])
+        
+        self.assertRaises(LexError, lexer.token)
+
+    def testIncludeError(self):
+        lexer = MutipleFileLexer(r'test\test_include_wrong.stx')
+        with open(r'test\test_include_wrong.stx') as f:
+            lexer.input(f.read())
+
+        t = lexer.token()
+        t = lexer.token()
+        t = lexer.token()
+        self.assertRaises(LexError, lexer.token)
+
+        try:
+            with open(r'test\test_include_wrong.stx') as f:
+                lexer.input(f.read())
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+        except LexError, e:
+            msg = r'illegal char(35) "#" at test\test_wrong.stx:3:2'
+            self.assertEqual(msg, e.args[0])
+
+        lexer = MutipleFileLexer(r'test\test_include_wrong2.stx')
+        with open(r'test\test_include_wrong2.stx') as f:
+            lexer.input(f.read())
+
+        t = lexer.token()
+        self.assertEqual('OL', t.type)
+        t = lexer.token()
+        self.assertEqual('OL', t.type)
+        t = lexer.token()
+        self.assertEqual('OL', t.type)
+        t = lexer.token()
+        self.assertEqual('OL', t.type)
+        t = lexer.token()
+        self.assertEqual('EMPTYLINE', t.type)
+        t = lexer.token()
+        self.assertEqual('LINE', t.type)
+        self.assertRaises(LexError, lexer.token)
+        try:
+            with open(r'test\test_include_wrong2.stx') as f:
+                lexer.input(f.read())
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+            t = lexer.token()
+        except LexError, e:
+            msg = r'illegal char(35) "#" at test\test_include_wrong2.stx:5:2'
+            self.assertEqual(msg, e.args[0])
 
 if __name__ == '__main__':
     unittest.main()

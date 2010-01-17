@@ -21,7 +21,7 @@ sql 程式由一串命令組成。
 它們不是符號，它們實際上等效於空白。
 
 比如，下列命令是 sql 程式：
-code[sql_commands.sql] 程式：
+code[sql_commands.sql].程式
 select * from my_table;
 update my_table set a = 5;
 insert into my_table values (3, 'hi there');
@@ -142,7 +142,7 @@ select 'foo'      'bar';
 ~~~~~~~~
 數值常數接受下列通用的形式：
 
-code[digits.bnf]
+code[digits.bnf].
 digits
 digits.[digits][e[+-]digits]
 [digits].digits[e[+-]digits]
@@ -222,7 +222,7 @@ real '1.23'  字串風格
 ~~~~
 註釋是任意以雙劃線開頭並延伸到行尾的任意字串，比如：
 
--- 這是標準的 sql92 註釋
+"--" 這是標準的 sql92 註釋
 
 註釋在進一步的語法分析之前會從輸入流刪除並用空白代替。
 

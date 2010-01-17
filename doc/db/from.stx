@@ -2,13 +2,13 @@
 ----------
 from 定義查詢所要引用並作處理的的資料表。
 
-code[from.bnf]
+code[from.bnf].
 from table_reference [, table_reference [, ...]]
 ::
 
 資料表引用
 ~~~~~~~~~~
-code[table_reference.bnf]
+code[table_reference.bnf].
 table_reference = basetable_name | derived_table_expression
 ::
 
