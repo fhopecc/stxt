@@ -1,8 +1,9 @@
 # coding=utf8
 from __future__ import with_statement
 import sys, os, re, lex3
-from stxt_tree import DocTreeNode
+from stxt_tree import Tree
 from lex3 import TOKEN
+from lex3 import LexError
 
 states = (
     ('code', 'exclusive'), 
@@ -14,7 +15,7 @@ tokens = [
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
           'IMAGE',
-          'FOOTNOTE', 'CITATION', 
+          'COMMENT', 'FOOTNOTE', 'CITATION', 
           'CODE', 'CODEBLOCK',
           'TABLE', 'TABLEBLOCK',
           'INSERT', 
@@ -47,7 +48,7 @@ def t_include(t):
 def t_CODE(t):
     r'^code(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
     m = t.lexer.lexmatch
-    t.value = DocTreeNode('code') 
+    t.value = Tree('code') 
     t.value.name = m.group('n')
     t.value.title = m.group('title')
     if len(t.value.title) < 1:
@@ -74,7 +75,7 @@ def t_code_pass(t):
 def t_TABLE(t):
     r'^table(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
     m = t.lexer.lexmatch
-    t.value = DocTreeNode('table') 
+    t.value = Tree('table') 
     t.value.name = m.group('n')
     t.value.title = m.group('title')
     if len(t.value.title) < 1:
@@ -104,22 +105,22 @@ def t_table_pass(t):
 
 def t_INSERT(t):
     r'^(?P<t>table|image)\[(?P<n>[^]]*)\]$'
-    t.value = DocTreeNode('insert') 
+    t.value = Tree('insert') 
     t.node_type = t.lexer.lexmatch.group('t')
     t.name = t.lexer.lexmatch.group('n')
     return t
 
 def t_LI(t):
     r'^\*[ ](?P<c>.*)'
-    t.value = t.lexer.lexmatch.group('c')
-    t.value = DocTreeNode('listitem', t.value)
+    content = t.lexer.lexmatch.group('c')
+    t.value = Tree('listitem', content)
     return t
 
 def t_OL(t):
     r'^(?P<n>\#|\d+)\.(?P<c>.*)'
     n = t.lexer.lexmatch.group('n')
-    t.value = t.lexer.lexmatch.group('c')
-    t.value = DocTreeNode('olistitem', t.value)
+    content = t.lexer.lexmatch.group('c')
+    t.value = Tree('olistitem', content)
     if n != '#':
         t.value.number = int(n)
     else:
@@ -135,73 +136,46 @@ head += r'(\[(?P<n>[^]]*)\])?\.(?P<title>.*)$'
 def t_HEAD(t):
     m = t.lexer.lexmatch
     t.type = m.group('h').upper()
-    t.value = DocTreeNode(m.group('h')) 
+    t.value = Tree(m.group('h')) 
     t.value.name = m.group('n')
     t.value.title = m.group('title')
     if len(t.value.title) < 1:
         t.value.title = t.value.name
     return t
 
-def t_FOOTNOTE(t):
+def t_COMMENT(t):
     r'^\.\.[ ](\[(?P<id>[\w#]+)][ ])?(?P<c>.+)$'
     m = t.lexer.lexmatch
     id = m.group('id')
     content = m.group('c')
-    if id == '#':
-        t.value = DocTreeNode('footnote', content)
-    elif not id:
-        t.value = DocTreeNode('footnote', content)
+    if not id:
+        t.value = Tree('comment', content)
+    elif id == '#':
+        t.type = 'FOOTNOTE'
+        t.value = Tree('footnote', content)
     else:
         t.type = 'CITATION'
-        t.value = DocTreeNode('citation', content)
+        t.value = Tree('citation', content)
     return t
 
-def t_H1(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n=+$'
+sep =  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
+
+@TOKEN(sep)
+def t_H(t):
     m = t.lexer.lexmatch
     t.lexer.lineno += m.group(0).count('\n')
-    t.value = DocTreeNode('sect1') 
+     
+    sep = m.group(0)[-1]
+    level = 1
+    if sep == '-': level = 2
+    elif sep == '~': level = 3
+    elif sep == '*': level = 4
+    elif sep == '^': level = 5
+    title = m.group('title')
+    t.type = 'H%s' % level
+    t.value = Tree('sect%s' % level, title) 
+    t.value.level = level
     t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
-
-def t_H2(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n-+$'
-    m = t.lexer.lexmatch
-    t.lexer.lineno += m.group(0).count('\n')
-
-    t.value = DocTreeNode('sect2') 
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    if len(t.value.title) < 1:
-        t.value.title = t.value.name
-    return t
-
-def t_H3(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n~+$'
-    m = t.lexer.lexmatch
-    t.lexer.lineno += m.group(0).count('\n')
-    t.value = DocTreeNode('sect3') 
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
-
-def t_H4(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n\*+$'
-    m = t.lexer.lexmatch
-    t.lexer.lineno += m.group(0).count('\n')
-    t.value = DocTreeNode('sect3') 
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
-    return t
-
-def t_H5(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n\^+$'
-    m = t.lexer.lexmatch
-    t.lexer.lineno += m.group(0).count('\n')
-    t.value = DocTreeNode('sect3') 
-    t.value.name = m.group('name')
-    t.value.title = m.group('title')
     return t
 
 def t_LINE(t):
@@ -226,11 +200,11 @@ def t_ANY_newline(t):
 
 def t_ANY_error(t):
     c = t.value[0]
-    raise lex3.LexError('illegal char(%s) "%s" at %s:%s:%s\n%s' % 
-                (str(ord(t.value[0])), c, 
-                 t.lexer.file, t.lexer.lineno, 
-                 find_column(t.lexer.lexdata, t), t.lexer.lexdata), 
-                 t.lexer.lexdata)
+    lineno = t.lexer.startlineno + t.lexer.lineno
+    col = find_column(t.lexer.lexdata, t) + t.lexer.indent * 2
+    raise LexError('illegal char(%s) "%s" at %s:%s:%s' % 
+                  (str(ord(t.value[0])), c, 
+                   t.lexer.file, lineno, col), c)
 
 def find_column(input,token):
     last_cr = input.rfind('\n',0,token.lexpos)
@@ -240,10 +214,13 @@ def find_column(input,token):
     return column
 
 class MutipleFileLexer(object):
-    def __init__(self):
+    def __init__(self, startlineno = 0, indent = 0):
         self.lexer = lex3.lex(reflags=re.M)
         self.lexer.include_lexer = None
         self.lexer.file = '__string__'
+        self.lexer.startlineno = startlineno
+        self.lexer.indent = indent
+        self.indent = indent
 
     def token(self):
         if self.lexer.include_lexer:

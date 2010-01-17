@@ -3,6 +3,7 @@ import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.booker_lexer import lexer
 from lib import booker
+from lib.lex3 import LexError
 
 class UnitTest(unittest.TestCase):
     def testPara(self):
@@ -262,7 +263,7 @@ t4               B.update(p)
         s1 = doc.children[0]
         self.assertEqual('sect1', s1.type)
         self.assertEqual('db', s1.name)
-        self.assertEqual('簡明資料庫實務、理論及考試參考', s1.title)
+        self.assertEqual('簡明資料庫實務、理論及考試參考', s1.value)
 
         self.assertEqual(1, len(s1.children))
         
@@ -339,12 +340,44 @@ t4               B.update(p)
         self.assertEqual(2, len(s2.children))
         self.assertEqual(1, len(s3.children))
 
+    def testTerm(self):
+        case = '''名詞解釋
+  解釋內容
+  第二行解釋內容
+
+'''
+        doc = booker.parse(case)
+        t = doc.children[0]
+        self.assertEqual('term', t.type)
+        p = t.children[0]
+        self.assertEqual('para', p.type)
+
+    def testError(self):
+        case = '#資料庫管理'
+        self.assertRaises(LexError, booker.parse, case)
+        try:
+            doc = booker.parse(case)
+        except LexError, e:
+            expect = 'illegal char(35) "#" at __string__:1:1'
+            msg = e.args[0]
+            self.assertEqual(expect, msg)
+
+        case = '''#.第一層正確條列
+  #第二層錯誤條列
+'''
+        self.assertRaises(LexError, booker.parse, case)
+        try:
+            doc = booker.parse(case)
+        except LexError, e:
+            expect = 'illegal char(35) "#" at __string__:2:3'
+            msg = e.args[0]
+            self.assertEqual(expect, msg)
 
 if __name__ == '__main__':
-#    unittest.main()
+    unittest.main()
     tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))'''
+    '''tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testSect1"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testCode"))
@@ -354,6 +387,7 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testList"))
     tests.addTest(UnitTest("testMList"))
     tests.addTest(UnitTest("testMSect1"))
-    tests.addTest(UnitTest("testMSect2"))
+    tests.addTest(UnitTest("testMSect2"))'''
+    tests.addTest(UnitTest("testTerm"))
     runner = unittest.TextTestRunner()
     runner.run(tests)

@@ -1,5 +1,6 @@
 # coding=utf8
 import sys, unittest
+
 class Tree(object):
     def __init__(self, type, value='', title='', name=''):
         self.type, self.value, self.title, self.name = type, value, title, name
@@ -90,6 +91,7 @@ class Tree(object):
             self.__make_name_table__()
         return self.name_table[name]
 
+
     def number_children(self):
         cs = self.children
         if self.type in ('book'):
@@ -146,26 +148,47 @@ class Tree(object):
         for c in self.children: out += c.print_tree()
         return out
 
-    def order(self):
-        "order is defined as the node's position among sibling"
-        return self.sibling().index(self)
-        
+    def children_in_type(self, type):
+        return [c for c in self.children if c.type == type] 
+
+    def child(self, order=None):
+        if not order: return self.children
+        else: return self.child()[order]
+
     def sibling(self, order=None):
+        if not order: return self.parent.children
+        else: return self.sibling()[order]
+    
+    def brother(self, order=None):        
+        "The sibling shared the same type as this node."
         if not order:
-            return self.parent.children
+            return self.parent.children_in_type(self.type)
         else:
-            return self.parent.children[order]
-       
+            return self.brother()[order]
+
+    def order(self):
+        "The node's position among brothers."
+        if self.isRoot(): return 0
+        return self.brother().index(self)
+
+DocTreeNode = Tree
+
 class UnitTest(unittest.TestCase):
     def testSibling(self):
-        r = DocTreeNode('book', 'book value', name='book')
-        r.append(DocTreeNode('sect1', 'child1 value', name='child1'))
-        r.append(DocTreeNode('sect1', 'child2 value', name='child2'))
+        d = Tree('doc')
+        d.append(Tree('question', 'q0'))
+        d.append(Tree('question', 'q1'))
+        d.append(Tree('example', 'e0'))
+        d.append(Tree('question', 'q2'))
+        d.append(Tree('example', 'e1'))
 
-        self.assertEqual(0, r.find_by_name('child1').order())
+        self.assertEqual(3, len(d.children_in_type('question')))
+        self.assertEqual(2, len(d.children_in_type('example')))
 
-        self.assertEqual('child2 value', 
-                r.find_by_name('child1').sibling(1).value)
+        q1 = d.child(1)
+        self.assertEqual('q2', q1.brother(2).value)
+        self.assertEqual('e0', q1.sibling(2).value)
+        self.assertEqual(1, q1.order())
 
     def testNameTable(self):
         r = DocTreeNode('book', 'book value', name='book')
@@ -181,8 +204,6 @@ class UnitTest(unittest.TestCase):
         sect1s = [c for c in r.children if c.type == 'sect1']
         child3 = r.find_by_name('child3')
         self.assertEqual(1, sect1s.index(child3))
-
-DocTreeNode = Tree
 
 if __name__ == '__main__':
     unittest.main()

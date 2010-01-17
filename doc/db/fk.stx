@@ -85,10 +85,10 @@ id dep_id boss_id name   gender title    salary
 
 會產生孤兒紀錄的操作稱為破壞參考完整性操作，
 如下有四種：
-# 父表修改主鍵內容
-# 父表刪除紀錄
-# 子表插入之紀錄外鍵無對應主鍵 
-# 子表更新之外鍵無對應主鍵     
+#.父表修改主鍵內容
+#.父表刪除紀錄
+#.子表插入之紀錄外鍵無對應主鍵 
+#.子表更新之外鍵無對應主鍵     
 
 參考完整性實作
 ~~~~~~~~~~~~~~
@@ -142,8 +142,6 @@ alter table employees
 add foreign key (dep_id) references departments(id);
 ::
 
-<d:\stxt\doc\db\mysql_fk.stx>
-
 Access 的外鍵支援
 ~~~~~~~~~~~~~~~~~
 Access 的「資料庫關聯圖」可以定義外鍵及參考完整性。
@@ -179,3 +177,5 @@ Microsoft Access 會發出相關記錄也將被刪除的警告訊息。
 不過，當使用「刪除查詢」來刪除記錄時，
 Microsoft Access 將自動刪除相關資料表之中的記錄，
 並不會顯示任何的警告。 
+
+<d:\stxt\doc\db\mysql_fk.stx>

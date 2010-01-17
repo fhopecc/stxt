@@ -7,49 +7,52 @@ from booker_lexer import *
 
 def p_doc(p):
     '''doc : sect1s
+           | sect2s 
+           | sect3s 
+           | sect4s 
+           | sect5s 
            | contents 
     '''
     doc = DocTreeNode('doc')
-
     for c in p[1]: doc.append(c)
-
     p[0] = doc
 
-def p_sects(p):
-    '''sect1s : sect1
-              | sect1s sect1
-       sect2s : sect2
-              | sect2s sect2 
-       sect3s : sect3
-              | sect3s sect3 
-       sect4s : sect4
-              | sect4s sect4
-       sect5s : sect5
-              | sect5s sect5
+def p_make_element_list(p):
+    '''sect1s   : sect1
+       sect2s   : sect2
+       sect3s   : sect3
+       sect4s   : sect4
+       sect5s   : sect5
+       contents : content
     '''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
+    p[0] = [p[1]]
+
+def p_element_list(p):
+    '''sect1s    : sect1s sect1
+       sect2s    : sect2s sect2 
+       sect3s    : sect3s sect3 
+       sect4s    : sect4s sect4
+       sect5s    : sect5s sect5
+       contents  : contents content
+       list      : list listitem
+       footnotes : footnotes FOOTNOTE
+    '''
+    p[1].append(p[2])
     p[0] = p[1]
 
 def p_sect(p):
-    '''sect1 : H1
-             | H1 contents
+    '''sect1 : H1 contents
              | H1 sect2s
-       sect2 : H2
-             | H2 contents
+       sect2 : H2 contents
              | H2 sect3s
-       sect3 : H3
-             | H3 contents
+       sect3 : H3 contents
              | H3 sect4s
-       sect4 : H4
-             | H4 contents
+       sect4 : H4 contents
              | H4 sect5s
-       sect5 : H5
-             | H5 contents
-                          '''
-    if len(p) == 3:
-        for s in p[2]:
-            p[1].append(s)
+       sect5 : H5 contents
+    '''
+    for s in p[2]:
+        p[1].append(s)
     p[0] = p[1]
 
 def p_sect_with_contents(p):
@@ -58,62 +61,48 @@ def p_sect_with_contents(p):
        sect3 : H3 contents sect4s
        sect4 : H4 contents sect5s
     '''
-    for s in p[2]:
-        p[1].append(s)
-    for s in p[3]:
-        p[1].append(s)
+    for c in p[2]: p[1].append(c)
+    for s in p[3]: p[1].append(s)
     p[0] = p[1]
  
-def p_contents(p):
-    '''contents : content
-                | contents content'''
-    if len(p) == 2: p[1] = [p[1]]
-    else: p[1].append(p[2])
-    p[0] = p[1]
-
-def p_content(p):
-    '''content : para
+def p_token(p):
+    '''sect1   : H1
+       sect2   : H2
+       sect3   : H3
+       sect4   : H4
+       sect5   : H5
+       content : para
                | list
                | theorem
                | define
                | question
-               | code
                | table
                | footnotes
+               | footnotes EMPTYLINE
+               | term
+               | IMAGE
+               | code
+               | code EMPTYLINE
+               | table EMPTYLINE
                | para EMPTYLINE
+               | IMAGE EMPTYLINE
     '''
     p[0] = p[1]
 
-def p_define(p):
-    '''define : DEFINE subdoc
-    '''
-    p[0] = p[1]
-    for c in p[2]:
-        p[0].append(c)
-
-def p_theorem(p):
-    '''theorem : THEOREM subdoc
+def p_element_with_subdoc(p):
+    '''define    : DEFINE subdoc
+       theorem   : THEOREM subdoc
+       question  : QUESTION subdoc
     '''
     p[0] = p[1]
     for c in p[2]:
         p[0].append(c)
 
-def p_theorem_with_proof(p):
-    '''theorem : theorem PROOF subdoc'''
-    p[0] = p[1]
-    for c in p[3]:
-        p[2].append(c)
-    p[0].append(p[2])
 
-def p_question(p):
-    '''question : QUESTION subdoc
+def p_q_and_a_form(p):
+    '''theorem : theorem PROOF subdoc
+       question : question ANSWER subdoc
     '''
-    p[0] = p[1]
-    for c in p[2]:
-        p[0].append(c)
-
-def p_question_with_answer(p):
-    '''question : question ANSWER subdoc'''
     p[0] = p[1]
     for c in p[3]:
         p[2].append(c)
@@ -126,29 +115,37 @@ def p_code(p):
 
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
-    table = stxt_tb_parser.parse(p[2].decode('utf8'))
-    table.title = p[1].title
-    table.name = p[1].name
-    p[0] = table
+    if DEBUG == 0:
+        table = stxt_tb_parser.parse(p[2].decode('utf8'))
+        table.title = p[1].title
+        table.name = p[1].name
+        p[0] = table
+    else:
+        p[0] = DocTreeNode('table', 'debug mode do not support table')
 
 def p_para(p):
     '''para : LINE
             | para LINE
     '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('para', p[1])
-    else:
-        p[1].value += p[2]
-        p[0] = p[1]
+    if len(p) == 2: p[1] = DocTreeNode('para', p[1])
+    else: p[1].value += p[2]
+    p[0] = p[1]
 
-def p_list(p):
-    '''list : listitem
-            | list listitem
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode(p[1].type.replace('item', ''))
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
+def p_make_footnotes(p):
+    'footnotes : FOOTNOTE'
+    p[0] = DocTreeNode('footnotes')
+    p[0].append(p[1])
+
+def p_term(p):
+    'term : LINE subdoc'
+    p[0] = DocTreeNode('term', p[1])
+    for c in p[2]:
+        p[0].append(c)
+
+def p_make_list(p):
+    'list : listitem'
+    p[0] = DocTreeNode(p[1].type.replace('item', ''))
+    p[0].append(p[1])
 
 def p_listitem(p):
     '''listitem : listhead
@@ -171,7 +168,12 @@ def p_listhead(p):
 
 def p_subdoc(p):
     'subdoc : indent_block'
-    p[0] = parse(p[1], lexer= MutipleFileLexer()).children
+    start, end = p.linespan(1)
+    slineno = start - 1
+    indent = p.lexer.indent + 1
+    p[0] = parse(p[1], lexer = MutipleFileLexer(slineno, indent))
+    if not p[0]: raise SyntaxError('subdoc error')
+    else: p[0] = p[0].children
 
 def p_indent_block(p):
     '''indent_block : INDENT
@@ -183,27 +185,19 @@ def p_indent_block(p):
     else: p[1] += '\n'
     p[0] = p[1]
 
-def p_footnotes(p):
-    '''footnotes : FOOTNOTE
-                 | footnotes FOOTNOTE
-    '''
-    if len(p) == 2:
-        p[0] = DocTreeNode('footnotes')
-        p[0].append(p[1])
-    else: p[0] = p[1].append(p[2])
-
 def p_error(p):
-    print p
-    sys.exit(0)
+    lineno = p.lexer.startlineno + p.lexer.lineno
+    col = find_column(p.lexer.lexdata, p) + p.lexer.indent * 2
+    raise SyntaxError('%s at %s:%s:%s' % 
+                     (p.type, p.lexer.file, lineno, col))
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-
+DEBUG = 0
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
-    #return parser.parse(source, lexer=lexer, debug=1)
-   return parser.parse(source, lexer=lexer)
+    return parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"

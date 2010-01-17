@@ -8,13 +8,21 @@ class UnitTest(unittest.TestCase):
         lexer.begin('INITIAL')
 
     def testFOOTNOTE(self):
-        case = r'.. [#] this is a footnote'
+        case = r'.. 註解'
+        lexer.input(case)
+        lexer.lineno = 1
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('COMMENT', t.type)
+        self.assertEqual('註解', t.value.value)
+
+        case = r'.. [#] 腳註'
         lexer.input(case)
         lexer.lineno = 1
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('FOOTNOTE', t.type)
-        self.assertEqual('this is a footnote', t.value.value)
+        self.assertEqual('腳註', t.value.value)
         
         case = '''.. [KDE1989] Knuth, Donald E., *The TeXbook*, Reading,
 Massachusetts: Addison-Wesley, 1989.'''
@@ -25,19 +33,9 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual('CITATION', t.type)
         self.assertEqual('Knuth, Donald E., *The TeXbook*, Reading,', 
                           t.value.value)
-
-
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
         self.assertEqual('LINE', t.type)
-
-        case = r'.. this is a footnote'
-        lexer.input(case)
-        lexer.lineno = 1
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('FOOTNOTE', t.type)
-        self.assertEqual('this is a footnote', t.value.value)
 
     def testINSERT(self):
         case = r'table[test]'
@@ -84,7 +82,7 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual(tok.type, 'ANSWER')
     
     def testHSEP(self):
-        case = '''abcd
+        case = '''標題一
 =========
 def
 ---------
@@ -94,6 +92,7 @@ fcg
         lexer.input(case)
         t = lexer.token()
         self.assertEqual('H1', t.type)
+        self.assertEqual('標題一', t.value.value)
 
         t = lexer.token()
         self.assertEqual('H2', t.type)

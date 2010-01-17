@@ -10,14 +10,13 @@ code[sql_proc.dfd].
 <d:\stxt\doc\db\dml.stx>
 <d:\stxt\doc\db\ddl.stx>
 <d:\stxt\doc\db\datatypes.stx>
-
 question.96警2-1.2
-查詢有關資料庫名稱為「CrimeDB」與資料表名稱為「重大刑案」內資料行
-（或欄位）名稱為「犯罪類別」，持有'擄人勒贖'的總筆數。
+  查詢有關資料庫名稱為「CrimeDB」與資料表名稱為「重大刑案」內資料行
+  （或欄位）名稱為「犯罪類別」，持有'擄人勒贖'的總筆數。
 
 answer.
-code.96警2-1.2
-select count(*) 
-from CrimeDB.重大刑案 case
-where case.犯罪類別 = 擄人勒贖
-::
+  code.96警2-1.2
+  select count(*) 
+  from CrimeDB.重大刑案 case
+  where case.犯罪類別 = 擄人勒贖
+  ::

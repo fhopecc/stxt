@@ -20,52 +20,52 @@
 包含下面三條推論規則：
 
 define.反身性規則
-若 a 是一個欄位集，且 a 包含 b，則 a → b。
+  若 a 是一個欄位集，且 a 包含 b，則 a → b。
 
 define.擴充性規則
-若 a → b 且 c 是一個欄位集，則 ac → bc。
+  若 a → b 且 c 是一個欄位集，則 ac → bc。
 
 define.遞移性規則
-若 a → b 且 b → c，則 a → c。
+  若 a → b 且 b → c，則 a → c。
 
 theorem.阿姆斯壯公理是正確的
-阿姆斯壯公理是正確的
+  阿姆斯壯公理是正確的
 
 theorem.阿姆斯壯公理是完全的
-阿姆斯壯公理是完全的
+  阿姆斯壯公理是完全的
 
 衍生定理
 ~~~~~~~~
 theorem.自我定義
-a → a
+  a → a
 proof.
-因為 a 包含 a，所以 a → a。
+  因為 a 包含 a，所以 a → a。
 
 theorem[decomposition].分解
-若 a → bc，則 a → b 且 a → c 。
+  若 a → bc，則 a → b 且 a → c 。
 proof.
-* bc 包含 b，bc → b，引用[reflective]。
-* bc 包含 c，bc → c，引用[reflective]。
-* a → bc 且 bc → b，則 a → b，引用[transitivity]。
-* a → bc 且 bc → c，則 a → c，引用[transitivity]。
+  * bc 包含 b，bc → b，引用[reflective]。
+  * bc 包含 c，bc → c，引用[reflective]。
+  * a → bc 且 bc → b，則 a → b，引用[transitivity]。
+  * a → bc 且 bc → c，則 a → c，引用[transitivity]。
 
 theorem[union].聯集
-若 a → b 且 a → c，則 a → bc 。
+  若 a → b 且 a → c，則 a → bc 。
 proof.
-* a → b 則 ac → bc，引用[augmentation]
-* bc 包含 c，bc → c，引用[reflective]
-* a → bc 且 bc → b，則 a → b，引用[transitivity]。
-* a → bc 且 bc → c，則 a → c，引用[transitivity]。
+  * a → b 則 ac → bc，引用[augmentation]
+  * bc 包含 c，bc → c，引用[reflective]
+  * a → bc 且 bc → b，則 a → b，引用[transitivity]。
+  * a → bc 且 bc → c，則 a → c，引用[transitivity]。
 
 theorem[combination].組合
-若 a → b 且 c → d，則 ac → bd 。
+  若 a → b 且 c → d，則 ac → bd 。
 proof.
-* c → d 則 ac → ad，引用[augmentation]
-* a → b 則 ad → bd，引用[augmentation]
-* ac → ad 且 ad → bd，則 ac → bd，引用[transitivity]。
+  * c → d 則 ac → ad，引用[augmentation]
+  * a → b 則 ad → bd，引用[augmentation]
+  * ac → ad 且 ad → bd，則 ac → bd，引用[transitivity]。
 
 theorem[transitivity].虛擬遞移性
-若 a → b 且 bc → d，則 ac → d 。
+  若 a → b 且 bc → d，則 ac → d 。
 
 函數相依封閉集
 ~~~~~~~~~~~~~~
@@ -106,16 +106,16 @@ end
 如[attr_clo_test]所示。
 
 theorem[attr_clo_test].測試函數相依
-令 S 為一組函數相依，FD: X→Y 為一個函數相依， 
-則若 FD 屬於 S，則 Y 必為 X 在 S 下的 X+ 的子集。
+  令 S 為一組函數相依，FD: X→Y 為一個函數相依， 
+  則若 FD 屬於 S，則 Y 必為 X 在 S 下的 X+ 的子集。
 
 欄位封閉集也可用來判斷某欄位集是否為超鍵，
 如[attr_clo_test_superkey]所示。
 
 theorem[attr_clo_test_superkey].測試超鍵
-令 S 為表 T 的一組函數相依， C 為 T 的一組欄位集， 
-若 C+ 等於 T 的所有欄位，
-則 C 為 T 的超鍵。
+  令 S 為表 T 的一組函數相依， C 為 T 的一組欄位集， 
+  若 C+ 等於 T 的所有欄位，
+  則 C 為 T 的超鍵。
 
 最簡函數相依
 ~~~~~~~~~~~~

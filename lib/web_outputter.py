@@ -201,8 +201,7 @@ def f_filename(tree):
         fn = tree.name
     return '%s.html' % fn
 
-def f_questions(tree):
-    html = '<h3>習題</h3>\n'
+def f_question(tree):
     for i in range(0,len(tree.children)):
         c1 = tree.children[i]
         html += '<h4>題%s：%s</h4>\n' % (i+1, c1.title)
