@@ -81,6 +81,7 @@ def p_token(p):
                | footnotes EMPTYLINE
                | term
                | IMAGE
+               | COMMENT
                | code
                | code EMPTYLINE
                | table EMPTYLINE
@@ -97,7 +98,6 @@ def p_element_with_subdoc(p):
     p[0] = p[1]
     for c in p[2]:
         p[0].append(c)
-
 
 def p_q_and_a_form(p):
     '''theorem : theorem PROOF subdoc
@@ -168,16 +168,13 @@ def p_listhead(p):
 
 def p_subdoc(p):
     'subdoc : indent_block'
-    file = p.lexer.file()
-    m = re.match(r'<(?P<file>[^>]*)>', p[1])
-    if m:
-        file = m.group('file')
-        p[1] = p[1].replace('<%s>' % file, '')
-
+    file = p[1][0]
+    lexdata = p[1][1]
+    active_lexer = p.lexer.active_lexer()
     start, end = p.linespan(1)
-    slineno = p.lexer.lexer.startlineno + start - 1
-    indent = p.lexer.indent + 1
-    p[0] = parse(p[1], MutipleFileLexer(file, slineno, indent))
+    slineno = active_lexer.startlineno + start - 1
+    indent = active_lexer.indent + 1
+    p[0] = parse(lexdata, MutipleFileLexer(file, slineno, indent))
 
     if not p[0]: raise SyntaxError('subdoc error')
     elif not p[0].children: raise SyntaxError('subdoc error')
@@ -189,22 +186,20 @@ def p_indent_block(p):
                     | indent_block INDENT
     '''
     if len(p) == 3:
-       p[1] += p[2] + '\n'
+        p[1][1] += p[2] + '\n'
     else: 
-       p[1] += '\n'
-       if p.lexer.lexer.include_lexer:
-           p[1] = '<' + p.lexer.lexer.include_lexer.lexer.file + '>' + p[1]
+        p[1] += '\n'
+        active_lexer = p.lexer.active_lexer()
+        p[1] = [active_lexer.file, p[1]]
     p[0] = p[1]
 
 def p_error(p):
-    lex = p.lexer
-    if lex.include_lexer:
-        lex = lex.include_lexer
+    active_lexer = p.lexer.mflexer.active_lexer()
 
-    lineno = lex.startlineno + lex.lineno
-    col = find_column(lex.lexdata, p) + lex.indent * 2
-    print '%s at %s:%s:%s' % (p.type, lex.file, lineno, col)
-    print lex.lexdata
+    lineno = active_lexer.startlineno + active_lexer.lineno
+    col = find_column(active_lexer.lexdata, p) + active_lexer.indent * 2
+    print '%s at %s:%s:%s' % (p.type, active_lexer.file, lineno, col)
+    print active_lexer.lexdata
     sys.exit(0)
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'

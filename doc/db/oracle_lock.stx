@@ -21,16 +21,16 @@ ORACLE 會自動地使用不同的鎖定來
 
 達到交易層次讀取一致性的方法  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 唯讀交易
-# 互斥表鎖定與列鎖定
+#.唯讀交易
+#.互斥表鎖定與列鎖定
 
 ORACLE 鎖定種類 
 ~~~~~~~~~~~~~~~
-# 資料鎖定(Data Lock)
-# 資料字典鎖定(Dictionary Lock)
-# 內部鎖定(Internal Lock)
-# 分散式鎖定(Distributed Lock)
-# 平行緩衝管理鎖定(Parallel Cache Management Lock)
+#.資料鎖定(Data Lock)
+#.資料字典鎖定(Dictionary Lock)
+#.內部鎖定(Internal Lock)
+#.分散式鎖定(Distributed Lock)
+#.平行緩衝管理鎖定(Parallel Cache Management Lock)
 
 資料鎖定 
 ~~~~~~~~
@@ -40,8 +40,8 @@ ORACLE 鎖定種類
 故亦稱為 DML 鎖定(DML Lock)
 
 DML 操作能獲得兩種等級的鎖定：
-# 列鎖定(Row Locks) 
-# 表鎖定(Table Locks)。
+#.列鎖定(Row Locks) 
+#.表鎖定(Table Locks)。
 
 列鎖定  
 ~~~~~~
@@ -53,11 +53,11 @@ DML 操作能獲得兩種等級的鎖定：
 表鎖定  
 ~~~~~~
 表鎖定鎖住整個表。
-# 列共享表鎖定(Row Share Table Lock，RS)(Table Locks)
-# 列互斥表鎖定(Row Exclusive Table Lock，RX)
-# 共享表鎖定(Share Table Lock，S)
-# 共享列互斥表鎖定(Share Row Exclusive Table Lock，SRX)
-# 互斥表鎖定(Exclusive Table Lock，X)
+#.列共享表鎖定(Row Share Table Lock，RS)(Table Locks)
+#.列互斥表鎖定(Row Exclusive Table Lock，RX)
+#.共享表鎖定(Share Table Lock，S)
+#.共享列互斥表鎖定(Share Row Exclusive Table Lock，SRX)
+#.互斥表鎖定(Exclusive Table Lock，X)
 
 列共享表鎖定
 ~~~~~~~~~~~~

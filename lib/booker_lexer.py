@@ -193,16 +193,14 @@ def t_ANY_newline(t):
 
 def t_ANY_error(t):
     c = t.value[0]
-    lex = t.lexer
-    if t.lexer.include_lexer:
-        lex = t.lexer.include_lexer
+    active_lexer = t.lexer.mflexer.active_lexer()
 
-    lineno = lex.startlineno + lex.lineno
+    lineno = active_lexer.startlineno + active_lexer.lineno
     
-    col = find_column(lex.lexdata, t) + lex.indent * 2
+    col = find_column(active_lexer.lexdata, t) + active_lexer.indent * 2
     raise LexError('illegal char(%s) "%s" at %s:%s:%s' % 
                   (str(ord(t.value[0])), c, 
-                   lex.file, lineno, col), c)
+                   active_lexer.file, lineno, col), c)
 
 def find_column(input,token):
     last_cr = input.rfind('\n',0,token.lexpos)
@@ -218,10 +216,17 @@ class MutipleFileLexer(object):
         self.lexer.file = f
         self.lexer.startlineno = startlineno
         self.lexer.indent = indent
-        self.indent = indent
+        self.lexer.mflexer = self
+        self.mflexer = self
+    
+    def active_lexer(self):
+        lexer = self.lexer
+        while lexer.include_lexer:
+            lexer = lexer.include_lexer.lexer
+        return lexer
 
-    def file(self):
-        return self.lexer.file
+    def active_file(self):
+        return self.active_lexer().file
 
     def token(self):
         if self.lexer.include_lexer:

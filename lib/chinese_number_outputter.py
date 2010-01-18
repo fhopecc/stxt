@@ -24,6 +24,7 @@ def to_html(file):
         return t % {'title': title, 'content': disp(d)}
 
 def f_section_number(tree):
+    if tree.type == 'sect1': return ''
     ns = tree.section_number(0)[0]
     cbd = ['零','壹','貳','參','肆','伍','陸','柒','捌','玖','拾',
     '拾壹','拾貳','拾參','拾肆','拾伍','陸','柒','捌','玖','拾']
@@ -71,11 +72,11 @@ def f_doc(tree):
     return html
 
 def f_sect1(tree):
-    html = '<h1>%s</h1>\n' % tree.title
-    html += '<div class="sect1">'
+    html = '<div class="title">%s%s</div>\n' % \
+            (f_section_number(tree), tree.value)
     for c in tree.children:
         html += disp(c)
-    html += '</div>'
+    html = '<div class="%s">\n%s\n</div>' % (tree.type, html)
     return html
 
 def f_sect2(tree):
@@ -163,6 +164,13 @@ def f_footnotes(tree):
         html += c.value+ '<br/>\n'
     html += '</div>\n'
     return html
+
+def f_comment(tree):
+    html = '<div class="title">%s</div>\n' % tree.value
+    for c in tree.children: html += disp(c)
+    html = '<div class="%s">\n%s\n</div>\n' % (tree.type, html)
+    return html
+
 
 def f_questions(tree):
     html = '<h3>習題</h3>\n'

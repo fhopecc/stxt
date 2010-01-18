@@ -219,12 +219,12 @@ Y 要求被 O 鎖定的資源  Y die     Y wait
 ~~~~~~~~~~~~
 交易使用二階段來鎖定(Two-phase Locking)與解除資料鎖定，如下：
 
-# 擴展階段(Expanding or Growing Phase)：
+#.擴展階段(Expanding or Growing Phase)：
 
   在交易 A執行資料庫單元操作前，交易A需要請求所有需要存取資料的互斥鎖定，
   如果有資料已經被交易B鎖定，就等待直到交易B解除資料的鎖定。
 
-# 縮減階段（Shrinking Phase）：
+#.縮減階段（Shrinking Phase）：
 
   當交易A執行完操作後，就解除鎖定交易A所有鎖定的資料。
 

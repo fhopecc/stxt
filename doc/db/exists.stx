@@ -1,5 +1,5 @@
-[exists]
---------
+[exists]exists
+--------------
 code[exists.bnf].exists 語法
 [not] exists (subquery)
 ::
@@ -52,7 +52,7 @@ sql 並未提供全稱量詞，
 但可用一個雙重否定律利用 exists 表達全稱量詞。
 
 theorem.雙重否定律
-forall P(x) = not exists x(not exists P(x))
+  forall P(x) = not exists x(not exists P(x))
 
 雙重否定律簡言之就是「負負得正」，「否定 + 否定 = 肯定」。
 

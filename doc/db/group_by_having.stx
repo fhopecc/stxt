@@ -90,10 +90,10 @@ select x, sum(y) from test1 group by x having x < 'c';
 然後是一個更現實的例子：
 
 select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
-    from products p left join sales s using (product_id)
-    where s.date > current_date - interval '4 weeks'
-    group by product_id, p.name, p.price, p.cost
-    having sum(p.price * s.units) > 5000;
+from products p left join sales s using (product_id)
+where s.date > current_date - interval '4 weeks'
+group by product_id, p.name, p.price, p.cost
+having sum(p.price * s.units) > 5000;
 
 在上例裡，where子句用於那些非分組欄集選擇資料行。 
 「表示式只是對那些最近四周發生的銷售為真」。
