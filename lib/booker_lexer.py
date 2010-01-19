@@ -52,7 +52,7 @@ def t_CODE(t):
     return t
 
 def t_code_CODEBLOCK(t):
-    r'\n::\s*$'
+    r'\n::[ ]*$'
     block_end = t.lexer.lexpos - len(t.lexer.lexmatch.group(0))
     t.value = t.lexer.lexdata[t.lexer.block_start:block_end]
     t.lineno = t.lexer.block_lineno
@@ -245,8 +245,11 @@ class MutipleFileLexer(object):
 
 lexer = MutipleFileLexer()
 
-#if __name__ == '__main__':
-#    case = 'theorem[name].this is a theorem title'
-#    lexer.input(case)
-#    tok = lexer.token()
-#    print tok
+if __name__ == '__main__':
+    file = sys.argv[1]
+    with open(file) as f:
+        lexer.input(f.read())
+    t = lexer.token()
+    while t:
+        print "%i:%s" % (t.lexer.lineno , t.type)
+        t = lexer.token()
