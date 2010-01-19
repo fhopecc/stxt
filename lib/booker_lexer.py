@@ -27,14 +27,14 @@ tokens = [
 def t_include(t):
     r'^<(?P<file>.*)>$'
     column = find_column(t.lexer.lexdata, t)
-    file = t.lexer.lexmatch.group('file')
-    t.lexer.include_lexer = MutipleFileLexer(file)
+    fn = t.lexer.lexmatch.group('file')
+    t.lexer.include_lexer = MutipleFileLexer(fn)
     try:
-        with open(file) as f:
+        with open(fn) as f:
             t.lexer.include_lexer.input(f.read())
     except IOError:
         raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
-               (t.lexer.file, t.lexer.lineno, column, file))
+               (t.lexer.file, t.lexer.lineno, column, fn))
     return t.lexer.include_lexer.token()
 
 def t_CODE(t):
@@ -246,8 +246,8 @@ class MutipleFileLexer(object):
 lexer = MutipleFileLexer()
 
 if __name__ == '__main__':
-    file = sys.argv[1]
-    with open(file) as f:
+    f = sys.argv[1]
+    with open(f) as f:
         lexer.input(f.read())
     t = lexer.token()
     while t:

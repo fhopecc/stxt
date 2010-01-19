@@ -215,6 +215,8 @@ where dep_id in (select dep_id
                  group by dep_id 
                  having count(*) > 1)
 ::
+
+一行
 '''
         lexer.input(case)
         ch = lexer.token()
@@ -231,6 +233,16 @@ where dep_id in (select dep_id
                  from employees 
                  group by dep_id 
                  having count(*) > 1)''', cb.value)
+
+        emptyline = lexer.token()
+        self.assertEqual(9, emptyline.lineno)
+        self.assertEqual('EMPTYLINE', emptyline.type)
+        self.assertEqual(10, emptyline.lexer.lineno)
+
+        line = lexer.token()
+        self.assertEqual('LINE', line.type)
+        self.assertEqual(10, line.lineno)
+        self.assertEqual(10, line.lexer.lineno)
 
     def testSingleColumnTable(self):
         case = '''table[angles].angles
