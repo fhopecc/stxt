@@ -1,0 +1,5 @@
+code[rmdir_s].
+rmdir c:\test /s
+::
+
+Windows 2000, Windows XP and later versions of Windows can use this option with a prompt to permanently delete the test directory and all subdirectories and files. Adding the /q switch would suppress the prompt.

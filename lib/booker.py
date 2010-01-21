@@ -163,7 +163,9 @@ def p_listhead(p):
                 | OL
                 | listhead EMPTYLINE
     '''
-    p[1].is_onelinelabel = len(p) == 3
+    one_line_lable_pattern = r'.*[:|：]$'
+    m = re.match(one_line_lable_pattern, p[1].value)
+    p[1].is_onelinelabel = (len(p) == 3 or m is not None)
     p[0] = p[1]
 
 def p_subdoc(p):
