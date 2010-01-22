@@ -153,7 +153,7 @@ def p_listitem(p):
     '''
     if len(p) == 3: 
        for i, c in enumerate(p[2]): 
-           if not p[1].is_onelinelabel and i == 0 and c.type == 'para': 
+           if not p[1].is_onelinepara and i == 0 and c.type == 'para': 
                 p[1].value += c.value
            else: p[1].append(c)
     p[0] = p[1]
@@ -163,9 +163,9 @@ def p_listhead(p):
                 | OL
                 | listhead EMPTYLINE
     '''
-    one_line_lable_pattern = r'.*[:|：]$'
-    m = re.match(one_line_lable_pattern, p[1].value)
-    p[1].is_onelinelabel = (len(p) == 3 or m is not None)
+    onelinelable_pattern = r'.*[:|：]$'
+    m = re.match(onelinelable_pattern, p[1].value)
+    p[1].is_onelinepara = (len(p) == 3 or m is not None)
     p[0] = p[1]
 
 def p_subdoc(p):
