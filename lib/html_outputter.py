@@ -1,21 +1,24 @@
 # coding=utf-8
 # for single html
 from __future__ import with_statement
-import sys, os, re, unittest, booker
+from template import Template
 #from pygments import highlight
 #from pygments.lexers import PythonLexer
 #from pygments.formatters import HtmlFormatter
+import sys, os, re, booker, template
+
 def disp(tree):
-    type = tree.type
-
-    head  = r'image|question|answer|define|theorem|'
-    head += r'proof'
-
     if re.match(r'sect\d', tree.type):
-        type = 'sect'
-    elif re.match(head, tree.type):
-        type = 'element'
-    return globals()['f_' + type](tree)
+        return f_sect(tree)
+    elif tree.type in ('question', 'answer', 'define', 'theorem'):
+        return f_label_container(tree)
+    elif tree.type in ('proof'):
+        return f_label_container(tree)
+    elif tree.type in ('para'):
+        return f_element(tree)
+    elif tree.type in ('list', 'listitem', 'olistitem'):
+        return f_container(tree)
+    else: return globals()['f_' + tree.type](tree)
 
 def to_html(file):
     d = None
@@ -24,9 +27,9 @@ def to_html(file):
     d.number_children()
     d.count_occurence()
     title = os.path.basename(file)
-    with open(r'd:\stxt\template\single_html.html') as tfn:
-        t = tfn.read()
-        return t % {'title': title, 'content': disp(d)}
+
+    render = template.render('template')
+    return str(render.single_html(title, disp(d)))
 
 def f_doc(tree):
     html = ''
@@ -57,18 +60,42 @@ def f_type_label(tree):
             'image'   : '圖' 
            }[tree.type]
 
-def f_element(tree):
-    html = '<div class="title">%s%s：%s</div>\n' % \
-            (f_type_label(tree), tree.order() + 1, tree.value)
-    for c in tree.children: html += disp(c)
-    html = '<div class="%s">\n%s\n</div>' % (tree.type, html)
-    return html
+def f_label_container(tree):
+    temp = '''$def with (type, label, title, content)
+<div class="$type"><div class="title">$label：$title</div>
+$content
+</div>
+'''
+    label = f_type_label(tree) + str(tree.order() + 1)
+    content =""
+    for c in tree.children: content += disp(c)
+    temp = Template(temp)
+    return str(temp(tree.type, label, tree.title, content))
 
 def f_image(tree):
-    html = '<div class="title">圖%s：%s</div>\n' % \
-            (tree.order(), tree.value)
+    temp = '''$def with (type, label, title, path)
+<div class="$type">
+    <div class="title">$label：$title</div>
+    <img src="images/$path" alt="$title"/>
+</div>
+'''
+    label = f_type_label(tree) + str(tree.order() + 1)
+    title = tree.value
+    temp = Template(temp)
+    return str(temp(tree.type, label, tree.title, tree.name))
 
-    html += '<img src="images/%s" alt="%s"' % (tree.name, tree.title)
+def f_table(tree):
+    html = '<h4>表%s：%s</h4>\n'%(tree.occurence,  tree.title)
+    if tree.children:
+        html += '<table>\n'
+        for row in tree.children:
+            html += '<tr>\n' 
+            for col in row.children:
+                html += '<td>%s</td>\n' % col.value.encode('utf8')
+            html += '</tr>\n' 
+        html += '</table>\n'
+    else:
+        html += '<pre>%s</pre>\n' % tree.value 
     return html
 
 def f_answer(tree):
@@ -97,16 +124,25 @@ def f_code(tree):
     #print highlight(tree.value, PythonLexer(), HtmlFormatter())
     return html
 
-def f_table(tree):
-    html    = '<h4>表%s：%s</h4>\n'%(tree.occurence,    tree.title)
-    html += '<pre>\n' + tree.value + '</pre>\n'
-    return html
+def f_container(tree):
+    temp = '''$def with (type, element)
+<div class="$type">
+$element
+</div>
+'''
+    element = ""
+    for c in tree.children: element += disp(c)
+    temp = Template(temp)
+    return str(temp(tree.type, element))
 
-def f_para(tree):
-    return '<p>\n' + tree.value + '</p>\n'
-
-def f_l2para(tree):
-    return '<p>\n' + tree.value + '</p>\n'
+def f_element(tree):
+    temp = '''$def with (type, content)
+<div class="$type">
+$content
+</div>
+'''
+    temp = Template(temp)
+    return str(temp(tree.type, tree.value))
 
 def f_list(tree):
     html = '<ul>\n'
@@ -119,14 +155,24 @@ def f_list(tree):
     return html
 
 def f_olist(tree):
-    html = '<ol>\n'
-    for c in tree.children:
-        html += '<li>' + c.value
-        for np in c.children:
-            html += disp(np)
-        html += '</li>\n'
-    html += '</ol>\n'
-    return html
+    temp = '''$def with (items)
+<div class="olist">
+$for i in items:
+    <div class="olistitem">
+    $ index = loop.index
+    $for p in i.children:
+        $if loop.first:
+            <div class="para">
+            $index.$(p.value)
+            </div>
+        $else:    
+            $:(disp(p))
+    </div>
+</div>
+'''
+    globals = {'disp':disp}
+    temp = Template(temp, globals=globals)
+    return str(temp(tree.children))
 
 def f_footnotes(tree):
     html = '<ul>\n'

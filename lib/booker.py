@@ -5,6 +5,8 @@ from stxt_tree import DocTreeNode
 import yacc, stxt_tb_parser
 from booker_lexer import *
 
+DEBUG = 0
+
 def p_doc(p):
     '''doc : sect1s
            | sect2s 
@@ -154,7 +156,7 @@ def p_listitem(p):
     if len(p) == 3: 
        for i, c in enumerate(p[2]): 
            if not p[1].is_onelinepara and i == 0 and c.type == 'para': 
-                p[1].value += c.value
+                p[1].children[0].value +=  c.value
            else: p[1].append(c)
     p[0] = p[1]
 
@@ -207,7 +209,6 @@ def p_error(p):
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-DEBUG = 0
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
     return parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)

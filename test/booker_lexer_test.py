@@ -167,13 +167,14 @@ fcg
         self.assertEqual('OL', t.type)
         self.assertEqual('#', t.value.number)
         self.assertEqual('普通條列', t.value.value)
+        self.assertEqual('普通條列', t.value.children[0].value)
 
         t = lexer.token()
         self.assertEqual(2, t.lexer.lineno)
         self.assertEqual('OL', t.type)
         self.assertEqual(12, t.value.number)
         self.assertEqual('數字條列', t.value.value)
- 
+        self.assertEqual('數字條列', t.value.children[0].value)
  
     def testLI(self):        
         case = '* 普通條列'
@@ -183,6 +184,7 @@ fcg
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('LI', t.type)
         self.assertEqual('普通條列', t.value.value)
+        self.assertEqual('普通條列', t.value.children[0].value)
 
     def testLine(self):        
         case = '''普通行

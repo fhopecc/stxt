@@ -56,9 +56,10 @@ Msg1：“用戶端要與伺服端進行認證”
         self.assertEqual(2, l1.number)
         l2 = list.children[1]
         self.assertEqual('用戶端與 KDC 在確認彼此的身份之後，' \
-                         '用戶端即送出 Msg1 訊息給 KDC：', l2.value)
-        self.assertEqual(1, len(l2.children))
-        l2p = l2.children[0]
+                         '用戶端即送出 Msg1 訊息給 KDC：', 
+                         l2.children[0].value)
+        self.assertEqual(2, len(l2.children))
+        l2p = l2.children[1]
         self.assertEqual('Msg1：“用戶端要與伺服端進行認證”', l2p.value)
 
     def testMList(self): 
@@ -83,20 +84,19 @@ Msg1：“用戶端要與伺服端進行認證”
         l1 = list.children[0]
         self.assertEqual('安全性方法(IPsec  Security Methods)：' , 
                           l1.value)
-        self.assertEqual(1, len(l1.children))
+        self.assertEqual(2, len(l1.children))
 
-        l1list = l1.children[0]
+        l1list = l1.children[1]
         l1l1 = l1list.children[0]
         self.assertEqual('高(High)：使用ESP協定。' , 
                           l1l1.value)
-        self.assertEqual(1, len(l1l1.children))
+        self.assertEqual(2, len(l1l1.children))
 
-        l2list = l1l1.children[0]
+        l2list = l1l1.children[1]
         self.assertEqual('list', l2list.type)
 
-
         l2l1 = l2list.children[0]
-        self.assertEqual(3, len(l2l1.children))
+        self.assertEqual(4, len(l2l1.children))
 
         para = l2l1.children[0]
         self.assertEqual('para', para.type)
@@ -104,25 +104,25 @@ Msg1：“用戶端要與伺服端進行認證”
         para = l2l1.children[1]
         self.assertEqual('para', para.type)
 
-        l3list = l2l1.children[2]
+        l3list = l2l1.children[3]
         self.assertEqual('list', l3list.type)
 
         l3l1 = l3list.children[0]
-        self.assertEqual(1, len(l3l1.children))
+        self.assertEqual(2, len(l3l1.children))
 
-        l4list = l3l1.children[0]
+        l4list = l3l1.children[1]
         self.assertEqual('olist', l4list.type)
 
         l4l1 = l4list.children[0]
-        self.assertEqual(1, len(l4l1.children))
+        self.assertEqual(2, len(l4l1.children))
  
-        l5list = l4l1.children[0]
+        l5list = l4l1.children[1]
         self.assertEqual('list', l5list.type)
 
         l5l1 = l5list.children[0]
-        self.assertEqual(0, len(l5l1.children))
+        self.assertEqual(1, len(l5l1.children))
         self.assertEqual('OK啦這是真的，多層的',
-                          l5l1.value)
+                          l5l1.children[0].value)
         
     def testTheorem(self):
         case ='''theorem[reflective].反身性規則

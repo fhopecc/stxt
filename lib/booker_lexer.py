@@ -103,16 +103,18 @@ def t_INSERT(t):
     return t
 
 def t_LI(t):
-    r'^\*[ ](?P<c>.*)'
-    content = t.lexer.lexmatch.group('c')
-    t.value = Tree('listitem', content)
+    r'^\*[ ](?P<text>.*)'
+    text = t.lexer.lexmatch.group('text')
+    t.value = Tree('listitem', text)
+    t.value.append(Tree('para', text))
     return t
 
 def t_OL(t):
-    r'^(?P<n>\#|\d+)\.(?P<c>.*)'
+    r'^(?P<n>\#|\d+)\.(?P<text>.*)'
     n = t.lexer.lexmatch.group('n')
-    content = t.lexer.lexmatch.group('c')
-    t.value = Tree('olistitem', content)
+    text = t.lexer.lexmatch.group('text')
+    t.value = Tree('olistitem', text)
+    t.value.append(Tree('para', text))
     if n != '#':
         t.value.number = int(n)
     else:
@@ -131,6 +133,7 @@ def t_HEAD(t):
     t.value = Tree(m.group('h')) 
     t.value.name = m.group('n')
     t.value.title = m.group('title')
+    t.value.value = m.group('title')
     if len(t.value.title) < 1:
         t.value.title = t.value.name
     return t

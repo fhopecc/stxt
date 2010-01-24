@@ -1,29 +1,27 @@
+$def with (title, content)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <style type="text/css">
-body {font-family:"標楷體";font-size:12pt}
+body {font-family:"標楷體";font-size:14pt}
 .sect1 .title {font-size:24pt;font-weight:bold;}
 .sect2 .title {font-size:20pt;font-weight:bold;}
 .sect3 .title {font-size:16pt;font-weight:bold;}
 .sect4 .title {font-size:14pt;font-weight:bold;}
-.sect5 .title {font-size:12pt;font-weight:bold;}
-.image .title {font-size:12pt;font-weight:bold;}
-.define .title {font-size:12pt;font-weight:bold;}
-.theorem .title {font-size:12pt;font-weight:bold;}
-.term {margin:24pt}
-.term .title {text-indent:-24pt;font-size:12pt;font-weight:bold;}
+.sect5 .title {font-size:14pt;font-weight:bold;}
+.image .title {font-size:14pt;font-weight:bold;}
+.define .title {font-size:14pt;font-weight:bold;}
+.theorem .title {font-size:14pt;font-weight:bold;}
+.term div {margin:24pt}
+.term .title {margin:0;font-size:14pt;font-weight:bold;}
 h1 {font-size:20}
 h2 {font-size:20px}
 h3 {font-size:18px}
 </style>
-<title>%(title)s</title>
+<title>$title</title>
 </head>
 <body>
-</div>
-<div id="content">
-%(content)s
-</div>
+$:content
 </body>
 </html>
