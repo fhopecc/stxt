@@ -133,9 +133,9 @@ def t_HEAD(t):
     t.value = Tree(m.group('h')) 
     t.value.name = m.group('n')
     t.value.title = m.group('title')
-    t.value.value = m.group('title')
-    if len(t.value.title) < 1:
+    if t.value.name and len(t.value.title) < 1:
         t.value.title = t.value.name
+    t.value.value = t.value.title
     return t
 
 def t_COMMENT(t):
@@ -170,6 +170,7 @@ def t_H(t):
     title = m.group('title')
     t.type = 'H%s' % level
     t.value = Tree('sect%s' % level, title) 
+    t.value.title = title
     t.value.level = level
     t.value.name = m.group('name')
     return t

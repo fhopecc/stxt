@@ -140,7 +140,8 @@ def p_make_footnotes(p):
 
 def p_term(p):
     'term : LINE subdoc'
-    p[0] = DocTreeNode('term', p[1])
+    p[0] = Tree('term', p[1])
+    p[0].title = p[0].value
     for c in p[2]:
         p[0].append(c)
 
