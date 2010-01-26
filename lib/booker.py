@@ -194,7 +194,7 @@ def p_indent_block(p):
         p[1][1] += p[2] + '\n'
     else: 
         p[1] += '\n'
-        active_lexer = p.lexer.active_lexer()
+        active_lexer = p.lexer.mflexer.active_lexer()
         p[1] = [active_lexer.file, p[1]]
     p[0] = p[1]
 
@@ -213,6 +213,10 @@ parser = yacc.yacc()
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
     return parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
+
+def read(file):
+    with open(file) as f:
+        return parse(f.read(), lexer = MutipleFileLexer(file))
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"

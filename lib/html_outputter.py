@@ -22,8 +22,8 @@ def disp(tree):
 
 def to_html(file):
     d = None
-    with open(file) as f:
-        d = booker.parse(f.read())
+    d = booker.read(file)
+    
     d.number_children()
     d.count_occurence()
     title = os.path.basename(file)
