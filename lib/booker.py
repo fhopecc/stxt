@@ -194,8 +194,8 @@ def p_indent_block(p):
         p[1][1] += p[2] + '\n'
     else: 
         p[1] += '\n'
-        active_lexer = p.lexer.mflexer.active_lexer()
-        p[1] = [active_lexer.file, p[1]]
+        file = p.lexer.mflexer.active_file()
+        p[1] = [file, p[1]]
     p[0] = p[1]
 
 def p_error(p):

@@ -193,6 +193,7 @@ class UnitTest(unittest.TestCase):
     def testNameTable(self):
         r = DocTreeNode('book', 'book value', name='book')
         r.append(DocTreeNode('child', 'child value', name='child'))
+
         self.assertEqual('book value', r.find_by_name('book').value)
         self.assertEqual('child value', r.find_by_name('child').value)
 
