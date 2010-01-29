@@ -1,17 +1,18 @@
+$def with (title, content, sect1_list, sect2_list)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <link rel="stylesheet" href="/css/web.css" />
-<title>%(title)s</title>
+<title>$title</title>
 </head>
 <body>
 <div id="topbar">
 <a href="/">回加油站</a>
-%(sect1_list)s
+$:sect1_list
 </div>
 <div id="sidebar">
-%(sect2_list)s
+$:sect2_list
 </div>
 <div id="rightbar">
 <script type="text/javascript"><!--
@@ -27,11 +28,11 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </div>
 <div id="content">
-%(content)s
+$:content
 </div>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%%3E%%3C/script%%3E"));
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <script type="text/javascript">
 try {

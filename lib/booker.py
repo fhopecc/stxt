@@ -216,7 +216,9 @@ def parse(source, lexer=lexer):
 
 def read(file):
     with open(file) as f:
-        return parse(f.read(), lexer = MutipleFileLexer(file))
+        tree = parse(f.read(), lexer = MutipleFileLexer(file))
+        tree.file = file
+        return tree
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"

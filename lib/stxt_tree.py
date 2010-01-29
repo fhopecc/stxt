@@ -54,6 +54,10 @@ class Tree(object):
     def isRoot(self):
         return self.parent is None
 
+    def root(self):
+        if self.isRoot(): return self
+        else: return self.parent.root()
+
     def height(self):
         if self.isRoot(): return 0
         c, h = self, 0
@@ -109,14 +113,12 @@ class Tree(object):
     def section_number(self, level=0):
         '''Return a list of section numbers by level.
         '''
-        if self.number is None: return '' 
+        if level == 0: return [self.order() + 1]
+        elif self.isRoot(): return [self.order() + 1]
         else: 
-            if self.parent.number is None: return [self.number]
-            elif level == 0: return [self.number]
-            else: 
-                ns = self.parent.section_number(level-1)
-                ns.append(self.number)
-                return ns
+            ns = self.parent.section_number(level-1)
+            ns.append(self.order() + 1)
+            return ns
 
     def _count_occurence(self, type, o=0):
         for c in self.children:
@@ -171,9 +173,19 @@ class Tree(object):
         if self.isRoot(): return 0
         return self.brother().index(self)
 
+    def path(self):
+        "A node tuple from root to self" 
+        if self.isRoot(): return [self]
+        path = self.parent.path()
+        path.append(self)
+        return path
+
 DocTreeNode = Tree
 
 class UnitTest(unittest.TestCase):
+    def testPath(self):
+        pass 
+
     def testSibling(self):
         d = Tree('doc')
         d.append(Tree('question', 'q0'))

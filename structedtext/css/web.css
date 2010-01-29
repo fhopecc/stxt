@@ -1,7 +1,26 @@
 @import url("/css/pygments_style.css");
+body {font-family:"標楷體";font-size:14pt}
+
 #sidebar {float:left;width:13%}
 #content {padding: 0 13% 0 13%}
 #rightbar {float:right;width:13%}
+
+.sect1 .title {font-size:24pt;font-weight:bold;}
+.sect2 .title {font-size:20pt;font-weight:bold;}
+.sect3 .title {font-size:16pt;font-weight:bold;}
+.sect4 .title {font-size:14pt;font-weight:bold;}
+.sect5 .title {font-size:14pt;font-weight:bold;}
+.image .title {font-size:14pt;font-weight:bold;}
+.define .title {font-size:14pt;font-weight:bold;}
+.theorem .title {font-size:14pt;font-weight:bold;}
+.term div {margin-left:24pt}
+.term .title {margin:0;font-size:14pt;font-weight:bold;}
+
+.olistitem div {margin-left:14pt}
+.olistitem .para:first-child {text-indent:-14pt}
+
+.olistitem .olistitem div {margin-left:0pt}
+
 table { 
   border:1px solid; 
   border-collapse:collapse; 
@@ -9,3 +28,4 @@ table {
 tr { border:1px solid;text-align:center;font-style:bold }
 th { font-weight:bold}
 td { border:1px solid; }
+
