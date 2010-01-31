@@ -95,7 +95,6 @@ class Tree(object):
             self.__make_name_table__()
         return self.name_table[name]
 
-
     def number_children(self):
         cs = self.children
         if self.type in ('book'):
@@ -109,16 +108,6 @@ class Tree(object):
         elif self.type in ('sect2'):
             for i, c in enumerate([c for c in cs if c.type == 'sect3']):
                 c.number = i + 1
-
-    def section_number(self, level=0):
-        '''Return a list of section numbers by level.
-        '''
-        if level == 0: return [self.order() + 1]
-        elif self.isRoot(): return [self.order() + 1]
-        else: 
-            ns = self.parent.section_number(level-1)
-            ns.append(self.order() + 1)
-            return ns
 
     def _count_occurence(self, type, o=0):
         for c in self.children:
@@ -174,15 +163,30 @@ class Tree(object):
         return self.brother().index(self)
 
     def path(self):
-        "A node tuple from root to self" 
+        '''Nodes from root to self, every tree node has a unique path.
+           Path can represente a tree node identically, so we use 
+           a path to represent a file in tree file system.
+        '''
         if self.isRoot(): return [self]
         path = self.parent.path()
         path.append(self)
         return path
 
+    def order_path(self):
+        'a list of order of node in path'
+        if self.isRoot(): return [self.order()]
+        order_path = self.parent.order_path()
+        order_path.append(self.order())
+        return order_path
+
+    section_number = order_path
+    
 DocTreeNode = Tree
 
 class UnitTest(unittest.TestCase):
+    def testOrderPath(self):
+        pass
+
     def testPath(self):
         pass 
 

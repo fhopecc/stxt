@@ -23,12 +23,24 @@ def to_doc(tree):
         disp(sect1)
 
 def sect1_list(tree):
-    o = ''
-    root = tree.root()
-    for sect1 in root.children:
-        o += r'<a href="%s">%s%s</a>' %\
-                 (f_filename(sect1), f_section_number(sect1), sect1.title)
-    return o
+    temp = '''$def with (sect1s)
+<div class='sect1_list'>
+<table>
+$for i, s in enumerate(sect1s)
+    $if i % 5 == 0:
+        $if not loop.first:
+            </tr>
+        $if not loop.last:
+            <tr>
+    <td>
+    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
+    </td>
+</table>
+'''
+    globals = {'f_filename':f_filename,
+               'f_section_number':f_section_number}
+    temp = Template(temp, globals=globals)
+    return str(temp(tree.root().children))
 
 def sect2_list(tree):
     o = '主題列表<br/>'
@@ -84,7 +96,7 @@ def f_sect2(tree):
                         sect1_list(tree), sect2_list(tree))))
 
 def f_filename(tree):
-    fn = '_'.join([str(n) for n in tree.section_number(3)])
+    fn = '_'.join([str(n+1) for n in tree.section_number()[-2:]])
     if tree.name:
         fn = tree.name
     return '%s.html' % fn

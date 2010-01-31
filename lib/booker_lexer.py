@@ -153,9 +153,6 @@ def t_COMMENT(t):
         t.value = Tree('citation', content)
     return t
 
-#sep =  r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
-
-#@TOKEN(sep)
 def t_H(t):
     r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
     m = t.lexer.lexmatch
@@ -173,6 +170,7 @@ def t_H(t):
     t.value.title = title
     t.value.level = level
     t.value.name = m.group('name')
+    if not t.value.title: t.value.title = t.value.name
     return t
 
 def t_LINE(t):

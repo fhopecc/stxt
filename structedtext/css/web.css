@@ -21,6 +21,8 @@ body {font-family:"標楷體";font-size:14pt}
 
 .olistitem .olistitem div {margin-left:0pt}
 
+#sect1_list table {text-align:left}
+
 table { 
   border:1px solid; 
   border-collapse:collapse; 
