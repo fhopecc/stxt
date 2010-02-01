@@ -1,4 +1,4 @@
-$def with (title, content, sect1_list, sect2_list)
+$def with (title, content, sect1s, sect2s)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
@@ -7,11 +7,25 @@ $def with (title, content, sect1_list, sect2_list)
 <title>$title</title>
 </head>
 <body>
-<div id="sect1_list">
-$:sect1_list
+<div id="sect1list">
+<table>
+$for i, s in enumerate(sect1s):
+    $if i % 5 == 0:
+        <tr>
+    <td>
+    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
+    </td>
+    $if i % 5 == 4 or loop.last:
+        </tr>
+</table>
 </div>
-<div id="sidebar">
-$:sect2_list
+<div id="sect2list">
+<table>
+$for s in sect2s:
+    <tr><td>
+    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
+    </td></tr>
+</table>
 </div>
 <div id="rightbar">
 <script type="text/javascript"><!--

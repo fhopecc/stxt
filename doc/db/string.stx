@@ -1,23 +1,57 @@
 [string]字元類型
 ----------------
+字元類型是用來表示現實世界文字的資料類型，
+我們先來認識字元及字串，再來看看怎麼去操作字串。
+
+字元與字串
+~~~~~~~~~~
+在電腦和電信領域的術語中，字元是一個資訊單位。
+在使用字母系統或音節文字等的文字的自然語言中，
+它大約對應為一個音位、類音位的單位或符號。
+
+字元的例子有字母、數字系統或標點符號。
+
+字元也可包含控制字元，
+控制字元並不對應到自然語言中的特定符號，
+而是對應到語言中一些用來處理文句的東西。
+例如列印機或顯示器的命令，如 return 或 tab。
+
+字串（String），是由零或多個字元所組成的有限序列，
+通常是程式語言中表示文字的資料類型。
+其最基本的儲存方式是陣列和鏈結。
+
+字串相等通常定義為長度相等，
+並且各個對應位置上的字元都相等。
+
+模式匹配是指找出字串 p 在字串 q 中首次出現的位置。
+
+我們很少操作單一字元，
+通常以字串整體作為操作單位，
+例如：在字串中尋找某個子字串、求取一個子字串、
+在字串的某個位置上插入一個子字串以及刪除一個子字串等。
+
+SQL 字元類型
+~~~~~~~~~~~~
 SQL 定義了兩種基本的字元類型： 
 
 table.字元類型
-名字                             描述
+名稱                             描述
 ================================ ======================
-character varying(n), varchar(n) 變長，有長度限制
-character(n), char(n)            定長,不足補空白
-text                             變長，無長度限制
+character varying(n), varchar(n) 可變長度，有長度限制
+character(n), char(n)            固定長度，不足補空白
+text                             可變長度，無長度限制
 ================================ ======================
 
 對 character varying(n) 和 character(n) 而言，
 n 是一個正整數，指類型最多儲存 n 字元長字串。 
-試圖儲存更長的字串到這些類型的字串裡會產生一個錯誤， 
+若嘗試儲存更長的字串到此類型的字串裡則會產生一個錯誤， 
+
 除非超出長度的字元都是空白，這種情況下該字串將被截斷為最大長度。
 
 若儲存字串的長度比 n 短， 
 類型 character 將會用空白填滿不足的長度；
-而類型為 character varying 的數值將儲存較短的字串。
+而類型為 character varying 的數值將儲存較短的字串，
+所以 character varying 比較節省空間。
 
 若強制將字串轉換成 character(n) 或者 character varying(n)， 
 那麼超過長度的字串將被截斷成 n 個字元，而不會拋出錯誤。
@@ -30,63 +64,69 @@ char(n) 和 varchar(n) 分別是 character(n) 和 character varying(n) 的別名
 則該類型接受任何長度的字串。 
 
 text 類型，它可以儲存任何長度的字串。 
-儘管類型 text 不是SQL標準，但被很多 SQL 資料庫系統支援。
+儘管類型 text 不是 SQL 標準，但被很多 SQL 資料庫系統支援。
 
-類型 character 字串都用空白填充到指定的長度 n，
+character 字串都用空白填充到指定的長度 n，
 並且以這種方式儲存和顯示。
-不過填充的空白在語意上並不重要。 
-在比較兩個 character 字串時，填充的空白都被忽略，
-在轉型成其它字串類時，character 字串空白會被刪除。
+
+填充空白在語意上並不重要。
+
+在比較兩個 character 字串時，填充空白會被忽略，
+在轉型成其它字串類型時，character 字串空白會被刪除。
 但在 character varying 和 text 字串中，
-結尾的空白語意上是有含義的。
+結尾填充空白語意上是有含義的。
 
 這些類型的儲存需求是 4 字元加上實際的字串，
-若是 character 的話再加上填充的字元。
+若是 character 的話再加上填充空白。
 
 長字串會自動被系統壓縮， 
 因此實際儲存空間需求可能會更少些。
 長字串也會儲存在後台資料表裡面，
 這樣就不會干擾對短字串值的快速訪問。 
-允許儲存的最長字串大概是 1 gb。 
+允許儲存的最長字串大概是 1 GB。 
 
-允許在資料類型定義的 n 最大值比這還小。 
-修改這個行為沒有甚麼意義，
-因為在多字元編碼下字元和字元的數目可能差別很大。 
-若您想儲存沒有特定上限的長字串，
+若想儲存沒有特定上限之長字串，
 那麼使用 text 或者沒有長度定義詞的 character varying，
 而不要選擇一個任意長度限制。
 
 這三種類型之間沒有性能差別，
-只不過是在使用填充空白的類型的時候增加了儲存尺寸，
-通常應該使用 text 或者 character varying。
+只不過 character 類型會增加填充空白儲存長度，
+沒特別需要的話應該使用 text 或者 character varying，
+而不要使用 character。
 
 字串函數和運算子
 ~~~~~~~~~~~~~~~~
-本節描述檢查和操作字串的函數和運算子。 
-
 字串包括 character， character varying，和 text 類型值。
 除非另外說明，所有下面列出的函數都可以處理這些類型， 
+
 不過要小心的是，在使用 character 類型的時候，
-它的自動填充的潛在影響。
-通常這裡描述的函數也能用於非字串 類型，
-我們只要先把那些資料轉化為字串資料表現形式就可以了。 有些函數還可以處理位串類型。
+填充空白的潛在影響。
+
+通常這裡描述的函數也能用於非字串類型，
+我們只要先把那些資料轉化為字串資料表現形式就可以了。 
+有些函數還可以處理位串類型。
 
 SQL 定義了一些字串函數，
 它們有指定的語法，
-裡面是用某種特定的關鍵字，而不是逗號來分隔參數。 
+裡面是用某種特定的關鍵字，
+而不是逗號來分隔參數。 
 
 字串連接運算子  
 ~~~~~~~~~~~~~~
-string || string
+字串串接（Concatenation），又稱字串相加、連接、串連、相連，
+指將兩個字串作首尾相接。
 
-「||」為字串連接運算子，如下例：
+例如「色不異空」和「空不異色」串接後便成了「色不異空空不異色」。
 
-select 'sql' || ' tutorial' => 'sql tutorial'
+SQL 使用「||」作為字串連接運算子，
+如下例：
+ 
+code[concatenation.sql].
+select '色不異空' || '空不異色' => '色不異空空不異色'
+::
 
 bit_length
 ~~~~~~~~~~
-bit_length(string)    
-
 字串所佔的 byte 長度，如下例：
 
 select bit_length('jose') => 32
@@ -161,6 +201,15 @@ position(substring in string) => integer
 
 position('om' in 'thomas') => 3
 
+trim
+~~~~
+trim([leading | trailing | both] [characters] from string) => text
+
+從字串 string 的開頭、結尾或兩邊
+刪除只包含 characters 「預設是一個空白」的最長的字串。
+
+trim(both 'x' from 'xtomxx')i => tom
+
 substring
 ~~~~~~~~~
 substring(string [from integer] [for integer]) => text     
@@ -183,16 +232,7 @@ substring(string from pattern for escape) => text
 
 substring('thomas' from '%#"o_a#"_' for '#') => oma
 
-trim
-~~~~
-trim([leading | trailing | both] [characters] from string) => text
-
-從字串 string 的開頭、結尾或兩邊
-刪除只包含 characters 「預設是一個空白」的最長的字串。
-
-trim(both 'x' from 'xtomxx')i => tom
-
 其它
 ~~~~
 set sqlblanklines on
-讓 SQL*plus 可辨識含空白行的字串值
+讓 SQL*plus 可辨識含空白行的字串值。

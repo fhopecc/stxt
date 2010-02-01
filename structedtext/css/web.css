@@ -1,9 +1,14 @@
 @import url("/css/pygments_style.css");
 body {font-family:"標楷體";font-size:14pt}
 
-#sidebar {float:left;width:13%}
-#content {padding: 0 13% 0 13%}
+#content  {padding: 0 13% 0 15%}
 #rightbar {float:right;width:13%}
+
+#sect1list {padding-left:15%}
+#sect1list table tr {text-align:left}
+
+#sect2list {float:left;width:10%}
+#sect2list table tr {text-align:left}
 
 .sect1 .title {font-size:24pt;font-weight:bold;}
 .sect2 .title {font-size:20pt;font-weight:bold;}
@@ -21,7 +26,6 @@ body {font-family:"標楷體";font-size:14pt}
 
 .olistitem .olistitem div {margin-left:0pt}
 
-#sect1_list table {text-align:left}
 
 table { 
   border:1px solid; 

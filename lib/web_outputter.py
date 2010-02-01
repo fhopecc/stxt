@@ -18,38 +18,8 @@ def disp(tree):
     else: return globals()['f_' + tree.type](tree)
 
 def to_doc(tree):
-    render = template.render('template')
     for sect1 in tree.children:
         disp(sect1)
-
-def sect1_list(tree):
-    temp = '''$def with (sect1s)
-<div class='sect1_list'>
-<table>
-$for i, s in enumerate(sect1s)
-    $if i % 5 == 0:
-        $if not loop.first:
-            </tr>
-        $if not loop.last:
-            <tr>
-    <td>
-    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
-    </td>
-</table>
-'''
-    globals = {'f_filename':f_filename,
-               'f_section_number':f_section_number}
-    temp = Template(temp, globals=globals)
-    return str(temp(tree.root().children))
-
-def sect2_list(tree):
-    o = '主題列表<br/>'
-    sect1 = [t for t in tree.path() if t.type == 'sect1'][0]
-    sect2s = [sect2 for sect2 in sect1.children if sect2.type == 'sect2']
-    for sect2 in sect2s:
-        o += r'<a href="%s">%s%s</a><br/>' %\
-                 (f_filename(sect2), f_section_number(sect2), sect2.title)
-    return o
 
 def f_index(tree):
     o = ''
@@ -72,31 +42,40 @@ def f_index(tree):
     logger.info('generate %s' % index)
 
 def f_sect1(tree):
-    render = template.render('template')
     html = ''
     content = [c for c in tree.children if c.type != 'sect2']
     for c in content:
         html += disp(c)
 
-    print 'render %s' % f_path(tree)
+    sect1s = tree.root().children
+    sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
+ 
     with open(f_path(tree), 'w') as f:
         f.write(str(render.web_section(tree.name, html, 
-                                       sect1_list(tree), sect2_list(tree))))
+                                       sect1s, sect2s)))
+
+    print 'render %s' % f_path(tree)
 
     sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
     for sect2 in sect2s:
         disp(sect2)
 
 def f_sect2(tree):
-    render = template.render('template')
-    print 'render %s' % f_path(tree)
+    sect1s = tree.root().children
+    sect1 = [t for t in tree.path() if t.type == 'sect1'][0]
+    sect2s = [sect2 for sect2 in sect1.children if sect2.type == 'sect2']
+
     with open(f_path(tree), 'w') as f:
         f.write(str(render.web_section(tree.name, 
                         str(f_titled_container(tree)), 
-                        sect1_list(tree), sect2_list(tree))))
+                        sect1s, sect2s)))
+
+    print 'render %s' % f_path(tree)
 
 def f_filename(tree):
-    fn = '_'.join([str(n+1) for n in tree.section_number()[-2:]])
+    section_number = tree.order_path()
+    section_number = section_number[1:]
+    fn = '_'.join([str(n+1) for n in section_number])
     if tree.name:
         fn = tree.name
     return '%s.html' % fn
@@ -110,6 +89,11 @@ def usage():
     usage = os.path.basename(__file__) + " filename\n"
     usage += 'filename: structed text file'
     return usage
+
+funcs = {'f_filename':f_filename,
+         'f_section_number':f_section_number}
+
+render = template.render('template', globals=funcs)
 
 if __name__ == '__main__':
     try:
