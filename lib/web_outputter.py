@@ -51,7 +51,7 @@ def f_sect1(tree):
     sect2s = [sect2 for sect2 in tree.children if sect2.type == 'sect2']
  
     with open(f_path(tree), 'w') as f:
-        f.write(str(render.web_section(tree.name, html, 
+        f.write(str(render.web_section(tree, html, 
                                        sect1s, sect2s)))
 
     print 'render %s' % f_path(tree)
@@ -66,13 +66,14 @@ def f_sect2(tree):
     sect2s = [sect2 for sect2 in sect1.children if sect2.type == 'sect2']
 
     with open(f_path(tree), 'w') as f:
-        f.write(str(render.web_section(tree.name, 
-                        str(f_titled_container(tree)), 
+        f.write(str(render.web_section(tree, 
+                        str(f_container(tree)), 
                         sect1s, sect2s)))
 
     print 'render %s' % f_path(tree)
 
 def f_filename(tree):
+    'The filename for specified node'
     section_number = tree.order_path()
     section_number = section_number[1:]
     fn = '_'.join([str(n+1) for n in section_number])
@@ -81,6 +82,7 @@ def f_filename(tree):
     return '%s.html' % fn
 
 def f_path(tree):
+    'The file path for specified node'
     m = re.match(r".*\\([^\\]*)\\.*$", tree.root().file)
     webdir = m.group(1)
     return os.path.join("structedtext", webdir, f_filename(tree))

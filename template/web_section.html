@@ -1,10 +1,10 @@
-$def with (title, content, sect1s, sect2s)
+$def with (node, content, sect1s, sect2s)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <link rel="stylesheet" href="/css/web.css" />
-<title>$title</title>
+<title>$(node.name)</title>
 </head>
 <body>
 <div id="sect1list">
@@ -12,8 +12,11 @@ $def with (title, content, sect1s, sect2s)
 $for i, s in enumerate(sect1s):
     $if i % 5 == 0:
         <tr>
-    <td>
-    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
+    $if node is s:
+        <td class="selected">
+    $else:
+        <td>
+    <a href="$:(f_filename(s))">$(s.title)</a>
     </td>
     $if i % 5 == 4 or loop.last:
         </tr>
@@ -22,9 +25,14 @@ $for i, s in enumerate(sect1s):
 <div id="sect2list">
 <table>
 $for s in sect2s:
-    <tr><td>
-    <a href="$:(f_filename(s))">$:(f_section_number(s))$:(s.title)</a>
-    </td></tr>
+    <tr>
+    $if node is s:
+        <td class="selected">
+    $else:
+        <td>
+    <a href="$:(f_filename(s))">$(s.title)</a>
+    </td>
+    </tr>
 </table>
 </div>
 <div id="rightbar">

@@ -47,8 +47,17 @@ Massachusetts: Addison-Wesley, 1989.'''
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('INSERT', t.type)
-        self.assertEqual('table', t.node_type)
-        self.assertEqual('test', t.name)
+        self.assertEqual('table', t.value.node_type)
+        self.assertEqual('test', t.value.node_name)
+
+        case = r'sect2[name]'
+        lexer.input(case)
+        lexer.lineno = 1
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('INSERT', t.type)
+        self.assertEqual('sect2', t.value.node_type)
+        self.assertEqual('name', t.value.node_name)
     
     def testHEAD(self):
         case = 'image[name].this is a image title'

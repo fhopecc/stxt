@@ -96,10 +96,10 @@ def t_table_pass(t):
     pass 
 
 def t_INSERT(t):
-    r'^(?P<t>table|image)\[(?P<n>[^]]*)\]$'
+    r'^(?P<t>table|image|sect\d)\[(?P<n>[^]]*)\]$'
     t.value = Tree('insert') 
-    t.node_type = t.lexer.lexmatch.group('t')
-    t.name = t.lexer.lexmatch.group('n')
+    t.value.node_type = t.lexer.lexmatch.group('t')
+    t.value.node_name = t.lexer.lexmatch.group('n')
     return t
 
 def t_LI(t):

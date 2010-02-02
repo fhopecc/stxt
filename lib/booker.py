@@ -89,6 +89,7 @@ def p_token(p):
                | table EMPTYLINE
                | para EMPTYLINE
                | IMAGE EMPTYLINE
+               | INSERT EMPTYLINE
     '''
     p[0] = p[1]
 

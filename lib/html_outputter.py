@@ -93,10 +93,13 @@ $:content
     content = ''
     if tree.children:
         content += '<table>\n'
-        for row in tree.children:
+        for ri, row in enumerate(tree.children):
             content += '<tr>\n' 
             for col in row.children:
-                content += '<td>%s</td>\n' % col.value.encode('utf8')
+                if ri == 0:
+                    content += '<th>%s</th>\n' % col.value.encode('utf8')
+                else:
+                    content += '<td>%s</td>\n' % col.value.encode('utf8')
             content += '</tr>\n' 
         content += '</table>\n'
     else:
@@ -180,6 +183,11 @@ def f_section_number(tree):
         if not tree: break
         n = '%s.%s' % (tree.order() + 1, n)
     return n
+
+def f_insert(tree):
+    root = tree.root()
+    insert = root.find_by_name(tree.node_name)
+    return disp(insert)
 
 def f_filename(tree):
     fn = tree.section_number()[0]

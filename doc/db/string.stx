@@ -94,6 +94,8 @@ character 字串都用空白填充到指定的長度 n，
 沒特別需要的話應該使用 text 或者 character varying，
 而不要使用 character。
 
+sect3[string_constant]
+
 字串函數和運算子
 ~~~~~~~~~~~~~~~~
 字串包括 character， character varying，和 text 類型值。
