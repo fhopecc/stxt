@@ -1,0 +1,362 @@
+以上兩個link是Python的logging system，寫的算是詳細，
+要注意的是%(asctime)-24s
+這裡的24表示長度是24不滿的部份補空白，超過就以超原本的長度為主
+第一個link裡有寫，不過要狠認真看
+也可以做logging server，專門收所有的log，這倒是狠有意思....只要做service的，應該都要有一套這個，好追蹤。
+當然網路斷線也沒關係，logging system有支援兩種以上的log，可以本機有log，也可以送到logging server，只是fail over的機制就得自己想了....
+----------------------------------------------------------------------------
+Update:
+http://bytes.com/forum/thread23499.html
+試了一下SMTPHandler，發現每一個error就寄一封信，原來要有MemoryHandler，這實在是太神奇了，一定要記下來，不然怎麼猜得到
+----------------------------------------------------------------------------
+Update:
+後來發現這樣如果是發生Error要寄出email不可行，所以只好改用BufferingSMTPHandler
+，有興趣可以參考以下link
+http://www.red-dove.com/python_logging.html
+
+
+階層
+
+Log4j將輸出訊息分成五個等級，分別為DEBUG、INFO、WARN、ERROR、FATAL，在上面設定檔將輸出等級 設為INFO，就表示INFO~FATAL等級的訊息將會輸出，因此DEBUG等級的訊息就會被忽略，如果將設定檔的 第一行改為log4j.rootLogger=DEBUG, A1, A2，就會兩個訊息都輸出了。除了這五個等級外，也可以設為ALL或OFF， ALL很示全部訊息都輸出，OFF則表示不輸出訊息。
+輸出格式
+
+# %c 輸出日誌訊息所屬的類別的全名
+# %d 輸出日誌時間點的日期或時間，指定格式的方式：%d{yyy-MM-dd HH:mm:ss }。
+# %l 輸出日誌事件的發生位置，即輸出日誌訊息的語句處於它所在的類別的第幾行。
+# %m 輸出訊息，如log(message)中的message。
+# %n 輸出一個列尾符號。
+# %p 輸出優先階層，即DEBUG，INFO，WARN，ERROR，FATAL。如果是調用debug()輸出的，則為DEBUG，依此類推。
+# %r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+# %t 輸出產生該日誌事件的線程名。
+# %r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+# %f 輸出日誌訊息所屬的類別的類別名。
+值得注意的是A2的appender被設為org.apache.log4j.DailyRollingFileAppender表示Log4j會將日誌檔依日期分開。
+
+
+SECTION 01 前言 
+
+當你在開發程式的時候, 除錯(debugging)和日誌(logging)都是非常重要的工作, 但是, 現在有太多的 logging API 問世, 因為他們都不錯, 很難做一個抉擇. 國外 java 論壇對於這些 logging 方式也是有一番討論. 而 common logging 就是一個在這幾個不同的 logging API 中建立小小的橋樑.
+
+
+目前在 Java 中最有名的 Log 方式, 首推是 Log4j, 另是 JDK 1.4 Logging API. 除此之外, 還有 Avalon 中用的 LogKit 等等 . 而 commons-logging 也有實作一些基本 的 logging 方式為 NoOpLog 及 SimpleLog. 對於他們的比較不在這次討論範圍,有興趣者請自行參閱參考文件. 
+
+
+SECTION 02 快速使用 Logging 
+其實 logging 非常簡單去使用, 將 commons-logging.jar 放到 /WEB-INF/lib 之下.
+接著寫以下的程式碼
+LoggingTest.java
+
+package com.softleader.newspaper.java.opensource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class LoggingTest {
+
+	Log log = LogFactory.getLog(LoggingTest.class);
+
+
+	public void hello() {
+		log.error("ERROR");
+		log.debug("DEBUG");
+		log.warn("WARN");
+		log.info("INFO");
+		log.trace("TRACE");
+		System.out.println("OKOK");
+	}
+}
+
+		
+在 / 放置一支 jsp 測試 
+test-commons-logging.jsp
+
+<%@ page import="com.softleader.newspaper.java.opensource.LoggingTest" %>
+
+<%
+	LoggingTest test = new LoggingTest();
+
+	test.hello();
+
+%>
+		
+你將會看到 tomcat console 會有下面輸出 
+
+log4j:WARN No appenders could be found for logger (com.softleader.newspaper.java.opensource.LoggingTest). 
+log4j:WARN Please initialize the log4j system properly.
+OKOK
+
+
+是因為你還沒有設定 commons-logging.properties, 馬上會為你介紹 ~~~. 
+
+
+SECTION 03 設定 commons-logging.properties 
+你可以設定你的 log factory 是要使用哪一個 
+我以 Log4J 為例子 
+在 /WEB-INF/classes/commons-logging.properties 中寫入 
+
+org.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JCategoryLog
+		
+如果你 server 是使用 jdk1.4 以上的版本 
+可以使用 org.apache.commons.logging.impl.Jdk14Logger
+
+
+接著根據你的 Logger 撰寫符合他的 properties 
+拿 Log4j 為例子 
+你就要在 /WEB-INF/classes/ 下擺一個 log4j.properties
+
+log4j.rootLogger=DEBUG, A_default
+
+log4j.appender.A_default=org.apache.log4j.RollingFileAppender
+log4j.appender.A_default.File=c://log/test.log
+log4j.appender.A_default.MaxFileSize=4000KB
+log4j.appender.A_default.MaxBackupIndex=10
+log4j.appender.A_default.layout=org.apache.log4j.PatternLayout
+log4j.appender.A_default.layout.ConversionPattern=%d{ISO8601} - %p - %m%n
+		
+		
+此時你去執行 test-commons-logging.jsp 輸出的內容, 就會記錄在你的 c:\log 目錄的 test.log 中了 
+
+ps:如果沒有相關的 class 會使用到 SimpLog, 此時要設定的是 simplelog.properties 
+
+
+SECTION 04 結論
+以我自己本身使用的經驗, Log4j 可以滿足所有工程師, 所以我也是直接使用 log4j 而沒有使用 commons-logging. 不過為了增加產品的共用性, 避免移植時候的麻煩, 新的產品及專案, 我會將他改成 commons-logging api 去呼叫. 才能符合真正的 reusable , 減少工程師未來的負擔.
+
+簡介 :
+Log4j 是一套開放源碼的工具,方便編程人員在程式中加入 log 機制,並輸出到各種目標上。Log4j 能夠透過外部的設定檔(properites 或 XML)進行設定。Log4j 能夠將 log message 寫到 console, 檔案,串流,TCP 協定的伺服器, Unix Syslog daemon 等。Log4j 具有 5 種 log 層級(DEBUG, INFO, WARN, ERROR, FATAL),可用於不同的系統狀態下所產生的訊息。
+
+組成 Log4j 的三大元件 :
+
+Logger - 由編程人員在程式中使用,進行 logging 的元件
+Appender - 負責將 log message 輸出到各種裝置上
+Layout - 決定 log message 的格式
+Log4j 的階層架構 :
+一個程式中可以擁有多個 Logger,這些 Logger之間以名稱區分,並以此區分出階層。例如有一個 Logger 的名稱為 "com.foo",那麼另一個名為 "com.foo.bar" 的 Logger 就隸屬於 "com.foo" logger,如果 "com.foo.bar" 未定義自己的 log 等級,則以 "com.foo" 的 log 等級為預設值。
+
+階層的最高為 root logger。Root logger 一定在存,不具有名稱屬性,可以隨時在程式中以 Logger.getRootLogger() 取得,其它 logger 則以 Logger.getLogger(String loggerName) 取得。
+
+Logger :
+Logger 可以被指派等級。能夠指派給 Logger 的等級有 : DEBUG, INFO, WARN, ERROR, FATAL 5 種,定義在 org.apache.log4j.Level 類別中。這 5 種等級的高低順序為 FATAL > ERROR > WARN > INFO > DEBUG。
+
+Logger 的等級決定它產生 log message 的數量 : Logger 只寫"出高於或等於本身等級"的 log message。例如某個 Logger 的等級被設定為 WARN,那麼它只會寫出等級為 WARN, ERROR, FATAL 的 log message,對於 DEBUG, INFO 的 log message 則不予理會。
+
+若是 Logger 的等級未被設定,則會自動使用 parent(上一層) 的等級。如果程式中所有的 Logger 都未設定等級,則由 root logger 決定。
+
+Logger 之間以名稱區分,所以在程式中任何地方,呼叫 Logger.getLogger(),並傳入同一個 Logger 名稱,則會得到同一個 Logger 的 reference。
+
+Logger 之間以名稱區分出階層。即使父階層在程式中出現的時機比子階層晚,例如 "com.foo" logger 比 "com.foo.bar" 被取得的時間來得晚,"com.foo" 仍然是 "com.foo.bar" 的父階層(會影響到子階層 logger 未被定義的屬性, log 等級, appender, layout )。
+
+Appender:
+透過 Appender, Logger 能夠將 log message 輸出到指定的裝置上。一個 Logger 能夠擁有多個 Appender,所以 Logger 能夠同時將 log message 輸出到多個個裝置上。
+
+Appender 的設定亦會反映在 Logger 的階層中。當 Logger 輸出一筆 log message 時,父階層的 Appender 和自己的 Appender(如果有的話)都會記錄到這筆 log message;例如 "com.foo" Logger 有一個 Appender 將 log message 輸出到 console,而 "com.foo.bar" 有一個 Appender 將 log message 輸出到 檔案;當 "com.foo.bar" Logger 輸出一筆 log message 時, console 和檔案都會出現這筆 log message。而最簡單的例子,就是當 root logger 擁有一個輸出到 console 的 Appender 時,則程式中所有的 logger 所產生的 log message 都會輸出到 console。唯一個例外的情況,就是當某個 logger 將自己的 additivity 屬性設為 false(Logger.setAdditivity(false)),則此 logger 與隸屬於它的子 logger 都不會將 log message 寫到 console。
+
+Layout:
+編程人員透過 Layout 的配置,能夠自由改變 Logger 寫出 log message 的格式。例如,為 Logger 加入一個 conversion pattern 為 "%r [%t] %-5p %c - %m%n" 的 PatternLayout,則輸出的 log message 就可能會像下列這樣:
+
+176 [main] INFO  org.foo.Bar - Located nearest gas station.
+PatternLayout 的 格式字元列表如下:
+
+%c 輸出日誌訊息所屬的類別的全名
+%d 輸出日誌時間點的日期或時間，指定格式的方式：%d{yyy-MM-dd HH:mm:ss }。
+%l 輸出日誌事件的發生位置，即輸出日誌訊息的語句處於它所在的類別的第幾行。
+%m 輸出代碼中指定的訊息，如log(message)中的message。
+%n 輸出一個列尾符號。
+%p 輸出優先階層，即DEBUG，INFO，WARN，ERROR，FATAL。如果是調用debug()輸出的，則為DEBUG，依此類推。-5p 代表將此字串填滿至 5 個字元,以空白補不足處。
+%r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+%t 輸出產生該日誌事件的線程名。
+%f 輸出日誌訊息所屬的類別的類別名。
+Layout 亦會反映在 Logger 的階層上。
+
+
+設定 :
+設定 Log4j 有 2 種方式 : 以 Java 程式碼配置組態,或是以外部設定檔進行設定。無論以哪種方式進行,不外下列幾個主要的步驟:
+
+定義 Root Logger 的等級 - 此設定會成為 logger 的預設等級
+定義 Root Logger 的 Appender - 如果有定義 Root Logger,則 Root Logger 的 Appender 一定要指定
+定義 Root Logger Appender 的 Layout - 定義 Layout 的類別後,可以選擇是否要定義該 Layout 的 conversion pattern
+定義個別的 Logger,其它步驟同 Root Logger
+最簡單的使用方式 - 使用 BasicConfigurator 進行設定, Root Logger 將會被設定為 DEBUG 等級,並且將 log message 以 "%r [%t] %p %c %x - %m%n" 的格式輸出到 console :
+
+package yc.usingLog4j;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
+public class UsingLog4j {
+     private static Logger logger = Logger.getLogger(UsingLog4j.class);
+
+     public static void main(String[] args) {
+     BasicConfigurator.configure();
+
+     logger.info("This is an info message.");
+     logger.debug("This is a debug message.");
+ }
+}
+將 Log4j 的設定提到外部檔案(*.properties),讓程式較具有彈性。以下是一個設定檔的範例 :
+
+#定義 Root Logger 的等級為 INFO,且為其指定一個 appender 名為 rootAppender.
+log4j.rootLogger=info, rootAppender
+
+#指定 rootAppender 的類型.
+log4j.appender.rootAppender=org.apache.log4j.ConsoleAppender
+
+#指定 rootAppender 的 Layout.
+log4j.appender.rootAppender.layout=org.apache.log4j.PatternLayout
+
+#指定 rootAppender Layout 的輸出格式.
+log4j.appender.rootAppender.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
+
+#設定特定名稱的 Logger.
+log4j.logger.yc.usingLog4j.UsingLog4jA=INFO, log4jaAppender
+log4j.appender.log4jaAppender=org.apache.log4j.RollingFileAppender
+log4j.appender.log4jaAppender.File=d:/tmp/usinglog4j.log
+log4j.appender.log4jaAppender.MaxFileSize=100KB
+log4j.appender.log4jaAppender.MaxBackupIndex=10
+log4j.appender.log4jaAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.log4jaAppender.layout.ConversionPattern=%c - %m%n
+Log4j 會從 class path 中尋找 log4j.properties,並自動讀取其中的設定。
+
+一般的使用方法 : 為 Root logger 設定 DEBUG 等級, Appender 及格式。其它的 logger 不做其它設定;當程式要轉換為 debug 或 release 模式時,只需修改 Root Logger 的等級即可。
+
+
+使用範例 :
+
+package yc.usingLog4j;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
+public class UsingLog4j {
+  private static Logger logger = Logger.getLogger(UsingLog4j.class);
+
+  public static void main(String[] args) {
+      BasicConfigurator.configure();
+    
+      /* 改變 Root Logger 的等級為 INFO */
+      //Logger.getRootLogger().setLevel(Level.INFO);
+    
+      /* 鴨子類別庫的 client 只做 INFO 等級的 log;類別庫裡才使用 DEBUG 等級的 log. */
+      logger.info("Create a Redhead Duck.");
+      RedheadDuck rhd = new RedheadDuck(new FlyWithWings(), new Quack());
+      logger.info("Play with the duck.");
+      rhd.display();
+      rhd.performFly();
+      rhd.performQuack();
+    
+      logger.info("Create a RubberDuck.");
+      RubberDuck rbd = new RubberDuck(new FlyWithRocket(), new Squeak());
+      logger.info("Play with the duck.");
+      rbd.display();
+      rbd.performFly();
+      rbd.performQuack();
+      }
+  }
+
+  interface FlyBehavior {
+      public void fly();
+  }
+
+  class FlyWithWings implements FlyBehavior {
+      private static Logger logger = Logger.getLogger(FlyWithWings.class);
+    
+      public void fly() {
+      logger.debug("Fly with wings...");
+  }
+}
+
+class FlyWithRocket implements FlyBehavior {
+  private static Logger logger = Logger.getLogger(FlyWithRocket.class);
+
+  public void fly() {
+      logger.debug("Fly with a rocket...");
+  }
+}
+
+interface QuackBehavior {
+  public void quack();
+}
+
+class Quack implements QuackBehavior {
+  private static Logger logger = Logger.getLogger(Quack.class);
+
+  public void quack() {
+      logger.debug("Quack...");
+  }
+}
+
+class Squeak implements QuackBehavior {
+  private static Logger logger = Logger.getLogger(Squeak.class);
+
+  public void quack() {
+      logger.debug("Squeak...");
+  }
+}
+
+abstract class Duck {
+  private FlyBehavior flyBehavior;
+
+  private QuackBehavior quackBehavior;
+
+  public Duck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+      this.flyBehavior = flyBehavior;
+      this.quackBehavior = quackBehavior;
+  }
+
+  public void performQuack() {
+      this.quackBehavior.quack();
+  }
+
+  public void performFly() {
+   this.flyBehavior.fly();
+  }
+
+  public abstract void display();
+}
+
+class RedheadDuck extends Duck {
+  private static Logger logger = Logger.getLogger(RedheadDuck.class);
+
+  public RedheadDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+      super(flyBehavior, quackBehavior);
+  }
+
+  @Override
+  public void display() {
+      logger.debug("A RedheadDuck is showing up...");
+  }
+}
+
+class RubberDuck extends Duck {
+  private static Logger logger = Logger.getLogger(RubberDuck.class);
+
+  public RubberDuck(FlyBehavior flyBehavior, QuackBehavior quackBehavior) {
+      super(flyBehavior, quackBehavior);
+  }
+
+  @Override
+  public void display() {
+      logger.debug("A RubberDuck is showing up...");
+  }
+}
+
+在一般情況下運行時所得到的 log message :
+
+0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+
+而在除錯模式下則是 :
+
+0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
+109 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+109 [main] DEBUG yc.usingLog4j.RedheadDuck  - A RedheadDuck is showing up...
+109 [main] DEBUG yc.usingLog4j.FlyWithWings  - Fly with wings...
+109 [main] DEBUG yc.usingLog4j.Quack  - Quack...
+109 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
+125 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+125 [main] DEBUG yc.usingLog4j.RubberDuck  - A RubberDuck is showing up...
+125 [main] DEBUG yc.usingLog4j.FlyWithRocket  - Fly with a rocket...
+125 [main] DEBUG yc.usingLog4j.Squeak  - Squeak...

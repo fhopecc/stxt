@@ -6,7 +6,7 @@
 
 萬用字元
 ~~~~~~~~
-SQL 的模式語言很簡單，底線「_」代表「匹配」任何單個字元，
+sql 的模式語言很簡單，底線「_」代表「匹配」任何單個字元，
 而一個百分號「%」匹配零或更多字元長的字串。
 
 除了上述兩個字元，其它字元匹配字元本身，見下表：
@@ -42,43 +42,85 @@ table[like_example].like 例句
 'abc' like 'c'   false
 ================ =====
 
-code[chang.SQL].找出姓張的員工
+例如若在 SQL 查詢中輸入 like '張%'，
+則查詢會傳回欄中以「張」做為開頭的字串紀錄，
+如下例找出姓張的員工。
+
+code[chang.sql].找出姓張的員工
 select *
 from employees
 where name like '張%'
 ::
 
-code[chang.SQL].找出電話區碼為 038的員工
+如下例找出電話區碼為038的員工。
+
+code[pre038.sql].找出電話區碼為038的員工
 select *
 from employees
 where phone like '038%'
 ::
 
+若要搜尋包括一或多個特殊萬用字元的字元字串，
+則必須於底線及百分比前導跳脫字元。
+預設的跳脫字元是反斜線。
+
+例如 customers 資料庫中 discount 欄表示每位顧客的預設折扣值，
+會儲存包括百分比符號「%」的折扣值。
+若要將百分比符號當作普通字元而不是萬用字元來搜尋，
+必須使用跳脫字元。 
+
+由於反斜線在字串常數裡已經有特殊含義了，
+所以若寫一個包含反斜線的模式字串要寫兩個反斜線，代表一反斜線。
+
+code[esc_backslash.sql].查詢顧客其折扣為 10-15 %
+select * 
+from customers
+where discount like '%10-15//% off%';
+::
+
+因此寫一個匹配單反斜線的模式實際上要在語句裡寫四個反斜線。 
+如下例查詢存在 fhopecc 目錄下的圖片，
+檔案路徑一定包含 fhopecc 字串，
+且前後要用反斜線表示目錄，但反斜線要寫成四個反斜線。
+
+code[esc_backslash.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%////fhopecc////%' escape '//';
+::
+
+我們可用 escape 子句自定一個跳脫字元， 
+使反斜線就不再是 like 的跳脫字元了，可避免上述四個反斜線問題。
+如下例以 escape 指定跳脫字元為驚嘆號「!」將顧客折扣查詢改寫如下：
+
+code[discount.sql].查詢顧客其折扣為 10-15 %
+select * 
+from customers
+where discount like '%10-15!% off%' escape '!';
+::
+
+由於反斜線仍然是字串常數的跳脫字元，
+所以還是需要兩個反斜線表示一個反斜線，如下例：
+
+code[fhopecc_images.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%//fhopecc//%' escape '!';
+::
+
 like 模式匹配總是覆蓋整個字串。 
 要匹配在字串內部任何位置的序列，該模式必須以百分號開頭和結尾。
 
-code[chang.SQL].找出
-select *
-from emails
-where title like '038%'
-::
-
-或者您可以使用萬用字元來找出一範圍內的數值(例如，like "sm*")。
-在一運算式中，您可以使用 like 運算子將一欄數值和一字串運算式做一比較。 例如，若您在一 SQL 查詢中輸入 like "c*"，則查詢會傳回所有欄中以字母 c 做為開頭的數值。在一參數查詢 中，您可以提示使用者一樣式以便進行搜尋。
-
-要匹配底線或者百分號，則必須於底線及百前導跳脫字元。預設的跳脫字元是反斜線，但是您可以用 escape 子句指定一個。 
-
 要匹配跳脫字元本身，寫兩個跳脫字元。
 
-由於反斜線在字串字面常數裡已經有特殊含義了，
-所以若寫一個包含反斜線的模式常數，那就要在 SQL 語句裡寫兩個反斜線。
-因此，寫一個匹配單個反斜線的模式實際上要在語句裡寫四個反斜線。 
-您可以透過用 escape 選擇一個不同的跳脫字元來避免這樣；
-這樣反斜線就不再是 like 的特殊字元了。 
-但仍然是字元字面常數分析器的特殊字元，所以您還是需要兩個反斜線。
-
-可以透過 escape '' 的方式關閉跳脫機制，
+escape '' 表示關閉跳脫機制，
 這時就不能關閉底線和百分號的特殊含義。
+
+code[fhopecc_images.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%//fhopecc//%' escape '';
+::
 
 Microsoft Jet SQL 萬用字元
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

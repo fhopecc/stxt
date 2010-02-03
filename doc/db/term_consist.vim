@@ -14,12 +14,13 @@
 %s/[A-Z]/\L&/g "大寫轉小寫
 %s/\<bc\>/\U&/g
 %s/\<ac\>/\U&/g
-%s/\<sql\>/\U&/g
+%s/ \<sql\>/\U&/g
 %s/\<quel\>/\U&/g
 %s/\<ansi\>/\U&/ig
 %s/\<Microsoft\>/Microsoft/ig
 %s/\<Jet\>/Jet/ig
 %s/文本/字面常數/cg
+%s/逸出字元/跳脫字元/g
 %s/介入/引入/g
 %s/聚集表示式/統計表示式/g
 %s/搜索條件/搜尋條件/g
