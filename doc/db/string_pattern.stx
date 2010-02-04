@@ -6,7 +6,8 @@
 
 萬用字元
 ~~~~~~~~
-sql 的模式語言很簡單，底線「_」代表「匹配」任何單個字元，
+SQL 的模式語言很簡單，只有兩種特別字元，
+底線「_」代表「匹配」任何單個字元，
 而一個百分號「%」匹配零或更多字元長的字串。
 
 除了上述兩個字元，其它字元匹配字元本身，見下表：
@@ -15,7 +16,7 @@ table.ANSI SQL 萬用字元表
 ANSI 意義           模式例 可匹配字串 
 ==== ============== ====== =================
 '_'  任何單一字元   '_ean' dean, sean
-'%'  零或更多的字元 'com*' computer, company
+'%'  零或更多的字元 'com%' computer, company
 ==== ============== ====== =================
 
 like 
@@ -32,27 +33,38 @@ strexpr like 'pattern'
 若 strexpr 所表示的字串匹配 pattern 所表示的模式，則 like 傳回真。
 not like 表示式傳回假。
 
-下面是一些例子︰
-table[like_example].like 例句
-例句             結果
-================ =====
-'abc' like 'abc' true
-'abc' like 'a%'  true
-'abc' like '_b_' true
-'abc' like 'c'   false
-================ =====
+表 employees 用長度為7之字串表示民國年生日，
+例如「0680729」是我的民國年生日之日期字串，
+若要查詢和我同生日的員工，
+可以用 birthday like '___0729' 作為條件，
+每個底線代表任何單一字元，因為日期字串民國年用3個字元表示，
+所以要有三個底線字元表示出生年可以是任何年份，
+而生日必須固定為 0729，如下例：
 
-例如若在 SQL 查詢中輸入 like '張%'，
-則查詢會傳回欄中以「張」做為開頭的字串紀錄，
-如下例找出姓張的員工。
-
-code[chang.sql].找出姓張的員工
+code[birthday.sql].找出與我同生日的員工
 select *
 from employees
-where name like '張%'
+where birthday like '___0729'
 ::
 
-如下例找出電話區碼為038的員工。
+由於中國姓名格式為姓式後加上一至三個字人名，
+所以想查詢與我同姓的同事清單，
+可在 SQL 查詢中輸入 name like '張簡%'，
+利用 % 表示任何字數的人名，
+會傳回 name 中以「張簡」做為開頭的字串紀錄，
+如下碼：
+
+code[chang_chine.sql].找出姓張簡的員工
+select *
+from employees
+where name like '張簡%'
+::
+
+電話號碼前三碼為區碼，
+花蓮的區碼為038，
+所以要找出電話於花蓮區的員工，
+可在 SQL 查詢中輸入 phone like '038%'，
+如下碼：
 
 code[pre038.sql].找出電話區碼為038的員工
 select *
