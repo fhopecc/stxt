@@ -1,9 +1,8 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, os, re, lex3
-from stxt_tree import DocTreeNode
-import yacc, stxt_tb_parser
-from booker_lexer import *
+import sys, os, re, lex, yacc, tabler
+from tree import Tree
+from lexer import *
 
 DEBUG = 0
 
@@ -15,7 +14,7 @@ def p_doc(p):
            | sect5s 
            | contents 
     '''
-    doc = DocTreeNode('doc')
+    doc = Tree('doc')
     for c in p[1]: doc.append(c)
     p[0] = doc
 
@@ -119,24 +118,24 @@ def p_code(p):
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
     if DEBUG == 0:
-        table = stxt_tb_parser.parse(p[2].decode('utf8'))
+        table = tabler.parse(p[2].decode('utf8'))
         table.title = p[1].title
         table.name = p[1].name
         p[0] = table
     else:
-        p[0] = DocTreeNode('table', 'debug mode do not support table')
+        p[0] = Tree('table', 'debug mode do not support table')
 
 def p_para(p):
     '''para : LINE
             | para LINE
     '''
-    if len(p) == 2: p[1] = DocTreeNode('para', p[1])
+    if len(p) == 2: p[1] = Tree('para', p[1])
     else: p[1].value += p[2]
     p[0] = p[1]
 
 def p_make_footnotes(p):
     'footnotes : FOOTNOTE'
-    p[0] = DocTreeNode('footnotes')
+    p[0] = Tree('footnotes')
     p[0].append(p[1])
 
 def p_term(p):
@@ -148,7 +147,7 @@ def p_term(p):
 
 def p_make_list(p):
     'list : listitem'
-    p[0] = DocTreeNode(p[1].type.replace('item', ''))
+    p[0] = Tree(p[1].type.replace('item', ''))
     p[0].append(p[1])
 
 def p_listitem(p):
@@ -228,6 +227,10 @@ def usage():
     return usage
 
 if __name__ == '__main__':
-    with open(sys.argv[1]) as f:
-        d = parse(f.read(), lexer = MutipleFileLexer(sys.argv[1]))
-        d.dump_type_tree()
+    try:
+        fn = sys.argv[1]
+        with open(fn) as f:
+            d = parse(f.read(), lexer = MutipleFileLexer(fn))
+            d.dump_type_tree()
+    except IndexError:
+       console.info(usage()) 

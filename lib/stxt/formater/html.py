@@ -1,11 +1,11 @@
 # coding=utf-8
-# for single html
 from __future__ import with_statement
-from template import Template
-#from pygments import highlight
-#from pygments.lexers import PythonLexer
-#from pygments.formatters import HtmlFormatter
-import sys, os, re, booker, template
+import sys, os, re
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from stxt import parser
+from stxt import template 
+from stxt.template import Template 
+from stxt.parser import console
 
 def disp(tree):
     if re.match(r'sect\d', tree.type):
@@ -22,14 +22,18 @@ def disp(tree):
 
 def to_html(file):
     d = None
-    d = booker.read(file)
+    d = parser.read(file)
     
     d.number_children()
     d.count_occurence()
     title = os.path.basename(file)
 
+    f = open(os.path.join('structedtext', 'css', 'web.css'))
+    css = f.read()
+    f.close()
+
     render = template.render('template')
-    return str(render.single_html(title, disp(d)))
+    return str(render.single_html(title, disp(d), css))
 
 def f_doc(tree):
     html = ''
@@ -195,9 +199,16 @@ def f_filename(tree):
         fn = tree.name
     return '%s.html' % fn
 
+def usage():
+    usage = os.path.basename(__file__) + " filename\n"
+    usage += u'filename: structed text file\n'
+    usage += u'convert stxt to html.'
+    return usage
+
 if __name__ == '__main__':
-    usage = os.path.basename(__file__) + " filename"
     try:
-        print to_html(sys.argv[1])
+        fn = sys.argv[1]
+        print to_html(fn)
     except IndexError:
-        print usage
+       console.info(usage()) 
+

@@ -1,7 +1,8 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re, booker, template
-from template import Template
+import sys, os, re
+from stxt import parser
+from stxt.template import Template
 from html_outputter import *
 
 def disp(tree):
