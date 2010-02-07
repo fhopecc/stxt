@@ -1,6 +1,6 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, os, re, lex, yacc, tabler
+import sys, os, re, lex, yacc, tabler, inliner
 from tree import Tree
 from lexer import *
 
@@ -90,6 +90,14 @@ def p_token(p):
                | IMAGE EMPTYLINE
                | INSERT EMPTYLINE
     '''
+    if p[1].type == 'para':
+        value = p[1].value  
+        start, end = p.linespan(1)
+        slineno = p.lexer.active_lexer().startlineno + start - 1
+        p[1] = inliner.parse(p[1].value, 
+                            file = p.lexer.active_file(), 
+                            lineno = slineno)
+        p[1].value = value
     p[0] = p[1]
 
 def p_element_with_subdoc(p):
@@ -157,7 +165,12 @@ def p_listitem(p):
     if len(p) == 3: 
        for i, c in enumerate(p[2]): 
            if not p[1].is_onelinepara and i == 0 and c.type == 'para': 
-                p[1].children[0].value +=  c.value
+                para = p[1].children[0]
+                para.value +=  c.value
+                src = para.value
+                para = inliner.parse(src)
+                para.value = src
+                p[1].children[0] = para
            else: p[1].append(c)
     p[0] = p[1]
 

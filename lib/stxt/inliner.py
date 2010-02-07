@@ -1,11 +1,13 @@
 # coding=utf8
 import sys, lex, yacc
-from stxt_tree import DocTreeNode
+from tree import Tree
 # Lexer
 tokens = [
           'CBLOCK', 
-          'EMPHASIS', 
-          'REFERENCE'
+          'STAR', 
+          'LSQUARE', 
+          'RSQUARE', 
+          'BACKSLASH' 
          ] 
 
 def find_column(input,token):
@@ -15,25 +17,29 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-def t_REFERENCE(t):
-    r'\[(?P<ref>[^\]]*)]'           
-    c = t.lexer.lexmatch.group('ref')
-    t.value = DocTreeNode('reference', c)
+def t_BACKSLASH(t):
+    r'\\'
     return t
 
-def t_EMPHASIS(t):
-    r'\*(?P<em>[^* ]*)\*'           
-    c = t.lexer.lexmatch.group('em')
-    t.value = DocTreeNode('reference', c)
+def t_STAR(t):
+    r'\*'
+    return t
+
+def t_LSQUARE(t):
+    r'\['
+    return t
+
+def t_RSQUARE(t):
+    r'\]'
     return t
 
 def t_CBLOCK(t):
-    r'[^*[\n]+'           
+    r'[^*\[\]\n]+'           
     return t
 
 def t_NEWLINE(t):
     r'\n'
-    t.lexer.lineno += t.lexeme.count('\n')
+    t.lexer.lineno += 1
 
 def t_error(t):
     c = t.value[0]
@@ -50,27 +56,45 @@ def p_para(p):
             | para elem
     ''' 
     if len(p) == 2:
-        p[0] = DocTreeNode('para', '')
+        p[0] = Tree('para', '')
         p[0].append(p[1])
     else:
         p[0] = p[1].append(p[2])
 
 def p_elem(p):
     '''elem : cblock
-            | EMPHASIS
-            | REFERENCE
+            | emphasis
+            | reference
     '''
     p[0] = p[1]
 
+def p_element(p):
+    '''emphasis  : STAR cblock STAR
+       reference : LSQUARE cblock RSQUARE
+    '''
+    if p[1] == '*':
+        p[0] = Tree('emphasis', p[2].value)
+    elif p[1] == '[':
+        p[0] = Tree('reference', p[2].value)
+
 def p_cblock(p):
     '''cblock : CBLOCK
+              | unmagic_char
               | cblock CBLOCK
+              | cblock unmagic_char
     '''
     if len(p) == 2:
-        p[0] = DocTreeNode('cblock', p[1])
+        p[0] = Tree('cblock', p[1])
     else:
         p[1].value += p[2]
         p[0] = p[1]
+
+def p_unmagic_char(p):
+    '''unmagic_char : BACKSLASH STAR
+                    | BACKSLASH LSQUARE
+                    | BACKSLASH RSQUARE
+    '''
+    p[0] = p[2]
 
 def p_error(t):
     print 'parse error:' + str(t)
@@ -78,6 +102,8 @@ def p_error(t):
 
 parser = yacc.yacc()
 
-def parse(input):
-    d = parser.parse(input, lexer=lexer)
+def parse(input, file='__string__', lineno=1):
+    lexer.lineno = lineno
+    lexer.file = file
+    d = parser.parse(input, lexer=lexer, debug=True)
     return d

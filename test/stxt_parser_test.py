@@ -18,7 +18,9 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(doc.type, 'doc')
         para = doc.children[0]
         self.assertEqual('para', para.type)
-        self.assertEqual(case.replace('\n', ''), para.value)
+        cblock = para.children[0]
+        self.assertEqual('cblock', cblock.type)
+        self.assertEqual(case.replace('\n', ''), cblock.value)
 
     def testList(self):
         case = '''衍生運算子包含：
@@ -30,7 +32,8 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(doc.type, 'doc')
         para = doc.children[0]
         self.assertEqual('para', para.type)
-        self.assertEqual('衍生運算子包含：', para.value)
+        cblock = para.children[0]
+        self.assertEqual('衍生運算子包含：', cblock.value)
 
         list = doc.children[1]
         self.assertEqual('list', list.type)
@@ -56,12 +59,18 @@ Msg1：“用戶端要與伺服端進行認證”
         self.assertEqual('olistitem', l1.type)
         self.assertEqual(2, l1.number)
         l2 = list.children[1]
+        para = l2.children[0]
+        self.assertEqual('para', para.type)
+        cblock = para.children[0]
+        self.assertEqual('cblock', cblock.type)
         self.assertEqual('用戶端與 KDC 在確認彼此的身份之後，' \
                          '用戶端即送出 Msg1 訊息給 KDC：', 
-                         l2.children[0].value)
+                         cblock.value)
         self.assertEqual(2, len(l2.children))
         l2p = l2.children[1]
-        self.assertEqual('Msg1：“用戶端要與伺服端進行認證”', l2p.value)
+        self.assertEqual('para', l2p.type)
+        cblock = l2p.children[0]
+        self.assertEqual('Msg1：“用戶端要與伺服端進行認證”', cblock.value)
 
     def testMList(self): 
         case='''#.安全性方法(IPsec  Security Methods)：
@@ -122,8 +131,11 @@ Msg1：“用戶端要與伺服端進行認證”
 
         l5l1 = l5list.children[0]
         self.assertEqual(1, len(l5l1.children))
+        para = l5l1.children[0]
+        self.assertEqual('para', para.type)
+        cblock = para.children[0]
         self.assertEqual('OK啦這是真的，多層的',
-                          l5l1.children[0].value)
+                          cblock.value)
         
     def testTheorem(self):
         case ='''theorem[reflective].反身性規則

@@ -178,12 +178,30 @@ class Tree(object):
         order_path = self.parent.order_path()
         order_path.append(self.order())
         return order_path
+    
+    def __getitem__(self, i):                            
+        'Get direct child whose index is i.'
+        return self.children[i]
 
     section_number = order_path
     
 DocTreeNode = Tree
 
 class UnitTest(unittest.TestCase):
+    def setUp(self):
+        d = Tree('doc')
+        d.append(Tree('question', 'q0'))
+        d.append(Tree('question', 'q1'))
+        d.append(Tree('example', 'e0'))
+        d.append(Tree('question', 'q2'))
+        d.append(Tree('example', 'e1'))
+
+        self.tree = d
+        
+    def testGetDirectChild(self):
+        t = self.tree
+        self.assertEqual('q2', t[3].value)
+
     def testOrderPath(self):
         pass
 
@@ -191,12 +209,7 @@ class UnitTest(unittest.TestCase):
         pass 
 
     def testSibling(self):
-        d = Tree('doc')
-        d.append(Tree('question', 'q0'))
-        d.append(Tree('question', 'q1'))
-        d.append(Tree('example', 'e0'))
-        d.append(Tree('question', 'q2'))
-        d.append(Tree('example', 'e1'))
+        d = self.tree
 
         self.assertEqual(3, len(d.children_in_type('question')))
         self.assertEqual(2, len(d.children_in_type('example')))
