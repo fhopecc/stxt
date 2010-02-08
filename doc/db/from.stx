@@ -60,7 +60,7 @@ from employees e
 括弧用於解決歧義，
 下式將連接的結果賦予別名 b：
 
-select * from (masters as a cross join angles) as m
+select \* from (masters as a cross join angles) as m
 
 若給 join 子句附加別名，
 則該別名就會隱藏 join 裡其它表名。比如
@@ -96,7 +96,7 @@ from (employees e natural join angles) as a
 
 定義子查詢必須括弧且賦予一個別名，如下式：
 
-from (select * from table1) as alias_name
+from (select \* from table1) as alias_name
 
 此例等效於下式：
 

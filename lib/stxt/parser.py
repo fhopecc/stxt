@@ -4,7 +4,7 @@ import sys, os, re, lex, yacc, tabler, inliner
 from tree import Tree
 from lexer import *
 
-DEBUG = 1
+DEBUG = False
 
 def p_doc(p):
     '''doc : sect1s
@@ -94,10 +94,14 @@ def p_token(p):
         value = p[1].value  
         start, end = p.linespan(1)
         slineno = p.lexer.active_lexer().startlineno + start - 1
-        p[1] = inliner.parse(p[1].value, 
-                             file = p.lexer.active_file(), 
-                             lineno = slineno)
-        p[1].value = value
+        try:
+            p[1] = inliner.parse(p[1].value, 
+                                 file = p.lexer.active_file(), 
+                                 lineno = slineno)
+            p[1].value = value
+        except SyntaxError, e:
+            print '%s at %s:%s' % (e.message, e.filename, e.lineno)
+            exit()
     p[0] = p[1]
 
 def p_element_with_subdoc(p):

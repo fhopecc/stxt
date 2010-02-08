@@ -1,8 +1,13 @@
 # coding=utf8
 import sys, lex, yacc
+import logging
+from logging import config
 from tree import Tree
 
-DEBUG = True
+config.fileConfig(r'config\log.conf')
+console = logging.getLogger()
+
+DEBUG = False
 
 # Lexer
 tokens = [
@@ -67,6 +72,7 @@ def p_elem(p):
     '''elem : cblock
             | emphasis
             | reference
+            | single_star_error
     '''
     p[0] = p[1]
 
@@ -79,11 +85,18 @@ def p_element(p):
     elif p[1] == '[':
         p[0] = Tree('reference', p[2].value)
 
+def p_single_star_error(p):
+    '''single_star_error : STAR cblock'''
+    console.info("inliner error report:")
+    console.info("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
+    console.info("emphasis element:could not find ending '*'.")
+    sys.exit()
+
 def p_cblock(p):
     '''cblock : CBLOCK
-              | unmagic_char
+              | escape_sequence
               | cblock CBLOCK
-              | cblock unmagic_char
+              | cblock escape_sequence
     '''
     if len(p) == 2:
         p[0] = Tree('cblock', p[1])
@@ -91,24 +104,33 @@ def p_cblock(p):
         p[1].value += p[2]
         p[0] = p[1]
 
-def p_unmagic_char(p):
-    '''unmagic_char : BACKSLASH STAR
-                    | BACKSLASH LSQUARE
-                    | BACKSLASH RSQUARE
+def p_escape_sequence(p):
+    '''escape_sequence : BACKSLASH STAR
+                       | BACKSLASH LSQUARE
+                       | BACKSLASH RSQUARE
+                       | BACKSLASH BACKSLASH
+                       | BACKSLASH CBLOCK
     '''
+    if p[2] not in ('*', '[', ']', '\\'):
+        console.info("inliner error report:")
+        console.info("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
+        console.info("Wrong escape sequence!")
+        sys.exit()
+
     p[0] = p[2]
 
 def p_error(p):
-    fn = p.lexer.file
-    lineno = p.lexer.lineno
-
-    print '%s at %s:%s' % (p.type, fn, lineno)
+    console.error("inliner error report:")
+    if p:
+        console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
+        console.error("Input %s" % p.type)
     sys.exit()
+
 
 
 parser = yacc.yacc()
 def parse(input, file='__string__', lineno=1):
-    lexer.lineno = lineno
+    lexer.lineno = lineno + 1
     lexer.file = file
-    d = parser.parse(input, lexer=lexer, debug=DEBUG)
+    d = parser.parse(input, lexer=lexer, tracking=True, debug=DEBUG)
     return d

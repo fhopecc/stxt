@@ -16,6 +16,8 @@ body {font-family:"標楷體";font-size:14pt}
 #sect2list table tr td {border:0}
 #sect2list table tr td.selected {color:white;background:gray}
 
+.emphasis {font-weight:bold}
+
 .sect1 .title {font-size:24pt;font-weight:bold;}
 .sect2 .title {font-size:20pt;font-weight:bold;}
 .sect3 .title {font-size:16pt;font-weight:bold;}

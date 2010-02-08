@@ -19,7 +19,7 @@ define[product].積
 theorem.積的紀錄數目
   若 R 的紀錄數目為 count(R)，
   且 S 的紀錄數目為 count(S)，
-  則 count(R TIMES S) = count(R) * count(S)，
+  則 count(R TIMES S) = count(R) \* count(S)，
 
 proof.
   由乘法原理可證。
@@ -67,7 +67,7 @@ angle  master
 
 matches 的紀錄筆數為 angles 的紀錄筆數乘以 masters 的紀錄筆數為
 
-3 * 3 = 9
+3 \* 3 = 9
 
 共 9 筆，由[matches]表可見。
 

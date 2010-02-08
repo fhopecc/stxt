@@ -19,14 +19,14 @@ group by 會依分組欄集將相同分組值的紀錄當成一組，
 分組後會將分組紀錄統計成一筆紀錄，
 此統計紀錄代表該組所有紀錄。 
 
-select * from test1;
+select \* from test1;
 
 不可引用原有欄
 ~~~~~~~~~~~~~~
 select x from test1 group by x;
 
 在上述查詢裡，
-我們不能寫成 select * from test1 group by x，
+我們不能寫成 select \* from test1 group by x，
 因為除了欄 x 裡，沒有其它值可以和每個組相關聯起來。
 分組欄集可以在表頭定義中引用是因為分組欄集在每組只有單一值。
 

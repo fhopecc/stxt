@@ -75,7 +75,7 @@ expression operator (單元後序運算子)
 
 operator 符號如下： 
 
-+ - * / < > = ~ ! @ # % ^ & | ` ?
++ - \* / < > = ~ ! @ # % ^ & | ` ?
 
 and or not 
 
@@ -121,7 +121,7 @@ aggregate_name 是統計函數，
 
 比如
 
-count(*) 
+count(\*) 
 
 為結果紀錄總數； 
 
@@ -240,4 +240,4 @@ select ... where case when x <> 0 then y/x > 1.5 else false end;
 用這種風格的 case 構造會阻止優化，
 因此應該只在必要的時候使用。 
 
-此例毫無疑問寫成 y > 1.5*x 更好。
+此例毫無疑問寫成 y > 1.5\*x 更好。

@@ -14,9 +14,9 @@ def disp(tree):
         return f_titled_container(tree)
     elif tree.type in ('proof', 'term'):
         return f_titled_container(tree)
-    elif tree.type in ('para'):
-        return f_element(tree)
-    elif tree.type in ('list', 'listitem', 'olistitem'):
+    elif tree.type in ('emphasis', 'reference'):
+        return f_inline_element(tree)
+    elif tree.type in ('para', 'list', 'listitem', 'olistitem'):
         return f_container(tree)
     else: return globals()['f_' + tree.type](tree)
 
@@ -132,6 +132,18 @@ $element
     for c in tree.children: element += disp(c)
     temp = Template(temp)
     return str(temp(tree.type, element))
+
+def f_cblock(tree):
+    return tree.value
+
+def f_inline_element(tree):
+    temp = '''$def with (type, content)
+<span class="$type">
+$content
+</span>
+'''
+    temp = Template(temp)
+    return str(temp(tree.type, tree.value))
 
 def f_element(tree):
     temp = '''$def with (type, content)
