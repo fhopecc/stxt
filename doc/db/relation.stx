@@ -46,7 +46,7 @@ id name   sex birthday
 SQL 並無法定義型態，但通常提供一組資料型態。
 
 或更進一步 check 限制資料型態的可能值，
-請參閱「check_sql]。
+請參閱[check_sql]。
 
 欄
 ~~

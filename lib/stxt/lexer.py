@@ -1,9 +1,13 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, os, re, lex3
-from stxt_tree import Tree
-from lex3 import TOKEN
-from lex3 import LexError
+from tree import Tree
+from lex import TOKEN
+from lex import LexError
+from logging import config
+import sys, os, re, lex, logging
+
+config.fileConfig(os.path.join(os.path.dirname(__file__),'log.conf'))
+console = logging.getLogger('console')
 
 states = (
     ('code', 'exclusive'), 
@@ -211,9 +215,11 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
+__lexer__  = lex.lex(reflags=re.M)
+
 class MutipleFileLexer(object):
     def __init__(self, f = '__string__', startlineno = 0, indent = 0):
-        self.lexer = lex3.lex(reflags=re.M)
+        self.lexer = __lexer__.clone()
         self.lexer.include_lexer = None
         self.lexer.file = f
         self.lexer.startlineno = startlineno
@@ -247,11 +253,22 @@ class MutipleFileLexer(object):
 
 lexer = MutipleFileLexer()
 
+def usage():
+    usage = '''Dump the stxt doctree.
+Syntax: %s stxt
+Dump the stxt doctree of file named stxt.
+'''
+    return usage % os.path.basename(sys.argv[0])
+    
+
 if __name__ == '__main__':
-    f = sys.argv[1]
-    with open(f) as f:
-        lexer.input(f.read())
-    t = lexer.token()
-    while t:
-        print "%i:%s" % (t.lexer.lineno , t.type)
+    try:
+        fn = sys.argv[1]
+        with open(fn) as f:
+            lexer.input(f.read())
         t = lexer.token()
+        while t:
+            console.info("%i:%s" % (t.lexer.lineno , t.type))
+            t = lexer.token()
+    except IndexError:
+       console.info(usage()) 

@@ -1,8 +1,7 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re, booker, template
-from template import Template
-from html_outputter import *
+import sys, os, re
+from html import *
 
 def disp(tree):
     if re.match(r'sect[345]', tree.type):
@@ -39,7 +38,7 @@ def f_index(tree):
                  'sect2_list': "",
                  'content': o
                 })
-    logger.info('generate %s' % index)
+    console.info('generate %s' % index)
 
 def f_sect1(tree):
     html = ''
@@ -100,7 +99,7 @@ render = template.render('template', globals=funcs)
 if __name__ == '__main__':
     try:
         sourcefile = sys.argv[1]
-        tree = booker.read(sourcefile)
+        tree = parser.read(sourcefile)
         to_doc(tree)
     except IndexError:
-        logger.info(usage())
+        console.info(usage())

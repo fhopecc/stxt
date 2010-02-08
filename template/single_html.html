@@ -1,25 +1,10 @@
-$def with (title, content)
+$def with (title, content, css)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <style type="text/css">
-body {font-family:"標楷體";font-size:14pt}
-.sect1 .title {font-size:24pt;font-weight:bold;}
-.sect2 .title {font-size:20pt;font-weight:bold;}
-.sect3 .title {font-size:16pt;font-weight:bold;}
-.sect4 .title {font-size:14pt;font-weight:bold;}
-.sect5 .title {font-size:14pt;font-weight:bold;}
-.image .title {font-size:14pt;font-weight:bold;}
-.define .title {font-size:14pt;font-weight:bold;}
-.theorem .title {font-size:14pt;font-weight:bold;}
-.term div {margin-left:24pt}
-.term .title {margin:0;font-size:14pt;font-weight:bold;}
-
-.olistitem div {margin-left:14pt}
-.olistitem .para:first-child {text-indent:-14pt}
-
-.olistitem .olistitem div {margin-left:0pt}
+$:css
 </style>
 <title>$title</title>
 </head>

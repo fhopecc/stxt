@@ -1,5 +1,5 @@
 # coding=utf8
-from stxt_tree import DocTreeNode
+from tree import Tree
 import sys, lex, yacc, unicodedata
 
 # Visual Length:
@@ -34,8 +34,9 @@ tokens = ['COLSEP', 'LINE']#, 'ROWSEP']
 
 def t_COLSEP(t):
     r'(?P<sepline>=+[= ]*)(\n|$)'
-    t.lexer.lineno += t.lexeme.count('\n')
     m = t.lexer.lexmatch
+    lexme = m.group(0)
+    t.lexer.lineno += lexme.count('\n')
     sepline = m.group('sepline')
     seps = sepline.split(' ')
     cols = []
@@ -59,7 +60,7 @@ def t_LINE(t):
     return t
 
 def t_error(t):
-    print >>sys.stderr, 'lexerror:' + str(t) + t.lexeme
+    print >>sys.stderr, 'lexerror:' + str(t) + t.lexedata
     raise SyntaxError('lexerror')
 
 lexer = lex.lex()
@@ -84,17 +85,17 @@ def p_simple_table(p):
                 row[i] += vals[i]
         else:
             row = parse_row(p[2], l)
-    header = DocTreeNode('tr', '')
+    header = Tree('tr', '')
     for v in row:
-        header.append(DocTreeNode('th', v))
-    table = DocTreeNode('table', '')
+        header.append(Tree('th', v))
+    table = Tree('table', '')
     table.append(header)
     # parse row
     for l in p[3]:
-        r = DocTreeNode('tr', '')
+        r = Tree('tr', '')
         table.append(r)
         for v in parse_row(p[2], l):
-            r.append(DocTreeNode('td', v))
+            r.append(Tree('td', v))
     p[0] = table
 
 def p_lines(p):

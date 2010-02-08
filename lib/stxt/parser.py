@@ -1,11 +1,10 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, os, re, lex3
-from stxt_tree import DocTreeNode
-import yacc, stxt_tb_parser
-from booker_lexer import *
+import sys, os, re, lex, yacc, tabler, inliner
+from tree import Tree
+from lexer import *
 
-DEBUG = 0
+DEBUG = 1
 
 def p_doc(p):
     '''doc : sect1s
@@ -15,7 +14,7 @@ def p_doc(p):
            | sect5s 
            | contents 
     '''
-    doc = DocTreeNode('doc')
+    doc = Tree('doc')
     for c in p[1]: doc.append(c)
     p[0] = doc
 
@@ -91,6 +90,14 @@ def p_token(p):
                | IMAGE EMPTYLINE
                | INSERT EMPTYLINE
     '''
+    if p[1].type == 'para':
+        value = p[1].value  
+        start, end = p.linespan(1)
+        slineno = p.lexer.active_lexer().startlineno + start - 1
+        p[1] = inliner.parse(p[1].value, 
+                             file = p.lexer.active_file(), 
+                             lineno = slineno)
+        p[1].value = value
     p[0] = p[1]
 
 def p_element_with_subdoc(p):
@@ -119,24 +126,24 @@ def p_code(p):
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
     if DEBUG == 0:
-        table = stxt_tb_parser.parse(p[2].decode('utf8'))
+        table = tabler.parse(p[2].decode('utf8'))
         table.title = p[1].title
         table.name = p[1].name
         p[0] = table
     else:
-        p[0] = DocTreeNode('table', 'debug mode do not support table')
+        p[0] = Tree('table', 'debug mode do not support table')
 
 def p_para(p):
     '''para : LINE
             | para LINE
     '''
-    if len(p) == 2: p[1] = DocTreeNode('para', p[1])
+    if len(p) == 2: p[1] = Tree('para', p[1])
     else: p[1].value += p[2]
     p[0] = p[1]
 
 def p_make_footnotes(p):
     'footnotes : FOOTNOTE'
-    p[0] = DocTreeNode('footnotes')
+    p[0] = Tree('footnotes')
     p[0].append(p[1])
 
 def p_term(p):
@@ -148,7 +155,7 @@ def p_term(p):
 
 def p_make_list(p):
     'list : listitem'
-    p[0] = DocTreeNode(p[1].type.replace('item', ''))
+    p[0] = Tree(p[1].type.replace('item', ''))
     p[0].append(p[1])
 
 def p_listitem(p):
@@ -158,7 +165,12 @@ def p_listitem(p):
     if len(p) == 3: 
        for i, c in enumerate(p[2]): 
            if not p[1].is_onelinepara and i == 0 and c.type == 'para': 
-                p[1].children[0].value +=  c.value
+                para = p[1].children[0]
+                para.value +=  c.value
+                src = para.value
+                para = inliner.parse(src)
+                para.value = src
+                p[1].children[0] = para
            else: p[1].append(c)
     p[0] = p[1]
 
@@ -205,7 +217,7 @@ def p_error(p):
     lineno = active_lexer.startlineno + active_lexer.lineno
     col = find_column(active_lexer.lexdata, p) + active_lexer.indent * 2
     print '%s at %s:%s:%s' % (p.type, active_lexer.file, lineno, col)
-    print active_lexer.lexdata
+#print active_lexer.lexdata
     sys.exit(0)
 
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
@@ -228,6 +240,10 @@ def usage():
     return usage
 
 if __name__ == '__main__':
-    with open(sys.argv[1]) as f:
-        d = parse(f.read(), lexer = MutipleFileLexer(sys.argv[1]))
-        d.dump_type_tree()
+    try:
+        fn = sys.argv[1]
+        with open(fn) as f:
+            d = parse(f.read(), lexer = MutipleFileLexer(fn))
+            d.dump_type_tree()
+    except IndexError:
+       console.info(usage()) 
