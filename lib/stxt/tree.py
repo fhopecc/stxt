@@ -185,7 +185,28 @@ class Tree(object):
 
     section_number = order_path
     
-DocTreeNode = Tree
+def Tuple2BTree(root=None, left=None, right=None):
+    if root is None:
+        raise ValueError, 'Root of binary tree cannot be None!'
+    root        = Tree('root', root)
+
+    if left:
+        if type(left) is tuple:
+            left = Tuple2BTree(*left)
+            left.type = 'left'
+        else:
+            left = Tree('left', left)
+        root.append(left)
+
+    if right:
+        if type(right) is tuple:
+            right = Tuple2BTree(*right)
+            right.type = 'right'
+        else:
+            right = Tree('right', right)
+        root.append(right)
+
+    return root
 
 class UnitTest(unittest.TestCase):
     def setUp(self):
@@ -220,20 +241,49 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(1, q1.order())
 
     def testNameTable(self):
-        r = DocTreeNode('book', 'book value', name='book')
-        r.append(DocTreeNode('child', 'child value', name='child'))
+        r = Tree('book', 'book value', name='book')
+        r.append(Tree('child', 'child value', name='child'))
 
         self.assertEqual('book value', r.find_by_name('book').value)
         self.assertEqual('child value', r.find_by_name('child').value)
 
     def testPrevious(self):
-        r = DocTreeNode('book', 'book value', name='book')
-        r.append(DocTreeNode('sect1', 'sect1 value', name='child1'))
-        r.append(DocTreeNode('sect2', 'sect2 value', name='child2'))
-        r.append(DocTreeNode('sect1', 'sect1 value', name='child3'))
+        r = Tree('book', 'book value', name='book')
+        r.append(Tree('sect1', 'sect1 value', name='child1'))
+        r.append(Tree('sect2', 'sect2 value', name='child2'))
+        r.append(Tree('sect1', 'sect1 value', name='child3'))
         sect1s = [c for c in r.children if c.type == 'sect1']
         child3 = r.find_by_name('child3')
         self.assertEqual(1, sect1s.index(child3))
+
+    def testPreorder(self):
+        r'''
+        2
+       / \
+      7   5  
+     / \   \
+    2  6    9
+      / \   /
+     5  11  4
+'''
+        tree = Tuple2BTree((2,(7,2,(6, 5, 11)), (5, None, (9, 4))))
+
+    def testTuple2BTree(self):
+        self.assertRaises(ValueError, Tuple2BTree, None,2,3)
+
+        t = Tuple2BTree(2)                    
+        self.assertEqual('root', t.type)
+        self.assertEqual(2, t.value)
+
+        t = Tuple2BTree(2,(7,2,6))                    
+        self.assertEqual('root', t.type)
+        self.assertEqual(2, t.value)
+        self.assertEqual('left', t[0].type)
+        self.assertEqual(7, t[0].value)
+        
+        self.assertEqual('right', t[0][1].type)
+        self.assertEqual(6, t[0][1].value)
+
 
 if __name__ == '__main__':
     unittest.main()
