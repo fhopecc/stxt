@@ -54,6 +54,9 @@ class Tree(object):
     def isRoot(self):
         return self.parent is None
 
+    def isLeaf(self):
+        return len(self.children) == 0
+
     def root(self):
         if self.isRoot(): return self
         else: return self.parent.root()
@@ -66,23 +69,16 @@ class Tree(object):
             h += 1
         return h
 
-    def _dfs(self, unvisited):
-        for c in self.children:
-            c._dfs(unvisited)
-        unvisited.append(self)
-
     def dfs(self):
-        '''depth-first search
-               It calls _dfs() to construct a list of nodes in dfs order,
-               then it enumerates the list to implement the generator.
-           TODO: 
-               Modify it not constructing node first, just find the next
-               node on demand.
-        '''
-        unvisited = []
-        self._dfs(unvisited)
-        for n in unvisited:
-            yield n
+        '先深後廣探訪，演算法見[Tree DFS]'
+        unvisited = [] # 這是未尋訪堆疊
+        cursor = self
+        unvisited.extend(cursor.children)
+        yield cursor
+        while len(unvisited) > 0:
+            cursor = unvisited.pop()
+            unvisited.extend(cursor.children)
+            yield cursor
 
     def __make_name_table__(self):
         self.name_table = {}
@@ -218,6 +214,17 @@ class UnitTest(unittest.TestCase):
         d.append(Tree('example', 'e1'))
 
         self.tree = d
+
+        r'''
+    2
+   / \
+  7   5  
+ / \   \
+2  6    9
+  / \   /
+ 5  11  4
+'''
+        self.btree = Tuple2BTree(2,(7,2,(6, 5, 11)), (5, None, (9, 4)))
         
     def testGetDirectChild(self):
         t = self.tree
@@ -257,17 +264,13 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(1, sect1s.index(child3))
 
     def testPreorder(self):
-        r'''
-        2
-       / \
-      7   5  
-     / \   \
-    2  6    9
-      / \   /
-     5  11  4
-'''
-        tree = Tuple2BTree((2,(7,2,(6, 5, 11)), (5, None, (9, 4))))
-
+        pass
+    
+    def testDFS(self):
+        btree = self.btree
+        seq = [n.value for n in btree.dfs()]
+        self.assertEqual([2, 5, 9, 4, 7, 6, 11, 5, 2], seq)
+        
     def testTuple2BTree(self):
         self.assertRaises(ValueError, Tuple2BTree, None,2,3)
 

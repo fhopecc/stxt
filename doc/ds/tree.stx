@@ -24,6 +24,13 @@ define.樹
 
 由定義可知根為樹中沒有父的節點。
 
+theorem.樹定理(tree)
+  以下的陳述相互邏輯等價:
+    1.T 為無環且連通圖
+    2.T 任兩個點之間，存在唯一的路徑
+    3.T 為最大連通，且 v=e-1 這同義於若 e in T, 則 T-e 不連通。
+    4.T 為最小無環，且 v=e-1，這同義於若 e not in T, 則 T+e 為有環圖。
+
 叉(degree)
 ~~~~~~~~~~
 叉為一函數，若 n 為樹 t 之節點，
@@ -53,6 +60,34 @@ h(n) 定義為由根 r 至 n 的路徑所連接的節點數。
 完全樹(complete tree)
 ~~~~~~~~~~~~~~~~~~~~~
 若 t 既是滿樹，也是平衡樹，則稱為完全樹。
+
+先深後廣探訪(Tree DFS)
+~~~~~~~~~~~~~~~~~~~~~~
+先深後廣探訪先探訪離起點最遠的節點，
+在樹的情況中，先深後廣探訪先的實作不用額外記憶尋訪過的節點，
+由[theorem.tree]得知樹中每不同兩點間僅有唯一的路徑，
+故不可能經由不同路徑探訪至探訪過的節點。
+以上樹的尋訪均是 dfs 的特例，其中反前序最接近一般的先深後廣探訪。
+
+其演算法如下:
+  1.初始堆疊 unvisited 用來維護將探訪的節點
+  2.探訪根節點並把與根節點的子節點放入 unvisited
+  3.若 unvisited 不為空，選出下一節點 node 進行探訪，
+    並把與 node 之子節點放入 unvisited
+  4.回上一步驟反覆進行至 unvisited 為空
+
+code.tree_dfs.py
+def dfs(self):
+    '先深後廣探訪，演算法見[Tree DFS]'
+    unvisited = [] # 這是未尋訪堆疊
+    cursor = self
+    unvisited.extend(cursor.children)
+    yield cursor
+    while len(unvisited) > 0:
+        cursor = unvisited.pop()
+        unvisited.extend(cursor.children)
+        yield cursor
+::
 
 陣列表示法
 ~~~~~~~~~~
