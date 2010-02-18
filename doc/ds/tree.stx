@@ -1,230 +1,92 @@
-¾ðª¬µ²ºc
-========
-¾ð(tree)
-~~~~~~~~
-¾ð¥i»¼°j©w¸q¦p¤U¡G
+æ¨¹ç‹€çµæ§‹(tree structure)
+========================
+æ¨¹ç‹€çµæ§‹æ˜¯ç›¸ç•¶é‡è¦çš„è³‡æ–™çµæ§‹ï¼Œ
+å®ƒçš„ç‰¹é»žä¾¿æ˜¯å¯è¡¨é”éšŽå±¤æ€§çš„è³‡æ–™ã€‚
 
-°ò¥»©w¸q¡G
+æ¨¹(tree)
+--------
+define.æ¨¹
+  æ¨¹å¯éžè¿´å®šç¾©å¦‚ä¸‹ï¼š
 
-³æ¤@¸`ÂI r ¬°¾ð¡A¨ä¦Û¨­¬°®Ú root¡C
+  åŸºæœ¬å®šç¾©:
+    å–®ä¸€ç¯€é»ž r ç‚ºæ¨¹ï¼Œå…¶è‡ªèº«ç‚ºæ ¹(root)ã€‚
+  å»ºæ§‹å®šç¾©:
+    ä»¤ r ç‚ºå–®ä¸€ç¯€é»žï¼Œè‹¥æœ‰æ¨¹é›†åˆ ts={ t1, t2... tn}ï¼Œ
+    å°æ‰€æœ‰ t å±¬æ–¼ ts 
+    å»ºç«‹ä¸€å€‹é‚Šé€£è‡³ r å½¢æˆ r'ï¼Œ
+    å‰‡ r' ä»ç‚ºæ¨¹ã€‚
 
+    r' ç¨±ç‚º t çš„çˆ¶(parent)ï¼Œ
+    è€Œ t ç¨±ç‚º r' ç‚ºå­(child)ï¼Œ
+    r ç¨±ç‚ºæ¨¹ r' çš„æ ¹ã€‚
+    {t1, t2...  tn}çš„æ ¹ï¼Œç¨±ç‚ºå…„å¼Ÿ silblingã€‚
+    è‹¥ t æ²’æœ‰å­ç¯€é»žï¼Œç¨± t ç‚ºè‘‰ leafã€‚
 
-«Øºc©w¸q¡G
+ç”±å®šç¾©å¯çŸ¥æ ¹ç‚ºæ¨¹ä¸­æ²’æœ‰çˆ¶çš„ç¯€é»žã€‚
 
-¥O r ¬°³æ¤@¸`ÂI¡A­Y¦³¾ð¶°¦X ts={
-t1, 
-t2...
-tn}¡A
-¹ï©Ò¦³ t ÄÝ©ó ts 
-«Ø¥ß¤@­ÓÃä³s¦Ü r §Î¦¨ r'¡A
-«h r' ¤´¬°¾ð¡C
+å‰(degree)
+~~~~~~~~~~
+å‰ç‚ºä¸€å‡½æ•¸ï¼Œè‹¥ n ç‚ºæ¨¹ t ä¹‹ç¯€é»žï¼Œ
+d(n) å®šç¾©ç‚º n çš„å­ç¯€é»žæ•¸ç›®ã€‚
 
+åºæ¨¹(ordered tree)æŒ‡æ¨¹çš„å­ç¯€é»žå…·æœ‰ä¸€å®šçš„é †åºã€‚
 
+å®šç¾© d(t)=max(d(n)), n å±¬æ–¼ tï¼Œ
+è‹¥ d(t)=m, m ç‚ºè‡ªç„¶æ•¸ï¼Œ
+ç¨± t ç‚ºm-å‰æ¨¹ã€‚
 
+è‹¥æ‰€æœ‰ n å±¬æ–¼ m-å‰æ¨¹ tï¼Œä¸” d(n)=0 or mï¼Œå‰‡ t ç‚ºæ»¿æ¨¹(full tree)ã€‚
 
+1-å‰æ¨¹ç‚ºä¸€ç¨®é€€åŒ–æˆéˆçµçš„æ¨¹ï¼Œå…¶æ¯å€‹ç¯€é»žæœ€å¤šåªæœ‰ä¸€å€‹å­ï¼Œ
+åˆç¨±ç‚ºè—¤è”“ vine    
 
-r' ºÙ¬° t ªº¤÷ parent¡A
-¦Ó t ºÙ¬° r' ¬°¤l child¡A
-r ºÙ¬°¾ð r' ªº®Ú¡C
-{t1, 
-t2...
-tn}ªº®Ú¡AºÙ¬°¥S§Ì silbling¡C
+é«˜(height)
+~~~~~~~~~~
+é«˜ç‚ºä¸€å‡½æ•¸ï¼Œè‹¥ n ç‚ºæ¨¹ t ä¹‹ç¯€é»žï¼Œ
+h(n) å®šç¾©ç‚ºç”±æ ¹ r è‡³ n çš„è·¯å¾‘æ‰€é€£æŽ¥çš„ç¯€é»žæ•¸ã€‚
+ç”±ä¸Šå¯çŸ¥ h(r)=1ã€‚
 
+å®šç¾© h(t)=max(h(n)), n å±¬æ–¼ tï¼Œç¨± h ç‚º t çš„æ¨¹é«˜ã€‚
 
-­Y t ¨S¦³¤l¸`ÂI¡AºÙ t ¬°¸­ leaf¡C
+å¹³è¡¡æ¨¹(balanced tree)ç‚ºæ¯å€‹è‘‰å­éƒ½ç­‰é«˜çš„æ¨¹ã€‚
 
-
-¥Ñ©w¸q¥iª¾®Ú¬°¾ð¤¤¨S¦³¤÷ªº¸`ÂI¡C
-
-¤e degree
-
-¤e¬°¤@¨ç¼Æ¡A­Y n ¬°¾ð t ¤§¸`ÂI¡A
-d(n) ©w¸q¬° n ªº¤l¸`ÂI¼Æ¥Ø¡C
-
-
-§Ç¾ð ordered tree«ü¾ðªº¤l¸`ÂI¨ã¦³¤@©wªº¶¶§Ç¡C
-
-
-©w¸q d(t)=max(d(n)), n ÄÝ©ó t¡A
-­Y d(t)=m, m ¬°¦ÛµM¼Æ¡A
-ºÙ t ¬°m-¤e¾ð¡C
-
-
-­Y©Ò¦³ n ÄÝ©ó m-¤e¾ð t¡A¥B d(n)=0 or m¡A«h t ¬°
-º¡¾ð full tree¡C
-
-
-1-¤e¾ð¬°¤@ºØ°h¤Æ¦¨Ãìµ²ªº¾ð¡A¨ä¨C­Ó¸`ÂI³Ì¦h¥u¦³¤@­Ó¤l¡A
-¤SºÙ¬°ÃÃ½¯ vine    
-
-
-°ª height
-
-°ª¬°¤@¨ç¼Æ¡A­Y n ¬°¾ð t ¤§¸`ÂI¡A
-h(n) ©w¸q¬°¥Ñ®Ú r ¦Ü n ªº¸ô®|©Ò³s±µªº¸`ÂI¼Æ¡C
-¥Ñ¤W¥iª¾ h(r)=1¡C
-
-
-©w¸q h(t)=max(h(n)), n ÄÝ©ó t¡AºÙ h ¬° t ªº¾ð°ª¡C
-
-
-¥­¿Å¾ð    balanced tree
-¬°¨C­Ó¸­¤l³£µ¥°ªªº¾ð¡C
-
-
-§¹¥þ¾ð complete tree
-­Y t ¬J¬Oº¡¾ð¡A¤]¬O¥­¿Å¾ð¡A«hºÙ¬°§¹¥þ¾ð¡C
-
-°}¦Cªí¥Üªk
-
-Ãìµ²ªí¥Üªk
-
-¾ð©w²z
-
-¥H¤Uªº³¯­z¬Û¤¬ÅÞ¿èµ¥»ù
-
-t ¬°µLÀô¥B³s³q¹Ï
-t ¥ô¨â­ÓÂI¤§¶¡¡A¦s¦b°ß¤@ªº¸ô®|
-t ¬°³Ì¤j³s³q¡A¥B v=e-1 ³o¦P¸q©ó­Y e in t, «h t-e ¤£³s³q¡C
-t ¬°³Ì¤pµLÀô¡A¥B v=e-1¡A³o¦P¸q©ó­Y e not in t, «h t+e ¬°¦³Àô¹Ï¡C
-    
-
-
-
-
-ºâ¦¡¾ð expression tree
-º¡¨¬°ÝÃD satisfication problem
-
-
-¨Mµ¦¾ð decision tree
-¤K¹ô°ÝÃD eight coins problem
-
-
-¹CÀ¸¾ð game tree
-
-¾ðªº´M³X(travel tree)
+å®Œå…¨æ¨¹(complete tree)
 ~~~~~~~~~~~~~~~~~~~~~
-´M³X¬O¿é¤J¤@¾ð¡A
-¨Ã¶Ç¦^¤@§Ç¦C¥]§t©Ò¦³ªº¸`ÂIªº¨ç¼Æ¡C
-Â²³æ»¡´N¬O§â¾ð§@½u©Ê±Æ§Ç¡C
+è‹¥ t æ—¢æ˜¯æ»¿æ¨¹ï¼Œä¹Ÿæ˜¯å¹³è¡¡æ¨¹ï¼Œå‰‡ç¨±ç‚ºå®Œå…¨æ¨¹ã€‚
 
-¤@¯ë»¡¨Ó´M³X¥]§t¤T­Ó¨BÆJ¡G¿é¥X¸`ÂI¡B³X°Ý¥ª¤l¾ð¡B³X°Ý¥k¤l¾ð¡A
-¨ä¤¤¿é¥X¸`ÂI³q±`¬°±N¸`ÂI­È¥[¤J¦Üµ²ªG§Ç¦C¤¤¡A
-³X°Ý¥ª¤l¾ð¬°¦V¥ª¤l¾ð²¾°Ê¡A
-³X°Ý¥k¤l¾ð¬°¦V¥k¤l¾ð²¾°Ê¡A
-¥O p ªí¿é¥X¸`ÂIªº¨BÆJ¡Bl ªí³X°Ý¥ª¤l¾ð¡Br ªí³X°Ý¥k¤l¾ð¡A
-«h¦³¿é¥Xªº¶¶§Ç·|¦³¤U­±ªº²Õ¦X¡G
-t={plr,lpr,lrp,prl,rpl,rlp}
+é™£åˆ—è¡¨ç¤ºæ³•
+~~~~~~~~~~
+TODO
 
-³q±`·|¥ý«ô³X¥ª¤l¾ð¡A¦A«ô³X¥k¤l¾ð¡A
-¦Ó©R¦W¬O¨Ó¦Û©ó¿é¥Xªº§Ç¦C»P¼Æ¾Ç¤½¦¡«e§Ç²Å¸¹¡B
-¤¤§Ç²Å¸¹¤Î«á§Ç²Å¸¹¦r¦ê¤@¼Ë¦Ó¨Ó¡A
-¦³¤U­±¤TºØ¡G
+éˆçµè¡¨ç¤ºæ³•
+~~~~~~~~~~
+theorem.æ¨¹å®šç†
+  ä»¥ä¸‹çš„é™³è¿°ç›¸äº’é‚è¼¯ç­‰åƒ¹
 
-table.
-==== ========= === ====================
-«e§Ç preorder  plr ¿é¥X¸`ÂI¦b³X°Ý¤l¾ð«e
-¤¤§Ç inorder   lpr ¿é¥X¸`ÂI¦b³X°Ý¤l¾ð¤¤
-«á§Ç postorder lrp ¿é¥X¸`ÂI¦b³X°Ý¤l¾ð«á
-==== ========= === ====================
+  1.t ç‚ºç„¡ç’°ä¸”é€£é€šåœ–
+  2.t ä»»å…©å€‹é»žä¹‹é–“ï¼Œå­˜åœ¨å”¯ä¸€çš„è·¯å¾‘
+  3.t ç‚ºæœ€å¤§é€£é€šï¼Œä¸” v=e-1 é€™åŒç¾©æ–¼è‹¥ e in t, å‰‡ t-e ä¸é€£é€šã€‚
+  4.t ç‚ºæœ€å°ç„¡ç’°ï¼Œä¸” v=e-1ï¼Œé€™åŒç¾©æ–¼è‹¥ e not in t, å‰‡ t+e ç‚ºæœ‰ç’°åœ–ã€‚
 
-­Y¬O½Õ´«¥ª¥k¤l¾ðªº³X°Ý¶¶§Ç¡A«hºÙ¬°
-¤Ï§Ç´M³X reverse order¡A
-¦CÁ|¦p¤U¡G
- 
-table.
-====== ================= ===
-¤Ï«e§Ç reverse preorder  prl
-¤Ï¤¤§Ç reverse inorder   rpl
-¤Ï«á§Ç reverse postorder rlp
-====== ================= ===
+ç®—å¼æ¨¹(expression tree)
+~~~~~~~~~~~~~~~~~~~~~~~
+TODO
 
-tree. 
-        2
-       / \
-      7   5  
-     / \   \
-    2  6    9
-      / \   /
-     5  11  4
-::
+æ»¿è¶³å•é¡Œ(satisfication problem)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TODO
 
-¨ä´M³X§Ç¦C¬°¡G
-«e§Ç:2 7  2 6  5 11  5  9  4
-¤¤§Ç:2 7  5 6 11  2  5  4  9 
-«á§Ç:2 5 11 6  7  4  9  5  2     
+æ±ºç­–æ¨¹(decision tree)
+~~~~~~~~~~~~~~~~~~~~~~
+TODO
 
-»P dfs ªºÃö«Y
-~~~~~~~~~~~~~
-dfs ¥ý±´³XÂ÷°_ÂI³Ì»·ªº¸`ÂI¡A¦b¾ðªº±¡ªp¤¤¡A
-dfs ªº¹ê§@¤£¥ÎÃB¥~°O¾Ð´M³X¹Lªº¸`ÂI¡A
-¥Ñ 3.2.1 ±oª¾¾ð¤¤¨C¤£¦P¨âÂI¶¡¶È¦³°ß¤@ªº¸ô®|¡A
-¬G¤£¥i¯à¸g¥Ñ¤£¦P¸ô®|±´³X¦Ü±´³X¹Lªº¸`ÂI¡C
-¥H¤W¾ðªº´M³X§¡¬O dfs ªº¯S¨Ò¡A¨ä¤¤«e§Ç³Ì±µªñ¤@¯ëªº dfs¡C
+å…«å¹£å•é¡Œ(eight coins problem)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TODO
 
-¶¥¼h´M³X(level order)
-~~~~~~~~~~~~~~~~~~~~~
-¤G¤¸¾ðªº¶¥¼h´M³X«K¬° bfs ªº¯S¨Ò¡C
+éŠæˆ²æ¨¹(game tree)
+~~~~~~~~~~~~~~~~~
+TODO
 
-¤Þ½u¾ð(threaded tree)
-~~~~~~~~~~~~~~~~~~~~~
-¤G¤¸¾ðªí¥Ü¶°¦X
-
-¤G¤¸¾ðªí¥Ü¾ð¤Î´ËªL
-
-¥Î«e§Ç¤Î¤¤§Ç§Ç¦C«Ø¥ß°ß¤@¤G¤¸¾ð
-
-
-¤G¤¸·j´M¾ð
-    ¤G¤¸·j´M¾ð¬O¤@¤G¤¸¾ð¡A¦ý¥ª¤l¸`ÂI­È§¡¤p©ó¸`ÂI­È¡A¥k¤l
-    ¸`ÂI­È§¡¤j©ó¸`ÂI­È¡C
-    *¹Ï 3.2.3.a    
-         7
-               /  \
-              3   10
-          / \    \
-        1   6   14
-               / \  /
-            4  7 13
-    *§Q¥Î¤¤§Ç´M³X±N¾ð¤Æ¬°º¥¼W§Ç¦C    
-    ¤W¹Ï¬°¤@¤G¤¸·j´M¾ð¡A¨ä inorder traversal ¬°¡G
-    1 3 4 6 7 7 10 13 14
-    **¤Ï§Ç§Q¥Î¤Ï¦V¤¤§Ç´M³X    
-    §â¸`ÂIÂà¬°º¥¼W§Ç¦C¡A­Y¥Î reverse inorder «hÂà¬°º¥´î¼Æ
-    ¦C¡C
-    *·j´M    
-    ·j´M¸`ÂI¨BÆJ¬°¡G
-    ¤ñ¸û¸`ÂI­È»PÁä­È¡A­YÁä­È¤p©ó¸`ÂI­È«h©¹¥ª¤l¾ð±´³X¡A­Y
-    ¤j©ó«h©¹¥k¤l¾ð±´³X¡A­Yµ¥©ó«h¶Ç¦^¦¹¸`ÂI¡C
-    
-    *¦A¥­¿Å    reblance    
-    ­Y¥[¤J©Î§R°£¸`ÂI¡A¦Ó§ïÅÜ¤F¾ðªºµ²ºc¡A«h¥²»Ý¥Î¦A¥­¿Å¨Ó
-    ¨Ï¾ðºû«ù¥­¿Å¡C
-    
-    *¥­¿Åªk«h balance rule    
-    ¥­¿Åªk«h¬O¾ð¥Î¨Ó¦A¥­¿Åªº§P©w¤Î°Ê§@¡C±`¨£ªº¦³ avl ¾ð¤Î
-    ¬õ¶Â¾ð¡C
-
-    
-¾ðªº½Õ¾ã
-    *±ÛÂà    rotation
-    *¹Ï3.2.4.a    
-    
-        |         |
-        y    x
-           / \     / \
-          x   c&lt;=>a      y
-         / \     / \
-        a   b    b   c
-    
-    ¸`ÂI¡G¤j¼g¦r¥À x, y
-    ¤l¾ð¡G¤p¼g¦r¥À a, b, c
-    ±ÛÂà©w¸q¦p¤W¹Ï¡A¥Ñ¥ª¹Ï¦Ü¥k¹ÏªºÂàÅÜºÙ§@¥k±Û¡A¨ä¤Ï¦VÂàÅÜºÙ
-    §@¥ª±Û¡C
-    *±ÛÂà·|§ïÅÜ¸`ÂIªº°ª«×¡A¦ý¤£·|§ïÅÜ¨ä¤¤§Ç¨µ³Xªº¶¶§Ç    
-    *±ÛÂà¶È·|§ïÅÜ¸`ÂI¤Î¨ä¤l¾ðªºµ²ºc¡A¤£·|§ó°Ê¨ì¥À¾ð    
-    ³o¨Ç¯S©Ê¨Ï±ÛÂà¦¨¬°¤G¤¸¾ð¥Î¨Ó½Õ¾ã¥­¿Åµ²ºcªº¼Ð·Ç°Ê§@
-
-
-
-
+<d:\stxt\doc\ds\bst.stx>
+<d:\stxt\doc\ds\b_tree.stx>

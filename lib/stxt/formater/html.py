@@ -16,7 +16,7 @@ def disp(tree):
         return f_titled_container(tree)
     elif tree.type in ('emphasis', 'reference'):
         return f_inline_element(tree)
-    elif tree.type in ('para', 'list', 'listitem', 'olistitem'):
+    elif tree.type in ('para', 'listitem', 'olistitem'):
         return f_container(tree)
     else: return globals()['f_' + tree.type](tree)
 
@@ -155,14 +155,23 @@ $content
     return str(temp(tree.type, tree.value))
 
 def f_list(tree):
-    html = '<ul>\n'
-    for c in tree.children:
-        html += '<li>\n' + c.value 
-        for np in c.children:
-            html += disp(np)
-        html += '</li>\n'
-    html += '</ul>\n'
-    return html
+    temp = '''$def with (items)
+<div class="list">
+$for i in items:
+    <div class="listitem">
+    $for p in i.children:
+        $if loop.first:
+            <div class="para">
+            * $(p.value)
+            </div>
+        $else:    
+            $:(disp(p))
+    </div>
+</div>
+'''
+    globals = {'disp':disp}
+    temp = Template(temp, globals=globals)
+    return str(temp(tree.children))
 
 def f_olist(tree):
     temp = '''$def with (items)

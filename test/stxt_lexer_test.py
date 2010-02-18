@@ -96,10 +96,10 @@ Massachusetts: Addison-Wesley, 1989.'''
     def testHSEP(self):
         case = '''標題一
 =========
-def
----------
-fcg
-~~~~~~~~~
+標題二(name specifier)
+----------------------
+[old name specifier]標題三
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 '''
         lexer.input(case)
         t = lexer.token()
@@ -108,9 +108,11 @@ fcg
 
         t = lexer.token()
         self.assertEqual('H2', t.type)
+        self.assertEqual('name specifier', t.value.name)
 
         t = lexer.token()
         self.assertEqual('H3', t.type)
+        self.assertEqual('old name specifier', t.value.name)
 
     def testEMPTYLINE(self):
         case = '''

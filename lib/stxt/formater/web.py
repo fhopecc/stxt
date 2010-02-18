@@ -77,7 +77,7 @@ def f_filename(tree):
     section_number = section_number[1:]
     fn = '_'.join([str(n+1) for n in section_number])
     if tree.name:
-        fn = tree.name
+        fn = tree.name.replace(' ', '_')
     return '%s.html' % fn
 
 def f_path(tree):
@@ -97,9 +97,9 @@ funcs = {'f_filename':f_filename,
 render = template.render('template', globals=funcs)
 
 if __name__ == '__main__':
-    try:
-        sourcefile = sys.argv[1]
-        tree = parser.read(sourcefile)
-        to_doc(tree)
-    except IndexError:
+    if len(sys.argv) < 2: 
         console.info(usage())
+        exit()
+    sourcefile = sys.argv[1]
+    tree = parser.read(sourcefile)
+    to_doc(tree)

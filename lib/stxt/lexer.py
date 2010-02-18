@@ -42,7 +42,7 @@ def t_include(t):
     return t.lexer.include_lexer.token()
 
 def t_CODE(t):
-    r'^code(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
+    r'^(diagram|code)(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
     m = t.lexer.lexmatch
     t.value = Tree('code') 
     t.value.name = m.group('n')
@@ -157,23 +157,30 @@ def t_COMMENT(t):
         t.value = Tree('citation', content)
     return t
 
+H  = r'^(\[(?P<oname>.*)\])?' # old name specifier should be deprecated
+H += r'(?P<title>[^(\n]*)'
+H += r'(\((?P<name>.*)\))?' # name specifier use this
+H += r'\n(=+|-+|~+|\*+|\^+)$' 
+
+@TOKEN(H)
 def t_H(t):
-    r'^(\[(?P<name>.*)\])?(?P<title>.*)\n(=+|-+|~+|\*+|\^+)$' 
     m = t.lexer.lexmatch
     t.lexer.lineno += m.group(0).count('\n')
      
     sep = m.group(0)[-1]
-    level = 1
-    if sep == '-': level = 2
-    elif sep == '~': level = 3
-    elif sep == '*': level = 4
-    elif sep == '^': level = 5
+
+    level = '=-~*^'.index(sep) + 1
     title = m.group('title')
+    name = m.group('name')
+    oname = m.group('oname')
+
     t.type = 'H%s' % level
     t.value = Tree('sect%s' % level, title) 
     t.value.title = title
     t.value.level = level
-    t.value.name = m.group('name')
+    t.value.name = oname
+    if name:
+        t.value.name = name
     if not t.value.title: t.value.title = t.value.name
     return t
 

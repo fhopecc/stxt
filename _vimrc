@@ -1,6 +1,7 @@
 cd \stxt
 lang mes en_US
 
+set runtimepath=\sxt\config\vimfiles
 set nocompatible
 set backspace=2 "let backspace can delete back a char
 set encoding=utf8
