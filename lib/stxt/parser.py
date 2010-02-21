@@ -56,6 +56,22 @@ def p_sect(p):
         p[1].append(s)
     p[0] = p[1]
 
+def p_sect_with_timestamp(p):
+    '''sect1 : H1 TIMESTAMP contents
+             | H1 TIMESTAMP sect2s
+       sect2 : H2 TIMESTAMP contents
+             | H2 TIMESTAMP sect3s
+       sect3 : H3 TIMESTAMP contents
+             | H3 TIMESTAMP sect4s
+       sect4 : H4 TIMESTAMP contents
+             | H4 TIMESTAMP sect5s
+       sect5 : H5 TIMESTAMP contents
+    '''
+    for c in p[3]:
+        p[1].append(c)
+    p[1].timestamp = p[2]
+    p[0] = p[1]
+
 def p_sect_with_contents(p):
     '''sect1 : H1 contents sect2s
        sect2 : H2 contents sect3s
@@ -65,6 +81,18 @@ def p_sect_with_contents(p):
     for c in p[2]: p[1].append(c)
     for s in p[3]: p[1].append(s)
     p[0] = p[1]
+
+def p_sect_with_contents_and_timestamp(p):
+    '''sect1 : H1 TIMESTAMP contents sect2s
+       sect2 : H2 TIMESTAMP contents sect3s
+       sect3 : H3 TIMESTAMP contents sect4s
+       sect4 : H4 TIMESTAMP contents sect5s
+    '''
+    for c in p[4]: p[1].append(c)
+    for s in p[5]: p[1].append(s)
+    p[1].timestamp = p[2]
+    p[0] = p[1]
+ 
  
 def p_token(p):
     '''sect1   : H1

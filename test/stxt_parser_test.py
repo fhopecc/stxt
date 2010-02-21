@@ -263,6 +263,28 @@ t4               B.update(p)
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
 
+    def testSectWithTimestamp(self):
+        case = '''種萵苣
+======
+0990124
+
+鄰居余媽媽(吳美惠)教我於庭院弄了一個畦，
+並給了我一些萵苣苗植入，
+要我好好注意不要讓蝸牛吃了。
+'''
+        doc = parser.parse(case)
+        s1 = doc.children[0]
+        self.assertEqual('sect1', s1.type)
+        self.assertEqual('種萵苣', s1.value)
+
+        from datetime import date
+        self.assertEqual(date(2010, 1, 24), s1.timestamp)
+
+        self.assertEqual(1, len(s1.children))
+        
+        p = s1.children[0]
+        self.assertEqual('para', p.type)
+
     def testSect1(self):
         case = '''[db]簡明資料庫實務、理論及考試參考
 ==================================
@@ -388,9 +410,9 @@ t4               B.update(p)
 
 if __name__ == '__main__':
     unittest.main()
-    tests = unittest.TestSuite()
+    '''tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
-    '''tests.addTest(UnitTest("testTable"))
+    tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testSect1"))
     tests.addTest(UnitTest("testDefine"))
     tests.addTest(UnitTest("testCode"))
@@ -402,5 +424,6 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testMSect1"))
     tests.addTest(UnitTest("testMSect2"))
     tests.addTest(UnitTest("testTerm"))
+    tests.addTest(UnitTest("testSectWithTimestamp"))
     runner = unittest.TextTestRunner()
     runner.run(tests)'''

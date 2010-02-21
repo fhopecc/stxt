@@ -24,8 +24,8 @@ tokens = [
           'TABLE', 'TABLEBLOCK',
           'INSERT', 
           'LINE', 'INDENT', 
-          'LI', 'OL', 
-          'EMPTYLINE', 
+          'LI', 'OL', 'TIMESTAMP', 
+          'EMPTYLINE'
          ] 
 
 def t_include(t):
@@ -40,6 +40,20 @@ def t_include(t):
         raise IOError("(%s:%i:%i): include file %s doesn't exist" % \
                (t.lexer.file, t.lexer.lineno, column, fn))
     return t.lexer.include_lexer.token()
+
+def t_TIMESTAMP(t):
+    r'^(?P<y>\d{3})(?P<m>[01]\d)(?P<d>[0123]\d)\n\n'
+
+    t.lexer.lineno += t.value.count('\n')
+
+    m   = t.lexer.lexmatch
+    y   = int(m.group('y')) + 1911 # 民國年轉西元年
+    mon = int(m.group('m'))
+    d   = int(m.group('d'))
+    from datetime import date
+    t.value = date(y, mon, d)
+
+    return t
 
 def t_CODE(t):
     r'^(diagram|code)(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'

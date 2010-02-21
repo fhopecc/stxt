@@ -219,6 +219,18 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual('INDENT', t.type)
         self.assertEqual('  二層縮排', t.value)
 
+    def testTIMESTAMP(self):
+        case = '0680729\n\n'
+
+        lexer.input(case)
+        ts = lexer.token()
+        self.assertEqual('TIMESTAMP', ts.type)
+        from datetime import date
+        self.assertEqual(date(1979, 7, 29), ts.value)
+
+        ts = lexer.token()
+        self.assertEqual(None, ts)
+
     def testCODEBLOCK(self):
         case = '''code[dep_id_not_unique.sql].非單人科室員工名單
 select name 

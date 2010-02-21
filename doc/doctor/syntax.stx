@@ -1,0 +1,8 @@
+參照
+----
+*參照* 用來指示讀者可跳出參考何項資源，
+
+code.參照
+reference : [refname:type] | [refname]
+::
+
