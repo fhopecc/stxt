@@ -91,6 +91,32 @@ class Tree(object):
             self.__make_name_table__()
         return self.name_table[name]
 
+    def __make_address_map__(self):
+        '''初始化 address_map'''
+        amap = self.__address_map__ = {}
+        for c in self.dfs():
+            if not amap.has_key(c.type):
+                nmap = amap[c.type] = {}
+            nmap[c.name] = c
+
+    def address_map(self):
+        '''位址由兩部份組成，第一部份是資源名稱，第二部份是類型。
+
+           address_map 是二維字典，
+           第一維度為類型，第二維度為資源名稱，
+           基本上此字典只存放在根。
+        '''
+        root = self.root()
+        try:
+            return root.__address_map__
+        except AttributeError:
+            root.__make_address_map__()
+            return root.__address_map__
+
+    def get(self, type, name):           
+        '取出指定位址的文件資源'
+        return self.address_map()[type][name]
+
     def number_children(self):
         cs = self.children
         if self.type in ('book'):
@@ -201,7 +227,6 @@ def Tuple2BTree(root=None, left=None, right=None):
         else:
             right = Tree('right', right)
         root.append(right)
-
     return root
 
 class UnitTest(unittest.TestCase):
@@ -253,6 +278,13 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual('book value', r.find_by_name('book').value)
         self.assertEqual('child value', r.find_by_name('child').value)
+
+    def testAddress(self):
+        t = Tree('book', 'fhopecc book', name='fhopecc')
+        t.append(Tree('sect', 'section first', name='sect1'))
+
+        self.assertEqual('fhopecc book', t.get('book', 'fhopecc').value)
+        self.assertEqual('section first', t.get('sect', 'sect1').value)
 
     def testPrevious(self):
         r = Tree('book', 'book value', name='book')

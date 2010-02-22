@@ -40,6 +40,9 @@ def f_doc(tree):
     for e in tree.children:
         html += disp(e)
     return html
+    
+def f_address(tree):
+    tree
 
 def f_title(tree):
     title = ""
