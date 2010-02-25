@@ -4,9 +4,10 @@
 以增進對該項內容的了解。
 
 code.參照
-reference : [name:type] | [name]
+reference : [name:type] | [name] | [label:name:type]
 ::
 若讀者省略文件元素類型，則會找出第一個名稱為 name 的元素。
+label 是表示此參照的提示文字。
 
 定址系統
 ~~~~~~~~

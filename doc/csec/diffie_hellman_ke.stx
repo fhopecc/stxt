@@ -6,6 +6,7 @@ Diffie-Hellman 密鑰交換協定
 此演算法是一非對稱式密碼法，使用的是一種「離散對數」的運算，
 而其安全性也是取決於計算離散對數的困難度上。
 在Diffie-Hellman密鑰交換演算法中包含有兩個公開的參數，
+
 # 大質數p
 # 模p(Module p)的原根(Primitive root)g
 

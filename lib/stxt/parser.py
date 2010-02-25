@@ -276,6 +276,6 @@ if __name__ == '__main__':
         fn = sys.argv[1]
         with open(fn) as f:
             d = parse(f.read(), lexer = MutipleFileLexer(fn))
-            d.dump_type_tree()
+            d.dump()
     except IndexError:
        console.info(usage()) 

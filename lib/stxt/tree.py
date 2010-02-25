@@ -1,4 +1,5 @@
 # coding=utf8
+from __future__ import with_statement
 import sys, unittest
 
 class Tree(object):
@@ -80,6 +81,14 @@ class Tree(object):
             unvisited.extend(cursor.children)
             yield cursor
 
+    def dump(self, level_limit=10):
+        if self.height() < level_limit:
+            name = ''
+            if self.name:
+                name = self.name
+            print '%s%s[%s]' % ('*' * self.height(), self.type, name)
+        for c in self.children: c.dump(level_limit)
+
     def __make_name_table__(self):
         self.name_table = {}
         for c in self.dfs():
@@ -95,8 +104,11 @@ class Tree(object):
         '''初始化 address_map'''
         amap = self.__address_map__ = {}
         for c in self.dfs():
+            if not c.name:
+                continue
             if not amap.has_key(c.type):
-                nmap = amap[c.type] = {}
+                amap[c.type] = {}
+            nmap = amap[c.type] 
             nmap[c.name] = c
 
     def address_map(self):
@@ -113,9 +125,25 @@ class Tree(object):
             root.__make_address_map__()
             return root.__address_map__
 
-    def get(self, type, name):           
-        '取出指定位址的文件資源'
-        return self.address_map()[type][name]
+    def dump_address_table(self):
+        for k in self.address_map().keys():
+            for n in self.address_map()[k]:
+                print '%s:%s' % (k, n)
+
+    def getrefnode(self):
+        u'取出參考節點'
+        if type <> 'reference':
+            raise TypeError, "[%s] isn't [reference]." % type
+
+    def get(self, name, type=None):           
+        u'取出指定位址的文件資源'
+        if type:
+            return self.address_map()[type][name]
+        else:
+            for k in self.address_map().keys():
+                for n in self.address_map()[k].keys():
+                    if n == name: return self.address_map()[k][n]
+        raise KeyError, name
 
     def number_children(self):
         cs = self.children
@@ -146,10 +174,13 @@ class Tree(object):
                 self.occurence = o
             self._count_occurence(type)
 
-    def dump_type_tree(self, level_limit=10):
+    def dump(self, level_limit=10):
         if self.height() < level_limit:
-            print '*' * self.height() + self.type
-        for c in self.children: c.dump_type_tree(level_limit)
+            name = ''
+            if self.name:
+                name = self.name
+            print '%s%s[%s]' % ('*' * self.height(), self.type, name)
+        for c in self.children: c.dump(level_limit)
 
     def print_postfix_tree(self):
         for c in self.children: c.print_postfix_tree()
@@ -206,6 +237,11 @@ class Tree(object):
         return self.children[i]
 
     section_number = order_path
+
+class ReferenceNode(Tree):
+    def __init__(self, name='', label=''):
+        Tree.__init__(self, 'reference', name=name)
+        self.label= label
     
 def Tuple2BTree(root=None, left=None, right=None):
     if root is None:
@@ -228,97 +264,3 @@ def Tuple2BTree(root=None, left=None, right=None):
             right = Tree('right', right)
         root.append(right)
     return root
-
-class UnitTest(unittest.TestCase):
-    def setUp(self):
-        d = Tree('doc')
-        d.append(Tree('question', 'q0'))
-        d.append(Tree('question', 'q1'))
-        d.append(Tree('example', 'e0'))
-        d.append(Tree('question', 'q2'))
-        d.append(Tree('example', 'e1'))
-
-        self.tree = d
-
-        r'''
-    2
-   / \
-  7   5  
- / \   \
-2  6    9
-  / \   /
- 5  11  4
-'''
-        self.btree = Tuple2BTree(2,(7,2,(6, 5, 11)), (5, None, (9, 4)))
-        
-    def testGetDirectChild(self):
-        t = self.tree
-        self.assertEqual('q2', t[3].value)
-
-    def testOrderPath(self):
-        pass
-
-    def testPath(self):
-        pass 
-
-    def testSibling(self):
-        d = self.tree
-
-        self.assertEqual(3, len(d.children_in_type('question')))
-        self.assertEqual(2, len(d.children_in_type('example')))
-
-        q1 = d.child(1)
-        self.assertEqual('q2', q1.brother(2).value)
-        self.assertEqual('e0', q1.sibling(2).value)
-        self.assertEqual(1, q1.order())
-
-    def testNameTable(self):
-        r = Tree('book', 'book value', name='book')
-        r.append(Tree('child', 'child value', name='child'))
-
-        self.assertEqual('book value', r.find_by_name('book').value)
-        self.assertEqual('child value', r.find_by_name('child').value)
-
-    def testAddress(self):
-        t = Tree('book', 'fhopecc book', name='fhopecc')
-        t.append(Tree('sect', 'section first', name='sect1'))
-
-        self.assertEqual('fhopecc book', t.get('book', 'fhopecc').value)
-        self.assertEqual('section first', t.get('sect', 'sect1').value)
-
-    def testPrevious(self):
-        r = Tree('book', 'book value', name='book')
-        r.append(Tree('sect1', 'sect1 value', name='child1'))
-        r.append(Tree('sect2', 'sect2 value', name='child2'))
-        r.append(Tree('sect1', 'sect1 value', name='child3'))
-        sect1s = [c for c in r.children if c.type == 'sect1']
-        child3 = r.find_by_name('child3')
-        self.assertEqual(1, sect1s.index(child3))
-
-    def testPreorder(self):
-        pass
-    
-    def testDFS(self):
-        btree = self.btree
-        seq = [n.value for n in btree.dfs()]
-        self.assertEqual([2, 5, 9, 4, 7, 6, 11, 5, 2], seq)
-        
-    def testTuple2BTree(self):
-        self.assertRaises(ValueError, Tuple2BTree, None,2,3)
-
-        t = Tuple2BTree(2)                    
-        self.assertEqual('root', t.type)
-        self.assertEqual(2, t.value)
-
-        t = Tuple2BTree(2,(7,2,6))                    
-        self.assertEqual('root', t.type)
-        self.assertEqual(2, t.value)
-        self.assertEqual('left', t[0].type)
-        self.assertEqual(7, t[0].value)
-        
-        self.assertEqual('right', t[0][1].type)
-        self.assertEqual(6, t[0][1].value)
-
-
-if __name__ == '__main__':
-    unittest.main()

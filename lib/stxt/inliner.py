@@ -85,6 +85,24 @@ def p_element(p):
     elif p[1] == '[':
         p[0] = Tree('reference', p[2].value)
 
+        "[name:type] | [name] | [label:name:type]"
+
+        pattern =  r'(\S+):(\S+):(\S+)|'
+        pattern += r'(\S+):(\S+)|'
+        pattern += r'(\S+)'
+        import re
+        m = re.match(pattern, p[0].value)
+        if m:
+            if m.group(1):
+                p[0].reflabel = m.group(1)
+                p[0].refname  = m.group(2)
+                p[0].reftype  = m.group(3)
+            elif m.group(4):
+                p[0].refname  = m.group(4)
+                p[0].reftype  = m.group(5)
+            elif m.group(6):
+                p[0].refname  = m.group(6)
+
 def p_single_star_error(p):
     '''single_star_error : STAR cblock'''
     console.info("inliner error report:")
@@ -125,8 +143,6 @@ def p_error(p):
         console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
         console.error("Input %s" % p.type)
     sys.exit()
-
-
 
 parser = yacc.yacc()
 def parse(input, file='__string__', lineno=1):

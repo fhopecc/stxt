@@ -126,11 +126,11 @@ class UnitTest(unittest.TestCase):
     def testPara(self):
         case = '''字元塊1
 字元塊2
-[test.sql]
+[test.sql][label:name:type][name:type]
 '''
         d = parser.parse(case)
         self.assertEqual('para', d.type)
-        self.assertEqual(2, len(d.children))
+        self.assertEqual(4, len(d.children))
 
         cb = d.children[0]
         self.assertEqual('cblock', cb.type)
@@ -139,6 +139,18 @@ class UnitTest(unittest.TestCase):
         ref = d.children[1]
         self.assertEqual('reference', ref.type)
         self.assertEqual('test.sql', ref.value)
+        self.assertEqual('test.sql', ref.refname)
+
+        ref = d.children[2]
+        self.assertEqual('reference', ref.type)
+        self.assertEqual('label', ref.reflabel)
+        self.assertEqual('name', ref.refname)
+        self.assertEqual('type', ref.reftype)
+
+        ref = d.children[3]
+        self.assertEqual('reference', ref.type)
+        self.assertEqual('name', ref.refname)
+        self.assertEqual('type', ref.reftype)
 
 if __name__ == '__main__':
     '''unittest.main()'''

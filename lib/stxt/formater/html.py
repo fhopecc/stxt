@@ -14,7 +14,7 @@ def disp(tree):
         return f_titled_container(tree)
     elif tree.type in ('proof', 'term'):
         return f_titled_container(tree)
-    elif tree.type in ('emphasis', 'reference'):
+    elif tree.type in ('emphasis'):
         return f_inline_element(tree)
     elif tree.type in ('para', 'listitem', 'olistitem'):
         return f_container(tree)
@@ -41,27 +41,22 @@ def f_doc(tree):
         html += disp(e)
     return html
     
-def f_address(tree):
-    tree
-
 def f_title(tree):
     title = ""
     if re.match(r'sect\d', tree.type):
-        title = f_section_number(tree) + tree.title
+        title = f_label(tree) + tree.title
     elif tree.type in ('question', 'define', 'theorem'):
-        title =  f_label(tree) + str(tree.order() + 1)
-        title += "：" + tree.title
+        title =  f_label(tree) + "：" + tree.title
     elif tree.type in ('proof', 'answer'):
         title =  f_label(tree) + '：'
     elif tree.type in ('table', 'image', 'code'):
-        title =  f_label(tree) + str(tree.order() + 1)
-        title += "：" + tree.title
+        title =  f_label(tree) + "：" + tree.title
     elif tree.type in ('term'):
         title = tree.title
     return title
 
 def f_label(tree):
-    return {'define'  : '定義', 
+    type = {'define'  : '定義', 
             'theorem' : '定理', 
             'proof'   : '證明', 
             'code'    : '程式', 
@@ -69,18 +64,34 @@ def f_label(tree):
             'answer'  : '答', 
             'table'   : '表', 
             'image'   : '圖' 
-           }[tree.type]
+            }
+    label = ""
+    if re.match(r'sect\d', tree.type):
+        label = f_section_number(tree)
+    elif tree.type in ('question', 'define', 'theorem'):
+        label =  type[tree.type] + str(tree.order() + 1)
+    elif tree.type in ('proof', 'answer'):
+        label =  type[tree.type]
+    elif tree.type in ('table', 'image', 'code'):
+        label =  type[tree.type] + str(tree.order() + 1)
+    elif tree.type in ('reference'):
+        try:
+            label = tree.reflabel
+        except AttributeError:
+            ref = tree.get(tree.refname) 
+            label = f_label(ref)
+    return label
 
 def f_titled_container(tree):
-    temp = '''$def with (type, title, content)
-<div class="$type"><div class="title">$title</div>
+    temp = '''$def with (id, type, title, content)
+<div id="$id" class="$type"><div class="title">$title</div>
 $:content
 </div>
 '''
     content =""
     for c in tree.children: content += disp(c)
     temp = Template(temp)
-    return str(temp(tree.type, f_title(tree), content))
+    return str(temp(f_address(tree), tree.type, f_title(tree), content))
 
 def f_image(tree):
     temp = '''$def with (type, title, path)
@@ -204,7 +215,7 @@ def f_footnotes(tree):
     return html
 
 def f_section_number(tree):
-    level = tree.level
+    level = tree.height()
     n = '%s.' % (tree.order() + 1)
     for l in range(1, level):
         tree = tree.parent
@@ -216,6 +227,27 @@ def f_insert(tree):
     root = tree.root()
     insert = root.find_by_name(tree.node_name)
     return disp(insert)
+
+def f_reference(tree):
+    temp = '''$def with (label, url)
+<a class="reference" href="$url">$label</a>
+'''
+    ref = tree.get(tree.refname, tree.reftype) 
+    temp = Template(temp)
+
+    return str(temp(f_label(tree), f_url(ref)))
+
+def f_address(tree):
+    type = tree.type  
+    name = f_label(tree).replace('.', '_')
+    if tree.name: 
+        name = tree.name
+    id = '%s_%s' % (type, name)
+    return id.lower()
+
+def f_url(tree):
+    '轉換文件元素位址為對應之 URL'
+    return '#%s' % f_address(tree)
 
 def f_filename(tree):
     fn = tree.section_number()[0]

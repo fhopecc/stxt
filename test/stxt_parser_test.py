@@ -1,4 +1,5 @@
 # coding=utf8
+from __future__ import with_statement
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.stxt import parser
@@ -407,6 +408,12 @@ t4               B.update(p)
             expect = 'illegal char(35) "#" at __string__:2:3'
             msg = e.args[0]
             self.assertEqual(expect, msg)
+
+    def testReference(self):
+        fn = 'doc/db/sql.stx'
+        with open(fn) as f:
+            d = parser.parse(f.read(), lexer = MutipleFileLexer(fn))
+            d.dump_address_table()
 
 if __name__ == '__main__':
     unittest.main()

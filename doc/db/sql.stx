@@ -7,6 +7,9 @@ code[sql_proc.dfd].
 (select) -> [輸出表]
 ::
 
+四大命令：
+[select:select:sect2]
+
 <d:\stxt\doc\db\dml.stx>
 <d:\stxt\doc\db\ddl.stx>
 <d:\stxt\doc\db\datatypes.stx>

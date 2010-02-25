@@ -1,0 +1,143 @@
+相對於decorator, iterator, generator, metaclass 這些概念，
+descriptor是python所有概念中最難理解的一個了。
+儘管python documentation對其描述不多(基本上是一筆帶過)，
+以至於很多人忽略了這個概念。
+事實上，自己以前也忽略了它，
+只不過最近重溫python時無意間發現了他，覺得非常有必要深入研究它。
+自己的理解是建立在前人的基礎之上的。
+不過，網上關於descriptor的資料實在是有限，下面是自己認為有參考價值的幾個鏈結：
+1.http://users.rcn.com/python/download/Descriptor.htm       (最主要的參考資料)
+2.http://www.python.org/peps/pep-0252.html                  (太難理解了)
+3.http://www.python.org/~jeremy/weblog/030425.html
+4.http://www.python.org/download/releases/2.2.2/descrintro/
+5.Python25 documentation (Python Reference Manual, Chapter 3.4.2)
+6.Python25的源代碼
+
+1.假如"x"是普通屬性。
+  每個class均有一個__dict__，該class的obj也有一個__dict__。
+  1)對於obj.x，優先查找obj.__dict__["x"]，如果找不到，
+    再查找class.__dict__["x"]；
+  2)對於class.x，直接查找class.__dict__["x"]；  
+  3)obj.__dict__與class.__dict__可以擁有同名的屬性；
+  4)obj.x=10，將無條件的更新obj.__dict__；
+    class.x=10，將無條件的更新class.__dict__。
+
+class C(object):
+    x = 10 #b.__dict__不包含"x"，C.__dict__包含"x"
+
+b = C()  
+b.x        #10
+C.x        #10
+b.x = 100  #b.__dict__也包含一個"x"，
+           #對應的值為100；C.__dict__對應的值還是10
+b.x        #100
+C.x        #10
+t=C()
+t.x        #10
+C.x=99     #C.__dict__["x"]變成了99
+t.x
+b.x
+C.x
+
+2.假如"x"是一個descriptor
+  為簡化，假設obj.__dict__沒有"x"項。
+
+code.
+class RevealAccess(object):
+    def __init__(self, initval, name):
+        self.val = initval
+        self.name = name
+ 
+    def __get__(self, obj, objtype):
+        print 'Retrieving', self.name
+        return self.val
+ 
+    def __set__(self, obj, val):
+        print 'Updating' , self.name
+        self.val = val
+
+class C(object):
+    x = RevealAccess(10,"A test variable")
+
+>>> b = C()    # case1
+>>> b.x
+Retrieving A test variable
+10
+>>> C.x
+Retrieving A test variable
+10
+>>>
+>>> b.x=100    # case2
+Updating A test variable
+>>> b.x
+Retrieving A test variable
+100
+>>> C.x
+Retrieving A test variable
+100
+>>>
+>>> C.x=1000    # case3
+>>>
+>>> b.x
+1000
+>>> C.x
+1000
+>>>     # case4
+>>> C.x = RevealAccess(999,"The second var")
+>>> b.x
+Retrieving The second var
+999
+>>> C.x
+Retrieving The second var
+999
+>>>
+""
+上述結果可以通過Python25 Documentation 
+(Python Reference Manual, Chapter 3.4.2.2)解釋：
+
+The following methods only apply when an instance of the class containing 
+the method (a so-calleddescriptor class) appears in the class dictionary of another new-style class, known as the owner class. In the examples below, ``the attribute'' refers to the attribute whose name is the key of the property in the owner class' __dict__. Descriptors can only be implemented as new-style classes themselves.
+1)__get__( self, instance, owner) 
+Called to get the attribute of the owner class (class attribute access) or of an instance of that class (instance attribute access). owner is always the owner class, while instance is the instance that the attribute was accessed through, or None when the attribute is accessed through the owner. This method should return the (computed) attribute value or raise an AttributeError exception. 
+(注意：obj.x、class.x均會導致該調用)
+2)__set__( self, instance, value) 
+Called to set the attribute on an instance instance of the owner class to a new value, value. 
+(注意：僅obj.x=ttt均會導致該調用；class.x=ttt直接綁定到另外一個物件上)
+3)__delete__( self, instance) 
+Called to delete the attribute on an instance instance of the owner class.
+
+為簡化以及方面理解，在實際應用中，
+儘量避免obj.__dict__與class.__dict__擁有同名的屬性。
+
+3.假如"x"是一個descriptor，而且obj.__dict__也有一個"x"項。非常複雜。
+For instance bindings, the precedence of descriptor invocation depends on the which descriptor methods are defined. Data descriptors define both __get__() and __set__(). Non-data descriptors have just the __get__() method. Data descriptors always override a redefinition in an instance dictionary. In contrast, non-data descriptors can be overridden by instances.
+詳細的描述還得參考：http://users.rcn.com/python/download/Descriptor.htm
+1)從該文檔可以知道，descriptor與__getattribute__密切相關。基礎類型object、type均定義了__getattribute__，並有缺省實現。上面所說的descriptor的各種特性其實就是這些__getattribute__的行為。也就是說，如果自己重新定義了__getattribute__，那麼這個函數具有最高的優先順序。
+2)另外，__getattr__/__setattr__/__delattr__也與屬性的取值有關，見Python25 documentation (Python Reference Manual, Chapter 3.4.2)。它們的級別比較低。建議它們所對應的屬性不要為descriptor。
+class RevealAccess(object):
+ def __init__(self, initval, name):
+  self.val = initval
+  self.name = name
+ 
+ def __get__(self, obj, objtype):
+  print 'Retrieving', self.name
+  return self.val
+ 
+class C(object):
+ x = RevealAccess(10,"A test variable")
+ def __init__(self,val):
+  self.x = val
+>>> b = C(100)
+>>>
+>>> C.x
+Retrieving A test variable
+10
+>>> b.x
+100
+>>>
+
+4.根據http://users.rcn.com/python/download/Descriptor.htm的描述，
+  descriptor更多的被python自己用來實現一些語言上的特性。
+  比如：
+  function, property, staticmethod, classmethod
+  等均是通過descriptor實現的。
