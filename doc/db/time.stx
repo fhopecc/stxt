@@ -68,7 +68,8 @@ timestamp 值是以 2000-01-01 午夜之前或之後以來的秒數儲存的，
 請記住任何日期或者時間的字面常數輸入需要由單引號包圍， 
 就像一個字面常數字串一樣。
 
-type [ (p) ] 'value'
+type \[ (p) \] 'value'
+
 在這裡可選的精度定義中的 p 是一個整數， 
 對應在秒域中小數部分的位數， 
 我們可以對 time， timestamp，和 interval 類型定義精度。 
@@ -101,7 +102,7 @@ january 8, 99 BC 公元前99年
 
 時間
 ~~~~
-當日時間類型是 time [ (p) ] without time zone 和 time [ (p) ] with time zone。 
+當日時間類型是 time \[ (p) \] without time zone 和 time \[ (p) \] with time zone。 
 只寫 time 等效於 time without time zone。
 
 這些類型的有效輸入由當日時間後面跟著可選的時區組成。
@@ -174,7 +175,7 @@ timestamp with time zone '2004-10-19 10:23:54+02'
 sql 將忽略任何字面常數中指明的失去。
 因此，生成的日期/時間值是從輸入值的日期/時間字串衍生出來的，並且沒有就時區進行調整。
 
-對於 timestamp [without time zone]，
+對於 timestamp \[without time zone\]，
 任何在輸入中定義的時區都被悄悄吞掉。 
 也就是說，生成的日期/時間數值是從輸入中明確的日期/時間字串中得出的，並且沒有根據時區調整。
 
@@ -196,7 +197,7 @@ sql 將忽略任何字面常數中指明的失去。
 ~~~~
 interval 值可以用下面語法定義：
 
-[@] quantity unit [quantity unit...] [direction]
+\[@\] quantity unit \[quantity unit...\] \[direction\]
 
 quantity 是一個數字「可能有符號」； 
 

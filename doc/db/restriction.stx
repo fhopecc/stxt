@@ -69,4 +69,4 @@ where id < 1000
 ::
 
 布林運算子串接的條件，可用集合運算表示出來，
-如[and_as_intersect]為[fl_and_lt1000.sql]的等式。
+如[and_as_intersect.sql]為[fl_and_lt1000.sql]的等式。

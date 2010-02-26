@@ -62,11 +62,11 @@ question[96h2-3].96高2-3
   個體整合限制(Entity Integrity Constraint)以及
   參考整合限制(Referential Integrity Constraint)三種，試分別說明之。(30 分)
 answer.
-  鍵值限制請參閱[key_constraint]。
+  鍵值限制請參閱key_constraint。
 
-  個體整合限制請參閱[entity_integrity]。
+  個體整合限制請參閱entity_integrity。
 
-  參考整合限制請參閱[referntial_integrity]。
+  參考整合限制請參閱referntial_integrity。
 
 question[96p2-4].96警2-4
   為確保資料庫內的資料能正確被處理，

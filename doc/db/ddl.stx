@@ -12,10 +12,10 @@
 以及那個欄的資料類型。
 
 資料類型是什麼呢？就是所謂的型態，定義了某個欄所允許的可能值，
-詳請參見[domain_integrity]。
+詳請參見domain_integrity。
 建立上面提過的顧客表的 sql，如[create_table]_所示。
 
-code.create table
+code[create_table].create table
 create table customers
 (first_name char(50),
  last_name char(50),
@@ -41,14 +41,14 @@ alter column city char(50);
 刪除表 customers 的欄 city 須用 alter table ，
 如[drop_column]_所示。
 
-code.drop column
+code[drop_column].drop column
 alter table customers
             drop column(city);
 ::
 
 定義完整性
 ~~~~~~~~~~
-如[relational_integrity]_所述，
+如relational_integrity所述，
 完整性是確保資料正確性的方法，
 完整性包含在表定義中，
 完整性限制可以在表藉由 create table 語句來指定，
@@ -63,10 +63,10 @@ alter table customers
 
 primary key
 ~~~~~~~~~~~
-primary key 用來定義主鍵，請參見[primary_key]。
+primary key 用來定義主鍵，請參見primary_key。
 
 我們可以運用 create table 於建置新表時設定主鍵，
-如[create_primary_key]所示
+如create_primary_key所示
 
 code.create primary key
 create table customer 
@@ -89,7 +89,7 @@ alter table customer add primary key (id);
 foreign key
 ~~~~~~~~~~~
 foreign key 用來定義參考完整性，
-請參見[s_referntial_integrity]_。
+請參見s_referntial_integrity。
 
 假設有兩個表：
 一個 customer 表，
@@ -103,7 +103,7 @@ foreign key 用來定義參考完整性，
 換句話說，orders表之中，不能有任何顧客是不存在於 customer 表中的資料。
 
 我們可以在 create table 語法指定外鍵，
-如[alter_foreign_key]_所示，
+如alter_foreign_key所示，
 orders 表中的 customer_id 欄是一個指向 customers 表中 id 欄的外鍵。
 
 code.create foreign key
@@ -137,7 +137,7 @@ last_name varchar (30) not null,
 first_name varchar(30));
 ::
 
-如[not_null]_指出 id 和 last_name 不允許有 null，
+如not_null指出 id 和 last_name 不允許有 null，
 而 first_name 可以有 null。
 
 請注意，一個被指定為主鍵的欄也一定會含有 not null 的特性。
@@ -154,7 +154,7 @@ last_name varchar (30),
 first_name varchar(30));
 ::
 
-如[unique]_指出
+如unique指出
 id 欄不能有重複值存在，
 而 last_name 及 first_name 這兩個欄則是允許有重複值存在。
 

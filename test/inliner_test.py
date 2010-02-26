@@ -138,12 +138,11 @@ class UnitTest(unittest.TestCase):
 
         ref = d.children[1]
         self.assertEqual('reference', ref.type)
-        self.assertEqual('test.sql', ref.value)
         self.assertEqual('test.sql', ref.refname)
 
         ref = d.children[2]
         self.assertEqual('reference', ref.type)
-        self.assertEqual('label', ref.reflabel)
+        self.assertEqual('label', ref.label)
         self.assertEqual('name', ref.refname)
         self.assertEqual('type', ref.reftype)
 

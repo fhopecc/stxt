@@ -410,10 +410,12 @@ t4               B.update(p)
             self.assertEqual(expect, msg)
 
     def testReference(self):
-        fn = 'doc/db/sql.stx'
+        fn = 'doc/db/db.stx'
         with open(fn) as f:
             d = parser.parse(f.read(), lexer = MutipleFileLexer(fn))
             d.dump_address_table()
+            print d.get('matches.alg')
+
 
 if __name__ == '__main__':
     unittest.main()

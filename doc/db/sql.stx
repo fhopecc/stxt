@@ -10,6 +10,18 @@ code[sql_proc.dfd].
 四大命令：
 [select:select:sect2]
 
+table[keyword].關鍵字
+title
+====== ========
+select keyworkd
+====== ========
+
+table[buildin_function].內建函數
+title
+====== ========
+select keyworkd
+====== ========
+
 <d:\stxt\doc\db\dml.stx>
 <d:\stxt\doc\db\ddl.stx>
 <d:\stxt\doc\db\datatypes.stx>

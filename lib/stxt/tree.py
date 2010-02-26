@@ -1,6 +1,11 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, unittest
+import sys, logging
+from logging import config
+from tree import *
+
+config.fileConfig(r'config\log.conf')
+console = logging.getLogger()
 
 class Tree(object):
     def __init__(self, type, value='', title='', name=''):
@@ -138,12 +143,18 @@ class Tree(object):
     def get(self, name, type=None):           
         u'取出指定位址的文件資源'
         if type:
-            return self.address_map()[type][name]
+            t = self.address_map()[type]
+            if name:
+                return t[name]
         else:
             for k in self.address_map().keys():
                 for n in self.address_map()[k].keys():
                     if n == name: return self.address_map()[k][n]
-        raise KeyError, name
+
+        console.error("No element named [%s], %s:%s" %
+                      (name, self.file, self.lineno)
+                     ) 
+        exit()
 
     def number_children(self):
         cs = self.children
@@ -239,9 +250,15 @@ class Tree(object):
     section_number = order_path
 
 class ReferenceNode(Tree):
-    def __init__(self, name='', label=''):
-        Tree.__init__(self, 'reference', name=name)
+    def __init__(self, refname='', reftype= '', label=''):
+        Tree.__init__(self, 'reference')
+        self.refname, self.reftype = refname, reftype
         self.label= label
+
+    def reftree(self): 
+        ref = self.get(self.refname, self.reftype)
+            
+        return ref
     
 def Tuple2BTree(root=None, left=None, right=None):
     if root is None:

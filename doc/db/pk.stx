@@ -4,7 +4,7 @@
 ~~~~
 define[sk].超鍵
   令 R 為表，其表頭為 H ，其紀錄集為 B ，K 為 H 之子集，
-  則不存在紀錄 t1, t2 屬於 B，使得 t1[K] = t2[K]。
+  則不存在紀錄 t1, t2 屬於 B，使得 t1\[K\] = t2\[K\]。
 
 超鍵(Superkeys)是表中單欄或一組欄的集合，
 超鍵需要滿足唯一性(Uniqueness)，在表中絕不會有 2 列擁有相同值，
@@ -70,8 +70,7 @@ define[ck].候選鍵
 簡短且簡單的值(Brevity and Simplicity)：
   儘可能選擇單一欄的候選鍵。
 
-在 SQL 中，可用 primary key 語法用來定義主鍵，
-請參見[primary_key_sql]。
+在 SQL 中，可用 primary key 語法用來定義主鍵。
 
 humans 的候選鍵如下：
 #.id

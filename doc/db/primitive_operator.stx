@@ -39,14 +39,14 @@ proof.
 theorem.合併為衍生運算子
   若 R = (A, B) 且 S = (C, D)
   A 及 C 為 JOIN 的共同欄集，則
-  R JOIN S = ((R TIMES S) WHERE R(A) = S(C))[A,B,D]
+  R JOIN S = ((R TIMES S) WHERE R(A) = S(C))\[A,B,D\]
   或
-  R JOIN S = ((R TIMES S) WHERE R(A) = S(C))[B,C,D]
+  R JOIN S = ((R TIMES S) WHERE R(A) = S(C))\[B,C,D\]
 proof.
   可由合併的定義證明。
 
 theorem.除法為衍生運算子
   若 R = (A, B) 且 S = (B) 則
-  R DIVIDEBY S = R[A] MINUS ((R[A] TIMES B) MINUS A)[A]
+  R DIVIDEBY S = R\[A\] MINUS ((R\[A\] TIMES B) MINUS A)\[A\]
 proof.
   可由除法的定義證明。

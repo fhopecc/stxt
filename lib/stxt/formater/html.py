@@ -8,17 +8,21 @@ from stxt.template import Template
 from stxt.parser import console
 
 def disp(tree):
-    if re.match(r'sect\d', tree.type):
-        return f_titled_container(tree)
-    elif tree.type in ('question', 'answer', 'define', 'theorem'):
-        return f_titled_container(tree)
-    elif tree.type in ('proof', 'term'):
-        return f_titled_container(tree)
-    elif tree.type in ('emphasis'):
-        return f_inline_element(tree)
-    elif tree.type in ('para', 'listitem', 'olistitem'):
-        return f_container(tree)
-    else: return globals()['f_' + tree.type](tree)
+    try:
+        if re.match(r'sect\d', tree.type):
+            return f_titled_container(tree)
+        elif tree.type in ('question', 'answer', 'define', 'theorem'):
+            return f_titled_container(tree)
+        elif tree.type in ('proof', 'term'):
+            return f_titled_container(tree)
+        elif tree.type in ('emphasis'):
+            return f_inline_element(tree)
+        elif tree.type in ('para', 'listitem', 'olistitem'):
+            return f_container(tree)
+        else: return globals()['f_' + tree.type](tree)
+    except TypeError:
+        console.error("error at %s:%s" % (tree.file, tree.lineno))
+        exit()
 
 def to_html(file):
     d = None
@@ -232,9 +236,8 @@ def f_reference(tree):
     temp = '''$def with (label, url)
 <a class="reference" href="$url">$label</a>
 '''
-    ref = tree.get(tree.refname, tree.reftype) 
+    ref = tree.reftree()
     temp = Template(temp)
-
     return str(temp(f_label(tree), f_url(ref)))
 
 def f_address(tree):

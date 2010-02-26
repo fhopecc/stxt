@@ -91,7 +91,7 @@ function ([expression [, expression ... ]] )
 
 sqrt(2)
 
-[table, buildin_function]列出內建函數。
+[buildin_function:table]列出內建函數。
 
 統計表示式
 ~~~~~~~~~~

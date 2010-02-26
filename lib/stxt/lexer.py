@@ -63,6 +63,8 @@ def t_CODE(t):
     t.value.title = m.group('title')
     if len(t.value.title) < 1:
         t.value.title = t.value.name
+    t.value.file = t.lexer.file
+    t.value.lineno = t.lexer.lineno
     t.lexer.lineno += 1
     t.lexer.block_start = t.lexer.lexpos
     t.lexer.block_lineno = t.lexer.lineno

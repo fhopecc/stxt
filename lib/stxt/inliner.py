@@ -2,7 +2,7 @@
 import sys, lex, yacc
 import logging
 from logging import config
-from tree import Tree
+from tree import *
 
 config.fileConfig(r'config\log.conf')
 console = logging.getLogger()
@@ -83,25 +83,26 @@ def p_element(p):
     if p[1] == '*':
         p[0] = Tree('emphasis', p[2].value)
     elif p[1] == '[':
-        p[0] = Tree('reference', p[2].value)
-
         "[name:type] | [name] | [label:name:type]"
-
         pattern =  r'(\S+):(\S+):(\S+)|'
         pattern += r'(\S+):(\S+)|'
         pattern += r'(\S+)'
         import re
-        m = re.match(pattern, p[0].value)
+        m = re.match(pattern, p[2].value)
         if m:
             if m.group(1):
-                p[0].reflabel = m.group(1)
-                p[0].refname  = m.group(2)
-                p[0].reftype  = m.group(3)
+                p[0] = ReferenceNode(m.group(2), m.group(3), m.group(1))
             elif m.group(4):
-                p[0].refname  = m.group(4)
-                p[0].reftype  = m.group(5)
+                p[0] = ReferenceNode(m.group(4), m.group(5))
             elif m.group(6):
-                p[0].refname  = m.group(6)
+                p[0] = ReferenceNode(m.group(6))
+        else: 
+
+            console.error("[%s]:It isn't correct address." % p[2].value)
+            console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
+            sys.exit()
+        p[0].file   = p.lexer.file
+        p[0].lineno = p.lexer.lineno
 
 def p_single_star_error(p):
     '''single_star_error : STAR cblock'''

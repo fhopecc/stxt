@@ -5,11 +5,11 @@ from lib.stxt.tree import *
 class UnitTest(unittest.TestCase):
     def setUp(self):
         d = Tree('doc')
-        d.append(Tree('question', 'q0'))
-        d.append(Tree('question', 'q1'))
-        d.append(Tree('example', 'e0'))
-        d.append(Tree('question', 'q2'))
-        d.append(Tree('example', 'e1'))
+        d.append(Tree('question', 'q0', name='q0'))
+        d.append(Tree('question', 'q1', name='q1'))
+        d.append(Tree('example', 'e0', name='e0'))
+        d.append(Tree('question', 'q2', name='q2'))
+        d.append(Tree('example', 'e1', name='e1'))
 
         self.tree = d
 
@@ -93,8 +93,17 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(6, t[0][1].value)
     
     def testReferenceNode(self):
-        ref = ReferenceNode()
+        tree = self.tree
+        ref = ReferenceNode('e1', 'example')
+        tree.append(ref)
+
         self.assertEqual('reference', ref.type)
+        self.assertEqual('example', ref.reftype)
+        self.assertEqual('e1', ref.refname)
+
+        e1 = tree.get('e1', 'example')
+
+        self.assertEqual(e1, ref.reftree())
 
 if __name__ == '__main__':
     unittest.main()
