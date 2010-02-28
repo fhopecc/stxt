@@ -3,6 +3,7 @@ import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from lib.stxt.inliner import lexer
 from lib.stxt.inliner import parser
+from lib.stxt import inliner
 
 class UnitTest(unittest.TestCase):
     def setUp(self):
@@ -24,19 +25,19 @@ class UnitTest(unittest.TestCase):
         t = lexer.token()
         self.assertEqual('CBLOCK', t.type)
 
-    def testSQURE(self):
-        case = '[test.sql]'
+    def testDSQURE(self):
+        case = '[[test.sql]]'
         lexer.input(case)
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LSQUARE', t.type)
+        self.assertEqual('LDSQUARE', t.type)
 
         t = lexer.token()
         self.assertEqual('CBLOCK', t.type)
         self.assertEqual('test.sql', t.value)
 
         t = lexer.token()
-        self.assertEqual('RSQUARE', t.type)
+        self.assertEqual('RDSQUARE', t.type)
 
     def testSTAR(self):
         case = '字元塊[test.sql]*強調詞*'
@@ -48,14 +49,14 @@ class UnitTest(unittest.TestCase):
 
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LSQUARE', t.type)
+        self.assertEqual('LDSQUARE', t.type)
 
         t = lexer.token()
         self.assertEqual('CBLOCK', t.type)
         self.assertEqual('test.sql', t.value)
 
         t = lexer.token()
-        self.assertEqual('RSQUARE', t.type)
+        self.assertEqual('RDSQUARE', t.type)
 
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
@@ -72,7 +73,7 @@ class UnitTest(unittest.TestCase):
     def testNEWLINE(self):
         case = '''字元塊1
 字元塊2
-[test.sql]
+[[test.sql]]
 '''
         lexer.input(case)
         t = lexer.token()
@@ -87,14 +88,14 @@ class UnitTest(unittest.TestCase):
 
         t = lexer.token()
         self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('LSQUARE', t.type)
+        self.assertEqual('LDSQUARE', t.type)
 
         t = lexer.token()
         self.assertEqual('CBLOCK', t.type)
         self.assertEqual('test.sql', t.value)
 
         t = lexer.token()
-        self.assertEqual('RSQUARE', t.type)
+        self.assertEqual('RDSQUARE', t.type)
 
     def test_cblock(self):           
         case = '字元塊'
@@ -128,7 +129,15 @@ class UnitTest(unittest.TestCase):
 字元塊2
 [test.sql][label:name:type][name:type]
 '''
-        d = parser.parse(case)
+        d = inliner.parse(case)
+        self.assertEqual('para', d.type)
+        self.assertEqual(1, len(d.children))
+
+        case = '''字元塊1
+字元塊2
+[[test.sql]][[label:name:type]][[name:type]]
+'''
+        d = inliner.parse(case)
         self.assertEqual('para', d.type)
         self.assertEqual(4, len(d.children))
 
@@ -154,7 +163,7 @@ class UnitTest(unittest.TestCase):
 if __name__ == '__main__':
     '''unittest.main()'''
     tests = unittest.TestSuite()
-    tests.addTest(UnitTest("testSQURE"))
+    tests.addTest(UnitTest("testDSQURE"))
     tests.addTest(UnitTest("testBACKSLASH"))
     tests.addTest(UnitTest("testSTAR"))
     tests.addTest(UnitTest("testNEWLINE"))

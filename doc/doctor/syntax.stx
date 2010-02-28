@@ -4,8 +4,11 @@
 以增進對該項內容的了解。
 
 code.參照
-reference : [name:type] | [name] | [label:name:type]
+reference : [[name:type]] | [[name]] | [[label:name:type]]
 ::
+參照位址是由重覆左右引號所包圍，用重覆引號比較不會和一般引號衝突。
+'[[test.sql]]' 是一個參照，其位址為 test.sql。 
+
 若讀者省略文件元素類型，則會找出第一個名稱為 name 的元素。
 label 是表示此參照的提示文字。
 

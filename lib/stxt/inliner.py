@@ -13,8 +13,7 @@ DEBUG = False
 tokens = [
           'CBLOCK', 
           'STAR', 
-          'LSQUARE', 
-          'RSQUARE', 
+          'REFERENCE', 
           'BACKSLASH' 
          ] 
 
@@ -32,16 +31,38 @@ def t_STAR(t):
     r'\*'
     return t
 
-def t_LSQUARE(t):
-    r'\['
-    return t
+refpat =  r'\[\['
+refpat += r'([^:\]]+):([^:\]]+):([^:\]]+)|'
+refpat += r'([^:\]]+):([^:\]]+)|'
+refpat += r'([^:\]]+)'
+refpat += r'\]\]'
+TOKEN(refpat)
+def t_REFERENCE(t):
 
-def t_RSQUARE(t):
-    r'\]'
+    "[[name:type]] | [[name]] | [[label:name:type]]"
+    pattern =  r
+    import re
+    m = re.match(pattern, p[2].value)
+    if m:
+        if m.group(1):
+            p[0] = ReferenceNode(m.group(2), m.group(3), m.group(1))
+        elif m.group(4):
+            p[0] = ReferenceNode(m.group(4), m.group(5))
+        elif m.group(6):
+            p[0] = ReferenceNode(m.group(6))
+    else: 
+
+        console.error("[%s]:It isn't correct address." % p[2].value)
+        console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
+        sys.exit()
+    p[0].file   = p.lexer.file
+    p[0].lineno = p.lexer.lineno
+
+
     return t
 
 def t_CBLOCK(t):
-    r'[^\\*\[\]\n]+'           
+    r'.+'           
     return t
 
 def t_NEWLINE(t):
@@ -78,32 +99,11 @@ def p_elem(p):
 
 def p_element(p):
     '''emphasis  : STAR cblock STAR
-       reference : LSQUARE cblock RSQUARE
+       reference : LDSQUARE cblock RDSQUARE
     '''
     if p[1] == '*':
         p[0] = Tree('emphasis', p[2].value)
     elif p[1] == '[':
-        "[name:type] | [name] | [label:name:type]"
-        pattern =  r'(\S+):(\S+):(\S+)|'
-        pattern += r'(\S+):(\S+)|'
-        pattern += r'(\S+)'
-        import re
-        m = re.match(pattern, p[2].value)
-        if m:
-            if m.group(1):
-                p[0] = ReferenceNode(m.group(2), m.group(3), m.group(1))
-            elif m.group(4):
-                p[0] = ReferenceNode(m.group(4), m.group(5))
-            elif m.group(6):
-                p[0] = ReferenceNode(m.group(6))
-        else: 
-
-            console.error("[%s]:It isn't correct address." % p[2].value)
-            console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
-            sys.exit()
-        p[0].file   = p.lexer.file
-        p[0].lineno = p.lexer.lineno
-
 def p_single_star_error(p):
     '''single_star_error : STAR cblock'''
     console.info("inliner error report:")
@@ -125,12 +125,12 @@ def p_cblock(p):
 
 def p_escape_sequence(p):
     '''escape_sequence : BACKSLASH STAR
-                       | BACKSLASH LSQUARE
-                       | BACKSLASH RSQUARE
+                       | BACKSLASH LDSQUARE
+                       | BACKSLASH RDSQUARE
                        | BACKSLASH BACKSLASH
                        | BACKSLASH CBLOCK
     '''
-    if p[2] not in ('*', '[', ']', '\\'):
+    if p[2] not in ('*', '[[', ']]', '\\'):
         console.info("inliner error report:")
         console.info("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
         console.info("Wrong escape sequence!")
