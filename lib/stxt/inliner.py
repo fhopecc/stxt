@@ -12,7 +12,7 @@ DEBUG = False
 # Lexer
 tokens = [
           'CBLOCK', 
-          'STAR', 
+          'EMPHASIS', 
           'REFERENCE', 
           'BACKSLASH' 
          ] 
@@ -27,8 +27,10 @@ def t_BACKSLASH(t):
     r'\\'
     return t
 
-def t_STAR(t):
-    r'\*'
+def t_EMPHASIS(t):
+    r'\*\*(?P<t>[^*]+)\*\*'
+    m = t.lexer.lexmatch
+    t.value = Tree('emphasis')
     return t
 
 refpat =  r'\[\['
@@ -51,13 +53,11 @@ def t_REFERENCE(t):
         elif m.group(6):
             p[0] = ReferenceNode(m.group(6))
     else: 
-
         console.error("[%s]:It isn't correct address." % p[2].value)
         console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
         sys.exit()
     p[0].file   = p.lexer.file
     p[0].lineno = p.lexer.lineno
-
 
     return t
 
