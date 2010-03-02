@@ -11,10 +11,11 @@ DEBUG = False
 
 # Lexer
 tokens = [
-          'CBLOCK', 
           'EMPHASIS', 
+          'EMAIL', 
           'REFERENCE', 
-          'BACKSLASH' 
+          'URL',
+          'CBLOCK' 
          ] 
 
 def find_column(input,token):
@@ -23,42 +24,44 @@ def find_column(input,token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-def t_BACKSLASH(t):
-    r'\\'
+def t_EMAIL(t):
+    r'\b(?i[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})\b' 
+    t.value = Tree('email', t.value))
+    return t
+
+def t_URL(t):
+    r"\b(https?|ftp|gopher|telnet|file|notes|ms-help):((//)|(\\\\))[\w\d:#%/;$()~_?\\-=\\\.&]*\b"
+    t.value = Tree('url', t.value))
     return t
 
 def t_EMPHASIS(t):
     r'\*\*(?P<t>[^*]+)\*\*'
     m = t.lexer.lexmatch
-    t.value = Tree('emphasis')
+    t.value = Tree('emphasis', m.group('t'))
     return t
 
 refpat =  r'\[\['
-refpat += r'([^:\]]+):([^:\]]+):([^:\]]+)|'
-refpat += r'([^:\]]+):([^:\]]+)|'
-refpat += r'([^:\]]+)'
+refpat += r'(?P<1>[^:\]]+):(?P<2>[^:\]]+):(?P<3>[^:\]]+)|'
+refpat += r'(?P<4>[^:\]]+):(?P<5>[^:\]]+)|'
+refpat += r'(?P<5>[^:\]]+)'
 refpat += r'\]\]'
 TOKEN(refpat)
 def t_REFERENCE(t):
-
-    "[[name:type]] | [[name]] | [[label:name:type]]"
-    pattern =  r
-    import re
-    m = re.match(pattern, p[2].value)
+    m = t.lexmatch
     if m:
-        if m.group(1):
-            p[0] = ReferenceNode(m.group(2), m.group(3), m.group(1))
-        elif m.group(4):
-            p[0] = ReferenceNode(m.group(4), m.group(5))
-        elif m.group(6):
-            p[0] = ReferenceNode(m.group(6))
+        if m.group('1'): #[[label:name:type]]
+            p[0] = ReferenceNode(m.group('2'), m.group('3'), m.group('1'))
+        elif m.group('4'): #[[name]]
+            p[0] = ReferenceNode(m.group('4'), m.group('5'))
+        elif m.group('6'): #[[name:type]]
+            p[0] = ReferenceNode(m.group('6'))
     else: 
         console.error("[%s]:It isn't correct address." % p[2].value)
         console.error("error at %s:%s" % (p.lexer.file, p.lexer.lineno))
         sys.exit()
+
     p[0].file   = p.lexer.file
     p[0].lineno = p.lexer.lineno
-
     return t
 
 def t_CBLOCK(t):
@@ -104,6 +107,7 @@ def p_element(p):
     if p[1] == '*':
         p[0] = Tree('emphasis', p[2].value)
     elif p[1] == '[':
+
 def p_single_star_error(p):
     '''single_star_error : STAR cblock'''
     console.info("inliner error report:")
