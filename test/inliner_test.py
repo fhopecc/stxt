@@ -9,66 +9,42 @@ class UnitTest(unittest.TestCase):
     def setUp(self):
         lexer.begin('INITIAL')
         lexer.lineno = 1
+        lexer.sourcefile = '__string__'
 
-    def testBACKSLASH(self):
-        case = r'符號={數字, +, -, \*, /}'
+    def testESCAPESTRING(self):
+        case = "''[[test.sql]]''"
         lexer.input(case)
         t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('ESCAPESTRING', t.type)
+        self.assertEqual('[[test.sql]]', t.value)
+
+        case = '''字元塊1''[[test.sql]]''
+字元塊2
+'''
+        lexer.input(case)
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('CBLOCK', t.type)
+        self.assertEqual('字元塊1', t.value)
 
         t = lexer.token()
-        self.assertEqual('BACKSLASH', t.type)
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('ESCAPESTRING', t.type)
+        self.assertEqual('[[test.sql]]', t.value)
 
-        t = lexer.token()
-        self.assertEqual('STAR', t.type)
-
-        t = lexer.token()
-        self.assertEqual('CBLOCK', t.type)
-
-    def testDSQURE(self):
+    def testREFERENCE(self):
         case = '[[test.sql]]'
         lexer.input(case)
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LDSQUARE', t.type)
+        self.assertEqual('REFERENCE', t.type)
 
-        t = lexer.token()
-        self.assertEqual('CBLOCK', t.type)
-        self.assertEqual('test.sql', t.value)
-
-        t = lexer.token()
-        self.assertEqual('RDSQUARE', t.type)
-
-    def testSTAR(self):
-        case = '字元塊[test.sql]*強調詞*'
+    def testCBLOCK(self):
+        case = r'符號={數字, +, -, *, /}'
         lexer.input(case)
         t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('CBLOCK', t.type)
-        self.assertEqual('字元塊', t.value)
-
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('LDSQUARE', t.type)
-
-        t = lexer.token()
-        self.assertEqual('CBLOCK', t.type)
-        self.assertEqual('test.sql', t.value)
-
-        t = lexer.token()
-        self.assertEqual('RDSQUARE', t.type)
-
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('STAR', t.type)
-
-        t = lexer.token()
-        self.assertEqual('CBLOCK', t.type)
-        self.assertEqual('強調詞', t.value)
-
-        t = lexer.token()
-        self.assertEqual(1, t.lexer.lineno)
-        self.assertEqual('STAR', t.type)
 
     def testNEWLINE(self):
         case = '''字元塊1
@@ -88,51 +64,27 @@ class UnitTest(unittest.TestCase):
 
         t = lexer.token()
         self.assertEqual(3, t.lexer.lineno)
-        self.assertEqual('LDSQUARE', t.type)
+        self.assertEqual('REFERENCE', t.type)
+        self.assertEqual('test.sql', t.value.refname)
 
+    def testPARA(self):
+        case = '字元塊[[test.sql]]__強調詞__'
+        lexer.input(case)
         t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('CBLOCK', t.type)
-        self.assertEqual('test.sql', t.value)
+        self.assertEqual('字元塊', t.value)
 
         t = lexer.token()
-        self.assertEqual('RDSQUARE', t.type)
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('REFERENCE', t.type)
+        self.assertEqual('test.sql', t.value.refname)
 
-    def test_cblock(self):           
-        case = '字元塊'
-        d = parser.parse(case)
-        self.assertEqual('para', d.type)
-        self.assertEqual(1, len(d.children))
-        cb = d.children[0]
-        self.assertEqual('cblock', cb.type)
-        self.assertEqual('字元塊', cb.value)
+        t = lexer.token()
+        self.assertEqual('EMPHASIS', t.type)
+        self.assertEqual('強調詞', t.value.value)
 
-        case = '''字元塊1
-字元塊2
-'''
-        d = parser.parse(case)
-        self.assertEqual('para', d.type)
-        self.assertEqual(1, len(d.children))
-        cb = d.children[0]
-        self.assertEqual('cblock', cb.type)
-        self.assertEqual('字元塊1字元塊2', cb.value)
-
-    def testEscapeChar(self):
-        case = r'''*\*字元塊*'''
-        d = parser.parse(case)
-        self.assertEqual('para', d.type)
-        self.assertEqual(1, len(d.children))
-        self.assertEqual('emphasis', d[0].type)
-        self.assertEqual('*字元塊', d[0].value)
-
-    def testPara(self):
-        case = '''字元塊1
-字元塊2
-[test.sql][label:name:type][name:type]
-'''
-        d = inliner.parse(case)
-        self.assertEqual('para', d.type)
-        self.assertEqual(1, len(d.children))
-
+    def testReference(self):
         case = '''字元塊1
 字元塊2
 [[test.sql]][[label:name:type]][[name:type]]
@@ -160,14 +112,53 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('name', ref.refname)
         self.assertEqual('type', ref.reftype)
 
+    def testCblock(self):           
+        case = '字元塊'
+        d = parser.parse(case)
+        self.assertEqual('para', d.type)
+        self.assertEqual(1, len(d.children))
+        cb = d.children[0]
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual('字元塊', cb.value)
+
+        case = '''字元塊1
+字元塊2
+'''
+        d = parser.parse(case)
+        self.assertEqual('para', d.type)
+        self.assertEqual(1, len(d.children))
+        cb = d.children[0]
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual('字元塊1字元塊2', cb.value)
+
+        case = '''字元塊1
+字元塊2_3_4_5
+[test.sql][label:name:type][name:type]
+'''
+        d = inliner.parse(case)
+        self.assertEqual('para', d.type)
+        self.assertEqual(1, len(d.children))
+        cb = d.children[0]                                    
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual(case.replace('\n',''), cb.value)
+
+        case = '''字元塊1''[[test.sql]]''
+字元塊2
+'''
+        d = inliner.parse(case)
+        self.assertEqual('para', d.type)
+        self.assertEqual(1, len(d.children))
+        cb = d.children[0]                                    
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual('字元塊1[[test.sql]]字元塊2', cb.value)
+
 if __name__ == '__main__':
-    '''unittest.main()'''
-    tests = unittest.TestSuite()
-    tests.addTest(UnitTest("testDSQURE"))
-    tests.addTest(UnitTest("testBACKSLASH"))
-    tests.addTest(UnitTest("testSTAR"))
+    unittest.main()
+    '''tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testREFERENCE"))
+    tests.addTest(UnitTest("testCBLOCK"))
+    tests.addTest(UnitTest("testPARA"))
+    tests.addTest(UnitTest("testReference"))
     tests.addTest(UnitTest("testNEWLINE"))
-    tests.addTest(UnitTest("testPara"))
-    tests.addTest(UnitTest("testEscapeChar"))
     runner = unittest.TextTestRunner()
-    runner.run(tests)
+    runner.run(tests)'''
