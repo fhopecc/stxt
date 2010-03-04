@@ -124,7 +124,7 @@ def p_token(p):
         slineno = p.lexer.active_lexer().startlineno + start - 1
         try:
             p[1] = inliner.parse(p[1].value, 
-                                 file = p.lexer.active_file(), 
+                                 src = p.lexer.active_file(), 
                                  lineno = slineno)
             p[1].value = value
         except SyntaxError, e:
