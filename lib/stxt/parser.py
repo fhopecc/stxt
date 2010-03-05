@@ -110,12 +110,15 @@ def p_token(p):
                | footnotes EMPTYLINE
                | term
                | IMAGE
+               | VIDEO
                | COMMENT
                | code
                | code EMPTYLINE
                | table EMPTYLINE
                | para EMPTYLINE
                | IMAGE EMPTYLINE
+               | VIDEO EMPTYLINE
+               | COMMENT EMPTYLINE
                | INSERT EMPTYLINE
     '''
     if p[1].type == 'para':

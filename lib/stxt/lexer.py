@@ -6,8 +6,9 @@ from lex import LexError
 from logging import config
 import sys, os, re, lex, logging
 
-config.fileConfig(os.path.join(os.path.dirname(__file__),'log.conf'))
-console = logging.getLogger('console')
+config.fileConfig(os.path.join(os.path.dirname(__file__), '..', '..', 
+            'config','log.conf'))
+console = logging.getLogger('')
 
 states = (
     ('code', 'exclusive'), 
@@ -18,7 +19,7 @@ tokens = [
           'H1', 'H2', 'H3', 'H4', 'H5', 
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
-          'IMAGE',
+          'IMAGE', 'VIDEO', 
           'COMMENT', 'FOOTNOTE', 'CITATION', 
           'CODE', 'CODEBLOCK',
           'TABLE', 'TABLEBLOCK',
@@ -141,17 +142,22 @@ def t_OL(t):
         t.value.number = '#'
     return t
 
-head  = r'image|question|answer|define|theorem|'
-head += r'proof'
+head  = r'image|video|'
+head += r'question|answer|define|theorem|proof'
 head  = r'^(?P<h>(%s))' % head
-head += r'(\[(?P<n>[^]]*)\])?\.(?P<title>.*)$'
+head += r'(\[(?P<oldname>[^]]*)\])?\.'
+head += r'(?P<title>[^(\n]*)'
+head += r'(\((?P<name>.*)\))?' # name specifier use this
 
 @TOKEN(head)
 def t_HEAD(t):
     m = t.lexer.lexmatch
     t.type = m.group('h').upper()
     t.value = Tree(m.group('h')) 
-    t.value.name = m.group('n')
+    if m.group('name'):
+        t.value.name = m.group('name')
+    else:
+        t.value.name = m.group('oldname')
     t.value.title = m.group('title')
     if t.value.name and len(t.value.title) < 1:
         t.value.title = t.value.name

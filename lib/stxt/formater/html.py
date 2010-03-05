@@ -32,12 +32,14 @@ def to_html(file):
     d.count_occurence()
     title = os.path.basename(file)
 
+    render = template.render('template', globals={'css':f_css()})
+    return str(render.single_html(title, disp(d)))
+
+def f_css():
     f = open(os.path.join('structedtext', 'css', 'web.css'))
     css = f.read()
     f.close()
-
-    render = template.render('template')
-    return str(render.single_html(title, disp(d), css))
+    return css
 
 def f_doc(tree):
     html = ''
@@ -105,6 +107,29 @@ def f_image(tree):
 '''
     temp = Template(temp)
     return str(temp(tree.type, f_title(tree), tree.name))
+
+def f_video(tree):
+    temp = '''$def with (type, title, path)
+<div class="$type"><div class="title">$title</div>
+<OBJECT id="VIDEO" width="320" height="240" 
+	CLASSID="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6"
+	type="application/x-oleobject">
+	
+	<PARAM NAME="URL" VALUE="$:path">
+	<PARAM NAME="SendPlayStateChangeEvents" VALUE="True">
+	<PARAM NAME="AutoStart" VALUE="FALSE">
+	<PARAM name="uiMode" value="none">
+	<PARAM name="PlayCount" value="1">
+</OBJECT>
+
+</div>
+'''
+
+#style="position:absolute; left:0;top:0;"
+
+    temp = Template(temp)
+    vurl = os.path.join('videos', tree.name.replace(' ', '_') + '.wmv')
+    return str(temp(tree.type, f_title(tree), vurl))
 
 def f_table(tree):
     temp = '''$def with (type, title, content)
@@ -258,6 +283,9 @@ def f_filename(tree):
         fn = tree.name
     return '%s.html' % fn
 
+def f_comment(tree):
+    return ''
+
 def usage():
     usage = os.path.basename(__file__) + " filename\n"
     usage += u'filename: structed text file\n'
@@ -270,4 +298,3 @@ if __name__ == '__main__':
         print to_html(fn)
     except IndexError:
        console.info(usage()) 
-
