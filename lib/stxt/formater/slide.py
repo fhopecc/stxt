@@ -61,18 +61,18 @@ $:content
     prev = order-1
     next = order+1
     if prev > -1:
-         prev = sect2s[prev]
-         if prev:
-             prev = f_filename(prev)
-         else:
-             prev = f_filename(tree)
+        prev = sect2s[prev]
+    if type(prev) is parser.Tree:
+        prev = f_filename(prev)
+    else:
+        prev = f_filename(tree.parent)
 
     if next < len(sect2s):
-         next = sect2s[next]
-         if next:
-             next = f_filename(next)
-         else:
-             next = f_filename(tree)
+        next = sect2s[next]
+    if type(next) is parser.Tree:
+        next = f_filename(next)
+    else:
+        next = f_filename(tree)
 
     temp = Template(temp)
     content = str(temp(f_address(tree), tree.type, 
