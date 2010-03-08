@@ -53,8 +53,12 @@ def t_TIMESTAMP(t):
     d   = int(m.group('d'))
     from datetime import date
     t.value = date(y, mon, d)
-
     return t
+
+'''def t_TIME(t):
+    r'^(?P<h>\d\d)(?P<m>\d\d)\n\n'
+    t.lexer.lineno += t.value.count('\n')
+    t.value = date(y, mon, d)'''
 
 def t_CODE(t):
     r'^(diagram|code)(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'

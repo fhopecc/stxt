@@ -17,6 +17,11 @@ def to_slide(tree):
     for sect1 in tree.children:
         disp(sect1)
 
+def f_slide_counts(tree):
+    root = tree.root()
+    sect2s = [c for c in tree.children() if c.type == 'sect2']
+    return len(sect2s)
+ 
 def f_sect1(tree):
     temp = '''$def with (id, type, title, content)
 <div id="$id" class="$type"><div class="title">$title</div>
@@ -44,8 +49,10 @@ $:content
         disp(sect2)
 
 def f_sect2(tree):
-    temp = '''$def with (id, type, title, content, prev, next)
-<div id="$id" class="$type"><div class="title">$title</div>
+    temp = '''$def with (id, type, title, subtitle, content, prev, next)
+<div id="$id" class="$type"><div class="title">$title
+<div class="subtitle">$subtitle</div>
+</div>
 $:content
 </div>
 <div id="footer">
@@ -74,9 +81,11 @@ $:content
     else:
         next = f_filename(tree)
 
+    subtitle = '%s/%s' % (order + 1, len(sect2s))
+
     temp = Template(temp)
     content = str(temp(f_address(tree), tree.type, 
-                f_title(tree), content, prev, next))
+                f_title(tree), subtitle, content, prev, next))
 
     with open(f_path(tree), 'w') as f:
         f.write(str(render.slide(f_title(tree), content)))
