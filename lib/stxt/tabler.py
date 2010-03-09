@@ -1,6 +1,6 @@
 # coding=utf8
 from tree import Tree
-import sys, lex, yacc, unicodedata
+import sys, lex, yacc, unicodedata, inliner
 
 # Visual Length:
 # These functions must pass unicode string as arguments
@@ -95,7 +95,13 @@ def p_simple_table(p):
         r = Tree('tr', '')
         table.append(r)
         for v in parse_row(p[2], l):
-            r.append(Tree('td', v))
+            td = Tree('td', v)
+            try:
+                t = inliner.parse(v)
+                td.append(t)         
+            except:
+                print 'inliner error %s:%s' % (p.lexer.source, p.lexer.lineno)
+            r.append(td)
     p[0] = table
 
 def p_lines(p):
@@ -112,6 +118,8 @@ def p_error(t):
 
 parser = yacc.yacc()
 
-def parse(input):
+def parse(input, source='__string__', lineno=0):
+    lexer.source = source
+    lexer.lineno = lineno
     d = parser.parse(input, lexer=lexer)
     return d

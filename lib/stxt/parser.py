@@ -161,7 +161,9 @@ def p_code(p):
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
     if DEBUG == 0:
-        table = tabler.parse(p[2].decode('utf8'))
+        table = tabler.parse(p[2].decode('utf8'), 
+                    source=p.lexer.mflexer.active_source(), 
+                    lineno=p.lineno(1))
         table.title = p[1].title
         table.name = p[1].name
         p[0] = table

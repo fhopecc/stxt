@@ -11,10 +11,10 @@ code[sql_proc.dfd].
 [select:select:sect2]
 
 table[keyword].關鍵字
-title
-====== ========
-select keyworkd
-====== ========
+title      title
+========== ========
+[[select]] update
+========== ========
 
 table[buildin_function].內建函數
 title

@@ -146,7 +146,11 @@ $:content
                 if ri == 0:
                     content += '<th>%s</th>\n' % col.value.encode('utf8')
                 else:
-                    content += '<td>%s</td>\n' % col.value.encode('utf8')
+                    if len(col.children) > 0:
+                        content += '<td>%s</td>\n' % \
+                                   disp(col[0])
+                    else:
+                        content += '<td>%s</td>\n' % col.value.encode('utf8')
             content += '</tr>\n' 
         content += '</table>\n'
     else:

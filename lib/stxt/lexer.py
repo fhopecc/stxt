@@ -269,6 +269,9 @@ class MutipleFileLexer(object):
     def active_file(self):
         return self.active_lexer().file
 
+    def active_source(self):
+        return self.active_lexer().file
+
     def token(self):
         if self.lexer.include_lexer:
             t = self.lexer.include_lexer.token()
