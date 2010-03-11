@@ -88,8 +88,8 @@ def p_sect_with_contents_and_timestamp(p):
        sect3 : H3 TIMESTAMP contents sect4s
        sect4 : H4 TIMESTAMP contents sect5s
     '''
-    for c in p[4]: p[1].append(c)
-    for s in p[5]: p[1].append(s)
+    for c in p[3]: p[1].append(c)
+    for s in p[4]: p[1].append(s)
     p[1].timestamp = p[2]
     p[0] = p[1]
  

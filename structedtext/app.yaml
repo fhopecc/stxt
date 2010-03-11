@@ -22,6 +22,8 @@ handlers:
   upload: index.html
 - url: /sqls
   script: run_rest.py
+- url: /food
+  static_dir: food
 
 skip_files: |
  ^(.*/)?(
@@ -29,6 +31,8 @@ skip_files: |
  (app\.yml)|
  (index\.yaml)|
  (index\.yml)|
+ (hltb\.*)|
+ (hltb\video\.*)|
  (#.*#)|
  (.*~)|
  (.*\.py[co])|

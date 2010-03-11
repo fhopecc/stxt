@@ -297,8 +297,6 @@ def usage():
     return usage
 
 if __name__ == '__main__':
-    try:
-        fn = sys.argv[1]
-        print to_html(fn)
-    except IndexError:
-       console.info(usage()) 
+    fn = sys.argv[1]
+    print to_html(fn)
+#console.info(usage()) 

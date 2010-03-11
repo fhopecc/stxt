@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import with_statement
 import sys, os, re, html, web
+from os import path
 from html import *
 from web import f_path
 from web import f_filename
@@ -38,6 +39,10 @@ $:content
 
     temp = Template(temp)
     content =  str(temp(f_address(tree), tree.type, f_title(tree), content))
+
+    dir = path.dirname(f_path(tree))
+    if not path.exists(dir):
+        os.makedirs(dir) 
 
     with open(f_path(tree), 'w') as f:
         f.write(str(render.slide(f_title(tree), content)))
@@ -87,6 +92,10 @@ $:content
     content = str(temp(f_address(tree), tree.type, 
                 f_title(tree), subtitle, content, prev, next))
 
+    dir = path.dirname(f_path(tree))
+    if not path.exists(dir):
+        os.mkdirs(dir) 
+
     with open(f_path(tree), 'w') as f:
         f.write(str(render.slide(f_title(tree), content)))
 
@@ -108,6 +117,12 @@ def f_filename(tree):
         return '%d.html' % (tree.order() + 1)
 
 web.f_filename = f_filename
+
+def f_path(tree):
+    'The file path for specified node'
+    bf = path.basename(tree.root().file)
+    dir = path.splitext(bf)[0]
+    return path.join("slides", dir, f_filename(tree))
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"

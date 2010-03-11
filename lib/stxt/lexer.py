@@ -128,7 +128,7 @@ def t_INSERT(t):
     return t
 
 def t_LI(t):
-    r'^\*[ ](?P<text>.*)'
+    r'^\*\s(?P<text>.*)'
     text = t.lexer.lexmatch.group('text')
     t.value = Tree('listitem', text)
     t.value.append(Tree('para', text))
@@ -222,7 +222,7 @@ def t_EMPTYLINE(t):
     return t
 
 def t_INDENT(t):
-    r'^[ ][ ](?P<l>.+)$'
+    r'^\s\s(?P<l>.+)$'
     t.value = t.lexer.lexmatch.group('l')
     return t
 
