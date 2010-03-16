@@ -1,3 +1,17 @@
+使用者不需要知道的訊息
+----------------------
+0990316
+
+發生例外時，若只會碰出請「發生系統錯誤，請聯絡資訊室」，對資訊室人員而言，他完全不曉得發生什麼例外，所以記錄所有例外訊息，對修改程式助益甚大。
+建議加入以下源碼：
+
+catch(Throwable e){
+String msg = "XXX程序未完成:"+e.getMessage();
+log.error(msg);
+throw new RuntimeException(msg, e);
+}
+
+
 以上兩個link是Python的logging system，寫的算是詳細，
 要注意的是%(asctime)-24s
 這裡的24表示長度是24不滿的部份補空白，超過就以超原本的長度為主

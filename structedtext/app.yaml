@@ -24,6 +24,10 @@ handlers:
   script: run_rest.py
 - url: /food
   static_dir: food
+- url: /novel
+  static_dir: novel
+- url: /taichi
+  static_dir: taichi
 
 skip_files: |
  ^(.*/)?(
