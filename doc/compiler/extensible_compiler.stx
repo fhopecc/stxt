@@ -1,0 +1,57 @@
+可擴充編譯器(extensible compiler)
+---------------------------------
+0990317
+
+代數資料型態(algebraic datatypes)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+使用 Pizza[pizza] 實作代數資料型態，
+
+code.tree
+class Tree {
+    case Variable(String name);
+    case Lambda(Variable x, Tree body);
+    case Apply(Tree fn, Tree arg);
+}
+::
+
+code.TypeChecker
+class TypeChecker {
+    Type process(Tree tree, Env env) {
+        switch (tree) {
+            case Variable(String n):
+                return env.lookup(n).type;
+            case Lambda(Variable x, Tree body):
+                ...
+            case Apply(Tree fn, Tree arg):
+                Type funtype = process(fn, env);
+                ...
+            default:
+                throw new Error();
+        }
+    } ...
+}
+::
+
+code.NewTypechecker
+class NewTypeChecker extends TypeChecker {
+    Type process(Tree tree, Env env) {
+        switch (tree) {
+            case Lambda(Variable x, Tree body):
+            ...
+            default:
+            return super.process(tree, env);
+        }
+    }
+}
+::
+
+code.NewLambda
+class NewLambda extends Tree.Lambda {
+    Tree argtype;
+    NewLambda(Variable x, Tree argtype, Tree body) {
+        super(x, body);
+        this.argtype = argtype;
+    }
+}
+::
+
