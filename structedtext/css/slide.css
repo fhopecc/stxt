@@ -1,0 +1,49 @@
+@import url("/css/pygments_style.css");
+body {font-family:"標楷體";font-size:20pt}
+
+#content  {padding: 0 13% 0 15%}
+#rightbar {float:right;width:13%}
+
+#sect1list {padding-left:15%}
+#sect1list table {border:0}
+#sect1list table tr {border:0;text-align:left}
+#sect1list table tr td {border:0}
+#sect1list table tr td.selected {color:white;background:gray}
+
+#sect2list {float:left;width:10%}
+#sect2list table {border:0}
+#sect2list table tr {border:0;text-align:left}
+#sect2list table tr td {border:0}
+#sect2list table tr td.selected {color:white;background:gray}
+
+.emphasis {font-weight:bold}
+
+.sect1 .title {font-size:24pt;font-weight:bold;}
+.sect2 .title {font-size:20pt;font-weight:bold;}
+.sect3 .title {font-size:20pt;font-weight:bold;}
+.sect4 .title {font-size:20pt;font-weight:bold;}
+.sect5 .title {font-size:20pt;font-weight:bold;}
+.code    .title {font-size:20pt;font-weight:bold;}
+.image   .title {font-size:20pt;font-weight:bold;}
+.table   .title {font-size:20pt;font-weight:bold;}
+.define  .title {font-size:20pt;font-weight:bold;}
+.theorem .title {font-size:20pt;font-weight:bold;}
+.term div {margin-left:24pt}
+.term .title {margin:0;font-size:20pt;font-weight:bold;}
+
+.olistitem div {margin-left:14pt}
+.olistitem .para:first-child {text-indent:-14pt}
+
+.olistitem .olistitem div {margin-left:0pt}
+
+.para {margin-bottom:14}
+
+table { 
+  border:1px solid; 
+  border-collapse:collapse; 
+} 
+
+tr {border:1px solid;}
+th {border:1px solid;color:white;background:gray;
+    font-weight:bold;text-align:center}
+td {border:1px solid}

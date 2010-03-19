@@ -118,8 +118,9 @@ def f_video(tree):
 	<PARAM NAME="URL" VALUE="$:path">
 	<PARAM NAME="SendPlayStateChangeEvents" VALUE="True">
 	<PARAM NAME="AutoStart" VALUE="FALSE">
-	<PARAM name="uiMode" value="none">
+	<PARAM name="uiMode" value="mini">
 	<PARAM name="PlayCount" value="1">
+	<PARAM name="fullScreen" value="True">
 </OBJECT>
 
 </div>

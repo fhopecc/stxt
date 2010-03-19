@@ -32,7 +32,7 @@ def t_ESCAPESTRING(t):
     return t
 
 def t_EMPHASIS(t):
-    r'__(?P<t>[^*]+)__'
+    r'__(?P<t>[^*]+?)__'
     m = t.lexer.lexmatch
     t.value = Tree('emphasis', m.group('t'))
     return t

@@ -6,6 +6,12 @@ from html import *
 from web import f_path
 from web import f_filename
 
+def f_css():
+    f = open(os.path.join('structedtext', 'css', 'slide.css'))
+    css = f.read()
+    f.close()
+    return css
+
 render = template.render('template', globals={'css':f_css()})
 
 def disp(tree):
