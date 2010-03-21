@@ -49,8 +49,8 @@ def find_by_keyword(dir, keyword):
     find_by_pattern(dir, pattern)
 
 def main():
-    usage = u"usage: %prog START [options]"
-    parser = OptionParser(usage)
+    usage = u"usage: %prog TOP [options]"
+    parser = OptionParser(usage, version="%prog 0.9")
     parser.add_option("-k", "--keyword", dest="keyword",
                       help=u"檔名是否含有關鍵字")
 
@@ -63,7 +63,7 @@ def main():
     (options, args) = parser.parse_args()
 
     if len(args) != 1:
-        print u"必須指定 START"
+        print u"必須指定開始目錄"
         exit(1)
     
     if not path.exists(args[0]):
