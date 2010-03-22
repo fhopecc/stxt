@@ -1,0 +1,3 @@
+Q.查出系統開機時間？
+A.who -b
+  last reboot | head -1
