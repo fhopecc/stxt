@@ -73,7 +73,7 @@ def f_label(tree):
             }
     label = ""
     if re.match(r'sect\d', tree.type):
-        label = f_section_number(tree)
+        label = tree.title
     elif tree.type in ('question', 'define', 'theorem'):
         label =  type[tree.type] + str(tree.order() + 1)
     elif tree.type in ('proof', 'answer'):
@@ -268,7 +268,7 @@ def f_reference(tree):
 '''
     ref = tree.reftree()
     temp = Template(temp)
-    return str(temp(f_label(tree), f_url(ref)))
+    return str(temp(f_label(ref), f_url(ref)))
 
 def f_address(tree):
     type = tree.type  

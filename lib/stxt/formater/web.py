@@ -1,6 +1,6 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re
+import sys, os, re, html
 from html import *
 
 def disp(tree):
@@ -85,6 +85,14 @@ def f_path(tree):
     m = re.match(r".*\\([^\\]*)\\.*$", tree.root().file)
     webdir = m.group(1)
     return os.path.join("structedtext", webdir, f_filename(tree))
+
+def f_url(tree):
+    u'轉換文件元素位址為對應之 URL'
+    if re.match(r'sect[12]', tree.type):
+        return f_filename(tree)
+    return '#%s' % f_address(tree)
+
+html.f_url = f_url
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"

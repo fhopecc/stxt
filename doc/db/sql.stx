@@ -1,26 +1,23 @@
-[sql]SQL
+SQL(sql)
 ========
-一般的 SQL 處理資料程序。
+SQL 是目前最重要的資料庫介面，
+幾乎所有關聯式資料庫都支援。
+
+四大命令 CRUD:
+  盡管 SQL 指令再多，但對每個資料項目做的動作，
+  都超不出 CRUD 這四個動作，分別為 Create, Read, Update, Delete 之縮寫，
+  CRUD 可視為資料項目的動詞，分別對應下述的 SQL 指令。
+
+  insert, [[select]], update, delete。
+
+<d:\stxt\doc\db\reserved_word.stx>
+
 code[sql_proc.dfd].
 [基礎表] -> (from) -> [引用表] -> (where) -> [過濾表] ->
 (group by) -> [分組表] -> (having) -> [過濾分組表] ->
 (select) -> [輸出表]
 ::
-
-四大命令：
-[select:select:sect2]
-
-table[keyword].關鍵字
-title      title
-========== ========
-[[select]] update
-========== ========
-
-table[buildin_function].內建函數
-title
-====== ========
-select keyworkd
-====== ========
+一般的 SQL 處理資料程序，如上表。
 
 <d:\stxt\doc\db\dml.stx>
 <d:\stxt\doc\db\ddl.stx>

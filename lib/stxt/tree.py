@@ -147,6 +147,12 @@ class Tree(object):
             if name:
                 return t[name]
         else:
+            t = self.address_map()['sect1']
+            if t.has_key(name): return t[name]
+            t = self.address_map()['sect2']
+            if t.has_key(name): return t[name]
+            t = self.address_map()['sect3']
+            if t.has_key(name): return t[name]
             for k in self.address_map().keys():
                 for n in self.address_map()[k].keys():
                     if n == name: return self.address_map()[k][n]
@@ -257,7 +263,6 @@ class ReferenceNode(Tree):
 
     def reftree(self): 
         ref = self.get(self.refname, self.reftype)
-            
         return ref
     
 def Tuple2BTree(root=None, left=None, right=None):

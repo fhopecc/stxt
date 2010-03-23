@@ -1,3 +1,6 @@
+Q.複製整個目錄？
+A.如下述程式碼會將
+
 To copy a directory in MS-DOS you will need to use 
 the MS-DOS xcopy command.  Below is a basic example with 
 each of the steps to do this in MS-DOS. If you need additional information about the xcopy command or additional examples see the above xcopy command page.
