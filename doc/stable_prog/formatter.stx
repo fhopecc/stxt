@@ -1,0 +1,42 @@
+輸出格式(formatter)
+-------------------
+
+#.%c 輸出日誌訊息所屬的類別的全名
+#.%d 輸出日誌時間點的日期或時間，指定格式的方式：%d{yyy-MM-dd HH:mm:ss }。
+#.%l 輸出日誌事件的發生位置，即輸出日誌訊息的語句處於它所在的類別的第幾行。
+#.%m 輸出訊息，如log(message)中的message。
+#.%n 輸出一個列尾符號。
+#.%p 輸出優先階層，即DEBUG，INFO，WARN，ERROR，FATAL。
+  如果是調用debug()輸出的，則為DEBUG，依此類推。
+#.%r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+#.%t 輸出產生該日誌事件的線程名。
+#.%r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+#.%f 輸出日誌訊息所屬的類別的類別名。
+
+值得注意的是A2的appender被設為
+org.apache.log4j.DailyRollingFileAppender表示Log4j會將日誌檔依日期分開。
+
+要注意的是%(asctime)-24s
+這裡的24表示長度是24不滿的部份補空白，超過就以超原本的長度為主
+第一個link裡有寫，不過要狠認真看
+也可以做logging server，專門收所有的log，這倒是狠有意思....只要做service的，應該都要有一套這個，好追蹤。
+當然網路斷線也沒關係，logging system有支援兩種以上的log，可以本機有log，也可以送到logging server，只是fail over的機制就得自己想了....
+-
+Layout:
+編程人員透過 Layout 的配置,能夠自由改變 Logger 寫出 log message 的格式。例如,為 Logger 加入一個 conversion pattern 為 "%r [%t] %-5p %c - %m%n" 的 PatternLayout,則輸出的 log message 就可能會像下列這樣:
+
+176 [main] INFO  org.foo.Bar - Located nearest gas station.
+PatternLayout 的 格式字元列表如下:
+
+%c 輸出日誌訊息所屬的類別的全名
+%d 輸出日誌時間點的日期或時間，指定格式的方式：%d{yyy-MM-dd HH:mm:ss }。
+%l 輸出日誌事件的發生位置，即輸出日誌訊息的語句處於它所在的類別的第幾行。
+%m 輸出代碼中指定的訊息，如log(message)中的message。
+%n 輸出一個列尾符號。
+%p 輸出優先階層，即DEBUG，INFO，WARN，ERROR，FATAL。如果是調用debug()輸出的，則為DEBUG，依此類推。-5p 代表將此字串填滿至 5 個字元,以空白補不足處。
+%r 輸出自應用啟動到輸出該日誌訊息所耗費的毫秒數。
+%t 輸出產生該日誌事件的線程名。
+%f 輸出日誌訊息所屬的類別的類別名。
+Layout 亦會反映在 Logger 的階層上。
+
+

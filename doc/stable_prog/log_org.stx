@@ -1,0 +1,59 @@
+組織您的日誌系統(organize log)
+------------------------------
+
+訊息等級(level)
+~~~~~~~~~~~~~~~
+Log4j將輸出訊息分成五個等級，
+分別為DEBUG、INFO、WARN、ERROR、FATAL，
+在上面設定檔將輸出等級設為INFO，
+就表示INFO~FATAL等級的訊息將會輸出，
+因此DEBUG等級的訊息就會被忽略，
+如果將設定檔的第一行改為log4j.rootLogger=DEBUG, A1, A2，
+就會兩個訊息都輸出了。
+
+除了這五個等級外，也可以設為ALL或OFF，
+ALL很示全部訊息都輸出，OFF則表示不輸出訊息。
+
+Log4j 的階層架構 :
+一個程式中可以擁有多個 Logger,這些 Logger之間以名稱區分,
+    並以此區分出階層。
+    例如有一個 Logger 的名稱為 "com.foo",那麼另一個名為 "com.foo.bar" 的 Logger 就隸屬於 "com.foo" logger,如果 "com.foo.bar" 未定義自己的 log 等級,則以 "com.foo" 的 log 等級為預設值。
+
+階層的最高為 root logger。Root logger 一定在存,不具有名稱屬性,可以隨時在程式中以 Logger.getRootLogger() 取得,其它 logger 則以 Logger.getLogger(String loggerName) 取得。
+
+Logger :
+Logger 可以被指派等級。
+能夠指派給 Logger 的等級有: 
+DEBUG, INFO, WARN, ERROR, FATAL 5 種,
+定義在 org.apache.log4j.Level 類別中。
+這 5 種等級的高低順序為 FATAL > ERROR > WARN > INFO > DEBUG。
+
+Logger 的等級決定它產生 log message 的數量 : Logger 只寫"出高於或等於本身等級"的 log message。例如某個 Logger 的等級被設定為 WARN,那麼它只會寫出等級為 WARN, ERROR, FATAL 的 log message,對於 DEBUG, INFO 的 log message 則不予理會。
+
+若是 Logger 的等級未被設定,則會自動使用 parent(上一層) 的等級。如果程式中所有的 Logger 都未設定等級,則由 root logger 決定。
+
+Logger 之間以名稱區分,所以在程式中任何地方,呼叫 Logger.getLogger(),並傳入同一個 Logger 名稱,則會得到同一個 Logger 的 reference。
+
+Logger 之間以名稱區分出階層。
+即使父階層在程式中出現的時機比子階層晚,
+    例如 "com.foo" logger 比 "com.foo.bar" 被取得的時間來得晚,"com.foo" 仍然是 "com.foo.bar" 的父階層(會影響到子階層 logger 未被定義的屬性, log 等級, appender, layout )。
+
+在一般情況下運行時所得到的 log message :
+
+0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
+16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+
+而在除錯模式下則是 :
+
+0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
+109 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+109 [main] DEBUG yc.usingLog4j.RedheadDuck  - A RedheadDuck is showing up...
+109 [main] DEBUG yc.usingLog4j.FlyWithWings  - Fly with wings...
+109 [main] DEBUG yc.usingLog4j.Quack  - Quack...
+109 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
+125 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+125 [main] DEBUG yc.usingLog4j.RubberDuck  - A RubberDuck is showing up...
+125 [main] DEBUG yc.usingLog4j.FlyWithRocket  - Fly with a rocket...
+125 [main] DEBUG yc.usingLog4j.Squeak  - Squeak...

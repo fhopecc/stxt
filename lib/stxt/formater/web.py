@@ -78,6 +78,7 @@ def f_filename(tree):
     fn = '_'.join([str(n+1) for n in section_number])
     if tree.name:
         fn = tree.name.replace(' ', '_')
+        fn = fn.lower()
     return '%s.html' % fn
 
 def f_path(tree):

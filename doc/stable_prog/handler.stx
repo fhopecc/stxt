@@ -1,0 +1,16 @@
+
+Update:
+http://bytes.com/forum/thread23499.html
+試了一下SMTPHandler，發現每一個error就寄一封信，原來要有MemoryHandler，這實在是太神奇了，一定要記下來，不然怎麼猜得到
+Update:
+後來發現這樣如果是發生Error要寄出email不可行，所以只好改用BufferingSMTPHandler
+，有興趣可以參考以下link
+http://www.red-dove.com/python_logging.html
+
+Appender:
+透過 Appender, Logger 能夠將 log message 輸出到指定的裝置上。一個 Logger 能夠擁有多個 Appender,所以 Logger 能夠同時將 log message 輸出到多個個裝置上。
+
+Appender 的設定亦會反映在 Logger 的階層中。當 Logger 輸出一筆 log message 時,父階層的 Appender 和自己的 Appender(如果有的話)都會記錄到這筆 log message;例如 "com.foo" Logger 有一個 Appender 將 log message 輸出到 console,而 "com.foo.bar" 有一個 Appender 將 log message 輸出到 檔案;當 "com.foo.bar" Logger 輸出一筆 log message 時, console 和檔案都會出現這筆 log message。而最簡單的例子,就是當 root logger 擁有一個輸出到 console 的 Appender 時,則程式中所有的 logger 所產生的 log message 都會輸出到 console。唯一個例外的情況,就是當某個 logger 將自己的 additivity 屬性設為 false(Logger.setAdditivity(false)),則此 logger 與隸屬於它的子 logger 都不會將 log message 寫到 console。
+
+
+Log4j 是一套開放源碼的工具,方便編程人員在程式中加入 log 機制,並輸出到各種目標上。Log4j 能夠透過外部的設定檔(properites 或 XML)進行設定。Log4j 能夠將 log message 寫到 console, 檔案,串流,TCP 協定的伺服器, Unix Syslog daemon 等。Log4j 具有 5 種 log 層級(DEBUG, INFO, WARN, ERROR, FATAL),可用於不同的系統狀態下所產生的訊息。

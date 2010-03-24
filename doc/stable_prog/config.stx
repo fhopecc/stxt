@@ -1,0 +1,69 @@
+設定 commons-logging.properties 
+你可以設定你的 log factory 是要使用哪一個 
+我以 Log4J 為例子 
+在 /WEB-INF/classes/commons-logging.properties 中寫入 
+
+org.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JCategoryLog
+		
+如果你 server 是使用 jdk1.4 以上的版本 
+可以使用 org.apache.commons.logging.impl.Jdk14Logger
+
+
+接著根據你的 Logger 撰寫符合他的 properties 
+拿 Log4j 為例子 
+你就要在 /WEB-INF/classes/ 下擺一個 log4j.properties
+
+log4j.rootLogger=DEBUG, A_default
+
+log4j.appender.A_default=org.apache.log4j.RollingFileAppender
+log4j.appender.A_default.File=c://log/test.log
+log4j.appender.A_default.MaxFileSize=4000KB
+log4j.appender.A_default.MaxBackupIndex=10
+log4j.appender.A_default.layout=org.apache.log4j.PatternLayout
+log4j.appender.A_default.layout.ConversionPattern=%d{ISO8601} - %p - %m%n
+		
+		
+此時你去執行 test-commons-logging.jsp 輸出的內容, 就會記錄在你的 c:\log 目錄的 test.log 中了 
+
+ps:如果沒有相關的 class 會使用到 SimpLog, 此時要設定的是 simplelog.properties 
+
+
+設定 :
+設定 Log4j 有 2 種方式 : 以 Java 程式碼配置組態,或是以外部設定檔進行設定。無論以哪種方式進行,不外下列幾個主要的步驟:
+
+定義 Root Logger 的等級 - 此設定會成為 logger 的預設等級
+定義 Root Logger 的 Appender - 如果有定義 Root Logger,則 Root Logger 的 Appender 一定要指定
+定義 Root Logger Appender 的 Layout - 定義 Layout 的類別後,可以選擇是否要定義該 Layout 的 conversion pattern
+定義個別的 Logger,其它步驟同 Root Logger
+最簡單的使用方式 - 使用 BasicConfigurator 進行設定, Root Logger 將會被設定為 DEBUG 等級,並且將 log message 以 "%r [%t] %p %c %x - %m%n" 的格式輸出到 console :
+
+p將 Log4j 的設定提到外部檔案(*.properties),讓程式較具有彈性。以下是一個設定檔的範例 :
+
+#定義 Root Logger 的等級為 INFO,且為其指定一個 appender 名為 rootAppender.
+log4j.rootLogger=info, rootAppender
+
+#指定 rootAppender 的類型.
+log4j.appender.rootAppender=org.apache.log4j.ConsoleAppender
+
+#指定 rootAppender 的 Layout.
+log4j.appender.rootAppender.layout=org.apache.log4j.PatternLayout
+
+#指定 rootAppender Layout 的輸出格式.
+log4j.appender.rootAppender.layout.ConversionPattern=%d [%t] %-5p %c - %m%n
+
+#設定特定名稱的 Logger.
+log4j.logger.yc.usingLog4j.UsingLog4jA=INFO, log4jaAppender
+log4j.appender.log4jaAppender=org.apache.log4j.RollingFileAppender
+log4j.appender.log4jaAppender.File=d:/tmp/usinglog4j.log
+log4j.appender.log4jaAppender.MaxFileSize=100KB
+log4j.appender.log4jaAppender.MaxBackupIndex=10
+log4j.appender.log4jaAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.log4jaAppender.layout.ConversionPattern=%c - %m%n
+Log4j 會從 class path 中尋找 log4j.properties,並自動讀取其中的設定。
+
+一般的使用方法 : 為 Root logger 設定 DEBUG 等級, Appender 及格式。其它的 logger 不做其它設定;當程式要轉換為 debug 或 release 模式時,只需修改 Root Logger 的等級即可。
+
+
+使用範例 :
+
+

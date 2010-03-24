@@ -1,0 +1,20 @@
+各種程式語言的系統
+------------------
+Log4j
+~~~~~
+目前在 Java 中最有名的 Log 方式, 首推是 Log4j,
+ 另是 JDK 1.4 Logging API. 除此之外, 
+ 還有 Avalon 中用的 LogKit 等等 . 
+ 而 commons-logging 也有實作一些基本 的 logging 方式為 
+ NoOpLog 及 SimpleLog. 對於他們的比較不在這次討論範圍,
+ 有興趣者請自行參閱參考文件. 
+
+快速使用 Logging 
+其實 logging 非常簡單去使用, 將 commons-logging.jar 放到 /WEB-INF/lib 之下.
+接著寫以下的程式碼
+LoggingTest.java
+
+以我自己本身使用的經驗, Log4j 可以滿足所有工程師, 
+所以我也是直接使用 log4j 而沒有使用 commons-logging.
+不過為了增加產品的共用性, 避免移植時候的麻煩, 新的產品及專案, 
+我會將他改成 commons-logging api 去呼叫. 才能符合真正的 reusable , 減少工程師未來的負擔.

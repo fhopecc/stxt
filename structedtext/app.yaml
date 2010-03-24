@@ -28,6 +28,8 @@ handlers:
   static_dir: novel
 - url: /taichi
   static_dir: taichi
+- url: /stable_prog
+  static_dir: stable_prog
 
 skip_files: |
  ^(.*/)?(
