@@ -1,0 +1,193 @@
+Python Loggin
+從Python2.3版本中開始引入的logging模塊為應用提供了靈活的日誌系統。
+
+logging的行為依靠調用 Logger 類的方法來實現，實例一般叫做logger。每個實例都擁有自己的名字，並且可以通過點來分割具備層次的名字。例如，一個logger叫做”scan”是一個叫做”scan.text”的logger的頂層，當然也包括”scan.html”和”scan.pdf”。logger的名字指示了他屬於應用程序的哪個位置。
+
+日誌信息也擁有級別指定其重要程度。缺省提供的級別包括DEBUG，INFO，WARNING，ERROR，CRITICAL(嚴重)。為了方便，你可以調用特定的方法來指定日誌的重要性，對應的方法為 debug() ， info() ， warning() ， error() ， critical() 。你也不必拘泥於這些級別，你可以使用更為通用的方法 log() 並且手動指定其級別。
+
+日誌級別對應值如下表所示。了解這些有助於你定義自己的日誌級別的相對關系。如果你定義的級別與已有的數值相同，則原有的級別會被覆蓋。
+
+級別	數值
+CRITICAL	50
+ERROR	40
+WARNING	30
+INFO	20
+DEBUG	10
+NOTSET	0
+日誌級別也可以在指定logger時定義，可以在開發時裝入和存儲配置。當調用logger的日誌方法時，logger對比日誌級別和自己的被指定的級別。如果本身的級別高於調用方法的級別，則不會記錄這個日誌信息。這是一個方便的方法用於忽略過多細節的日誌。
+
+日誌信息會被編碼為 LogRecord 類，當logger決定記錄一個事件時，就會為日誌信息創建一個LogRecord實例。
+
+日誌信息會被發布(dispatch)機制通過handler來發布出去，這些handler繼承自 Handler 類。Handler負責把日誌信息(LogRecord的實例)發布到對應的位置供處理這些信息。Handler傳遞LogRecord實例並指定特定目標。每個logger都可以擁有0個或多個handler，通過 addHandler() 方法添加。除了handler與logger的組合之外，所有的handler還會被所組合的祖先logger所調用來發布信息。
+
+有如logger，handler也可以有自己的級別過濾器，用於過濾日誌級別。如果一個handler決定發布一個事件，可以調用 emit() 來發送信息到目的。大多數用戶繼承的Handler的子類需要重載這個emit()方法。
+
+除了基本的Handler類，比較有用的子類如：
+
+StreamHandler實例發送錯誤到流(類似文件的對象)。
+FileHandler實例發送錯誤到磁盤文件。
+BaseRotatingHandler是所有輪徇日誌的基類，不能直接使用。但是可以使用RotatingFileHandler和TimeRotatingFileHandler。
+RotatingFileHandler實例發送信息到磁盤文件，並且限制最大的日誌文件大小，並適時輪徇。
+TimeRotatingFileHandler實例發送錯誤信息到磁盤，並在適當的事件間隔進行輪徇。
+SocketHandler實例發送日誌到TCP/IP socket。
+DatagramHandler實例發送錯誤信息通過UDP協議。
+SMTPHandler實例發送錯誤信息到特定的email地址。
+SysLogHandler實例發送日誌到UNIX syslog服務，並支持遠程syslog服務。
+NTEventLogHandler實例發送日誌到WindowsNT/2000/XP事件日誌。
+MemoryHandler實例發送日誌到內存中的緩沖區，並在達到特定條件時清空。
+HTTPHandler實例發送錯誤信息到HTTP服務器，通過GET或POST方法。
+StreamHandler和FileHandler類都是在核心logging模塊中定義的。其他handler定義在各個子模塊中，叫做logging.handlers。當然還有一個logging.config模塊提供了配置功能。
+
+日誌信息在輸出之前會經過 Formatter 類的格式化。
+他們在最開始使用%操作符來設置。
+
+批量格式化信息，需要 BufferingFormatter 類。
+除了格式化字符串之外，它還會在輸出信息之前加上其他信息。
+
+當基於logger和handler的級別過濾器仍然不夠時，可以使用 Filter 類的實例來添加到logger和handler實例中，通過他們的 addFilter() 方法。當決定輸出日誌之前，logger和handler會詢問過濾器，如果過濾器返回False，則不會顯示這條日誌。
+
+最簡單的過濾器功能用於指定日誌的名字。如果使用了這個過濾器，則發送到命名logger和其子logger的日誌將會通過，其他的會被丟棄。
+
+除了上面所描述的，還有很多模塊級別的函數。如下：
+
+getLogger([name])
+
+返回一個logger，可以指定名字，如果沒有指定名字則返回根logger。指定的名字典型的為以點分隔的分層次的名字。選擇一個恰當的名字，讓別人知道，誰在輸出日誌。所有使用相同名字調用這個函數都會返回相同的logger實例。這意味著logger實例不需要在應用中到處傳遞。
+
+getLoggerClass()
+
+返回一個標準的Logger類，或者上次傳遞到 setLoggerClass() 的類。這個函數用於定義一個新的日誌類，但是之前的代碼不會受到影響。例如:
+
+class MyLogger(logging.getLoggerClass()):
+    #重載一些行為
+debug(msg[,*args[,**kwargs]])
+
+記錄一個DEBUG級別的日誌信息到根logger。 msg 參數就是用於輸出的日誌， args 參數是用於填入msg字符串的參數，當然kwargs也是差不多的角色。這說明msg可以是一個包含%d、%s等等的待格式化字符串。
+
+在kwargs中有2個參數是必須的： exc_info 如果不為False，則異常產生的信息也會被記錄；如果提供了一個異常tuple(以 sys.exc_info() 格式)，則會使用它；否則會調用 sys.exc_info() 來獲取異常信息。
+
+另外一個參數為 extra 用於傳遞一個字典表示 LogRecord 中的 __dict__ 信息，可以加入用戶自定義屬性。這些傳遞的參數可以隨你喜歡的。例如可能需要傳遞的:
+
+FORMAT="%(asctime)-15s %(clientip)s %(user)-8s %(message)s"
+logging.basicConfig(format=FORMAT)
+dict={'clientip':'192.168.1.1','user':'fbloggs'}
+logging.warning("Protocol problem: %s","connection reset",extra=d)
+將會有如下的顯示:
+
+2006-02-08 22:20:02,165 192.168.1.1 fbloggs Protocol problem: connection reset
+extra字典中的鍵不會與已有的鍵相沖突，具體可以參考Formatter的文檔中關於使用字典的部分。
+
+在選擇字典中的鍵名時，必須小心一些情況。上面的例子中，已經在待格式化字符串中有’clientip’和’user’了，這時如果沒有傳遞這兩個鍵，則不會輸出日誌，因為出現了異常了。這種情況時，你必須要傳遞這2個鍵。
+
+出於這種複雜性，這種功能往往用在很特殊的地方，比如多線程服務器，或關心多種信息的上下文環境，例如遠程IP和登錄用戶。在這些情況中，需要先指定Formatter實例。 extra 參數從2.5版本開始加入。
+
+info(msg[,*args[,**kwargs]])
+
+記錄INFO級別的日誌信息，其他參數同debug()。
+
+warning(msg[,*args[,**kwargs]])
+
+記錄WARNING級別的日誌信息，其他參數同debug()。
+
+error(msg[,*args[,**kwargs]])
+
+記錄ERROR級別的日誌信息，其他參數同debug()。
+
+critical(msg[,*args[,**kwargs]])
+
+記錄CRITICAL級別的日誌信息，其他參數同debug()。
+
+exception(msg[,*args])
+
+記錄ERROR級別的日誌信息，其他參數同debug()。一般用在異常處理中。
+
+log(level,msg[,*args[,**kwargs]])
+
+記錄level級別的日誌信息，其他參數同debug()。
+
+disable(lvl)
+
+提供一個在logger中禁用某個級別日誌的方法，用於應用臨時切換可顯示的日誌。
+
+addLevelName(lvl,levelName)
+
+給級別lvl指定一個名字levelName到內部字典。以後用於映射數字的級別到特定的名字，供給Formatter用來格式化字符串。也可以用於定義自己的級別。這里也是唯一可以註冊級別用的地方，級別必須是數字，並且在按照一定的排序要求。
+
+getLevelName(lvl)
+
+返回lvl級別的文字說明。如果級別是CRITICAL、ERROR、WARNING、INFO、DEBUG中的某一個，也會返回對應的名字。如果你自己通過addLevelName()自定義過級別，那麼也會返回對應的名字。如果對應級別不存在，則返回 “Level %s”%lvl 這個字符串。
+
+makeLogRecord(attrdict)
+
+創建並返回一個LogRecord實例，並使用attrdict賦值過。這個函數用於把一個LogRecord給pickle過後通過socket發送，並方便接收方重組這個信息。
+
+basicConfig([**kwargs])
+
+對日誌系統進行基本配置，使用缺省的StreamHandler和Formatter並添加根logger。一些函數如debug()、info()、warning()、error()、critical()會自動使用basicConfig()配置好的根logger進行日誌輸出。在2.4版之前，basicConfig()不接受字典參數。
+
+如下是支持的字典參數：
+
+格式	描述
+filename	指定FileHandler的文件名，而不是StreamHandler
+filemode	打開文件的模式，同open函數中的同名參數，默認為’a’
+format	輸出格式字符串
+datefmt	日期格式
+level	設置根logger的日誌級別
+stream	指定StreamHandler。這個參數與filename沖突，忽略stream
+shutdown()
+
+告知日誌系統準備關閉日誌並將所有信息寫入磁盤。
+
+setLoggerClass(klass)
+
+告知日誌系統使用類klass作為示例的Logger類。這個類應該定義 __init__() 方法並接受一個參數表示名字，而且 __init__() 方法應該在內部調用 Logger.__init__() 方法。這個函數一般在應用自定義Logger的行為時使用。
+
+PEP 282, A Logging System
+
+Original Python logging package
+
+2   各種Handler的子類
+
+2.1   TimedRotatingFileHandler
+
+TimedRotatingFileHandler 類是在logging.handler包中，支持對寫入到磁盤的日誌按照時間間隔來輪詢。
+
+class TimedRotatingFileHandler(filename[,when[,interval[,backupCount]]])
+
+返回一個新的TimedRotatingFileHandler類實例，在指定文件名時會自動使用詞綴。輪詢發生的時間取決於參數 when 和 interval 。
+
+你可以使用 when 來指定 interval 的類型。可選值如下，註意區分大小寫：
+
+值	interval的類型
+S	秒
+M	分鐘
+H	小時
+D	天
+W	周
+midnight	在午夜
+如果 backupCount 為非零，則系統會在舊日誌文件名的末尾添加詞綴。詞綴格式為日期和時間，使用 strftime 格式如 %Y-%m-%d %H:%M:%S 或者依賴於之前的規則。最多會保留 backupCount 個日誌文件，如果繼續增加，會持續刪除最舊的的日誌。
+
+doRollover()
+
+進行一次回轉，有如上面描述的。
+
+emit(record)
+
+把日誌輸出到文件，按照如上的回轉規則。
+
+This entry was posted on Tuesday, September 11th, 2007 at 19:55	 and is filed under Python. You can follow any responses to this entry through the RSS 2.0 feed. You can leave a response, or trackback from your own site.
+
+2 Responses to “Python的logging模塊”
+
+金慶 Says: 
+September 14th, 2007 at 9:41
+“RotatingFileHandler實例發送信息到磁盤文件，並且限制最大的日誌文件大小，並適時輪徇。”
+
+不是“輪徇”，是輪換，將舊日誌更名為 xxxx.1, 並重新開始日誌文件。
+
+hechu Says: 
+October 3rd, 2007 at 16:54
+兄弟，我去年很早前用過 python 的 logging 模塊。覺得不太好。
+當時寫一個多線程程序，用 threading，多個工作線程的結果都要 log 下來。
+雖然我坐了互斥保護，但是logging 模塊在多線程寫的時候好像會出錯。
+讀了源碼也不懂為啥，後來放棄了。

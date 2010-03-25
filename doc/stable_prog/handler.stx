@@ -1,16 +1,53 @@
+輸出裝置(Handler)
+-----------------
+0990325
 
-Update:
-http://bytes.com/forum/thread23499.html
-試了一下SMTPHandler，發現每一個error就寄一封信，原來要有MemoryHandler，這實在是太神奇了，一定要記下來，不然怎麼猜得到
-Update:
-後來發現這樣如果是發生Error要寄出email不可行，所以只好改用BufferingSMTPHandler
-，有興趣可以參考以下link
+Handler 用來表訊息通道，
+使 Logger 能夠將日誌訊息輸出到指定的裝置。
+
+一個 Logger 能夠擁有多個 Handler，
+這表示 Logger 能夠同時將日誌訊息輸出到多個不同通道。
+
+目前主流之日誌系統能將日誌訊息寫到主控台(console)、檔案、串流、
+TCP 協定的訊息伺服器、 Unix Syslog daemon 
+或 WINDOWS 事件紀錄等。
+
+主控台(Console)
+~~~~~~~~~~~~~~~
+不要將主控台加入到根 logger 
+***************************
+若把根 logger 加入一個輸出到主控台的 Handler，
+依「回報上層」原則，
+則程式中所有 logger 所產生的日誌訊息都會輸出到主控台。
+
+但我不建議這樣作，尤其是命令模式的指令，這樣會增加管道的複雜性。
+
+主控台的輸出應視為一種使用者介面及簡單的程式介面，
+而非除錯管道，不宜放太多訊息。
+
+電子郵件(SMTPHandler)
+~~~~~~~~~~~~~~~~~~~~~
+試了一下SMTPHandler，發現每一個error就寄一封信，
+原來要有MemoryHandler，這實在是太神奇了，一定要記下來，不然怎麼猜得到
+後來發現這樣如果是發生Error要寄出email不可行，
+所以只好改用BufferingSMTPHandler，有興趣可以參考以下link
 http://www.red-dove.com/python_logging.html
 
-Appender:
-透過 Appender, Logger 能夠將 log message 輸出到指定的裝置上。一個 Logger 能夠擁有多個 Appender,所以 Logger 能夠同時將 log message 輸出到多個個裝置上。
+可作為即時行為之監控
+********************
+由於電子郵件可同時發送給多人，
+事後稽核人員可向不同收件者調閱信件進行交叉比對，
+使管理員修改日誌的難度升高，
+得以正確地事後稽核管理員行為。
 
-Appender 的設定亦會反映在 Logger 的階層中。當 Logger 輸出一筆 log message 時,父階層的 Appender 和自己的 Appender(如果有的話)都會記錄到這筆 log message;例如 "com.foo" Logger 有一個 Appender 將 log message 輸出到 console,而 "com.foo.bar" 有一個 Appender 將 log message 輸出到 檔案;當 "com.foo.bar" Logger 輸出一筆 log message 時, console 和檔案都會出現這筆 log message。而最簡單的例子,就是當 root logger 擁有一個輸出到 console 的 Appender 時,則程式中所有的 logger 所產生的 log message 都會輸出到 console。唯一個例外的情況,就是當某個 logger 將自己的 additivity 屬性設為 false(Logger.setAdditivity(false)),則此 logger 與隸屬於它的子 logger 都不會將 log message 寫到 console。
+檔案(File)
+~~~~~~~~~~
+值得注意的是A2的appender被設為
+org.apache.log4j.DailyRollingFileAppender表示Log4j會將日誌檔依日期分開。
 
-
-Log4j 是一套開放源碼的工具,方便編程人員在程式中加入 log 機制,並輸出到各種目標上。Log4j 能夠透過外部的設定檔(properites 或 XML)進行設定。Log4j 能夠將 log message 寫到 console, 檔案,串流,TCP 協定的伺服器, Unix Syslog daemon 等。Log4j 具有 5 種 log 層級(DEBUG, INFO, WARN, ERROR, FATAL),可用於不同的系統狀態下所產生的訊息。
+日誌伺服器
+~~~~~~~~~~
+也可以做logging server，專門收所有的log，
+只要做service的，應該都要有一套這個，好追蹤。
+當然網路斷線也沒關係，logging system有支援兩種以上的log，
+可以本機有log，也可以送到logging server，只是fail over的機制就得自己想了....

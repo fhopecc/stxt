@@ -1,59 +1,89 @@
 組織您的日誌系統(organize log)
 ------------------------------
+0990325 
+
+日誌系統有許多組織方式如下：
+  1.日誌訊息等級
+  2.日誌之階層關係
 
 訊息等級(level)
 ~~~~~~~~~~~~~~~
-Log4j將輸出訊息分成五個等級，
-分別為DEBUG、INFO、WARN、ERROR、FATAL，
-在上面設定檔將輸出等級設為INFO，
-就表示INFO~FATAL等級的訊息將會輸出，
-因此DEBUG等級的訊息就會被忽略，
-如果將設定檔的第一行改為log4j.rootLogger=DEBUG, A1, A2，
-就會兩個訊息都輸出了。
+日誌系統通常會將輸出訊息分成五個等級，等級具有權重值，
+這 5 種等級依權重高低順序為 FATAL > ERROR > WARN > INFO > DEBUG。
+
+Logger 等級
+***********
+Logger 可以被指派一個等級作為輸出等級臨界值，
+因為 Logger 只輸出「高於或等於本身等級」的日誌訊息，
+所以 Logger 等級決定它產生日誌訊息的數量。 
+
+例如某個 Logger 的等級被設定為 WARN，
+那麼它只會寫出等級為 WARN, ERROR, FATAL 的日誌訊息，
+對於 DEBUG, INFO 的日誌訊息則會被忽略，
 
 除了這五個等級外，也可以設為ALL或OFF，
 ALL很示全部訊息都輸出，OFF則表示不輸出訊息。
 
-Log4j 的階層架構 :
-一個程式中可以擁有多個 Logger,這些 Logger之間以名稱區分,
-    並以此區分出階層。
-    例如有一個 Logger 的名稱為 "com.foo",那麼另一個名為 "com.foo.bar" 的 Logger 就隸屬於 "com.foo" logger,如果 "com.foo.bar" 未定義自己的 log 等級,則以 "com.foo" 的 log 等級為預設值。
+Logger 等級之繼承
+*****************
+若 Logger 等級未被設定，則會繼承上層 logger 之等級。
 
-階層的最高為 root logger。Root logger 一定在存,不具有名稱屬性,可以隨時在程式中以 Logger.getRootLogger() 取得,其它 logger 則以 Logger.getLogger(String loggerName) 取得。
+如果程式中所有的 Logger 都未設定等級，則由 root logger 決定。
 
-Logger :
-Logger 可以被指派等級。
-能夠指派給 Logger 的等級有: 
-DEBUG, INFO, WARN, ERROR, FATAL 5 種,
-定義在 org.apache.log4j.Level 類別中。
-這 5 種等級的高低順序為 FATAL > ERROR > WARN > INFO > DEBUG。
+例如有一個 Logger 的名稱為 "com.foo"，
+那麼名為 "com.foo.bar" 就隸屬於 "com.foo" ，
+若 "com.foo.bar" 未定義等級，則以 "com.foo" 的等級為預設值。
 
-Logger 的等級決定它產生 log message 的數量 : Logger 只寫"出高於或等於本身等級"的 log message。例如某個 Logger 的等級被設定為 WARN,那麼它只會寫出等級為 WARN, ERROR, FATAL 的 log message,對於 DEBUG, INFO 的 log message 則不予理會。
+Logger 的階層架構 
+~~~~~~~~~~~~~~~~~
+一個系統可以定義多個 Logger，
+它們之間以名稱區分，所以在程式中任何地方，
+呼叫 Logger.getLogger()，並傳入同一個 Logger 名稱，
+則會得到相同的 Logger 物件。
 
-若是 Logger 的等級未被設定,則會自動使用 parent(上一層) 的等級。如果程式中所有的 Logger 都未設定等級,則由 root logger 決定。
+名稱可以此區分出階層，
+即使父階層在程式中出現的時機比子階層晚，
+例如 "com.foo" 比 "com.foo.bar" 被取得的時間來得晚，
+"com.foo" 仍然是 "com.foo.bar" 的父階層。
 
-Logger 之間以名稱區分,所以在程式中任何地方,呼叫 Logger.getLogger(),並傳入同一個 Logger 名稱,則會得到同一個 Logger 的 reference。
+階層中最高為根。根 logger 一定存在，不具有名稱屬性，
+可隨時在程式以 Logger.getRootLogger() 取得，
+其它 logger 則以 Logger.getLogger(loggerName) 取得。
 
-Logger 之間以名稱區分出階層。
-即使父階層在程式中出現的時機比子階層晚,
-    例如 "com.foo" logger 比 "com.foo.bar" 被取得的時間來得晚,"com.foo" 仍然是 "com.foo.bar" 的父階層(會影響到子階層 logger 未被定義的屬性, log 等級, appender, layout )。
+繼承關係
+********
+子階層 logger 未被定義的屬性，如等級, handler, foramtter 
+則會自動繼承上層 logger 之屬性。
 
-在一般情況下運行時所得到的 log message :
+回報上層原則
+~~~~~~~~~~~~
+日誌系統通常會實作「回報上層」原則，
+當 Logger 輸出一筆日誌訊息時，
+父階層的 Logger 和自己的 Logger 都會記錄到這筆日誌訊息，
 
-0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
-16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
-16 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
-16 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
+例如 "com.foo" Logger 將日誌訊息輸出到 console，
+而 "com.foo.bar" 將日誌訊息輸出到檔案。
 
-而在除錯模式下則是 :
+當 "com.foo.bar" 輸出一筆日誌訊息時，
+console 和檔案都會出現這筆日誌訊息。
 
-0 [main] INFO yc.usingLog4j.UsingLog4j  - Create a Redhead Duck.
-109 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
-109 [main] DEBUG yc.usingLog4j.RedheadDuck  - A RedheadDuck is showing up...
-109 [main] DEBUG yc.usingLog4j.FlyWithWings  - Fly with wings...
-109 [main] DEBUG yc.usingLog4j.Quack  - Quack...
-109 [main] INFO yc.usingLog4j.UsingLog4j  - Create a RubberDuck.
-125 [main] INFO yc.usingLog4j.UsingLog4j  - Play with the duck.
-125 [main] DEBUG yc.usingLog4j.RubberDuck  - A RubberDuck is showing up...
-125 [main] DEBUG yc.usingLog4j.FlyWithRocket  - Fly with a rocket...
-125 [main] DEBUG yc.usingLog4j.Squeak  - Squeak...
+而最常用的例子是我們把 root logger 加入一個輸出到 console 的 Handler，
+則程式中所有的 logger 所產生的日誌訊息都會輸出到 console。
+
+但我不建議這樣作，尤其是命令模式的指令，
+這樣會增加管道的複雜性。
+
+console 的輸出應視為一種使用者介面及簡單的程式介面，
+而非除錯管道，
+不宜放太多訊息。
+
+通常日誌系統會提供關閉此向上傳播的功能，
+如 log4j 的 logger 若將 additivity 屬性設為 false，如下碼：
+
+code.關閉向上傳播
+Logger.setAdditivity(false)
+::    
+
+則此 logger 與隸屬於它的子 logger 都不會將日誌訊息傳給 root logger。
+
+
