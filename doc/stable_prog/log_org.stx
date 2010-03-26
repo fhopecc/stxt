@@ -86,4 +86,3 @@ Logger.setAdditivity(false)
 
 則此 logger 與隸屬於它的子 logger 都不會將日誌訊息傳給 root logger。
 
-

@@ -409,13 +409,34 @@ t4               B.update(p)
             msg = e.args[0]
             self.assertEqual(expect, msg)
 
-    def testReference(self):
-        fn = 'doc/db/db.stx'
-        with open(fn) as f:
-            d = parser.parse(f.read(), lexer = MutipleFileLexer(fn))
-            d.dump_address_table()
-            print d.get('matches.alg')
+#    def testReference(self):
+#        fn = 'doc/db/db.stx'
+#        with open(fn) as f:
+#            d = parser.parse(f.read(), lexer = MutipleFileLexer(fn))
+#            d.dump_address_table()
+#            print d.get('matches.alg')
 
+    def testQuote(self):
+        case = '''標題三
+~~~~~~~~~~~~~~
+  「須菩提！於意云何？可以身相見如來不？」
+  「不也，世尊！不可以身相得見如來。何以故？如來所說身相，即非身相。」
+  佛告須菩提：「凡所有相，皆是虛妄。若見諸相非相，即見如來。」
+  .. 金剛經
+
+章節內容
+'''
+        doc = parser.parse(case)
+        t = doc.children[0]
+        self.assertEqual('sect3', t.type)
+        q = t.children[0]
+        self.assertEqual('quote', q.type)
+
+        p = q.children[0]
+        self.assertEqual('para', p.type)
+
+        f = q.children[1]
+        self.assertEqual('comment', f.type)
 
 if __name__ == '__main__':
     unittest.main()

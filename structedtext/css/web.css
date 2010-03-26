@@ -38,6 +38,9 @@ body {font-family:"標楷體";font-size:14pt}
 
 .para {margin-bottom:14pt}
 
+.quote  {margin:0 0 14pt 14pt}
+.quote .comment {margin-left:14pt}
+
 table { 
   border:1px solid; 
   border-collapse:collapse; 

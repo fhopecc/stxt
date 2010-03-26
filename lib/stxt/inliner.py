@@ -62,10 +62,10 @@ def t_REFERENCE(t):
     t.value.lineno = t.lexer.lineno
     return t
 
-def t_EMAIL(t):
-    r'\b([\w._%+\-]+@[\w.\-]+\.[\w]{2,4})\b' 
-    t.value = Tree('email', t.value)
-    return t
+#def t_EMAIL(t):
+#    r'\b([\w._%+\-]+@[\w.\-]+\.[\w]{2,4})\b' 
+#    t.value = Tree('email', t.value)
+#    return t
 
 def t_URL(t):
     r"\b(https?|ftp|gopher|telnet|file|notes|ms-help):(//)[\w\d:#%/;$()~_?\-=\\.&]*\b"
