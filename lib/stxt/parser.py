@@ -72,6 +72,24 @@ def p_sect_with_timestamp(p):
     p[1].timestamp = p[2]
     p[0] = p[1]
 
+def p_sect_with_quote(p):
+    '''sect1 : H1 subdoc contents
+             | H1 subdoc sect2s
+       sect2 : H2 subdoc contents
+             | H2 subdoc sect3s
+       sect3 : H3 subdoc contents
+             | H3 subdoc sect4s
+       sect4 : H4 subdoc contents
+             | H4 subdoc sect5s
+       sect5 : H5 subdoc contents
+    '''
+    quote = Tree('quote')
+    for c in p[2]: quote.append(c)
+    p[1].append(quote)
+    for c in p[3]:
+        p[1].append(c)
+    p[0] = p[1]
+
 def p_sect_with_contents(p):
     '''sect1 : H1 contents sect2s
        sect2 : H2 contents sect3s
@@ -92,7 +110,20 @@ def p_sect_with_contents_and_timestamp(p):
     for s in p[4]: p[1].append(s)
     p[1].timestamp = p[2]
     p[0] = p[1]
- 
+
+def p_sect_with_contents_and_quote(p):
+    '''sect1 : H1 subdoc contents sect2s
+       sect2 : H2 subdoc contents sect3s
+       sect3 : H3 subdoc contents sect4s
+       sect4 : H4 subdoc contents sect5s
+    '''
+    quote = Tree('quote')
+    for c in p[2]: quote.append(c)
+    p[1].append(quote)
+    for c in p[3]: p[1].append(c)
+    for s in p[4]: p[1].append(s)
+    p[1].timestamp = p[2]
+    p[0] = p[1]
  
 def p_token(p):
     '''sect1   : H1
@@ -277,10 +308,20 @@ def usage():
     return usage
 
 if __name__ == '__main__':
-    try:
-        fn = sys.argv[1]
-        with open(fn) as f:
-            d = parse(f.read(), lexer = MutipleFileLexer(fn))
-            d.dump()
-    except IndexError:
-       console.info(usage()) 
+    from optparse import OptionParser
+    usage = u"usage: %prog SOURCE [options]"
+    oparser = OptionParser(usage, version="%prog 1.1")
+    oparser.add_option("-d", "--debug", action="store_true", 
+                      dest="debug", default=False,
+                      help=u"檔名是否含有關鍵字")
+    (options, args) = oparser.parse_args()
+
+    if len(args) < 1:
+        oparser.error("Must supply the SOURCE file!")
+
+    src = args[0]
+    DEBUG = options.debug
+
+    with open(src) as f:
+        d = parse(f.read(), lexer = MutipleFileLexer(src))
+        d.dump()

@@ -1,4 +1,8 @@
 # coding=utf8
+u'''
+0.9 初始版本
+1.0 加入執行命令 -e
+'''
 from optparse import OptionParser
 from os import path
 import sys, os, re
@@ -31,26 +35,15 @@ def grep(path, keyword):
                 print "error happen"
     f.close()
         
-
-def find_by_pattern(dir, pattern):
-    for root, dirs, files in os.walk(dir):
-        for f in files:
-            if re.match(pattern, f):
-                print path.join(root, f)
-
-def find_by_glob(dir, pattern):
-    from fnmatch import fnmatch
-    for file in os.listdir('.'):
-        if fnmatch.fnmatch(file, '*.txt'):
-            print file
-
-def find_by_keyword(dir, keyword):
-    pattern = r'.*%s.*' % keyword
-    find_by_pattern(dir, pattern)
+def is_matched(options, path):
+    if options.pattern:
+        return re.match(options.pattern, path)
+    elif options.glob:
+        return fnmatch(path, options.glob)
 
 def main():
     usage = u"usage: %prog TOP [options]"
-    parser = OptionParser(usage, version="%prog 0.9")
+    parser = OptionParser(usage, version="%prog 1.0")
     parser.add_option("-k", "--keyword", dest="keyword",
                       help=u"檔名是否含有關鍵字")
 
@@ -59,34 +52,37 @@ def main():
 
     parser.add_option("-g", "--glob", dest="glob",
                       help=u"檔名是否符合指定 glob 樣式")
+
+    parser.add_option("-e", "--exec", dest="execute",
+                      help=u"每找到一個檔案後執行命令，%s代表檔案。")
+
+    parser.add_option("-t", "--top", type='int', dest="top", 
+                       help=u"只印出前幾筆檔案")
  
     (options, args) = parser.parse_args()
 
-    if len(args) != 1:
-        print u"必須指定開始目錄"
-        exit(1)
+    cwd = os.getcwd()
+    if len(args) == 1:
+        cwd = args[0]
     
-    if not path.exists(args[0]):
-        print u'不存在 %s' % args[0]
+    if not path.exists(cwd):
+        print u'不存在 %s' % cwd
         exit(1)
-
-    for root, dirs, files in os.walk(args[0]):
+    count = 0 
+    for root, dirs, files in os.walk(cwd):
         for f in files:
             p = path.join(root, f)
-            if options.pattern:
-                if re.match(options.pattern, f):
-                    if options.keyword:
-                        grep(p, options.keyword)
-                    else:
-                        print p
-            elif options.glob:
-                if fnmatch(f, options.glob):
-                    if options.keyword:
-                        grep(p, options.keyword)
-                    else:
-                        print p
-            else:
-                print p
+            if is_matched(options, f):
+                count += 1
+                if options.keyword:
+                    grep(p, options.keyword)
+                elif options.execute:
+                    os.system(options.execute % ('"%s"' % p))
+                else:
+                    print p
+                if options.top:
+                    if count == options.top:
+                        exit(0)
 
 if __name__ == "__main__":
     main()

@@ -13,9 +13,9 @@ def disp(tree):
             return f_titled_container(tree)
         elif tree.type in ('question', 'answer', 'define', 'theorem'):
             return f_titled_container(tree)
-        elif tree.type in ('proof', 'term'):
+        elif tree.type in ('proof', 'term', 'quote'):
             return f_titled_container(tree)
-        elif tree.type in ('emphasis'):
+        elif tree.type in ('emphasis', 'comment'):
             return f_inline_element(tree)
         elif tree.type in ('para', 'listitem', 'olistitem'):
             return f_container(tree)
@@ -50,7 +50,7 @@ def f_doc(tree):
 def f_title(tree):
     title = ""
     if re.match(r'sect\d', tree.type):
-        title = f_label(tree) + tree.title
+        title = f_label(tree) #+ tree.title
     elif tree.type in ('question', 'define', 'theorem'):
         title =  f_label(tree) + "：" + tree.title
     elif tree.type in ('proof', 'answer'):
@@ -287,9 +287,6 @@ def f_filename(tree):
     if tree.name:
         fn = tree.name
     return '%s.html' % fn
-
-def f_comment(tree):
-    return ''
 
 def usage():
     usage = os.path.basename(__file__) + " filename\n"
