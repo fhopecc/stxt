@@ -4,7 +4,7 @@ import sys, logging
 from logging import config
 from tree import *
 
-config.fileConfig(r'config\log.conf')
+config.fileConfig(os.join(os.dirname(__file__)), 'config', 'log.conf'))
 console = logging.getLogger()
 
 class Tree(object):
