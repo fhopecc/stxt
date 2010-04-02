@@ -1,10 +1,11 @@
 # coding=utf8
 from __future__ import with_statement
 import sys, logging
+from os import path
 from logging import config
 from tree import *
 
-config.fileConfig(os.join(os.dirname(__file__)), 'config', 'log.conf'))
+config.fileConfig(path.join(path.dirname(__file__), '..', '..', 'config', 'log.conf'))
 console = logging.getLogger()
 
 class Tree(object):

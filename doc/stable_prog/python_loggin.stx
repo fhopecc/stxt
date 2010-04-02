@@ -1,9 +1,16 @@
 Python Loggin
 從Python2.3版本中開始引入的logging模塊為應用提供了靈活的日誌系統。
 
-logging的行為依靠調用 Logger 類的方法來實現，實例一般叫做logger。每個實例都擁有自己的名字，並且可以通過點來分割具備層次的名字。例如，一個logger叫做”scan”是一個叫做”scan.text”的logger的頂層，當然也包括”scan.html”和”scan.pdf”。logger的名字指示了他屬於應用程序的哪個位置。
+logging的行為依靠調用 Logger 類的方法來實現，實例一般叫做logger。
+每個實例都擁有自己的名字，
+並且可以通過點來分割具備層次的名字。
+例如，一個logger叫做”scan”是一個叫做”scan.text”的logger的頂層，當然也包括”scan.html”和”scan.pdf”。logger的名字指示了他屬於應用程序的哪個位置。
 
-日誌信息也擁有級別指定其重要程度。缺省提供的級別包括DEBUG，INFO，WARNING，ERROR，CRITICAL(嚴重)。為了方便，你可以調用特定的方法來指定日誌的重要性，對應的方法為 debug() ， info() ， warning() ， error() ， critical() 。你也不必拘泥於這些級別，你可以使用更為通用的方法 log() 並且手動指定其級別。
+日誌信息也擁有級別指定其重要程度。
+缺省提供的級別包括DEBUG，INFO，WARNING，ERROR，CRITICAL(嚴重)。
+為了方便，你可以調用特定的方法來指定日誌的重要性，
+對應的方法為 debug() ， info() ， warning() ， error() ， critical() 。
+你也不必拘泥於這些級別，你可以使用更為通用的方法 log() 並且手動指定其級別。
 
 日誌級別對應值如下表所示。了解這些有助於你定義自己的日誌級別的相對關系。如果你定義的級別與已有的數值相同，則原有的級別會被覆蓋。
 
@@ -14,6 +21,7 @@ WARNING	30
 INFO	20
 DEBUG	10
 NOTSET	0
+
 日誌級別也可以在指定logger時定義，可以在開發時裝入和存儲配置。當調用logger的日誌方法時，logger對比日誌級別和自己的被指定的級別。如果本身的級別高於調用方法的級別，則不會記錄這個日誌信息。這是一個方便的方法用於忽略過多細節的日誌。
 
 日誌信息會被編碼為 LogRecord 類，當logger決定記錄一個事件時，就會為日誌信息創建一個LogRecord實例。

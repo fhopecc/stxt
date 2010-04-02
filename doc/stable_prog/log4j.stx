@@ -14,7 +14,19 @@ Log4j
 接著寫以下的程式碼
 LoggingTest.java
 
+這 5 種等級依權重高低順序為 FATAL > ERROR > WARN > INFO > DEBUG。
+
 以我自己本身使用的經驗, Log4j 可以滿足所有工程師, 
 所以我也是直接使用 log4j 而沒有使用 commons-logging.
 不過為了增加產品的共用性, 避免移植時候的麻煩, 新的產品及專案, 
 我會將他改成 commons-logging api 去呼叫. 才能符合真正的 reusable , 減少工程師未來的負擔.
+
+additivity
+~~~~~~~~~~
+如 log4j 的 logger 若將 additivity 屬性設為 false，如下碼：
+
+code.關閉向上傳播
+Logger.setAdditivity(false)
+::    
+
+則此 logger 與隸屬於它之子 logger 都不會將日誌訊息上傳父 logger。
