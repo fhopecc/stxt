@@ -82,7 +82,7 @@ def deploy():
 def usage():
     usage =  update_hlland.__doc__ + '\n'
     usage += u'用法: %s docdate docno password\n'
-    usage += u'docdate: 文件日期\n'
+    usage += u'docdate: 文件日期請輸入民國年 ex.0990101\n'
     usage += u'docno: 文號\n'
     usage += u'password: 壓縮檔密碼\n'
     return usage % os.path.basename(sys.argv[0]) 
