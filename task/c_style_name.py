@@ -39,6 +39,8 @@ if __name__ == "__main__":
 
     (options, args) = parser.parse_args()
 
+    if len(args) < 1:
+        parser.error('path must be specified!')
     p  = args[0]
     d  = path.dirname(p)
     n  = path.basename(p)

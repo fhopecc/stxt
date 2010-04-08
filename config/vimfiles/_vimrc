@@ -1,6 +1,4 @@
 cd d:\stxt
-source $VIM/fhope.vim
-source $VIM/vimfiles/plugin/refactoring.vim
 source $VIM/vimfiles/format.vim
 let g:xml_namespace_transparent=1
 let g:xml_syntax_folding = 1
@@ -14,14 +12,13 @@ set nu
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
+
 behave mswin
 colo darkblue
-
 set guifont=Lucida_Console:h14:cANSI
-set tabstop=2
-set shiftwidth=2
-"set diffexpr=MyDiff()
-"英文字打到 70 自動插入換行服號
+
+set tabstop=4
+set shiftwidth=4
 set textwidth=70
 
 " T 自動 del cursor 停留的 xml tag 所包的整個內容
