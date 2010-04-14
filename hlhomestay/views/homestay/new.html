@@ -1,0 +1,11 @@
+{% extends layout %}
+{% block content %}
+<p>民宿基本資料</p>
+<form action="/homestay" method="post">
+名稱：<input name="name" type="text"/><br/>
+網址：<input name="link" type="text"/><br/>
+電子郵件信箱：<input name="email" type="text"/><br/>
+狀態：<input name="status" type="text"/><br/>
+<input type="submit" value="建立" />
+</form>
+{% endblock %}
