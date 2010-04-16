@@ -240,6 +240,12 @@ def p_listitem(p):
                 para.value = src
                 p[1].children[0] = para
            else: p[1].append(c)
+    else:
+        para = p[1].children[0]
+        src = para.value
+        para = inliner.parse(src)
+        para.value = src
+        p[1].children[0] = para
     p[0] = p[1]
 
 def p_listhead(p):
@@ -314,6 +320,10 @@ if __name__ == '__main__':
     oparser.add_option("-d", "--debug", action="store_true", 
                       dest="debug", default=False,
                       help=u"檔名是否含有關鍵字")
+    oparser.add_option("-t", "--table", action="store_true", 
+                      dest="dump_table", default=False,
+                      help=u"印出符號表")
+
     (options, args) = oparser.parse_args()
 
     if len(args) < 1:
@@ -325,3 +335,7 @@ if __name__ == '__main__':
     with open(src) as f:
         d = parse(f.read(), lexer = MutipleFileLexer(src))
         d.dump()
+
+        if options.dump_table:
+            print u'符號表：'
+            d.dump_address_table()

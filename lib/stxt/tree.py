@@ -143,25 +143,32 @@ class Tree(object):
 
     def get(self, name, type=None):           
         u'取出指定位址的文件資源'
-        if type:
-            t = self.address_map()[type]
-            if name:
-                return t[name]
-        else:
-            t = self.address_map()['sect1']
-            if t.has_key(name): return t[name]
-            t = self.address_map()['sect2']
-            if t.has_key(name): return t[name]
-            t = self.address_map()['sect3']
-            if t.has_key(name): return t[name]
-            for k in self.address_map().keys():
-                for n in self.address_map()[k].keys():
-                    if n == name: return self.address_map()[k][n]
+        am = self.address_map()
+        try:
+            if type:
+                t = am[type]
+                if name:
+                    return t[name]
+            else:
+                t = am['sect1']
+                if t.has_key(name): return t[name]
+                t = am['sect2']
+                if t.has_key(name): return t[name]
+                t = am['sect3']
+                if t.has_key(name): return t[name]
+                for k in am.keys():
+                    for n in am[k].keys():
+                        if n == name: return am[k][n]
 
-        console.error("No element named [%s], %s:%s" %
-                      (name, self.file, self.lineno)
-                     ) 
-        exit()
+            console.error("No element named [%s], %s:%s" %
+                          (name, self.file, self.lineno)
+                         ) 
+            exit()
+        except:
+            print "error"
+            print am
+            self.root().dump_address_table()
+            exit()
 
     def number_children(self):
         cs = self.children

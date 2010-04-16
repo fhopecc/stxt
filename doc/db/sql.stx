@@ -1,6 +1,6 @@
 SQL(sql)
 ========
-SQL 是目前最重要的資料庫介面，
+SQL 是目前主流之資料庫管理介面，
 幾乎所有關聯式資料庫都支援。
 
 四大命令 CRUD:
@@ -9,6 +9,13 @@ SQL 是目前最重要的資料庫介面，
   CRUD 可視為資料項目的動詞，分別對應下述的 SQL 指令。
 
   insert, [[select]], update, delete。
+
+資料型態:
+  SQL 支援的資料型態很多，
+  一般使用者僅需要知道以下三大類資型態即可:
+  1.數值
+  2.[[字串:String:sect2]]
+  3.時間
 
 <d:\stxt\doc\db\reserved_word.stx>
 

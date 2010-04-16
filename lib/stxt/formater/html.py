@@ -230,7 +230,7 @@ $for i in items:
     $for p in i.children:
         $if loop.first:
             <div class="para">
-            $index.$(p.value)
+            $index.$:(disp(p))
             </div>
         $else:    
             $:(disp(p))
