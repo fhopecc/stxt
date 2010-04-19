@@ -9,10 +9,12 @@ config.fileConfig(path.join(path.dirname(__file__), '..', '..', 'config', 'log.c
 console = logging.getLogger()
 
 class Tree(object):
-    def __init__(self, type, value='', title='', name=''):
+    def __init__(self, type='', value='', title='', name='', 
+                 source='__string__', spos=None, epos=None, sline=None,
+                 eline=None, scol=None, ecol=None):
         self.type, self.value, self.title, self.name = type, value, title, name
         self.parent, self.children = None, []
-        self.number = None         # It's section number
+        self.number = None       # It's section number
         self.occurence = None    # It's table number
         self.name_table = None    
 

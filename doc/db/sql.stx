@@ -14,7 +14,7 @@ SQL 是目前主流之資料庫管理介面，
   SQL 支援的資料型態很多，
   一般使用者僅需要知道以下三大類資型態即可:
   1.數值
-  2.[[字串:String:sect2]]
+  2.字串
   3.時間
 
 <d:\stxt\doc\db\reserved_word.stx>

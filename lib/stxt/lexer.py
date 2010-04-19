@@ -241,12 +241,19 @@ def t_ANY_error(t):
                   (str(ord(t.value[0])), c, 
                    active_lexer.file, lineno, col), c)
 
-def find_column(input,token):
+def find_column(input, token):
     last_cr = input.rfind('\n',0,token.lexpos)
     if last_cr < 0:
 	last_cr = 0
     column = (token.lexpos - last_cr) + 1
     return column
+
+def token_node(t):
+    '''傳回表示此 Token 的 Tree。
+       會將 Token 中的源碼資訊寫到 Tree 中。 
+    '''
+    return Tree(type  = t.type, 
+                value = t.value)
 
 __lexer__  = lex.lex(reflags=re.M)
 
