@@ -253,7 +253,11 @@ def token_node(t):
        會將 Token 中的源碼資訊寫到 Tree 中。 
     '''
     return Tree(type  = t.type, 
-                value = t.value)
+                value = t.value, 
+                source = t.lexer.source, 
+                pos = t.lexer.pos
+                lineno = t.lexer.lineno
+               )
 
 __lexer__  = lex.lex(reflags=re.M)
 
@@ -262,6 +266,7 @@ class MutipleFileLexer(object):
         self.lexer = __lexer__.clone()
         self.lexer.include_lexer = None
         self.lexer.file = f
+        self.lexer.source = f
         self.lexer.startlineno = startlineno
         self.lexer.indent = indent
         self.lexer.mflexer = self
@@ -302,7 +307,6 @@ Syntax: %s stxt
 Dump the stxt doctree of file named stxt.
 '''
     return usage % os.path.basename(sys.argv[0])
-    
 
 if __name__ == '__main__':
     try:

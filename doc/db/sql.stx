@@ -4,15 +4,19 @@ SQL(sql)
 
 SQL 是目前主流之資料庫管理介面，
 幾乎所有關聯式資料庫都支援。
-其理論基礎為 Codd 提出的關聯式模型及值組關聯演算，
+
+SQL 之理論基礎為 Codd 提出的關聯式模型及值組關聯演算，
 請參閱[[tuple calculus]]。
+
+系統分析常使用實體關系模型來作資料之模型，
+它與關聯式模型之轉換可參閱[[erd2table]]。
 
 四大命令 CRUD:
   盡管 SQL 指令再多，但對每個資料項目做的動作，
   都超不出 CRUD 這四個動作，分別為 Create, Read, Update, Delete 之縮寫，
   CRUD 可視為資料項目的動詞，分別對應下述的 SQL 指令。
 
-  insert, [[select]], update, delete, 。
+  insert, [[select]], update, delete。
 
 資料型態:
   SQL 支援的資料型態很多，
