@@ -10,13 +10,16 @@ console = logging.getLogger()
 
 class Tree(object):
     def __init__(self, type='', value='', title='', name='', 
-                 source='__string__', spos=None, epos=None, sline=None,
-                 eline=None, scol=None, ecol=None):
+                 source='__string__', spos=None, epos=None, slineno=None,
+                 elineno=None, scol=None, ecol=None):
         self.type, self.value, self.title, self.name = type, value, title, name
         self.parent, self.children = None, []
         self.number = None       # It's section number
         self.occurence = None    # It's table number
         self.name_table = None    
+        self.source = source
+        self.slineno = slineno
+        self.spos = spos
 
     def __str__(self):
         m = "%s:\n[\n%s\n]" % (self.type, self.value)

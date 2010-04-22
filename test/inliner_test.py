@@ -152,6 +152,18 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('cblock', cb.type)
         self.assertEqual('字元塊1[[test.sql]]字元塊2', cb.value)
 
+        case = '用戶端與 KDC 在確認彼此的身份之後，' \
+               '用戶端即送出 Msg1 訊息給 KDC：'
+
+        p = inliner.parse(case)
+        self.assertEqual('para', p.type)
+        self.assertEqual('__string__', p.source)
+        self.assertEqual(1, len(d.children))
+
+        cb = p.children[0]                                    
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual(case, cb.value)
+
 if __name__ == '__main__':
     unittest.main()
     '''tests = unittest.TestSuite()

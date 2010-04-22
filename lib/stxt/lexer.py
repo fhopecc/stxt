@@ -131,7 +131,7 @@ def t_LI(t):
     r'^\*\s(?P<text>.*)'
     text = t.lexer.lexmatch.group('text')
     t.value = Tree('listitem', text)
-    t.value.append(Tree('para', text))
+    t.value.append(token_node(t, type='para', value=text))
     return t
 
 def t_OL(t):
@@ -139,7 +139,7 @@ def t_OL(t):
     n = t.lexer.lexmatch.group('n')
     text = t.lexer.lexmatch.group('text')
     t.value = Tree('olistitem', text)
-    t.value.append(Tree('para', text))
+    t.value.append(token_node(t, type='para', value=text))
     if n != '#':
         t.value.number = int(n)
     else:
@@ -174,13 +174,13 @@ def t_COMMENT(t):
     id = m.group('id')
     content = m.group('c')
     if not id:
-        t.value = Tree('comment', content)
+        t.value = token_node(t, value=content)
     elif id == '#':
         t.type = 'FOOTNOTE'
-        t.value = Tree('footnote', content)
+        t.value = token_node(t, value=content)
     else:
         t.type = 'CITATION'
-        t.value = Tree('citation', content)
+        t.value = token_node(t, value=content)
     return t
 
 H  = r'^(\[(?P<oname>.*)\])?' # old name specifier should be deprecated
@@ -248,15 +248,20 @@ def find_column(input, token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-def token_node(t):
+def token_node(t, type=None, value=None):
     '''傳回表示此 Token 的 Tree。
        會將 Token 中的源碼資訊寫到 Tree 中。 
     '''
-    return Tree(type  = t.type, 
-                value = t.value, 
-                source = t.lexer.source, 
-                pos = t.lexer.pos
-                lineno = t.lexer.lineno
+    if not value:
+        value = t.value
+    if not type:
+        type = t.type.lower()
+    spos = t.lexer.lexpos - len(value)
+    return Tree(type  = type,
+                value = value, 
+                source = t.lexer.mflexer.active_source(), 
+                spos = spos,
+                slineno = t.lexer.lineno
                )
 
 __lexer__  = lex.lex(reflags=re.M)
@@ -279,7 +284,7 @@ class MutipleFileLexer(object):
         return lexer
 
     def active_file(self):
-        return self.active_lexer().file
+        return self.active_source()
 
     def active_source(self):
         return self.active_lexer().file

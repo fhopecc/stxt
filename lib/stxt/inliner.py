@@ -141,8 +141,13 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-def parse(input, src='__string__', lineno=1):
-    lexer.lineno = lineno + 1
+def parse(input, source='__string__', slineno=1):
+    if lineno:
+        lexer.lineno = lineno + 1
+    else:
+        print 'inliner error, lineno is zero'
+        raise AttributeException()
+
     lexer.sourcefile = src
     d = parser.parse(input, lexer=lexer, tracking=True, debug=DEBUG)
     return d

@@ -17,6 +17,10 @@ class UnitTest(unittest.TestCase):
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('COMMENT', t.type)
+
+        self.assertEqual('__string__', t.value.source)
+        self.assertEqual(1, t.value.slineno)
+        self.assertEqual(0, t.value.spos)
         self.assertEqual('註解', t.value.value)
 
         case = r'.. [#] 腳註'
@@ -25,6 +29,10 @@ class UnitTest(unittest.TestCase):
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('FOOTNOTE', t.type)
+
+        self.assertEqual('__string__', t.value.source)
+        self.assertEqual(1, t.value.slineno)
+        self.assertEqual(0, t.value.spos)
         self.assertEqual('腳註', t.value.value)
         
         case = '''.. [KDE1989] Knuth, Donald E., *The TeXbook*, Reading,

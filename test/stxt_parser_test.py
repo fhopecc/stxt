@@ -17,8 +17,13 @@ class UnitTest(unittest.TestCase):
 '''
         doc = parser.parse(case)
         self.assertEqual(doc.type, 'doc')
+
         para = doc.children[0]
         self.assertEqual('para', para.type)
+        self.assertEqual('__string__', para.source)
+        self.assertEqual(1, para.slineno)
+        self.assertEqual(0, para.spos)
+
         cblock = para.children[0]
         self.assertEqual('cblock', cblock.type)
         self.assertEqual(case.replace('\n', ''), cblock.value)
@@ -62,11 +67,15 @@ Msg1：“用戶端要與伺服端進行認證”
         l2 = list.children[1]
         para = l2.children[0]
         self.assertEqual('para', para.type)
+        self.assertEqual('用戶端與 KDC 在確認彼此的身份之後，' \
+                         '用戶端即送出 Msg1 訊息給 KDC：', para.value)
+
         cblock = para.children[0]
         self.assertEqual('cblock', cblock.type)
         self.assertEqual('用戶端與 KDC 在確認彼此的身份之後，' \
                          '用戶端即送出 Msg1 訊息給 KDC：', 
                          cblock.value)
+
         self.assertEqual(2, len(l2.children))
         l2p = l2.children[1]
         self.assertEqual('para', l2p.type)

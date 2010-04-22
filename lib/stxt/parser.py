@@ -157,10 +157,11 @@ def p_token(p):
         start, end = p.linespan(1)
         slineno = p.lexer.active_lexer().startlineno + start - 1
         try:
-            p[1] = inliner.parse(p[1].value, 
-                                 src = p.lexer.active_file(), 
-                                 lineno = slineno)
-            p[1].value = value
+            #p[1] = inliner.parse(p[1].value, 
+            #src = p.lexer.active_file(), 
+            #lineno = slineno)
+            #p[1].value = value
+            pass
         except SyntaxError, e:
             print '%s at %s:%s' % (e.message, e.filename, e.lineno)
             exit()
@@ -205,7 +206,8 @@ def p_para(p):
     '''para : LINE
             | para LINE
     '''
-    if len(p) == 2: p[1] = Tree('para', p[1])
+    if len(p) == 2: 
+        p[1] = parser_node(p, 1, 'para')
     else: p[1].value += p[2]
     p[0] = p[1]
 
@@ -234,17 +236,17 @@ def p_listitem(p):
        for i, c in enumerate(p[2]): 
            if not p[1].is_onelinepara and i == 0 and c.type == 'para': 
                 para = p[1].children[0]
-                para.value +=  c.value
-                src = para.value
-                para = inliner.parse(src)
-                para.value = src
+                para.value += c.value
+                #src = para.value
+                #para = inliner.parse(src)
+                #para.value = src
                 p[1].children[0] = para
            else: p[1].append(c)
     else:
         para = p[1].children[0]
-        src = para.value
-        para = inliner.parse(src)
-        para.value = src
+        #src = para.value
+        #para = inliner.parse(src)
+        #para.value = src
         p[1].children[0] = para
     p[0] = p[1]
 
@@ -294,12 +296,49 @@ def p_error(p):
 #print active_lexer.lexdata
     sys.exit(0)
 
+def parser_node(p, num=1, type=None, value=None):
+    '''傳回表示此 Paser Element 的 Tree。
+       會將 Parser 中的源碼資訊寫到 Tree 中。 
+    '''
+    source = p.lexer.mflexer.active_source()
+    spos = p.lexpos(num)
+    slineno = p.lineno(num)
+    if not value:
+        value = p[num]
+    return Tree(type  = type,
+                value = value, 
+                source = source, 
+                spos = spos,
+                slineno = slineno
+               )
+
+
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
 def parse(source, lexer=lexer):
     # TABLE parsing will failed in yacc debug mode    
-    return parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
+    doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
+    doc = inline_parse(doc)
+    return doc
+
+def inline_parse(doc):
+    for n in doc.dfs():
+         lineno = n.slineno
+         if not lineno: lineno = 0
+         if n.type == 'para': 
+              try:
+                  p = inliner.parse(n.value, n.source, n.slineno)
+                  if p.children:
+                      n.children = p.children
+                  else:
+                      raise "inline parse error"
+              except:
+                  print "inline error at %s:%s" % (n.source, n.slineno)
+                  print n.value
+                  pass
+    return doc
+
 
 def read(file):
     with open(file) as f:
