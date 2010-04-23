@@ -2,11 +2,9 @@
 from __future__ import with_statement
 import sys, logging
 from os import path
-from logging import config
 from tree import *
 
-config.fileConfig(path.join(path.dirname(__file__), '..', '..', 'config', 'log.conf'))
-console = logging.getLogger()
+logger = logging.getLogger()
 
 class Tree(object):
     def __init__(self, type='', value='', title='', name='', 
@@ -17,6 +15,7 @@ class Tree(object):
         self.number = None       # It's section number
         self.occurence = None    # It's table number
         self.name_table = None    
+        self.symbol_table = {}    
         self.source = source
         self.slineno = slineno
         self.spos = spos
@@ -136,6 +135,16 @@ class Tree(object):
             root.__make_address_map__()
             return root.__address_map__
 
+    def make_symbol_table(self):
+        for c in self.dfs():
+            key = c.name
+            if not key: key = c.title
+            if not key: key = id(c)
+            if self.symbol_table.has_key(key):
+                msg = "duplicating key %s" % key
+                logger.warn(msg)
+            self.symbol_table[key] = c
+
     def dump_address_table(self):
         for k in self.address_map().keys():
             for n in self.address_map()[k]:
@@ -146,7 +155,11 @@ class Tree(object):
         if type <> 'reference':
             raise TypeError, "[%s] isn't [reference]." % type
 
-    def get(self, name, type=None):           
+    def get(self, key):
+        u'取出指定名稱之文件資源'
+        return self.system[key]
+
+    def get_old(self, name, type=None):           
         u'取出指定位址的文件資源'
         am = self.address_map()
         try:
@@ -209,7 +222,8 @@ class Tree(object):
             name = ''
             if self.name:
                 name = self.name
-            print '%s%s[%s]' % ('*' * self.height(), self.type, name)
+            print '%s%s[%s]%s:%s' % ('*' * self.height(), self.type,
+                name, self.source, self.slineno)
         for c in self.children: c.dump(level_limit)
 
     def print_postfix_tree(self):

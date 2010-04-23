@@ -130,16 +130,18 @@ def t_INSERT(t):
 def t_LI(t):
     r'^\*\s(?P<text>.*)'
     text = t.lexer.lexmatch.group('text')
-    t.value = Tree('listitem', text)
-    t.value.append(token_node(t, type='para', value=text))
+    node = Tree('listitem', text)
+    node.append(token_node(t, type='para', value=text))
+    t.value = node 
     return t
 
 def t_OL(t):
     r'^(?P<n>\#|\d+)\.(?P<text>.*)'
     n = t.lexer.lexmatch.group('n')
     text = t.lexer.lexmatch.group('text')
-    t.value = Tree('olistitem', text)
-    t.value.append(token_node(t, type='para', value=text))
+    node = Tree('olistitem', text)
+    node.append(token_node(t, type='para', value=text))
+    t.value = node 
     if n != '#':
         t.value.number = int(n)
     else:
@@ -256,7 +258,7 @@ def token_node(t, type=None, value=None):
         value = t.value
     if not type:
         type = t.type.lower()
-    spos = t.lexer.lexpos - len(value)
+    spos = t.lexer.lexpos - len(t.value)
     return Tree(type  = type,
                 value = value, 
                 source = t.lexer.mflexer.active_source(), 

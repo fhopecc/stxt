@@ -268,7 +268,8 @@ def p_subdoc(p):
     start, end = p.linespan(1)
     slineno = active_lexer.startlineno + start - 1
     indent = active_lexer.indent + 1
-    p[0] = parse(lexdata, MutipleFileLexer(file, slineno, indent))
+    p[0] = parser.parse(lexdata, MutipleFileLexer(file, slineno, indent), 
+                        tracking=True, debug=DEBUG)
 
     if not p[0]: raise SyntaxError('subdoc error')
     elif not p[0].children: raise SyntaxError('subdoc error')
@@ -312,14 +313,15 @@ def parser_node(p, num=1, type=None, value=None):
                 slineno = slineno
                )
 
-
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-def parse(source, lexer=lexer):
+def parse(source, lexer=lexer, inline=True):
     # TABLE parsing will failed in yacc debug mode    
     doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
-    doc = inline_parse(doc)
+    doc.make_symbol_table()
+    if inline:
+      doc = inline_parse(doc)
     return doc
 
 def inline_parse(doc):
@@ -333,9 +335,14 @@ def inline_parse(doc):
                       n.children = p.children
                   else:
                       raise "inline parse error"
-              except:
+              except: 
                   print "inline error at %s:%s" % (n.source, n.slineno)
-                  print n.value
+                  print "inline error at %s:%s" % (n.source, n.slineno)
+                  print "Unexpected exception:" 
+                  print sys.exc_info()
+                  print n.type
+                  for c in n:
+                      print c.value.encode('utf8', 'ignore')
                   pass
     return doc
 
@@ -362,6 +369,10 @@ if __name__ == '__main__':
     oparser.add_option("-t", "--table", action="store_true", 
                       dest="dump_table", default=False,
                       help=u"印出符號表")
+    oparser.add_option("-i", "--noinline", action="store_true", 
+                      dest="noinline", default=False,
+                      help=u"不剖析行內元素")
+
 
     (options, args) = oparser.parse_args()
 
@@ -372,7 +383,8 @@ if __name__ == '__main__':
     DEBUG = options.debug
 
     with open(src) as f:
-        d = parse(f.read(), lexer = MutipleFileLexer(src))
+        d = parse(f.read(), lexer = MutipleFileLexer(src),
+            inline = (not options.noinline))
         d.dump()
 
         if options.dump_table:

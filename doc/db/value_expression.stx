@@ -197,7 +197,8 @@ typename ( expression )
 那些變量也是在計算任意子查詢時視為常數。
 
 比如，下面的查詢找出每筆記錄與最大繳稅額的差額。
-code[max_amount_payer.sql].
+
+code[max_amount_payer.sql].abc
 select payer, 
 (select max(amount) from tax_payments) - amount 
 from tax_payments
