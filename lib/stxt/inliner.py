@@ -142,7 +142,7 @@ def p_error(p):
 parser = yacc.yacc()
 
 def parse(input, source='__string__', slineno=1):
-    if slineno:
+    if slineno is not None:
         lexer.lineno = slineno + 1
     else:
         raise AttributeError, 'inliner.parse, slineno is None!'

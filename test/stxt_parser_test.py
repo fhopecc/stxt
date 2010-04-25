@@ -448,8 +448,8 @@ t4               B.update(p)
         self.assertEqual('comment', f.type)
 
 if __name__ == '__main__':
-    unittest.main()
-    '''tests = unittest.TestSuite()
+    #unittest.main()
+    tests = unittest.TestSuite()
     # TABLE parsing will failed in yacc debug mode    
     tests.addTest(UnitTest("testTable"))
     tests.addTest(UnitTest("testSect1"))
@@ -465,4 +465,5 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testTerm"))
     tests.addTest(UnitTest("testSectWithTimestamp"))
     runner = unittest.TextTestRunner()
-    runner.run(tests)'''
+    runner.run(tests)
+    #tests.debug()

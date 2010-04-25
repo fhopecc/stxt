@@ -192,15 +192,11 @@ def p_code(p):
 
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
-    if DEBUG == 0:
-        table = tabler.parse(p[2].decode('utf8'), 
-                    source=p.lexer.mflexer.active_source(), 
-                    lineno=p.lineno(1))
-        table.title = p[1].title
-        table.name = p[1].name
-        p[0] = table
-    else:
-        p[0] = Tree('table', 'debug mode do not support table')
+    p[0] = parser_node(1)
+    table.title = p[1].title
+    table.name = p[1].name
+    p[0] = table
+    p[0] = Tree('table', 'debug mode do not support table')
 
 def p_para(p):
     '''para : LINE
@@ -316,36 +312,50 @@ def parser_node(p, num=1, type=None, value=None):
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-def parse(source, lexer=lexer, inline=True):
+def parse(source, lexer=lexer, table=False, inline=True):
     # TABLE parsing will failed in yacc debug mode    
     doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
     doc.make_symbol_table()
+    if table:
+        doc = parse_table(doc)
     if inline:
-      doc = inline_parse(doc)
+        doc = parse_inline(doc)
     return doc
 
-def inline_parse(doc):
-    for n in doc.dfs():
-         lineno = n.slineno
-         if not lineno: lineno = 0
-         if n.type == 'para': 
-              try:
-                  p = inliner.parse(n.value, n.source, n.slineno)
-                  if p.children:
-                      n.children = p.children
-                  else:
-                      raise "inline parse error"
-              except: 
-                  print "inline error at %s:%s" % (n.source, n.slineno)
-                  print "inline error at %s:%s" % (n.source, n.slineno)
-                  print "Unexpected exception:" 
-                  print sys.exc_info()
-                  print n.type
-                  for c in n:
-                      print c.value.encode('utf8', 'ignore')
-                  pass
-    return doc
+def parse_table(doc):
+    ts = (n for n in doc.dfs() if n.type == 'table')
+    for t in ts:
+        if DEBUG == 0:
+            table = tabler.parse(p[2].decode('utf8'), 
+                        source=t.source, 
+                        lineno=t.slineno)
+            if table.children:
+                t.children = table.children
+        else:
+            raise "table parse error at %s:%s" % (t.source, t.slineno)
+        return doc
 
+def parse_inline(doc):
+    ps = (n for n in doc.dfs() if n.type == 'para')
+    for p in ps:
+        source = p.source
+        if not source: source = '__string__'
+        lineno = p.slineno
+        if not lineno: lineno = 0
+        t = inliner.parse(p.value, source, lineno)
+        if t.children:
+            p.children = t.children
+        else:
+            raise "inline parse error"
+        #except: 
+        #    print "Inline parse error at %s:%s" % (source, lineno)
+        #    print "Unexpected exception:" 
+        #    print sys.exc_info()
+        #    print p.type
+        #    for c in p:
+        #        print c.value.encode('utf8', 'ignore')
+        #    pass
+    return doc
 
 def read(file):
     with open(file) as f:
