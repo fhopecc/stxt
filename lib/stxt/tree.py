@@ -10,7 +10,9 @@ class Tree(object):
     def __init__(self, type='', value='', title='', name='', 
                  source='__string__', spos=None, epos=None, slineno=None,
                  elineno=None, scol=None, ecol=None):
-        self.type, self.value, self.title, self.name = type, value, title, name
+        self.type, self.value = type, value
+        self.title = title
+        self.name = name
         self.parent, self.children = None, []
         self.number = None       # It's section number
         self.occurence = None    # It's table number

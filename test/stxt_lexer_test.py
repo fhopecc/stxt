@@ -10,6 +10,25 @@ class UnitTest(unittest.TestCase):
     def setUp(self):
         lexer.begin('INITIAL')
 
+    def testTABLE(self):
+        case = '''table.交易
+時間 交易A       交易B
+==== =========== ===========
+t1   A.read(p)
+t2   A.update(p)
+t3               B.read(p)
+t4               B.update(p)
+==== =========== ===========
+'''
+        lexer.input(case)
+        lexer.lineno = 1
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('TABLE', t.type)
+        
+         
+        
+
     def testFOOTNOTE(self):
         case = r'.. 註解'
         lexer.input(case)

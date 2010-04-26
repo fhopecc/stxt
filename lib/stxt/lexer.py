@@ -90,13 +90,8 @@ def t_code_pass(t):
     pass 
  
 def t_TABLE(t):
-    r'^table(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
-    m = t.lexer.lexmatch
-    t.value = Tree('table') 
-    t.value.name = m.group('n')
-    t.value.title = m.group('title')
-    if len(t.value.title) < 1:
-        t.value.title = t.value.name
+    r'^table(\[(?P<name>[^]]*)\])?\.(?P<title>.*)\n'
+    t.value = token_node(t)
     t.lexer.lineno += 1
     t.lexer.block_start = t.lexer.lexpos
     t.lexer.block_lineno = t.lexer.lineno
@@ -250,7 +245,7 @@ def find_column(input, token):
     column = (token.lexpos - last_cr) + 1
     return column
 
-def token_node(t, type=None, value=None):
+def token_node(t, type=None, value=None, name=None, title=None):
     '''傳回表示此 Token 的 Tree。
        會將 Token 中的源碼資訊寫到 Tree 中。 
     '''
@@ -259,11 +254,31 @@ def token_node(t, type=None, value=None):
     if not type:
         type = t.type.lower()
     spos = t.lexer.lexpos - len(t.value)
+    source = t.lexer.mflexer.active_source()
+    slineno = t.lexer.lineno
+
+    m = t.lexer.lexmatch
+
+    try:
+        if not name: name = m.group('name')
+    except IndexError:
+        print 'WARN: %s:%s Not specified name ' % (source, slineno)
+
+    try:
+        if not name: title = m.group('title')
+    except IndexError:
+        print 'WARN: %s:%s Not specified title ' % (source, slineno)
+
+    if not title or len(title) < 0:
+        title = name
+
     return Tree(type  = type,
                 value = value, 
-                source = t.lexer.mflexer.active_source(), 
+                name = name, 
+                title = title,
+                source = source, 
                 spos = spos,
-                slineno = t.lexer.lineno
+                slineno = slineno
                )
 
 __lexer__  = lex.lex(reflags=re.M)
