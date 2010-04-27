@@ -192,11 +192,8 @@ def p_code(p):
 
 def p_table(p):
     '''table : TABLE TABLEBLOCK'''
-    p[0] = parser_node(1)
-    table.title = p[1].title
-    table.name = p[1].name
-    p[0] = table
-    p[0] = Tree('table', 'debug mode do not support table')
+    p[1].value = p[2]
+    p[0] = p[1]
 
 def p_para(p):
     '''para : LINE
@@ -312,7 +309,7 @@ def parser_node(p, num=1, type=None, value=None):
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-def parse(source, lexer=lexer, table=False, inline=True):
+def parse(source, lexer=lexer, table=True, inline=True):
     # TABLE parsing will failed in yacc debug mode    
     doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
     doc.make_symbol_table()
@@ -326,14 +323,14 @@ def parse_table(doc):
     ts = (n for n in doc.dfs() if n.type == 'table')
     for t in ts:
         if DEBUG == 0:
-            table = tabler.parse(p[2].decode('utf8'), 
+            table = tabler.parse(t.value.decode('utf8'), 
                         source=t.source, 
                         lineno=t.slineno)
             if table.children:
                 t.children = table.children
         else:
             raise "table parse error at %s:%s" % (t.source, t.slineno)
-        return doc
+    return doc
 
 def parse_inline(doc):
     ps = (n for n in doc.dfs() if n.type == 'para')
