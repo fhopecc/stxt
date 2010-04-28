@@ -96,11 +96,13 @@ def p_simple_table(p):
         table.append(r)
         for v in parse_row(p[2], l):
             td = Tree('td', v)
-            try:
-                t = inliner.parse(v)
-                td.append(t)         
-            except:
-                print 'inliner error %s:%s' % (p.lexer.source, p.lexer.lineno)
+            if type(v) in [str, unicode]:
+                 para = parser_node(p, 1, type='para',
+                                 value=v) 
+            else:
+                print 'v is not string, it is %s' % type(v)
+
+            td.append(para)         
             r.append(td)
     p[0] = table
 
@@ -117,6 +119,23 @@ def p_error(t):
     raise SyntaxError('parse error:' + str(t))
 
 parser = yacc.yacc()
+
+def parser_node(p, num=1, type=None, value=None):
+    '''傳回表示此 Paser Element 的 Tree。
+       會將 Parser 中的源碼資訊寫到 Tree 中。 
+    '''
+    source = p.lexer.source
+    spos = p.lexpos(num)
+    slineno = p.lineno(num)
+    if not value:
+        value = p[num]
+    return Tree(type  = type,
+                value = value, 
+                source = source, 
+                spos = spos,
+                slineno = slineno
+               )
+
 
 def parse(input, source='__string__', lineno=0):
     lexer.source = source

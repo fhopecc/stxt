@@ -25,7 +25,7 @@ SQL 支援的資料型態很多，一般使用者僅需要知道以下三大類�
 
 <d:\stxt\doc\db\reserved_word.stx>
 
-code[sql_proc.dfd].
+code.sql_proc.dfd
 [基礎表] -> (from) -> [引用表] -> (where) -> [過濾表] ->
 (group by) -> [分組表] -> (having) -> [過濾分組表] ->
 (select) -> [輸出表]

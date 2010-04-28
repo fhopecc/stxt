@@ -1,8 +1,14 @@
 # coding=utf8
 from __future__ import with_statement
-import sys, os, re, lex, yacc, tabler, inliner
+import sys, os, re, lex, yacc, logging, tabler, inliner
 from tree import Tree
 from lexer import *
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(name) %(levelname) %(message)s',
+                    filename='stxt.log',
+                    filemode='w')
+logger = logging.getLogger('stxt.parser')
 
 DEBUG = False
 
@@ -286,7 +292,8 @@ def p_error(p):
 
     lineno = active_lexer.startlineno + active_lexer.lineno
     col = find_column(active_lexer.lexdata, p) + active_lexer.indent * 2
-    print '%s at %s:%s:%s' % (p.type, active_lexer.file, lineno, col)
+    logger.error('%s at %s:%s:%s' % (p.type, active_lexer.file,
+                                     lineno, col))
 #print active_lexer.lexdata
     sys.exit(0)
 
@@ -343,7 +350,7 @@ def parse_inline(doc):
         if t.children:
             p.children = t.children
         else:
-            raise "inline parse error"
+            raise "Inline parse error at %s:%s" % (source, lineno)
         #except: 
         #    print "Inline parse error at %s:%s" % (source, lineno)
         #    print "Unexpected exception:" 

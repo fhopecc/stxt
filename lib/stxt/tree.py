@@ -6,6 +6,9 @@ from tree import *
 
 logger = logging.getLogger()
 
+NAMED_NODE = ['sect1', 'sect2', 'sect3', 'sect4', 'sect5',
+              'define', 'theorem', 'question']
+
 class Tree(object):
     def __init__(self, type='', value='', title='', name='', 
                  source='__string__', spos=None, epos=None, slineno=None,

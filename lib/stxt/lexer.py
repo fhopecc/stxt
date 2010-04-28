@@ -3,12 +3,15 @@ from __future__ import with_statement
 from tree import Tree
 from lex import TOKEN
 from lex import LexError
-from logging import config
-import sys, os, re, lex, logging
+import logging
+import sys, os, re, lex, tree, logging
 
-config.fileConfig(os.path.join(os.path.dirname(__file__), '..', '..', 
-            'config','log.conf'))
-console = logging.getLogger('')
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(name) %(levelname) %(message)s',
+                    filename='inliner.log',
+                    filemode='w')
+logger = logging.getLogger('stxt.lexer')
+
 
 states = (
     ('code', 'exclusive'), 
@@ -262,12 +265,16 @@ def token_node(t, type=None, value=None, name=None, title=None):
     try:
         if not name: name = m.group('name')
     except IndexError:
-        print 'WARN: %s:%s Not specified name ' % (source, slineno)
+        if type in tree.NAMED_NODE: 
+            print 'WARN: %s:%s Not specified name ' % (source, slineno)
+        else:
+            name = id(t)
 
     try:
-        if not name: title = m.group('title')
+        if not title: title = m.group('title')
     except IndexError:
-        print 'WARN: %s:%s Not specified title ' % (source, slineno)
+        if type in tree.NAMED_NODE: 
+            print 'WARN: %s:%s Not specified title ' % (source, slineno)
 
     if not title or len(title) < 0:
         title = name
@@ -337,7 +344,7 @@ if __name__ == '__main__':
             lexer.input(f.read())
         t = lexer.token()
         while t:
-            console.info("%i:%s" % (t.lexer.lineno , t.type))
+            logger.info("%i:%s" % (t.lexer.lineno , t.type))
             t = lexer.token()
     except IndexError:
-       console.info(usage()) 
+       logger.info(usage()) 

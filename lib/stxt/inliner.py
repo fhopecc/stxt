@@ -5,8 +5,11 @@ from lex import TOKEN
 from logging import config
 from tree import *
 
-config.fileConfig(r'config\log.conf')
-console = logging.getLogger()
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(name) %(levelname) %(message)s',
+                    filename='stxt.log',
+                    filemode='w')
+console = logging.getLogger('stxt.inliner')
 
 DEBUG = False
 
@@ -142,6 +145,11 @@ def p_error(p):
 parser = yacc.yacc()
 
 def parse(input, source='__string__', slineno=1):
+    if len(input) == 0:
+        msg  ='Inliner.WARN:: %s:%s is empty.' % (source, slineno),
+        print msg
+        sys.exit()
+
     if slineno is not None:
         lexer.lineno = slineno + 1
     else:

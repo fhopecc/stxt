@@ -1,11 +1,11 @@
-[restriction]限制
+限制(restriction)
 ~~~~~~~~~~~~~~~~~
 從一個表中取出符合條件的紀錄，常見條件如下：
 * 相等條件
 * 範圍條件 
 * 布林運算子
 
-table[tax_payments].
+table.tax payment
 id payer  date     area tax    amount
 == ====== ======== ==== ====== ======
  1 李白   0981107  鳳林 地價稅   1000 
@@ -58,7 +58,7 @@ where amount < 1000 and area='鳳林'
 上述代數式表示取出位於納稅人額小於 1000 且位於鳳林的所有繳稅紀錄。
 因為條件都是布林函數，所以可以用布林運算子串接。
 
-code[and_as_intersect.sql].集合運算等式
+code.集合運算等式(and_as_intersect.sql)
 select *
 from tax_payments 
 where area='鳳林' 
