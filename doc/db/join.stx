@@ -232,3 +232,6 @@ from t1 join t2 join t3
 等同於下式：
 
 from (t1 join t2) join t3
+
+Oracle 之 join 語法
+~~~~~~~~~~~~~~~~~~~

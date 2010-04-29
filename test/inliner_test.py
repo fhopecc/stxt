@@ -164,6 +164,18 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('cblock', cb.type)
         self.assertEqual(case, cb.value)
 
+    def testUnicode(self):
+        case = u'交易A'
+               
+        p = inliner.parse(case)
+        self.assertEqual('para', p.type)
+        self.assertEqual(u'交易A', p.value)
+
+        cb = p[0]
+        self.assertEqual('cblock', cb.type)
+        self.assertEqual(case, cb.value)
+
+
 if __name__ == '__main__':
     unittest.main()
     '''tests = unittest.TestSuite()

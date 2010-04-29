@@ -10,8 +10,6 @@ class UnitTest(unittest.TestCase):
     def setUp(self):
         lexer.begin('INITIAL')
 
-
-
     def testFOOTNOTE(self):
         case = r'.. 註解'
         lexer.input(case)
@@ -77,11 +75,19 @@ Massachusetts: Addison-Wesley, 1989.'''
         self.assertEqual(tok.value.name, 'name')
         self.assertEqual(tok.value.title, 'this is a image title')
 
+        self.assertEqual('__string__', tok.value.source)
+        self.assertEqual(1, tok.value.slineno)
+        self.assertEqual(0, tok.value.spos)
+
         case = 'question[96h2-3].96高2-3'
         lexer.input(case)
         tok = lexer.token()
         self.assertEqual('QUESTION', tok.type)
         self.assertEqual('96h2-3', tok.value.name)
+
+        self.assertEqual('__string__', tok.value.source)
+        self.assertEqual(1, tok.value.slineno)
+        self.assertEqual(0, tok.value.spos)
 
         case = 'define[name].this is a define title'
         lexer.input(case)
@@ -259,6 +265,10 @@ where dep_id in (select dep_id
         self.assertEqual('CODE', ch.type)
         self.assertEqual('dep_id_not_unique.sql', ch.value.name)
         self.assertEqual('非單人科室員工名單', ch.value.title)
+        self.assertEqual('__string__', ch.value.source)
+        self.assertEqual(1, ch.value.slineno)
+        self.assertEqual(0, ch.value.spos)
+
         cb = lexer.token()
         self.assertEqual(2, cb.lineno)
         self.assertEqual('CODEBLOCK', cb.type)

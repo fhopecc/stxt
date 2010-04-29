@@ -54,10 +54,13 @@ class UnitTest(unittest.TestCase):
 
     def testAddress(self):
         t = Tree('book', 'fhopecc book', name='fhopecc')
-        t.append(Tree('sect', 'section first', name='sect1'))
+        c = Tree('sect', 'section first', name='sect1')
+        t.append(c)
 
-        self.assertEqual('fhopecc book', t.get('fhopecc', 'book').value)
-        self.assertEqual('section first', t.get('sect1', 'sect').value)
+        t.root().make_symbol_table()
+
+        self.assertEqual('fhopecc book', c.get('fhopecc').value)
+        self.assertEqual('section first', t.get('sect1').value)
 
     def testPrevious(self):
         r = Tree('book', 'book value', name='book')
@@ -100,8 +103,8 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('reference', ref.type)
         self.assertEqual('example', ref.reftype)
         self.assertEqual('e1', ref.refname)
-
-        e1 = tree.get('e1', 'example')
+        tree.root().make_symbol_table()
+        e1 = tree.get('e1')
 
         self.assertEqual(e1, ref.reftree())
 

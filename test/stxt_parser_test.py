@@ -253,23 +253,55 @@ t3               B.read(p)
 t4               B.update(p)
 ==== =========== ===========
 '''
-        doc = parser.parse(case)
+        doc = parser.parse(case, inline=False)
         t = doc.children[0]
         self.assertEqual('table', t.type)
         self.assertEqual('交易', t.title)
+
+        value = '''時間 交易A       交易B
+==== =========== ===========
+t1   A.read(p)
+t2   A.update(p)
+t3               B.read(p)
+t4               B.update(p)
+==== =========== ==========='''
+        self.assertEqual(value, t.value)
+
         header = t.children[0]
         self.assertEqual('tr', header.type)
-        th1 = header.children[0]
-        self.assertEqual('th', th1.type)
-        self.assertEqual(u'時間', th1.value)
-        th2 = header.children[1]
-        self.assertEqual(u'交易A', th2.value)
+
+        th = header.children[0]
+        self.assertEqual('th', th.type)
+        self.assertEqual(u'時間', th.value)
+
+        para = th[0]
+        self.assertEqual('para', para.type)
+        self.assertEqual(u'時間', para.value)
+
+        th = header.children[1]
+        self.assertEqual(u'交易A', th.value)
+        self.assertEqual(1, len(th.children))
 
         r2 = t.children[1]
         self.assertEqual('tr', r2.type)
-        td1 = r2.children[0]
-        self.assertEqual('td', td1.type)
-        self.assertEqual('t1', td1.value)
+
+        td = r2.children[0]
+        self.assertEqual('td', td.type)
+        self.assertEqual(u't1', td.value)
+
+        td = r2.children[1]
+        self.assertEqual('td', td.type)
+        self.assertEqual(u'A.read(p)', td.value)
+        self.assertEqual(1, len(td.children))
+
+        p = td[0]
+        self.assertEqual('para', p.type)
+        self.assertEqual('A.read(p)', p.value)
+
+        td = r2.children[2]
+        self.assertEqual('td', td.type)
+        self.assertEqual(u'', td.value)
+
         td2 = r2.children[1]
         self.assertEqual('A.read(p)', td2.value)
 

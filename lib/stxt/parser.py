@@ -316,7 +316,8 @@ def parser_node(p, num=1, type=None, value=None):
 HEADER_PATTERN = r'^(\[(?P<n>[^]]+)\])?(?P<h>.+)'
 
 parser = yacc.yacc()
-def parse(source, lexer=lexer, table=True, inline=True):
+def parse(source, lexer=lexer, 
+          table=True, inline=True, symbol_table=True):
     # TABLE parsing will failed in yacc debug mode    
     doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
     doc.make_symbol_table()
@@ -324,6 +325,8 @@ def parse(source, lexer=lexer, table=True, inline=True):
         doc = parse_table(doc)
     if inline:
         doc = parse_inline(doc)
+    if symbol_table:
+        doc.root().make_symbol_table()
     return doc
 
 def parse_table(doc):
@@ -346,19 +349,20 @@ def parse_inline(doc):
         if not source: source = '__string__'
         lineno = p.slineno
         if not lineno: lineno = 0
-        t = inliner.parse(p.value, source, lineno)
-        if t.children:
-            p.children = t.children
-        else:
-            raise "Inline parse error at %s:%s" % (source, lineno)
-        #except: 
-        #    print "Inline parse error at %s:%s" % (source, lineno)
-        #    print "Unexpected exception:" 
-        #    print sys.exc_info()
-        #    print p.type
-        #    for c in p:
-        #        print c.value.encode('utf8', 'ignore')
-        #    pass
+        try:
+            t = inliner.parse(p.value, source, lineno)
+            if t.children:
+                p.replace_children(t.children)
+            else:
+                raise "Inline parse error at %s:%s" % (source, lineno)
+        except: 
+            print "Inline parse error at %s:%s" % (source, lineno)
+            print "Unexpected exception:" 
+            print sys.exc_info()
+            #print p.type
+            #for c in p:
+            #    print c.value.encode('utf8', 'ignore')
+            pass
     return doc
 
 def read(file):
@@ -386,6 +390,9 @@ if __name__ == '__main__':
     oparser.add_option("-i", "--noinline", action="store_true", 
                       dest="noinline", default=False,
                       help=u"不剖析行內元素")
+    oparser.add_option("-p", "--dump", action="store_true", 
+                      dest="dump_tree", default=False,
+                      help=u"印出文件樹")
 
 
     (options, args) = oparser.parse_args()
@@ -399,8 +406,9 @@ if __name__ == '__main__':
     with open(src) as f:
         d = parse(f.read(), lexer = MutipleFileLexer(src),
             inline = (not options.noinline))
-        d.dump()
-
+        if options.dump_tree:
+            d.dump()
         if options.dump_table:
-            print u'符號表：'
-            d.dump_address_table()
+            d.make_symbol_table()
+            print '符號表：'
+            d.dump_symbol_table()

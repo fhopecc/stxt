@@ -1,6 +1,6 @@
 # coding=utf8
 from tree import Tree
-import sys, lex, yacc, unicodedata, inliner
+import sys, lex, yacc, unicodedata
 
 # Visual Length:
 # These functions must pass unicode string as arguments
@@ -87,8 +87,14 @@ def p_simple_table(p):
             row = parse_row(p[2], l)
     header = Tree('tr', '')
     for v in row:
-        header.append(Tree('th', v))
+        th = Tree('th', v)
+        if len(v) > 0:
+            para = parser_node(p, 1, ntype='para', value=v) 
+            th.append(para)
+        header.append(th)
+
     table = Tree('table', '')
+
     table.append(header)
     # parse row
     for l in p[3]:
@@ -96,11 +102,13 @@ def p_simple_table(p):
         table.append(r)
         for v in parse_row(p[2], l):
             td = Tree('td', v)
-            if type(v) in [str, unicode]:
-                 para = parser_node(p, 1, type='para',
-                                 value=v) 
-            else:
-                print 'v is not string, it is %s' % type(v)
+            if len(v) > 0:
+                para = parser_node(p, 1, ntype='para', value=v) 
+                td.append(para)
+            #if type(v) in [str, unicode]:
+            #     para = parser_node(p, 1, ntype='para', value=v) 
+            #else:
+            #    raise 'v is not string, it is %s' % type(v)
 
             td.append(para)         
             r.append(td)
@@ -120,22 +128,24 @@ def p_error(t):
 
 parser = yacc.yacc()
 
-def parser_node(p, num=1, type=None, value=None):
+def parser_node(p, num=1, ntype=None, value=None):
     '''傳回表示此 Paser Element 的 Tree。
        會將 Parser 中的源碼資訊寫到 Tree 中。 
     '''
     source = p.lexer.source
     spos = p.lexpos(num)
     slineno = p.lineno(num)
-    if not value:
-        value = p[num]
-    return Tree(type  = type,
+    #import pdb
+    #pdb.set_trace()
+    if type(value) not in (str, unicode):
+        raise 'not specified value'
+        #value = p[num]
+    return Tree(type  = ntype,
                 value = value, 
                 source = source, 
                 spos = spos,
                 slineno = slineno
                )
-
 
 def parse(input, source='__string__', lineno=0):
     lexer.source = source

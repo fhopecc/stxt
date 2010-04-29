@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.DEBUG,
                     filename='stxt.log',
                     filemode='w')
 console = logging.getLogger('stxt.inliner')
+logger = logging.getLogger('stxt.inliner')
 
 DEBUG = False
 
@@ -145,10 +146,11 @@ def p_error(p):
 parser = yacc.yacc()
 
 def parse(input, source='__string__', slineno=1):
+    #import pdb
+    #pdb.set_trace()
     if len(input) == 0:
         msg  ='Inliner.WARN:: %s:%s is empty.' % (source, slineno),
-        print msg
-        sys.exit()
+        raise AttributeError, msg
 
     if slineno is not None:
         lexer.lineno = slineno + 1
@@ -157,4 +159,5 @@ def parse(input, source='__string__', slineno=1):
 
     lexer.sourcefile = source
     d = parser.parse(input, lexer=lexer, tracking=True, debug=DEBUG)
+    d.value = input
     return d

@@ -66,7 +66,10 @@ def t_TIMESTAMP(t):
 def t_CODE(t):
     r'^(diagram|code)(\[(?P<n>[^]]*)\])?\.(?P<title>.*)\n'
     m = t.lexer.lexmatch
-    t.value = Tree('code') 
+
+    t.value = token_node(t)
+    #t.value = Tree('code') 
+
     t.value.name = m.group('n')
     t.value.title = m.group('title')
     if len(t.value.title) < 1:
@@ -157,7 +160,7 @@ head += r'(\((?P<name>.*)\))?' # name specifier use this
 def t_HEAD(t):
     m = t.lexer.lexmatch
     t.type = m.group('h').upper()
-    t.value = Tree(m.group('h')) 
+    t.value = token_node(t, type=m.group('h')) 
     if m.group('name'):
         t.value.name = m.group('name')
     else:

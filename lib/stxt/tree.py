@@ -4,7 +4,11 @@ import sys, logging
 from os import path
 from tree import *
 
-logger = logging.getLogger()
+logging.basicConfig(level=logging.DEBUG,
+                    filename='stxt.log',
+                    filemode='w')
+
+logger = logging.getLogger('stxt.tree')
 
 NAMED_NODE = ['sect1', 'sect2', 'sect3', 'sect4', 'sect5',
               'define', 'theorem', 'question']
@@ -66,6 +70,13 @@ class Tree(object):
             n.parent = self
             self.children.append(n)
         return self
+
+    def replace_children(self, children):
+        self.children = []
+        if type(children) is list:
+            self.append(*children)
+        else:
+            self.append(children)
 
     def isRoot(self):
         return self.parent is None
@@ -144,16 +155,18 @@ class Tree(object):
         for c in self.dfs():
             key = c.name
             if not key: key = c.title
-            if not key: key = id(c)
-            if self.symbol_table.has_key(key):
-                msg = "duplicating key %s" % key
-                logger.warn(msg)
-            self.symbol_table[key] = c
+            #if not key: key = id(c)
+            if key:
+                if self.symbol_table.has_key(key):
+                    msg = "duplicating key %s at %s:%s" % (key,
+                              self.source, self.slineno)
+                    logger.warn(msg)
+                else:
+                    self.symbol_table[key] = c
 
-    def dump_address_table(self):
-        for k in self.address_map().keys():
-            for n in self.address_map()[k]:
-                print '%s:%s' % (k, n)
+    def dump_symbol_table(self):
+        for k in self.symbol_table.keys():
+            print '%s' % k
 
     def getrefnode(self):
         u'取出參考節點'
@@ -162,36 +175,10 @@ class Tree(object):
 
     def get(self, key):
         u'取出指定名稱之文件資源'
-        return self.system[key]
-
-    def get_old(self, name, type=None):           
-        u'取出指定位址的文件資源'
-        am = self.address_map()
-        try:
-            if type:
-                t = am[type]
-                if name:
-                    return t[name]
-            else:
-                t = am['sect1']
-                if t.has_key(name): return t[name]
-                t = am['sect2']
-                if t.has_key(name): return t[name]
-                t = am['sect3']
-                if t.has_key(name): return t[name]
-                for k in am.keys():
-                    for n in am[k].keys():
-                        if n == name: return am[k][n]
-
-            console.error("No element named [%s], %s:%s" %
-                          (name, self.file, self.lineno)
-                         ) 
-            exit()
-        except:
-            print "error"
-            print am
-            self.root().dump_address_table()
-            exit()
+        if self.isRoot(): return self.symbol_table[key]
+        else: 
+          r = self.root()
+          return r.get(key)
 
     def number_children(self):
         cs = self.children
@@ -237,7 +224,7 @@ class Tree(object):
 
     def print_tree(self):
         out = '+' * self.height() + self.type + '[' + self.name + ']' \
-                     +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
+              +'#'+str(self.occurence)+'#' + self.section_number() + self.title + '\n'
         for c in self.children: out += c.print_tree()
         return out
 
@@ -294,7 +281,7 @@ class ReferenceNode(Tree):
         self.label= label
 
     def reftree(self): 
-        ref = self.get(self.refname, self.reftype)
+        ref = self.get(self.refname)
         return ref
     
 def Tuple2BTree(root=None, left=None, right=None):

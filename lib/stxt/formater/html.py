@@ -5,7 +5,13 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 from stxt import parser
 from stxt import template 
 from stxt.template import Template 
-from stxt.parser import console
+import logging
+import traceback
+
+logging.basicConfig(level=logging.DEBUG,
+                    filename='stxt.log',
+                    filemode='w')
+logger = logging.getLogger('stxt.formatter.html')
 
 def disp(tree):
     try:
@@ -21,7 +27,9 @@ def disp(tree):
             return f_container(tree)
         else: return globals()['f_' + tree.type](tree)
     except TypeError:
-        console.error("error at %s:%s" % (tree.file, tree.lineno))
+        msg = "Error at %s:%s:%s" % (tree.type, tree.file, tree.lineno)
+        logger.error(msg)
+        traceback.print_exc()
         exit()
 
 def to_html(file):
@@ -268,9 +276,15 @@ def f_reference(tree):
     temp = '''$def with (label, url)
 <a class="reference" href="$url">$label</a>
 '''
-    ref = tree.reftree()
-    temp = Template(temp)
-    return str(temp(f_label(ref), f_url(ref)))
+    try:
+      #  import pdb
+      #  pdb.set_trace()
+        ref = tree.reftree()
+        temp = Template(temp)
+        return str(temp(f_label(ref), f_url(ref)))
+    except KeyError:
+        logger.error("[%s] not in symbol table" % tree.refname)
+        return tree.refname
 
 def f_address(tree):
     type = tree.type  
