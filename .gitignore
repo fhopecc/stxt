@@ -1,12 +1,17 @@
-tmp/*
-log/*
 *~
 Thumbs.db
+DEBUG
+parser.out
+parsetab.py
 *.swp
 *.pyc
+*.html
+log/*
+tmp/*
 lib/sql/*
 lib/dist/*
 lib/build/*
+slides/*
 structedtext/db/*
 structedtext/ds/*
 structedtext/csec/*
@@ -16,4 +21,6 @@ structedtext/net/*
 structedtext/food/*
 structedtext/taichi/*
 structedtext/novel/*
+structedtext/travel/*
+structedtext/stable_prog/*
 structedtext/index.yaml
