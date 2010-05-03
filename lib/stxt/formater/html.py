@@ -268,8 +268,7 @@ def f_section_number(tree):
     return n
 
 def f_insert(tree):
-    root = tree.root()
-    insert = root.find_by_name(tree.node_name)
+    insert = tree.get(tree.node_name)
     return disp(insert)
 
 def f_reference(tree):

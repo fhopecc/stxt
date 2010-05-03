@@ -150,7 +150,7 @@ def t_OL(t):
     return t
 
 head  = r'image|video|'
-head += r'question|answer|define|theorem|proof'
+head += r'Q|A|question|answer|define|theorem|proof'
 head  = r'^(?P<h>(%s))' % head
 head += r'(\[(?P<oldname>[^]]*)\])?\.'
 head += r'(?P<title>[^(\n]*)'
@@ -161,6 +161,13 @@ def t_HEAD(t):
     m = t.lexer.lexmatch
     t.type = m.group('h').upper()
     t.value = token_node(t, type=m.group('h')) 
+    if t.type == 'Q':
+        t.type = 'QUESTION' 
+        t.value.type = 'question'
+    elif t.type == 'A': 
+        t.type = 'ANSWER' 
+        t.value.type = 'answer'
+
     if m.group('name'):
         t.value.name = m.group('name')
     else:
