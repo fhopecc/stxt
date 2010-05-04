@@ -2,7 +2,7 @@
 from __future__ import with_statement
 import sys, os, re
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-from stxt import parser
+from stxt import booker
 from stxt import template 
 from stxt.template import Template 
 import logging
@@ -34,7 +34,7 @@ def disp(tree):
 
 def to_html(file):
     d = None
-    d = parser.read(file)
+    d = booker.read(file)
     
     d.number_children()
     d.count_occurence()

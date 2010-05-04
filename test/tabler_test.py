@@ -36,7 +36,6 @@ t4               B.update(p)
         self.assertEqual('td', td.type)
         self.assertEqual('t1', td.value)
 
-
         td = r2.children[1]
         self.assertEqual('A.read(p)', td.value)
 

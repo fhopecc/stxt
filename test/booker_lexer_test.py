@@ -2,9 +2,9 @@
 from __future__ import with_statement
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from lib.stxt.lexer import lexer
-from lib.stxt.lexer import MutipleFileLexer
-from lib.stxt.lexer import LexError
+from lib.stxt.booker_lexer import lexer
+from lib.stxt.booker_lexer import MutipleFileLexer
+from lib.stxt.booker_lexer import LexError
 
 class UnitTest(unittest.TestCase):
     def setUp(self):

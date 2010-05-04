@@ -22,7 +22,7 @@
   initially inner input insensitive insert int integer 
   intersect interval into is
   isolation [[join]] key language last leading left 
-  level like local lower
+  level [[like]] local lower
   match max min minute module month
   names national natural nchar 
   next no not null

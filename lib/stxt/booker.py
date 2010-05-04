@@ -2,7 +2,7 @@
 from __future__ import with_statement
 import sys, os, re, lex, yacc, logging, tabler, inliner
 from tree import Tree
-from lexer import *
+from booker_lexer import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(name) %(levelname) %(message)s',
