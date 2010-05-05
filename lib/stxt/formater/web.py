@@ -110,5 +110,5 @@ if __name__ == '__main__':
         console.info(usage())
         exit()
     sourcefile = sys.argv[1]
-    tree = parser.read(sourcefile)
+    tree = booker.read(sourcefile)
     to_doc(tree)

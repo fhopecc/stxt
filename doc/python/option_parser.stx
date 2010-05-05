@@ -1,0 +1,459 @@
+Python: OptionParser的使用 Python 很好用的 Option module....
+
+==================================================================
+
+轉自：http://www.javaworld.com.tw dummycat edited on 2005-01-13 23:58
+
+簡介: optparse 是一個能夠讓程式設計人員輕鬆設計出簡單明瞭、易於使用、
+符合標準的 Unix 命令列程式的 Python 套件。開始學習 Python 之後,我常常
+會寫一些小程式來處理日常的工作;漸漸地,我發現無法處理參數的程式的彈性有
+限,於是就開始為我的程式加上解讀命令列參數的功能。在發現這個 套件之前,
+我總是覺得解讀命令列不難,但是要做到像標準 Unix 命令那樣完善的使用者互
+動和錯誤處置,可就不是一件簡單的事了!某天在 Python Library Reference 中
+發現這個套件,真是如獲至寶!從此不用再為解讀參數煩惱,可以更專注在解決問
+題上了!
+
+如果對於 optparse 套件有興趣,想快速入門的話,可以直接看"基本使用流程"小
+節,然後再看後面的一些介紹與說明;當然啦!想獲得最詳細的資訊,就只有自己去
+看 Python Library Reference 囉~
+
+就以下列命令來解釋一些術語,myprog 是命令的名字, $ 是命令列提示符號:
+
+$myprog -f thefile.txt -s xyz a1 a2 a3
+
+
+●argument: 使 用者在命令後面所輸入的字串。以本例來說,"-f",
+ "thefile.txt", "-s", "xyz", "a1", "a2", "a3" 都是 argument。在 Python
+ 中,可以使用 sys.argv[1:] 來得到命令列傳進來的 argument。為什麼是
+ sys.argv[1:] ,而不是 sys.argv 呢?因為命令列收到完整的參數還要加上一個
+命令本身的檔名,以本例來說, sys.argv 應該是:
+
+["myprog", "-f", "thefile.txt", "-s", "xyz", "a1", "a2", "a3"]
+
+
+所以如果要得到去除命令本身的檔名以後的參數列,就要靠 sys.argv[1:] 了。
+
+●option: 一些傳遞給命令的額外 argument,以改變程式的行為。以本例來說,
+ "-f", "-s" 就是 option。有 幾種 option 的寫法,在 Unix 系統上的傳統寫
+法是 "-" 後跟著一個字母,例如 "-f", "-s";以及 "-f -s", 和 "-fs", 在
+ Unix 系統上都可以被接受。 GNU project 使用另一種方式,以 "--" 後面跟著
+一串由 "-" 分開的字串,例如 "--file-for-log"。Python 的 optparse 套件只
+接受以上所提的兩種 option 格式。
+
+顧名思義, option 應該是可有可無的,即使命令中沒有任何的 option,程式也應
+該能夠正確地執行。如果程式需要使用者輸入某些資料才能運作,那麼也應該是
+使用 positional argument 才對。
+
+●option argument: 緊 跟隨在 option 後的 argument,就是 option argument
+。以本例來說, "thefile.txt", "xyz" 都是 option argument。指定 option
+ argument 有兩種寫法, "-f thefile" 和 "-fthefile", optparse 套件都接受
+。
+
+option 亦可以沒有 option argument,意即 option 單獨存在。這樣的 option
+ 通常做為旗標 (flag) 用,代表某個功能的開啟或是關閉。
+
+●positional argument: 當一個 argument list 被解讀完後,剩下的就是
+ positional argument 了!以本例來說, "a1", "a2", "a3" 就是 positional
+ argument。通常被用在"使用者必須輸入"的資訊上。
+
+●required option: 一 個有點讓人覺得矛盾的名詞:既然是 "option" (選擇),
+又怎麼會是 "required" (必須)的呢? optparse 套件不對這種 option 做出任
+何的限制或是協助。詳情可以參閱 Python Library Reference 6.20.5 的範例
+程式。
+
+基本使用流程:
+
+》1.產生一個 optparse.OptionParser 的物件。可以在產生時將"程式的命令列
+說明" (usage) 做為參數,交給 OptionParser 的建構子:
+
+from optparse import OptionParser MSG_USAGE = "myprog[ -f ][ -s ]
+ arg1[, arg2...]" optParser = OptionParser(MSG_USAGE)
+
+
+》2.呼叫 OptionParser.add_option() 加入接受的 option:
+
+optParser.add_option("-f","--file",action = "store",type =
+ "string",dest = "fileName")
+
+
+參數 action 有許多種類,預設是 "store",所以即使省略也無妨,其它的 action
+ 種類在下面會繼續說明。
+
+若有一個以上的 option,重覆上述的方式加入(注意:以下省略了 action 參數):
+
+optParser.add_option("-s","--someopt",type = "string",dest =
+ "someopt")
+
+》3. 呼叫 OptionParser.parse_args() 進行解讀。如果沒有傳入參數,
+ OptionParser 預設會以 sys.argv[1:] 為對象進行解讀
+。OptionParser.parse_args() 會傳回一個 tuple,由 optparse.Values 和 一
+個 list 所組成。下例傳入一個假造的參數列:
+
+fakeArgs = ['-f', 'thefile.txt', '-s', 'xyz', 'arg1', 'arg2', 'arge']
+
+
+options, args = optParser.parse_args(fakeArgs)
+
+
+print options.fileName print options.someopt print args
+
+
+最後會得到的輸出結果:
+
+thefile.txt xyz ['arg1', 'arg2', 'arge']
+
+
+這 是一個簡單的範例,說明了 OptionParser 的一般使用方式。透過這個例子,
+可以看到如果為程式加入 option, 並且在程式中取得 option argument 和
+ positional argument。OptionParser.parse_args() 還有許多用法,下面會說
+明一部份。
+
+為程式加入 flag option:
+
+許多的 Unix 命令擁有 "-v", "-q" 的 option,代表"提供詳細訊息"或是"不顯
+示訊息"。要做到這一點,只要在程式中加入下列的 option :
+
+parser.add_option("-v", action="store_true", dest="verbose")
+ parser.add_option("-q", action="store_false", dest="verbose") opts,
+ args = parser.parse_args()
+
+
+第 一個 add_option() 加入了一個 "-v" 的 option;如果命令列參數中出現了
+ "-v",則 opts.verbose 將會是 True;相反的,第二個 add_option() 加入了一
+個 "-q" option;如果命令列參數中出現了 "-q",則 opts.verbose 將會是
+ False,這兩者並不相悖,程式可以設計成:當收到 "-v" 時,顯示詳細訊息;當收
+到 "-q" 時,顯示概略訊息,或完全不顯示;當兩者都沒有收到,則顯示一般的訊息
+。
+
+設定 option 的預設值:
+
+上述的例 子都假設命令例會收到預期中的 option,那麼如果沒有 option 時,接
+收到的 option 值會是什麼呢?答案是 None!如果想為 option 提供預設值,只要
+在 OptionParser.parse_args()中指定參數 default 就行了:
+
+parser.add_option("-v", action="store_true", dest="verbose", default =
+ True) parser.add_option("-q", action="store_false", dest="verbose")
+ opts, args = parser.parse_args()
+
+
+上述的程式碼為程式加入了兩個 option,當 "-v" 沒有出現時, opts.verbose
+ 預設值為 True;當 "-q" 被指定時, opts.verbose 被設定為 False,和上一個
+例子有點不同。再看下一個例子:
+
+parser.add_option("-v", action="store_true", dest="verbose",
+ default=False) parser.add_option("-q", action="store_false",
+ dest="verbose", default=True)
+
+opts.verbose 的預設值會是什麼?答案是 True,最後一個指定到同一個目標的
+ option 預設值會被採用。
+
+一般的 option 亦可加入預設值:
+
+parser.add_option("-f", action="store", dest="fileName", default =
+ "defaultConfig.txt")
+
+
+為程式加入說明:
+
+標準的 Unix 命令大多有著 "-h", "--help" 的 option,會將使用說明印出來。
+在 OptionParser.parse_args() 中指定 "help" 參數,並指定說明的字串,就可
+以為這個 option 加入說明了:
+
+
+parser.add_option("-v",action="store_true",dest="verbose",default=False,help="make
+ lots of noise [default]")
+
+
+當程式收到 "-h" 或 "--help",交給 OptionParser 解讀時,會自動印出說明內
+容,而忽略其它的 argument:
+
+usage: [options] arg1 arg2 
+
+
+options: -h, --help show this help message and exit -v, --verbose make
+ lots of noise [default] -q, --quiet be vewwy quiet (I'm hunting
+ wabbits) -fFILE, --file=FILE write output to FILE -mMODE, --mode=MODE
+ interaction mode: one of 'novice', 'intermediate' [default], 'expert'
+
+
+還 記得一開始提到交給 OptionParser 建構子的參數 MSG_USAGE 嗎? optparse
+ 套件對 usage 訊息也提供了一些支援。在 usage 中使用 "%prog" 關鍵字,
+ OptionParser 會自動將其代換為程式名,即 sys.args[0]:
+
+usage = "usage: %prog [options] arg1 arg2"
+
+
+如果程式名為 "myprog",則出現在 help 訊息中的 usage 就會是:
+
+usage = "usage: myprog [options] arg1 arg2"
+
+
+如果OptionParser 建構子沒有收到任何參數,則會自動產生一個 usage 訊息:
+
+
+"usage: %prog [options]"
+
+
+前提是程式沒有 positional argument。甭擔心 option 在 help 訊息中排列的
+方式, OptionParser 會搞定一切,如同前面程式所示。
+
+替 option 分門別類:
+
+如果能夠在 help 訊息中,將性質相近的 option 放在一起,與其它 option 明顯
+區別開來,相信使用者在閱讀時,就能夠很快地查到所要的資訊了。 optparse 套
+件提供了將 option 以 group 分開的機制:
+
+group = OptionGroup(parser, "Dangerous Options", "Caution: use these
+ options at your own risk. " "It is believed that some of them bite.")
+ group.add_option("-g", action="store_true", help="Group option.")
+ parser.add_option_group(group)
+
+首 先產生一個 OptionGroup 物件,將 OptionParser 和 help 訊息當做參數交
+給建構子,然後呼叫 OptionGroup.add_option() 加入 option,最後再呼叫
+ OptionParser.add_option_group() 加入此 group。如此 help 訊息中的
+ option 就會按 group 顯示了!
+
+usage: [options] arg1 arg2
+
+
+options: -h, --help show this help message and exit -v, --verbose make
+ lots of noise [default] -q, --quiet be vewwy quiet (I'm hunting
+ wabbits) -fFILE, --file=FILE write output to FILE -mMODE, --mode=MODE
+ interaction mode: one of 'novice', 'intermediate' [default], 'expert'
+
+Dangerous Options: Caution: use of these options is at your own risk.
+ It is believed that some of them bite.  -g Group option.
+
+顯示程式版本:
+
+無論是 GUI 或是 CUI 程式,使用者都會關心目前的程式版本資訊。 optparse
+ 套件也提供了版本資訊的支援:
+
+parser = OptionParser(usage="%prog [-f] [-q]", version="%prog 1.0")
+
+
+在 OptionParser 建構時指定 version 參數,並將提供版本訊息(先前提到的
+ "%prot" 關鍵字亦可用在此處)。當使用者下達的命令中帶有參數
+ "---version" (只有 "-v" 不行)時,程式會顯示版本資訊:
+
+$/usr/bin/foo --version foo 1.0
+
+指定讀入 option argument 的個數:
+
+add_option() 有一個參數 nargs,用以指定該 option 會從命令列上讀入幾個
+ option argument。舉例來說,如果 add_option(..., narg = 3, ...):
+
+$myprog --file w x y z
+
+
+則 opts.file 將會是一個 tuple,內容為 ('w', 'z', 'y')。如果 option
+ argument 個數不足,程式會回應錯誤訊息。
+
+type of an option:
+
+在 加入 option 時,參數 type 代表該 option 儲存 dest 的型態。支援的型態
+有 string, int, long, choice, float 和 complex。若要加入其它型態,請參
+考 Python Library Reference 6.20.5 小節,"Extending optparse"。對於
+ string 型態的 option, option argument 會被直接將結果存入 dest。
+
+對於 int, long, float 和 complex 型態, option argument 會被轉換成相對
+應的型別;如果轉換的過程失敗,例如原本預期收到一個 int,卻收到一個字串,程
+式會結束並列印錯誤訊息。
+
+對 於 choice 型態, 在呼叫 OptionParser.add_option() 要指定一個由字串所
+組成的 tuple 或 list 給 choice 參數,接著 OptionParser.check_choice()
+ 會比對傳入的 option argument 是否和 choice tuple 或 choice list 相同,
+若不相同則會丟出 OptionValueError。
+
+action of an option:
+
+在加入 option 時,參數 action 代表對 option argument 所要進行的動作。參
+數 action 有下列幾種:
+
+store : 預設的 action,將 option argument 存到指定的 dest。 store_const
+ : 將 dest 的值設為一個給定的常數。 make_option("-q", "--quiet",
+ action="store_const", const=0, dest="verbose"), make_option("-v",
+ "--verbose", action="store_const", const=1, dest="verbose"),
+ make_option("--noisy", action="store_const", const=2,
+ dest="verbose"), 當 "--noisy" 出現時, opts.verbose 的值將會被設定成 2
+。 store_true : 將 dest 的值設定為 True。 store_false : 將 dest 的值設
+定為 False。 append : 將 option argument 增加到 dest 中,而 dest 的型態
+將會是 list。使用 append action 時,命令列中可以重覆出現 option 和
+ option argument:
+
+$myprog -f 1 -f 2 -f 3
+
+
+則 opts.optargs 將會是 ['1', '2', '3']。如果是 store action,那麼
+ opts.optargs 將只會是 3,因為每指定一次 option, dest 的值就一直被更新
+。
+
+若呼叫 add_option() 時參數 nargs 被設定,而 action = append 時,程式可以
+接受下列命令列參數:
+
+parser.add_option(dest = "optargs",action = "append",nargs = 3) ...
+  print opts.optargs
+
+-----------------------------
+
+$myprog -f 1 2 3 -f 4 5 6 -f 7 8 9 [('1', '2', '3'), ('4', '5', '6'),
+ ('7', '8', '9')]
+
+
+看出其中差異了嗎? nargs 會將 option argument 包裝成 tuple,而 append 參
+數會將包裝好的 tuple 再"附加"到原有的 list 中。 count : 將 dest 的值加
+ 1。 dest 的值會被初始會 0,該 option 每出現一次, dest 的值就增加 1。
+ callback : 請參考 Python Library Reference 6.20.4。 help : 列印 help
+ 訊息。 version : 列印程式版本。
+
+
+錯誤處置: 如果 option 預期會收到一個 int,而使用者傳入的是 string 參數
+時,會發生什麼事?
+
+optParser.add_option("-n",dest = "theNumber",type = "int")
+
+
+若使用者輸入的命令是:
+
+$ /usr/bin/foo -n abc
+
+
+程式會發出錯誤訊息,並告知使用者輸入的參數有誤,並且以非零的回傳值結束:
+
+usage: foo[ -n ] 
+
+
+foo: error: option -n: invalid integer value: 'abc'
+
+
+OptionParser 的一些操作方法:
+
+在加入 option 或解讀完參數之後,可以透過 OptionParser 的一些方法來得到
+一些資訊(以下的 opt_str 就是 "-f", "--file" 這些在增加 option 時所用到
+的參數):
+
+
+has_option(opt_str) : 檢查 OptionParser 中是否有某個 option。
+ get_option(opt_str) : 取得 OptionParser 中的某個 option。
+ remove_option(opt_str) : 刪除 OptionParser 中的某個 option。
+
+
+當 option 發生碰撞(重覆)時:
+
+option 以下列的方式加入時:
+
+parser.add_option("-n", "--dry-run", ...) ...  parser.add_option("-n",
+ "--noisy", ...)
+
+
+就稱為"碰撞"。當 option 碰撞時, optparse 會丟出 OptionConflictError。
+程式設計師應該在設計期就解決掉這個問題,也就是說,不應該使用 try -
+ except 來捕捉這個錯誤 - 畢竟這在設計期就可以被處理掉的。
+
+當 OptionParser 的被繼承時,一些標準的 option 就很有可能被子類別覆蓋掉
+。這種情況下,可以設定 OptionParse 處置碰撞的方式:
+
+parser.set_conflict_handler("resolve") or parser = OptionParser(...,
+ conflict_handler="resolve")
+
+都 可以讓後來加入的 option 覆蓋掉原有的 option。預設的
+ conflict_handler 值為 "error",也就是直接丟出 OptionConflictError。所
+謂覆蓋,也不是直接移除掉原有的 option,而是避開後來加入的 option:
+
+parser = OptionParser(conflict_handler="resolve")
+
+
+parser.add_option("-n", "--dry-run", ..., help="original dry-run
+ option") ...  parser.add_option("-n", "--noisy", ..., help="be
+ noisy")
+
+
+在 help 訊息中,就會看到:
+
+options: --dry-run original dry-run option ...  -n, --noisy be noisy
+
+
+第一個 option 的 "-n" 被刪去了。如果這時又加入一個 option,使用了
+ "--dry-run"做為名稱呢?那麼第一個 option 就會直接被移除,因為它已經完全
+被覆蓋掉了,程式將不認得它, help 訊息中也不會有它的蹤跡。
+
+在這裡我省略了 Callback option 和 Extending optparse 兩個小節,如果有興
+趣,可以親閱 Python Library Reference;對於這篇文章若有疑問的,也可以先找
+找 Reference,也許我漏掉了也說不定。
+
+程 式寫得愈多,愈覺得自己的渺小。這些設計精良的套件,若不是當初由許多無
+私的前輩們開發出來,我們又怎麼夠享受到它的便利性?以上是我參考 Python
+ Library Reference, 6.19 optparse 介紹的內容,所寫的心得筆記。希望對這
+裡的 Python 同好有幫助,如果有錯誤也請多指正!
+
+
+void optparse::OptionParser::add_option	(	std::string 	shrt_flag,
+
+
+std::string 	lng_flag,
+
+
+std::string 	destination,
+
+
+std::string 	help = "",
+
+
+action_t 	act = STORE,
+
+
+type_t 	type = STRING,
+
+
+std::string 	dfault = "",
+
+
+std::string 	allowed_values= ""	
+
+)	
+
+
+
+Add an option to the parser.
+
+Parameters:
+
+
+
+
+
+shrt_flag 	Short option name, like e.g. "-q".
+
+lng_flag 	Long option name, like e.g. "--quiet"
+
+destination 	Key under which the option argument is stored in the
+ dictionary.
+
+help 	Help string for generating the usage info.
+
+act 	Action, one of STORE, STORE_TRUE, STORE_FALSE.
+
+type 	Type info of the expected option argument. One of INT, DOUBLE,
+ STRING, BOOL.
+
+dfault 	Default value. Value stored in the dictionary if the option is
+ not given.
+
+allowed_values 	List of possible option values. A string of
+ comma-separated allowed values. An empty string means that any value
+ is allowed.
+
+
+Q.How to specify a discrete list of choices for an option
+  from optparse import OptionParser
+A.
+def main():
+    parser = OptionParser(usage='usage: %prog [options] ')
+    parser.add_option('-e', '--env',
+                      type='choice',
+                      action='store',
+                      dest='environment',
+                      choices=['production', 'staging', 'testing',],
+                      default='production',
+                      help='Environment to run on',)
+    (options, args) = parser.parse_args() 

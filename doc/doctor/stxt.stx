@@ -68,9 +68,9 @@ XML 已忽略欄、行、首排前置字元等結構，
 僅有純標籤結構。
 
 雖然其結構較 XML 為特殊，
-且不易設計剖析器，但其較 XML 自然，
+且不易設計剖析器，但其源碼較 XML 更自然適合人類閱讀，
 具由於結構比 XML 之標籤結構多元，
-故一定能表示 XML 所能表示之結構
+故能表示 XML 所能表示之結構
 
 多次剖析取向
 ~~~~~~~~~~~~
@@ -239,3 +239,16 @@ STXT 其中間表示為文件樹，
 視覺介面之主控台。
 
 <doc\doctor\reference.stx>
+
+問答結構
+~~~~~~~~
+
+Q. Can you tell us a little about Neptune’s Pride?
+   Neptune's Pride is a real-time multi-player game of strategy, intrigue
+   and galactic conquest. The game is played over several weeks, and
+   players can log in at any time to upgrade their stars, dispatch their
+   ships and most important of all, conspire with the other players.
+
+   Neptune's Pride is not like most web strategy games. The game itself
+   is very simple, which allows players to focus on high level strategic
+   decisions, teamwork and diplomacy. 

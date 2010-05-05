@@ -1,4 +1,5 @@
 # coding=utf8
+# stxt 之前端命令介面
 from __future__ import with_statement
 import sys, os, re, logging
 import booker
@@ -8,6 +9,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(name) %(levelname) %(message)s',
                     filename='stxt.log',
                     filemode='w')
+
 logger = logging.getLogger('stxt')
 
 if __name__ == '__main__':
@@ -15,20 +17,16 @@ if __name__ == '__main__':
     usage = u"usage: %prog SOURCE [options]"
     oparser = OptionParser(usage, version="%prog 1.1")
     oparser.add_option("-d", "--debug", action="store_true", 
-                      dest="debug", default=False,
-                      help=u"檔名是否含有關鍵字")
-    oparser.add_option("-t", "--table", action="store_true", 
-                      dest="dump_table", default=False,
-                      help=u"印出符號表")
+                       dest="debug", default=False,
+                       help=u"除錯模式")
     oparser.add_option("-i", "--noinline", action="store_true", 
-                      dest="noinline", default=False,
-                      help=u"不剖析行內元素")
-    oparser.add_option("-p", "--dump", action="store_true", 
-                      dest="dump_tree", default=False,
-                      help=u"印出文件樹")
-    oparser.add_option("-f", "--format", action="store", 
-                      dest="format", default=False,
-                      help=u"指定輸出格式")
+                       dest="noinline", default=False,
+                       help=u"不剖析行內元素")
+    oparser.add_option("-f", "--format", dest="format", 
+                       choices=['html', 'doctree', 'name_table',
+                                'web', 'slide'],
+                       default='html',
+                       help=u"指定輸出格式")
 
     (options, args) = oparser.parse_args()
 
@@ -42,9 +40,16 @@ if __name__ == '__main__':
     with open(src) as f:
         d = booker.parse(f.read(), lexer = MutipleFileLexer(src),
             inline = (not options.noinline))
-        if options.dump_tree:
+        d.make_symbol_table()
+        d.file = src # this parameter is used by web formatter
+
+        if options.format == 'doctree':
             d.dump()
-        if options.dump_table:
-            d.make_symbol_table()
-            print '符號表：'
+        elif options.format == 'name_table':
             d.dump_symbol_table()
+        elif options.format == 'html':
+            from formater import html
+            print html.to_html(src)
+        elif options.format == 'web':
+            from formater import web
+            web.to_doc(d)

@@ -394,7 +394,6 @@ if __name__ == '__main__':
                       dest="dump_tree", default=False,
                       help=u"印出文件樹")
 
-
     (options, args) = oparser.parse_args()
 
     if len(args) < 1:

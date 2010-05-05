@@ -1,10 +1,10 @@
 # coding=utf-8
 from __future__ import with_statement
 import sys, os, re
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-from stxt import booker
-from stxt import template 
-from stxt.template import Template 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import booker
+import template 
+from template import Template 
 import logging
 import traceback
 
