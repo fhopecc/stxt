@@ -10,9 +10,7 @@ def disp(tree):
         return f_titled_container(tree)
     elif tree.type in ('proof', 'term'):
         return f_titled_container(tree)
-    elif tree.type in ('para'):
-        return f_element(tree)
-    elif tree.type in ('list', 'listitem', 'olistitem'):
+    elif tree.type in ('para', 'list', 'listitem', 'olistitem'):
         return f_container(tree)
     else: return globals()['f_' + tree.type](tree)
 
@@ -44,6 +42,8 @@ def f_sect1(tree):
     html = ''
     content = [c for c in tree.children if c.type != 'sect2']
     for c in content:
+        #import pdb
+        #pdb.set_trace()
         html += disp(c)
 
     sect1s = tree.root().children
