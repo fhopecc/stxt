@@ -2,5 +2,15 @@
 ===========
 0990506
 
-[[七星潭集]]
+code.架構圖
+    北
+ 西 心 東
+    南
+::
+   
+東 [[chisingtan]]
+心 [[love]] [[imaging]]
+
 <doc/poems/chisingtan.stx>
+<doc/poems/love.stx>
+<doc/poems/imaging.stx>

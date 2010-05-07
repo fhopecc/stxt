@@ -30,6 +30,9 @@ handlers:
   static_dir: taichi
 - url: /stable_prog
   static_dir: stable_prog
+- url: /poems
+  static_dir: poems
+
 
 skip_files: |
  ^(.*/)?(
