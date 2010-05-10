@@ -23,8 +23,8 @@ tokens = [
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
           'IMAGE', 'VIDEO', 
-          'COMMENT', 'FOOTNOTE', 'CITATION', 
-          'CODE', 'CODEBLOCK',
+          'COMMENT', 'FOOTNOTE', #'CITATION', 
+          'PREMARK', 'CODE', 'CODEBLOCK',
           'TABLE', 'TABLEBLOCK',
           'INSERT', 
           'LINE', 'INDENT', 
@@ -94,6 +94,10 @@ def t_code_CODEBLOCK(t):
 def t_code_pass(t):
     r'[^\n]+'
     pass 
+
+def t_PREMARK(t):
+    r'.*::$'
+    pass
  
 def t_TABLE(t):
     r'^table(\[(?P<name>[^]]*)\])?\.(?P<title>.*)\n'

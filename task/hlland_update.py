@@ -46,9 +46,10 @@ def isalive(host):
     s.close() 
     return False
 
-def deploy():
+def deploy(dir=None):
     targets  = ['96tt003', '96tt006', '97tt024', 
                 '97tt025', '97tt027', '97tt040']
+
     for t in targets:
         if isalive(t):
             if sys.version[0:1] == '3':
@@ -65,7 +66,10 @@ def deploy():
                 cmd = r'net use T: \\%s\HL' % t
 
             os.system(cmd)
-            dir = os.path.join('tmp', 'hlland')
+
+            if dir==None:
+                dir = os.path.join('tmp', 'hlland')
+
             for root, dirs, files in os.walk(dir):
                 for f in files:
                     src  = os.path.join(root, f)
@@ -88,9 +92,29 @@ def usage():
     return usage % os.path.basename(sys.argv[0]) 
 
 if __name__ == '__main__':
-    try:
-        if len(sys.argv) < 4: raise IndexError()
-        update_hlland(*sys.argv[1:4])
-        deploy()
-    except IndexError:
-        print usage()
+    from optparse import OptionParser
+    usage = u"usage: %prog [options]"
+    parser = OptionParser(usage, version="%prog 1.0")
+    parser.add_option("-o", "--online", dest="online",
+                      nargs=3,
+                      help=u"-o docdate docno password. " +
+                           u'date: 文件日期請輸入民國年 ex.0990101, ' +
+                           u'docno: 文號, ' +
+                           u'password: 壓縮檔密碼 '
+                      )
+    parser.add_option("-l", "--local", dest="local",
+                      help=u"-l dir. " +
+                           u'將 dir 下的更新程式佈署到機台上。'
+                      )
+
+    (options, args) = parser.parse_args()
+
+    if options.local:
+        deploy(options.local)
+
+    #try:
+    #    if len(sys.argv) < 4: raise IndexError()
+    #    update_hlland(*sys.argv[1:4])
+    #    deploy()
+    #except IndexError:
+    #    print usage()
