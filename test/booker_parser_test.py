@@ -479,6 +479,25 @@ t4               B.update(p)
         f = q.children[1]
         self.assertEqual('comment', f.type)
 
+    def testLiteral(self):
+        case = '''::
+  我說啊
+  石帆船
+  風要將你吹向何方
+  前方太平洋之彼端
+  是你夢想的終點嗎
+
+  我知道不是的
+  因為你佇足在此很久了
+  是什麼把你留下呢
+  留下的理由肯定大於男兒海上的雄心壯志吧
+'''
+        doc = booker.parse(case)
+        n = doc.children[0]
+        self.assertEqual('literal', n.type)
+        self.assertEqual(case[3:].replace(' ', ''), n.value)
+
+
 if __name__ == '__main__':
     #unittest.main()
     tests = unittest.TestSuite()
@@ -496,6 +515,7 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testMSect2"))
     tests.addTest(UnitTest("testTerm"))
     tests.addTest(UnitTest("testSectWithTimestamp"))
+    tests.addTest(UnitTest("testLiteral"))
     runner = unittest.TextTestRunner()
     runner.run(tests)
     #tests.debug()

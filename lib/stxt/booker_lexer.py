@@ -8,7 +8,7 @@ import sys, os, re, lex, tree, logging
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(name) %(levelname) %(message)s',
-                    filename='inliner.log',
+                    filename='stxt.log',
                     filemode='w')
 logger = logging.getLogger('stxt.lexer')
 
@@ -23,12 +23,12 @@ tokens = [
           'DEFINE', 'THEOREM', 'PROOF', 
           'QUESTION', 'ANSWER', 
           'IMAGE', 'VIDEO', 
-          'COMMENT', 'FOOTNOTE', #'CITATION', 
-          'PREMARK', 'CODE', 'CODEBLOCK',
+          'COMMENT', 'FOOTNOTE', 'CITATION', 
+          'LITERAL', 'CODE', 'CODEBLOCK',
           'TABLE', 'TABLEBLOCK',
-          'INSERT', 
-          'LINE', 'INDENT', 
-          'LI', 'OL', 'TIMESTAMP', 
+          'INSERT',
+          'LINE', 'INDENT',
+          'LI', 'OL', 'TIMESTAMP',
           'EMPTYLINE'
          ] 
 
@@ -95,10 +95,11 @@ def t_code_pass(t):
     r'[^\n]+'
     pass 
 
-def t_PREMARK(t):
-    r'.*::$'
-    pass
- 
+def t_LITERAL(t):
+    r'^::$'
+    t.value = token_node(t, type='literal') 
+    return t 
+
 def t_TABLE(t):
     r'^table(\[(?P<name>[^]]*)\])?\.(?P<title>.*)\n'
     t.value = token_node(t)

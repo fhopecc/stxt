@@ -138,6 +138,7 @@ def p_token(p):
        sect4   : H4
        sect5   : H5
        content : para
+               | literal
                | list
                | theorem
                | define
@@ -273,6 +274,11 @@ def p_subdoc(p):
     if not p[0]: raise SyntaxError('subdoc error')
     elif not p[0].children: raise SyntaxError('subdoc error')
     else: p[0] = p[0].children
+
+def p_literal(p):
+    '''literal : LITERAL indent_block'''
+    p[1].value = p[2][1]
+    p[0] = p[1]
 
 def p_indent_block(p):
     '''indent_block : INDENT

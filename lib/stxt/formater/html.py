@@ -178,6 +178,17 @@ $:code
     temp = Template(temp)
     return str(temp(tree.type, f_title(tree), tree.value))
 
+def f_literal(tree):
+    temp = '''$def with (type, literal)
+<div class="$type">
+<pre>
+$:literal
+</pre>
+</div>
+'''
+    temp = Template(temp)
+    return str(temp(tree.type, tree.value))
+
 def f_container(tree):
     temp = '''$def with (type, element)
 <div class="$type">

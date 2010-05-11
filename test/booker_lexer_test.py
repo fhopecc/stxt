@@ -10,6 +10,16 @@ class UnitTest(unittest.TestCase):
     def setUp(self):
         lexer.begin('INITIAL')
 
+    def testLITERAL(self):
+        case = r'::'
+        lexer.input(case)
+        lexer.lineno = 1
+        t = lexer.token()
+        self.assertEqual('LITERAL', t.type)
+        self.assertEqual('literal', t.value.type)
+        self.assertEqual(1, t.value.slineno)
+        self.assertEqual('__string__', t.value.source)
+
     def testFOOTNOTE(self):
         case = r'.. 註解'
         lexer.input(case)
