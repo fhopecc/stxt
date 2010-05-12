@@ -24,7 +24,7 @@ if __name__ == '__main__':
                        help=u"不剖析行內元素")
     oparser.add_option("-f", "--format", dest="format", 
                        choices=['html', 'doctree', 'name_table',
-                                'web', 'slide'],
+                                'web', 'slide', 'slide_print'],
                        default='html',
                        help=u"指定輸出格式")
 
@@ -53,3 +53,9 @@ if __name__ == '__main__':
         elif options.format == 'web':
             from formater import web
             web.to_doc(d)
+        elif options.format == 'slide':
+            from formater import slide
+            slide.to_slide(d)
+        elif options.format == 'slide_print':
+            from formater import slide_print
+            slide_print.to_slide(d)

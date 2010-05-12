@@ -1,42 +1,17 @@
 # coding=utf-8
 from __future__ import with_statement
-import sys, os, re, html, web
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from os import path
-from html import *
-from web import f_path
-from web import f_filename
-from tree import Tree
+import sys, os, re, unittest, stxt_parser, slide
+from slide import *
 
 logging.basicConfig(level=logging.DEBUG,
                     filename='stxt.log',
                     filemode='w')
-logger = logging.getLogger('stxt.formatter.slide')
-
-
-def f_css():
-    f = open(os.path.join('structedtext', 'css', 'slide.css'))
-    css = f.read()
-    f.close()
-    return css
-
-render = template.render('template', globals={'css':f_css()})
-
-def disp(tree):
-    if re.match(r'sect[12]', tree.type):
-        return globals()['f_' + tree.type](tree)
-    else: 
-        return html.disp(tree)
+logger = logging.getLogger('stxt.formatter.slide_print')
 
 def to_slide(tree):
     for sect1 in tree.children:
         disp(sect1)
 
-def f_slide_counts(tree):
-    root = tree.root()
-    sect2s = [c for c in tree.children() if c.type == 'sect2']
-    return len(sect2s)
- 
 def f_sect1(tree):
     temp = '''$def with (id, type, title, content)
 <div id="$id" class="$type"><div class="title">$title</div>
@@ -115,39 +90,3 @@ $:content
 
     logger.info('render %s' % f_path(tree))
 
-def f_comment(tree):
-    return ''
-
-def f_title(tree):
-    return tree.title
-
-html.f_title = f_title
-
-def f_filename(tree):
-    'The filename for specified node'
-    if tree.type == 'sect1':
-        return '0.html'
-    else:
-        return '%d.html' % (tree.order() + 1)
-
-web.f_filename = f_filename
-
-def f_path(tree):
-    'The file path for specified node'
-    bf = path.basename(tree.root().file)
-    dir = path.splitext(bf)[0]
-    return path.join("slides", dir, f_filename(tree))
-
-def usage():
-    usage = os.path.basename(__file__) + " filename\n"
-    usage += 'filename: structed text file'
-    return usage
-
-if __name__ == '__main__':
-    if len(sys.argv) < 2: 
-        logger.info(usage())
-        exit()
-    sourcefile = sys.argv[1]
-    tree = parser.read(sourcefile)
-    tree.dump()
-    to_slide(tree)

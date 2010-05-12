@@ -4,7 +4,6 @@ u'''
 1.0 加入執行命令 -e
 '''
 from optparse import OptionParser
-from os import path
 import sys, os, re
 from fnmatch import fnmatch
 import site
@@ -65,13 +64,13 @@ def main():
     if len(args) == 1:
         cwd = args[0]
     
-    if not path.exists(cwd):
+    if not os.path.exists(cwd):
         print u'不存在 %s' % cwd
         exit(1)
     count = 0 
     for root, dirs, files in os.walk(cwd):
         for f in files:
-            p = path.join(root, f)
+            p = os.path.join(root, f)
             if is_matched(options, f):
                 count += 1
                 if options.keyword:
