@@ -58,4 +58,4 @@ if __name__ == '__main__':
             slide.to_slide(d)
         elif options.format == 'slide_print':
             from formater import slide_print
-            slide_print.to_slide(d)
+            print slide_print.to_slide(d)
