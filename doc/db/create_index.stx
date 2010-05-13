@@ -1,0 +1,29 @@
+CREATE INDEX 敘述句 (SQL CREATE INDEX Statement)
+
+如同如果一本書有索引 (Index) 您可以更快的找到需要的資料，資料庫也是同樣道理，如果一張資料表中沒有索引，在查詢資料時就必需先把整張資料表讀過一遍 (Scan Table) 再慢慢去找資料，非常的沒有效率，因此替資料表加上「適當的」索引會大大加快查詢速度哦。
+為什麼說「適當的」？因為一個設有索引的資料表當您在INSERT、UPDATE或DELETE時，索引也需要額外花資源去更新，所以最好只在常被查詢到的欄位作索引，不然得不償失啊！
+CREATE INDEX 語法 (SQL CREATE INDEX Syntax)
+
+CREATE INDEX index_name
+ON table_name (column_name);
+CREATE INDEX index_name
+ON table_name (column_name1, column_name2···);
+什麼時候建立多欄位索引比較合適？如果您常對一張資料表查詢WHERE column_name1='xxx' AND column_name2='yyy'，這時您就可以對column_name1及column_name2這兩個欄位建立一個共同索引。
+
+
+DROP INDEX 敘述句 (SQL DROP INDEX Statement)
+
+我們要怎麼將索引移除掉？就是使用 DROP INDEX。
+
+MySQL
+ALTER TABLE table_name
+DROP INDEX index_name;
+
+MS SQL Server
+DROP INDEX table_name.index_name;
+
+Oracle
+DROP INDEX index_name;
+
+MS Access
+DROP INDEX index_name ON table_name;

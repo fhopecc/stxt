@@ -1,0 +1,23 @@
+
+在一個操作中修改兩個現有字串的類型：
+
+ALTER TABLE distributors
+    ALTER COLUMN address TYPE varchar(80),
+    ALTER COLUMN name TYPE varchar(100);
+
+alter table
+   table_name
+modify
+   column_name  datatype;
+
+If you are brave you can use a single "alter table" syntax to modify multiple columns:
+
+alter table
+   table_name
+modify
+   (
+   column1_name  column1_datatype,
+   column2_name  column2_datatype,
+   column3_name  column3_datatype,
+   column4_name  column4_datatype
+   );
