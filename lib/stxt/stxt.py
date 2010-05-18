@@ -24,7 +24,8 @@ if __name__ == '__main__':
                        help=u"不剖析行內元素")
     oparser.add_option("-f", "--format", dest="format", 
                        choices=['html', 'doctree', 'name_table',
-                                'web', 'slide', 'slide_print'],
+                                'web', 'slide', 'slide_print', 
+                                'chinese_number'],
                        default='html',
                        help=u"指定輸出格式")
 
@@ -59,3 +60,6 @@ if __name__ == '__main__':
         elif options.format == 'slide_print':
             from formater import slide_print
             print slide_print.to_slide(d)
+        elif options.format == 'chinese_number':
+            from formater import chinese_number
+            print chinese_number.to_html(src)
