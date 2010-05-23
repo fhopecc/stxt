@@ -1,0 +1,250 @@
+最短路徑(shortest path)
+-----------------------
+
+令圖 g={v, e}，
+則可定義一權重函數 w:e->d, e 屬於 e, d>=0，
+若 e 不屬於 e 則定義其 w 為無限大。
+
+路徑 p 的權重函數可定義為
+w(p)=sum(w(v1, v2),w(v2, v3)...w(v(n-1), vn)
+故可定義最短路徑距離 d(u,v)=min(w(p)), 其中 p 為從 u 到 v 的路徑。
+
+若 s 是最短路徑，且 s' 包含於 s，則 s'
+也是最短路徑。
+最短路徑的最佳子結構定理
+
+若 u, x, v 屬於 v，則右方不等式成立：
+d(u,v)&lt;=d(u,x)+d(x,v)
+最短路徑的三角不等式
+
+距離向量協定
+
+採用 bellman-ford 演算法，所以不須知道所有網路的拓撲狀態。
+
+
+最短路徑演算法比較
+最短路徑演算法比較
+
+
+
+問題
+非負權重邊
+通用
+dag
+
+
+
+
+單起點最短路徑問題
+dijkstra:o(e+vlgv)
+bellman-ford:o(ve)
+one pass of bellman-ford:o(v+e)
+
+
+全對最短路徑問題
+dijkstra*|v|次:o(ve+v2lgv)
+動態規劃, floyd-warsshell, 遞移閉包
+
+
+dijkstra 演算法
+找尋源點最短路徑問題
+
+給定一起點 s 屬於 v，對所有 v 屬於 v，找出所有 d(s,v)。
+
+
+
+其交易與 bfs 很像，但是其佇列 q 是使用優先佇列，
+而 dijkstra必須知道網路的拓撲狀態，
+同時不能有負權邊。
+
+dijkstra 演算法
+初始 t 用來維護已探訪的節點
+初始優先佇列 q，並將所有節點放入
+初始陣列 d 用來維護目前階段所有點與 s
+最短的距離，
+d(v)便是存放 d(s,v)，
+初始值為 d(s)=0, d(v)=無限大，其中 v 屬於 v-s
+若 q 不為空，則執行以下子交易
+
+自 q 取出最近節點
+「也就是 d(u) 值最小的節點」 u 加入 t
+更新 q 
+對每個與 u 相鄰點 v，依下面公式重算其最短距離 d(v)
+
+d(v)=min(d(v),d(v)+ w(u,v))
+
+對每個 d(v) 值改變的點 v，在 q 執行降級(decrease key)的動作
+
+
+
+
+反覆進行至 q 為空
+
+dijkstra 演算法
+
+def dijkstra(graph, source)
+  #1:初始化圖
+    vs=graph.vertices
+    es=graph.edges
+  for v in vs
+    v.predecessor := null
+    v.distance = infinity
+    v.distance = 0 if v == source
+  end
+  q = fqueue[vs]  #fibonacci queue
+  s = set.new
+
+  #2:展開每個邊的權值
+  until q.empty? 
+    u = q.deqmin
+    s = s.union(u)
+    for e in u.outedges
+      v = e.destination
+      if v.distance > u.distance + e.weight
+        v.distance = u.distance + e.weight
+        q.decrease(v) # 對 fq 作鍵 v 的降級
+        v.prev = u 
+      end
+    end
+  end
+end
+
+
+
+其 q 以費伯納希堆實作為佳。
+
+ospf 協定
+採用 dijkstra 演算法，所以必須知道所有網路的拓撲狀態。
+
+
+bellman-ford 演算法
+
+與 dijkstra 最大的不同在於，
+bellman-ford 每一次展開邊時，
+是圖的所有邊作展開，
+而 dijkstra 則是對最小權值節點的所有發出邊作展開。
+
+bellman-ford 演算法
+
+def bellman_ford(graph, source)
+  # 1:初始化圖
+    vs=graph.vertices
+    es=graph.edges
+  q =fibonacciqueue.new(vs)
+  s =set.new();
+  vs.each do |v| 
+    if v == source
+      v.distance = 0
+    else
+      v.distance = infinity
+    end
+    v.predecessor=null
+  end
+
+  # 2:重覆地展開邊
+  for i in 1..(vs.size)
+    for e in es
+      u=e.source
+      v=e.destination
+      v.distance = min(v.distance, u.distance + e.weight)
+      v.prev = u if v.distance == u.distance + e.weight
+    end
+  end
+
+  # 3:檢查負權邊
+  for e in es
+    u=e.source
+    v=e.destination
+    throw negweightedgeerror if v.distance > u.distance + e.weight
+  end
+end
+
+
+找尋全對最短路徑問題
+
+
+aov-網路 activity on vertex network
+
+所有的工程或者某種流程可以分為若干個小的工程或階段，
+這些小的工程或階段稱為活動(activity)。
+若以有向無環圖(dag)的頂點來表示活動，
+有向邊表示活動之間的優先關係，
+則這樣活動在頂點上的 dag 稱為 aov 網路。
+
+
+在 aov 網路中，若從點 i 到點 j 之間存在一條有向路徑，
+稱 i 是 j 的前驅，
+或者稱 j 是 i 的後繼。
+若 (i,j) 是圖中的邊，則稱 i 是 j 的直接前驅，
+j 是 i 的直接後繼。
+aov 網中的邊表示了活動之間存在的先後關係。
+
+
+在aov 網路中不能出現有向環。
+若出現了有向環，則意味著某項活動應以自己作為先決條件。
+因此，對給定的aov網路，必須先判斷它是否存在有向環。
+檢測有向環的一種方法是對 aov
+網路求出拓撲有序序列。
+即將各個點「代表各個活動」排列成一個線性有序的序列，
+使得 aov 網路中所有應存在的前驅和後繼關係都能得到滿足。
+這種構造 aov
+網路全部頂點的拓撲有序序列的運算就稱為拓撲排序。
+若通過拓撲排序能將 aov 網路的所有頂點都排入一個拓撲有序的序列中, 
+則該網路中必定不會出現有向環。
+
+拓撲排序
+令 g 為具有 n 個元素的有向圖，初始化陣列 a[n] 用來儲存排序結果
+若 |a| 小於 n，執行以下子交易
+
+在 g 中選一個沒有進入邊的頂點 v
+將 v 加入至 a 中
+從 g 中刪除 v 和所有以它為尾的邊
+
+
+傳回 a 為 g 的拓撲排序陣列
+拓撲排序演算法時間複雜度為 o(n＋e)。
+
+
+aoe-網路 activity on eage network
+
+一般就是 pert 圖，其可以回答
+
+元素
+說明
+工作(task)
+
+又稱為活動，在有向圖中的以邊表示，
+工作會消耗資源，用來達到其進入里程碑。
+其出來的里程碑若沒達到，則此工作永達無法完成。
+
+里程碑(milestone)
+
+又稱為事件，在網路圖以節點表示，
+里程碑不消耗資源「時間、勞務、金錢等等」。
+若此點的里程碑沒有發生，
+則表示此點的離邊所代表的工作就不能進行。
+所謂的完成里程碑是指此點的入邊所代表的工作皆已完成。
+
+樂觀時間 o
+完成工作最少所耗費的時間
+
+悲觀時間 p
+完成工作最多所耗費的時間
+
+可能時間 m
+完成工作最有可能耗費的時間
+
+預期時間 te
+te=(o+4m+p)/6
+
+延誤 s(slack)
+
+一個里程碑的延誤是指到達此里程碑所多費的時間，
+
+若 s > 0 則稱為進度超前
+若 s &lt; 0 則稱為進度落後
+若 s = 0 則稱為趕上進度
+
+關鍵路徑 cr
+從開始到最終里程碑的路徑中，耗時最長的路徑，
+若關鍵路徑延遲，會延遲整個專案時程

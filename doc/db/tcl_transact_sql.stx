@@ -1,5 +1,5 @@
-Transact-SQL的交易控制語言
---------------------------
+Transact-SQL的交易控制語言(tcl in transact_sql)
+-----------------------------------------------
 在Transact-SQL的交易是使用BEGIN TRAN指令開始，
 如果交易成功，就使用交付交易COMMIT TRAN指令結束，如下所示：
 

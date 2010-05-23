@@ -1,6 +1,6 @@
-關鍵字:
-  SQL 的保留字相當多，列表如下：   
-
+關鍵字(reserved word)
+---------------------
+SQL 的保留字相當多，列表如下：   
   absolute action add [[all]] allocate alter and
   any are as asc assertion at authorization avg
   begin between bit bit_length both by

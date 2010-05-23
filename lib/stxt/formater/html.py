@@ -116,6 +116,33 @@ def f_image(tree):
     temp = Template(temp)
     return str(temp(tree.type, f_title(tree), tree.name))
 
+def f_flash(tree):
+    temp = '''$def with (type, title, path)
+<div class="$type"><div class="title">$title</div>
+<object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="400" height="315"> 
+		<param name="movie" value="videos/player-viral.swf" /> 
+		<param name="allowfullscreen" value="true" /> 
+		<param name="allowscriptaccess" value="always" /> 
+		<param name="flashvars"
+        value="file=videos/video.flv&image=videos/preview.jpg" /> 
+		<embed 
+			type="application/x-shockwave-flash"
+			id="player2"
+			name="player2"
+			src="videos/player-viral.swf" 
+			width="400" 
+			height="315"
+			allowscriptaccess="always" 
+			allowfullscreen="true"
+			flashvars="file=videos/video.flv&image=videos/preview.jpg" 
+		/> 
+</object> 
+</div>
+'''
+    temp = Template(temp)
+    vurl = os.path.join('videos', tree.name.replace(' ', '_'))
+    return str(temp(tree.type, f_title(tree), vurl))
+
 def f_video(tree):
     temp = '''$def with (type, title, path)
 <div class="$type"><div class="title">$title</div>
@@ -137,8 +164,12 @@ def f_video(tree):
 #style="position:absolute; left:0;top:0;"
 
     temp = Template(temp)
-    vurl = os.path.join('videos', tree.name.replace(' ', '_') + '.wmv')
-    return str(temp(tree.type, f_title(tree), vurl))
+    vurl = os.path.join('videos', tree.name.replace(' ', '_'))
+    ext = os.path.splitext(vurl)[1]
+    if ext in ('.flv'):
+        return f_flash(tree)
+    else:
+        return str(temp(tree.type, f_title(tree), vurl))
 
 def f_table(tree):
     temp = '''$def with (type, title, content)
