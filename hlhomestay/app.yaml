@@ -6,7 +6,7 @@ api_version: 1
 
 handlers:
 - url: /
-  script: \\homestay\\list.py
+  script: homestay/month_view.py
 
 #- url: /session/.*
 #  script: session.py
