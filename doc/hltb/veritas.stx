@@ -1,0 +1,10 @@
+Retension
+---------
+本局 veritas 設的 retension 為 1 個月
+
+啟動 veritas client
+-------------------
+1.用 XBroswer 連 ap1(或想要的主機)
+2.開啟一終端機視窗
+3.輸入 cd user/openv/netbackup/bin
+4.輸入 ./jbpSA

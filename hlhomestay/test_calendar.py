@@ -1,8 +1,21 @@
 from calendar import Calendar
 c = Calendar()
-temp = '''
-<table id="canlendar">
-</table>
+tdtemp = '''<td><div class="day">%s</div>
+</td>
 '''
+
+trtemp = '''<tr>
+%s
+</tr>
+'''
+
+
+out = '''<table id="canlendar">'''
 for w in c.monthdatescalendar(2010, 5):
-    print w
+    tr = '<tr>'
+    for d in w:
+        tr += tdtemp % d.day
+    tr += '</tr>'
+    out += tr
+out += '</table>'
+print out
