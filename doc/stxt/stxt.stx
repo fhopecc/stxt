@@ -1,5 +1,5 @@
 自然文字排版系統
-----------------
+================
 0990405
 
 文件排版系統，在目前分化成以下兩種取向：
@@ -23,10 +23,6 @@
 讓人們已無法從編碼直接看出文件結構，
 且標籤控制碼可能佔到文件碼近 1/3 的可能性。
 
-研究目的   
---------
-0990504
-
 本研究企圖建立一個自然文字排版系統，
 其文件為純文字文件，
 但利用直覺排版來表示文件結構，
@@ -44,12 +40,8 @@
 
 控制碼越少越好，且控制碼不可複雜化可讀性。
 
-研究設計
---------
-0990405
-
 以自然純文字視覺排版作為文法
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 0990405
 
 本研究為了克服 XML 文件階層太深的標籤控制碼，
@@ -72,8 +64,8 @@ XML 已忽略欄、行、首排前置字元等結構，
 具由於結構比 XML 之標籤結構多元，
 故能表示 XML 所能表示之結構
 
-多次剖析取向
-~~~~~~~~~~~~
+多次剖析
+--------
 0990310
 
 一般剖析器都為__單次剖析__或__二次剖析__，
@@ -148,8 +140,8 @@ Lexer 須滿足以下功能：
   4.儲存源碼之位置訊息，以利事後除錯
   5.處理巨大檔之讀取
 
-以文件樹組織剖析結果
-~~~~~~~~~~~~~~~~~~~~
+文件樹
+~~~~~~
 0990311
 
 因剖析歷程具階層關係，
@@ -240,15 +232,6 @@ STXT 其中間表示為文件樹，
 
 <doc\doctor\reference.stx>
 
-問答結構
-~~~~~~~~
+<doc\doctor\structure.stx>
 
-Q. Can you tell us a little about Neptune’s Pride?
-Neptune's Pride is a real-time multi-player game of strategy, intrigue
-and galactic conquest. The game is played over several weeks, and
-players can log in at any time to upgrade their stars, dispatch their
-ships and most important of all, conspire with the other players.
-
-Neptune's Pride is not like most web strategy games. The game itself
-is very simple, which allows players to focus on high level strategic
-decisions, teamwork and diplomacy. 
+<doc\doctor\frontend.stx>

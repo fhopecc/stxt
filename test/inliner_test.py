@@ -65,7 +65,7 @@ class UnitTest(unittest.TestCase):
         t = lexer.token()
         self.assertEqual(3, t.lexer.lineno)
         self.assertEqual('REFERENCE', t.type)
-        self.assertEqual('test.sql', t.value.refname)
+        self.assertEqual('test.sql', t.value.address)
 
     def testPARA(self):
         case = '字元塊[[test.sql]]__強調詞__'
@@ -75,10 +75,12 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('CBLOCK', t.type)
         self.assertEqual('字元塊', t.value)
 
+        #import pdb
+        #pdb.set_trace()
         t = lexer.token()
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('REFERENCE', t.type)
-        self.assertEqual('test.sql', t.value.refname)
+        self.assertEqual('test.sql', t.value.address)
 
         t = lexer.token()
         self.assertEqual('EMPHASIS', t.type)
@@ -87,11 +89,13 @@ class UnitTest(unittest.TestCase):
     def testReference(self):
         case = '''字元塊1
 字元塊2
-[[test.sql]][[label:name:type]][[name:type]]
+[[test.sql]][[label|address]]
 '''
+        #import pdb
+        #pdb.set_trace()
         d = inliner.parse(case)
         self.assertEqual('para', d.type)
-        self.assertEqual(4, len(d.children))
+        self.assertEqual(3, len(d.children))
 
         cb = d.children[0]
         self.assertEqual('cblock', cb.type)
@@ -99,18 +103,12 @@ class UnitTest(unittest.TestCase):
 
         ref = d.children[1]
         self.assertEqual('reference', ref.type)
-        self.assertEqual('test.sql', ref.refname)
+        self.assertEqual('test.sql', ref.address)
 
         ref = d.children[2]
         self.assertEqual('reference', ref.type)
         self.assertEqual('label', ref.label)
-        self.assertEqual('name', ref.refname)
-        self.assertEqual('type', ref.reftype)
-
-        ref = d.children[3]
-        self.assertEqual('reference', ref.type)
-        self.assertEqual('name', ref.refname)
-        self.assertEqual('type', ref.reftype)
+        self.assertEqual('address', ref.address)
 
     def testCblock(self):           
         case = '字元塊'
@@ -175,7 +173,6 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('cblock', cb.type)
         self.assertEqual(case, cb.value)
 
-
 if __name__ == '__main__':
     unittest.main()
     '''tests = unittest.TestSuite()
@@ -184,5 +181,6 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testPARA"))
     tests.addTest(UnitTest("testReference"))
     tests.addTest(UnitTest("testNEWLINE"))
-    runner = unittest.TextTestRunner()
-    runner.run(tests)'''
+    #tests.debug()
+    #runner = unittest.TextTestRunner()
+    #runner.run(tests)'''

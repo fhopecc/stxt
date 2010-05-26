@@ -275,13 +275,13 @@ class Tree(object):
     section_number = order_path
 
 class ReferenceNode(Tree):
-    def __init__(self, refname='', reftype= '', label=''):
+    def __init__(self, address='', label=''):
         Tree.__init__(self, 'reference')
-        self.refname, self.reftype = refname, reftype
+        self.address = address
         self.label= label
 
     def reftree(self): 
-        ref = self.get(self.refname)
+        ref = self.get(self.address)
         return ref
     
 def Tuple2BTree(root=None, left=None, right=None):

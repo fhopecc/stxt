@@ -42,21 +42,20 @@ def t_EMPHASIS(t):
     return t
 
 refpat =  r'\[\[('
-refpat += r'(?P<l>[^:\]]+):(?P<n1>[^:\]]+):(?P<t1>[^:\]]+)|'
-refpat += r'(?P<n2>[^:\]]+):(?P<t2>[^:\]]+)|'
-refpat += r'(?P<n3>[^:\]]+)'
+refpat += r'(?P<l>[^|\]]+)\|(?P<a1>[^|\]]+)|' # with label
+refpat += r'(?P<a2>[^|\]]+)'                 # only address
 refpat += r')]]'
 @TOKEN(refpat)
 def t_REFERENCE(t):
     m = t.lexer.lexmatch
     if m:
-        if m.group('l'): #[[label:name:type]]
-            t.value = ReferenceNode(m.group('n1'), m.group('t1'), 
-                                    m.group('l'))
-        elif m.group('n2'): #[[name:type]] 
-            t.value = ReferenceNode(m.group('n2'), m.group('t2'))
-        elif m.group('n3'): #[[name]]
-            t.value = ReferenceNode(m.group('n3'))
+        #import pdb
+        #pdb.set_trace()
+
+        if m.group('l'): #[[label|address]]
+            t.value = ReferenceNode(m.group('a1'), m.group('l'))
+        elif m.group('a2'): #[[address]]
+            t.value = ReferenceNode(m.group('a2'))
     else: 
         console.error("[%s]:It isn't correct address." % t.value)
         console.error("error at %s:%s" % (t.lexer.sourcefile, t.lexer.lineno))

@@ -318,14 +318,12 @@ def f_reference(tree):
 <a class="reference" href="$url">$label</a>
 '''
     try:
-      #  import pdb
-      #  pdb.set_trace()
         ref = tree.reftree()
         temp = Template(temp)
         return str(temp(f_label(ref), f_url(ref)))
     except KeyError:
-        logger.error("[%s] not in symbol table" % tree.refname)
-        return tree.refname
+        logger.error("[%s] not in symbol table" % tree.address)
+        return tree.address
 
 def f_address(tree):
     type = tree.type  
