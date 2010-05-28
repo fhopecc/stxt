@@ -233,5 +233,21 @@ from t1 join t2 join t3
 
 from (t1 join t2) join t3
 
-Oracle 之 join 語法
-~~~~~~~~~~~~~~~~~~~
+oracle left outer join
+~~~~~~~~~~~~~~~~~~~~~~
+code.語法
+from t1, t2 
+where  t1.id = t2.id(+)
+::
+先執行一次內連接，
+然後為 t1 不滿足連接條件的紀錄傳回一個連接紀錄， 
+該連接紀錄裡對應 t2 的紀錄用空值補齊。
+
+因此產出的連接資料表裡無條件地至少包含來自 t1 裡的每一筆紀錄。
+
+code[emp_boss_list.sql].員工對應主管名單（含無主管員工） 
+select e1.name, e2.name as boss
+from employees e1, employees e2 
+wher e1.boss_id = e2.id(+)
+::
+
