@@ -1,0 +1,50 @@
+日誌設定(log config)
+--------------------
+0990529
+
+code.預設日誌設定
+import logging
+
+logging.debug('A debug message')
+logging.info('Some information')
+logging.warning('A shot across the bows')
+::
+
+上述程式輸出如下::
+  WARNING:root:A shot across the bows
+
+因為沒有指定記錄器，系統預設為根(root)記錄器，
+而根記錄器，預設輸出等級為 WARN，
+故 debug 及 info 等級之訊息不會輸出，
+而預設之輸出器為 sys.stderr。
+
+多輸出設定
+~~~~~~~~~~
+0990529
+
+code.多輸出設定
+
+import logging
+
+# 系統日誌
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%m-%d %H:%M',
+                    filename='/temp/myapp.log',
+                    filemode='w')
+
+# 使用者訊息列
+console = logging.StreamHandler()
+console.setLevel(logging.INFO)
+formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+console.setFormatter(formatter)
+logging.getLogger('').addHandler(console)
+::
+
+上述的多輸出日誌設定依等級區分兩種日誌，
+系統日誌及通知日誌，
+對象分別為系統發展者及系統使用者。
+
+系統日誌記錄所有訊息，所以輸出等級為 DEBUG，
+通常輸出到指定之系統日誌檔，而格式一般帶有時戳。
+

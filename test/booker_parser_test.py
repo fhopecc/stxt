@@ -497,6 +497,29 @@ t4               B.update(p)
         self.assertEqual('literal', n.type)
         self.assertEqual(case[3:].replace(' ', ''), n.value)
 
+        case = '''方法其實也是函數，如下::
+
+  >>> class T(object):
+  ...    def hello( self ):
+  ...        pass  
+  ...  
+  >>> T.__dict__[ 'hello']  
+  <function hello at 0x00CD7EB0>  
+'''
+        doc = booker.parse(case)
+        p = doc.children[0]
+        self.assertEqual('para', p.type)
+        l = doc.children[1]
+        self.assertEqual('literal', l.type)
+        
+        expect = '''>>> class T(object):
+...    def hello( self ):
+...        pass  
+...  
+>>> T.__dict__[ 'hello']  
+<function hello at 0x00CD7EB0>  
+'''
+        self.assertEqual(expect, l.value)
 
 if __name__ == '__main__':
     #unittest.main()

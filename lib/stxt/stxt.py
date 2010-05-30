@@ -41,7 +41,7 @@ if __name__ == '__main__':
     with open(src) as f:
         d = booker.parse(f.read(), lexer = MutipleFileLexer(src),
             inline = (not options.noinline))
-        d.make_symbol_table()
+        d.make_name_table()
         d.file = src # this parameter is used by web formatter
 
         if options.format == 'doctree':

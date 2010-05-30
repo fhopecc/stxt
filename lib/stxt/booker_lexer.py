@@ -1,6 +1,7 @@
 # coding=utf8
 from __future__ import with_statement
 from tree import Tree
+from tree import Node
 from lex import TOKEN
 from lex import LexError
 import logging
@@ -96,8 +97,9 @@ def t_code_pass(t):
     pass 
 
 def t_LITERAL(t):
-    r'^::$'
+    r'::$'
     t.value = token_node(t, type='literal') 
+
     return t 
 
 def t_TABLE(t):
@@ -225,6 +227,12 @@ def t_H(t):
     if not t.value.title: t.value.title = t.value.name
     return t
 
+def t_lineWithLiteral(t):
+    r'^(?P<l>[^ \n=\-~*^<#:].+)(?=::$)'
+    t.value = t.lexer.lexmatch.group('l')
+    t.type = 'LINE'
+    return t
+
 def t_LINE(t):
     r'^(?P<l>[^ \n=\-~*^<#:].+)'
     t.value = t.lexer.lexmatch.group('l')
@@ -294,7 +302,7 @@ def token_node(t, type=None, value=None, name=None, title=None):
     if not title or len(title) < 0:
         title = name
 
-    return Tree(type  = type,
+    return Node(type  = type,
                 value = value, 
                 name = name, 
                 title = title,

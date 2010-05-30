@@ -17,8 +17,31 @@ class UnitTest(unittest.TestCase):
         t = lexer.token()
         self.assertEqual('LITERAL', t.type)
         self.assertEqual('literal', t.value.type)
-        self.assertEqual(1, t.value.slineno)
+
+        case = '''方法其實也是函數，如下::
+
+  >>> class T(object):
+  ...    def hello( self ):
+  ...        pass  
+  ...  
+  >>> T.__dict__[ 'hello']  
+  <function hello at 0x00CD7EB0>  
+'''
+        lexer.input(case)
+        lexer.lineno = 1
+
+        t = lexer.token()
+        self.assertEqual('LINE', t.type)
+        self.assertEqual('方法其實也是函數，如下', t.value)
+
+        t = lexer.token()
+        self.assertEqual('LITERAL', t.type)
+        self.assertEqual('literal', t.value.type)
+        self.assertEqual(1, t.value.lineno)
         self.assertEqual('__string__', t.value.source)
+
+        t = lexer.token()
+        self.assertEqual('EMPTYLINE', t.type)
 
     def testFOOTNOTE(self):
         case = r'.. 註解'

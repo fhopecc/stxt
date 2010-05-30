@@ -55,9 +55,11 @@ class UnitTest(unittest.TestCase):
     def testAddress(self):
         t = Tree('book', 'fhopecc book', name='fhopecc')
         c = Tree('sect', 'section first', name='sect1')
+        d = Tree('sect', 'section second', name='sect1')
         t.append(c)
+        c.append(d)
 
-        t.root().make_symbol_table()
+        t.root().make_name_table()
 
         self.assertEqual('fhopecc book', c.get('fhopecc').value)
         self.assertEqual('section first', t.get('sect1').value)
@@ -97,13 +99,13 @@ class UnitTest(unittest.TestCase):
     
     def testReferenceNode(self):
         tree = self.tree
-        ref = ReferenceNode('e1', 'example')
+        ref = ReferenceNode('e1', 'label')
         tree.append(ref)
 
         self.assertEqual('reference', ref.type)
-        self.assertEqual('example', ref.reftype)
-        self.assertEqual('e1', ref.refname)
-        tree.root().make_symbol_table()
+        self.assertEqual('e1', ref.address)
+        self.assertEqual('label', ref.label)
+        tree.root().make_name_table()
         e1 = tree.get('e1')
 
         self.assertEqual(e1, ref.reftree())

@@ -3,19 +3,17 @@ from __future__ import with_statement
 import sys, logging
 from os import path
 from tree import *
-
-logging.basicConfig(level=logging.DEBUG,
-                    filename='stxt.log',
-                    filemode='w')
+import log
 
 logger = logging.getLogger('stxt.tree')
 
 NAMED_NODE = ['sect1', 'sect2', 'sect3', 'sect4', 'sect5',
               'define', 'theorem', 'question']
 
-class Tree(object):
+class Node(object):
     def __init__(self, type='', value='', title='', name='', 
-                 source='__string__', spos=None, epos=None, slineno=None,
+                 source='__string__', spos=None, epos=None, 
+                 slineno=None, lineno=None, 
                  elineno=None, scol=None, ecol=None):
         self.type, self.value = type, value
         self.title = title
@@ -24,9 +22,12 @@ class Tree(object):
         self.number = None       # It's section number
         self.occurence = None    # It's table number
         self.name_table = None    
-        self.symbol_table = {}    
+        self.name_table = {}    
         self.source = source
-        self.slineno = slineno
+
+        # slineno should be decrepated
+        self.lineno = lineno or slineno
+        self.slineno = lineno or slineno
         self.spos = spos
 
     def __str__(self):
@@ -126,46 +127,21 @@ class Tree(object):
             self.__make_name_table__()
         return self.name_table[name]
 
-    def __make_address_map__(self):
-        '''初始化 address_map'''
-        amap = self.__address_map__ = {}
-        for c in self.dfs():
-            if not c.name:
-                continue
-            if not amap.has_key(c.type):
-                amap[c.type] = {}
-            nmap = amap[c.type] 
-            nmap[c.name] = c
-
-    def address_map(self):
-        '''位址由兩部份組成，第一部份是資源名稱，第二部份是類型。
-
-           address_map 是二維字典，
-           第一維度為類型，第二維度為資源名稱，
-           基本上此字典只存放在根。
-        '''
-        root = self.root()
-        try:
-            return root.__address_map__
-        except AttributeError:
-            root.__make_address_map__()
-            return root.__address_map__
-
-    def make_symbol_table(self):
+    def make_name_table(self):
         for c in self.dfs():
             key = c.name
             if not key: key = c.title
             #if not key: key = id(c)
             if key:
-                if self.symbol_table.has_key(key):
+                if self.name_table.has_key(key):
                     msg = "duplicating key %s at %s:%s" % (key,
                               self.source, self.slineno)
                     logger.warn(msg)
                 else:
-                    self.symbol_table[key] = c
+                    self.name_table[key] = c
 
-    def dump_symbol_table(self):
-        for k in self.symbol_table.keys():
+    def dump_name_table(self):
+        for k in self.name_table.keys():
             print '%s' % k
 
     def getrefnode(self):
@@ -175,7 +151,7 @@ class Tree(object):
 
     def get(self, key):
         u'取出指定名稱之文件資源'
-        if self.isRoot(): return self.symbol_table[key]
+        if self.isRoot(): return self.name_table[key]
         else: 
           r = self.root()
           return r.get(key)
@@ -274,9 +250,13 @@ class Tree(object):
 
     section_number = order_path
 
-class ReferenceNode(Tree):
+class TitledNode(Node):
+    def __init__(self, title):
+        Node.__init__(self)
+
+class ReferenceNode(Node):
     def __init__(self, address='', label=''):
-        Tree.__init__(self, 'reference')
+        Node.__init__(self, 'reference')
         self.address = address
         self.label= label
 
@@ -305,3 +285,6 @@ def Tuple2BTree(root=None, left=None, right=None):
             right = Tree('right', right)
         root.append(right)
     return root
+
+# This is for back capability, Tree should be deprecated.
+Tree = Node

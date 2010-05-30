@@ -1,22 +1,16 @@
 # coding=utf8
+from lex import TOKEN
+from tree import *
 import sys, lex, yacc
 import logging
-from lex import TOKEN
-from logging import config
-from tree import *
+import log
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(name) %(levelname) %(message)s',
-                    filename='stxt.log',
-                    filemode='w')
-console = logging.getLogger('stxt.inliner')
 logger = logging.getLogger('stxt.inliner')
 
 DEBUG = False
 
 # Lexer
-tokens = [
-          'ESCAPESTRING', 
+tokens = ['ESCAPESTRING', 
           'EMPHASIS', 
           'REFERENCE', 
           'SINGLESPECIALCHAR', 
@@ -42,23 +36,20 @@ def t_EMPHASIS(t):
     return t
 
 refpat =  r'\[\[('
-refpat += r'(?P<l>[^|\]]+)\|(?P<a1>[^|\]]+)|' # with label
-refpat += r'(?P<a2>[^|\]]+)'                 # only address
+refpat += r'(?P<l>[^|\]]+)\|(?P<a1>[^|\]]+)|' # [[label|address]] 
+refpat += r'(?P<a2>[^|\]]+)'                  # [[address]]
 refpat += r')]]'
 @TOKEN(refpat)
 def t_REFERENCE(t):
     m = t.lexer.lexmatch
     if m:
-        #import pdb
-        #pdb.set_trace()
-
-        if m.group('l'): #[[label|address]]
+        if m.group('l'): # [[label|address]]
             t.value = ReferenceNode(m.group('a1'), m.group('l'))
-        elif m.group('a2'): #[[address]]
+        elif m.group('a2'): # [[address]]
             t.value = ReferenceNode(m.group('a2'))
     else: 
-        console.error("[%s]:It isn't correct address." % t.value)
-        console.error("error at %s:%s" % (t.lexer.sourcefile, t.lexer.lineno))
+        logger.error("[%s]:It isn't correct address." % t.value)
+        logger.error("error at %s:%s" % (t.lexer.sourcefile, t.lexer.lineno))
         sys.exit()
 
     t.value.file   = t.lexer.sourcefile

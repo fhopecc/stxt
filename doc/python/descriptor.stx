@@ -1,143 +1,345 @@
-相對於decorator, iterator, generator, metaclass 這些概念，
-descriptor是python所有概念中最難理解的一個了。
-儘管python documentation對其描述不多(基本上是一筆帶過)，
-以至於很多人忽略了這個概念。
-事實上，自己以前也忽略了它，
-只不過最近重溫python時無意間發現了他，覺得非常有必要深入研究它。
-自己的理解是建立在前人的基礎之上的。
-不過，網上關於descriptor的資料實在是有限，下面是自己認為有參考價值的幾個鏈結：
-1.http://users.rcn.com/python/download/Descriptor.htm       (最主要的參考資料)
-2.http://www.python.org/peps/pep-0252.html                  (太難理解了)
-3.http://www.python.org/~jeremy/weblog/030425.html
-4.http://www.python.org/download/releases/2.2.2/descrintro/
-5.Python25 documentation (Python Reference Manual, Chapter 3.4.2)
-6.Python25的源代碼
+描述子(Descriptor)
+------------------
+0990530
 
-1.假如"x"是普通屬性。
-  每個class均有一個__dict__，該class的obj也有一個__dict__。
-  1)對於obj.x，優先查找obj.__dict__["x"]，如果找不到，
-    再查找class.__dict__["x"]；
-  2)對於class.x，直接查找class.__dict__["x"]；  
-  3)obj.__dict__與class.__dict__可以擁有同名的屬性；
-  4)obj.x=10，將無條件的更新obj.__dict__；
-    class.x=10，將無條件的更新class.__dict__。
+相對於裝飾子(decorator)，疊代子(iterator)，
+產生子(generator)及後設類(metaclass)這些概念，
+描述子是 Python 概念中最難理解的一個，
+它其實可類比於 Java 之 setter 及 getter。
 
-class C(object):
-    x = 10 #b.__dict__不包含"x"，C.__dict__包含"x"
+描述子通常被 Python 用來實現一些語言上的特性，如下:
 
-b = C()  
-b.x        #10
-C.x        #10
-b.x = 100  #b.__dict__也包含一個"x"，
-           #對應的值為100；C.__dict__對應的值還是10
-b.x        #100
-C.x        #10
-t=C()
-t.x        #10
-C.x=99     #C.__dict__["x"]變成了99
-t.x
-b.x
-C.x
+* function
+* property
+* staticmethod
+* classmethod 
 
-2.假如"x"是一個descriptor
-  為簡化，假設obj.__dict__沒有"x"項。
+均是通過描述子實現的。
 
-code.
-class RevealAccess(object):
-    def __init__(self, initval, name):
-        self.val = initval
-        self.name = name
- 
-    def __get__(self, obj, objtype):
-        print 'Retrieving', self.name
-        return self.val
- 
-    def __set__(self, obj, val):
-        print 'Updating' , self.name
-        self.val = val
+描述子與 ''__getattribute__'' 密切相關，
+基礎類型 object 及 type 均定義了 ''__getattribute__'' ，並有預設實現。
 
-class C(object):
-    x = RevealAccess(10,"A test variable")
+上面所說的描述子的各種特性其實就是 __getattribute__ 的行為。
+也就是說，如果自己重新定義了__getattribute__，
+那麼這個函數具有最高的優先順序。
 
->>> b = C()    # case1
->>> b.x
-Retrieving A test variable
-10
->>> C.x
-Retrieving A test variable
-10
->>>
->>> b.x=100    # case2
-Updating A test variable
->>> b.x
-Retrieving A test variable
-100
->>> C.x
-Retrieving A test variable
-100
->>>
->>> C.x=1000    # case3
->>>
->>> b.x
-1000
->>> C.x
-1000
->>>     # case4
->>> C.x = RevealAccess(999,"The second var")
->>> b.x
-Retrieving The second var
-999
->>> C.x
-Retrieving The second var
-999
->>>
-""
-上述結果可以通過Python25 Documentation 
-(Python Reference Manual, Chapter 3.4.2.2)解釋：
+除描述子外 __getattr__, __setattr__ 
+及 __delattr__ 也與屬性的取值有關，建議對應屬性不要為描述子。
 
-The following methods only apply when an instance of the class containing 
-the method (a so-calleddescriptor class) appears in the class dictionary of another new-style class, known as the owner class. In the examples below, ``the attribute'' refers to the attribute whose name is the key of the property in the owner class' __dict__. Descriptors can only be implemented as new-style classes themselves.
-1)__get__( self, instance, owner) 
-Called to get the attribute of the owner class (class attribute access) or of an instance of that class (instance attribute access). owner is always the owner class, while instance is the instance that the attribute was accessed through, or None when the attribute is accessed through the owner. This method should return the (computed) attribute value or raise an AttributeError exception. 
-(注意：obj.x、class.x均會導致該調用)
-2)__set__( self, instance, value) 
-Called to set the attribute on an instance instance of the owner class to a new value, value. 
-(注意：僅obj.x=ttt均會導致該調用；class.x=ttt直接綁定到另外一個物件上)
-3)__delete__( self, instance) 
+普通屬性
+~~~~~~~~
+設 x 為普通屬性，
+且類別 class 均有一個 __dict__，
+該 class 之實例 obj 也有一個 __dict__，
+且屬性值之取值法。
+
+1.obj.x
+
+  先查閱 obj.__dict__["x"]，
+  如果查不到，再查閱 class.__dict__["x"]
+
+2.class.x
+
+  直接查閱 class.__dict__["x"]
+
+3.obj.__dict__ 與 class.__dict__ 可以擁有同名的屬性
+  為簡化以及方面理解，在實際應用中，
+  儘量避免 obj.__dict__ 與 class.__dict__ 擁有同名的屬性。
+
+4.obj.x = 10
+
+  無條件的更新 obj.__dict__；
+
+5.class.x=10
+
+  無條件的更新 class.__dict__。
+
+上述之原則可由下碼驗證::
+
+    class C(object):
+       x = 10 # b.__dict__不包含"x"，C.__dict__包含"x"
+
+    b = C()  
+    b.x        # 10
+    C.x        # 10
+    b.x = 100  # b.__dict__也包含一個"x"，
+               # 對應的值為100；C.__dict__對應的值還是10
+    b.x        # 100
+    C.x        # 10
+    t=C()
+    t.x        # 10
+    C.x=99     # C.__dict__["x"]變成了99
+    t.x        # 99
+    b.x        # 100
+    C.x        # 99
+
+描述子
+~~~~~~
+設屬性 x 是一個描述子，
+且 obj.__dict__ 沒有 x 之項目。
+
+::
+  >>> class RevealAccess(object):
+  ...    def __init__(self, initval, name):
+  ...       self.val = initval
+  ...       self.name = name
+  ...   
+  ...    def __get__(self, obj, objtype):
+  ...       print 'Retrieving', self.name
+  ...       return self.val
+  ...   
+  ...    def __set__(self, obj, val):
+  ...       print 'Updating' , self.name
+  ...       self.val = val
+  ...
+  >>>class C(object):
+  ...    x = RevealAccess(10,"A test variable")
+  ...
+  >>> b = C()    # case1
+  >>> b.x
+  Retrieving A test variable
+  10
+  >>> C.x
+  Retrieving A test variable
+  10
+  >>>
+  >>> b.x=100    # case2
+  Updating A test variable
+  >>> b.x
+  Retrieving A test variable
+  100
+  >>> C.x
+  Retrieving A test variable
+  100
+  >>>
+  >>> C.x=1000    # case3
+  >>>
+  >>> b.x
+  1000
+  >>> C.x
+  1000
+  >>>     # case4
+  >>> C.x = RevealAccess(999,"The second var")
+  >>> b.x
+  Retrieving The second var
+  999
+  >>> C.x
+  Retrieving The second var
+  999
+  >>>
+
+__get__(self, instance, owner)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+obj.x, class.x 均會調用此方法。
+
+Called to get the attribute of the owner class (class attribute
+access) or of an instance of that class (instance attribute access).
+owner is always the owner class, while instance is the instance that
+the attribute was accessed through, or None when the attribute is
+accessed through the owner. This method should return the (computed)
+attribute value or raise an AttributeError exception. 
+
+__set__(self, instance, value)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+僅 obj.x=ttt 均會呼叫此方法，
+
+class.x = ttt 會重設 x 至另外一個物件上。
+
+Called to set the attribute on an instance instance of the owner class
+to a new value, value. 
+
+__delete__(self, instance) 
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 Called to delete the attribute on an instance instance of the owner class.
 
-為簡化以及方面理解，在實際應用中，
-儘量避免obj.__dict__與class.__dict__擁有同名的屬性。
+函數
+~~~~
+所有函數都是描述子，
+因為它定義了 __get__ 方法::
 
-3.假如"x"是一個descriptor，而且obj.__dict__也有一個"x"項。非常複雜。
-For instance bindings, the precedence of descriptor invocation depends on the which descriptor methods are defined. Data descriptors define both __get__() and __set__(). Non-data descriptors have just the __get__() method. Data descriptors always override a redefinition in an instance dictionary. In contrast, non-data descriptors can be overridden by instances.
-詳細的描述還得參考：http://users.rcn.com/python/download/Descriptor.htm
-1)從該文檔可以知道，descriptor與__getattribute__密切相關。基礎類型object、type均定義了__getattribute__，並有缺省實現。上面所說的descriptor的各種特性其實就是這些__getattribute__的行為。也就是說，如果自己重新定義了__getattribute__，那麼這個函數具有最高的優先順序。
-2)另外，__getattr__/__setattr__/__delattr__也與屬性的取值有關，見Python25 documentation (Python Reference Manual, Chapter 3.4.2)。它們的級別比較低。建議它們所對應的屬性不要為descriptor。
-class RevealAccess(object):
- def __init__(self, initval, name):
-  self.val = initval
-  self.name = name
- 
- def __get__(self, obj, objtype):
-  print 'Retrieving', self.name
-  return self.val
- 
-class C(object):
- x = RevealAccess(10,"A test variable")
- def __init__(self,val):
-  self.x = val
->>> b = C(100)
->>>
->>> C.x
-Retrieving A test variable
-10
->>> b.x
-100
->>>
+  >>> def hello():
+  ...    pass  
+  ...  
+  >>> dir(hello)
+  ['__call__' , '__class__' , '__delattr__' , '__dict__' , '__doc__' , 
+  '__get__ ', ' __getattribute__', '__hash__' , '__init__' , '__module__' ,
+  '__name__' , '__new__',   '__reduce__' , '__reduce_ex__' , '__repr__' ,
+  '__setattr__' , '__str__' , 'func_closure',   'func_code' , 
+  'func_defaults' , 'func_dict' , 'func_doc' ,
+  'func_globals' , 'func_name']  
+  >>>
 
-4.根據http://users.rcn.com/python/download/Descriptor.htm的描述，
-  descriptor更多的被python自己用來實現一些語言上的特性。
-  比如：
-  function, property, staticmethod, classmethod
-  等均是通過descriptor實現的。
+函數沒有 __set__ 和 __del__ 方法，
+所以它非資料描述子。
+
+方法
+~~~~
+方法其實也是函數，如下::
+
+  >>> class T(object):
+  ...    def hello( self ):
+  ...        pass  
+  ...  
+  >>> T.__dict__[ 'hello']  
+  <function hello at 0x00CD7EB0>  
+
+如上述若我們直接從 T 的 __dict__ 中來取 hello，
+則不會執行預設查閱策略。
+
+換句話說方法可視為特殊的函數，
+只是它們存在於類中。
+
+當從物件中獲取函數屬性時，
+傳回的不是函數本身，
+而是返回函數描述子之 __get__ 的返回值。
+
+接著上面類 T 的定義::
+
+    >>> T.hello 
+    <unbound method T.hello>
+
+T.hello 之屬性查閱路徑，
+會從 T 的 __dict__ 找出 <function hello at 0x00CD7EB0> ，
+但不會直接傳回 <function hello at 0x00CD7EB0>，
+而是傳回 __get__(None, T) 的結果，一個未綁定方法。 
+
+::
+  >>> t = T() 
+  >>> t.hello 
+  <bound method T.hello of <__main__.T object at 0x00CDAD10>>
+
+從實例獲取屬性，傳回 __get__(o, T) 的結果，一個綁定方法。 
+
+為了證實上述說法，在執行下述程式碼::
+
+  >>> f = T.hello
+  >>> f.__get__( None , T)
+  <unbound method T.hello>  
+  >>> f.__get__(t, T)
+  <bound method T.hello of <__main__.T object at 0x00CDAD10>>
+ 
+總結一下: 
+
+1.所有的函數都有 __get__
+
+2.當函數位於類的 __dict__ 中時，
+  若此函數是個方法，通過類或實例獲取該函數時，
+  傳回不是函數本身，而是它的 __get__ 方法結果值。
+ 
+上述可能誤導你認為方法只是特殊的函數。
+其實方法和函數還是有區別的，
+準確的說：方法就是方法，函數就是函數::
+
+  >>> type(f)
+  <type 'function'>  
+  >>> type(t.hello)
+  <type 'instancemethod'>  
+  >>> type(T.hello)
+  <type 'instancemethod'>  
+  >>>
+
+函數之類為 function，
+方法之類為 instancemethod。
+
+未綁定方法和綁定方法，
+在 C 實現中都是實例方法，
+可先看它們裡面到底是什麼::
+
+  >>> dir(t.hello)
+  ['__call__' , '__class__' , '__cmp__' , '__delattr__' , '__doc__' ,
+  '__get__' , '__getattribute__',   '__hash__' , '__init__' , '__new__'
+  , '__reduce__' , '__reduce_ex__' , '__repr__' , '__setattr__',
+  '__str__' , 'im_class' , 'im_func' , 'im_self']  
+
+具有 __call__ 屬性說明它是函數，
+且可猜測 __call__ 之實現應該委任給另外一個函數，
+並以實例作為第一參數。
+
+im_class, im_func, im_self，
+在 t.hello 裡，
+分別代表 T, hello(這裡存在T.__dict__ 中之函數 hello) 和 t。
+
+至此已可以大致想像如何以純 Python 實現一個實例方法。
+ 
+類方法
+~~~~~~
+classmethod 能將函數轉換成類方法，
+類方法的第一個隱含參數是類本身，
+普通方法的第一個隱含參數是實例本身，
+類方法即可從類調用，也可以從實例調用，
+而普通方法只能從實例調用。 
+
+::
+  >>> class T(object):
+  ...    def hello(cls): 
+  ...        print  'hello' , cls  
+  ...    # 兩個作用：把 hello 裝換成類方法，
+  ...    # 同時隱藏作為普通方法的hello  
+  ...    hello = classmethod(hello) 
+  >>> t = T()
+  >>> t.hello()
+  hello <__main__.T>
+  >>> T.hello()
+  hello <class  '__main__.T'>
+  >>>
+
+classmethod 是類而非函數，此類定義 __get__ ，
+所以上述 t.hello 和 T.hello 實際上是此類之 __get__ 方法結果。
+
+::
+  >>> t.hello
+  <bound method type.hello of <class '__main__.T'>>  
+  >>> type(t.hello)
+  <type 'instancemethod'>  
+  >>> T.hello
+  <bound method type.hello of <class '__main__.T'>>  
+  >>> type(T.hello)
+  <type 'instancemethod'>  
+  >>>
+
+上述可知 t.hello 和 T.hello 是實例方法且綁定於類 T 上。
+也就是說 classmethod 的 __get__ 回傳一個實例方法。
+
+故可推斷，
+t.hello 之 im_self 是 T，
+而 im_class 是 type (因為 T 是 type 之實例)，
+im_func 是函數 hello::
+  >>> t.hello.im_self
+  <class  '__main__.T'>
+  >>> t.hello.im_class
+  <type 'type'>  
+  >>> t.hello.im_func
+  <function hello at 0x011A40B0>  
+  >>>
+ 
+靜態方法
+~~~~~~~~
+staticmethod 能將一個函數轉換成靜態方法，
+靜態方法沒有隱含的第一個參數::
+
+  >>> class T(object): 
+  ...     def hello(): 
+  ...         print 'hello'
+  ...     hello = staticmethod(hello)
+  >>> T.hello() #沒有隱含的第一個參數  
+  hello
+  >>> T.hello
+  <function hello at 0x011A4270>  
+  >>>
+
+T.hello 直接返回了一個函數。
+所以 staticmethod 的 __get__ 方法應該是直接返回了物件本身。
+ 
+屬性
+~~~~
+還有一個 property，和上面兩個差不多，但它是個資料描述子。
+
+參考
+~~~~
+::
+  1.http://users.rcn.com/python/download/Descriptor.htm
+  2.http://www.python.org/peps/pep-0252.html
+  3.http://www.python.org/~jeremy/weblog/030425.html
+  4.http://www.python.org/download/releases/2.2.2/descrintro/
+  5.Python25 documentation (Python Reference Manual, Chapter 3.4.2)
+  6.Python25的源代碼

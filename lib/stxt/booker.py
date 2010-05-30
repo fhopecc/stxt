@@ -106,6 +106,16 @@ def p_sect_with_contents(p):
     for s in p[3]: p[1].append(s)
     p[0] = p[1]
 
+def p_sect_with_emptyline_contents(p):
+    '''sect1 : H1 EMPTYLINE contents sect2s
+       sect2 : H2 EMPTYLINE contents sect3s
+       sect3 : H3 EMPTYLINE contents sect4s
+       sect4 : H4 EMPTYLINE contents sect5s
+    '''
+    for c in p[3]: p[1].append(c)
+    for s in p[4]: p[1].append(s)
+    p[0] = p[1]
+
 def p_sect_with_contents_and_timestamp(p):
     '''sect1 : H1 TIMESTAMP contents sect2s
        sect2 : H2 TIMESTAMP contents sect3s
@@ -280,6 +290,11 @@ def p_literal(p):
     p[1].value = p[2][1]
     p[0] = p[1]
 
+def p_literal_with_emptyline(p):
+    '''literal : LITERAL EMPTYLINE indent_block'''
+    p[1].value = p[3][1]
+    p[0] = p[1]
+
 def p_indent_block(p):
     '''indent_block : INDENT
                     | indent_block EMPTYLINE
@@ -326,13 +341,13 @@ def parse(source, lexer=lexer,
           table=True, inline=True, symbol_table=True):
     # TABLE parsing will failed in yacc debug mode    
     doc = parser.parse(source, lexer=lexer, tracking=True, debug=DEBUG)
-    doc.make_symbol_table()
+    doc.make_name_table()
     if table:
         doc = parse_table(doc)
     if inline:
         doc = parse_inline(doc)
     if symbol_table:
-        doc.root().make_symbol_table()
+        doc.root().make_name_table()
     return doc
 
 def parse_table(doc):
@@ -382,38 +397,3 @@ def usage():
     usage += u'filename: structed text file\n'
     usage += u'dump the doctree'
     return usage
-
-if __name__ == '__main__':
-    from optparse import OptionParser
-    usage = u"usage: %prog SOURCE [options]"
-    oparser = OptionParser(usage, version="%prog 1.1")
-    oparser.add_option("-d", "--debug", action="store_true", 
-                      dest="debug", default=False,
-                      help=u"檔名是否含有關鍵字")
-    oparser.add_option("-t", "--table", action="store_true", 
-                      dest="dump_table", default=False,
-                      help=u"印出符號表")
-    oparser.add_option("-i", "--noinline", action="store_true", 
-                      dest="noinline", default=False,
-                      help=u"不剖析行內元素")
-    oparser.add_option("-p", "--dump", action="store_true", 
-                      dest="dump_tree", default=False,
-                      help=u"印出文件樹")
-
-    (options, args) = oparser.parse_args()
-
-    if len(args) < 1:
-        oparser.error("Must supply the SOURCE file!")
-
-    src = args[0]
-    DEBUG = options.debug
-
-    with open(src) as f:
-        d = parse(f.read(), lexer = MutipleFileLexer(src),
-            inline = (not options.noinline))
-        if options.dump_tree:
-            d.dump()
-        if options.dump_table:
-            d.make_symbol_table()
-            print '符號表：'
-            d.dump_symbol_table()
