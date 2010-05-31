@@ -24,7 +24,7 @@ def find_column(input,token):
     return column
 
 def t_ESCAPESTRING(t):
-    r"''(?P<s>[^*]+)''"
+    r"(''(?P<s>[^*]+?)'')" # +?, non-greedy fashion
     m = t.lexer.lexmatch
     t.value = m.group('s')
     return t

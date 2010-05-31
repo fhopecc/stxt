@@ -32,6 +32,40 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(1, t.lexer.lineno)
         self.assertEqual('ESCAPESTRING', t.type)
         self.assertEqual('[[test.sql]]', t.value)
+        
+        # non-greedy test
+        case = """除描述子外''__getattr__'',''__setattr__''
+及''__delattr__''也與屬性的取值有關，建議對應屬性不要為描述子。"""
+        lexer.input(case)
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('CBLOCK', t.type)
+        self.assertEqual('除描述子外', t.value)
+
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('ESCAPESTRING', t.type)
+        self.assertEqual('__getattr__', t.value)
+
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('CBLOCK', t.type)
+        self.assertEqual(',', t.value)
+
+        t = lexer.token()
+        self.assertEqual(1, t.lexer.lineno)
+        self.assertEqual('ESCAPESTRING', t.type)
+        self.assertEqual('__setattr__', t.value)
+
+        t = lexer.token()
+        self.assertEqual(2, t.lexer.lineno)
+        self.assertEqual('CBLOCK', t.type)
+        self.assertEqual('及', t.value)
+
+        t = lexer.token()
+        self.assertEqual(2, t.lexer.lineno)
+        self.assertEqual('ESCAPESTRING', t.type)
+        self.assertEqual('__delattr__', t.value)
 
     def testREFERENCE(self):
         case = '[[test.sql]]'

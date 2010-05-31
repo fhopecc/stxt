@@ -1,4 +1,4 @@
-描述子(Descriptor)
+描述子(descriptor)
 ------------------
 0990530
 
@@ -19,40 +19,40 @@
 描述子與 ''__getattribute__'' 密切相關，
 基礎類型 object 及 type 均定義了 ''__getattribute__'' ，並有預設實現。
 
-上面所說的描述子的各種特性其實就是 __getattribute__ 的行為。
-也就是說，如果自己重新定義了__getattribute__，
+上面所說的描述子的各種特性其實就是 ''__getattribute__'' 的行為。
+也就是說，如果自己重新定義了''__getattribute__''，
 那麼這個函數具有最高的優先順序。
 
-除描述子外 __getattr__, __setattr__ 
-及 __delattr__ 也與屬性的取值有關，建議對應屬性不要為描述子。
+除描述子外''__getattr__'',''__setattr__'' 
+及''__delattr__''也與屬性的取值有關，建議對應屬性不要為描述子。
 
 普通屬性
 ~~~~~~~~
 設 x 為普通屬性，
-且類別 class 均有一個 __dict__，
-該 class 之實例 obj 也有一個 __dict__，
+且類別 class 均有一個 ''__dict__''，
+該 class 之實例 obj 也有一個 ''__dict__''，
 且屬性值之取值法。
 
-1.obj.x
+1.''obj.x''
 
-  先查閱 obj.__dict__["x"]，
-  如果查不到，再查閱 class.__dict__["x"]
+  先查閱 ''obj.__dict__["x"]''，
+  如果查不到，再查閱 ''class.__dict__["x"]''
 
-2.class.x
+2.''class.x''
 
-  直接查閱 class.__dict__["x"]
+  直接查閱 ''class.__dict__["x"]''
 
-3.obj.__dict__ 與 class.__dict__ 可以擁有同名的屬性
+3.''obj.__dict__'' 與 ''class.__dict__'' 可以擁有同名的屬性
   為簡化以及方面理解，在實際應用中，
-  儘量避免 obj.__dict__ 與 class.__dict__ 擁有同名的屬性。
+  儘量避免 ''obj.__dict__'' 與 ''class.__dict__'' 擁有同名的屬性。
 
 4.obj.x = 10
 
-  無條件的更新 obj.__dict__；
+  無條件的更新 ''obj.__dict__''
 
 5.class.x=10
 
-  無條件的更新 class.__dict__。
+  無條件的更新 ''class.__dict__''。
 
 上述之原則可由下碼驗證::
 
@@ -76,7 +76,7 @@
 描述子
 ~~~~~~
 設屬性 x 是一個描述子，
-且 obj.__dict__ 沒有 x 之項目。
+且 ''obj.__dict__'' 沒有 x 之項目。
 
 ::
   >>> class RevealAccess(object):
@@ -148,7 +148,7 @@ class.x = ttt 會重設 x 至另外一個物件上。
 Called to set the attribute on an instance instance of the owner class
 to a new value, value. 
 
-__delete__(self, instance) 
+__delete__(self, instance)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Called to delete the attribute on an instance instance of the owner class.
 
@@ -169,7 +169,7 @@ Called to delete the attribute on an instance instance of the owner class.
   'func_globals' , 'func_name']  
   >>>
 
-函數沒有 __set__ 和 __del__ 方法，
+函數沒有''__set__''和''__del__''方法，
 所以它非資料描述子。
 
 方法
@@ -183,7 +183,7 @@ Called to delete the attribute on an instance instance of the owner class.
   >>> T.__dict__[ 'hello']  
   <function hello at 0x00CD7EB0>  
 
-如上述若我們直接從 T 的 __dict__ 中來取 hello，
+如上述若我們直接從 T 的''__dict__''中來取 hello，
 則不會執行預設查閱策略。
 
 換句話說方法可視為特殊的函數，
@@ -191,7 +191,7 @@ Called to delete the attribute on an instance instance of the owner class.
 
 當從物件中獲取函數屬性時，
 傳回的不是函數本身，
-而是返回函數描述子之 __get__ 的返回值。
+而是返回函數描述子之''__get__''的返回值。
 
 接著上面類 T 的定義::
 
@@ -199,16 +199,16 @@ Called to delete the attribute on an instance instance of the owner class.
     <unbound method T.hello>
 
 T.hello 之屬性查閱路徑，
-會從 T 的 __dict__ 找出 <function hello at 0x00CD7EB0> ，
+會從 T 的''__dict__''找出 <function hello at 0x00CD7EB0> ，
 但不會直接傳回 <function hello at 0x00CD7EB0>，
-而是傳回 __get__(None, T) 的結果，一個未綁定方法。 
+而是傳回''__get__(None, T)''的結果，一個未綁定方法。 
 
 ::
   >>> t = T() 
   >>> t.hello 
   <bound method T.hello of <__main__.T object at 0x00CDAD10>>
 
-從實例獲取屬性，傳回 __get__(o, T) 的結果，一個綁定方法。 
+從實例獲取屬性，傳回''__get__(o, T)''的結果，一個綁定方法。 
 
 為了證實上述說法，在執行下述程式碼::
 
@@ -220,11 +220,11 @@ T.hello 之屬性查閱路徑，
  
 總結一下: 
 
-1.所有的函數都有 __get__
+1.所有的函數都有''__get__''
 
-2.當函數位於類的 __dict__ 中時，
+2.當函數位於類的''__dict__''中時，
   若此函數是個方法，通過類或實例獲取該函數時，
-  傳回不是函數本身，而是它的 __get__ 方法結果值。
+  傳回不是函數本身，而是它的''__get__''方法結果值。
  
 上述可能誤導你認為方法只是特殊的函數。
 其實方法和函數還是有區別的，
@@ -251,13 +251,13 @@ T.hello 之屬性查閱路徑，
   , '__reduce__' , '__reduce_ex__' , '__repr__' , '__setattr__',
   '__str__' , 'im_class' , 'im_func' , 'im_self']  
 
-具有 __call__ 屬性說明它是函數，
-且可猜測 __call__ 之實現應該委任給另外一個函數，
+具有''__call__''屬性說明它是函數，
+且可猜測''__call__''之實現應該委任給另外一個函數，
 並以實例作為第一參數。
 
 im_class, im_func, im_self，
 在 t.hello 裡，
-分別代表 T, hello(這裡存在T.__dict__ 中之函數 hello) 和 t。
+分別代表 T, hello(這裡存在''T.__dict__''中之函數 hello) 和 t。
 
 至此已可以大致想像如何以純 Python 實現一個實例方法。
  
@@ -283,8 +283,8 @@ classmethod 能將函數轉換成類方法，
   hello <class  '__main__.T'>
   >>>
 
-classmethod 是類而非函數，此類定義 __get__ ，
-所以上述 t.hello 和 T.hello 實際上是此類之 __get__ 方法結果。
+classmethod 是類而非函數，此類定義''__get__''，
+所以上述 t.hello 和 T.hello 實際上是此類之''__get__''方法結果。
 
 ::
   >>> t.hello
@@ -298,7 +298,7 @@ classmethod 是類而非函數，此類定義 __get__ ，
   >>>
 
 上述可知 t.hello 和 T.hello 是實例方法且綁定於類 T 上。
-也就是說 classmethod 的 __get__ 回傳一個實例方法。
+也就是說 classmethod 的''__get__''回傳一個實例方法。
 
 故可推斷，
 t.hello 之 im_self 是 T，
@@ -328,7 +328,7 @@ staticmethod 能將一個函數轉換成靜態方法，
   >>>
 
 T.hello 直接返回了一個函數。
-所以 staticmethod 的 __get__ 方法應該是直接返回了物件本身。
+所以 staticmethod 的''__get__''方法應該是直接返回了物件本身。
  
 屬性
 ~~~~

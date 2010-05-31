@@ -202,9 +202,8 @@ def t_COMMENT(t):
 
 H  = r'^(\[(?P<oname>.*)\])?' # old name specifier should be deprecated
 H += r'(?P<title>[^(\n]*)'
-H += r'(\((?P<name>.*)\))?' # name specifier use this
+H += r'(\((?P<name>.*)\))?'   # name specifier
 H += r'\n(=+|-+|~+|\*+|\^+)$' 
-
 @TOKEN(H)
 def t_H(t):
     m = t.lexer.lexmatch
