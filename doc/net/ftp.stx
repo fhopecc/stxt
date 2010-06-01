@@ -1,7 +1,7 @@
-[ftp]
-=====
+ftp(ftp)
+--------
 [ftp_conn_mode]連線模式
------------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 FTP 是一種檔案傳輸協定，它的連線模式有兩種﹕ 
 主動模式(active)和被動模式(passive)。
 
@@ -18,39 +18,40 @@ FTP 是一種檔案傳輸協定，它的連線模式有兩種﹕
 ~~~~~~~~
 預設模式是主動模式，其連線方式如下：
 
-# client 開啟一個隨機 TCP port，
+#.client 開啟一個隨機 TCP port，
   呼叫 server 的 port 21 請求連線。
-  當順利完成 Three-Way Handshake 之後，
+  當順利完成 Three~Way Handshake 之後，
   連線就成功建立，但這僅是命令通道的建立。 
 
-# 當兩端需要傳送資料的時候，
+#.當兩端需要傳送資料的時候，
   client 透過命令通道用一個 port command 告訴 server ，
   client 可用另一個 TCP port 做數據通道。 
 
-# server 用 port 20 和剛才 client 所告知的 TCP port 建立數據連線。
+#.server 用 port 20 和剛才 client 所告知的 TCP port 建立數據連線。
   請注意：連線方向是從 server 到 client 的，TCP 封包會有一個 SYN flag。 
 
-# client 會返回一個帶 ACK flag的確認封包，
-  並完成另一次的 Three-Way Handshake 手續。
+#.client 會返回一個帶 ACK flag的確認封包，
+  並完成另一次的 Three~Way Handshake 手續。
   這時候，數據通道才能成功建立。 
 
-# 開始數據傳送。 
+#.開始數據傳送。 
 
 被動模式
 ~~~~~~~~
 被動模式連線方式如下：
 
-# client 開啟一個隨機的 TCP port 呼叫 server 的 port 21 請求連線，
+#.client 開啟一個隨機的 TCP port 呼叫 server 的 port 21 請求連線，
   並完成命令通道的建立。 
-# 當兩端需要傳送資料的時候，
+
+#.當兩端需要傳送資料的時候，
   client 透過命令通道送一個 PASV command 給 server，
   要求進入 passive 傳輸模式。 
 
-# server 像上述的主動模式之第 2 步驟那樣，
+#.server 像上述的主動模式之第 2 步驟那樣，
   挑一個 TCP port ，並用命令通道告訴 client。 
 
-# client 用另一個TCP port 呼叫剛才 server 告知的 TCP port 來建立數據通道。
+#.client 用另一個TCP port 呼叫剛才 server 告知的 TCP port 來建立數據通道。
   此時封包帶 SYN flag。 
 
-# server 確認後回應一個 ACK 封包。並完成所有三方握手程序成功建立數據通道。 
-# 開始數據傳送。 
+#.server 確認後回應一個 ACK 封包。並完成所有三方握手程序成功建立數據通道。 
+#.開始數據傳送。 

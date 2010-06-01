@@ -1,7 +1,5 @@
-檔案分享系統
-============
-SMB
----
+SMB(smb)
+--------
 SMB(Server Message Block)，
 又稱 Common Internet File System(CIFS)是由微軟開發的，
 用於連接伺服器和 Windows 客戶端。經過 Unix 伺服器廠商重新開發後，

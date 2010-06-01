@@ -423,3 +423,4 @@ Windows Server System 的認證架構顯然大有進步，
 尤其 Kerberos 具有相互認證的功能，並且具備代理認證的功能，
 更重要的是，Kerberos 是通用的標準，
 因此提高了 Windows Server System 與其他系統的相容性。
+

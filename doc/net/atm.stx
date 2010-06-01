@@ -1,5 +1,5 @@
 [atm]ATM
-========
+--------
 非同步傳輸模式(ATM, Asynchronous Transfer Mode) 
 是由國際電信聯盟(ITU)的前身國際電話電報諮詢委員會(CCITT)
 所制定的高速網路傳輸協定。
@@ -8,7 +8,7 @@
 亦即規範如何傳送與接收資訊的方法。
 
 細胞
-----
+~~~~
 ATM 之細胞（Cell）長度為53 bytes。
 這53 bytes包含
 * 細胞標頭: 5 bytes
@@ -34,7 +34,7 @@ ATM 是目前被 ANSI 及 ITU 認可為寬頻整體服務數位
 多媒體或是電傳視訊資料等。
 
 服務等級
---------
+~~~~~~~~
 ATM適應層（ATM Adaptation Layer；AAL）
 服務等級可區分成固定速率（Constant Bit Rate；CBR）、
 可變速率（Variable Bit Rate；VBR）、備便速率（Available Bit

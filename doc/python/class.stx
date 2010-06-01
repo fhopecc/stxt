@@ -5,20 +5,20 @@
 Python 的類別機制其目的為儘可能不要加入太多新的語法及語意。
 
 Python的類別機制是 C++ 以及 Modula-3 的綜合體。
-正如同在modules裡面的情況一樣，
+正如同在模組s裡面的情況一樣，
 Python 類別也沒有在其定義及使用者之間加入絕對的障礙，而是仰
 賴使用者有禮貌的不要去闖入其定義之中(not to ``break into the
- definition'')。對於class來說最重要的一些特性在Python裡面都完全的保留
+ definition'')。對於class來說最重要的一些屬性在Python裡面都完全的保留
 ：類別的繼承可以繼承自個基礎類別(base classes)，一個子類別(derived
  class)可以override其所有基礎類別(base class)的任何方法(method)，一個
 method也可以呼叫一個基礎類別的同名方法，物件可以自由決定是否要讓某些資
 料是 private的。
 
 以C++ 的術語來說，Python所有的類別成員(包含其資料成員)都是 public 的，
-而且所有的函式成員(member functions)都是 virtual 的。也並沒有所謂的建
+而且所有的函數成員(member functions)都是 virtual 的。也並沒有所謂的建
 構元(constructors)或是解構元(destructors)的存在。 如同在 Modula-3裡面
 一樣，從物件的方法(method)裡面要使用物件的成員並沒有捷徑可以使用：成員
-函式的宣告必須在第一個參數中明白的在表示所存在其中的物件，而此參數在呼
+函數的宣告必須在第一個參數中明白的在表示所存在其中的物件，而此參數在呼
 叫時是不用傳的。如同在Smalltalk裡面一樣，類別本身也是一個物件，事實上
 在Python裡面，所有的資料型態(data type)都是物件。這提供了在import以及
 重新命名時候的語意(sematics)。但是如同在C++ 或是Modula-3裡面，內建的基
@@ -42,9 +42,9 @@ subscripting，都可以被拿來在類別中重新定義的。
 並非所有在Python裡面的資料型態都是類別，像是整數
 及list這類的基本的內建型態就不是類別，甚至一些特別的資料型態像是file都
 不是類別。無論如何， 所有的 Python的資料型態都或多或少都有一些基本相同
-的語意特性，我們可以把這個相同點叫做物件。
+的語意屬性，我們可以把這個相同點叫做物件。
 
-物件有其獨特性，
+物件有其獨屬性，
 而且可以用不同的名字連結到同一個物件去，
 這在其他的程式語言中稱作別名(aliasing)。
 通常你第一次看到 Python不會覺得這有什麼特別，
@@ -56,86 +56,107 @@ subscripting，都可以被拿來在類別中重新定義的。
 式碼語意的解釋，有(故意的)一些影響。這樣的影響通常是對程式有正面的效益
 ，因為別名(alias)運作的方式就像是一個有禮貌的指標(pointer)。舉例來說，
 當你傳一個物件當參數時，因為所傳的其實只是一個指標，所以所費的資源就不
-多。而且，當在函式之內對這個傳入的物件進行修改時，在外面呼叫這個函式的
-人(caller)會看得見函式所做的修改，這大大的簡化了在Pascal裡面需要兩種不
+多。而且，當在函數之內對這個傳入的物件進行修改時，在外面呼叫這個函數的
+人(caller)會看得見函數所做的修改，這大大的簡化了在Pascal裡面需要兩種不
 同參數傳遞機制才能作到的事。
 
-可用範圍及命名空間(Scopes and Naming Spaces)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-在介紹類別(class)之前，我首先必須介紹Python有關可用範圍(scope)的一些準
-則。類別的定義也對命名空間(namespace)做了一些小技巧，所以你需要對scope
-及namespace的運作有一些了解才能夠完全的掌握到底發生了什麼事。對於進階
-的Python程式設計師來說，有關這個主題的了解是很有幫助的。
+命名空間(namespace)
+~~~~~~~~~~~~~~~~~~~
+命名空間指名稱對應物件之字典。
+故命名空間是以 dictionary 物件實作。
 
-現在讓我們先來定義一些東西：
+命名空間的例子有：
+1.內建名稱:
+  1.內建函數，如 abs()
+  2.內建例外類別，如 RuntimeError
+2.模組之全域變數
+3.函數之區域變數。
 
-一個 namespace 指的是名稱與物件的對應關係的組合。目前來說，namespace都
-是以Python的dictionary來實作出來的，但是這應該沒有多大意義(除非對程式
-的效率)，而且在未來可能也有所改變。Namespace的例子有：一組的內建名稱
-(像是 abs() 的函式，還有內建的exception名稱)，在module裡的全域變數
-(global variables)，以及在函式裡的local變數。某種意義來說，一個物件裡
-的特性(attributes，譯：成員)也組成一個namespace。在這裡要知道的重點是
-，不同的namespace裡面所定義的名稱是彼此沒有任何關係的。舉例來說，兩個
-不同的module都可以定義一個叫做``maximize''的函式。這一點都不衝突，因為
-使用者必須要在這個函式的名稱前加上module的名稱。
+通常一個物件之屬性也組成一個命名空間。
 
-喔，我在這裡所用的 屬性 一字指的事所有在點號後面的東西，舉例來說
-在 z.real 這個expression裡面 real 就是一個屬於 z 這個物件的屬性。
-嚴格說來，使用module裡面的名稱也是一個屬性的指稱(references)，在
- modname.funcname 這個expression裡面， modname 就是一個module物件，而
- funcname 就是其屬性。在這個例子裡面，剛好module的屬性s就對
-應了在module裡面定義的全域變數，所以我們就說它們就是在一個namespace裡
-面。 9.1
+重點是不同之命名空間裡面所定義的名稱是彼此沒有任何關係的。
 
-Attributes可以是唯讀的或是可改寫的。對可改寫的屬性，你可以設定值
-給它。Module的 屬性s是可以改寫的：所以你可以寫
- "modname.the_answer = 42" 來改變其值。可改寫的屬性s也可以被刪除
-掉，你可以用 del 敘述像是 "del modname.the_answer " 來做。
+舉例來說，兩個不同的模組都可以定義一個叫做 maximize 的函數。
+這一點都不衝突，因為使用者必須要在這個函數的名稱前加上模組的名稱。
 
-命名空間(Name spaces)是在不同的時候被創造出來的，而且其存在的時間也都
-不一定。內建名稱的namespace是在當Python直譯器啟動時就被創造出來，而且
-不會被刪除掉。Module裡全域(global)的namespace是當module的定義被讀入的
-時候就被創造出來，通常在直譯器離開之前也不會被刪除。那些在top-level啟
-動直譯器裡面被執行的指令，不管是在互動模式或是從script裡面而來的，都隸
-屬於一個叫做 __main__ 的module，所以它們也算有自己的一個global
- namespace。 (事實上，內建的名稱也都在一個module裡面，這個module叫做
- __builtin__ )
+屬性指的是所有在點號後面的東西，
+舉例來說在 z.real 這個表示式中，
+real 就是一個屬於 z 這個物件之屬性。
 
-函式所有的namespace叫做local namespace，是在函式被呼叫時才創造的，而且
-當函式傳回一個值或是引發一個本身無法處理的exception時，這個namespace就
-被刪除(事實上，也許說遺忘是比較貼切的形容詞)。當然，遞迴的函式呼叫會使
-每個呼叫都有自己的local namespace。
+嚴格說來，使用模組裡面的名稱也是屬性指稱，
+在 modname.funcname 這個表示式裡面， modname 就是一個模組物件，
+而 funcname 就是其屬性。
+在這個例子裡面，剛好模組的屬性就對應了在模組裡面定義的全域變數，
+所以我們就說它們就是在一個命名空間裡面。
 
-一個可用範圍( scope )是一個在Python程式裡面文字上的範圍，在這個範圍裡
-面你可以直接使用某個namespace。直接使用(``Directly accessible'')的意思
-是指對一個名稱而言不合格的參考(unqualified reference)試圖想要在
-namespace裡面找某一個名稱。
+屬性可以是唯讀的或是可改寫的。
+對可改寫的屬性，可以設定值給它。
 
-雖然scope是靜態的(statically)被決定的，但是我們使用namescope的時候是很
-動態(dynamically)的來使用之。在任何一個程式執行的地方，都正好有三層的
-scope正在被使用(也就是有三個可以直接使用的namespace)：首先尋找的是最內
-圈的scope，包含有local的名稱；其次搜尋的是中間一層，包含有目前所在的
-module的全域名稱(global names)；最後搜尋的是最外面的一層，也就是包含有
-內建名稱的namespace。
+模組之屬性是可以改寫的，
+所以你可以寫 ''modname.the_answer = 42'' 來改變其值。
+可改寫的屬性也可以被刪除掉，
+你可以用 del 敘述像是 ''del modname.the_answer'' 來做。
 
-通常，local scope指的是在文字上面目前的函式所擁有的local名稱。在函式之
-外的話，local scope就指的是global scope所指的namespace。類別的定義在
-local scope裡面則又放入了另外的一個namespace。
+命名空間是在不同的時候被創造出來的，而且其存在的時間也都不一定。
+內建名稱之命名空間是在當 Python 直譯器啟動時就被創造出來，
+而且不會被刪除掉。
 
-要注意的是scope的決定是依文字的安排來決定的。一個定義在module裡面的函
-式，其global scope就是module的namespace，不管這個函式是從哪裡或是用哪
-一個別名被呼叫的。在另一方面來說，真正的名稱搜尋路線是動態的決定的(在
-程式執行的時候)。但是Python語言本身的定義好像慢慢的往靜態決定變化(也就
-是在編譯的時候)，所以，不要過分依賴動態的名稱解釋。(事實上，local的變
-數都已經是靜態就已經決定了的)。
+模組之全域命名空間是當模組定義被載入之時建立，
+通常在直譯器離開之前也不會被刪除。
 
-Python有一個很特別的變化就是當設定(assignment)的時候都一定是進入到了最
-內層的scope。設定並不是複製資料，相反的，它只是把物件及名稱連結起來而
-已。對於刪除也是一樣的， "del x" 事實上只是把 x 的連結從local scope所
-代表的namespace中除去。事實上，所有會引進新名稱的動作都是使用local
- scope：特別是， import敘述以及函式的定義就是把module以及函式的名稱都
-連結到local scope裡面來了。( global 這個敘述可以用來特別指定某個特殊的
-變數是要放在global scope裡的)
+在最上層啟動直譯器裡面被執行的指令，
+不管是在互動模式或是從草稿檔裡面而來的，
+都隸屬於一個叫做 __main__ 的模組，
+所以它們也算有自己的一個全域命名空間。 
+
+事實上，內建的名稱也都在一個模組裡面，這個模組叫做 __builtin__。
+
+函數所有的命名空間叫做區域命名空間，
+是在函數被呼叫時才創造的，
+而且當函數傳回一個值或是引發一個本身無法處理例外時，
+這個命名空間就被刪除，事實上，也許說遺忘是比較貼切的形容詞。
+當然，遞迴的函數呼叫會使每個呼叫都有自己的區域命名空間。
+
+可用範圍(scope)
+~~~~~~~~~~~~~~~
+可用範圍是 Python 程式裡面文字上的範圍，
+在這個範圍裡面你可以直接使用某個命名空間。
+直接使用(Directly accessible)的意思
+是指對一個名稱而言不合格的參考(unqualified reference)試圖想要在命名空間裡面找某一個名稱。
+
+雖然可用範圍是靜態的被決定的，但是我們使用namescope的時候是很
+動態(dynamically)的來使用之。
+
+在任何一個程式執行的地方，都正好有三層的可用範圍正在被使用，
+也就是有三個可以直接使用的命名空間:
+
+1.首先尋找的是最內圈的可用範圍，包含有區域的名稱；
+
+2.其次搜尋的是中間一層，包含有目前所在的模組的全域名稱；
+
+3.最後搜尋的是最外面的一層，也就是包含有內建名稱的命名空間。
+
+通常，區域可用範圍指的是在文字上面目前的函數所擁有的區域名稱。
+在函數之外的話，
+區域可用範圍就指的是全域可用範圍所指的命名空間。
+類別的定義在區域可用範圍裡面則又放入了另外的一個命名空間。
+
+要注意的是可用範圍的決定是依文字的安排來決定的。
+一個定義在模組裡面的函式，其全域可用範圍就是模組的命名空間，
+不管這個函數是從哪裡或是用哪一個別名被呼叫的。
+
+在另一方面來說，真正的名稱搜尋路線是在程式執行的時候動態決定的。
+但是 Python 本身的定義好像慢慢的往靜態決定變化，也就是在編譯的時候，
+所以，不要過分依賴動態的名稱解釋。
+事實上，區域的變數都已經是靜態就已經決定了的。
+
+Python 有一個很特別的變化就是當設定的時候都一定是進入到了最內層的可用範圍。設定並不是複製資料，相反的，它只是把物件及名稱連結起來而已。
+對於刪除也是一樣的，
+''del x '' 事實上只是把 x 的連結從區域可用範圍所代表的命名空間中除去。
+事實上，所有會引進新名稱的動作都是使用區域可用範圍:
+特別是 import 敘述以及函數定義就是把模組以及函數名稱都連結到區域可用範圍裡面來了。
+
+global 敘述可以用來特別指定某個特殊的變數是要放在全域可用範圍裡的。
 
 定義類別
 ~~~~~~~~
@@ -146,63 +167,64 @@ Python有一個很特別的變化就是當設定(assignment)的時候都一定�
       .  .  .  
       <statement-N> 
 
-類別定義與函式定義都是用 def 敘述，
+類別定義與函數定義都是用 def 敘述，
 且必須要在作用前就定義好，
-但你也可以在 if 敘述或是一個函式裡面放入類別的定義。
+但你也可以在 if 敘述或是一個函數裡面放入類別的定義。
 
-在實務上，存在於類別定義內的敘述通常都是函式的定義，但是我們也可以放入
+在實務上，存在於類別定義內的敘述通常都是函數的定義，但是我們也可以放入
 其他的敘述。這樣的做法有時也很好用，我們之後會再會來看這個用法。類別定
-義內的函式定義通常都有一個特別的參數形式，這是為了method的特別呼叫習俗
+義內的函數定義通常都有一個特別的參數形式，這是為了method的特別呼叫習俗
 的。我們還是留到後面再來討論之。
 
-當一個類別的定義進來時，就會創造出一個新的namespace，而且會當作是一個
-local scope來用。所以所有對local變數的設定都會進入到這個新的namespace
-裡面。具體來說，函式的定義也會把新的函式的名稱連結到這裡來。
+當一個類別的定義進來時，就會創造出一個新的命名空間，而且會當作是一個
+區域 可用範圍來用。所以所有對區域變數的設定都會進入到這個新的命名空間
+裡面。具體來說，函數的定義也會把新的函數的名稱連結到這裡來。
 
 當一個類別的定義正常的離開時( 藉由定義的尾端)，一個類別物件( class
  object )就被創造出來了。這個類別物件基本上來說是只是一個包裝起來的東
-西，其內容是由這個類別定義所創造出來的namespace裡面的內容。我們在下一
+西，其內容是由這個類別定義所創造出來的命名空間裡面的內容。我們在下一
 節就會有更多有關類別物件(class objects)的討論。另外在類別的定義離開時
-，原來的local scope (在進入類別的定義之前的那一個local space)就會被重
-新使用，並且這個創造出來的類別物件就會被放在這個local scope裡面，並且
+，原來的區域 可用範圍 (在進入類別的定義之前的那一個區域 space)就會被重
+新使用，並且這個創造出來的類別物件就會被放在這個區域 可用範圍裡面，並且
 被連結到你所定義的類別名稱(上面的例子裡是 ClassName )上面。
-
 
 類別物件(Class Objects)
 ~~~~~~~~~~~~~~~~~~~~~~~
 類別物件可以做兩件事情，
-一是屬性的指涉(references)，另一個是創造
-出一個實例來(instantiation)。
+一是屬性的指涉(references)，
+另一個是創造出一個實例來(instantiation)。
 
 Attribute references 所使用的是在Python裡面標準的屬性 reference的
 語法： obj.name 。有效的屬性的名稱指的是當類別物件被創造時，所有
-在類別的namespace裡面的名稱。所以，如果你的類別定義如同下面例子的話：
+在類別的命名空間裡面的名稱。
+所以，如果你的類別定義如同下面例子的話：
 
 class MyClass: "A simple example class" i = 12345 def f(x): return
  'hello world' 你就可以使用 MyClass.i 以及 MyClass.f 這兩個有效的
-屬性 references語法，它們分別會傳回一個整數以及一個method物件來。
+屬性 references語法，它們分別會傳回一個整數以及一個方法物件來。
 你也可以設定值給這些類別的屬性s，如此你就可以改變 MyClass.i 的值
 了。 __doc__ 也是類別物件的一個有效的屬性，其傳回值是這個類別的注
 釋字串(docstring)，也就是： "A simple example class" 。
 
-類別的實例化( Class instantiation )是使用函式的表示方法。看起來好像這
-個類別物件是一個沒有參數的函式，然後傳回來的就是這個類別的的一個實例
-(instance)。我們再以前面的類別為例子：
+類別實例化是使用函數的表示方法。
+看起來好像這個類別物件是一個沒有參數的函數，
+然後傳回來的就是這個類別的的一個實例。
+我們再以前面的類別為例子：
 
 x = MyClass() 就會創造出一個新的類別的 instance ，然後我們再把這個物件
-設定給 x 這個local的變數。
+設定給 x 這個區域的變數。
 
 類別的實例化(Class instantiation )這個動作(也就是``呼叫''一個類別物件)
 所創造出來的是一個空的物件。有許多的類別希望創造出來的物件有一個特定的
-初始狀態，所以你可以在類別裡面定義一個特別的method叫做 __init__() ，如
+初始狀態，所以你可以在類別裡面定義一個特別的方法叫做 __init__() ，如
 同下例：
 
     def __init__(self): self.data = [] 當你的類別有定義一個 __init__()
- method時，當你在實例化(instantiation)你的類別時，就會自動的引發
+ 方法時，當你在實例化(instantiation)你的類別時，就會自動的引發
  __init__() 執行，並且創造出一個類別的實例(instance)。所以，一個新的物
 件就可以截由底下的呼叫來創造出來：
 
-x = MyClass() 當然， __init__() 這個method 可以有參數傳入，這樣可以增
+x = MyClass() 當然， __init__() 這個方法 可以有參數傳入，這樣可以增
 加使用時的彈性。在這樣做的時候，使用實例化(instantiate)類別的語法時，
 所傳入的參數就會被傳到 __init__() 裡面去。如範例：
 
@@ -218,65 +240,64 @@ x = MyClass() 當然， __init__() 這個method 可以有參數傳入，這樣�
 對於這樣的實例物件，唯一它們懂得的就是屬性 references。有兩種的
 attribute names我們可以使用：
 
-第一種我叫他是資料特性( data attributes )，這類似於在Smalltalk中所說的
+第一種我叫他是資料屬性( data attributes )，這類似於在Smalltalk中所說的
 實例變數(``instance variables'')以及在C++中的資料成員(``data
- members'')。如同local變數一樣，Data attributes不需要再宣告，你第一次
+ members'')。如同區域變數一樣，Data attributes不需要再宣告，你第一次
 設定值給它們的時候它們就自動存在了。舉例來說，如果 x 是 MyClass 這個物
 件的一個instance，底下這個程式碼就會印出 16 這個結果來：
 
 x.counter = 1 while x.counter < 10: x.counter = x.counter * 2 print
  x.counter del x.counter 第二種instance objecet可以使用的attribute
- references叫做方法( methods ) 。一個method就是一個隸屬於某個物件的函
+ references叫做方法( methods ) 。一個方法就是一個隸屬於某個物件的函
 式。(在Python中，method一詞並不只特定用於類別的instances，其他的物件資
-料型態也可以有自己的 method，例如list物件就有很多methods像是
-append，insert，remove，sort等等。但是我們底下用到method這個詞的時候，
-除非特別說明，要不然我們倒是單獨指著instance objects 的method說的。)
+料型態也可以有自己的 方法，例如list物件就有很多methods像是
+append，insert，remove，sort等等。但是我們底下用到方法這個詞的時候，
+除非特別說明，要不然我們倒是單獨指著instance objects 的方法說的。)
 
-一個instance objects 可以用的有效method名稱是由其類別所決定的。定義上
-來說，所有類別裡面(使用者定義)為函式物件的attribute，都會成為其
-instance的相對應method。所以在我們的例子裡， x.f 就是一個有效的method
-的reference，其原因是因為 MyClass.f 是一個函式；但是 x.i 就不是一個
-method的reference，因為 MyClass.i 不是一個函式。但是，要注意的是， x.f
- 和 MyClass.f 是兩回事，它是一個method物件( method object )，而非一個
-函式物件。
+一個instance objects 可以用的有效方法名稱是由其類別所決定的。定義上
+來說，所有類別裡面(使用者定義)為函數物件的attribute，都會成為其
+instance的相對應方法。所以在我們的例子裡， x.f 就是一個有效的方法
+的reference，其原因是因為 MyClass.f 是一個函數；但是 x.i 就不是一個
+方法的reference，因為 MyClass.i 不是一個函數。但是，要注意的是， x.f
+ 和 MyClass.f 是兩回事，它是一個方法物件( method object )，而非一個
+函數物件。
 
+方法物件(Method Objects)
+~~~~~~~~~~~~~~~~~~~~~~~~
+通常，一個方法可以馬上被呼叫，例如::
+  x.f() 
 
-9.3.4 Method Objects(方法物件)
-
-通常，一個method可以馬上被呼叫，例如：
-
-x.f() 在我們的例子裡，這一個呼叫會傳回來 'hello world' 這個字串。但是
-，因為 x.f 是一個method物件，所以我們沒有必要馬上就呼叫它，我們可以把
+在我們的例子裡，這一個呼叫會傳回來 'hello world' 這個字串。但是
+，因為 x.f 是一個方法物件，所以我們沒有必要馬上就呼叫它，我們可以把
 它儲存起來，然後再稍後再呼叫它。舉例如下：
 
 xf = x.f while 1: print xf() 這個例子同樣的會一直不斷的印出 "hello
  world" 來。
 
-到底，你的method被呼叫時，什麼事情發生了呢？你也許注意到了 當我們呼叫
+到底，你的方法被呼叫時，什麼事情發生了呢？你也許注意到了 當我們呼叫
  x.f() 的時候並沒有傳入任何參數，但是我們在類別定義的時候確實有定義 f
  所傳入的參數。到底是怎麼回事呢？當然，依照Python的定義，當一個函是需
 要參數而你呼叫時沒有傳入參數的話，是會引發一個例外狀況(exception)的，
 甚至這個傳入的參數沒有被用到也是一樣…
 
-事實上，你也許已經猜到答案了。對於method來說有一個較特殊的事是，method
-所處的物件會被當作函式傳入的第一個參數。所以在我們的例子裡面，當我們呼
+事實上，你也許已經猜到答案了。對於方法來說有一個較特殊的事是，方法
+所處的物件會被當作函數傳入的第一個參數。所以在我們的例子裡面，當我們呼
 叫 x.f() 的時候，事實上我們是呼叫 MyClass.f(x) 。一般來說，如果你呼叫
-method的時候傳了 n 個參數，其實你是呼叫背後所代表之類別的函式，而且該
-method所在的物件會插入在傳入的參數中當作第一個參數。
+方法的時候傳了 n 個參數，其實你是呼叫背後所代表之類別的函數，而且該
+方法所在的物件會插入在傳入的參數中當作第一個參數。
 
-如果你還不了解到底method如何運作的話，你也許可以看看它的實作來更了解它
+如果你還不了解到底方法如何運作的話，你也許可以看看它的實作來更了解它
 。當一個instance的attribute被reference，而這個attribute又不是一個data
  attribute的時候，該instance的類別會被尋找。如果這個class attribute的
-名字在類別裡面代表的是一個函式物件的話，就會有一個method物件被創造出來
-。這個method物件是一個由這個instance物件(的指標)，以及剛剛找到的這個函
-式物件所包裝起來的一個抽象的物件。當這個method物件被帶著一串參數呼叫的
-時候，這個method物件會先打開原來的包裝，然後會用instance物件(的指標)以
+名字在類別裡面代表的是一個函數物件的話，就會有一個方法物件被創造出來
+。這個方法物件是一個由這個instance物件(的指標)，以及剛剛找到的這個函
+式物件所包裝起來的一個抽象的物件。當這個方法物件被帶著一串參數呼叫的
+時候，這個方法物件會先打開原來的包裝，然後會用instance物件(的指標)以
 及那一串傳進來的參數組成新的參數串，然後我們再用這個新的參數串來呼叫在
-method物件裡面的函式物件。
+方法物件裡面的函數物件。
 
-
-9.4 一些隨意的想法
-
+一些隨意的想法
+~~~~~~~~~~~~~~
 [這些東西其實應該更多花點心思加以處理的…]
 
 如果data attributes和method attributes 有相同名稱的話，data attributes
@@ -300,26 +321,26 @@ data attribute都用名詞。
 
 從method裡面要使用data attributes (或者是其他的methods)並沒有捷徑。我
 發現這樣的好處是程式的可讀性會增加很多，因為當你在讀method的程式碼的時
-候，local變數跟instance變數混淆的機會就會少很多。
+候，區域變數跟instance變數混淆的機會就會少很多。
 
 習慣上，我們把一個method的第一個參數叫做 self 。這只是一個習慣而已，
  self 這個名字對Python來說完全沒有什麼特殊的意義。(但是你要注意，如果
 你不用這一個習慣的話，對於某些讀你程式的Python程式設計師來說，也許你程
 式的可讀性就低了一點。而且可能有一些類似像 class browser 之類的程式是
-靠這個約定來分辨class的特性，所以你不遵守的話，你的類別它們可能就讀不
+靠這個約定來分辨class的屬性，所以你不遵守的話，你的類別它們可能就讀不
 懂)
 
-所有的在類別裡面的函式物件，在定義上都是該類別之instance的一個method。
+所有的在類別裡面的函數物件，在定義上都是該類別之instance的一個method。
 在類別裡面的意思不限定於一定要在文字上是在類別的定義裡面，你也可以把一
-個函式物件設定給一個在類別裡面的local變數，這樣也算數的。比如說：
+個函數物件設定給一個在類別裡面的區域變數，這樣也算數的。比如說：
 
 # Function defined outside the class
 def f1(self, x, y): return min(x, x+y)
 
 class C: f = f1 def g(self): return 'hello world' h = g 現在 f, g 以及
- h 都是類別 C attributes，而且都指涉(reference)到某個函式物件去。而且
+ h 都是類別 C attributes，而且都指涉(reference)到某個函數物件去。而且
 ，如此做的話，當 C 有instance的時候， f ， g 以及 h 都會變成instance的
-method(事實上 h 所指的函式是跟 g 同一個的)。值得注意的是，如果你真這樣
+method(事實上 h 所指的函數是跟 g 同一個的)。值得注意的是，如果你真這樣
 做的話，你只是讓讀你程式的人頭昏眼花罷了。
 
 你也可以在method裡面呼叫其他的method，你所需要的只是用 self 這個參數的
@@ -327,11 +348,11 @@ method attribute就可以了。例如：
 
 class Bag: def __init__(self): self.data = [] def add(self, x):
  self.data.append(x) def addtwice(self, x): self.add(x) self.add(x)
- method跟一般的函式物件一樣可以使用全域名稱(global name)。Method的
-global scope所指的是類別的定義所存在的module，(注意：類別本身絕不會是
-一個global scope！)。 你大概很少有機會在method裡面會需要用到global
- scope，但是你還是可以使用global scope的，method可以使用在global scope
-之中所import進來的函式以及module，也可以使用在global scope裡面定義的函
+ method跟一般的函數物件一樣可以使用全域名稱(global name)。Method的
+global 可用範圍所指的是類別的定義所存在的模組，(注意：類別本身絕不會是
+一個global 可用範圍！)。 你大概很少有機會在method裡面會需要用到global
+ 可用範圍，但是你還是可以使用global 可用範圍的，method可以使用在global 可用範圍
+之中所import進來的函數以及模組，也可以使用在global 可用範圍裡面定義的函
 式及類別。通常，包含method的這個類別本身就定義在這個global space裡面，
 而且下一段我們就要講到為什麼你會需要在method裡面用到自己本身的類別。
 
@@ -343,9 +364,9 @@ global scope所指的是類別的定義所存在的module，(注意：類別本�
     class DerivedClassName(BaseClassName): 
         <statement-1>...<statement-N> 
 
-基礎類別之名稱 BaseClassName 必須是在子類別所處的scope裡面有定義的。
-除了直接使用基礎類別的名字之外，也可使用expression。
-這在當你的基礎類別是定義在別的module裡的時候特別有用::
+基礎類別之名稱 BaseClassName 必須是在子類別所處的可用範圍裡面有定義的。
+除了直接使用基礎類別的名字之外，也可使用表示式。
+這在當你的基礎類別是定義在別的模組裡的時候特別有用::
 
   class DerivedClassName(modname.BaseClassName): 
 
@@ -363,7 +384,7 @@ global scope所指的是類別的定義所存在的module，(注意：類別本�
 子類別的方法則是由以下的過程來尋找:
 會先找該類別的屬性，
 然後如果需要的話會沿著繼承的路線去找基礎類別，
-如果找到任何的函式物件的話，這個方法參考就是有效的。
+如果找到任何的函數物件的話，這個方法參考就是有效的。
 
 覆寫方法(override)
 ~~~~~~~~~~~~~~~~~~
@@ -381,7 +402,7 @@ TODO::
 
 這對於類別的使用者來說，有時候也是有用的。
 注意的是，如果要這樣做，
-需將基礎類別定義在global scope或是import進來global scope 裡面。
+需將基礎類別定義在global 可用範圍或是import進來global 可用範圍 裡面。
 
 繼承建構子
 ~~~~~~~~~~
@@ -400,7 +421,7 @@ TODO::
     ...
     >>> c = C()
     Traceback (most recent call last):
-      File "<stdin>", line 1, in <module>
+      File "<stdin>", line 1, in <模組>
     TypeError: __init__() takes exactly 2 arguments (1 given)
     >>> c = C('Carl')
     >>> c.name
@@ -489,7 +510,7 @@ Python仰賴程式設計師們的約定俗成的習慣來避免可能的名稱�
 9.6 Private變數
 
 在Python裡面只有有限度的支援類別中的private指稱 (class-private
- identifiers，譯：指變數及函式)。任何的identifier，在之前是以 __spam
+ identifiers，譯：指變數及函數)。任何的identifier，在之前是以 __spam
  這個形式存在的(最前面至少要有兩個底線，最後面最多只能有一個底線) 現在
 都要以 _classname__spam 這個形式來取代之。在這裡的 classname 指的是所
 在的類別名稱，拿掉所有前面的底線。這個名稱的變化不受限於這個identifier
@@ -516,10 +537,10 @@ bug：如果一個類別繼承自某個基礎類別時用了相同的名字，�
 
 底下這個例子是一個類別裡面定義了自己的 __getattr__() 以及
  __setattr__() 兩個方法，並且把所有的attributes都儲存在private的變數裡
-面。這個例子適用於所有的Python版本，甚至是包括在這個特性加入之前的版本
+面。這個例子適用於所有的Python版本，甚至是包括在這個屬性加入之前的版本
 都可以：
 
-class VirtualAttributes: __vdict = None __vdict_name =
+class Virtual屬性: __vdict = None __vdict_name =
  locals().keys()[0]
      
     def __init__(self): self.__dict__[self.__vdict_name] = {}
@@ -541,13 +562,13 @@ john = Employee() # Create an empty employee record
 # Fill the fields of the record
 john.name = 'John Doe' john.dept = 'computer lab' john.salary = 1000
  如果有一段的Python程式碼需要一個特別的抽象資料型態的時候，通常你可以
-傳給這段程式碼一個類似功能的類別來代替。例如，如果你有一個函式是用來格
+傳給這段程式碼一個類似功能的類別來代替。例如，如果你有一個函數是用來格
 式化一些來自於file物件的資料，你可以定義一個類別，類別裡面有類似
  read() 以及 readline() 之類方法可以從一個字串緩衝區(string buffer)
-讀出資料，然後再把這個類別傳入函式當作參數。
+讀出資料，然後再把這個類別傳入函數當作參數。
 
 Instance的方法物件也可以有attributes： m.im_self 就是其方法為
-instance的一個物件， m.im_func 就是這個方法相對應的函式物件。
+instance的一個物件， m.im_func 就是這個方法相對應的函數物件。
 
 
 9.7.1 例外(Exceptions)也可以是類別
@@ -577,16 +598,16 @@ for c in [B, C, D]: try: raise c() except D: print "D" except C: print
 也就是只有第一個可以接受的except子句被執行而已。
 
 當一個沒有被處理到的exception是一個類別時，所印出來的錯誤信息會包含其
-類別的名稱，然後是(：)，然後是這個instance用內建的 str() 函式轉換成的
+類別的名稱，然後是(：)，然後是這個instance用內建的 str() 函數轉換成的
 字串。
 
 
 Footnotes
 
-... 一個namespace裡面。 9.1 除了一件事之外。module物件有一個秘密的
-attribute叫做 __dict__ ，這個attribute會傳回這個module的namespace所對
+... 一個命名空間裡面。 9.1 除了一件事之外。模組物件有一個秘密的
+attribute叫做 __dict__ ，這個attribute會傳回這個模組的命名空間所對
 應的dictionary。 __dict__ 這個名字就是一個attribute，但卻不是一個
-global的名稱。很明顯的，使用這個attribite將會破壞這個namespace命名的抽
+global的名稱。很明顯的，使用這個attribite將會破壞這個命名空間命名的抽
 象性(abstraction)，所以應該只限制於像是檢驗屍體一樣的除錯器使用。
  Python 教學文件			Previous: 8. 程式錯誤與例外(Exceptions)情
 形 Up: Python 教學文件 Next: 10. 現在呢?  請看關於此文件… 裡面有關如何

@@ -1,8 +1,25 @@
 import os
-docs = [r'doc\db\db.stx']
+docs = [r'doc\db\db.stx',
+        r'doc\taichi\taichi.stx', 
+        r'doc\poems\poems.stx',
+        r'doc\net\net.stx',
+        r'doc\csec\csec.stx',
+        r'doc\stable_prog\stable_prog.stx', 
+        r'doc\food\food.stx', 
+        r'doc\novel\novel.stx', 
+        r'doc\ds\ds.stx', 
+        r'doc\python\python.stx'
+        ]
 for doc in docs:
-    print 'transform %s' % doc
-    os.system(r'lib\stxt\formater\web.py %s > DEBUG' % doc)
+    print 'Transform %s' % doc
+    target_dir = os.path.dirname(doc.replace('doc', 'structedtext'))
+    os.system(r'del %s\*.html' % target_dir)
+    os.system(r'lib\stxt\stxt.py -f web %s' % doc)
+
+os.system(r'echo UPDATE TO SERVER')
+os.system(r'pause')
+os.system(r'appcfg.py update structedtext')
+
 #slides = [r'doc\db\db_slides.stx']
 #for slide in slides:
 #    print 'transform %s' % slide
