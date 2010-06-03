@@ -14,18 +14,15 @@ digit  = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0
 --------------------
 
 table.左遞迴文法轉後置文法的語意動作表
-<tgroup cols='2' align='left' colsep='1' rowsep='1'>
-<thead>
-<row>
-<entry>展開規則</entry>
-<entry>語意動作</entry>
-</row>
-</thead>
-<tbody>
-<row><entry><![CDATA[<expr>   ::= <expr1>+<term1>]]></entry>
-<entry>
+展開規則
+語意動作
+
+
+
+<![CDATA[<expr>   ::= <expr1>+<term1>]]>
+
 <![CDATA[
-<expr>.a ::= <expr1>.a || <term1>.a || +
+.a ::= <expr1>.a || <term1>.a || +
 ]]>
 </entry>
 </row>
@@ -48,37 +45,18 @@ table.左遞迴文法轉後置文法的語意動作表
 <![CDATA[
 <term>.a   ::= <term1>.a ||<digit1>.a || *
 ]]>
-</entry>
-</row>
-<row><entry><![CDATA[<term>   ::= <term1>/<digit1>]]></entry>
-<entry>
-<![CDATA[
 <term>.a   ::= <term1>.a ||<digit1>.a || /
-]]>
-</entry>
-</row>
-<row><entry><![CDATA[<term>   ::= <digit1>]]></entry>
+<term>   ::= <digit1>
 <entry>
-<![CDATA[
 <term>.a   ::= <digit1>.a 
-]]>
-</entry>
-</row>
-<row>
-<entry><![CDATA[<digit>  ::= 1]]></entry>
-<entry>
-<![CDATA[
+
+
+
+<![CDATA[<digit>  ::= 1]]>
 <digit>.t ::= 1
-]]>
-</entry>
-</row>
-</tbody>
-</tgroup>
-</table>
-</example>
-</sect1>
-<sect1 id="PredictiveParse"><title>預測剖析法</title>
-<para>
+
+預測剖析法
+~~~~~~~~~~
 對源碼詞串的剖析，一般是由左而右的讀取，
 正讀取到的詞稱為讀取詞，
 預測剖析法為遞降剖析法的一種，

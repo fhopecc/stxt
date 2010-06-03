@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import with_statement
 import sys, os, re, unittest, booker
+from html import f_image
 
 def disp(tree):
     return globals()['f_' + tree.type](tree)
@@ -144,17 +145,18 @@ def f_olist(tree):
     html = ''
 
     m = re.match('sect(\d)', tree.parent.type)
-    s = int(m.group(1)) - 2 #section level
-    l = s + l
+    if m:
+        s = int(m.group(1)) - 2 #section level
+        l = s + l
     for i, c in enumerate(tree.children):
         html += '<div class="level%s">\n' % str(l)
         #import pdb
         #pdb.set_trace()
         html += '<p class="list%s">%s%s' % (l,
-                                           f_number(l, i),
-                                           c[0].value)
+                                            f_number(l, i),
+                                            c[0].value)
         html += '</p>\n'
-        for np in c.children[1:-1]:
+        for np in c.children[1:]:
             html += disp(np)
         html += '</div>\n'
     return html

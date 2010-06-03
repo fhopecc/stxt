@@ -9,6 +9,8 @@ import sys, os, shutil, logging , socket
 config.fileConfig(r'config\log.conf')
 logger = logging.getLogger()
 
+UPDATEDIR = os.path.join('tmp', 'hlland')
+
 def update_hlland(docdate, docno, password):
     u'更新地政觸控系統'
     url = 'http://att.hl.gov.tw/SENDATT_FILE/%s/376550400A_%s.zip' % \
@@ -34,6 +36,14 @@ def unzip(file, password):
               password, rar, os.path.join('tmp', 'hlland'))
     logger.info(cmd)
     os.system(cmd)
+
+def unrar(rar, password):
+    cmd = '%s e -o+ -p"%s" %s %s' % (r'lib\bin\rar', 
+          password, rar, UPDATEDIR)
+    logger.info(cmd)
+
+    if os.system(cmd) != 0:
+        exit()
 
 def isalive(host):
     targetIP = socket.gethostbyname(host)  
@@ -107,10 +117,31 @@ if __name__ == '__main__':
                            u'將 dir 下的更新程式佈署到機台上。'
                       )
 
+    parser.add_option("-r", "--rar", dest="rar",
+                      nargs=2,
+                      help=u"-r rar password" +
+                           u'將 rar 更新程式佈署到機台上，' + 
+                           u'其密碼為 password。'
+                      )
+
+    parser.add_option("-d", "--deploy", dest="deploy",
+                      help=u"-d " +
+                           u'連帶佈署更新程式佈署到機台上，'
+                      )
+
+
+
     (options, args) = parser.parse_args()
 
     if options.local:
         deploy(options.local)
+    
+    elif options.rar: 
+        import pdb
+        pdb.set_trace()
+        unrar(options.rar[0], options.rar[1]) 
+        if options.deploy:
+            deploy(UPDATEDIR)
 
     #try:
     #    if len(sys.argv) < 4: raise IndexError()

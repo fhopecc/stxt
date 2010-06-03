@@ -1,23 +1,21 @@
 花蓮縣地方稅務局
 ================
-
-98 年度稅務資料庫災變回復演練報告
-=================================
+99 年度網路申報資料庫資料庫災變回復演練報告
+===========================================
 依據：
 ------
-# 「財政部暨所屬機關 (構)資訊安全管理準則」
-  暨「財稅資訊處理手冊－稽核管理」。
-# 本局 98 年度稅務資料庫災變回復演練計畫
+1.「財政部暨所屬機關 (構)資訊安全管理準則」暨
+  「財稅資訊處理手冊－稽核管理」。
+2.本局 99 年度網路申報資料庫資料庫災變回復演練報告。
 
 目的：
 ------
-為確保稅務資料庫安全，
+為確保網路申報資料庫安全，
 確實掌握意外災難發生時相關人員應變作業處理流程及回復作業實機操作之熟練度，
 以期災害發生時，能在最短期限內回復正常作業，達到稅務作業之永續服務。
 
 演練時間：98年10月20日。
 ------------------------
-
 辦理單位：資訊科
 ----------------
 協辦單位：經緯科技股份有限公司  
@@ -29,213 +27,119 @@
 
 演練項目：
 ----------
-資料庫災變回復。
+網路申報資料庫災變回復。
 
 演練地點：
 ----------
-本局資訊科
+本局資訊科。
 
 模擬情境：
 ----------
-這次資料庫災難演練，
-模擬當Oracle資料庫主機的資料庫檔案系統皆於09:25毀損
-（但Archive Log的檔案系統沒有毀損），
-無法提供地方稅應用程式所需的資料庫服務。
+網路申報資料庫主機之資料庫檔案於 18:00 毀損，
+致使主機無法提供網路申報系統所需之資料庫服務，
+資訊科重建資料庫於備援主機上，
+並將資料庫恢復至 19:00 之狀態，
+且請維護廠商協助相關作業。
 
 演練步驟：
 ----------
-選定房屋稅系統執行模擬驗證作業：
+保存毀損前之畫面以進行事後驗證：
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-選定房屋稅系統為此次模擬作業，
-並於演練前事先將登錄資料及其畫面留存，
-以檢核復原作業是否成功。
+事前登入至網路申報系統並留存其畫面，
+以利事後檢核復原作業是否成功。
 
-模擬線上資料庫檔案系統毀損：
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 早上 09:25 櫃台人員回報，所有人員皆無法登入地方稅應用系統。
-# 主機操作人員首先進行硬體問題判別檢視作業，
-  檢視地方稅磁碟機陣列組之硬體燈號皆正常。
-# 資料庫管理師檢查資料庫系統 listener 程式，發現 listener 程式正常，
-  再次嘗試開啟資料庫，卻發現系統顯示某些資料庫檔案無法開啟，
-  檢查資料庫主機上之資料庫系統程式LOG記錄檔，
-  發現有資料庫無法掛載之錯誤訊息，經使用檢查檔案系統之程式檢查，
-  發現資料庫主機資料庫檔案系統嚴重毀損，
-  無法開啟資料庫（資料庫系統異常檢測流程如附件）。
+模擬資料庫系統檔案毀損：
+~~~~~~~~~~~~~~~~~~~~~~~~
+#.切斷防火牆，以防止民眾於災變期間連入地方稅網路申報系統。
 
-進行資料庫復原作業：
-~~~~~~~~~~~~~~~~~~~~
-# 關閉AP1、AP2 及 AP3 的 Weblogic 系統。
+#.網路申報系統內外網中介主機關機，
+  以防止內外網進行不正常之檔案交換。
 
-# 由於Oracle資料庫主機資料庫檔案系統於 09:25 嚴重毀損，
-  為了使稅務系統能於最短時間內提供服務，
-  因此從備份磁帶將稅務資料庫回復到測試機資料庫主機，
-  並將資料庫恢復到09:24時的狀態，且請維護廠商協助相關作業。
+#.關閉網路申報系統資料庫，模擬資料庫主機毀損，
+  並啟動測試網路申報系統資料庫。
 
-# 於測試機上建立正式機資料庫相關目錄：
-# 建立 /data/eltdb 底下 oradata、admin 目錄
-# 建立 /data/eltdb/admin 底下 ELTUD 目錄
-# 建立 /data/eltdb/admin/ELTUD 底下 bdump、cdump、udump 目錄
-# 建立 /data/eltdb/oradata 底下 ELTUD 目錄。
-# 建立 /data/eltbat/arch 底下 ELTUD 目錄。
-# 找出昨日Veritas 全備份磁帶Tape 進行回復作業。
-# 進行資料庫的recover作業，將資料庫recover到09：24狀態
-# 開啟復原完成的資料庫，準備進行地方稅AP整合測試
-# 開啟AP1、AP2 及 AP3 的 Weblogic 系統。
-  修改設定，將資料庫指定到測試資料庫主機ELTUD01T，系統恢復正常作業。
+#.於 18:00 土地代書通知土增稅服務區人員，
+  無法登入地方稅網路申報系統。
 
-房屋稅系統進行後續檢核驗證作業：
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-開啟地方稅房屋稅系統，進行後續檢核驗證作業，並進行資料驗證作業。
+#.土增稅服務區人員嘗試登入地方稅網路申報系統，
+  發現無法登入，再通報資訊科。
+  
+#.資訊科嘗試登入地方稅網路申報系統，發現系統無法連接資料庫。
+
+#.通報資料庫管理員，經查為資料庫系統檔案毀損，無法使用。
+
+資料庫復原：
+~~~~~~~~~~~~
+#.啟動備援資料庫主機，其 IP 設為毀損資料庫主機 IP。
+
+#.於備援資料庫主機建置 MS SQLServer。
+
+#.建立資料庫 yrxweb。
+
+#.建立資料庫帳號 eltweb。
+
+#.利用備援系統(Arconis)將資料庫復原至 18:00 狀態。
+
+檢核驗證：
+~~~~~~~~~~
+開啟地方稅網申報系統，進行後續檢核驗證作業，並進行資料驗證作業。
 
 綜合檢討：
 ----------
-# 本次災變回復演練成功驗證目前資料庫備份機制完備，
-  於災變發生時確實能迅速回復已毀損之資料庫，並確認備份媒體、
-  備份主機及備份系統運作正常。
-# 備份為災變回復之基礎工作，為期災變發生能確實回復資料庫，
-  平時備份作業更應確實執行，以備不時之需。
-# 本次災變回復演練在經緯公司工程師輔導下順利完成。 
+#.本局去年 7 月建置網路申報系統，並採用 Acronis 作為備援系統，
+  此次災變回復演練成功驗證目前網路申報系統資料庫備份機制完備，
+  並確認備份媒體、備份主機及備份系統運作正常。
 
-98 年度稅務資料庫災變回復演練模擬演練情形
-=========================================
-測試機上建立正式機資料庫相關目錄：
-----------------------------------
-code.建立正式機資料庫相關目錄
-cd /data/eltdb/admin
-mkdir ELTUD
-cd ELTUD
-mkdir bdump  cdump  udump
-cd /data/eltdb/oradata
-mkdir ELTUD
-cd /data/eltbat
-mkdir -p arch/ELTUD
-mkdir -p oradata/ELTUD
-::
-# 於測試機上建立正式機資料庫相關目錄：(時間09:20)
-# 登入 VERITAS 主機並切換目錄至 c:\VERITAS\NetBackup\db\altnames
-# 新增一個檔案，檔名為 ELTUD01T ，檔案內容 為 ELTUD00(正式機) 
-# 開始 Restore SPFILE(時間09:36)
-# copy 正式機密碼檔/opt/oracle/OraHome_1/dbs/orapwELTUD 
-  到測試機/opt/oracle/OraHome_1/dbs/orapwELTUD
-# 更改restore_spfile.sql 內 DBID 及 control  file  
-# 查詢正式機的 DBID
+#.備份為災變回復之基礎工作，為期災變發生能確實回復網路申報系統，
+  平時系統相關人員應確實監控備份作業是否成功，以備不時之需。
 
-  select dbid from v$database;
+#.本次災變回復演練在經緯公司工程師輔導下順利完成。 
 
-# 查詢最新的正式機 controlfile (到VERITAS 找最近的全備援的LOG)
+99 年度網路申報資料庫資料庫災變回復演練報告
+===========================================
+保存毀損前之畫面以進行事後驗證：
+-------------------------------
+#.事前登入至網路申報系統並留存其畫面，
+  以利事後檢核復原作業是否成功。
 
-Restore SPFILE：
-----------------
-# 首先Restore Oracle的spfile<ORACLE_SID>.ora參數檔
-# 關閉測試機DB
-# 於測試機(ora10g)執行 export ORACLE_SID=ELTUD  模擬正式機
-  於測試機建立暫時使用之spfile
-  /opt/oracle/OraHome_1/dbs/initELTUD.ora (見附件)
-# 執行命令如下：
+  image.17:58 事前登入畫面(login_before.JPG)
 
-  rman cmdfile /opt/oracle/script/restore/restore_spfile.sql
+模擬資料庫系統檔案毀損：
+------------------------
+#.切斷防火牆，以防止民眾於災變期間連入地方稅網路申報系統。
+  #.登入外網防火牆系統，關閉規則 web -> DMZ:https，
+    以防止民眾於災變期間連入地方稅網路申報系統。
 
-開始 Restore Control file(時間：10:15)
---------------------------------------
-# 更改restore_control.sql 內 DBID 及 control  file
+#.網路申報系統內外網中介主機關機，
+  以防止內外網進行不正常之檔案交換。
 
-# Restore Control file：開始還原Controlfile 
-  命令如下：
+#.關閉網路申報系統資料庫，模擬資料庫主機毀損，
+  並啟動測試網路申報系統資料庫。
 
-  rman cmdfile /opt/oracle/script/restore/restore_control.sql
+#.於 18:00 土地代書通知土增稅服務區人員，
+  無法登入地方稅網路申報系統。
 
-開啟資料庫到mount狀態並開始回復database (時間：10:20)
-------------------------------------------------------
-# 更改restore_db.sql 內 DBID
-  命令如下：
+#.土增稅服務區人員嘗試登入地方稅網路申報系統，
+  發現無法登入，再通報資訊科。
+  
+#.資訊科嘗試登入地方稅網路申報系統，發現系統無法連接資料庫。
 
-  rman cmdfile /opt/oracle/script/restore/restore_db.sql
+  image.無法登入畫面(login_error.JPG)
 
-資料檔案回復完成時間(時間：12:30)
----------------------------------
+#.通報資料庫管理員，經查為資料庫系統檔案毀損，無法使用。
 
-# 檢查資料檔案是否已經回復(時間：13:20)
+資料庫復原：
+------------
+#.啟動備援資料庫主機，其 IP 設為毀損資料庫主機 IP。
 
-  $ ls -l /data/eltdb/oradata/ELTUD
+#.於備援資料庫主機建置 MS SQLServer。
 
-查詢所需archive log ( 測試機 ora10g )
--------------------------------------
-code.查詢所需archive log (測試機 ora10g)
-$ export ORACLE_SID=ELTUD
-$ sqlplus / as sysdba
+#.建立資料庫 yrxweb。
 
-SQL*Plus: Release 10.1.0.5.0 - Production on Tue Oct 20 16:12:02 2009
-Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+#.建立資料庫帳號 eltweb。
 
-Connected to:
-Oracle Database 10g Enterprise Edition Release 10.1.0.5.0 - 64bit Production
-With the Partitioning, OLAP and Data Mining options
-SQL>
-SQL> archive log list;
-Database log mode              Archive Mode
-Automatic archival             Enabled
-Archive destination            /data/eltbat/arch/ELTUD
-Oldest online log sequence     148798
-Next log sequence to archive   148929
-Current log sequence           148929
-::
+#.利用備援系統(Arconis)將資料庫復原至 18:00 狀態。
 
-Restore Archive Log 檔案(時間：13:26)
--------------------------------------
-# 更改 restore_arch.sql 內 logseq 
-  rman cmdfile /opt/oracle/script/restore/restore_arch.sql
-
-傳送正式機的Archive log檔 (時間：13:31)
----------------------------------------
-# 由於前面還原的是周日FULL BACKUP的controlfile 
-  （c-881898704-20091018-01）及Archive log檔案，
-  所以只要從正式機傳輸周日 晚上FULL BACKUP完成之後的Archivelog就可以
-  複製正式機的Archive Log File到 測試機 /data/eltbat/arch/ELTUD
-
-# 檢查atchive log 檔 (時間：13:36)
-
-  $ls -l /data/eltbat/arch/ELTUD
-
-# 再進行修復資料庫，因為原主機已無法復原，
-  必須使用backup controlfile來復原，手動指定回復到09:24 (時間：13:40)
-
-Ora10g 登入 測試機
-------------------
-code.Ora10g 登入 測試機
-$export ORACLE_SID=ELTUD
-bash-3.00$ sqlplus / as sysdba
-SQL*Plus: Release 10.1.0.5.0 - Production on Thu Oct 8 13:42:57 2009
-Copyright (c) 1982, 2005, Oracle.  All rights reserved.
-Connected to:
-Oracle Database 10g Enterprise Edition Release 10.1.0.5.0 - 64bit Production
-With the Partitioning, OLAP and Data Mining options
-
-SQL> alter session set nls_date_format="YYYY-MM-DD:HH24:MI:SS";
-
-Session altered.
-
-SQL>
-SQL> RECOVER DATABASE USING BACKUP CONTROLFILE UNTIL TIME '2009-10-20:09:24:00';
-ORA-00279: change 1537368947 generated at 10/07/2009 18:37:35 needed for thread
-ORA-00289: suggestion : /data/eltbat/arch/ELTUD/arch1_562249498_94334.log
-ORA-00280: change 1537368947 for thread 1 is in sequence #94334
-
-
-Specify log: {<RET>=suggested | filename | AUTO | CANCEL}
-AUTO
-::
-
-最後用resetlogs方式開啟資料庫 （時間 14：20）
---------------------------------------------
-code.Ora10g 登入 測試機
-SQL> alter database open resetlogs;
-
-Database altered.
-
-::
-
-資料庫已修復完畢
-----------------
-此時測試機的資料庫運作的資料為正式機 2009-10-20:09:24:00 的最新資料
-最後再將 AP1 ~ AP3 的JDBC 指向 測試機 ( 10.66.250.5 改成 10.66.248.1 )
-稅務平台就運行順利
+檢核驗證：
+---------
+開啟地方稅網申報系統，進行後續檢核驗證作業，並進行資料驗證作業。
