@@ -81,7 +81,7 @@ def f_label(tree):
             }
     label = ""
     if re.match(r'sect\d', tree.type):
-        label = tree.title
+        label = tree.title.replace(r'\n', '<br/>')
     elif tree.type in ('question', 'define', 'theorem'):
         label =  type[tree.type] + str(tree.order() + 1)
     elif tree.type in ('proof', 'answer'):
@@ -99,7 +99,9 @@ def f_label(tree):
 def f_titled_container(tree):
     temp = '''$def with (id, type, title, content)
 <div id="$id" class="$type"><div class="title">$title</div>
+<div class="$:(type)_content">
 $:content
+</div>
 </div>
 '''
     content =""

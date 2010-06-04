@@ -1,24 +1,29 @@
+$def with (title, content)
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 <style type="text/css">
 body {font-family:"標楷體";font-size:14pt}
-.sect1 .title {font-size:24pt;font-weight:bold;text-align:center}
-.comment .title {text-align:right;font-weight:normal;font-size:12pt}
-.image .title {text-align:left;font-weight:normal;font-size:14pt}
-h2 {font-size:16pt;font-weight:bold}
-h3 {font-size:16pt;font-weight:normal}
-.sect2  {margin-left:24pt}
-.sect3  {margin-left:28pt}
-.level1 {margin-left:24pt}
-.level2 {margin-left:24pt}
-.level3 {margin-left:24pt}
-.level4 {margin-left:24pt}
-.list1  {text-indent:-24pt}
-.list2  {text-indent:-42pt}
-.list3  {text-indent:-24pt}
-.list4  {text-indent:-15pt}
+.sect1 .title {font-size:20pt;font-weight:bold;text-align:center}
+.sect1 .sect1_content {margin-top:12pt;page-break-after:always}
+.olist1 .olistitem .para:first-child {margin:0 0 12pt 0pt;
+                                      font-weight:bold}
+.olist1 .olistitem .para {margin:0 0 12pt 32pt}
+.olist2 {margin-left:32pt}
+.olist2 .olistitem .para:first-child {margin:0 0 12pt 32pt;
+                                      text-indent:-32pt;
+                                      font-weight:normal}
+.olist3 {margin-left:28pt}
+
+.olist3 .olistitem .para:first-child {margin:0 0 12pt 42pt;
+                                      text-indent:-42pt;
+                                      font-weight:normal}
+
+.image .title {font-size:14pt;font-weight:normal;text-align:center}
+
+img {width:442pt;height:332pt}
+
 dt {font-weight:bold}
 table { 
  border:1pt black solid; 
@@ -27,9 +32,9 @@ table {
 tr {border:1pt black solid}
 td {border:1pt black solid}
 </style>
-<title>%(title)s</title>
+<title>$title</title>
 </head>
 <body>
-%(content)s
+$:content
 </body>
 </html>

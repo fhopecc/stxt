@@ -16,8 +16,12 @@ alter table table-name disable constraint constraint-name;
 Adding a new Column
 alter table foo_table add bar_column char(1);
 Modifying a column
+
 Renaming a column name
-alter table some_table rename column column_name to new_column_name;
+~~~~~~~~~~~~~~~~~~~~~~
+:: 
+  alter table some_table rename column column_name to new_column_name;
+
 Changing a column's type
 A column's type can be changed if the column is empty within the entire table, otherwise Oracle gives an ORA-01440: column to be modified must be empty to decrease precision or scale.
 alter table some_table modify (column_name number);
