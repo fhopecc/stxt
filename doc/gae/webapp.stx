@@ -1,0 +1,199 @@
+執行應用程式
+------------
+webapp 應用程式包含三個部分：
+一或多個 RequestHandler 類別 (描述於要求處理常式)
+將 URL 對應到 RequestHandler 類別的 WSGIApplication 物件
+使用 CGI 配接程式來執行 WSGIApplication 的主要常式
+
+WSGIApplication 類別實作 WSGI 介面，即網路應用程式和網頁伺服器之間的標
+準介面。任何 WSGI 架構都可以使用 WSGI CGI 配接程式，與「應用服務引擎」
+搭配使用。webapp 包括下列的配接程式：函式 run_wsgi_app() 接受應用程式
+實例並執行它。您也可以使用 Python 標準程式庫中所包含之 wsgiref 模組的
+ CGI 配接程式。
+
+下列範例會將四個 URL 路徑對應至四個 RequestHandler 類別 (未顯示)，再使用 run_wsgi_app() 執行應用程式：
+
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
+
+application = webapp.WSGIApplication([('/', MainPage),
+                                      ('/newentry', NewEntry),
+                                      ('/editentry', EditEntry),
+                                      ('/deleteentry', DeleteEntry),
+                                     ],
+                                     debug=True)
+
+def main():
+  run_wsgi_app(application)
+
+if __name__ == '__main__':
+  main()
+WSGIApplication 建構函式接受配對 (組合) 的清單，此清單會將 URL 路徑對應至 RequestHandler 類別。
+選擇性的 debug=True 引數會將應用程式置於偵錯模式，若處理常式引發例外，便會告訴 webapp 在瀏覽中顯示堆疊追蹤。發生錯誤時，webapp 預設只會傳回 HTTP 500 錯誤。
+URL 對應
+對應中的 URL 路徑是規則運算式。規則運算式特殊字元必須逸出。規則運算式可以包含 regexp 群組，來比對 URL 的部分。符合群組的模式會當做引數傳遞給要求處理常式。
+class BrowseHandler(webapp.RequestHandler):
+
+  def get(self, category, product_id):
+    # Display product with given ID in the given category.
+
+
+# Map URLs like /browse/(category)/(product_id) to BrowseHandler.
+application = webapp.WSGIApplication([(r'/browse/(.*)/(.*)', BrowseHandler)
+                                     ],
+                                     debug=True)
+
+def main():
+  run_wsgi_app(application)
+
+if __name__ == '__main__':
+
+  main()
+
+提示：「應用服務引擎」會根據應用程式的 app.yaml 檔案所指定的 URL 和對
+應關係，將要求傳送給 Python 指令碼。webapp WSGIApplication 進一步將特
+定 URL 路徑對應至要求處理常式。如何使用兩種對應方式，全靠您自行決定：
+您可以讓所有非靜態 URL 移至單一 Python 指令碼，並讓指令碼將所有動態
+ URL 分派給處理常式。或者，您可以將功能性群組為多個 WSGI 應用程式，由
+不同指令碼執行，並使用 app.yaml 將適當的 URL 對應至適當的應用程式。
+
+
+RequestHandler 類別
+RequestHandler 類別是 HTTP 要求處理常式的超級類別。
+RequestHandler 是由 google.appengine.ext.webapp 模組所提供。
+簡介
+RequestHandler()
+實例方法：
+get()
+post()
+put()
+head()
+options()
+delete()
+trace()
+handle_exception()
+error()
+redirect()
+initialize()
+實例屬性 (attribute)：
+request
+response
+簡介
+webapp 應用程式定義用來處理要求的一或多個 RequestHandler 類別。處理常式類別覆寫下列一或多個方法，來處理相關種類的 HTTP 要求：get()、post()、head()、options()、put()、delete() 或 trace()。
+建構函式
+class RequestHandler()
+HTTP 要求處理常式的基礎類別。
+此建構函式沒有引數。可以使用 initialize() 方法來初始化此實例。
+實例方法
+RequestHandler 類別的子類別繼承或覆寫下列方法：
+get(*args)
+呼叫來處理 HTTP GET 要求。被處理常式子類別覆寫。
+post(*args)
+呼叫來處理 HTTP POST 要求。被處理常式子類別覆寫。
+put(*args)
+呼叫來處理 HTTP PUT 要求。被處理常式子類別覆寫。
+head(*args)
+呼叫來處理 HTTP HEAD 要求。被處理常式子類別覆寫。
+options(*args)
+呼叫來處理 HTTP OPTIONS 要求。被處理常式子類別覆寫。
+delete(*args)
+呼叫來處理 HTTP DELETE 要求。被處理常式子類別覆寫。
+trace(*args)
+呼叫來處理 HTTP TRACE 要求。被處理常式子類別覆寫。
+handle_exception(exception, debug_mode)
+處理常式引發例外狀況時會呼叫此方法。按照預設，handle_exception 會設定 HTTP 狀態碼 500 (「伺服器錯誤」)。若 debug_mode 為 True，它會將堆疊追蹤列印至瀏覽器。否則，它只會列印單純的錯誤訊息。RequestHandler 類別可以覆寫此方法，來提供自訂行為。
+error(code)
+提供處理常式使用的簡捷方法，以傳回錯誤回應。清除回應輸出串流並設定 HTTP 錯誤代碼為 code。與呼叫 self.response.clear() 和 self.response.set_status(code) 相同。
+redirect(uri, permanent=False)
+提供處理常式使用的簡捷方法，以傳回重新導向回應。設定 HTTP 錯誤代碼和 Location: 標頭，以重新導向至 uri，並清除回應輸出串流。若 permanent 為 True，則永久重新導向會使用 HTTP 狀況碼 301。否則，暫時重新導向會使用 HTTP 狀況碼 302。
+initialize(request, response)
+以 Request 和 Response 物件初始化處理常式實例。一般而言，WSGIApplication 會在初始化處理常式類別之後執行此動作。
+實例屬性 (attribute)
+RequestHandler 子類別的實例具有下列屬性 (attribute)：
+request
+Request 實例。一般而言，此屬性 (attribute) 會在建構物件之後，由 WSGIApplication 進行初始化。
+response
+Response 實例。一般而言，此屬性 (attribute) 會在建構物件之後，由 WSGIApplication 進行初始化。
+
+取得使用者引數
+~~~~~~~~~~~~~~
+要求處理常式實例可以使用其 request 屬性來存取要求資料。
+應用程式會將它初始化為填入的 WebOb Request 物件。
+
+要求物件提供 get() 方法，傳回從查詢和 POST 資料剖析的引數值。
+方法接受引數名稱做為其第一個參數。例如::
+
+    class MyHandler(webapp.RequestHandler):
+        def post(self):
+            name = self.request.get("name")
+
+若要求中沒有被要求的引數，get() 按照預設會傳回空白字串 ('')。若指定參
+數 default_value，而引數不存在，則 get() 傳回該參數值，而非空白字串。
+
+若在要求中引數出現一次以上，get() 按照預設會傳回第一次出現的引數。若要
+以清單 (可能為空白) 方式取回可能出現一次以上的所有引數，請於 get() 使
+用引數 allow_multiple=True。
+# <input name="name" type="text" />
+name = self.request.get("name")
+
+# <input name="subscribe" type="checkbox" value="yes" />
+subscribe_to_newsletter = self.request.get("subscribe", default_value="no")
+
+# <select name="favorite_foods" multiple="true">...</select>
+favorite_foods = self.request.get("favorite_foods", allow_multiple=True)
+for food in favorite_foods:
+  # ...
+針對本文內容不是 CGI 參數集的要求而言 (例如 HTTP PUT 要求的本文)，要求
+物件會提供屬性 (attribute) body 和 body_file。body 是本文內容，為位元
+組字串。body_file 提供與檔案類似的介面給相同資料。
+uploaded_file = self.request.body
+WebOb 是開放原始碼第三方程式庫。請參閱 WebOb 文件以取得詳細的 API 參考資料和範例。
+
+重新導向、標頭和狀態碼
+~~~~~~~~~~~~~~~~~~~~~~~
+一般而言，包含 HTTP 狀態碼 200 的回應表示「確定」。更確切地說，代碼 200 表示 URI 參考到有效的資源，而該資源包括在回應的輸出中。不同的情況需要不同的錯誤代碼。例如，若伺服器內部發生狀況，而無法輸出想要的資料，則伺服器可以傳回代碼 500，表示「伺服器錯誤」。
+要求處理常式提供 error(...) 方法，以指定的錯誤代碼準備錯誤回應。例如：
+
+class MyHandler(webapp.RequestHandler):
+  def get(self):
+    self.response.out.write("You asked me to do something.")
+    try:
+      doSomething()
+      self.response.out.write("It's done!")
+
+    except Error:
+      # Clear output and return an error code.
+      self.error(500)
+
+error(...) 方法接受數字的 HTTP 狀態碼，並準備要求處理常式的回應來使用該狀態碼。它也會清除輸出緩衝，讓處理常式可以使用 out 然後再呼叫 error(...) (若有問題的話)，準備成功輸出。
+狀態碼其他常見的用法，是將使用者的瀏覽器重新導向至不同的 URI。這可以是
+永久的重新導向，這表示該 URI 對要求的資源來說曾經有效，但後續對該資源
+的所有要求，都要使用新的 URI。或者，重新導向可以是暫時的，這表示要求的
+ URI 是有效的，但是瀏覽目前應該暫時要求不同的 URI。網路應用程式常見的
+技術，是使用暫時的重新導向來回應成功的表單提交，以防止使用者不小心按到
+瀏覽器的「上一頁」按鈕而再次提交表單。
+
+重新導向
+~~~~~~~~
+要求處理常式提供 redirect(...) 方法，來準備重新導向回應。例如：
+
+class FormHandler(webapp.RequestHandler):
+  def post(self):
+    if processFormData(self.request):
+      self.redirect("/home")
+    else:
+      # Display the form, possibly with error messages.
+
+redirect(...) 接受目的地 URI 做為其第一個參數。
+按照預設，它會建立暫時的重新導向。
+選擇性的引數 permanent=True 會使用永久的重新導向代碼。
+
+要求處理常式方法 error(...) 和 redirect(...) 變更回應的 HTTP 狀態碼。redirect(...) 也使用 HTTP 標頭來溝通新的 URI 和用戶端。Response 物件提供直接設定狀態碼和 HTTP 標頭的方法。
+回應物件的 set_status(...) 方法會變更回應的狀態碼。此方法接受數字狀態碼做為其第一個參數。可選用第二個參數來指定訊息，使用指定的狀態碼取代預設的狀態碼。
+回應物件的 headers 屬性是 wsgiref.headers.Headers 實例，代表回應的 HTTP 標頭。如需設定標頭方式的詳細資訊，請參閱 wsgiref.headers 文件。
+class StatusImageHandler(webapp.RequestHandler):
+  def get(self):
+    img_data = get_status_image_for_current_user()
+    self.response.headers["Content-Type"] = "image/png"
+    self.response.headers.add_header("Expires", "Thu, 01 Dec 1994 16:00:00 GMT")
+    self.response.out.write(img_data)

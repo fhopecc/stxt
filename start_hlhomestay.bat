@@ -1,2 +1,2 @@
-c:\google_appengine\dev_appserver.py --port=80 --datastore_path=\datastore\stxt_dev hlhomestay
+c:\google_appengine\dev_appserver.py --port=80 --datastore_path=tmp\stxt_dev hlhomestay
 

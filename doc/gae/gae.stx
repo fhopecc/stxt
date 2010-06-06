@@ -1,0 +1,110 @@
+1. Google App Engine (GAE) 四, 2008-08-14 15:51 — www1036 ‧簡介：
+Google App
+Engine是一個存放網頁應用程式的平台，由Google資料中心管理。在2008年4月釋出Beta版支援Python語言，並在2009年4月推出第二個支援JAVA語言的版本。
+Google所引領的雲端運算，這個話題近年來持續發燒。而Google App
+Engine正是Google想用打入雲端運算市場的產品之一。
+    
+1.屬於web application開發環境。 2.允許用Python及Java程式語言來開發。
+3.用Google的Bigtable資料儲存系統。 4.以及Google的GFS來處理資料。
+5.Google會幫你hosting這些web application。 
+
+*Bigtable:寫網站程式幾乎都會用database,不同於傳統常見的Relational
+Database。是一種分散式的資料庫架構，能在資料數量龐大的情況下，都能正常操作。
+*GFS:Google File
+System是Google自行研製的分散式檔案系統，是一套能快速穩定及安全的資料儲存系統。
+
+‧目的：
+GAE首重的就是使用簡單，讓使用者專心讓設計應用程式的部份，資料庫、作業系統、網路資源的部份交給Google操心。GAE首先支援的Python也是一個標榜簡單易學的Scripting
+language。
+GAE另一個目標就是延展性(Scalability)。GAE有信心在使用者擁有百萬、千萬筆資料的情況下都能正常的運作。
+
+‧特色：
+1.GAE嘗試去幫助掌管應用程式的生命週期，例如：Dashboard，Log記綠，版本管理，資料庫等等。
+2.應用程式是執行在Google 的infrastructure，在Google File
+System的架構下，能快速、可靠地運作。 3.在有限的配額下完全免費。
+4.可以免費使用多種Google API。 5.支援 Python , JAVA 兩種程式語言開發。
+
+-Datastore：
+因為GAE使用的是BigTable架構，使用者沒有辦法直接存取資料庫。GAE提供資料庫的操作API供使用者存取資料。
+另外，GAE的Datastore是一種Schema-less
+Style，也就是使用者並不需要特別去設計資料庫的Schema。而直接用程式語言的類別去設計資料庫。GAE為常見的資料提供不同的種類，例如字串，使用者，日期等等。因為是使用BigTable的架構，資料很可能是分佈在不同的電腦之上。所以在執行join指令的時侯會耗費很多資源。所以GAE不支援join指令。所以在設計Datastore時要特別注意。
+
+-免費的額度：
+主要是希望讓使用者不會耗盡整個網路資源。不會因為某些過大的流量而影響正常的使用者。
+
+‧比較Google App Engine And Google Apps：
+
+Google App Engine (GAE)跟Google App是不同的，不要搞錯囉!
+
+GAE是提供一個平台，有註冊的使用者可以建立web
+application然後Google會幫你hosting，可以免費註冊及使用，但是有些限制在，十個registered
+application、1GB的disk storage、每天10GB的頻寬、每天 46
+CPU-hours、每天兩千Emails以及一個query最多回應1000個結果，使用者也不需要去維持維護server只需上載application至GAE。
+
+Google Apps
+服務範圍十分的廣，包含了GMail信箱、GTalk、個人化首頁、文件、Google
+Calender...等。申請時可以分一些版本來申請，有標準版(適合個人)、專業版(適合企業需付費)、教育版(適合各學校)。這麼方便的服務當然也是有小缺點，例如是公司有機密性的聯絡事宜。
+
+參考資料:課程投影片
+&http://s9011514.googlepages.com/apply_google_apps.htm
+
+ 
+
+‧Google App Engine 的應用程式環境：
+
+使用GAE可以讓你在資料量極大的情況下，可以輕鬆建構安全的應用程式
+
+-其環境有以下特性:
+
+   1:動態網路服務，支援全部的網頁技術
+
+   2:不間斷的查詢、排序以及交易
+
+   3:自動擴展以及負載平衡
+
+   4:功能完整的本機開發環境，直接在使用者電腦上模擬GAE
+
+   5:使用API對用戶進行身份驗證和使用Google帳戶發送e-mail
+
+   6:支援Cron，可進行排程工作，在指定時間與固定時段間隔啟動活動
+
+ 
+-Sandbox:
+
+在安全的環境下進行應用程式，提供一些基本限制權限，這些限制使App
+Engine可在多個server之間分享應用程式，並可以使用啟用或停止來滿足使用需求，Sandbox將應用程式放至安全的可靠環境中。
+
+有這種Sandbox安全性的執行環境，可以確保當程式發生問題時，問題只會發生在安全的環境範圍內，而不會影響到該環境的網路server的硬體、操作系統等等。
+
+ 
+-相對的也有缺點，安全的Sandbox環境的限制包含:
+
+   1:應用程式必須透過提供的URL fetch及E-mail
+Services瀏覽其他的電腦。而其他的電腦只能透過HTTP或HTTPS的請求來連接應用程式。
+
+   2:應用程式無法寫入檔案系統，只能讀通過應用程式編碼的檔案，而該應用程式必須使用App
+Engine資料庫區域、memcache或其他服務。
+
+   3:應用程式只能在有網路請求或Cron任務時運行,且無論任何狀況都必須30秒之內得到回應。而一個請求無法在回應之後才產生sub-process或是執行code.
+
+ *Memcache：提供應用程式的多項instances作高效能內部記憶體的key-value擷取，適用於不需要持續保存於資料庫或交易功能的資料。
+
+‧Python執行環境：
+
+透過GAE的Python執行環境，使用者可以使用Python程式設計實做個人應用程式，並在GAE的安全Sandbox環境中，使用預先載入的最佳化Python直譯器上執行應用程式。GAE支持適用於Python網路應用程式開發的API和工具，以及各種管理和存取應用程式資料的工具，並可用各種完善的程式庫與架構來開發。
+
+ 
+
+-目前支援版本：
+
+Python 2.5.2（官方資料，2.6.5可執行）
+
+ 
+
+-使用規範：
+
+1.必須在不超出Sandbox的限制下使用程式庫功能，故必須停用不支援此環境下的模組功能，否則在匯入時就會出錯。
+
+2.Python環境設計下的應用程式碼必須全部使用Python編寫，故不支援由C語言編寫的擴充套件。
+
+3.可隨著應用程式上傳第三方程式庫，但該程式庫必須為純Python實作和沒有任何不支援的標準程式庫模組。

@@ -12,7 +12,7 @@ Python 類別也沒有在其定義及使用者之間加入絕對的障礙，而�
 ：類別的繼承可以繼承自個基礎類別(base classes)，一個子類別(derived
  class)可以override其所有基礎類別(base class)的任何方法(method)，一個
 method也可以呼叫一個基礎類別的同名方法，物件可以自由決定是否要讓某些資
-料是 private的。
+料是 私有的。
 
 以C++ 的術語來說，Python所有的類別成員(包含其資料成員)都是 public 的，
 而且所有的函數成員(member functions)都是 virtual 的。也並沒有所謂的建
@@ -191,17 +191,29 @@ global 敘述可以用來特別指定某個特殊的變數是要放在全域可�
 類別物件(Class Objects)
 ~~~~~~~~~~~~~~~~~~~~~~~
 類別物件可以做兩件事情，
-一是屬性的指涉(references)，
+一是存取類別屬性(class attribute)，
 另一個是創造出一個實例來(instantiation)。
 
-Attribute references 所使用的是在Python裡面標準的屬性 reference的
-語法： obj.name 。有效的屬性的名稱指的是當類別物件被創造時，所有
-在類別的命名空間裡面的名稱。
-所以，如果你的類別定義如同下面例子的話：
+Attribute references 所使用的是在 Python 裡面標準的屬性 reference的
+語法： obj.name 。
 
-class MyClass: "A simple example class" i = 12345 def f(x): return
- 'hello world' 你就可以使用 MyClass.i 以及 MyClass.f 這兩個有效的
-屬性 references語法，它們分別會傳回一個整數以及一個方法物件來。
+有效的屬性的名稱指的是當類別物件被創造時，
+所有在類別的命名空間裡面的名稱。 
+`
+所以，如果你的類別定義如同下面例子的話::
+
+  class MyClass: 
+      "A simple example class" 
+
+      i = 12345 
+
+      def f(x): 
+          return 'hello world' 
+
+你就可以使用 MyClass.i 以及 MyClass.f 
+這兩個有效的類別屬性參考語法，
+它們分別會傳回一個整數以及一個方法物件來。
+
 你也可以設定值給這些類別的屬性s，如此你就可以改變 MyClass.i 的值
 了。 __doc__ 也是類別物件的一個有效的屬性，其傳回值是這個類別的注
 釋字串(docstring)，也就是： "A simple example class" 。
@@ -506,28 +518,27 @@ Python仰賴程式設計師們的約定俗成的習慣來避免可能的名稱�
 狀況，(這個instance將會只有一個單一共用基礎類別的``instance
  variables''或是data 屬性s)，但是很難了解這到底有什麼用處。
 
-
-9.6 Private變數
-
-在Python裡面只有有限度的支援類別中的private指稱 (class-private
+私有變數(private variable)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+在Python裡面只有有限度的支援類別中的私有指稱 (class-private
  identifiers，譯：指變數及函數)。任何的identifier，在之前是以 __spam
  這個形式存在的(最前面至少要有兩個底線，最後面最多只能有一個底線) 現在
 都要以 _classname__spam 這個形式來取代之。在這裡的 classname 指的是所
 在的類別名稱，拿掉所有前面的底線。這個名稱的變化不受限於這個identifier
-其語法上所在的位置，所以可以套用在定義類別的private instance，類別變數
+其語法上所在的位置，所以可以套用在定義類別的私有 instance，類別變數
 ，方法，global名稱，甚至用來儲存 其他 的類別instance裡，對目前這個類
-別來說是private的instance變數。當這個變化過的名稱超過255個字元時，有可
+別來說是私有的instance變數。當這個變化過的名稱超過255個字元時，有可
 能超過的部分是會被截掉的。在類別之外，或者是當類別的名稱只包含底線的時
 候，就沒有任何名稱的變化產生。
 
 這個名稱的變化主要是用來給類別有一個簡單的方法來定義``private''的
 instance變數及方法s，而不需要擔心其他子類別裡面所定義的instance變數
 ，或者與其他的在類別之外的程式碼裡的instance變數有所混淆。注意的是這個
-變化名稱的規則主要是用來避免意外的，如果你存心要使用或修改一個private
+變化名稱的規則主要是用來避免意外的，如果你存心要使用或修改一個私有
 的變數的話，這還是可行的。某方面來說這也是有用的，比如說用在除錯器
 (debugger)上面，這也是為什麼這個漏洞沒有被補起來的一個原因。(如何製造
 bug：如果一個類別繼承自某個基礎類別時用了相同的名字，這會使得你可以從
-子類別裡面使用基礎類別裡的private的變數。)
+子類別裡面使用基礎類別裡的私有的變數。)
 
 值得注意的是，被傳到 exec, eval() 或 evalfile() 的程式碼並不用考慮引發
 這個動作的類別是目前的類別，這是相類似於 global 敘述的效果，但是這個效
@@ -536,7 +547,7 @@ bug：如果一個類別繼承自某個基礎類別時用了相同的名字，�
 時候。
 
 底下這個例子是一個類別裡面定義了自己的 __getattr__() 以及
- __setattr__() 兩個方法，並且把所有的attributes都儲存在private的變數裡
+ __setattr__() 兩個方法，並且把所有的attributes都儲存在私有的變數裡
 面。這個例子適用於所有的Python版本，甚至是包括在這個屬性加入之前的版本
 都可以：
 
@@ -571,7 +582,7 @@ Instance的方法物件也可以有attributes： m.im_self 就是其方法為
 instance的一個物件， m.im_func 就是這個方法相對應的函數物件。
 
 
-9.7.1 例外(Exceptions)也可以是類別
+例外(Exceptions)也可以是類別
 
 使用者自訂的exception不用只是被限定於只是字串物件而已，它們現在也可以
 用類別來定義了。使用這個機制的話，就可以創造出一個可延伸的屋exception
@@ -600,9 +611,6 @@ for c in [B, C, D]: try: raise c() except D: print "D" except C: print
 當一個沒有被處理到的exception是一個類別時，所印出來的錯誤信息會包含其
 類別的名稱，然後是(：)，然後是這個instance用內建的 str() 函數轉換成的
 字串。
-
-
-Footnotes
 
 ... 一個命名空間裡面。 9.1 除了一件事之外。模組物件有一個秘密的
 attribute叫做 __dict__ ，這個attribute會傳回這個模組的命名空間所對

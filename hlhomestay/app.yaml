@@ -8,6 +8,9 @@ handlers:
 - url: /
   script: homestay/month_calendar.py
 
+- url: /homestays?/.*
+  script: homestay/handler.py
+
 #- url: /session/.*
 #  script: session.py
 

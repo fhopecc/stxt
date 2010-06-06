@@ -1,0 +1,155 @@
+建立、取得和刪除資料
+~~~~~~~~~~~~~~~~~~~~~
+Datastore API (資料存放區 API) 代表模型類別實例的實體。模型實例建立、更新和刪除實體的方法。您可以使用查詢或金鑰，從資料存放區以模型實例擷取實體。
+建立和更新實體
+使用查詢取得實體
+使用金鑰取得實體
+刪除實體
+
+建立和更新實體
+~~~~~~~~~~~~~~
+Model 實例代表實體。藉
+由呼叫與指定種類的新實體相應之模型類別的建構函式，
+應用程式會建立該指定種類的新實體，如下例::
+
+  pet = Pet(name="Fluffy",
+            type="cat",
+            owner=users.get_current_user())
+
+實例第一次「放置」後，
+才會在資料存放區建立新實體，可以在實例上呼叫 put() 方法，
+或將實例傳遞給 db.put() 函式，如下例::
+
+  pet.put()
+  db.put(pet)
+
+如果實例已經儲存，put() 方法會更新現有的實體。
+查詢將結果以模型實例傳回。這些實例可以修改再放回資料存放區。
+
+if users.get_current_user():
+  user_pets = db.GqlQuery("SELECT * FROM Pet WHERE owner = :1",
+                          users.get_current_user())
+  for pet in user_pets:
+    pet.spayed_or_neutered = True
+
+  db.put(user_pets)
+
+使用查詢取得實體
+~~~~~~~~~~~~~~~~
+資料存放區可以橫跨指定種類的實體執行查詢。 查詢可以使用條件篩選結果，
+而實體屬性值必須符合該條件，而且可以傳回按照屬性值排序的結果。查詢也可
+以將實體的範圍限制為具有指定上階的實體；請參閱金鑰和實體群組。
+
+若要取得查詢運作的完整描述，包括查詢無法執行的事情，請參閱查詢和索引。
+資料存放區 API 提供下列兩個介面，在實體屬性上執行查詢：Query，在查詢物件上使用方法準備查詢的介面，以及 GqlQuery，使用類似 SQL 查詢語言 (稱為 GQL) 的介面。
+
+Query 介面
+~~~~~~~~~~
+Model.all() 傳回 Query 物件，
+該物件代表相應種類的所有實體。
+
+應用程式藉由呼叫物件的 filter()、order() 以及 ancestor() 方法來準備查詢。
+
+class Story(db.Model):
+  title = db.StringProperty()
+  date = db.DateTimeProperty()
+
+query = Story.all()
+
+query.filter('title =', 'Foo')
+query.order('-date')
+query.ancestor(key)
+
+# These methods can be chained together on one line.
+query.filter('title =', 'Foo').order('-date').ancestor(key)
+
+GqlQuery 介面
+~~~~~~~~~~~~~
+GqlQuery 類別建構函式使用 GQL 查詢字串和選用的參數繫結。查詢字串指定種類、篩選器、排序順序以及上階條件。查詢字串也可以包括結果限制和位移。
+# Parameters can be bound with positional arguments.
+query = db.GqlQuery("SELECT * FROM Story WHERE title = :1 "
+                    "AND ANCESTOR IS :2 "
+                    "ORDER BY date DESC",
+                    'Foo', key)
+
+# Or, parameters can be bound with keyword arguments.
+query = db.GqlQuery("SELECT * FROM Story WHERE title = :title "
+                    "AND ANCESTOR IS :parent "
+                    "ORDER BY date DESC",
+                    title='Foo', parent=key)
+
+# String, number and Boolean values can be literal values in the string.
+query = db.GqlQuery("SELECT * FROM Story WHERE title = 'Foo' "
+                    "AND ANCESTOR IS :parent "
+                    "ORDER BY date DESC",
+                    parent=key)
+Model 類別的 gql() 類別方法也準備來自字串的 GqlQuery 物件。該字串是 GQL 查詢字串省略了 SELECT * FROM Model，因為這個部分是內建的。
+query = Story.gql("WHERE title = :title "
+                  "AND ANCESTOR IS :parent "
+                  "ORDER BY date DESC",
+                  title='Foo', parent=key)
+參數繫結可以使用 bind() 方法，重新繫結至新值。應用程式可以透過重新繫結參數和重新執行查詢，便可重新使用 GqlQuery 物件。
+執行查詢和存取結果
+應用程式嘗試存取結果時，才會執行 Query 和 GqlQuery 物件。應用程式存取結果時，查詢會成為查詢之模型類別的實例，載入記憶體。兩種查詢類別都提供兩種方式來執行查詢和存取結果：fetch() 方法，以及 iterator 介面。
+fetch() 方法接受要擷取結果的最大數量 (限制，以及選用的跳過結果數量 (位移)。方法會執行查詢，然後擷取結果，直到擷取的限制，或者已經沒有其他結果。結果一旦載入記憶體，它會跳過位移 (若有指定)，然後將要求的結果以模型實例的清單傳回。每次呼叫 fetch()，都會執行完整的查詢。
+注意：位移不會影響從資料存放區擷取的結果數量。限制以內的所有結果，都會被擷取並放置於記憶體。位移只會影響 fetch() 方法傳回的內容。
+results = query.fetch(10)
+for result in results:
+  print "Title: " + result.title
+指定給 fetch() 方法的限制和位移，會覆寫 GQL 查詢字串中指定的任何限制和位移。
+若查詢物件是用來當做 iterator，則查詢會以沒有限制或位移的方式來執行，結果會載入記憶體，而傳回的值會是結果的 iterator。iterator 會產生模型類別的實例。
+for result in query:
+  print "Title: " + result.title
+注意：資料存放區在回應查詢時，最多只會傳回 1000 個結果，不論用來擷取結果的限制和位移為何。1000 個結果包括使用位移跳過的任何結果，因此查詢的結果若超過 1000 個，並使用位移 100，將傳回 900 個結果。
+使用金鑰取得實體
+實體儲存在資料存放區後，實體便具有獨特的金鑰。API 中呈現的金鑰值代表 Key 類別的實例。模型實體的 put() 方法，以及 db.put() 函式會傳回已儲存實體的 Key。第一次儲存模型實例之後，模型實例的 key() 方法會傳回該實例的 Key。
+entity.put()
+key = entity.key()
+
+# ...
+
+entity = db.get(key)
+Key 值常用來儲存另一個實體的屬性值。ReferenceProperty 模型屬性類別提供自動參考和解除參考模型實例為金鑰：模型實例可以直接指派給 ReferenceProperty，而其金鑰將會做為值。
+class PetOwner(db.Model):
+  name = db.StringProperty()
+
+class Pet(db.Model):
+  name = db.StringProperty()
+  owner = db.ReferenceProperty(PetOwner)
+
+owner = PetOwner(name="Albert")
+pet = Pet(name="Fluffy", owner=owner)
+
+# This is equivalent:
+pet = Pet(name="Fluffy", owner=owner.key())
+同樣地，透過屬性存取的 ReferenceProperty 值的運作方式像是它的實例。資料實體會自動地擷取，而且使用時才會進行擷取動作。
+pets = db.GqlQuery("SELECT * FROM Pet WHERE name = :1", "Fluffy")
+pet = pets.get()
+
+owner_name = pet.owner.name
+不含 ReferenceProperty 模型儲存的 Key 值 (例如 Expando 動態屬性或 ListProperty 元素)，不具有自動解除參考的行為。
+db.get() 函式會從資料存放區擷取 Key (Key 的清單) 的實體。
+Key 可以編碼為字串，以便於在應用程式外面傳遞。若要將字串編碼的金鑰轉換回 Key 物件，應用程式要將該字串傳遞給 Key 建構函式。
+obj = MyModel(name="Foo")
+self.response.write('<a href="/view?key=%s">%s</a>' % (str(obj.key()), 
+                                                      obj.name()))
+
+# ...
+
+key_name = self.request.get('key')
+obj = db.get(db.Key(key_name))
+請注意：Key 的字串編碼是不透明，但並非加密的。若您的應用程式需要無法猜測的金鑰，則在將它傳送給使用者之前，需要進一步加密字串編碼的 Key。
+刪除實體
+應用程式可以使用模型實例或 Key，從資料存放區刪除實體。模型實例的 delete() 方法，會從資料存放區刪除相應的實體。delete() 函式取得 Key 或 Key 清單，並從資料存放區刪除實體。
+q = db.GqlQuery("SELECT * FROM Message WHERE create_date < :1", earliest_date)
+results = q.fetch(10)
+for result in results:
+  result.delete()
+
+# or...
+
+q = db.GqlQuery("SELECT * FROM Message WHERE create_date < :1", earliest_date)
+results = q.fetch(10)
+db.delete(results)
+刪除實體不會變更資料存放區中可能參考實體的任何 Key 值。若您的應用程式嘗試為已刪除的實體解除參考 Key 值，則應用程式應使用 db.get() 執行此動作，然後在存取屬性之前，先測試傳回值。
+刪除其他實體上階的實體，不會影響其他實體。只要應用程式並非依賴上階的存在，為子系實體建立金鑰，則應用程式仍然可以存取子系。

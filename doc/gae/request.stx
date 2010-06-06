@@ -1,0 +1,112 @@
+Request 
+-------
+Request 類別的實例包含連入網頁要求的相關資訊。
+Request 是由 google.appengine.ext.webapp 模組所提供。
+Request 類別繼承自 WebOb Request 類別。此處只討論 WebOb Request 類別的部分功能。如需詳細資訊，請參閱 WebOb 文件。
+簡介
+Request()
+實例方法：
+get()
+get_all()
+arguments()
+get_range()
+繼承自 WebOb Request 的實例變數：
+body
+body_file
+remote_addr
+url
+path
+query_string
+headers
+cookies
+簡介
+webapp 提供的 Request 類別繼承自 WebOb Request 類別。webapp 新增幾個方法來存取網頁表單提交的引數，並延伸幾個預設行為。
+class MyRequestHandler(webapp.RequestHandler):
+  def get(self):
+    self.response.out.write('''
+    <html>
+      <body>
+        <form action="post">
+          <p>Name: <input type="text" name="name" /></p>
+          <p>Favorite foods:</p>
+          <select multiple size="4">
+            <option value="apples">Apples</option>
+            <option value="bananas">Bananas</option>
+            <option value="carrots">Carrots</option>
+            <option value="durians">Durians</option>
+          </select>
+          <p>Birth year: <input type="text" name="birth_year" /></p>
+        </form>
+      </body>
+    </html>
+    ''')
+
+  def post(self):
+    name = self.request.get("name")
+    favorite_foods = self.request.get_all("favorite_foods")
+    birth_year = self.request.get_range("birth_year",
+                                        min_value=1900,
+                                        max_value=datetime.datetime.utcnow().year,
+                                        default_value=1900)
+除了下面描述的幾個新方法之外，webapp Request 類別與 WebOb Request 相較，有下列不同之處：
+若要求的 Content-Type 標頭未指定字元集，會預設為 UTF-8。
+表單引數解碼為 Unicode 期間若發生錯誤，會予以忽略。建構函式會強制下列參數至 WebOb Request 建構函式：unicode_errors='ignore'
+表單引數金鑰會使用與值相同的字元集來進行編碼。建構函式會強制下列參數至 WebOb Request 建構函式：decode_param_names=True
+建構函式
+Request 類別的建構函式定義如下：
+class Request(environ)
+webapp 應用程式的連入要求。通常，WSGIApplication 會具現化 RequestHandler，並在一個 Request 物件填入與 WSGI 相容的環境變數字典 (environ)，進行初始化。
+引數：
+environ
+與 WSGI 相容的環境變數字典。
+實例方法
+Request 類別提供下列實例方法：
+get(argument_name, default_value='')
+以指定名稱傳回查詢 (URL) 或 POST 引數的值。若多個引數具有相同名稱，則會傳回第一個引數的值。URL 和要求內文為網頁瀏覽器對表單提交的標準格式。
+引數：
+argument_name
+要取得的引數名稱。
+default_value
+方法應該傳回的值 (若指定名稱的引數不存在)。預設為空白字串。
+get_all(argument_name)
+以指定名稱傳回所有查詢 (URL) 或 POST 引數的值清單，可能是空白清單。
+引數：
+argument_name
+要取得的引數名稱。
+arguments()
+傳回查詢 (URL) 或 POST 資料引數的名稱清單。即使資料有多個引數名稱相同，的多個引數名稱只會在清單中出現一次。
+get_range(name, min_value=None, max_value=None, default=0)
+以指定名稱將查詢 (URL) 或 POST 資料引數剖析為 int，並將它傳回。值會正規化為指定範圍內的值 (若有的話)。
+引數：
+name
+要取得的引數名稱，為整數。
+min_value
+引數的最小值。若值小於最小值，則方法回傳回最小值。
+max_value
+引數的最大值。若值超過最大值，則方法回傳回最大值。
+default
+若沒有以指定名稱存在的引數，則會傳回此值。
+繼承自 WebOb Request 的實例變數
+下列是繼承自 WebOb Request 類別之實例變數成員的部分清單。如需詳細資訊，請參閱 WebOb 文件。
+body
+要求內文，為 bytestring。
+body_file
+要求內文，為 StringIO 實例 (類似檔案旳物件)。
+remote_addr
+遠端使用者的 IP 位址。
+
+url
+~~~
+完整的要求 URL。
+
+path
+~~~~
+URL 的路徑，在主機名稱和查詢參數之間。
+
+query_string
+~~~~~~~~~~~~
+URL 的查詢參數，第一個 ? 之後的所有字元。
+headers
+要求標頭，類似字典的物件。金鑰會區分大小寫。
+cookies
+來自要求的 cookie 資料，類似字典的物件。

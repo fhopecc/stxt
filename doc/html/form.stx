@@ -1,0 +1,46 @@
+表單(form)
+----------
+<FORM METHOD ACTION> ..表單控制標籤.. </FORM>
+設定互動式表單之資料傳送方式
+
+method 屬性
+~~~~~~~~~~~
+<FORM METHOD、ACTION>，內可含以下欄位各式屬性：
+
+METHOD="GET、POST"，依需要選擇其一；舉例說明
+
+action 屬性
+~~~~~~~~~~~
+action 用來指定 CGI 程式存放的超連結所在目錄位置及檔名，
+可使用相對或絕對路徑 CGI 程式的副檔名為.CGI其下的Perl程式語言，副檔名
+為.PL，或者根本沒有副檔名
+
+"URL"也可以用Email信箱代替，並不須用到CGI，惟須加入ENCTYPE屬性；舉例說明
+
+input 標籤
+~~~~~~~~~~
+input 輸入文字型表單標籤可分為下面幾種互動性欄位，無須結尾標籤：
+《INPUT》常用屬性有9項，而且都要使用TYPE及NAME屬性，及視況使用VALUE、SIZE等屬性；格式為：
+<INPUT TYPE=Click Here、 NAME=Click Here、 VALUE=Click Here、 SIZE=Click Here....>其他屬性說明：
+MAXLENGHT=Click Here、 CHEKED=Click Here、 READONLY=Click Here、 DISABLED=Click Here、 ACCESSKEY=Checked>
+
+文字輸入
+~~~~~~~~
+type="TEXT" 文字的基本欄位： 主要用於文字的輸入；舉例說明
+
+2.TYPE="PASSWORD"密碼的基本欄位： 主要是提供密碼的輸入；舉例說明
+3.TYPE="HIDDEN"隱藏用的基本欄位： 無法供填表者使用，主要用於內定資訊傳輸；舉例說明
+4.TYPE="RADIO"單一選項的基本欄位： 主要用於單一選項時的點選；舉例說明
+5.TYPE="CHECKBOX"多重選項的基本欄位： 主要用於多重選項時的勾選；舉例說明
+6.TYPE="BUTTON"按鈕格式的基本欄位： 有兩個按鈕格式，主要用於清除或送出表單內資料；舉例說明
+您也可以使用圖片來代替BUTTON，這是HTML 4.0新增的功能；舉例說明
+7.TYPE="IMAGE"圖片的基本欄位： 主要用於將圖片坐標傳輸給CGI處理；舉例說明
+8.TYPE="FILE"上傳檔案的基本欄位： 主要用於上傳檔案的資料輸入；舉例說明
+
+submit
+~~~~~~
+註：除了SUBMIT、RESET之外，所有輸入型表單，都要使用的NAME屬性
+
+《SELECT》選擇式表單標籤，用於設定窗型選擇欄位，須結尾標籤，每個選項以<OPTION>來宣告他 ；舉例說明
+《TEXTAREA》多列輸入文字區標籤，須結尾標籤，</TEXTAREA>，用COLS及ROWS設定長寬 ；舉例說明
+《FIELDSET》表單加外框與標題，這是HTML 4.0新增的功能(限IE使用)；舉例說明
