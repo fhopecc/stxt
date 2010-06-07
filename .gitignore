@@ -5,7 +5,6 @@ parser.out
 parsetab.py
 *.swp
 *.pyc
-*.html
 log/*
 tmp/*
 lib/sql/*
@@ -23,4 +22,5 @@ structedtext/taichi/*
 structedtext/novel/*
 structedtext/travel/*
 structedtext/stable_prog/*
+structedtext/poems/*
 structedtext/index.yaml
