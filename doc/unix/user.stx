@@ -1,0 +1,29 @@
+[root@www ~]# useradd [-u UID] [-g 初始群組] [-G 次要群組] [-mM]\
+>  [-c 說明欄] [-d 家目錄絕對路徑] [-s shell] 使用者帳號名
+選項與參數：
+-u  ：後面接的是 UID ，是一組數字。直接指定一個特定的 UID 給這個帳號；
+-g  ：後面接的那個群組名稱就是我們上面提到的 initial group 啦～
+      該群組的 GID 會被放置到 /etc/passwd 的第四個欄位內。
+-G  ：後面接的群組名稱則是這個帳號還可以加入的群組。
+      這個選項與參數會修改 /etc/group 內的相關資料喔！
+-M  ：強制！不要建立使用者家目錄！(系統帳號預設值)
+-m  ：強制！要建立使用者家目錄！(一般帳號預設值)
+-c  ：這個就是 /etc/passwd 的第五欄的說明內容啦～可以隨便我們設定的啦～
+-d  ：指定某個目錄成為家目錄，而不要使用預設值。務必使用絕對路徑！
+-r  ：建立一個系統的帳號，這個帳號的 UID 會有限制 (參考 /etc/login.defs)
+-s  ：後面接一個 shell ，若沒有指定則預設是 /bin/bash 的啦～
+-e  ：後面接一個日期，格式為『YYYY-MM-DD』此項目可寫入 shadow 第八欄位，
+      亦即帳號失效日的設定項目囉；
+-f  ：後面接 shadow 的第七欄位項目，指定密碼是否會失效。0為立刻失效，
+      -1 為永遠不失效(密碼只會過期而強制於登入時重新設定而已。)
+
+範例一：完全參考預設值建立一個使用者，名稱為 vbird1
+[root@www ~]# useradd vbird1
+[root@www ~]# ll -d /home/vbird1
+drwx------ 4 vbird1 vbird1 4096 Feb 25 09:38 /home/vbird1
+# 預設會建立使用者家目錄，且權限為 700 ！這是重點！
+
+[root@www ~]# grep vbird1 /etc/passwd /etc/shadow /etc/group
+/etc/passwd:vbird1:x:504:505::/home/vbird1:/bin/bash
+/etc/shadow:vbird1:!!:14300:0:99999:7:::
+/etc/group:vbird1:x:505:    <==預設會建立一個與帳號一模一樣的群組名
