@@ -6,7 +6,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
 from lib.template import Template 
-from homestay.model import Homestay
+from model import Homestay
 import logging
 
 def get_account(path):
@@ -44,8 +44,8 @@ class NewPage(webapp.RequestHandler):
         self.redirect('homestay/%s' % account)
 
 application = webapp.WSGIApplication(
-                                     [('/homestays/\w+', MainPage),
-                                      ('/homestays/new', NewPage), 
+                                     [('/homestays/new', NewPage), 
+                                      ('/homestays/\w+', MainPage)
                                      ],
                                      debug=True)
 

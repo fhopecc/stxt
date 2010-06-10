@@ -1,0 +1,90 @@
+除錯(Debug)
+-----------
+Python has a wonderful interactive interpreter (i.e. shell). However, sometimes you need more setup before you can start coding. Previously, I wrote Python: Coding in the Debugger for Beginners.
+
+Google App Engine works a bit like CGI in that output to STDOUT goes
+ to the browser. This breaks my normal "import pdb; pdb.set_trace()"
+ trick. However, it's not hard to put STDOUT, etc. back so that you
+ can use pdb in the way you normally would:
+
+GAE 為一種 CGI 程式，STDOUT 之輸出會到瀏覽器，
+這使得無法使用 ''import pdb; pdb.set_trace()'' 來設定中斷點，
+但將 STDOUT 還原並不難如下式::
+
+for attr in ('stdin', 'stdout', 'stderr'):
+    setattr(sys, attr, getattr(sys, '__%s__' % attr))
+
+ Ian Bicking said...
+Or use weberror's magical new pdb middleware! Well... I haven't tried it with appengine, so there's a decent chance it doesn't work there (but patches welcome).
+
+8:33 PM
+ metapundit.net said...
+Heh - I wondered about that today at the hackathon. I tried import pdb;pdb.set_trace() and got a weird error; now I guess i know why...
+
+9:51 PM
+ Shannon -jj Behrens said...
+> Or use weberror's magical new pdb middleware! Well... I haven't tried it with appengine, so there's a decent chance it doesn't work there (but patches welcome).
+
+Haha, as usual, you're way ahead of me.
+
+6:09 PM
+ whit537 said...
+You can also pass std{in,out} arguments to pdb.Pdb, like so:
+
+def set_trace():
+    import pdb, sys
+    debugger = pdb.Pdb(stdin=sys.__stdin__, 
+        stdout=sys.__stdout__)
+    debugger.set_trace(sys._getframe().f_back)
+
+This messes with Google's sandbox less.
+
+3:51 PM
+ Stuart Grimshaw said...
+I've tried the various methods mentioned here, but I always get errors displayed in the browser.
+
+Using whit537's method I get this shown in the browser:
+
+BdbQuit at /stop/37023745/
+Request Method: GET
+Request URL: http://localhost:8080/stop/37023745/
+Exception Type: BdbQuit
+Exception Value: 
+Exception Location: /System/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/bdb.py in dispatch_call, line 80
+
+8:27 AM
+ Shannon -jj Behrens said...
+It sounds like you're not successfully pointing stdout at the actual terminal. I'm surprised that my technique (in the main body of this blog post) doesn't work.
+
+3:05 PM
+ Stuart Grimshaw said...
+Actually, that does look like it works, I just can't work out how to attach to it, I'm running it through the Google App Engine Launcher on my mac if that makes any difference.
+
+3:38 PM
+ Shannon -jj Behrens said...
+You need to figure out how to start the server from a shell. The start server script (whatever it's called) is on your Mac somewhere ;)
+
+4:46 PM
+ Stuart Grimshaw said...
+Turns out "dev_appserver.py" is on the defaultpath, probably set up by the installer, or the "Make Symlinks" option off the gui apps menu.
+
+Go to your apps parent directory and run "dev_appserver.py yourappname"
+
+4:51 PM
+ Jeff Enderwick said...
+I tried:
+pdb.Pdb(stdin=getattr(sys,'__stdin__'),stdout=getattr(sys,'__stderr__')).set_trace(sys._getframe().f_back)
+
+- the idea being leave stdout alone. Seems to work. I did not have any crap heading back toward the browser. Is there any best soln out there from someone who works on GAE (as a full time thing)?
+
+11:05 PM
+ Shannon -jj Behrens said...
+> the idea being leave stdout alone. Seems to work.
+
+Thanks.
+
+> Is there any best soln out there from someone who works on GAE (as a full time thing)?
+
+I have no clue.
+
+12:55 AM
