@@ -84,7 +84,9 @@ def deploy(dir=None):
                 for f in files:
                     src  = os.path.join(root, f)
                     try:
-                        shutil.copy(src, 'T:')
+                        'import pdb; pdb.set_trace()'
+                        cmd = "copy %s %s" % (src, 'T:')
+                        os.system(cmd)
                     except IOError:
                         pass
         else:
@@ -128,7 +130,6 @@ if __name__ == '__main__':
                       help=u"-d " +
                            u'連帶佈署更新程式佈署到機台上，'
                       )
-
 
 
     (options, args) = parser.parse_args()

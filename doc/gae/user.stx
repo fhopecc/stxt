@@ -1,53 +1,101 @@
-Google Accounts Python API 
---------------------------
+帳戶管理(user)
+--------------
+GAE 可以驗證「Google 帳戶」之使用者，
+偵測目前使用者是不是透過「Google 帳戶」登入，
+還能夠將使用者重新導向「Google 帳戶」登入網頁，
+協助使用者登入或者建立新的帳戶。
 
-「應用服務引擎」應用程式可以驗證「Google 帳戶」的使用者。應用程式能夠
-偵測目前的使用者是不是透過「Google 帳戶」登入，還能夠將使用者重新導向
-「Google 帳戶」登入網頁，協助使用者登入或者建立新的帳戶。使用者登入應
-用程式之後，應用程式即可存取使用者的電子郵件地址和唯一的使用者 ID。應
-用程式也能夠偵測目前的使用者是否為管理員，以便實作應用程式的管理員專屬
-區域。
+使用者登入 GAE 之後，
+程式師即可存取使用者之電子郵件地址和唯一的使用者 ID。
+應用程式也能夠偵測目前的使用者是否為管理員，
+以便實作應用程式的管理員專屬區域。
 
 「Google 帳戶」整合是「應用服務引擎」的選用功能。如果您不想整合您的應
 用程式和「Google 帳戶」，您隨時可以建立自己的使用者驗證系統。「Google
  帳戶」提供強大、易用的驗證機制，這個機制的功能完善，且擁有數百萬個使
 用者。
 
-在 Python 中使用「Google 帳戶」
+登入
+~~~~
+程式師可自訂歡迎訊息和登出連結來讓使用者以「Google 帳戶」登入應用程式。
+如果使用者未登入，應用程式會提供「Google 帳戶」登入畫面的連結，
+如下例::
+  from google.appengine.api import users
+
+  class MyHandler(webapp.RequestHandler):
+      def get(self):
+        user = users.get_current_user()
+        if user:
+            greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
+                       (user.nickname(), 
+                        users.create_logout_url("/intl/zh-TW/")))
+        else:
+            greeting = ("<a href=\"%s\">Sign in or register</a>." %
+                      users.create_login_url("/intl/zh-TW/"))
+
+        self.response.out.write("<html><body>%s</body></html>" % greeting)
+
+強制登入和管理存取
+~~~~~~~~~~~~~~~~~~
+若使用者必須登入才能存取某些網頁，
+則可以在 app.yaml 為這些網頁設定處理常式以要求使用者登入。
+
+如果使用者想存取需要先登入的 URL，但該使用者並未登入，
+則「應用服務引擎」會自動將使用者重新導向到「Google 帳戶」登入頁面，
+然後於使用者登入或註冊成功之後讓使用者返回該 URL。
+
+處理常式設定也可以要求使用者必須是已註冊的應用程式管理員。
+這會讓實作網站的管理員專區變得很容易，因為您不需要另外實作授權機制。
+
+驗證系統管理者
+~~~~~~~~~~~~~~
+應用程式可以測試目前登入的使用者，
+是否為應用程式的已註冊系統管理員。
+
+系統管理員是可以存取應用程式管理控制台的使用者。
+您可以使用「管理控制台」來管理哪些使用者可具有系統管理狀態。
+
+若目前使用者是應用程式的系統管理員，
+則函式 users.is_current_user_admin() 會傳回 True，如下例::
+
+  user = users.get_current_user()
+
+  if user:
+    print "Welcome, %s!" % user.nickname()
+    if users.is_current_user_admin():
+      print "<a href=\"/admin/\">Go to admin area</a>"
+
+限制 URL 僅系統管理者訪問
+~~~~~~~~~~~~~~~~~~~~~~~~~
+任何 URL 處理常式可以設定 login，
+以限制訪客必須是已登入的使用者，或是僅限於應用程式的管理員。
+
+若 URL 處理常式的 login 設定符合 URL，
+處理常式會先檢查使用者是否已經以 Google 帳戶登入應用程式。
+若否，會將使用者重新導向至 Google 登入頁面，
+並於登入或建立帳戶後，再重新導向回到應用程式 URL。
+
+若設定為 login: required，一旦使用者登入後，處理常式會正常地繼續。
+
+若設定為 login: admin，一旦使用者登入後，
+處理常式會檢查使用者是否為應用程式的管理員。
+若否，使用者會看到錯誤訊息。若使用者為管理員，則處理常式會繼續。
+若應用程式需要不同的行為，該應用程式可以實作讓使用者自行處理。 如下例::
+  handlers:
+
+  - url: /profile/.*
+    script: user_profile.py
+    login: required
+
+  - url: /admin/.*
+    script: admin.py
+    login: admin
+
+  - url: /.*
+    script: welcome.py
+
 登入和登出
-存取帳戶資訊
-使用者和資料存放區
-Google 帳戶和開發伺服器
-在 Python 中使用「Google 帳戶」
-
-下列範例會以個人化的訊息和登出連結來歡迎使用「Google 帳戶」登入應用程
-式的使用者。如果使用者未登入，應用程式會提供「Google 帳戶」登入畫面的
-連結。
-
-
-from google.appengine.api import users
-
-class MyHandler(webapp.RequestHandler):
-  def get(self):
-    user = users.get_current_user()
-    if user:
-      greeting = ("Welcome, %s! (<a href=\"%s\">sign out</a>)" %
-                  (user.nickname(), users.create_logout_url("/intl/zh-TW/")))
-    else:
-      greeting = ("<a href=\"%s\">Sign in or register</a>." %
-                  users.create_login_url("/intl/zh-TW/"))
-
-    self.response.out.write("<html><body>%s</body></html>" % greeting)
-
-使用 app.yaml 強制登入和管理存取
-如果使用者必須登入才能存取某些網頁，則您可以在 app.yaml 為這些網頁設定
-處理常式以要求使用者登入。如果使用者想存取需要先登入的 URL，但該使用者
-並未登入，則「應用服務引擎」會自動將使用者重新導向到「Google 帳戶」登
-入頁面，然後於使用者登入或註冊成功之後讓使用者返回該 URL。
-處理常式設定也可以要求使用者必須是已註冊的應用程式管理員。這會讓實作網站的管理員專區變得很容易，因為您不需要另外實作授權機制。
-若要了解如何設定 URL 的驗證，請參閱「Python 應用程式設定：要求登入或管
-理員狀態」。
-登入和登出
+~~~~~~~~~~
 應用程式可以偵測使用者是不是透過「Google 帳戶」登入應用程式。如果使用者尚未登入，應用程式可以將使用者導向「Google 帳戶」進行登入或建立新的 Google 帳戶。應用程式會呼叫一種 Users API (使用者 API) 方法，以取得「Google 帳戶」登入畫面的 URL。應用程式可以顯示這個 URL 的連結，或是在使用者瀏覽的頁面需要驗證時，發出這個 URL 的重新導向。
 「Google 帳戶」登入畫面會告知使用者他正在登入您的應用程式，而畫面顯示的應用程式名稱為您註冊應用程式時所選擇的名稱。如要變更應用程式名稱，請至「管理控制台」的 [Application Settings] (應用程式設定) 區段。
 使用者登入或建立 Google 帳戶之後，將被重新導向您的應用程式。應用程式會將重新導向 URL 提供給產生登入 URL 的方法。
