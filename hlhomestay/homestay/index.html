@@ -1,0 +1,28 @@
+$def with (model, homestays)
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
+<html lang="zh-tw"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<title>民宿清單</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>$model.name.verbose_name</td>
+        <td>$model.owner.verbose_name</td>
+        <td>$model.email.verbose_name</td>
+        <td>$model.address.verbose_name</td>
+    </tr>
+$for h in homestays:
+    <tr>
+        <td>$h.name</td>
+        <td>$h.owner</td>
+        <td>$h.email</td>
+        <td>$h.address</td>
+        <td>查</td>
+        <td>改</td>
+        <td>刪</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -14,6 +14,12 @@ def get_key(path):
     m = re.match(pat, path)
     return m.group(1)
 
+class IndexPage(webapp.RequestHandler):
+    def get(self):
+        homestays = Homestay.all()
+        render = template.frender('index.html')
+        self.response.out.write(str(render(Homestay, homestays)))
+
 class MainPage(webapp.RequestHandler):
   def get(self):
         key = get_key(self.request.path)
@@ -44,13 +50,13 @@ class NewPage(webapp.RequestHandler):
         self.redirect('%s' % h.key())
 
 application = webapp.WSGIApplication(
-                                     [('/homestays/new', NewPage), 
+                                     [
+                                      ('/homestays', IndexPage), 
+                                      ('/homestays/new', NewPage), 
                                       ('/homestays/\w+', MainPage)
                                      ],
                                      debug=True)
 
-def main():
-  run_wsgi_app(application)
+def main(): run_wsgi_app(application)
 
-if __name__ == "__main__":
-  main()
+if __name__ == "__main__": main()
