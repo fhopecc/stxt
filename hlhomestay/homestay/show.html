@@ -7,11 +7,9 @@ $def with (homestay)
 <body>
     <h1>民宿詳細資料</h1>
     <form method="post" action="new">
-        <label>帳號：</label>$:homestay.account
-        <label>名稱：</label>$:homestay.name
-        <label>地址：</label>$:homestay.account
-        <label>主人姓名：</label>$:homestay.user.nickname()
         <label>電子郵件：</label>$:homestay.email
+        <label>名稱：</label>$:homestay.name
+        <label>地址：</label>$:homestay.address
         <label>部落格：</label>$:homestay.blog
     </form>
 </body>

@@ -9,15 +9,15 @@ from lib.template import Template
 from model import Homestay
 import logging
 
-def get_account(path):
+def get_key(path):
     pat = r'/homestays/(\w+)'
     m = re.match(pat, path)
     return m.group(1)
 
 class MainPage(webapp.RequestHandler):
   def get(self):
-        account = get_account(self.request.path)
-        homestay = Homestay(account)
+        key = get_key(self.request.path)
+        homestay = Homestay.get(key)
         render = template.frender('show.html')
         self.response.out.write(str(render(homestay)))
       
@@ -36,12 +36,12 @@ class NewPage(webapp.RequestHandler):
         name = r.get("name")
         h = Homestay(account = r.get("account"), 
                      name= r.get("name") ,
-                     address=r.get("address"),
+                     address= r.get("address"),
                      email=r.get("email"),
                      blog=r.get("blog"),
                      owner=owner)
         h.put()
-        self.redirect('homestay/%s' % account)
+        self.redirect('%s' % h.key())
 
 application = webapp.WSGIApplication(
                                      [('/homestays/new', NewPage), 
