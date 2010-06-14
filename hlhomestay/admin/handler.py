@@ -7,6 +7,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
 from lib.template import Template 
 import logging
+from model import Homestay
 
 def get_account(path):
     pat = r'/homestays/(\w+)'
@@ -15,8 +16,9 @@ def get_account(path):
 
 class IndexPage(webapp.RequestHandler):
   def get(self):
-        render = template.frender('index.html')
-        self.response.out.write(str(render()))
+      render = template.frender('index.html')
+      count = Homestay.all().count()
+      self.response.out.write(str(render(count)))
 
 application = webapp.WSGIApplication(
                                      [('/admin/console', IndexPage)

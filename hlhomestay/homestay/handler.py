@@ -10,7 +10,7 @@ from model import Homestay
 import logging
 
 def get_key(path):
-    pat = r'/homestays/(\w+)'
+    pat = r'/homestays/(\w+)/.*'
     m = re.match(pat, path)
     return m.group(1)
 
@@ -20,18 +20,24 @@ class IndexPage(webapp.RequestHandler):
         render = template.frender('index.html')
         self.response.out.write(str(render(Homestay, homestays)))
 
-class MainPage(webapp.RequestHandler):
+class ShowPage(webapp.RequestHandler):
   def get(self):
         key = get_key(self.request.path)
         homestay = Homestay.get(key)
         render = template.frender('show.html')
+        self.response.out.write(str(render(Homestay, homestay)))
+
+class EditPage(webapp.RequestHandler):
+    def get(self):
+        render = template.frender('edit.html')
+        key = get_key(self.request.path)
+        homestay = Homestay.get(key)
         self.response.out.write(str(render(homestay)))
-      
+
 class NewPage(webapp.RequestHandler):
     def get(self):
         render = template.frender('new.html')
 
-        self.response.headers['Content-Type'] = 'text/html'
         self.response.out.write(str(render()))
 
     # create entity
@@ -50,12 +56,13 @@ class NewPage(webapp.RequestHandler):
         self.redirect('%s' % h.key())
 
 application = webapp.WSGIApplication(
-                                     [
-                                      ('/homestays', IndexPage), 
-                                      ('/homestays/new', NewPage), 
-                                      ('/homestays/\w+', MainPage)
-                                     ],
-                                     debug=True)
+        [
+         ('/homestays', IndexPage), 
+         ('/homestays/new', NewPage), 
+         ('/homestays/\w+/edit', EditPage), 
+         ('/homestays/\w+', ShowPage)
+        ],
+        debug=True)
 
 def main(): run_wsgi_app(application)
 
