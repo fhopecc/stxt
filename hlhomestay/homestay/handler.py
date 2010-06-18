@@ -10,7 +10,7 @@ from model import Homestay
 import logging
 
 def get_key(path):
-    pat = r'/homestays/(\w+)/.*'
+    pat = r'/homestays/(\w+)(/.*)?'
     m = re.match(pat, path)
     return m.group(1)
 
@@ -32,13 +32,12 @@ class EditPage(webapp.RequestHandler):
         render = template.frender('edit.html')
         key = get_key(self.request.path)
         homestay = Homestay.get(key)
-        self.response.out.write(str(render(homestay)))
+        self.response.out.write(str(render(Homestay, homestay)))
 
 class NewPage(webapp.RequestHandler):
     def get(self):
         render = template.frender('new.html')
-
-        self.response.out.write(str(render()))
+        self.response.out.write(str(render(Homestay)))
 
     # create entity
     def post(self):

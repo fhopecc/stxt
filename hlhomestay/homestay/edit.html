@@ -1,5 +1,6 @@
-$def with (homestay)
+$def with (Model, homestay)
 $code:
+    m = Model
     h = homestay
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
@@ -7,14 +8,22 @@ $code:
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 </head>
 <body>
-    <h1>修改民宿資料</h1>
-    <form method="post" action="update">
-        <label>名稱</label><input name="name" type="text"/><br/>
-        <label>地址</label><input name="address" type="text"/><br/>
-        <label>主人姓名</label><input name="owner" type="text"/><br/>
-        <label>電子郵件</label><input name="email" type="text"/><br/>
-        <label>部落格</label><input name="blog" type="text"/><br/>
-        <input type="submit" value="建立"/>
-    </form>
+<h1>修改民宿資料</h1>
+<form method="post" action="update">
+  <table>
+    <tr><td >$:m.name.verbose_name</td>
+        <td><input name="name" type="text"/></td></tr>
+    <tr><td >$:m.address.verbose_name</td>
+        <td><input name="address" type="text"/>
+       </td></tr>
+    <tr><td >$:m.owner.verbose_name</td>
+       <td><input name="owner" type="text"/></td></tr>
+    <tr><td >$:m.email.verbose_name</td>
+        <td><input name="email" type="text"/></td></tr>
+    <tr><td >$:m.blog.verbose_name</td>
+        <td><input name="blog" type="text"/></td></tr>
+    <tr><td><input type="submit" value="儲存"/></td><td></td></tr>
+  </table>
+</form>
 </body>
 </html>
