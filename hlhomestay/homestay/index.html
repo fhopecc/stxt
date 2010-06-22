@@ -23,8 +23,8 @@ $for h in homestays:
         <td>$h.email</td>
         <td>$h.address</td>
         <td><a href="/homestays/$:h.key()">查</a></td>
-        <td>改</td>
-        <td>刪</td>
+        <td><a href="/homestays/$:h.key()/edit">改</a></td>
+        <td><a href="/homestays/$:h.key()/delete">刪</a></td>
     </tr>
 </table>
 </body>
