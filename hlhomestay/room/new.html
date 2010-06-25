@@ -1,0 +1,21 @@
+$def with (m)
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
+<html lang="zh-tw"> 
+<head><title>新增客房</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+</head>
+<body>
+<h1>新增客房</h1>
+<form method="post" action="new">
+  <table>
+    <tr><td >$:m.name.verbose_name</td>
+      <td><input name="name" type="text"/></td>
+    </tr>
+    <tr><td >$:m.price.verbose_name</td>
+      <td><input name="price" type="text"/></td>
+    </tr>
+    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
+  </table>
+</form>
+</body>
+</html>
