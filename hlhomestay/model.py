@@ -12,5 +12,5 @@ class Homestay(db.Model):
 
 class Room(db.Model):
     name = db.StringProperty(required=True)
-    value = db.IntegerProperty()
+    price = db.IntegerProperty()
     homestay = db.ReferenceProperty(Homestay)

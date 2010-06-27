@@ -16,10 +16,27 @@ $code:
 <tr><td >$:m.email.verbose_name</td><td>$:h.email</td></tr>
 <tr><td >$:m.blog.verbose_name</td><td>$:h.blog</td></tr>
 <tr>
-<td><a href="javascript:history.go(-1)">回</a>
+<td><a href="/homestays">回</a>
 改
 刪
 </tr>
+</table>
+<h2>客房清單</h2>
+<table>
+    <tr>
+        <td>名稱</td>
+        <td>價位</td>
+        <td><a href="/homestays/new">新</a></td>
+        <td><a href="javascript:history.go(-1)">回</a></td>
+    </tr>
+$for r in h.room_set:
+    <tr>
+        <td>$r.name</td>
+        <td>$r.price</td>
+        <td><a href="/rooms/$:r.key()">查</a></td>
+        <td><a href="/rooms/$:r.key()/edit">改</a></td>
+        <td><a href="/rooms/$:r.key()/delete">刪</a></td>
+    </tr>
 </table>
 </body>
 </html>

@@ -9,19 +9,22 @@ $code:
 </head>
 <body>
 <h1>修改民宿資料</h1>
-<form method="post" action="update">
+<form method="post" action="/homestays/edit">
+  <input name="key" type="hidden" value="$h.key()"/>
   <table>
     <tr><td >$:m.name.verbose_name</td>
-        <td><input name="name" type="text"/></td></tr>
+        <td><input name="name" type="text" value="$h.name"/></td>
+    </tr>
     <tr><td >$:m.address.verbose_name</td>
-        <td><input name="address" type="text"/>
-       </td></tr>
+        <td><input name="address" type="text" value="$h.address"/>
+      </td>
+    </tr>
     <tr><td >$:m.owner.verbose_name</td>
-       <td><input name="owner" type="text"/></td></tr>
+       <td><input name="owner" type="text" value="$h.owner"/></td></tr>
     <tr><td >$:m.email.verbose_name</td>
-        <td><input name="email" type="text"/></td></tr>
+        <td><input name="email" type="text" value="$h.email"/></td></tr>
     <tr><td >$:m.blog.verbose_name</td>
-        <td><input name="blog" type="text"/></td></tr>
+        <td><input name="blog" type="text" value="$h.blog"/></td></tr>
     <tr><td><input type="submit" value="儲存"/></td><td></td></tr>
   </table>
 </form>
