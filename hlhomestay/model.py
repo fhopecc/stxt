@@ -8,7 +8,7 @@ class Homestay(db.Model):
     owner= db.UserProperty(verbose_name="主人",required=True)
     address = db.PostalAddressProperty(verbose_name="地址",)
     email = db.EmailProperty(verbose_name="電子信箱",)
-    blog = db.LinkProperty(verbose_name="網站", required=True)
+    blog = db.LinkProperty(verbose_name="網站")
 
 class Room(db.Model):
     name = db.StringProperty(required=True)

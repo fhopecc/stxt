@@ -19,7 +19,7 @@ class MainPage(webapp.RequestHandler):
 class NewPage(webapp.RequestHandler):
     def get(self):
         render = template.frender('new.html')
-
+        room = Room(
         self.response.headers['Content-Type'] = 'text/html'
         self.response.out.write(str(render()))
 
@@ -39,8 +39,8 @@ class NewPage(webapp.RequestHandler):
         self.redirect('homestay/%s' % account)
 
 application = webapp.WSGIApplication(
-                                     [('/homestays/new', NewPage), 
-                                      ('/homestays/\w+', MainPage)
+                                     [('/rooms/new', NewPage), 
+                                      ('/rooms/\w+', MainPage)
                                      ],
                                      debug=True)
 

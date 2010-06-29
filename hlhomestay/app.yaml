@@ -11,6 +11,10 @@ handlers:
   script: homestay/handler.py
   login: admin
 
+- url: /rooms?.*
+  script: room/handler.py
+  login: admin
+
 - url: /admin/.*
   script: admin/handler.py
   login: admin
