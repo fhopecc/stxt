@@ -2,6 +2,7 @@
 u'''
 0.9 初始版本
 1.0 加入執行命令 -e
+1.1 未用 -g 篩選則預設使用 .stx, .txt, .html
 '''
 from optparse import OptionParser
 import sys, os, re
@@ -47,6 +48,7 @@ def main():
                       help=u"檔名是否含有關鍵字")
 
     parser.add_option("-p", "--pattern", dest="pattern",
+                      default=".*\.(stx|txt|html)", 
                       help=u"檔名是否符合指定的正規表示式樣式")
 
     parser.add_option("-g", "--glob", dest="glob",
@@ -67,7 +69,9 @@ def main():
     if not os.path.exists(cwd):
         print u'不存在 %s' % cwd
         exit(1)
+
     count = 0 
+
     for root, dirs, files in os.walk(cwd):
         for f in files:
             p = os.path.join(root, f)
