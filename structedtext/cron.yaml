@@ -1,0 +1,4 @@
+cron:
+- description: 
+  url: /tasks/notice_monthly_task
+  schedule: 1st day of month 00:00

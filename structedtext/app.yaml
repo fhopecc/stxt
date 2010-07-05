@@ -3,6 +3,9 @@ version: 1
 runtime: python
 api_version: 1
 handlers:
+- url: /tasks/notice_monthly_task
+  script: notice_monthly_task.py
+  login: admin
 - url: /net
   static_dir: net
 - url: /db
