@@ -34,6 +34,13 @@ alter column 可更改欄定義，
 code.更改欄定義
 alter table customers
 alter column city char(50);
+
+-- for oracle
+ALTER TABLE table
+ADD (column datatype [DEFAULT expr][, column datatype]...);
+
+ALTER TABLE table
+MODIFY (column datatype [DEFAULT expr][, column datatype]...);
 ::
 
 刪除表欄
