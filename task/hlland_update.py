@@ -84,7 +84,7 @@ def deploy(dir=None):
                 for f in files:
                     src  = os.path.join(root, f)
                     try:
-                        'import pdb; pdb.set_trace()'
+                        #import pdb; pdb.set_trace()
                         cmd = "copy %s %s" % (src, 'T:')
                         os.system(cmd)
                     except IOError:
@@ -106,7 +106,8 @@ def usage():
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog [options]"
-    parser = OptionParser(usage, version="%prog 1.0")
+    parser = OptionParser(usage, version="%prog 1.1", 
+               description = u'更新地政觸控系統')
     parser.add_option("-o", "--online", dest="online",
                       nargs=3,
                       help=u"-o docdate docno password. " +
