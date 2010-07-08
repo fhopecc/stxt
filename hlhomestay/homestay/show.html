@@ -10,11 +10,11 @@ $code:
 <body>
 <h1>民宿基本資料</h1>
 <table>
-<tr><td >$:m.name.verbose_name</td><td>$:h.name</td></tr>
-<tr><td >$:m.address.verbose_name</td><td>$:h.address</td></tr>
-<tr><td >$:m.owner.verbose_name</td><td>$:h.owner</td></tr>
-<tr><td >$:m.email.verbose_name</td><td>$:h.email</td></tr>
-<tr><td >$:m.blog.verbose_name</td><td>$:h.blog</td></tr>
+<tr><td>名稱</td><td>$:h.name</td></tr>
+<tr><td>地址</td><td>$:h.address</td></tr>
+<tr><td>主人</td><td>$:h.owner</td></tr>
+<tr><td>電子郵件</td><td>$:h.email</td></tr>
+<tr><td>部落格</td><td>$:h.blog</td></tr>
 <tr>
 <td><a href="/homestays">回</a>
 改
@@ -23,12 +23,12 @@ $code:
 </table>
 <h2>客房清單</h2>
 <table>
-    <tr>
-        <td>名稱</td>
-        <td>價位</td>
-        <td><a href="/rooms/new">新</a></td>
-        <td><a href="javascript:history.go(-1)">回</a></td>
-    </tr>
+<tr>
+  <td>名稱</td>
+  <td>價位</td>
+  <td><a href="/homestays/$:h.key()/rooms/new">新</a></td>
+  <td><a href="javascript:history.go(-1)">回</a></td>
+  </tr>
 $for r in h.room_set:
     <tr>
         <td>$r.name</td>

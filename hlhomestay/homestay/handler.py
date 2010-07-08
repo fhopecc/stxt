@@ -9,10 +9,11 @@ from lib.template import Template
 from model import Homestay
 import logging
 
-def get_key(path):
-    pat = r'/homestays/(\w+)(/.*)?'
-    m = re.match(pat, path)
-    return m.group(1)
+class HomestayPage(webapp.RequestHandler):
+    def homestay_key():
+        p = r'/homestays/(\w+)(/.*)?' # pattern
+        m = re.match(p, self.path) # match
+        return m.group(1)
 
 class IndexPage(webapp.RequestHandler):
     def get(self):

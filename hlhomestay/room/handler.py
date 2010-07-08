@@ -5,23 +5,31 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
+from lib import url_handler
 from lib.template import Template 
 from model import Homestay
 import logging
 
-class MainPage(webapp.RequestHandler):
+class RoomHandler(webapp.RequestHandler):
+    def homestay(self):
+        p = r'/homestays/(\w+)(/.*)?' # pattern
+        m = re.match(p, self.request.path)    # match
+        k = m.group(1)                # key for homestay
+        h = Homestay.get(k)           # Homestay object
+        return h
+
+class MainPage(RoomHandler):
   def get(self):
         account = get_account(self.request.path)
         homestay = Homestay(account)
         render = template.frender('show.html')
         self.response.out.write(str(render(homestay)))
       
-class NewPage(webapp.RequestHandler):
+class NewPage(RoomHandler):
     def get(self):
         render = template.frender('new.html')
-        room = Room(
         self.response.headers['Content-Type'] = 'text/html'
-        self.response.out.write(str(render()))
+        self.response.out.write(str(render(self.homestay())))
 
     # create entity
     def post(self):
@@ -39,7 +47,7 @@ class NewPage(webapp.RequestHandler):
         self.redirect('homestay/%s' % account)
 
 application = webapp.WSGIApplication(
-                                     [('/rooms/new', NewPage), 
+                                     [('/homestays/\w+/rooms/new', NewPage), 
                                       ('/rooms/\w+', MainPage)
                                      ],
                                      debug=True)
