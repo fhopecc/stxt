@@ -5,9 +5,9 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
-from lib import url_handler
 from lib.template import Template 
 from model import Homestay
+from model import Room
 import logging
 
 class RoomHandler(webapp.RequestHandler):
@@ -18,37 +18,63 @@ class RoomHandler(webapp.RequestHandler):
         h = Homestay.get(k)           # Homestay object
         return h
 
+    def room(self):
+        p = r'/rooms/(\w+)(/.*)?'          # pattern
+        m = re.match(p, self.request.path) # match
+        k = m.group(1)                     # key for homestay
+        r = Room.get(k)                    # Room object
+        return r
+
+    def create_room(self):
+        r = self.request
+        room = Room(name = r.get("name") ,
+                    price = int(r.get("price")), 
+                    homestay = self.homestay())
+        return room
+
+    def update_room(self):
+        r = self.request
+        room = self.room()
+        room.name = r.get("name")
+        room.price = int(r.get("price"))
+        return room
+
 class MainPage(RoomHandler):
   def get(self):
-        account = get_account(self.request.path)
-        homestay = Homestay(account)
+        room = self.room()
         render = template.frender('show.html')
-        self.response.out.write(str(render(homestay)))
+        self.response.out.write(str(render(room)))
       
 class NewPage(RoomHandler):
     def get(self):
+        room = Room()
+        room.homestay = self.homestay()
+
         render = template.frender('new.html')
-        self.response.headers['Content-Type'] = 'text/html'
-        self.response.out.write(str(render(self.homestay())))
+        self.response.out.write(str(render(room)))
 
     # create entity
     def post(self):
-        r = self.request
-        account = r.get("account")
-        owner = users.User(r.get("owner"))
-        name = r.get("name")
-        h = Homestay(account = r.get("account"), 
-                     name= r.get("name") ,
-                     address=r.get("address"),
-                     email=r.get("email"),
-                     blog=r.get("blog"),
-                     owner=owner)
-        h.put()
-        self.redirect('homestay/%s' % account)
+        r = self.create_room()
+        r.put()
+        self.redirect('/homestays/%s' % r.homestay.key())
+
+class EditPage(RoomHandler):
+    def get(self):
+        room = self.room()
+        render = template.frender('edit.html')
+        self.response.out.write(str(render(room)))
+
+    # update entity
+    def post(self):
+        r = self.update_room()
+        r.put()
+        self.redirect('/homestays/%s' % r.homestay.key())
 
 application = webapp.WSGIApplication(
                                      [('/homestays/\w+/rooms/new', NewPage), 
-                                      ('/rooms/\w+', MainPage)
+                                      ('/rooms/\w+', MainPage), 
+                                      ('/rooms/\w+/edit', EditPage)
                                      ],
                                      debug=True)
 

@@ -7,12 +7,16 @@ handlers:
 - url: /
   script: homestay/month_calendar.py
 
-- url: /homestays/\w*
+- url: /homestays(/\w*)?
   script: homestay/handler.py
   login: admin
 
 # must specified homestay's key
 - url: /homestays/\w+/rooms/\w*
+  script: room/handler.py
+  login: admin
+
+- url: /rooms/\w*(/\w*)?
   script: room/handler.py
   login: admin
 

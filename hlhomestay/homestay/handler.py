@@ -10,10 +10,12 @@ from model import Homestay
 import logging
 
 class HomestayPage(webapp.RequestHandler):
-    def homestay_key():
+    def homestay(self):
         p = r'/homestays/(\w+)(/.*)?' # pattern
-        m = re.match(p, self.path) # match
-        return m.group(1)
+        m = re.match(p, self.request.path)    # match
+        k = m.group(1)                # key for homestay
+        h = Homestay.get(k)           # Homestay object
+        return h
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
@@ -21,13 +23,11 @@ class IndexPage(webapp.RequestHandler):
         render = template.frender('index.html')
         self.response.out.write(str(render(Homestay, homestays)))
 
-class ShowPage(webapp.RequestHandler):
+class ShowPage(HomestayPage):
   def get(self):
-        key = get_key(self.request.path)
-        homestay = Homestay.get(key)
+        homestay = self.homestay()
         render = template.frender('show.html')
         self.response.out.write(str(render(Homestay, homestay)))
-
 
 class EditPage(webapp.RequestHandler):
     def get(self):

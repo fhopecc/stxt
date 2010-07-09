@@ -11,6 +11,6 @@ class Homestay(db.Model):
     blog = db.LinkProperty(verbose_name="網站")
 
 class Room(db.Model):
-    name = db.StringProperty(required=True)
-    price = db.IntegerProperty()
+    name = db.StringProperty(default=u'輸入客房名稱', multiline=False)
+    price = db.IntegerProperty(default=0)
     homestay = db.ReferenceProperty(Homestay)

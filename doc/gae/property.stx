@@ -338,11 +338,24 @@ class SelfReferenceProperty(verbose_name=None, collection_name=None, ...)
 class StringListProperty(verbose_name=None, default=None, ...)
 與 Python str 或 unicode (basestring) 值的 ListProperty 相似。 請參閱 ListProperty。
 值類型：Python list 的 str 或 unicode 值
+
+StringProperty
+~~~~~~~~~~~~~~
 class StringProperty(verbose_name=None, multiline=False, ...)
-短字串屬性。接受小於或等於 500 個位元組的 Python str 或 unicode (basestring) 值。
+
+短字串屬性。
+接受小於或等於 500 個位元組的 Python str 或 unicode (basestring) 值。
+
 StringProperty 屬性值會進行索引，並可用於篩選器和排序順序。
-若 multiline 為 False，則值不能包括換行字元。djangoforms 程式庫用它來區分資料模型中文字欄位和文字區域欄位的不同，而其他的可能將它做為類似的目的。
-值類型： str 或 unicode
+
+若 multiline 為 False，則值不能包括換行字元。
+
+djangoforms 程式庫用它來區分資料模型中文字欄位和文字區域欄位的不同，
+而其他的可能將它做為類似的目的。
+
+值類型：
+str 或 unicode
+
 class TextProperty()
 長字串。
 與 StringProperty 不同，TextProperty 值的長度可以大於 500 個位元組。不過，TextProperty 值不會進行索引，且無法用於篩選器或排序順序。
