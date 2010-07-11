@@ -1,6 +1,7 @@
 $def with (r)
 $code:
     h = r.homestay
+    f = open(r'form.html').read()
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'>
 <html lang="zh-tw">
 <head><title>新增客房</title>
@@ -19,10 +20,13 @@ $code:
 <form method="post" action="new">
   <table>
     <tr><td>名稱</td>
-      <td><input name="name" type="text"/ value="$:r.name"></td>
+      <td><input name="name" type="text" value="$:r.name"/></td>
     </tr>
-    <tr><td>每日價格</td>
-      <td><input name="price" type="text"/ value="$:r.price"></td>
+    <tr><td>平日價格</td>
+      <td><input name="price" type="text" value="$:r.price"/></td>
+    </tr>
+    <tr><td>假日價格</td>
+      <td><input name="holiday_price" type="text" value="$:r.price"/></td>
     </tr>
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
   </table>

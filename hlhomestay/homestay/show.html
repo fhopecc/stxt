@@ -1,10 +1,21 @@
-$def with (model, homestay)
+$def with (homestay)
 $code:
-    m = model
     h = homestay
+    c = Calendar()
+    m = c.monthdatescalendar(today().year, today().month)
+
+$def date_class(d):
+    $if d == today():
+        today
+    $elif d < today():
+        passed
+    $elif d > today():
+        future
+
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
 <head><title>民宿基本資料</title>
+<link rel="stylesheet" href="/css/homestay.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 </head>
 <body>
@@ -21,11 +32,12 @@ $code:
 刪
 </tr>
 </table>
-<h2>客房清單</h2>
+<h1>客房清單</h1>
 <table>
 <tr>
   <td>名稱</td>
-  <td>價位</td>
+  <td>平日</td>
+  <td>假日</td>
   <td><a href="/homestays/$:h.key()/rooms/new">新</a></td>
   <td><a href="javascript:history.go(-1)">回</a></td>
   </tr>
@@ -33,10 +45,25 @@ $for r in h.room_set:
     <tr>
         <td>$r.name</td>
         <td>$r.price</td>
-        <td><a href="/rooms/$:r.key()">查</a></td>
+        <td>$r.holiday_price</td>
         <td><a href="/rooms/$:r.key()/edit">改</a></td>
         <td><a href="/rooms/$:r.key()/delete">刪</a></td>
     </tr>
 </table>
+<div id = "canlendar">
+  <div id = "operations">
+  </div>
+  <table id="canlendar">
+  <tr id="week_label">
+  <td>一</td><td>二</td><td>三</td><td>四</td>
+  <td>五</td><td>六</td><td>日</td>
+  </tr>
+  $for w in m:
+      <tr class="week">
+      $for d in w:
+          <td class="$date_class(d)">$:d.day</td>
+      </tr>
+  </table>
+</div>
 </body>
 </html>

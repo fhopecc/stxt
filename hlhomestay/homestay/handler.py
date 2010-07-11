@@ -1,5 +1,4 @@
 import sys, os, cgi, re
-from datetime import date
 from google.appengine.ext import db
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -7,7 +6,11 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
 from lib.template import Template 
 from model import Homestay
+from calendar import Calendar
+from datetime import date
 import logging
+
+globals = {"Calendar":Calendar, "today":date.today}
 
 class HomestayPage(webapp.RequestHandler):
     def homestay(self):
@@ -26,8 +29,8 @@ class IndexPage(webapp.RequestHandler):
 class ShowPage(HomestayPage):
   def get(self):
         homestay = self.homestay()
-        render = template.frender('show.html')
-        self.response.out.write(str(render(Homestay, homestay)))
+        render = template.frender('show.html', globals=globals)
+        self.response.out.write(str(render(homestay)))
 
 class EditPage(webapp.RequestHandler):
     def get(self):

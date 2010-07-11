@@ -266,9 +266,13 @@ ByteStringProperty 屬性值會進行索引，並可用於篩選器和排序順�
 class CategoryProperty(...)
 類別或「標記」，描述性的文字或片語。
 值類型： Category
+
 class DateProperty(verbose_name=None, auto_now=False, auto_now_add=False, ...)
+
 日期屬性，沒有日期的時間。請參閱 DateTimeProperty 以取得詳細資訊。
+
 值類型： datetime.date。 在內部，這會轉換為 datetime.datetime。
+
 class DateTimeProperty(verbose_name=None, auto_now=False, auto_now_add=False, ...)
 日期和時間屬性。
 若 auto_now 為 True，則屬性值會設為目前的時間 (不論模型實例儲存在資料存放區的時間為何)，覆寫屬性之前的值。追蹤模型實例「最後修改時間」的日期和時間時，這非常有用。

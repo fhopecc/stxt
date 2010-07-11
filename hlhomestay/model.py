@@ -11,6 +11,22 @@ class Homestay(db.Model):
     blog = db.LinkProperty(verbose_name="網站")
 
 class Room(db.Model):
-    name = db.StringProperty(default=u'輸入客房名稱', multiline=False)
-    price = db.IntegerProperty(default=0)
+    name = db.StringProperty(
+            verbose_name="客房名稱", 
+            default=u'輸入客房名稱', multiline=False)
+    price = db.IntegerProperty(
+            verbose_name = "平日價格", 
+            default=0)
+    holiday_price = db.IntegerProperty(
+            verbose_name = "假日價格", 
+            default=0) 
     homestay = db.ReferenceProperty(Homestay)
+
+class Reservation(db.Model):
+    date = db.DateProperty(verbose_name="訂房日期",
+                           auto_now_add=True)
+
+    create_date = db.DateProperty(verbose_name="訂單日期",
+                           auto_now_add=True)
+    comment = db.TextProperty(verbose_name="備註")
+    room = db.ReferenceProperty(Room)

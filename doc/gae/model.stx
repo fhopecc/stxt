@@ -38,16 +38,16 @@ Model 類別是由 google.appengine.ext.db 套件所提供。
 Model 之建構函式定義如下::
   class Model(parent=None, key_name=None, **kw)
 
-引數：
-parent
+parent:
+  實體的 Model 實例或 Key 實例是新實體的父項 (parent)。
 
-實體的 Model 實例或 Key 實例是新實體的父項 (parent)。
+key_name:
+  新實體的名稱。名稱會成為主要金鑰的一部分。
+  若為 None，則會使用系統產生的 ID 做為金鑰。
 
-key_name
-
-新實體的名稱。名稱會成為主要金鑰的一部分。若為 None，則會使用系統產生的 ID 做為金鑰。
-
-key_name 值的開頭不能是數字，而且不能是 (__*__) 型式。 若您的應用程式以使用者提交的資料做為資料存放區實體金鑰名稱 (例如電子郵件地址)，則應用程式要先處理好該值，例如加上已知字串的首碼 (像是「key:」)，以符合這些要求。
+  key_name 值的開頭不能是數字，而且不能是 (__*__) 型式。
+  若您的應用程式以使用者提交的資料做為資料存放區實體金鑰名稱
+   (例如電子郵件地址)，則應用程式要先處理好該值，例如加上已知字串的首碼 (像是「key:」)，以符合這些要求。
 key_name 會儲存為 Unicode 字串，而 str 值會轉換為 ASCII 文字。
 **kw
 
@@ -123,12 +123,17 @@ s = Story.gql("WHERE title = :1", "Little Red Riding Hood")
 
 s = Story.gql("WHERE title = :title", title="Little Red Riding Hood")
 傳回值是 GqlQuery 物件，可用來存取結果。
+
 Model.kind()
+~~~~~~~~~~~~
 傳回模型的種類，通常是 Model 子類別的名稱。
+
 Model.properties()
+~~~~~~~~~~~~~~~~~~~
 傳回為此模型類別所定義之所有屬性的字典。
 實例方法
 模型實例具有下列方法：
+
 key()
 傳回此模型實例的 Key。
 模型實例必須 put() 至資料存放區，才會具有金鑰。若於實例具有金鑰之前就呼叫 key()，則會引發 NotSavedError。

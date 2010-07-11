@@ -10,6 +10,8 @@ from model import Homestay
 from model import Room
 import logging
 
+globals = {"open":open}
+
 class RoomHandler(webapp.RequestHandler):
     def homestay(self):
         p = r'/homestays/(\w+)(/.*)?' # pattern
@@ -29,6 +31,7 @@ class RoomHandler(webapp.RequestHandler):
         r = self.request
         room = Room(name = r.get("name") ,
                     price = int(r.get("price")), 
+                    holiday_price = int(r.get("holiday_price")), 
                     homestay = self.homestay())
         return room
 
@@ -37,6 +40,7 @@ class RoomHandler(webapp.RequestHandler):
         room = self.room()
         room.name = r.get("name")
         room.price = int(r.get("price"))
+        room.holiday_price = int(r.get("holiday_price"))
         return room
 
 class MainPage(RoomHandler):
@@ -50,7 +54,7 @@ class NewPage(RoomHandler):
         room = Room()
         room.homestay = self.homestay()
 
-        render = template.frender('new.html')
+        render = template.frender('new.html', globals = globals)
         self.response.out.write(str(render(room)))
 
     # create entity
@@ -71,10 +75,17 @@ class EditPage(RoomHandler):
         r.put()
         self.redirect('/homestays/%s' % r.homestay.key())
 
+class DelPage(RoomHandler):
+    def get(self):
+        room = self.room()
+        room.delete()
+        self.redirect('/homestays/%s' % room.homestay.key())
+
 application = webapp.WSGIApplication(
                                      [('/homestays/\w+/rooms/new', NewPage), 
                                       ('/rooms/\w+', MainPage), 
-                                      ('/rooms/\w+/edit', EditPage)
+                                      ('/rooms/\w+/edit', EditPage), 
+                                      ('/rooms/\w+/delete', DelPage)
                                      ],
                                      debug=True)
 

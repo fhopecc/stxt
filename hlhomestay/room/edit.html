@@ -19,12 +19,16 @@ $code:
 <form method="post" action="/rooms/$:r.key()/edit">
   <table>
     <tr><td>名稱</td>
-      <td><input name="name" type="text"/ value="$:r.name"></td>
+      <td><input name="name" type="text" value="$:r.name"/></td>
     </tr>
-    <tr><td>每日價格</td>
-      <td><input name="price" type="text"/ value="$:r.price"></td>
+    <tr><td>平日價格</td>
+      <td><input name="price" type="text" value="$:r.price"/></td>
     </tr>
-    <tr><td><input type="submit" value="更新"/></td><td></td></tr>
+    <tr><td>假日價格</td>
+      <td><input name="holiday_price" type="text"
+          value="$:r.holiday_price"/></td>
+    </tr>
+    <tr><td><input type="submit" value="更新"/></td></tr>
   </table>
 </form>
 </body>
