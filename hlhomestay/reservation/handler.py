@@ -1,36 +1,96 @@
+import sys, os, cgi, re
+from datetime import date
+from google.appengine.ext import db
+from google.appengine.api import users
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
+from lib import template 
+from lib.template import Template 
+from model import Homestay
+from model import Room
+import logging
 
-$def with (r)
-$code:
-    h = r.homestay
-<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'>
-<html lang="zh-tw">
-<head><title>新增客房</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
-<body>
-<h1>民宿資料</h1>
-<table>
-<tr><td>名稱<td>$:h.name</td></tr>
-<tr><td>地址</td><td>$:h.address</td></tr>
-<tr><td>主人</td><td>$:h.owner</td></tr>
-<tr><td>電子郵件</td><td>$:h.email</td></tr>
-<tr><td>部落格</td><td>$:h.blog</td></tr>
-</table>
-<h1>客房資料</h1>
-<form method="post" action="/rooms/$:r.key()/edit">
-  <table>
-    <tr><td>名稱</td>
-      <td><input name="name" type="text" value="$:r.name"/></td>
-    </tr>
-    <tr><td>平日價格</td>
-      <td><input name="price" type="text" value="$:r.price"/></td>
-    </tr>
-    <tr><td>假日價格</td>
-      <td><input name="holiday_price" type="text"
-          value="$:r.holiday_price"/></td>
-    </tr>
-    <tr><td><input type="submit" value="更新"/></td></tr>
-  </table>
-</form>
-</body>
-</html>
+globals = {"open":open}
+
+class RoomHandler(webapp.RequestHandler):
+    def homestay(self):
+        p = r'/homestays/(\w+)(/.*)?' # pattern
+        m = re.match(p, self.request.path)    # match
+        k = m.group(1)                # key for homestay
+        h = Homestay.get(k)           # Homestay object
+        return h
+
+    def room(self):
+        p = r'/rooms/(\w+)(/.*)?'          # pattern
+        m = re.match(p, self.request.path) # match
+        k = m.group(1)                     # key for homestay
+        r = Room.get(k)                    # Room object
+        return r
+
+    def create_room(self):
+        r = self.request
+        room = Room(name = r.get("name") ,
+                    price = int(r.get("price")), 
+                    holiday_price = int(r.get("holiday_price")), 
+                    homestay = self.homestay())
+        return room
+
+    def update_room(self):
+        r = self.request
+        room = self.room()
+        room.name = r.get("name")
+        room.price = int(r.get("price"))
+        room.holiday_price = int(r.get("holiday_price"))
+        return room
+
+class MainPage(RoomHandler):
+  def get(self):
+        room = self.room()
+        render = template.frender('show.html')
+        self.response.out.write(str(render(room)))
+      
+class NewPage(RoomHandler):
+    def get(self):
+        room = Room()
+        room.homestay = self.homestay()
+
+        render = template.frender('new.html', globals = globals)
+        self.response.out.write(str(render(room)))
+
+    # create entity
+    def post(self):
+        r = self.create_room()
+        r.put()
+        self.redirect('/homestays/%s' % r.homestay.key())
+
+class EditPage(RoomHandler):
+    def get(self):
+        room = self.room()
+        render = template.frender('edit.html')
+        self.response.out.write(str(render(room)))
+
+    # update entity
+    def post(self):
+        r = self.update_room()
+        r.put()
+        self.redirect('/homestays/%s' % r.homestay.key())
+
+class DelPage(RoomHandler):
+    def get(self):
+        room = self.room()
+        room.delete()
+        self.redirect('/homestays/%s' % room.homestay.key())
+
+application = webapp.WSGIApplication(
+                                     [('/rooms/\w+/reservations/new', NewPage), 
+                                      ('/rooms/\w+', MainPage), 
+                                      ('/rooms/\w+/edit', EditPage), 
+                                      ('/rooms/\w+/delete', DelPage)
+                                     ],
+                                     debug=True)
+
+def main():
+    run_wsgi_app(application)
+
+if __name__ == "__main__":
+    main()

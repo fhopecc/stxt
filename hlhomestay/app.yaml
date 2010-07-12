@@ -20,19 +20,15 @@ handlers:
   script: room/handler.py
   login: admin
 
+- url: /rooms/\w+/reservations/\w*
+  script: reservation/handler.py
+
 - url: /admin/.*
   script: admin/handler.py
   login: admin
 
-#- url: /session/.*
-#  script: session.py
-
-#handlers:
-#- url: /static
-#  static_dir: static
-
-#- url: /.*
-#  script: main.py
+- url: /css
+  static_dir: css
 
 skip_files: |
  ^(.*/)?(

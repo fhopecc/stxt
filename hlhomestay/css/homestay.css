@@ -1,0 +1,11 @@
+#left_pane{float:left;width:40%}
+
+table { 
+  border:1px solid; 
+  border-collapse:collapse; 
+} 
+
+tr {border:1px solid;}
+th {border:1px solid;color:white;background:gray;
+    font-weight:bold;text-align:center}
+td {border:1px solid}

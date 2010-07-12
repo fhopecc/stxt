@@ -24,7 +24,7 @@ $def date_reservation(d):
     <div class="room_list">
     $for r in rooms:
         <a class="room_reservation" \
-           href="rooms/$:r.key()/reservations/new">$:r.name</a><br/>
+           href="/rooms/$:r.key()/reservations/new">$:r.name</a><br/>
     </div>
 
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
@@ -34,7 +34,9 @@ $def date_reservation(d):
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 </head>
 <body>
-<h1>民宿基本資料</h1>
+
+<div id="left_pane">
+民宿基本資料
 <table>
 <tr><td>名稱</td><td>$:h.name</td></tr>
 <tr><td>地址</td><td>$:h.address</td></tr>
@@ -47,7 +49,7 @@ $def date_reservation(d):
 刪
 </tr>
 </table>
-<h1>客房清單</h1>
+客房清單
 <table>
 <tr>
   <td>名稱</td>
@@ -65,9 +67,9 @@ $for r in h.room_set:
         <td><a href="/rooms/$:r.key()/delete">刪</a></td>
     </tr>
 </table>
-<div id = "canlendar">
-  <div id = "operations">
-  </div>
+</div>
+
+<div id="calendar">
   <table id="canlendar">
   <tr id="week_label">
   <td>一</td><td>二</td><td>三</td><td>四</td>
@@ -80,5 +82,6 @@ $for r in h.room_set:
       </tr>
   </table>
 </div>
+
 </body>
 </html>
