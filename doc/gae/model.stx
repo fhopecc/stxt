@@ -110,19 +110,24 @@ Model.all()
 ，可以在執行之前在查詢上套用篩選器和排序順序。請參閱查詢以取得詳細資訊
 。
 
-Model.gql(query_string, *args, **kwds)
-針對此模型的實例執行 GQL 查詢。
-引數：
-query_string
-GQL 查詢的一部分，接在 SELECT * FROM model (使用此類別方法會隱含這個部分) 後面。
-*args
-位置參數繫結，與 GqlQuery 建構函式類似。
-**kw
-關鍵字參數繫結，與 GqlQuery 建構函式類似。
-s = Story.gql("WHERE title = :1", "Little Red Riding Hood")
+Model.gql(query_string, *args, **kwds):
+  針對此模型的實例執行 GQL 查詢。
 
-s = Story.gql("WHERE title = :title", title="Little Red Riding Hood")
-傳回值是 GqlQuery 物件，可用來存取結果。
+  query_string:
+    GQL 查詢的一部分，接在 SELECT * FROM model 後面，
+    使用此類別方法會隱含這個部分。
+
+  *args:
+    位置參數繫結，與 GqlQuery 建構函式類似。
+
+  **kwds 
+    關鍵字參數繫結，與 GqlQuery 建構函式類似。
+
+  s = Story.gql("WHERE title = :1", "Little Red Riding Hood")
+
+  s = Story.gql("WHERE title = :title", title="Little Red Riding Hood")
+
+  傳回值是 GqlQuery 物件，可用來存取結果。
 
 Model.kind()
 ~~~~~~~~~~~~

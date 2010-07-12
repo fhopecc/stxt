@@ -1,14 +1,13 @@
-import os
-docs = [r'doc\db\db.stx',
-        r'doc\taichi\taichi.stx', 
-        r'doc\poems\poems.stx',
-        r'doc\net\net.stx',
-        r'doc\csec\csec.stx',
-        r'doc\stable_prog\stable_prog.stx', 
-        r'doc\food\food.stx', 
-        r'doc\novel\novel.stx', 
-        r'doc\ds\ds.stx', 
-        r'doc\python\python.stx'
+import os docs = [#r'doc\db\db.stx', 
+        r'doc\taichi\taichi.stx'#, 
+        #r'doc\poems\poems.stx',
+        #r'doc\net\net.stx',
+        #r'doc\csec\csec.stx',
+        #r'doc\stable_prog\stable_prog.stx', 
+        #r'doc\food\food.stx', 
+        #r'doc\novel\novel.stx', 
+        #r'doc\ds\ds.stx', 
+        #r'doc\python\python.stx'
         ]
 for doc in docs:
     print 'Transform %s' % doc
@@ -20,7 +19,7 @@ os.system(r'echo UPDATE TO SERVER')
 os.system(r'pause')
 os.system(r'appcfg.py update structedtext')
 
-#slides = [r'doc\db\db_slides.stx']
+#os.system(r'appcfg.py update structedtext')
 #for slide in slides:
 #    print 'transform %s' % slide
 #    dir = os.path.basename(slide)
