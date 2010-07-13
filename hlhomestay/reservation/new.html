@@ -1,0 +1,74 @@
+$def with (reservation)
+$code:
+    r = reservation.room
+    h = r.homestay
+    rooms = h.room_set
+
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
+<html lang="zh-tw"> 
+<head><title>民宿基本資料</title>
+<link rel="stylesheet" href="/css/homestay.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+</head>
+<body>
+
+<div id="left_pane">
+民宿基本資料
+<table>
+<tr><td>名稱</td><td>$:h.name</td></tr>
+<tr><td>地址</td><td>$:h.address</td></tr>
+<tr><td>主人</td><td>$:h.owner</td></tr>
+<tr><td>電子郵件</td><td>$:h.email</td></tr>
+<tr><td>部落格</td><td>$:h.blog</td></tr>
+<tr>
+<td><a href="/homestays">回</a>
+改
+刪
+</tr>
+</table>
+客房清單
+<table>
+<tr>
+  <td>名稱</td>
+  <td>平日</td>
+  <td>假日</td>
+  <td><a href="/homestays/$:h.key()/rooms/new">新</a></td>
+  <td><a href="javascript:history.go(-1)">回</a></td>
+  </tr>
+$for r in h.room_set:
+    <tr>
+        <td>$r.name</td>
+        <td>$r.price</td>
+        <td>$r.holiday_price</td>
+        <td><a href="/rooms/$:r.key()/edit">改</a></td>
+        <td><a href="/rooms/$:r.key()/delete">刪</a></td>
+    </tr>
+</table>
+</div>
+<div id="calendar">
+<form method="post" action="/rooms/$:r.key()/reservations/new">
+  <table>
+    <tr><td>姓名</td>
+        <td><input name="name" type="text" 
+                   value="$:reservation.name"/>
+        </td></tr>
+    <tr><td>電話</td>
+        <td><input name="phone" type="text"
+                   value="$:reservation.phone"/>
+    </td></tr>
+    <tr><td>電子郵件</td>
+        <td><input name="email" type="text"
+                   value="$:reservation.email"/>
+    </td></tr>
+
+    <tr><td>備註</td>
+        <td><input name="phone" type="text"
+                   value="$:reservation.phone"/>
+    </td></tr>
+
+    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
+  </table>
+</form>
+</div>
+</body>
+</html>

@@ -215,15 +215,24 @@ m.im = db.IM("http://example.com/", "Larry97")
 
 在 XML 中，這是一種 Atom link 項目。請參閱 [[Atom]]。
 
-class PhoneNumber(phone)
-人類可讀的電話號碼。這是內建 unicode 類型的子類別。
-Model 屬性： PhoneNumberProperty
-class MyModel(db.Model):
-  phone = db.PhoneNumberProperty()
 
-m = MyModel()
-m.phone = db.PhoneNumber("1 (206) 555-1212")
-在 XML 中，這是 gd.phoneNumber 項目。請參閱 GData API 參考資料。
+電話號碼
+~~~~~~~~
+class PhoneNumber(phone):
+  人類可讀的電話號碼。這是內建 unicode 類型的子類別。
+
+class db.PhoneNumberProperty():
+  對映之模型屬性類別。
+
+::
+  class MyModel(db.Model):
+    phone = db.PhoneNumberProperty()
+
+  m = MyModel()
+  m.phone = db.PhoneNumber("1 (206) 555-1212")
+
+在 XML 中，這是 gd.phoneNumber 項目。
+請參閱 GData API 參考資料。
 
 郵寄地址(PostalAddress)
 ~~~~~~~~~~~~~~~~~~~~~~~

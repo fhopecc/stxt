@@ -1,25 +1,15 @@
-import sys, os, cgi, re
+import sys, re, logging
 from datetime import date
 from google.appengine.ext import db
-from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
 from lib.template import Template 
+from model import Reservation
 from model import Homestay
 from model import Room
-import logging
 
-globals = {"open":open}
-
-class RoomHandler(webapp.RequestHandler):
-    def homestay(self):
-        p = r'/homestays/(\w+)(/.*)?' # pattern
-        m = re.match(p, self.request.path)    # match
-        k = m.group(1)                # key for homestay
-        h = Homestay.get(k)           # Homestay object
-        return h
-
+class ReservationHandler(webapp.RequestHandler):
     def room(self):
         p = r'/rooms/(\w+)(/.*)?'          # pattern
         m = re.match(p, self.request.path) # match
@@ -43,19 +33,19 @@ class RoomHandler(webapp.RequestHandler):
         room.holiday_price = int(r.get("holiday_price"))
         return room
 
-class MainPage(RoomHandler):
+class MainPage(ReservationHandler):
   def get(self):
         room = self.room()
         render = template.frender('show.html')
         self.response.out.write(str(render(room)))
       
-class NewPage(RoomHandler):
+class NewPage(ReservationHandler):
     def get(self):
-        room = Room()
-        room.homestay = self.homestay()
-
-        render = template.frender('new.html', globals = globals)
-        self.response.out.write(str(render(room)))
+        reservation = Reservation()
+        reservation.room = self.room()
+        
+        render = template.frender('new.html')
+        self.response.out.write(str(render(reservation)))
 
     # create entity
     def post(self):
@@ -63,7 +53,7 @@ class NewPage(RoomHandler):
         r.put()
         self.redirect('/homestays/%s' % r.homestay.key())
 
-class EditPage(RoomHandler):
+class EditPage(ReservationHandler):
     def get(self):
         room = self.room()
         render = template.frender('edit.html')
@@ -75,19 +65,18 @@ class EditPage(RoomHandler):
         r.put()
         self.redirect('/homestays/%s' % r.homestay.key())
 
-class DelPage(RoomHandler):
+class DelPage(ReservationHandler):
     def get(self):
         room = self.room()
         room.delete()
         self.redirect('/homestays/%s' % room.homestay.key())
 
 application = webapp.WSGIApplication(
-                                     [('/rooms/\w+/reservations/new', NewPage), 
-                                      ('/rooms/\w+', MainPage), 
-                                      ('/rooms/\w+/edit', EditPage), 
-                                      ('/rooms/\w+/delete', DelPage)
-                                     ],
-                                     debug=True)
+                     [('/rooms/\w+/reservations/new', NewPage), 
+                      ('/rooms/\w+', MainPage), 
+                      ('/rooms/\w+/edit', EditPage), 
+                      ('/rooms/\w+/delete', DelPage)
+                     ], debug=True)
 
 def main():
     run_wsgi_app(application)

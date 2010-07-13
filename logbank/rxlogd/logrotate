@@ -1,0 +1,10 @@
+/var/log/remote/* {
+	rotate 5
+	notifempty
+	sharedscripts
+	olddir oldlogs
+	compress
+	postrotate
+		/sbin/service rxlogd reopenlogs
+	endscript
+}
