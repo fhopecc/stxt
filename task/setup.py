@@ -30,3 +30,4 @@ def add_path(p):
 	end
 '''
 add_path(path.dirname(sys.argv[0]))
+add_path(r'C:\Program Files\GnuWin32\bin')

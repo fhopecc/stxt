@@ -276,9 +276,12 @@ class CategoryProperty(...)
 類別或「標記」，描述性的文字或片語。
 值類型： Category
 
-class DateProperty(verbose_name=None, auto_now=False, auto_now_add=False, ...)
-
-日期屬性，沒有日期的時間。請參閱 DateTimeProperty 以取得詳細資訊。
+日期屬性
+~~~~~~~~
+class DateProperty(verbose_name=None, auto_now=False, 
+                   auto_now_add=False, ...)
+日期屬性，沒有時間的日期。
+請參閱 DateTimeProperty 以取得詳細資訊。
 
 值類型： datetime.date。 在內部，這會轉換為 datetime.datetime。
 

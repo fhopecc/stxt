@@ -41,3 +41,9 @@ class Reservation(db.Model):
     comment = db.TextProperty(verbose_name="備註")
 
     room = db.ReferenceProperty(Room)
+
+def strpdate(str, fmt="%Y-%m-%d"):
+    import time
+    from datetime import date
+    d = time.strptime(str, fmt)
+    return date(*d[0:3])

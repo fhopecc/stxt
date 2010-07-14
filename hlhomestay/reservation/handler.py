@@ -1,6 +1,7 @@
 import sys, re, logging
 from datetime import date
 from google.appengine.ext import db
+from google.appengine.ext.db import PhoneNumber
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from lib import template 
@@ -8,6 +9,7 @@ from lib.template import Template
 from model import Reservation
 from model import Homestay
 from model import Room
+from model import strpdate
 
 class ReservationHandler(webapp.RequestHandler):
     def room(self):
@@ -49,9 +51,17 @@ class NewPage(ReservationHandler):
 
     # create entity
     def post(self):
-        r = self.create_room()
-        r.put()
-        self.redirect('/homestays/%s' % r.homestay.key())
+        r = self.request
+        reservation = Reservation(name = r.get('name') ,
+                        phone = PhoneNumber(r.get('phone')), 
+                        email = r.get('email'), 
+                        date = strpdate(r.get('date')), 
+                        create_date = strpdate(r.get('create_date')),
+                        comment = r.get('comment'), 
+                        room = self.room())
+        reservation.put()
+        render = template.frender('order.html')
+        self.response.out.write(str(render(reservation)))
 
 class EditPage(ReservationHandler):
     def get(self):

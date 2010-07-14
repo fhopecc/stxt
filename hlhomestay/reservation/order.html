@@ -46,41 +46,54 @@ $for r in h.room_set:
 </table>
 </div>
 <div id="calendar">
-<form method="post" action="/rooms/$:r.key()/reservations/new">
-  <table>
-    <tr><td>姓名</td>
-        <td><input name="name" type="text" 
-                   value="$:reservation.name"/>
-    </td></tr>
+<table>
+  <tr><td colspan="2">您的訂房資料如下：</td></tr>
+  <tr>
+    <td>訂房編號</td>
+    <td>$:reservation.key()</td>
+  </tr>
 
-    <tr><td>聯絡電話</td>
-        <td><input name="phone" type="text"
-                   value="$:reservation.phone"/>
-    </td></tr>
+  <tr>
+    <td>客房名稱</td>
+    <td>$:r.name</td>
+  </tr>
 
-    <tr><td>電子郵件</td>
-        <td><input name="email" type="text"
-                   value="$:reservation.email"/>
-    </td></tr>
+  <tr>
+    <td>入住日期</td>
+    <td>$:reservation.date</td>
+  </tr>
 
-    <tr><td>訂房日期</td>
-        <td><input name="date" type="text" readonly="true"
-                   value="$:reservation.date"/>
-    </td></tr>
+  <tr>
+    <td>訂房日期</td>
+    <td>$:reservation.create_date</td>
+  </tr>
 
-    <tr><td>訂單日期</td>
-        <td><input name="create_date" type="text" readonly="true"
-                   value="$:reservation.create_date"/>
-    </td></tr>
+  <tr>
+    <td>姓名</td>
+    <td>$:reservation.name</td>
+  </tr>
 
-    <tr><td>備註</td>
-        <td><input name="phone" type="text"
-                   value="$:reservation.phone"/>
-    </td></tr>
+  <tr>
+    <td>聯絡電話</td>
+    <td>$:reservation.phone</td>
+  </tr>
 
-    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
-  </table>
-</form>
+  <tr>
+    <td>電子郵件</td>
+    <td>$:reservation.email</td>
+  </tr>
+
+  <tr>
+    <td>備註</td>
+    <td>$:reservation.comment</td>
+  </tr>
+
+  <tr>
+    <td colspan="2">
+      <a href="/homestays/$:h.key()">回日曆</a>
+    </td>
+  </tr>
+</table>
 </div>
 </body>
 </html>
