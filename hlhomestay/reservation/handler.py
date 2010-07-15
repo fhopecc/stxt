@@ -43,8 +43,11 @@ class MainPage(ReservationHandler):
       
 class NewPage(ReservationHandler):
     def get(self):
+        r = self.request
         reservation = Reservation()
         reservation.room = self.room()
+        if r.get('date'):
+            reservation.date = strpdate(r.get('date'))
         
         render = template.frender('new.html')
         self.response.out.write(str(render(reservation)))

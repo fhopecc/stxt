@@ -4,15 +4,7 @@ $code:
     c = Calendar()
     m = c.monthdatescalendar(today().year, today().month)
     rooms = homestay.room_set
-
-$def date_class(d):
-    $if d == today():
-        today
-    $elif d < today():
-        passed
-    $elif d > today():
-        future
-
+    
 $def date_reservation(d):
     $if d == today():
         <td class="today">
@@ -22,9 +14,9 @@ $def date_reservation(d):
         <td class="future">
     <div class="date_label">$d.day</div>
     <div class="room_list">
-    $for r in rooms:
+    $for r in h.available_rooms(d):
         <a class="room_reservation" \
-           href="/rooms/$:r.key()/reservations/new">$:r.name</a><br/>
+        href="/rooms/$:r.key()/reservations/new?date=$:d">$:r.name</a><br/>
     </div>
 
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 

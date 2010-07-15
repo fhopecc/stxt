@@ -122,8 +122,8 @@ $for c in ["a", "b", "c", "d"]:
     </tr>
 </table>
 
-定義函數
-~~~~~~~~~
+定義模板函數
+~~~~~~~~~~~~
 You can define a new template function using $def. 
 Keyword arguments are also supported.
 

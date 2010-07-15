@@ -330,9 +330,20 @@ class PostalAddressProperty(...)
 class RatingProperty()
 使用者提供的內容評等，介於 0 和 100 之間的整數。
 值類型： Rating
+
+ReferenceProperty
+~~~~~~~~~~~~~~~~~
 class ReferenceProperty(reference_class=None, verbose_name=None, collection_name=None, ...)
-另一個模型實例的參考。例如，參考可能會在具有屬性的模型和屬性參考的模型之間，指出多對一關聯。
-reference_class 是被參考模型實例的模型類別。若指定的話，只有類別的模型實例可以指定給此屬性。若為 None，則任何模型實例都可以是此屬性值。
+  另一個模型實例的參考。
+  例如，參考可能會在具有屬性的模型和屬性參考的模型之間，指出多對一關聯。
+
+  值類型： db.Key
+
+  reference_class: 
+  是被參考模型實例的模型類別。若指定的話，
+  只有類別的模型實例可以指定給此屬性。
+  若為 None，則任何模型實例都可以是此屬性值。
+
 collection_name 是指定給被參考模型類別之屬性的名稱，該模型類別的值是參考實體之所有實體的 Query。若沒有設定 collection_name，則會使用 modelname_set (小寫的模型名稱，並加上 "_set")。
 注意：若在相同模型中有多個屬性參考相同模型類別，則必須設定 collection_name。否則，產生預設名稱時，會引發 DuplicatePropertyError。
 ReferenceProperty 會自動參考和解除參考模型實例為屬性值：模型實例可以直接指派給 ReferenceProperty，而且會使用其金鑰。ReferenceProperty 值可以當做模型實例來使用，而且會在第一次以這種方式使用時，擷取資料存放區並建立模型實例。未處理的參考屬性不會查詢不需要的資料。
@@ -347,7 +358,9 @@ author_name = story.author.name
 使用 Key 值時，參考屬性值可以參考不存在的資料實體。若從資料存放區刪除被參考的實體，則不會更新該實體的參考。應用程式可以明確地 db.get() ReferenceProperty (這是 Key) 的值，來測試被參考的實體是否存在。
 刪除實體不會刪除 ReferenceProperty 參考的實體。
 另請參閱本簡介的參考屬性。
+
 值類型： db.Key (請參閱上方)
+
 class SelfReferenceProperty(verbose_name=None, collection_name=None, ...)
 相同類別之另一個模型實例的參考。請參閱 ReferenceProperty。
 值類型： db.Key (請參閱上方)

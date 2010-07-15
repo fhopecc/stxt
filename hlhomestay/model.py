@@ -10,6 +10,13 @@ class Homestay(db.Model):
     email = db.EmailProperty(verbose_name="電子信箱")
     blog = db.LinkProperty(verbose_name="網站")
 
+    def available_rooms(self, date):
+        ars = []
+        for r in self.room_set: 
+            if r.reservation_set.filter('date =', date).count() == 0:
+                ars.append(r)
+        return ars
+
 class Room(db.Model):
     name = db.StringProperty(
             verbose_name="客房名稱", 

@@ -43,28 +43,40 @@ IN 運算子等同於多個 = 查詢，每個值使用一個，
 每個項目執行個別的基礎資料存放區查詢。傳回的實體是所有基礎資料存放區查
 詢的總合結果，而且會去除重複的項目。每個單一 GQL 查詢最多允許 30 個資
 料存放區查詢。
+
 使用 ANCESTOR IS 運算子可以測試條件，以測試實體的上階是否為指定實體。
 值為模型實例或上階實體的 Key。如需關於上階的詳細資訊，請參閱金鑰和實體
 群組。
-比較運算的左手邊是屬性名稱。右手邊可以是下列其中一項 (依屬性的資料類型
-而定)：
-str 文字，為單引號字串。字串中的單引號字元必須以 '' 逸出。例如：'Joe''s Diner'
-整數或浮點數文字。例如：42.7
-布林值文字，為 TRUE 或 FALSE。
-datetime、date 或 time 文字，搭配下列格式的數值或字串：
-DATETIME(year, month, day, hour, minute, second)
-DATETIME('YYYY-MM-DD HH:MM:SS')
-DATE(year, month, day)
-DATE('YYYY-MM-DD')
-TIME(hour, minute, second)
-TIME('HH:MM:SS')
-實體 key 文字，搭配以字串編碼的金鑰，或完整的種類和金鑰名稱/ID 路徑：
-KEY('encoded key')
-KEY(kind, name/ID [, kind, name/ID...])
-User 物件文字，搭配使用者的電子郵件地址：
-USER(email-address)
-GeoPt 文字，搭配浮點數值的緯度和經度：
-GEOPT(lat, long)
+
+比較式
+~~~~~~
+比較式之左式為屬性名稱，右式為下列其中一項，其由屬性資料類型而定：
+
+1.str 文字，為單引號字串。
+  字串中的單引號字元必須以 '' 逸出。例如：'Joe''s Diner'
+
+2.整數或浮點數文字。例如：42.7
+
+3.布林值文字，為 TRUE 或 FALSE。
+
+4.datetime、date 或 time 文字，搭配下列格式的數值或字串：
+  DATETIME(year, month, day, hour, minute, second)
+  DATETIME('YYYY-MM-DD HH:MM:SS')
+  DATE(year, month, day)
+  DATE('YYYY-MM-DD')
+  TIME(hour, minute, second)
+  TIME('HH:MM:SS')
+
+5.實體 key 文字，搭配以字串編碼的金鑰，或完整的種類和金鑰名稱/ID 路徑：
+  KEY('encoded key')
+  KEY(kind, name/ID [, kind, name/ID...])
+
+6.User 物件文字，搭配使用者的電子郵件地址：
+  USER(email-address)
+
+7.GeoPt 文字，搭配浮點數值的緯度和經度：
+  GEOPT(lat, long)
+
 繫結參數值。在查詢字串中，數字會參考位置參數：title = :1 名稱會參考關鍵字參數：title = :mytitle
 繫結的參數可以繫結為位置引數或關鍵字引數，遞送至 GqlQuery 建構函式或 Model 類別的 gql() 方法。 您必須使用參數繫結來指定沒有相應值文字語法的屬性資料類型，包括清單資料類型。在 GqlQuery 實例的留存期間，可以使用 bind() 方法以新值來重新繫結參數繫結 (以有效地重新使用查詢)。
 選擇性的 ORDER BY 子句指出結果應該以指定的屬性傳回，可以是遞增 (ASC) 或遞減 (DESC) 順序。若未指定方向，則預設為 ASC。ORDER BY 子句 可以使用逗號分隔的清單來指定多種排序順序，由左而右進行評估。
@@ -103,17 +115,18 @@ WHERE子句中的值可以是字串或數字，或者可以使用值的繫結參
 為了便利起見，Model 和 Expando 類別都具有傳回 GqlQuery 實例的 gql() 方法。
 此方法接受沒有 SELECT * FROM model-name 的 GQL 查詢字串::
 
-query = Song.gql("WHERE composer = 'Lennon, John'")
+  query = Song.gql("WHERE composer = 'Lennon, John'")
 
 使用 Query 類別時，應用程式會執行查詢，
 並透過呼叫 fetch() 方法或將 GqlQuery 物件視為可重複執行來存取結果。
 請參閱查詢文件以取得詳細資訊。
 
 Query 和 GqlQuery 存取結果的方式有一點不同：
+
 若 GQL 查詢包括 LIMIT 子句或 OFFSET 子句，
 其結果會如同使用 fetch() 方法進行抓取，
-即使是使用 iterator 介面來存取結果也如此。當
- GqlQuery 的 GQL 使用 LIMIT 或 OFFSET 做為可重複執行項目時，
+即使是使用 iterator 介面來存取結果也如此。
+當 GqlQuery 的 GQL 使用 LIMIT 或 OFFSET 做為可重複執行項目時，
 會呼叫執行資料存放區以擷取所有結果，而 iterator 會從記憶體傳回每個結果。
 
 for song in q:
@@ -124,8 +137,8 @@ for song in q:
 注意：索引式的資料結構和資料存放區查詢的演算法不支援部分查詢種類。
 請參閱查詢和索引：查詢的限制以取得詳細資訊。
 
-GqlQuery 類別的建構函式定義如下：
-
+建構式
+~~~~~~
 GqlQuery(query_string, *args, **kwds):
   使用應用程式查詢語言 GQL 的查詢物件。
 
@@ -138,8 +151,8 @@ GqlQuery(query_string, *args, **kwds):
   **kwds:
     關鍵字參數繫結。
 
-GqlQuery 實例具有下列方法：
-
+實例方法
+~~~~~~~~
 bind(*args, **kwds):
   為查詢重新繫結參數。第一次執行的新查詢，
   會在重新繫結參數之後存取其結果。
@@ -157,10 +170,12 @@ get():
   get() 隱含 1 的「限制」，並覆寫 GQL 查詢的 LIMIT 子句。
   最多只會從資料存放區擷取 1 筆結果。
 
-fetch(limit, offset=0)
+fetch(limit, offset=0):
   執行查詢，然後傳回結果。
+
   limit 和 offset 引數控制從資料存放區擷取的結果數量，
   以及 fetch() 方法傳回的結果數量。
+
   資料存放區會擷取 offset + limit 筆結果至應用程式。
   資料存放區本身不會略過第一筆 offset 結果。
 
