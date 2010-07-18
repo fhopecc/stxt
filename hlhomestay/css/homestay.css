@@ -1,11 +1,22 @@
+#topbar {padding-bottom: 10px}
+#homestay_name {border-bottom: 1pt solid blue;}
 #left_pane{float:left;width:40%}
 
-table { 
-  border:1px solid; 
-  border-collapse:collapse; 
-} 
+td {vertical-align:top}
+a.available_room {font-size:10pt;
+    padding:none;border:none;margin-top:2pt;vertical-align:baseline}
+.room_list {height:50pt}
 
-tr {border:1px solid;}
-th {border:1px solid;color:white;background:gray;
-    font-weight:bold;text-align:center}
-td {border:1px solid}
+td.passed {background:silver}
+td.passed .date_label {color:white;background:gray}
+
+td.today .date_label {color:red;background:yellow}
+
+td.future {background:none}
+td.future .date_label {color:white;background:navy}
+
+td.label {text-align:right}
+table.form {padding-bottom:30pt}
+
+table.list tr:first-child {font-weight:bold}
+table.list td:first-child {text-align:right}

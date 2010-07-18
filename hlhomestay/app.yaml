@@ -4,8 +4,6 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /
-  script: homestay/month_calendar.py
 
 - url: /homestays(/\w*)?
   script: homestay/handler.py
@@ -29,6 +27,9 @@ handlers:
 
 - url: /css
   static_dir: css
+
+- url: /\w+(/\d+)?
+  script: client/handler.py
 
 skip_files: |
  ^(.*/)?(

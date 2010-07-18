@@ -2,6 +2,7 @@
 import datetime
 from google.appengine.ext import db
 from google.appengine.api import users
+import datetime
 
 class Homestay(db.Model):
     name = db.StringProperty(verbose_name="名稱", required=True)
@@ -11,6 +12,8 @@ class Homestay(db.Model):
     blog = db.LinkProperty(verbose_name="網站")
 
     def available_rooms(self, date):
+        if date < datetime.date.today(): return []
+
         ars = []
         for r in self.room_set: 
             if r.reservation_set.filter('date =', date).count() == 0:
