@@ -31,7 +31,7 @@ $def available_rooms(d):
 </div>
 <div id="left_pane">
 <table class="form">
-<tr><td class="label">民宿主人：</td><td colspan="2">$:h.owner</td></tr>
+<tr><td class="label">聯絡電話：</td><td colspan="2">$:h.phone</td></tr>
 <tr><td class="label">地址：</td><td colspan="2">$:h.address</td></tr>
 <tr><td class="label">電子郵件：</td><td colspan="2">$:h.email</td></tr>
 <tr><td class="label">部落格：</td><td colspan="2">$:h.blog</td></tr>
@@ -46,10 +46,11 @@ $for r in h.room_set:
 <div id="calendar">
   <table id="calendar">
   <tr id="operation">
-    <td>
+    <td colspan="4">
+      $:month.year $:month.month
       <a href="/$:h.key()">今天</a>
-      <a href="/$:h.key()">上月</a>
-      <a href="/$:h.key()">下月</a>
+      <a href="$:h.last_month_index_path(month)">上月</a>
+      <a href="$:h.next_month_index_path(month)">下月</a>
     </td>
   </tr>
   <tr id="week_label">
