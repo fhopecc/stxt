@@ -1,8 +1,8 @@
-$def with (homestay)
+$def with (homestay, month)
 $code:
     h = homestay
     c = Calendar()
-    m = c.monthdatescalendar(today().year, today().month)
+    m = c.monthdatescalendar(month.year, month.month)
     rooms = homestay.room_set
     
 $def available_rooms(d):
@@ -45,6 +45,13 @@ $for r in h.room_set:
 </div>
 <div id="calendar">
   <table id="calendar">
+  <tr id="operation">
+    <td>
+      <a href="/$:h.key()">今天</a>
+      <a href="/$:h.key()">上月</a>
+      <a href="/$:h.key()">下月</a>
+    </td>
+  </tr>
   <tr id="week_label">
   <td>一</td><td>二</td><td>三</td><td>四</td>
   <td>五</td><td class="saturday">六</td><td class="sunday">日</td>

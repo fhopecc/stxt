@@ -40,12 +40,23 @@ class ClientPage(webapp.RequestHandler):
         d = strpdate(d, '%Y%m%d')
         return d
 
+    def month(self):
+        p = r'/\w+/(\d{6})'
+        m = re.match(p, self.request.path)
+
+        if not m.group(1): return date.today()
+
+        d = m.group(1) + '01'     
+        d = strpdate(d)
+        return d
 
 class IndexPage(ClientPage):
     def get(self):
         homestay = self.homestay()
+        #month = self.month()
+        month = datetime.date.today()
         render = template.frender('index.html', globals=globals)
-        self.response.out.write(str(render(homestay)))
+        self.response.out.write(str(render(homestay, month)))
 
 class ShowPage(ClientPage):
   def get(self):
@@ -106,8 +117,8 @@ class DelPage(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
         [
-         ('/\w+', IndexPage), 
-         ('/\w+/\d+', NewPage)
+         ('/\w+(/\d{6})?', IndexPage),
+         ('/\w+/\d{8}', NewPage)
         ], debug=True)
 
 def main(): run_wsgi_app(application)

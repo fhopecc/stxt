@@ -3,7 +3,6 @@ import datetime
 from google.appengine.ext import db
 from google.appengine.api import users
 import datetime
-
 class Homestay(db.Model):
     name = db.StringProperty(verbose_name="名稱", required=True)
     owner= db.UserProperty(verbose_name="主人",required=True)
@@ -52,7 +51,7 @@ class Reservation(db.Model):
 
     room = db.ReferenceProperty(Room)
 
-def strpdate(str, fmt="%Y-%m-%d"):
+def strpdate(str, fmt="%Y%m%d"):
     import time
     from datetime import date
     d = time.strptime(str, fmt)
