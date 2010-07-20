@@ -47,10 +47,12 @@ $for r in h.room_set:
   <table id="calendar">
   <tr id="operation">
     <td colspan="4">
-      $:month.year $:month.month
       <a href="/$:h.key()">今天</a>
-      <a href="$:h.last_month_index_path(month)">上月</a>
-      <a href="$:h.next_month_index_path(month)">下月</a>
+      <a class="cal_operation"
+        href="$:h.last_month_index_path(month)">▲</a>
+      <a class="cal_operation"
+        href="$:h.next_month_index_path(month)">▼</a>
+      <span class="month_label">$:month.year - $:month.month</span>
     </td>
   </tr>
   <tr id="week_label">
