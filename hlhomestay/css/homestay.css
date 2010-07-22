@@ -1,7 +1,9 @@
 #topbar {padding-bottom: 10px}
-#homestay_name {border-bottom: 1pt solid blue;}
-#left_pane{float:left;width:40%}
+#homestay_name {border-bottom: 1pt solid blue}
+#left_pane {float:left;width:30%}
+/*div#calendar {width:60%}*/
 .cal_operation {color:white;background:blue}
+table#calendar {width:65%}
 
 td {vertical-align:top}
 a.available_room {font-size:10pt;
@@ -11,7 +13,8 @@ a.available_room {font-size:10pt;
 td.passed {background:silver}
 td.passed .date_label {color:white;background:gray}
 
-td.today .date_label {color:red;background:yellow}
+td.today {background:gold}
+td.today .date_label {color:gray;background:lightyellow}
 
 td.future {background:none}
 td.future .date_label {color:white;background:navy}
