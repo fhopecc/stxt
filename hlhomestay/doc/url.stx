@@ -1,13 +1,8 @@
 客戶訂房作業
-~~~~~~~~~~~~
-/homestay_key, GET:
-  民宿訂房畫面。
-
-/room_key/date, GET:
-  訂房輸入畫面。
-
-/room_key/date, POST:
-  訂房並顯示完成之訂房紀錄。
+民宿訂房畫面             /homestay_key, GET
+訂房輸入畫面 -- /room_key/date, GET
+訂房並顯示完成之訂房紀錄 -- /room_key/date, POST
+  
 
 /homestay_key/show, GET:
   查詢訂房紀錄畫面，由顧客輸入訂房鍵值，再按「查詢」

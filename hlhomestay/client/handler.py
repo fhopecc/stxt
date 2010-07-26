@@ -105,9 +105,9 @@ class NewPage(ClientPage):
                         comment = r.get('comment'), 
                         room = self.room())
         reservation.put()
+
         render = template.frender('order.html')
         self.response.out.write(str(render(reservation)))
-
 
 class DelPage(webapp.RequestHandler):
     def get(self):

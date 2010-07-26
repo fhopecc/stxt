@@ -1,0 +1,56 @@
+使用範本
+HTML 內嵌在程式碼中會很混亂，且很難進行維護。使用範本系統是比較好的方式，其中 HTML 會使用特殊語法保持在個別檔案中，以指出來自應用程式的資料要顯示的位置。Python 有很多範本系統：EZT、Cheetah、ClearSilver、Quixote 以及 Django 只是其中的一部分。您可以使用選擇的範本引擎，與您的應用程式碼一起搭配使用。
+為了讓您方便使用，webapp 模組涵蓋了 Django 的範本。它包含在 SDK 中，是「應用服務引擎」的一部分，因此您不需要搭配它就可以直接使用。
+使用 Django 範本
+將下列 import 陳述式新增至 helloworld/helloworld.py 上方：
+import os
+from google.appengine.ext.webapp import template
+以下列程式碼取代 MainPage 處理常式：
+class MainPage(webapp.RequestHandler):
+  def get(self):
+    greetings_query = Greeting.all().order('-date')
+    greetings = greetings_query.fetch(10)
+
+    if users.get_current_user():
+      url = users.create_logout_url(self.request.uri)
+      url_linktext = 'Logout'
+    else:
+      url = users.create_login_url(self.request.uri)
+      url_linktext = 'Login'
+
+    template_values = {
+      'greetings': greetings,
+      'url': url,
+      'url_linktext': url_linktext,
+      }
+
+    path = os.path.join(os.path.dirname(__file__), 'index.html')
+    self.response.out.write(template.render(path, template_values))
+最後，在 helloworld 目錄中建立名稱為 index.html 的新檔案，其內容如下：
+<html>
+  <body>
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <b>{{ greeting.author.nickname }}</b> wrote:
+      {% else %}
+       An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content|escape }}</blockquote>
+    {% endfor %}
+
+    <form action="/sign" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+
+    <a href="{{ url }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
+重新載入頁面，看看結果如何。
+template.render(path, template_values) 循檔案路徑取得範本檔案和值的字典，並傳回轉譯後的文字。範本會使用 Django 範本語法來存取並重複值，並且可以參考那些值的屬性。 在許多情況下，您可能會直接將資料存放區模型物件當做值來傳遞，並從範本存取它們的屬性。
+提示：「應用服務引擎」應用程式只對於與專案、程式庫模組以及其他檔案一起上傳的所有檔案具有唯讀存取權。目前的工作目錄是應用程式根目錄，所以 index.html 的路徑就是 "index.html"。
+如需關於 Django 範本引擎的詳細資訊，請參閱 Django 0.96 範本文件。
+接下來...
+每個網路應用程式都會透過範本或其他機制，從應用程式碼動態傳回產生的 HTML。大部分網路應用程式也需要服務靜態內容，例如影像、CSS 樣式表或 JavaScript 檔案。為了效率起見，「應用服務引擎」會將應用程式原始碼和資料檔案以不同方式處理。您可以使用「應用服務引擎」靜態檔案功能，以 CSS 樣式表來服務此應用程式。
+繼續瀏覽「使用靜態檔案」一節。
