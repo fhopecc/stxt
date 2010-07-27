@@ -6,48 +6,32 @@ $code:
 
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
 <html lang="zh-tw"> 
-<head><title>民宿基本資料</title>
+<head><title>$:{h.name}訂房系統</title>
 <link rel="stylesheet" href="/css/homestay.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 </head>
 <body>
-
-<div id="left_pane">
-民宿基本資料
-<table>
-<tr><td>名稱</td><td>$:h.name</td></tr>
-<tr><td>地址</td><td>$:h.address</td></tr>
-<tr><td>主人</td><td>$:h.owner</td></tr>
-<tr><td>電子郵件</td><td>$:h.email</td></tr>
-<tr><td>部落格</td><td>$:h.blog</td></tr>
-<tr>
-<td><a href="/homestays">回</a>
-改
-刪
-</tr>
-</table>
-客房清單
-<table>
-<tr>
-  <td>名稱</td>
-  <td>平日</td>
-  <td>假日</td>
-  <td><a href="/homestays/$:h.key()/rooms/new">新</a></td>
-  <td><a href="javascript:history.go(-1)">回</a></td>
-  </tr>
-$for r in h.room_set:
-    <tr>
-        <td>$r.name</td>
-        <td>$r.price</td>
-        <td>$r.holiday_price</td>
-        <td><a href="/rooms/$:r.key()/edit">改</a></td>
-        <td><a href="/rooms/$:r.key()/delete">刪</a></td>
-    </tr>
-</table>
+<div id="topbar">
+    <span id="homestay_name">$:{h.name}訂房系統</span>
+    <span id="help">說明</span>
 </div>
-<div id="calendar">
+<div id="form_content">
 <form method="post" action="/rooms/$:r.key()/reservations/new">
-  <table>
+  <table class="form">
+    <tr><th colspan="2">訂房資料</th></tr>
+
+    <tr><td>房間</td>
+        <td><input type="text" readonly="true"
+                   value="$:reservation.room.name"/>
+            <input name="room" type="hidden" 
+                   value="$:reservation.room.key()"/>
+    </td></tr>
+
+    <tr><td>訂房日期</td>
+        <td><input name="date" type="text" readonly="true"
+                   value="$:reservation.date"/>
+    </td></tr>
+
     <tr><td>姓名</td>
         <td><input name="name" type="text" 
                    value="$:reservation.name"/>
@@ -63,19 +47,15 @@ $for r in h.room_set:
                    value="$:reservation.email"/>
     </td></tr>
 
-    <tr><td>訂房日期</td>
-        <td><input name="date" type="text" readonly="true"
-                   value="$:reservation.date"/>
-    </td></tr>
 
     <tr><td>訂單日期</td>
         <td><input name="create_date" type="text" readonly="true"
                    value="$:reservation.create_date"/>
     </td></tr>
 
-    <tr><td>備註</td>
-        <td><input name="phone" type="text"
-                   value="$:reservation.phone"/>
+    <tr><td colspan="2">備註</td></td></tr>
+    <tr><td colspan="2">
+        <textarea name="coment">$:reservation.comment</textarea>
     </td></tr>
 
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
@@ -84,3 +64,5 @@ $for r in h.room_set:
 </div>
 </body>
 </html>
+
+

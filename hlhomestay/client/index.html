@@ -27,33 +27,39 @@ $def available_rooms(d):
 </head>
 <body>
 <div id="topbar">
-    <div id="homestay_name">$:{h.name}訂房系統</div>
+    <span id="homestay_name">$:{h.name}訂房系統</span>
+    <span id="help">說明</span>
 </div>
 <div id="left_pane">
-<table class="form">
-<tr><td class="label">聯絡電話：</td><td colspan="2">$:h.phone</td></tr>
-<tr><td class="label">地址：</td><td colspan="2">$:h.address</td></tr>
-<tr><td class="label">電子郵件：</td><td colspan="2">$:h.email</td></tr>
-<tr><td class="label">部落格：</td><td colspan="2">$:h.blog</td></tr>
+<div class="label"><label>房型</label></div>
+<div class="subcontent">
 $for r in h.room_set:
-    <tr>
-        <td class="label">$:{r.name}：</td>
-        <td>$r.price</td>
-        <td>假日：$r.holiday_price</td>
-    </tr>
-</table>
+    $:{r.name}<br/>
+    平日：$r.price<br/>
+    假日：$r.holiday_price<br/><br/>
+
 </div>
-<div id="calendar">
+<div class="label">聯絡方式</div>
+<div class="subcontent">
+$:h.phone<br/>
+$:h.address<br/>
+$:h.email<br/>
+$:h.blog<br/>
+
+</div>
+</div>
+<div id="content">
   <table id="calendar">
-  <tr id="operation">
-    <td colspan="4">
-      <a href="/$:h.key()">今天</a>
-      <a class="cal_operation"
-        href="$:h.last_month_index_path(month)">▲</a>
-      <a class="cal_operation"
-        href="$:h.next_month_index_path(month)">▼</a>
-      <span class="month_label">$:month.year - $:month.month</span>
-    </td>
+  <tr id="calendar_operation">
+      <td colspan="7">
+      <a class="operation_button" href="/$:h.key()">今天</a>
+      <a class="operation_button"
+         href="$:h.last_month_index_path(month)">&lt;</a>
+
+      <a class="operation_button"
+         href="$:h.next_month_index_path(month)">></a>
+      <label>$:month.year 年 $:month.month 月</label>
+      </td>
   </tr>
   <tr id="week_label">
   <td>一</td><td>二</td><td>三</td><td>四</td>

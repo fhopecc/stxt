@@ -1,0 +1,1526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Language" content="en-us" />
+
+		<title>Django | The Django template language: For template authors | Django Documentation</title>
+
+		<meta name="ROBOTS" content="ALL" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="MSSmartTagsPreventParsing" content="true" />
+		<meta name="Copyright" content="This site's design and contents Copyright (c) 2005  Lawrence Journal-World." />
+
+		<meta name="keywords" content="Python, Django, framework, open-source" />
+		<meta name="description" content="Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design." />
+
+		<link href="http://media.djangoproject.com/css/base.css" rel="stylesheet" type="text/css" media="screen" />
+		<link href="http://media.djangoproject.com/css/print.css" rel="stylesheet" type="text/css" media="print" />
+      
+	</head>
+
+	<body id="documentation" class="default">
+
+	<div id="container">
+		<div id="header">
+			<h1 id="logo"><a href="http://www.djangoproject.com/"><img src="http://media.djangoproject.com/img/site/hdr_logo.gif" alt="Django" /></a></h1>
+			<ul id="nav-global">
+				<li id="nav-homepage"><a href="http://www.djangoproject.com/">Home</a></li>
+				<li id="nav-download"><a href="http://www.djangoproject.com/download/">Download</a></li>
+				<li id="nav-documentation"><a href="http://docs.djangoproject.com/">Documentation</a></li>
+				<li id="nav-weblog"><a href="http://www.djangoproject.com/weblog/">Weblog</a></li>
+				<li id="nav-community"><a href="http://www.djangoproject.com/community/">Community</a></li>
+				<li id="nav-code"><a href="http://code.djangoproject.com/">Code</a></li>
+			</ul>
+		</div>
+		<!-- END Header -->
+		<div id="billboard"><h2><a href="/documentation/">Django documentation</a></h2></div>
+		<div id="columnwrap">
+			
+		<div id="content-main">
+		
+<h1>The Django template language: For template authors</h1>
+
+<h2 class="deck">
+
+  This document describes Django version 0.96. For current documentation, 
+  <a href="/documentation/templates/">go here</a>.
+
+</h2>
+
+<p>Django&#8217;s template language is designed to strike a balance between power and
+ease. It&#8217;s designed to feel comfortable to those used to working with HTML. If
+you have any exposure to other text-based template languages, such as <a class="reference external" href="http://smarty.php.net/">Smarty</a>
+or <a class="reference external" href="http://www.cheetahtemplate.org/">CheetahTemplate</a>, you should feel right at home with Django&#8217;s templates.</p>
+<div class="section" id="templates">
+<h2>Templates</h2>
+<p>A template is simply a text file. It can generate any text-based format (HTML,
+XML, CSV, etc.).</p>
+<p>A template contains <strong>variables</strong>, which get replaced with values when the
+template is evaluated, and <strong>tags</strong>, which control the logic of the template.</p>
+<p>Below is a minimal template that illustrates a few basics. Each element will be
+explained later in this document.:</p>
+<pre class="literal-block">
+{% extends &quot;base_generic.html&quot; %}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block content %}
+&lt;h1&gt;{{ section.title }}&lt;/h1&gt;
+
+{% for story in story_list %}
+&lt;h2&gt;
+  &lt;a href=&quot;{{ story.get_absolute_url }}&quot;&gt;
+    {{ story.headline|upper }}
+  &lt;/a&gt;
+&lt;/h2&gt;
+&lt;p&gt;{{ story.tease|truncatewords:&quot;100&quot; }}&lt;/p&gt;
+{% endfor %}
+{% endblock %}
+</pre>
+<div class="admonition-philosophy admonition">
+<p class="first admonition-title">Philosophy</p>
+<p>Why use a text-based template instead of an XML-based one (like Zope&#8217;s
+TAL)? We wanted Django&#8217;s template language to be usable for more than
+just XML/HTML templates. At World Online, we use it for e-mails,
+JavaScript and CSV. You can use the template language for any text-based
+format.</p>
+<p class="last">Oh, and one more thing: Making humans edit XML is sadistic!</p>
+</div>
+</div>
+<div class="section" id="variables">
+<h2>Variables</h2>
+<p>Variables look like this: <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">variable</span> <span class="pre">}}</span></tt>. When the template engine
+encounters a variable, it evaluates that variable and replaces it with the
+result.</p>
+<p>Use a dot (<tt class="docutils literal"><span class="pre">.</span></tt>) to access attributes of a variable.</p>
+<div class="admonition-behind-the-scenes admonition">
+<p class="first admonition-title">Behind the scenes</p>
+<p>Technically, when the template system encounters a dot, it tries the
+following lookups, in this order:</p>
+<ul class="simple">
+<li>Dictionary lookup</li>
+<li>Attribute lookup</li>
+<li>Method call</li>
+<li>List-index lookup</li>
+</ul>
+</div>
+<p>In the above example, <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">section.title</span> <span class="pre">}}</span></tt> will be replaced with the
+<tt class="docutils literal"><span class="pre">title</span></tt> attribute of the <tt class="docutils literal"><span class="pre">section</span></tt> object.</p>
+<p>If you use a variable that doesn&#8217;t exist, the template system will insert
+the value of the <tt class="docutils literal"><span class="pre">TEMPLATE_STRING_IF_INVALID</span></tt> setting, which is set to <tt class="docutils literal"><span class="pre">''</span></tt>
+(the empty string) by default.</p>
+<p>See <a class="reference internal" href="#using-the-built-in-reference">Using the built-in reference</a>, below, for help on finding what variables
+are available in a given template.</p>
+</div>
+<div class="section" id="filters">
+<h2>Filters</h2>
+<p>You can modify variables for display by using <strong>filters</strong>.</p>
+<p>Filters look like this: <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">name|lower</span> <span class="pre">}}</span></tt>. This displays the value of the
+<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">name</span> <span class="pre">}}</span></tt> variable after being filtered through the <tt class="docutils literal"><span class="pre">lower</span></tt> filter,
+which converts text to lowercase. Use a pipe (<tt class="docutils literal"><span class="pre">|</span></tt>) to apply a filter.</p>
+<p>Filters can be &#8220;chained.&#8221; The output of one filter is applied to the next.
+<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">text|escape|linebreaks</span> <span class="pre">}}</span></tt> is a common idiom for escaping text contents,
+then converting line breaks to <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> tags.</p>
+<p>Some filters take arguments. A filter argument looks like this:
+<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">bio|truncatewords:&quot;30&quot;</span> <span class="pre">}}</span></tt>. This will display the first 30 words of the
+<tt class="docutils literal"><span class="pre">bio</span></tt> variable. Filter arguments always are in double quotes.</p>
+<p>The <a class="reference internal" href="#built-in-filter-reference">Built-in filter reference</a> below describes all the built-in filters.</p>
+</div>
+<div class="section" id="tags">
+<h2>Tags</h2>
+<p>Tags look like this: <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">tag</span> <span class="pre">%}</span></tt>. Tags are more complex than variables: Some
+create text in the output, some control flow by performing loops or logic, and
+some load external information into the template to be used by later variables.</p>
+<p>Some tags require beginning and ending tags (i.e.
+<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">tag</span> <span class="pre">%}</span> <span class="pre">...</span> <span class="pre">tag</span> <span class="pre">contents</span> <span class="pre">...</span> <span class="pre">{%</span> <span class="pre">endtag</span> <span class="pre">%}</span></tt>). The <a class="reference internal" href="#built-in-tag-reference">Built-in tag reference</a>
+below describes all the built-in tags. You can create your own tags, if you
+know how to write Python code.</p>
+</div>
+<div class="section" id="comments">
+<h2>Comments</h2>
+<p>To comment-out part of a template, use the comment syntax: <tt class="docutils literal"><span class="pre">{#</span> <span class="pre">#}</span></tt>.</p>
+<p>For example, this template would render as <tt class="docutils literal"><span class="pre">'hello'</span></tt>:</p>
+<pre class="literal-block">
+{# greeting #}hello
+</pre>
+<p>A comment can contain any template code, invalid or not. For example:</p>
+<pre class="literal-block">
+{# {% if foo %}bar{% else %} #}
+</pre>
+</div>
+<div class="section" id="template-inheritance">
+<h2>Template inheritance</h2>
+<p>The most powerful &#8212; and thus the most complex &#8212; part of Django&#8217;s template
+engine is template inheritance. Template inheritance allows you to build a base
+&#8220;skeleton&#8221; template that contains all the common elements of your site and
+defines <strong>blocks</strong> that child templates can override.</p>
+<p>It&#8217;s easiest to understand template inheritance by starting with an example:</p>
+<pre class="literal-block">
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;{% block title %}My amazing site{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        {% block sidebar %}
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        {% endblock %}
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        {% block content %}{% endblock %}
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>This template, which we&#8217;ll call <tt class="docutils literal"><span class="pre">base.html</span></tt>, defines a simple HTML skeleton
+document that you might use for a simple two-column page. It&#8217;s the job of
+&#8220;child&#8221; templates to fill the empty blocks with content.</p>
+<p>In this example, the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> tag defines three blocks that child
+templates can fill in. All the <tt class="docutils literal"><span class="pre">block</span></tt> tag does is to tell the template
+engine that a child template may override those portions of the template.</p>
+<p>A child template might look like this:</p>
+<pre class="literal-block">
+{% extends &quot;base.html&quot; %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+{% for entry in blog_entries %}
+    &lt;h2&gt;{{ entry.title }}&lt;/h2&gt;
+    &lt;p&gt;{{ entry.body }}&lt;/p&gt;
+{% endfor %}
+{% endblock %}
+</pre>
+<p>The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">%}</span></tt> tag is the key here. It tells the template engine that
+this template &#8220;extends&#8221; another template. When the template system evaluates
+this template, first it locates the parent &#8212; in this case, &#8220;base.html&#8221;.</p>
+<p>At that point, the template engine will notice the three <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> tags
+in <tt class="docutils literal"><span class="pre">base.html</span></tt> and replace those blocks with the contents of the child
+template. Depending on the value of <tt class="docutils literal"><span class="pre">blog_entries</span></tt>, the output might look
+like:</p>
+<pre class="literal-block">
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+    &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;My amazing blog&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        &lt;h2&gt;Entry one&lt;/h2&gt;
+        &lt;p&gt;This is my first entry.&lt;/p&gt;
+
+        &lt;h2&gt;Entry two&lt;/h2&gt;
+        &lt;p&gt;This is my second entry.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Note that since the child template didn&#8217;t define the <tt class="docutils literal"><span class="pre">sidebar</span></tt> block, the
+value from the parent template is used instead. Content within a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+tag in a parent template is always used as a fallback.</p>
+<p>You can use as many levels of inheritance as needed. One common way of using
+inheritance is the following three-level approach:</p>
+<ul class="simple">
+<li>Create a <tt class="docutils literal"><span class="pre">base.html</span></tt> template that holds the main look-and-feel of your
+site.</li>
+<li>Create a <tt class="docutils literal"><span class="pre">base_SECTIONNAME.html</span></tt> template for each &#8220;section&#8221; of your
+site. For example, <tt class="docutils literal"><span class="pre">base_news.html</span></tt>, <tt class="docutils literal"><span class="pre">base_sports.html</span></tt>. These
+templates all extend <tt class="docutils literal"><span class="pre">base.html</span></tt> and include section-specific
+styles/design.</li>
+<li>Create individual templates for each type of page, such as a news
+article or blog entry. These templates extend the appropriate section
+template.</li>
+</ul>
+<p>This approach maximizes code reuse and makes it easy to add items to shared
+content areas, such as section-wide navigation.</p>
+<p>Here are some tips for working with inheritance:</p>
+<ul>
+<li><p class="first">If you use <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">%}</span></tt> in a template, it must be the first template
+tag in that template. Template inheritance won&#8217;t work, otherwise.</p>
+</li>
+<li><p class="first">More <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> tags in your base templates are better. Remember,
+child templates don&#8217;t have to define all parent blocks, so you can fill
+in reasonable defaults in a number of blocks, then only define the ones
+you need later. It&#8217;s better to have more hooks than fewer hooks.</p>
+</li>
+<li><p class="first">If you find yourself duplicating content in a number of templates, it
+probably means you should move that content to a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> in a
+parent template.</p>
+</li>
+<li><p class="first">If you need to get the content of the block from the parent template,
+the <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></tt> variable will do the trick. This is useful
+if you want to add to the contents of a parent block instead of
+completely overriding it.</p>
+</li>
+<li><p class="first">For extra readability, you can optionally give a <em>name</em> to your
+<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></tt> tag. For example:</p>
+<pre class="literal-block">
+{% block content %}
+...
+{% endblock content %}
+</pre>
+<p>In larger templates, this technique helps you see which <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+tags are being closed.</p>
+</li>
+</ul>
+<p>Finally, note that you can&#8217;t define multiple <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> tags with the same
+name in the same template. This limitation exists because a block tag works in
+&#8220;both&#8221; directions. That is, a block tag doesn&#8217;t just provide a hole to fill &#8212;
+it also defines the content that fills the hole in the <em>parent</em>. If there were
+two similarly-named <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> tags in a template, that template&#8217;s parent
+wouldn&#8217;t know which one of the blocks&#8217; content to use.</p>
+</div>
+<div class="section" id="using-the-built-in-reference">
+<h2>Using the built-in reference</h2>
+<p>Django&#8217;s admin interface includes a complete reference of all template tags and
+filters available for a given site. To see it, go to your admin interface and
+click the &#8220;Documentation&#8221; link in the upper right of the page.</p>
+<p>The reference is divided into 4 sections: tags, filters, models, and views.</p>
+<p>The <strong>tags</strong> and <strong>filters</strong> sections describe all the built-in tags (in fact,
+the tag and filter references below come directly from those pages) as well as
+any custom tag or filter libraries available.</p>
+<p>The <strong>views</strong> page is the most valuable. Each URL in your site has a separate
+entry here, and clicking on a URL will show you:</p>
+<ul class="simple">
+<li>The name of the view function that generates that view.</li>
+<li>A short description of what the view does.</li>
+<li>The <strong>context</strong>, or a list of variables available in the view&#8217;s template.</li>
+<li>The name of the template or templates that are used for that view.</li>
+</ul>
+<p>Each view documentation page also has a bookmarklet that you can use to jump
+from any page to the documentation page for that view.</p>
+<p>Because Django-powered sites usually use database objects, the <strong>models</strong>
+section of the documentation page describes each type of object in the system
+along with all the fields available on that object.</p>
+<p>Taken together, the documentation pages should tell you every tag, filter,
+variable and object available to you in a given template.</p>
+</div>
+<div class="section" id="custom-tag-and-filter-libraries">
+<h2>Custom tag and filter libraries</h2>
+<p>Certain applications provide custom tag and filter libraries. To access them in
+a template, use the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">%}</span></tt> tag:</p>
+<pre class="literal-block">
+{% load comments %}
+
+{% comment_form for blogs.entries entry.id with is_public yes %}
+</pre>
+<p>In the above, the <tt class="docutils literal"><span class="pre">load</span></tt> tag loads the <tt class="docutils literal"><span class="pre">comments</span></tt> tag library, which then
+makes the <tt class="docutils literal"><span class="pre">comment_form</span></tt> tag available for use. Consult the documentation
+area in your admin to find the list of custom libraries in your installation.</p>
+<p>The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">%}</span></tt> tag can take multiple library names, separated by spaces.
+Example:</p>
+<pre class="literal-block">
+{% load comments i18n %}
+</pre>
+<div class="section" id="custom-libraries-and-template-inheritance">
+<h3>Custom libraries and template inheritance</h3>
+<p>When you load a custom tag or filter library, the tags/filters are only made
+available to the current template &#8212; not any parent or child templates along
+the template-inheritance path.</p>
+<p>For example, if a template <tt class="docutils literal"><span class="pre">foo.html</span></tt> has <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></tt>, a child
+template (e.g., one that has <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">&quot;foo.html&quot;</span> <span class="pre">%}</span></tt>) will <em>not</em> have
+access to the comments template tags and filters. The child template is
+responsible for its own <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></tt>.</p>
+<p>This is a feature for the sake of maintainability and sanity.</p>
+</div>
+</div>
+<div class="section" id="built-in-tag-and-filter-reference">
+<h2>Built-in tag and filter reference</h2>
+<p>For those without an admin site available, reference for the stock tags and
+filters follows. Because Django is highly customizable, the reference in your
+admin should be considered the final word on what tags and filters are
+available, and what they do.</p>
+<div class="section" id="built-in-tag-reference">
+<h3>Built-in tag reference</h3>
+<div class="section" id="block">
+<h4>block</h4>
+<p>Define a block that can be overridden by child templates. See
+<a class="reference internal" href="#template-inheritance">Template inheritance</a> for more information.</p>
+</div>
+<div class="section" id="comment">
+<h4>comment</h4>
+<p>Ignore everything between <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">comment</span> <span class="pre">%}</span></tt> and <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endcomment</span> <span class="pre">%}</span></tt></p>
+</div>
+<div class="section" id="cycle">
+<h4>cycle</h4>
+<p>Cycle among the given strings each time this tag is encountered.</p>
+<p>Within a loop, cycles among the given strings each time through the loop:</p>
+<pre class="literal-block">
+{% for o in some_list %}
+    &lt;tr class=&quot;{% cycle row1,row2 %}&quot;&gt;
+        ...
+    &lt;/tr&gt;
+{% endfor %}
+</pre>
+<p>Outside of a loop, give the values a unique name the first time you call it,
+then use that name each successive time through:</p>
+<pre class="literal-block">
+&lt;tr class=&quot;{% cycle row1,row2,row3 as rowcolors %}&quot;&gt;...&lt;/tr&gt;
+&lt;tr class=&quot;{% cycle rowcolors %}&quot;&gt;...&lt;/tr&gt;
+&lt;tr class=&quot;{% cycle rowcolors %}&quot;&gt;...&lt;/tr&gt;
+</pre>
+<p>You can use any number of values, separated by commas. Make sure not to put
+spaces between the values &#8212; only commas.</p>
+</div>
+<div class="section" id="debug">
+<h4>debug</h4>
+<p>Output a whole load of debugging information, including the current context and
+imported modules.</p>
+</div>
+<div class="section" id="extends">
+<h4>extends</h4>
+<p>Signal that this template extends a parent template.</p>
+<p>This tag can be used in two ways:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">&quot;base.html&quot;</span> <span class="pre">%}</span></tt> (with quotes) uses the literal value
+<tt class="docutils literal"><span class="pre">&quot;base.html&quot;</span></tt> as the name of the parent template to extend.</li>
+<li><tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">variable</span> <span class="pre">%}</span></tt> uses the value of <tt class="docutils literal"><span class="pre">variable</span></tt>. If the variable
+evaluates to a string, Django will use that string as the name of the
+parent template. If the variable evaluates to a <tt class="docutils literal"><span class="pre">Template</span></tt> object,
+Django will use that object as the parent template.</li>
+</ul>
+<p>See <a class="reference internal" href="#template-inheritance">Template inheritance</a> for more information.</p>
+</div>
+<div class="section" id="filter">
+<h4>filter</h4>
+<p>Filter the contents of the variable through variable filters.</p>
+<p>Filters can also be piped through each other, and they can have arguments &#8212;
+just like in variable syntax.</p>
+<p>Sample usage:</p>
+<pre class="literal-block">
+{% filter escape|lower %}
+    This text will be HTML-escaped, and will appear in all lowercase.
+{% endfilter %}
+</pre>
+</div>
+<div class="section" id="firstof">
+<h4>firstof</h4>
+<p>Outputs the first variable passed that is not False.  Outputs nothing if all the
+passed variables are False.</p>
+<p>Sample usage:</p>
+<pre class="literal-block">
+{% firstof var1 var2 var3 %}
+</pre>
+<p>This is equivalent to:</p>
+<pre class="literal-block">
+{% if var1 %}
+    {{ var1 }}
+{% else %}{% if var2 %}
+    {{ var2 }}
+{% else %}{% if var3 %}
+    {{ var3 }}
+{% endif %}{% endif %}{% endif %}
+</pre>
+</div>
+<div class="section" id="for">
+<h4>for</h4>
+<p>Loop over each item in an array.  For example, to display a list of athletes
+given <tt class="docutils literal"><span class="pre">athlete_list</span></tt>:</p>
+<pre class="literal-block">
+&lt;ul&gt;
+{% for athlete in athlete_list %}
+    &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+</pre>
+<p>You can also loop over a list in reverse by using <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">for</span> <span class="pre">obj</span> <span class="pre">in</span> <span class="pre">list</span> <span class="pre">reversed</span> <span class="pre">%}</span></tt>.</p>
+<p>The for loop sets a number of variables available within the loop:</p>
+<table class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Variable</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">forloop.counter</span></tt></td>
+<td>The current iteration of the loop (1-indexed)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.counter0</span></tt></td>
+<td>The current iteration of the loop (0-indexed)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.revcounter</span></tt></td>
+<td>The number of iterations from the end of the
+loop (1-indexed)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.revcounter0</span></tt></td>
+<td>The number of iterations from the end of the
+loop (0-indexed)</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.first</span></tt></td>
+<td>True if this is the first time through the loop</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.last</span></tt></td>
+<td>True if this is the last time through the loop</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">forloop.parentloop</span></tt></td>
+<td>For nested loops, this is the loop &#8220;above&#8221; the
+current one</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="if">
+<h4>if</h4>
+<p>The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">%}</span></tt> tag evaluates a variable, and if that variable is &#8220;true&#8221; (i.e.
+exists, is not empty, and is not a false boolean value) the contents of the
+block are output:</p>
+<pre class="literal-block">
+{% if athlete_list %}
+    Number of athletes: {{ athlete_list|length }}
+{% else %}
+    No athletes.
+{% endif %}
+</pre>
+<p>In the above, if <tt class="docutils literal"><span class="pre">athlete_list</span></tt> is not empty, the number of athletes will be
+displayed by the <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">athlete_list|length</span> <span class="pre">}}</span></tt> variable.</p>
+<p>As you can see, the <tt class="docutils literal"><span class="pre">if</span></tt> tag can take an optional <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">else</span> <span class="pre">%}</span></tt> clause that
+will be displayed if the test fails.</p>
+<p><tt class="docutils literal"><span class="pre">if</span></tt> tags may use <tt class="docutils literal"><span class="pre">and</span></tt>, <tt class="docutils literal"><span class="pre">or</span></tt> or <tt class="docutils literal"><span class="pre">not</span></tt> to test a number of variables or
+to negate a given variable:</p>
+<pre class="literal-block">
+{% if athlete_list and coach_list %}
+    Both athletes and coaches are available.
+{% endif %}
+
+{% if not athlete_list %}
+    There are no athletes.
+{% endif %}
+
+{% if athlete_list or coach_list %}
+    There are some athletes or some coaches.
+{% endif %}
+
+{% if not athlete_list or coach_list %}
+    There are no athletes or there are some coaches (OK, so
+    writing English translations of boolean logic sounds
+    stupid; it's not our fault).
+{% endif %}
+
+{% if athlete_list and not coach_list %}
+    There are some athletes and absolutely no coaches.
+{% endif %}
+</pre>
+<p><tt class="docutils literal"><span class="pre">if</span></tt> tags don&#8217;t allow <tt class="docutils literal"><span class="pre">and</span></tt> and <tt class="docutils literal"><span class="pre">or</span></tt> clauses within the same tag, because
+the order of logic would be ambiguous. For example, this is invalid:</p>
+<pre class="literal-block">
+{% if athlete_list and coach_list or cheerleader_list %}
+</pre>
+<p>If you need to combine <tt class="docutils literal"><span class="pre">and</span></tt> and <tt class="docutils literal"><span class="pre">or</span></tt> to do advanced logic, just use nested
+<tt class="docutils literal"><span class="pre">if</span></tt> tags. For example:</p>
+<pre class="literal-block">
+{% if athlete_list %}
+    {% if coach_list or cheerleader_list %}
+        We have athletes, and either coaches or cheerleaders!
+    {% endif %}
+{% endif %}
+</pre>
+<p>Multiple uses of the same logical operator are fine, as long as you use the
+same operator. For example, this is valid:</p>
+<pre class="literal-block">
+{% if athlete_list or coach_list or parent_list or teacher_list %}
+</pre>
+</div>
+<div class="section" id="ifchanged">
+<h4>ifchanged</h4>
+<p>Check if a value has changed from the last iteration of a loop.</p>
+<p>The &#8216;ifchanged&#8217; block tag is used within a loop. It has two possible uses.</p>
+<ol class="arabic">
+<li><p class="first">Checks its own rendered contents against its previous state and only
+displays the content if it has changed. For example, this displays a list of
+days, only displaying the month if it changes:</p>
+<pre class="literal-block">
+&lt;h1&gt;Archive for {{ year }}&lt;/h1&gt;
+
+{% for date in days %}
+    {% ifchanged %}&lt;h3&gt;{{ date|date:&quot;F&quot; }}&lt;/h3&gt;{% endifchanged %}
+    &lt;a href=&quot;{{ date|date:&quot;M/d&quot;|lower }}/&quot;&gt;{{ date|date:&quot;j&quot; }}&lt;/a&gt;
+{% endfor %}
+</pre>
+</li>
+<li><p class="first">If given a variable, check whether that variable has changed. For
+example, the following shows the date every time it changes, but
+only shows the hour if both the hour and the date has changed:</p>
+<pre class="literal-block">
+{% for date in days %}
+    {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
+    {% ifchanged date.hour date.date %}
+        {{ date.hour }}
+    {% endifchanged %}
+{% endfor %}
+</pre>
+</li>
+</ol>
+</div>
+<div class="section" id="ifequal">
+<h4>ifequal</h4>
+<p>Output the contents of the block if the two arguments equal each other.</p>
+<p>Example:</p>
+<pre class="literal-block">
+{% ifequal user.id comment.user_id %}
+    ...
+{% endifequal %}
+</pre>
+<p>As in the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">%}</span></tt> tag, an <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">else</span> <span class="pre">%}</span></tt> clause is optional.</p>
+<p>The arguments can be hard-coded strings, so the following is valid:</p>
+<pre class="literal-block">
+{% ifequal user.username &quot;adrian&quot; %}
+    ...
+{% endifequal %}
+</pre>
+<p>It is only possible to compare an argument to template variables or strings.
+You cannot check for equality with Python objects such as <tt class="docutils literal"><span class="pre">True</span></tt> or
+<tt class="docutils literal"><span class="pre">False</span></tt>.  If you need to test if something is true or false, use the <tt class="docutils literal"><span class="pre">if</span></tt>
+tag instead.</p>
+</div>
+<div class="section" id="ifnotequal">
+<h4>ifnotequal</h4>
+<p>Just like <tt class="docutils literal"><span class="pre">ifequal</span></tt>, except it tests that the two arguments are not equal.</p>
+</div>
+<div class="section" id="include">
+<h4>include</h4>
+<p>Loads a template and renders it with the current context. This is a way of
+&#8220;including&#8221; other templates within a template.</p>
+<p>The template name can either be a variable or a hard-coded (quoted) string,
+in either single or double quotes.</p>
+<p>This example includes the contents of the template <tt class="docutils literal"><span class="pre">&quot;foo/bar.html&quot;</span></tt>:</p>
+<pre class="literal-block">
+{% include &quot;foo/bar.html&quot; %}
+</pre>
+<p>This example includes the contents of the template whose name is contained in
+the variable <tt class="docutils literal"><span class="pre">template_name</span></tt>:</p>
+<pre class="literal-block">
+{% include template_name %}
+</pre>
+<p>An included template is rendered with the context of the template that&#8217;s
+including it. This example produces the output <tt class="docutils literal"><span class="pre">&quot;Hello,</span> <span class="pre">John&quot;</span></tt>:</p>
+<ul>
+<li><p class="first">Context: variable <tt class="docutils literal"><span class="pre">person</span></tt> is set to <tt class="docutils literal"><span class="pre">&quot;john&quot;</span></tt>.</p>
+</li>
+<li><p class="first">Template:</p>
+<pre class="literal-block">
+{% include &quot;name_snippet.html&quot; %}
+</pre>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">name_snippet.html</span></tt> template:</p>
+<pre class="literal-block">
+Hello, {{ person }}
+</pre>
+</li>
+</ul>
+<p>See also: <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">ssi</span> <span class="pre">%}</span></tt>.</p>
+</div>
+<div class="section" id="load">
+<h4>load</h4>
+<p>Load a custom template tag set.</p>
+<p>See <a class="reference internal" href="#custom-tag-and-filter-libraries">Custom tag and filter libraries</a> for more information.</p>
+</div>
+<div class="section" id="now">
+<h4>now</h4>
+<p>Display the date, formatted according to the given string.</p>
+<p>Uses the same format as PHP&#8217;s <tt class="docutils literal"><span class="pre">date()</span></tt> function (<a class="reference external" href="http://php.net/date">http://php.net/date</a>)
+with some custom extensions.</p>
+<p>Available format strings:</p>
+<table class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="31%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Format character</th>
+<th class="head">Description</th>
+<th class="head">Example output</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>a</td>
+<td><tt class="docutils literal"><span class="pre">'a.m.'</span></tt> or <tt class="docutils literal"><span class="pre">'p.m.'</span></tt> (Note that
+this is slightly different than PHP&#8217;s
+output, because this includes periods
+to match Associated Press style.)</td>
+<td><tt class="docutils literal"><span class="pre">'a.m.'</span></tt></td>
+</tr>
+<tr><td>A</td>
+<td><tt class="docutils literal"><span class="pre">'AM'</span></tt> or <tt class="docutils literal"><span class="pre">'PM'</span></tt>.</td>
+<td><tt class="docutils literal"><span class="pre">'AM'</span></tt></td>
+</tr>
+<tr><td>b</td>
+<td>Month, textual, 3 letters, lowercase.</td>
+<td><tt class="docutils literal"><span class="pre">'jan'</span></tt></td>
+</tr>
+<tr><td>B</td>
+<td>Not implemented.</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>d</td>
+<td>Day of the month, 2 digits with
+leading zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'31'</span></tt></td>
+</tr>
+<tr><td>D</td>
+<td>Day of the week, textual, 3 letters.</td>
+<td><tt class="docutils literal"><span class="pre">'Fri'</span></tt></td>
+</tr>
+<tr><td>f</td>
+<td>Time, in 12-hour hours and minutes,
+with minutes left off if they&#8217;re zero.
+Proprietary extension.</td>
+<td><tt class="docutils literal"><span class="pre">'1'</span></tt>, <tt class="docutils literal"><span class="pre">'1:30'</span></tt></td>
+</tr>
+<tr><td>F</td>
+<td>Month, textual, long.</td>
+<td><tt class="docutils literal"><span class="pre">'January'</span></tt></td>
+</tr>
+<tr><td>g</td>
+<td>Hour, 12-hour format without leading
+zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+</tr>
+<tr><td>G</td>
+<td>Hour, 24-hour format without leading
+zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'0'</span></tt> to <tt class="docutils literal"><span class="pre">'23'</span></tt></td>
+</tr>
+<tr><td>h</td>
+<td>Hour, 12-hour format.</td>
+<td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+</tr>
+<tr><td>H</td>
+<td>Hour, 24-hour format.</td>
+<td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'23'</span></tt></td>
+</tr>
+<tr><td>i</td>
+<td>Minutes.</td>
+<td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'59'</span></tt></td>
+</tr>
+<tr><td>I</td>
+<td>Not implemented.</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>j</td>
+<td>Day of the month without leading
+zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'31'</span></tt></td>
+</tr>
+<tr><td>l</td>
+<td>Day of the week, textual, long.</td>
+<td><tt class="docutils literal"><span class="pre">'Friday'</span></tt></td>
+</tr>
+<tr><td>L</td>
+<td>Boolean for whether it&#8217;s a leap year.</td>
+<td><tt class="docutils literal"><span class="pre">True</span></tt> or <tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr><td>m</td>
+<td>Month, 2 digits with leading zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'01'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+</tr>
+<tr><td>M</td>
+<td>Month, textual, 3 letters.</td>
+<td><tt class="docutils literal"><span class="pre">'Jan'</span></tt></td>
+</tr>
+<tr><td>n</td>
+<td>Month without leading zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'1'</span></tt> to <tt class="docutils literal"><span class="pre">'12'</span></tt></td>
+</tr>
+<tr><td>N</td>
+<td>Month abbreviation in Associated Press
+style. Proprietary extension.</td>
+<td><tt class="docutils literal"><span class="pre">'Jan.'</span></tt>, <tt class="docutils literal"><span class="pre">'Feb.'</span></tt>, <tt class="docutils literal"><span class="pre">'March'</span></tt>, <tt class="docutils literal"><span class="pre">'May'</span></tt></td>
+</tr>
+<tr><td>O</td>
+<td>Difference to Greenwich time in hours.</td>
+<td><tt class="docutils literal"><span class="pre">'+0200'</span></tt></td>
+</tr>
+<tr><td>P</td>
+<td>Time, in 12-hour hours, minutes and
+&#8216;a.m.&#8217;/&#8217;p.m.&#8217;, with minutes left off
+if they&#8217;re zero and the special-case
+strings &#8216;midnight&#8217; and &#8216;noon&#8217; if
+appropriate. Proprietary extension.</td>
+<td><tt class="docutils literal"><span class="pre">'1</span> <span class="pre">a.m.'</span></tt>, <tt class="docutils literal"><span class="pre">'1:30</span> <span class="pre">p.m.'</span></tt>, <tt class="docutils literal"><span class="pre">'midnight'</span></tt>, <tt class="docutils literal"><span class="pre">'noon'</span></tt>, <tt class="docutils literal"><span class="pre">'12:30</span> <span class="pre">p.m.'</span></tt></td>
+</tr>
+<tr><td>r</td>
+<td>RFC 822 formatted date.</td>
+<td><tt class="docutils literal"><span class="pre">'Thu,</span> <span class="pre">21</span> <span class="pre">Dec</span> <span class="pre">2000</span> <span class="pre">16:01:07</span> <span class="pre">+0200'</span></tt></td>
+</tr>
+<tr><td>s</td>
+<td>Seconds, 2 digits with leading zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'00'</span></tt> to <tt class="docutils literal"><span class="pre">'59'</span></tt></td>
+</tr>
+<tr><td>S</td>
+<td>English ordinal suffix for day of the
+month, 2 characters.</td>
+<td><tt class="docutils literal"><span class="pre">'st'</span></tt>, <tt class="docutils literal"><span class="pre">'nd'</span></tt>, <tt class="docutils literal"><span class="pre">'rd'</span></tt> or <tt class="docutils literal"><span class="pre">'th'</span></tt></td>
+</tr>
+<tr><td>t</td>
+<td>Number of days in the given month.</td>
+<td><tt class="docutils literal"><span class="pre">28</span></tt> to <tt class="docutils literal"><span class="pre">31</span></tt></td>
+</tr>
+<tr><td>T</td>
+<td>Time zone of this machine.</td>
+<td><tt class="docutils literal"><span class="pre">'EST'</span></tt>, <tt class="docutils literal"><span class="pre">'MDT'</span></tt></td>
+</tr>
+<tr><td>U</td>
+<td>Not implemented.</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>w</td>
+<td>Day of the week, digits without
+leading zeros.</td>
+<td><tt class="docutils literal"><span class="pre">'0'</span></tt> (Sunday) to <tt class="docutils literal"><span class="pre">'6'</span></tt> (Saturday)</td>
+</tr>
+<tr><td>W</td>
+<td>ISO-8601 week number of year, with
+weeks starting on Monday.</td>
+<td><tt class="docutils literal"><span class="pre">1</span></tt>, <tt class="docutils literal"><span class="pre">23</span></tt></td>
+</tr>
+<tr><td>y</td>
+<td>Year, 2 digits.</td>
+<td><tt class="docutils literal"><span class="pre">'99'</span></tt></td>
+</tr>
+<tr><td>Y</td>
+<td>Year, 4 digits.</td>
+<td><tt class="docutils literal"><span class="pre">'1999'</span></tt></td>
+</tr>
+<tr><td>z</td>
+<td>Day of the year.</td>
+<td><tt class="docutils literal"><span class="pre">0</span></tt> to <tt class="docutils literal"><span class="pre">365</span></tt></td>
+</tr>
+<tr><td>Z</td>
+<td>Time zone offset in seconds. The
+offset for timezones west of UTC is
+always negative, and for those east of
+UTC is always positive.</td>
+<td><tt class="docutils literal"><span class="pre">-43200</span></tt> to <tt class="docutils literal"><span class="pre">43200</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre class="literal-block">
+It is {% now &quot;jS F Y H:i&quot; %}
+</pre>
+<p>Note that you can backslash-escape a format string if you want to use the
+&#8220;raw&#8221; value. In this example, &#8220;f&#8221; is backslash-escaped, because otherwise
+&#8220;f&#8221; is a format string that displays the time. The &#8220;o&#8221; doesn&#8217;t need to be
+escaped, because it&#8217;s not a format character.:</p>
+<pre class="literal-block">
+It is the {% now &quot;jS o\f F&quot; %}
+</pre>
+<p>(Displays &#8220;It is the 4th of September&#8221; %}</p>
+</div>
+<div class="section" id="regroup">
+<h4>regroup</h4>
+<p>Regroup a list of alike objects by a common attribute.</p>
+<p>This complex tag is best illustrated by use of an example:  say that <tt class="docutils literal"><span class="pre">people</span></tt>
+is a list of <tt class="docutils literal"><span class="pre">Person</span></tt> objects that have <tt class="docutils literal"><span class="pre">first_name</span></tt>, <tt class="docutils literal"><span class="pre">last_name</span></tt>, and
+<tt class="docutils literal"><span class="pre">gender</span></tt> attributes, and you&#8217;d like to display a list that looks like:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Male:</dt>
+<dd><ul class="first last simple">
+<li>George Bush</li>
+<li>Bill Clinton</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Female:</dt>
+<dd><ul class="first last simple">
+<li>Margaret Thatcher</li>
+<li>Condoleezza Rice</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Unknown:</dt>
+<dd><ul class="first last simple">
+<li>Pat Smith</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The following snippet of template code would accomplish this dubious task:</p>
+<pre class="literal-block">
+{% regroup people by gender as grouped %}
+&lt;ul&gt;
+{% for group in grouped %}
+    &lt;li&gt;{{ group.grouper }}
+    &lt;ul&gt;
+        {% for item in group.list %}
+        &lt;li&gt;{{ item }}&lt;/li&gt;
+        {% endfor %}
+    &lt;/ul&gt;
+{% endfor %}
+&lt;/ul&gt;
+</pre>
+<p>As you can see, <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">regroup</span> <span class="pre">%}</span></tt> populates a variable with a list of objects
+with <tt class="docutils literal"><span class="pre">grouper</span></tt> and <tt class="docutils literal"><span class="pre">list</span></tt> attributes.  <tt class="docutils literal"><span class="pre">grouper</span></tt> contains the item that
+was grouped by; <tt class="docutils literal"><span class="pre">list</span></tt> contains the list of objects that share that
+<tt class="docutils literal"><span class="pre">grouper</span></tt>.  In this case, <tt class="docutils literal"><span class="pre">grouper</span></tt> would be <tt class="docutils literal"><span class="pre">Male</span></tt>, <tt class="docutils literal"><span class="pre">Female</span></tt> and
+<tt class="docutils literal"><span class="pre">Unknown</span></tt>, and <tt class="docutils literal"><span class="pre">list</span></tt> is the list of people with those genders.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">regroup</span> <span class="pre">%}</span></tt> does not work when the list to be grouped is not
+sorted by the key you are grouping by!  This means that if your list of people
+was not sorted by gender, you&#8217;d need to make sure it is sorted before using it,
+i.e.:</p>
+<pre class="literal-block">
+{% regroup people|dictsort:&quot;gender&quot; by gender as grouped %}
+</pre>
+</div>
+<div class="section" id="spaceless">
+<h4>spaceless</h4>
+<p>Normalizes whitespace between HTML tags to a single space. This includes tab
+characters and newlines.</p>
+<p>Example usage:</p>
+<pre class="literal-block">
+{% spaceless %}
+    &lt;p&gt;
+        &lt;a href=&quot;foo/&quot;&gt;Foo&lt;/a&gt;
+    &lt;/p&gt;
+{% endspaceless %}
+</pre>
+<p>This example would return this HTML:</p>
+<pre class="literal-block">
+&lt;p&gt; &lt;a href=&quot;foo/&quot;&gt;Foo&lt;/a&gt; &lt;/p&gt;
+</pre>
+<p>Only space between <em>tags</em> is normalized &#8212; not space between tags and text. In
+this example, the space around <tt class="docutils literal"><span class="pre">Hello</span></tt> won&#8217;t be stripped:</p>
+<pre class="literal-block">
+{% spaceless %}
+    &lt;strong&gt;
+        Hello
+    &lt;/strong&gt;
+{% endspaceless %}
+</pre>
+</div>
+<div class="section" id="ssi">
+<h4>ssi</h4>
+<p>Output the contents of a given file into the page.</p>
+<p>Like a simple &#8220;include&#8221; tag, <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">ssi</span> <span class="pre">%}</span></tt> includes the contents of another
+file &#8212; which must be specified using an absolute path &#8212; in the current
+page:</p>
+<pre class="literal-block">
+{% ssi /home/html/ljworld.com/includes/right_generic.html %}
+</pre>
+<p>If the optional &#8220;parsed&#8221; parameter is given, the contents of the included
+file are evaluated as template code, within the current context:</p>
+<pre class="literal-block">
+{% ssi /home/html/ljworld.com/includes/right_generic.html parsed %}
+</pre>
+<p>Note that if you use <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">ssi</span> <span class="pre">%}</span></tt>, you&#8217;ll need to define
+<a class="reference external" href="../settings/#allowed-include-roots">ALLOWED_INCLUDE_ROOTS</a> in your Django settings, as a security measure.</p>
+<p>See also: <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">include</span> <span class="pre">%}</span></tt>.</p>
+</div>
+<div class="section" id="templatetag">
+<h4>templatetag</h4>
+<p>Output one of the syntax characters used to compose template tags.</p>
+<p>Since the template system has no concept of &#8220;escaping&#8221;, to display one of the
+bits used in template tags, you must use the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">templatetag</span> <span class="pre">%}</span></tt> tag.</p>
+<p>The argument tells which template bit to output:</p>
+<table class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Argument</th>
+<th class="head">Outputs</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">openblock</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">{%</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">closeblock</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">%}</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">openvariable</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">{{</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">closevariable</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">}}</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">openbrace</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">{</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">closebrace</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">}</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">opencomment</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">{#</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">closecomment</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">#}</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="url">
+<h4>url</h4>
+<p><strong>Note that the syntax for this tag may change in the future, as we make it more robust.</strong></p>
+<p>Returns an absolute URL (i.e., a URL without the domain name) matching a given
+view function and optional parameters. This is a way to output links without
+violating the DRY principle by having to hard-code URLs in your templates:</p>
+<pre class="literal-block">
+{% url path.to.some_view arg1,arg2,name1=value1 %}
+</pre>
+<p>The first argument is a path to a view function in the format
+<tt class="docutils literal"><span class="pre">package.package.module.function</span></tt>. Additional arguments are optional and
+should be comma-separated values that will be used as positional and keyword
+arguments in the URL. All arguments required by the URLconf should be present.</p>
+<p>For example, suppose you have a view, <tt class="docutils literal"><span class="pre">app_name.client</span></tt>, whose URLconf takes
+a client ID. The URLconf line might look like this:</p>
+<pre class="literal-block">
+('^client/(\d+)/$', 'app_name.client')
+</pre>
+<p>If this app&#8217;s URLconf is included into the project&#8217;s URLconf under a path
+such as this:</p>
+<pre class="literal-block">
+('^clients/', include('project_name.app_name.urls'))
+</pre>
+<p>&#8230;then, in a template, you can create a link to this view like this:</p>
+<pre class="literal-block">
+{% url app_name.client client.id %}
+</pre>
+<p>The template tag will output the string <tt class="docutils literal"><span class="pre">/clients/client/123/</span></tt>.</p>
+</div>
+<div class="section" id="widthratio">
+<h4>widthratio</h4>
+<p>For creating bar charts and such, this tag calculates the ratio of a given value
+to a maximum value, and then applies that ratio to a constant.</p>
+<p>For example:</p>
+<pre class="literal-block">
+&lt;img src=&quot;bar.gif&quot; height=&quot;10&quot; width=&quot;{% widthratio this_value max_value 100 %}&quot; /&gt;
+</pre>
+<p>Above, if <tt class="docutils literal"><span class="pre">this_value</span></tt> is 175 and <tt class="docutils literal"><span class="pre">max_value</span></tt> is 200, the the image in the
+above example will be 88 pixels wide (because 175/200 = .875; .875 * 100 = 87.5
+which is rounded up to 88).</p>
+</div>
+</div>
+<div class="section" id="built-in-filter-reference">
+<h3>Built-in filter reference</h3>
+<div class="section" id="add">
+<h4>add</h4>
+<p>Adds the arg to the value.</p>
+</div>
+<div class="section" id="addslashes">
+<h4>addslashes</h4>
+<p>Adds slashes. Useful for passing strings to JavaScript, for example.</p>
+</div>
+<div class="section" id="capfirst">
+<h4>capfirst</h4>
+<p>Capitalizes the first character of the value.</p>
+</div>
+<div class="section" id="center">
+<h4>center</h4>
+<p>Centers the value in a field of a given width.</p>
+</div>
+<div class="section" id="cut">
+<h4>cut</h4>
+<p>Removes all values of arg from the given string.</p>
+</div>
+<div class="section" id="date">
+<h4>date</h4>
+<p>Formats a date according to the given format (same as the <tt class="docutils literal"><span class="pre">now</span></tt> tag).</p>
+</div>
+<div class="section" id="default">
+<h4>default</h4>
+<p>If value is unavailable, use given default.</p>
+</div>
+<div class="section" id="default-if-none">
+<h4>default_if_none</h4>
+<p>If value is <tt class="docutils literal"><span class="pre">None</span></tt>, use given default.</p>
+</div>
+<div class="section" id="dictsort">
+<h4>dictsort</h4>
+<p>Takes a list of dicts, returns that list sorted by the property given in the
+argument.</p>
+</div>
+<div class="section" id="dictsortreversed">
+<h4>dictsortreversed</h4>
+<p>Takes a list of dicts, returns that list sorted in reverse order by the
+property given in the argument.</p>
+</div>
+<div class="section" id="divisibleby">
+<h4>divisibleby</h4>
+<p>Returns true if the value is divisible by the argument.</p>
+</div>
+<div class="section" id="escape">
+<h4>escape</h4>
+<p>Escapes a string&#8217;s HTML. Specifically, it makes these replacements:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&quot;&amp;&quot;</span></tt> to <tt class="docutils literal"><span class="pre">&quot;&amp;amp;&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&lt;</span></tt> to <tt class="docutils literal"><span class="pre">&quot;&amp;lt;&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;</span></tt> to <tt class="docutils literal"><span class="pre">&quot;&amp;gt;&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">'&quot;'</span></tt> (double quote) to <tt class="docutils literal"><span class="pre">'&amp;quot;'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&quot;'&quot;</span></tt> (single quote) to <tt class="docutils literal"><span class="pre">'&amp;#39;'</span></tt></li>
+</ul>
+</div>
+<div class="section" id="filesizeformat">
+<h4>filesizeformat</h4>
+<p>Format the value like a &#8216;human-readable&#8217; file size (i.e. <tt class="docutils literal"><span class="pre">'13</span> <span class="pre">KB'</span></tt>,
+<tt class="docutils literal"><span class="pre">'4.1</span> <span class="pre">MB'</span></tt>, <tt class="docutils literal"><span class="pre">'102</span> <span class="pre">bytes'</span></tt>, etc).</p>
+</div>
+<div class="section" id="first">
+<h4>first</h4>
+<p>Returns the first item in a list.</p>
+</div>
+<div class="section" id="fix-ampersands">
+<h4>fix_ampersands</h4>
+<p>Replaces ampersands with <tt class="docutils literal"><span class="pre">&amp;amp;</span></tt> entities.</p>
+</div>
+<div class="section" id="floatformat">
+<h4>floatformat</h4>
+<p>When used without an argument, rounds a floating-point number to one decimal
+place &#8212; but only if there&#8217;s a decimal part to be displayed. For example:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">36.123</span></tt> gets converted to <tt class="docutils literal"><span class="pre">36.1</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">36.15</span></tt> gets converted to <tt class="docutils literal"><span class="pre">36.2</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">36</span></tt> gets converted to <tt class="docutils literal"><span class="pre">36</span></tt></li>
+</ul>
+<p>If used with a numeric integer argument, <tt class="docutils literal"><span class="pre">floatformat</span></tt> rounds a number to that
+many decimal places.  For example:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">36.1234</span></tt> with floatformat:3 gets converted to <tt class="docutils literal"><span class="pre">36.123</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">36</span></tt> with floatformat:4 gets converted to <tt class="docutils literal"><span class="pre">36.0000</span></tt></li>
+</ul>
+<p>If the argument passed to <tt class="docutils literal"><span class="pre">floatformat</span></tt> is negative, it will round a number to
+that many decimal places &#8212; but only if there&#8217;s a decimal part to be displayed.
+For example:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">36.1234</span></tt> with floatformat:-3 gets converted to <tt class="docutils literal"><span class="pre">36.123</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">36</span></tt> with floatformat:-4 gets converted to <tt class="docutils literal"><span class="pre">36</span></tt></li>
+</ul>
+<p>Using <tt class="docutils literal"><span class="pre">floatformat</span></tt> with no argument is equivalent to using <tt class="docutils literal"><span class="pre">floatformat</span></tt> with
+an argument of <tt class="docutils literal"><span class="pre">-1</span></tt>.</p>
+</div>
+<div class="section" id="get-digit">
+<h4>get_digit</h4>
+<p>Given a whole number, returns the requested digit of it, where 1 is the
+right-most digit, 2 is the second-right-most digit, etc. Returns the original
+value for invalid input (if input or argument is not an integer, or if argument
+is less than 1). Otherwise, output is always an integer.</p>
+</div>
+<div class="section" id="join">
+<h4>join</h4>
+<p>Joins a list with a string, like Python&#8217;s <tt class="docutils literal"><span class="pre">str.join(list)</span></tt>.</p>
+</div>
+<div class="section" id="length">
+<h4>length</h4>
+<p>Returns the length of the value. Useful for lists.</p>
+</div>
+<div class="section" id="length-is">
+<h4>length_is</h4>
+<p>Returns a boolean of whether the value&#8217;s length is the argument.</p>
+</div>
+<div class="section" id="linebreaks">
+<h4>linebreaks</h4>
+<p>Converts newlines into <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></tt> tags.</p>
+</div>
+<div class="section" id="linebreaksbr">
+<h4>linebreaksbr</h4>
+<p>Converts newlines into <tt class="docutils literal"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></tt> tags.</p>
+</div>
+<div class="section" id="linenumbers">
+<h4>linenumbers</h4>
+<p>Displays text with line numbers.</p>
+</div>
+<div class="section" id="ljust">
+<h4>ljust</h4>
+<p>Left-aligns the value in a field of a given width.</p>
+<p><strong>Argument:</strong> field size</p>
+</div>
+<div class="section" id="lower">
+<h4>lower</h4>
+<p>Converts a string into all lowercase.</p>
+</div>
+<div class="section" id="make-list">
+<h4>make_list</h4>
+<p>Returns the value turned into a list. For an integer, it&#8217;s a list of
+digits. For a string, it&#8217;s a list of characters.</p>
+</div>
+<div class="section" id="phone2numeric">
+<h4>phone2numeric</h4>
+<p>Converts a phone number (possibly containing letters) to its numerical
+equivalent. For example, <tt class="docutils literal"><span class="pre">'800-COLLECT'</span></tt> will be converted to
+<tt class="docutils literal"><span class="pre">'800-2655328'</span></tt>.</p>
+<p>The input doesn&#8217;t have to be a valid phone number. This will happily convert
+any string.</p>
+</div>
+<div class="section" id="pluralize">
+<h4>pluralize</h4>
+<p>Returns a plural suffix if the value is not 1. By default, this suffix is <tt class="docutils literal"><span class="pre">'s'</span></tt>.</p>
+<p>Example:</p>
+<pre class="literal-block">
+You have {{ num_messages }} message{{ num_messages|pluralize }}.
+</pre>
+<p>For words that require a suffix other than <tt class="docutils literal"><span class="pre">'s'</span></tt>, you can provide an alternate
+suffix as a parameter to the filter.</p>
+<p>Example:</p>
+<pre class="literal-block">
+You have {{ num_walruses }} walrus{{ num_walrus|pluralize:&quot;es&quot; }}.
+</pre>
+<p>For words that don&#8217;t pluralize by simple suffix, you can specify both a
+singular and plural suffix, separated by a comma.</p>
+<p>Example:</p>
+<pre class="literal-block">
+You have {{ num_cherries }} cherr{{ num_cherries|pluralize:&quot;y,ies&quot; }}.
+</pre>
+</div>
+<div class="section" id="pprint">
+<h4>pprint</h4>
+<p>A wrapper around pprint.pprint &#8212; for debugging, really.</p>
+</div>
+<div class="section" id="random">
+<h4>random</h4>
+<p>Returns a random item from the list.</p>
+</div>
+<div class="section" id="removetags">
+<h4>removetags</h4>
+<p>Removes a space separated list of [X]HTML tags from the output.</p>
+</div>
+<div class="section" id="rjust">
+<h4>rjust</h4>
+<p>Right-aligns the value in a field of a given width.</p>
+<p><strong>Argument:</strong> field size</p>
+</div>
+<div class="section" id="slice">
+<h4>slice</h4>
+<p>Returns a slice of the list.</p>
+<p>Uses the same syntax as Python&#8217;s list slicing. See
+<a class="reference external" href="http://diveintopython.org/native_data_types/lists.html#odbchelper.list.slice">http://diveintopython.org/native_data_types/lists.html#odbchelper.list.slice</a>
+for an introduction.</p>
+<p>Example: <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">some_list|slice:&quot;:2&quot;</span> <span class="pre">}}</span></tt></p>
+</div>
+<div class="section" id="slugify">
+<h4>slugify</h4>
+<p>Converts to lowercase, removes non-word characters (alphanumerics and
+underscores) and converts spaces to hyphens. Also strips leading and trailing
+whitespace.</p>
+</div>
+<div class="section" id="stringformat">
+<h4>stringformat</h4>
+<p>Formats the variable according to the argument, a string formatting specifier.
+This specifier uses Python string formating syntax, with the exception that
+the leading &#8220;%&#8221; is dropped.</p>
+<p>See <a class="reference external" href="http://docs.python.org/lib/typesseq-strings.html">http://docs.python.org/lib/typesseq-strings.html</a> for documentation of
+Python string formatting</p>
+</div>
+<div class="section" id="striptags">
+<h4>striptags</h4>
+<p>Strips all [X]HTML tags.</p>
+</div>
+<div class="section" id="time">
+<h4>time</h4>
+<p>Formats a time according to the given format (same as the <tt class="docutils literal"><span class="pre">now</span></tt> tag).</p>
+</div>
+<div class="section" id="timesince">
+<h4>timesince</h4>
+<p>Formats a date as the time since that date (i.e. &#8220;4 days, 6 hours&#8221;).</p>
+<p>Takes an optional argument that is a variable containing the date to use as
+the comparison point (without the argument, the comparison point is <em>now</em>).
+For example, if <tt class="docutils literal"><span class="pre">blog_date</span></tt> is a date instance representing midnight on 1
+June 2006, and <tt class="docutils literal"><span class="pre">comment_date</span></tt> is a date instance for 08:00 on 1 June 2006,
+then <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">comment_date|timesince:blog_date</span> <span class="pre">}}</span></tt> would return &#8220;8 hours&#8221;.</p>
+</div>
+<div class="section" id="timeuntil">
+<h4>timeuntil</h4>
+<p>Similar to <tt class="docutils literal"><span class="pre">timesince</span></tt>, except that it measures the time from now until the
+given date or datetime. For example, if today is 1 June 2006 and
+<tt class="docutils literal"><span class="pre">conference_date</span></tt> is a date instance holding 29 June 2006, then
+<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">conference_date|timeuntil</span> <span class="pre">}}</span></tt> will return &#8220;28 days&#8221;.</p>
+<p>Takes an optional argument that is a variable containing the date to use as
+the comparison point (instead of <em>now</em>). If <tt class="docutils literal"><span class="pre">from_date</span></tt> contains 22 June
+2006, then <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">conference_date|timeuntil:from_date</span> <span class="pre">}}</span></tt> will return &#8220;7 days&#8221;.</p>
+</div>
+<div class="section" id="title">
+<h4>title</h4>
+<p>Converts a string into titlecase.</p>
+</div>
+<div class="section" id="truncatewords">
+<h4>truncatewords</h4>
+<p>Truncates a string after a certain number of words.</p>
+<p><strong>Argument:</strong> Number of words to truncate after</p>
+</div>
+<div class="section" id="truncatewords-html">
+<h4>truncatewords_html</h4>
+<p>Similar to <tt class="docutils literal"><span class="pre">truncatewords</span></tt>, except that it is aware of HTML tags. Any tags
+that are opened in the string and not closed before the truncation point, are
+closed immediately after the truncation.</p>
+<p>This is less efficient than <tt class="docutils literal"><span class="pre">truncatewords</span></tt>, so should only be used when it
+is being passed HTML text.</p>
+</div>
+<div class="section" id="unordered-list">
+<h4>unordered_list</h4>
+<p>Recursively takes a self-nested list and returns an HTML unordered list &#8212;
+WITHOUT opening and closing &lt;ul&gt; tags.</p>
+<p>The list is assumed to be in the proper format. For example, if <tt class="docutils literal"><span class="pre">var</span></tt> contains
+<tt class="docutils literal"><span class="pre">['States',</span> <span class="pre">[['Kansas',</span> <span class="pre">[['Lawrence',</span> <span class="pre">[]],</span> <span class="pre">['Topeka',</span> <span class="pre">[]]]],</span> <span class="pre">['Illinois',</span> <span class="pre">[]]]]</span></tt>,
+then <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">var|unordered_list</span> <span class="pre">}}</span></tt> would return:</p>
+<pre class="literal-block">
+&lt;li&gt;States
+&lt;ul&gt;
+        &lt;li&gt;Kansas
+        &lt;ul&gt;
+                &lt;li&gt;Lawrence&lt;/li&gt;
+                &lt;li&gt;Topeka&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Illinois&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+</div>
+<div class="section" id="upper">
+<h4>upper</h4>
+<p>Converts a string into all uppercase.</p>
+</div>
+<div class="section" id="urlencode">
+<h4>urlencode</h4>
+<p>Escapes a value for use in a URL.</p>
+</div>
+<div class="section" id="urlize">
+<h4>urlize</h4>
+<p>Converts URLs in plain text into clickable links.</p>
+</div>
+<div class="section" id="urlizetrunc">
+<h4>urlizetrunc</h4>
+<p>Converts URLs into clickable links, truncating URLs to the given character limit.</p>
+<p><strong>Argument:</strong> Length to truncate URLs to</p>
+</div>
+<div class="section" id="wordcount">
+<h4>wordcount</h4>
+<p>Returns the number of words.</p>
+</div>
+<div class="section" id="wordwrap">
+<h4>wordwrap</h4>
+<p>Wraps words at specified line length.</p>
+<p><strong>Argument:</strong> number of characters at which to wrap the text</p>
+</div>
+<div class="section" id="yesno">
+<h4>yesno</h4>
+<p>Given a string mapping values for true, false and (optionally) None,
+returns one of those strings according to the value:</p>
+<table class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="33%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Value</th>
+<th class="head">Argument</th>
+<th class="head">Outputs</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">True</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">yeah</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">no</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">None</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">maybe</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">None</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&quot;yeah,no&quot;</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">&quot;no&quot;</span></tt> (converts None to False
+if no mapping for None is given)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="other-tags-and-filter-libraries">
+<h2>Other tags and filter libraries</h2>
+<p>Django comes with a couple of other template-tag libraries that you have to
+enable explicitly in your <tt class="docutils literal"><span class="pre">INSTALLED_APPS</span></tt> setting and enable in your
+template with the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">%}</span></tt> tag.</p>
+<div class="section" id="django-contrib-humanize">
+<h3>django.contrib.humanize</h3>
+<p>A set of Django template filters useful for adding a &#8220;human touch&#8221; to data. See
+the <a class="reference external" href="../add_ons/#humanize">humanize documentation</a>.</p>
+</div>
+<div class="section" id="django-contrib-markup">
+<h3>django.contrib.markup</h3>
+<p>A collection of template filters that implement these common markup languages:</p>
+<ul class="simple">
+<li>Textile</li>
+<li>Markdown</li>
+<li>ReST (ReStructured Text)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="content-secondary">
+  <h2 id="comments">Questions/Feedback</h2>
+  <p>
+    If you notice errors with this documentation, please <a
+    href="http://code.djangoproject.com/simpleticket?component=Documentation">
+    open a ticket</a> and let us know!
+  </p>
+  <p>
+    Please only use the ticket tracker for criticisms and improvements on the
+    docs. For tech support, ask in the IRC channel or post to the <a
+    href="http://groups-beta.google.com/group/django-users"> django-users
+    list</a>.
+  </p>
+</div>
+
+		</div>
+		<!-- END #content-main -->
+		<div id="content-related" class="sidebar">
+		
+  <h2>Contents</h2>
+  <ul class='toc'><li><a class="reference internal" href="#templates" id="id1">Templates</a></li>
+<li><a class="reference internal" href="#variables" id="id2">Variables</a></li>
+<li><a class="reference internal" href="#filters" id="id3">Filters</a></li>
+<li><a class="reference internal" href="#tags" id="id4">Tags</a></li>
+<li><a class="reference internal" href="#comments" id="id5">Comments</a></li>
+<li><a class="reference internal" href="#template-inheritance" id="id6">Template inheritance</a></li>
+<li><a class="reference internal" href="#using-the-built-in-reference" id="id7">Using the built-in reference</a></li>
+<li><p class="first"><a class="reference internal" href="#custom-tag-and-filter-libraries" id="id8">Custom tag and filter libraries</a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#custom-libraries-and-template-inheritance" id="id9">Custom libraries and template inheritance</a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="#built-in-tag-and-filter-reference" id="id10">Built-in tag and filter reference</a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#built-in-tag-reference" id="id11">Built-in tag reference</a><ul>
+<li><a class="reference internal" href="#block" id="id12">block</a></li>
+<li><a class="reference internal" href="#comment" id="id13">comment</a></li>
+<li><a class="reference internal" href="#cycle" id="id14">cycle</a></li>
+<li><a class="reference internal" href="#debug" id="id15">debug</a></li>
+<li><a class="reference internal" href="#extends" id="id16">extends</a></li>
+<li><a class="reference internal" href="#filter" id="id17">filter</a></li>
+<li><a class="reference internal" href="#firstof" id="id18">firstof</a></li>
+<li><a class="reference internal" href="#for" id="id19">for</a></li>
+<li><a class="reference internal" href="#if" id="id20">if</a></li>
+<li><a class="reference internal" href="#ifchanged" id="id21">ifchanged</a></li>
+<li><a class="reference internal" href="#ifequal" id="id22">ifequal</a></li>
+<li><a class="reference internal" href="#ifnotequal" id="id23">ifnotequal</a></li>
+<li><a class="reference internal" href="#include" id="id24">include</a></li>
+<li><a class="reference internal" href="#load" id="id25">load</a></li>
+<li><a class="reference internal" href="#now" id="id26">now</a></li>
+<li><a class="reference internal" href="#regroup" id="id27">regroup</a></li>
+<li><a class="reference internal" href="#spaceless" id="id28">spaceless</a></li>
+<li><a class="reference internal" href="#ssi" id="id29">ssi</a></li>
+<li><a class="reference internal" href="#templatetag" id="id30">templatetag</a></li>
+<li><a class="reference internal" href="#url" id="id31">url</a></li>
+<li><a class="reference internal" href="#widthratio" id="id32">widthratio</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#built-in-filter-reference" id="id33">Built-in filter reference</a><ul>
+<li><a class="reference internal" href="#add" id="id34">add</a></li>
+<li><a class="reference internal" href="#addslashes" id="id35">addslashes</a></li>
+<li><a class="reference internal" href="#capfirst" id="id36">capfirst</a></li>
+<li><a class="reference internal" href="#center" id="id37">center</a></li>
+<li><a class="reference internal" href="#cut" id="id38">cut</a></li>
+<li><a class="reference internal" href="#date" id="id39">date</a></li>
+<li><a class="reference internal" href="#default" id="id40">default</a></li>
+<li><a class="reference internal" href="#default-if-none" id="id41">default_if_none</a></li>
+<li><a class="reference internal" href="#dictsort" id="id42">dictsort</a></li>
+<li><a class="reference internal" href="#dictsortreversed" id="id43">dictsortreversed</a></li>
+<li><a class="reference internal" href="#divisibleby" id="id44">divisibleby</a></li>
+<li><a class="reference internal" href="#escape" id="id45">escape</a></li>
+<li><a class="reference internal" href="#filesizeformat" id="id46">filesizeformat</a></li>
+<li><a class="reference internal" href="#first" id="id47">first</a></li>
+<li><a class="reference internal" href="#fix-ampersands" id="id48">fix_ampersands</a></li>
+<li><a class="reference internal" href="#floatformat" id="id49">floatformat</a></li>
+<li><a class="reference internal" href="#get-digit" id="id50">get_digit</a></li>
+<li><a class="reference internal" href="#join" id="id51">join</a></li>
+<li><a class="reference internal" href="#length" id="id52">length</a></li>
+<li><a class="reference internal" href="#length-is" id="id53">length_is</a></li>
+<li><a class="reference internal" href="#linebreaks" id="id54">linebreaks</a></li>
+<li><a class="reference internal" href="#linebreaksbr" id="id55">linebreaksbr</a></li>
+<li><a class="reference internal" href="#linenumbers" id="id56">linenumbers</a></li>
+<li><a class="reference internal" href="#ljust" id="id57">ljust</a></li>
+<li><a class="reference internal" href="#lower" id="id58">lower</a></li>
+<li><a class="reference internal" href="#make-list" id="id59">make_list</a></li>
+<li><a class="reference internal" href="#phone2numeric" id="id60">phone2numeric</a></li>
+<li><a class="reference internal" href="#pluralize" id="id61">pluralize</a></li>
+<li><a class="reference internal" href="#pprint" id="id62">pprint</a></li>
+<li><a class="reference internal" href="#random" id="id63">random</a></li>
+<li><a class="reference internal" href="#removetags" id="id64">removetags</a></li>
+<li><a class="reference internal" href="#rjust" id="id65">rjust</a></li>
+<li><a class="reference internal" href="#slice" id="id66">slice</a></li>
+<li><a class="reference internal" href="#slugify" id="id67">slugify</a></li>
+<li><a class="reference internal" href="#stringformat" id="id68">stringformat</a></li>
+<li><a class="reference internal" href="#striptags" id="id69">striptags</a></li>
+<li><a class="reference internal" href="#time" id="id70">time</a></li>
+<li><a class="reference internal" href="#timesince" id="id71">timesince</a></li>
+<li><a class="reference internal" href="#timeuntil" id="id72">timeuntil</a></li>
+<li><a class="reference internal" href="#title" id="id73">title</a></li>
+<li><a class="reference internal" href="#truncatewords" id="id74">truncatewords</a></li>
+<li><a class="reference internal" href="#truncatewords-html" id="id75">truncatewords_html</a></li>
+<li><a class="reference internal" href="#unordered-list" id="id76">unordered_list</a></li>
+<li><a class="reference internal" href="#upper" id="id77">upper</a></li>
+<li><a class="reference internal" href="#urlencode" id="id78">urlencode</a></li>
+<li><a class="reference internal" href="#urlize" id="id79">urlize</a></li>
+<li><a class="reference internal" href="#urlizetrunc" id="id80">urlizetrunc</a></li>
+<li><a class="reference internal" href="#wordcount" id="id81">wordcount</a></li>
+<li><a class="reference internal" href="#wordwrap" id="id82">wordwrap</a></li>
+<li><a class="reference internal" href="#yesno" id="id83">yesno</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="#other-tags-and-filter-libraries" id="id84">Other tags and filter libraries</a></p>
+<ul class="simple">
+<li><a class="reference internal" href="#django-contrib-humanize" id="id85">django.contrib.humanize</a></li>
+<li><a class="reference internal" href="#django-contrib-markup" id="id86">django.contrib.markup</a></li>
+</ul>
+</li>
+</ul>
+  <h3>Last update:</h3>
+  <div>March 23, 2007, 3:45 p.m. (<a href="http://www.timeanddate.com/worldclock/city.html?n=64">CDT</a>)</div>
+
+		</div>
+		<!-- END #content-related -->
+
+		</div>
+		<!-- END #content -->
+		<div id="footer">
+			<p>&copy; 2005-2010 <a href="http://www.djangoproject.com/foundation/">Django Software Foundation</a> unless otherwise noted. Django is a registered trademark of the Django Software Foundation. 
+			Hosting graciously provided by <a href="http://mediatemple.net/">
+			<img style="vertical-align: middle; position: relative; top: -1px;" src="http://media.djangoproject.com/img/site/mt.png" alt="media temple" /></a>
+			</p>
+		</div>
+		<!-- END #footer -->
+	</div>
+	<!-- END #container -->
+	</body>
+</html>
+

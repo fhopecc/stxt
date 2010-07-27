@@ -1,22 +1,37 @@
-#topbar {padding-bottom: 10px}
-#homestay_name {border-bottom: 1pt solid blue}
-#left_pane {float:left;width:30%}
-/*div#calendar {width:60%}*/
-.cal_operation {color:white;background:blue}
-table#calendar {width:65%}
+body {font-size:12pt}
+table {border-collapse:collapse}
+textarea {width:100%}
+#topbar {border-bottom: 1pt solid blue;margin-bottom:10px}
+#left_pane {float:left;width:24%;margin:0 0 0 0}
+#help {float:right}
+
+table#calendar {width:75%;border-left:solid 5px silver}
+
+#calendar_operation {background:silver;padding:15px 0 15px 0}
+.operation_button {color:black}
+#form_content {margin-left:30%}
 
 td {vertical-align:top}
+th {text-align:left}
 a.available_room {font-size:10pt;
     padding:none;border:none;margin-top:2pt;vertical-align:baseline}
+.label {background:silver;font-weight:bold}
+.subcontent {margin-left:5%}
 .room_list {height:50pt}
 
-td.passed {background:silver}
+td.passed {background:silver;
+           border-right:1px solid gray;
+           border-bottom:1px solid gray}
 td.passed .date_label {color:white;background:gray}
 
-td.today {background:gold}
-td.today .date_label {color:gray;background:lightyellow}
+td.today {background:lightyellow;
+          border-right:1px solid gray;
+          border-bottom:1px solid gray}
+td.today .date_label {color:gray;background:gold}
 
-td.future {background:none}
+td.future {background:none;
+           border-right:1px solid gray;
+           border-bottom:1px solid gray}
 td.future .date_label {color:white;background:navy}
 
 td.label {text-align:right}
