@@ -15,7 +15,7 @@ def split_print(docno):
     im = tiffopen(local)
     index = 1
     for frame in ImageSequence.Iterator(im):
-        if index in [1, 4, 7, 10, 13]:
+        if index in [1, 4, 7, 9, 12]:
             jpg = os.path.join('tmp', 'frame%d.jpg' % index)
             frame.save(jpg)
             cmd = r'rundll32 shimgvw.dll,ImageView_PrintTo %s sharp' 
