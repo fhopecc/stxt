@@ -3,6 +3,7 @@ from google.appengine.ext import db
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+
 from lib import template 
 from lib.template import Template 
 from model import Homestay
@@ -27,7 +28,7 @@ class ClientPage(webapp.RequestHandler):
         return h
 
     def room(self):
-        p = r'/(\w+)/\d+'          # pattern
+        p = r'/(\w+)/\d+'                  # pattern
         m = re.match(p, self.request.path) # match
         k = m.group(1)                     # key for homestay
         r = Room.get(k)                    # Room object
@@ -52,18 +53,27 @@ class ClientPage(webapp.RequestHandler):
 
 class IndexPage(ClientPage):
     def get(self):
+        from google.appengine.ext.webapp import template
         import datetime
         homestay = self.homestay()
         month = self.month()
         #month = datetime.date.today()
-        render = template.frender('index.html', globals=globals)
-        self.response.out.write(str(render(homestay, month)))
+        #render = template.frender('index.html', globals=globals)
+        #self.response.out.write(str(render(homestay, month)))
+
+        template_values = {
+            'homestay': homestay,
+            'url_linktext': month
+        }
+
+        self.response.out.write(
+            template.render('index.html', template_values))
 
 class ShowPage(ClientPage):
-  def get(self):
-        homestay = self.homestay()
-        render = template.frender('show.html', globals=globals)
-        self.response.out.write(str(render(homestay)))
+    def get(self):
+          homestay = self.homestay()
+          render = template.frender('show.html', globals=globals)
+          self.response.out.write(str(render(homestay)))
 
 class EditPage(webapp.RequestHandler):
     def get(self):
