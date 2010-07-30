@@ -62,7 +62,7 @@ class IndexPage(ClientPage):
         #self.response.out.write(str(render(homestay, month)))
 
         template_values = {
-            'homestay': homestay,
+            'h': homestay,
             'url_linktext': month
         }
 

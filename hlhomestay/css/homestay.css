@@ -2,7 +2,7 @@ body {font-size:12pt}
 table {border-collapse:collapse}
 textarea {width:100%}
 #topbar {border-bottom: 1pt solid blue;margin-bottom:10px}
-#left_pane {float:left;width:24%;margin:0 0 0 0}
+#leftbar {float:left;width:24%;margin:0 0 0 0}
 #help {float:right}
 
 table#calendar {width:75%;border-left:solid 5px silver}
