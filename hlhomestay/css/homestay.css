@@ -1,8 +1,20 @@
 body {font-size:12pt}
 table {border-collapse:collapse}
 textarea {width:100%}
-#topbar {border-bottom: 1pt solid blue;margin-bottom:10px}
-#leftbar {float:left;width:24%;margin:0 0 0 0}
+
+#topbar {border-bottom: 1pt solid blue;
+         margin-bottom:10px}
+
+#leftbar {float:left;
+          width:24%;}
+
+.upperpane {background:skyblue;
+            border-top: 2pt solid skyblue; 
+            border-right: 2pt solid silver; 
+            border-left: 2pt solid skyblue; 
+            border-bottom: 2pt solid silver; 
+           }
+
 #help {float:right}
 
 table#calendar {width:75%;border-left:solid 5px silver}

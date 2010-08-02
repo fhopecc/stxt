@@ -1,1 +1,39 @@
 {% extends "base.html" %}
+{% block leftbar %}
+<div class="upperpane">
+<table>
+<tr>
+  <td></td>
+  <td>平日</td>
+  <td>假日</td>
+  </tr>
+{% for r in h.room_set %}
+    <tr>
+        <td>{{r.name}}</td>
+        <td>{{r.price}}</td>
+        <td>{{r.holiday_price}}</td>
+    </tr>
+{% endfor %}
+</table>
+</div>
+<div class="basepane">
+    {{h.address}}<br/>
+    {{h.owner}}<br/>
+    {{h.email}}<br/>
+    {{h.blog}}<br/>
+</div>
+{% endblock %}
+
+{% block content %}
+<table id="canlendar">
+<tr id="week_label">
+<td>一</td><td>二</td><td>三</td><td>四</td>
+<td>五</td><td>六</td><td>日</td>
+</tr>
+  $for w in m:
+      <tr class="week">
+      $for d in w:
+          $:date_reservation(d)
+</tr>
+</table>
+{% endblock %}
