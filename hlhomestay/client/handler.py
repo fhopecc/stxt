@@ -60,9 +60,13 @@ class IndexPage(ClientPage):
         #month = datetime.date.today()
         #render = template.frender('index.html', globals=globals)
         #self.response.out.write(str(render(homestay, month)))
+        c = Calendar()
+        m = c.monthdatescalendar(date.today().year, 
+                                 date.today().month)
 
         template_values = {
             'h': homestay,
+            'm': m,
             'url_linktext': month
         }
 
