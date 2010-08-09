@@ -5,11 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 </head>
 <body>
-<div id="topbar">
-<span id="homestay_name">{{h.name}}訂房系統</span>
-<span id="help">說明</span>
 </div>
 <div id="leftbar">
+<div class="h1" id="homestay_name">{{h.name}}訂房系統</div>
 {% block leftbar %}
 房型
 {% endblock %}
@@ -18,6 +16,7 @@
 {% block content %}
 內容
 {% endblock %}
+<span id="help">說明</span>
 </div>
 </body>
 </html>

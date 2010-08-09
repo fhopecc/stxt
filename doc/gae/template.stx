@@ -74,3 +74,196 @@ JavaScript 檔案。為了效率起見，「應用服務引擎」會將應用程
 樣式表來服務此應用程式。
 
 繼續瀏覽「使用靜態檔案」一節。
+
+Context variable lookup5
+In the examples so far, we’ve passed simple values in the template contexts — mostly strings, plus a datetime.date example. However, the template system elegantly handles more complex data structures, such as lists, dictionaries and custom objects.2
+
+The key to traversing complex data structures in Django templates is the dot (.) character. Use a dot to access dictionary keys, attributes, indices or methods of an object.
+
+This is best illustrated with a few examples. First, say you’re passing a Python dictionary to a template. To access the values of that dictionary by dictionary key, use a dot:1
+
+>>> from django.template import Template, Context
+>>> person = {'name': 'Sally', 'age': '43'}
+>>> t = Template('{{ person.name }} is {{ person.age }} years old.')
+>>> c = Context({'person': person})
+>>> t.render(c)
+'Sally is 43 years old.'
+1
+Similarly, dots also allow access of object attributes. For example, a Python datetime.date object has year, month and day attributes, and you can use a dot to access those attributes in a Django template:
+
+>>> from django.template import Template, Context
+>>> import datetime
+>>> d = datetime.date(1993, 5, 2)
+>>> d.year
+1993
+>>> d.month
+5
+>>> d.day
+2
+>>> t = Template('The month is {{ date.month }} and the year is {{ date.year }}.')
+>>> c = Context({'date': d})
+>>> t.render(c)
+'The month is 5 and the year is 1993.'
+3
+This example uses a custom class:
+
+>>> from django.template import Template, Context
+>>> class Person(object):
+...     def __init__(self, first_name, last_name):
+...         self.first_name, self.last_name = first_name, last_name
+>>> t = Template('Hello, {{ person.first_name }} {{ person.last_name }}.')
+>>> c = Context({'person': Person('John', 'Smith')})
+>>> t.render(c)
+'Hello, John Smith.'
+Dots are also used to access list indices. For example:
+
+>>> from django.template import Template, Context
+>>> t = Template('Item 2 is {{ items.2 }}.')
+>>> c = Context({'items': ['apples', 'bananas', 'carrots']})
+>>> t.render(c)
+'Item 2 is carrots.'
+2
+Negative list indices are not allowed. 
+For example, the template variable {{ items.-1 }} would cause a 
+TemplateSyntaxError.
+
+Method call
+~~~~~~~~~~~
+Finally, dots are also used to call methods on objects. 
+For example, each Python string has the methods upper() and isdigit(), 
+and you can call those in Django templates using the same dot syntax:2
+
+>>> from django.template import Template, Context
+>>> t = Template('{{ var }} -- {{ var.upper }} -- {{ var.isdigit }}')
+>>> t.render(Context({'var': 'hello'}))
+'hello -- HELLO -- False'
+>>> t.render(Context({'var': '123'}))
+'123 -- 123 -- True'
+..1
+Note that, in the method calls, you don’t include parentheses. 
+Also, it’s not possible to pass arguments to the methods; 
+you can only call methods that have no required arguments. 
+(We’ll explain this philosophy later in this chapter.)1
+
+The dot lookups can be summarized like this: When the template system encounters a dot in a variable name, it tries the following lookups, in this order:
+
+Dictionary lookup. Example: foo["bar"]
+Attribute lookup. Example: foo.bar4
+Method call. Example: foo.bar()
+List-index lookup. Example: foo[bar]
+The system uses the first lookup type that works. It’s short-circuit logic.
+
+Dot lookups can be nested multiple levels deep. For instance, the following example uses {{ person.name.upper }}, which translates into a dictionary lookup (person['name']), then a method call (upper()):
+
+>>> from django.template import Template, Context
+>>> person = {'name': 'Sally', 'age': '43'}
+>>> t = Template('{{ person.name.upper }} is {{ person.age }} years old.')
+>>> c = Context({'person': person})
+>>> t.render(c)
+'SALLY is 43 years old.'
+
+A word about method calls
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Method calls are slightly more complex than the other lookup types. 
+Here are some things to keep in mind:
+
+If, during the method lookup, a method raises an exception, 
+the exception will be propagated, unless the exception has an 
+attribute silent_variable_failure whose value is True. 
+If the exception does have a silent_variable_failure attribute, 
+the variable will render as an empty string. For example:
+
+>>> t = Template("My name is {{ person.first_name }}.")
+>>> class PersonClass3:
+...     def first_name(self):
+...         raise AssertionError, "foo"
+>>> p = PersonClass3()
+>>> t.render(Context({"person": p}))
+Traceback (most recent call last):
+...
+AssertionError: foo
+
+>>> class SilentAssertionError(AssertionError):
+...     silent_variable_failure = True
+>>> class PersonClass4:
+...     def first_name(self):
+...         raise SilentAssertionError
+>>> p = PersonClass4()
+>>> t.render(Context({"person": p}))
+"My name is ."
+1
+A method call will only work if the method has no required arguments. 
+Otherwise, the system will move to the next lookup type (list-index lookup).
+
+2
+Obviously, some methods have side effects, and it’d be foolish at best, 
+and possibly even a security hole, 
+to allow the template system to access them.1
+
+Say, for instance, you have a BankAccount object that has a 
+delete() method. The template system shouldn’t be allowed to do 
+something like this:
+
+I will now delete this valuable data. {{ account.delete }}
+To prevent this, set a function attribute alters_data on the method. The template system won’t execute a method if the method has alters_data=True set. For example:
+
+def delete(self):
+    # Delete the account
+delete.alters_data = True
+2
+How invalid variables are handled
+By default, if a variable doesn’t exist, the template system renders it as an empty string, failing silently. For example:2
+
+>>> from django.template import Template, Context
+>>> t = Template('Your name is {{ name }}.')
+>>> t.render(Context())
+'Your name is .'
+>>> t.render(Context({'var': 'hello'}))
+'Your name is .'
+>>> t.render(Context({'NAME': 'hello'}))
+'Your name is .'
+>>> t.render(Context({'Name': 'hello'}))
+'Your name is .'
+The system fails silently rather than raising an exception because it’s intended to be resilient to human error. In the real world, it’s unacceptable for a Web site to become inaccessible due to a small template syntax error.
+
+Note that it’s possible to change Django’s default behavior in this 
+regard, by tweaking a setting in your Django configuration. 
+We’ll discuss this in Chapter 10, “Extending the template engine.”1
+
+Playing with Context objects
+Most of the time, you’ll instantiate Context objects by passing in a 
+fully-populated dictionary to Context(). But you can add and 
+delete items from a Context object once it’s been instantiated, too, 
+using standard Python dictionary syntax:
+
+>>> from django.template import Context
+>>> c = Context({"foo": "bar"})
+>>> c['foo']
+'bar'
+>>> del c['foo']
+>>> c['foo']
+''
+>>> c['newvariable'] = 'hello'
+>>> c['newvariable']
+'hello'
+A Context object is a stack. That is, you can push() and pop() it. 
+If you pop() too much, it’ll raise django.template.ContextPopException:2
+
+>>> c = Context()
+>>> c['foo'] = 'first level'
+>>> c.push()
+>>> c['foo'] = 'second level'
+>>> c['foo']
+'second level'
+>>> c.pop()
+>>> c['foo']
+'first level'
+>>> c['foo'] = 'overwritten'
+>>> c['foo']
+'overwritten'
+>>> c.pop()
+Traceback (most recent call last):
+...
+django.template.ContextPopException
+Using a Context as a stack comes in handy in some custom 
+template tags, as you’ll see in Chapter 10.

@@ -1,23 +1,4 @@
 {% extends "base.html" %}
-<<<<<<< HEAD:hlhomestay/client/index.html
-
-{% block content %}
-
-$def date_reservation(d):
-    $if d == today():
-        <td class="today">
-    $if d < today():
-        <td class="passed">
-    $if d > today():
-        <td class="future">
-    <div class="date_label">$d.day</div>
-    <div class="room_list">
-    $for r in h.available_rooms(d):
-        <a class="room_reservation" \
-        href="/rooms/$:r.key()/reservations/new?date=$:d">$:r.name</a><br/>
-    </div>
-
-=======
 {% block leftbar %}
 <div class="upperpane">
 <table>
@@ -44,13 +25,11 @@ $def date_reservation(d):
 {% endblock %}
 
 {% block content %}
->>>>>>> 58e4fd27eada7553801bcbbb5f33b6bd8eec4d4a:hlhomestay/client/index.html
 <table id="canlendar">
 <tr id="week_label">
 <td>一</td><td>二</td><td>三</td><td>四</td>
 <td>五</td><td>六</td><td>日</td>
 </tr>
-<<<<<<< HEAD:hlhomestay/client/index.html
 {% for w in m %}
     <tr class="week">
       {% for d in w %}
@@ -59,16 +38,4 @@ $def date_reservation(d):
     </tr>
 {% endfor %}
 </table>
-
-</body>
-</html>
 {% endblock %} 
-=======
-  $for w in m:
-      <tr class="week">
-      $for d in w:
-          $:date_reservation(d)
-</tr>
-</table>
-{% endblock %}
->>>>>>> 58e4fd27eada7553801bcbbb5f33b6bd8eec4d4a:hlhomestay/client/index.html
