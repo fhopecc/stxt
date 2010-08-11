@@ -13,6 +13,7 @@ class Homestay(db.Model):
     phone = db.TextProperty(verbose_name="聯絡電話", 
                             default=u'輸入聯絡電話')
 
+
     def available_rooms(self, date):
         if date < datetime.date.today(): return []
 
@@ -21,6 +22,21 @@ class Homestay(db.Model):
             if r.reservation_set.filter('date =', date).count() == 0:
                 ars.append(r)
         return ars
+
+    def available_rooms_in_month(self, year, month):
+        from calendar import Calendar
+        c = Calendar()
+        m = c.monthdatescalendar(year, month)
+        rooms_in_month = []
+        for w in m:
+            rooms_in_week = []
+            for d in w:
+              rooms_in_week.append({
+                 'date':d,
+                 'available_rooms':self.available_rooms(d)
+               })
+            rooms_in_month.append(rooms_in_week)
+        return rooms_in_month 
 
     def next_month_index_path(self, month):
         t = month

@@ -30,11 +30,15 @@
 <td>一</td><td>二</td><td>三</td><td>四</td>
 <td>五</td><td>六</td><td>日</td>
 </tr>
-{% for w in m %}
+{% for rooms_in_week in available_rooms_in_month %}
     <tr class="week">
-      {% for d in w %}
-          <td>{{d}}</td>
-      {% endfor %}
+    {% for r in rooms_in_week %}
+        <td><div class="date">{{r.date}}</div>
+        {% for a in r.available_rooms %}
+            <div class="available_room">{{a.name}}</div>
+        {% endfor %}
+        </td>
+    {% endfor %}
     </tr>
 {% endfor %}
 </table>

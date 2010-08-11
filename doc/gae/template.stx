@@ -75,12 +75,20 @@ JavaScript 檔案。為了效率起見，「應用服務引擎」會將應用程
 
 繼續瀏覽「使用靜態檔案」一節。
 
-Context variable lookup5
-In the examples so far, we’ve passed simple values in the template contexts — mostly strings, plus a datetime.date example. However, the template system elegantly handles more complex data structures, such as lists, dictionaries and custom objects.2
+Context variable lookup
+~~~~~~~~~~~~~~~~~~~~~~~
+In the examples so far, we’ve passed simple values 
+in the template contexts — mostly strings, plus a datetime.date example. 
+However, the template system elegantly handles more complex data 
+structures, such as lists, dictionaries and custom objects.
 
-The key to traversing complex data structures in Django templates is the dot (.) character. Use a dot to access dictionary keys, attributes, indices or methods of an object.
+The key to traversing complex data structures in Django templates is 
+the dot (.) character. Use a dot to access dictionary keys, 
+attributes, indices or methods of an object.
 
-This is best illustrated with a few examples. First, say you’re passing a Python dictionary to a template. To access the values of that dictionary by dictionary key, use a dot:1
+This is best illustrated with a few examples. First, say you’re passing 
+a Python dictionary to a template. To access the values of that 
+dictionary by dictionary key, use a dot:1
 
 >>> from django.template import Template, Context
 >>> person = {'name': 'Sally', 'age': '43'}
@@ -88,8 +96,10 @@ This is best illustrated with a few examples. First, say you’re passing a Pyth
 >>> c = Context({'person': person})
 >>> t.render(c)
 'Sally is 43 years old.'
-1
-Similarly, dots also allow access of object attributes. For example, a Python datetime.date object has year, month and day attributes, and you can use a dot to access those attributes in a Django template:
+
+Similarly, dots also allow access of object attributes. 
+For example, a Python datetime.date object has year, month and day attributes, 
+and you can use a dot to access those attributes in a Django template:
 
 >>> from django.template import Template, Context
 >>> import datetime
@@ -104,7 +114,7 @@ Similarly, dots also allow access of object attributes. For example, a Python da
 >>> c = Context({'date': d})
 >>> t.render(c)
 'The month is 5 and the year is 1993.'
-3
+
 This example uses a custom class:
 
 >>> from django.template import Template, Context
@@ -115,6 +125,7 @@ This example uses a custom class:
 >>> c = Context({'person': Person('John', 'Smith')})
 >>> t.render(c)
 'Hello, John Smith.'
+
 Dots are also used to access list indices. For example:
 
 >>> from django.template import Template, Context
@@ -122,7 +133,7 @@ Dots are also used to access list indices. For example:
 >>> c = Context({'items': ['apples', 'bananas', 'carrots']})
 >>> t.render(c)
 'Item 2 is carrots.'
-2
+
 Negative list indices are not allowed. 
 For example, the template variable {{ items.-1 }} would cause a 
 TemplateSyntaxError.
@@ -145,7 +156,9 @@ Also, it’s not possible to pass arguments to the methods;
 you can only call methods that have no required arguments. 
 (We’ll explain this philosophy later in this chapter.)1
 
-The dot lookups can be summarized like this: When the template system encounters a dot in a variable name, it tries the following lookups, in this order:
+The dot lookups can be summarized like this: 
+When the template system encounters a dot in a variable name, 
+it tries the following lookups, in this order:
 
 Dictionary lookup. Example: foo["bar"]
 Attribute lookup. Example: foo.bar4
@@ -153,7 +166,10 @@ Method call. Example: foo.bar()
 List-index lookup. Example: foo[bar]
 The system uses the first lookup type that works. It’s short-circuit logic.
 
-Dot lookups can be nested multiple levels deep. For instance, the following example uses {{ person.name.upper }}, which translates into a dictionary lookup (person['name']), then a method call (upper()):
+Dot lookups can be nested multiple levels deep. For instance, 
+the following example uses {{ person.name.upper }}, 
+which translates into a dictionary lookup (person['name']), 
+then a method call (upper()):
 
 >>> from django.template import Template, Context
 >>> person = {'name': 'Sally', 'age': '43'}
@@ -224,13 +240,17 @@ By default, if a variable doesn’t exist, the template system renders it as an 
 'Your name is .'
 >>> t.render(Context({'Name': 'hello'}))
 'Your name is .'
-The system fails silently rather than raising an exception because it’s intended to be resilient to human error. In the real world, it’s unacceptable for a Web site to become inaccessible due to a small template syntax error.
+The system fails silently rather than raising an exception because it’
+s intended to be resilient to human error. In the real world, it’s
+unacceptable for a Web site to become inaccessible due to a small
+template syntax error.
 
 Note that it’s possible to change Django’s default behavior in this 
 regard, by tweaking a setting in your Django configuration. 
 We’ll discuss this in Chapter 10, “Extending the template engine.”1
 
 Playing with Context objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Most of the time, you’ll instantiate Context objects by passing in a 
 fully-populated dictionary to Context(). But you can add and 
 delete items from a Context object once it’s been instantiated, too, 

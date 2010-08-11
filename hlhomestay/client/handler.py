@@ -54,19 +54,19 @@ class ClientPage(webapp.RequestHandler):
 class IndexPage(ClientPage):
     def get(self):
         from google.appengine.ext.webapp import template
-        import datetime
+        #import datetime
         homestay = self.homestay()
         month = self.month()
         #month = datetime.date.today()
         #render = template.frender('index.html', globals=globals)
         #self.response.out.write(str(render(homestay, month)))
-        c = Calendar()
-        m = c.monthdatescalendar(date.today().year, 
-                                 date.today().month)
+        #c = Calendar()
+        #m = c.monthdatescalendar(date.today().year, 
+        #                         date.today().month)
 
         template_values = {
             'h': homestay,
-            'm': m,
+            'available_rooms_in_month': homestay.available_rooms_in_month(date.today().year, date.today().month),
             'url_linktext': month
         }
 

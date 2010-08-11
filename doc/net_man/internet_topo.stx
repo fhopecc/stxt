@@ -1,0 +1,16 @@
+firewall(F-100A) -+-OUTSIDE- HUB -+- cisco 2600 -T1- INTERNET
+                  |               +- XMLBOX
+                  |               +- WEB 
+                  |               +- DNS
+                  |               +- HTTPS
+                  |               +- POP3 WEBMAIL
+                  |               +- SMTP
+                  |
+                  +---DMZ--- HUB -+- SMTP SPAMWALL
+                  |               +- POP3 WEBMAIL
+                  |               +- HTTPS, YRXAP, WEB DNS
+                  |               +- HUB - 中介主機 - HUB -- 內網
+                  |                   |                |
+                  |                   +--時間切換電源--+
+                  |
+                  +--INSIDE- HUB -+- CISCO -E1- 玉里分局
