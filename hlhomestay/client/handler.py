@@ -18,6 +18,23 @@ globals = {"Calendar":Calendar,
            "today":date.today, 
            "strftime":date.strftime
           }
+def last_month(d):
+    year = d.year
+    month = d.month
+    last_month = month - 1
+    if last_month < 1:
+        last_month = 12
+        year -= 1
+    return date(year, last_month, 1)
+
+def next_month(d):
+    year = d.year
+    month = d.month
+    next_month = month + 1
+    if next_month > 12:
+        next_month = 1
+        year += 1
+    return date(year, next_month, 1)
 
 class ClientPage(webapp.RequestHandler):
     def homestay(self):
@@ -50,24 +67,23 @@ class ClientPage(webapp.RequestHandler):
         d = m.group(2) + '01'     
         d = strpdate(d)
         return d
+    
+
+
 
 class IndexPage(ClientPage):
     def get(self):
         from google.appengine.ext.webapp import template
-        #import datetime
         homestay = self.homestay()
         month = self.month()
-        #month = datetime.date.today()
-        #render = template.frender('index.html', globals=globals)
-        #self.response.out.write(str(render(homestay, month)))
-        #c = Calendar()
-        #m = c.monthdatescalendar(date.today().year, 
-        #                         date.today().month)
-
+        available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
         template_values = {
             'h': homestay,
-            'available_rooms_in_month': homestay.available_rooms_in_month(date.today().year, date.today().month),
-            'url_linktext': month
+            'today':date.today(),
+            'month':month,
+            'last_month':last_month(month),
+            'next_month':next_month(month),
+            'available_rooms_in_month':available_rooms_in_month
         }
 
         self.response.out.write(

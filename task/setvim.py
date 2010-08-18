@@ -4,9 +4,9 @@ root = path.join(path.dirname(__file__).replace('task',''),
        'config', 'vimfiles')
 
 s= path.join(root, '_vimrc') 
-t = path.join('c:', 'vim', '_vimrc')
+t = path.join('\\', 'vim', '_vimrc')
 shutil.copy(s, t)
 
 s = path.join(root, 'format.vim')
-t = path.join('c:', 'vim', 'vimfiles', 'format.vim')
+t = path.join('\\', 'vim', 'vimfiles', 'format.vim')
 shutil.copy(s, t)
