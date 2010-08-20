@@ -251,3 +251,16 @@ from employees e1, employees e2
 wher e1.boss_id = e2.id(+)
 ::
 
+outer join on multiple columns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+currently have a query that Joins 2 Tables (Table1 and Table2) using 
+LEFT OUTER JOIN. Here is an example of that query:
+
+SELECT a.supply, 
+a.state, 
+b.cost
+FROM Table1 a
+LEFT OUTER JOIN Table2 b
+ON a.supply = b.supply
+AND a.state = b.state
+GROUP BY a.supply, a.state, b.cost

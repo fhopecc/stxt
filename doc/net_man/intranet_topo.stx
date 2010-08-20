@@ -5,6 +5,7 @@
            +---DB ---- <HUB> -+- DB1   DB2
            |                  |   |     |
            |                  |   +HACMP+
+           |                  |   
            |                  +- OADB, OAAP
            |                  |
            |                  +- AP1, AP2(IBM 615), AP3(IBM 520)
