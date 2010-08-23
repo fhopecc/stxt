@@ -7,16 +7,20 @@ pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
 pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
 
 class LogRecord(object):
-    def __init__(self, message='', timestamp='', ip=''):
+    def __init__(self, message='', timestamp='', hostname='', 
+                 facility='', servity=''):
         self.message = message
         self.timestamp = timestamp
-        self.ip = ip
+        self.hostname = hostname
+        self.facility = facility
+        self.servity = servity
 
     def format(self):
-        return self.timestamp + " " + self.message
+        return "%s %s %s " % (self.timestamp, self.servity,
+            self.message)
 
     def report_title(self): 
-        title =  'syslog from %s at %s\n' % (self.ip, 
+        title =  'syslog from %s at %s\n' % (self.hostname, 
                                              self.format()[:6])
         title += '=' * len(title) 
         return title
@@ -25,9 +29,25 @@ def parselog(str):
     for r in re.finditer(pattern, str):
         yield LogRecord(r.group('msg'), r.group('ts'), r.group('ip'))
 
-def parsefile(path):
+def parse(pattern, str): 
+    for r in re.finditer(pattern, str):
+        yield LogRecord(r.group('msg'), r.group('ts'), r.group('ip'), 
+                        r.group('fact'), r.group('ser'))
+
+def parse_enterasys_log(str):
+    pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '
+    pattern += r'(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
+    pattern += r'(?P<fact>\w+)\.(?P<ser>\w+)  '
+    pattern += r'[^%]+ %% (?P<msg>[^\n]*)(\n)?'
+
+    return parse(pattern, str)
+
+def parsefile(path, format):
     str = open(path).read()
-    return parselog(str)
+    if format == 'fortinet':
+        return parselog(str)
+    elif format == 'enterasys':
+        return parse_enterasys_log(str)
 
 def hardcopy(path):
     cmd = 'notepad /P %s' % path
@@ -50,13 +70,19 @@ if __name__ == "__main__":
                       dest="hardcopy", 
                       help=u"列印至印表機")
 
+    parser.add_option("-f", "--format", type="choice", dest="format", 
+                      choices=['fortinet', 'enterasys'],
+                      default='fortinet', 
+                      help=u"指定訊息格式")
+
+
     (options, args) = parser.parse_args()
 
     if options.date:
         pass        
     else:
         file = args[0]
-        logs = parsefile(file)
+        logs = parsefile(file, options.format)
         first = True
 
         if options.top: i = 0

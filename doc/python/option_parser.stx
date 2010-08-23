@@ -260,7 +260,7 @@ type of an option:
 應的型別;如果轉換的過程失敗,例如原本預期收到一個 int,卻收到一個字串,程
 式會結束並列印錯誤訊息。
 
-對 於 choice 型態, 在呼叫 OptionParser.add_option() 要指定一個由字串所
+對於 choice 型態, 在呼叫 OptionParser.add_option() 要指定一個由字串所
 組成的 tuple 或 list 給 choice 參數,接著 OptionParser.check_choice()
  會比對傳入的 option argument 是否和 choice tuple 或 choice list 相同,
 若不相同則會丟出 OptionValueError。
