@@ -2,6 +2,11 @@
 from optparse import OptionParser
 import sys, os, re
 
+#MONPAT = r'(Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec)'
+#3CHEAD  = r'%s \d\d (\d\d:){2}\d\d ' % MONPAT
+#3CHEAD += r'(\d{1,3}\.){3}\d{1,3} '
+#3CHEAD += r'\w+\.\w+ '
+
 pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '
 pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
 pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
@@ -25,6 +30,27 @@ class LogRecord(object):
         title += '=' * len(title) 
         return title
 
+def parse3cheader(header):
+    mon = r'(?P<mon>Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec)'
+    pat = r'(?P<ts>%s \d\d (\d\d:){2}\d\d) ' % mon
+    pat += r'(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
+    pat += r'(?P<fact>\w+)\.(?P<ser>\w+) '
+
+def parse3clog(str):
+    mon = r'(Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec)'
+    head  = r'(%s \d\d (\d\d:){2}\d\d ' % mon
+    head += r'(\d{1,3}\.){3}\d{1,3} '
+    head += r'\w+\.\w+)\s'
+    pat = r'(?P<head>%s)'% head
+    pat += r'(?P<msg>.*?)((?=%s)|\Z)' % head
+
+
+    for r in re.finditer(pat, str, re.M|re.S):
+        yield (r.group('head'), r.group('msg'))
+
+
+r'(?P<head>((Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec) \\d\\d (\\d\\d:){2}\\d\\d (\\d{1,3}\\.){3}\\d{1,3} \\w+\\.\\w+) )(?P<msg>.*)(?=((Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec) \\d\\d (\\d\\d:){2}\\d\\d (\\d{1,3}\\.){3}\\d{1,3} \\w+\\.\\w+) )'
+
 def parselog(str): 
     for r in re.finditer(pattern, str):
         yield LogRecord(r.group('msg'), r.group('ts'), r.group('ip'))
@@ -33,6 +59,12 @@ def parse(pattern, str):
     for r in re.finditer(pattern, str):
         yield LogRecord(r.group('msg'), r.group('ts'), r.group('ip'), 
                         r.group('fact'), r.group('ser'))
+
+def parse_fortinet_log(str):
+  pattern  = r'(?P<ts>%s \d\d (\d\d:){2}\d\d) ' % MONPAT
+  pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
+  pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
+
 
 def parse_enterasys_log(str):
     pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '

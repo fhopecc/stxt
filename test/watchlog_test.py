@@ -8,6 +8,19 @@ case = 'Aug 19 02:45:01 192.168.1.254 local0.notice date=2010-08-19 time=02:45:5
 
 
 class UnitTest(unittest.TestCase):
+    def testParse3CLog(self):
+        #import pdb; pdb.set_trace()
+        logs = parse3clog(case)
+        i = 0
+        for log in logs:
+            print log[0]
+            i += 1;
+        self.assertEqual(4, i)
+        #log = logs.next()
+        #self.assertEqual("Fortigate updated virdb(12.258) idsdb(2.850) " 
+        #                 "aven(up-to-date) idsen(up-to-date) "
+        #                 "rbldb(up-to-date)", log[1]) 
+       
     def testParseLog(self):
         logs = parselog(case)
         log = logs.next()
@@ -29,6 +42,14 @@ Aug 20 06:43:42 10.66.4.254 local4.debug  APR 23 20:31:47 0.0.0.0-1 SIM[15224273
 Aug 20 06:43:43 10.66.4.254 local4.debug  APR 23 20:31:48 0.0.0.0-1 SIM[152242736]: dot1s_sm.c(1033) 7209 %% Discarding BPDU:Cannot process BPDU on port(4) until migration timer expires
 Aug 20 06:43:43 10.66.4.254 local4.debug  APR 23 20:31:48 0.0.0.0-1 SIM[152242736]: dot1s_sm.c(1033) 7210 %% Discarding BPDU:Cannot process BPDU on port(3) until migration timer expires
 Aug 20 06:48:16 10.66.4.254 local4.debug  APR 23 20:36:22 0.0.0.0-1 UNITMGR[188324872]: unitmgr.c(3492) 7211 %% Configuration propagation successfulAug 20 08:18:36 10.66.4.254 local4.crit  APR 23 22:06:42 0.0.0.0-1 USER_MGR[1]: 7212 %% User:NONE logged out from 10.66.4.56(telnet)'''
+
+        logs = parse3clog(case)
+        i = 0
+        for log in logs:
+            print log[0]
+            i += 1;
+        self.assertEqual(8, i)
+
         logs = parse_enterasys_log(case)
         log = logs.next()
         self.assertEqual("Discarding BPDU:Cannot process BPDU on port(7) "+

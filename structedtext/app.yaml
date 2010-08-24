@@ -6,6 +6,8 @@ handlers:
 - url: /tasks/notice_monthly_task
   script: notice_monthly_task.py
   login: admin
+- url: /health_records/
+  script: health_records_handler.py
 - url: /net
   static_dir: net
 - url: /db
