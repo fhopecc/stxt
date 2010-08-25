@@ -69,6 +69,9 @@ class Room(db.Model):
             default=0) 
     homestay = db.ReferenceProperty(Homestay)
 
+    def book_path(self, date):
+        return '/%s/%s' % (self.key(), date.strftime('%Y%m%d'))
+
 class Reservation(db.Model):
     name = db.StringProperty(verbose_name="訂戶名稱", 
                              default=u'輸入訂戶名稱', 

@@ -1,11 +1,7 @@
 # coding=utf8
+from __future__ import with_statement
 from optparse import OptionParser
 import sys, os, re
-
-#MONPAT = r'(Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec)'
-#3CHEAD  = r'%s \d\d (\d\d:){2}\d\d ' % MONPAT
-#3CHEAD += r'(\d{1,3}\.){3}\d{1,3} '
-#3CHEAD += r'\w+\.\w+ '
 
 pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '
 pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
@@ -36,7 +32,7 @@ def parse3cheader(header):
     pat += r'(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
     pat += r'(?P<fact>\w+)\.(?P<ser>\w+) '
 
-def parse3clog(str):
+def read3clogs(str):
     mon = r'(Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec)'
     head  = r'(%s \d\d (\d\d:){2}\d\d ' % mon
     head += r'(\d{1,3}\.){3}\d{1,3} '
@@ -44,12 +40,8 @@ def parse3clog(str):
     pat = r'(?P<head>%s)'% head
     pat += r'(?P<msg>.*?)((?=%s)|\Z)' % head
 
-
     for r in re.finditer(pat, str, re.M|re.S):
         yield (r.group('head'), r.group('msg'))
-
-
-r'(?P<head>((Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec) \\d\\d (\\d\\d:){2}\\d\\d (\\d{1,3}\\.){3}\\d{1,3} \\w+\\.\\w+) )(?P<msg>.*)(?=((Jan|Feb|Mar|Apr|Aug|Sep|Oct|Nov|Dec) \\d\\d (\\d\\d:){2}\\d\\d (\\d{1,3}\\.){3}\\d{1,3} \\w+\\.\\w+) )'
 
 def parselog(str): 
     for r in re.finditer(pattern, str):
@@ -86,10 +78,13 @@ def hardcopy(path):
     os.system(cmd)
 
 #import pdb; pdb.set_trace()
-
+'''
+1.0:檢視、摘要、列印 syslog
+1.1:加入 raw 選項
+'''
 if __name__ == "__main__":
     usage = u"usage: %prog log [options]"
-    parser = OptionParser(usage, version="%prog 1.0", 
+    parser = OptionParser(usage, version="%prog 1.1", 
              description=u"檢視、摘要、列印 syslog"
         )
     parser.add_option("-t", "--top", type='int', dest="top", 
@@ -102,11 +97,14 @@ if __name__ == "__main__":
                       dest="hardcopy", 
                       help=u"列印至印表機")
 
+    parser.add_option("-r", "--raw", action="store_true",
+                      dest="raw", 
+                      help=u"僅以行分割基礎 3C 之紀錄格式")
+
     parser.add_option("-f", "--format", type="choice", dest="format", 
                       choices=['fortinet', 'enterasys'],
                       default='fortinet', 
                       help=u"指定訊息格式")
-
 
     (options, args) = parser.parse_args()
 
@@ -114,25 +112,35 @@ if __name__ == "__main__":
         pass        
     else:
         file = args[0]
-        logs = parsefile(file, options.format)
+        if options.raw:
+            with open(file, 'r') as f:
+                logs = read3clogs(f.read())
+        else:
+            logs = parsefile(file, options.format)
         first = True
 
         if options.top: i = 0
-        if options.hardcopy: tmplog = open('tmplog.txt', 'w')
+        if options.hardcopy: tmplog = open('%s.tmp' % file, 'w')
 
         for l in logs:
-            if first: 
+            if first and not options.raw: 
                 print l.report_title(); 
                 if options.hardcopy: tmplog.write(l.report_title()+'\n')
                 first = False
 
-            print l.format()
-            if options.hardcopy:
-                tmplog.write(l.format()+'\n')
+            if options.raw:
+                print l[0]
+                print l[1]
+                if options.hardcopy:
+                    tmplog.write(l[0]+'\n'+l[1])
+            else:
+                print l.format()
+                if options.hardcopy:
+                    tmplog.write(l.format()+'\n')
 
             if options.top: 
                 i+=1
                 if i >= options.top: exit()
         if options.hardcopy:      
             tmplog.close()
-            hardcopy('tmplog.txt')
+            hardcopy('%s.tmp' % file)

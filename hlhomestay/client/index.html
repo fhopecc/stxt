@@ -47,7 +47,8 @@
         <div class="date">{{r.date|date:"d"}}</div>
         <div class="available_rooms">
         {% for a in r.available_rooms %}
-            <div class="available_room">{{a.name}}</div>
+           <div><a class="available_room" 
+           href="/{{a.key}}/{{r.date|date:"Ymd"}}">{{a.name}}</a></div>
         {% endfor %}
         </div>
         </td>
