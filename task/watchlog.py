@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 print l[0]
                 print l[1]
                 if options.hardcopy:
-                    tmplog.write(l[0]+'\n'+l[1])
+                    tmplog.write(l[0]+'\n'+l[1] + '\n')
             else:
                 print l.format()
                 if options.hardcopy:
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
             if options.top: 
                 i+=1
-                if i >= options.top: exit()
+                if i >= options.top: break
         if options.hardcopy:      
             tmplog.close()
             hardcopy('%s.tmp' % file)

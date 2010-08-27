@@ -1,0 +1,7 @@
+Q. Howto change the menubar language? 
+
+you can change menubar lang by modification of ide.conf
+add following line at $SQLDEVELOPER_INSTALL_DIR\ide\bin\ide.conf
+
+AddVMOption -Duser.language=en
+Jongwoo

@@ -82,8 +82,11 @@ class Reservation(db.Model):
 
     email = db.EmailProperty(verbose_name="電子信箱")
 
-    date = db.DateProperty(verbose_name="訂房日期",
-                           auto_now_add=True)
+    checkin = db.DateProperty(verbose_name="入住日期",
+                              auto_now_add=True)
+
+    checkout = db.DateProperty(verbose_name="退房日期",
+                               auto_now_add=True)
 
     create_date = db.DateProperty(verbose_name="訂單日期",
                            auto_now_add=True)

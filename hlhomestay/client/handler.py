@@ -3,9 +3,9 @@ from google.appengine.ext import db
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-
-from lib import template 
-from lib.template import Template 
+from google.appengine.ext.webapp import template
+#from lib import template 
+#from lib.template import Template 
 from model import Homestay
 from model import Room
 from model import Reservation
@@ -69,14 +69,12 @@ class ClientPage(webapp.RequestHandler):
         return d
     
 
-
-
 class IndexPage(ClientPage):
     def get(self):
-        from google.appengine.ext.webapp import template
         homestay = self.homestay()
         month = self.month()
         available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
+
         template_values = {
             'h': homestay,
             'today':date.today(),
@@ -114,15 +112,22 @@ class EditPage(webapp.RequestHandler):
         h.put()
         self.redirect('%s' % h.key())
 
+# NewPage for booking a room
 class NewPage(ClientPage):
     def get(self):
         r = self.request
         reservation = Reservation()
         reservation.room = self.room()
-        reservation.date = self.date()
+        reservation.checkin = self.date()
+        reservation.checkout = self.date()
         
-        render = template.frender('new.html')
-        self.response.out.write(str(render(reservation)))
+        template_values = {
+            'h': reservation.room.homestay,
+            'r': reservation
+        }
+
+        self.response.out.write(template.render('new.html', 
+                                template_values))
 
     # create entity
     def post(self):

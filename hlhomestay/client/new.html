@@ -1,29 +1,4 @@
 {% extends "base.html" %}
-{% block leftbar %}
-<div class="upperpane">
-<table>
-<tr>
-  <td></td>
-  <td>平日</td>
-  <td>假日</td>
-  </tr>
-{% for r in h.room_set %}
-    <tr>
-        <td>{{r.name}}</td>
-        <td>{{r.price}}</td>
-        <td>{{r.holiday_price}}</td>
-    </tr>
-{% endfor %}
-</table>
-</div>
-<div class="basepane">
-    {{h.address}}<br/>
-    {{h.owner}}<br/>
-    {{h.email}}<br/>
-    {{h.blog}}<br/>
-</div>
-{% endblock %}
-
 {% block content %}
 <div id="form_content">
 <form method="post" action="/rooms/$:r.key()/reservations/new">
@@ -31,40 +6,43 @@
     <tr><th colspan="2">訂房資料</th></tr>
 
     <tr><td>房間</td>
-        <td><input type="text" readonly="true"
-                   value="$:reservation.room.name"/>
-            <input name="room" type="hidden" 
-                   value="$:reservation.room.key()"/>
+        <td><input type="text" readonly="true" value="{{r.room.name}}"/>
+            <input name="room" type="hidden" value="{{r.room.key}}"/>
     </td></tr>
 
-    <tr><td>訂房日期</td>
+    <tr><td>入住日期</td>
         <td><input name="date" type="text" readonly="true"
-                   value="$:reservation.date"/>
+                   value="{{r.checkin}}"/>
+    </td></tr>
+
+    <tr><td>退房日期</td>
+        <td><input name="date" type="text" readonly="true"
+                   value="{{r.checkout}}"/>
     </td></tr>
 
     <tr><td>姓名</td>
         <td><input name="name" type="text" 
-                   value="$:reservation.name"/>
+                   value="{{r.name}}"/>
     </td></tr>
 
     <tr><td>聯絡電話</td>
         <td><input name="phone" type="text"
-                   value="$:reservation.phone"/>
+                   value="{{r.phone}}"/>
     </td></tr>
 
     <tr><td>電子郵件</td>
         <td><input name="email" type="text"
-                   value="$:reservation.email"/>
+                   value="{{r.email}}"/>
     </td></tr>
 
     <tr><td>訂單日期</td>
         <td><input name="create_date" type="text" readonly="true"
-                   value="$:reservation.create_date"/>
+                   value="{{r.create_date}}"/>
     </td></tr>
 
     <tr><td colspan="2">備註</td></td></tr>
     <tr><td colspan="2">
-        <textarea name="coment">$:reservation.comment</textarea>
+        <textarea name="coment">{{r.comment}}</textarea>
     </td></tr>
 
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
