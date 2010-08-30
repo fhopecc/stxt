@@ -13,13 +13,12 @@ class Homestay(db.Model):
     phone = db.TextProperty(verbose_name="聯絡電話", 
                             default=u'輸入聯絡電話')
 
-
     def available_rooms(self, date):
         if date < datetime.date.today(): return []
 
         ars = []
         for r in self.room_set: 
-            if r.reservation_set.filter('date =', date).count() == 0:
+            if r.reservation_set.filter('checkin >= ? and checkout <= ?', (date, date)).count() == 0:
                 ars.append(r)
         return ars
 
@@ -80,7 +79,8 @@ class Reservation(db.Model):
     phone = db.TextProperty(verbose_name="聯絡電話", 
                             default=u'輸入聯絡電話')
 
-    email = db.EmailProperty(verbose_name="電子信箱")
+    email = db.EmailProperty(verbose_name="電子信箱",
+                             default=u'請輸入電子信箱')
 
     checkin = db.DateProperty(verbose_name="入住日期",
                               auto_now_add=True)
@@ -91,7 +91,8 @@ class Reservation(db.Model):
     create_date = db.DateProperty(verbose_name="訂單日期",
                            auto_now_add=True)
 
-    comment = db.TextProperty(verbose_name="備註")
+    comment = db.TextProperty(verbose_name="備註",
+                              default=u'請輸入備註')
 
     room = db.ReferenceProperty(Room)
 

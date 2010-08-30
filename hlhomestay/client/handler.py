@@ -132,17 +132,22 @@ class NewPage(ClientPage):
     # create entity
     def post(self):
         r = self.request
-        reservation = Reservation(name = r.get('name') ,
-                        phone = PhoneNumber(r.get('phone')), 
-                        email = r.get('email'), 
-                        date = strpdate(r.get('date')), 
-                        create_date = strpdate(r.get('create_date')),
-                        comment = r.get('comment'), 
-                        room = self.room())
-        reservation.put()
+        res = Reservation(name = r.get('name') ,
+                          phone = db.PhoneNumber(r.get('phone')), 
+                          email = r.get('email'), 
+                          checkin = strpdate(r.get('checkin')), 
+                          checkout = strpdate(r.get('checkout')), 
+                          create_date = strpdate(r.get('create_date')),
+                          comment = r.get('comment'), 
+                          room = self.room())
+        res.put()
 
-        render = template.frender('order.html')
-        self.response.out.write(str(render(reservation)))
+        template_values = {
+            'r': res
+        }
+
+        self.response.out.write(template.render('reservation.html', 
+                                template_values))
 
 class DelPage(webapp.RequestHandler):
     def get(self):

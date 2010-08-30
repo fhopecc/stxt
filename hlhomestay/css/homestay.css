@@ -40,7 +40,7 @@ textarea {width:100%}
 
 #calendar_operation {background:silver;padding:15px 0 15px 0}
 .operation_button {color:black}
-#form_content {margin-left:30%}
+/*#form_content {margin-left:30%}*/
 
 a.available_room {font-size:10pt;
     padding:none;border:none;margin-top:2pt;vertical-align:baseline}

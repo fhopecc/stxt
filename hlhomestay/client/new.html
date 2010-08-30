@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="form_content">
-<form method="post" action="/rooms/$:r.key()/reservations/new">
+  <form method="post" action='/{{r.room.key}}/{{r.checkin|date:"Ymd"}}'>
   <table class="form">
     <tr><th colspan="2">訂房資料</th></tr>
 
@@ -11,13 +11,13 @@
     </td></tr>
 
     <tr><td>入住日期</td>
-        <td><input name="date" type="text" readonly="true"
-                   value="{{r.checkin}}"/>
+        <td><input name="checkin" type="text" readonly="true"
+                   value='{{r.checkout|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td>退房日期</td>
-        <td><input name="date" type="text" readonly="true"
-                   value="{{r.checkout}}"/>
+        <td><input name="checkout" type="text" readonly="true"
+                   value='{{r.checkout|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td>姓名</td>
@@ -37,7 +37,7 @@
 
     <tr><td>訂單日期</td>
         <td><input name="create_date" type="text" readonly="true"
-                   value="{{r.create_date}}"/>
+                   value='{{r.checkout|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td colspan="2">備註</td></td></tr>
