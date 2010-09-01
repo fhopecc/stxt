@@ -18,8 +18,13 @@ class Homestay(db.Model):
 
         ars = []
         for r in self.room_set: 
-            if r.reservation_set.filter('checkin >= ? and checkout <= ?', (date, date)).count() == 0:
-                ars.append(r)
+            # The mapping sql meaning
+            # select * from Reservations
+            # where room = :r.key()
+            # and :date between checkin and checkout
+            q = r.reservation_set.filter('checkin >=', date)
+            s = [ r for r in q if r.checkout <= date]
+            if len(s) == 0: ars.append(r)
         return ars
 
     def available_rooms_in_month(self, year, month):

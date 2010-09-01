@@ -266,28 +266,62 @@ class MainHandler(webapp.RequestHandler):
 
 查詢的限制
 ----------
-
 索引查詢機制本身具有一些執行查詢的限制。
 屬性的篩選或排序時，該屬性必須存在
 屬性的查詢篩選器條件或排序順序，隱含一個條件，那就是實體的該屬性要有值。
+
 如果其他實體具有相同種類的屬性，資料存放區實體的該屬性便不需要有值。屬性的篩選器只能比對該屬性有值的實體。在篩選器或排序順序中使用的實體屬性若沒有值，為查詢建置的索引會省略這樣的實體。
 篩選器不會比對沒有屬性的實體
 實體如果缺乏指定屬性，便不可能進行查詢。您可以使用 None 預設值建立固定的 (模型化的) 屬性，再為屬性值為 None 的實體建立篩選器。
+
 不等式篩選器只能用於一個屬性
-在查詢的所有篩選器中，只能在一個屬性上使用不等式篩選器 (<、<=、>=、>、!=)。
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+在查詢的所有篩選器中，
+只能在一個屬性上使用不等式篩選器 (<、<=、>=、>、!=)。
 例如，這個查詢是成立的：
+
 SELECT * FROM Person WHERE birth_year >= :min
                        AND birth_year <= :max
-但是，這個查詢卻「不成立」，因為它在兩個不同的屬性上使用不等式篩選器：
+
+但是，這個查詢卻「不成立」，
+因為它在兩個不同的屬性上使用不等式篩選器：
+
 SELECT * FROM Person WHERE birth_year >= :min_year
                        AND height >= :min_height     # ERROR
-在同一個查詢中，篩選器可以為不同屬性合併等式 (=) 比較，包括使用一或多個不等式條件的屬性。這是允許的：
+
+在同一個查詢中，篩選器可以為不同屬性合併等式 (=) 比較，
+包括使用一或多個不等式條件的屬性。這是允許的：
+
 SELECT * FROM Person WHERE last_name = :last_name
                        AND city = :city
                        AND birth_year >= :min_year
-查詢的所有結果在索引表格中必須相鄰，否則查詢機制就必須掃描整個表格才能獲得結果。如果希望所有結果在表格中都維持連續，單一索引表格就不能代表多個屬性上的多個不等式篩選器。
+
+查詢的所有結果在索引表格中必須相鄰，
+否則查詢機制就必須掃描整個表格才能獲得結果。
+如果希望所有結果在表格中都維持連續，
+單一索引表格就不能代表多個屬性上的多個不等式篩選器。
+
+多個不等式實作：
+
+
+The way around it, of course, is to let the datastore handle the 
+first inequality, and then post-filter to assess the rest. 
+This works great (despite various other datastore limitations, 
+eg: never returning more than 1000 rows) but having to do it explicitly 
+in the main part of the code reduces the elegance of the code.
+
+Things.all().filter("foo >", foo).filter("bar >", bar).filter("qux >", qux)
+
+is more elegant than
+
+[ t for t in Things.all().filter("foo >", foo) if t.bar > bar and t.qux > qux]
+especially if you’re generating the queries on the fly. Wouldn’t it be nice to be able to have the filter() method work out whether this was a disallowed inequality and if so, handle it as a post-filter?
+
 不等式篩選器中的屬性，必須在其他排序順序前先進行排序
-如果某查詢同時具有含不等式比較的篩選器以及一或多個排序順序，則查詢必須包含該不等式的屬性排序順序，而該排序順序必須出現在其他屬性的排序順序之前。
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+如果某查詢同時具有含不等式比較的篩選器以及一或多個排序順序，
+則查詢必須包含該不等式的屬性排序順序，
+而該排序順序必須出現在其他屬性的排序順序之前。
 這個查詢是「無效」的，因為它使用不等式篩選器，卻沒有依照篩選的屬性排序：
 SELECT * FROM Person WHERE birth_year >= :min_year
                      ORDER BY last_name              # ERROR
@@ -330,3 +364,144 @@ e2.put()
 如果 put() 導致索引項目的數量超過上限，則呼叫會失敗，並發生例外狀況。在您建立的新索引中，如果有部分索引項目都超出建立實體時的上限，就無法查詢該索引；而在「管理控制台」中，索引會顯示為「錯誤」狀態。
 若要處理「錯誤」的索引，請先將它們從 index.yaml 檔案中移除，並執行 appcfg.py vacuum_indexes。然後，重新規劃索引定義和相關查詢，或者移除導致索引「過量」的實體。最後，將索引新增回 index.yaml，並執行 appcfg.py update_indexes。
 只要避免查詢需要使用清單屬性的自訂索引，就可以避免過量索引的發生。如上所述，這包括使用多個排序順序的查詢、混合使用等式和不等式篩選器的查詢，以及使用上階篩選器的查詢。
+
+查詢實體
+~~~~~~~~
+查詢會以模型類別實例的型式傳回實體，可以修改和放回資料存放區。
+資料存放區提供兩種查詢介面：
+1.查詢物件
+2.GQL - 類似 SQL 的查詢語言。
+
+::
+training_registration_list = [users.User("Alfred.Smith@example.com"),
+                              users.User("jharrison@example.com"),
+                              users.User("budnelson@example.com")]
+
+employees_trained = db.GqlQuery("SELECT * FROM Employee WHERE 
+                                 account IN :1",
+                                training_registration_list)
+for e in employees_trained:
+    e.new_hire_training_completed = True
+    db.put(e)
+
+查詢程序會先篩選出指定類別之每個實體，
+進而對上述結果集每個實體之屬性值和金鑰
+看是否符合篩選條件及排序，並傳回此實體做為查詢結果。
+::
+  資料存放區 -篩選同類-> 同類實體 -篩選條件-> 結果集
+
+Query 類別
+~~~~~~~~~~
+Query 類別是一種資料存放區查詢介面，它使用物件和方法來準備查詢。
+Query 是由 google.appengine.ext.db 模組所提供。
+
+應用程式可以使用下列方法建立 Query 物件：
+以要查詢實體的 Model 類別來呼叫建構函式，
+或者呼叫類別的 all() 類別方法。
+
+class Song(db.Model):
+  title = db.StringProperty()
+  composer = db.StringProperty()
+  date = db.DateTimeProperty()
+
+query = db.Query(Song)
+
+query = Song.all()
+
+若沒有修改，物件會代表指定種類之所有實體的查詢。
+方法以屬性條件 (filter())、上階條件 (ancestor()) 以及排序 (order()) 等，
+呼叫自訂的查詢。
+
+為了便利起見，這些方法會傳回 self，
+以利單一陳述式中將其串接起來。
+
+query.filter('title =', 'Imagine')
+query.order('-date')
+query.ancestor(key)
+
+query.filter('title =', 'Imagine').order('-date').ancestor(key)
+
+應用程式會以二種方式之一執行查詢：
+
+呼叫 fetch() 方法。這會針對資料存放區執行單一呼叫以擷取結果 (可高達指定的結果數量)。
+Query 物件不會快取結果，因此第二次呼叫 fetch() 時，會重新執行查詢。
+
+results = query.fetch(limit=5)
+for song in results:
+  print song.title
+
+將 Query 物件視為可重複執行項目。
+iterator 在小型批次中從資料存放區抓取結果，可允許應用程式結果的反覆運算，
+以避免擷取超過所需的結果數量。當符合查詢的所有結果都已經抓取完之後，
+會停止反覆運算。使用 fetch() 時，iterator 介面不會快取結果，
+因此從 Query 物件建立新的 iterator 時，將會重新執行查詢。
+
+for song in query:
+  print song.title
+
+另請參閱 GqlQuery，使用類似 SQL 查詢語言的查詢類別。
+
+注意：索引式的資料結構和資料存放區查詢的演算法不支援部分查詢種類。
+請參閱查詢和索引：查詢的限制以取得詳細資訊。
+
+建構函式
+Query 類別的建構函式定義如下：
+class Query(model_class)
+一種資料存放區查詢介面，使用物件和方法來準備查詢。
+Query 實例會傳回建構函式所代表種類之所有實體的查詢。實例方法 filter()、order() 以及 ancestor() 會將條件套用到查詢，以便篩選結果或將結果排序。
+引數：
+model_class
+Model (或 Expando) 的類別，代表查詢的資料存放區實體種類。
+
+實例方法
+Query 類別實例具有下列方法：
+filter(property_operator, value)
+將屬性條件篩選器新增至查詢。查詢只會傳回屬性符合所有條件的實體。
+引數：
+property_operator
+包含屬性名稱與可省略比較運算子的字串。名稱和運算子必須以一個空格分隔，如下所示：age >。支援下列比較運算子：< <= = >= > != IN 。如果字串省略了運算子 (引數只剩下屬性名稱)，則篩選器會使用 = 運算子。
+value
+在比較中位於運算式右手邊的值。它的類型應該與要進行比較屬性的值資料類型相同。請參閱類型和 Property 類別。
+query.filter('height >', 42).filter('city = ', 'Seattle')
+
+query.filter('user = ', users.get_current_user())
+order(property)
+為結果增加排序。結果會排序，以新增的第一個順序開始。
+引數：
+property
+字串，要排序的屬性名稱。若要指定順序為遞減，請在名稱前面加上連字號 (-)。若沒有連字號，則順序為遞增。
+# Order by last name, alphabetical:
+query.order('last_name')
+
+# Order tallest to shortest:
+query.order('-height')
+ancestor(ancestor)
+將上階條件篩選器新增至查詢。查詢只會傳回指定實體為其上階 (路徑中的任何位置) 的實體。
+引數：
+ancestor
+Model 實例或 Key 實例代表上階。
+get()
+執行查詢，然後傳回第一個結果，或者 None (若查詢沒有傳回任何結果)。
+get() 隱含的「限制」為 1。 最多只會從資料存放區擷取 1 筆結果。
+fetch(limit, offset=0)
+執行查詢，然後傳回結果。
+limit 和 offset 引數控制從資料存放區擷取的結果數量，以及 fetch() 方法傳回的結果數量。
+資料存放區會擷取 offset + limit 筆結果至應用程式。資料存放區本身不會略過第一筆 offset 結果。
+fetch() 方法會略過第一筆 offset 結果，然後傳回其他的結果 (limit 結果)。
+查詢的效能特色與「位移」的量加上「限制」成線性關係。
+注意：fetch() 最多傳回 1000 筆結果。符合查詢的項目若超過 1000 筆，而且沒有指定限制或者使用的限制超過 1000，則只會傳回 fetch() 所傳回的前 1000 筆結果。
+引數：
+limit
+要傳回的結果數量。符合條件的結果如果不足，則會傳回比 limit 更少的結果數量。
+limit 是必要引數。結果數量未知的時候，要從查詢取得每次的結果時，請使用 Query 物件做為可重複執行的項目，而不要使用 fetch() 方法。
+offset
+要略過的結果數量。
+傳回值是模型實例清單，有可能是空白清單。
+count(limit)
+傳回此次查詢所擷取的結果數量。
+透過常數係數抓取所有資料時，使用 count() 較快速，不過結果集的大小愈大，則執行時間仍然會較長。若預期的計數很少的時候，建議使用 count()，或指定 limit。
+注意：count() 最多傳回 1000 筆結果。符合查詢條件的實際數量若超過最大值，count() 只會傳回 1000 筆。
+引數：
+limit
+要計數的最大結果數量。
+

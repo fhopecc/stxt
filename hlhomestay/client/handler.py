@@ -18,6 +18,7 @@ globals = {"Calendar":Calendar,
            "today":date.today, 
            "strftime":date.strftime
           }
+
 def last_month(d):
     year = d.year
     month = d.month
