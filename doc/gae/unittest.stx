@@ -1,7 +1,55 @@
 單元測試(unit test)
 -------------------
-Unit Test Your Google App Engine Models
+Nose GAE
+~~~~~~~~
+Nose 可以自動收尋目錄下面所有的 python 檔案並執行 unittest，如果要在
+本機端上面測試 google app engine 的程式，需要另外安裝 Nosegae_，
+Nosegae 會在本機建立好 google app engine 的環境，避免 import 錯誤。
 
+這兩個都可以透過 easy_install 安裝:
+
+easy_install nose
+
+easy_install nosegae
+
+Nosegae 預設的 google app engine 路徑是 /usr/local/google_appengine，
+如果不是這個路徑可能需要在執行的時候傳入option (--gae-lib-root)
+
+nosetests -v --with-gae --gae-lib-root="C:\Document and Setting\googleappengind"
+
+接下來只要寫好測試模組即可，
+測試模組的檔案記得用test_{name}.py這種格式。
+
+Warning
+~~~~~~~
+在 Mac Snow Leopard 上一直會丟煩人的 LOG 不過應該是 GAE 的問題 
+
+root: INFO: zipimporter('/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages/setuptools-0.6c11-py2.5.egg', '') root: INFO: zipimporter('/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages/NoseGAE-0.1.4-py2.5.egg', '') root: DEBUG: Could not import "strop": Disallowed C-extension or built-in module
+
+gaeunit.py
+~~~~~~~~~~
+gaeunit.py 是專門為 google app engine 設計的測試架框，
+可以在網頁上面顯示測試結果。
+
+使用上也十分簡單，下載 gaeunit.py 然後放到專案目錄下面，
+並在 app.yaml 加上:
+
+- url: /test.*
+  script: gaeunit.py
+
+即可開始撰寫測試模組，
+可以在網址輸入 http://localhost:8080/test 閱讀測試報告。
+
+也可以不要執行全部的測試，只要把想測試的模組名稱用url傳入即可:
+
+Examples:
+
+http://localhost:8080/test?name=test_module
+http://localhost:8080/test?name=test_module.ClassTest
+http://localhost:8080/test?name=test_module.ClassTest.testMethod
+
+Unit Test Your Google App Engine Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 I've been working on a project using Google App Engine (GAE) called "les Freres Jacques" That manipulates images of people's face onto the cover of this old french LP. Look for it to be out in a couple months. Anyway, My favorite way to start any project is by doing TDD. Unfortunately I'm new to python and GAE simultaneously so I had to do plenty of research to figure out how to unit test a GAE app. Most importantly for me was the ability to test my models that are based on google's datastore api. What follows is some information to get you started writing unit tests against a GAE model. First, a list of the tools you need to install.
 Nose is a tool for running your python unit tests.
 
