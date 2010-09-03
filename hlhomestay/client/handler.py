@@ -11,6 +11,7 @@ from model import Room
 from model import Reservation
 from calendar import Calendar
 from datetime import date
+from datetime import timedelta
 from model import strpdate
 import logging
 
@@ -120,7 +121,7 @@ class NewPage(ClientPage):
         reservation = Reservation()
         reservation.room = self.room()
         reservation.checkin = self.date()
-        reservation.checkout = self.date()
+        reservation.checkout = self.date() + timedelta(days=1)
         
         template_values = {
             'h': reservation.room.homestay,

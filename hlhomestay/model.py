@@ -14,18 +14,23 @@ class Homestay(db.Model):
                             default=u'輸入聯絡電話')
 
     def available_rooms(self, date):
-        if date < datetime.date.today(): return []
-
-        ars = []
-        for r in self.room_set: 
-            # The mapping sql meaning
-            # select * from Reservations
-            # where room = :r.key()
-            # and :date between checkin and checkout
-            q = r.reservation_set.filter('checkin >=', date)
-            s = [ r for r in q if r.checkout <= date]
-            if len(s) == 0: ars.append(r)
-        return ars
+        if date >= datetime.date.today(): 
+            for r in self.room_set: 
+                # The mapping sql meaning
+                # select * from Reservations
+                # where room = :r.key()
+                # and :date between checkin and checkout
+                # import pdb; pdb.set_trace()
+                #print r.key()
+                #print r.reservation_set.count()
+                #print r.reservation_set.get().checkin
+                #print date
+                ress = r.reservation_set.filter('checkin <=', date)
+                #print ress.count()
+                ress = [ res for res in ress if date < res.checkout]
+                #print len(ress)
+                if len(ress) == 0: 
+                    yield r # this is an available room
 
     def available_rooms_in_month(self, year, month):
         from calendar import Calendar
@@ -94,7 +99,7 @@ class Reservation(db.Model):
                                auto_now_add=True)
 
     create_date = db.DateProperty(verbose_name="訂單日期",
-                           auto_now_add=True)
+                                  auto_now_add=True)
 
     comment = db.TextProperty(verbose_name="備註",
                               default=u'請輸入備註')
