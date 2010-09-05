@@ -21,12 +21,12 @@ handlers:
 - url: /rooms/\w+/reservations/\w*
   script: reservation/handler.py
 
-- url: /admin/.*
-  script: admin/handler.py
-  login: admin
-
 - url: /css
   static_dir: css
+
+- url: /admin/.*
+  script: admin/handler.py
+  login: required
 
 - url: /\w+(/\d+)?
   script: client/handler.py

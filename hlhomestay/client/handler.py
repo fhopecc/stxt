@@ -4,15 +4,10 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
-#from lib import template 
-#from lib.template import Template 
-from model import Homestay
-from model import Room
-from model import Reservation
 from calendar import Calendar
 from datetime import date
 from datetime import timedelta
-from model import strpdate
+from model import * 
 import logging
 
 globals = {"Calendar":Calendar, 
@@ -70,7 +65,6 @@ class ClientPage(webapp.RequestHandler):
         d = strpdate(d)
         return d
     
-
 class IndexPage(ClientPage):
     def get(self):
         homestay = self.homestay()

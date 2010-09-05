@@ -1,8 +1,8 @@
 # coding=utf8
-import datetime
 from datetime import date
 from google.appengine.ext import db
 from google.appengine.api import users
+import datetime
 
 class Homestay(db.Model):
     name = db.StringProperty(verbose_name="名稱", required=True)
@@ -12,6 +12,22 @@ class Homestay(db.Model):
     blog = db.LinkProperty(verbose_name="網站")
     phone = db.TextProperty(verbose_name="聯絡電話", 
                             default=u'輸入聯絡電話')
+
+    def rooms_status(self, date):
+        # analogy for SQL: 
+        # select * 
+        # from Homestays, Rooms, Reservations
+        # where Homestays.key = :self.key() 
+        # and Rooms.homestay = Homestays.key 
+        # and Reservations.room = Rooms.key
+        # and :date between Reservations.checkin 
+        #               and Reservations.checkout
+        if date >= datetime.date.today(): 
+            for r in self.room_set: 
+                ress = r.reservation_set.filter('checkin <=', date)
+                ress = [ res for res in ress if date < res.checkout ]
+                if len(ress) == 0: yield r # an available room
+                else: yield res # a room reservation
 
     def available_rooms(self, date):
         if date >= datetime.date.today(): 

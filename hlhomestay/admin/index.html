@@ -1,14 +1,34 @@
-$def with (count)
-<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
-<html lang="zh-tw"> 
-<head> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-<title>民宿管理系統主控台</title>
-</head>
-<body>
-<div id="title">民宿管理系統主控台</div>
-註冊民宿總計 $:count 家<br/>
-<a href="/homestays/new">新民宿申請作業</a><br/>
-<a href="/homestays">民宿清單</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<table id="calendar">
+<tr id="operation"><td colspan="7">
+{{month|date:"Y-m"}} 
+<a href="/{{h.key}}">今天</a>
+<a href="/{{h.key}}/{{last_month|date:"Ym"}}">上月</a>
+<a href="/{{h.key}}/{{next_month|date:"Ym"}}">下月</a>
+</td></tr>
+<tr id="label">
+<th>一</th><th>二</th><th>三</th><th>四</th>
+<th>五</th><th>六</th><th>日</th>
+</tr>
+{% for rooms_in_week in available_rooms_in_month %}
+    <tr class="week">
+    {% for r in rooms_in_week %}
+        <td
+        {% ifequal r.date today %}
+           id="today"
+        {% endifequal %}
+        >
+        <div class="date">{{r.date|date:"d"}}</div>
+        <div class="available_rooms">
+        {% for a in r.available_rooms %}
+           <div><a class="available_room" 
+           href="/{{a.key}}/{{r.date|date:"Ymd"}}">{{a.name}}</a></div>
+        {% endfor %}
+        </div>
+        </td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock %} 

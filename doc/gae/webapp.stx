@@ -59,26 +59,12 @@ if __name__ == '__main__':
 
 
 RequestHandler 類別
+~~~~~~~~~~~~~~~~~~~
 RequestHandler 類別是 HTTP 要求處理常式的超級類別。
 RequestHandler 是由 google.appengine.ext.webapp 模組所提供。
+
 簡介
-RequestHandler()
-實例方法：
-get()
-post()
-put()
-head()
-options()
-delete()
-trace()
-handle_exception()
-error()
-redirect()
-initialize()
-實例屬性 (attribute)：
-request
-response
-簡介
+~~~~
 webapp 應用程式定義用來處理要求的一或多個 RequestHandler 類別。處理常式類別覆寫下列一或多個方法，來處理相關種類的 HTTP 要求：get()、post()、head()、options()、put()、delete() 或 trace()。
 建構函式
 class RequestHandler()
