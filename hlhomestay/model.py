@@ -1,7 +1,7 @@
 # coding=utf8
-from datetime import date
 from google.appengine.ext import db
 from google.appengine.api import users
+from datetime import date
 import datetime
 
 class Homestay(db.Model):
@@ -29,6 +29,21 @@ class Homestay(db.Model):
                 if len(ress) == 0: yield r # an available room
                 else: yield res # a room reservation
 
+    def monthly_rooms_status(self, year, month):
+        from calendar import Calendar
+        c = Calendar()
+        m = c.monthdatescalendar(year, month)
+        monthly_rooms = []
+        for w in m:
+            weekly_rooms = []
+            for d in w:
+              weekly_rooms.append({
+                  'date':d,
+                  'rooms_status':self.available_rooms(d)
+              })
+            monthly_rooms.append(weekly_rooms)
+        return monthly_rooms
+
     def available_rooms(self, date):
         if date >= datetime.date.today(): 
             for r in self.room_set: 
@@ -49,7 +64,6 @@ class Homestay(db.Model):
                     yield r # this is an available room
 
     def available_rooms_in_month(self, year, month):
-        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         rooms_in_month = []

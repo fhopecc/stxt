@@ -15,7 +15,6 @@ next2weeks = date.today() + timedelta(days=14)
 
 class UnitTest(unittest.TestCase):
     def setUp(self):
-        from datetime import date
         owner = users.User("test@gmail.com")
         self.h = Homestay(name=u"測試民宿", 
                           owner=owner)
@@ -96,6 +95,9 @@ class UnitTest(unittest.TestCase):
         r = rs.next()
         self.assertEqual('Room', r.kind()) 
         self.assertEqual(u"四人房", r.name)
+
+    def testMonthlyRoomStatus(self):
+        pass 
 
     def testAvailableRooms(self):
         rs = self.h.available_rooms(yestorday)

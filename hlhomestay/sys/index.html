@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>民宿清單</h1>
+<table>
+    <tr>
+        <td>名稱</td>
+        <td>民宿主人</td>
+        <td>電子郵件</td>
+        <td>地址</td>
+        <td><a href="/sys/new">新</a></td>
+        <td><a href="javascript:history.go(-1)">回</a></td>
+    </tr>
+    {% for h in homestays %}
+    <tr>
+      <td>{{h.name}}</td>
+      <td>{{h.owne}}r</td>
+      <td>{{h.emai}}l</td>
+      <td>{{h.addres}}s</td>
+      <td><a href="/homestays/{{h.key}}">查</a></td>
+      <td><a href="/homestays/{{h.key}}/edit">改</a></td>
+      <td><a href="/homestays/{{h.key}}/delete">刪</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %} 

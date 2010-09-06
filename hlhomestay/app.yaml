@@ -24,6 +24,10 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /sys.*
+  script: sys/handler.py
+  login: admin
+
 - url: /admin/.*
   script: admin/handler.py
   login: required

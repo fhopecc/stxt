@@ -1,0 +1,27 @@
+Python comes with the tarfile module who’s usage allows 
+manipulation of tar archives, including those using bzip2 or 
+gzip compression. Python 2.6′s tarfile includes the ability to 
+exclude files when creating tar archives:
+
+TarFile.add(name, arcname=None, recursive=True, exclude=None)¶
+
+Add the file name to the archive. name may be any type of file (directory, fifo, symbolic link, etc.). If given, arcname specifies an alternative name for the file in the archive. Directories are added recursively by default. This can be avoided by setting recursive to False. If exclude is given it must be a function that takes one filename argument and returns a boolean value. Depending on this value the respective file is either excluded (True) or added (False).
+Changed in version 2.6: Added the exclude parameter.
+
+Searching around I was unable to find an example usage of this parameter, so I’ve created the example below:
+
+#!/usr/bin/env python
+import tarfile
+ 
+# return True for files we want to exclude
+def excluded_files(file):
+    _return = False
+    # here we're checking to see if the file is 'fwdApp' -
+    # a file don't want included in our tar archive.
+    if file.find('fwdApp') > -1:
+        _return = True
+    return _return
+# create a tar archive of my home directory
+tar_archive = tarfile.open('home.tar','w')
+tar_archive.add('/home/gba',exclude=excluded_files)
+tar_archive.close()

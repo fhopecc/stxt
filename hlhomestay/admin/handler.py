@@ -23,7 +23,7 @@ class AdminPage(webapp.RequestHandler):
         return h
 
     def room(self):
-        p = r'/admin/(\w+)/\d+'                  # pattern
+        p = r'/admin/(\w+)/\d+'            # pattern
         m = re.match(p, self.request.path) # match
         k = m.group(1)                     # key for homestay
         r = Room.get(k)                    # Room object

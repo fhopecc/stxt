@@ -22,8 +22,9 @@ def strpdate(str):
     d = int(m.group('d'))
     return date(y, mon, d)
 
-
 def match(f, options):
+    if options.all: 
+        return True
     pat  = r'(?P<d>\d\d-\d\d-\d\d\d\d)\.'
     pat += r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
     pat += r'\.log(\s|$)'
@@ -36,7 +37,6 @@ def match(f, options):
             d = strpdate(d)
             b = parselocaldate(options.before)
             res = d < b
-
     return res
 
 
@@ -52,8 +52,20 @@ if __name__ == "__main__":
                       dest="all", 
                       help=u"列出指定根目錄之所有日誌檔，不作任何動作")
 
+    parser.add_option("-t", "--tar", action="store_true",
+                      dest="tar", 
+                      help=u"加入壓縮檔")
+
+    parser.add_option("-R", "--remove", action="store_true",
+                      dest="remove", 
+                      help=u"加入壓縮檔後刪除原檔案")
+
+
 
     (options, args) = parser.parse_args()
+
+    from datetime import date
+
     
     if len(args) < 1:
         print u'請指定日誌檔之根目錄'
@@ -63,7 +75,20 @@ if __name__ == "__main__":
         print u'日誌檔之根目錄不存在'
         sys.exit()       
 
+    bak = r'%s.logs.bak.tar' % date.today().strftime('%Y%m%d')
+
+    if options.tar:
+        import tarfile
+        tar = tarfile.TarFile(bak, 'w')
+                
+    #import pdb; pdb.set_trace()
     for f in os.listdir(args[0]):
         if match(f, options):
-            print f
-
+            p = os.path.join(args[0], f)
+            print p
+            if options.tar:
+                tar.add(p)
+                if options.remove:
+                    os.remove(p)
+    if options.tar:
+        tar.close()
