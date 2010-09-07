@@ -8,19 +8,25 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from model import *
 
 class SysPage(webapp.RequestHandler):
-    pass
+    def homestay(self):
+        p = r'/sys/(\w+)(/.*)?' # pattern
+        m = re.match(p, self.request.path)    # match
+        k = m.group(1)                # key for homestay
+        h = Homestay.get(k)           # Homestay object
+        return h
 
 class IndexPage(SysPage):
     def get(self):
         hs = Homestay.all()
         template_values = {
-            'homestays': hs,
+            'homestays': hs
         }
         self.response.out.write(
              template.render('index.html', template_values))
 
 class NewPage(SysPage):
     def get(self):
+        template_values = {}
         self.response.out.write(
              template.render('new.html', template_values))
 
@@ -37,11 +43,44 @@ class NewPage(SysPage):
                      blog=r.get("blog"),
                      owner=owner)
         h.put()
-        self.redirect('%s' % h.key())
+        self.redirect('/sys')
+
+class ShowPage(SysPage):
+    def get(self):
+        homestay = self.homestay()
+        template_values = {
+            'h': homestay
+        }
+        self.response.out.write(
+             template.render('show.html', template_values))
+
+class EditPage(SysPage):
+    def get(self):
+
+        template_values = {
+            'h': self.homestay()
+        }
+
+        self.response.out.write(
+             template.render('edit.html', template_values))
+
+    # update entity
+    def post(self):
+        r = self.request
+        h = Homestay.get(r.get("key"))
+        h.name = r.get("name")
+        h.address = r.get("address")
+        h.email = r.get("email")
+        h.blog = r.get("blog")
+        h.owner = users.User(r.get("owner"))
+        h.put()
+        self.redirect('/sys/%s' % h.key())
 
 application = webapp.WSGIApplication([
                 ('/sys', IndexPage),
-                ('/sys/new', NewPage)
+                ('/sys/new', NewPage), 
+                ('/sys/\w+/edit', EditPage), 
+                ('/sys/\w+', ShowPage)
                ], debug=True)
 
 def main():
