@@ -1,18 +1,29 @@
 import sys, os, cgi, re
-from datetime import date
 from google.appengine.ext import db
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
-from lib import template 
-from lib.template import Template 
-import logging
-from model import Homestay
+from google.appengine.ext.webapp import template
+from datetime import date
+from model import *
 
-def get_account(path):
-    pat = r'/homestays/(\w+)'
-    m = re.match(pat, path)
-    return m.group(1)
+def last_month(d):
+    year = d.year
+    month = d.month
+    last_month = month - 1
+    if last_month < 1:
+        last_month = 12
+        year -= 1
+    return date(year, last_month, 1)
+
+def next_month(d):
+    year = d.year
+    month = d.month
+    next_month = month + 1
+    if next_month > 12:
+        next_month = 1
+        year += 1
+    return date(year, next_month, 1)
 
 class AdminPage(webapp.RequestHandler):
     def homestay(self):
@@ -32,6 +43,8 @@ class AdminPage(webapp.RequestHandler):
     def date(self):
         p = r'/admin/\w+/(\d+)' 
         m = re.match(p, self.request.path)
+
+        if not m: return date.today()
         d = m.group(1)     
         d = strpdate(d, '%Y%m%d')
         return d
@@ -40,6 +53,7 @@ class AdminPage(webapp.RequestHandler):
         p = r'/admin/\w+(/(\d{6}))?'
         m = re.match(p, self.request.path)
 
+        if not m: return date.today()
         if not m.group(2): return date.today()
 
         d = m.group(2) + '01'     
@@ -48,7 +62,9 @@ class AdminPage(webapp.RequestHandler):
 
 class IndexPage(AdminPage):
     def get(self):
-        homestay = self.homestay()
+        user = users.get_current_user()
+        homestay = Homestay.all().filter('owner', user).get()
+
         month = self.month()
         available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
 
@@ -64,9 +80,7 @@ class IndexPage(AdminPage):
         self.response.out.write(
             template.render('index.html', template_values))
 
-
-
-application = webapp.WSGIApplication([('/admin/\w+', IndexPage)
+application = webapp.WSGIApplication([('/admin', IndexPage)
                                      ],
                                      debug=True)
 

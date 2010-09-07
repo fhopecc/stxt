@@ -1,26 +1,20 @@
-$def with (m)
-<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/tr/html4/strict.dtd'> 
-<html lang="zh-tw"> 
-<head><title>新增民宿</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 <h1>新增民宿</h1>
 <form method="post" action="new">
   <table>
-    <tr><td >$:m.name.verbose_name</td>
+    <tr><td>名稱</td>
         <td><input name="name" type="text"/></td></tr>
-    <tr><td >$:m.address.verbose_name</td>
+    <tr><td >地址</td>
         <td><input name="address" type="text"/>
        </td></tr>
-    <tr><td >$:m.owner.verbose_name</td>
+    <tr><td >帳號</td>
        <td><input name="owner" type="text"/></td></tr>
-    <tr><td >$:m.email.verbose_name</td>
+    <tr><td >電子郵件</td>
         <td><input name="email" type="text"/></td></tr>
-    <tr><td >$:m.blog.verbose_name</td>
+    <tr><td >網址</td>
         <td><input name="blog" type="text"/></td></tr>
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
   </table>
 </form>
-</body>
-</html>
+{% endblock %} 

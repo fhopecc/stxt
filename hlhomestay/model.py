@@ -64,6 +64,7 @@ class Homestay(db.Model):
                     yield r # this is an available room
 
     def available_rooms_in_month(self, year, month):
+        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         rooms_in_month = []

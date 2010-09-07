@@ -28,7 +28,7 @@ handlers:
   script: sys/handler.py
   login: admin
 
-- url: /admin/.*
+- url: /admin.*
   script: admin/handler.py
   login: required
 

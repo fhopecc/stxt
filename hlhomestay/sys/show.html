@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>民宿基本資料</h1>
+<table>
+<tr><td>名稱</td><td>{{h.name}}</td></tr>
+<tr><td>地址</td><td>{{h.address}}</td></tr>
+<tr><td>主人</td><td>{{h.owner}}</td></tr>
+<tr><td>電子郵件</td><td>{{h.email}}</td></tr>
+<tr><td>部落格</td><td>{{h.blog}}</td></tr>
+<tr><td>鍵值</td><td>{{h.key}}</td></tr>
+<tr>
+<td><a href="/sys">回</a>
+改
+刪
+</tr>
+</table>
+{% endblock %} 
