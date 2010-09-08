@@ -20,6 +20,11 @@ class UnitTest(unittest.TestCase):
                           owner=owner)
         self.h.put()
 
+        self.h2 = Homestay(name=u"測試民宿2", 
+                          owner=owner)
+        self.h2.put()
+
+
         self.room1 = Room(homestay=self.h, name=u"雙人房")
         self.room1.put()
         
@@ -32,8 +37,16 @@ class UnitTest(unittest.TestCase):
         self.room2 = Room(homestay=self.h, name=u"四人房")
         self.room2.put()
 
+
         Reservation(room=self.room2, name=u"沈懿嬅", checkin=next2weeks, 
                     checkout=next2weeks + timedelta(days=3)).put()
+
+        self.room3 = Room(homestay=self.h2, name=u"五人房")
+        self.room3.put()
+
+        Reservation(room=self.room3, name=u"張簡嘉品", checkin=next2weeks, 
+                    checkout=next2weeks + timedelta(days=3)).put()
+
         
     def testRoomSet(self):
         rooms = self.h.room_set
@@ -99,6 +112,17 @@ class UnitTest(unittest.TestCase):
     def testMonthlyRoomStatus(self):
         pass 
 
+  
+    def testReservationList(self):
+        rooms = list(self.h.room_set)
+        self.assertEqual(2, len(rooms)) 
+
+        self.assertEqual(4, Reservation.all().count()) 
+
+        rs = list(self.h.recently_reservations())
+        self.assertEqual(3, len(rs)) 
+
+
     def testAvailableRooms(self):
         rs = self.h.available_rooms(yestorday)
         self.assertEqual(0, sum(1 for r in rs))
@@ -118,8 +142,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(u"四人房", r.name)
 
     def tearDown(self):
-        hs = Homestay.all().filter("name", u"測試民宿")
-        for h in hs:
+        for h in Homestay.all():
             for r in h.room_set:
                 for res in r.reservation_set:
                     res.delete()

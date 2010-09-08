@@ -43,6 +43,10 @@ class Homestay(db.Model):
               })
             monthly_rooms.append(weekly_rooms)
         return monthly_rooms
+    
+    def recently_reservations(self):
+        rooms = list(self.room_set)
+        return Reservation.all().filter("room IN", rooms)
 
     def available_rooms(self, date):
         if date >= datetime.date.today(): 
@@ -95,7 +99,6 @@ class Homestay(db.Model):
         else:
             l = date(t.year, l, 1)
         return '/%s/%s' % (self.key(), strfdate(l, '%Y%m'))
-
 
 class Room(db.Model):
     name = db.StringProperty(
