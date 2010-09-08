@@ -27,14 +27,12 @@ def next_month(d):
 
 class AdminPage(webapp.RequestHandler):
     def homestay(self):
-        p = r'/admin/(\w+)'
-        m = re.match(p, self.request.path)
-        k = m.group(1)
-        h = Homestay.get(k)
-        return h
+        user = users.get_current_user()
+        homestay = Homestay.all().filter('owner', user).get()
+        return homestay
 
     def room(self):
-        p = r'/admin/(\w+)/\d+'            # pattern
+        p = r'/admin/(\w+)/\w+'            # pattern
         m = re.match(p, self.request.path) # match
         k = m.group(1)                     # key for homestay
         r = Room.get(k)                    # Room object
@@ -62,8 +60,7 @@ class AdminPage(webapp.RequestHandler):
 
 class IndexPage(AdminPage):
     def get(self):
-        user = users.get_current_user()
-        homestay = Homestay.all().filter('owner', user).get()
+        homestay = self.homestay()
 
         month = self.month()
         available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
@@ -80,9 +77,57 @@ class IndexPage(AdminPage):
         self.response.out.write(
             template.render('index.html', template_values))
 
-application = webapp.WSGIApplication([('/admin', IndexPage)
-                                     ],
-                                     debug=True)
+class NewPage(AdminPage):
+    def get(self):
+        homestay = self.homestay()
+        month = self.month()
+        template_values = {
+            'h': homestay
+        }
+
+        self.response.out.write(
+            template.render('new.html', template_values))
+
+    def post(self):
+        r = self.request
+        room = Room(name = r.get("name") ,
+                    price = int(r.get("price")), 
+                    holiday_price = int(r.get("holiday_price")), 
+                    homestay = self.homestay())
+        room.put()
+        self.redirect('/admin')
+
+class EditPage(AdminPage):
+    def get(self):
+        room = self.room()
+        template_values = {
+            'h': room.homestay, 
+            'r': room
+        }
+        self.response.out.write(
+            template.render('edit.html', template_values))
+
+    def post(self):
+        r = self.request
+        room = self.room()
+        room.name = r.get("name")
+        room.price = int(r.get("price"))
+        room.holiday_price = int(r.get("holiday_price"))
+        room.put()
+        self.redirect('/admin')
+
+class DelPage(AdminPage):
+    def get(self):
+        room = self.room()
+        room.delete()
+        self.redirect('/admin')
+
+application = webapp.WSGIApplication([
+              (r'/admin', IndexPage), 
+              (r'/admin/new', NewPage), 
+              (r'/admin/\w+/edit', EditPage), 
+              (r'/admin/\w+/delete', DelPage)
+              ], debug=True)
 
 def main():
     run_wsgi_app(application)

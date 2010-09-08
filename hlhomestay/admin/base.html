@@ -11,15 +11,21 @@
 <div class="upperpane">
 <table>
 <tr>
-  <td></td>
+<td colspan="4">房間清單</td>
+</tr>
+<tr>
+  <td>名稱</td>
   <td>平日</td>
   <td>假日</td>
-  </tr>
+  <td><a href="/admin/new">新</a></td>
+</tr>
 {% for r in h.room_set %}
     <tr>
         <td>{{r.name}}</td>
         <td>{{r.price}}</td>
         <td>{{r.holiday_price}}</td>
+        <td><a href="/admin/{{r.key}}/edit">改</a></td>
+        <td><a href="/admin/{{r.key}}/delete">刪</a></td>
     </tr>
 {% endfor %}
 </table>
