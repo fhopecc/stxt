@@ -31,6 +31,9 @@ class AdminPage(webapp.RequestHandler):
         homestay = Homestay.all().filter('owner', user).get()
         return homestay
 
+    def logout_url(self):
+        return users.create_logout_url('/admin')
+
     def room(self):
         p = r'/admin/(\w+)/\w+'            # pattern
         m = re.match(p, self.request.path) # match
@@ -62,6 +65,10 @@ class IndexPage(AdminPage):
     def get(self):
         homestay = self.homestay()
 
+        if not homestay:
+            self.redirect(users.create_logout_url('/admin'))
+            return
+
         month = self.month()
         available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
 
@@ -71,7 +78,8 @@ class IndexPage(AdminPage):
             'month':month,
             'last_month':last_month(month),
             'next_month':next_month(month),
-            'available_rooms_in_month':available_rooms_in_month
+            'available_rooms_in_month':available_rooms_in_month, 
+            'logout_url':self.logout_url()
         }
 
         self.response.out.write(

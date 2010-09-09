@@ -27,7 +27,12 @@ class UnitTest(unittest.TestCase):
 
         self.room1 = Room(homestay=self.h, name=u"雙人房")
         self.room1.put()
-        
+
+        Reservation(room=self.room1, name=u"張簡稜剛",
+                    checkin=yestorday - timedelta(days=1), 
+                    checkout=yestorday).put()
+
+
         Reservation(room=self.room1, name=u"張簡稜剛", checkin=today, 
                     checkout=tomorrow).put()
 
@@ -50,11 +55,10 @@ class UnitTest(unittest.TestCase):
         
     def testRoomSet(self):
         rooms = self.h.room_set
-
         self.assertEqual(2, rooms.count())
 
     def testReservation(self):
-        self.assertEqual(2, self.room1.reservation_set.count())
+        self.assertEqual(3, self.room1.reservation_set.count())
         r = self.room1.reservation_set.get()
 
         self.assertEqual(u"雙人房", r.room.name)
@@ -113,15 +117,18 @@ class UnitTest(unittest.TestCase):
         pass 
 
   
-    def testReservationList(self):
+    def testRecentlyReservations(self):
         rooms = list(self.h.room_set)
         self.assertEqual(2, len(rooms)) 
 
-        self.assertEqual(4, Reservation.all().count()) 
+        self.assertEqual(5, Reservation.all().count()) 
 
         rs = list(self.h.recently_reservations())
         self.assertEqual(3, len(rs)) 
 
+        # order by chekcin ascendingly
+        self.assert_(rs[0].checkin < rs[1].checkin)
+        self.assert_(rs[1].checkin < rs[2].checkin)
 
     def testAvailableRooms(self):
         rs = self.h.available_rooms(yestorday)
@@ -129,11 +136,6 @@ class UnitTest(unittest.TestCase):
 
         rs = self.h.available_rooms(tomorrow)
         self.assertEqual(2, sum(1 for r in rs))
-
-        res = self.room1.reservation_set.filter('checkin <=', today)
-        self.assertEqual(1, res.count())
-        res = [ r for r in res if today < r.checkout]
-        self.assertEqual(1, len(res))
 
         rs = self.h.available_rooms(today)
         self.assertEqual(1, sum(1 for r in rs))

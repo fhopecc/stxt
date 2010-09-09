@@ -8,6 +8,25 @@
 </div>
 <div id="leftbar">
 <div class="h1" id="homestay_name">{{h.name}}訂房系統</div>
+<div class="recently_reservations">
+<table>
+<tr>
+<td colspan="4">最近訂房單</td>
+</tr>
+<tr>
+  <td>房客</td>
+  <td>入住</td>
+  <td>退房</td>
+</tr>
+{% for re in h.recently_reservations %}
+    <tr>
+        <td>{{re.name}}</td>
+        <td>{{re.checkin|date:"md"}}</td>
+        <td>{{re.checkout|date:"md"}}</td>
+    </tr>
+{% endfor %}
+</table>
+</div>
 <div class="upperpane">
 <table>
 <tr>
@@ -35,6 +54,8 @@
     {{h.owner}}<br/>
     {{h.email}}<br/>
     {{h.blog}}<br/>
+    <a href="/{{h.key}}">訂房網址</a>
+    <a href="{{logout_url}}">登出</a>
 </div>
 </div>
 <div id="content">

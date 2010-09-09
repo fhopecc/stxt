@@ -46,10 +46,12 @@ class Homestay(db.Model):
     
     def recently_reservations(self):
         rooms = list(self.room_set)
-        return Reservation.all().filter("room IN", rooms)
+        return Reservation.all().filter("room IN",
+                          rooms).filter("checkin >=",
+                   date.today()).order("checkin")
 
     def available_rooms(self, date):
-        if date >= datetime.date.today(): 
+        if date >= date.today(): 
             for r in self.room_set: 
                 # The mapping sql meaning
                 # select * from Reservations
