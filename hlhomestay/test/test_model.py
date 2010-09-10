@@ -28,9 +28,10 @@ class UnitTest(unittest.TestCase):
         self.room1 = Room(homestay=self.h, name=u"雙人房")
         self.room1.put()
 
-        Reservation(room=self.room1, name=u"張簡稜剛",
+        self.res1 = Reservation(room=self.room1, name=u"張簡稜剛",
                     checkin=yestorday - timedelta(days=1), 
-                    checkout=yestorday).put()
+                    checkout=yestorday)
+        self.res1.put()
 
 
         Reservation(room=self.room1, name=u"張簡稜剛", checkin=today, 
@@ -52,6 +53,9 @@ class UnitTest(unittest.TestCase):
         Reservation(room=self.room3, name=u"張簡嘉品", checkin=next2weeks, 
                     checkout=next2weeks + timedelta(days=3)).put()
 
+    def testURLMaker(self):
+        self.assertEqual('/admin/%s' % self.res1.key(), 
+                         self.res1.admin_show_url())
         
     def testRoomSet(self):
         rooms = self.h.room_set
@@ -114,9 +118,22 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(u"四人房", r.name)
 
     def testMonthlyRoomStatus(self):
-        pass 
+        mrs = self.h.monthly_rooms_status(today.year,
+                                         today.month)
+        self.assertEqual(5, len(mrs))
+        for w in mrs:
+            for d in w:
+                if d['date'] == today:
+                    for r in d['rooms_status']:
+                        if r.kind() == 'Reservation':
+                            self.assertEqual(u'張簡稜剛', r.name)
+                elif d['date'] == next2weeks:
+                    for r in d['rooms_status']:
+                        if r.kind() == 'Reservation':
+                            self.assertEqual(u'沈懿嬅', r.name)
+                        elif r.kind() == 'Room':
+                            self.assertEqual(u'雙人房', r.name)
 
-  
     def testRecentlyReservations(self):
         rooms = list(self.h.room_set)
         self.assertEqual(2, len(rooms)) 

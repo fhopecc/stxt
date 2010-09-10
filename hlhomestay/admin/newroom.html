@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>客房資料</h1>
+<form method="post" action="/admin/room/new">
+  <table>
+    <tr><td>名稱</td>
+      <td><input name="name" type="text" value=""/></td>
+    </tr>
+    <tr><td>平日價格</td>
+      <td><input name="price" type="text" value=""/></td>
+    </tr>
+    <tr><td>假日價格</td>
+      <td><input name="holiday_price" type="text" value=""/></td>
+    </tr>
+    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
+  </table>
+</form>
+{% endblock %} 

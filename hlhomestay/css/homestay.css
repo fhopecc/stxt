@@ -33,10 +33,15 @@ textarea {width:100%}
 #calendar tr td {vertical-align:top;border:1px dashed;
                  color:silver}
 #calendar tr td#today {border:1px dashed orange}
-.available_rooms{height:45pt} /* available_rooms */
-.available_room {color:orange;
+/*.available_rooms{height:45pt} /* available_rooms */
+/*.available_room {color:orange;
                  border-radius:1px;margin:1px; 
+                }*/
+.list          {height:45pt} /* available_rooms */
+.listitem      {color:orange;
+                border-radius:1px;margin:1px; 
                 }
+
 
 #calendar_operation {background:silver;padding:15px 0 15px 0}
 .operation_button {color:black}

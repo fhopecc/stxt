@@ -15,14 +15,21 @@
 </tr>
 <tr>
   <td>房客</td>
+  <td>房型</td>
   <td>入住</td>
   <td>退房</td>
 </tr>
 {% for re in h.recently_reservations %}
     <tr>
         <td>{{re.name}}</td>
+        <td>{{re.room.name}}</td>
         <td>{{re.checkin|date:"md"}}</td>
         <td>{{re.checkout|date:"md"}}</td>
+        <td>
+            <a href="{{re.admin_show_path}}">詳</a>
+            <a href="{{re.admin_edit_path}}">改</a>
+            <a href="{{re.admin_delete_path}}">刪</a>
+        </td>
     </tr>
 {% endfor %}
 </table>
@@ -36,15 +43,15 @@
   <td>名稱</td>
   <td>平日</td>
   <td>假日</td>
-  <td><a href="/admin/new">新</a></td>
+  <td><a href="/admin/room/new">新</a></td>
 </tr>
 {% for r in h.room_set %}
     <tr>
         <td>{{r.name}}</td>
         <td>{{r.price}}</td>
         <td>{{r.holiday_price}}</td>
-        <td><a href="/admin/{{r.key}}/edit">改</a></td>
-        <td><a href="/admin/{{r.key}}/delete">刪</a></td>
+        <td><a href="/admin/room/{{r.key}}/edit">改</a></td>
+        <td><a href="/admin/room/{{r.key}}/delete">刪</a></td>
     </tr>
 {% endfor %}
 </table>

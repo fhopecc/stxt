@@ -1,21 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>客房資料</h1>
-<form method="post" action="/admin/{{r.key}}/edit">
-  <table>
-    <tr><td>名稱</td>
-      <td><input name="name" type="text" value="{{r.name}}"/></td>
-    </tr>
-    <tr><td>平日價格</td>
-      <td><input name="price" type="text" value="{{r.price}}"/></td>
-    </tr>
-    <tr><td>假日價格</td>
-      <td><input name="holiday_price" type="text"
-           value="{{r.holiday_price}}"/></td>
-    </tr>
-    <tr><td><input type="submit" value="更新"/></td></tr>
+<div id="form_content">
+  <form method="post" action='{{res.admin_edit_path}}'>
+  <table class="form">
+    <tr><th colspan="2">訂房資料修改作業</th></tr>
+
+    <tr><td>房間</td>
+        <td><input type="text" readonly="true" value="{{res.room.name}}"/>
+            <input name="room" type="hidden" value="{{res.room.key}}"/>
+    </td></tr>
+
+    <tr><td>入住日期</td>
+      <td><input name="checkin" type="text"
+                 value='{{res.checkin|date:"Ymd"}}'/>
+    </td></tr>
+
+    <tr><td>退房日期</td>
+        <td><input name="checkout" type="text"
+                   value='{{res.checkout|date:"Ymd"}}'/>
+    </td></tr>
+
+    <tr><td>姓名</td>
+        <td><input name="name" type="text" 
+                   value="{{res.name}}"/>
+    </td></tr>
+
+    <tr><td>聯絡電話</td>
+        <td><input name="phone" type="text"
+                   value="{{res.phone}}"/>
+    </td></tr>
+
+    <tr><td>電子郵件</td>
+        <td><input name="email" type="text"
+                   value="{{res.email}}"/>
+    </td></tr>
+
+    <tr><td>訂單日期</td>
+        <td><input name="create_date" type="text" readonly="true"
+                   value='{{res.checkout|date:"Ymd"}}'/>
+    </td></tr>
+
+    <tr><td colspan="2">備註</td></td></tr>
+    <tr><td colspan="2">
+        <textarea name="coment">{{res.comment}}</textarea>
+    </td></tr>
+
+    <tr><td><input type="submit" value="修改"/></td><td></td></tr>
   </table>
 </form>
-</body>
-</html>
+</div>
+
 {% endblock %} 

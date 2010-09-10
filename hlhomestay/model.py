@@ -39,7 +39,7 @@ class Homestay(db.Model):
             for d in w:
               weekly_rooms.append({
                   'date':d,
-                  'rooms_status':self.available_rooms(d)
+                  'rooms_status':list(self.rooms_status(d))
               })
             monthly_rooms.append(weekly_rooms)
         return monthly_rooms
@@ -141,6 +141,18 @@ class Reservation(db.Model):
                               default=u'請輸入備註')
 
     room = db.ReferenceProperty(Room)
+
+    def admin_show_path(self):
+        return "/admin/%s" % self.key()
+
+    def admin_edit_path(self):
+        return "/admin/%s/edit" % self.key()
+
+    def admin_delete_path(self):
+        return "/admin/%s/delete" % self.key()
+
+
+
 
 def strpdate(str, fmt="%Y%m%d"):
     import time

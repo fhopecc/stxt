@@ -11,7 +11,7 @@
 <th>一</th><th>二</th><th>三</th><th>四</th>
 <th>五</th><th>六</th><th>日</th>
 </tr>
-{% for rooms_in_week in available_rooms_in_month %}
+{% for rooms_in_week in monthly_rooms_status %}
     <tr class="week">
     {% for r in rooms_in_week %}
         <td
@@ -20,10 +20,18 @@
         {% endifequal %}
         >
         <div class="date">{{r.date|date:"d"}}</div>
-        <div class="available_rooms">
-        {% for a in r.available_rooms %}
-           <div><a class="available_room" 
-           href="/{{a.key}}/{{r.date|date:"Ymd"}}">{{a.name}}</a></div>
+        <div class="list">
+        {% for a in r.rooms_status %}
+            <div class="listitem">
+
+            {% ifequal a.kind "Reservation" %}
+                <a href="/admin/{{a.key}}">{{a.name}}</a>
+            {% else %}
+                <a href="/admin/{{a.key}}/{{r.date|date:"Ymd"}}"
+                 >{{a.name}}</a>
+            {% endifequal %}
+
+            </div>
         {% endfor %}
         </div>
         </td>

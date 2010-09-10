@@ -1,0 +1,11 @@
+testAvailableRooms (test_model.UnitTest) ... ok
+testMonthlyRoomStatus (test_model.UnitTest) ... ok
+testRecentlyReservations (test_model.UnitTest) ... ok
+testReservation (test_model.UnitTest) ... ok
+testRoomSet (test_model.UnitTest) ... ok
+testRoomStatus (test_model.UnitTest) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.547s
+
+OK
