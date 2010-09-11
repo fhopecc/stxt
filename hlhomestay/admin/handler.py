@@ -7,23 +7,6 @@ from google.appengine.ext.webapp import template
 from datetime import date
 from model import *
 
-def last_month(d):
-    year = d.year
-    month = d.month
-    last_month = month - 1
-    if last_month < 1:
-        last_month = 12
-        year -= 1
-    return date(year, last_month, 1)
-
-def next_month(d):
-    year = d.year
-    month = d.month
-    next_month = month + 1
-    if next_month > 12:
-        next_month = 1
-        year += 1
-    return date(year, next_month, 1)
 
 class AdminPage(webapp.RequestHandler):
     def homestay(self):
@@ -57,36 +40,58 @@ class AdminPage(webapp.RequestHandler):
         d = strpdate(d, '%Y%m%d')
         return d
 
-
+class IndexPage(AdminPage):
     def month(self):
-        p = r'/admin/\w+(/(\d{6}))?'
+        p = r'/admin/(\d{6})'
         m = re.match(p, self.request.path)
 
         if not m: return date.today()
-        if not m.group(2): return date.today()
-
-        d = m.group(2) + '01'     
+        d = m.group(1) + '01'     
         d = strpdate(d)
         return d
 
-class IndexPage(AdminPage):
-    def get(self):
-        homestay = self.homestay()
+    def last_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        last_month = month - 1
+        if last_month < 1:
+            last_month = 12
+            year -= 1
+        last_month = date(year, last_month, 1) 
 
-        if not homestay:
+        h = self.homestay()
+
+        return '/admin/%s' % last_month.strftime('%Y%m')
+
+    def next_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        next_month = month + 1
+        if next_month > 12:
+            next_month = 1
+            year += 1
+        next_month = date(year, next_month, 1)
+
+        h = self.homestay()
+
+        return '/admin/%s' % next_month.strftime('%Y%m')
+
+    def get(self):
+        h = self.homestay()
+
+        if not h:
             self.redirect(users.create_logout_url('/admin'))
             return
-
-        month = self.month()
-
+        
         template_values = {
-            'h': homestay,
+            'h': h,
             'today':date.today(),
-            'month':month,
-            'last_month':last_month(month),
-            'next_month':next_month(month),
-            'monthly_rooms_status':
-                   homestay.monthly_rooms_status(month.year, month.month), 
+            'month':self.month(),
+            'last_month_path':self.last_month_path(),
+            'next_month_path':self.next_month_path(),
+            'monthly_rooms_status': h.monthly_rooms_status(
+                                    self.month().year, 
+                                    self.month().month), 
             'logout_url':self.logout_url()
         }
         self.response.out.write( template.render('index.html', template_values))
@@ -98,7 +103,8 @@ class NewPage(AdminPage):
         d = self.date()
 
         from datetime import timedelta
-        res = Reservation(room = r, checkin = d, 
+        res = Reservation(room = r, 
+                          checkin = d, 
                           checkout = d + timedelta(days=1)
                           )
         
@@ -235,6 +241,7 @@ class RoomDelPage(AdminRoomPage):
 
 application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
+               (r'/admin/\d{6}', IndexPage),
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 

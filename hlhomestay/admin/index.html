@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <table id="calendar">
-<tr id="operation"><td colspan="7">
+<tr id="controlbar"><td colspan="7">
 {{month|date:"Y-m"}} 
-<a href="/admin/{{h.key}}">今天</a>
-<a href="/admin/{{h.key}}/{{last_month|date:"Ym"}}">上月</a>
-<a href="/admin/{{h.key}}/{{next_month|date:"Ym"}}">下月</a>
+<a href="/admin">今天</a>
+<a href="{{last_month_path}}">上月</a>
+<a href="{{next_month_path}}">下月</a>
 </td></tr>
 <tr id="label">
 <th>一</th><th>二</th><th>三</th><th>四</th>
@@ -25,7 +25,7 @@
             <div class="listitem">
 
             {% ifequal a.kind "Reservation" %}
-                <a href="/admin/{{a.key}}">{{a.name}}</a>
+                <a href="{{a.admin_show_path}}">{{a.name}}</a>
             {% else %}
                 <a href="/admin/{{a.key}}/{{r.date|date:"Ymd"}}"
                  >{{a.name}}</a>

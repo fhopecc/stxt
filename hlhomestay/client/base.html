@@ -7,11 +7,14 @@
 <body>
 </div>
 <div id="leftbar">
-<div class="h1" id="homestay_name">{{h.name}}訂房系統</div>
-<div class="upperpane">
+<div id="title">{{h.name}}訂房系統</div>
+<div class="block">
 <table>
 <tr>
-  <td></td>
+  <th colspan="3">房型價目</th>
+</tr>
+<tr>
+  <td>房型</td>
   <td>平日</td>
   <td>假日</td>
   </tr>
@@ -24,12 +27,13 @@
 {% endfor %}
 </table>
 </div>
-<div class="basepane">
-    {{h.address}}<br/>
-    {{h.owner}}<br/>
-    {{h.email}}<br/>
-    {{h.blog}}<br/>
+
+<div class="block">
+{{h.address}}<br/>
+{{h.email}}<br/>
+<a href="{{h.blog}}">{{h.blog}}</a><br/>
 </div>
+
 </div>
 <div id="content">
 {% block content %}

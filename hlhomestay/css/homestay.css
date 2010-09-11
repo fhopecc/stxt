@@ -1,77 +1,60 @@
-body {font-size:12pt}
-textarea {width:100%}
+/* platte url
+ * http://www.colourlovers.com/palette/1292599/Cotton_Candy?widths=1
+ */
 
 #topbar {border-bottom: 1pt solid blue;
          margin-bottom:10px}
 
-#leftbar {float:left;background:darkgreen;color:gold;
+#leftbar {float:left;background:#94D1FF;color:#E0F2FF;
           height:560px;
           width:23%;
+          border:solid 2px #DFA3FF;
           padding: 5px 5px 0 5px
          }
 
-#leftbar div.h1 {color:white;font-size:14pt}
-
-/*.upperpane {color:silver;background:lime;
-            border-top:limegreen;solid 1px;
-            border-bottom:limegreen solid 1px;
-           }*/
-
-/*            border-top: 2pt solid skyblue; 
-            border-right: 2pt solid silver; 
-            border-left: 2pt solid skyblue; 
-            border-bottom: 2pt solid silver; 
-           }*/
-
-#help {float:right}
-
-/*table#calendar {width:75%;border-left:solid 5px silver}*/
-/*table {border-collapse:collapse}*/
-
-#calendar       {width:75%}
-#calendar tr th {vertical-align:top;text-align:left}
-#calendar tr td {vertical-align:top;border:1px dashed;
-                 color:silver}
-#calendar tr td#today {border:1px dashed orange}
-/*.available_rooms{height:45pt} /* available_rooms */
-/*.available_room {color:orange;
-                 border-radius:1px;margin:1px; 
-                }*/
-.list          {height:45pt} /* available_rooms */
-.listitem      {color:orange;
-                border-radius:1px;margin:1px; 
+#leftbar #title {font-size:18pt;font-weight:bold;
+                 padding-bottom:10pt;color:darkblue
                 }
+.block
+
+#leftbar .block table {border:solid 5px #BAE1FF}
+#leftbar .block th {text-align:left}
+#leftbar .block td {border:solid 5px #BAE1FF}
+
+#leftbar .list    {font-size:10pt}
+#leftbar .list th {text-align:left}
+#leftbar .list th.title {font-size:12pt;color:#DFA3FF}
+#leftbar .list td {border:solid 1px #BAE1FF}
 
 
-#calendar_operation {background:silver;padding:15px 0 15px 0}
-.operation_button {color:black}
-/*#form_content {margin-left:30%}*/
+#leftbar a          {color:#E0F2FF}
+#leftbar a:visited  {color:#E0F2FF} 
+#leftbar a:hover    {color:#E0F2FF}
 
-a.available_room {font-size:10pt;
-    padding:none;border:none;margin-top:2pt;vertical-align:baseline}
-.label {background:silver;font-weight:bold}
-.subcontent {margin-left:5%}
+#calendar    {width:75%}
+#calendar th {vertical-align:top;text-align:left;color:#DFA3FF}
+#calendar td {vertical-align:top;border:1px dashed #94D1FF;
+              color:#94D1FF}
+#calendar td#today {color:#FAA7EE;border:1px dashed #FAA7EE}
 
-td.passed {background:silver;
-           border-right:1px solid gray;
-           border-bottom:1px solid gray}
+#calendar .list           {height:55pt;font-size:8pt} 
+#calendar .list a         {color:#DFA3FF}
+#calendar .list a:visited {color:#DFA3FF} 
+#calendar .list a:hover   {color:#DFA3FF}
 
-td.passed .date_label {color:white;background:gray}
+#calendar #controlbar           {font-size:14pt} 
+#calendar #controlbar a         {font-size:12pt;color:#DFA3FF}
+#calendar #controlbar a:visited {color:#DFA3FF} 
+#calendar #controlbar a:hover   {color:#DFA3FF}
 
-td.today {background:lightyellow;
-          border-right:1px solid gray;
-          border-bottom:1px solid gray}
+#content {font-size:12pt;color:#DFA3FF}
+#content th {text-align:left}
 
-td.today .date_label {color:gray;background:gold}
+#content form {font-size:12pt;color:#DFA3FF}
+#content form th {text-align:left;color:#DFA3FF}
+#content input {color:darkblue}
+#content textarea {color:darkblue;width:100%;}
+#content form a         {color:#DFA3FF}
+#content form a:visited {color:#DFA3FF} 
+#content form a:hover   {color:#DFA3FF}
 
-td.future {background:none;
-           border-right:1px solid gray;
-           border-bottom:1px solid gray}
-td.future .date_label {color:white;background:navy}
-
-td.label {text-align:right}
-
-table.form {padding-bottom:30pt}
-
-table.list tr:first-child {font-weight:bold}
-table.list td:first-child {text-align:right}

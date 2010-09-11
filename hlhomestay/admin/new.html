@@ -37,15 +37,20 @@
 
     <tr><td>訂單日期</td>
         <td><input name="create_date" type="text" readonly="true"
-                   value='{{res.checkout|date:"Ymd"}}'/>
+                   value='{{res.create_date|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td colspan="2">備註</td></td></tr>
     <tr><td colspan="2">
-        <textarea name="coment">{{res.comment}}</textarea>
+        <textarea name="comment">{{res.comment}}</textarea>
     </td></tr>
 
-    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
+    <tr><td>
+            <input type="submit" value="建立"/>
+        </td>
+        <td>
+            <a href="{{res.admin_calendar_path}}">月曆</a>
+    </td></tr>
   </table>
 </form>
 </div>

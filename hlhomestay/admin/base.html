@@ -7,17 +7,17 @@
 <body>
 </div>
 <div id="leftbar">
-<div class="h1" id="homestay_name">{{h.name}}訂房系統</div>
-<div class="recently_reservations">
-<table>
+<div id="title">{{h.name}}訂房管理系統</div>
+<div class="block">
+<table class="list">
 <tr>
-<td colspan="4">最近訂房單</td>
+<th class="title" colspan="5">近期訂房單</th>
 </tr>
 <tr>
-  <td>房客</td>
-  <td>房型</td>
-  <td>入住</td>
-  <td>退房</td>
+  <th>房客</th>
+  <th>房型</th>
+  <th>入住</th>
+  <th>退房</th>
 </tr>
 {% for re in h.recently_reservations %}
     <tr>
@@ -34,15 +34,15 @@
 {% endfor %}
 </table>
 </div>
-<div class="upperpane">
-<table>
+<div>
+<table class="list">
 <tr>
-<td colspan="4">房間清單</td>
+<th class="title" colspan="4">房間清單</th>
 </tr>
 <tr>
-  <td>名稱</td>
-  <td>平日</td>
-  <td>假日</td>
+  <th>名稱</th>
+  <th>平日</th>
+  <th>假日</th>
   <td><a href="/admin/room/new">新</a></td>
 </tr>
 {% for r in h.room_set %}

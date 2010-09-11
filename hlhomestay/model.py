@@ -151,7 +151,12 @@ class Reservation(db.Model):
     def admin_delete_path(self):
         return "/admin/%s/delete" % self.key()
 
+    def admin_calendar_path(self):
+        return "/admin/%s" % self.checkin.strftime('%Y%m')
 
+    def client_calendar_path(self):
+        return "/%s/%s" % (self.room.homestay.key(), 
+                          self.checkin.strftime('%Y%m'))
 
 
 def strpdate(str, fmt="%Y%m%d"):

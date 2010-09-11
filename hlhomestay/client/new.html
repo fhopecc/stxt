@@ -3,10 +3,10 @@
 <div id="form_content">
   <form method="post" action='/{{r.room.key}}/{{r.checkin|date:"Ymd"}}'>
   <table class="form">
-    <tr><th colspan="2">訂房資料</th></tr>
+    <tr><th colspan="2">訂房作業</th></tr>
 
     <tr><td>房間</td>
-        <td><input type="text" readonly="true" value="{{r.room.name}}"/>
+        <td>{{r.room.name}}
             <input name="room" type="hidden" value="{{r.room.key}}"/>
     </td></tr>
 
@@ -36,16 +36,20 @@
     </td></tr>
 
     <tr><td>訂單日期</td>
-        <td><input name="create_date" type="text" readonly="true"
-                   value='{{r.checkout|date:"Ymd"}}'/>
+        <td>{{r.create_date|date:"Ymd"}}
+            <input name="create_date" type="hidden" 
+                   value='{{r.create_date|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td colspan="2">備註</td></td></tr>
     <tr><td colspan="2">
-        <textarea name="coment">{{r.comment}}</textarea>
+        <textarea name="comment">{{r.comment}}</textarea>
     </td></tr>
 
-    <tr><td><input type="submit" value="建立"/></td><td></td></tr>
+    <tr><td><input type="submit" value="建立"/></td>
+        <td>
+            <a href="{{r.client_calendar_path}}">月曆</a>
+        </td></tr>
   </table>
 </form>
 </div>

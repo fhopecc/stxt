@@ -710,3 +710,36 @@ Called to implement truth value testing and the built-in operation bool(); shoul
 
 object.__unicode__(self)
 Called to implement unicode() built-in; should return a Unicode object. When this method is not defined, string conversion is attempted, and the result of string conversion is converted to Unicode using the system default encoding.
+
+方法別名
+~~~~~~~~
+I'm not sure if this problem I face affects many other people, but I'll just describe it and see what kind of feedback I get.
+
+I have a suggestion for a new piece of Python syntax when defining methods. I have seen the following done, and have done it myself
+
+
+class FanstasticClass:
+
+    def __init__(self):
+        self.someFantasticMethod("Hello")
+
+    def someFantasticMethod(self, argument = True):
+        print argument
+ 
+    justAsFantastic = someFantasticMethod
+
+
+In order to set up a second method, justAsFantastic, which is just an alias to someFantasticMethod
+
+The shortcoming of this approach is that supposing we have some unfamiliar codebase. In my method I see a call to someObject.justAsFantastic("Wahoo"). In order to find that method, I do a file search for "def justAsFantastic(" in order to make sure (a) I only get method definitions and (b) I don't get any extraneous methods.
+
+This is especially relevant to methods which might be commonly used as variable names elsewhere in the code.
+
+I suggest allowing the following syntax:
+
+   def justAsFantastic = someFantasticMethod
+
+which will *do* exactly the same thing, but by a syntactic marker that the variable justAsFantastic points to a method.
+
+
+Comments appreciated!

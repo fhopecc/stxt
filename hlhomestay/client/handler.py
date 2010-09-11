@@ -139,10 +139,11 @@ class NewPage(ClientPage):
         res.put()
 
         template_values = {
-            'r': res
+            'h': res.room.homestay,
+            'res': res
         }
 
-        self.response.out.write(template.render('reservation.html', 
+        self.response.out.write(template.render('show.html', 
                                 template_values))
 
 class DelPage(webapp.RequestHandler):

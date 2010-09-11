@@ -1,55 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
 <table>
-  <tr><td colspan="2">您的訂房資料如下：</td></tr>
+  <tr><th colspan="2">您的訂房資料如下：</th></tr>
   <tr>
     <td>訂房編號</td>
-    <td>{{r.key}}</td>
+    <td>{{res.key}}</td>
   </tr>
 
   <tr>
     <td>客房名稱</td>
-    <td>{{r.room.name}}</td>
+    <td>{{res.room.name}}</td>
   </tr>
 
   <tr>
     <td>入住日期</td>
-    <td>{{r.checkin}}</td>
+    <td>{{res.checkin}}</td>
   </tr>
 
   <tr>
     <td>退房日期</td>
-    <td>{{r.checkout}}</td>
+    <td>{{res.checkout}}</td>
   </tr>
 
   <tr>
     <td>訂房日期</td>
-    <td>{{r.create_date}}</td>
+    <td>{{res.create_date}}</td>
   </tr>
 
   <tr>
     <td>姓名</td>
-    <td>{{r.name}}</td>
+    <td>{{res.name}}</td>
   </tr>
 
   <tr>
     <td>聯絡電話</td>
-    <td>{{r.phone}}</td>
+    <td>{{res.phone}}</td>
   </tr>
 
   <tr>
     <td>電子郵件</td>
-    <td>{{r.email}}</td>
+    <td>{{res.email}}</td>
   </tr>
 
   <tr>
     <td>備註</td>
-    <td>{{r.comment}}</td>
+    <td>{{res.comment}}</td>
   </tr>
 
   <tr>
     <td colspan="2">
-      <a href="/{{r.room.homestay.key}}">回日曆</a>
+      <a href="/{{res.room.homestay.key}}">月曆</a>
     </td>
   </tr>
 </table>
