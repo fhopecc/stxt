@@ -15,6 +15,8 @@ next2weeks = date.today() + timedelta(days=14)
 
 class UnitTest(unittest.TestCase):
     def setUp(self):
+        SysHoliday(date=date(2010, 7, 29)).put()
+
         owner = users.User("test@gmail.com")
         self.h = Homestay(name=u"測試民宿", 
                           owner=owner)
@@ -55,11 +57,20 @@ class UnitTest(unittest.TestCase):
 
     def testURLMaker(self):
         self.assertEqual('/admin/%s' % self.res1.key(), 
-                         self.res1.admin_show_url())
+                         self.res1.admin_show_path())
         
     def testRoomSet(self):
         rooms = self.h.room_set
         self.assertEqual(2, rooms.count())
+
+    def testIsHoliday(self):
+        # test Sat, Sun
+        self.assert_(self.h.isholiday(date(2010, 9, 11)))
+        self.assert_(self.h.isholiday(date(2010, 9, 12)))
+        # test SysHoliday
+        self.assert_(self.h.isholiday(date(2010, 7, 29)))
+        
+        self.failIf(self.h.isholiday(date(2010, 7, 28)))
 
     def testReservation(self):
         self.assertEqual(3, self.room1.reservation_set.count())

@@ -53,10 +53,15 @@ str 或 unicode
 str 值假設是以 ascii 編碼器編碼的文字，而且在儲存之前會轉換為 unicode 值。資料存放區會以 unicode 值傳回該值。 使用其他編碼器的短字串，會使用 unicode 值。
 短字串可以由資料存放區進行索引，可以用於篩選器以及排序順序。大於 500 個位元組的文字字串 (不會進行索引)，會使用 Text 實例。 大於 500 個位元組的未編碼字串 (也不會進行索引)，會使用 Blob 實例。
 Model 屬性： StringProperty
+
 bool
+~~~~
 Boolean 值，True 或 False。
+
 Model 屬性： BooleanProperty
+
 int 或 long
+~~~~~~~~~~~
 整數值
 Python int 值在儲存之前會轉換為 Python long 值。儲存為 int 的值將會以 long 傳回。
 Model 屬性： IntegerProperty

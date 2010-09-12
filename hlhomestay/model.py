@@ -15,7 +15,6 @@ class Homestay(db.Model):
     notice = db.TextProperty(verbose_name="訂房注意事項", 
                              default=u'輸入訂房注意事項')
 
-
     def rooms_status(self, date):
         # analogy for SQL: 
         # select * 
@@ -57,19 +56,8 @@ class Homestay(db.Model):
     def available_rooms(self, date):
         if date >= date.today(): 
             for r in self.room_set: 
-                # The mapping sql meaning
-                # select * from Reservations
-                # where room = :r.key()
-                # and :date between checkin and checkout
-                # import pdb; pdb.set_trace()
-                #print r.key()
-                #print r.reservation_set.count()
-                #print r.reservation_set.get().checkin
-                #print date
                 ress = r.reservation_set.filter('checkin <=', date)
-                #print ress.count()
                 ress = [ res for res in ress if date < res.checkout]
-                #print len(ress)
                 if len(ress) == 0: 
                     yield r # this is an available room
 
@@ -108,6 +96,10 @@ class Homestay(db.Model):
 
     def admin_edit_path(self):
         return "/admin/homestay/edit"
+
+    def isholiday(self, date):
+        if (date.weekday() in (5, 6)) or (SysHoliday.all().filter('date', date).count() > 0):
+               return True
 
 class Room(db.Model):
     name = db.StringProperty(
@@ -165,6 +157,13 @@ class Reservation(db.Model):
         return "/%s/%s" % (self.room.homestay.key(), 
                           self.checkin.strftime('%Y%m'))
 
+class Holiday(db.Model):
+    homestay = db.ReferenceProperty(Homestay, required=True)
+    date = db.DateProperty(verbose_name="日期", required=True)
+    isholiday = db.BooleanProperty(verbose_name="是否為假期", required=True)
+
+class SysHoliday(db.Model):
+    date = db.DateProperty(verbose_name="假期", required=True)
 
 def strpdate(str, fmt="%Y%m%d"):
     import time
