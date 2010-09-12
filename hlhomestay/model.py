@@ -9,9 +9,12 @@ class Homestay(db.Model):
     owner= db.UserProperty(verbose_name="主人",required=True)
     address = db.PostalAddressProperty(verbose_name="地址")
     email = db.EmailProperty(verbose_name="電子信箱")
-    blog = db.LinkProperty(verbose_name="網站")
+    blog = db.LinkProperty(verbose_name="民宿網站")
     phone = db.TextProperty(verbose_name="聯絡電話", 
                             default=u'輸入聯絡電話')
+    notice = db.TextProperty(verbose_name="訂房注意事項", 
+                             default=u'輸入訂房注意事項')
+
 
     def rooms_status(self, date):
         # analogy for SQL: 
@@ -46,9 +49,10 @@ class Homestay(db.Model):
     
     def recently_reservations(self):
         rooms = list(self.room_set)
-        return Reservation.all().filter("room IN",
+        q = Reservation.all().filter("room IN",
                           rooms).filter("checkin >=",
                    date.today()).order("checkin")
+        return q.fetch(limit=10) 
 
     def available_rooms(self, date):
         if date >= date.today(): 
@@ -101,6 +105,9 @@ class Homestay(db.Model):
         else:
             l = date(t.year, l, 1)
         return '/%s/%s' % (self.key(), strfdate(l, '%Y%m'))
+
+    def admin_edit_path(self):
+        return "/admin/homestay/edit"
 
 class Room(db.Model):
     name = db.StringProperty(

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="{{h.admin_edit_path}}">
+  <table>
+    <tr><th colspan="2">民宿資料維護作業</th></tr>
+    <tr><td>帳號</td><td>{{h.owner}}</td></tr>
+
+    <tr><td>名稱</td>
+        <td>
+            <input name="name" type="text" value="{{h.name}}"/>
+    </td></tr>
+
+    <tr><td>地址</td>
+        <td>
+            <input name="address" type="text" value="{{h.address}}"/>
+    </td></tr>
+
+    <tr><td>電子郵件</td>
+        <td><input name="email" type="text" value="{{h.email}}"/>
+    </td></tr>
+
+    <tr><td>聯絡電話</td>
+        <td><input name="phone" type="text" value="{{h.phone}}"/>
+    </td></tr>
+
+    <tr><td>民宿網站網址</td>
+        <td><input name="blog" type="text" value="{{h.blog}}"/>
+    </td></tr>
+
+    <tr><td colspan="2">訂房注意事項</td></td></tr>
+    <tr><td colspan="2">
+        <textarea name="notice" cols="50" rows="20">{{h.notice}}</textarea>
+    </td></tr>
+
+    <tr><td colspan="2"><input type="submit" value="更新"/>
+            <a href="{{res.admin_calendar_path}}">回月曆</a>
+        </td>
+    </tr>
+  </table>
+</form>
+{% endblock %} 

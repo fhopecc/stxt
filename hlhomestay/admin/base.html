@@ -11,7 +11,8 @@
 <div class="block">
 <table class="list">
 <tr>
-<th class="title" colspan="5">近期訂房單</th>
+<th class="title" colspan="5" 
+    title="近期訂房清單可顯示最近 10 筆訂房">近期訂房單</th>
 </tr>
 <tr>
   <th>房客</th>
@@ -55,14 +56,21 @@
     </tr>
 {% endfor %}
 </table>
-</div>
-<div class="basepane">
-    {{h.address}}<br/>
-    {{h.owner}}<br/>
-    {{h.email}}<br/>
-    {{h.blog}}<br/>
-    <a href="/{{h.key}}">訂房網址</a>
-    <a href="{{logout_url}}">登出</a>
+<table class="list">
+<tr>
+<th class="title">民宿基本資料</th>
+<td><a href="{{h.admin_edit_path}}">編輯</a>
+</tr><tr>
+<td>帳號</td><td>{{h.owner}}</td>
+</tr><tr>
+<td>地址</td><td>{{h.address}}</td>
+</tr><tr>
+<td colspan="2"><a href="{{h.blog}}">民宿網站</a>
+<a href="/{{h.key}}">訂房網站</a>
+<a href="{{logout_url}}">登出</a>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div id="content">

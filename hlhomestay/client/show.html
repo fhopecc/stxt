@@ -47,10 +47,30 @@
     <td>{{res.comment}}</td>
   </tr>
 
+  <tr><th colspan="2">訂房注意事項：</th></tr>
+  <tr>
+    <td colspan="2">{{res.room.homestay.notice}}</td>
+  </tr>
+
+  <tr><th colspan="2">若有任何問題歡迎來電：</th></tr>
+  <tr>
+    <td colspan="2">{{res.room.homestay.phone}}</td>
+  </tr>
+
+  <tr><th colspan="2">更多相關訊息請上我們的網站：</th></tr>
+  <tr><td colspan="2">
+      <a href="{{res.room.homestay.blog}}">{{res.room.homestay.blog}}</a>
+   </td>
+  </tr>
+
   <tr>
     <td colspan="2">
+
+    <input type=button name=print value="列印訂房單" 
+           onClick="javascript:window.print()"> 
       <a href="/{{res.room.homestay.key}}">月曆</a>
     </td>
   </tr>
+
 </table>
 {% endblock %} 

@@ -239,9 +239,32 @@ class RoomDelPage(AdminRoomPage):
         room.delete()
         self.redirect('/admin')
 
+class HomestayEditPage(AdminPage):
+    def get(self):
+        h = self.homestay()
+        template_values = {
+            'h': h
+        }
+        self.response.out.write(
+            template.render('edithomestay.html', template_values))
+
+    def post(self):
+        r = self.request
+        h = self.homestay()
+
+        h.name = r.get("name")
+        h.address = r.get("address")
+        h.email = r.get("email")
+        h.phone = db.PhoneNumber(r.get("phone"))
+        h.blog = r.get("blog")
+        h.notice = r.get("notice")
+        h.put()
+        self.redirect('/admin')
+
 application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
+               (r'/admin/homestay/edit', HomestayEditPage), 
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 
