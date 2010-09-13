@@ -98,7 +98,17 @@ class Homestay(db.Model):
         return "/admin/homestay/edit"
 
     def isholiday(self, date):
-        if (date.weekday() in (5, 6)) or (SysHoliday.all().filter('date', date).count() > 0):
+        # negative list
+        if self.holiday_set.\
+                filter('date', date).\
+                filter('isholiday', False).count() > 0:
+            return False
+
+        if date.weekday() in (5, 6) or \
+           SysHoliday.all().filter('date', date).count() > 0 \
+           or self.holiday_set.\
+              filter('date', date).\
+              filter('isholiday', True).count() > 0:
                return True
 
 class Room(db.Model):
@@ -140,7 +150,23 @@ class Reservation(db.Model):
                               default=u'請輸入備註')
 
     room = db.ReferenceProperty(Room)
+  
+    def isholiday(self, date):
+        return self.room.homestay.isholiday(date)
 
+    def price_items(self):
+        from datetime_iterator import datetimeIterator
+        from datetime import timedelta 
+        for d in datetimeIterator(self.checkin + timedelta(days=1), \
+                 self.checkout):
+            if self.isholiday(d):
+                yield {'date':d, 'value':self.room.holiday_price}
+            else:
+                yield {'date':d, 'value':self.room.price}
+
+    def price(self):
+        return sum(p['value'] for p in self.price_items())
+  
     def admin_show_path(self):
         return "/admin/%s" % self.key()
 
@@ -159,10 +185,12 @@ class Reservation(db.Model):
 
 class Holiday(db.Model):
     homestay = db.ReferenceProperty(Homestay, required=True)
+    name = db.StringProperty(verbose_name="名稱", required=True)
     date = db.DateProperty(verbose_name="日期", required=True)
     isholiday = db.BooleanProperty(verbose_name="是否為假期", required=True)
 
 class SysHoliday(db.Model):
+    name = db.StringProperty(verbose_name="名稱", required=True)
     date = db.DateProperty(verbose_name="假期", required=True)
 
 def strpdate(str, fmt="%Y%m%d"):

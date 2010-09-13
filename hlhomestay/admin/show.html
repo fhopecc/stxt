@@ -47,6 +47,23 @@
     <td>{{res.comment}}</td>
   </tr>
 
+  <tr><th colspan="2">價格明細表：</th></tr>
+  <tr><th>日期</th><th>單價</th>
+  </tr>
+
+  <tr><td>{{res.checkin}}</td><td>入住</td>
+  </tr>
+
+  {% for p in res.price_items %}
+      <tr>
+        <td>{{p.date}}</td>
+        <td>{{p.value}}</td>
+      </tr>
+  {% endfor %}
+
+  <tr><td>總價</td><td>{{res.price}}</td>
+  </tr>
+
   <tr>
     <td colspan="2">
       <a href="/admin">月曆</a>
