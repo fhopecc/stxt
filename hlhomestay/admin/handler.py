@@ -261,10 +261,157 @@ class HomestayEditPage(AdminPage):
         h.put()
         self.redirect('/admin')
 
+class HolidaysPage(AdminPage):
+    def month(self):
+        p = r'/admin/holidays/(\d{6})'
+        m = re.match(p, self.request.path)
+
+        if not m: return date.today()
+        d = m.group(1) + '01'     
+        d = strpdate(d)
+        return d
+
+    def last_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        last_month = month - 1
+        if last_month < 1:
+            last_month = 12
+            year -= 1
+        last_month = date(year, last_month, 1) 
+
+        h = self.homestay()
+
+        return '/admin/holidays/%s' % last_month.strftime('%Y%m')
+
+    def next_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        next_month = month + 1
+        if next_month > 12:
+            next_month = 1
+            year += 1
+        next_month = date(year, next_month, 1)
+
+        h = self.homestay()
+
+        return '/admin/holidays/%s' % next_month.strftime('%Y%m')
+
+    def get(self):
+        h = self.homestay()
+
+        template_values = {
+            'h': h,
+            'today':date.today(),
+            'month':self.month(),
+            'last_month_path':self.last_month_path(),
+            'next_month_path':self.next_month_path(),
+            'monthly_holidays': 
+                h.monthly_holidays(self.month().year, 
+                                   self.month().month)
+        }
+        self.response.out.write(template.render('holidays.html', 
+                                template_values))
+
+
+    def post(self):
+        r = self.request
+        h = self.homestay()
+
+        h.name = r.get("name")
+        h.address = r.get("address")
+        h.email = r.get("email")
+        h.phone = db.PhoneNumber(r.get("phone"))
+        h.blog = r.get("blog")
+        h.notice = r.get("notice")
+        h.put()
+        self.redirect('/admin')
+
+
+class NewHolidayPage(HolidaysPage):
+    def date(self):
+        p = r'/admin/holidays/(\d{8})/new' 
+        m = re.match(p, self.request.path)
+        if not m: return date.today()
+        d = m.group(1)     
+        d = strpdate(d, '%Y%m%d')
+        return d
+
+    def get(self):
+        h = self.homestay()
+        d = self.date()
+
+        holiday = Holiday(homestay = h, 
+                          date = d
+                          )
+        
+        template_values = {
+            'h': h,
+            'holiday': holiday
+        }
+
+        self.response.out.write(template.render('new_holiday.html', 
+                                template_values))
+
+    def post(self):
+        r = self.request
+        h = Holiday(date = strpdate(r.get('date')), 
+                    name = r.get('name'),
+                    isholiday = r.get('name') != 'False',
+                    homestay = self.homestay())
+        h.put()
+
+        self.redirect('/admin/holidays/%s' % h.date.strftime('%Y%m'))
+
+class EditHolidayPage(HolidaysPage):
+    def holiday(self):
+        p = r'/admin/holidays/(\w+)/edit'  
+        m = re.match(p, self.request.path) 
+        k = m.group(1)                     
+        return  Holiday.get(k)             
+
+    def get(self):
+        holiday = self.holiday()
+
+        template_values = {
+            'h': holiday.homestay, 
+            'holiday': holiday
+        }
+        self.response.out.write(
+            template.render('edit_holiday.html', template_values))
+
+    def post(self):
+        r = self.request
+        holiday = self.holiday()
+        holiday.name = r.get("name")
+        holiday.date = strpdate(r.get('date'))
+        holiday.isholiday = r.get('name') != 'False'
+        holiday.put()
+
+        self.redirect(holiday.calendar_path())
+
+class DelHolidayPage(HolidaysPage):
+    def holiday(self):
+        p = r'/admin/holidays/(\w+)/delete'
+        m = re.match(p, self.request.path) 
+        k = m.group(1)                     
+        return  Holiday.get(k)             
+
+    def get(self):
+        holiday = self.holiday()
+        holiday.delete()
+        self.redirect(holiday.calendar_path())
+
 application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
                (r'/admin/homestay/edit', HomestayEditPage), 
+               (r'/admin/holidays', HolidaysPage), 
+               (r'/admin/holidays/\d{6}', HolidaysPage), 
+               (r'/admin/holidays/new', NewHolidayPage), 
+               (r'/admin/holidays/\d{8}/new', NewHolidayPage), 
+               (r'/admin/holidays/\w+/edit', EditHolidayPage), 
+               (r'/admin/holidays/\w+/delete', DelHolidayPage), 
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 

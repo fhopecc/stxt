@@ -37,6 +37,10 @@
               color:#94D1FF}
 #calendar td#today {color:#FAA7EE;border:1px dashed #FAA7EE}
 
+#calendar .date a         {color:#DFA3FF;font-size:10pt}
+#calendar .date a:visited {color:#DFA3FF} 
+#calendar .date a:hover   {color:#DFA3FF}
+
 #calendar .list           {height:55pt;font-size:8pt} 
 #calendar .list a         {color:#DFA3FF}
 #calendar .list a:visited {color:#DFA3FF} 

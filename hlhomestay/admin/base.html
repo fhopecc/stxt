@@ -58,16 +58,29 @@
 </table>
 <table class="list">
 <tr>
-<th class="title">民宿基本資料</th>
+
+<th class="title" colspan="2">民宿基本資料</th>
 <td><a href="{{h.admin_edit_path}}">編輯</a>
 </tr><tr>
-<td>帳號</td><td>{{h.owner}}</td>
+
+<td>帳號</td>
+<td>
+    {{h.owner}}
+    <a href="{{logout_url}}">登出</a>
+</td>
 </tr><tr>
+
 <td>地址</td><td>{{h.address}}</td>
 </tr><tr>
-<td colspan="2"><a href="{{h.blog}}">民宿網站</a>
-<a href="/{{h.key}}">訂房網站</a>
-<a href="{{logout_url}}">登出</a>
+
+<td colspan="2">
+    <a href="{{h.calendar_path}}">訂房管理</a>
+    <a href="{{h.holidays_path}}">假日檔管理</a>
+</tr><tr>
+
+<td colspan="2">
+    <a href="{{h.blog}}">民宿網站</a>
+    <a href="/{{h.key}}">訂房網站</a>
 </td>
 </tr>
 </table>

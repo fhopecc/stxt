@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="form_content">
+  <form method="post" action='/admin/holidays/new'>
+  <table class="form">
+    <tr><th colspan="2">假日建立作業</th></tr>
+
+    <tr><td>日期</td>
+      <td><input name="date" type="text"
+                 value='{{holiday.date|date:"Ymd"}}'/>
+    </td></tr>
+
+    <tr><td>名稱</td>
+        <td><input name="name" type="text" 
+                   value="{{holiday.name}}"/>
+    </td></tr>
+
+    <tr><td>是否為假日？</td>
+        <td><input name="isholiday" type="text"
+                   value='{{holiday.isholiday}}'/>
+    </td></tr>
+
+    <tr><td>
+            <input type="submit" value="建立"/>
+        </td>
+        <td>
+            <a href="{{res.admin_calendar_path}}">回月曆</a>
+    </td></tr>
+  </table>
+</form>
+</div>
+
+{% endblock %} 

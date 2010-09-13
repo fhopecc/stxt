@@ -2,6 +2,7 @@
 from google.appengine.ext import db
 from google.appengine.api import users
 from datetime import date
+from calendar import Calendar
 import datetime
 
 class Homestay(db.Model):
@@ -32,7 +33,6 @@ class Homestay(db.Model):
                 else: yield res # a room reservation
 
     def monthly_rooms_status(self, year, month):
-        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         monthly_rooms = []
@@ -62,7 +62,6 @@ class Homestay(db.Model):
                     yield r # this is an available room
 
     def available_rooms_in_month(self, year, month):
-        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         rooms_in_month = []
@@ -97,6 +96,12 @@ class Homestay(db.Model):
     def admin_edit_path(self):
         return "/admin/homestay/edit"
 
+    def calendar_path(self):
+        return "/admin"
+    
+    def holidays_path(self):
+        return "/admin/holidays"
+
     def isholiday(self, date):
         # negative list
         if self.holiday_set.\
@@ -110,6 +115,26 @@ class Homestay(db.Model):
               filter('date', date).\
               filter('isholiday', True).count() > 0:
                return True
+
+    def holidays(self, date):
+        h = SysHoliday.all().filter('date', date).get()
+        if h: yield h
+        h = self.holiday_set.filter('date', date).get()
+        if h: yield h
+
+    def monthly_holidays(self, year, month):
+        c = Calendar()
+        m = c.monthdatescalendar(year, month)
+        monthly_holidays = []
+        for w in m:
+            weekly_holidays = []
+            for d in w:
+              weekly_holidays.append({
+                  'date':d,
+                  'holidays':list(self.holidays(d))
+              })
+            monthly_holidays.append(weekly_holidays)
+        return monthly_holidays
 
 class Room(db.Model):
     name = db.StringProperty(
@@ -185,9 +210,21 @@ class Reservation(db.Model):
 
 class Holiday(db.Model):
     homestay = db.ReferenceProperty(Homestay, required=True)
-    name = db.StringProperty(verbose_name="名稱", required=True)
+    name = db.StringProperty(verbose_name="名稱", required=True, 
+                             default=u'請輸入假日名稱')
     date = db.DateProperty(verbose_name="日期", required=True)
-    isholiday = db.BooleanProperty(verbose_name="是否為假期", required=True)
+    isholiday = db.BooleanProperty(verbose_name="是否為假期", 
+                                   required=True, 
+                                   default=True)
+
+    def edit_path(self):
+        return "/admin/holidays/%s/edit" % self.key()
+
+    def delete_path(self):
+        return "/admin/holidays/%s/delete" % self.key()
+
+    def calendar_path(self):
+        return "/admin/holidays/%s" % self.date.strftime('%Y%m')
 
 class SysHoliday(db.Model):
     name = db.StringProperty(verbose_name="名稱", required=True)
