@@ -1,0 +1,32 @@
+相關指令
+~~~~~~~~
+mkuser     Creates a new user account.
+mkuser.sys Customizes a new user account. 
+lsuser     Displays attributes of user accounts. 
+usrck      Verifies the correctness of a user definition.
+chuser     rlogin=true <username>	Changes attributes for 
+           the specified user. 
+chgroup    Users=x,y,z <grp name>	Changes attributes for groups
+passwd     Change a user's password.
+pwdadm
+rmuser     Removes a user account.
+
+建立使用者
+~~~~~~~~~~
+
+建立使用者 lmh02527 如下：
+
+  mkuser lmh02527
+
+其使用者屬性會使用使用者預設檔定義的屬性來建立使用者，
+此檔路徑如下：
+
+  /lib/security/mkuser.default
+
+稅務局帳號主要是 ftp 存取 /elt/shared_tmp 的目錄，
+故將上述檔設為 group=eltgrp 而 home=/elt/shared_tmp
+
+配置密碼:
+
+passwd lmh02527
+

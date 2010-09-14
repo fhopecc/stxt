@@ -167,11 +167,13 @@ def f_video(tree):
 
     temp = Template(temp)
     vurl = os.path.join('videos', tree.name.replace(' ', '_'))
+    vurl = vurl + '.wmv'
     ext = os.path.splitext(vurl)[1]
-    if ext in ('.flv'):
-        return f_flash(tree)
-    else:
-        return str(temp(tree.type, f_title(tree), vurl))
+    #if ext in ('.flv'):
+    #    return f_flash(tree)
+    #else:
+    #    return str(temp(tree.type, f_title(tree), vurl))
+    return str(temp(tree.type, f_title(tree), vurl))
 
 def f_table(tree):
     temp = '''$def with (type, title, content)
