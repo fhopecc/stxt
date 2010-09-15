@@ -1,0 +1,38 @@
+with statement
+--------------
+
+"with" statement is used when numerous function of an object 
+is used or a function of an object is to be used numerous times.
+
+Syntax:
+
+  with(object)
+  {
+       // Calling the functions or methods of the object
+  }
+
+For this example we will use the object "document" and 
+its methods (functions) "write" and attribute "title".
+
+Example Code: 
+
+<script language="javascript">
+with(document)
+{
+    write(" inside with statement <br>");
+    write(" using with(object) we can call its functions directly <br>");
+    write (" TITLE -"+title);
+}
+</script>
+
+Result:
+
+  inside with statement 
+  using with(object) we can call its functions directly 
+
+  In the above example you can clearly see that the write function 
+  is executed numerous times with out calling document.write() and 
+  also title (document.title) is called. 
+
+  You can use any objects with "with" statement. e.g: date, math, etc. 
+  You will know more about these objects in later part of the tutorial.

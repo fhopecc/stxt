@@ -1,3 +1,75 @@
+JavaScript Form Validation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+JavaScript can be used to validate data in HTML forms 
+before sending off the content to a server.
+
+Form data that typically are checked by a JavaScript could be:
+
+1.has the user left required fields empty?
+2.has the user entered a valid e-mail address?
+3.has the user entered a valid date?
+4.has the user entered text in a numeric field?
+5.Required Fields
+
+The function below checks if a required field has been left empty. 
+If the required field is blank, an alert box alerts a message 
+and the function returns false. If a value is entered, 
+the function returns true (means that data is OK):
+
+function validate_required(field,alerttxt)
+{
+with (field)
+  {
+  if (value==null||value=="")
+    {
+    alert(alerttxt);return false;
+    }
+  else
+    {
+    return true;
+    }
+  }
+}
+The entire script, with the HTML form could look something like this:
+
+<html>
+<head>
+<script type="text/javascript">
+function validate_required(field,alerttxt)
+{
+with (field)
+  {
+  if (value==null||value=="")
+    {
+    alert(alerttxt);return false;
+    }
+  else
+    {
+    return true;
+    }
+  }
+}
+
+function validate_form(thisform)
+{
+with (thisform)
+  {
+  if (validate_required(email,"Email must be filled out!")==false)
+  {email.focus();return false;}
+  }
+}
+</script>
+</head>
+
+<body>
+<form action="submit.htm" onsubmit="return validate_form(this)" method="post">
+Email: <input type="text" name="email" size="30">
+<input type="submit" value="Submit">
+</form>
+</body>
+
+</html>
+
 Explanation of the Code
 ~~~~~~~~~~~~~~~~~~~~~~~
 The JavaScript has the following main functions:
