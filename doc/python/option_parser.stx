@@ -44,7 +44,7 @@ $myprog -f thefile.txt -s xyz a1 a2 a3
 該能夠正確地執行。如果程式需要使用者輸入某些資料才能運作,那麼也應該是
 使用 positional argument 才對。
 
-●option argument: 緊 跟隨在 option 後的 argument,就是 option argument
+option argument: 緊 跟隨在 option 後的 argument,就是 option argument
 。以本例來說, "thefile.txt", "xyz" 都是 option argument。指定 option
  argument 有兩種寫法, "-f thefile" 和 "-fthefile", optparse 套件都接受
 。
@@ -52,11 +52,11 @@ $myprog -f thefile.txt -s xyz a1 a2 a3
 option 亦可以沒有 option argument,意即 option 單獨存在。這樣的 option
  通常做為旗標 (flag) 用,代表某個功能的開啟或是關閉。
 
-●positional argument: 當一個 argument list 被解讀完後,剩下的就是
+positional argument: 當一個 argument list 被解讀完後,剩下的就是
  positional argument 了!以本例來說, "a1", "a2", "a3" 就是 positional
  argument。通常被用在"使用者必須輸入"的資訊上。
 
-●required option: 一 個有點讓人覺得矛盾的名詞:既然是 "option" (選擇),
+required option: 一 個有點讓人覺得矛盾的名詞:既然是 "option" (選擇),
 又怎麼會是 "required" (必須)的呢? optparse 套件不對這種 option 做出任
 何的限制或是協助。詳情可以參閱 Python Library Reference 6.20.5 的範例
 程式。
@@ -241,7 +241,7 @@ $/usr/bin/foo --version foo 1.0
 指定讀入 option argument 的個數:
 
 add_option() 有一個參數 nargs,用以指定該 option 會從命令列上讀入幾個
- option argument。舉例來說,如果 add_option(..., narg = 3, ...):
+ option argument。舉例來說,如果 add_option(..., nargs = 3, ...):
 
 $myprog --file w x y z
 
@@ -299,19 +299,16 @@ parser.add_option(dest = "optargs",action = "append",nargs = 3) ...
 $myprog -f 1 2 3 -f 4 5 6 -f 7 8 9 [('1', '2', '3'), ('4', '5', '6'),
  ('7', '8', '9')]
 
-
 看出其中差異了嗎? nargs 會將 option argument 包裝成 tuple,而 append 參
 數會將包裝好的 tuple 再"附加"到原有的 list 中。 count : 將 dest 的值加
  1。 dest 的值會被初始會 0,該 option 每出現一次, dest 的值就增加 1。
  callback : 請參考 Python Library Reference 6.20.4。 help : 列印 help
  訊息。 version : 列印程式版本。
 
-
 錯誤處置: 如果 option 預期會收到一個 int,而使用者傳入的是 string 參數
 時,會發生什麼事?
 
 optParser.add_option("-n",dest = "theNumber",type = "int")
-
 
 若使用者輸入的命令是:
 
