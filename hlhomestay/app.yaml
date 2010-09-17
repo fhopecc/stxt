@@ -5,24 +5,11 @@ api_version: 1
 
 handlers:
 
-- url: /homestays(/\w*)?
-  script: homestay/handler.py
-  login: admin
-
-# must specified homestay's key
-- url: /homestays/\w+/rooms/\w*
-  script: room/handler.py
-  login: admin
-
-- url: /rooms/\w*(/\w*)?
-  script: room/handler.py
-  login: admin
-
-- url: /rooms/\w+/reservations/\w*
-  script: reservation/handler.py
-
 - url: /css
   static_dir: css
+
+- url: /js
+  static_dir: js
 
 - url: /sys.*
   script: sys/handler.py

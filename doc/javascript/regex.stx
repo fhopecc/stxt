@@ -1,0 +1,17 @@
+Capturing Groups 
+~~~~~~~~~~~~~~~~
+You can access capturing groups like this:
+
+var myString = "something format_abc";
+var myRegexp = /(?:^|\s)format_(.*?)(?:\s|$)/g;
+var match = myRegexp.exec(myString);
+alert(match[1]);  // abc
+And if you there are multiple matches you can iterate over them:
+
+while (match != null) {
+    match = myregexp.exec(myString);
+
+    // matched text: match[0]
+    // match start: match.index
+    // capturing group n: match[n]
+}

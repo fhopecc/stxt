@@ -1,60 +1,66 @@
-/**--------------------------
-//* Validate Date Field script- By JavaScriptKit.com
-//* For this script and 100s more, visit http://www.javascriptkit.com
-//* This notice must stay intact for usage
----------------------------**/
+function check_date(field, msg) {
+    with(field) {
+        var pat = /(\d{4})(\d{2})(\d{2})/
+        var m = pat.exec(value)
+        if (m != null){
+          year = m[1]
+          mon  = m[2]
+          day  = m[3]
+          return true
+        } else {
+          alert(msg)
+          focus()
+          return false
+        }
+    }
+}
 
-function validate_email(field,alerttxt)
+function check_email(field,msg)
 {
 with (field)
   {
   apos=value.indexOf("@");
   dotpos=value.lastIndexOf(".");
   if (apos<1||dotpos-apos<2)
-    {alert(alerttxt);return false;}
+    {alert(msg);focus();return false;}
   else {return true;}
   }
 }
 
-
-// Checks if a given date string is in    
-// one of the valid formats:   
-// a) M/D/YYYY format   
-// b) M-D-YYYY format   
-// c) M.D.YYYY format   
-// d) M_D_YYYY format   
-function isDate(s)   
-{      
-    // make sure it is in the expected format   
-    if (s.search(/^\d{1,2}[\/|\-|\.|_]\d{1,2}[\/|\-|\.|_]\d{4}/g) != 0)   
-        return false;   
-  
-    // remove other separators that are not valid with the Date class              
-    s = s.replace(/[\-|\.|_]/g, "/");   
-               
-    // convert it into a date instance   
-    var dt = new Date(Date.parse(s));          
-  
-    // check the components of the date   
-    // since Date instance automatically rolls over each component   
-    var arrDateParts = s.split("/");   
-    return (   
-        dt.getMonth() == arrDateParts[0]-1 &&   
-        dt.getDate() == arrDateParts[1] &&   
-        dt.getFullYear() == arrDateParts[2]   
-    );             
-}   
-  
-// test function to test the isDate function   
-function test_isDate()   
-{   
-    var arrDates = [    
-        '05/15/2008', '05-15-2008',    
-        '05.15.2008', '05_15_2008',   
-        '15/15/2008', '05/35/2008',   
-        '05/15/1908', '15-15-2008',   
-        'a/1b/2008', '05/30/a008' ];   
-           
-    for (var d in arrDates)    
-        document.writeln("isDate('" + arrDates[d] + "') : " + isDate(arrDates[d]) + "<BR>");   
+// 身份證字號
+function checkID(string) {
+  re = /^[A-Z]\d{9}$/;
+  if (re.test(string))
+   return true; 
+ }
+ 
+// 信用卡號
+function checkCreditCard(string) {
+  re = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+ // re = /^(\d{4}-){3}\d{4}$/;
+  if (re.test(string))
+   return true; 
+ }
+ 
+// 英文名稱
+function checkEnglishName(string) {
+  re1 = /^[A-Za-z\-]+\s+[A-Za-z\-]+$/;
+  re2 = /^[A-Za-z\-]+\s+[A-Za-z\-]+\s+[A-Za-z\-]+$/;
+  if (re1.test(string) || re2.test(string))
+   return true; 
+ }
+ 
+// 電話
+function check_phone(field, msg)
+{
+    re = /^[\d()-]+$/;
+    with (field) {
+        if (re.test(value)) {
+            return true; 
+        } else {
+            alert(msg)
+            focus()
+            return false
+        }
+    }
 }

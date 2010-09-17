@@ -1,7 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="form_content">
-  <form method="post" action='/{{r.room.key}}/{{r.checkin|date:"Ymd"}}'>
+  <script src="/js/validate_input.js"></script>
+  <script>
+    function check_form(f){
+        with(f) {
+            if(check_date(checkin, 
+                "入住日期格式錯誤，格式如20100912")==false){
+               return false 
+            } 
+
+            if(check_date(checkout, 
+                "退房日期格式錯誤，格式如20100912")==false){
+               return false 
+            } 
+
+            if(check_phone(phone, 
+                "聯絡電話格式錯誤，格式如0911831831或07-3351444")==false){
+               return false 
+            } 
+
+            if(check_email(email, 
+                "電子郵件格式錯誤，格式如abcd@example.com")==false){
+               return false 
+            } 
+                
+        }
+    }
+  </script>
+  <form method="post" 
+        onsubmit="return check_form(this)"
+        action='/{{r.room.key}}/{{r.checkin|date:"Ymd"}}'>
   <table class="form">
     <tr><th colspan="2">訂房作業</th></tr>
 
@@ -41,7 +70,7 @@
                    value='{{r.create_date|date:"Ymd"}}'/>
     </td></tr>
 
-    <tr><td colspan="2">備註</td></td></tr>
+    <tr><td colspan="2">備註</td></tr>
     <tr><td colspan="2">
         <textarea name="comment">{{r.comment}}</textarea>
     </td></tr>
