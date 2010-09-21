@@ -69,7 +69,7 @@ class IndexPage(ClientPage):
     def get(self):
         homestay = self.homestay()
         month = self.month()
-        available_rooms_in_month = homestay.available_rooms_in_month(month.year, month.month)
+        monthly_availables = homestay.monthly_availables(month.year, month.month)
 
         template_values = {
             'h': homestay,
@@ -77,7 +77,7 @@ class IndexPage(ClientPage):
             'month':month,
             'last_month':last_month(month),
             'next_month':next_month(month),
-            'available_rooms_in_month':available_rooms_in_month
+            'monthly_availables':monthly_availables
         }
 
         self.response.out.write(

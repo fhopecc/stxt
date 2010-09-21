@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="/js/validate_input.js"></script>
+<script>
+function check_form(f){
+    with(f) {
+        if(check_date(date, 
+            "特價日期格式錯誤，格式如20100912")==false){
+           return false 
+        } 
+
+        if(check_integer(price, 
+            "特別價格格式錯誤，格式如2000")==false){
+           return false 
+        } 
+    }
+}
+</script>
+
+<div id="form_content">
+
+  <form method="post" 
+        onsubmit="return check_form(this)"
+        action='/admin/specials/new'>
+
+  <table class="form">
+    <tr><th colspan="2">特價資料建立作業</th></tr>
+
+    <tr><td>特價房間</td>
+        <td>{{special.room.name}}
+            <input name="room" type="hidden" value="{{special.room.key}}"/>
+    </td></tr>
+
+    <tr><td>特價日期</td>
+      <td><input name="date" type="text"
+                 value='{{special.date|date:"Ymd"}}'/>
+    </td></tr>
+
+    <tr><td>特價名稱</td>
+        <td><input name="name" type="text" 
+                   value="{{special.name}}"/>
+    </td></tr>
+
+    <tr><td>特別價格</td>
+        <td><input name="price" type="text" 
+                   value="{{special.price}}"/>
+    </td></tr>
+
+
+    <tr><td>
+            <input type="submit" value="建立"/>
+        </td>
+        <td>
+            <a href="{{special.calendar_path}}">月曆</a>
+    </td></tr>
+  </table>
+</form>
+</div>
+
+{% endblock %} 

@@ -64,3 +64,18 @@ function check_phone(field, msg)
         }
     }
 }
+
+// 價格
+function check_integer(field, msg)
+{
+    re = /^[\d]+$/;
+    with (field) {
+        if (re.test(value)) {
+            return true; 
+        } else {
+            alert(msg)
+            focus()
+            return false
+        }
+    }
+}

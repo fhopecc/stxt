@@ -11,24 +11,24 @@
 <th>一</th><th>二</th><th>三</th><th>四</th>
 <th>五</th><th>六</th><th>日</th>
 </tr>
-{% for rooms_in_week in monthly_rooms_status %}
+{% for weekly_books in monthly_books %}
     <tr class="week">
-    {% for r in rooms_in_week %}
+    {% for d in weekly_books %}
         <td
-        {% ifequal r.date today %}
+        {% ifequal d.date today %}
            id="today"
         {% endifequal %}
         >
-        <div class="date">{{r.date|date:"d"}}</div>
+        <div class="date">{{d.date|date:"d"}}</div>
         <div class="list">
-        {% for a in r.rooms_status %}
+        {% for b in d.daily_books %}
             <div class="listitem">
 
-            {% ifequal a.kind "Reservation" %}
-                <a href="{{a.admin_show_path}}">{{a.name}}</a>
+            {% ifequal b.kind "Reservation" %}
+                <a href="{{b.admin_show_path}}">{{b.name}}</a>
             {% else %}
-                <a href="/admin/{{a.key}}/{{r.date|date:"Ymd"}}"
-                 >{{a.name}}</a>
+                <a href="/admin/{{b.key}}/{{d.date|date:"Ymd"}}">
+                   {{b.name}}</a>
             {% endifequal %}
 
             </div>

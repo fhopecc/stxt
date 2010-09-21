@@ -1,19 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>新增民宿</h1>
 <form method="post" action="new">
-  <table>
+  <table class="form">
+    <tr><th colspan="2">民宿資料建立作業</th></tr>
+
     <tr><td>名稱</td>
-        <td><input name="name" type="text"/></td></tr>
-    <tr><td >地址</td>
+        <td><input name="name" type="text"/>
+    </td></tr>
+
+    <tr><td>電話</td>
+        <td><input name="address" type="text"/></td>
+    </tr>
+
+    <tr><td>地址</td>
         <td><input name="address" type="text"/>
        </td></tr>
-    <tr><td >帳號</td>
+
+    <tr><td>帳號</td>
        <td><input name="owner" type="text"/></td></tr>
-    <tr><td >電子郵件</td>
+
+    <tr><td>電子郵件</td>
         <td><input name="email" type="text"/></td></tr>
-    <tr><td >網址</td>
-        <td><input name="blog" type="text"/></td></tr>
+
+    <tr><td>網址</td>
+        <td><input name="blog" type="text"/>
+    </td></tr>
+
+    <tr><td colspan="2">備註</td></td></tr>
+    <tr><td colspan="2">
+        <textarea name="comment" >{{res.comment}}</textarea>
+    </td></tr>
+
+
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
   </table>
 </form>

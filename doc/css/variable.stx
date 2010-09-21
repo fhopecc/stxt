@@ -1,0 +1,54 @@
+1. Introduction
+
+It is very common to find repeated property values in a CSS stylesheet, for instance to make sure semantically different elements in a web page have a similar rendering and user experience. While CSS offers a mechanism for grouping style rules using groups of selectors, Web designers often tend to neglect it because it decreases the stylesheet's readability and human-based maintainability, and semantically distinct elements rarely share all style rules.
+
+CSS Variables allow authors to define variables that are reusable as property values anywhere in a stylesheet and queryable/modifiable through an extension of the CSS Object Model described in this document.
+
+2. Requirements
+
+RQ1
+The definition of a variable and a call to a variable should be simple enough so web authors don't have to drastically change their existing stylesheets to take advantage of CSS Variables. Use case: remove all existing occurrences of a given value in a given stylesheet to replace them by a call to a single variable.
+RQ2
+The definitions of variables should cross @import boundaries so variables can be contained in a standalone stylesheet and imported by all stylesheets needing them. Use case: company-wide graphical charter for a set of corporate web sites.
+RQ3
+The value of variable should be modifiable by script. Such a modification should instantaneously update the value of all properties calling the corresponding variable's value, possibly triggering changes in the rendering of the document.
+RQ4
+Calls to a variable in the assignment of the value of a property should make the corresponding CSS declaration invalid in a non-conformant legacy browser, the CSS error handling rules allowing then a fallback to a regular CSS Level 2 rule.
+3. Definition of a variable
+
+3.1. The @variables at-rule
+
+CSS Variables should be defined in an @variables at-rule. An @variable at-rule is composed of the '@' character followed by the 'variables' identifier, optional target media types (separated by commas) and a block of variable definitions. The definition of a variable must precede all style rules contained or imported in the stylesheet.
+
+Each variable definition contained in the block of variables is a declaration composed as CSS style declarations of an identifier, a semi-colon and one value. As in CSS declarations, optional whitespaces and comments are allowed anywhere.
+
+3.2. Variables and @import
+
+The definition of variables crosses @import boundaries. That means that the definition of a variable contained in a stylesheet B imported from a stylesheet A applies to all rules directly contained or imported into stylesheet A.
+
+3.3 Calling a variable
+
+Using the value of a variable as the value or one of the values of a property in a CSS declaration should be achieved using the new functional notation var(). This function takes only one argument being the identifier being the name of the variable. The declaration becomes invalid if the variable does not exist.
+Examples:
+
+@variables {
+  CorporateLogoBGColor: #fe8d12;
+}
+
+div.logoContainer {
+  background-color: var(CorporateLogoBGColor);
+}
+@variables {
+  myMargin1: 2em;
+}
+
+@variables print {
+  myMargin1: 2em;
+}
+
+.data, div.entry {
+  margin-left: 30px;
+  margin-left: var(myMargin1);
+}
+In the example just above, the left margin of an element carrying the class 'data' will be 2em for instance for the 'screen' medium type, and 10px for the 'print' medium type in a user agent conformant to CSS Variables. A legacy non-conformant browser would apply a 30px left margin to such elements in all media types.
+4

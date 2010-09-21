@@ -1,0 +1,154 @@
+Installing JsUnit
+-----------------
+
+Download the distribution by clicking on "Download" at the top right
+ of the screen, or here. You will need to choose the JsUnit file to
+ download, and then select a Sourceforge mirror from which to download
+ it. The distributed ZIP is suitable for windows, Mac, or Unix.
+
+Unzip the distributed ZIP to any directory. You will get a directory named "jsunit".
+
+You can also put the jsunit directory on a webserver. Then you can
+access JsUnit over HTTP. This method is particularly suitable when
+you have many people running shared JsUnit tests across an
+enterprise.
+
+If you are going to use the JsUnit Server, jsunit/java/bin/jsunit.jar
+needs to exist. The distribution comes with a default jsunit.jar. If
+you have trouble with this JAR, you can easily build it for your
+machine using the jsunit/build.xml Ant file. The default target in
+this file is create_distribution, which builds the JAR. So can just
+execute "ant" in the jsunit directory to build the JAR.
+
+
+Structure of the Distribution
+-----------------------------
+
+Inside the directory named "jsunit" are the following files 
+and directories:
+
+testRunner.html          is an HTML page that launches 
+                         the JsUnit Test Runner
+
+build.xml                is an Ant build script for building and 
+                         running the JsUnit Server and its components
+
+jsunit.properties.sample is a properties file for the JsUnit Server - 
+                         to use it, rename it to 
+                         jsunit.properties 
+                         (DEPRECATED in favor of build.xml)
+
+app                      is a directory containing most of 
+                         the JsUnit application code (HTML/.js files)
+
+css                      is a directory containing a style sheet for 
+                         the JsUnit app
+
+images                   is a directory containing images for 
+                         the JsUnit app
+
+intellij                 is a directory containing the IntelliJ project 
+                         and module files (for developers of JsUnit)
+
+java                     is a directory containing the Java source and 
+                         JARs for running the JsUnit Server and 
+                         its components
+
+licenses                 is a directory containing license files for 
+                         JsUnit and its third-party components 
+                         (see index.html)
+
+logs                     is a directory containing the logs from 
+                         the JsUnit Server
+
+tests                    is a directory containing the JsUnit self-tests
+
+
+Test Pages and Test Functions
+-----------------------------
+
+We write an (HTML) Test Page of tests when using JsUnit (corresponding to a test class in JUnit). A test page contains JavaScript Test Functions (corresponding to test methods in JUnit). A Test Function is distinguished from other functions on the page by its name - it must begin with "test"; in addition a test function takes no parameters (just as things are in JUnit.) For example, a Test Function could have the signature testMyCode().
+
+A test page must "include" the jsunit/app/jsUnitCore.js JavaScript file; this file is the JsUnit engine. (This corresponds to extending the TestCase class in JUnit.)
+That is, the document's <head> must contain the statement
+<script language="JavaScript" src="jsUnitCore.js"></script>
+Of course, you may need to change this to point at jsUnitCore.js if you are in a different directory. For example, since the JsUnit self tests live in jsunit/tests, they point at "../app/jsUnitCore.js".
+
+Under most platform/browser combinations, Test Functions are "auto-discovered" - that is, JsUnit can scan the Test Page and discover what Test Functions are present. For Mac 0S9 with IE5, Mac OSX with IE5, KDE with Netscape 6.x/Mozilla 0.9 and KDE with Konqueror, however, auto-discovery is not supported. You must expose the Test Function names using the exposeTestFunctionNames() function. This function must return a string array of all the Test Functions in the page.
+
+Of course, test pages can include any other .js library files and can contain any other functions. Sometimes it is useful to define Test Functions in external .js files. For example, you may wish to set up several HTML with different contents and to run the same tests on each; placing the Test Functions in an external .js file and including it in each HTML page accomplishes this. If you define Test Functions in external .js files, you must expose the Test Function names using the exposeTestFunctionNames() function except in Mozilla.
+
+
+Assertion Functions
+
+Test functions in a test page set up as described are then free to use the following functions. In each case but the last the comment argument is optional.
+
+assert([comment], booleanValue)
+assertTrue([comment], booleanValue)
+assertFalse([comment], booleanValue)
+assertEquals([comment], value1, value2)
+assertNotEquals([comment], value1, value2)
+assertNull([comment], value)
+assertNotNull([comment], value)
+assertUndefined([comment], value)
+assertNotUndefined([comment], value)
+assertNaN([comment], value)
+assertNotNaN([comment], value)
+fail(comment)
+Also, as a convenience, JsUnit provides a variable called JSUNIT_UNDEFINED_VALUE which is the JavaScript undefined value.
+
+Note that JsUnit comes with several Test Pages (tests/jsUnitAssertionTests.html and tests/jsUnitUtilityTests.html) which test all of these test functions and other functions that the TestRunner uses.
+
+ 
+setUp() and tearDown()
+
+JsUnit supports setUp() and tearDown(). That is, if you define a function called setUp() in a Test Page, it is called before each test is run. If you define a function called tearDown(), it is called after each test. For an example, see the Test Page called jsUnitSetupTearDownTests.html which comes with JsUnit.
+
+There are two important differences here between JUnit and JsUnit:
+
+In JUnit, each test run creates a new instance of the test class. In JsUnit the corresponding event (which would be reloading the Test Page) does not happen. Thus any variables declared in your Test Page will preserve their state across test runs.
+In JUnit you are not guaranteed any order in the running of the test methods; similarly in JsUnit you are not guaranteed any particular order of running.
+setUpPage()
+
+JsUnit supports another kind of setUp function called setUpPage(). setUpPage() is called once on each Test Page before any Test Functions are called. setUpPage() can be a useful place to place script that needs to execute after the page is loaded but before any Test Functions are called, when setUp() is not appropriate (setUp() is called before every Test Function). setUpPage() is especially useful for the asynchronous loading of data documents.
+
+
+
+
+If you implement setUpPage in your Test Page, you need to set the value of a variable called "setUpPageStatus" to "complete" when your function is finished. JsUnit then knows your function is done, and proceeds to execute the page.
+
+
+Test Suites
+
+JsUnit supports Test Suites. A Test Suite is a collection of Test Pages; a common use of Test Suites is to group Test Pages which test related areas. In JsUnit, a Test Suite is a special kind of Test Page which lists Test Pages and/or other Test Suites; if one runs the Test Suite Page in the Test Runner, each Test Page listed is run in succession. The Test Pages listed in a suite can themselves be Test Suite pages. In this way we can have one "master" Test Suite Page which runs a large number of grouped tests (just as things are in JUnit).
+
+
+Tracing/logging
+
+A common problem when debugging JavaScript is that it is harder in JavaScript than in most languages to print out simple trace statements. Commonly, the developer has to resort to using the "alert()" function. While it does work well, it can be frustrating as you progress in tracking down a problem to step past many alert statements to get to your latest one. Also, the developer typically has to go back and remove each alert when (s)he is finished debugging, which takes time, and is especially annoying if another similar problem has to be tracked down later where the original alert calls would have been useful. Finally, using alerts can alter the behavior of the code, especially when UI events are occurring.
+
+JsUnit supports tracing. There are 3 tracing levels - warn, info, and debug. When running tests, you can specify which level of tracing you want (see "Running Tests"). The levels cascade in the order warn->info->debug. That is, if you choose "warn" as your tracing level, you will see only warn traces. If you choose "info", you will see all warn and info traces. If you choose "debug", you will see all traces. (You can also choose "No tracing", which is the default.)
+
+There are three functions that you can call anywhere in your tests:
+
+function warn(message, [value])
+function inform(message, [value]) (equivalent to function info(message, [value]))
+function debug(message, [value])
+In each case the value parameter is optional. For example, if x were 7, the code
+
+warn("Variable x should never be greater than 5", x);
+would result in the trace "Variable x should never be greater than 5: 7". See the Test Page "jsUnitFrameworkUtilityTests.html" which comes with JsUnit for more examples.
+To define a Test Suite Page in JsUnit, make a function called "suite()" in a Test Page (note that the Test Page should itself contain no tests). This function should return a JsUnitTestSuite object. The methods on the JsUnitTestSuite type are listed below. See the tests/jsUnitTestSuite.html Test Suite file for an example.
+
+addTestPage(filename) adds a Test Page to the suite. The filename parameter is the fully qualified or relative URL of the Test Page, for example "file:///mytests/testPage.html" or "../testPage.html". If relative, it is relative to testRunner.html.
+addTestSuite(aTestSuite) adds a Test Suite to the suite. aTestSuite must be an object of type JsUnitTestSuite and be declared in the same page as the suite function.
+
+
+Using the Test Runner
+
+To use the JsUnit Test Runner, open the web browser in which the tests are to be run on the "testRunner.html" file in the jsUnit directory. Enter the name of your test file in the field provided and press the "Run" button. The Test Functions in your test page will be run in order of declaration. The "Progress" bar indicates progress of the Test Runner through the Test Page. The progress bar remains green unless an error or failure is encountered, at which time it turns red. Number of tests run ("Runs"), errors encountered ("Errors"), and failures encountered ("Failures") are reported. For each error or failure encountered, an entry is placed in the "Errors and Failures" list box. Double-click the error or failure or highlight it and click "Show" to see more information about it. In the case of an error, you will see the browser's error message. In the case of a failure you will see the failure message, your comment (if you used one in the assertion call) and the stack trace if you are using IE.
+
+
+Tracing
+
+If your Test Functions contain any tracing, the traces will appear in a pop-up window. You can select the level of your tracing in the drop down - none, warn, info or debug. To choose whether to keep trace windows from previous runs open, use the checkbox.

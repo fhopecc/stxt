@@ -89,7 +89,7 @@ class IndexPage(AdminPage):
             'month':self.month(),
             'last_month_path':self.last_month_path(),
             'next_month_path':self.next_month_path(),
-            'monthly_rooms_status': h.monthly_rooms_status(
+            'monthly_books': h.monthly_books(
                                     self.month().year, 
                                     self.month().month), 
             'logout_url':self.logout_url()
@@ -126,15 +126,26 @@ class NewPage(AdminPage):
                           create_date = strpdate(r.get('create_date')),
                           comment = r.get('comment'), 
                           room = self.room())
-        res.put()
+        try:
+            res.book()
 
-        template_values = {
-            'h': res.room.homestay, 
-            'res': res
-        }
+            template_values = {
+                'h': res.room.homestay, 
+                'res': res
+            }
 
-        self.response.out.write(template.render('show.html', 
-                                template_values))
+            self.response.out.write(template.render('show.html', 
+                                    template_values))
+
+        except PeriodHasBooksError:
+            template_values = {
+                'h': res.room.homestay, 
+                'bs': res.period_books()
+            }
+            self.response.out.write(
+                    template.render('period_has_books_error.html', 
+                                    template_values))
+
 
 class ShowPage(AdminPage):
    def get(self):
@@ -172,7 +183,7 @@ class EditPage(AdminPage):
         res.create_date = strpdate(r.get('create_date'))
         res.comment = r.get('comment') 
         res.room = Room.get(r.get('room'))
-        res.put()
+        res.book()
 
         template_values = {
             'h': res.room.homestay, 
@@ -262,6 +273,7 @@ class HomestayEditPage(AdminPage):
         self.redirect('/admin')
 
 class HolidaysPage(AdminPage):
+
     def month(self):
         p = r'/admin/holidays/(\d{6})'
         m = re.match(p, self.request.path)
@@ -313,22 +325,8 @@ class HolidaysPage(AdminPage):
         self.response.out.write(template.render('holidays.html', 
                                 template_values))
 
-
-    def post(self):
-        r = self.request
-        h = self.homestay()
-
-        h.name = r.get("name")
-        h.address = r.get("address")
-        h.email = r.get("email")
-        h.phone = db.PhoneNumber(r.get("phone"))
-        h.blog = r.get("blog")
-        h.notice = r.get("notice")
-        h.put()
-        self.redirect('/admin')
-
-
 class NewHolidayPage(HolidaysPage):
+
     def date(self):
         p = r'/admin/holidays/(\d{8})/new' 
         m = re.match(p, self.request.path)
@@ -402,6 +400,100 @@ class DelHolidayPage(HolidaysPage):
         holiday.delete()
         self.redirect(holiday.calendar_path())
 
+class SpecialsPage(AdminPage):
+
+    def month(self):
+        p = r'/admin/specials/(\d{6})'
+        m = re.match(p, self.request.path)
+
+        if not m: return date.today()
+        d = m.group(1) + '01'     
+        d = strpdate(d)
+        return d
+
+    def last_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        last_month = month - 1
+        if last_month < 1:
+            last_month = 12
+            year -= 1
+        last_month = date(year, last_month, 1) 
+
+        h = self.homestay()
+
+        return '/admin/specials/%s' % last_month.strftime('%Y%m')
+
+    def next_month_path(self):
+        year = self.month().year
+        month = self.month().month
+        next_month = month + 1
+        if next_month > 12:
+            next_month = 1
+            year += 1
+        next_month = date(year, next_month, 1)
+
+        h = self.homestay()
+
+        return '/admin/specials/%s' % next_month.strftime('%Y%m')
+
+    def get(self):
+        h = self.homestay()
+
+        template_values = {
+            'h': h,
+            'today':date.today(),
+            'month':self.month(),
+            'last_month_path':self.last_month_path(),
+            'next_month_path':self.next_month_path(),
+            'monthly_specials': 
+                h.monthly_specials(self.month().year, 
+                                   self.month().month)
+        }
+        self.response.out.write(template.render('specials.html', 
+                                template_values))
+
+class NewSpecialPage(AdminPage):
+
+    def room(self):
+        p = r'/admin/specials/(\w+)/\d{8}'   
+        m = re.match(p, self.request.path)
+        r = m.group(1)                   
+        r = Room.get(r)                 
+        return r
+
+    def date(self):
+        p = r'/admin/specials/\w+/(\d{8})' 
+        m = re.match(p, self.request.path)
+        if not m: return date.today()
+        d = m.group(1)     
+        d = strpdate(d, '%Y%m%d')
+        return d
+
+    def get(self):
+        s = Special(room = self.room(), 
+                    date = self.date()
+                   )
+        
+        template_values = {
+            'h': s.room.homestay,
+            'special': s
+        }
+
+        self.response.out.write(template.render('new_special.html', 
+                                template_values))
+
+    def post(self):
+        r = self.request
+        s = Special(room = Room.get(r.get('room')),
+                    date = strpdate(r.get('date')),
+                    name = r.get('name'),
+                    price = int(r.get('price'))
+                   )
+        s.put()
+
+        self.redirect(s.calendar_path())
+
 application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
@@ -412,6 +504,12 @@ application = webapp.WSGIApplication([
                (r'/admin/holidays/\d{8}/new', NewHolidayPage), 
                (r'/admin/holidays/\w+/edit', EditHolidayPage), 
                (r'/admin/holidays/\w+/delete', DelHolidayPage), 
+               (r'/admin/specials', SpecialsPage), 
+               (r'/admin/specials/\d{6}', SpecialsPage), 
+               (r'/admin/specials/new', NewSpecialPage), 
+               (r'/admin/specials/\w+/\d{8}', NewSpecialPage),
+               (r'/admin/specials/\w+/edit', EditHolidayPage), 
+               (r'/admin/specials/\w+/delete', DelHolidayPage), 
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 

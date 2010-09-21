@@ -3,17 +3,17 @@
 <table id="calendar">
 <tr id="controlbar"><td colspan="7">
 {{month|date:"Y-m"}} 
-<a href="/{{h.key}}">今天</a>
-<a href="/{{h.key}}/{{last_month|date:"Ym"}}">上月</a>
-<a href="/{{h.key}}/{{next_month|date:"Ym"}}">下月</a>
+<a href="/admin">今天</a>
+<a href="{{last_month_path}}">上月</a>
+<a href="{{next_month_path}}">下月</a>
 </td></tr>
-<tr id="week_label">
+<tr id="label">
 <th>一</th><th>二</th><th>三</th><th>四</th>
 <th>五</th><th>六</th><th>日</th>
 </tr>
-{% for weekly_availables in monthly_availables %}
+{% for weekly_specials in monthly_specials %}
     <tr class="week">
-    {% for d in weekly_availables %}
+    {% for d in weekly_specials %}
         <td
         {% ifequal d.date today %}
            id="today"
@@ -21,9 +21,16 @@
         >
         <div class="date">{{d.date|date:"d"}}</div>
         <div class="list">
-        {% for a in d.daily_availables%}
-            <div><a class="item" 
-                    href="/{{a.key}}/{{d.date|date:"Ymd"}}">{{a.name}}</a>
+        {% for s in d.specials %}
+            <div class="listitem">
+
+            {% ifequal s.kind "Special" %}
+            <a href="{{s.admin_show_path}}">{{s.name}}/{{s.price}}</a>
+            {% else %}
+                <a href="/admin/specials/{{s.key}}/{{d.date|date:"Ymd"}}"
+                 >{{s.name}}</a>
+            {% endifequal %}
+
             </div>
         {% endfor %}
         </div>

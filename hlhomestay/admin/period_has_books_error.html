@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+  <tr><td colspan="2">訂房期間與下列訂房衝突：</td></tr>
+  {% for b in bs %}
+  <tr><td>{{b.checkin}}~{{b.checkout}}</td><td>{{b.name}}</td></tr>
+  {% endfor %}
+  <tr>
+    <td colspan="2">
+      <a href="/admin">月曆</a>
+      <input type="button" value="回上頁" onclick="javascript:history.go(-1)"/>
+    </td>
+  </tr>
+</table>
+{% endblock %} 
