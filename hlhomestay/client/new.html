@@ -27,43 +27,33 @@ function check_form(f){
            return false 
         } 
             
-        $.ajax({
-
-            url: '/period_books',
-
-            data: {room: room.value, 
+        $.getJSON('/period_books.json', 
+                  {room: room.value, 
                    checkin: checkin.value, 
                    checkout: checkout.value},
+                   function(books) { 
+                       if (books.length == 0)
+                            f.submit()
 
-            error: function(xhr) { 
-                alert("伺服器發生問題！")
-                return false
-            },
+                       $('#notice').empty()
+                       $('#notice').append("此房間於以下期間有訂房:"
+                                    ).append("<br/>")
 
-            success: function(response) { 
-                var books = eval('(' + response + ')');
+                       for (b in books) {
+                            b = books[b]
+                            $('#notice').append(
+                                b.checkin.format('yyyymmdd') + 
+                                ' ~ ' + 
+                                b.checkout.format('yyyymmdd')
+                                ).append("<br/>")
+                       }
+                       
+                       $('#notice').show()
 
-                if (books.length == 0)
-                    f.submit()
+                       return false
+                    }
 
-                $('#notice').empty()
-                $('#notice').append("此房間於以下期間有訂房:"
-                            ).append("<br/>")
-
-                for (b in books) {
-                    b = books[b]
-                    $('#notice').append(b.checkin.format('yyyymmdd') + 
-                                        ' ~ ' + 
-                                        b.checkout.format('yyyymmdd')
-                                       ).append("<br/>")
-                }
-                
-                $('#notice').show()
-
-                return false
-            }
-
-        });
+        );
 
     }
     return false

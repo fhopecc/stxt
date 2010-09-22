@@ -176,7 +176,7 @@ def date2json(d):
 
 application = webapp.WSGIApplication(
         [
-         (r'/period_books.*', PeriodBooksPage), 
+         (r'/period_books\.json.*', PeriodBooksPage), 
          (r'/\w+', IndexPage),
          (r'/\w+/\d{6}', IndexPage),
          (r'/\w+/\d{8}', NewPage)
