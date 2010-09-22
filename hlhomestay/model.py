@@ -58,6 +58,7 @@ class Homestay(db.Model):
               })
             result.append(weekly_books)
         return result
+
     
     def recently_reservations(self):
         rooms = list(self.room_set)
@@ -196,6 +197,17 @@ class Room(db.Model):
             return None
         else:
             return bs[0]
+
+    def period_books(self, checkin, checkout):
+        period = datetimeIterator(checkin, 
+                                  checkout - timedelta(days=1))
+        bs = []
+        for d in period:
+            b = self.daily_book(d)
+            if b:
+                if b.key() not in (b.key() for b in bs):
+                    bs.append(b)
+        return bs
 
     def special(self, date):
         s = self.special_set.filter("date", date).get()

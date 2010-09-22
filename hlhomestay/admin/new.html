@@ -1,12 +1,86 @@
 {% extends "base.html" %}
 {% block content %}
+
+<script src="/js/jquery-1.4.2.js" type="text/javascript"></script>
+<script src="/js/validate_input.js"></script>
+<script src="/js/date.format.js"></script>
+<script>
+function check_form(f){
+    with(f) {
+        if(check_date(checkin, 
+            "入住日期格式錯誤，格式如20100912")==false){
+           return false 
+        } 
+
+        if(check_date(checkout, 
+            "退房日期格式錯誤，格式如20100912")==false){
+           return false 
+        } 
+
+        if(check_phone(phone, 
+            "聯絡電話格式錯誤，格式如0911831831或07-3351444")==false){
+           return false 
+        } 
+        if(check_email(email, 
+            "電子郵件格式錯誤，格式如abcd@example.com")==false){
+           return false 
+        } 
+
+        $.ajax({
+
+            url: '/admin/period_books',
+
+            data: {room: room.value, 
+                   checkin: checkin.value, 
+                   checkout: checkout.value},
+
+            error: function(xhr) { 
+                alert("伺服器發生問題！")
+                return false
+            },
+
+            success: function(response) { 
+                var books = eval('(' + response + ')');
+
+                if (books.length == 0)
+                    f.submit()
+
+                $('#notice').empty()
+                $('#notice').append("此房間於以下期間有訂房:"
+                            ).append("<br/>")
+
+                for (b in books) {
+                    b = books[b]
+                    $('#notice').append(b.name +
+                                        b.checkin.format('yyyymmdd') + 
+                                        ' ~ ' + 
+                                        b.checkout.format('yyyymmdd')
+                                       ).append("<br/>")
+                }
+                
+                $('#notice').show()
+
+                return false
+            }
+
+        });
+
+        return false
+    }
+}
+</script>
+
 <div id="form_content">
-  <form method="post" action='/admin/{{res.room.key}}/{{res.checkin|date:"Ymd"}}'>
+  <form method="post" 
+        onsubmit="return check_form(this)"
+        action='/admin/{{res.room.key}}/{{res.checkin|date:"Ymd"}}'>
   <table class="form">
     <tr><th colspan="2">訂房資料建立作業</th></tr>
 
+    <tr><td id="notice" colspan="2" style="display:none"></td></tr>
+
     <tr><td>房間</td>
-        <td><input type="text" readonly="true" value="{{res.room.name}}"/>
+        <td>{{res.room.name}}
             <input name="room" type="hidden" value="{{res.room.key}}"/>
     </td></tr>
 
@@ -36,13 +110,15 @@
     </td></tr>
 
     <tr><td>訂單日期</td>
-        <td><input name="create_date" type="text" readonly="true"
+        <td>{{res.create_date|date:"Ymd"}}
+            <input name="create_date" type="hidden" 
                    value='{{res.create_date|date:"Ymd"}}'/>
-    </td></tr>
+        </td>
+     </tr>
 
-    <tr><td colspan="2">備註</td></td></tr>
+    <tr><td colspan="2">備註</td></tr>
     <tr><td colspan="2">
-        <textarea name="comment">{{res.comment}}</textarea>
+        <textarea name="comment" rows="10">{{res.comment}}</textarea>
     </td></tr>
 
     <tr><td>

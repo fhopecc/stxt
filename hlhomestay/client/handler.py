@@ -153,11 +153,33 @@ class DelPage(webapp.RequestHandler):
         homestay.delete()
         self.redirect('/homestays')
 
+class PeriodBooksPage(webapp.RequestHandler):
+    def get(self):
+        r = self.request
+        room = Room.get(r.get('room'))
+
+        bs = room.period_books(strpdate(r.get('checkin')),
+                               strpdate(r.get('checkout')))
+
+        o = ','.join(['{key:"%s", checkin:%s, checkout:%s}' % 
+                       (b.key(),
+                        date2json(b.checkin), 
+                        date2json(b.checkout)
+                       ) for b in bs])
+
+        self.response.out.write('[%s]' % o)
+
+def date2json(d):
+    'month value whose range starts with zero, so Nov = 10, Dec = 11'
+    return 'new Date(%d, %d, %d)' % (d.year, d.month - 1, d.day)
+
+
 application = webapp.WSGIApplication(
         [
-         ('/\w+', IndexPage),
-         ('/\w+/\d{6}', IndexPage),
-         ('/\w+/\d{8}', NewPage)
+         (r'/period_books.*', PeriodBooksPage), 
+         (r'/\w+', IndexPage),
+         (r'/\w+/\d{6}', IndexPage),
+         (r'/\w+/\d{8}', NewPage)
         ], debug=True)
 
 def main(): run_wsgi_app(application)

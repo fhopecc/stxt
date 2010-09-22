@@ -36,3 +36,47 @@ If the transform is complex, or the list is large, this can be a lot faster than
 
 Python’s sort is stable; the order of items that compare equal 
 will be preserved.
+
+
+Transposing Lists With map and zip
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I’m re-writing a piece of code to print into columns within a terminal
+and I wanted to join the nth items of each list together. Zip allows
+you to do just that
+
+>>> list=[[1,2,3],[4,5,6],[7,8,9,10]]
+>>> print zip(*list)
+[(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+
+But truncates the output to the _shortest common length_.
+
+I then stumbled across this snippet about map in the manual:
+
+map( function, list, …)
+
+Apply function to every item of list and return a list of the results.
+If additional list arguments are passed, function must take that many
+arguments and is applied to the items of all lists in parallel; if a
+list is shorter than another it is assumed to be extended with None
+items. 
+
+If _function is None_, the identity function is assumed; if
+there are multiple list arguments, map() returns a list consisting of
+tuples containing the corresponding items from all lists (a kind of
+transpose operation). The list arguments may be any kind of sequence;
+the result is always a list.
+
+In other words is the function is None the resulting tuples are padded
+with None
+
+>>> list=[[1,2,3],[4,5,6],[7,8,9,10]]
+>>> print map(None,*list)
+[(1, 4, 7), (2, 5, 8), (3, 6, 9), (None, None, 10)]
+
+Now in-case you are looking at this wondering what the star (*) syntax
+is, it is called an “Arbitrary Argument List” and it’s useful here as
+it expands our list to pass each of the lists within the outer list
+as an arguments to zip and map.
+
+Post Tools

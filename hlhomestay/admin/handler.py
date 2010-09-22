@@ -146,7 +146,6 @@ class NewPage(AdminPage):
                     template.render('period_has_books_error.html', 
                                     template_values))
 
-
 class ShowPage(AdminPage):
    def get(self):
         res = self.reservation()
@@ -173,7 +172,7 @@ class EditPage(AdminPage):
     def post(self):
         r = self.request
 
-        res = self.reservation()
+        res = Reservation.get(r.get('key'))
 
         res.name  = r.get('name')
         res.phone = db.PhoneNumber(r.get('phone'))
@@ -183,7 +182,7 @@ class EditPage(AdminPage):
         res.create_date = strpdate(r.get('create_date'))
         res.comment = r.get('comment') 
         res.room = Room.get(r.get('room'))
-        res.book()
+        res.put()
 
         template_values = {
             'h': res.room.homestay, 
@@ -494,9 +493,32 @@ class NewSpecialPage(AdminPage):
 
         self.redirect(s.calendar_path())
 
+
+class PeriodBooksPage(AdminPage):
+    def get(self):
+        r = self.request
+        room = Room.get(r.get('room'))
+
+        bs = room.period_books(strpdate(r.get('checkin')),
+                               strpdate(r.get('checkout')))
+
+        o = ','.join(['{key:"%s", name:"%s", checkin:%s, checkout:%s}' % 
+                       (b.key(),
+                        b.name, 
+                        date2json(b.checkin), 
+                        date2json(b.checkout)
+                       ) for b in bs])
+
+        self.response.out.write('[%s]' % o)
+
+def date2json(d):
+    'month value whose range starts with zero, so Nov = 10, Dec = 11'
+    return 'new Date(%d, %d, %d)' % (d.year, d.month - 1, d.day)
+        
 application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
+               (r'/admin/period_books', PeriodBooksPage), 
                (r'/admin/homestay/edit', HomestayEditPage), 
                (r'/admin/holidays', HolidaysPage), 
                (r'/admin/holidays/\d{6}', HolidaysPage), 
@@ -513,10 +535,11 @@ application = webapp.WSGIApplication([
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 
+               (r'/admin/edit', EditPage),
                (r'/admin/\w+', ShowPage),
                (r'/admin/\w+/edit', EditPage),
                (r'/admin/\w+/delete', DelPage), 
-               (r'/admin/\w+/\d{8}', NewPage), 
+               (r'/admin/\w+/\d{8}', NewPage)
               ], debug=True)
 
 def main():

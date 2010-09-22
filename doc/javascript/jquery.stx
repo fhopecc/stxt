@@ -1,425 +1,1110 @@
-jQuery 
-------
+jQuery 基礎篇 
+-------------
 
-Learn about 2 different jQuery plugin patterns (pattern A and pattern B) --
-by the end of this tutorial, you should be able to grasp the basic 
-behind writing custom jQuery plugins. 
-jQuery books as well as a few online tutorials were used 
-as references in writing this tutorial.
+jQuery 是一套 JavaScript 的 Library，因此，你必須稍具 JavaScript 的基
+礎，至少寫過一些 JavaScript 才比較容易上手，並且看得懂後續的教學
+。jQuery 的核心程式並非包山包海、什麼都可以幫你做，相反地，jQuery 主要
+是用在 DOM 文件的操作，包含「快速選取元素(Element)」並且「做一些事情」
+，快速選取元素可以讓你一次選取單一或多個的元素，然後你可以將這些被選取
+的元素做一些改變，例如隱藏、顯示等等。此外 jQuery 的核心程式還加強了非
+同步傳輸(AJAX)以及事件(Event)的功能，讓你更容易操作遠端文件及事件。
 
-Tutorials for writing jQuery plugins are plentiful on the Internet 
-as are jQuery books. When I was learning about writing jQuery plugins 
-for the first time, one of the difficulties that I had while looking 
-at jQuery plugin tutorials written by other people was that 
-they merely explained what code needed to be implemented in order to 
-make a jQuery plugin function. This is often enough, 
-but I like to be thorough. For example, some of the basic questions 
-one may have when beginning learning about how to write a jQuery plugin are
+以上看得出來 jQuery 是針對 JavaScript 內在不足的地方加以增進，你仍然需
+要自己寫一些程式來完成你需要的各種功能，不同的是，正確地使用了 jQuery
+ 可以讓你的程式碼更精簡、更優雅的表達出來，這在後續的範例中可以看到，
+更重要的是，應該也會讓你更快速的開發出你要的功能。
 
-Q. What is the difference between using $.myfunction and $.fn.myfunction?
+或許你會想說，在這個 Web 2.0 的時代，我需要多點漂亮、絢麗的 Widgets 來
+裝飾我的網站，就像 Yahoo UI 或 ExtJS 提供的那些功能一樣，jQuery 有嗎？
+其實 jQuery 的設計上有考慮到這類擴展性的問題，目前 jQuery 的 plugin 已
+經有上百個了，你也不一定要完全自己動手寫，上 jQuery 官方網站找找看，或
+許你需要的功能別人已經幫你做好了。以 UI 來講， jQuery 跟 UI 相關的
+ plugins 已經做過了一些整合，目前獨立發佈為 jQuery UI
+ (http://ui.jquery.com/)，如果你之前沒聽過 jQuery UI，建議你上去網站上
+看一下展示的範例，嗯，雖然可能還有一些 bug 存在，但是整體來說已經有相
+當的水準了，或許你會對 jQuery 更有興趣了。
 
-Q. What does the dollar sign mean?
-
-Q. What does the jQuery function jQuery.extend do and how to use it?
-
-Q. How to initialize my jQuery plugin and pass it function parameters?
-
-Q. How to provide default values for and how to override 
-   initialization parameters? 
-
-If you are curious about in depth implementation of jQuery interface for 
-adding your own code into existing framework, this tutorial is for you!
-
-In this jQuery plugin tutorial I will walk you through the process of 
-writing your own jQuery plugins. 
-
-This process is the same every time you decide to create a new plugin. 
-Once you understand how your JavaScript code can be integrated 
-into the main jQuery object you will no longer need documentation and 
-will be able to focus on programming plugins.
-
-Objects in JavaScript
-~~~~~~~~~~~~~~~~~~~~~
-
-As you may already know, JavaScript is an object-oriented language. 
-
-It would be improper to describe jQuery to someone who 
-had not yet studied objects in JavaScript. 
-
-The basic philosophy of object design in JavaScript is that when 
-you declare (or define) a function, that function is by default a class 
-and can be instantiated as an object. We can use the new operator 
-to instantiate copies of the same class. 
-It just so happened that instead of the traditional keyword class, 
-JavaScript prefers the keyword function. 
-It is interesting to note that a class in JavaScript can be used both 
-as a class from which other classes can be inherited 
-(by implementing what is known as prototype inheritance) or 
-the same exacty construct can be used as an actual function that 
-we can call later.
-
-The main jQuery object
-~~~~~~~~~~~~~~~~~~~~~~
-
-The main jQuery object is simply defined with the keyword function as
-an object whose identifier name is $. For a deeper insight into what
-this really means, I have written another tutorial What does the
-dollar sign mean? Be sure to read it if you're still confused about
-the dollar sign identifier notation.
-
-The jQuery object is equivalent to a global function, such as
-window.$. You see, in JavaScript, when you extend the window object
-(that must exist in all browsers by design), or in other words, attach
-new member functions with the dot (.) to the window object, it means
-that you will be able to call that object either by window.myobj(); or
-simply myobj(); You are allowed to do so because every function you
-attach to the window object can also be called from the global scope
-in your script. Internally, the jQuery object is created like so:
+以下的教學內容，主要是擷取了 jQuery 作者 John Resig 的一篇簡報
+ "Building Interactive
+Prototypes with jQuery" 的內容加以調整並註解，希望能以比較忠實的方式來呈現 jQuery 的設計含意。
 
 
-    var jQuery = window.jQuery = window.$ = function(selector,
-context) {
-       // ...  other internal initialization code goes here
-    }; 
+[jsg.example]<h2><font color="slategray" size="5"><a id="初探" name="初探">[初探]</a></font></h2>[/jsg.example]
+jQuery 怎麼用來「快速選取元素」並且「做一些事情」呢？請看看程式碼：
+$("div").addClass("special");
+錢記號 $ 是 jQuery 的物件，使用 $("div") 就是用 jQuery 來選取元素，這
+個範例可以選取文件內所有的 <div> 元素。後面接著的 .addClass("special")
+ 就是用來做一些事情，這個範例是將先前所選取到的所有元素都加上一個名為
+ "special" 的 class。也就是透過 $("div").addClass("special") 的語法，
+可以讓你一次幫文件上有的 <div> 元素都加入 special 的 class。
 
-This precise declaration allows us to refer to the main jQuery
-object by the identifier name jQuery, or the dollar sign ($). You need
-to know that jQuery, window.jQuery, window.$ or simply $ can be used
-interchangeably, because as the declaration stated in the code block
-above tells us, it refers to the same object in memory. Please note
-the selector and context parameters of the jQuery function object. The
-selector is usually a string that selects a number of elements from
-the DOM. It can also be the this object (a self-reference). The jQuery
-selector parameter accepts the same values you would expect to use in
-a CSS style definition. For example, consider the following jQuery
-object call:
+請注意喔，剛剛的例子可以針對已選取的多個元素做批次的操作，也就是說如果
+文件上有三個 <div>，那就會一次找出三個 <div> 並且全部套用後續的動作。
+這和你原本自己使用 JavaScript 來寫程式有很大的差異，原本自己寫可能會需
+要用到迴圈之類的語法，而 jQuery 的函數大多具有批次處理的功能，光是這點
+就可以讓你的程式更簡潔了。
+
+關於錢記號 $ 將會是你學習及使用 jQuery 的過程中最重要的物件（或者你要
+把 $ 當成一個函數也可以，事實上也是這樣)，使用方式就像剛剛你看到的，用
+來找元素用的，把參數帶入即可。或許你不習慣錢記號也可以當成函數名稱，那
+麼你也可以用 jQuery 這個名字，錢記號其實是被當成 jQuery 的縮寫，讓你的
+函數看起來更簡潔一些，如果你要自己設定另外一個縮寫，例如 $j，也是可以
+的，這部份後續再解釋，先看看已下的範例，結果將會和上面的範例是一模一樣
+的：
+
+jQuery("div").addClass("special");
+
+[jsg.example]<h2><font color="slategray" size="5"><a id="選取元素" name="選取元素">[選取元素]</a></font></h2>[/jsg.example]
+
+前面的例子使用 $("div") 來選取元素，帶入的參數 div 是表示你要找的元素
+，這是 CSS 選擇器(CSS Selector) 的語法，就如同 CSS 在做排版和外觀所使
+用的選擇器語法一樣。jQuery 所支援的 CSS Selector 包含了 CSS 1、CSS2 以
+及仍未正式發佈的 CSS3，此外透過 plugin 還可支援常用的 XPath 語法，善用
+這些 CSS、XPath 語法就可以很容易地找到你要處理的網頁元素，底下來看看更
+多的範例。
 
 
-// Select all elements of class: "someClass" and apply a red border to
-// all of them
-jQuery(".someClass").css("border", "1px solid red");
+這是一段原始的 HTML：
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+以下用一連串的範例，以藍色字體展示一些基本的語法並且以深色字顯示文件中會被選取的元素。
 
-// Select an element with id: someId and insert dynamic html into it
-jQuery("#someId").html("<b>So Bold!</b>");
+$("div")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：選取所有 <div>
 
-// Exactly the same as above, but using $
-$("#someId").html("<b>So Bold!</b>"); 
 
-This is an example of how powerful a short jQuery statement can be. 
-You dont need to worry about writing your own 
-document.getElementById functions that tend to clutter the code. 
+$("#body")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：選取 id 為 body 的元素
 
-With just one line of code, jQuery selects all
-elements of the requested type by scanning the entire DOM and applies
-the desired effect. Many people use jQuery just for the intuitive
-element-selector functionality, but if you like this so far, you are
-going to love the rest of the features at your command when you work
-with the jQuery framework. It's good to note that jQuery cares about
-cross-browser compatibility.
 
-jQuery Plugin Entry Point
-~~~~~~~~~~~~~~~~~~~~~~~~~
+$("div#body")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：選取 id 為 body 的 <div>
 
-I would like to begin with a jQuery plugin example code as seen used
-by most people, followed by an explanation of what it means. But
-because I am targeting the absolute jQuery beginners who may not have
-enough experience with JavaScript, I'd like to clarify a few things
-first. When learning a new language or a framework such as jQuery, you
-need to understand where the entry point of your plugin program is.
-Traditionally, for years prior to jQuery, some JavaScript programmers
-liked to execute their crucial code in the window.onload function as
-illustrated below:
 
-// Override the onload event
+$("div.contents p")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：選取 class 為 contents 的 <div> 所包住的所有下層的 <p>
+
+
+$("div > div")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：選取被 <div> 包住的下一層 <div>
+
+
+$("div:has(div)")
+<div id="body">
+  <h2>Some Header</h2>
+  <div class="contents">
+    <p>...</p>
+    <p>...</p>
+  </div>
+</div>
+解釋：和前一個範例相反，這邊是選取至少有包住一個 <div> 的 <div>
+
+
+動作
+~~~~
+
+前一段的教學中介紹了如何使用 jQuery 來選取元素，其中大部份的語法都是可
+以讓你快速地一次選取多個元素，接下來當然就是要來對這些選取到的元素做些
+改變囉。透過 jQuery 內建的函數，你可以：
+
+#.對 DOM 進行操作，例如對文件節點的新增或修改
+
+#.添加事件處理
+
+#.做一些基本的視覺效果，例如隱藏、顯示、下拉顯示、淡出淡入等等
+
+#.使用 AJAX 傳送表單內容或取得遠端文件
+
+
+Ex. 選取所有有 target 屬性的 <a>，並且在其節點下加入一段文字。
+
+$("a[target]").append(" (Opens in New Window)");
+
+這是一段原始的 HTML :
+
+<a href="http://jsgears.com">jsGears</a>
+<a href="http://google.com" target="_blank">Google</a>
+<a href="http://amazon.com" target="_blank">Amazon</a>
+
+選取有 target 屬性並加入文字後的結果：
+
+<a href="http://jsgears.com">jsGears</a>
+<a href="http://google.com" target="_blank">Google (Opens in New Window)</a>
+<a href="http://amazon.com" target="_blank">Amazon (Opens in New Window)</a>
+
+Ex. 選取 id 為 body 的元素，並且修改兩個 css 屬性。
+
+$("#body").css({
+  border: "1px solid green",
+  height: "40px"
+});
+
+這是一段原始的 HTML :
+
+<div id="body">
+  ...
+</div>
+
+選取 id 為 body 的元素並修改 css 後的結果(示意)：
+
+<div id="body" style="border: 1px solid green; height: 40px">
+  ...
+</div>
+
+Ex. 在網頁上的表單送出時加入一個判斷，如果 username 這個欄位是空值的話，
+    就顯示 help 這個區塊內的文字。
+
+$("form").submit(function() {
+  if ($("input#username").val() == "")
+    $("span.help").show();
+});
+
+可作用在類似以下的 HTML，一開始 span.help 是隱藏的，如果沒有輸入
+username，才會顯示：
+
+<style type="text/css">
+  .help {display: none}
+</style>
+<form>
+  <label for="username">請輸入大名</label>
+  <input type="text" id="username" name="username" />
+  <span class="help">這個欄位必填喔</span>
+</form>
+
+Ex. 當 user 點選 id 為 open 的連結時，顯示 id 為 menu 的區塊，並回傳
+    false 避免瀏覽器真的換頁。
+
+$("a#open").click(function() {
+  $("#menu").show();
+  return false;
+});
+
+可作用在類似以下的 HTML：
+
+<style type="text/css">
+  #menu {display: none}
+</style>
+
+<a id="open" href="#">控制面板</a>
+<ul id="menu">
+  <li><a href="#1">控制面板首頁</a></li>
+  <li><a href="#2">編輯個人資料</a></li>
+  <li><a href="#3">個人空間管理</a></li>
+</ul>
+
+Ex. 將 id 為 menu 的區塊以下拉布幕的動態效果快速顯示：
+
+$("#menu").slideDown("fast");
+
+可作用在類似以下的 HTML，原本隱藏的選單會以動態下拉的方式顯示出來：
+
+<style type="text/css">
+  #menu {display: none}
+</style>
+
+<ul id="menu">
+  <li><a href="#1">控制面板首頁</a></li>
+  <li><a href="#2">編輯個人資料</a></li>
+  <li><a href="#3">個人空間管理</a></li>
+</ul>
+
+Ex. 將所有的 <div> 漸變為寬 300px、文字與邊界寬 20px
+
+$("div").animate({
+    width: '300px',
+    padding: '20px'
+  }, 'slow');
+
+可作用在類似以下的 HTML：
+
+<div style="width: 100px; border: solid 1px red;">
+  Hello world!
+</div>
+
+PS. jQuery 核心程式的 animate 函數能改變的元素屬性並不多，但是可以透過
+其他 plugin 提供更多的動態效果。
+
+Ex. 動態效果的 callback 的範例，將所有的 <div> 以 0.5 秒的動態效果隱藏
+    後，再以 0.5 秒的動態效果顯示。hide() 的第二個參數就是一個 callback 函
+    數，其中 $(this) 是原本程式所處理的各個元素。
+
+$("div").hide(500, function(){
+  // $(this) 是每一個各別的 <div>
+  $(this).show(500);
+});
+
+可作用在類似以下的 HTML：
+
+<div style="width: 100px; border: solid 1px red;">
+  Hello world!
+</div>
+<div style="width: 100px; border: solid 1px red;">
+  jsGears.com!
+</div>
+
+Ex. 取得 sample.html 並將找出文件內所有 <div> 下一層的 <h1> 填入原本文
+    件 id 為 body 的元素內
+
+$("#body").load("sample.html div > h1");
+
+這是一段原始的 HTML :
+
+<div id="body"></div>
+
+sample.html 的片段：
+
+<div>
+  <h1>Hello world!</h1>
+  <h2>This is H2</h2>
+  <h1>jsGears.com!</h1>
+</div>
+
+執行程式碼之後的結果：
+
+<div id="body">
+  <h1>Hello world!</h1>
+  <h1>jsGears.com!</h1>
+</div>
+
+Ex. 透過 getJSON() 取得 JSON 格式的資料，並透過 callback 函數處理資料
+
+$.getJSON("test.json", function(data){
+  for (var idx in data)
+    $("#menu").append("<li>" + data[idx] + "</li>");
+});
+
+這是一段原始的 HTML：
+
+<ul id="menu">
+  <li>項目1</li>
+</ul>
+
+test.json 的內容：
+
+[
+  "Hello world!", 
+  "jsGears.com!"
+]
+
+執行程式碼之後的結果：
+
+<ul id="menu">
+  <li>項目1</li>
+  <li>Hello world!</li>
+  <li>jsGears.com!</li>
+</ul>
+
+連續使用函數
+~~~~~~~~~~~~
+
+jQuery 很重要的一個特性是可以連續地使用函數(Chaining)，當你選取了一個
+或一組的元素後，可以連續對這些元素進行多個處理。以下範例會將所有的
+ <div> 隱藏，修改文字顏色為藍色，再將 <div> 以下拉布幕的效果顯示出來：
+
+$("div").hide();
+$("div").css("color", "blue");
+$("div").slideDown();
+
+這樣的三行程式碼可以用以下一行的程式碼取代，結果會是完全相同的：
+
+$("div").hide().css("color", "blue").slideDown();
+
+是否感到很神奇呢？在 jQuery 的架構設計上，大部分的函數都會在處理完該做
+的事情後，再將原本傳入的元素給回傳回去，因此函數都可以連續這樣一個接著
+一個的使用。還記得一開始所說的 jQuery 可以讓你的程式碼更精簡嗎？看了上
+面的一些範例後，現在應該有點感覺了吧。
+
+講到 jQuery 的函數連續使用，有兩個很重要的函數必須在此介紹一下。第一個
+是 end()，這個函數執行後，會回傳「前一組找到的元素」。另一個是 find()
+，這個函數的用法如同使用 $() 找文件內的元素一樣是帶入 CSS 選擇器，執行
+後回傳找到的元素，不同的是 $() 是找整個文件，而 find() 是根據先前找到
+的元素再找其底下的元素，像是一個再過濾的功能。
+
+$("ul.open")                // [ ul, ul, ul ]
+  .children("li")           // [ li, li, li ]
+  .addClass("open")         // [ li, li, li]
+  .end()                    // [ ul, ul, ul ]
+  .find("a")                // [ a, a, a ]
+  .click(function(){
+    $(this).next().toggle();
+    return false;
+  })                        // [ a, a, a ]
+  .end();                   // [ ul, ul, ul ]
+
+上面這一段程式碼連續使用多個函數，且透過 end() 和 find() 來分別對不同的元素進行操作，詳細的步驟解釋如下：
+
+找出文件內所有 class 為 open 的 <ul>
+過濾出下一層的所有 <li>
+對這些 <li> 新增一個 class
+回前一次搜尋的結果，也就是所有的 <ul>
+再找出底下所有的 <a>
+對 <a> 新增事件處理
+
+
+document ready 事件
+~~~~~~~~~~~~~~~~~~~
+
+有些時候，我們必須在網頁下載完成之後立即執行一些程式，可能是想要把游標
+放在預設的輸入框，或是馬上顯示一些歡迎訊息等等。過去你可能用過
+ window.onload 來處理，或是直接在 <body> 標籤上加入 onload 的事件處理
+函數，但是 jQuery 提供了另一種選擇，請參考下面的範例：
+
+$(document).ready(function() {
+  alert('您好，歡迎來到 jsGears.com ～');
+});
+
+先透過 $() 取得 document 物件，接著使用 ready() 帶入一個函數，就可以在
+網頁下載完成後立即執行。jQuery 的 document ready 事件是模擬 W3C DOM 標
+準的 DOMContentLoaded 事件，DOMContentLoaded 和 window.onlad 的差異在
+於前者是在 DOM 文件下載完成後觸發，而後者是文件和所有文件內的元件，包
+含圖檔等等全部下載完成後才會觸發，因此通常 window.onload 的發生時間要
+比 DOMContentLoaded 晚一點(如果你的網頁內確實有用到一些圖檔)，有時候你
+所需要執行的程式並不需要等所有圖檔都下載完成，因此，放到
+DOMContentLoaded 事件內處理是比較合適的。但是，IE 目前的版本 6 和 7
+並不支援 DOMContentLoaded 事件，所以 jQuery 用了一些技巧來達到模擬
+DOMContentLoaded 的事件，而成果就是上面看到的這個例子的用法。
+
+DOMContentLoaded 和 window.onlad 的另一個差異在於 window.onload 並沒有
+辦法多次指定不同的函數來執行，最後指定的那個函數會複寫掉先前的，例如以
+下範例：
+
 window.onload = function() {
-    // the page finished loading, do something here...
-} 
-
-This code actually overrides the onload event of the HTML <body>
-tag. All this means to us is that our code will be executed soon as
-the page is finished loading. It makes sense because sometimes pages
-take time to load, or the downloading process is segmented by the
-browser architecture. We would not want to compile and execute any
-JavaScript code on a page that is currently being loaded. The jQuery
-internal architecture also utilizes the window.onload event, but
-before it does so, it checks whether the entire DOM (document object
-model) has been loaded because it is very important. It is not enough
-for jQuery to know that the page has been loaded, we must ensure that
-the DOM has been fully constructed. This is achieved by listening to
-the DOMContentLoaded in most browsers, but we don't need to worry
-about this at all because jQuery takes care of this for us internally.
-To provide us with this functionality, jQuery gives us a new method
-called ready that we can call on the main jQuery object itself. When
-writing a jQuery plugin, we use the ready function to check whether we
-are 'ready' to execute our plugin code. Please note that this is not
-yet the plugin code, this will be the entry point of our plugin. You
-can think of this as a jQuery's version of window.onload function:
-
-
-<script type = "text/javascript">
-    // Define the entry point
-    $(document).ready(function() {
-        // The DOM (document object model) is constructed We will
-        // initialize and run our plugin here
-    } </script> 
-
-Let's think for a moment that we are writing a plugin
-called Shuffle. Assuming the plugin provides two separate functions
-for initialization as well as execution of the base code, the code may
-have looked something like the following:
-
-
-<script type = "text/javascript">
-    // One way to initialize plugin code
-    $(document).ready(function() { 
-        jQuery.Shuffle.initialize("monalisa.jpg", 5, 8, 67, 1500); 
-        jQuery.Shuffle.run(); 
-    }
-</script>
-
-More than often, the code above can be improvised. Is it required to
-use this specific format for initializing and executing our plugin?
-No. For me personally, because I come from C and C++ background
-writing computer games, I like to separate initialization and
-execution function calls like I show above.
-
-Internal definition of a jQuery plugin
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The coding style is entirely up to you but also depends on what you
-are trying to accomplish. It is easy to think that a plugin must be
-written, initialized and executed in a certain way all the time but
-this is simply not true. The reason you see many different styles and
-syntactical differences in jQuery plugin code is that the programmers
-are trying to accomplish different things. Additional knowledge of
-JavaScript Inheritance and function closures may help here quite a
-bit.
-
-First let's talk a little about the following syntax seen in many a
-plugin written by jQuery programmers. It is very easy to get confused
-about it especially for programmers with only intermediate knowledge
-of JavaScript. So, this may seem quite ambiguous at first.
-
-
-<script type = "text/javascript"> 
-    (function($){ ... })(jQuery);
-</script> 
-
-What is going on here? First of all, in a real-world
-scenario, the three dots would be replaced with actual code that we
-would like to be executed. Here we see a definition of an anonymous
-function (also known as function closure), that takes a parameter
-called dollar sign ($). The function is wrapped in parenthesis, but
-why? You see, the function in this example is an anonymous function
-that has no reference to itself, but by wrapping it in parenthesis,
-the JavaScript syntax allows us to reference to an anonymous function
-we just created. We could have added a dot (.) after the function
-definition wrapped in parenthesis and called a member function that
-this function object supports. We could then add the dot at the end of
-that statements as well, and call yet another member function that can
-be executed on the type of the object returned by the previous
-function. This chaining feature of JavaScript language is common
-throughout many other script languages, for example Perl. It is a
-common script-language feature because it makes your code miniature.
-
-So, by wrapping an anonymous function with parenthesis we can
-reference to that function's memory location without actually refering
-to the name of that function - and well, we can't do that because the
-function has no name! Furthermore, not only can we reference to a
-function that has no name, we can also call that function in the same
-statement that created it. And that's exactly what's going on here.
-The nameless function is defined, wrapped in parenthesis, and then
-that function is immediately called. This is only one example of the
-function closure usage that you will see throughout jQuery and other
-advanced JavaScript code.
-
-Why would someone do such a thing? There are several reasons. This is
-done to minimize code length and more importantly, to hide parameters
-that start with the dollar sign character from the global scope of the
-script. The real reason for doing that is for cases where you are
-using multiple frameworks that may use the dollar sign function object
-in the global scope of the program (which is a very bad design idea in
-itself). But in real circumstances, when would we see that happen?
-That depends on circumstances and developer's choices. Since in this
-tutorial we are not using any additional frameworks or outside code,
-this obscure and sometimes confusing syntax is not necessary and the
-chances of creating a conflict are zero. When learning, it is
-sometimes a good idea to simplify. Let's take a look at a very basic
-plugin construction idea:
-
-
-<script type = "text/javascript"> 
-  jQuery.func = doSomething;
-  jQuery.fn.func = doSomethingElse; 
-</script> 
-
-Where doSomething and
-doSomethingElse are simply previously defined function objects.
-However, this technique is not always desired because we are losing
-the ability to chain our jQuery plugin with other jquery API functions
-that already exist, or that are created by other developers. In the
-end, what it comes down to is that if you want your plugin have that
-chaining functionality, you must use the self-calling function
-mechanism as explained above. If chaining the functionality of your
-plugin with other people's code is not important to you, simply add
-your own objects and variables to the $. or $.fn objects. Also keep in
-mind that as discussed earlier, jQuery, the dollar sign (and even
-something like window.$) can be used interchangeably and refer to the
-same exact object in memory. jQuery documentation tells us to use
-jQuery object instead of the dollar sign. The dollar sign must be
-hidden, it must only be used internally in the jQuery architecture. Do
-not expose the dollar sign to the implementators of your plugin.
-
-jQuery Plugin Design Pattern `A`
-
-Now, let's consider the internal code of an arbitrary plugin that uses
-the self-referencing anonymous function call that takes the jQuery
-object as the only parameter. I wanted to include additional comments
-to explain what each part means. The comments obviously clutter the
-code, but I think it is slightly more intuitive than explaining each
-line by writing about it and I tried to format the comments in a
-conscious way.
-
-It is easy to get confused about what the this keyword is refered to
-in this pattern in different places in the code. I created some local
-variables that I named vari, stored within the main jQuery object
-($.vari), and a jquery fn object ($.fn.vari). These could have been
-function objects too, but for simplicity's sake I use basic variables.
-You can see these values displayed with alert functions in the
-following code. I did this to demonstrate which varibles the this
-keyword will refer to in different function scopes. (For those who may
-not know, in classic computer programming a scope can be defined by
-the opening and closing brackets {, and } which modifies the
-visibility behavior of variables. I don't want to go any further into
-explaining how JavaScript scope works because it is like a science of
-its own, but I hope this clears some fog for people who may not know
-how the scope works. If you do, that's great!
-
-Let's take our first look at the classic jQuery plugin pattern. First,
-I want to show the pattern without the comment clutter.
-
-
-(function($) { $.vari = "$.vari"; $.fn.vari = "$.fn.vari";
-
-    // $.fn is the object we add our custom functions to
-    $.fn.DoSomethingLocal = function() { return this.each(function() {
-alert(this.vari);    // would output `undefined` alert($(this).vari);
-// would output `$.fn.vari` }); }; })(jQuery);
-
-// $ is the main jQuery object, we can attach a global function to it
-$.DoSomethingGlobal = function() { alert("Do Something Globally, where
-`this.vari` = " + this.vari); };
-
-$(document).ready(function() { $("div").DoSomethingLocal();
-$.DoSomethingGlobal(); }); And here are some details:
-
-
-// plugin-name.js - define your plugin implementation pattern
-(function($) // The $ here signifies a parameter name
-             // As you can see from below, (jQuery) is immediately
-             // passed as the $ param
-{ $.vari = "$.vari"; $.fn.vari = "$.fn.vari";
-
-    // 1.) Add a custom interface `DoSomethingLocal` Which will modify
-    // all selected elements!  If you are a software engineer, think
-    // about this as a member function of the main jQuery class
-    $.fn.DoSomethingLocal = function() {
-        // return the object back to the chained call flow
-        return this.each(function() // This is the main processor
-                                    // function that executes on each
-                                    // selected element (e.g:
-                                    // jQuery("div"))
-        {
-            // this     ~ refers to a DOM element $(this)  ~ refers to
-            // a jQuery object
-
-            // Here, the `this` keyword is a self-refence to the
-            // selected object `this.vari` is `undefined` because it
-            // refers to selected DOM elements. So, we can do
-            // something like: var borderStyle = this.style.border;
-            // While $(this).vari, or jQuery(this).vari refers to
-            // `$.fn.vari`
-
-            // You would use the $(this) object to perform any desired
-            // modification to the selected elements $(this) is simply
-            // a reference to the jQuery object of the selected
-            // elements
-            alert(this.vari);    // would output `undefined`
-alert($(this).vari); // would output `$.fn.vari` }); }; })(jQuery); //
-pass the jQuery object to this function
-
-// 2.) Or we can add a custom interface to the global jQuery object.
-// In this case, it makes no sense to enumerate through objects with
-// `each` keyword because this function will theoretically work in the
-// `global` scope. If you are a professional software engineer, think
-// about this as a [static function]
-$.DoSomethingGlobal = function() {
-    // this will output this.vari = $.vari
-    alert("Do Something Globally, where `this.vari` = " + this.vari);
+  alert('Hello world!');
+};
+window.onload = function() {
+  alert('您好，歡迎來到 jsGears.com ～');
 };
 
-// index.html - test the plugin
-$(document).ready(function() { $("div").DoSomethingLocal();
-$.DoSomethingGlobal(); }); There are two different types of interfaces
-you can add to the main jQuery object that is already defined by the
-framework. Please take a look at the example above where we have just
-added the function DoSomethingLocal and DoSomethingGlobal.
+上面的例子在同一個頁面上用了兩次 window.onload，結果將會是後面的函數會
+被執行到，前面的函數將消失無影蹤，當然，只要你稍具 JavaScript 處理
+Event 的技巧，真要連續指定兩個函數來執行也不是太困難，不過用 jQuery
+會更容易，看看以下相同的範例：
 
-1.) DoSomethingLocal is defined as $.fn.DoSomethingLocal. You can add
-as many custom functions to the jQuery.fn (or simply $.fn) object as
-required by your plugin implementation. Any function you add to the
-$.fn object is assumed to work on references to an instance of an
-element/object that was selected. This is what the $.fn syntax means -
-we are simply adding a custom interface to a jQuery object that
-assumes selected elements.
+$(document).ready(function() {
+  alert('Hello world!');
+});
+$(document).ready(function() {
+  alert('您好，歡迎來到 jsGears.com ～');
+});
 
-2.) DoSomethingGlobal is applied directly to the global jQuery object
-as $.DoSomethingGlobal. A function attached to the jQuery framework in
-such way assumes that it will not work on selected elements but rather
-it will work in the global scope and contain practically any
-implementation.
-
-jQuery Plugin Design Pattern `B`
-
-Many people prefer wrapping the plugin code in an anonymous function,
-instantly call it by adding the parenthesis at the end of the
-statement and pass jQuery object to it like shown in the jQuery Plugin
-Pattern A above, but do we have to do that? We don't. Let's take a
-look at the alernative way of building jQuery plugins, which some
-people will find more straightforward and easy to read. If you don't
-feel comfortable with the classic pattern presented above, you might
-as well play around with the following pattern until you become
-familiar with jQuery plugin development. Please note that the
-following pattern must only be used in cases where you are not
-implementing chainability, in other words, you must assume that your
-plugin functions will not be returning a jQuery object. You must also
-point this out in your documentation.
+相同的例子使用 jQuery 的 document ready 函數，則帶入的兩個函數都會被執行到，很簡單吧，完全不需用到什麼技巧。再提供一個精簡的語法， document ready 函數也可以這樣用：
+$(function() {
+  alert('您好，歡迎來到 jsGears.com ～');
+});
+直接把函數放到 $() 裡面就可以了，是不是超精簡啊。
 
 
-// Plugin base object
-$.gShuffle = function() {
+[jsg.example]<h2><font color="slategray" size="5"><a id="別名" name="別名">[$() 別名]</a></font></h2>[/jsg.example]
+前面用到了很多 $()，包含剛介紹的 document ready 及先前的選取功能，都是透過這個簡短的錢記號來達成，其實這個錢記號是 「jQuery」這個物件的縮寫，也就是剛剛所有你看到用 $() 的地方，都可以改寫成用 jQuery()，例如：
+jQuery(document).ready(function() {
+  jQuery("div").addClass("special");
+});
+沒事應該不會有人想用比較長的名稱來寫程式，簡短的 $ 不是挺好的。但是，某些情況可能你無法使用 $()，例如你進行中的專案已經使用了其他的 JavaScript Library，而 $ 這個名稱已經被使用了，例如另一套知名的 prototype，也使用了 $() 這樣的函數名稱，這時如果你需要再搭配使用 jQuery 的話，jQuery 本身有提供一個方式來避免 $() 的衝突：
+jQuery.noConflict();
+jQuery(document).ready(function() {
+  jQuery("div").addClass("special");
+});
+使用 jQuery 前，先下達 jQuery.noConflict() 這樣就可以避免掉 $() 衝突的問題，接著再用 jQuery 物件來進行操作即可。此外，你也可以自行幫 jQuery 這個物件設定另一個別名，例如：
+var $j = jQuery.noConflict();
+$j(document).ready(function() {
+  $j("div").addClass("special");
+});
+使用一個變數來接 jQuery.noConflict() 的回傳值，這個變數就可以做為 jQuery 的一個別名，透過這個別名不但避免了和其他 Library 錢記號的衝突，也可以將函數名稱縮短，算是 jQuery 一個蠻貼心的設計。
+作者: wmh    時間: 2008-9-30 01:54
 
+Ajax
+~~~~
+
+在這個號稱 web 2.0 的時代，寫網站，尤其是還用到了大量的 JavaScript，如
+果與使用者的互動還沒有用到 Ajax 技術的話，似乎是一件很神奇的事，至於
+ Ajax 是什麼東西？想瞭解的人可以到這裡去看維基百科上的解釋，這篇就專心
+寫一下 jQuery 中的 Ajax 部份。
+
+產生一個 Ajax 呼叫
+~~~~~~~~~~~~~~~~~~
+
+我們來把之前的例子翻修成為 Ajax 版本，也就是說，之前的版本是我們把
+ “Hello” 字樣寫死在 JavaScript 裡，改成使用 Ajax 版本的目標，是希望顯
+示的字樣從 server 上取得。所以，我們先在 server 上寫一個處理 request
+ 的小程式（這裡用 PHP 作為示範），假設名為 msg.php：
+
+<?php
+  echo "Hello";
+?>
+
+這個 PHP 程式很簡單，任何對 msg.php 的 request，它只回應一個 “Hello”
+ 的字串，所以我們現在要做的事情便是：按下按鈕後，向 server 端的
+ msg.php 發出一個 request，然後把它回應的東西放在要顯示的地方。所以我
+們把 showMsg 函式的部份改寫成這樣：
+
+function showMsg(e) {
+  $(e.target).attr('disabled', true);
+  $.ajax({
+    url: 'msg.php',
+    error: function(xhr) {
+      alert('Ajax request 發生錯誤');
+      $(e.target).attr('disabled', false);
+    },
+    success: function(response) {
+      $('#msg').html(response);
+      $('#msg').fadeIn();
+      setTimeout(function(){
+        $('#msg').fadeOut();
+        $(e.target).attr('disabled', false);
+      }, 3000);
+    }
+  });
 }
 
-// Initializes plugin
-$.gShuffle.initialize = function() {
+在這段程式碼中，當我一把按鈕功能關閉時，馬上就利用 jQuery 中的 ajax()
+ 函式來產生一個 Ajax request，注意這裡的寫法是 $.ajax，因為 ajax () 函
+式是定義在 jQuery 這個物件下，而且不用指定網頁元件（當然你要也是可以）
+，所以可以直接用 jQuery.ajax() 來呼叫使用，不過 jQuery 提供了一個
+alias，也就是 $ 相當於 jQuery，所以我通常會把 code 寫成 $.ajax(...)
+囉。
 
+而 jQuery.ajax() 函式中需要帶一個 key-value pair 的參數，以此例來說：
+
+url: 用來指定要進行呼叫的位址
+
+error: 是定義當 Ajax 發生錯誤時會呼叫的 callback
+
+success: 則是 Ajax 成功時呼叫的 callback。
+
+所以我把之前做的事都移到了 success 的 callback 函式中，不過值得注意的是：
+
+目前版本（註）的 jQuery/Ajax success callback 帶的參數（code 中的
+ response）直接就是 server 回應的內容，而不像其它 error/complete
+ callback 帶回來的是一個 XMLHttpRequest 物件。
+
+所以我就直接把 response 塞進 $('#msg') 裡了。
+
+參數傳遞
+~~~~~~~~
+
+上面的例子，只有單純作一個 ajax request，如果我們同時要在 Ajax request
+時傳一些數值給 server 作處理的話，那就要在 $.ajax() 函式中帶入 data
+的參數。我們把之前一直使用的例子再作點修改，傳送兩個參數給 msg.php ，
+好讓它的回應訊息會根據傳入的參數而有所不同，先在按鈕前加入兩個輸入元件：
+
+<select id="gender">
+  <option>Male</option>
+  <option>Female</option>
+</select>
+<input type="text" id="name"/>
+
+#gender 是一個下拉式選單，可以選擇是 Male 或 Female；而 #name 則是一個
+文字輸入元件，用來輸入名稱，這時我們將 showMsg 再改寫一下 $.ajax 的部
+份：
+
+$.ajax({
+    url: 'msg.php',
+    data: {gender: $('#gender').val(), name: $('#name').val()},
+    error: function(xhr) { .... },
+    success: function(response) { ... }
+});
+
+這次我們加入了 data 的參數，用意是在作 ajax request 時，帶兩個參數
+：gender 及 name，這兩個參數的值就是在輸入欄位輸入的值， val() 函式是
+針對輸入欄位而設計的，它可以抓出目前該輸入欄位所輸入的值。
+
+所以 msg.php 也要做適當的修改以接收 ajax request 所送來的參數：
+
+<?php
+  $res = "Hello, ";
+
+  if (!strcmp($_GET['gender'], "Male")) {
+    $res .= "Mr. ";
+  } else {
+    $res .= "Miss ";
+  }
+  $res .= $_GET['name'];
+  echo $res;
+?>
+
+這樣，若下拉式選單傳遞的是 Male 則回應 “Hello, Mr. XXX” 否則回應 “Hello, Miss XXX”。
+
+回傳資料型態
+~~~~~~~~~~~~
+
+當 Ajax request 成功後，jQuery 的 ajax 函式會把回應的資料塞給 success
+ 的 callback，這個參數預設是以 HTML 的資料格式來看待，以上述的例子而言
+，在沒有指定回傳資料型態的情況下，response 預期會是一份 HTML 資料，所
+以可以直接利用 jQuery 的 html 函式來塞入 HTML 資料。但是如果 server 端
+程式的回應值不是 HTML 的時候呢？要怎麼改變 response 的資料型態？答案就
+是在 $.ajax 函式中加入 dataType 的參數來指定。
+
+假設我 server 端的回傳值是一個 JSON 物件，裡面可能只是一個成員是 HTML
+資料，那我就不能直接把 response 當成 HTML 來塞了。舉個例子，若 server
+端的程式（這裡用 Ruby on Rails 說明）在回應時都以 JSON 來送：
+
+def msg
+  ....
+  ....
+  render :json => {:success => true, :msg => 'Hello'}.to_json
+end
+
+那我的 $.ajax 在呼叫時，就必須要加入 dataType: 'json' 來指定回傳的資料
+型態為何，這樣 response 就會是一個 JSON object，你可能就會把 success
+ 的 callback 寫成這樣：
+
+...
+success: function(response) {
+  if (response.success) {
+    $('#msg').html(response.msg);
+    ...
+  }
+  ...
 }
 
-// Runs the plugin
-$.gShuffle.run = function() {
+另外，在 Ruby on Rails 上也蠻多人會利用 RJS 來設計 server/client 間的
+互動，此時 dataType 就必須要指定為 'script'，這樣當 ajax 成功後，你的
+瀏覽器才會知道要把回傳的資料當 JavaScript 來執行。
 
-}; Final Thoughts
+jQuery.ajax() 的 callback
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Well, this tutorial has already taken several hours to write and edit.
-I hope I pointed out some of the things that made jQuery plugin
-development more clear for you. Have fun building jQuery plugins!
+jQuery 提供的 ajax 函式其中有 4 個 callbacks: beforeSend, complete,
+ error, 以及 success，當一個 Ajax request 送出到完成，會依照：
 
-Interestingly enough, I also found some books about jQuery on Amazon:
+beforeSend » success or error » complete
 
-1. Learning jQuery - Interaction Development
+這樣的順序來呼叫你所定義的 callback 函式，也就是不管成功或者失敗
+，beforeSend 及 complete 定義的 callbacks 都會被呼叫到，而 success 或
+ error 的 callback 則是視 Ajax request 的成敗來決定誰會被呼叫。
 
-2. jQuery Reference Guide - Comprehensive Exploration
+另外值得一提的是，jQuery 1.2 開始加入 JSONP 的支援，當你的 dataType 設
+成 jsonp 的時候，jQuery 的 ajax 函式會將 dataType 改為 script 並且多送
+一個 callback 參數到 server，然後 server 可以利用 callback 參數的值來
+輸出適當的 script 送回給 browser 來執行，也許這樣講很抽象，直接來看之
+前的例子改成 JSONP 的作法：
 
-3. jQuery in Action
+msg.php
 
+<?php
+  $res = "Hello, ";
+
+  if (!strcmp($_GET['gender'], "Male")) {
+    $res .= "Mr. ";
+  } else {
+    $res .= "Miss ";
+  }
+
+  $res .= $_GET['name'];
+
+  echo $_GET['callback']."({msg: '$res'});";
+?>
+
+然後 JavaScript 的部份改成：
+
+function processData(data) {
+  $('#msg').html(data.msg);
+  $('#msg').fadeIn();
+  setTimeout(function(){
+    $('#msg').fadeOut();
+    $(e.target).attr('disabled', false);
+  }, 3000);
+}
+
+function showMsg(e) {
+  $(e.target).attr('disabled', true);
+  $.ajax({
+    url: 'msg.php',
+    dataType: 'jsonp',
+    jsonp: 'processData',
+    data: {gender: $('#gender').val(), name: $('#name').val(), callback: 'processData'},
+    error: function(xhr) {
+      alert('Ajax request 發生錯誤');
+      $(e.target).attr('disabled', false);
+    }
+}
+
+先看 msg.php 最後的輸出，其實是根據 callback 參數的值來決定，以這個例子而言可能就會輸出
+
+processData({msg: 'Hello, Mr. XXX'});
+
+所以 jQuery 會自動幫你把 dataType 設成 script 好讓 browser 認得要執行
+，這樣就不會去呼叫 success 或 complete 的 callback ，而是去呼叫你自己
+定義的 callback function 。
+
+JSONP 的應用愈來愈多，像是 Google Calendar API 或是 twitter API 都有用
+到 JSONP，如果想了解更深入一點，可以參考這裡。
+
+Global event
+~~~~~~~~~~~~
+
+
+當 Ajax request 產生時，如果你希望網頁上其它的元件能根據 Ajax 進行中不
+同的流程而做些動作的話，jQuery 已經定義好了一組 event handlers (見文件
+中的 ajaxXXXX)。而在 jQuery.ajax 函式中，如果 global 參數設為 true 的
+時候（預設就是 true），它會在 ajax 的流程中，適時去 trigger 這些 event
+，如果有網頁元件使用這些函式來 bind 住這些 event 的話，就會去呼叫設定
+的 callback function。而它 trigger 的順序為：
+
+ajaxStart » ajaxSend » ajaxSuccess or ajaxError » ajaxComplete » ajaxStop
+
+假設我們在按鈕旁加上一個 loading… 的圖案，預設是不顯示，但是當
+ ajaxStart 的時候把它打開，而在 ajaxComplete 的時候再關閉。先在按鈕後
+加上：
+
+<img src="spinner.gif" style="display:none" id="loading" />
+然後在 script 中幫 #loading 去 bind 必要的 event:
+
+$(document).ready(function(e){
+  $('#btn').click(showMsg);
+  $('#loading').ajaxStart(function(e){
+    $(e.target).show();
+  });
+  $('#loading').ajaxComplete(function(e){
+    $(e.target).hide();
+  });
+});
+
+這樣一來，當按鈕按下後建立一個 Ajax request 後，所有 bind ajaxStart
+ event 的元件就會去呼叫定義好的 callback，而整個 Ajax request 完成後，
+ajaxComplete event 又會被 trigger。
+
+jQuery/Ajax 部份所提供的 API 真是讓我們減輕不少使用 Ajax 上的負擔，再
+加上自訂 ajaxXXXX event 的架構，讓你不用把所有的動作擠在同一個
+ callback function 之中，完全符合 jQuery 的以網頁元件為中心的理念。
+
+如果不想每一次使用 ajax 都設定那麼多參數的話，其實 jQuery/Ajax API 還
+定義了一些快速的函式（如：load, post, getJSON, getScript），一樣是兩三
+下就完成 ajax 的動作。
+
+hsiang
+April 1, 2008 11:44 am
+你的JSONP範例跑步起來，少了jsonp: ‘processData’,
+
+ericsk
+April 1, 2008 11:45 am
+[quote comment=""]你的JSONP範例跑步起來，少了jsonp: ‘processData’,[/quote]
+多謝指教，已修正 :)
+
+axis
+April 30, 2008 10:56 am
+問題回報：
+1.這個範例在IE6跑不起來
+2.在最後要重新顯示#btn的這行
+$(e.target).attr(‘disabled’, false);
+已經確定不論在IE還是FIREFOX都沒有作用
+但是改回
+$(‘#btn’).attr(‘disabled’, false);
+就都正常了
+3.我的jquery版本是 1.2.3 不知是不是有影響??
+
+ericsk
+April 30, 2008 10:59 am
+@axis
+感謝回報…不過我身邊沒有 IE6..所以我沒測過我自己的 sample XD
+多謝指正 m(_ _)m
+
+axis
+April 30, 2008 11:03 am
+更正一下：
+是在firefox上也跑不起來，但是稍微好一點，至少按送出後
+按鈕有被disable起來，不過之後就無任何反應
+另外我試過了jquery1.1.2版本，結果也是一樣的
+
+ericsk
+April 30, 2008 11:05 am
+Orz…
+這…我也不知道您跑不起來的原因是什麼 XD
+
+axis
+April 30, 2008 11:09 am
+回覆的這麼快，嚇我一跳
+再補充一下，前一個範例是正常的，
+(除了$(e.target).attr(’disabled’, false);無作用以外)
+是到這一個改用jsonp的方式就不行了
+p.s 教學寫的真好，能寫到讓新手很快入門的，也是一大學問:p
+
+axis
+April 30, 2008 11:16 am
+不好意思 又要補充 免的誤導大眾
+在FIREFOX上可以運作成功，但是在IE6上確定不行
+Orz
+
+Citypig
+July 29, 2008 5:43 pm
+第一個範例的 function showMsg(e) { … }
+在倒數第二行少了 “});” 所以程式會無法正常執行。
+
+Citypig
+July 30, 2008 8:20 pm
+請問站長:
+要如何才能觸發 jQuery 裡 “error:” 的事件?!
+因為我就算把 msg.php 從 Server 上刪除也不會發生錯誤訊息，只是一直沒結果!!
+
+ericsk
+July 30, 2008 8:37 pm
+@Citypig
+我覺得會不會是你的 request 有 cache 住了呢？
+應該是 request 送不到（也就是回應不是 2xx）就會 error 了
+
+yehchge
+September 9, 2008 10:26 am
+這個範例中,執行到
+function processData(data) {
+…..
+$(e.target).attr(‘disabled’,false); <== e未被定義
+}, 3000);
+}
+請問要如何寫, e才有辦法定義?
+
+ericsk
+September 9, 2008 10:29 am
+@yehchge
+你應該要直接去拿你要作用的對象，
+而不是透過 event object 去取 target 喔
+
+yehchge
+September 9, 2008 10:59 am
+謝謝,可以了, 我改寫如下:
+function processData(data) {
+…
+$(‘#btn’).attr(’disabled’,false); <== 這樣改寫就OK了!
+}, 3000);
+}
+[jQuery] AJAX 學習筆記 (一) 如何使用 JSON 驗證使用者表單 | 小惡魔 - 電腦技術 - 生活日記 - 美食介紹 - AppleBOY
+September 22, 2008 12:14 pm
+[...] 參考網站： PHP::JSON in PHP http://visualjquery.com/1.1.2.html jQuery 學習心得筆記 (4) – Ajax (上) jQuery 學習心得筆記 (5) – Ajax (下) [...]
+
+1
+October 1, 2008 11:17 pm
+please could you tell me how to write JSP for the following Line:
+echo $_GET['callback'].”({msg: ‘$res’});”;
+I use
+out.println(callback + “({msg: Hello ” + gender+ ” ” + name + “})”);
+As a result of this, the callback function is never be called?
+
+ericsk
+October 1, 2008 11:21 pm
+@1:
+I think that you may remove the “jsonp:’processData’”
+
+azure
+October 2, 2009 10:15 pm
+您好：
+在參閱了”jQuery 學習心得筆記(4)Ajax(下)”後，最大心得是用JSONP可自行定
+義success之外的函數名稱，而且回傳不再是html形式。
+因此我想說回傳時能否不只回傳一筆資料，因此用您的程式改了一下，但為何永遠都只抓到一筆 ?
+while($row = mysql_fetch_array($result, MYSQL_ASSOC)){
+$name = $row["name"];
+echo $_GET['callback'].”({msg: ‘$name’});”;
+}
+
+azure
+October 3, 2009 12:49 am
+不好意思~已經弄懂了~謝^^
+
+如何使用 JSON 驗證使用者表單
+----------------------------
+ 
+目前來大家都使用 javascript
+客戶端來取得資料，然而 AJAX 可以從Server端取的資料 show 在使用者端給
+大家看，底下會大概講解以及實做一個驗證。
+
+首先要 include jQuery 的檔案，這部份昨天看到 DK大神部落格：Google 的
+ jQuery 與 jQuery UI 裡面有提到 AJAX Libraries API Developer’s Guide，
+可以使用底下方法來 include 各種 Ajax Libraries:
+
+google.load("jquery", "1.2.3");
+google.load("jqueryui", "1.5.2");
+google.load("prototype", "1.6");
+google.load("scriptaculous", "1.8.1");
+google.load("mootools", "1.11");
+google.load("dojo", "1.1.1");
+
+不過我自己是下載 jQuery 放在自己的伺服器來使用
+
+#
+# 可以下載 mini 版本，如果 load 不要這麼重的話
+#
+<script src="./includes/jquery-1.2.6.js" type="text/javascript"></script>
+首先來使用最簡單的 jQuery AJAX
+先建立一個 text 欄位：
+
+<!--
+使用 id="user_name"
+-->
+<p><input type="text" name="user_name" size="20" id="user_name"><span id="msg_user_name"></span></p>
+
+checkRegAcc = function (){
+    $.ajax({
+      url: 'id_validate.php',
+      type: 'GET',
+      data: {
+        user_name: $('#user_name').val()
+      },
+      error: function(xhr) {
+        alert('Ajax request 發生錯誤');
+      },
+      success: function(response) {
+          $('#msg_user_name').html(response);
+          $('#msg_user_name').fadeIn();
+
+      }
+    });
+  };
+
+首先可以看到 $.ajax 這個就是在呼叫 jQuery ajax 物件，前面這個 $ 字號，
+那是 jQuery 的 alias，其實你也可以雪寫成 jQuery.ajax() 這是一樣的，然
+後可以看到 url type data 這三個參數，分別是你要傳到伺服器端的網址，以
+及你是要用 POST 或者是 GET 方式傳遞，data 是你要傳送的參數，這裡的例子
+ user_name: $(’#user_name’).val()，傳送 $_GET['user_name'] 到
+ id_validate.php 然後它的 value 是 $(’#user_name’).val()，這樣其實還蠻
+容易的，然後回傳值 call back 可能是 error 或者是 success 表示成功，如
+果失敗就是跳出視窗說明，成功的話，jQuery 回傳預設是 html 然後直接寫到
+ $(’#msg_user_name’) 這個 span id 裡面，也可以回傳不同的data type，那
+就是要改 ajax 裡面的 datatype 下面會介紹回傳 datetyep: json 這樣就很簡
+單實做一個驗證了，多重驗證，可以再加寫，很容易吧
+
+使用 JSON 方式：
+
+checkRegAcc = function (){
+    alert($('#user_name').val());
+    $.getJSON('id_validate.php?type=json&method=checkRegisterAccount', 
+        {user_name: $('#user_name').val()},
+        function(ret) {
+           $('#msg_user_name').html(ret);
+        });
+
+  };
+  $('#user_name').blur(checkRegAcc);
+
+剛剛有說回傳的datatype可以有下面四種
+
+“xml”: Returns a XML document that can be processed via jQuery.
+“html”: Returns HTML as plain text, included script tags are evaluated.
+“script”: Evaluates the response as Javascript and returns it as plain text.
+“json”: Evaluates the response as JSON and returns a Javascript Object
+
+上面用到 getJSON 的方法，這是利用 datatype:json 的方式，利用這個方式，
+就可以不必依照回傳 error 或者是 success 的 call back 而可以自訂函式唷
+，當然在 id_validate.php 這個 php 裡面，回傳的部份可以利用
+ json_encode() 這個函式來達成，下面是實際 check user_name 是否存在的
+ php 程式
+
+$type = ( isset($_POST['type']) ) ? $_POST['type'] : $_GET['type'];
+
+$sql = "SELECT user_id, username, user_password, user_active, user_level, user_login_tries, user_last_login_try
+    FROM " . USERS_TABLE . "
+    WHERE username = '" . str_replace("\'", "''", $_GET['user_name']) . "'";   
+if( !($result = $db->sql_query($sql)) )
+{
+    die("Could not query config information " . $sql);
+}
+if(!$db->sql_numrows($result))
+{  
+  $ret = "<span style='color:green'> " . $_GET['user_name'] . " 此帳號可以使用</span>";
+}
+else
+{
+  $ret = "<span style='color:red'>此帳號已經有人使用</span>";
+}
+
+echo ($type == 'json') ? json_encode($ret) : $ret;
+?>
+
+$(’#user_name’).blur(checkRegAcc); 
+
+這一行的用意是在，原本 focus 在 user_name 這個 text 欄位，如果你按 TAB
+ 之後就會去直行 checkRegAcc 這個 function，相當容易瞭解
+
+
+Manipulation
+~~~~~~~~~~~~
+All of the methods in this chapter manipulate the DOM in some manner.
+A few of them simply change one of the attributes of an element (also
+listed in the Attributes category), while others set an element’s
+style properties (also listed in the CSS category). Still others
+modify entire elements (or groups of elements) themselves—inserting,
+copying, removing, and so on. All of these methods are referred to as
+“setters,” as they change the values of properties.
+A few of these methods—such as .attr(), .html(), and .val()—also act as “getters,” retrieving information from DOM elements for later use.
+
+.addClass()
+    Attributes, CSS, Class Attribute
+
+    Adds the specified class(es) to each of the set of matched elements.
+
+.after()
+
+DOM Insertion, Outside
+Insert content, specified by the parameter, after each element in the set of matched elements.
+
+.append()
+
+DOM Insertion, Inside
+Insert content, specified by the parameter, to the end of each element in the set of matched elements.
+
+.appendTo()
+
+DOM Insertion, Inside
+Insert every element in the set of matched elements to the end of the target.
+
+.attr()
+Attributes, General Attributes
+Get the value of an attribute for the first element in the set of matched elements.
+
+.before()
+
+DOM Insertion, Outside
+Insert content, specified by the parameter, before each element in the set of matched elements.
+
+.clone()
+Copying
+Create a deep copy of the set of matched elements.
+
+.css()
+CSS, Style Properties
+Get the value of a style property for the first element in the set of matched elements.
+
+.detach()
+DOM Removal
+Remove the set of matched elements from the DOM.
+
+.empty()
+DOM Removal
+Remove all child nodes of the set of matched elements from the DOM.
+
+.hasClass()
+
+Attributes, CSS, Class Attribute
+Determine whether any of the matched elements are assigned the given class.
+
+.height()
+CSS, Dimensions, Style Properties
+Get the current computed height for the first element in the set of matched elements.
+
+.html()
+Attributes, DOM Insertion, Inside
+Get the HTML contents of the first element in the set of matched elements.
+
+.innerHeight()
+CSS, Dimensions, Style Properties
+Get the current computed height for the first element in the set of matched elements, including padding but not border.
+
+.innerWidth()
+CSS, Dimensions, Style Properties
+Get the current computed width for the first element in the set of matched elements, including padding but not border.
+
+.insertAfter()
+DOM Insertion, Outside
+Insert every element in the set of matched elements after the target.
+
+.insertBefore()
+DOM Insertion, Outside
+Insert every element in the set of matched elements before the target.
+
+.offset()
+CSS, Offset, Style Properties
+Get the current coordinates of the first element in the set of matched elements, relative to the document.
+
+.outerHeight()
+CSS, Dimensions, Style Properties
+Get the current computed height for the first element in the set of matched elements, including padding, border, and optionally margin.
+
+.outerWidth()
+CSS, Dimensions, Style Properties
+Get the current computed width for the first element in the set of matched elements, including padding and border.
+
+.position()
+CSS, Offset, Style Properties
+Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+
+.prepend()
+DOM Insertion, Inside
+Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.
+
+.prependTo()
+DOM Insertion, Inside
+Insert every element in the set of matched elements to the beginning of the target.
+
+.remove()
+DOM Removal
+Remove the set of matched elements from the DOM.
+
+.removeAttr()
+Attributes, General Attributes
+Remove an attribute from each element in the set of matched elements.
+.removeClass()
+Attributes, CSS, Class Attribute
+Remove a single class, multiple classes, or all classes from each element in the set of matched elements.
+.replaceAll()
+DOM Replacement
+A selector expression indicating which element(s) to replace.
+.replaceWith()
+DOM Replacement
+Replace each element in the set of matched elements with the provided new content.
+.scrollLeft()
+CSS, Offset, Style Properties
+Get the current horizontal position of the scroll bar for the first element in the set of matched elements.
+.scrollTop()
+CSS, Offset, Style Properties
+Get the current vertical position of the scroll bar for the first element in the set of matched elements.
+.text()
+DOM Insertion, Inside
+Get the combined text contents of each element in the set of matched elements, including their descendants.
+.toggleClass()
+Attributes, CSS, Class Attribute
+Add or remove one or more classes from each element in the set of matched elements, depending on either the class's presence or the value of the switch argument.
+.unwrap()
+DOM Insertion, Around, DOM Removal
+Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.
+.val()
+Attributes, Forms, General Attributes
+Get the current value of the first element in the set of matched elements.
+.width()
+CSS, Dimensions, Style Properties
+Get the current computed width for the first element in the set of matched elements.
+.wrap()
+DOM Insertion, Around
+Wrap an HTML structure around each element in the set of matched elements.
+.wrapAll()
+DOM Insertion, Around
+Wrap an HTML structure around all elements in the set of matched elements.
+.wrapInner()
+DOM Insertion, Around
+Wrap an HTML structure around the content of each element in the set of matched elements.

@@ -1,6 +1,8 @@
 /* platte url
  * http://www.colourlovers.com/palette/1292599/Cotton_Candy?widths=1
  */
+#notice {color:red}
+
 #topbar {border-bottom: 1pt solid blue;
          margin-bottom:10px}
 

@@ -1,0 +1,109 @@
+加快 Vista 效能
+
+
+1.關閉華麗效果
+
+在桌面按滑鼠右鍵，然後選擇個人化，並按下"視窗色彩及外觀"，關閉 Vista 的 Aero 效果
+
+2.電源規劃 - 強烈建議更改成高效能模式來
+
+3.調整圖形效能
+3.1 我的電腦按下右鍵選擇內容，將會跳出電腦的基本資訊
+
+3.2 點選左邊的進階系統設定將會跳出系統內容的設定畫面，並點選效能後面的設定按鈕。
+
+
+3.3 出現效能選項之後，請點選自訂並將所有的選項取消只留下在視窗和按鈕上使用圖形模式(如果不怕醜也可以取消)
+
+3.4  並按下套用與確定即可切換到效能模式。
+
+4.關閉自動還原功能
+
+4.1 我的電腦按下右鍵選擇內容，將會跳出電腦的基本資訊
+
+
+4.2 點選左邊的進階系統設定將會跳出系統內容的設定畫面，並點選系統保護的標籤。
+
+
+4.3 將所有硬碟前面的勾取消(此為別台電腦的系統保護圖提供給各位參考)，並按下套用與確定。
+
+
+4.4 跳出警告視窗請點選關閉系統還原按鈕，即可關閉系統還原功能。
+
+6.關閉資訊看板 Sidear
+
+7.取消UAC控制權
+
+7.1 進入控制台選擇使用者帳號與家庭安全下方的新增或移除使用者帳戶
+
+
+7.2 進入帳號管理畫面，請利用右邊的拉BAR移至最下面點選移至主頁[使用者帳戶]頁面。
+
+
+7.3 進入使用者帳號頁面點選 開啟或關閉使用者帳戶
+
+
+7.4 將 使用[使用者帳互控制(UAC)]來協助保護您的電腦的勾取消。
+
+7.5 按下確定並選擇立即重新開機，以後就不會問東問西了
+
+8.關閉所不必要動畫
+
+9.取消自動更新
+
+10.停止不必要的服務
+
+於開始輸入 services.msc
+
+#.Computer Browser
+#.Distributed Link Tracking Client
+#.Offline Files
+#.IKE and AuthIP IPsec Keying Modules
+#.Internet Connection Sharing (ICS)
+#.IPsec Policy Agent
+#.Messenger Sharing Folders USN Journal Reader service
+#.Net.Tcp 連接埠共用服務
+#.ReadyBoost
+#.Remote Registry
+#.Routing and Remote Access
+#.Security Center
+#.Shell Hardware Detection
+#.Tablet pc Input Service
+#.Windows Error Reporting Service
+
+11.關閉以下 Windows 功能
+
+開啟「程式和功能」視窗以後，按一下左方窗格的「開啟或關閉Windows功能」選項。
+
+#.Windows會議空間- 網路會議系統
+
+#.Windows DFS 覆寫服務 - 多部 PC 的檔案同步服務
+
+#.Windows DFS 覆寫服務 - 多部 PC 的檔案同步服務
+
+#.遠端差異壓縮
+
+12.取消檔案搜尋索引Indexing功能，加快電腦運作效能
+
+13.關閉自動運行程式
+
+按左下方的 Vista Logo，
+然後在輸入欄輸入 "msconfig" 在啟動欄行把不需要自動啟動的程式剔除
+
+14. 更改以下登錄值
+
+14.1. 縮短關閉服務的時間
+
+HKEY_LOCAL_MACHINE\Syatem\CurrentControlSet\Control
+WaitToKillServiceTimeout，修改成為 3000 或1000 即可 (3000 即3秒，1000即1秒)
+
+14.2. 縮短關閉程式與進程前的等侯時間
+
+HKEY_CURRENT_USER\Control Panel\Desktop，將 WaitToKillAppTimeout 和 HungAppTimeout 的數值修改
+
+14.3. 減少開機滾動條的滾動次數呢
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters
+
+[EnablePrefetcher]，把它的默認值由3改為0.
+

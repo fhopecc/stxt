@@ -1,0 +1,307 @@
+JSON
+----
+
+
+JavaScript這種編程語言首要的目的是為Netscape Navigator提供一種頁面腳本
+語言。它仍被普遍的認為是Java的一個子集，但事實並非如此。它是一種語法類
+似c語言並且支持面向物件的Scheme-like語言。 JavaScript使用了ECMAScript
+語言規範第三版進行了標準化。
+
+JSON是JavaScript面向物件語法的一個子集。 由於JSON是JavaScript的一個子
+集，因此它可清晰的運用於此語言中。
+
+var myJSONObject = {"bindings": [ {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"}, {"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"}, {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"} ] } ;
+
+上面的示例，創建了一個包括單獨成員”bindings”的物件，此成員包括一個含有
+三個物件（”ircEvent”, “method”, 與“regex”）的數組
+
+成員可以通過.或者下標操作符檢索。
+
+myJSONObject.bindings[0].method // "newURI"
+
+為了將JSON文本轉換為物件，可以使用eval()函數。 eval()函數調用
+JavaScript編輯器。 由於JSON是JavaScript的子集，因此編譯器將正確的解析
+文本並產生物件結構。 文本必須括在括號中避免產生JavaScript的語法歧義。
+
+var myObject = eval('(' + myJSONtext + ')');
+
+eval函數非常快速。 它可以編譯執行任何JavaScript程序，因此產生了安全性
+問題。 當使用可信任與完善的源代碼時才可以使用eval函數。 這樣可以更安全
+的使用JSON解析器。 使用XMLHttpRequest的web應用，頁面之間的通訊只允許同
+源，因此是可以信任的。 但這卻不是完善的。 如果服務器沒有嚴謹的JSON編碼
+，或者沒有嚴格的輸入驗證，那麼可能傳送包括危險腳本的無效JSON文本。
+ eval函數將執行惡意的腳本。
+
+使用JSON解析器可以防止此類事件。 JSON解析器只能辨識JSON文本，拒絕所有
+腳本。 提供了本地JSON支持的瀏覽器的JSON解析器將遠快於eval函數。 預計未
+來的ECMAScript標準將支持本地JSON。
+
+var myObject = JSON.parse(myJSONtext, reviver);
+
+一個替換函數（reviver function）做為可選參數被最終結果的每一級的鍵
+（key）與值（value）調用。 每個值都將被替換函數的值代替。 這可以用來將
+一般的類改變成偽類的實例，或者將日期字符串轉變為日期物件。
+
+myData = JSON.parse(text, function (key, value) { var type; if (value && typeof value === 'object') { type = value.type; if (typeof type === 'string' && typeof window[type] === 'function') { return new (window[type])(value); } } return value; });
+
+JSON stringifier進行反向操作，可以把JavaScript數據結構轉換為JSON文本。
+ JSON不支持循環數據結構，因此應小心不要為JSON stringifier提供循環結構
+。
+
+var myJSONText = JSON.stringify(myObject, replacer);
+
+如果stringify函數發現一個帶有toJSON方法的物件，它將執行此方法，並且返
+回產生的值。 這樣一個物件就可以決定自己的JSON表現。
+
+stringifier方法可以攜帶一個可選的字符串數組。 這些字符串被用於選擇包括
+在JSON文本中的屬性。
+
+stringifier方法可以攜帶一個可選的替代(replacer)函數。 它將在結構中每個
+值的toJSON方法（如果有的話）後面執行。 它將每個鍵與值做為參數傳遞，當
+然對像要包含這個鍵。 返回值將被字符串化。
+
+如果沒有提供數組或替代函數，一個用於忽略被集成的屬性的可選替代函數將被
+提供。 如果想要所有被繼承的屬性，可以提供一個簡單的替換函數：
+
+var myJSONText = JSON.stringify(myObject, function (key, value) { return value; });
+
+對於在JSON中沒有表達的值（如函數與undefined）是排除在外的。
+
+不能確定的數量將被替換為null。 為了替代其它的值，可以像下面一樣使用替
+換（replacer）函數
+
+function replacer(key, value) { if (typeof value === 'number' && !isFinite(value)) { return String(value); } return value; }
+
+開放源代碼的JSON解析器與JSON stringifier可以使用。通過minified可以小於
+2.5K。
+
+JavaScript物件標記法，英文名稱JavaScript Object Notation，簡稱 JSON，
+為 JavaScript Programming Language, Standard ECMA-262 3rd Edition -
+ December 1999 的子集合，從 JavaScript 的 object literal （或稱 object
+ initalizer ）擴充而來的一種文字格式標記法，作為資料交換之用，因此想要
+了解 JSON，可以先了解JavaScript 中 object literal 的運作方式。
+
+如果您要一個具索引的陣列，可以使用Array initializer的方式，例如：
+
+myLibrary.books=
+　　　[predefinedBook1,predefinedBook2,predefinedBook3]; 
+
+在JavaScript中，您可以使用Object initializer的方式來建立物件並指定其屬性，例如：
+
+myLibrary.books={ 
+    bestSeller : predefinedBook1,
+    cookbook : predefinedBook2,
+    spaceFiller : predefinedBook3
+};
+
+如果屬性名稱中間有空白，則可以用引號括住，例如：
+
+myLibrary.books={ 
+    "best Seller" : predefinedBook1,
+    cookbook : predefinedBook2,
+    spaceFiller : predefinedBook3
+};
+
+由於陣列是物件，而陣列之中可以置放物件，而物件可以使用
+Object initializer 的方式來建立，因而您可以更複雜的方式來建立物件，物
+件中包括陣列屬性，陣列中包括物件：
+
+var some = { // 這邊是Object initializer
+    prop1 : "value1",
+    prop2 : ["v1", "v2", "v3"],  // 這邊是Array initializer
+    prop3 : [  // 這邊是Array initializer
+        {  // 這邊是Object initializer
+            key1 : "o1",
+            key2 : [ // 這邊是Array initializer
+                        {loc: "Kaohsiung", number : 1503},  // 這邊是Object initializer
+                        {loc: "Taipei", number : 2}
+                   ]
+             key3 : new Date(2007, 2, 1)
+        }
+    ]
+};
+
+object literal 在指定值時可以使用任何JavaScript程式碼，甚至是自己定義的函式 ：
+
+function currentDate(){
+    return new Date(2007, 2, 1); 
+}
+
+var volNum=2;
+var turnipVol2={
+    title : "Ajax in action" +volNum,
+    authors : [
+        { name: "Justin", age: 32 }
+    ], 
+    publicationDate : currentDate()  // 設定為currentDate()的傳回值
+}; 
+
+也可以使用 object literal  建立物件並建立成員函式：
+
+var turnipVol2={ 
+    …
+    summarize:function(len){
+        ....
+    }
+};
+
+還可以如下混用建立物件與其屬性：
+
+var numbers={ one:1, two:2, three:3 };
+numbers.five=5;
+numbers.someone = {
+    name : "Justin",
+    age : 32,
+    birthday : new Date(1975, 5, 26)
+};
+
+有了以上Object literal 的基礎，可以進一步看看 JSON  的介紹，了解 JSON 的文字格式結構。
+
+在 JSON 中我們已經介紹過其基本格式，與XML相同，JSON只是一個文字格式，
+只要客戶端與伺服端可以剖析它，就可以利用它作為傳送資料的格式，但JSON是
+JavaScript 的核心特性 object literal 擴充而來的資料交換格式，所以在
+JavaScript中使用JSON作為資料格式很方便，您還可以在 http://www.json.org
+ 找到處理JSON的程式庫，包括客戶端JavaScript library與伺服端的library。
+
+相較於XML，JSON在資料表示時更為簡潔，例如一個表示帳戶的資料，XML中可能如下表示：
+
+<account>
+    <number>123456</number>
+    <name>Justin</name>
+    <balance>1000</balance>
+</account>
+
+而使用JSON可以這麼表示：
+
+var account = {
+    number : "123456",
+    name: "Justin",
+    balance: "1000"
+};
+
+您可以下載 http://www.json.org/json.js ，並將之加入至網頁之中：
+
+<script type="text/javascript" src="json.js"></script> 
+
+json.js 中有JSON parser與JSON stringifier，例如它擴充了物件，增加了
+toJSONString()函式，您可以直接如下傳回物件的JSON表示法：
+
+function Account(number, name, balance) {
+    this.number = number;
+    this.name = name;
+    this.balance = balance;
+}
+
+var account = new Account(123456, "Justin", 1000);
+alert(account.toJSONString());
+
+您可以按下 執行範例 觀看結果。
+
+您可以把JSON表示法以POST發送至伺服端，例如： 
+
+HandleJSONEx-2.js
+var xmlHttp;
+
+function createXMLHttpRequest() {
+    if(window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+    }
+    else if(window.ActiveXObject) {
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+function prepareJSON() {
+	var number = document.getElementById("num").value;
+	var name = document.getElementById("name").value;
+	var balance = document.getElementById("bal").value;
+	
+	var account = new Object();
+	account.number = number;
+	account.name = name;
+	account.balance = balance;
+	
+	return account.toJSONString();
+}
+
+function handleAccount() {
+    var json = prepareJSON();
+    var url = "JSONServlet?timeStamp" + new Date().getTime();
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.open("POST", url);
+    xmlHttp.setRequestHeader("Content-Type", 
+                             "application/x-www-form-urlencoded");
+    xmlHttp.send(json);
+}
+
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+            document.getElementById("response").innerHTML = xmlHttp.responseText;
+        }
+    }
+}
+
+這個程式使用者輸入的帳號資訊包裝為物件，並使用JSON擴充的toJSONString()
+將之轉換為JSON格式，之後POST至伺服端，伺服端可以至  JSON in Java 下載
+JSON伺服端的Parser，您可以撰寫以下的程式：
+
+# JSONServlet.java
+
+package onlyfun.caterpillar;
+
+import java.io.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.json.*;
+
+ public class JSONServlet extends javax.servlet.http.HttpServlet 
+                          implements javax.servlet.Servlet {
+	public JSONServlet() {
+		super();
+	}   	
+
+	protected void doPost(HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        String json = readJSONString(request);
+        
+        JSONObject jsonObject = null;
+        String responseText = null;
+        try {
+            jsonObject = new JSONObject(json);
+            responseText = "帳號 " + jsonObject.getString("number") + 
+                "<br/> 名稱 "+ jsonObject.getString("name") + "<br/> 餘額 " 
+                + jsonObject.getString("balance");
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        
+        
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/xml");
+        response.getWriter().print(responseText);
+	}   
+    
+    private String readJSONString(HttpServletRequest request){
+        StringBuffer json = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = request.getReader();
+            while((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.toString());
+        }
+        return json.toString();
+    }
+}
+
+這個Servlet剖析JSON，並將資料取出後再傳回文字回應。
+
+如果將JSON字串傳回給客戶端瀏覽器，則可以使用eval()將之運算為一個
+JavaScript物件以進行操作。

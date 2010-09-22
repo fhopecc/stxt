@@ -22,6 +22,9 @@ handlers:
 - url: /\w+(/\d+)?
   script: client/handler.py
 
+- url: /period_books.*
+  script: client/handler.py
+
 skip_files: |
  ^(.*/)?(
  (app\.yaml)|
