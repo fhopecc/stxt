@@ -1,0 +1,13 @@
+Q. Convert date to datetime in Python
+
+You can use datetime.combine(date, time); for the time you create a
+datetime.time object initialized to midnight.
+
+Thanks. Combined with the fact that time() returns (0,0) I think this
+comes out the cleanest: datetime.combine(d, time()) 
+
+Just be careful not to let your code get datetime.time() confused with
+time.time(). Qualified names FTW!
+
+Yes, good point. Fortunately, combine() raises an exception if you
+pass in a time.time or anything else other than a datetime.time.

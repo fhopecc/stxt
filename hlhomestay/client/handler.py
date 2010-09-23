@@ -161,18 +161,9 @@ class PeriodBooksPage(webapp.RequestHandler):
         bs = room.period_books(strpdate(r.get('checkin')),
                                strpdate(r.get('checkout')))
 
-        o = ','.join(['{key:"%s", checkin:%s, checkout:%s}' % 
-                       (b.key(),
-                        date2json(b.checkin), 
-                        date2json(b.checkout)
-                       ) for b in bs])
+        from gaejson import GaeEncoder, json
 
-        self.response.out.write('[%s]' % o)
-
-def date2json(d):
-    'month value whose range starts with zero, so Nov = 10, Dec = 11'
-    return 'new Date(%d, %d, %d)' % (d.year, d.month - 1, d.day)
-
+        self.response.out.write(json.dumps(bs, cls=GaeEncoder))
 
 application = webapp.WSGIApplication(
         [

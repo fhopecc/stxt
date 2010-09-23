@@ -2,7 +2,6 @@
 from google.appengine.ext import db
 from google.appengine.api import users
 from datetime import date
-from calendar import Calendar
 from datetime_iterator import datetimeIterator
 from datetime import timedelta
 import datetime
@@ -46,6 +45,7 @@ class Homestay(db.Model):
                     yield r 
 
     def monthly_books(self, year, month):
+        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         result = []
@@ -81,6 +81,7 @@ class Homestay(db.Model):
             return []
 
     def monthly_availables(self, year, month):
+        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         result = []
@@ -145,6 +146,7 @@ class Homestay(db.Model):
         if h: yield h
 
     def monthly_holidays(self, year, month):
+        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         monthly_holidays = []
@@ -165,6 +167,7 @@ class Homestay(db.Model):
             else: yield r # a special room
     
     def monthly_specials(self, year, month):
+        from calendar import Calendar
         c = Calendar()
         m = c.monthdatescalendar(year, month)
         monthly_specials = []

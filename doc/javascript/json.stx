@@ -1,7 +1,6 @@
 JSON
 ----
 
-
 JavaScript這種編程語言首要的目的是為Netscape Navigator提供一種頁面腳本
 語言。它仍被普遍的認為是Java的一個子集，但事實並非如此。它是一種語法類
 似c語言並且支持面向物件的Scheme-like語言。 JavaScript使用了ECMAScript
@@ -305,3 +304,162 @@ import org.json.*;
 
 如果將JSON字串傳回給客戶端瀏覽器，則可以使用eval()將之運算為一個
 JavaScript物件以進行操作。
+
+
+ASP.NET的JSON日期轉換
+~~~~~~~~~~~~~~~~~~~~~
+
+最近寫程式處理物件轉JSON時，才發現日期型別在轉換上有特別之處，在此做個
+整理:
+
+JSON中時間型別會轉成UTC標準時間。
+
+題外話:
+大家知道UTC是什麼的縮寫嗎? 是Coordinated Universal Time。
+靠!! 取第一個字母縮寫明明該是CUT，為什麼會變成UTC? 原來這裡有段歷史，
+當初在定義名稱時，為了該用英語Coordinated Universal Time[CUT]，還是法
+語Temps Universel Coordonné[TUC]吵翻天。最後一不做二不休，索性誰都不用
+，先把縮寫訂成UTC，再發明"Univeral Time, Coordinated"這個新名詞來搭配
+，很妙吧!
+
+由於JSON規格中未定義日期型別的呈現方式，只用了"2010-03-31T16:00:00Z"這
+種表示法，因此無法區分它只是個日期時間字串或是真該被轉成JavaScript
+ Date物件。為此，微軟發明了"\/Date(1270051200000)\/"這種表示法，用以明
+確標註"這是一個Date型別"。由於它用了合法但JavaScript不會使用的特殊註記--
+"\/"，跟一般字串雷同的機率微乎其微。[細節可參考An Introduction to
+ JavaScript Object Notation (JSON) in JavaScript and .NET一文關於A
+SP.NET AJAX: Inside JSON date and time string的說明。]
+
+微軟定義出"\/Date(Tick)\/"字串格式，解決JSON規格欠缺日期型別表示法的不
+足，但問題是，該格式只有Microsoft AJAX Client相關的js Library及元件能
+正確解析式，使用JSON2.js、jQuery時，"\/Date(Tick)\/"只會被視為字串，並
+不會被還原成Javascript Data物件。
+
+針對這些問題，MVP Rrick Strahl發展了一組好用的函數庫可以解決問題: 其中
+包含了JSON.parseWithDate(解析JSON字串時將"\/Date(Tick)\/"解析成Date物
+件)、JSON.stringifyWcf(物件轉成JSON字串時將Date物件轉成
+"\/Date(Tick)\/"格式)、JSON.dateStringToDate(將"\/Date(Tick)\/"轉成
+Date物件)
+
+在ASP.NET Server Side要將物件轉成JSON字串，有兩個選擇: 
+* JavaScriptSerializer in System.Web.Extensions
+* DataContractJsonSerializer in System.Runtime.Serialization.Web
+Rick Strahl有另一篇文章列出了二者的比較。
+以下範例列出JavaScriptSerializer, DataContractJsonSerializer, 及瀏覽器
+JSON.stringify轉換結果的比較: (註: IE6/IE7沒有內建JSON轉換物件，要外掛
+JSON2.js)
+
+排版顯示純文字
+<%@ Page Language="C#" %>
+<%@ Import Namespace="System.Web.Script.Serialization" %>
+<%@ Import Namespace="System.Runtime.Serialization.Json" %>
+<%@ Import Namespace="System.IO" %>
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        //借用 http://bit.ly/am7Efd 文章中的Member LINQ物件
+        Member m = new Member()
+        {
+            UserId = 1,
+            UserName = "Jeffrey",
+            Code = "Darkthread",
+            RegTime = new DateTime(2010, 4, 1)
+        };
+        //JavaScriptSerializer
+        JavaScriptSerializer jss = new JavaScriptSerializer();
+        dvJson1.InnerText = jss.Serialize(m);
+ 
+        //DataContractJsonSerializer
+        DataContractJsonSerializer dcs =
+            new DataContractJsonSerializer(m.GetType());
+        MemoryStream ms = new MemoryStream();
+        dcs.WriteObject(ms, m);
+        dvJson2.InnerText = Encoding.UTF8.GetString(ms.ToArray());
+        
+    }
+ 
+</script>
+ 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>JSON Date</title>
+    <script src="JSON2.js" type="text/javascript"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" 
+    type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var m = { UserId: 1, UserName: "Jeffrey", Code: "Darkthread",
+                "RegDate": new Date("2010/04/01")
+            };
+            $("#dvJson3").text(JSON.stringify(m));
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    JavaScriptSerializer:
+    <div id="dvJson1" runat="server" />
+    DataContractJsonSerializer:
+    <div id="dvJson2" runat="server" />
+    Client Side JSON:
+    <div id="dvJson3" />
+    </form>
+</body>
+</html>
+執行結果如下:
+
+JavaScriptSerializer:
+
+{"UserId":1,"UserName":"Jeffrey","Code":"Darkthread","RegTime":"\/Date(1270051200000)\/"}
+
+DataContractJsonSerializer:
+
+{"Code":"Darkthread","RegTime":"\/Date(1270051200000+0800)\/","UserId":1,"UserName":"Jeffrey"}
+
+Client Side JSON:
+
+{"UserId":1,"UserName":"Jeffrey","Code":"Darkthread","RegDate":"2010-03-31T16:00:00Z"}
+
+由結果來看，微軟元件所序列化的結果都採用了"\/Date(Tick)\/"格式，但有個
+差異: DataContractJsonSerializer轉換出的時間會包含時區資訊，而
+JavaScriptSerializer不會。
+
+再來示範如何在JS端解析及轉換\/Date(Tick)\/格式，我先將Rick的函數庫存檔
+成為json4ms.js，接著用以下的程式展示如何將物件轉成JSON再還原:
+
+排版顯示純文字
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="JSON2.js" type="text/javascript"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" 
+    type="text/javascript"></script>
+    <script src="json4ms.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            var m = { UserId: 1, UserName: "Jeffrey", Code: "Darkthread",
+                "RegDate": new Date("2010/04/01")
+            };
+            var json = JSON.stringifyWcf(m);
+            var m2 = JSON.parseWithDate(json);
+            $("#dv1").text(json);
+            $("#dv2").text(m2.RegDate.toGMTString());
+        });
+    </script>
+</head>
+<body>
+JSON.stringifyWcf:
+<div id="dv1"></div>
+JSON.parseWithDate:
+<div id="dv2"></div>
+</body>
+</html>
+執行結果為:
+
+JSON.stringifyWcf:
+
+{"UserId":1,"UserName":"Jeffrey","Code":"Darkthread","RegDate":"/Date(1270051200000)/"}
+
+JSON.parseWithDate:
+
+Wed, 31 Mar 2010 16:00:00 UTC
+

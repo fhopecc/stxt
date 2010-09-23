@@ -1,0 +1,44 @@
+除錯(Debug)
+-----------
+
+nose
+~~~~
+
+安裝方式： easy_install nose。
+
+寫 unittest 時，管理 test suit 是件很瑣碎又易犯錯的事，相信很多人會想
+說，能不能跑個程式，自行搜集目錄下全部的測試碼並自動執行。沒錯，大家的
+心聲 nose 聽到了！這裡直接用例子說明 nose 的使用方式，詳細說明請見《An
+Extended Introduction to the nose Unit Testing Framework 》：
+
+執行目前目錄下所有測試：
+1
+nosetests
+只執行 package PKG 下的 module MOD 內的測試：
+1
+nosetests PKG.MOD
+只執行 package PKG 下的 module MOD 內的 test case CLS 的測試 (注意 test case 前接得是冒號)：
+1
+nosetests PKG.MOD:CLS
+執行目前目錄下所有測試並附上子目錄 pkg1、pkg2 的 Code coverage 資訊：
+1
+nosetests --with-coverage --cover-package=pkg1,pkg2 --cover-erase
+不要執行 slow_test.py：
+1
+nosetests -e slow_test.py
+使用四個 CPU 平行執行測試：
+1
+nosetests --processes=4
+只執行上回失敗的測試：
+1
+nosetests --failed
+–with-coverage 需要先裝 coverage；–process 得另裝 package multiprocessing ( easy_install multiprocessing )，相關說明詳見 Multiprocess: parallel testing。
+
+另外，若要讓 nose 跳過物件 A 的測試，就在程式裡寫上
+
+1
+A.__test__ = False
+比方若不想測模組 mod，就在 mod.py 裡寫上
+
+1
+__test__ = False

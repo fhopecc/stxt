@@ -1,34 +1,25 @@
 除錯(Debug)
 -----------
-Python has a wonderful interactive interpreter (i.e. shell). However, sometimes you need more setup before you can start coding. Previously, I wrote Python: Coding in the Debugger for Beginners.
 
-Google App Engine works a bit like CGI in that output to STDOUT goes
- to the browser. This breaks my normal "import pdb; pdb.set_trace()"
- trick. However, it's not hard to put STDOUT, etc. back so that you
- can use pdb in the way you normally would:
+使用 PDB
+~~~~~~~~
 
 GAE 為一種 CGI 程式，STDOUT 之輸出會到瀏覽器，
 這使得無法使用 ''import pdb; pdb.set_trace()'' 來設定中斷點，
 但將 STDOUT 還原並不難如下式::
 
+import sys
+import pdb
 for attr in ('stdin', 'stdout', 'stderr'):
     setattr(sys, attr, getattr(sys, '__%s__' % attr))
+pdb.set_trace()
 
- Ian Bicking said...
-Or use weberror's magical new pdb middleware! Well... I haven't tried it with appengine, so there's a decent chance it doesn't work there (but patches welcome).
+若要用 nose 則必須把 
 
-8:33 PM
- metapundit.net said...
-Heh - I wondered about that today at the hackathon. I tried import pdb;pdb.set_trace() and got a weird error; now I guess i know why...
+if name="__main__": 
 
-9:51 PM
- Shannon -jj Behrens said...
-> Or use weberror's magical new pdb middleware! Well... I haven't tried it with appengine, so there's a decent chance it doesn't work there (but patches welcome).
+整段拿掉。
 
-Haha, as usual, you're way ahead of me.
-
-6:09 PM
- whit537 said...
 You can also pass std{in,out} arguments to pdb.Pdb, like so:
 
 def set_trace():
@@ -88,3 +79,14 @@ Thanks.
 I have no clue.
 
 12:55 AM
+
+
+PDB and AppEngine
+feb 07, 2009 · appengine pdb python
+It turns out App Engine breaks the default behaviour of the Python debugger PDB by sending STDOUT to the browser. But with a little bit of python you can put it back in.
+
+import sys
+import pdb
+for attr in ('stdin', 'stdout', 'stderr'):
+    setattr(sys, attr, getattr(sys, '__%s__' % attr))
+pdb.set_trace()

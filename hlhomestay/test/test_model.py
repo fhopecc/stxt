@@ -2,6 +2,7 @@
 import os, sys, unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from google.appengine.api import users
+from django.utils import simplejson
 from model import *
 from datetime import date
 from datetime import timedelta
@@ -295,6 +296,11 @@ class UnitTest(unittest.TestCase):
        self.assertEqual(20000, 
                         sum(p['value'] for p in self.b5.price_items()))
 
+       #import pdb
+       #for attr in ('stdin', 'stdout', 'stderr'):
+       #    setattr(sys, attr, getattr(sys, '__%s__' % attr))
+       #pdb.set_trace()
+
        self.assertEqual(20000, self.b5.price())
 
     def testSpecial(self):
@@ -318,9 +324,9 @@ class UnitTest(unittest.TestCase):
         # nextweek(Tue) special 1000 Sat 2000 Sun 2000 Mon 1000
         #                       5000     6000     7000     6000
 
-        if nextweek.weekday in(2, 4): # WED, FRI
+        if nextweek.weekday() in(2, 4): # WED, FRI
             self.assertEqual(6000, self.b4.price())
-        elif nextweek.weekday == 3: # Thu
+        elif nextweek.weekday() == 3: # Thu
             self.assertEqual(7000, self.b4.price())
         else:
             self.assertEqual(5000, self.b4.price())
@@ -339,10 +345,17 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual('Room', s.kind())
 
-if __name__ == '__main__':
-    unittest.main()
+    def testJSON(self):
+        from django.utils import simplejson
+        self.assertEqual('["foo", {"bar": ["baz", null, 1.0, 2]}]', 
+            simplejson.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
+            )
+
+#if __name__ == '__main__':
+    #unittest.main()
     #tests = unittest.TestSuite()
     #tests.addTest(UnitTest("testAvailables"))
+    #tests.addTest(UnitTest("testPrice"))
     #UnitTest("testAvailables").debug()
     #tests.debug()
     #runner = unittest.TextTestRunner()

@@ -42,9 +42,9 @@ function check_form(f){
                        for (b in books) {
                             b = books[b]
                             $('#notice').append(
-                                b.checkin.format('yyyymmdd') + 
+                                b.checkin + 
                                 ' ~ ' + 
-                                b.checkout.format('yyyymmdd')
+                                b.checkout
                                 ).append("<br/>")
                        }
                        
