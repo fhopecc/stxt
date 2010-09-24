@@ -41,10 +41,12 @@ function check_form(f){
 
                        for (b in books) {
                             b = books[b]
+                            chk = new Date(b.checkin)
+                            chi = new Date(b.checkout)
                             $('#notice').append(
-                                b.checkin + 
+                                chk.format('yyyymmdd') + 
                                 ' ~ ' + 
-                                b.checkout
+                                chi.format('yyyymmdd')
                                 ).append("<br/>")
                        }
                        

@@ -1,16 +1,3 @@
-Using Captcha with Google App Engine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-How does Captcha works ?
-- We generate a random string and place it on a temporary image
-- We show that image in the form
-- We make a md5 or sha1 hash out of that string and send it as a
-  hidden field of the form or we use sessions or cookies to store it.
-- When user submits the form the text he entered is hashed and
-  compared with the original hash. If they are equal then user entered
-  correct captcha text.
-
-## {{{ http://code.activestate.com/recipes/440588/ (r3)
 import random
 import Image
 import ImageFont
@@ -40,3 +27,5 @@ def gen_captcha(text, fnt, fnt_sz, file_name, fmt='JPEG'):
 	im = im.filter(ImageFilter.EDGE_ENHANCE_MORE)
 	# save the image to a file
 	im.save(file_name, format=fmt)
+
+gen_captcha("text", r'c:\WINDOWS\Fonts\times.ttf', 50, 'test.jpg')

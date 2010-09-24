@@ -245,7 +245,7 @@ class UnitTest(unittest.TestCase):
                         checkin=today,
                         checkout=tomorrow + timedelta(days=2))
         self.failIf(b.period_available())
-        self.assertRaises(PeriodHasBooksError, b.book)
+        self.assertRaises(PeriodHasBooksError, b.put)
 
     def testAvailables(self):
         avs = self.h1.daily_availables(yestorday)
@@ -350,13 +350,3 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('["foo", {"bar": ["baz", null, 1.0, 2]}]', 
             simplejson.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
             )
-
-#if __name__ == '__main__':
-    #unittest.main()
-    #tests = unittest.TestSuite()
-    #tests.addTest(UnitTest("testAvailables"))
-    #tests.addTest(UnitTest("testPrice"))
-    #UnitTest("testAvailables").debug()
-    #tests.debug()
-    #runner = unittest.TextTestRunner()
-    #runner.run(tests)

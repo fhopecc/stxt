@@ -24,5 +24,17 @@ Q.共用代碼，花蓮不見了？
   4.安裝代碼
 
 Q.YRX LOG在那裡?
+
   /shared_tmp/work/yrx
   
+Q.出現驗證錯誤？
+
+  「非自然人或工商憑證」
+
+  「驗證 GetCertificateFromGPKI:9000」
+
+  「Out of Memory: line 231」之訊息。 
+
+  YRXT204 記錄已登入的驗證使用者。
+
+  檢查 CRLFile 之目錄是否錯置。

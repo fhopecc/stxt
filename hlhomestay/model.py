@@ -289,6 +289,11 @@ class Reservation(db.Model):
             self.put()
         else:
             raise PeriodHasBooksError("period has books")
+    def put(self):
+        if self.period_available():
+            db.Model.put(self)
+        else:
+            raise PeriodHasBooksError("period has books")
 
     def admin_show_path(self):
         return "/admin/%s" % self.key()

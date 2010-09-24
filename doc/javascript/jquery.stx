@@ -25,13 +25,16 @@ jQuery 是一套 JavaScript 的 Library，因此，你必須稍具 JavaScript �
 當的水準了，或許你會對 jQuery 更有興趣了。
 
 以下的教學內容，主要是擷取了 jQuery 作者 John Resig 的一篇簡報
- "Building Interactive
-Prototypes with jQuery" 的內容加以調整並註解，希望能以比較忠實的方式來呈現 jQuery 的設計含意。
+"Building Interactive Prototypes with jQuery" 的內容加以調整並註解，
+希望能以比較忠實的方式來呈現 jQuery 的設計含意。
 
 
-[jsg.example]<h2><font color="slategray" size="5"><a id="初探" name="初探">[初探]</a></font></h2>[/jsg.example]
+初探
+~~~~
+
 jQuery 怎麼用來「快速選取元素」並且「做一些事情」呢？請看看程式碼：
 $("div").addClass("special");
+
 錢記號 $ 是 jQuery 的物件，使用 $("div") 就是用 jQuery 來選取元素，這
 個範例可以選取文件內所有的 <div> 元素。後面接著的 .addClass("special")
  就是用來做一些事情，這個範例是將先前所選取到的所有元素都加上一個名為
@@ -440,15 +443,21 @@ jQuery(document).ready(function() {
   jQuery("div").addClass("special");
 });
 沒事應該不會有人想用比較長的名稱來寫程式，簡短的 $ 不是挺好的。但是，某些情況可能你無法使用 $()，例如你進行中的專案已經使用了其他的 JavaScript Library，而 $ 這個名稱已經被使用了，例如另一套知名的 prototype，也使用了 $() 這樣的函數名稱，這時如果你需要再搭配使用 jQuery 的話，jQuery 本身有提供一個方式來避免 $() 的衝突：
+
 jQuery.noConflict();
 jQuery(document).ready(function() {
   jQuery("div").addClass("special");
 });
-使用 jQuery 前，先下達 jQuery.noConflict() 這樣就可以避免掉 $() 衝突的問題，接著再用 jQuery 物件來進行操作即可。此外，你也可以自行幫 jQuery 這個物件設定另一個別名，例如：
+
+使用 jQuery 前，先下達 jQuery.noConflict() 這樣就可以避免掉 $() 衝突的
+問題，接著再用 jQuery 物件來進行操作即可。此外，你也可以自行幫 jQuery
+ 這個物件設定另一個別名，例如：
+
 var $j = jQuery.noConflict();
 $j(document).ready(function() {
   $j("div").addClass("special");
 });
+
 使用一個變數來接 jQuery.noConflict() 的回傳值，這個變數就可以做為 jQuery 的一個別名，透過這個別名不但避免了和其他 Library 錢記號的衝突，也可以將函數名稱縮短，算是 jQuery 一個蠻貼心的設計。
 作者: wmh    時間: 2008-9-30 01:54
 
@@ -459,9 +468,6 @@ Ajax
 果與使用者的互動還沒有用到 Ajax 技術的話，似乎是一件很神奇的事，至於
  Ajax 是什麼東西？想瞭解的人可以到這裡去看維基百科上的解釋，這篇就專心
 寫一下 jQuery 中的 Ajax 部份。
-
-產生一個 Ajax 呼叫
-~~~~~~~~~~~~~~~~~~
 
 我們來把之前的例子翻修成為 Ajax 版本，也就是說，之前的版本是我們把
  “Hello” 字樣寫死在 JavaScript 裡，改成使用 Ajax 版本的目標，是希望顯
@@ -497,7 +503,7 @@ function showMsg(e) {
 }
 
 在這段程式碼中，當我一把按鈕功能關閉時，馬上就利用 jQuery 中的 ajax()
- 函式來產生一個 Ajax request，注意這裡的寫法是 $.ajax，因為 ajax () 函
+函式來產生一個 Ajax request，注意這裡的寫法是 $.ajax，因為 ajax () 函
 式是定義在 jQuery 這個物件下，而且不用指定網頁元件（當然你要也是可以）
 ，所以可以直接用 jQuery.ajax() 來呼叫使用，不過 jQuery 提供了一個
 alias，也就是 $ 相當於 jQuery，所以我通常會把 code 寫成 $.ajax(...)
@@ -514,8 +520,8 @@ success: 則是 Ajax 成功時呼叫的 callback。
 所以我把之前做的事都移到了 success 的 callback 函式中，不過值得注意的是：
 
 目前版本（註）的 jQuery/Ajax success callback 帶的參數（code 中的
- response）直接就是 server 回應的內容，而不像其它 error/complete
- callback 帶回來的是一個 XMLHttpRequest 物件。
+response）直接就是 server 回應的內容，而不像其它 error/complete
+callback 帶回來的是一個 XMLHttpRequest 物件。
 
 所以我就直接把 response 塞進 $('#msg') 裡了。
 
@@ -955,6 +961,7 @@ $(’#user_name’).blur(checkRegAcc);
 
 Manipulation
 ~~~~~~~~~~~~
+
 All of the methods in this chapter manipulate the DOM in some manner.
 A few of them simply change one of the attributes of an element (also
 listed in the Attributes category), while others set an element’s
