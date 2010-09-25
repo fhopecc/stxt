@@ -17,6 +17,10 @@ class SysPage(webapp.RequestHandler):
 
 class IndexPage(SysPage):
     def get(self):
+        if not users.is_current_user_admin():
+            self.redirect(users.create_login_url('/sys'))
+            return
+
         hs = Homestay.all()
         template_values = {
             'homestays': hs
@@ -68,11 +72,15 @@ class EditPage(SysPage):
     def post(self):
         r = self.request
         h = Homestay.get(r.get("key"))
+        h.owner = users.User(r.get("owner"))
         h.name = r.get("name")
-        h.address = r.get("address")
+        h.css = r.get("css")
         h.email = r.get("email")
         h.blog = r.get("blog")
-        h.owner = users.User(r.get("owner"))
+        h.phone = r.get("phone")
+        h.mobile = r.get("mobile")
+        h.address = r.get("address")
+        h.comment = r.get("comment")
         h.put()
         self.redirect('/sys/%s' % h.key())
 

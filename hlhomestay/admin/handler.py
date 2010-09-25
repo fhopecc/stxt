@@ -493,6 +493,46 @@ class NewSpecialPage(AdminPage):
 
         self.redirect(s.calendar_path())
 
+class EditSpecialPage(SpecialsPage):
+    def special(self):
+        p = r'/admin/specials/(\w+)/edit'  
+        m = re.match(p, self.request.path) 
+        k = m.group(1)                     
+        return  Special.get(k)             
+
+    def get(self):
+        special = self.special()
+
+        template_values = {
+            'h': special.room.homestay, 
+            'special': special
+        }
+
+        self.response.out.write(
+            template.render('edit_special.html', template_values))
+
+    def post(self):
+        r = self.request
+        special = Special.get(r.get('special'))
+        #special.room = Room.get(r.get('room'))
+        #special.date = strpdate(r.get('date'))
+        special.name = r.get("name")
+        special.price = int(r.get('price'))
+        special.put()
+
+        self.redirect(special.calendar_path())
+
+class DelSpecialPage(SpecialsPage):
+    def special(self):
+        p = r'/admin/specials/(\w+)/delete'  
+        m = re.match(p, self.request.path) 
+        k = m.group(1)                     
+        return  Special.get(k)             
+
+    def get(self):
+        special = self.special()
+        special.delete()
+        self.redirect(special.calendar_path())
 
 class PeriodBooksPage(AdminPage):
     def get(self):
@@ -530,8 +570,9 @@ application = webapp.WSGIApplication([
                (r'/admin/specials/\d{6}', SpecialsPage), 
                (r'/admin/specials/new', NewSpecialPage), 
                (r'/admin/specials/\w+/\d{8}', NewSpecialPage),
-               (r'/admin/specials/\w+/edit', EditHolidayPage), 
-               (r'/admin/specials/\w+/delete', DelHolidayPage), 
+               (r'/admin/special/edit', EditSpecialPage), 
+               (r'/admin/specials/\w+/edit', EditSpecialPage), 
+               (r'/admin/specials/\w+/delete', DelSpecialPage), 
                (r'/admin/room/new', RoomNewPage), 
                (r'/admin/room/\w+/edit', RoomEditPage), 
                (r'/admin/room/\w+/delete', RoomDelPage), 

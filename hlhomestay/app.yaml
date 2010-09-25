@@ -11,6 +11,12 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /img
+  static_dir: img
+
+- url: /sys.*
+  script: sys/handler.py
+
 - url: /sys.*
   script: sys/handler.py
   login: admin

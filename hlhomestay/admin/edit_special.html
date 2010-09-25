@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="form_content">
+  <form method="post" action='/admin/special/edit'>
+
+  <input name="special" type="hidden" value="{{special.key}}"/>
+
+  <table class="form">
+    <tr><th colspan="2">特價檔修改作業</th></tr>
+
+    <tr><td>特價房間</td>
+        <td>{{special.room.name}}</td>
+    </tr>
+
+    <tr><td>日期</td>
+        <td>{{special.date|date:"Ymd"}}
+    </td></tr>
+
+    <tr><td>特價名稱</td>
+        <td><input name="name" type="text" 
+                   value="{{special.name}}"/>
+    </td></tr>
+
+    <tr><td>特別價格</td>
+        <td><input name="price" type="text" 
+                   value="{{special.price}}"/>
+    </td></tr>
+
+    <tr>
+        <td><input type="submit" value="更新"/></td>
+        <td><a href="{{special.calendar_path}}">回月曆</a>
+        <td><a href="{{special.delete_path}}">刪除</a>
+    </td></tr>
+
+  </table>
+</form>
+</div>
+
+{% endblock %} 

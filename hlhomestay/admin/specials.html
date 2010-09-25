@@ -25,7 +25,7 @@
             <div class="listitem">
 
             {% ifequal s.kind "Special" %}
-            <a href="{{s.admin_show_path}}">{{s.name}}/{{s.price}}</a>
+            <a href="{{s.edit_path}}">{{s.name}}/{{s.price}}</a>
             {% else %}
                 <a href="/admin/specials/{{s.key}}/{{d.date|date:"Ymd"}}"
                  >{{s.name}}</a>

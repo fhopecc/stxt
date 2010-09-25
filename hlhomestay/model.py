@@ -25,6 +25,9 @@ class Homestay(db.Model):
     comment = db.TextProperty(verbose_name="備註", 
                               default=u'輸入備註')
 
+    css = db.TextProperty(verbose_name="CSS 檔案",
+                          default="homestay") 
+
     def daily_books(self, date):
         # analogy for SQL: 
         # select limit 1 Reservations.* 
@@ -347,6 +350,13 @@ class Special(db.Model):
 
     def calendar_path(self):
         return "/admin/specials/%s" % self.date.strftime('%Y%m')
+
+    def edit_path(self):
+        return "/admin/specials/%s/edit" % self.key()
+    
+    def delete_path(self):
+        return "/admin/specials/%s/delete" % self.key()
+
 
 class PeriodHasBooksError(Exception):
     pass
