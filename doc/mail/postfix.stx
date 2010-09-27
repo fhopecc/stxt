@@ -1,0 +1,20 @@
+Q.Postfix預設會擋Mail Body內容有另開視窗嗎??
+
+小弟公司因要收大陸的mail,但是對於是使用126.com,小弟查log有發現如下: 
+
+message-id=<442BEF6E.00013F.24163@m112.126.com>
+Mar 30 22:46:57 msa postfix/cleanup[14397]: C011C68FCE: reject: body =09<a href=3D"http://www.126.com/help/126fab.htm" target=3D"_blank" style= from unknown[
+10.10.1.5]; from=<ic887@126.com> to=<es66@esine.com.tw> proto=ESMTP helo=<ssbox.esine.com.tw>: Commercial unavailable body Do not use html language to open a
+new window
+
+看起來是mail內容有另開視窗,所以被檔了,小弟是否可以針對這個mail address
+收而略過檢查呢,或是有什麼方法來跳過呢??? 
+請各位先進不吝指教,謝謝
+
+A.
+
+看來您是使用之前小弟提供的擋信機制啊！ 
+可以將 /etc/postfix/body_checks 裡面相關的功能取消！ 
+看到您提供的 log 的最後一行了吧？？ 
+在 body_checks 找到那個相關說明，先將他 # mark 掉， 
+重新啟動 postfix ，就不會抵擋了。

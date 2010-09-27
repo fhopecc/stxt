@@ -8,8 +8,11 @@
     <tr><td>名稱</td>
         <td><input name="name" type="text" value="{{h.name}}"/></td>
     </tr>
+
     <tr><td>帳號</td>
-        <td><input name="owner" type="text" value="{{h.owner}}"/></td></tr>
+        <td><input name="owner" type="text" 
+                   value="{{h.owner.email}}"/>
+    </td></tr>
 
     <tr><td>電子郵件</td>
         <td><input name="email" type="text" value="{{h.email}}"/></td></tr>
