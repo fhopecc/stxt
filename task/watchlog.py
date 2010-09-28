@@ -2,9 +2,14 @@
 from __future__ import with_statement
 from optparse import OptionParser
 import sys, os, re
+# TODO
+#
+# 預設為查看原始 LOG 檔，Raw 改為含 3CSyslog 的標頭。
+# 將查看最近日期記在 .wathlog 中
+# 
 
 pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '
-pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
+pattern += r'(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
 pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
 
 class LogRecord(object):
@@ -53,9 +58,9 @@ def parse(pattern, str):
                         r.group('fact'), r.group('ser'))
 
 def parse_fortinet_log(str):
-  pattern  = r'(?P<ts>%s \d\d (\d\d:){2}\d\d) ' % MONPAT
-  pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
-  pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
+    pattern  = r'(?P<ts>%s \d\d (\d\d:){2}\d\d) ' % MONPAT
+    pattern += '(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
+    pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
 
 
 def parse_enterasys_log(str):
