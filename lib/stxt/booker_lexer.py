@@ -31,7 +31,7 @@ tokens = [
           'LINE', 'INDENT',
           'LI', 'OL', 'TIMESTAMP',
           'EMPTYLINE'
-         ] 
+        ] 
 
 def t_include(t):
     r'^<(?P<file>.*)>$'

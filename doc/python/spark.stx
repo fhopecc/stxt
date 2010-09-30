@@ -1,0 +1,434 @@
+In this article, which follows on an earlier installment of "Charming
+ Python" devoted to SimpleParse, I introduce some basic concepts in
+ parsing and discuss the Spark module. Parsing frameworks are a rich
+ topic that warrants quite a bit of study to get the full picture;
+ these two articles make a good start, for both readers and myself.
+
+In my programming life, I have frequently needed to identify parts and
+structures that exist inside textual documents: log files,
+configuration files, delimited data, and more free-form (but still
+semi-structured) report formats. All of these documents have their
+own "little languages" for what can occur within them. The way I have
+programmed these informal parsing tasks has always been somewhat of a
+hodgepodge of custom state-machines, regular expressions, and
+context-driven string tests. The pattern in these programs was
+always, roughly, "read a bit of text, figure out if we can make
+something of it, maybe read a bit more text afterwards, keep trying."
+
+Parsers distill descriptions of the parts and structures in documents
+into concise, clear, and declarative rules identifying what makes up
+a document. Most formal parsers use variants on Extended Backus-Naur
+Form (EBNF) to describe the "grammars" of the languages they
+describe. Basically, an EBNF grammar gives names to the parts one
+might find in a document; additionally, larger parts are frequently
+composed of smaller parts. The frequency and order in which small
+parts may occur in larger parts is specified by operators. For
+example, Listing 1 is the EBNF grammar, typographify.def, that we saw
+in the SimpleParse installment (other tools spell things slightly
+differently):
+
+Listing 1. typographify.def
+		
+para        := (plain / markup)+
+plain       := (word / whitespace / punctuation)+
+whitespace  := [ \t\r\n]+
+alphanums   := [a-zA-Z0-9]+
+word        := alphanums, (wordpunct, alphanums)*, contraction?
+wordpunct   := [-_]
+contraction := "'", ('am'/'clock'/'d'/'ll'/'m'/'re'/'s'/'t'/'ve')
+markup      := emph / strong / module / code / title
+emph        := '-', plain, '-'
+strong      := '*', plain, '*'
+module      := '[', plain, ']'
+code        := "'", plain, "'"
+title       := '_', plain, '_'
+punctuation := (safepunct / mdash)
+mdash       := '--'
+safepunct   := [!@#$%^&()+=|\{}:;<>,.?/"]
+
+Introduction to Spark
+~~~~~~~~~~~~~~~~~~~~~
+
+The Spark parser has something in common with EBNF grammars but breaks
+the parsing/processing process into smaller components than a
+traditional EBNF grammar allows. The advantage Spark has is
+fine-tuned control of the operations at each step along the way,
+along with the capability of inserting custom code into the process.
+Readers of the SimpleParse installment will recall that our process
+was a rough-scale one: 1) Generate an entire taglist from the grammar
+(and from a source document), and 2) use the taglist as data for
+custom-programmed actions.
+
+The disadvantage of Spark compared to a standard EBNF-based tool is
+that it is more verbose and that it lacks direct occurrence
+quantifiers (i.e., existential "+", possible "*", limited "?").
+Quantifiers can be used within the regular expressions of the Spark
+tokenizer, and can be simulated by recursion in parse expression
+grammars. But it would be nice if Spark allowed quantification in its
+grammar expressions. Another disadvantage worth mentioning is that
+Spark's speed suffers compared to the underlying C-based mxTextTools
+engine that SimpleParse uses.
+
+In "Compiling Little Languages in Python" (see Resources), Spark
+creator John Aycock breaks a compiler into four stages. The problem
+this article presents will only use the first two-and-a-half stages,
+due both to space constraints and because we will limit ourselves to
+the same comparatively simple "text markup" problem that the previous
+installment addressed. Spark can potentially be used for full-cycle
+code compilers/interpreters, not only for the "parse and process" job
+I look at. Let us look at Aycock's four stages (quoted in abridged
+form):
+
+Scanning, or lexical analysis. Breaks the input stream into a list of
+tokens.
+
+Parsing, or syntax analysis. Ensures that a list of tokens has valid
+syntax according to a grammar.
+
+Semantic analysis. Traverses the abstract syntax tree (AST) one or
+more times, collecting information and checking that the input
+program makes sense.
+
+Code generation. Again traversing the AST, this phase may directly
+interpret the program or our output code in C or assembly.
+
+For each stage, Spark provides one or more abstract classes for
+performing the step, and a rather unusual protocol for specializing
+these classes. Rather than merely redefining or adding specific
+methods as in most inheritance patterns, Spark concrete classes have
+two features (the general pattern is common to the stages and various
+parents). First, much of the work done by a concrete class is
+specified in the docstrings of methods. The second special protocol
+is that sets of methods describing patterns are given distinct names
+indicating their role. The parent classes in turn contain
+introspective methods that look for features of the instance to
+operate. This becomes more clear as we look at examples.
+
+Recognizing text markup
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The problem here is one I have solved in several other ways already. I
+use a format I call "smart ASCII" for various purposes. This format
+looks a lot like the conventions that have developed for e-mail and
+newsgroup communications. For various purposes, I automatically
+convert this format to other formats such as HTML, XML, LaTeX. This
+is what I will do here again. To see informally what I mean, here is
+a short sample that will be used in this article:
+
+Listing 2. Smart ASCII sample text (p.txt)
+		
+Text with *bold*, and -itals phrase-, and [module]--this
+should be a good 'practice run'.
+
+There is a little more to the format than in the sample, but not too
+much (though there are some subtleties to how markup and punctuation
+interact).
+
+Generating tokens
+~~~~~~~~~~~~~~~~~
+
+The first thing our Spark "smart ASCII" parser needs to do is break an
+input text into its relevant parts. At the level of tokenizing, we
+are not yet interested in how the tokens are structured, just what
+they are. Later on we will combine token sequences into parse trees.
+
+The grammar shown above in typographify.def provides guidance for the
+design of a Spark lexer/scanner. The trick is that we can only use
+those names that are "primitive" at the scanner stage. That is, those
+(compound) patterns that include other named patterns must be
+postponed for the parsing stage. Other than that, we can really just
+copy our old grammar:
+
+Listing 3. Abridged wordscanner.py Spark script
+		
+class WordScanner(GenericScanner):
+    "Tokenize words, punctuation and markup"
+    def tokenize(self, input):
+        self.rv = []
+        GenericScanner.tokenize(self, input)
+        return self.rv
+    def t_whitespace(self, s):
+        r" [ \t\r\n]+ "
+        self.rv.append(Token('whitespace', ' '))
+    def t_alphanums(self, s):
+        r" [a-zA-Z0-9]+ "
+        print "{word}",
+        self.rv.append(Token('alphanums', s))
+    def t_safepunct(self, s): ...
+    def t_bracket(self, s): ...
+    def t_asterisk(self, s): ...
+    def t_underscore(self, s): ...
+    def t_apostrophe(self, s): ...
+    def t_dash(self, s): ...
+
+class WordPlusScanner(WordScanner):
+    "Enhance word/markup tokenization"
+    def t_contraction(self, s):
+        r" (?<=[a-zA-Z])'(am|clock|d|ll|m|re|s|t|ve) "
+        self.rv.append(Token('contraction', s))
+    def t_mdash(self, s):
+        r' -- '
+        self.rv.append(Token('mdash', s))
+    def t_wordpunct(self, s): ...
+
+There is an interesting trick here. WordScanner is a perfectly good
+scanner class by itself; but a Spark scanner class can itself be
+further specialized by inheritance: child regular expression patterns
+are matched before parents, and child methods/regexes may override
+parents if desired. So the specializations in WordPlusScanner are
+matched before those in WordScanner are attempted (possibly thereby
+grabbing some bytes first). Any regular expressions are allowed in
+pattern docstrings (the method .t_contraction(), for example,
+contains a "lookbehind assertion" in the pattern).
+
+The scanner inheritance logic is somewhat broken by Python 2.2,
+unfortunately. In Python 2.2, all of the defined patterns are matched
+in alphabetical order (by name), regardless of where they are defined
+in the inheritance chain. The fix for this problem is a one-line
+change in in the Spark function _namelist():
+
+Listing 4. Corrected reflective function for spark.py
+		
+def _namelist(instance):
+    namelist, namedict, classlist = [], {}, [instance.__class__]
+    for c in classlist:
+        for b in c.__bases__:
+            classlist.append(b)
+        # for name in dir(c):   # dir() behavior changed in 2.2
+        for name in c.__dict__.keys():  # <-- USE THIS
+            if not namedict.has_key(name):
+                namelist.append(name)
+                namedict[name] = 1
+    return namelist
+    
+I have informed Spark creator John Aycock of the problem, and future
+versions will fix this. In the meantime, make this change in your own
+copy.
+
+Let us take a look at what the WordPlusScanner does when applied to
+the above smart ASCII sample. The created list is actually a list of
+Token instances, but they contain a .__repr__ method that makes them
+display the following nicely:
+
+Listing 5. Tokenizing smart ASCII with WordPlusScanner 
+		
+>>> from wordscanner import WordPlusScanner
+>>> tokens = WordPlusScanner().tokenize(open('p.txt').read())
+>>> filter(lambda s: s<>'whitespace', tokens)
+[Text, with, *, bold, *, ,, and, -, itals, phrase, -, ,, and, [,
+module, ], --, this, should, be, a, good, ', practice, run, ', .]
+
+It is worth noting that although methods like .t_alphanums() are
+recognized by Spark introspection based on their "t_" prefix, they
+are also regular methods. Any extra code put into a method will
+execute whenever the corresponding token is encountered. The method
+.t_alphanums() contains a trivial example of this with a print
+statement.
+
+Generating abstract syntax trees
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Finding tokens is a bit interesting, but the real work comes with
+applying grammars to the token lists. The parsing stage creates
+arbitrary tree structures on the basis of token lists. It is just a
+matter of specifying the expression grammar.
+
+Spark has several ways to create ASTs. The "manual" way is to
+specialize the GenericParser class. In this case, the concrete child
+parser should provide a number of methods with names in the form
+p_foobar(self, args). The docstring of each such method contains one
+or several assignments of patterns to names. Each method can contain
+arbitrary code to execute whenever its grammar expression(s) is
+matched.
+
+However, Spark also offers an "automatic" way of generating ASTs. This
+style inherits from the GenericASTBuilder class. All the grammar
+expression are listed in a single top-level method, and the
+.terminal() and .nonterminal() methods may be specialized to
+manipulate subtrees during generation (or to perform any other
+arbitrary actions, if desired). The result is still an AST, but the
+parent class does most of the work for you. My grammar class looks
+like this:
+
+Listing 6. Abridged markupbuilder.py Spark script
+		
+class MarkupBuilder(GenericASTBuilder):
+    "Write out HTML markup based on matched markup"
+    def p_para(self, args):
+        '''
+        para   ::= plain
+        para   ::= markup
+        para   ::= para plain
+        para   ::= para emph
+        para   ::= para strong
+        para   ::= para module
+        para   ::= para code
+        para   ::= para title
+        plain  ::= whitespace
+        plain  ::= alphanums
+        plain  ::= contraction
+        plain  ::= safepunct
+        plain  ::= mdash
+        plain  ::= wordpunct
+        plain  ::= plain plain
+        emph   ::= dash plain dash
+        strong ::= asterisk plain asterisk
+        module ::= bracket plain bracket
+        code   ::= apostrophe plain apostrophe
+        title  ::= underscore plain underscore
+        '''
+    def nonterminal(self, type_, args):
+        #  Flatten AST a bit by not making nodes if only one child.
+        if len(args)==1:  return args[0]
+        if type_=='para': return nonterminal(self, type_, args)
+        if type_=='plain':
+            args[0].attr = foldtree(args[0])+foldtree(args[1])
+            args[0].type = type_
+            return nonterminal(self, type_, args[:1])
+        phrase_node = AST(type_)
+        phrase_node.attr = foldtree(args[1])
+        return phrase_node
+        
+My .p_para() should contain only a set of grammar rules in its
+docstring (no code). I decided to specialize the .nonterminal()
+method to flatten my AST a bit. "Plain" nodes that consist of a
+family of "plain" subtrees compact the subtrees into one longer
+string. Likewise, markup subtrees (i.e. "emph", "strong", "module",
+"code", "title") are collapsed to a single node of the right type,
+and containing a compound string.
+
+We have already mentioned one thing notably absent in the Spark
+grammar: no quantifiers. By having one rule be like this,
+
+plain ::= plain plain
+
+we can aggregate subtrees of the "plain" type pairwise. But I would
+prefer if Spark allowed a more EBNF-style grammar expression like
+this:
+
+plain ::= plain+
+
+We might then more simply create n-ary subtrees of "as many plains as
+possible." In this case, our tree would start out much flatter, even
+without the massaging in .nonterminal().
+
+Working with trees
+~~~~~~~~~~~~~~~~~~
+
+The Spark module provides several classes for working with ASTs. For
+my purposes, these are heavier duty than I need. If you want them,
+GenericASTTraversal and GenericASTMatcher provide ways of walking
+trees, using similar inheritance protocols to those presented for the
+scanner and parser.
+
+But walking a tree just by using recursive functions is not all that
+difficult. I have created a few such examples in the article archive
+file prettyprint.py (see Resources). One of these is showtree(). This
+function displays an AST with a couple of conventions:
+
+Each line shows the descent depth
+Nodes with only children (no content) have leading dashes
+Node types are double angle-bracketed
+Let's take a look at the AST generated in the above examples:
+
+Listing 7. Tokenizing smart ASCII with WordPlusScanner
+		
+>>> from wordscanner import tokensFromFname
+>>> from markupbuilder import treeFromTokens
+>>> from prettyprint import showtree
+>>> showtree(treeFromTokens(tokensFromFname('p.txt')))
+ 0  <<para>>
+ 1 - <<para>>
+ 2 -- <<para>>
+ 3 --- <<para>>
+ 4 ---- <<para>>
+ 5 ----- <<para>>
+ 6 ------ <<para>>
+ 7 ------- <<para>>
+ 8 -------- <<plain>>
+ 9           <<plain>>  Text with
+ 8          <<strong>> bold
+ 7 ------- <<plain>>
+ 8          <<plain>> , and
+ 6        <<emph>> itals phrase
+ 5 ----- <<plain>>
+ 6        <<plain>> , and
+ 4      <<module>> module
+ 3 --- <<plain>>
+ 4      <<plain>> --this should be a good
+ 2    <<code>> practice run
+ 1 - <<plain>>
+ 2    <<plain>> .
+ 
+
+Understanding the tree structure is illustrative, but what about the
+actual modified markup we are aiming for? Fortunately, it takes just
+a few lines to traverse the tree and produce it:
+
+Listing 8. Outputting markup from AST (prettyprint.py)
+		
+def emitHTML(node):
+    from typo_html import codes
+    if hasattr(node, 'attr'):
+        beg, end = codes[node.type]
+        sys.stdout.write(beg+node.attr+end)
+    else: map(emitHTML, node._kids)
+
+The file typo_html.py is the same file from the SimpleParse installment -- it just contains a dictionary mapping names to begintag/endtag pairs. Obviously, we could use the same approach for markup other than HTML. For the curious, here is what it produces for our example:
+
+Listing 9. The HTML output of the whole process
+		
+Text with <strong>bold</strong>, and <em>itals phrase</em>,
+and <em><code>module</code></em>--this should be a good
+<code>practice run</code>.
+
+Conclusion
+~~~~~~~~~~
+
+Quite a number of Python programmers have recommended Spark to me.
+While the unusual conventions Spark uses take a little bit of getting
+used to, and while the documentation could probably be a little more
+explicit on certain points, the power of Spark is really quite
+amazing. The style of programming that Spark implements allows an
+end-programmer to insert code blocks everywhere within a
+scanning/parsing process -- something that is usually a "black box"
+to end users.
+
+For all its strengths, the real drawback I found with Spark is its
+speed. Spark is the first Python program I've used where I really
+found the speed penalty of an interpreted language to be an major
+issue. Indeed, Spark is slow; not I-wish-it-were-a-second-faster
+slow, but take-a-long-lunch-and-hope-it-finishes slow. In my
+experiments, the tokenizer is plenty fast, but the parsing bogs down
+even with quite small test cases. In fairness, John Aycock has
+pointed out to me that the Earley parsing algorithm used by Spark is
+far more general than simpler LR algorithms, and therein lies much of
+the slowness. It is possible also that in my inexperience I have
+designed inefficient grammars; but if so, most users would likely do
+likewise.
+
+Resources
+~~~~~~~~~
+
+Read the previous installments of Charming Python.
+
+This article builds on David's earlier discussion in "Charming Python:
+ Parsing with the SimpleParse module" (developerWorks, January 2002).
+
+Download Spark and get more information on John Aycock's Spark homepage.
+
+On the Spark homepage, the most important document to read is the
+original presentation of the Spark framework, "Compiling Little
+Languages in Python", by John Aycock.
+
+Mike Fletcher's SimpleParse can be found, along with a brief
+introduction to its usage, on his SimpleParse page.
+
+mxTextTools is now part of the larger eGenix package of extensions.
+
+Information on the ISO 14977 standard for EBNF syntax can be found on
+a page provided by Markus Kuhn.
+
+The files mentioned in this article are in David's personal archive.
+
+Find more Linux articles in the developerWorks Linux zone.

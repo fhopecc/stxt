@@ -7,6 +7,7 @@ Q.Howto uniqify a list in Python?
 
 Sorting Lists
 ~~~~~~~~~~~~~
+
 The sort method sorts a list in place.
 
     L.sort()
@@ -78,5 +79,3 @@ Now in-case you are looking at this wondering what the star (*) syntax
 is, it is called an “Arbitrary Argument List” and it’s useful here as
 it expands our list to pass each of the lists within the outer list
 as an arguments to zip and map.
-
-Post Tools

@@ -1,0 +1,302 @@
+上文我們講到我們已經明白disassemble是怎麼產生的了，現在我們來討論如何
+從disassemble到decompile的轉化，事實上在python 2.3以前是有一個工具來完
+成這個轉化，decompyle ,這個工具可以從這裡下載：
+
+http://ftp.debian.org/debian/pool/main/d/decompyle/decompyle_2.3.2.orig.tar.gz
+
+遺憾的是，2.3版本以後這個工具就不支持了，我們先研究一下decompyle，然後
+再實現我們的支持2.3以後的版本。 首先聲明一下，我對python和編譯原理都不
+是很熟悉，所以文章中可以謬誤難免，如果發現錯誤，請及時地通知我，我好做
+修改。
+
+研究decompyle,就不得不研究spark,spark是decompyle的核心，decompyle事實
+上是spark的一個應用。Spark是一個用python寫的，為小型語言準備的編譯器的
+框架(framework),這樣說起來真拗口，你把它理解為是一個python寫的，功能主
+要是lex&yacc的功能，基本上就對了，spark主要分成四個部分:詞法分析，語法
+分析，語義分析，代碼生成，下面我們分別簡單的介紹一下這四個部分：
+
+詞法分析：GenericScanner 類，你要用這個類的時候，需要為這個類寫一個子
+類，同時定義一堆以”t_”開頭的函數來實現具體的詞法，比如說你要定義一個
+digit , 在lex中是這樣：
+
+digit [0-9] ,在spark中需要定義成這樣：
+
+class DigitScanner(GenericScanner):
+
+       def __init__(self):
+
+              GenericScanner.__init__(self)
+
+       def t_digit(self,s):
+
+              r'd'
+
+              t= Token(type='digit',attr=s)
+
+              self.rv.append(t)
+
+
+語法分析：這個是整個spark最為古怪的部分了，因為它把所有的語法規則都作
+為相應函數的__doc__，這個前兩天我看decompile的src的時候，把我給搞糊塗
+了，因為我在整個程序代碼裡沒有找到語法規則，後來用debugger跟了半天才發
+現這個秘密，看spark文檔的時候才特別對這個問題註意了，舉一例說明之：
+
+def p_funcdef(self, args):
+
+              '''
+
+              stmt ::= funcdef
+
+              funcdef ::= mkfunc designator
+
+              load_closure ::= load_closure LOAD_CLOSURE
+
+              load_closure ::= LOAD_CLOSURE
+
+              '''
+
+語法分析與詞法分析類似，你要加你自己的語法規則的話，需要寫一個類，
+作為GenericParser的子類，同時有定義語法規則的函數都以”p_”開始。 語法分析的
+主要目的是建立AST樹
+
+語義分析：在spark中，這個功能的framework由GenericASTTraversal實現，主
+要用來遍歷語法分析生成的ast樹，做語法檢查。 同詞法分析，語法分析一樣，
+你要使用它，需要寫一個GenericASTTraversal的子類，處理函數需要以”n_”開
+頭。
+
+代碼生成：這個含義很明顯了，生成最終的代碼，在spark中，和語義分析一樣
+，都是由GenericASTTraversal實現，方法都一樣，遍歷語法分析生成的ast樹，
+但主要用途不一樣而已。
+
+好了，我們簡單的介紹到這裡，有不明白的看這裡：
+
+http://pages.cpsc.ucalgary.ca/~aycock/spark/paper.pdf
+
+下面我們看看decompyle是怎樣利用spark生成python的decompile的。
+
+首先，我們要有個概念，我們只要能成功的定義出詞法分析規則和語法分析規則
+，那麼
+
+我們就可以利用spark來實現decompile.
+
+我們來看看如何定出這些規則，下面以例子的形式來說明（decompyle的一個例
+子）：
+
+def kwfunc(**kwargs):
+
+    print kwargs.items()
+
+def argsfunc(*args):
+
+    print args
+
+def no_apply(*args, **kwargs):
+
+    print args
+
+    print kwargs.items()
+
+    argsfunc(34)
+
+    foo = argsfunc(*args)
+
+    argsfunc(*args)
+
+    argsfunc(34, *args)
+
+    kwfunc(**kwargs)
+
+    kwfunc(x=11, **kwargs)
+
+    no_apply(*args, **kwargs)
+
+    no_apply(34, *args, **kwargs)
+
+    no_apply(x=11, *args, **kwargs)
+
+    no_apply(34, x=11, *args, **kwargs)
+
+    no_apply(42, 34, x=11, *args, **kwargs)
+
+ 
+
+no_apply(1,2,4,8,a=2,b=3,c=5)
+
+ 
+
+編譯後利用decompyle 進行disassemble得到：
+
+6     LOAD_CONST        'code_object kwfunc'
+
+9     MAKE_FUNCTION_0   ''
+
+12    STORE_NAME        'kwfunc'
+
+18    LOAD_CONST        'code_object argsfunc'
+
+21    MAKE_FUNCTION_0   ''
+
+24    STORE_NAME        'argsfunc'
+
+30    LOAD_CONST        'code_object no_apply'
+
+33    MAKE_FUNCTION_0   ''
+
+36    STORE_NAME        'no_apply'
+
+42    LOAD_NAME         'no_apply'
+
+45    LOAD_CONST        1
+
+48    LOAD_CONST        2
+
+51    LOAD_CONST        4
+
+54    LOAD_CONST        8
+
+57    LOAD_CONST        'a'
+
+60    LOAD_CONST        2
+
+63    LOAD_CONST        'b'
+
+66    LOAD_CONST        3
+
+69    LOAD_CONST        'c'
+
+72    LOAD_CONST        5
+
+75    CALL_FUNCTION_772 ''
+
+78    POP_TOP           ''
+
+79    LOAD_CONST        ''
+
+82    RETURN_VALUE      ''
+
+ 
+
+6     LOAD_FAST         'kwargs'
+
+9     LOAD_ATTR         'items'
+
+12    CALL_FUNCTION_0   ''
+
+15    PRINT_ITEM        ''
+
+16    PRINT_NEWLINE     ''
+
+17    LOAD_CONST        ''
+
+20    RETURN_VALUE      ''
+
+ 
+
+6     LOAD_FAST         'args'
+
+9     PRINT_ITEM        ''
+
+10    PRINT_NEWLINE     ''
+
+11    LOAD_CONST        ''
+
+14    RETURN_VALUE      ''
+
+ 
+
+6     LOAD_FAST         'args'
+
+………………………………………………….
+
+ 
+
+220  CALL_FUNCTION_VAR_KW_258 ''
+
+223  POP_TOP           ''
+
+224  LOAD_CONST        ''
+
+227  RETURN_VALUE      ''
+
+可以看到，disassemble的指令的格式基本上是：
+
+              Opcode
+
+       或    opcode+一個參數
+
+Decompyle為了簡便起見，把一些opcode做了一些變形，比如說上面標有220的這行：
+
+220  CALL_FUNCTION_VAR_KW_258 ''
+
+事實上應該是220       CALL_FUNCTION_VAR_KW 258
+
+ 
+
+在Decompyle中，每一個token都有四個屬性：opname ,oparg,pattr,offset,
+ opname就是每一行前面那個詞，比如LOAD_CONST, LOAD_FAST,oparg就是後面跟
+的那個short型的整數了，pattr是把有些opcode用到的局部變量，名稱從pyc或
+pyo中查出來，填到這個地方，還有就是計算跳轉型的opcode)的跳轉地址計算出
+來填進去，具體例子可以看這系列文章的(1)的做法，offset是這條opcode在這
+條指令流的偏移地址,比如說上面這個（220 CALL_FUNCTION_VAR_KW 258）的220
+就是offset.
+
+詞法分析規則是相當的簡單，因為一條opcode無非是1 byte 或3 bytes長，一個
+字節一個字節的讀進來，有參數的(opcode > 90) 再讀兩字節，然後按照不同的
+opcode屬性，比如說用到局部變量的，查查局部變量表，填到pattr裡去，我們
+就得到了排列好的tokens了。
+
+下面要進行的工作就是把一維的tokens列表，變成2維的AST樹，這個除了語法分
+析規則要我們提供以外，其他的工作都由spark幫我們做好了，我們考慮語法分
+析規則就行了。
+
+Decompiler的語法分析規則其實就是確定哪些opcode的組合對應哪一條高級語言
+的語句，比如說:
+
+       LOAD_CONST 'hello world'
+
+       PRINT_ITEM
+
+       PRINT_NEWLINE
+
+你就知道是print “ hello world”
+
+我們把它抽像出來，用spark的定義語義規則形式就是：
+
+def p_print(self, args):
+
+              '''
+
+              stmt ::= print_stmt
+
+              stmt ::= print_stmt_nl
+
+              stmt ::= print_nl_stmt
+
+              print_stmt ::= expr PRINT_ITEM
+
+              print_nl_stmt ::= PRINT_NEWLINE
+
+              print_stmt_nl ::= print_stmt print_nl_stmt
+
+              '''
+
+遇到這樣的opcode組合後，代表這部分的AST樹可歸約成: print_stmt_nl,然後
+在decompyle的walk.py中你會發現：
+
+'print_stmt_nl': ( '%|print %[0]C ', (0,1, None) ),
+
+有了這條規則，decompyle在輸出的就會直接把print_stmt_nl這個node輸出為
+print 加上參數。
+
+好了，我們大概知道decompyle是怎麼幹的了，如果我們要給decompyle做一個擴
+展，讓它能夠符合2.4,2.5的話，那麼有哪些地方需要修改呢？
+
+1． Dis部分，這部分可能要把2.4,2.5新出現的opcode(有麼？)，加進去，簡單。
+
+2． 詞法分析階段，跟Dis部分差不多，新出現的opcode對應得token處理加進去，簡單。
+
+3． 語法分析階段，這個複雜了，pyc應該和以前的差不多，但如果python採用了新的優化技術的話，pyo的處理（語法規則）可能很多要重新寫過了，這個比較花時間了。
+
+4． Output（代碼生成）,簡單，小修改即可。
+
+下面我們就研究研究2.4,2.5跟2.3,2.2的處理有什麼不同吧。
