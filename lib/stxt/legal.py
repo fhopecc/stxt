@@ -37,3 +37,35 @@ class Lexer(GenericScanner):
     def t_line(self, s):
         r"[^-\d\s][^-\s]+\n"
         self.rv.append(Token('line', s.strip()))
+
+class Parser(GenericParser):
+    def __init__(self, start='doc'):
+        GenericParser.__init__(self, start)
+                
+    def p_expr_1(self, args):
+        ' expr ::= expr + term '
+        return AST(type=args[1],
+                   left=args[0],
+                   right=args[2])
+        
+    def p_expr_2(self, args):
+        ' expr ::= term '
+        return args[0]
+        
+    def p_term_1(self, args):
+        ' term ::= term * factor '
+        return AST(type=args[1],
+                   left=args[0],
+                   right=args[2])
+        
+    def p_term_2(self, args):
+        ' term ::= factor '
+        return args[0]
+        
+    def p_factor_1(self, args):
+        ' factor ::= number '
+        return AST(type=args[0])
+
+    def p_factor_2(self, args):
+        ' factor ::= float '
+        return AST(type=args[0])
