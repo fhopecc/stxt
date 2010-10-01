@@ -1,8 +1,8 @@
 In this article, which follows on an earlier installment of "Charming
-Python" devoted to SimpleParse, I introduce some basic concepts in
-parsing and discuss the Spark module. Parsing frameworks are a rich
-topic that warrants quite a bit of study to get the full picture;
-these two articles make a good start, for both readers and myself.
+ Python" devoted to SimpleParse, I introduce some basic concepts in
+ parsing and discuss the Spark module. Parsing frameworks are a rich
+ topic that warrants quite a bit of study to get the full picture;
+ these two articles make a good start, for both readers and myself.
 
 In my programming life, I have frequently needed to identify parts and
 structures that exist inside textual documents: log files,
@@ -360,6 +360,7 @@ Listing 7. Tokenizing smart ASCII with WordPlusScanner
  1 - <<plain>>
  2    <<plain>> .
  
+
 Understanding the tree structure is illustrative, but what about the
 actual modified markup we are aiming for? Fortunately, it takes just
 a few lines to traverse the tree and produce it:
@@ -373,11 +374,7 @@ def emitHTML(node):
         sys.stdout.write(beg+node.attr+end)
     else: map(emitHTML, node._kids)
 
-The file typo_html.py is the same file from the SimpleParse
-installment -- it just contains a dictionary mapping names to
-begintag/endtag pairs. Obviously, we could use the same approach for
-markup other than HTML. For the curious, here is what it produces for
-our example:
+The file typo_html.py is the same file from the SimpleParse installment -- it just contains a dictionary mapping names to begintag/endtag pairs. Obviously, we could use the same approach for markup other than HTML. For the curious, here is what it produces for our example:
 
 Listing 9. The HTML output of the whole process
 		
@@ -416,7 +413,7 @@ Resources
 Read the previous installments of Charming Python.
 
 This article builds on David's earlier discussion in "Charming Python:
-Parsing with the SimpleParse module" (developerWorks, January 2002).
+ Parsing with the SimpleParse module" (developerWorks, January 2002).
 
 Download Spark and get more information on John Aycock's Spark homepage.
 
