@@ -89,25 +89,6 @@ class ShowPage(ClientPage):
           render = template.frender('show.html', globals=globals)
           self.response.out.write(str(render(homestay)))
 
-class EditPage(webapp.RequestHandler):
-    def get(self):
-        render = template.frender('edit.html')
-        key = get_key(self.request.path)
-        homestay = Homestay.get(key)
-        self.response.out.write(str(render(Homestay, homestay)))
-
-    # update entity
-    def post(self):
-        r = self.request
-        h = Homestay.get(r.get("key"))
-        h.name = r.get("name")
-        h.address = r.get("address")
-        h.email = r.get("email")
-        h.blog = r.get("blog")
-        h.owner = users.User(r.get("owner"))
-        h.put()
-        self.redirect('%s' % h.key())
-
 # NewPage for booking a room
 class NewPage(ClientPage):
     def get(self):
@@ -134,6 +115,7 @@ class NewPage(ClientPage):
                           checkin = strpdate(r.get('checkin')), 
                           checkout = strpdate(r.get('checkout')), 
                           create_date = strpdate(r.get('create_date')),
+                          addbeds_num = int(r.get('addbeds_num')), 
                           comment = r.get('comment'), 
                           room = self.room())
         res.put()
@@ -145,13 +127,6 @@ class NewPage(ClientPage):
 
         self.response.out.write(template.render('show.html', 
                                 template_values))
-
-class DelPage(webapp.RequestHandler):
-    def get(self):
-        key = get_key(self.request.path)
-        homestay = Homestay.get(key)
-        homestay.delete()
-        self.redirect('/homestays')
 
 class PeriodBooksPage(webapp.RequestHandler):
     def get(self):

@@ -20,13 +20,13 @@ class UnitTest(unittest.TestCase):
         '''
         訂房檔
         ------
-        物件 民宿   房間   房客     入住日期 退房日期
+        物件 民宿   房間   房客     加床數 入住日期 退房日期
 
-        b1   民宿一 雙人房 張簡稜剛 前天     昨天
-        b3   民宿一 雙人房 陳堂山   昨天     明天
-        b4   民宿一 雙人房 張簡稜剛 下星期   下星期又三天
-        b2   民宿一 四人房 沈懿嬅   前天     後天
-        b5   民宿一 大客房 沈懿嬅   20100728 20100804
+        b1   民宿一 雙人房 張簡稜剛 0      前天     昨天
+        b3   民宿一 雙人房 陳堂山   0      昨天     明天
+        b4   民宿一 雙人房 張簡稜剛 0      下星期   下星期又三天
+        b2   民宿一 四人房 沈懿嬅   0      前天     後天
+        b5   民宿一 大客房 沈懿嬅   0      20100728 20100804
 
         系統假日檔
         ----------
@@ -56,7 +56,8 @@ class UnitTest(unittest.TestCase):
 
         self.r1 = Room(homestay=self.h1, name=u"雙人房", 
                        price=1000,
-                       holiday_price=2000 
+                       holiday_price=2000, 
+                       addbed_price = 700
                       )
 
         self.r1.put()
@@ -99,9 +100,9 @@ class UnitTest(unittest.TestCase):
         self.r3.put()
 
         self.b5 = Reservation(room=self.r2, 
-                                name=u"沈懿嬅", 
-                                checkin=date(2010, 7, 28), 
-                                checkout=date(2010, 8, 4))
+                              name=u"沈懿嬅", 
+                              checkin=date(2010, 7, 28), 
+                              checkout=date(2010, 8, 4))
 
         self.b5.put()
 
@@ -236,14 +237,15 @@ class UnitTest(unittest.TestCase):
         self.assert_(bs[1].checkin < bs[2].checkin)
 
     def testPeriodAvailable(self):
-        b = Reservation(room=self.r1, name=u"測區間",
+        b = Reservation(room=self.r1, name=u"訂房期間測試",
                         checkin=tomorrow,
                         checkout=tomorrow + timedelta(days=2))
         self.assert_(b.period_available())
 
-        b = Reservation(room=self.r1, name=u"測區間",
+        b = Reservation(room=self.r1, name=u"訂房期間測試",
                         checkin=today,
                         checkout=tomorrow + timedelta(days=2))
+
         self.failIf(b.period_available())
         self.assertRaises(PeriodHasBooksError, b.put)
 
@@ -313,10 +315,8 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual(None, s)
 
-        # self.b4 = Reservation(room=self.r1, 
-        #                         name=u"張簡稜剛",
-        #                         checkin=nextweek, 
-        #                         checkout=nextweek + timedelta(days=3))
+        # 雙人房 1000 2000 700
+        # b4   民宿一 雙人房 張簡稜剛 0      下星期   下星期又三天
         #
         # nextweek(Sat) checkin      Wed      Thu      Fri
         # nextweek(Sun) special 3000 Thu 3000 Fri 3000 Sat 3000
@@ -350,3 +350,32 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('["foo", {"bar": ["baz", null, 1.0, 2]}]', 
             simplejson.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
             )
+    
+    def testAddBeds(self):
+        # 雙人房 1000 2000 700
+        # b4   民宿一 雙人房 張簡稜剛 0      下星期   下星期又三天
+
+        # 加床數不可超過三
+        b = self.b4
+        b.addbeds_num = 5
+        self.assertRaises(BookingError, b.put)
+
+        b.addbeds_num = 3
+        b.put()
+
+        self.assertEqual(700, self.b4.room.addbed_price)
+        # nextweek(Sat) checkin      Wed      Thu      Fri
+        # nextweek(Sun) special  3000 Thu  3000 Fri 3000 Sat 3000
+        # nextweek(Mon) special  1000 Fri  1000 Sat 2000 Sun 2000
+        # nextweek(Tue) special  1000 Sat  2000 Sun 2000 Mon 1000
+        #                        5000      6000     7000     6000
+        # addbeds_num=3*700*3d  11300     12300    13300    12300
+
+        if nextweek.weekday() in(2, 4): # WED, FRI
+            self.assertEqual(12300, self.b4.price())
+        elif nextweek.weekday() == 3: # Thu
+            self.assertEqual(13300, self.b4.price())
+        else:
+            self.assertEqual(11300, self.b4.price())
+
+

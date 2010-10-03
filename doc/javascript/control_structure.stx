@@ -1,30 +1,25 @@
-JavaScript For...In Statement
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for in
+~~~~~~
 
-for 語句是嚴格的迭代語句，用於枚舉物件的屬性，
-或列舉陣列內的元素。它的語法如下：
+for in 可用於列舉物件的屬性，
+PropertyIsEnumerable() 說明屬性是否可用 for-in 語句訪問。
+
+其語法如下：
 
 for (property in expression) statement
 
-例子：
+Ex.列舉並顯示 window 物件的所有屬性。
 
-for (sProp in window) { alert(sProp); }
+for (sProp in window) { 
+    alert(sProp); 
+}
 
-這裡，for-in 語句用於顯示window 物件的所有屬性。
+for in 也可來列舉陣列內的元素，
+語法如下:
 
-前面討論過的PropertyIsEnumerable() 是ECMAScript 中專門用於說明屬性是否
-可以用for-in 語句訪問的方法。
+for (index in array) statement
 
-For...In 聲明用於對陣列或者物件的屬性進行循環操作。
-
-for ... in 循環中的代碼每執行一次，就會對陣列的元素或者物件的屬性進行一次操作。
-語法：
-
-for (變量 in 物件) {在此執行代碼}
-
-“變量”用來指定變量，指定的變量可以是陣列元素，也可以是物件的屬性。
-
-Ex. 使用for ... in 循環列舉陣列。
+Ex.列舉陣列。
 
 <html>
 <body>
@@ -36,10 +31,10 @@ mycars[0] = "Saab";
 mycars[1] = "Volvo";
 mycars[2] = "BMW";
 
-for (x in mycars)
-  {
-  document.write(mycars[x] + "<br />");
-  }
+for (x in mycars) {
+    document.write(mycars[x] + "<br />");
+}
+
 </script>
 
 </body>

@@ -1,0 +1,620 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<!-- saved from url=(0052)http://pages.cpsc.ucalgary.ca/~aycock/spark/doc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=Big5"><meta name="GENERATOR" content="TtH 1.60">
+                                                     
+<title> SPARK Documentation for Release 0.6</title> 
+</head><body><h1 align="center">SPARK Documentation for Release 0.6 </h1>
+
+<h3 align="center">John Aycock <br> Computer Science <br> University of Calgary <br>
+	<a href="mailto:aycock@ucalgary.ca"><tt>aycock@ucalgary.ca</tt></a> </h3>
+
+<p>
+This document is a random scattering of thoughts, derived from
+my own experience and from the valuable feedback I've gotten from:
+
+</p><p>
+
+</p><ul>
+<li> Jan Decaluwe
+
+</li><li> Paul Dubois
+
+</li><li> Mike Fletcher
+
+</li><li> Darrell Gallion
+
+</li><li> Nick Mathewson
+
+</li><li> Gordon McMillan
+
+</li><li> Amit J. Patel
+
+</li><li> Tim Peters
+
+</li><li> Dickon Reed
+
+</li><li> Nicky Sandhu
+
+</li><li> Richard White
+</li></ul>
+<p>
+The ``real'' documentation is still the IPC7 paper.  Please send
+me any suggestions you have about the framework, or things to add
+to this document!
+
+</p><p>
+<em>This is new in version 0.6.</em>
+
+</p><p>
+(The module name has been changed to <tt>spark.py</tt>; new code should
+<tt>import spark</tt> instead of <tt>import generic</tt>.)
+
+</p><p>
+      </p><h2><a name="tth_sEc1">
+1</a>&nbsp;&nbsp;The <tt>Token</tt> Class</h2>
+
+<p>
+The version of <tt>Token</tt> that's supplied is as minimal as possible.  The
+only thing the framework assumes is a <tt>__cmp__</tt> method, so as long as
+you adhere to this you can expand the class or drop in your own.
+
+</p><p>
+<tt>GenericParser</tt>'s default <tt>error</tt> method attempts to print out
+the offending token in a readable form, so you may find it useful to have
+a <tt>__str__</tt> or <tt>__repr__</tt> in your <tt>Token</tt> class too.
+
+</p><p>
+      </p><h2><a name="tth_sEc2">
+2</a>&nbsp;&nbsp;The <tt>AST</tt> Class</h2>
+
+<p>
+Like the <tt>Token</tt> class, the <tt>AST</tt> class is very minimal.  The
+framework assumes that each <tt>AST</tt> node will have a string-valued
+<tt>type</tt> attribute, and that the children of a node are obtainable
+using the <tt>__getitem__</tt> method.  Again, you can roll your own
+class with this type of interface too.
+
+</p><p>
+I prefer n-ary trees for my ASTs rather than binary trees, so the
+example one in <tt>examples/paper</tt> is quite a bit different than my own.
+
+</p><p>
+      </p><h2><a name="tth_sEc3">
+3</a>&nbsp;&nbsp;The <tt>GenericScanner</tt> Class</h2>
+
+<p>
+      </p><h3><a name="tth_sEc3.1">
+3.1</a>&nbsp;&nbsp;The <tt>error</tt> Method</h3>
+
+<p>
+If the input is not matched by some point by regular expressions you've
+supplied, then the <tt>error</tt> method will get called (in previous
+versions an assertion was raised instead).  This method gets passed
+the input string and the position within the string that the error
+occurred.
+
+</p><p>
+<tt>GenericScanner</tt> provides a default implementation which prints out
+an error message and raises a <tt>SystemExit</tt> exception.
+
+</p><p>
+I'm deliberating as to whether this should be a straight exception, or
+if I should modify the interface to permit some form of error recovery...
+
+</p><p>
+      </p><h3><a name="tth_sEc3.2">
+3.2</a>&nbsp;&nbsp;Bugs/Limitations/Caveats</h3>
+
+<p>
+
+</p><dl compact=""><dt><b>Speed.</b></dt><dd>  I've addressed this in this latest release, thanks to
+	some code from Tim Peters.  However, <tt>GenericScanner</tt> is
+	ultimately only as good as Python's RE engine - a peril of
+	code re-use.
+
+<p>
+</p></dd><dt><b>Regular expressions.</b></dt><dd>  <tt>GenericScanner</tt> interprets regular
+	expressions with the <tt>re.VERBOSE</tt> option enabled.  This
+	means you have to escape the <tt>#</tt> character if you want
+	to literally match it.
+
+<p>
+</p></dd></dl>      <h2><a name="tth_sEc4">
+4</a>&nbsp;&nbsp;The <tt>GenericParser</tt> Class</h2>
+
+<p>
+      </p><h3><a name="tth_sEc4.1">
+4.1</a>&nbsp;&nbsp;Input Grammars</h3>
+
+<p>
+<tt>GenericParser</tt> should work with any Backus-Naur form (BNF) grammar,
+including grammars
+with empty right-hand sides and ambiguous grammars.
+There are apparently a few rather obscure cases where Earley's parsing algorithm
+fails, but they're not likely to crop up in any reasonable application.
+
+</p><p>
+      </p><h3><a name="tth_sEc4.2">
+4.2</a>&nbsp;&nbsp;The <tt>typestring</tt> Method</h3>
+
+<p>
+<em>This is new in version 0.6.</em>
+
+</p><p>
+<tt>GenericParser</tt> can often run faster if it knows the type of its
+tokens.  More specifically, if it knows a token's type as a string.  You
+can tell the parser this by supplying a <tt>typestring</tt> method, which is
+passed a token, and must either return that token's type as a string, or
+<tt>None</tt> if it's unable to (in the latter case, the parser will simply
+fall back on a less-efficient method of operation).
+
+</p><p>
+For example, if a token's type is always stored in under the name <tt>type</tt>,
+you might have the following code:
+
+</p><p>
+
+</p><pre>class MyParser(GenericParser):
+    ...
+    def typestring(self, token):
+        return token.type
+</pre>
+
+<p>
+Note that <tt>GenericParser</tt> may or may not use <tt>typestring</tt>; your
+tokens must still be comparable objects, as before.  Supplying <tt>typestring</tt>
+is purely optional.
+
+</p><p>
+      </p><h3><a name="tth_sEc4.3">
+4.3</a>&nbsp;&nbsp;Bugs/Limitations/Caveats</h3>
+
+<p>
+
+</p><dl compact=""><dt><b>Speed.</b></dt><dd> You're using a very general parsing algorithm
+	implemented in Python; it's not going to be blazingly fast,
+	sorry.
+
+<p>
+</p></dd><dt><b>Action code.</b></dt><dd>  The entire input has been recognized by
+	<tt>GenericParser</tt> before any of your action code is
+	executed.  This may restrict the types of things you do on-the-fly
+	in your parser actions.  It's one argument for building an AST
+	that you can traverse any way you want.
+
+<p>
+</p></dd><dt><b>Watch your method names.</b></dt><dd>  I've been bitten by this a few times.
+	Python won't warn you if you inadventently redefine a method,
+	which I've done when cutting and pasting a bit too freely.  It's
+	a bugger to track down too.
+
+<p>
+</p></dd></dl>      <h3><a name="tth_sEc4.4">
+4.4</a>&nbsp;&nbsp;Ambiguity Resolution</h3>
+
+<p>
+Since the IPC7 paper, I had added some rudimentary ambiguity resolution code.
+It was undocumented, far from satisfactory, and it has been supplanted by
+the following interface.
+
+</p><p>
+Ambiguities are not resolved until the parse tree is being traversed.  In
+other words, the input is already known to be syntactically correct; it's
+just a matter of deciding which parse tree to build when there are multiple
+choices.
+
+</p><p>
+When an ambiguity is reached, a choice will need to be made between two
+or more rules.  These rules must reside in different <tt>p_</tt> methods.
+The method names which correspond to the conflicting rules, minus the
+initial ``<tt>p_</tt>,'' are gathered together in a list.  This list is
+sorted by the length of the rules' right-hand side - shorter rules appear
+earlier in the list - and passed to the <tt>resolve</tt> method.  The
+<tt>resolve</tt> method must choose an element of the list and return its choice.
+
+</p><p>
+<tt>GenericParser</tt> supplies a default implementation of <tt>resolve</tt>
+which always selects the rule with the shortest right-hand side (assuming
+the conflicting rules reside in different <tt>p_</tt> methods, of course).
+This is enough to handle the ``dangling-else'' conflict.
+
+</p><p>
+Now some examples.  The first one always picks the rule with the shortest
+right-hand side (this is the default as supplied):
+
+</p><p>
+
+</p><pre>class MyParser(GenericParser):
+    ...
+    def resolve(self, list):
+        return list[0]
+</pre>
+
+<p>
+The second example always picks the rule with the longest
+right-hand side:
+
+</p><p>
+
+</p><pre>class MyParser(GenericParser):
+    ...
+    def resolve(self, list):
+        return list[-1]
+</pre>
+
+<p>
+Here's one which exercises fine-grained control:
+
+</p><p>
+
+</p><pre>class MyParser(GenericParser):
+    ...
+    def p_if_stmt(self, args):
+        '''
+            stmt ::= IF expr THEN stmt
+        '''
+    def p_ifelse_stmt(self, args):
+        '''
+            stmt ::= IF expr THEN stmt ELSE stmt
+        '''
+    ...
+    def resolve(self, list):
+        choice = {
+            ('if_stmt', 'ifelse_stmt'): 'if_stmt',
+        }
+        return choice[tuple(list)]
+</pre>
+
+<p>
+If you have an ambiguity, but aren't sure where, you may want to override
+the default <tt>resolve</tt> with one that simply prints out the list it's
+passed.  This allows you to find the guilty parties, and to ensure that there's
+no duplicates in the list.
+
+</p><p>
+      </p><h2><a name="tth_sEc5">
+5</a>&nbsp;&nbsp;The <tt>GenericASTBuilder</tt> Class</h2>
+
+<p>
+This class will construct syntax trees for you automatically (or at
+least with minimal intervention).  Instead of having your parser be a
+subclass of <tt>GenericParser</tt>, you make it a subclass of
+<tt>GenericASTBuilder</tt>.  <tt>GenericASTBuilder</tt> is a subclass of
+<tt>GenericParser</tt>, meaning the parsing interface is unchanged.
+
+</p><p>
+The constructor for <tt>GenericASTBuilder</tt> takes an extra argument,
+which is the <em>class</em> that you want AST nodes to be.
+
+</p><p>
+It's actually simpler than it sounds.  The rest of this section gives
+a ``cookbook'' explanation.  The class of AST nodes is called ``AST''
+in the examples below.
+
+</p><p>
+      </p><h3><a name="tth_sEc5.1">
+5.1</a>&nbsp;&nbsp;Heterogeneous Parse Tree</h3>
+
+<p>
+Sometimes these are called ``concrete syntax trees.''  By heterogeneous
+I mean that the leaves of the tree are instances of tokens rather than
+instances of the AST class.  (See the <tt>GenericASTTraversal</tt> section
+for more on this.)
+
+</p><p>
+
+</p><pre>class AutoExprParser(GenericASTBuilder):
+    def __init__(self, AST, start='expr'):
+        GenericASTBuilder.__init__(self, AST, start)
+
+    def p_expr(self, args):
+        '''
+            expr ::= expr + term
+            expr ::= term
+            term ::= term * factor
+            term ::= factor
+            factor ::= number
+            factor ::= float
+        '''
+</pre>
+
+<p>
+That's it.  The code that uses it would look like:
+
+</p><p>
+
+</p><pre>    parser = AutoExprParser(AST)
+    parseTree = parser.parse(tokens)
+</pre>
+
+<p>
+Except for the extra class argument to the constructor, there's no
+changes.  In <tt>AutoExprParser</tt>, all the rules are lumped together
+since there's no further need for actions.
+
+</p><p>
+The AST class must support the <tt>__setslice__</tt> and <tt>__len__</tt>
+operations in order to use <tt>GenericASTBuilder</tt>.
+
+</p><p>
+      </p><h3><a name="tth_sEc5.2">
+5.2</a>&nbsp;&nbsp;Homogeneous Parse Tree</h3>
+
+<p>
+To make a homogeneous parse tree, the leaves need to be changed from
+token instances into AST instances.  When <tt>GenericASTBuilder</tt>
+encounters a leaf, it calls <tt>GenericASTBuilder.terminal</tt>, so you
+simply need to supply your own version of it:
+
+</p><p>
+
+</p><pre>class AutoExprParser(GenericASTBuilder):
+    ...
+    def terminal(self, token):
+        return AST(token.type)
+</pre>
+
+<p>
+In practice, you'll probably want to copy some attribute values from the
+token to the AST node too.
+
+</p><p>
+      </p><h3><a name="tth_sEc5.3">
+5.3</a>&nbsp;&nbsp;Any-geneous Abstract Syntax Tree</h3>
+
+<p>
+To use <tt>GenericASTBuilder</tt> for building an abstract syntax tree,
+there should be a fairly straightforward mapping between the parse tree
+and the AST you want.  Just like <tt>GenericASTBuilder.terminal</tt> was
+supplied in the last section, you'll now supply a
+<tt>GenericASTBuilder.nonterminal</tt> method.  The arguments to this method
+are the nonterminal it's trying to build a node for, and the node's children.
+
+</p><p>
+For example, if I wanted to flatten the parse tree out a bit, I could
+skip allocating new nodes if there's only one child:
+
+</p><p>
+
+</p><pre>class AutoExprParser(GenericASTBuilder):
+    ...
+    def nonterminal(self, type, args):
+        if len(args) == 1:
+            return args[0]
+        return GenericASTBuilder.nonterminal(self, type, args)
+</pre>
+
+<p>
+<tt>args</tt> is just a list, so you could also delete elements from it,
+or any other transformation you can imagine.
+
+</p><p>
+      </p><h3><a name="tth_sEc5.4">
+5.4</a>&nbsp;&nbsp;Bugs/Limitations/Caveats</h3>
+
+<p>
+
+</p><dl compact=""><dt><b>Ignorance.</b></dt><dd> Any parser actions you supply in your <tt>p_</tt> functions are
+	silently ignored by <tt>GenericASTBuilder</tt> in the current version.
+	This may change in the future.
+
+<p>
+</p></dd></dl>      <h2><a name="tth_sEc6">
+6</a>&nbsp;&nbsp;The <tt>GenericASTTraversal</tt> Class</h2>
+
+<p>
+This was called the <tt>ASTTraversal</tt> class in the IPC7 paper.  For
+consistency, I've renamed it and placed it in <tt>spark.py</tt> along
+with the other generic classes.  For backward compatibility,
+<tt>ASTTraversal</tt> is still present in its old spot as a wrapper; new
+code should use <tt>GenericASTTraversal</tt>.
+
+</p><p>
+I got a great suggestion about heterogeneous ASTs: use the already-present
+token instances as leaves of the AST.  I was all ready to add support
+into <tt>GenericASTTraversal</tt> so that it only traversed a node's children
+if the node had a <tt>__getitem__</tt> method present.  Then it
+suddenly occurred to me that <tt>GenericASTTraversal</tt> already supports
+heterogeneous ASTs: if you want to use tokens as leaves, just add a
+method to your token class:
+
+</p><pre>class MyToken:
+    ...
+    def __getitem__(self, i):	raise IndexError
+    ...
+</pre>
+This way the interface to <tt>GenericASTTraversal</tt> is kept simple.
+
+<p>
+If you want to prevent further traversal into a subtree during a
+preorder traversal, calling the <tt>prune</tt> method will do the trick.  I
+found I needed this when generating code from ASTs.
+
+</p><p>
+      </p><h3><a name="tth_sEc6.1">
+6.1</a>&nbsp;&nbsp;The <tt>typestring</tt> Method</h3>
+
+<p>
+<em>This is new in version 0.6.</em>
+
+</p><p>
+To decouple <tt>GenericASTTraversal</tt> from the node implementation,
+<tt>GenericASTTraversal</tt> now calls the <tt>typestring</tt> method to
+get the node's type as a string.  Like its counterpart in <tt>GenericParser</tt>,
+it takes a node as an argument, and must return a string (it may not return
+<tt>None</tt>, unlike the one in <tt>GenericParser</tt>).
+
+</p><p>
+The default implementation simply returns the node's <tt>type</tt> field; this
+behaviour is backwards-compatible.
+
+</p><p>
+      </p><h2><a name="tth_sEc7">
+7</a>&nbsp;&nbsp;The <tt>GenericASTMatcher</tt> Class</h2>
+
+<p>
+<tt>GenericASTMatcher</tt> is a class that is designed for generating code
+from ASTs.  You supply a set of patterns (in docstrings, of course) and
+actions; <tt>GenericASTMatcher</tt> will find a way to cover the AST with
+your patterns, then invoke the corresponding actions.  Actions are called
+in left-to-right, bottom-up order.
+
+</p><p>
+For example:
+
+</p><p>
+
+</p><pre>class AutoInterpret(GenericASTMatcher):
+    def __init__(self, ast):
+        GenericASTMatcher.__init__(self, 'V', ast)
+
+    def p_n(self, tree):
+        '''
+            V ::= number
+        '''
+        tree.value = int(tree.attr)
+
+    def p_add(self, tree):
+        '''
+            V ::= expr ( V + V )
+        '''
+        tree.value = tree[0].value + tree[2].value
+
+    def p_multiply(self, tree):
+        '''
+            V ::= term ( V * V )
+        '''
+        tree.value = tree[0].value * tree[2].value
+
+    def p_addmul(self, tree):
+        '''
+            V ::= expr ( V + term ( V * V ) )
+        '''
+        tree.value = tree[0].value + tree[2][0].value * tree[2][2].value
+</pre>
+
+<p>
+As in <tt>GenericParser</tt>, the methods you supply are prefixed with
+<tt>p_</tt>, which in this context stands for ``pattern.''  The argument
+to the <tt>p_</tt> methods is the AST node where the pattern is rooted.
+
+</p><p>
+Patterns are just trees linearized into prefix
+form, which use parentheses to denote
+subtrees.  On the left-hand side is a symbol which the pattern is
+effectively ``rewritten'' to if the pattern is matched.  For example,
+the pattern <tt>V&nbsp;::=&nbsp;term&nbsp;(&nbsp;V&nbsp;*&nbsp;V&nbsp;)</tt> would correspond to:
+
+</p><p>
+
+</p><pre> term
+  /|\    =&gt; V
+ / | \
+V  *  V
+</pre>
+
+<p>
+You'd use the above class as follows:
+
+</p><p>
+
+</p><pre>    interpreter = AutoInterpret(ast)
+    interpreter.match()
+    print ast.value
+</pre>
+
+<p>
+You may optionally supply an AST to <tt>match</tt>.  This is so you can
+create one instance of your matcher class, then have it match different
+ASTs.  For instance, you could use a matcher for implementing a
+language's arithmetic expressions, and use a <tt>GenericASTTraversal</tt>
+for the rest.
+
+</p><p>
+AST nodes must support <tt>__getitem__</tt> and <tt>__cmp__</tt> methods
+to use <tt>GenericASTMatcher</tt>.
+
+</p><p>
+      </p><h3><a name="tth_sEc7.1">
+7.1</a>&nbsp;&nbsp;Bugs/Limitations/Caveats</h3>
+
+<p>
+
+</p><dl compact=""><dt><b>Ambiguity.</b></dt><dd> If there's a conflict between two patterns, then
+	<tt>GenericASTMatcher</tt> will choose the longest one.  Ideally,
+	the entire matching engine will eventually be replaced by a more
+	sophisticated one that'll find an ``optimal'' covering.
+
+<p>
+</p></dd><dt><b>Parentheses considered harmful.</b></dt><dd> You may end up with some strange
+	things happening if you have a terminal/nonterminal named ``(''
+	or ``)'' as they're delimiting the pattern's tree structure.
+
+<p>
+</p></dd><dt><b>Patterns.</b></dt><dd> <tt>GenericASTMatcher</tt>'s engine will accept patterns
+	that are more general than those described above.  These restrictions
+	may be enforced in a later release, however.
+
+<p>
+</p></dd></dl>      <h2><a name="tth_sEc8">
+8</a>&nbsp;&nbsp;Inheritance and <tt>Generic*</tt> Classes</h2>
+
+<p>
+You can override <tt>t_</tt> and <tt>p_</tt> methods now in the expected fashion;
+in other words, defining <tt>p_foo</tt> in a subclass hides <tt>p_foo</tt> in
+its superclass.  (Previously duplicate method names were not removed when
+the <tt>Generic*</tt> classes did their reflection, giving strange results.)
+
+</p><p>
+      </p><h2><a name="tth_sEc9">
+9</a>&nbsp;&nbsp;Miscellaneous</h2>
+
+<p>
+
+</p><dl compact=""><dt><b>Memory leaks!</b></dt><dd>  Several of the <tt>Generic*</tt> classes keep references
+	to the various <tt>t_</tt> and <tt>p_</tt> methods.  Unfortunately this
+	results in a circular reference, as Darrell Gallion pointed out, which
+	Python's current garbage collector won't collect.
+
+<p>
+	This will only be an issue if you create and destroy <tt>Generic*</tt>
+	classes repeatedly; simply using a single instance of
+	<tt>GenericScanner</tt> repeatedly will not consume extra memory.
+
+</p><p>
+	I probably won't fix this, since full GC is likely coming soon
+	to a Python near you, and it won't affect many users.  If you
+	<em>do</em> need to handle this problem, contact me and I can advise you
+	how to change the SPARK code.
+
+</p><p>
+</p></dd><dt><b>How do I keep track of the line number?</b></dt><dd>  There's currently no
+	automatic way to do this.  What I do is to keep a line
+	number attribute, say <tt>lineno</tt>, for each token.  Then
+	in my <tt>GenericScanner</tt> subclass I'll have a method like:
+	
+<pre>	def t_nl(self, s):
+	    r'\n'
+	    self.lineno = self.lineno + 1
+	</pre>
+	(I set <tt>self.lineno</tt> to 1 in my subclass' <tt>tokenize</tt> method.)
+
+<p>
+</p></dd><dt><b>What about inherited attributes?</b></dt><dd>  For inherited attributes - ones
+	that propagate from the root to the leaves of a tree - I just set
+	variables in my subclass rather than pass them around explicitly.
+	You may want to avoid relying on this while parsing unless you
+	know exactly how and when your parsing actions are being invoked.
+
+<p>
+</p></dd><dt><b>How do I distribute a project that uses SPARK?</b></dt><dd>  As far as I'm
+	concerned, you need only include <tt>spark.py</tt>.  I'd appreciate it
+	if you mentioned SPARK in your documentation and/or web pages.  And
+	if you send me the URL of your project's home page, I can add it
+	to the SPARK web page.
+</dd></dl>
+<p>
+
+</p><p></p><hr><small>File translated from T<sub><font size="-1">E</font></sub>X by <a href="http://hutchinson.belmont.ma.us/tth/">T<sub><font size="-1">T</font></sub>H</a>, version 1.60.</small>
+
+</body></html>

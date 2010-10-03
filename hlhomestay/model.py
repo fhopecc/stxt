@@ -185,15 +185,18 @@ class Homestay(db.Model):
         return monthly_specials
 
 class Room(db.Model):
-    name = db.StringProperty(
-            verbose_name="客房名稱", 
+    name = db.StringProperty(verbose_name="客房名稱", 
             default=u'輸入客房名稱', multiline=False)
-    price = db.IntegerProperty(
-            verbose_name = "平日價格", 
+
+    price = db.IntegerProperty(verbose_name = "平日價", 
             default=0)
-    holiday_price = db.IntegerProperty(
-            verbose_name = "假日價格", 
+
+    holiday_price = db.IntegerProperty(verbose_name = "假日價", 
             default=0) 
+
+    addbed_price = db.IntegerProperty(verbose_name = "加床價", 
+            default=0) 
+
     homestay = db.ReferenceProperty(Homestay)
 
     def daily_book(self, date):
@@ -245,6 +248,9 @@ class Reservation(db.Model):
     comment = db.TextProperty(verbose_name="備註",
                               default=u'請輸入備註')
 
+    addbeds_num = db.IntegerProperty(verbose_name="加床數",
+                                     default=0)
+
     room = db.ReferenceProperty(Room)
   
     def isholiday(self, date):
@@ -258,21 +264,32 @@ class Reservation(db.Model):
         from datetime import timedelta 
         for d in datetimeIterator(self.checkin + timedelta(days=1), \
                  self.checkout):
+            item = {'date':d, 
+                    'value':self.room.price, 
+                    'addbeds_num':self.addbeds_num, 
+                    'addbed_price': \
+                        self.addbeds_num * self.room.addbed_price}
             if self.special(d):
-                yield {'date':d, 'value':self.special(d).price}
+                item['value'] = self.special(d).price
             elif self.isholiday(d):
-                yield {'date':d, 'value':self.room.holiday_price}
-            else:
-                yield {'date':d, 'value':self.room.price}
+                item['value'] = self.room.holiday_price
+
+            #item['value'] += self.room.addbed_price * self.addbeds_num
+            yield item
 
     def price(self):
-        return sum(p['value'] for p in self.price_items())
+        return sum(p['value'] + p['addbed_price'] \
+                   for p in self.price_items())
 
     def period_available(self):
         period = datetimeIterator(self.checkin, 
                                   self.checkout - timedelta(days=1))
+
         for d in period:
-            if self.room.daily_book(d):
+            bs = self.room.daily_book(d) 
+            if bs and bs.is_saved() \
+                  and (not self.is_saved() \
+                       or bs.key() != self.key()): # 允許修改訂單本身
                 return False
         return True
 
@@ -292,11 +309,14 @@ class Reservation(db.Model):
             self.put()
         else:
             raise PeriodHasBooksError("period has books")
+
     def put(self):
-        if self.period_available():
-            db.Model.put(self)
-        else:
+        if self.addbeds_num > 3:
+            raise BookingError("add beds' num must <= 3")
+        elif not self.period_available():
             raise PeriodHasBooksError("period has books")
+        else:
+            db.Model.put(self)
 
     def admin_show_path(self):
         return "/admin/%s" % self.key()
@@ -357,8 +377,10 @@ class Special(db.Model):
     def delete_path(self):
         return "/admin/specials/%s/delete" % self.key()
 
+class BookingError(Exception):
+    pass
 
-class PeriodHasBooksError(Exception):
+class PeriodHasBooksError(BookingError):
     pass
 
 def strpdate(str, fmt="%Y%m%d"):

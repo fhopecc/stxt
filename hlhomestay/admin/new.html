@@ -26,6 +26,15 @@ function check_form(f){
            return false 
         } 
 
+        if(check_integer(addbeds_num, 
+           "加床數必須為整數")==false){
+           return false 
+        } 
+
+        if(check_max(addbeds_num, 3,"加床數最多為三床")==false) {
+           return false 
+        } 
+
         $.ajax({
 
             url: '/admin/period_books',
@@ -107,6 +116,11 @@ function check_form(f){
     <tr><td>電子郵件</td>
         <td><input name="email" type="text"
                    value="{{res.email}}"/>
+    </td></tr>
+
+    <tr><td>加房數</td>
+        <td><input name="addbeds_num" type="text"
+                   value="{{res.addbeds_num}}"/>
     </td></tr>
 
     <tr><td>訂單日期</td>

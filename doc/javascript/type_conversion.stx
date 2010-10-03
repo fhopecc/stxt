@@ -1,0 +1,5 @@
+string to number
+~~~~~~~~~~~~~~~~
+
+parseInt("42")
+parseFloat("42")

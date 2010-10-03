@@ -1,3 +1,14 @@
+function check_max(field, maximum, msg) {
+    with(field) {
+        n = parseInt(value)
+        if (n > maximum) {
+            alert(msg)
+            focus()
+            return false
+        }
+    }
+}
+
 function check_date(field, msg) {
     with(field) {
         var pat = /(\d{4})(\d{2})(\d{2})/
@@ -65,17 +76,29 @@ function check_phone(field, msg)
     }
 }
 
-// 價格
-function check_integer(field, msg)
-{
+// 欄位須為整數
+function check_integer(fields, msg) {
+
     re = /^[\d]+$/;
-    with (field) {
-        if (re.test(value)) {
-            return true; 
-        } else {
-            alert(msg)
-            focus()
-            return false
+
+    if(!(fields instanceof Array))
+        fields = [fields]
+
+    for (i in fields) {
+
+        field = fields[i]
+
+        with (field) {
+
+            if (!re.test(value)) {
+
+                alert(msg)
+                focus()
+                return false
+
+            }
         }
     }
+
+    return true
 }

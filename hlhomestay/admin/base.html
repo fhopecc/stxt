@@ -37,12 +37,13 @@
 <div>
 <table class="list">
 <tr>
-<th class="title" colspan="4">房間清單</th>
+<th class="title" colspan="5">房間清單</th>
 </tr>
 <tr>
   <th>名稱</th>
   <th>平日</th>
   <th>假日</th>
+  <th>加床價</th>
   <td><a href="/admin/room/new">新</a></td>
 </tr>
 {% for r in h.room_set %}
@@ -50,6 +51,7 @@
         <td>{{r.name}}</td>
         <td>{{r.price}}</td>
         <td>{{r.holiday_price}}</td>
+        <td>{{r.addbed_price}}</td>
         <td><a href="/admin/room/{{r.key}}/edit">改</a></td>
         <td><a href="/admin/room/{{r.key}}/delete">刪</a></td>
     </tr>

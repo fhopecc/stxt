@@ -26,7 +26,16 @@ function check_form(f){
             "電子郵件格式錯誤，格式如abcd@example.com")==false){
            return false 
         } 
-            
+
+        if(check_integer(addbeds_num, 
+           "加床數必須為整數")==false){
+           return false 
+        } 
+
+        if(check_max(addbeds_num, 3,"加床數最多為三床")==false) {
+           return false 
+        } 
+
         $.getJSON('/period_books.json', 
                   {room: room.value, 
                    checkin: checkin.value, 
@@ -84,6 +93,11 @@ function check_form(f){
                    value='{{r.checkout|date:"Ymd"}}'/>
     </td></tr>
 
+    <tr><td>加床數</td>
+        <td><input name="addbeds_num" type="text"
+                   value="{{r.addbeds_num}}"/>
+    </td></tr>
+
     <tr><td>姓名</td>
         <td><input name="name" type="text" 
                    value="{{r.name}}"/>
@@ -98,6 +112,7 @@ function check_form(f){
         <td><input name="email" type="text"
                    value="{{r.email}}"/>
     </td></tr>
+
 
     <tr><td>訂單日期</td>
         <td>{{r.create_date|date:"Ymd"}}

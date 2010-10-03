@@ -43,21 +43,28 @@
   </tr>
 
   <tr>
+    <td>加房數</td>
+    <td>{{res.addbeds_num}}</td>
+  </tr>
+
+  <tr>
     <td>備註</td>
     <td>{{res.comment}}</td>
   </tr>
 
-  <tr><th colspan="2">價格明細表：</th></tr>
-  <tr><th>日期</th><th>單價</th>
+  <tr><th colspan="4">價格明細表：</th></tr>
+  <tr><th>日期</th><th>單價</th><th>加床數</th><th>加床價</th>
   </tr>
 
-  <tr><td>{{res.checkin}}</td><td>入住</td>
+  <tr><td>{{res.checkin}}</td><td colspan="3">入住</td>
   </tr>
 
   {% for p in res.price_items %}
       <tr>
         <td>{{p.date}}</td>
         <td>{{p.value}}</td>
+        <td>{{p.addbeds_num}}</td>
+        <td>{{p.addbed_price}}</td>
       </tr>
   {% endfor %}
 
@@ -65,7 +72,7 @@
   </tr>
 
   <tr>
-    <td colspan="2">
+    <td colspan="4">
       <a href="/admin">月曆</a>
       <a href="{{res.admin_edit_path}}">改</a>
       <a href="{{res.admin_delete_path}}">刪</a>

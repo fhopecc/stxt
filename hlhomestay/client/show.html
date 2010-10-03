@@ -46,9 +46,10 @@
     <td>備註</td>
     <td>{{res.comment}}</td>
   </tr>
-
-  <tr><th colspan="2">價格明細表：</th></tr>
-  <tr><th>日期</th><th>單價</th>
+</table>
+<table>
+  <tr><th colspan="4">價格明細表：</th></tr>
+  <tr><th>日期</th><th>單價</th><th>加床數</th><th>加床價</th>
   </tr>
 
   <tr><td>{{res.checkin}}</td><td>入住</td>
@@ -58,30 +59,33 @@
       <tr>
         <td>{{p.date}}</td>
         <td>{{p.value}}</td>
+        <td>{{p.addbeds_num}}</td>
+        <td>{{p.addbed_price}}</td>
       </tr>
   {% endfor %}
 
   <tr><td>總價</td><td>{{res.price}}</td>
   </tr>
-
-  <tr><th colspan="2">訂房注意事項：</th></tr>
+</table>
+<table>
+  <tr><th colspan="5">訂房注意事項：</th></tr>
   <tr>
-    <td colspan="2">{{res.room.homestay.notice}}</td>
+    <td colspan="5">{{res.room.homestay.notice}}</td>
   </tr>
 
-  <tr><th colspan="2">若有任何問題歡迎來電：</th></tr>
+  <tr><th>若有任何問題歡迎來電：</th></tr>
   <tr>
-    <td colspan="2">{{res.room.homestay.phone}}</td>
+    <td>{{res.room.homestay.phone}}</td>
   </tr>
 
-  <tr><th colspan="2">更多相關訊息請上我們的網站：</th></tr>
-  <tr><td colspan="2">
+  <tr><th>更多相關訊息請上我們的網站：</th></tr>
+  <tr><td>
       <a href="{{res.room.homestay.blog}}">{{res.room.homestay.blog}}</a>
    </td>
   </tr>
 
   <tr>
-    <td colspan="2">
+    <td>
 
     <input type=button name=print value="列印訂房單" 
            onClick="javascript:window.print()"> 

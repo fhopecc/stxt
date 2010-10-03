@@ -8,8 +8,7 @@ GAE 為一種 CGI 程式，STDOUT 之輸出會到瀏覽器，
 這使得無法使用 ''import pdb; pdb.set_trace()'' 來設定中斷點，
 但將 STDOUT 還原並不難如下式::
 
-import sys
-import pdb
+import sys, pdb
 for attr in ('stdin', 'stdout', 'stderr'):
     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 pdb.set_trace()

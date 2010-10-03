@@ -123,6 +123,7 @@ class NewPage(AdminPage):
                           email = r.get('email'), 
                           checkin = strpdate(r.get('checkin')), 
                           checkout = strpdate(r.get('checkout')), 
+                          addbeds_num = int(r.get('addbeds_num')), 
                           create_date = strpdate(r.get('create_date')),
                           comment = r.get('comment'), 
                           room = self.room())
@@ -179,6 +180,7 @@ class EditPage(AdminPage):
         res.email = r.get('email') 
         res.checkin = strpdate(r.get('checkin'))
         res.checkout = strpdate(r.get('checkout')) 
+        res.addbeds_num = int(r.get('addbeds_num'))
         res.create_date = strpdate(r.get('create_date'))
         res.comment = r.get('comment') 
         res.room = Room.get(r.get('room'))
@@ -209,8 +211,10 @@ class AdminRoomPage(AdminPage):
 class RoomNewPage(AdminRoomPage):
     def get(self):
         homestay = self.homestay()
+        room = Room(homestay=homestay)
         template_values = {
-            'h': homestay
+            'h': homestay, 
+            'r': room
         }
         self.response.out.write(
             template.render('newroom.html', template_values))
@@ -220,6 +224,7 @@ class RoomNewPage(AdminRoomPage):
         room = Room(name = r.get("name") ,
                     price = int(r.get("price")), 
                     holiday_price = int(r.get("holiday_price")), 
+                    addbed_price = int(r.get("addbed_price")), 
                     homestay = self.homestay())
         room.put()
         self.redirect('/admin')
@@ -240,6 +245,7 @@ class RoomEditPage(AdminRoomPage):
         room.name = r.get("name")
         room.price = int(r.get("price"))
         room.holiday_price = int(r.get("holiday_price"))
+        room.addbed_price = int(r.get("addbed_price"))
         room.put()
         self.redirect('/admin')
 

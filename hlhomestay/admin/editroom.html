@@ -1,21 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>客房資料</h1>
-<form method="post" action="/admin/room/{{r.key}}/edit">
+<script src="/js/validate_input.js"></script>
+<script>
+function check_form(f){
+    with(f) {
+        if(check_integer([price, holiday_price, addbed_price], 
+           "價格必為整數")==false) {
+           return false 
+        } 
+    }
+}
+</script>
+<div id="form_content">
+<form method="post" 
+      onsubmit="return check_form(this)"
+      action="/admin/room/{{r.key}}/edit">
   <table>
+    <tr><th colspan="2">客房資料修改作業</th></tr>
+
+    <tr><td id="notice" colspan="2" style="display:none"></td></tr>
+
     <tr><td>名稱</td>
-      <td><input name="name" type="text" value="{{r.name}}"/></td>
+        <td><input name="name" type="text" value="{{r.name}}"/></td>
     </tr>
+
     <tr><td>平日價格</td>
-      <td><input name="price" type="text" value="{{r.price}}"/></td>
+        <td><input name="price" type="text" value="{{r.price}}"/></td>
     </tr>
+
     <tr><td>假日價格</td>
-      <td><input name="holiday_price" type="text"
-           value="{{r.holiday_price}}"/></td>
+        <td><input name="holiday_price" type="text"
+                   value="{{r.holiday_price}}"/></td>
     </tr>
+
+    <tr><td>加床價</td>
+        <td><input name="addbed_price" type="text" 
+                   value="{{r.addbed_price}}"/></td>
+    </tr>
+
     <tr><td><input type="submit" value="更新"/></td></tr>
   </table>
 </form>
+</div>
 </body>
 </html>
 {% endblock %} 

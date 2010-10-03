@@ -6,7 +6,7 @@ import lib.stxt.legal as legal
 
 class UnitTest(unittest.TestCase):
 
-    def testLITERAL(self):
+    def testLexer(self):
         case = '''資料交換管理程序
 --------
 
@@ -73,11 +73,42 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('line', t.type)
         self.assertEqual('防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。', t.value)
 
+    def testParser(self):
+        case = '''資料交換管理程序
+        '''
+        no ='''
+機密等級:內部使用
+文件編號:PHG-ISMS-03-011
+版次:1.0
+發行日期:97年11月4日
+權責單位:計畫室
+
+3.3.1.確保防毒機制有效運作。
+
+防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。
+防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。
+'''
+        tokens = legal.Lexer().tokenize(case)
+        t = tokens[0]
+        self.assertEqual('line', t.type)
+        self.assertEqual('資料交換管理程序', t.value)
+        """
+        t = tokens[1]
+        self.assertEqual('titlesep', t.type)
+
+        t = tokens[2]
+        self.assertEqual('emptyline', t.type)
+        """
+        doc = legal.Parser().parse(tokens)
+        
+        self.assertEqual('資料交換管理程序', doc.title)
+
 
 if __name__ == '__main__':
     '''unittest.main()'''
     tests = unittest.TestSuite()
-    tests.addTest(UnitTest("testLITERAL"))
+    tests.addTest(UnitTest("testLexer"))
+    tests.addTest(UnitTest("testParser"))
     #tests.debug()
     runner = unittest.TextTestRunner()
     runner.run(tests)
