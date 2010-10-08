@@ -147,6 +147,7 @@ class GenericParser:
 		self.rule2name[startRule] = ''
 		return startRule
 
+  # make FIRST set
 	def makeFIRST(self):
 		union = {}
 		self.first = {}
@@ -203,7 +204,7 @@ class GenericParser:
 				break				
 			self.buildState(tokens[i], states, i, tree)
 
-		#_dump(tokens, states)
+		_dump(tokens, states)
 
 		if i < len(tokens)-1 or states[i+1] != [(self.startRule, 2, 0)]:
 			del tokens[-1]

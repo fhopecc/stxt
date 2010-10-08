@@ -75,13 +75,34 @@ class UnitTest(unittest.TestCase):
 
     def testParser(self):
         case = '''資料交換管理程序
-        '''
+--------
+
+機密等級:內部使用
+文件編號:PHG-ISMS-03-011
+版次:1.0
+發行日期:97年11月4日
+權責單位:計畫室
+
+3.權責
+
+3.1.網路管理者
+
+依據「PHG-ISMS-04-030系統權限申請單」申請，
+開放適當權限。
+
+'''
         no ='''
 機密等級:內部使用
 文件編號:PHG-ISMS-03-011
 版次:1.0
 發行日期:97年11月4日
 權責單位:計畫室
+
+3.權責
+
+3.1.網路管理者
+
+依據「PHG-ISMS-04-030系統權限申請單」申請，開放適當權限。
 
 3.3.1.確保防毒機制有效運作。
 
@@ -101,8 +122,12 @@ class UnitTest(unittest.TestCase):
         """
         doc = legal.Parser().parse(tokens)
         
+        self.assertEqual('doc', doc.type)
         self.assertEqual('資料交換管理程序', doc.title)
 
+        self.assertEqual('內部使用', doc.attrs['機密等級'])
+
+        self.assertEqual(2, len(doc.kids()))
 
 if __name__ == '__main__':
     '''unittest.main()'''
