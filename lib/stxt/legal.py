@@ -42,7 +42,7 @@ class Lexer(GenericScanner):
         self.rv.append(Token('secnumber', s))
 
     def t_line(self, s):
-        r"[^-\d\s][^-\s]+\n"
+        r"[^-\d\s][^\n]+\n"
         self.rv.append(Token('line', s.strip()))
 
 class Parser(GenericParser):
@@ -80,9 +80,12 @@ class Parser(GenericParser):
  
     def p_sect(self, args):
         ''' sect ::= secnumber line emptyline
+            sect ::= secnumber emptyline
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0]
+        if len(args) == 3:
+            sect.append(Node(type='para', value = args[1].value))
         return sect
 
     """
