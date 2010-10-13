@@ -64,9 +64,12 @@ class Homestay(db.Model):
 
     
     def recently_reservations(self):
-        rooms = list(self.room_set)
+        pricetypes = []
+        for r in self.room_set:
+            for pt in r.pricetype_set:
+                pricetypes.append(pt)
         q = Reservation.all().\
-                filter("room IN", rooms).\
+                filter("price_type IN", pricetypes).\
                 filter("checkout >=", date.today())
 
         def compare(a, b):
@@ -188,24 +191,15 @@ class Room(db.Model):
     name = db.StringProperty(verbose_name="客房名稱", 
             default=u'輸入客房名稱', multiline=False)
 
-    price = db.IntegerProperty(verbose_name = "平日價", 
-            default=0)
-
-    holiday_price = db.IntegerProperty(verbose_name = "假日價", 
-            default=0) 
-
-    addbed_price = db.IntegerProperty(verbose_name = "加床價", 
-            default=0) 
-
     homestay = db.ReferenceProperty(Homestay)
 
     def daily_book(self, date):
-        bs = self.reservation_set.filter('checkout >', date)
-        bs = [b for b in bs if date >= b.checkin]
-        if len(bs) == 0:
-            return None
-        else:
-            return bs[0]
+        for pt in self.pricetype_set:
+            bs = pt.reservation_set.filter('checkout >', date)
+            bs = [b for b in bs if date >= b.checkin]
+            if len(bs) > 0:
+                return bs[0]
+        return None
 
     def period_books(self, checkin, checkout):
         period = datetimeIterator(checkin, 
@@ -225,54 +219,93 @@ class Room(db.Model):
     def book_path(self, date):
         return '/%s/%s' % (self.key(), date.strftime('%Y%m%d'))
 
-class Reservation(db.Model):
-    name = db.StringProperty(verbose_name="訂戶名稱", 
-                             default=u'輸入訂戶名稱', 
-                             multiline=False)
+    def edit_path(self):
+        return "/admin/room/%s/edit" % self.key()
 
-    phone = db.TextProperty(verbose_name="聯絡電話", 
-                            default=u'輸入聯絡電話')
-
-    email = db.EmailProperty(verbose_name="電子信箱",
-                             default=u'請輸入電子信箱')
-
-    checkin = db.DateProperty(verbose_name="入住日期",
-                              auto_now_add=True)
-
-    checkout = db.DateProperty(verbose_name="退房日期",
-                               auto_now_add=True)
-
-    create_date = db.DateProperty(verbose_name="訂單日期",
-                                  auto_now_add=True)
-
-    comment = db.TextProperty(verbose_name="備註",
-                              default=u'請輸入備註')
-
-    addbeds_num = db.IntegerProperty(verbose_name="加床數",
-                                     default=0)
-
+class PriceType(db.Model):
     room = db.ReferenceProperty(Room)
+
+    name = db.StringProperty(
+            verbose_name="計價名稱", 
+            default=u'輸入計價名稱', multiline=False)
+
+    price = db.IntegerProperty(
+            verbose_name = "平日價", 
+            default=0)
+
+    holiday_price = db.IntegerProperty(
+            verbose_name = "假日價", 
+            default=0) 
+
+    bed_price = db.IntegerProperty(
+            verbose_name = "加床價", 
+            default=0) 
+
+    def edit_path(self):
+        return "/admin/price_types/%s/edit" % self.key()
+
+    def delete_path(self):
+        return "/admin/price_types/%s/delete" % self.key()
+
+class Reservation(db.Model):
+    name = db.StringProperty(
+            verbose_name="訂戶名稱", 
+            default=u'輸入訂戶名稱', 
+            multiline=False)
+
+    price_type = db.ReferenceProperty(PriceType)
+
+    phone = db.TextProperty(
+            verbose_name="聯絡電話", 
+            default=u'輸入聯絡電話')
+
+    email = db.EmailProperty(
+            verbose_name="電子信箱",
+            default=u'請輸入電子信箱')
+
+    checkin = db.DateProperty(
+            verbose_name="入住日期",
+            auto_now_add=True)
+
+    checkout = db.DateProperty(
+            verbose_name="退房日期",
+            auto_now_add=True)
+
+    create_date = db.DateProperty(
+            verbose_name="訂單日期",
+            auto_now_add=True)
+
+    comment = db.TextProperty(
+            verbose_name="備註",
+            default=u'請輸入備註')
+
+    addbeds_num = db.IntegerProperty(
+            verbose_name="加床數",
+            default=0)
+
+    def room(self):
+        return self.price_type.room
   
     def isholiday(self, date):
-        return self.room.homestay.isholiday(date)
+        return self.room().homestay.isholiday(date)
 
     def special(self, date):
-        return self.room.special(date)
+        return self.room().special(date)
 
     def price_items(self):
         from datetime_iterator import datetimeIterator
         from datetime import timedelta 
-        for d in datetimeIterator(self.checkin + timedelta(days=1), \
-                 self.checkout):
+        for d in datetimeIterator(self.checkin, \
+                 self.checkout - timedelta(days=1)):
             item = {'date':d, 
-                    'value':self.room.price, 
+                    'value':self.price_type.price, 
                     'addbeds_num':self.addbeds_num, 
                     'addbed_price': \
-                        self.addbeds_num * self.room.addbed_price}
+                        self.addbeds_num * self.price_type.bed_price}
             if self.special(d):
                 item['value'] = self.special(d).price
-            elif self.isholiday(d):
-                item['value'] = self.room.holiday_price
+            elif self.isholiday(d + timedelta(days=1)):
+                item['value'] = self.price_type.holiday_price
 
             #item['value'] += self.room.addbed_price * self.addbeds_num
             yield item
@@ -286,7 +319,7 @@ class Reservation(db.Model):
                                   self.checkout - timedelta(days=1))
 
         for d in period:
-            bs = self.room.daily_book(d) 
+            bs = self.room().daily_book(d) 
             if bs and bs.is_saved() \
                   and (not self.is_saved() \
                        or bs.key() != self.key()): # 允許修改訂單本身
@@ -376,6 +409,7 @@ class Special(db.Model):
     
     def delete_path(self):
         return "/admin/specials/%s/delete" % self.key()
+
 
 class BookingError(Exception):
     pass

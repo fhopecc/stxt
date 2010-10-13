@@ -17,5 +17,5 @@ indexes:
 
 - kind: Reservation
   properties:
-  - name: room
+  - name: price_type
   - name: checkout

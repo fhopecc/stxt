@@ -16,31 +16,38 @@ function check_form(f){
       onsubmit="return check_form(this)"
       action="/admin/room/{{r.key}}/edit">
   <table>
-    <tr><th colspan="2">客房資料修改作業</th></tr>
+    <tr><th colspan="3">客房資料維護作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
 
     <tr><td>名稱</td>
         <td><input name="name" type="text" value="{{r.name}}"/></td>
+        <td><input type="submit" value="更新"/></td>
     </tr>
-
-    <tr><td>平日價格</td>
-        <td><input name="price" type="text" value="{{r.price}}"/></td>
-    </tr>
-
-    <tr><td>假日價格</td>
-        <td><input name="holiday_price" type="text"
-                   value="{{r.holiday_price}}"/></td>
-    </tr>
-
-    <tr><td>加床價</td>
-        <td><input name="addbed_price" type="text" 
-                   value="{{r.addbed_price}}"/></td>
-    </tr>
-
-    <tr><td><input type="submit" value="更新"/></td></tr>
   </table>
 </form>
+
+<table>
+<tr><th colspan="5">定價維護作業</th></tr>
+
+<tr><th>名稱</th><th>平日價</th><th>假日價</th><th>加床價</th>
+<td><a href="/admin/price_types/new?room={{r.key|urlencode}}">新</a></td>
+</tr>
+
+{% for p in r.pricetype_set %}
+<tr>
+    <td>{{p.name}}</td>
+    <td>{{p.price}}</td>
+    <td>{{p.holiday_price}}</td>
+    <td>{{p.bed_price}}</td>
+    <td><a href="{{p.edit_path}}">改</a>
+        <a href="{{p.delete_path}}">刪</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
 </div>
 </body>
 </html>

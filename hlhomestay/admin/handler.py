@@ -7,8 +7,7 @@ from google.appengine.ext.webapp import template
 from datetime import date
 from model import *
 
-
-class AdminPage(webapp.RequestHandler):
+class HomestayPage(webapp.RequestHandler):
     def homestay(self):
         user = users.get_current_user()
         homestay = Homestay.all().filter('owner', user).get()
@@ -28,7 +27,6 @@ class AdminPage(webapp.RequestHandler):
         r = Reservation.get(k)                    # Room object
         return r
 
-
     def logout_url(self):
         return users.create_logout_url('/admin')
 
@@ -40,7 +38,31 @@ class AdminPage(webapp.RequestHandler):
         d = strpdate(d, '%Y%m%d')
         return d
 
-class IndexPage(AdminPage):
+class EditHomestayPage(HomestayPage):
+    def get(self):
+        h = self.homestay()
+        template_values = {
+            'h': h
+        }
+        self.response.out.write(
+            template.render('edithomestay.html', template_values))
+
+    def post(self):
+        r = self.request
+        h = self.homestay()
+
+        h.name = r.get("name")
+        h.address = r.get("address")
+        h.email = r.get("email")
+        h.phone = db.PhoneNumber(r.get("phone"))
+        h.blog = r.get("blog")
+        h.css = r.get("css")
+        h.notice = r.get("notice")
+        h.put()
+        self.redirect('/admin')
+
+
+class IndexPage(HomestayPage):
     def month(self):
         p = r'/admin/(\d{6})'
         m = re.match(p, self.request.path)
@@ -97,7 +119,7 @@ class IndexPage(AdminPage):
         self.response.out.write( template.render('index.html', template_values))
 
 # NewPage for booking a room
-class NewPage(AdminPage):
+class NewPage(HomestayPage):
     def get(self):
         r = self.room()
         d = self.date()
@@ -147,7 +169,7 @@ class NewPage(AdminPage):
                     template.render('period_has_books_error.html', 
                                     template_values))
 
-class ShowPage(AdminPage):
+class ShowPage(HomestayPage):
    def get(self):
         res = self.reservation()
 
@@ -159,7 +181,7 @@ class ShowPage(AdminPage):
         self.response.out.write(template.render('show.html', 
                                 template_values))
 
-class EditPage(AdminPage):
+class EditPage(HomestayPage):
     def get(self):
         res = self.reservation()
 
@@ -194,13 +216,13 @@ class EditPage(AdminPage):
         self.response.out.write(template.render('show.html', 
                                 template_values))
 
-class DelPage(AdminPage):
+class DelPage(HomestayPage):
     def get(self):
         res = self.reservation()
         res.delete()
         self.redirect('/admin')
 
-class AdminRoomPage(AdminPage):
+class AdminRoomPage(HomestayPage):
     def room(self):
         p = r'/admin/room/(\w+)/\w+'       # pattern
         m = re.match(p, self.request.path) # match
@@ -208,7 +230,7 @@ class AdminRoomPage(AdminPage):
         r = Room.get(k)                    # Room object
         return r
 
-class RoomNewPage(AdminRoomPage):
+class NewRoomPage(AdminRoomPage):
     def get(self):
         homestay = self.homestay()
         room = Room(homestay=homestay)
@@ -222,14 +244,11 @@ class RoomNewPage(AdminRoomPage):
     def post(self):
         r = self.request
         room = Room(name = r.get("name") ,
-                    price = int(r.get("price")), 
-                    holiday_price = int(r.get("holiday_price")), 
-                    addbed_price = int(r.get("addbed_price")), 
                     homestay = self.homestay())
         room.put()
         self.redirect('/admin')
 
-class RoomEditPage(AdminRoomPage):
+class EditRoomPage(AdminRoomPage):
     def get(self):
         room = self.room()
         template_values = {
@@ -243,41 +262,81 @@ class RoomEditPage(AdminRoomPage):
         r = self.request
         room = self.room()
         room.name = r.get("name")
-        room.price = int(r.get("price"))
-        room.holiday_price = int(r.get("holiday_price"))
-        room.addbed_price = int(r.get("addbed_price"))
         room.put()
         self.redirect('/admin')
 
-class RoomDelPage(AdminRoomPage):
+class DelRoomPage(AdminRoomPage):
     def get(self):
         room = self.room()
         room.delete()
         self.redirect('/admin')
 
-class HomestayEditPage(AdminPage):
+class NewPriceTypePage(HomestayPage):
     def get(self):
-        h = self.homestay()
+        r = self.request
+        room = Room.get(r.get("room"))
+        price_type = PriceType(room=room)
+
         template_values = {
-            'h': h
+            'h': room.homestay, 
+            'r': room,
+            'p': price_type
         }
+
         self.response.out.write(
-            template.render('edithomestay.html', template_values))
+            template.render('new_price_type.html', template_values))
 
     def post(self):
         r = self.request
-        h = self.homestay()
+        room = Room.get(r.get("room"))
+        price_type = PriceType(room=room,
+                        name=r.get("name"),
+                        price=int(r.get("price")),
+                        holiday_price=int(r.get("holiday_price")),
+                        bed_price=int(r.get("bed_price")),
+                     )
+        price_type.put()
 
-        h.name = r.get("name")
-        h.address = r.get("address")
-        h.email = r.get("email")
-        h.phone = db.PhoneNumber(r.get("phone"))
-        h.blog = r.get("blog")
-        h.notice = r.get("notice")
-        h.put()
-        self.redirect('/admin')
+        self.redirect(room.edit_path())
 
-class HolidaysPage(AdminPage):
+class EditPriceTypePage(HomestayPage):
+    def price_type(self):
+        p = r'/admin/price_types/(\w+)/edit' # pattern
+        m = re.match(p, self.request.path)   # match
+        if m:
+            k = m.group(1)                   # key for homestay
+            p = PriceType.get(k)             # Room object
+        else:
+            p = PriceType.get(self.request.get('price_type'))
+        return p
+
+    def get(self):
+        p = self.price_type()
+
+        template_values = {
+            'h': p.room.homestay,
+            'r': p.room,
+            'p': p
+        }
+
+        self.response.out.write(
+            template.render('edit_price_type.html', template_values))
+
+    def post(self):
+        r = self.request
+        p = self.price_type()
+
+        p.name          = r.get("name")
+        p.price         = int(r.get("price"))
+        p.holiday_price = int(r.get("holiday_price"))
+        p.bed_price     = int(r.get("bed_price"))
+         
+        p.put()
+
+        self.redirect("/admin")
+
+
+class HolidaysPage(HomestayPage):
 
     def month(self):
         p = r'/admin/holidays/(\d{6})'
@@ -405,7 +464,7 @@ class DelHolidayPage(HolidaysPage):
         holiday.delete()
         self.redirect(holiday.calendar_path())
 
-class SpecialsPage(AdminPage):
+class SpecialsPage(HomestayPage):
 
     def month(self):
         p = r'/admin/specials/(\d{6})'
@@ -458,7 +517,7 @@ class SpecialsPage(AdminPage):
         self.response.out.write(template.render('specials.html', 
                                 template_values))
 
-class NewSpecialPage(AdminPage):
+class NewSpecialPage(HomestayPage):
 
     def room(self):
         p = r'/admin/specials/(\w+)/\d{8}'   
@@ -540,7 +599,7 @@ class DelSpecialPage(SpecialsPage):
         special.delete()
         self.redirect(special.calendar_path())
 
-class PeriodBooksPage(AdminPage):
+class PeriodBooksPage(HomestayPage):
     def get(self):
         r = self.request
         room = Room.get(r.get('room'))
@@ -565,7 +624,7 @@ application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
                (r'/admin/period_books', PeriodBooksPage), 
-               (r'/admin/homestay/edit', HomestayEditPage), 
+               (r'/admin/homestay/edit', EditHomestayPage), 
                (r'/admin/holidays', HolidaysPage), 
                (r'/admin/holidays/\d{6}', HolidaysPage), 
                (r'/admin/holidays/new', NewHolidayPage), 
@@ -579,9 +638,12 @@ application = webapp.WSGIApplication([
                (r'/admin/special/edit', EditSpecialPage), 
                (r'/admin/specials/\w+/edit', EditSpecialPage), 
                (r'/admin/specials/\w+/delete', DelSpecialPage), 
-               (r'/admin/room/new', RoomNewPage), 
-               (r'/admin/room/\w+/edit', RoomEditPage), 
-               (r'/admin/room/\w+/delete', RoomDelPage), 
+               (r'/admin/room/new', NewRoomPage), 
+               (r'/admin/room/\w+/edit', EditRoomPage), 
+               (r'/admin/room/\w+/delete', DelRoomPage), 
+               (r'/admin/price_types/new.*', NewPriceTypePage), 
+               (r'/admin/price_types/\w+/edit', EditPriceTypePage), 
+               (r'/admin/price_types/edit', EditPriceTypePage), 
                (r'/admin/edit', EditPage),
                (r'/admin/\w+', ShowPage),
                (r'/admin/\w+/edit', EditPage),

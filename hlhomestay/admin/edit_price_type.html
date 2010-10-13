@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="/js/validate_input.js"></script>
+<script>
+function check_form(f){
+    with(f) {
+        if(check_integer([price, holiday_price, bed_price], 
+           "價格必為整數")==false) {
+           return false 
+        } 
+    }
+}
+</script>
+<div id="form_content">
+<form method="post" 
+      onsubmit="return check_form(this)"
+      action="/admin/price_types/edit">
+
+  <input name="price_type" type="hidden" value="{{p.key}}"/>
+
+  <table>
+
+    <tr><th colspan="2">客房定價維護作業</th></tr>
+
+    <tr><td id="notice" colspan="2" style="display:none"></td></tr>
+
+    <tr><td>客房</td><td>{{p.room.name}}</td></tr>
+
+    <tr><td>名稱</td>
+        <td><input name="name" type="text" 
+                   value="{{p.name}}"/></td>
+    </tr>
+    <tr><td>平日價</td>
+        <td><input name="price" type="text" 
+                   value="{{p.price}}"/></td>
+    </tr>
+    <tr><td>假日價</td>
+        <td><input name="holiday_price" type="text" 
+                   value="{{p.holiday_price}}"/></td>
+    </tr>
+    <tr><td>加床價</td>
+        <td><input name="bed_price" type="text" 
+                   value="{{p.bed_price}}"/></td>
+    </tr>
+
+    <tr><td><input type="submit" value="更新"/></td><td></td></tr>
+  </table>
+</form>
+
+</div>
+{% endblock %} 

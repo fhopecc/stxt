@@ -3,34 +3,31 @@
  */
 #notice {color:red}
 
-#topbar {border-bottom: 1pt solid blue;
-         margin-bottom:10px}
-
-#leftbar {float:left;background:#94d1ff;color:#E0F2FF;
-          height:560px;
+#leftbar {float:left;color:#f08e05;background:#fcec97;
+          height:600px;
           width:23%;
-          border:solid 2px #DFA3FF;
+          border-top:solid 1px gray;
+          border-right:solid 1px gray;
+          border-left:solid 2px black;
+          border-bottom:solid 2px black;
           padding: 5px 5px 0 5px
          }
 
 #leftbar #title {font-size:18pt;font-weight:bold;
-                 padding-bottom:10pt;color:darkblue
+                 color:white;background:transparent;
+                 background-image:url('/img/fish.png');
+                 padding-left:10pt;
+                 padding-bottom:10pt;
                 }
-.block
-
-#leftbar .block table {border:solid 5px #BAE1FF}
-#leftbar .block th {text-align:left}
-#leftbar .block td {border:solid 5px #BAE1FF}
 
 #leftbar .list    {font-size:10pt}
 #leftbar .list th {text-align:left}
-#leftbar .list th.title {font-size:12pt;color:#DFA3FF}
-#leftbar .list td {border:solid 1px #BAE1FF}
+#leftbar .list th.title {font-size:12pt;color:#fcd614}
+#leftbar .list td {border:solid 1px #fcd614}
 
-
-#leftbar a          {color:#E0F2FF}
-#leftbar a:visited  {color:#E0F2FF} 
-#leftbar a:hover    {color:#E0F2FF}
+#leftbar a          {color:#f08e05}
+#leftbar a:visited  {color:#f08e05} 
+#leftbar a:hover    {color:#f08e05}
 
 #calendar    {width:75%}
 #calendar th {vertical-align:top;text-align:left;color:#DFA3FF}
@@ -38,14 +35,16 @@
               color:#94D1FF}
 #calendar td#today {color:#FAA7EE;border:1px dashed #FAA7EE}
 
-#calendar .date a         {color:#DFA3FF;font-size:10pt}
-#calendar .date a:visited {color:#DFA3FF} 
-#calendar .date a:hover   {color:#DFA3FF}
+#calendar .date           {color:#d885cc}
 
-#calendar .list           {height:55pt;font-size:8pt} 
-#calendar .list a         {color:#DFA3FF}
-#calendar .list a:visited {color:#DFA3FF} 
-#calendar .list a:hover   {color:#DFA3FF}
+#calendar .date a         {color:#faa7ee;font-size:10pt}
+#calendar .date a:visited {color:#faa7ee} 
+#calendar .date a:hover   {color:#faa7ee}
+
+#calendar .list           {height:68pt;font-size:8pt} 
+#calendar .list a         {color:black}
+#calendar .list a:visited {color:black} 
+#calendar .list a:hover   {color:black}
 
 #calendar #controlbar           {font-size:14pt} 
 #calendar #controlbar a         {font-size:12pt;color:#DFA3FF}
@@ -62,4 +61,3 @@
 #content form a         {color:#DFA3FF}
 #content form a:visited {color:#DFA3FF} 
 #content form a:hover   {color:#DFA3FF}
-
