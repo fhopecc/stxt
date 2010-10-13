@@ -68,17 +68,19 @@ class Parser(GenericParser):
     def p_init_list(self, args):
         '''docattrs ::= docattr
            sects ::= sect
+           paras ::= para
         '''
         return [args[0]]
 
     def p_lists(self, args):
         '''docattrs ::= docattrs docattr
            sects ::= sects sect
+           paras ::= paras emptyline para
         '''
         args[0].append(args[1])
         return args[0]
  
-    def p_sect(self, args):
+    def p_sect_0(self, args):
         ''' sect ::= secnumber line emptyline
             sect ::= secnumber emptyline
         '''
@@ -88,27 +90,30 @@ class Parser(GenericParser):
             sect.append(Node(type='para', value = args[1].value))
         return sect
 
-    """
-    def p_doc(self, args):
-        ' doc ::= title'
-        return Node(type="doc", title=args[0])
-        
-    def p_lists(self, args):
-        ''' attrs ::= attrs attr 
-            sects ::= sects sect
-            paras ::= paras para
-        '''
-
-   def p_attr(self, args):
-        ' attr ::= docattr '
-
     def p_sect(self, args):
-        ''' sect ::= secnumber emptyline paras
-            sect ::= secnumber line emptyline paras
+        ''' sect ::= secnumber line emptyline para
+            sect ::= secnumber emptyline paras
         '''
+        sect = Node(type='sect')
+        sect.secnumber = args[0]
+        if len(args) == 4:
+            sect.append(Node(type='para', value = args[1].value))
+            ps = args[3]
+        else:
+            ps = args[2]
+
+        for p in ps:
+            sect.append(Node(type='para', value = p.value))
+        return sect
+
+    def p_para_0(self, args):
+        ''' para ::= line
+        '''
+        return Node('para', args[0].value.strip())
 
     def p_para(self, args):
         ''' para ::= para line
-            para ::= para emptyline
         '''
-    """
+        args[0].value += args[1].strip()
+        return args[0]
+        

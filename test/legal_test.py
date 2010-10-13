@@ -90,13 +90,15 @@ class UnitTest(unittest.TestCase):
 依據「PHG-ISMS-04-030系統權限申請單」申請，
 開放適當權限。
 
+'''
+        '''
 3.1.1.
 
 合作廠商或各專案相關外部人員如有資訊設備連線、存取之需求，
 須由專案承辦人填寫「PHG-ISMS-04-030系統權限申請單」，
 經權責主管核准後，由相關網路管理者執行權限開放。
-
 '''
+
         tokens = legal.Lexer().tokenize(case)
 
         doc = legal.Parser().parse(tokens)
