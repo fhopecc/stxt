@@ -39,32 +39,8 @@ class Node(object):
     def __repr__(self):
         return str(self)
 
-    # OK to rename __setattr__
-	def setattr(self, attr_name, value):
-		# #1
-		if attr_name in self.__used_names:
-			raise TreeAttrExc(_("Attribute name '%s' is reserved" % attr_name))
-		try:
-			# If self.attribute exists
-			existed = getattr(self, attr_name)
-			if isinstance(value, Tree):
-				subtree = value
-				self.__dict__[attr_name] = subtree
-				# Replace the node directly
-			else:
-				# self.__dict__[attr_name]._Tree__node_value = value
-				# This will lead to raise TreeExc at #1, because the setattr operation of 
-				#	'self.__dict__[attr_name].attribute = value' has been affected by self.__setattr__()
-				subtree = existed
-				subtree.__dict__['_Tree__node_value'] = value
-				# Only replace the node value
-		except AttributeError:
-		# if self.attribute does not exists, assign it a EMPTY node
-			if isinstance(value, Tree):
-				subtree = value
-				self.__dict__[attr_name] = subtree
-			else:
-				self.__dict__[attr_name] = Tree(value)
+    def kids(self):
+        return self.children
 
     def append(self, *nodes):
         for n in nodes: 

@@ -1,0 +1,127 @@
+Earley Parsing
+--------------
+
+The Earley parser is a type of chart parser mainly used for parsing in
+computational linguistics, named after its inventor, Jay Earley. The
+algorithm uses dynamic programming.
+
+Earley parsers are appealing because they can parse all context-free
+languages. The Earley parser executes in cubic time (O(n3), where n
+is the length of the parsed string) in the general case, quadratic
+time (O(n2)) for unambiguous grammars, and linear time for almost all
+LR(k) grammars. It performs particularly well when the rules are
+written left-recursively.
+
+In the following descriptions, α, β, and γ represent any string of
+terminals/nonterminals (including the empty string), X and Y
+represent single nonterminals, and a represents a terminal symbol.
+
+Earley's algorithm is a top-down dynamic programming algorithm. In the
+following, we use Earley's dot notation: given a production X → αβ,
+the notation X → α • β represents a condition in which α has already
+been parsed and β is expected.
+
+For every input position (which represents a position between tokens),
+the parser generates an ordered state set. 
+Each state is a tuple (X → α • β, i), consisting of
+the production currently being matched (X → α β)
+our current position in that production (represented by the dot)
+the position i in the input at which the matching of this production
+began: the origin position
+
+(Earley's original algorithm included a look-ahead in the state; later
+research showed this to have little practical effect on the parsing
+efficiency, and it has subsequently been dropped from most
+implementations.)
+
+The state set at input position k is called S(k). The parser is seeded
+with S(0) consisting of only the top-level rule. The parser then
+iteratively operates in three stages: 
+prediction, scanning, and completion.
+
+Prediction: 
+  For every state in S(k) of the form (X → α • Y β, j)
+  (where j is the origin position as above), add (Y → • γ, k) to S(k)
+  for every production in the grammar 
+  with Y on the left-hand side (Y → γ).
+
+Scanning: 
+  If a is the next symbol in the input stream, for every state
+  in S(k) of the form (X → α • a β, j), add (X → α a • β, j) to S(k+1).
+
+Completion: 
+  For every state in S(k) of the form (X → γ •, j), find
+  states in S(j) of the form (Y → α • X β, i) and add (Y → α X • β, i)
+  to S(k).
+
+These steps are repeated until no more states can be added to the set.
+The set is generally implemented as a queue of states to process
+(though a given state must appear in one place only), and performing
+the corresponding operation depending on what kind of state it is.
+
+只有掃描(scan)才會建立新的項目組；掃描會吃入終端符號。
+
+Example
+~~~~~~~
+
+Consider the following simple grammar for arithmetic expressions:
+
+ P → S      # the start rule
+ S → S + M
+   | M
+ M → M * T
+   | T
+ T → number
+
+With the input:
+
+ 2 + 3 * 4
+
+This is the sequence of state sets:
+
+(state no.) Production          (Origin) # Comment
+---------------------------------
+== S(0): • 2 + 3 * 4 ==
+(1)  P → • S         (0)    # start rule
+(2)  S → • S + M     (0)    # predict from (1)
+(3)  S → • M         (0)    # predict from (1)
+(4)  M → • M * T     (0)    # predict from (3)
+(5)  M → • T         (0)    # predict from (3)
+(6)  T → • number    (0)    # predict from (5)
+
+== S(1): 2 • + 3 * 4 ==     # 只有掃描(scan)才會建立新的項目組。
+(1)  T → number •    (0)    # scan from S(0)(6) 
+(2)  M → T •         (0)    # complete from S(0)(5)
+(3)  M → M • * T     (0)    # complete from S(0)(4)
+(4)  S → M •         (0)    # complete from S(0)(3)
+(5)  S → S • + M     (0)    # complete from S(0)(2)
+(6)  P → S •         (0)    # complete from S(0)(1)
+
+== S(2): 2 + • 3 * 4 ==
+(1)  S → S + • M     (0)    # scan from S(1)(5)
+(2)  M → • M * T     (2)    # predict from (1)
+(3)  M → • T         (2)    # predict from (1)
+(4)  T → • number    (2)    # predict from (3)
+
+== S(3): 2 + 3 • * 4 ==
+(1)  T → number •    (2)    # scan from S(2)(4)
+(2)  M → T •         (2)    # complete from S(2)(3)
+(3)  M → M • * T     (2)    # complete from S(2)(2)
+(4)  S → S + M •     (0)    # complete from S(2)(1)
+(5)  S → S • + M     (0)    # complete from S(0)(2)
+(6)  P → S •         (0)    # complete from S(0)(1)
+
+== S(4): 2 + 3 * • 4 ==
+(1)  M → M * • T     (2)    # scan from S(3)(3)
+(2)  T → • number    (4)    # predict from (1)
+
+== S(5): 2 + 3 * 4 • ==
+(1)  T → number •    (4)    # scan from S(4)(2)
+(2)  M → M * T •     (2)    # complete from S(4)(1)
+(3)  M → M • * T     (2)    # complete from S(2)(2)
+(4)  S → S + M •     (0)    # complete from S(2)(1)
+(5)  S → S • + M     (0)    # complete from S(0)(2)
+(6)  P → S •         (0)    # complete from S(0)(1)
+
+The state (P → S •, 0) represents a completed parse. This state also
+appears in S(3) and S(1), which are complete sentences.

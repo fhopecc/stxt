@@ -1,3 +1,4 @@
+#  coding=utf8
 #  Copyright (c) 1998-2000 John Aycock
 #  
 #  Permission is hereby granted, free of charge, to any person obtaining
@@ -25,6 +26,7 @@ import re
 import sys
 import string
 
+# 收集所有類別的名稱
 def _namelist(instance):
 	namelist, namedict, classlist = [], {}, [instance.__class__]
 	for c in classlist:
@@ -98,15 +100,18 @@ class GenericParser:
 	#
 	def preprocess(self, rule, func):	return rule, func
 
+  # 剖析規則字串加入規則
 	def addRule(self, doc, func):
-		rules = string.split(doc)
+		rules = string.split(doc) # 以任何空白字元分隔之字串
 
+    # 將每條規則開頭字元之位置存於 index 中
 		index = []
 		for i in range(len(rules)):
 			if rules[i] == '::=':
 				index.append(i-1)
 		index.append(len(rules))
 
+    # 將每條規則開頭字元之位置存於 index 中
 		for i in range(len(index)-1):
 			lhs = rules[index[i]]
 			rhs = rules[index[i]+2:index[i+1]]
@@ -119,9 +124,10 @@ class GenericParser:
 			else:
 				self.rules[lhs] = [ rule ]
 			self.rule2func[rule] = fn
-			self.rule2name[rule] = func.__name__[2:]
+			self.rule2name[rule] = func.__name__[2:] # 去掉前置 p_ 字元
 		self.ruleschanged = 1
 
+  # 從類別之名稱匯入規則
 	def collectRules(self):
 		for name in _namelist(self):
 			if name[:2] == 'p_':
@@ -141,6 +147,7 @@ class GenericParser:
 		self.rule2name[startRule] = ''
 		return startRule
 
+  # make FIRST set
 	def makeFIRST(self):
 		union = {}
 		self.first = {}
@@ -197,7 +204,7 @@ class GenericParser:
 				break				
 			self.buildState(tokens[i], states, i, tree)
 
-		#_dump(tokens, states)
+		_dump(tokens, states)
 
 		if i < len(tokens)-1 or states[i+1] != [(self.startRule, 2, 0)]:
 			del tokens[-1]
