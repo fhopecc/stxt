@@ -1,5 +1,5 @@
 HLV  
----
+===
 
 APSERVER
 ~~~~~~~~
@@ -29,12 +29,20 @@ NAS -> PC(jpeg) -> HOUSRV(jpeg)
 
 HOUSRV 執行 run.bat
 
-安裝行動端
-----------
+安裝申辦台及行動端
+------------------
 
-//housvr/hlv$
+1.請使用者登入
 
-申辦台按 hlv.bat 安裝
+2.確認其帳號包含於本機 Administrators 群組中
+
+3.打開網址列輸入：「//housvr/hlv$」，
+  並輸入 administrator/password 
+
+4.按 setupAPP.bat 安裝申辦台
+
+5.按 setupMobile.bat 安裝行動端
+
 
 上正式機程序
 ------------
