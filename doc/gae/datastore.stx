@@ -291,12 +291,14 @@ Email 模型中其 user 屬性其型別為 Reference ，
 而同時你拿到了一個 email entity 也可以使用 user 這個欄位關聯到對應的
 user entity，這樣也很快就完成一對一關聯。
 
-多對多關聯(Many-to-Many)
-~~~~~~~~~~~~~~~~~~~~~~~~
-Many-to-Many 常被出現在指定分類的應用中，舉例來說，我的部落格可能有很多分類（Category），每個分類下會有很多篇文章，而對一篇文章來說，它也可能屬於不同的分類下，這樣就產生了一個 Many-to-Many 的關聯。
+多對多關聯
+~~~~~~~~~~
+
+Many-to-Many 常被出現在指定分類的應用中，舉例來說，我的部落格可能有很
+多分類（Category），每個分類下會有很多篇文章，而對一篇文章來說，它也可
+能屬於不同的分類下，這樣就產生了一個 Many-to-Many 的關聯。
 
 廢話不多說，寫成 Datastore 的 Model 就可以寫成這樣：
-
  
 class Post(db.Model):
     title = db.StringProperty(required=True)
@@ -311,7 +313,12 @@ class Category(db.Model):
     @property
     def posts(self):
         return Post.gql('WHERE categories = :1', self.key())
-在 Post model 中我建立了一個 categories 欄位，它是一個 List 型別，裡面的資料都是 db.Key 這個型別，每一個放進 Datastore 的 entity 都有一個唯一的 key，所以打算用這個 list 來表示某篇文章究竟有多少分類。而 Category model 中，我們自己寫了一個 posts 的 property，裡面只是要根據 key 來取出對應的 Posts。
+
+在 Post model 中我建立了一個 categories 欄位，它是一個 List 型別，裡面
+的資料都是 db.Key 這個型別，每一個放進 Datastore 的 entity 都有一個唯
+一的 key，所以打算用這個 list 來表示某篇文章究竟有多少分類。而
+Category model 中，我們自己寫了一個 posts 的 property，裡面只是要根據
+key 來取出對應的 Posts。
 
 這樣在建立 entity 的時候就可以寫成這樣：
 
@@ -334,6 +341,7 @@ post1.put()
 categories = db.get(post1.categories)
 for cat in categories:
     print 'Category: %s' % cat.name
+
 而要看某個分類下有什麼文章則是寫成：
 
  

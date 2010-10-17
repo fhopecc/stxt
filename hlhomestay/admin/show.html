@@ -8,8 +8,13 @@
   </tr>
 
   <tr>
-    <td>客房名稱</td>
+    <td>客房</td>
     <td>{{res.room.name}}</td>
+  </tr>
+
+  <tr>
+    <td>房型</td>
+    <td>{{res.price_type.name}}</td>
   </tr>
 
   <tr>
@@ -56,9 +61,6 @@
   <tr><th>日期</th><th>單價</th><th>加床數</th><th>加床價</th>
   </tr>
 
-  <tr><td>{{res.checkin}}</td><td colspan="3">入住</td>
-  </tr>
-
   {% for p in res.price_items %}
       <tr>
         <td>{{p.date}}</td>
@@ -67,6 +69,8 @@
         <td>{{p.addbed_price}}</td>
       </tr>
   {% endfor %}
+
+  <tr><td>{{res.checkout}}</td><td colspan="3">退房</td></tr>
 
   <tr><td>總價</td><td>{{res.price}}</td>
   </tr>

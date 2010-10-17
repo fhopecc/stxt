@@ -7,26 +7,10 @@
 <body>
 <div id="leftbar">
 <div id="title">{{h.name}}訂房系統</div>
+
 <div class="block">
-<table class="list">
-<tr>
-  <th colspan="4">房型價目表</th>
-</tr>
-<tr>
-  <td>房型</td>
-  <td>平日</td>
-  <td>假日</td>
-  <td>加床價</td>
-  </tr>
-{% for r in h.room_set %}
-    <tr>
-        <td>{{r.name}}</td>
-        <td>{{r.price}}</td>
-        <td>{{r.holiday_price}}</td>
-        <td>{{r.addbed_price}}</td>
-    </tr>
-{% endfor %}
-</table>
+訂房注意事項：
+{{h.notice}}
 </div>
 
 <div class="block">

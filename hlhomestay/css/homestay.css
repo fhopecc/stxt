@@ -4,7 +4,7 @@
 #notice {color:red}
 
 #leftbar {float:left;color:#f08e05;background:#fcec97;
-          height:600px;
+          height:620px;
           width:23%;
           border-top:solid 1px gray;
           border-right:solid 1px gray;
@@ -51,13 +51,13 @@
 #calendar #controlbar a:visited {color:#DFA3FF} 
 #calendar #controlbar a:hover   {color:#DFA3FF}
 
-#content {font-size:12pt;color:#DFA3FF}
+#content {font-size:12pt;color:black}
 #content th {text-align:left}
 
-#content form {font-size:12pt;color:#DFA3FF}
-#content form th {text-align:left;color:#DFA3FF}
+#content form {font-size:12pt;color:black}
+#content form th {text-align:left;color:black}
 #content input {color:darkblue}
 #content textarea {color:darkblue;width:100%;}
-#content form a         {color:#DFA3FF}
-#content form a:visited {color:#DFA3FF} 
-#content form a:hover   {color:#DFA3FF}
+#content form a         {color:black}
+#content form a:visited {color:black} 
+#content form a:hover   {color:black}

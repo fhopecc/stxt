@@ -103,14 +103,23 @@ pacific_time = utc_time.astimezone(Pacific_tzinfo())
 請參閱 datetime 模組文件 (包括 datetime.tzinfo)。 另請參閱第三方模組 pytz，不過請注意，pytz 發行有很多檔案。
 DateTimeProperty 模型類別的功能包括例如自動使用模型實例儲存的日期和時間。這些是模型的功能，在原始資料存放區值 (例如在 Expando 動態屬性中) 無法使用。
 Model 屬性： DateTimeProperty、DateProperty、TimeProperty
+
 list
+~~~~
 值的清單，清單中的每個值都是支援的資料類型之一。請參閱實體和模型：清單。
-當 Expando 動態屬性使用 list 類型時，不能是空白清單。這是由於清單值儲存的方式：清單屬性沒有任何項目時，在資料存放區中就不存在。您可以使用靜態屬性以及 ListProperty 類別來代表屬性的空白清單值。
+
+當 Expando 動態屬性使用 list 類型時，不能是空白清單。這是由於清單值儲
+存的方式：清單屬性沒有任何項目時，在資料存放區中就不存在。您可以使用靜
+態屬性以及 ListProperty 類別來代表屬性的空白清單值。
+
 Model 屬性： ListProperty
+
 db.Key
+~~~~~~
 其他資料存放區實體的金鑰。
 m = Employee(name="Susan", key_name="susan5")
 m.put()
+
 e = Employee(name="Bob", manager=m.key())
 e.put()
 
@@ -313,16 +322,33 @@ class IntegerProperty(...)
 整數屬性。
 Python int 值在儲存之前會轉換為 Python long 值。儲存為 int 的值將會以 long 傳回。
 值類型： int 或 long
+
 class LinkProperty(...)
 完整的 URL。
 值類型： Link
+
 class ListProperty(item_type, verbose_name=None, default=None, ...)
+
 類型指定為 item_type 的值清單。
-在查詢中，比較清單屬性和值會針對清單成員執行測試：list_property = value 測試 (若值出現在清單的任何位置)、list_property < value 測試 (若清單的任何成員小於指定值) 等等。
-查詢無法比較兩個清單值。若不個別測試每個項目的成員資格，就無法測試兩個清單是否相等。
-item_type 是清單中的項目類型，為可能是 Python 類型或類別。清單值中的所有項目都必須屬於指定類型。item_type 必須是資料存放區值類型之一，而且不能是 list。請參閱上述的資料存放區值類型。
+
+在查詢中，比較清單屬性和值會針對清單成員執行測試：
+list_property = value 測試 (若值出現在清單的任何位置)、
+list_property < value 測試 (若清單的任何成員小於指定值) 等等。
+
+查詢無法比較兩個清單值。若不個別測試每個項目的成員資格，
+就無法測試兩個清單是否相等。
+
+item_type 是清單中的項目類型，為可能是 Python 類型或類別。清單值中的所
+有項目都必須屬於指定類型。item_type 必須是資料存放區值類型之一，而且不
+能是 list。請參閱上述的資料存放區值類型。
+
 ListProperty 靜態屬性的值不能是 None。不過，可以是空白清單。
-提示：因為 ListProperty 彙整類型不會使用 Property 類別，Property 類別之自動值和驗證之類的功能，不會自動套用至清單的成員。若要使用 Property 類別來驗證成員值，您可以具現化該類別，並對該值呼叫其 validate() 方法。
+
+提示：因為 ListProperty 彙整類型不會使用 Property 類別，Property 類別
+之自動值和驗證之類的功能，不會自動套用至清單的成員。若要使用 Property
+ 類別來驗證成員值，您可以具現化該類別，並對該值呼叫其 validate() 方法
+。
+
 default 是清單屬性的預設值。若為 None，則預設為空白清單。清單屬性可以定義自訂 validator，讓它不允許空白清單。
 請參閱實體和模型以取得 ListProperty 和清單值的詳細資訊。
 值類型：零或其他值的 Python list，每個值都是設定的類型

@@ -72,62 +72,76 @@ function check_form(f){
   </script>
   <form method="post" 
         onsubmit="return check_form(this)"
-        action='/{{r.room.key}}/{{r.checkin|date:"Ymd"}}'>
+        action='/new'>
   <table class="form">
     <tr><th colspan="2">訂房作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
 
-    <tr><td>房間</td>
-        <td>{{r.room.name}}
-            <input name="room" type="hidden" value="{{r.room.key}}"/>
+    <tr><td>房間</td><td>{{r.name}}</td></tr>
+
+    {% ifequal 1 r.pricetype_set.count %}
+    <tr><td>房型</td>
+        <td>{{res.pricetype_set.get.name}}
+            <input name="price_type" type="hidden"
+                   value='{{r.pricetype_set.get.key}}'/>
     </td></tr>
+    {% else %}
+    <tr><td>房型</td>
+        <td>
+            <select name="price_type">
+            {% for p in r.pricetype_set %}
+                <option value="{{p.key}}">{{p.name}}</option>
+            {% endfor %}
+            </select>
+        </td>
+    {% endifequal %}
 
     <tr><td>入住日期</td>
       <td><input name="checkin" type="text"
-                 value='{{r.checkin|date:"Ymd"}}'/>
+                 value='{{res.checkin|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td>退房日期</td>
         <td><input name="checkout" type="text"
-                   value='{{r.checkout|date:"Ymd"}}'/>
+                   value='{{res.checkout|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td>加床數</td>
         <td><input name="addbeds_num" type="text"
-                   value="{{r.addbeds_num}}"/>
+                   value="{{res.addbeds_num}}"/>
     </td></tr>
 
     <tr><td>姓名</td>
         <td><input name="name" type="text" 
-                   value="{{r.name}}"/>
+                   value="{{res.name}}"/>
     </td></tr>
 
     <tr><td>聯絡電話</td>
         <td><input name="phone" type="text"
-                   value="{{r.phone}}"/>
+                   value="{{res.phone}}"/>
     </td></tr>
 
     <tr><td>電子郵件</td>
         <td><input name="email" type="text"
-                   value="{{r.email}}"/>
+                   value="{{res.email}}"/>
     </td></tr>
 
 
     <tr><td>訂單日期</td>
-        <td>{{r.create_date|date:"Ymd"}}
+        <td>{{res.create_date|date:"Ymd"}}
             <input name="create_date" type="hidden" 
-                   value='{{r.create_date|date:"Ymd"}}'/>
+                   value='{{res.create_date|date:"Ymd"}}'/>
     </td></tr>
 
     <tr><td colspan="2">備註</td></tr>
     <tr><td colspan="2">
-        <textarea name="comment">{{r.comment}}</textarea>
+        <textarea name="comment">{{res.comment}}</textarea>
     </td></tr>
 
     <tr><td><input type="submit" value="建立"/></td>
         <td>
-            <a href="{{r.client_calendar_path}}">月曆</a>
+            <a href="{{res.client_calendar_path}}">月曆</a>
         </td></tr>
   </table>
 </form>

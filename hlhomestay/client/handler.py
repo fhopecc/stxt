@@ -93,14 +93,15 @@ class ShowPage(ClientPage):
 class NewPage(ClientPage):
     def get(self):
         r = self.request
-        reservation = Reservation()
-        reservation.room = self.room()
-        reservation.checkin = self.date()
-        reservation.checkout = self.date() + timedelta(days=1)
+        room = self.room()
+        res = Reservation()
+        res.checkin = self.date()
+        res.checkout = self.date() + timedelta(days=1)
         
         template_values = {
-            'h': reservation.room.homestay,
-            'r': reservation
+            'h': room.homestay,
+            'r': room,
+            'res': res
         }
 
         self.response.out.write(template.render('new.html', 
@@ -117,11 +118,12 @@ class NewPage(ClientPage):
                           create_date = strpdate(r.get('create_date')),
                           addbeds_num = int(r.get('addbeds_num')), 
                           comment = r.get('comment'), 
-                          room = self.room())
+                          price_type = PriceType.get(r.get('price_type'))
+                         )
         res.put()
 
         template_values = {
-            'h': res.room.homestay,
+            'h': res.homestay(),
             'res': res
         }
 
@@ -143,6 +145,7 @@ class PeriodBooksPage(webapp.RequestHandler):
 application = webapp.WSGIApplication(
         [
          (r'/period_books\.json.*', PeriodBooksPage), 
+         (r'/new', NewPage),
          (r'/\w+', IndexPage),
          (r'/\w+/\d{6}', IndexPage),
          (r'/\w+/\d{8}', NewPage)

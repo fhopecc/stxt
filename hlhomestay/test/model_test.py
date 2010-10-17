@@ -36,29 +36,39 @@ class UnitTest(unittest.TestCase):
                            owner=owner)
         self.h1.put()
 
-        self.r1 = Room(homestay=self.h1, name=u"聽濤")
-        self.r1.put()
-
         self.p1 = PriceType(name=u"雙人房",
                             price=2000,
                             holiday_price=2500, 
-                            room=self.r1
+                            homestay=self.h1
                            )
-
         self.p1.put()
 
         self.p2 = PriceType(name=u"四人房",
                             price=2500,
                             holiday_price=3000,
-                            room=self.r1
+                            homestay=self.h1
                            )
-
         self.p2.put()
 
+        self.p3 = PriceType(name=u"多人房",
+                            price=2500,
+                            holiday_price=3000,
+                            bed_price=400,
+                            homestay=self.h1
+                           )
+
+        self.p3.put()
+
+        self.r1 = Room(homestay=self.h1, name=u"聽濤")
+        self.r1.price_type_keys.append(self.p1.key())
+        self.r1.price_type_keys.append(self.p2.key())
+
+        self.r1.put()
 
         self.b1 = Reservation(name=u"張簡稜剛",
                               checkin=twodago, 
                               checkout=yestorday, 
+                              room=self.r1,
                               price_type=self.p1
                              )
         self.b1.put()
@@ -66,6 +76,7 @@ class UnitTest(unittest.TestCase):
         self.b4 = Reservation(name=u"張簡金水",
                               checkin=today, 
                               checkout=tomorrow,
+                              room=self.r1,
                               price_type=self.p1
                              )
         self.b4.put()
@@ -73,6 +84,7 @@ class UnitTest(unittest.TestCase):
         self.b7 = Reservation(name=u"張簡稜剛",
                               checkin=tomorrow, 
                               checkout=nextweek, 
+                              room=self.r1,
                               price_type=self.p2
                              )
         self.b7.put()
@@ -80,91 +92,56 @@ class UnitTest(unittest.TestCase):
         self.r2 = Room(homestay=self.h1, 
                        name=u"松濤"
                       )
+        self.r2.price_type_keys.append(self.p1.key())
+        self.r2.price_type_keys.append(self.p2.key())
         self.r2.put()
 
-        self.p3 = PriceType(name=u"雙人房",
-                            price=2000,
-                            holiday_price=2500, 
-                            room=self.r2
-                           )
-
-        self.p3.put()
-
-        self.p4 = PriceType(name=u"四人房",
-                            price=2500,
-                            holiday_price=3000,
-                            room=self.r2
-                           )
-
-        self.p4.put()
 
 
         self.b2 = Reservation(name=u"陳堂山",
                               checkin=twodago, 
                               checkout=today,
-                              price_type=self.p4
+                              room=self.r2,
+                              price_type=self.p2
                               )
         self.b2.put()
 
         self.b5 = Reservation(name=u"沈懿媗", 
                               checkin=today,
                               checkout=twodafter,
-                              price_type=self.p4
+                              room=self.r2,
+                              price_type=self.p2
                              )
         self.b5.put()
 
         self.r3 = Room(homestay=self.h1, 
                        name=u"迎曦"
                       )
+        self.r3.price_type_keys.append(self.p1.key())
+        self.r3.price_type_keys.append(self.p2.key())
         self.r3.put()
-
-        self.p5 = PriceType(name=u"雙人房",
-                            price=2000,
-                            holiday_price=2500, 
-                            room=self.r3
-                           )
-
-        self.p5.put()
-
-        self.p6 = PriceType(name=u"四人房",
-                            price=2500,
-                            holiday_price=3000,
-                            room=self.r3
-                           )
-
-        self.p6.put()
-
 
         self.b3 = Reservation(name=u"沈懿媗", 
                               checkin=twodago, 
                               checkout=twodafter,
-                              price_type=self.p6
+                              room=self.r3,
+                              price_type=self.p2
                              )
         self.b3.put()
-
-
 
         self.r4 = Room(homestay=self.h1, 
                        name=u"多人房"
                       )
+        self.r4.price_type_keys.append(self.p3.key())
         self.r4.put()
-
-        self.p7 = PriceType(name=u"多人房",
-                            price=2500,
-                            holiday_price=3000,
-                            bed_price=400,
-                            room=self.r4
-                           )
-
-        self.p7.put()
 
         self.b6 = Reservation(name=u"沈懿嬅", 
                               checkin=tomorrow, 
                               checkout=twodafter,
-                              price_type=self.p7
+                              room=self.r4,
+                              price_type=self.p3
                              )
         self.b6.put()
-
 
         '''
         系統假日檔
@@ -183,8 +160,8 @@ class UnitTest(unittest.TestCase):
 
         特價檔 
         ------
-        物件 民宿   房間   日期         名稱         
-        s1   五餅二魚 聽濤 下星期又一天 下星期又一天漲三倍
+        物件 民宿     房型   日期         名稱         
+        s1   五餅二魚 四人房 下星期       下星期春節4000
         '''
 
 
@@ -206,21 +183,21 @@ class UnitTest(unittest.TestCase):
                 date=date(2010, 7, 23), 
                 isholiday=True).put()
 
-        self.s1 = Special(room=self.r1,
-                          name = u"下星期又一天漲三倍", 
-                          date = nextweek + timedelta(days=1),
-                          price = 3000 
+        self.s1 = Special(price_type=self.p2,
+                          name = u"下星期春節", 
+                          date = nextweek,
+                          price = 4500
                          )
         self.s1.put()
 
     def tearDown(self):
         for h in Homestay.all():
             for r in h.room_set:
-                for pt in r.pricetype_set:
-                    for res in pt.reservation_set:
-                        res.delete()
-                    pt.delete()
+                for res in r.reservation_set:
+                    res.delete()
                 r.delete()
+            for pt in h.pricetype_set:
+                pt.delete()
             h.delete()
 
     def testRoom(self):
@@ -298,17 +275,17 @@ class UnitTest(unittest.TestCase):
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'張簡金水', r.name) 
-        self.assertEqual(u"聽濤", r.room().name)
+        self.assertEqual(u"聽濤", r.room.name)
 
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'沈懿媗', r.name) 
-        self.assertEqual(u"松濤", r.room().name)
+        self.assertEqual(u"松濤", r.room.name)
 
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'沈懿媗', r.name) 
-        self.assertEqual(u"迎曦", r.room().name)
+        self.assertEqual(u"迎曦", r.room.name)
 
         r = bs.next()
         self.assertEqual('Room', r.kind()) 
@@ -323,22 +300,22 @@ class UnitTest(unittest.TestCase):
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'張簡稜剛', r.name) 
-        self.assertEqual(u"聽濤", r.room().name)
+        self.assertEqual(u"聽濤", r.room.name)
 
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'沈懿媗', r.name) 
-        self.assertEqual(u"松濤", r.room().name)
+        self.assertEqual(u"松濤", r.room.name)
 
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'沈懿媗', r.name) 
-        self.assertEqual(u"迎曦", r.room().name)
+        self.assertEqual(u"迎曦", r.room.name)
 
         r = bs.next()
         self.assertEqual('Reservation', r.kind()) 
         self.assertEqual(u'沈懿嬅', r.name) 
-        self.assertEqual(u"多人房", r.room().name)
+        self.assertEqual(u"多人房", r.room.name)
 
     def testAvailables(self):
         # if date is before today, then no available.
@@ -361,21 +338,43 @@ class UnitTest(unittest.TestCase):
         avs = self.h1.daily_availables(nextweek)
         self.assertEqual(4, sum(1 for r in avs))
 
+    def testAvailablePriceTypes(self):
+        # if date is before today, then no available.
+        avs = self.h1.daily_available_price_types(yestorday)
+        self.assertEqual(0, sum(1 for r in avs))
+
+        # today 
+        avs = self.h1.daily_available_price_types(today)
+        self.assertEqual(1, len(avs))
+        self.assertEqual(u'多人房', avs[0].name)
+
+        # tomorrow 
+        avs = self.h1.daily_available_price_types(tomorrow)
+        self.assertEqual(0, sum(1 for r in avs))
+
+        # nextweek - 1 
+        avs = self.h1.daily_available_price_types(nextweek - timedelta(days=1))
+        self.assertEqual(3, sum(1 for r in avs))
+
+        # nextweek
+        avs = self.h1.daily_available_price_types(nextweek)
+        self.assertEqual(3, sum(1 for r in avs))
+
     def testPeriodAvailable(self):
         # today
-        b = Reservation(price_type=self.p7, name=u"訂房期間測試",
+        b = Reservation(room=self.r4, name=u"訂房期間測試",
                         checkin=today,
                         checkout=tomorrow)
 
         self.assert_(b.period_available())
 
         # tomorrow
-        b = Reservation(price_type=self.p3, name=u"訂房期間測試",
+        b = Reservation(room=self.r2, name=u"訂房期間測試",
                         checkin=twodafter,
                         checkout=twodafter + timedelta(days=2))
         self.assert_(b.period_available())
 
-        b = Reservation(price_type=self.p1, name=u"訂房期間測試",
+        b = Reservation(room=self.r1, name=u"訂房期間測試",
                         checkin=today,
                         checkout=tomorrow + timedelta(days=2))
 
@@ -494,46 +493,43 @@ class UnitTest(unittest.TestCase):
         #    self.assertEqual(11300, self.b4.price())
 
 
-    '''
     def testSpecial(self):
         
-        s = self.r1.special(nextweek + timedelta(days=1))
+        s = self.p2.special(nextweek)
         
-        self.assertEqual(3000, s.price)
+        self.assertEqual(4500, s.price)
 
-        s = self.r1.special(nextweek + timedelta(days=2))
+        s = self.p2.special(nextweek + timedelta(days=2))
 
         self.assertEqual(None, s)
 
-        # 聽濤 1000 2000 700
-        # b4   五餅二魚 聽濤 張簡稜剛 0      下星期   下星期又三天
-        #
-        # nextweek(Sat) checkin      Wed      Thu      Fri
-        # nextweek(Sun) special 3000 Thu 3000 Fri 3000 Sat 3000
-        # nextweek(Mon) special 1000 Fri 1000 Sat 2000 Sun 2000
-        # nextweek(Tue) special 1000 Sat 2000 Sun 2000 Mon 1000
-        #                       5000     6000     7000     6000
+        # b7   五餅二魚 聽濤   四人房 張簡稜剛 0      明天     下星期
+        # 
+        s = self.b7.special(nextweek)
+        
+        self.assertEqual(4500, s.price)
 
-        if nextweek.weekday() in(2, 4): # WED, FRI
-            self.assertEqual(6000, self.b4.price())
-        elif nextweek.weekday() == 3: # Thu
-            self.assertEqual(7000, self.b4.price())
+        pis = self.b7.price_items()
+
+        pi = pis.next() # tomorrow
+        self.assertEqual(tomorrow, pi['date'])
+        if self.h1.isholiday(tomorrow+timedelta(days=1)):
+            self.assertEqual(3000, pi['value'])
         else:
-            self.assertEqual(5000, self.b4.price())
+            self.assertEqual(2500, pi['value'])
 
-        specials = self.h1.specials(nextweek + timedelta(days=1))
+        pi = pis.next() # 2
+        pi = pis.next() # 3
+        pi = pis.next() # 4
+        pi = pis.next() # 5
+        pi = pis.next() # 6
+        self.assertEqual(4500, pi['value'])
+        self.assertRaises(StopIteration, pis.next) # 7 checkout
 
-        self.assertEqual(3, sum(1 for s in specials))
+    def testRoomPriceType(self):
+        self.assertEqual(2, len(self.r1.price_types))
+        self.assertEqual(1, len(self.r4.price_types))
 
-        specials = self.h1.specials(nextweek + timedelta(days=1))
-
-        s = specials.next()
-
-        self.assertEqual('Special', s.kind())
-
-        s = specials.next()
-
-        self.assertEqual('Room', s.kind())
-
-
-'''
+        self.assertEqual(3, len(self.p1.rooms))
+        self.assertEqual(3, len(self.p2.rooms))
+        self.assertEqual(1, len(self.p3.rooms))

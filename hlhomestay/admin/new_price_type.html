@@ -15,14 +15,11 @@ function check_form(f){
 <form method="post" 
       onsubmit="return check_form(this)"
       action="/admin/price_types/new">
-  <input name="room" type="hidden" value="{{r.key}}"/>
   <table>
 
     <tr><th colspan="2">客房定價建立作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
-
-    <tr><td>客房</td><td>{{r.name}}</td></tr>
 
     <tr><td>名稱</td>
         <td><input name="name" type="text" 

@@ -8,6 +8,8 @@ from datetime import date
 from model import *
 
 class HomestayPage(webapp.RequestHandler):
+
+    @property
     def homestay(self):
         user = users.get_current_user()
         homestay = Homestay.all().filter('owner', user).get()
@@ -20,12 +22,6 @@ class HomestayPage(webapp.RequestHandler):
         r = Room.get(r)                 
         return r
 
-    def reservation(self):
-        p = r'/admin/(\w+)'            # pattern
-        m = re.match(p, self.request.path) # match
-        k = m.group(1)                     # key for homestay
-        r = Reservation.get(k)                    # Room object
-        return r
 
     def logout_url(self):
         return users.create_logout_url('/admin')
@@ -40,7 +36,7 @@ class HomestayPage(webapp.RequestHandler):
 
 class EditHomestayPage(HomestayPage):
     def get(self):
-        h = self.homestay()
+        h = self.homestay
         template_values = {
             'h': h
         }
@@ -49,7 +45,7 @@ class EditHomestayPage(HomestayPage):
 
     def post(self):
         r = self.request
-        h = self.homestay()
+        h = self.homestay
 
         h.name = r.get("name")
         h.address = r.get("address")
@@ -58,6 +54,7 @@ class EditHomestayPage(HomestayPage):
         h.blog = r.get("blog")
         h.css = r.get("css")
         h.notice = r.get("notice")
+        h.ditems_num = int(r.get("ditems_num"))
         h.put()
         self.redirect('/admin')
 
@@ -72,6 +69,7 @@ class IndexPage(HomestayPage):
         d = strpdate(d)
         return d
 
+    @property
     def last_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -81,10 +79,11 @@ class IndexPage(HomestayPage):
             year -= 1
         last_month = date(year, last_month, 1) 
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/%s' % last_month.strftime('%Y%m')
 
+    @property
     def next_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -94,12 +93,12 @@ class IndexPage(HomestayPage):
             year += 1
         next_month = date(year, next_month, 1)
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/%s' % next_month.strftime('%Y%m')
 
     def get(self):
-        h = self.homestay()
+        h = self.homestay
 
         if not h:
             self.redirect(users.create_logout_url('/admin'))
@@ -109,8 +108,8 @@ class IndexPage(HomestayPage):
             'h': h,
             'today':date.today(),
             'month':self.month(),
-            'last_month_path':self.last_month_path(),
-            'next_month_path':self.next_month_path(),
+            'last_month_path':self.last_month_path,
+            'next_month_path':self.next_month_path,
             'monthly_books': h.monthly_books(
                                     self.month().year, 
                                     self.month().month), 
@@ -125,13 +124,14 @@ class NewPage(HomestayPage):
         d = self.date()
 
         from datetime import timedelta
-        res = Reservation(room = r, 
-                          checkin = d, 
+        res = Reservation(checkin = d, 
                           checkout = d + timedelta(days=1)
                           )
         
         template_values = {
-            'h': res.room.homestay,
+            'h': r.homestay,
+            'r': r,
+            'one_price': len(r.price_types) == 1,
             'res': res
         }
 
@@ -148,7 +148,9 @@ class NewPage(HomestayPage):
                           addbeds_num = int(r.get('addbeds_num')), 
                           create_date = strpdate(r.get('create_date')),
                           comment = r.get('comment'), 
-                          room = self.room())
+                          room = Room.get(r.get('room')),
+                          price_type = PriceType.get(r.get('price_type'))
+                         )
         try:
             res.book()
 
@@ -162,7 +164,7 @@ class NewPage(HomestayPage):
 
         except PeriodHasBooksError:
             template_values = {
-                'h': res.room.homestay, 
+                'h': res.price_type.room.homestay, 
                 'bs': res.period_books()
             }
             self.response.out.write(
@@ -170,25 +172,37 @@ class NewPage(HomestayPage):
                                     template_values))
 
 class ShowPage(HomestayPage):
-   def get(self):
-        res = self.reservation()
+
+    @property
+    def reservation(self):
+        p = r'/admin/(\w+)'            # pattern
+        m = re.match(p, self.request.path) # match
+        k = m.group(1)                     # key for homestay
+        r = Reservation.get(k)                    # Room object
+        return r
+
+    def get(self):
+        res = self.reservation
 
         template_values = {
-            'h': res.room.homestay, 
+            'h': res.homestay, 
             'res': res
         }
 
         self.response.out.write(template.render('show.html', 
                                 template_values))
 
-class EditPage(HomestayPage):
+class EditPage(ShowPage):
     def get(self):
-        res = self.reservation()
+        res = self.reservation
 
         template_values = {
-            'h': res.room.homestay, 
+            'h': res.homestay, 
+            'r': res.room, 
+            'one_price': len(res.room.price_types) == 1,
             'res': res
         }
+
         self.response.out.write(
             template.render('edit.html', template_values))
 
@@ -205,20 +219,20 @@ class EditPage(HomestayPage):
         res.addbeds_num = int(r.get('addbeds_num'))
         res.create_date = strpdate(r.get('create_date'))
         res.comment = r.get('comment') 
-        res.room = Room.get(r.get('room'))
+        res.price_type = PriceType.get(r.get('price_type'))
         res.put()
 
         template_values = {
-            'h': res.room.homestay, 
+            'h': res.homestay, 
             'res': res
         }
 
         self.response.out.write(template.render('show.html', 
                                 template_values))
 
-class DelPage(HomestayPage):
+class DelPage(ShowPage):
     def get(self):
-        res = self.reservation()
+        res = self.reservation
         res.delete()
         self.redirect('/admin')
 
@@ -232,7 +246,7 @@ class AdminRoomPage(HomestayPage):
 
 class NewRoomPage(AdminRoomPage):
     def get(self):
-        homestay = self.homestay()
+        homestay = self.homestay
         room = Room(homestay=homestay)
         template_values = {
             'h': homestay, 
@@ -244,7 +258,9 @@ class NewRoomPage(AdminRoomPage):
     def post(self):
         r = self.request
         room = Room(name = r.get("name") ,
-                    homestay = self.homestay())
+                    price_type_keys = [PriceType.get(k).key() for k \
+                                       in r.get_all("price_type_keys")],
+                    homestay = self.homestay)
         room.put()
         self.redirect('/admin')
 
@@ -262,6 +278,8 @@ class EditRoomPage(AdminRoomPage):
         r = self.request
         room = self.room()
         room.name = r.get("name")
+        room.price_type_keys = [PriceType.get(k).key() for k in \
+                                r.get_all("price_type_keys")]
         room.put()
         self.redirect('/admin')
 
@@ -274,12 +292,11 @@ class DelRoomPage(AdminRoomPage):
 class NewPriceTypePage(HomestayPage):
     def get(self):
         r = self.request
-        room = Room.get(r.get("room"))
-        price_type = PriceType(room=room)
+        homestay = self.homestay
+        price_type = PriceType(homestay=homestay)
 
         template_values = {
-            'h': room.homestay, 
-            'r': room,
+            'h': homestay, 
             'p': price_type
         }
 
@@ -288,8 +305,8 @@ class NewPriceTypePage(HomestayPage):
 
     def post(self):
         r = self.request
-        room = Room.get(r.get("room"))
-        price_type = PriceType(room=room,
+        homestay = self.homestay
+        price_type = PriceType(homestay=homestay,
                         name=r.get("name"),
                         price=int(r.get("price")),
                         holiday_price=int(r.get("holiday_price")),
@@ -297,7 +314,7 @@ class NewPriceTypePage(HomestayPage):
                      )
         price_type.put()
 
-        self.redirect(room.edit_path())
+        self.redirect('/admin')
 
 class EditPriceTypePage(HomestayPage):
     def price_type(self):
@@ -314,8 +331,7 @@ class EditPriceTypePage(HomestayPage):
         p = self.price_type()
 
         template_values = {
-            'h': p.room.homestay,
-            'r': p.room,
+            'h': p.homestay,
             'p': p
         }
 
@@ -347,6 +363,7 @@ class HolidaysPage(HomestayPage):
         d = strpdate(d)
         return d
 
+    @property
     def last_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -356,10 +373,11 @@ class HolidaysPage(HomestayPage):
             year -= 1
         last_month = date(year, last_month, 1) 
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/holidays/%s' % last_month.strftime('%Y%m')
 
+    @property
     def next_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -369,19 +387,19 @@ class HolidaysPage(HomestayPage):
             year += 1
         next_month = date(year, next_month, 1)
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/holidays/%s' % next_month.strftime('%Y%m')
 
     def get(self):
-        h = self.homestay()
+        h = self.homestay
 
         template_values = {
             'h': h,
             'today':date.today(),
             'month':self.month(),
-            'last_month_path':self.last_month_path(),
-            'next_month_path':self.next_month_path(),
+            'last_month_path':self.last_month_path,
+            'next_month_path':self.next_month_path,
             'monthly_holidays': 
                 h.monthly_holidays(self.month().year, 
                                    self.month().month)
@@ -400,7 +418,7 @@ class NewHolidayPage(HolidaysPage):
         return d
 
     def get(self):
-        h = self.homestay()
+        h = self.homestay
         d = self.date()
 
         holiday = Holiday(homestay = h, 
@@ -420,7 +438,7 @@ class NewHolidayPage(HolidaysPage):
         h = Holiday(date = strpdate(r.get('date')), 
                     name = r.get('name'),
                     isholiday = r.get('name') != 'False',
-                    homestay = self.homestay())
+                    homestay = self.homestay)
         h.put()
 
         self.redirect('/admin/holidays/%s' % h.date.strftime('%Y%m'))
@@ -450,7 +468,7 @@ class EditHolidayPage(HolidaysPage):
         holiday.isholiday = r.get('name') != 'False'
         holiday.put()
 
-        self.redirect(holiday.calendar_path())
+        self.redirect(holiday.calendar_path)
 
 class DelHolidayPage(HolidaysPage):
     def holiday(self):
@@ -462,7 +480,7 @@ class DelHolidayPage(HolidaysPage):
     def get(self):
         holiday = self.holiday()
         holiday.delete()
-        self.redirect(holiday.calendar_path())
+        self.redirect(holiday.calendar_path)
 
 class SpecialsPage(HomestayPage):
 
@@ -475,6 +493,7 @@ class SpecialsPage(HomestayPage):
         d = strpdate(d)
         return d
 
+    @property
     def last_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -484,10 +503,11 @@ class SpecialsPage(HomestayPage):
             year -= 1
         last_month = date(year, last_month, 1) 
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/specials/%s' % last_month.strftime('%Y%m')
 
+    @property
     def next_month_path(self):
         year = self.month().year
         month = self.month().month
@@ -497,19 +517,19 @@ class SpecialsPage(HomestayPage):
             year += 1
         next_month = date(year, next_month, 1)
 
-        h = self.homestay()
+        h = self.homestay
 
         return '/admin/specials/%s' % next_month.strftime('%Y%m')
 
     def get(self):
-        h = self.homestay()
+        h = self.homestay
 
         template_values = {
             'h': h,
             'today':date.today(),
             'month':self.month(),
-            'last_month_path':self.last_month_path(),
-            'next_month_path':self.next_month_path(),
+            'last_month_path':self.last_month_path,
+            'next_month_path':self.next_month_path,
             'monthly_specials': 
                 h.monthly_specials(self.month().year, 
                                    self.month().month)
@@ -519,13 +539,15 @@ class SpecialsPage(HomestayPage):
 
 class NewSpecialPage(HomestayPage):
 
-    def room(self):
+    @property
+    def price_type(self):
         p = r'/admin/specials/(\w+)/\d{8}'   
         m = re.match(p, self.request.path)
         r = m.group(1)                   
-        r = Room.get(r)                 
+        r = PriceType.get(r)                 
         return r
 
+    @property
     def date(self):
         p = r'/admin/specials/\w+/(\d{8})' 
         m = re.match(p, self.request.path)
@@ -535,12 +557,12 @@ class NewSpecialPage(HomestayPage):
         return d
 
     def get(self):
-        s = Special(room = self.room(), 
-                    date = self.date()
+        s = Special(price_type = self.price_type, 
+                    date = self.date
                    )
         
         template_values = {
-            'h': s.room.homestay,
+            'h': s.price_type.homestay,
             'special': s
         }
 
@@ -549,14 +571,15 @@ class NewSpecialPage(HomestayPage):
 
     def post(self):
         r = self.request
-        s = Special(room = Room.get(r.get('room')),
+        s = Special(price_type = PriceType.get(r.get('price_type')),
                     date = strpdate(r.get('date')),
                     name = r.get('name'),
-                    price = int(r.get('price'))
+                    price = int(r.get('price')),
+                    bed_price = int(r.get('bed_price'))
                    )
         s.put()
 
-        self.redirect(s.calendar_path())
+        self.redirect(s.calendar_path)
 
 class EditSpecialPage(SpecialsPage):
     def special(self):
@@ -569,7 +592,7 @@ class EditSpecialPage(SpecialsPage):
         special = self.special()
 
         template_values = {
-            'h': special.room.homestay, 
+            'h': special.homestay, 
             'special': special
         }
 
@@ -579,13 +602,12 @@ class EditSpecialPage(SpecialsPage):
     def post(self):
         r = self.request
         special = Special.get(r.get('special'))
-        #special.room = Room.get(r.get('room'))
-        #special.date = strpdate(r.get('date'))
         special.name = r.get("name")
         special.price = int(r.get('price'))
+        special.bed_price = int(r.get('bed_price'))
         special.put()
 
-        self.redirect(special.calendar_path())
+        self.redirect(special.calendar_path)
 
 class DelSpecialPage(SpecialsPage):
     def special(self):
@@ -597,11 +619,17 @@ class DelSpecialPage(SpecialsPage):
     def get(self):
         special = self.special()
         special.delete()
-        self.redirect(special.calendar_path())
+        self.redirect(special.calendar_path)
 
 class PeriodBooksPage(HomestayPage):
     def get(self):
         r = self.request
+
+        #import sys, pdb
+        #for attr in ('stdin', 'stdout', 'stderr'):
+        #    setattr(sys, attr, getattr(sys, '__%s__' % attr))
+        #pdb.set_trace()
+
         room = Room.get(r.get('room'))
 
         bs = room.period_books(strpdate(r.get('checkin')),
@@ -645,6 +673,7 @@ application = webapp.WSGIApplication([
                (r'/admin/price_types/\w+/edit', EditPriceTypePage), 
                (r'/admin/price_types/edit', EditPriceTypePage), 
                (r'/admin/edit', EditPage),
+               (r'/admin/new', NewPage),
                (r'/admin/\w+', ShowPage),
                (r'/admin/\w+/edit', EditPage),
                (r'/admin/\w+/delete', DelPage), 

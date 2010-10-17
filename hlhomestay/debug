@@ -1,5 +1,6 @@
 testDatetimeIterator (datetime_iterator_test.UnitTest) ... ok
-testAddBeds (model_test.UnitTest) ... ERROR
+testAddBeds (model_test.UnitTest) ... ok
+testAvailablePriceTypes (model_test.UnitTest) ... ok
 testAvailables (model_test.UnitTest) ... ok
 testDailyBook (model_test.UnitTest) ... ok
 testDailyBooks (model_test.UnitTest) ... ok
@@ -9,246 +10,2042 @@ testPeriodAvailable (model_test.UnitTest) ... ok
 testPrice (model_test.UnitTest) ... ok
 testRecentlyReservations (model_test.UnitTest) ... ok
 testRoom (model_test.UnitTest) ... ok
+testRoomPriceType (model_test.UnitTest) ... ERROR
+testSpecial (model_test.UnitTest) ... ok
 
 ======================================================================
-ERROR: testAddBeds (model_test.UnitTest)
+ERROR: testRoomPriceType (model_test.UnitTest)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "D:\stxt\hlhomestay\test\model_test.py", line 479, in testAddBeds
-    for p in self.b.price_items()),
-AttributeError: 'UnitTest' object has no attribute 'b'
+  File "d:\stxt\hlhomestay\test\model_test.py", line 530, in testRoomPriceType
+    self.assertEqual(2, len(self.r1.price_types))
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+  File "d:\stxt\hlhomestay\test\..\model.py", line 211, in price_types
+    return [PriceType.get(ptk) for ptk in self.price_types]
+RuntimeError: maximum recursion depth exceeded
 -------------------- >> begin captured logging << --------------------
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 11, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 11, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 11, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 11, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 12, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 12, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 12, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 12, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 13, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 13, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 13, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 13, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 14, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 14, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 14, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 14, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 9, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 7, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 8, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 9, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 3, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 14, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 13, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 2, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 8, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 17, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 9, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 8, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 11, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 10, 0, 0) > datetime.datetime(2010, 10, 10, 0, 0)"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 15, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 4, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 10, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
-root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay') == datastore_types.Key.from_path(u'PriceType', 18, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 19, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 19, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 20, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 20, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 21, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 21, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 22, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 22, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 23, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 23, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 15, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 16, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 17, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 18, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 17, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 19, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 16, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datetime.datetime(2010, 10, 24, 0, 0) > datetime.datetime(2010, 10, 18, 0, 0)"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 229, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 234, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 232, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 234, _app=u'hlhomestay')"
+root: Level 9: Evaling filter expression "datastore_types.Key.from_path(u'Room', 225, _app=u'hlhomestay') == datastore_types.Key.from_path(u'Room', 234, _app=u'hlhomestay')"
 --------------------- >> end captured logging << ---------------------
 
 ----------------------------------------------------------------------
-Ran 11 tests in 8.752s
+Ran 14 tests in 7.326s
 
 FAILED (errors=1)

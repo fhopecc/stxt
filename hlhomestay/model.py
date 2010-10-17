@@ -28,6 +28,19 @@ class Homestay(db.Model):
     css = db.TextProperty(verbose_name="CSS 檔案",
                           default="homestay") 
 
+    ditems_num = db.IntegerProperty(verbose_name="訂房網頁顯示筆數", 
+                          default=5) 
+
+    @property
+    def price_types(self):
+        return self.pricetype_set.fetch(1000)
+
+    @property
+    def rooms_price_types(self):
+        rooms = self.room_set.fetch(1000)
+        price_types = self.pricetype_set.fetch(1000)
+        return map(None, rooms, price_types)
+
     def daily_books(self, date):
         # analogy for SQL: 
         # select limit 1 Reservations.* 
@@ -64,27 +77,34 @@ class Homestay(db.Model):
 
     
     def recently_reservations(self):
-        pricetypes = []
-        for r in self.room_set:
-            for pt in r.pricetype_set:
-                pricetypes.append(pt)
+        rooms = self.room_set.fetch(1000)
         q = Reservation.all().\
-                filter("price_type IN", pricetypes).\
+                filter("room IN", rooms).\
                 filter("checkout >=", date.today())
 
         def compare(a, b):
             return cmp(a.checkin, b.checkin)
 #.sort(compare) 
-        a = q.fetch(limit=10)
+        a = q.fetch(1000)
         a.sort(compare)
         return a
 
     def daily_availables(self, date):
         if date >= date.today(): 
             return [b for b in self.daily_books(date)
-                            if b.kind() == 'Room']
+                    if b.kind() == 'Room']
         else:
             return []
+
+    def daily_available_price_type_keys(self, date):
+        pts = []
+        for r in self.daily_availables(date):
+            pts.extend(r.price_type_keys)
+        return list(set(pts))
+
+    def daily_available_price_types(self, date):
+        return [PriceType.get(ptk) for ptk in
+                self.daily_available_price_type_keys(date)]
 
     def monthly_availables(self, year, month):
         from calendar import Calendar
@@ -96,11 +116,12 @@ class Homestay(db.Model):
             for d in w:
               weekly_availables.append({
                  'date':d,
-                 'daily_availables':self.daily_availables(d)
+                 'daily_availables':self.daily_availables(d)[:self.ditems_num]
                })
             result.append(weekly_availables)
         return result 
 
+    @property
     def next_month_index_path(self, month):
         t = month
         n = t.month + 1 # for next month
@@ -110,6 +131,7 @@ class Homestay(db.Model):
             n = date(t.year, n, 1)
         return '/%s/%s' % (self.key(), strfdate(n, '%Y%m'))
 
+    @property
     def last_month_index_path(self, month):
         t = month
         l = t.month - 1 # for next month
@@ -119,15 +141,19 @@ class Homestay(db.Model):
             l = date(t.year, l, 1)
         return '/%s/%s' % (self.key(), strfdate(l, '%Y%m'))
 
+    @property
     def admin_edit_path(self):
         return "/admin/homestay/edit"
 
+    @property
     def calendar_path(self):
         return "/admin"
     
+    @property
     def holidays_path(self):
         return "/admin/holidays"
 
+    @property
     def specials_path(self):
         return "/admin/specials"
 
@@ -167,10 +193,10 @@ class Homestay(db.Model):
         return monthly_holidays
 
     def specials(self, date):
-        for r in self.room_set: 
-            special = r.special_set.filter('date', date).get()
+        for p in self.price_types: 
+            special = p.special_set.filter('date', date).get()
             if special: yield special # an normal room
-            else: yield r # a special room
+            else: yield p # a special pricetype
     
     def monthly_specials(self, year, month):
         from calendar import Calendar
@@ -193,12 +219,35 @@ class Room(db.Model):
 
     homestay = db.ReferenceProperty(Homestay)
 
+    price_type_keys = db.ListProperty(db.Key)
+
+    @property
+    def price_types(self):
+        return [PriceType.get(ptk) for ptk in self.price_type_keys]
+
+    @property
+    def price_type_checkboxes(self):
+        cbs = [] 
+        for p in self.homestay.pricetype_set:
+            cbs.append({'key':p.key(),
+                        'name':p.name,
+                        'checked':p.key() in self.price_type_keys
+                       })
+        return cbs                
+
+    @property
+    def edit_path(self):
+        return "/admin/room/%s/edit" % self.key()
+
+    @property
+    def delete_path(self):
+        return "/admin/room/%s/delete" % self.key()
+
     def daily_book(self, date):
-        for pt in self.pricetype_set:
-            bs = pt.reservation_set.filter('checkout >', date)
-            bs = [b for b in bs if date >= b.checkin]
-            if len(bs) > 0:
-                return bs[0]
+        bs = self.reservation_set.filter('checkout >', date)
+        bs = [b for b in bs if date >= b.checkin]
+        if len(bs) > 0:
+            return bs[0]
         return None
 
     def period_books(self, checkin, checkout):
@@ -212,18 +261,14 @@ class Room(db.Model):
                     bs.append(b)
         return bs
 
-    def special(self, date):
-        s = self.special_set.filter("date", date).get()
-        return s 
 
+    @property
     def book_path(self, date):
         return '/%s/%s' % (self.key(), date.strftime('%Y%m%d'))
 
-    def edit_path(self):
-        return "/admin/room/%s/edit" % self.key()
 
 class PriceType(db.Model):
-    room = db.ReferenceProperty(Room)
+    homestay = db.ReferenceProperty(Homestay)
 
     name = db.StringProperty(
             verbose_name="計價名稱", 
@@ -241,19 +286,28 @@ class PriceType(db.Model):
             verbose_name = "加床價", 
             default=0) 
 
+    @property
+    def rooms(self):
+        return Room.gql('WHERE price_type_keys = :1', \
+                        self.key()).fetch(1000)
+
+    @property
     def edit_path(self):
         return "/admin/price_types/%s/edit" % self.key()
 
+    @property
     def delete_path(self):
         return "/admin/price_types/%s/delete" % self.key()
+
+    def special(self, date):
+        s = self.special_set.filter("date", date).get()
+        return s 
 
 class Reservation(db.Model):
     name = db.StringProperty(
             verbose_name="訂戶名稱", 
             default=u'輸入訂戶名稱', 
             multiline=False)
-
-    price_type = db.ReferenceProperty(PriceType)
 
     phone = db.TextProperty(
             verbose_name="聯絡電話", 
@@ -283,14 +337,19 @@ class Reservation(db.Model):
             verbose_name="加床數",
             default=0)
 
-    def room(self):
-        return self.price_type.room
+    room = db.ReferenceProperty(Room)
+
+    price_type = db.ReferenceProperty(PriceType)
+
+    @property
+    def homestay(self):
+        return self.room.homestay
   
     def isholiday(self, date):
-        return self.room().homestay.isholiday(date)
+        return self.room.homestay.isholiday(date)
 
     def special(self, date):
-        return self.room().special(date)
+        return self.price_type.special(date)
 
     def price_items(self):
         from datetime_iterator import datetimeIterator
@@ -302,8 +361,11 @@ class Reservation(db.Model):
                     'addbeds_num':self.addbeds_num, 
                     'addbed_price': \
                         self.addbeds_num * self.price_type.bed_price}
-            if self.special(d):
-                item['value'] = self.special(d).price
+            if self.special(d + timedelta(days=1)):
+                special = self.special(d + timedelta(days=1))
+                item['value'] = special.price
+                item['addbed_price'] = self.addbeds_num * \
+                                       special.bed_price
             elif self.isholiday(d + timedelta(days=1)):
                 item['value'] = self.price_type.holiday_price
 
@@ -319,7 +381,7 @@ class Reservation(db.Model):
                                   self.checkout - timedelta(days=1))
 
         for d in period:
-            bs = self.room().daily_book(d) 
+            bs = self.room.daily_book(d) 
             if bs and bs.is_saved() \
                   and (not self.is_saved() \
                        or bs.key() != self.key()): # 允許修改訂單本身
@@ -331,7 +393,7 @@ class Reservation(db.Model):
                                   self.checkout - timedelta(days=1))
         bs = []
         for d in period:
-            b = self.room.daily_book(d)
+            b = self.room().daily_book(d)
             if b:
                 if b.key() not in (b.key() for b in bs):
                     bs.append(b)
@@ -351,18 +413,23 @@ class Reservation(db.Model):
         else:
             db.Model.put(self)
 
+    @property
     def admin_show_path(self):
         return "/admin/%s" % self.key()
 
+    @property
     def admin_edit_path(self):
         return "/admin/%s/edit" % self.key()
 
+    @property
     def admin_delete_path(self):
         return "/admin/%s/delete" % self.key()
 
+    @property
     def admin_calendar_path(self):
         return "/admin/%s" % self.checkin.strftime('%Y%m')
 
+    @property
     def client_calendar_path(self):
         return "/%s/%s" % (self.room.homestay.key(), 
                           self.checkin.strftime('%Y%m'))
@@ -376,12 +443,15 @@ class Holiday(db.Model):
                                    required=True, 
                                    default=True)
 
+    @property
     def edit_path(self):
         return "/admin/holidays/%s/edit" % self.key()
 
+    @property
     def delete_path(self):
         return "/admin/holidays/%s/delete" % self.key()
 
+    @property
     def calendar_path(self):
         return "/admin/holidays/%s" % self.date.strftime('%Y%m')
 
@@ -390,8 +460,9 @@ class SysHoliday(db.Model):
     date = db.DateProperty(verbose_name=u"假期", required=True)
 
 class Special(db.Model):
-    room = db.ReferenceProperty(Room, verbose_name="特假房間", 
-                                required=True)
+    price_type = db.ReferenceProperty(PriceType, 
+                                      verbose_name="特價房型", 
+                                      required=True)
 
     name = db.StringProperty(verbose_name=u"名稱", required=True, 
                              default="請輸入名稱")
@@ -401,15 +472,23 @@ class Special(db.Model):
     price = db.IntegerProperty(verbose_name=u"特價", required=True,
                                default=0)
 
+    bed_price = db.IntegerProperty(verbose_name=u"特價", required=True,
+                                   default=0)
+    @property
+    def homestay(self):
+        return self.price_type.homestay
+
+    @property
     def calendar_path(self):
         return "/admin/specials/%s" % self.date.strftime('%Y%m')
 
+    @property
     def edit_path(self):
         return "/admin/specials/%s/edit" % self.key()
     
+    @property
     def delete_path(self):
         return "/admin/specials/%s/delete" % self.key()
-
 
 class BookingError(Exception):
     pass

@@ -1,0 +1,115 @@
+Q.如何抓取表單中checkbox的值？
+
+以PHP+HTML來說，在處理網頁表單時，必須將HTML和PHP兩者做搭配，才能正確
+抓取表單中的值。透過HTML提交的資料傳輸到一個專門接收和處理表單的值，那
+該怎麼接收呢？這時候就必須搭配一下PHP語法就能正確接收。不過在接收的同
+時也會遇到一些突發狀況，CheckBox就是一個例子。
+
+如果單純以TextBox、ListBox、Radio Button來說這都還好，因為傳出的東西只
+有一個值，但CheckBox卻可能時傳出一個或是多個的值，那接收端要怎樣做才能
+正確收到這些值呢？查了一下資料，其實在HTML那邊加個陣列的型式就可以利用
+陣列的方式來讀取這些值。
+ 
+在介紹陣列處理的方式之前，大家要先了解一下CheckBox的HTML部分該怎麼正確
+的表示才確保傳進去的值是陣列的型態。首先讓我們看一下表單的CheckBox的部
+分該怎麼做變化。以下這是單一個CheckBox：
+
+<input type="checkbox" name="sport" value="running"><label>跑步</label>
+
+type：這個欄位種類，在此是checkbox
+name：這個欄位的名稱，在此是sport
+value：當勾選這選項時，表單會傳出的值，在此是傳出running，也可設定中文。
+label：在label標籤之內的「跑步」，是會顯示在網頁上。
+
+HTML前端處理CheckBox
+~~~~~~~~~~~~~~~~~~~~
+
+當然一般使用者可能都會像上面這樣做設定，但超過一個以上的CheckBox時，可
+能久變成永遠只能抓到第一個CheckBox的值，這就是出錯了。如果你在同一組的
+選項中有超過一個以上的CheckBox的話，那您就要修改一下CheckBox的HTML部分
+，改成陣列模式。
+
+<input type="checkbox" name="sport[]" value="跑步"><label>跑步</label>
+<input type="checkbox" name="sport[]" value="健行"><label>健行</label>
+<input type="checkbox" name="sport[]" value="爬山"><label>爬山</label>
+<input type="checkbox" name="sport[]" value="游泳"><label>游泳</label>
+
+有注意到不同的地方嗎？就是在name的部分從原本的名稱「sport」，改成多一
+個中括號，變成「sport[]」這樣就可以利用陣列的儲存方式，將有勾選的值儲
+存到陣列，之後傳送到PHP檔案中，再以陣列的方式讀取出來，
+就可以達成CheckBox傳送一個以上的值了，這是標準的CheckBox的處理方式。
+
+PHP後端處理CheckBox
+~~~~~~~~~~~~~~~~~~~
+
+當經過表單提交資料到PHP的檔案內，我們就必須對這些值做接收的動作，並且
+要弄後續的處理。接收表單的方式在此只針對CheckBox的部分做簡單說明，如果
+是其它的就請大家自己類推一下。
+
+$sport = $_POST ["sport"];
+
+這就是網頁PHP後端接收資料的方式，一般來講表單的傳送方式都是透過「POST
+」傳送，所以才會設定為POST，而["sport"]這個東西，就是對應到網頁表單中
+name的部分，也就是前面設定的sport[]。至於「$sport」這則是PHP的變數宣告
+而已。簡單說就是把透過POST傳送的表單中，裡面name部分等於sport的所有值
+儲存到$sport這個變數。
+
+讀出PHP陣列內的值
+~~~~~~~~~~~~~~~~~
+
+接下來要讀出陣列的值，當然讀出的方式有很多種，就看你怎麼去使用。以我自
+己的例子來說，因為我是要儲存到資料庫，所以我必須抓取每一個值，然後用逗
+號隔開接著再存進資料庫，所以我可以不用透過foreach之類的東西來讀取，直
+接使用內建的函數implode就可以達成。所以我的寫法是：
+
+$myallsport = implode (",", $sport);
+
+在implode內有個「","」，這表示每讀取一個陣列中的值，用逗號隔開。$sport
+則代表剛剛我們表單題交之後的陣列，$myallsport則會顯示經過處理之後的答
+案。
+
+假設剛剛我們勾選了「跑步」、「爬山」、「游泳」，若經過implode處理後，
+去echo變數$myallsport，就會呈現以下結果：「跑步,爬山,游泳」，利用透號
+隔開，這樣就可以執行資料庫語法儲存進去囉！
+
+check all button
+~~~~~~~~~~~~~~~~
+
+Here is the code for single button. Here is the single function we use
+inside our head tags.
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- 
+
+<!-- Begin
+function Check(chk)
+{
+if(document.myform.Check_All.value=="Check All"){
+for (i = 0; i < chk.length; i++)
+chk[i].checked = true ;
+document.myform.Check_All.value="UnCheck All";
+}else{
+
+for (i = 0; i < chk.length; i++)
+chk[i].checked = false ;
+document.myform.Check_All.value="Check All";
+}
+}
+
+// End -->
+</script>
+
+Now the html part 
+
+<form name="myform" action="checkboxes.asp" method="post">
+<b>Scripts for Web design and programming</b><br>
+<input type="checkbox" name="check_list" value="1">ASP<br>
+<input type="checkbox" name="check_list" value="2">PHP<br>
+<input type="checkbox" name="check_list" value="3">JavaScript<br>
+<input type="checkbox" name="check_list" value="4">HTML<br>
+<input type="checkbox" name="check_list" value="5">MySQL<br>
+
+<input type="button" name="Check_All" value="Check All"
+onClick="Check(document.myform.check_list)">
+
+</form>

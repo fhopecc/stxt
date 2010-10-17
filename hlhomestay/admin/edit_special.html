@@ -8,8 +8,8 @@
   <table class="form">
     <tr><th colspan="2">特價檔修改作業</th></tr>
 
-    <tr><td>特價房間</td>
-        <td>{{special.room.name}}</td>
+    <tr><td>房型</td>
+        <td>{{special.price_type.name}}</td>
     </tr>
 
     <tr><td>日期</td>
@@ -21,9 +21,14 @@
                    value="{{special.name}}"/>
     </td></tr>
 
-    <tr><td>特別價格</td>
+    <tr><td>特價</td>
         <td><input name="price" type="text" 
                    value="{{special.price}}"/>
+    </td></tr>
+
+    <tr><td>加床價</td>
+        <td><input name="bed_price" type="text" 
+                   value="{{special.bed_price}}"/>
     </td></tr>
 
     <tr>

@@ -44,3 +44,20 @@ submit
 《SELECT》選擇式表單標籤，用於設定窗型選擇欄位，須結尾標籤，每個選項以<OPTION>來宣告他 ；舉例說明
 《TEXTAREA》多列輸入文字區標籤，須結尾標籤，</TEXTAREA>，用COLS及ROWS設定長寬 ；舉例說明
 《FIELDSET》表單加外框與標題，這是HTML 4.0新增的功能(限IE使用)；舉例說明
+
+
+select
+~~~~~~
+
+<select>
+      <option>Volvo</option>
+      <option>Saab</option>
+      <option>Mercedes</option>
+      <option>Audi</option>
+</select>
+
+Attribute	Value	Description	DTD
+disabled	disabled	Specifies that an option should be disabled	STF
+label	text	Specifies a shorter label for an option	STF
+selected	selected	Specifies that an option should be selected by default	STF
+value	text	Specifies the value to be sent to a server when a form is submitted	STF

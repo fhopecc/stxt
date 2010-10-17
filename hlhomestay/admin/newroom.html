@@ -24,7 +24,14 @@ function check_form(f){
         <td><input name="name" type="text" 
                    value="{{r.name}}"/></td>
     </tr>
-    </tr>
+
+    <tr><td colspan="2">訂價類別</td></tr>
+    {% for p in h.price_types %}
+    <tr><td colspan="2">
+        <input type="checkbox" name="price_type_keys" value={{p.key}}>{{p.name}}
+    </td></tr>
+    {% endfor %}
+
     <tr><td><input type="submit" value="建立"/></td><td></td></tr>
   </table>
 </form>

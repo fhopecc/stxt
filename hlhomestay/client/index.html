@@ -21,7 +21,7 @@
         >
         <div class="date">{{d.date|date:"d"}}</div>
         <div class="list">
-        {% for a in d.daily_availables%}
+        {% for a in d.daily_availables %}
             <div><a class="item" 
                     href="/{{a.key}}/{{d.date|date:"Ymd"}}">{{a.name}}</a>
             </div>

@@ -1,4 +1,6 @@
 使用範本
+--------
+
 HTML 內嵌在程式碼中會很混亂，且很難進行維護。使用範本系統是比較好的方式，其中 HTML 會使用特殊語法保持在個別檔案中，以指出來自應用程式的資料要顯示的位置。Python 有很多範本系統：EZT、Cheetah、ClearSilver、Quixote 以及 Django 只是其中的一部分。您可以使用選擇的範本引擎，與您的應用程式碼一起搭配使用。
 為了讓您方便使用，webapp 模組涵蓋了 Django 的範本。它包含在 SDK 中，是「應用服務引擎」的一部分，因此您不需要搭配它就可以直接使用。
 使用 Django 範本
@@ -140,6 +142,7 @@ TemplateSyntaxError.
 
 Method call
 ~~~~~~~~~~~
+
 Finally, dots are also used to call methods on objects. 
 For example, each Python string has the methods upper() and isdigit(), 
 and you can call those in Django templates using the same dot syntax:2
@@ -251,6 +254,7 @@ We’ll discuss this in Chapter 10, “Extending the template engine.”1
 
 Playing with Context objects
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Most of the time, you’ll instantiate Context objects by passing in a 
 fully-populated dictionary to Context(). But you can add and 
 delete items from a Context object once it’s been instantiated, too, 
@@ -287,3 +291,67 @@ Traceback (most recent call last):
 django.template.ContextPopException
 Using a Context as a stack comes in handy in some custom 
 template tags, as you’ll see in Chapter 10.
+
+
+django for loop counter break
+-----------------------------
+code. slice
+{% for photos in gallery.photo_set|slice:":3" %}
+
+code. counter
+{% for photos in gallery.photo_set %}
+   {% if forloop.counter lt 3 %}
+     <img src="{{ photos.url }}">
+   {% endif %}
+{% endfor %}
+
+
+
+Loading templates
+-----------------
+
+Generally, you'll store templates in files on your filesystem rather
+than using the low-level Template API yourself. Save templates in a
+directory specified as a template directory.
+
+Django searches for template directories in a number of places,
+depending on your template-loader settings (see "Loader types"
+below), but the most basic way of specifying template directories is
+by using the TEMPLATE_DIRS setting.
+
+THE TEMPLATE_DIRS SETTING
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tell Django what your template directories are by using the
+TEMPLATE_DIRS setting in your settings file. This should be set to a
+list or tuple of strings that contain full paths to your template
+directory(ies). Example:
+
+TEMPLATE_DIRS = (
+    "/home/html/templates/lawrence.com",
+    "/home/html/templates/default",
+)
+
+Your templates can go anywhere you want, as long as the directories
+and templates are readable by the Web server. They can have any
+extension you want, such as .html or .txt, or they can have no
+extension at all.
+
+Note that these paths should use Unix-style forward slashes, even on
+Windows.
+
+FILTER
+------
+
+slice
+~~~~~
+Returns a slice of the list.
+
+Uses the same syntax as Python's list slicing. See
+ http://diveintopython.org/native_data_types/lists.html#odbchelper.list.slice 
+for an introduction.
+
+Example:
+
+{{ some_list|slice:":2" }}
+If some_list is ['a', 'b', 'c'], the output will be ['a', 'b'].

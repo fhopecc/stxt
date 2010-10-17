@@ -52,9 +52,10 @@ function check_form(f){
                     f.submit()
                 
                 if (books.length == 1)
-                    if (books[0].key == key.value)
+                    if (books[0].key == key.value) {
                         f.submit()
                         return true
+                    }
 
                 $('#notice').empty()
                 $('#notice').append("此房間於以下期間有訂房:"
@@ -85,16 +86,37 @@ function check_form(f){
         action='/admin/edit'>
 
   <input name="key" type="hidden" value="{{res.key}}"/>
+  <input name="room" type="hidden" value="{{res.room.key}}" />
 
   <table class="form">
     <tr><th colspan="2">訂房資料修改作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
 
-    <tr><td>房間</td>
-        <td>{{res.room.name}}
-            <input name="room" type="hidden" value="{{res.room.key}}"/>
+    <tr><td>房間</td><td>{{r.name}}</td></tr>
+
+    {% if one_price %}
+    <tr><td>房型</td>
+        <td>{{r.price_types.0.name}}
+            <input name="price_type" type="hidden"
+                   value='{{r.price_types.0.key}}'/>
     </td></tr>
+    {% else %}
+    <tr><td>房型</td>
+        <td>
+            <select name="price_type">
+            {% for p in r.price_types %}
+                {% ifequal p.key res.price_type.key %}
+                    <option selected="true" value="{{p.key}}">{{p.name}}</option>
+                {% else %}
+                    <option value="{{p.key}}">{{p.name}}</option>
+                {% endifequal %}
+            {% endfor %}
+            </select>
+        </td>
+    {% endif %}
+
+
 
     <tr><td>入住日期</td>
       <td><input name="checkin" type="text"

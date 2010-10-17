@@ -82,16 +82,35 @@ function check_form(f){
 <div id="form_content">
   <form method="post" 
         onsubmit="return check_form(this)"
-        action='/admin/{{res.room.key}}/{{res.checkin|date:"Ymd"}}'>
+        action='/admin/new'>
+
   <table class="form">
     <tr><th colspan="2">訂房資料建立作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
 
     <tr><td>房間</td>
-        <td>{{res.room.name}}
-            <input name="room" type="hidden" value="{{res.room.key}}"/>
+        <td>{{r.name}}
+            <input name="room" type="hidden"
+                   value='{{r.key}}'/>
     </td></tr>
+
+    {% if one_price %}
+    <tr><td>房型</td>
+        <td>{{r.price_types.0.name}}
+            <input name="price_type" type="hidden"
+                   value='{{r.price_types.0.key}}'/>
+    </td></tr>
+    {% else %}
+    <tr><td>房型</td>
+        <td>
+            <select name="price_type">
+            {% for p in r.price_types %}
+                <option value="{{p.key}}">{{p.name}}</option>
+            {% endfor %}
+            </select>
+        </td>
+    {% endif %}
 
     <tr><td>入住日期</td>
       <td><input name="checkin" type="text"

@@ -36,39 +36,26 @@
 </div>
 <div>
 
+
 <table class="list">
 <tr>
-<th class="title" colspan="5">房間清單</th>
+<th class="title">房間清單</th>
+<th class="title" colspan="4">訂價清單</th>
 </tr>
 <tr>
-  <th>客房</th>
-  <th>訂價</th>
+  <th>客房<a href="/admin/room/new">新</a></th>
+  <th>訂價<a href="/admin/price_types/new">新</a></th>
   <th>平日</th>
   <th>假日</th>
   <th>加床價</th>
-  <td><a href="/admin/room/new">新</a></td>
 </tr>
-{% for r in h.room_set %}
-    {% ifequal r.pricetype_set.count 0 %} 
-    <tr><td>{{r.name}}</td>
-        <td><a href="/admin/price_types/new?room={{r.key}}">新訂價</a></td>
-    </tr>
-    {% else %}
-        {% for pt in r.pricetype_set %}
-        <tr>
-            {% if forloop.first %}
-            <td rowspan="{{r.pricetype_set.count}}">
-                <a href="{{r.edit_path}}">{{r.name}}</a></td>
-            {% endif %}
-                <td>{{pt.name}}</td>
-                <td>{{pt.price}}</td>
-                <td>{{pt.holiday_price}}</td>
-                <td>{{pt.bed_price}}</td>
-                <td><a href="{{pt.edit_path}}">改</a></td>
-                <td><a href="{{pt.delete_path}}">刪</a></td>
-        </tr>
-        {% endfor %}
-    {% endifequal %}
+{% for rpt in h.rooms_price_types %}
+<tr><td><a href={{rpt.0.edit_path}}>{{rpt.0.name}}</a></td>
+    <td><a href={{rpt.1.edit_path}}>{{rpt.1.name}}</a></td>
+    <td>{{rpt.1.price}}</td>
+    <td>{{rpt.1.holiday_price}}</td>
+    <td>{{rpt.1.bed_price}}</td>
+</tr>
 {% endfor %}
 </table>
 
