@@ -74,9 +74,22 @@ class Homestay(db.Model):
               })
             result.append(weekly_books)
         return result
-
     
     def recently_reservations(self):
+        rooms = self.room_set.fetch(1000)
+        q = Reservation.all().\
+                filter("room IN", rooms).\
+                filter("checkout >=", date.today())
+
+        def compare(a, b):
+            return cmp(a.checkin, b.checkin)
+#.sort(compare) 
+        a = q.fetch(1000)
+        a.sort(compare)
+        return a
+
+    @property
+    def nodeposit_books(self):
         rooms = self.room_set.fetch(1000)
         q = Reservation.all().\
                 filter("room IN", rooms).\
@@ -335,6 +348,14 @@ class Reservation(db.Model):
 
     addbeds_num = db.IntegerProperty(
             verbose_name="加床數",
+            default=0)
+
+    addbeds_num = db.IntegerProperty(
+            verbose_name="加床數",
+            default=0)
+
+    deposit = db.IntegerProperty(
+            verbose_name="訂金",
             default=0)
 
     room = db.ReferenceProperty(Room)

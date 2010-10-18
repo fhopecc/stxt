@@ -34,6 +34,7 @@ def next_month(d):
     return date(year, next_month, 1)
 
 class ClientPage(webapp.RequestHandler):
+    @property
     def homestay(self):
         p = r'/(\w+)'
         m = re.match(p, self.request.path)
@@ -67,7 +68,7 @@ class ClientPage(webapp.RequestHandler):
     
 class IndexPage(ClientPage):
     def get(self):
-        homestay = self.homestay()
+        homestay = self.homestay
         month = self.month()
         monthly_availables = homestay.monthly_availables(month.year, month.month)
 
@@ -85,7 +86,7 @@ class IndexPage(ClientPage):
 
 class ShowPage(ClientPage):
     def get(self):
-          homestay = self.homestay()
+          homestay = self.homestay
           render = template.frender('show.html', globals=globals)
           self.response.out.write(str(render(homestay)))
 
@@ -101,6 +102,7 @@ class NewPage(ClientPage):
         template_values = {
             'h': room.homestay,
             'r': room,
+            'one_price': len(room.price_types) == 1,
             'res': res
         }
 
@@ -118,12 +120,13 @@ class NewPage(ClientPage):
                           create_date = strpdate(r.get('create_date')),
                           addbeds_num = int(r.get('addbeds_num')), 
                           comment = r.get('comment'), 
+                          room = Room.get(r.get('room')),
                           price_type = PriceType.get(r.get('price_type'))
                          )
         res.put()
 
         template_values = {
-            'h': res.homestay(),
+            'h': res.homestay,
             'res': res
         }
 

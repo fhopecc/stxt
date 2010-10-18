@@ -4,10 +4,18 @@ from django.utils import simplejson as json
 from google.appengine.api import users
 from google.appengine.ext import db
 import datetime
+from model import *
 
 class GaeEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, db.Model):
+        if isinstance(obj, Reservation):
+            return {
+                'name': obj.name,
+                'room': obj.email,
+                'checkin': self.default(obj.checkin),
+                'checkout': self.default(obj.checkout)
+            }
+        elif isinstance(obj, db.Model):
             return dict([(name, getattr(obj, name)) for name
                 in obj.properties().keys()])
         elif isinstance(obj, datetime.date):

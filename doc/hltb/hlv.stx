@@ -34,15 +34,14 @@ HOUSRV 執行 run.bat
 
 1.請使用者登入
 
-2.確認其帳號包含於本機 Administrators 群組中
+2.確認其帳號包含於本機 PowerUsers 群組中
 
-3.打開網址列輸入：「//housvr/hlv$」，
-  並輸入 administrator/password 
+3.打開網址列輸入：\\10.66.4.19\hlv$，
+  之後會提示要驗證，請輸入 administrator/password 
 
 4.按 setupAPP.bat 安裝申辦台
-
+  
 5.按 setupMobile.bat 安裝行動端
-
 
 上正式機程序
 ------------
@@ -53,8 +52,14 @@ HOUSRV 執行 run.bat
 
 //10.66.4.19
 
+圖資備份
+--------
+
+內網：netman F:\圖資
+
 聯絡人
 ------
 
 商業網   副總 廖榮華 0920594336 掃描外包商
 光特資訊 協理 簡致忠 0225575558 chichung@quantasoft.com.tw
+大同OA        鄧先生 0925120508

@@ -86,6 +86,7 @@ def hardcopy(path):
 '''
 1.0:檢視、摘要、列印 syslog
 1.1:加入 raw 選項
+1.2:加入 HLTB 選項
 '''
 if __name__ == "__main__":
     usage = u"usage: %prog log [options]"
@@ -97,6 +98,10 @@ if __name__ == "__main__":
 
     parser.add_option("-d", "--date", dest="date", 
                        help=u"列出指定日期之紀錄，尚未完成")
+
+    parser.add_option("-D", "--direct", action="store_true",
+                       dest="direct", 
+                       help=u"直接列出紀錄內容")
 
     parser.add_option("-p", "--hardcopy", action="store_true",
                       dest="hardcopy", 
@@ -111,12 +116,43 @@ if __name__ == "__main__":
                       default='fortinet', 
                       help=u"指定訊息格式")
 
+    parser.add_option("-H", "--hltb", type="choice", dest="hltb", 
+                      choices=['outer', 'inner'],
+                      help=u"指定稅局內網或外網")
+
     (options, args) = parser.parse_args()
+
+    if options.hltb:
+        from datetime import date
+        from datetime import timedelta
+        if options.hltb == 'outer':
+            cmd = r'%s -r \\99tt005\syslog\%s.192.168.1.254.log' % \
+                  (__file__, \
+                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            os.system(cmd)
+        elif options.hltb == 'inner':
+            cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log | more' % \
+                  (__file__, \
+                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            os.system(cmd)
+
+            cmd = r'%s -r \\99tt004\log\%s.10.66.7.252.log | more' % \
+                  (__file__, \
+                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            os.system(cmd)
+ 
+        exit()
 
     if options.date:
         pass        
     else:
         file = args[0]
+        if options.direct:
+            with open(file, 'r') as f:
+                #import pdb;pdb.set_trace()
+                print f.read()
+                exit()
+
         if options.raw:
             with open(file, 'r') as f:
                 logs = read3clogs(f.read())
