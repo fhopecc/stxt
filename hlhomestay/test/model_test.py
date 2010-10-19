@@ -381,8 +381,8 @@ class UnitTest(unittest.TestCase):
         self.failIf(b.period_available())
         self.assertRaises(PeriodHasBooksError, b.put)
 
-    def testRecentlyReservations(self):
-        bs = list(self.h1.recently_reservations())
+    def testRecentlyBookings(self):
+        bs = self.h1.recently_bookings
 
         self.assertEqual(6, len(bs)) 
 
@@ -394,6 +394,14 @@ class UnitTest(unittest.TestCase):
         # order by chekcin ascendingly
         self.assert_(bs[0].checkin <= bs[1].checkin)
         self.assert_(bs[1].checkin <= bs[2].checkin)
+
+    def testNodepositBookings(self):
+        nbs = self.h1.nodeposit_bookings
+        self.assertEqual(6, len(nbs))
+
+        self.b7.deposit = 1000
+        self.b7.put()
+        self.assertEqual(5, len(self.h1.nodeposit_bookings))
 
     def testMonthlyBooks(self):
         mbs = self.h1.monthly_books(today.year, today.month)

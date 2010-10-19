@@ -146,6 +146,7 @@ class NewPage(HomestayPage):
                           checkin = strpdate(r.get('checkin')), 
                           checkout = strpdate(r.get('checkout')), 
                           addbeds_num = int(r.get('addbeds_num')), 
+                          deposit = int(r.get('deposit')), 
                           create_date = strpdate(r.get('create_date')),
                           comment = r.get('comment'), 
                           room = Room.get(r.get('room')),
@@ -217,6 +218,7 @@ class EditPage(ShowPage):
         res.checkin = strpdate(r.get('checkin'))
         res.checkout = strpdate(r.get('checkout')) 
         res.addbeds_num = int(r.get('addbeds_num'))
+        res.deposit = int(r.get('deposit'))
         res.create_date = strpdate(r.get('create_date'))
         res.comment = r.get('comment') 
         res.price_type = PriceType.get(r.get('price_type'))
@@ -621,6 +623,18 @@ class DelSpecialPage(SpecialsPage):
         special.delete()
         self.redirect(special.calendar_path)
 
+class NodepositBookingsPage(HomestayPage):
+    def get(self):
+        h = self.homestay
+
+        template_values = {
+            'h': h
+        }
+
+        self.response.out.write(template.render('nodeposit_bookings.html', 
+                                template_values))
+
+
 class PeriodBooksPage(HomestayPage):
     def get(self):
         r = self.request
@@ -652,6 +666,7 @@ application = webapp.WSGIApplication([
                (r'/admin', IndexPage), 
                (r'/admin/\d{6}', IndexPage),
                (r'/admin/period_books', PeriodBooksPage), 
+               (r'/admin/nodeposit_bookings', NodepositBookingsPage), 
                (r'/admin/homestay/edit', EditHomestayPage), 
                (r'/admin/holidays', HolidaysPage), 
                (r'/admin/holidays/\d{6}', HolidaysPage), 

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+  <tr><th colspan="4">未付訂金訂單清冊：</th></tr>
+  <tr><th>名稱</th><th>下單日</th><th>入住</th><th>退房</th></tr>
+
+  {% for b in h.nodeposit_bookings %}
+      <tr>
+        <td>{{b.name}}</td>
+        <td>{{b.create_date}}</td>
+        <td>{{b.checkin}}</td>
+        <td>{{b.checkout}}</td>
+      </tr>
+  {% endfor %}
+
+  <tr>
+    <td colspan="4">
+      <a href="/admin">月曆</a>
+    </td>
+  </tr>
+
+</table>
+{% endblock %} 

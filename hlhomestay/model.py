@@ -74,7 +74,7 @@ class Homestay(db.Model):
               })
             result.append(weekly_books)
         return result
-    
+
     def recently_reservations(self):
         rooms = self.room_set.fetch(1000)
         q = Reservation.all().\
@@ -88,19 +88,14 @@ class Homestay(db.Model):
         a.sort(compare)
         return a
 
-    @property
-    def nodeposit_books(self):
-        rooms = self.room_set.fetch(1000)
-        q = Reservation.all().\
-                filter("room IN", rooms).\
-                filter("checkout >=", date.today())
+    @property    
+    def recently_bookings(self):
+        return self.recently_reservations()
 
-        def compare(a, b):
-            return cmp(a.checkin, b.checkin)
-#.sort(compare) 
-        a = q.fetch(1000)
-        a.sort(compare)
-        return a
+    @property
+    def nodeposit_bookings(self):
+        return [ b for b in self.recently_bookings
+                   if b.deposit == 0 ]
 
     def daily_availables(self, date):
         if date >= date.today(): 
@@ -154,6 +149,10 @@ class Homestay(db.Model):
             l = date(t.year, l, 1)
         return '/%s/%s' % (self.key(), strfdate(l, '%Y%m'))
 
+    @property
+    def nodeposit_bookings_path(self):
+        return "/admin/nodeposit_bookings"
+      
     @property
     def admin_edit_path(self):
         return "/admin/homestay/edit"

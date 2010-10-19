@@ -142,6 +142,11 @@ function check_form(f){
                    value="{{res.addbeds_num}}"/>
     </td></tr>
 
+    <tr><td>訂金</td>
+        <td><input name="deposit" type="text"
+                   value="{{res.deposit}}"/>
+    </td></tr>
+
     <tr><td>訂單日期</td>
         <td>{{res.create_date|date:"Ymd"}}
             <input name="create_date" type="hidden" 
