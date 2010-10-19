@@ -51,6 +51,9 @@
 #calendar #controlbar a:visited {color:#DFA3FF} 
 #calendar #controlbar a:hover   {color:#DFA3FF}
 
+#content .table {border-collapse:collapse}
+#content .table td {border:solid 1px black}
+
 #content {font-size:12pt;color:black}
 #content th {text-align:left}
 
@@ -61,3 +64,8 @@
 #content form a         {color:black}
 #content form a:visited {color:black} 
 #content form a:hover   {color:black}
+
+@media print {
+    #leftbar {display:none}
+    input {display:none}
+}

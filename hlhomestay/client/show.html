@@ -52,7 +52,6 @@
   <tr><th>日期</th><th>單價</th><th>加床數</th><th>加床價</th>
   </tr>
 
-  <tr><td>{{res.checkin}}</td><td>入住</td>
   </tr>
 
   {% for p in res.price_items %}
@@ -63,6 +62,8 @@
         <td>{{p.addbed_price}}</td>
       </tr>
   {% endfor %}
+
+  <tr><td>{{res.checkout}}</td><td>退房</td>
 
   <tr><td>總價</td><td>{{res.price}}</td>
   </tr>
@@ -87,8 +88,8 @@
   <tr>
     <td>
 
-    <input type=button name=print value="列印訂房單" 
-           onClick="javascript:window.print()"> 
+      <input type=button name=print value="列印訂房單" 
+             onClick="javascript:window.print()"> 
       <a href="/{{res.room.homestay.key}}">月曆</a>
     </td>
   </tr>
