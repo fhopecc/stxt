@@ -13,6 +13,15 @@ JBoss 8080
 IIS   8090
 FTP   3838
 
+啟動服務
+~~~~~~~~
+
+下列服務放於啟動！
+
+resin.exe 
+
+jboss.bat
+
 掃描圖資
 --------
 
@@ -61,5 +70,5 @@ HOUSRV 執行 run.bat
 ------
 
 商業網   副總 廖榮華 0920594336 掃描外包商
-光特資訊 協理 簡致忠 0225575558 chichung@quantasoft.com.tw
+光特資訊 協理 簡致忠 0225575558 0920930328 chichung@quantasoft.com.tw
 大同OA        鄧先生 0925120508
