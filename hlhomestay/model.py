@@ -298,6 +298,10 @@ class PriceType(db.Model):
             verbose_name = "加床價", 
             default=0) 
 
+    discount = db.IntegerProperty(
+            verbose_name = "連續日折扣", 
+            default=0) 
+
     @property
     def rooms(self):
         return Room.gql('WHERE price_type_keys = :1', \
