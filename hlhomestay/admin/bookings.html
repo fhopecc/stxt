@@ -1,26 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-<table>
-  <tr><th colspan="4">未付訂金訂單清冊：
+<table class="table">
+  <tr><th colspan="5">訂單清冊：
       <input type=button name=print value="列印" 
              onClick="javascript:window.print()"> 
   </th></tr>
-  <tr><th>名稱</th><th>下單日</th><th>入住</th><th>退房</th></tr>
+  <tr><th>名稱</th><th>下單日</th><th>入住</th>
+      <th>退房</th><th>已付訂金</th></tr>
 
-  {% for b in h.nodeposit_bookings %}
+  {% for b in h.bookings %}
       <tr>
       <td><a href="{{b.admin_edit_path}}">{{b.name}}</a></td>
         <td>{{b.create_date}}</td>
         <td>{{b.checkin}}</td>
         <td>{{b.checkout}}</td>
+        <td>{{b.deposit}}</td>
       </tr>
   {% endfor %}
 
-  <tr>
-    <td colspan="4">
-      <a href="/admin">月曆</a>
-    </td>
-  </tr>
-
 </table>
+
+<a href="/admin">月曆</a>
 {% endblock %} 

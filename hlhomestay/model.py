@@ -75,7 +75,8 @@ class Homestay(db.Model):
             result.append(weekly_books)
         return result
 
-    def recently_reservations(self):
+    @property    
+    def bookings(self):
         rooms = self.room_set.fetch(1000)
         q = Reservation.all().\
                 filter("room IN", rooms).\
@@ -83,14 +84,19 @@ class Homestay(db.Model):
 
         def compare(a, b):
             return cmp(a.checkin, b.checkin)
-#.sort(compare) 
+
         a = q.fetch(1000)
         a.sort(compare)
         return a
 
+    # deprecated
     @property    
     def recently_bookings(self):
-        return self.recently_reservations()
+        return self.bookings
+
+    # deprecated
+    def recently_reservations(self):
+        return self.bookings
 
     @property
     def nodeposit_bookings(self):
@@ -168,6 +174,10 @@ class Homestay(db.Model):
     @property
     def specials_path(self):
         return "/admin/specials"
+
+    @property
+    def bookings_path(self):
+        return "/admin/bookings"
 
     def isholiday(self, date):
         # negative list

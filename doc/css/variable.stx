@@ -1,6 +1,13 @@
 1. Introduction
 
-It is very common to find repeated property values in a CSS stylesheet, for instance to make sure semantically different elements in a web page have a similar rendering and user experience. While CSS offers a mechanism for grouping style rules using groups of selectors, Web designers often tend to neglect it because it decreases the stylesheet's readability and human-based maintainability, and semantically distinct elements rarely share all style rules.
+It is very common to find repeated property values in a CSS
+ stylesheet, for instance to make sure semantically different elements
+ in a web page have a similar rendering and user experience. While CSS
+ offers a mechanism for grouping style rules using groups of
+ selectors, Web designers often tend to neglect it because it
+ decreases the stylesheet's readability and human-based
+ maintainability, and semantically distinct elements rarely share all
+ style rules.
 
 CSS Variables allow authors to define variables that are reusable as property values anywhere in a stylesheet and queryable/modifiable through an extension of the CSS Object Model described in this document.
 

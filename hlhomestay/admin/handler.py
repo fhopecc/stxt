@@ -634,6 +634,16 @@ class NodepositBookingsPage(HomestayPage):
         self.response.out.write(template.render('nodeposit_bookings.html', 
                                 template_values))
 
+class BookingsPage(HomestayPage):
+    def get(self):
+        h = self.homestay
+
+        template_values = {
+            'h': h
+        }
+
+        self.response.out.write(template.render('bookings.html', 
+                                template_values))
 
 class PeriodBooksPage(HomestayPage):
     def get(self):
@@ -667,6 +677,7 @@ application = webapp.WSGIApplication([
                (r'/admin/\d{6}', IndexPage),
                (r'/admin/period_books', PeriodBooksPage), 
                (r'/admin/nodeposit_bookings', NodepositBookingsPage), 
+               (r'/admin/bookings', BookingsPage), 
                (r'/admin/homestay/edit', EditHomestayPage), 
                (r'/admin/holidays', HolidaysPage), 
                (r'/admin/holidays/\d{6}', HolidaysPage), 
