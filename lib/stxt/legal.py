@@ -1,6 +1,8 @@
 # coding=utf-8
+from __future__ import with_statement
 from spark import *
 from tree import Node
+
 
 class Token(object):
     def __init__(self, type, value):
@@ -51,15 +53,22 @@ class Parser(GenericParser):
         GenericParser.__init__(self, start)
 
     def p_doc(self, args):
-        ' doc ::= title docattrs emptyline sects'
+        ''' doc ::= title docattrs emptyline sects
+            doc ::= title sects
+        '''
         doc = Node(type="doc", title=args[0])
-        attrs = {}
-        for a in args[1]:
-            a = a.value.split(':')
-            attrs[a[0]]=a[1]
-        doc.attrs = attrs
-        for s in args[3]:
-            doc.append(s)
+        if len(args) == 4:
+            attrs = {}
+            for a in args[1]:
+                a = a.value.split(':')
+                attrs[a[0]]=a[1]
+            doc.attrs = attrs
+            for s in args[3]:
+                doc.append(s)
+        else:
+            for s in args[1]:
+                doc.append(s)
+            
         return doc
 
     def p_title(self, args):
@@ -86,7 +95,7 @@ class Parser(GenericParser):
             sect ::= secnumber emptyline
         '''
         sect = Node(type='sect')
-        sect.secnumber = args[0]
+        sect.secnumber = args[0].value
         if len(args) == 3:
             sect.append(Node(type='para', value = args[1].value))
         return sect
@@ -96,7 +105,7 @@ class Parser(GenericParser):
             sect ::= secnumber emptyline paras emptyline
         '''
         sect = Node(type='sect')
-        sect.secnumber = args[0]
+        sect.secnumber = args[0].value
         if len(args) == 5:
             sect.append(Node(type='para', value = args[1].value))
             ps = args[3]
@@ -118,6 +127,28 @@ class Parser(GenericParser):
         args[0].value += args[1].value
         return args[0]
 
+class SectLevel(GenericASTTraversal):
+    def __init__(self, ast):
+        GenericASTTraversal.__init__(self, ast)
+        self.postorder()
+
+    def n_sect(self, node):
+        node.numbers = node.secnumber.split('.')[:-1]
+        node.level = len(node.numbers)
+        print node.type
+        print node.level
+        print node.secnumber
+        
+    def n_number(self, node):
+        node.exprType = 'number'
+
+    def n_float(self, node):
+        node.exprType = 'float'
+        
+    def default(self, node):
+        # this handles + and * nodes
+        print node.type
+
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog SOURCE [options]"
@@ -133,4 +164,6 @@ if __name__ == '__main__':
 
     src = args[0]
     with open(src) as f:
-        tokens = legal.Lexer().tokenize(f.read())
+        tokens = Lexer().tokenize(f.read())
+        doc = Parser().parse(tokens)
+        ast = SectLevel(doc)

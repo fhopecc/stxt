@@ -57,8 +57,6 @@ $("div").addClass("special");
 
 jQuery("div").addClass("special");
 
-[jsg.example]<h2><font color="slategray" size="5"><a id="選取元素" name="選取元素">[選取元素]</a></font></h2>[/jsg.example]
-
 前面的例子使用 $("div") 來選取元素，帶入的參數 div 是表示你要找的元素
 ，這是 CSS 選擇器(CSS Selector) 的語法，就如同 CSS 在做排版和外觀所使
 用的選擇器語法一樣。jQuery 所支援的 CSS Selector 包含了 CSS 1、CSS2 以
@@ -68,6 +66,7 @@ jQuery("div").addClass("special");
 
 
 這是一段原始的 HTML：
+
 <div id="body">
   <h2>Some Header</h2>
   <div class="contents">
@@ -75,7 +74,9 @@ jQuery("div").addClass("special");
     <p>...</p>
   </div>
 </div>
-以下用一連串的範例，以藍色字體展示一些基本的語法並且以深色字顯示文件中會被選取的元素。
+
+以下用一連串的範例，以藍色字體展示一些基本的語法並且以深色字顯示文件中
+會被選取的元素。
 
 $("div")
 <div id="body">
@@ -85,6 +86,7 @@ $("div")
     <p>...</p>
   </div>
 </div>
+
 解釋：選取所有 <div>
 
 
@@ -96,6 +98,7 @@ $("#body")
     <p>...</p>
   </div>
 </div>
+
 解釋：選取 id 為 body 的元素
 
 
@@ -107,6 +110,7 @@ $("div#body")
     <p>...</p>
   </div>
 </div>
+
 解釋：選取 id 為 body 的 <div>
 
 
@@ -118,6 +122,7 @@ $("div.contents p")
     <p>...</p>
   </div>
 </div>
+
 解釋：選取 class 為 contents 的 <div> 所包住的所有下層的 <p>
 
 
@@ -129,6 +134,7 @@ $("div > div")
     <p>...</p>
   </div>
 </div>
+
 解釋：選取被 <div> 包住的下一層 <div>
 
 
@@ -140,6 +146,7 @@ $("div:has(div)")
     <p>...</p>
   </div>
 </div>
+
 解釋：和前一個範例相反，這邊是選取至少有包住一個 <div> 的 <div>
 
 
@@ -1115,3 +1122,18 @@ Wrap an HTML structure around all elements in the set of matched elements.
 .wrapInner()
 DOM Insertion, Around
 Wrap an HTML structure around the content of each element in the set of matched elements.
+
+each
+----
+
+This code selects the first form element and calls reset() on it. In
+case you had more than one form, you could also do this:
+
+ $(document).ready(function() {
+   // use this to reset several forms at once
+   $("#reset").click(function() {
+     $("form").each(function() {
+       this.reset();
+     });
+   });
+ });

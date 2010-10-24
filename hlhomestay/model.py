@@ -167,6 +167,10 @@ class Homestay(db.Model):
     @property
     def calendar_path(self):
         return "/admin"
+
+    @property
+    def booking_calendar_path(self):
+        return "/%s" % self.key()
     
     @property
     def holidays_path(self):
@@ -288,8 +292,6 @@ class Room(db.Model):
                     bs.append(b)
         return bs
 
-
-    @property
     def book_path(self, date):
         return '/%s/%s' % (self.key(), date.strftime('%Y%m%d'))
 
@@ -362,7 +364,7 @@ class Reservation(db.Model):
 
     comment = db.TextProperty(
             verbose_name="備註",
-            default=u'請輸入備註')
+            default="")
 
     addbeds_num = db.IntegerProperty(
             verbose_name="加床數",

@@ -122,6 +122,21 @@ class UnitTest(unittest.TestCase):
         self.assertEqual('para', para.type)
         self.assertEqual('權責', para.value)
 
+        case = '''資料交換管理程序
+--------
+
+3.權責
+
+3.1.網路管理者
+
+'''
+        tokens = legal.Lexer().tokenize(case)
+
+        doc = legal.Parser().parse(tokens)
+        
+        self.assertEqual('doc', doc.type)
+        self.assertEqual('資料交換管理程序', doc.title)
+
 
 if __name__ == '__main__':
     '''unittest.main()'''

@@ -6,7 +6,11 @@
 <script src="/js/date.format.js"></script>
 <script>
 function add_phrase(phrase){
-    $("#comment").append(phrase + '\n');
+ 
+    $("#comment").each(function() {
+        this.value += phrase + "\n";
+    });
+
 }
 
 function check_form(f){
@@ -147,7 +151,7 @@ function check_form(f){
        </td>
        <td style="vertical-align:top;padding-left:10pt">
            <b>備註片語：</b>
-           <a onclick="$('#comment').empty()">清空備註</a></br>
+           <a onclick="$('#comment').empty()">清空備註</a><br/>
            {% for p in h.phrase_set %}
                <a onclick="add_phrase('{{p.phrase}}')">{{p.phrase}}</a><br/>
            {% endfor %}
@@ -156,7 +160,7 @@ function check_form(f){
 
     <tr><td><input type="submit" value="建立"/></td>
         <td>
-            <a href="{{res.client_calendar_path}}">月曆</a>
+            <a href="{{h.booking_calendar_path}}">月曆</a>
         </td></tr>
   </table>
 </form>
