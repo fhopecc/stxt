@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table">
+
+  <tr><th colspan="2">備註片語檔：</th></tr>
+  <tr><th>片語<a href="/admin/phrases/new">新</a></th></tr>
+  {% for p in h.phrase_set %}
+      <tr><td>{{p.phrase}}</td>
+          <td><a href="{{p.edit_path}}">改</a>
+              <a href="{{p.delete_path}}">刪</a>
+          </td>
+      </tr>
+  {% endfor %}
+
+</table>
+
+<a href="/admin">訂房月曆</a>
+{% endblock %} 

@@ -313,6 +313,7 @@ class NewPriceTypePage(HomestayPage):
                         price=int(r.get("price")),
                         holiday_price=int(r.get("holiday_price")),
                         bed_price=int(r.get("bed_price")),
+                        discount=float(r.get("discount"))
                      )
         price_type.put()
 
@@ -348,6 +349,7 @@ class EditPriceTypePage(HomestayPage):
         p.price         = int(r.get("price"))
         p.holiday_price = int(r.get("holiday_price"))
         p.bed_price     = int(r.get("bed_price"))
+        p.discount     = float(r.get("discount"))
          
         p.put()
 
@@ -636,14 +638,82 @@ class NodepositBookingsPage(HomestayPage):
 
 class BookingsPage(HomestayPage):
     def get(self):
-        h = self.homestay
-
         template_values = {
-            'h': h
+            'h': self.homestay
         }
 
         self.response.out.write(template.render('bookings.html', 
                                 template_values))
+
+class PhrasesPage(HomestayPage):
+    def get(self):
+        template_values = {
+            'h': self.homestay
+        }
+        self.response.out.write(template.render('phrases.html', 
+                                template_values))
+class NewPhrasePage(PhrasesPage):
+    def get(self):
+        r = self.request
+        homestay = self.homestay
+        phrase = Phrase(homestay=homestay)
+
+        template_values = {
+            'h': homestay,
+            'p':phrase
+        }
+
+        self.response.out.write(
+            template.render('new_phrase.html', template_values))
+
+    def post(self):
+        r = self.request
+        homestay = self.homestay
+        phrase = Phrase(homestay=homestay,
+                            phrase=r.get("phrase")
+                     )
+        phrase.put()
+
+        self.redirect(homestay.phrases_path)
+
+class EditPhrasePage(PhrasesPage):
+    @property
+    def phrase(self):
+        p = r'/admin/phrases/(\w+)/(edit|delete)' # pattern
+        m = re.match(p, self.request.path)   # match
+        if m:
+            k = m.group(1)                 
+            p = Phrase.get(k)          
+        else:
+            p = Phrase.get(self.request.get('key'))
+
+        return p
+
+    def get(self):
+        template_values = {
+            'h': self.homestay,
+            'p': self.phrase
+        }
+
+        self.response.out.write(
+            template.render('edit_phrase.html', template_values))
+
+    def post(self):
+        r = self.request
+        p = self.phrase
+
+        p.phrase = r.get("phrase")
+         
+        p.put()
+
+        self.redirect(self.homestay.phrases_path)
+
+class DelPhrasePage(EditPhrasePage):
+    def get(self):
+        p = self.phrase
+        p.delete()
+        self.redirect(self.homestay.phrases_path)
+
 
 class PeriodBooksPage(HomestayPage):
     def get(self):
@@ -695,6 +765,11 @@ application = webapp.WSGIApplication([
                (r'/admin/room/new', NewRoomPage), 
                (r'/admin/room/\w+/edit', EditRoomPage), 
                (r'/admin/room/\w+/delete', DelRoomPage), 
+               (r'/admin/phrases', PhrasesPage), 
+               (r'/admin/phrases/new', NewPhrasePage), 
+               (r'/admin/phrases/\w+/edit', EditPhrasePage), 
+               (r'/admin/phrases/edit', EditPhrasePage), 
+               (r'/admin/phrases/\w+/delete', DelPhrasePage), 
                (r'/admin/price_types/new.*', NewPriceTypePage), 
                (r'/admin/price_types/\w+/edit', EditPriceTypePage), 
                (r'/admin/price_types/edit', EditPriceTypePage), 

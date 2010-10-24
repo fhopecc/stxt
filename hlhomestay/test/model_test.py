@@ -429,9 +429,9 @@ class UnitTest(unittest.TestCase):
         pi = pis.next() # twodago
         self.assertEqual(twodago, pi['date'])
         if self.h1.isholiday(yestorday):
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
         else:
-            self.assertEqual(2000, pi['value'])
+            self.assertEqual(2000, pi['price'])
 
         self.assertRaises(StopIteration, pis.next)
 
@@ -440,38 +440,39 @@ class UnitTest(unittest.TestCase):
         pi = pis.next() # twodago
         self.assertEqual(twodago, pi['date'])
         if self.h1.isholiday(yestorday):
-            self.assertEqual(3000, pi['value'])
+            self.assertEqual(3000, pi['price'])
         else:
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
 
         pi = pis.next() # yestorday
         self.assertEqual(yestorday, pi['date'])
         if self.h1.isholiday(today):
-            self.assertEqual(3000, pi['value'])
+            self.assertEqual(3000, pi['price'])
         else:
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
 
         pi = pis.next() # today
         self.assertEqual(today, pi['date'])
         if self.h1.isholiday(tomorrow):
-            self.assertEqual(3000, pi['value'])
+            self.assertEqual(3000, pi['price'])
         else:
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
 
         pi = pis.next() # tomorrow
         self.assertEqual(tomorrow, pi['date'])
         if self.h1.isholiday(twodafter):
-            self.assertEqual(3000, pi['value'])
+            self.assertEqual(3000, pi['price'])
         else:
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
 
         self.assertRaises(StopIteration, pis.next)
 
-        self.assertEqual(sum(p['value'] + p['addbed_price'] 
+        self.assertEqual(sum(p['price'] + p['bed_price'] 
                              for p in self.b3.price_items()),
                          self.b3.price())
+
     def testAddBeds(self):
-        # 多人房 2500 3000 400
+        # 多人房 2500 3000 400 0.9
         # b6   五餅二魚 多人房 多人房 沈懿嬅   1      明天     後天
 
         # 加床數不可超過三
@@ -482,23 +483,22 @@ class UnitTest(unittest.TestCase):
         b.addbeds_num = 3
         b.put()
 
-        self.assertEqual(sum(p['value'] + p['addbed_price'] 
-                             for p in b.price_items()),
-                         b.price())
+        pis = self.b6.price_items()
+        p = pis.next()
+        self.assertEqual(p['price'], 
+                        (p['room_price'] + p['bed_price']))
 
-        # nextweek(Sat) checkin      Wed      Thu      Fri
-        # nextweek(Sun) special  3000 Thu  3000 Fri 3000 Sat 3000
-        # nextweek(Mon) special  1000 Fri  1000 Sat 2000 Sun 2000
-        # nextweek(Tue) special  1000 Sat  2000 Sun 2000 Mon 1000
-        #                        5000      6000     7000     6000
-        # addbeds_num=3*700*3d  11300     12300    13300    12300
+    def testDiscount(self):
+        # b5   五餅二魚 松濤   四人房 沈懿媗   0      今天     後天
+        self.p2.discount = 0.9
 
-        #if nextweek.weekday() in(2, 4): # WED, FRI
-        #    self.assertEqual(12300, self.b4.price())
-        #elif nextweek.weekday() == 3: # Thu
-        #    self.assertEqual(13300, self.b4.price())
-        #else:
-        #    self.assertEqual(11300, self.b4.price())
+        pis = self.b5.price_items()
+        p = pis.next()
+        self.assertEqual(p['price'], 
+                        (p['room_price'] + p['bed_price']))
+        p = pis.next()
+        self.assertEqual(p['price'], 
+                        (p['room_price'] + p['bed_price']) * 0.9)
 
 
     def testSpecial(self):
@@ -522,16 +522,16 @@ class UnitTest(unittest.TestCase):
         pi = pis.next() # tomorrow
         self.assertEqual(tomorrow, pi['date'])
         if self.h1.isholiday(tomorrow+timedelta(days=1)):
-            self.assertEqual(3000, pi['value'])
+            self.assertEqual(3000, pi['price'])
         else:
-            self.assertEqual(2500, pi['value'])
+            self.assertEqual(2500, pi['price'])
 
         pi = pis.next() # 2
         pi = pis.next() # 3
         pi = pis.next() # 4
         pi = pis.next() # 5
         pi = pis.next() # 6
-        self.assertEqual(4500, pi['value'])
+        self.assertEqual(4500, pi['price'])
         self.assertRaises(StopIteration, pis.next) # 7 checkout
 
     def testRoomPriceType(self):

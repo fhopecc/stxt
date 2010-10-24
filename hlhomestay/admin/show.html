@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <table>
-  <tr><td colspan="2">訂房資料如下：</td></tr>
+  <tr><th colspan="2">訂房資料如下：</th></tr>
   <tr>
     <td>訂房編號</td>
     <td>{{res.key}}</td>
@@ -56,21 +56,25 @@
     <td>備註</td>
     <td>{{res.comment}}</td>
   </tr>
+</table>
 
-  <tr><th colspan="4">價格明細表：</th></tr>
-  <tr><th>日期</th><th>單價</th><th>加床數</th><th>加床價</th>
+<table>
+  <tr><th colspan="5">價格明細表：</th></tr>
+  <tr><th>日期</th><th>房價</th><th>加床價</th><th>長住折扣</th>
+      <th>單日價</th>
   </tr>
 
   {% for p in res.price_items %}
       <tr>
         <td>{{p.date}}</td>
-        <td>{{p.value}}</td>
-        <td>{{p.addbeds_num}}</td>
-        <td>{{p.addbed_price}}</td>
+        <td>{{p.room_price}}</td>
+        <td>{{p.bed_price}}</td>
+        <td>{{p.discount}}</td>
+        <td>{{p.price}}</td>
       </tr>
   {% endfor %}
 
-  <tr><td>{{res.checkout}}</td><td colspan="3">退房</td></tr>
+  <tr><td>{{res.checkout}}</td><td>退房</td></tr>
 
   <tr><td>總價</td><td>{{res.price}}</td>
   </tr>

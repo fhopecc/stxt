@@ -8,6 +8,10 @@ function check_form(f){
            "價格必為整數")==false) {
            return false 
         } 
+        if(check_number(discount, 
+           "折扣必為數字")==false) {
+           return false 
+        } 
     }
 }
 </script>
@@ -39,6 +43,10 @@ function check_form(f){
     <tr><td>加床價</td>
         <td><input name="bed_price" type="text" 
                    value="{{p.bed_price}}"/></td>
+    </tr>
+    <tr><td>長住折扣</td>
+        <td><input name="discount" type="text" 
+                   value="{{p.discount}}"/></td>
     </tr>
 
     <tr><td><input type="submit" value="更新"/></td><td></td></tr>

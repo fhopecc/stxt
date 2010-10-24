@@ -102,3 +102,57 @@ function check_integer(fields, msg) {
 
     return true
 }
+
+// 欄位須為數字
+function check_number(fields, msg) {
+
+    re = /(^\d+$)|(^\d+\.\d+$)/
+
+    if(!(fields instanceof Array))
+        fields = [fields]
+
+    for (i in fields) {
+
+        field = fields[i]
+
+        with (field) {
+
+            if (!re.test(value)) {
+
+                alert(msg)
+                focus()
+                return false
+
+            }
+        }
+    }
+
+    return true
+}
+
+// 欄位必須有值
+function check_without(fields, msg) {
+
+    re = /(^\d+$)|(^\d+\.\d+$)/
+
+    if(!(fields instanceof Array))
+        fields = [fields]
+
+    for (i in fields) {
+
+        field = fields[i]
+
+        with (field) {
+
+            if (value=="") {
+
+                alert(msg)
+                focus()
+                return false
+
+            }
+        }
+    }
+
+    return true
+}

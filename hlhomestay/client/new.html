@@ -5,6 +5,10 @@
 <script src="/js/validate_input.js"></script>
 <script src="/js/date.format.js"></script>
 <script>
+function add_phrase(phrase){
+    $("#comment").append(phrase + '\n');
+}
+
 function check_form(f){
     with(f) {
         if(check_date(checkin, 
@@ -74,7 +78,7 @@ function check_form(f){
         onsubmit="return check_form(this)"
         action='/new'>
   <table class="form">
-    <tr><th colspan="2">訂房作業</th></tr>
+    <tr><th colspan="3">訂房作業</th></tr>
 
     <tr><td id="notice" colspan="2" style="display:none"></td></tr>
 
@@ -137,10 +141,18 @@ function check_form(f){
                    value='{{res.create_date|date:"Ymd"}}'/>
     </td></tr>
 
-    <tr><td colspan="2">備註</td></tr>
+    <tr><td colspan="3">備註</td></tr>
     <tr><td colspan="2">
-        <textarea name="comment">{{res.comment}}</textarea>
-    </td></tr>
+        <textarea rows=10 id="comment" name="comment">{{res.comment}}</textarea>
+       </td>
+       <td style="vertical-align:top;padding-left:10pt">
+           <b>備註片語：</b>
+           <a onclick="$('#comment').empty()">清空備註</a></br>
+           {% for p in h.phrase_set %}
+               <a onclick="add_phrase('{{p.phrase}}')">{{p.phrase}}</a><br/>
+           {% endfor %}
+       </td>
+    </tr>
 
     <tr><td><input type="submit" value="建立"/></td>
         <td>

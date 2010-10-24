@@ -1,4 +1,5 @@
 # coding=utf8
+from __future__ import division
 from google.appengine.ext import db
 from google.appengine.api import users
 from datetime import date
@@ -179,6 +180,10 @@ class Homestay(db.Model):
     def bookings_path(self):
         return "/admin/bookings"
 
+    @property
+    def phrases_path(self):
+        return "/admin/phrases"
+
     def isholiday(self, date):
         # negative list
         if self.holiday_set.\
@@ -308,9 +313,9 @@ class PriceType(db.Model):
             verbose_name = "加床價", 
             default=0) 
 
-    discount = db.IntegerProperty(
-            verbose_name = "連續日折扣", 
-            default=0) 
+    discount = db.FloatProperty(
+            verbose_name = "長住折扣", 
+            default=1.0) 
 
     @property
     def rooms(self):
@@ -363,10 +368,6 @@ class Reservation(db.Model):
             verbose_name="加床數",
             default=0)
 
-    addbeds_num = db.IntegerProperty(
-            verbose_name="加床數",
-            default=0)
-
     deposit = db.IntegerProperty(
             verbose_name="訂金",
             default=0)
@@ -378,6 +379,7 @@ class Reservation(db.Model):
     @property
     def homestay(self):
         return self.room.homestay
+
   
     def isholiday(self, date):
         return self.room.homestay.isholiday(date)
@@ -385,30 +387,48 @@ class Reservation(db.Model):
     def special(self, date):
         return self.price_type.special(date)
 
+    def discount(self, date):
+        if date > self.checkin:
+            return self.price_type.discount
+        else:
+            return 1
+
+    def room_price(self, date):
+        nextday = date + timedelta(days=1)
+        if self.special(nextday):
+            special = self.special(date + timedelta(days=1))
+            return special.price
+        elif self.isholiday(nextday):
+            return self.price_type.holiday_price
+        else:
+            return self.price_type.price
+
+    def bed_price(self, date):
+        nextday = date + timedelta(days=1)
+        if self.special(nextday):
+            special = self.special(date + timedelta(days=1))
+            return self.addbeds_num * special.bed_price
+        else:
+            return self.addbeds_num * self.price_type.bed_price
+
+    def price_item(self, date):
+        item = {'date':date, 
+                'room_price':self.room_price(date),
+                'bed_price': self.bed_price(date),
+                'discount': self.discount(date),
+                'price': 0
+               }
+        item['price'] = round((item['room_price'] + item['bed_price']) * 
+                               item['discount'])
+        return item
+
     def price_items(self):
-        from datetime_iterator import datetimeIterator
-        from datetime import timedelta 
         for d in datetimeIterator(self.checkin, \
                  self.checkout - timedelta(days=1)):
-            item = {'date':d, 
-                    'value':self.price_type.price, 
-                    'addbeds_num':self.addbeds_num, 
-                    'addbed_price': \
-                        self.addbeds_num * self.price_type.bed_price}
-            if self.special(d + timedelta(days=1)):
-                special = self.special(d + timedelta(days=1))
-                item['value'] = special.price
-                item['addbed_price'] = self.addbeds_num * \
-                                       special.bed_price
-            elif self.isholiday(d + timedelta(days=1)):
-                item['value'] = self.price_type.holiday_price
-
-            #item['value'] += self.room.addbed_price * self.addbeds_num
-            yield item
+            yield self.price_item(d)
 
     def price(self):
-        return sum(p['value'] + p['addbed_price'] \
-                   for p in self.price_items())
+        return sum(p['price'] for p in self.price_items())
 
     def period_available(self):
         period = datetimeIterator(self.checkin, 
@@ -523,6 +543,19 @@ class Special(db.Model):
     @property
     def delete_path(self):
         return "/admin/specials/%s/delete" % self.key()
+
+class Phrase(db.Model):
+    homestay = db.ReferenceProperty(Homestay)
+    phrase = db.StringProperty(verbose_name=u"片語", required=True, 
+                               default=u'請輸入片語')
+
+    @property
+    def edit_path(self):
+        return "/admin/phrases/%s/edit" % self.key()
+    
+    @property
+    def delete_path(self):
+        return "/admin/phrases/%s/delete" % self.key()
 
 class BookingError(Exception):
     pass
