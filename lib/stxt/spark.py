@@ -186,6 +186,7 @@ class GenericParser:
 		return None
 
 	def error(self, token):
+		#import pdb; pdb.set_trace()
 		print "Syntax error at or near `%s' token" % token
 		raise SystemExit
 

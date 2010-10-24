@@ -11,6 +11,7 @@ class Token(object):
 		    return cmp(self.type, o)
 
     def __str__(self):
+        print self.value.decode('utf8')
         return "%s" % (self.type)
 
 class Lexer(GenericScanner):
@@ -91,12 +92,12 @@ class Parser(GenericParser):
         return sect
 
     def p_sect(self, args):
-        ''' sect ::= secnumber line emptyline para
-            sect ::= secnumber emptyline paras
+        ''' sect ::= secnumber line emptyline paras emptyline
+            sect ::= secnumber emptyline paras emptyline
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0]
-        if len(args) == 4:
+        if len(args) == 5:
             sect.append(Node(type='para', value = args[1].value))
             ps = args[3]
         else:
@@ -114,6 +115,22 @@ class Parser(GenericParser):
     def p_para(self, args):
         ''' para ::= para line
         '''
-        args[0].value += args[1].strip()
+        args[0].value += args[1].value
         return args[0]
-        
+
+if __name__ == '__main__':
+    from optparse import OptionParser
+    usage = u"usage: %prog SOURCE [options]"
+    oparser = OptionParser(usage, version="%prog 1.1")
+    oparser.add_option("-d", "--debug", action="store_true", 
+                       dest="debug", default=False,
+                       help=u"除錯模式")
+
+    (options, args) = oparser.parse_args()
+
+    if len(args) < 1:
+        oparser.error("Must supply the SOURCE file!")
+
+    src = args[0]
+    with open(src) as f:
+        tokens = legal.Lexer().tokenize(f.read())
