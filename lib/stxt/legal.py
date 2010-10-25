@@ -13,7 +13,7 @@ class Token(object):
 		    return cmp(self.type, o)
 
     def __str__(self):
-        print self.value.decode('utf8')
+        #print self.value.decode('utf8')
         return "%s" % (self.type)
 
 class Lexer(GenericScanner):
@@ -41,11 +41,11 @@ class Lexer(GenericScanner):
         self.rv.append(Token('docattr', s.strip()))
 
     def t_secnumber(self, s):
-        r"(\d\.)+"
+        r"(\d+\.)+"
         self.rv.append(Token('secnumber', s))
 
     def t_line(self, s):
-        r"[^-\d\s][^\n]+\n"
+        r"[^\d\s-][^\n]+\n"
         self.rv.append(Token('line', s.strip()))
 
 class Parser(GenericParser):
@@ -106,6 +106,7 @@ class Parser(GenericParser):
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0].value
+        print sect.secnumber
         if len(args) == 5:
             sect.append(Node(type='para', value = args[1].value))
             ps = args[3]
@@ -165,5 +166,6 @@ if __name__ == '__main__':
     src = args[0]
     with open(src) as f:
         tokens = Lexer().tokenize(f.read())
+        print len(tokens)
         doc = Parser().parse(tokens)
         ast = SectLevel(doc)

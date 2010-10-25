@@ -187,6 +187,13 @@ class GenericParser:
 
 	def error(self, token):
 		#import pdb; pdb.set_trace()
+		if token.type == 'secnumber':
+				print "sect %s" % token.value
+		if token.type == 'line':
+				try:	
+						print "%s" % token.value
+				except:	
+						pass
 		print "Syntax error at or near `%s' token" % token
 		raise SystemExit
 

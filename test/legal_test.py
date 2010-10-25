@@ -20,6 +20,12 @@ class UnitTest(unittest.TestCase):
 
 防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。
 防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。
+
+3.3.2.
+
+97年11月4日
+防毒軟體
+
 '''
         tokens = legal.Lexer().tokenize(case)
 
@@ -72,6 +78,20 @@ class UnitTest(unittest.TestCase):
         t = tokens[13]
         self.assertEqual('line', t.type)
         self.assertEqual('防毒軟體使用不正常，或影響應用系統、主機維運，應協請防毒系統管理者處理。', t.value)
+
+        t = tokens[14]
+        self.assertEqual('emptyline', t.type)
+
+        t = tokens[15]
+        self.assertEqual('secnumber', t.type)
+        self.assertEqual('3.3.2.', t.value)
+
+        t = tokens[16]
+        self.assertEqual('emptyline', t.type)
+
+        t = tokens[17]
+        self.assertEqual('line', t.type)
+        self.assertEqual('97年11月4日', t.value)
 
     def testParser(self):
         case = '''資料交換管理程序
