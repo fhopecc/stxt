@@ -2,7 +2,8 @@
 from __future__ import with_statement
 from spark import *
 from tree import Node
-
+import win32com
+from win32com.client import Dispatch, constants, DispatchEx
 
 class Token(object):
     def __init__(self, type, value):
@@ -131,23 +132,49 @@ class Parser(GenericParser):
 class SectLevel(GenericASTTraversal):
     def __init__(self, ast):
         GenericASTTraversal.__init__(self, ast)
+
+        msword = DispatchEx('Word.Application')
+        self.doc 	= msword.Documents.Add()			# 開啟一個新的文件。
         self.postorder()
+        msword.Visible = 1	# 1表示要顯示畫面，若為0則不顯示畫面。
 
     def n_sect(self, node):
         node.numbers = node.secnumber.split('.')[:-1]
         node.level = len(node.numbers)
+
+        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
+        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
+        range.Style.Font.Bold = 1			    # 設定字型為粗體字
+        range.Style.Font.Size = 16
+        range.InsertAfter(node.secnumber + node.value)
+
         print node.type
         print node.level
         print node.secnumber
+
+    def n_para(self, node):
+        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
+        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
+        range.Style.Font.Bold = 0			    # 設定字型為粗體字
+        range.Style.Font.Size = 14
+        range.InsertAfter(node.value)
         
-    def n_number(self, node):
+    def n_doc(self, node):
         node.exprType = 'number'
 
     def n_float(self, node):
         node.exprType = 'float'
         
     def default(self, node):
+
+        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
+        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
+        range.Style.Font.Bold = 1			    # 設定字型為粗體字
+        range.Style.Font.Size = 16
+        range.InsertAfter(node.type)
+
         # this handles + and * nodes
+
         print node.type
 
 if __name__ == '__main__':

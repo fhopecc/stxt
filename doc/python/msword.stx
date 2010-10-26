@@ -1,0 +1,106 @@
+控制MS Word
+-----------
+
+Python可以透過win32com這個module來控制Office系列的軟體，本文將會針對如
+何運用Python來控制MS Word做一個簡單的介紹。
+
+Text
+
+要使用Python控制MS Word，您需要先安裝win32com套件，這個套件可以到
+ http://sourceforge.net/projects/pywin32/ 找到。本文假設您已經正確安裝
+win32com及相關套件，所以將不再針對此部分多做說明。
+
+毫無疑問的，您需要先import win32com模組才能進行Word的控制。
+
+import win32com
+from win32com.client import Dispatch, constants
+
+接著，要讓我們的Python程式和MS Word建立起連結。
+
+msword = Dispatch('Word.Application')
+
+用Dispatch()的方式將會啟動MS Word。不過，如果您已經有執行MS Word，則此
+方式只會與現存的MS Word建立連結。如果您強烈希望能夠有一個新的MS Word程
+式出現，可用下面的方式：
+
+msword = DispatchEx('Word.Application')
+
+此時您會發現畫面上沒有任何MS Word出現，其實他已經在背後執行了。您可以
+透過工作管理員來查看是否有一個名為"WINWORD.EXE"的Process。不產生畫面的
+好處是您可 以在背景來處理您要進行的工作。如果您想要看看到底是不是真的
+有成功的啟動MS Word，請設定Visible屬性。
+
+msword.Visible = 1	# 1表示要顯示畫面，若為0則不顯示畫面。
+
+您可以隨時的更改此屬性。
+除了不顯示畫面外，您也許還會希望不要顯示一些警告訊息。此時請設定DisplayAlerts屬性：
+
+msword.DisplayAlerts = 0	# 1表示要顯示訊息，0則會隱藏訊息。
+
+若您真的有把畫面叫出來，您或許會發現此時的畫面上是沒有任何文件開啟的。
+沒錯！前面的動作只是幫助我們啟動Word並且建立連結，接著我們就要來開啟文
+件了。我們可以開啟已經存在的文件，或者是新增一個空白文件。
+
+doc 	= msword.Documents.Open(FileName="xxx.doc")	# 開啟一個名為xxx.doc的文件。
+newDoc 	= msword.Documents.Add()			# 開啟一個新的文件。
+msword.Quit()						# 關閉MS Word.
+
+當然，除了開啟檔案或新建文件，您也可以存檔或者控制這些文件。
+
+docCnt 	= msword.Documents.Count		# 取得目前開啟文件的數量。
+doc 	= msword.Documents[n]			# 取得第n個文件的物件，以便後面的控制。
+doc.Activate()					# 將文件設定為主要工作文件。
+doc.PrintOut()					# 列印文件
+doc.Save()					# 存檔
+doc.SaveAs('xxx.doc')				# 另存新檔
+doc.Undo(n)					# 回復前n次的動作
+
+取得與文件的聯繫，接著我們可以對他進行編輯。不過，我們要能夠先取得編輯
+的控制權。透過Document的Range()函式，我們可以取得MS Word的Range物件。
+
+range	= doc.Range(0, 0)	# 取得Range物件，範圍為文件的最開頭。
+range	= doc.Range()		# 取得Range物件，範圍為文件的最尾端。
+range	= doc.Range(doc.Content.Start, doc.Content.End)	# 取得Range物件，範圍整份文件。
+
+有了Range物件，我們就可以開始進行編輯了。
+range.InsertBefore('在range前面插入的文字')
+range.InsertAfter('在range後面插入的文字')
+select = range.Select()		# 將range的範圍全部選取。並且取得Selection物件。
+
+如果要設定Style，可以透過range物件的Style屬性來設定。
+
+range.Style = constants.wdStyleHeading1		# 設定style為Heading 1
+range.Style = constants.wdStyleHeading2		# 設定style為Heading 2
+range.Style = constants.wdStyleHeading3		# 設定style為Heading 3
+range.Style = constants.wdStyleHeading4		# 設定style為Heading 4
+range.Style = constants.wdStyleHeading5		# 設定style為Heading 5
+range.Style = constants.wdStyleHeading6		# 設定style為Heading 6
+range.Style = constants.wdStyleHeading7		# 設定style為Heading 7
+range.Style = constants.wdStyleHeading8		# 設定style為Heading 8
+range.Style = constants.wdStyleHeading9		# 設定style為Heading 9
+
+range.ParagraphFormat.Alignment = constants.wdAlignParagraphLeft	# 設定段落為靠左
+range.ParagraphFormat.Alignment = constants.wdAlignParagraphRight	# 設定段落為靠右
+range.ParagraphFormat.Alignment = constants.wdAlignParagraphCenter	# 設定段落為置中
+range.ParagraphFormat.Alignment = constants.wdAlignParagraphJustify	# 設定段落為左右對齊
+
+range.Style.Font.Name = "Arial"			# 設定字型為Arial
+range.Style.Font.Name = "Time New Roman"	# 設定字型為Time New Roman
+range.Style.Font.Name = "標楷體"		     # 設定字型為標楷體
+range.Style.Font.Color = 0xFF0000		# 設定字型的顏色為Blue
+range.Style.Font.Color = 0x00FF00		# 設定字型的顏色為Green
+range.Style.Font.Color = 0x0000FF		# 設定字型的顏色為Red
+range.Style.Font.Bold = 1			# 設定字型為粗體字
+range.Style.Font.Italic = 1			# 設定字型為斜體字
+range.Style.Font.Underline = 1			# 為字型加底線
+range.Style.Font.Shadow = 1			# 為字型加陰影
+range.Style.Font.Outline = 1			# 為字型加外框
+
+如果要插入一個表格，可以用下面的方式來做。
+
+table = doc.Tables.Add(range, 3, 4)			# 新增一個3x4表格
+table.Cell(1,1).Range.InsertAfter('Some text')		# 新增文字到cell(1,1)
+table.Cell(1,1).Range.Font.Name = "Arial"		# 設定字型為Arial
+table.Cell(1,1).Range.Font.Color = 0xFF0000		# 設定字型為blue
+table.Rows.Add()					# 新增一個Row
+table.Columns.Add()					# 新增一個Column
