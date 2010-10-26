@@ -143,7 +143,7 @@ class SectLevel(GenericASTTraversal):
         node.level = len(node.numbers)
 
         range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
-        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
+        range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
         range.Style.Font.Bold = 1			    # 設定字型為粗體字
         range.Style.Font.Size = 16
         range.InsertAfter(node.secnumber + node.value)
@@ -154,7 +154,7 @@ class SectLevel(GenericASTTraversal):
 
     def n_para(self, node):
         range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
-        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
+        range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
         range.Style.Font.Bold = 0			    # 設定字型為粗體字
         range.Style.Font.Size = 14
         range.InsertAfter(node.value)
