@@ -7,6 +7,7 @@ from html import *
 from web import f_path
 from web import f_filename
 from tree import Tree
+from stxt import booker
 
 logging.basicConfig(level=logging.DEBUG,
                     filename='stxt.log',
@@ -148,6 +149,6 @@ if __name__ == '__main__':
         logger.info(usage())
         exit()
     sourcefile = sys.argv[1]
-    tree = parser.read(sourcefile)
+    tree = booker.parse(sourcefile)
     tree.dump()
     to_slide(tree)

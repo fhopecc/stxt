@@ -132,50 +132,89 @@ class Parser(GenericParser):
 class SectLevel(GenericASTTraversal):
     def __init__(self, ast):
         GenericASTTraversal.__init__(self, ast)
-
-        msword = DispatchEx('Word.Application')
-        self.doc 	= msword.Documents.Add()			# 開啟一個新的文件。
-        self.postorder()
-        msword.Visible = 1	# 1表示要顯示畫面，若為0則不顯示畫面。
+        self.preorder()
+        self.current_sect = None
 
     def n_sect(self, node):
         node.numbers = node.secnumber.split('.')[:-1]
         node.level = len(node.numbers)
-
-        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
-        range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
-        range.Style.Font.Bold = 1			    # 設定字型為粗體字
-        range.Style.Font.Size = 16
-        range.InsertAfter(node.secnumber + node.value)
-
+        
+        self.current_sect = node
         print node.type
         print node.level
         print node.secnumber
 
     def n_para(self, node):
-        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
-        range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
-        range.Style.Font.Bold = 0			    # 設定字型為粗體字
-        range.Style.Font.Size = 14
-        range.InsertAfter(node.value)
-        
-    def n_doc(self, node):
-        node.exprType = 'number'
+        #pass
+        #import pdb;pdb.set_trace()
+        #import pdb;pdb.set_trace()
+        #self.current_sect = node
+        node.parent = self.current_sect
 
-    def n_float(self, node):
-        node.exprType = 'float'
-        
     def default(self, node):
+        print node.type
 
-        range	= self.doc.Range()		      # 取得Range物件，範圍為文件的最尾端。
-        range.Style.Font.Name = "標楷體"  # 設定字型為標楷體
-        range.Style.Font.Bold = 1			    # 設定字型為粗體字
-        range.Style.Font.Size = 16
-        range.InsertAfter(node.type)
+class WordOut(GenericASTTraversal):
+    def __init__(self, ast):
+        GenericASTTraversal.__init__(self, ast)
+        msword = DispatchEx('Word.Application')
+        msword.Visible = 1	# 1表示要顯示畫面，若為0則不顯示畫面。
 
+        self.word = msword
+        self.doc 	= msword.Documents.Add() # 開啟一個新的文件。
+        self.range	= self.doc.Range()
+        self.range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
+
+        self.range.Style.Font.Size = 12
+        self.range.Style.Font.Bold = 0
+        self.preorder()
+
+    def n_doc(self, node):
+
+        self.range.InsertAfter(node.title + '\n')
+
+    def n_sect(self, node):
+        #import pdb;pdb.set_trace()
+        self.range.InsertAfter(self.sect_num(node))
+        if len(node.kids) == 0:
+            self.range.InsertAfter('\n')
+
+    def n_para(self, node):
+        r	= self.range
+        r.InsertAfter(node.value + '\n')
+        for i in range(node.parent.level):
+            self.range.Paragraphs.Indent
+
+    def sect_num(self, node):
+        cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',u'捌',u'玖','拾',
+             '拾壹','拾貳','拾參','拾肆','拾伍','陸','柒','捌','玖','拾']
+        cd = [u'零',u'一',u'二',u'三',u'四',u'五',u'六',u'七',
+              u'八',u'九',u'十', u'十一','十二','十三','十四',
+              '十五','十六','十七','十九','二十'
+              '二十一','二十二','二十三','二十四','二十五','二十六',
+              '二十七','二十八','二十九', '三十', 
+              '三十一','三十二','三十三','三十四','三十五','三十六',
+              '三十七','三十八','三十九'
+             ]
+        n = int(node.numbers[-1])
+        spaces = (u'　' * (node.level - 1) * 2).encode('big5')
+        if node.level == 1:
+            return cd[n].encode('big5') + '.'
+        elif node.level == 2:
+            return spaces + \
+                  '(' + cd[n].encode('big5') + ')' + ' '
+        elif node.level == 3:
+            return spaces + str(n) + '.'
+        elif node.level == 4:
+            return spaces + '(' + str(n) + ')' + ' '
+        else:
+            return spaces + str(n) + '.'
+
+    def default(self, node):
         # this handles + and * nodes
 
         print node.type
+
 
 if __name__ == '__main__':
     from optparse import OptionParser
@@ -195,4 +234,5 @@ if __name__ == '__main__':
         tokens = Lexer().tokenize(f.read())
         print len(tokens)
         doc = Parser().parse(tokens)
-        ast = SectLevel(doc)
+        SectLevel(doc)
+        WordOut(doc)
