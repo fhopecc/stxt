@@ -1,9 +1,7 @@
 # coding=utf-8
 from __future__ import with_statement
 from spark import *
-from tree import Node
-import win32com
-from win32com.client import Dispatch, constants, DispatchEx
+from node import Node
 
 class Token(object):
     def __init__(self, type, value):
@@ -46,7 +44,7 @@ class Lexer(GenericScanner):
         self.rv.append(Token('secnumber', s))
 
     def t_line(self, s):
-        r"[^\d\s-][^\n]+\n"
+        r"((\d+[^.])|([^\d-].+))[^\n]+\n"
         self.rv.append(Token('line', s.strip()))
 
 class Parser(GenericParser):
@@ -107,7 +105,6 @@ class Parser(GenericParser):
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0].value
-        print sect.secnumber
         if len(args) == 5:
             sect.append(Node(type='para', value = args[1].value))
             ps = args[3]
@@ -129,92 +126,59 @@ class Parser(GenericParser):
         args[0].value += args[1].value
         return args[0]
 
-class SectLevel(GenericASTTraversal):
+class MakeDocTree(GenericASTTraversal):
+    def __init__(self, ast):
+        GenericASTTraversal.__init__(self, ast)
+        self.sect_stack = []
+        self.preorder()
+
+    @property
+    def level(self):
+        return len(self.sect_stack)
+
+    @property
+    def current_sect(self):
+        return self.sect_stack[-1]
+
+    def push(self, node):
+        if self.level > 0:
+           node.parent =  self.current_sect
+        self.sect_stack.append(node)
+
+    def pop(self):
+        self.sect_stack.pop()
+
+    def n_sect(self, node):
+        node.numbers = node.secnumber.split('.')[:-1]
+        node.level = len(node.numbers)
+
+        if self.level == 0:
+            self.push(node)
+        elif self.level == node.level:
+            brother = self.pop()
+            self.push(node)
+        elif self.level < node.level:
+            self.push(node)
+        elif self.level > node.level:
+            diff = self.level - node.level
+            for i in range(diff + 1):
+                self.pop()
+            self.push(node)
+        
+    def n_para(self, node):
+        node.parent = self.current_sect
+
+class TreeDump(GenericASTTraversal):
     def __init__(self, ast):
         GenericASTTraversal.__init__(self, ast)
         self.preorder()
         self.current_sect = None
 
     def n_sect(self, node):
-        node.numbers = node.secnumber.split('.')[:-1]
-        node.level = len(node.numbers)
-        
-        self.current_sect = node
-        print node.type
-        print node.level
-        print node.secnumber
-
-    def n_para(self, node):
-        #pass
-        #import pdb;pdb.set_trace()
-        #import pdb;pdb.set_trace()
-        #self.current_sect = node
-        node.parent = self.current_sect
+        print '%s%s[%s]' % ('*' * node.height, node.type, node.secnumber)
 
     def default(self, node):
-        print node.type
-
-class WordOut(GenericASTTraversal):
-    def __init__(self, ast):
-        GenericASTTraversal.__init__(self, ast)
-        msword = DispatchEx('Word.Application')
-        msword.Visible = 1	# 1表示要顯示畫面，若為0則不顯示畫面。
-
-        self.word = msword
-        self.doc 	= msword.Documents.Add() # 開啟一個新的文件。
-        self.range	= self.doc.Range()
-        self.range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
-
-        self.range.Style.Font.Size = 12
-        self.range.Style.Font.Bold = 0
-        self.preorder()
-
-    def n_doc(self, node):
-
-        self.range.InsertAfter(node.title + '\n')
-
-    def n_sect(self, node):
-        #import pdb;pdb.set_trace()
-        self.range.InsertAfter(self.sect_num(node))
-        if len(node.kids) == 0:
-            self.range.InsertAfter('\n')
-
-    def n_para(self, node):
-        r	= self.range
-        r.InsertAfter(node.value + '\n')
-        for i in range(node.parent.level):
-            self.range.Paragraphs.Indent
-
-    def sect_num(self, node):
-        cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',u'捌',u'玖','拾',
-             '拾壹','拾貳','拾參','拾肆','拾伍','陸','柒','捌','玖','拾']
-        cd = [u'零',u'一',u'二',u'三',u'四',u'五',u'六',u'七',
-              u'八',u'九',u'十', u'十一','十二','十三','十四',
-              '十五','十六','十七','十九','二十'
-              '二十一','二十二','二十三','二十四','二十五','二十六',
-              '二十七','二十八','二十九', '三十', 
-              '三十一','三十二','三十三','三十四','三十五','三十六',
-              '三十七','三十八','三十九'
-             ]
-        n = int(node.numbers[-1])
-        spaces = (u'　' * (node.level - 1) * 2).encode('big5')
-        if node.level == 1:
-            return cd[n].encode('big5') + '.'
-        elif node.level == 2:
-            return spaces + \
-                  '(' + cd[n].encode('big5') + ')' + ' '
-        elif node.level == 3:
-            return spaces + str(n) + '.'
-        elif node.level == 4:
-            return spaces + '(' + str(n) + ')' + ' '
-        else:
-            return spaces + str(n) + '.'
-
-    def default(self, node):
-        # this handles + and * nodes
-
-        print node.type
-
+        print '%s%s' % ('*' * node.height, node.type)
 
 if __name__ == '__main__':
     from optparse import OptionParser
@@ -223,6 +187,12 @@ if __name__ == '__main__':
     oparser.add_option("-d", "--debug", action="store_true", 
                        dest="debug", default=False,
                        help=u"除錯模式")
+
+    oparser.add_option("-f", "--format", dest="format", 
+                       choices=['tree', 'msword'],
+                       default='tree',
+                       help=u"指定輸出格式")
+
 
     (options, args) = oparser.parse_args()
 
@@ -234,5 +204,9 @@ if __name__ == '__main__':
         tokens = Lexer().tokenize(f.read())
         print len(tokens)
         doc = Parser().parse(tokens)
-        SectLevel(doc)
-        WordOut(doc)
+        MakeDocTree(doc)
+        if options.format == 'tree':
+            TreeDump(doc)
+        elif options.format == 'msword':
+            from formater import word
+            word.MSWordOut(doc)

@@ -6,6 +6,45 @@ import lib.stxt.legal as legal
 
 class UnitTest(unittest.TestCase):
 
+    def testLine(self):
+        case = '''97資料交換管理程序
+
+3.3.1.
+
+資料交換管理程序
+
+97年11月2日
+
+'''
+        tokens = legal.Lexer().tokenize(case)
+
+        #import pdb; pdb.set_trace()
+        t = tokens[0]
+        self.assertEqual('line', t.type)
+        self.assertEqual('97資料交換管理程序', t.value)
+
+        t = tokens[1]
+        self.assertEqual('emptyline', t.type)
+
+        t = tokens[2]
+        self.assertEqual('secnumber', t.type)
+        self.assertEqual('3.3.1.', t.value)
+
+        t = tokens[3]
+        self.assertEqual('emptyline', t.type)
+
+        t = tokens[4]
+        self.assertEqual('line', t.type)
+        self.assertEqual('資料交換管理程序', t.value)
+
+        t = tokens[5]
+        self.assertEqual('emptyline', t.type)
+
+        t = tokens[6]
+        self.assertEqual('line', t.type)
+        self.assertEqual('97年11月2日', t.value)
+
+
     def testLexer(self):
         case = '''資料交換管理程序
 --------
@@ -131,12 +170,12 @@ class UnitTest(unittest.TestCase):
 
         self.assertEqual('內部使用', doc.attrs['機密等級'])
 
-        self.assertEqual(3, len(doc.kids()))
+        self.assertEqual(3, len(doc.kids))
         
         sect = doc[0]
         self.assertEqual('sect', sect.type)
 
-        self.assertEqual(1, len(sect.kids()))
+        self.assertEqual(1, len(sect.kids))
 
         para = sect[0]
         self.assertEqual('para', para.type)
@@ -161,6 +200,7 @@ class UnitTest(unittest.TestCase):
 if __name__ == '__main__':
     '''unittest.main()'''
     tests = unittest.TestSuite()
+    tests.addTest(UnitTest("testLine"))
     tests.addTest(UnitTest("testLexer"))
     tests.addTest(UnitTest("testParser"))
     #tests.debug()
