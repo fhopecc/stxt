@@ -102,6 +102,8 @@ class Parser(GenericParser):
     def p_sect(self, args):
         ''' sect ::= secnumber line emptyline paras emptyline
             sect ::= secnumber emptyline paras emptyline
+            sect ::= secnumber line emptyline paras
+            sect ::= secnumber emptyline paras
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0].value

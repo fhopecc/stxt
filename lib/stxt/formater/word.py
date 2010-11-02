@@ -13,13 +13,21 @@ class MSWordOut(GenericASTTraversal):
         self.word = msword
         self.doc  = msword.Documents.Add() # 開啟一個新的文件。
         self.range	= self.doc.Range()
-        self.range.Style.Font.Name = u"標楷體".encode('cp950')  # 設定字型為標楷體
-        self.range.Style.Font.Size = 12
-        self.range.Style.Font.Bold = 0
+        # 設定字型為標楷體
+        self.range.Font.Name = u"標楷體".encode('cp950')  
         self.preorder()
+        #para = self.doc.Paragraphs(1).Range
+        #para.Paragraphs(1).Style.Font.Size = 18
+        #para.Paragraphs(1).Style.Font.Bold = 1
 
     def n_doc(self, node):
-        self.doc.Paragraphs.Last.Range.InsertAfter(node.title)
+        para = self.doc.Paragraphs.Last
+        #para.Style.Font.Name = u"標楷體".encode('cp950')  
+        #para.Style.Font.Size = 18
+        #para.Style.Font.Bold = 1
+        para.Style.Font.Size = 12
+        para.Style.Font.Bold = 0
+        para.Range.InsertAfter(node.title)
 
     def n_sect(self, node):
         #import pdb;pdb.set_trace()
@@ -27,8 +35,8 @@ class MSWordOut(GenericASTTraversal):
         para = self.doc.Paragraphs.Last
         #para.Format.LeftIndent = 24 * (node.height)
         if node.height == 1:
-            para.Format.LeftIndent = 30 
-            para.Format.FirstLineIndent = -30
+            para.Format.LeftIndent = 20
+            para.Format.FirstLineIndent = -20
         elif node.height == 2:
             para.Format.LeftIndent = 40 
             para.Format.FirstLineIndent = -28
@@ -57,8 +65,9 @@ class MSWordOut(GenericASTTraversal):
         para.Range.InsertAfter(node.value)
         
     def sect_num(self, node):
-        cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',u'捌',u'玖','拾',
-             '拾壹','拾貳','拾參','拾肆','拾伍','陸','柒','捌','玖','拾']
+        cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',
+               u'捌',u'玖',u'拾',u'拾壹', u'拾貳',
+               u'拾參',u'拾肆',u'拾伍',u'拾陸','柒','捌','玖','拾']
         cd = [u'零',u'一',u'二',u'三',u'四',u'五',u'六',u'七',
               u'八',u'九',u'十', u'十一','十二','十三','十四',
               '十五','十六','十七','十九','二十'
@@ -68,15 +77,13 @@ class MSWordOut(GenericASTTraversal):
               '三十七','三十八','三十九'
              ]
         n = int(node.numbers[-1])
-        spaces = ''#(u'　' * (node.level - 1) * 2).encode('big5')
         if node.level == 1:
             return cd[n].encode('big5') + '.'
         elif node.level == 2:
-            return spaces + \
-                  '(' + cd[n].encode('big5') + ')' + ' '
+            return '(' + cd[n].encode('big5') + ')' + ' '
         elif node.level == 3:
-            return spaces + str(n) + '.'
+            return str(n) + '.'
         elif node.level == 4:
-            return spaces + '(' + str(n) + ')' + ' '
+            return '(' + str(n) + ')' + ' '
         else:
-            return spaces + str(n) + '.'
+            return str(n) + '.'
