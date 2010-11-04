@@ -16,16 +16,16 @@ class MSWordOut(GenericASTTraversal):
         # 設定字型為標楷體
         self.range.Font.Name = u"標楷體".encode('cp950')  
         self.preorder()
-        para = self.doc.Paragraphs.First.Range
-        para.Select()
-        para.Style.Font.Size = 18
-        para.Style.Font.Bold = 1
 
+        # Format Title
+        para = self.doc.Paragraphs.First
+        para.Format.Alignment = 1 # center
+        para.Range.Select()
+        msword.Selection.Font.Size = 18
+        msword.Selection.Font.Bold = 1
+        
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last
-        #para.Style.Font.Name = u"標楷體".encode('cp950')  
-        #para.Style.Font.Size = 18
-        #para.Style.Font.Bold = 1
         para.Style.Font.Size = 12
         para.Style.Font.Bold = 0
         para.Range.InsertAfter(node.title)

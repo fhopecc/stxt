@@ -64,6 +64,7 @@ class GenericScanner:
     def error(self, s, pos):
         print "Lexical error at line %s position %s" % \
               (s[:pos].count('\n') ,pos)
+        print s[:pos]
         raise SystemExit
 
     def tokenize(self, s):

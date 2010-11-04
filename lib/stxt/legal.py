@@ -44,8 +44,13 @@ class Lexer(GenericScanner):
         self.rv.append(Token('secnumber', s))
 
     def t_line(self, s):
-        r"((\d+[^.])|([^\d-].+))[^\n]+\n"
+        r"((\d+[^.])|([^\d\-].+))[^\n]+\n"
         self.rv.append(Token('line', s.strip()))
+
+    #def t_default(self, s):
+    #    r'( . | \n )+'
+    #    pass
+
 
 class Parser(GenericParser):
     def __init__(self, start='doc'):
@@ -182,19 +187,24 @@ class TreeDump(GenericASTTraversal):
     def default(self, node):
         print '%s%s' % ('*' * node.height, node.type)
 
+# 1.1 輸入均轉為 unicode 串流 
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog SOURCE [options]"
     oparser = OptionParser(usage, version="%prog 1.1")
-    oparser.add_option("-d", "--debug", action="store_true", 
-                       dest="debug", default=False,
-                       help=u"除錯模式")
+
+    oparser.add_option("-c", "--fileencoding", dest="fileencoding", 
+                       default='utf8',
+                       help=u"指定輸入之字串編碼")
 
     oparser.add_option("-f", "--format", dest="format", 
-                       choices=['tree', 'msword'],
+                       choices=['tree', 'msword', 'tokens'],
                        default='tree',
                        help=u"指定輸出格式")
 
+    oparser.add_option("-D", "--debug", action="store_true", 
+                       dest="debug", default=False,
+                       help=u"除錯模式")
 
     (options, args) = oparser.parse_args()
 
@@ -203,8 +213,18 @@ if __name__ == '__main__':
 
     src = args[0]
     with open(src) as f:
-        tokens = Lexer().tokenize(f.read())
-        print len(tokens)
+        source = f.read() 
+
+        # To unicode string
+        ustring = source.decode(options.fileencoding)
+
+        # tokens = Lexer().tokenize(f.read())
+        tokens = Lexer().tokenize(ustring)
+        if options.format == 'tokens':
+            for t in tokens:
+                print t.type
+                exit()
+
         doc = Parser().parse(tokens)
         MakeDocTree(doc)
         if options.format == 'tree':
