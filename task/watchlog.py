@@ -86,11 +86,12 @@ def hardcopy(path):
 '''
 1.0:檢視、摘要、列印 syslog
 1.1:加入 raw 選項
-1.2:加入 HLTB 選項
+1.2:加入 HLTB 選項，作為稅處的網管人員之快捷用
+1.2.1:加入 HLTB 選項，可設定 -p 作為列印用
 '''
 if __name__ == "__main__":
     usage = u"usage: %prog log [options]"
-    parser = OptionParser(usage, version="%prog 1.1", 
+    parser = OptionParser(usage, version="%prog 1.2", 
              description=u"檢視、摘要、列印 syslog"
         )
     parser.add_option("-t", "--top", type='int', dest="top", 
@@ -129,18 +130,22 @@ if __name__ == "__main__":
             cmd = r'%s -r \\99tt005\syslog\%s.192.168.1.254.log' % \
                   (__file__, \
                   (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            if options.hardcopy: cmd += ' -p'
             os.system(cmd)
         elif options.hltb == 'inner':
-            cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log | more' % \
+            cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log' % \
                   (__file__, \
                   (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            if options.hardcopy: cmd += ' -p'
+            cmd += ' | more'
             os.system(cmd)
 
-            cmd = r'%s -r \\99tt004\log\%s.10.66.7.252.log | more' % \
+            cmd = r'%s -r \\99tt004\log\%s.10.66.7.252.log' % \
                   (__file__, \
                   (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+            if options.hardcopy: cmd += ' -p'
+            cmd += ' | more'
             os.system(cmd)
- 
         exit()
 
     if options.date:
