@@ -1,0 +1,763 @@
+Python
+------
+
+可以使用 repr()函數查看字串的原始格式。 這對於寫正則表達式有所幫助。
+Python的 re模塊有兩個相似的函數：re.match(), re.search 。 兩個函數的匹
+配過程完全一致，只是起點不同。
+
+match只從字串的開始位置進行匹配，如果失敗，它就此放棄；
+
+而search則會鍥而不捨地完全遍歷整個字串中所有可能的位置，
+直到成功地找到一個匹配，或者搜索完字串，以失敗告終。
+
+如果你了解match 的特性（在某些情況下比較快），大可以自由用它；
+如果不太清楚，search通常是你需要的那個函數。
+
+從一堆文本中，找出所有可能的匹配，以列表的形式返回，這種情況用
+findall()這個函數。 例子見後面的代碼。
+
+utf8下，每個漢字佔據3個字符位置，正則式為[\x80-\xff]{3}，這個都知道了吧。
+
+unicode下，漢字的格式如\uXXXX，只要找到對應的字符集的範圍，就能匹配相
+應的字串，方便從多語言文本中挑出所需要的某種語言的文本。 不過，對於像
+日文這樣的粘著語，既有中文字符，又有平假名片假名，或許結果會有所偏差。
+
+兩種字符類可以並列在一起使用，例如，平假名、片假名、中文的放在一起
+，u"[\u4e00-\u9fa5\u3040-\u309f\u30a0-\u30ff]+ "，來自定義所需要匹配的
+文本。
+
+匹配中文時，正則表達式和目標字串的格式必須相同。 這一點至關重要。 或者
+都用默認的utf8，此時你不用額外做什麼；如果是unicode，就需要在正則式之
+前加上u""格式。
+
+可以這樣定義unicode字符串：string=u"我愛正則表達式"。 如果字串不是
+unicode的，可以使用unicode()函數轉換之。 如果你知道源字串的編碼，可以
+使用newstr=unicode(oldstring, original_coding_name)的方式轉換，例如
+linux下常用unicode(string, "utf8")，windows下或許會用cp936吧，沒測試。
+
+Unicode
+-------
+
+Python's re module does not support any Unicode regular expression
+tokens. 
+However, Python Unicode strings do support the \uFFFF notation, 
+and Python's re module can use Unicode strings. 
+
+So you could pass the Unicode string u"\u00E0\\d" to the re module 
+to match à followed by a digit. 
+
+Note that the backslash for \d was escaped, while the one for \u was not. 
+That's because \d is a regular expression token,
+ and a regular expression backslash needs to be escaped.
+
+\u00E0 is a Python string token that shouldn't be escaped.
+The string u"\u00E0\\d" is seen by the regular expression engine as à
+\d.
+
+If you did put another backslash in front of the \u, the regex engine would see \u00E0\d. The regex engine doesn't support the \u token. It will to match the literal text u00E0 followed by a digit instead.
+
+Unicode raw strings
+~~~~~~~~~~~~~~~~~~~
+
+To avoid this confusion, just use Unicode raw strings like ur"\u00E0\d". 
+Then backslashes don't need to be escaped. 
+Python does interpret Unicode escapes in raw strings.
+
+Big5
+----
+
+Big5中文碼(2bytes code)之組成形式如下圖所示： 
+
+┌───────┬───────┐┌───────┬───────┐  
+│   High Byte   │|    Low Byte   |
+├───────┼───────┤├───────┼───────┤
+│   0xA1-0xFE   │|   0x40-0x7E   |
+│               │|      or       |
+│               │|   0xA1-0xFE   |
+└───────┴───────┘└───────┴───────┘
+
+由上圖可看出Big5中文字之 high byte及low byte有重複部分（0xA1-0xFE）。若
+中文字之high byte及low byte皆落在 0xA1-0xFE 這個範圍內，則可能產生第一個
+中文字的low byte與第二個中文字的high byte所組成的字仍是一個合法中文字的
+情形，這就是造成混淆的原因之一。
+
+例如：
+
+資、料、網、不、中、之、互、仍、今、內、分、及、天、太、
+少、手、全、文、方、日、月、它、必、用、民...，
+這些常用到的字都是會產生混淆的字。
+
+會產生混淆的字共有8050個(Big5 A4A1-F9DC)，
+若包括全形符號及造字區，則不只這些。
+
+1.
+
+Regular expression 所構成的樣式(pattern)若含有運算子
+'.'、'*'、\{m,n\}、[...]，
+當與中文字做比對時，可能會將中文字截一半。
+例如：pattern="資．" 並不會找到"資訊"，
+只找到"資"及"訊"的high byte。
+
+2.
+
+Regular expression 之 character class 運算子[...]
+內部只能辨識1byte字元(a、z、3...)，
+無法辨識2bytes字元(Big5中文碼)。
+例如：pattern="資[訊料]" 無法正確比對"資訊"或"資料"等字串。
+
+
+從資料檔(test.doc)中檢索資料
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+蒐集相關資料。
+以正確的資訊做判斷。
+全文檢索滿足您的需要。
+之乎者也成功的中文化。
+在瀏灠畫面中即無法顯示出來。
+擁有全文檢索系統使您的工作更加有效率。
+This is the hour Madam Entreated me to call her.
+
+
+例一、執行 egrep "的｜之" test.doc，結果如下：
+
+
+以正確的資訊做判斷。
+      --
+全文檢索滿足您的需要。
+              --
+之乎者也成功的中文化。
+在瀏灠畫面中即無法顯示出來。
+          ----
+擁有全文檢索系統使您的工作更加有效率。
+                    --
+
+檢索結果的第四列並沒有'的'或'之'兩個字，為何該列會被選出來呢？
+原因是Big5碼'中'(內碼A4A4)的low  byte與'即'(內碼A759)
+的high  byte 恰巧合成'之'(內碼A4A7)這個字，
+因而產生誤判的情形。
+
+例二、執行 grep ``[站立]'' test.doc，結果如下：
+
+蒐集相關資料。
+以正確的資訊做判斷。
+全文檢索滿足您的需要。
+之乎者也成功的中文化。
+在瀏灠畫面中即無法顯示出來。
+擁有全文檢索系統使您的工作更加有效率。
+
+
+可以很清楚的看出test.doc內並不含'站'或'立'這兩個字，
+但卻選出了六列資料。
+若資料量很大，要想去除這種中文字誤判的情形，可真是一件惱人的工作！
+
+      2.中文化的過程
+
+      GNU  grep有完整的原始程式碼，並且在「GNU  General  Public
+    License」的規範下，任何人皆可以自由的擁有、修改及傳播它。這
+    對於想要擁有一個好的中文化工具的我們，的確是一個好消息！
+
+      GNU  grep具備傳統UNIX指令grep家族之功能，且幾乎完全相容。
+    其與grep家族之對應如【表三】所示：
+
+      表三  GNU grep 與 UNIX grep家族
+     ┌────┬───────┬───────────┐
+     │GNU grep│UNIX grep家族 │regular expression    │
+     ├────┼───────┼───────────┤
+     │grep(-G)│grep　　　　　│standard regular exp. │
+     ├────┼───────┼───────────┤
+     │grep -E │egrep　　     │extended regular exp. │
+     ├────┼───────┼───────────┤
+     │grep -F │fgrep　　 　　│不支援 regular exp.   │
+     └────┴───────┴───────────┘
+
+      GNU grep 使用三種字串搜尋方法(matcher)，分別為KWS matcher
+    、DFA  matcher及regex matcher。對於完整字串(註三)所構成的樣
+    式(pattern)，使用KWS matcher 即可完成檢索的工作。而 Regular
+    expression 所構成的樣式，若不含Back-reference 運算子(，-)，
+    使用KWS     matcher及DFA    matcher即可完成檢索工作；若含有
+    Back-reference運算子，則須再使用regex matcher方可完成檢索的
+    工作。【表四】列出GNU grep使用各matcher的情形。
+
+      表四  GNU grep使用的檢索方法
+      ┌─────┬────────────┐
+      │GNU grep  │ 檢索方法               │
+      ├─────┼────────────┤
+      │grep(-G)  │ KWS、DFA、Regex matcher│
+      ├─────┼────────────┤
+      │grep -E   │ KWS、DFA、Regex matcher│
+      ├─────┼────────────┤
+      │grep -F   │KWS matcher             │
+      └─────┴────────────┘
+
+      由於regex  matcher的檢索速度很慢，且DFA matcher已含蓋 KWS
+    matcher的檢索功能，故我們只針對  DFA matcher進行中文化(不考
+    慮Back-reference運算子)。DFA          matcher的理論架構即是
+    Compilers      書上所提的「確定性有限自動機」(Deterministic
+    Finite Automata)，該方法效率佳，但須耗用較多的記憶空間。
+
+      GNU   grep的原始程式使用bit   map  的方式來建立狀態移轉表
+    (transition  table)，這對處理1byte字元(0-255)是一個效率很好
+    的方法。不過若用這個方法為數量龐大的中文字(Big5      2bytes
+    code)建立狀態移轉表，大量的記憶空間需求，並不是一般電腦所能
+    負荷的。因此我們以集合的觀念(交集、餘集、差集、...)改寫bit
+    map的方法，使得記憶空間維持在可接受的狀況。當然效率與空間是
+    一個很難取捨的問題，新的方法執行速度雖然比不上原來的方法，
+    但仍不致於太差。
+
+要能做到徹底的中文化，
+中文字與其它字元(例如：ascii或 0-255)都必須以一個完整字元的觀念來處理，
+而不是將Big5中文碼拆成二個ascii  code分別處理。
+這一點在對 GNU grep 進行中文化的過程皆已考慮到，
+也因此 regular expression中的'．'可以代表
+一個英文字或一個Big5中文字；'資〔訊料源〕'可以找到「資訊」、
+「資料」或「資源」等詞，不再有受騙的恐懼了。
+
+      四、效能測試
+
+      要知道一個工具的性能好壞，一份完整的測試報告是最具說服力
+    的。以下就是我們對中文化的  GNU grep所做的效能測試(測試環境
+    為SUN  SPARCCenter 2000上執行SunOS 5.4)，並與未中文化的 GNU
+    grep及  UNIX 上的 egrep 作一比較。(中文化後的GNU grep我們以
+    cgrep來命名)。
+
+      表五  測試時所使用的樣式(pattern)
+┌───┬────────────────────────────────┐
+│      │       pattern(s)                                              #│
+├───┼────────────────────────────────┤
+│pat. 1│       window                                                  1│
+├───┼────────────────────────────────┤
+│pat. 2│window|\<the\>|pat.*n|disk|easy                                5│
+├───┼────────────────────────────────┤
+│pat. 3│window|\<the\>|pat.*n|disk|easy|grand|happy|mouth|noun|open   10│
+├───┼────────────────────────────────┤
+│pat. 4│window|\<the\>|pat.*n|disk|easy|grand|happy|mouth|noun|open|    │
+│      │quit|quiz|rich|string|teach|limit|vesa|wear|xray|year         20│
+├───┼────────────────────────────────┤
+│pat. 5│window|\<the\>|pat.*n|disk|easy|grand|happy|mouth|noun|open|    │
+│      │quit|quiz|rich|string|teach|limit|vesa|wear|xray|year|zone|     │
+│      │zoo|bolck|blank|people                                        25│
+├───┼────────────────────────────────┤
+│pat. 6│window|\<the\>|pat.*n|disk|easy|grand|happy|mouth|noun|open|    │
+│      │quit|quiz|rich|string|teach|limit|vesa|wear|xray|year|zone|     │
+│      │zoo|bolck|blank|people|monney|splin|shift|pause|scroll|         │
+│      │enter|custom|friend|share|close|match|philo|phy|compact|        │
+│      │stock|head|trail|hair|eye                                     60│
+└───┴────────────────────────────────┘
+
+      【表五】為測試時所使用的樣式(pat.1-6)，其中第三欄(＃)內的
+    數字表示該樣式是由幾個子樣式(subpattern)所組成。【表六】內
+    之數字為程式執行時所花費的實際時間(real time；單位：秒)。若
+    將測試結果以曲線圖表示，可以更清楚的看出 egrep、 grep -E 及
+    cgrep -E之執行效率。如【圖一】所示，可以很清楚的看出，egrep
+    之時間曲線幾乎為指數成長，而grep  -E與cgrep -E 則為線性成長
+    ，且曲線有漸趨平緩的傾向。
+
+      表六  egrep、grep -E、cgrep -E 測試結果
+    ┌────┬───┬───┬───┬───┬───┬───┐
+    │＃---＞ │pat. 1│pat. 2│pat. 3│pat. 4│pat. 5│pat.6 │
+    ├────┼───┼───┼───┼───┼───┼───┤
+    │        │  1   │ 5    │ 10   │ 20   │ 25   │  60  │
+    ├────┼───┼───┼───┼───┼───┼───┤
+    │egrep   │  4.4 │ 4.6  │  5.0 │ 22.2 │ 39.8 │ 467.7│
+    ├────┼───┼───┼───┼───┼───┼───┤
+    │grep  -E│  0.6 │ 3.0  │  3.0 │  3.3 │  3.7 │   7.9│
+    ├────┼───┼───┼───┼───┼───┼───┤
+    │cgrep -E│  9.7 │10.0  │ 15.0 │ 17.0 │ 18.2 │  20.9│
+    └────┴───┴───┴───┴───┴───┴───┘
+
+      圖一  egrep、grep -E、cgrep -E之曲線圖
+
+
+      五、結語
+
+      由計算中心開發完成的「中文全文檢索資料庫」目前已有文字版
+    及WWW(Word  Wide Web)版本，使用者已遍及世界各學術領域。為了
+    讓使用者能更靈活的使用這個資料庫，我們已著手進行加入
+    wildcard字元（＊、？）的檢索功能到這個資料庫內。
+
+      檢索時，要完成單一樣式(pattern)結合  wildcard字元的檢索功
+    能可以輕易的做到，不過結合多個樣式(multipattern)與 wildcard
+    字元的檢索功能，若要維持高效率的檢索能力，仍得多下點功夫。
+
+      欲達到多個樣式(multipattern)與   wildcard字元的檢索功能，
+    regular  expression是直覺可以運用的好方法，它在 UNIX 上已被
+    廣泛運用(例如：grep、egrep、awk、sed、vi、emacs，...)，並且
+    可能已有完整的C Library可供使用(註四)。
+
+      我們查閱許多演算法相關書籍，並希望能找到UNIX上結合
+    multipattern與regular  expression的檢索工具---egrep所使用的
+    演算法。在這個過程中測試了egrep、agrep(註五)及GNU  grep的功
+    能與執行效率，並閱讀 agrep 及GNU grep的部份程式碼。評估後，
+    由於GNU      grep有完整的程式，並已支援extended     regular
+    expression(．、＊、｜、...)，故選定GNU      grep有關regular
+    expression之相關程式作深入瞭解，進而完成DFA  module之中文化
+    ，這就是cgrep中文化的由來。
+
+      cgrep是在強化「中文全文檢索資料庫」功能的途中，所獲得的附
+    加成果，相信對許多人的工作會有所幫助，因此先提出來與各位分
+    享！不過，截至目前為止，要完成 wildcard 字元與 multipattern
+    的全文檢索功能，仍有許多技術上的瓶頸等待突破，期待能早日提
+    供各位一個更完整的「中文全文檢索資料庫」。
+
+      註
+
+      目前支援   regular  expression的工具，通常只處理ASCII字元
+    (0-127)組成的   regular  expression，頂多也只擴充到處理字元
+    0-255(即8bits字元，或稱1byte字元)。至於中文字的處理，有些工
+    具並不支援，或者只支援由  EUC(Extended UNIX Code)構成的中文
+    字。對於使用最廣泛的Big5中文碼---  2bytes字元，現有工具上之
+    regular expression並無法正確的表示。
+
+      理想上應該只有一個grep指令，而非grep家族(grep、egrep、
+    fgrep)，以減少使用者因記憶太多指令而造成混淆或誤用的情況。
+    然而權衡效率與記憶空間使用的情形，要找到一個既節省空間且有
+    效率的演算法，實在不是一件容易辦到的事。grep家族即是使用不
+    同的演算法(DFA、NFA、...)分別完成，以確保其能有較佳的執行表
+    現。
+
+      完整字串是由不含'＊'運算子的regular  expression所構成。以
+    實例來說明完整字串的含義：字串``happy''、``the｜之｜
+    people''皆為完整字串所構成的樣式(pattern)；而字串``hapy''、
+    ``[Tt]he｜peoe｜〔之的〕''則不是由完整字串所構成的樣式。
+
+      UNIX  C 上有幾組處理regular expression的 library function
+    ，例如：【compile()，step()】、【recomp()，reexec()】。經研
+    讀其man  page  及實際測試後，發現它們只支援standard regular
+    expression而不支援extended regular expression，故無法運用於
+    muliti-pattern之檢索需求。
+
+      agrep為中正大學吳昇(Sun Wu)老師的作品。它除了擁有 grep 的
+    功能外，並提供許多新的功能，例如：容錯搜尋及樣式間的邏輯運
+    算(AND、OR)，不過仍有許多使用上的限制。另外，吳老師有一項新
+    作品GAIS(Global Area Information Servers)，是一個多用途的資
+    訊搜尋系統，有興趣的讀者可以使用WWW             Browser連至
+    http://gais.cs.ccu.edu.tw，以獲得更詳細的訊息。
+
+      (在進行 GNU grep 中文化的過程中，感謝工作站袁天竑、陳弘哲
+    兩位同仁熱心協助，提供最新的程式(source code)及技術手冊，同
+    時，更感謝林晰先生細心的指導，使得本文得順利完成)。
+  
+正規表示法 
+
+#.匹配中文字元的正規表示法：[\u4e00-\u9fa5] 
+
+評注：匹配中文還真是個頭疼的事，有了這個表達式就好辦了 
+
+#.匹配雙字節字元(包括漢字在內)：[^\x00-\xff] 
+
+評注：可以用來計算字元串的長度（一個雙字節字元長度計2，ASCII字元計1） 
+
+#.匹配空白行的正規表示法：\n\s*\r 
+
+評注：可以用來刪除空白行 
+
+#.匹配HTML標記的正規表示法：<(\S*?)[^>]*>.*?|<.*? /> 
+
+評注：網上流傳的版本太糟糕，上面這個也僅僅能匹配部分，
+對於複雜的嵌套標記依舊無能為力 
+
+#.匹配首尾空白字元的正規表示法：^\s*|\s*$ 
+
+評注：可以用來刪除行首行尾的空白字元(包括空格、制表符、換頁符等等)，
+非常有用的表達式 
+
+#.匹配Email地址的正規表示法：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)* 
+
+評注：表單驗證時很實用 
+
+#.匹配網址URL的正規表示法：[a-zA-z]+://[^\s]* 
+
+評注：網上流傳的版本功能很有限，上面這個基本可以滿足需求 
+
+#.匹配帳號是否合法(字母開頭，允許5-16字節，允許字母數字下劃線)：
+
+^[a-zA-Z][a-zA-Z0-9_]{4,15}$ 
+
+評注：表單驗證時很實用 
+
+#.匹配國內電話號碼：\d{3}-\d{8}|\d{4}-\d{7} 
+
+評注：匹配形式如 0511-4405222 或 021-87888822 
+
+#.匹配騰訊QQ號：[1-9][0-9]{4,} 
+評注：騰訊QQ號從10000開始 
+
+#.匹配中國郵政編碼：[1-9]\d{5}(?!\d) 
+評注：中國郵政編碼為6位數字 
+
+#.匹配身份證：\d{15}|\d{18} 
+評注：中國的身份證為15位或18位 
+
+#.匹配ip地址：\d+\.\d+\.\d+\.\d+ 
+評注：提取ip地址時有用 
+
+#.匹配特定數字： 
+^[1-9]\d*$　 　 //匹配正整數 
+^-[1-9]\d*$ 　 //匹配負整數 
+^-?[1-9]\d*$　　 //匹配整數 
+^[1-9]\d*|0$　 //匹配非負整數（正整數 + 0） 
+^-[1-9]\d*|0$　　 //匹配非正整數（負整數 + 0） 
+^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$　　 //匹配正浮點數 
+^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$　 //匹配負浮點數 
+^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$　 //匹配浮點數 
+^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$　　 //匹配非負浮點數（正浮點數 + 0） 
+^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$　　//匹配非正浮點數（負浮點數 + 0） 
+評注：處理大量數據時有用，具體應用時注意修正 
+
+#.匹配特定字元串： 
+^[A-Za-z]+$　　//匹配由26個英文字母組成的字元串 
+^[A-Z]+$　　//匹配由26個英文字母的大寫組成的字元串 
+^[a-z]+$　　//匹配由26個英文字母的小寫組成的字元串 
+^[A-Za-z0-9]+$　　//匹配由數字和26個英文字母組成的字元串 
+^\w+$　　//匹配由數字、26個英文字母或者下劃線組成的字元串 
+
+
+#.正規表示法 \d前面加個"\"轉義字元 這裡是判斷YYYY-MM-DD這種格式的，基本上把閏年和2月等的情況都考慮進去了 ^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))$ 
+
+#.下面的是加了時間驗證的 ^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-)) (20|21|22|23|[0-1]?\d):[0-5]?\d:[0-5]?\d$ 
+
+
+Tutorial
+Tools & Languages
+Examples
+Books & Reference
+	Easily use the power of regular expressions in your Python scripts with RegexBuddy.
+Create and analyze regex patterns with RegexBuddy's intuitive regex building blocks. Implement regexes in your Python scripts with instant Python code snippets. Just tell RegexBuddy what you want to achieve, and copy and paste the auto-generated Python code. Get your own copy of RegexBuddy now.
+Python's re Module
+
+Python is a high level open source scripting language. Python's built-in "re" module provides excellent support for regular expressions, with a modern and complete regex flavor. The only significant features missing from Python's regex syntax are atomic grouping, possessive quantifiers and Unicode properties.
+
+The first thing to do is to import the regexp module into your script with import re.
+
+
+ 
+Regex Search and Match
+
+Call re.search(regex, subject) to apply a regex pattern to a subject string. The function returns None if the matching attempt fails, and a Match object otherwise. Since None evaluates to False, you can easily use re.search() in an if statement. The Match object stores details about the part of the string matched by the regular expression pattern.
+
+You can set regex matching modes by specifying a special constant as a third parameter to re.search(). re.I or re.IGNORECASE applies the pattern case insensitively. re.S or re.DOTALL makes the dot match newlines. re.M or re.MULTILINE makes the caret and dollar match after and before line breaks in the subject string. There is no difference between the single-letter and descriptive options, except for the number of characters you have to type in. To specify more than one option, "or" them together with the | operator: re.search("^a", "abc", re.I | re.M).
+
+By default, Python's regex engine only considers the letters A through Z, the digits 0 through 9, and the underscore as "word characters". Specify the flag re.L or re.LOCALE to make \w match all characters that are considered letters given the current locale settings. Alternatively, you can specify re.U or re.UNICODE to treat all letters from all scripts as word characters. The setting also affects word boundaries.
+
+Do not confuse re.search() with re.match(). Both functions do exactly the same, with the important distinction that re.search() will attempt the pattern throughout the string, until it finds a match. re.match() on the other hand, only attempts the pattern at the very start of the string. Basically, re.match("regex", subject) is the same as re.search("\Aregex", subject). Note that re.match() does not require the regex to match the entire string. re.match("a", "ab") will succeed.
+
+To get all matches from a string, call re.findall(regex, subject). This will return an array of all non-overlapping regex matches in the string. "Non-overlapping" means that the string is searched through from left to right, and the next match attempt starts beyond the previous match. If the regex contains one or more capturing groups, re.findall() returns an array of tuples, with each tuple containing text matched by all the capturing groups. The overall regex match is not included in the tuple, unless you place the entire regex inside a capturing group.
+
+More efficient than re.findall() is re.finditer(regex, subject). It returns an iterator that enables you to loop over the regex matches in the subject string: for m in re.finditer(regex, subject). The for-loop variable m is a Match object with the details of the current match.
+
+Unlike re.search() and re.match(), re.findall() and re.finditer() do not support an optional third parameter with regex matching flags. Instead, you can use global mode modifiers at the start of the regex. E.g. "(?i)regex" matches regex case insensitively.
+
+Strings, Backslashes and Regular Expressions
+
+The backslash is a metacharacter in regular expressions, and is used to escape other metacharacters. The regex \\ matches a single backslash. \d is a single token matching a digit.
+
+Python strings also use the backslash to escape characters. The above regexes are written as Python strings as "\\\\" and "\\w". Confusing indeed.
+
+Fortunately, Python also has "raw strings" which do not apply special
+treatment to backslashes. As raw strings, the above regexes become
+r"\\" and r"\w". The only limitation of using raw strings is that the
+delimiter you're using for the string must not appear in the regular
+expression, as raw strings do not offer a means to escape it.
+
+You can use \n and \t in raw strings. Though raw strings do not support these escapes, the regular expression engine does. The end result is the same.
+
+
+Tutorial
+Tools & Languages
+Examples
+Books & Reference
+	Easily create and understand regular expressions today.
+Compose and analyze regex patterns with RegexBuddy's easy-to-grasp regex blocks and intuitive regex tree, instead of or in combination with the traditional regex syntax. Developed by the author of this website, RegexBuddy makes learning and using regular expressions easier than ever. Get your own copy of RegexBuddy now
+Unicode Regular Expressions
+
+Unicode is a character set that aims to define all characters and glyphs from all human languages, living and dead. With more and more software being required to support multiple languages, or even just any language, Unicode has been strongly gaining popularity in recent years. Using different character sets for different languages is simply too cumbersome for programmers and users.
+
+Unfortunately, Unicode brings its own requirements and pitfalls when it comes to regular expressions. Of the regex flavors discussed in this tutorial, Java, XML and the .NET framework use Unicode-based regex engines. Perl supports Unicode starting with version 5.6. PCRE can optionally be compiled with Unicode support. Note that PCRE is far less flexible in what it allows for the \p tokens, despite its name "Perl-compatible". The PHP preg functions, which are based on PCRE, support Unicode when the /u option is appended to the regular expression.
+
+RegexBuddy's regex engine is fully Unicode-based starting with version 2.0.0. RegexBuddy 1.x.x did not support Unicode at all. PowerGREP uses the same Unicode regex engine starting with version 3.0.0. Earlier versions would convert Unicode files to ANSI prior to grepping with an 8-bit (i.e. non-Unicode) regex engine. EditPad Pro supports Unicode starting with version 6.0.0.
+
+
+ 
+Characters, Code Points and Graphemes or How Unicode Makes a Mess of Things
+
+Most people would consider à a single character. Unfortunately, it need not be depending on the meaning of the word "character".
+
+All Unicode regex engines discussed in this tutorial treat any single Unicode code point as a single character. When this tutorial tells you that the dot matches any single character, this translates into Unicode parlance as "the dot matches any single Unicode code point". In Unicode, à can be encoded as two code points: U+0061 (a) followed by U+0300 (grave accent). In this situation, . applied to à will match a without the accent. ^.$ will fail to match, since the string consists of two code points. ^..$ matches à.
+
+The Unicode code point U+0300 (grave accent) is a combining mark. Any code point that is not a combining mark can be followed by any number of combining marks. This sequence, like U+0061 U+0300 above, is displayed as a single grapheme on the screen.
+
+Unfortunately, à can also be encoded with the single Unicode code point U+00E0 (a with grave accent). The reason for this duality is that many historical character sets encode "a with grave accent" as a single character. Unicode's designers thought it would be useful to have a one-on-one mapping with popular legacy character sets, in addition to the Unicode way of separating marks and base letters (which makes arbitrary combinations not supported by legacy character sets possible).
+
+How to Match a Single Unicode Grapheme
+
+Matching a single grapheme, whether it's encoded as a single code point, or as multiple code points using combining marks, is easy in Perl, RegexBuddy and PowerGREP: simply use \X. You can consider \X the Unicode version of the dot in regex engines that use plain ASCII. There is one difference, though: \X always matches line break characters, whereas the dot does not match line break characters unless you enable the dot matches newline matching mode.
+
+Java and .NET unfortunately do not support \X (yet). Use \P{M}\p{M}* as a substitute. To match any number of graphemes, use (?:\P{M}\p{M}*)+ instead of \X+.
+
+Matching a Specific Code Point
+
+To match a specific Unicode code point, use \uFFFF where FFFF is the hexadecimal number of the code point you want to match. You must always specify 4 hexadecimal digits E.g. \u00E0 matches à, but only when encoded as a single code point U+00E0.
+
+Perl and PCRE do not support the \uFFFF syntax. They use \x{FFFF} instead. You can omit leading zeros in the hexadecimal number between the curly braces. Since \x by itself is not a valid regex token, \x{1234} can never be confused to match \x 1234 times. It always matches the Unicode code point U+1234. \x{1234}{5678} will try to match code point U+1234 exactly 5678 times.
+
+In Java, the regex token \uFFFF only matches the specified code point, even when you turned on canonical equivalence. However, the same syntax \uFFFF is also used to insert Unicode characters into literal strings in the Java source code. Pattern.compile("\u00E0") will match both the single-code-point and double-code-point encodings of à, while Pattern.compile("\\u00E0") matches only the single-code-point version. Remember that when writing a regex as a Java string literal, backslashes must be escaped. The former Java code compiles the regex à, while the latter compiles \u00E0. Depending on what you're doing, the difference may be significant.
+
+JavaScript, which does not offer any Unicode support through its RegExp class, does support \uFFFF for matching a single Unicode code point as part of its string syntax.
+
+XML Schema does not have a regex token for matching Unicode code points. However, you can easily use XML entities like &#xFFFF; to insert literal code points into your regular expression.
+
+Unicode Character Properties
+
+In addition to complications, Unicode also brings new possibilities. One is that each Unicode character belongs to a certain category. You can match a single character belonging to a particular category with \p{}. You can match a single character not belonging to a particular category with \P{}.
+
+Again, "character" really means "Unicode code point". \p{L} matches a single code point in the category "letter". If your input string is à encoded as U+0061 U+0300, it matches a without the accent. If the input is à encoded as U+00E0, it matches à with the accent. The reason is that both the code points U+0061 (a) and U+00E0 (à) are in the category "letter", while U+0300 is in the category "mark".
+
+You should now understand why \P{M}\p{M}* is the equivalent of \X. \P{M} matches a code point that is not a combining mark, while \p{M}* matches zero or more code points that are combining marks. To match a letter including any diacritics, use \p{L}\p{M}*. This last regex will always match à, regardless of how it is encoded.
+
+The .NET Regex class and PCRE are case sensitive when it checks the part between curly braces of a \p token. \p{Zs} will match any kind of space character, while \p{zs} will throw an error. All other regex engines described in this tutorial will match the space in both cases, ignoring the case of the property between the curly braces. Still, I recommend you make a habit of using the same uppercase and lowercase combination as I did in the list of properties below. This will make your regular expressions work with all Unicode regex engines.
+
+In addition to the standard notation, \p{L}, Java, Perl, PCRE and the JGsoft engine allow you to use the shorthand \pL. The shorthand only works with single-letter Unicode properties. \pLl is not the equivalent of \p{Ll}. It is the equivalent of \p{L}l which matches Al or àl or any Unicode letter followed by a literal l.
+
+Perl and the JGsoft engine also support the longhand \p{Letter}. You can find a complete list of all Unicode properties below. You may omit the underscores or use hyphens or spaces instead.
+
+\p{L} or \p{Letter}: any kind of letter from any language.
+\p{Ll} or \p{Lowercase_Letter}: a lowercase letter that has an uppercase variant.
+\p{Lu} or \p{Uppercase_Letter}: an uppercase letter that has a lowercase variant.
+\p{Lt} or \p{Titlecase_Letter}: a letter that appears at the start of a word when only the first letter of the word is capitalized.
+\p{L&} or \p{Letter&}: a letter that exists in lowercase and uppercase variants (combination of Ll, Lu and Lt).
+\p{Lm} or \p{Modifier_Letter}: a special character that is used like a letter.
+\p{Lo} or \p{Other_Letter}: a letter or ideograph that does not have lowercase and uppercase variants.
+\p{M} or \p{Mark}: a character intended to be combined with another character (e.g. accents, umlauts, enclosing boxes, etc.).
+\p{Mn} or \p{Non_Spacing_Mark}: a character intended to be combined with another character without taking up extra space (e.g. accents, umlauts, etc.).
+\p{Mc} or \p{Spacing_Combining_Mark}: a character intended to be combined with another character that takes up extra space (vowel signs in many Eastern languages).
+\p{Me} or \p{Enclosing_Mark}: a character that encloses the character is is combined with (circle, square, keycap, etc.).
+\p{Z} or \p{Separator}: any kind of whitespace or invisible separator.
+\p{Zs} or \p{Space_Separator}: a whitespace character that is invisible, but does take up space.
+\p{Zl} or \p{Line_Separator}: line separator character U+2028.
+\p{Zp} or \p{Paragraph_Separator}: paragraph separator character U+2029.
+\p{S} or \p{Symbol}: math symbols, currency signs, dingbats, box-drawing characters, etc..
+\p{Sm} or \p{Math_Symbol}: any mathematical symbol.
+\p{Sc} or \p{Currency_Symbol}: any currency sign.
+\p{Sk} or \p{Modifier_Symbol}: a combining character (mark) as a full character on its own.
+\p{So} or \p{Other_Symbol}: various symbols that are not math symbols, currency signs, or combining characters.
+\p{N} or \p{Number}: any kind of numeric character in any script.
+\p{Nd} or \p{Decimal_Digit_Number}: a digit zero through nine in any script except ideographic scripts.
+\p{Nl} or \p{Letter_Number}: a number that looks like a letter, such as a Roman numeral.
+\p{No} or \p{Other_Number}: a superscript or subscript digit, or a number that is not a digit 0..9 (excluding numbers from ideographic scripts).
+\p{P} or \p{Punctuation}: any kind of punctuation character.
+\p{Pd} or \p{Dash_Punctuation}: any kind of hyphen or dash.
+\p{Ps} or \p{Open_Punctuation}: any kind of opening bracket.
+\p{Pe} or \p{Close_Punctuation}: any kind of closing bracket.
+\p{Pi} or \p{Initial_Punctuation}: any kind of opening quote.
+\p{Pf} or \p{Final_Punctuation}: any kind of closing quote.
+\p{Pc} or \p{Connector_Punctuation}: a punctuation character such as an underscore that connects words.
+\p{Po} or \p{Other_Punctuation}: any kind of punctuation character that is not a dash, bracket, quote or connector.
+\p{C} or \p{Other}: invisible control characters and unused code points.
+\p{Cc} or \p{Control}: an ASCII 0x00..0x1F or Latin-1 0x80..0x9F control character.
+\p{Cf} or \p{Format}: invisible formatting indicator.
+\p{Co} or \p{Private_Use}: any code point reserved for private use.
+\p{Cs} or \p{Surrogate}: one half of a surrogate pair in UTF-16 encoding.
+\p{Cn} or \p{Unassigned}: any code point to which no character has been assigned.
+Unicode Scripts
+
+The Unicode standard places each assigned code point (character) into one script. A script is a group of code points used by a particular human writing system. Some scripts like Thai correspond with a single human language. Other scripts like Latin span multiple languages.
+
+Some languages are composed of multiple scripts. There is no Japanese Unicode script. Instead, Unicode offers the Hiragana, Katakana, Han and Latin scripts that Japanese documents are usually composed of.
+
+A special script is the Common script. This script contains all sorts of characters that are common to a wide range of scripts. It includes all sorts of punctuation, whitespace and miscellaneous symbols.
+
+All assigned Unicode code points (those matched by \P{Cn}) are part of exactly one Unicode script. All unassigned Unicode code points (those matched by \p{Cn}) are not part of any Unicode script at all.
+
+Very few regular expression engines support Unicode scripts today. Of all the flavors discussed in this tutorial, only the JGsoft engine, Perl and PCRE can match Unicode scripts. Here's a complete list of all Unicode scripts:
+
+\p{Common}
+\p{Arabic}
+\p{Armenian}
+\p{Bengali}
+\p{Bopomofo}
+\p{Braille}
+\p{Buhid}
+\p{CanadianAboriginal}
+\p{Cherokee}
+\p{Cyrillic}
+\p{Devanagari}
+\p{Ethiopic}
+\p{Georgian}
+\p{Greek}
+\p{Gujarati}
+\p{Gurmukhi}
+\p{Han}
+\p{Hangul}
+\p{Hanunoo}
+\p{Hebrew}
+\p{Hiragana}
+\p{Inherited}
+\p{Kannada}
+\p{Katakana}
+\p{Khmer}
+\p{Lao}
+\p{Latin}
+\p{Limbu}
+\p{Malayalam}
+\p{Mongolian}
+\p{Myanmar}
+\p{Ogham}
+\p{Oriya}
+\p{Runic}
+\p{Sinhala}
+\p{Syriac}
+\p{Tagalog}
+\p{Tagbanwa}
+\p{TaiLe}
+\p{Tamil}
+\p{Telugu}
+\p{Thaana}
+\p{Thai}
+\p{Tibetan}
+\p{Yi}
+Instead of the \p{Latin} syntax you can also use \p{IsLatin}. The "Is" syntax is useful for distinguishing between scripts and blocks, as explained in the next section. Unfortunately, PCRE does not support "Is" as of this writing.
+
+Unicode Blocks
+
+The Unicode standard divides the Unicode character map into different blocks or ranges of code points. Each block is used to define characters of a particular script like "Tibetan" or belonging to a particular group like "Braille Patterns". Most blocks include unassigned code points, reserved for future expansion of the Unicode standard.
+
+Note that Unicode blocks do not correspond 100% with scripts. An essential difference between blocks and scripts is that a block is a single contiguous range of code points, as listed below. Scripts consist of characters taken from all over the Unicode character map. Blocks may include unassigned code points (i.e. code points matched by \p{Cn}). Scripts never include unassigned code points. Generally, if you're not sure whether to use a Unicode script or Unicode block, use the script.
+
+E.g. the Currency block does not include the dollar and yen symbols. Those are found in the Basic_Latin and Latin-1_Supplement blocks instead, for historical reasons, even though both are currency symbols, and the yen symbol is not a Latin character. You should not blindly use any of the blocks listed below based on their names. Instead, look at the ranges of characters they actually match. A tool like RegexBuddy can be very helpful with this. E.g. the Unicode property \p{Sc} or \p{Currency_Symbol} would be a better choice than the Unicode block \p{InCurrency} when trying to find all currency symbols.
+
+\p{InBasic_Latin}: U+0000..U+007F
+\p{InLatin-1_Supplement}: U+0080..U+00FF
+\p{InLatin_Extended-A}: U+0100..U+017F
+\p{InLatin_Extended-B}: U+0180..U+024F
+\p{InIPA_Extensions}: U+0250..U+02AF
+\p{InSpacing_Modifier_Letters}: U+02B0..U+02FF
+\p{InCombining_Diacritical_Marks}: U+0300..U+036F
+\p{InGreek_and_Coptic}: U+0370..U+03FF
+\p{InCyrillic}: U+0400..U+04FF
+\p{InCyrillic_Supplementary}: U+0500..U+052F
+\p{InArmenian}: U+0530..U+058F
+\p{InHebrew}: U+0590..U+05FF
+\p{InArabic}: U+0600..U+06FF
+\p{InSyriac}: U+0700..U+074F
+\p{InThaana}: U+0780..U+07BF
+\p{InDevanagari}: U+0900..U+097F
+\p{InBengali}: U+0980..U+09FF
+\p{InGurmukhi}: U+0A00..U+0A7F
+\p{InGujarati}: U+0A80..U+0AFF
+\p{InOriya}: U+0B00..U+0B7F
+\p{InTamil}: U+0B80..U+0BFF
+\p{InTelugu}: U+0C00..U+0C7F
+\p{InKannada}: U+0C80..U+0CFF
+\p{InMalayalam}: U+0D00..U+0D7F
+\p{InSinhala}: U+0D80..U+0DFF
+\p{InThai}: U+0E00..U+0E7F
+\p{InLao}: U+0E80..U+0EFF
+\p{InTibetan}: U+0F00..U+0FFF
+\p{InMyanmar}: U+1000..U+109F
+\p{InGeorgian}: U+10A0..U+10FF
+\p{InHangul_Jamo}: U+1100..U+11FF
+\p{InEthiopic}: U+1200..U+137F
+\p{InCherokee}: U+13A0..U+13FF
+\p{InUnified_Canadian_Aboriginal_Syllabics}: U+1400..U+167F
+\p{InOgham}: U+1680..U+169F
+\p{InRunic}: U+16A0..U+16FF
+\p{InTagalog}: U+1700..U+171F
+\p{InHanunoo}: U+1720..U+173F
+\p{InBuhid}: U+1740..U+175F
+\p{InTagbanwa}: U+1760..U+177F
+\p{InKhmer}: U+1780..U+17FF
+\p{InMongolian}: U+1800..U+18AF
+\p{InLimbu}: U+1900..U+194F
+\p{InTai_Le}: U+1950..U+197F
+\p{InKhmer_Symbols}: U+19E0..U+19FF
+\p{InPhonetic_Extensions}: U+1D00..U+1D7F
+\p{InLatin_Extended_Additional}: U+1E00..U+1EFF
+\p{InGreek_Extended}: U+1F00..U+1FFF
+\p{InGeneral_Punctuation}: U+2000..U+206F
+\p{InSuperscripts_and_Subscripts}: U+2070..U+209F
+\p{InCurrency_Symbols}: U+20A0..U+20CF
+\p{InCombining_Diacritical_Marks_for_Symbols}: U+20D0..U+20FF
+\p{InLetterlike_Symbols}: U+2100..U+214F
+\p{InNumber_Forms}: U+2150..U+218F
+\p{InArrows}: U+2190..U+21FF
+\p{InMathematical_Operators}: U+2200..U+22FF
+\p{InMiscellaneous_Technical}: U+2300..U+23FF
+\p{InControl_Pictures}: U+2400..U+243F
+\p{InOptical_Character_Recognition}: U+2440..U+245F
+\p{InEnclosed_Alphanumerics}: U+2460..U+24FF
+\p{InBox_Drawing}: U+2500..U+257F
+\p{InBlock_Elements}: U+2580..U+259F
+\p{InGeometric_Shapes}: U+25A0..U+25FF
+\p{InMiscellaneous_Symbols}: U+2600..U+26FF
+\p{InDingbats}: U+2700..U+27BF
+\p{InMiscellaneous_Mathematical_Symbols-A}: U+27C0..U+27EF
+\p{InSupplemental_Arrows-A}: U+27F0..U+27FF
+\p{InBraille_Patterns}: U+2800..U+28FF
+\p{InSupplemental_Arrows-B}: U+2900..U+297F
+\p{InMiscellaneous_Mathematical_Symbols-B}: U+2980..U+29FF
+\p{InSupplemental_Mathematical_Operators}: U+2A00..U+2AFF
+\p{InMiscellaneous_Symbols_and_Arrows}: U+2B00..U+2BFF
+\p{InCJK_Radicals_Supplement}: U+2E80..U+2EFF
+\p{InKangxi_Radicals}: U+2F00..U+2FDF
+\p{InIdeographic_Description_Characters}: U+2FF0..U+2FFF
+\p{InCJK_Symbols_and_Punctuation}: U+3000..U+303F
+\p{InHiragana}: U+3040..U+309F
+\p{InKatakana}: U+30A0..U+30FF
+\p{InBopomofo}: U+3100..U+312F
+\p{InHangul_Compatibility_Jamo}: U+3130..U+318F
+\p{InKanbun}: U+3190..U+319F
+\p{InBopomofo_Extended}: U+31A0..U+31BF
+\p{InKatakana_Phonetic_Extensions}: U+31F0..U+31FF
+\p{InEnclosed_CJK_Letters_and_Months}: U+3200..U+32FF
+\p{InCJK_Compatibility}: U+3300..U+33FF
+\p{InCJK_Unified_Ideographs_Extension_A}: U+3400..U+4DBF
+\p{InYijing_Hexagram_Symbols}: U+4DC0..U+4DFF
+\p{InCJK_Unified_Ideographs}: U+4E00..U+9FFF
+\p{InYi_Syllables}: U+A000..U+A48F
+\p{InYi_Radicals}: U+A490..U+A4CF
+\p{InHangul_Syllables}: U+AC00..U+D7AF
+\p{InHigh_Surrogates}: U+D800..U+DB7F
+\p{InHigh_Private_Use_Surrogates}: U+DB80..U+DBFF
+\p{InLow_Surrogates}: U+DC00..U+DFFF
+\p{InPrivate_Use_Area}: U+E000..U+F8FF
+\p{InCJK_Compatibility_Ideographs}: U+F900..U+FAFF
+\p{InAlphabetic_Presentation_Forms}: U+FB00..U+FB4F
+\p{InArabic_Presentation_Forms-A}: U+FB50..U+FDFF
+\p{InVariation_Selectors}: U+FE00..U+FE0F
+\p{InCombining_Half_Marks}: U+FE20..U+FE2F
+\p{InCJK_Compatibility_Forms}: U+FE30..U+FE4F
+\p{InSmall_Form_Variants}: U+FE50..U+FE6F
+\p{InArabic_Presentation_Forms-B}: U+FE70..U+FEFF
+\p{InHalfwidth_and_Fullwidth_Forms}: U+FF00..U+FFEF
+\p{InSpecials}: U+FFF0..U+FFFF
+Not all Unicode regex engines use the same syntax to match Unicode blocks. Perl and Java use the \p{InBlock} syntax as listed above. .NET and XML use \p{IsBlock} instead. The JGsoft engine supports both notations. I recommend you use the "In" notation if your regex engine supports it. "In" can only be used for Unicode blocks, while "Is" can also be used for Unicode properties and scripts, depending on the regular expression flavor you're using. By using "In", it's obvious you're matching a block and not a similarly named property or script.
+
+In .NET and XML, you must omit the underscores but keep the hyphens in the block names. E.g. Use \p{IsLatinExtended-A} instead of \p{InLatin_Extended-A}. Perl and Java allow you to use an underscore, hyphen, space or nothing for each underscore or hyphen in the block's name. .NET and XML also compare the names case sensitively, while Perl and Java do not. \p{islatinextended-a} throws an error in .NET, while \p{inlatinextended-a} works fine in Perl and Java.
+
+The JGsoft engine supports all of the above notations. You can use "In" or "Is", ignore differences in upper and lower case, and use spaces, underscores and hyphens as you like. This way you can keep using the syntax of your favorite programming language, and have it work as you'd expect in PowerGREP or EditPad Pro.
+
+The actual names of the blocks are the same in all regular expression engines. The block names are defined in the Unicode standard. PCRE does not support Unicode blocks.
+
+Alternative Unicode Regex Syntax
+
+Unicode is a relatively new addition to the world of regular expressions. As you guessed from my explanations of different notations, different regex engine designers unfortunately have different ideas about the syntax to use. Perl and Java even support a few additional alternative notations that you may encounter in regular expressions created by others. I recommend against using these notations in your own regular expressions, to maintain clarity and compatibility with other regex flavors, and understandability by people more familiar with other flavors.
+
+If you are just getting started with Unicode regular expressions, you may want to skip this section until later, to avoid confusion (if the above didn't confuse you already).
+
+In Perl and PCRE regular expressions, you may encounter a Unicode property like \p{^Lu} or \p{^Letter}. These are negated properties identical to \P{Lu} or \P{Letter}. Since very few regex flavors support the \p{^L} notation, and all Unicode-compatible regex flavors (including Perl and PCRE) support \P{L}, I strongly recommend you use the latter syntax.
+
+Perl (but not PCRE) and Java support the \p{IsL} notation, prefixing one-letter and two-letter Unicode property notations with "Is". Since very few regex flavors support the \p{IsL} notation, and all Unicode-compatible regex flavors (including Perl and Java) support \p{L}, I strongly recommend you use the latter syntax.
+
+Perl and Java allow you to omit the "In" when matching Unicode blocks, so you can write \p{Arrows} instead of \p{InArrows}. Perl can also match Unicode scripts, and some scripts like "Hebrew" have the same name as a Unicode block. In that situation, Perl will match the Hebrew script instead of the Hebrew block when you write \p{Hebrew}. While there are no Unicode properties with the same names as blocks, the property \p{Currency_Symbol} is confusingly similar to the block \p{Currency}. As I explained in the section on Unicode blocks, the characters they match are quite different. To avoid all such confusion, I strongly recommend you use the "In" syntax for blocks, the "Is" syntax for scripts (if supported), and the shorthand syntax \p{Lu} for properties.
+
+Again, the JGsoft engine supports all of the above oddball notations. This is only done to allow you to copy and paste regular expressions and have them work as they do in Perl or Java. You should consider these notations deprecated.
+
+Do You Need To Worry About Different Encodings?
+
+While you should always keep in mind the pitfalls created by the different ways in which accented characters can be encoded, you don't always have to worry about them. If you know that your input string and your regex use the same style, then you don't have to worry about it at all. This process is called Unicode normalization. All programming languages with native Unicode support, such as Java, C# and VB.NET, have library routines for normalizing strings. If you normalize both the subject and regex before attempting the match, there won't be any inconsistencies.
+
+If you are using Java, you can pass the CANON_EQ flag as the second parameter to Pattern.compile(). This tells the Java regex engine to consider canonically equivalent characters as identical. E.g. the regex à encoded as U+00E0 will match à encoded as U+0061 U+0300, and vice versa. None of the other regex engines currently support canonical equivalence while matching.
+
+If you type the à key on the keyboard, all word processors that I know of will insert the code point U+00E0 into the file. So if you're working with text that you typed in yourself, any regex that you type in yourself will match in the same way.
+
+Finally, if you're using PowerGREP to search through text files encoded using a traditional Windows (often called "ANSI") or ISO-8859 code page, PowerGREP will always use the one-on-one substitution. Since all the Windows or ISO-8859 code pages encode accented characters as a single code point, all software that I know of will use a single Unicode code point for each character when converting the file to Unicode.

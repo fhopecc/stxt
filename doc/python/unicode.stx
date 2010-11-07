@@ -1,0 +1,430 @@
+Python中的Unicode問題
+---------------------
+
+這幾天拿了一個題目自己練習寫python，
+才發現cpython是使用ascii來處理字串，對於unicode處理較不拿手。
+
+在這邊介紹一些python中使用unicode的方法。
+
+首先要先確認使用的是script或是直譯器
+script就要確認文件的編碼，
+直譯器則要確定所使用的shell的環境。
+
+使用script的話，在一開始文件編輯列，要先加入宣告，
+文件編輯軟體(如vi等)才會儲存為UTF-8字元。
+
+# -*- coding: <encoding name>-*-
+
+例如下面這行就可以宣告本文件應以UTF-8格式儲存：
+
+# -*- coding: utf-8 -*-
+
+這邊可以參考以下網址
+http://www.python.org/dev/peps/pep-0263/
+
+若是使用直譯器，就要確定shell的環境變數LANG。
+
+配置字串的時候，將字串配置為unicode格式：
+如果LANG=zh_TW.UTF-8：
+
+unicode_str = unicode('這是中文', 'utf-8')
+
+如果LANG=zh_TW.BIG5：
+
+unicode_str = unicode('這是中文', 'big5')
+
+windows中則shell的環境一定為big5：
+
+也有比較簡單的方法，無論LANG變數為何都可以運作：
+
+unicode_str =  u'這是中文'
+
+之後檢查
+
+>>> type(unicode_str)
+(type 'unicode')
+
+如果想要用big5顯示，可以這樣做
+
+print unicode('這是中文', 'utf-8').encode('big5')
+
+另外，raw_input()這個功能也有一些問題
+
+raw_input(u'Please input')
+raw_input(u'請輸入')
+
+前者會成功，後者卻會失敗
+筆者猜想可能是raw_input依然使用ascii來處理字串的關係。
+唯一解決方法就是不要讓raw_input裡面塞入unicode的中文了。
+
+在網站上也另外看到一個文件：
+
+http://czug.org/blog/eishn/sqlobject-dezhongwenbianmawentijijiejuefangan
+
+簡單來說，sys這個module原本有setdefaultencoding這個function，
+但在啟動腳本setting.py中卻被刪除了。
+而這個功能可以經由reload(sys)來啟用。
+
+因此可以在script開始時這樣寫入：
+
+import sys
+if sys.getdefaultencoding() != 'utf-8':
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
+很多問題就可以解決囉！
+
+Strings 
+~~~~~~~
+
+The items of a string are characters. There is no separate character type; a character is represented by a string of one item. Characters represent (at least) 8-bit bytes. The built-in functions chr() and ord() convert between characters and nonnegative integers representing the byte values. Bytes with the values 0-127 usually represent the corresponding ASCII values, but the interpretation of values is up to the program. The string data type is also used to represent arrays of bytes, e.g., to hold data read from a file. 
+(On systems whose native character set is not ASCII, strings may use EBCDIC in their internal representation, provided the functions chr() and ord() implement a mapping between ASCII and EBCDIC, and string comparison preserves the ASCII order. Or perhaps someone can propose a better rule?) 
+
+Unicode 
+~~~~~~~
+
+The items of a Unicode object are Unicode code units. A Unicode code
+unit is represented by a Unicode object of one item and can hold
+either a 16-bit or 32-bit value representing a Unicode ordinal (the
+maximum value for the ordinal is given in sys.maxunicode, and depends
+on how Python is configured at compile time). Surrogate pairs may be
+present in the Unicode object, and will be reported as two separate
+items. The built-in functions unichr() and ord() convert between code
+units and nonnegative integers representing the Unicode ordinals as
+defined in the Unicode Standard 3.0. Conversion from and to other
+encodings are possible through the Unicode method encode() and the
+built-in function unicode(). 
+
+Unicode
+-------
+
+在電腦科學領域中，Unicode（統一碼、萬國碼、單一碼、標準萬國碼）是業界
+的一種標準，它可以使電腦得以呈現世界上數十種文字的系統。Unicode是基於
+通用字元集（Universal Character Set）的標準來發展，並且同時也以書本的
+形式（The Unicode Standard，目前第五版由Addison-Wesley Professional出
+版，ISBN-10: 0321480910）對外發表。Unicode包含了超過十萬個字元（在2005
+年，Unicode的第十萬個字元被採納且認可成為標準之一）、一組可用以作為視
+覺參考的代碼圖表、一套編碼方法與一組標準字元編碼、一套包含了上標字、下
+標字等字元特性的列舉等。 Unicode組織（The Unicode Consortium）是由一個
+非營利性的機構所運作，並主導Unicode的後續發展，其目標在於：將既有的字
+元編碼方案，以Unicode編碼方案來加以取代，特別是既有的方案在多語環境下
+，皆僅有有限的空間以及不相容的問題。 Unicode在字元集認可的成功，使其得
+以在電腦軟體的國際化與在地化領域中，廣泛且具優勢的被採用。這標準已在近
+年來的多種新科技當中被加以採用，包含了可擴展置標語言（XML）、Java程式
+語言、以及最新的作業系統中。
+
+起源與發展 
+---------- 
+
+Unicode是由於傳統的字元編碼方式的侷限性而產生的，
+例如ISO 8859所定義的字元雖然在不同的國家中廣泛地使用，可是在不同國家
+間卻經常出現不相容的情況。很多傳統的編碼方式都具有一個共通的問題，即其
+容許電腦進行雙語環境式的處理（通常使用拉丁字母以及其原生語言），但卻無
+法同時支援多語言環境式的處理（指可同時處理混合多種語言的情況）。
+
+Unicode試圖將字位（字素，graphemes）與類字位字元加以認定與編碼，
+而非以不同的字形（glyphs）來加以區分。然而在漢字的個案來看，
+這樣方式有時會引起一字多形的認定爭議。
+
+在文字處理方面，Unicode的功用是為每一個字元提供一個唯一的代碼，
+而不是一種字形。換句話說，Unicode是將字元以一種抽象的方式來呈現，
+而將視覺上的演繹工作（例如字體大小、外觀形狀、字體形態、文體等）
+留給其他軟體來處理，例如網頁瀏覽器或是文字處理器。
+為了使Unicode與已存在和廣泛使用的舊
+有編碼互相相容，尤其是差不多所有電腦系統都支援的基本拉丁字母部分，所以
+Unicode的首256字元仍舊保留給 ISO 8859-1 所定義的字元，使既有的西歐語系
+文字的轉換不需特別考量；另方面因相同的原因，Unicode把大量相同的字元重
+複編到不同的字元碼中去，使得舊有紛雜的編碼方式得以和Unicode編碼間互相
+直接轉換，而不會遺失任何資訊。舉例來說，全形格式區段包含了主要的拉丁字
+母的全形格式，在中文、日文、以及韓文字形當中，這些字元以全形的方式來呈
+現，而不以常見的半形形式顯示，這對豎排文字和等寬排列文字有重要作用。
+
+在表達一個Unicode的字元時，
+通常會用「U+」然後緊接著一組十六進位的數字來表示這一個字元。
+
+在基本多文種平面（Basic Multilingual Plane，簡稱BMP）
+裏的所有字元，
+只要使用四位十六進制數（例如U+4AE0，共支援六萬多個字元）來表示，
+但在BMP以外的字元則需要使用五位或六位十六進制數了。
+舊版的 Unicode 標準使用相近的標記方法，但卻有些微的差異，
+例如在Unicode 3.0裏使用「U- 」然後緊接著八位數，
+
+而「U+」則必須隨後緊接著四位數，
+以表示僅限於代表一個字元單位（code unit），而非字元（code point）。
+
+
+code unit和code point
+~~~~~~~~~~~~~~~~~~~~~
+
+一個完整的Unicode字符叫代碼點/CodePoint，
+而一個Java char 叫代碼單元code unit;
+
+string對像以UTF-16保存Unicode字符，
+需要用2個字符表示一個超大字符集漢字，
+這種表示方式為 Surrogate，
+第一個字符叫Surrogate High，第二個就是Surrogate Low
+
+判斷一個char是否是Surrogate區的字符，
+用Character的isHighSurrogate()/isLowSurrogate()方法。
+
+從兩個Surrogate High/Low字符，
+返回一個完整的Unicode CodePoint用Character.toCodePoint()/codePointAt()
+
+一個Code Point，可能需要一個也可能需要兩個char表示，
+因此不能直接使用CharSequence.length()
+方法返回一個字符串到底有多少個漢字，
+而需要用String.codePointCount()/Character.codePointCount()
+
+要定位字符串中的第N個字符，不能直接將n作為偏移量，而需要從字符串頭部依次遍歷得到，需要
+String.offsetByCodePoints()
+從字符串的當前字符，找到上一個字符，不能直接用offset實現，而需要
+String.codePointBefore()，或String.offsetByCodePoints()
+從當前字符，找下一個字符，需要判斷當前CodePoint的長度，再計算得到
+String.offsetByCodePoints()
+
+看了之後還是不太明白
+
+String str("web開發");
+
+int len = str.length();
+
+System.out.println();
+
+輸出結果為5；
+
+改為用int len = str.codePointCount(0,str.length());
+
+輸出結果同樣為5
+
+定位一個字符
+
+用char cp = str.charAt(4);
+
+輸出為“發”；
+
+若用int index = str.offsetByCodePoints(0,4);
+
+       int cp = str.codePointAt(index);
+
+輸出為21457；什麼意思??原來是獲取字符串中指定位置的字符的UNICODE值,其值等同於(int)charAt(i)
+
+標準
+----
+
+位於美國加州的Unicode組織允許任何願意支付會員費用的公司或是個人加入，
+其成員包含了主要的電腦軟硬體廠商，例如奧多比系統（Adobe Systems）、蘋
+果公司（Apple）、惠普（HP）、IBM、微軟（Microsoft）、全錄（Xerox）等。
+ 1980 年代末，組成Unicode組織的商業機構，和國際合作的國際標準化組織
+（International Organization for Standardization，簡稱ISO）因為電腦普
+及和資訊國際化的前提下，分別各自成立了Unicode組織[1]和成立了ISO-10646
+ 工作小組。他們不久便發現對方機構的存在，和大家也為著相同的目的而工作
+，相當自然地兩個組織便共同合作開發適用於各國語言的通用碼，而且「相當有
+默契地」各自發表Unicode和ISO-10646字集。雖然實際上兩者的字集編碼相同，
+但實質上兩者確實為兩個不同的標準。 Unicode組織在1991年首次發佈了The
+ Unicode Standard（ISBN 0-321-18578-1）。Unicode的開發結合了國際標準化
+組織（International Organization for Standardization，簡稱ISO）所制定
+的ISO/IEC 10646，即通用字元集（Universal Character Set，簡稱
+ UCS）。Unicode與ISO/IEC 10646在編碼的運作原理相同，但The Unicode
+ Standard 包含了更詳盡的實現資訊、涵蓋了更細節的主題，諸如字元編碼
+（bitwise encoding）、校對以及呈現等。The Unicode Standard 也列舉了諸
+多的字元特性，包含了那些必須支援雙方向呈現的文字（由左至右或由右至左的
+文字呈現方向，例如阿拉伯文是由右至左）。Unicode與ISO/IEC 10646兩個標準
+在術語上的使用有些微的不同。在西元2005年，Unicode的第十萬個字元被輸入
+成為標準之一，其為馬來亞拉姆語（Malayalam，印度西南部沿海居民的語言）
+的Praslesham（പ്രശ്ലേഷം）。 Unicode截至目前為止歷次的版次與發佈時間如下：
+ Unicode 1.0：1991年10月 Unicode 1.0.1：1992年6月 Unicode 1.1：1993年6
+ 月 Unicode 2.0：1997年7月 Unicode 2.1：1998年5月 Unicode 2.1.2：1998
+年 5月 Unicode 3.0：1999年9月；涵蓋了來自ISO 10646-1的十六位元通用字元
+集（UCS）基本多文種平面（Basic Multilingual Plane） Unicode 3.1：2001
+年3 月；新增從ISO 10646-2定義的輔助平面（Supplementary Planes）
+ Unicode 3.2：2002年3月 Unicode 4.0：2003年4月 Unicode 4.0.1：2004年3
+月 Unicode 4.1：2005年3月 Unicode 5.0：2006年7月 Unicode 5.1：2008年4
+月 Unicode 5.2：2009年10月 Unicode 6.0：2010年10月 
+
+Unicode的編碼和實作
+-------------------
+
+大概來說，Unicode編碼系統可分為編碼方式和實作方式兩個層次。 
+
+編碼方式
+~~~~~~~~
+
+Unicode的編碼方式與
+ISO 10646的通用字符集（Universal Character Set, UCS）概念相對應，
+目前實際應用的Unicode版本對應於UCS-2，
+使用16位的編碼空間。
+也就是每個字元佔用2個位元組。
+
+這樣理論上一共最多可以表示 2**16 即 65536 個字元。
+
+基本滿足各種語言的使用。實際上目前版本的Unicode尚未填充滿這16位元編碼，
+保留了大量空間作為特殊使用或將來擴充功能。
+
+上述16位元 Unicode
+字元構成基本多文種平面（Basic Multilingual Plane，簡稱BMP）。
+
+最新（但未實際廣泛使用）的Unicode版本定義了16個輔助平面，兩者合起來至
+少需要佔據21位的編碼空間，比3位元組略少。但事實上輔助平面字元仍然佔用4
+位元組編碼空間，與UCS-4保持一致。
+未來版本會擴充到ISO 10646-1實作級別3，即涵蓋UCS-4的所有字元。
+UCS-4是一個更大的尚未填充完全的31位元字符集，
+
+加上恆為0的首位，共需佔據32位元，即4位元組。
+理論上最多能表示2^31個字元，完全可以涵蓋一切語言所用的符號。 
+BMP字元的Unicode編碼表示為U+hhhh，
+其中每個h 代表一個十六進制數位。
+
+與UCS-2編碼完全相同。對應的4位元組
+UCS-4 編碼後兩個位元組一致，前兩個位元組的所有位均為0。關於Unicode和I
+SO 10646及UCS的詳細關聯 ，請參看通用字符集。 
+
+實作方式 
+--------
+
+Unicode的實作方式不同於編碼方式。
+一個字元的Unicode編碼是確定的。但是在實際傳輸過程中，
+由於不同系統平台的設計不一定一致，以及出於節省空間的目的，
+對 Unicode編碼的實作方式有所不同。
+
+Unicode的實作方式稱為 
+Unicode轉換格式（Unicode Translation Format，簡稱為UTF）。
+
+例如，如果一個僅包含基本7位ASCII字元的Unicode檔案，
+如果每個字元都使用2位元組的原Unicode編碼傳輸，
+其第一位元組的8位元始終為0。這就造成了比較大的浪費。
+
+對於這種情況，可以使用UTF-8編碼，這是一種變長編碼，
+它將基本7位ASCII字元仍用7位編碼表示，佔用一個位元組（首位補0）。
+
+而遇到與其他Unicode字元混合的情況，將按一定演算法轉換，
+每個字元使用1-3個位元組編碼，並利用首位為0或1進行識別。
+這樣對以7位ASCII字元為主的西文文檔就大大節省了編碼長度。
+
+類似的，對未來會出現的需要4個位元組的輔助平面字元和其他UCS-4
+擴充字元，2位元組編碼的UTF-16也需要透過一定的演算法進行轉換。
+再如，如果直接使用與Unicode編碼一致（僅限於BMP字元）的UTF-16編碼，
+由於每個字元佔用了兩個位元組，在Macintosh (Mac)機和PC機上，
+對位元組順序的理解是不一致的。這時同一位元組流可能會被解釋為不同內容，
+如某字元為十六進制編碼 4E59，按兩個位元組拆分為4E和59，
+在Mac上讀取時是從低位元組開始，那麼在 Mac OS會認為此4E59編碼為594E，
+找到的字元為「奎」，而在Windows上從高位元組開始讀取，
+則編碼為U+4E59的字元為「乙」。就是說在Windows下以UTF-16
+編碼保存一個字元「乙」，在Mac OS里開啟會顯示成「奎」。此類情況說明
+UTF-16的編碼順序若不加以人為定義就可能發生混淆，於是在UTF-16編碼實作
+方式中使用了大端序（Big-Endian，簡寫為UTF-16 BE）、小端序
+（Little-Endian ，簡寫為UTF-16 LE）的概念，以及可附加的位元組順序記號
+解決方案，
+
+目前在 PC機上的Windows系統和Linux系統對於UTF-16編碼預設使用
+UTF-16 LE。（具體方案參見UTF-16）此外Unicode的實作方式還包括
+ UTF-7、Punycode、CESU-8、SCSU、UTF-32等，這些實作方式有些僅在一定的國
+家和地區使用，有些則屬於未來的規劃方式。目前通用的實作方式是UTF-16小尾
+序（LE）、UTF-16大尾序（BE）和UTF-8。在微軟公司Windows XP作業系統附帶
+的記事本（Notepad）中，「另存為」對話方塊可以選擇的四種編碼方式除去非
+Unicode編碼的ANSI（對於英文系統即ASCII編碼，中文系統則為GB2312或Big5
+編碼）外，其餘三種為「Unicode」（對應UTF-16 LE）、「Unicode big endian
+」（對應UTF-16 BE）和「UTF-8」。
+
+目前輔助平面的工作主要集中在第二和第三
+平面的中日韓統一表意文字中，因此包括GBK、GB18030、Big5等簡體中文、繁體
+中文、日文、韓文以及越南喃字的各種編碼與Unicode的協調性被重點關注。考
+慮到Unicode最終要涵蓋所有的字元，從某種意義而言，這些編碼方式也可視作
+Unicode的出現於其之前的既成事實的實作方式，如同ASCII及其擴充功能
+Latin-1一樣，後兩者的字元在16位元Unicode編碼空間中的編碼第一位元組各
+位全為0，第二位元組編碼與原編碼完全一致。但上述東亞語言編碼與Unicode編
+碼的對應關聯要複雜得多。 
+
+非Unicode環境
+-------------
+
+在非Unicode環境下，由於不同國家和地區採用的字符集不一致，很可能出現無
+法正常顯示所有字元的情況。
+
+微軟公司使用了內碼表（Codepage）轉換表的技術
+來過渡性的部分解決這一問題，即透過指定的轉換表將非Unicode的字元編碼轉
+換為同一字元對應的系統內部使用的Unicode編碼。可以在「語言與區域設定」
+中選擇一個內碼表作為非Unicode編碼所採用的預設編碼方式，
+如936為簡體中文GBK，950為正體中文Big5（皆指PC上使用的）。
+
+在這種情況下，一些非英語的歐洲語言編寫的軟體和文檔很可能出現亂碼。
+而將內碼表設定為相應語言中文處理
+又會出現問題，這一情況無法避免。從根本上說，完全採用統一編碼才是解決之
+道，但目前尚無法做到這一點。內碼表技術現在廣泛為各種平台所採用。UTF-7
+的內碼表是65000，UTF-8的內碼表是65001。
+
+XML和Unicode
+------------
+
+XML及其子集XHTML採用UTF-8作為標準字集，理論上我們可以在各種支援XML標準
+的瀏覽器上顯示任何地區文字的網頁，只要電腦本身安裝有合適的字型即可。可
+以利用&#nnn;的格式顯示特定的字元。nnn代表該字元的十進制Unicode代碼。如
+果採用十六進制代碼，在編碼之前加上x字元即可。但部分舊版本的瀏覽器可能
+無法識別十六進制代碼。過去電腦編碼的8位元標準，使每個國家都只按國家使
+用的字元而編定各自的編碼系統；而對於部份字元系統比較複雜的語言，如越南
+語，又或者東亞國家的大型字符集，都不能在8位元的環境下好好顯示。若連自
+己的語言也未必可以好好顯示，遑論顯示其他國家的文字。然而，現在於HTML和
+ XML，我們可以利用&#nnn;的格式顯示特定的字元。nnn代表該字元的十進位
+ Unicode代碼。如果想採用十六進位代碼的話，要在編碼之前加上x字元。只是
+最近才有在文字中對十六進制的支援，那麼舊版本的瀏覽器顯示那些字元或許可
+能有問題-大概首先會遇到的一個問題只是在對於大於8位Unicode字元的顯示。
+解決這個問題的普遍做法仍然是將其中的十六進制碼轉換成一個十進制碼（例如
+：用&#9824;代替&#x2660;）。也有一些字符集標準將一些常用的標誌存放在字
+元內碼外面，那麼你可能使用象&mdash;這樣的文字標誌來表示一個長劃（—）的
+情況，即使它的字元內碼已經被使用，這些標準也不包含那個字元。然而部分由
+於 Unicode版本發展原因，很多瀏覽器只能顯示UCS-2完整字符集，也即現在使
+用的 Unicode版本中的一個小子集。下表可以檢驗您的瀏覽器怎樣顯示各種各樣
+的 Unicode代碼：代碼	字元標準名稱（英語）	在瀏覽器上的顯示 &#65;
+ 大寫拉丁字母"A"	A &#223;	小寫拉丁字母"Sharp S"	ß &#254; 小寫
+拉丁字母"Thorn"	þ &#916;	大寫希臘字母"Delta"	Δ &#1049; 大寫斯拉夫字
+母 "Short I"	Й &#1511;	希伯來字母"Qof"	ק &#1605; 阿拉伯字母"Meem"
+	م &#3671;	泰文數位7	๗ &#4688; 衣索比亞音節文字"Qha"	ቐ &#12354;
+	日語平假名"A"	あ &#12450; 日語片假名"A"	ア &#21494;	簡體漢字"
+叶"	叶 &#33865;	正體漢字"葉" 葉 &#50685;	韓國音節文字"Yeob"	엽一些
+多語言支援的網頁瀏覽器，比如微軟Windows系統的Internet Explorer 5.5，以
+及跨平台的瀏覽器Mozilla／Netscape 6，可以在安裝時根據需要動態地使用相
+應的字符集，預先安裝了合適的語言包，就可以同時顯示頁面上的各種Unicode
+字元。IE 5.5還提出使用者可以在需要新字型時，即裝即用。另外的瀏覽器如
+ Netscape Navigator 4.77，則只能顯示跟頁面編碼相應字符集中的文字。當你
+使用後一種瀏覽器時，你不大可能預先安裝所有的字型，即使有了字型，瀏覽器
+也不一定能將這些字型完全應用起來。可能遇到的情況是，這種瀏覽器只能夠顯
+示部分文字，因為它們是按照標準進行編碼，儘管理論上在相容的系統中，只要
+有了相應的字型，就可以正確顯示。一種變通的辦法，是將某些少見的字元，透
+過「名稱實體參照」的方式來使用。
+
+中文輸入法
+----------
+截至2010年3月，可以使用微軟拼音2003或2007版本大字集鄭
+碼unicode版本海峰五筆9.3版本，新注音輸入法和VimIM進行輸入。微軟拼音在
+輸入法啟動狀態下，單擊語言欄上的「功能菜單」按鈕，指向「輔助輸入法」即
+可發現「Unicode碼輸入方式」，利用它可以直接輸入Unicode相應十六進制值的
+方式輸入相應文字。例如中文「胥」輸入「5066」，朝鮮語文字「셅」輸入
+「c145」（不需要在前面加0x或x）。大字集鄭碼已爲unicode漢字，類漢字編碼
+，可以在鄭碼輸入法方式下通過鄭碼字碼輸入方式輸入unicode內的中日韓漢字
+及韓文(卽將開發)。例如漢字「㗎」輸入「JYJF」，漢字「胥」輸入「XIQ」，
+漢字「㿱」輸入「DPXI」，朝鮮語文字「셅」輸入「ODYH」。海峰五筆此輸入法
+已經直接支援透過五筆碼輸入方式輸入Unicode內的任意中日韓漢字，但無法使
+用鍵入Unicode碼的方式輸入。例如漢字（Unicode部分）「㗎」為
+「keks」，CJK擴展B區的「㿱」為「iyho」和CJK擴展C區的「뇛」為「muih」。
+新注音輸入法在輸入法啟動狀態時，打入鍵盤上的「多功能前導字元鍵」（及通
+用鍵盤上之「`」），第一次使用會彈出說明。輸入Unicode字元「胥」則是在鍵
+盤上鍵入「`U5066」。而韓語中的「셅」，則輸入「`UC145」。而要輸入日語自
+製漢字「卡」，則是「`U5CE0」。 VimIM在Vim環境中，可以直接鍵入十進制或
+十六進制Unicode碼。既不需要啟動輸入法，也不需要碼表。 [編輯]日文輸入法
+使用Microsoft IME 2007，可以在IME PAD裡找到UNICODE的點選表。點選字元即
+可輸入。選擇字型可以預覽字元效果。 [編輯]其他除了輸入法外，作業系統也
+會提供另外幾種方法輸入Unicode。像是Windows 2000之後的Windows系統就提供
+一個可點擊的字元對映表。又或者在Microsoft Word下，按下Alt鍵不放，輸入0
+和某個字元的Unicode編碼（十進制），再鬆開Alt鍵即可得到該字元，如Alt +
+ 033865會得到Unicode字元葉。另外按Alt + X組合鍵，MS Word也會將游標前面
+的字元同其十六進制的四位Unicode編碼進行互相轉換。 
+
+漢字問題
+--------
+
+Unicode的漢字處理方法一直備受抨擊。
+有指這種把數萬漢字逐一編碼的方式，非常浪費資源，
+要把漢字加到Unicode標準中也不容易。
+也有批評處理Unicode中漢字編碼的專家，並不是真正研究漢字的學者。
+從早期的中文電腦時期開始，已有研究以部件產生漢字（動態組字），
+取代漢字逐一編碼方法。 
+

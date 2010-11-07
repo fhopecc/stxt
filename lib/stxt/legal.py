@@ -22,35 +22,25 @@ class Lexer(GenericScanner):
         GenericScanner.tokenize(self, input)
         return self.rv
 
-    #def t_whitespace(self, s):
-    #    r" [ \t\r]+ "
-    #    self.rv.append(Token('whitespace', ' '))
-    #    pass
-
     def t_emptyline(self, s):
-        r"\s*\n"
+        ur"\s*\n"
         self.rv.append(Token('emptyline', ' '))
 
     def t_titlesep(self, s):
-        r"[-]+\n"
+        ur"[-]+\n"
         self.rv.append(Token('titlesep', s))
 
     def t_docattr(self, s):
-        r"[^:\n]+[:][^:\n]+\n"
+        ur"[^:\n]+[:][^:\n]+\n"
         self.rv.append(Token('docattr', s.strip()))
 
     def t_secnumber(self, s):
-        r"(\d+\.)+"
+        ur"(\d+\.)+"
         self.rv.append(Token('secnumber', s))
 
     def t_line(self, s):
-        r"((\d+[^.])|([^\d\-].+))[^\n]+\n"
+        ur"((\d+[^.])|([^\d\-])).+\n"
         self.rv.append(Token('line', s.strip()))
-
-    #def t_default(self, s):
-    #    r'( . | \n )+'
-    #    pass
-
 
 class Parser(GenericParser):
     def __init__(self, start='doc'):
@@ -216,10 +206,10 @@ if __name__ == '__main__':
         source = f.read() 
 
         # To unicode string
-        ustring = source.decode(options.fileencoding)
+        ustr = source.decode(options.fileencoding)
 
         # tokens = Lexer().tokenize(f.read())
-        tokens = Lexer().tokenize(ustring)
+        tokens = Lexer().tokenize(ustr)
         if options.format == 'tokens':
             for t in tokens:
                 print t.type

@@ -9,7 +9,7 @@ class UnitTest(unittest.TestCase):
     def testLine(self):
         case = u'''97資料交換管理程序
 
-3.1. OK
+3.1.OK
 
 資料交換管理程序
 
@@ -207,6 +207,6 @@ if __name__ == '__main__':
     tests.addTest(UnitTest("testLine"))
     tests.addTest(UnitTest("testLexer"))
     tests.addTest(UnitTest("testParser"))
-    #tests.debug()
+    tests.debug()
     runner = unittest.TextTestRunner()
     runner.run(tests)
