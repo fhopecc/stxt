@@ -79,11 +79,15 @@ class Parser(GenericParser):
     def p_lists(self, args):
         '''docattrs ::= docattrs docattr
            sects ::= sects sect
-           paras ::= paras emptyline para
         '''
         args[0].append(args[1])
         return args[0]
- 
+
+    def p_paras(self, args):
+        'paras ::= paras emptyline para'
+        args[0].append(args[2])
+        return args[0]
+
     def p_sect_0(self, args):
         ''' sect ::= secnumber line emptyline
             sect ::= secnumber emptyline
@@ -172,7 +176,12 @@ class TreeDump(GenericASTTraversal):
         self.current_sect = None
 
     def n_sect(self, node):
-        print '%s%s[%s]' % ('*' * node.height, node.type, node.secnumber)
+        print '%s%s[%s]:%s' % ('*' * node.height, node.type,
+                               node.secnumber, node.title)
+
+    def n_para(self, node):
+        print '%s%s' % ('*' * node.height, node.type)
+        print node.value
 
     def default(self, node):
         print '%s%s' % ('*' * node.height, node.type)
