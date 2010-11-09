@@ -6,9 +6,9 @@ computational linguistics, named after its inventor, Jay Earley. The
 algorithm uses dynamic programming.
 
 Earley parsers are appealing because they can parse all context-free
-languages. The Earley parser executes in cubic time (O(n3), where n
+languages. The Earley parser executes in cubic time (O(n**3), where n
 is the length of the parsed string) in the general case, quadratic
-time (O(n2)) for unambiguous grammars, and linear time for almost all
+time (O(n**2)) for unambiguous grammars, and linear time for almost all
 LR(k) grammars. It performs particularly well when the rules are
 written left-recursively.
 
@@ -41,8 +41,8 @@ prediction, scanning, and completion.
 
 Prediction: 
   For every state in S(k) of the form (X → α • Y β, j)
-  (where j is the origin position as above), add (Y → • γ, k) to S(k)
-  for every production in the grammar 
+  (where j is the origin position as above), 
+  add (Y → • γ, k) to S(k) for every production in the grammar 
   with Y on the left-hand side (Y → γ).
 
 Scanning: 
@@ -123,5 +123,6 @@ This is the sequence of state sets:
 (5)  S → S • + M     (0)    # complete from S(0)(2)
 (6)  P → S •         (0)    # complete from S(0)(1)
 
-The state (P → S •, 0) represents a completed parse. This state also
-appears in S(3) and S(1), which are complete sentences.
+The state (P → S •, 0) represents a completed parse. 
+This state also appears in S(3) and S(1), 
+which are complete sentences.
