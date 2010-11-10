@@ -103,7 +103,7 @@ class GenericParser:
     #
     def preprocess(self, rule, func):    return rule, func
 
-  # 剖析規則字串加入規則
+    # 剖析規則字串加入規則
     def addRule(self, doc, func):
         rules = string.split(doc) # 以任何空白字元分隔之字串
 
@@ -114,7 +114,7 @@ class GenericParser:
                 index.append(i-1)
         index.append(len(rules))
 
-    # 將每條規則開頭字元之位置存於 index 中
+        # 將每條規則開頭字元之位置存於 index 中
         for i in range(len(index)-1):
             lhs = rules[index[i]]
             rhs = rules[index[i]+2:index[i+1]]
@@ -130,7 +130,7 @@ class GenericParser:
             self.rule2name[rule] = func.__name__[2:] # 去掉前置 p_ 字元
         self.ruleschanged = 1
 
-  # 從類別之名稱匯入規則
+    # 從類別之名稱匯入規則
     def collectRules(self):
         for name in _namelist(self):
             if name[:2] == 'p_':
@@ -150,7 +150,7 @@ class GenericParser:
         self.rule2name[startRule] = ''
         return startRule
 
-  # make FIRST set
+    # make FIRST set
     def makeFIRST(self):
         union = {}
         self.first = {}
@@ -207,6 +207,9 @@ class GenericParser:
         
         if self.ruleschanged:
             self.makeFIRST()
+
+        # 下面採取 DP 動態規劃
+        # 形式為由下而上反覆
 
         for i in xrange(len(tokens)):
             states[i+1] = []
