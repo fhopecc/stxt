@@ -298,6 +298,12 @@ substring(string from pattern for escape) => text
 
 substring('thomas' from '%#"o_a#"_' for '#') => oma
 
+T-SQL:
+
+SUBSTRING (value_expression ,start_expression ,length_expression )
+
+位置起算點是 1。
+
 其它
 ~~~~
 set sqlblanklines on
