@@ -1,0 +1,1107 @@
+第八章運算理論的基本觀念
+
+一、 運算理論的領域
+
+※ 自動機（automata）理論
+自動機理論探討運算的數學模型，包括相關的定義與特性，其中有限自動機應用
+於文字處理、編譯器與硬體設計，與上下文無關的文法則應用於程式語言與人工
+智慧。
+※ 運算性（computability）理論
+複雜度與運算性的理論息息相關，複雜度理論以問題的難易來對問題分類，運算
+性的理論則是以問題是否能用電腦解決來加以分類。
+※ 複雜度（complexity）理論
+在複雜度理論中最重要的問題是瞭解為什麼有的問題在運算上是難題，有的則是
+很簡易。
+
+二、運算性理論
+
+※ 有限自動機，可以描述有限記憶體的運算機器，
+下推自動機則是用來描述記憶體無限的運算機器，
+但只能使用於 LIFO 的堆疊中。
+有些簡單的問題還是沒有辦法用這兩種模型來解決，
+所以不適合當成一般電腦的模型。
+
+※ 杜寧機器（Turing machine）
+
+和有限自動機類似，但是記憶體無限，可以完成任何真正電腦可以完成的工作。
+見下圖所示：
+※ Turing machine 的模型使用一個無限長的磁帶當作記憶體，磁帶頭有讀與寫
+的功能，而且可以在磁帶上移動。Turing machine 工作的情況就好像無法記得那
+麼長的資料，但是可以前後瀏覽，作記號並且比對。
+※ Turing machine 與有限自動機的差異：
+1.Turing machine 可以對磁帶進行寫入與讀取的動作
+2.讀寫頭可以左右移動
+3.磁帶是無限長的
+4.產生的接受或拒絕的狀態有立即的效應
+
+
+為了模擬人的這種運算過程，圖靈構造出一臺假想的機器，該機器由以下幾個部
+分組成：
+
+   1. 一條無限長的紙帶 TAPE。紙帶被劃分為一個接一個的小格子，每個格子上包含一個來自有限字母表的符號，字母表中有一個特殊的符號 \square 表示空白。紙帶上的格子從左到右依此被編號為 0, 1, 2, ... ，紙帶的右端可以無限伸展。
+   2. 一個讀寫頭 HEAD。該讀寫頭可以在紙帶上左右移動，它能讀出當前所指的格子上的符號，並能改變當前格子上的符號。
+   3. 一套控制規則 TABLE。它根據當前機器所處的狀態以及當前讀寫頭所指的格子上的符號來確定讀寫頭下一步的動作，並改變狀態暫存器的值，令機器進入一個新的狀態。
+   4. 一個狀態暫存器。它用來保存圖靈機當前所處的狀態。圖靈機的所有可能狀態的數目是有限的，並且有一個特殊的狀態，稱為停機狀態。
+
+control
+
+a
+
+b
+
+c
+
+a
+
+Turing machine 示意圖
+
+PDF created with pdfFactory Pro trial version www.pdffactory.com
+
+Created by 郭豐鑫
+
+※ Turing machine 的正式定義最重要的部分是轉換函數δ，這個函數會告訴我
+們 Turing machine 如何從一個步驟一到下一個步驟。
+
+※ δ的形式為 Q﹛L，R﹜× Γ→ Q ×Γ ×Γ。
+※ Turing machine 定義：Turing machine 是一個 7-tuple，M＝(Q，Σ，Γ，δ，
+q0，q accept，q reject)，Q，Σ，與Γ都是有限集合。各成員的定義如下：
+1.Q 是狀態（states）的集合。
+2.Σ是輸入字母的集合，但不包括空白符號 Џ
+
+3.Γ是磁帶字母，空白符號 Џ εΓ，Σ ㄈ Γ
+
+4.δ：Q﹛L，R﹜× Γ→ Q ×Γ ×Γ代表轉換函數。
+5.q0 代表 start state。
+6.q accept 代表 accept state。
+7.q reject 代表 reject state。q accept≠q reject
+※ Turing machine 運算的過程中狀態會改變，目前的狀態、目前的磁帶內容、
+目前的磁頭位置，形成該 Turing machine 的組態。例如：
+q 是狀態，u 與 v 是字串，則組態 uqv 表示目前的狀態是 q，目前的磁帶內容為
+uv 目前磁頭的位置是 v 的第一個符號 如下圖所示的組態可以記成 1011q701111
+，
+。
+
+Turing machine 組態的表示方法
+
+q7
+
+1
+
+0
+
+1
+
+1
+
+0
+
+1
+
+1
+
+1
+
+1
+
+※ Turing machine 的組態變化：
+
+1. 若 transition function（qi，b）＝（qj，c，L）存在，則下面的組態變化成立
+uaqibv yieds uqjacv ，Turing machine 是往左移動。
+
+2. 若 transition functionδ（qi，b）＝（qj，c，R）存在，則下面的組態變化成
+立，uaqibv yieds uacqjv，Turing machine 是往右移動。
+※ 假設 Turing machine M 接受輸入 w，則開始的組態(start configuration)為
+q0w，接受組態(accept configuration)與拒絕組態(rejecting configuration)都是停
+止組態(halting configuration)，不會再變化成其他的組態。假如 M 接受 w 的話，
+則有一系列的組態 C1、C2、C3….存在，滿足下面的條件:
+1. C1 是接受 w 的開始狀態。
+2. Ci 會產生 Ci+1
+3. Ck 是接受組態
+
+PDF created with pdfFactory Pro trial version www.pdffactory.com
+
+Created by 郭豐鑫
+
+三、複雜度的理論（complexity theory）
+
+※ 複雜度是可以測量的。複雜度理論,目的就在於了解運算問題在時間、記憶體
+與資源方面的需求。
+※ 最糟情況的分析(worst-case analysis)
+係指以某個長度的所有字串輸入的最長執行時間來考量。
+※ 平均情況分析(average-case analysis)
+係指以某個長度的所有字串輸入的平均執行時間來考量。
+※ 所謂漸進式的分析是針對大的輸入來分析演算法的執行時間，表示執行時間
+的函數中只要考慮高次項，而且係數可省略。
+
+令 f：N→N 為一個函數，時間複雜度類別，TIME（t（n），可定義如下：
+）
+TIME（t（n）
+）＝﹛L∣L 是一個可由 Turing machine 花 O（t（n）
+）時間決定
+的語言﹜
+※ 運算模型不同，則語言的時間複雜度也會不同。常見的模型：single-tape
+Turing machine、multitape Turing machine、nondeterministic Turing machine。
+
+※ 令 （n）
+t
+為函數， n）
+（ ≧n，則每個使用 （n）
+t
+t
+時間的 multitape Turing machine
+2
+會有一個相等的使用 O（t （n）
+）的 single-tape Turing machine。
+※ 令t
+（n）
+為函數，t n）
+（ ≧n，則每個 t n）
+（ 時間的 nondeterministic single-tape
+）
+O（ t（ n）
+Turing machine 有一個相等的 2
+時間的 deterministic single-tape Turing
+machine。
+※ class P 的運算：假如一個運算問題屬於 P，則會有一個能在 nk（k 為常數）
+的時間內解決這個問題的方法。
+※ 屬於 P 類型的運算問題的語言可以由 deterministic single-tape Turing
+machine 在多項式級的時間內決定。
+※ class NP 的運算：NP 的運算問題代表 nondeterministic polynomial time
+problem。
+※ 杜寧機器和有限自動機最大的差異是在於：記憶體無限。
+※ 運算模型功能比較：狀態變化無限＞狀態無限＆記憶體無限
+※ Satisfiability problem 是屬於 CLASS NP 問題。
+※ 西元 1936 年 Alonzo Church 與 Alan Turing 發表的論文試著給演算法下定
+義，Church 使用λ-calculus 來定義演算法；Turing 使用 machine 的觀念來定義
+演算法。
+※ 下面各種語言類別之間的關係
+Regular≦Context free sdecidables≦Turing recode（應該是包含於或等於符號）
+
+
+演算法的複雜度-時間與結果的考量
+
+劉炯朗,謝禎鋐
+國立清華大學資工系
+
+liucl@mx.nthu.edu.tw
+pentel@nthucad.cs.nthu.edu.tw
+
+為了要以簡單，共通的方法算出問題的答案，人們發現問題中存在的規律
+性後就將其定為所謂的公式，一旦找出公式後，只要將問題的資料代入對映的
+公式中就能得到正確的答案，經由此種方式，人們對於許多相同的問題就能在
+很短的時間算出，例如有名的牛頓定律F=ma，狹義相對論中的愛因斯坦定律
+2
+m / 18
+E= mc ，和工業界的摩爾定律D= c 2
+等，根據 Alan Turing (1912 -1954) 所提
+
+出的Turing Machine，可知公式都是可算的函數(computable functions)，簡單的
+描述Turing Machine架構如下:將某個問題的計算規則都輸入Turing Machine後，
+在一條無限長的帶子(可前後移動)打上此問題的input data， Turing Machine可
+將之讀入並把output data打在帶子上，將正確的規則輸入Turing Machine後，
+Turing Machine能算出的問題，都是computable。
+
+無限長
+的帶子
+
+Turing Machine
+
+Read –write head
+
+但不是所有的函數Turing Machine都算的出來，還是有不可算的函數(non-
+computable functions)，就舉個最基本的問題作為例子，假設存在一個程式(T)會
+將任何程式(P)和其input data(D)當成自己的input data 然後判斷出那個程式是否最
+後能停止而不會跑進無窮迴圈，則
+
+program(P)
++
+Data(D)
+
+program(P)
++
+Data(D)
+
+T
+
+T′
+
+t
+
+　
+
+print WILL STOP，stops
+
+　　　print WILL NOT STOP，stops
+
+　
+
+print WILL STOP，enters an infinite loop
+
+　　　print WILL NOT STOP，stops
+
+P+P
+
+C
+
+T′
+
+Q
+
+If P+P will stop，enters an infinite loop
+
+If P+P will not stop，stops
+
+If P+P will stop，enters an infinite loop
+
+If P+P will not stop，stops
+
+If Q+Q will stop，enters an infinite loop
+
+Q
+
+If Q+Q will not stop，stops
+
+由上圖可知
+1. 如果program Q 用program Q 當作input data時會停止時，program Q將會
+進入無窮迴圈
+2. 如果program Q 用program Q 當作input data時會進入無窮迴圈時，
+program Q將會停止
+但此兩個描述都是自相矛盾的，因此推得並無T這個程式(可視作某個函數)存
+在，這就是一個無法算的函數了。
+
+可算的問題(函數)是我們比較有興趣的，就目前的情形而言，只要能找
+出演算法(algorithm)的題目都是可計算的，相同的題目又可能有一種以上的
+演算法，例如我們要解sorting
+problem時就有許多的演算法如Bubble
+sort，
+Quick sort，Insertion sort…..等等，而種種問題和其演算法的計算複雜度(time
+complexity)就是用來判斷計算所需時間的依據，我們先看看sorting problem和它
+的演算法的計算複雜度(time complexity)
+Problem
+Sorting
+nlogn
+n2
+Algorithm
+Bubble sort
+Quick sort
+nlogn
+Insertion sort nlogn
+
+n代表problem input size
+
+一個問題的計算複雜度是其所有演算法中所需的最小計算複雜度，例如
+sorting，它最小的計算複雜度的演算法是nlogn，至於每種algorithm有用到不同
+的方法，所以會有不盡相同的計算複雜度，以下是bubble sort 的algorithm:
+
+x1
+
+1
+
+x2
+
+4
+x3 2
+x4 3
+
+共需要 n+(n-1)+(n-2)+..+1=n(n-1)/2次 比較
+
+根據不同的time complexity我們又可以把algorithm分作快的和慢的兩大類，
+快的algorithm就是其time complexity對problem size(n)是polynomial function，
+3
+如 n ， n ， nlogn ， n …..，慢的algorithm就是其time complexity對problem
+
+size(n)是exponential function，如 2 ,3 , n! …，由此可知bubble sort， quick sort是
+快的algorithm，而partitioning則是慢的algorithm，當然問題也可以依此方法
+來分類，如果其time complexity是以polynomial function當作上限，則分在容
+易處理類(tractable)Ex: Sorting ， Linear Programming，若其time complexity是
+以exponential function當作下限的話就分在不易處理類(intractable) Ex: Boolean
+Equivalence;下表可明顯看出polynomial function和exponential function在n由小到
+大時的變化，在n 變大時，exponential function會遠比polynomial function的值來
+的大，也就是說在n不大時所需的計算時間並不相差很多，但隨著n的變大，所
+
+1
+
+1
+
+4
+
+4
+3
+
+4
+3
+
+1
+3
+
+2
+
+2
+
+2
+
+4
+
+4
+
+4
+
+1
+3
+
+3
+1
+
+3
+2
+
+2
+
+2
+
+1
+
+⇒
+
+time complexity 為 n
+
+2
+
+n
+
+n
+
+需的計算時間會以難以想像的速度成長。
+
+2
+
+32
+
+5
+
+2
+
+5
+
+4
+
+25
+
+8
+
+125
+
+3125
+
+4
+
+32
+
+9
+
+243
+
+2
+
+120
+
+10
+
+10
+
+10 2
+
+10 3
+
+10 5
+
+10 3
+
+5.9 × 10 4
+
+3.63 × 10 6
+
+50
+
+50
+
+2.5 × 10 3
+
+1.25 × 10 5
+
+3.12 × 10 8
+
+1.13 × 1015
+
+7.18 × 10 23
+
+3.04 × 10 64
+
+60
+
+60
+
+2.5 × 10 3
+
+2.16 × 10 5
+
+7.78 × 10 8
+
+1.15 × 1018
+
+4.24 × 10 28
+
+8.32 × 10 81
+
+100
+
+10 2
+
+10 4
+
+10 6
+
+1010
+
+1.27 × 10 30
+
+5.15 × 10 47
+
+9.33 × 10177
+
+用計算複雜度把問題分作易處理和不易處理後，其實中間還是有些灰色地
+帶尚未能做出分類，而這個地帶就是NP-Complete problems，為何NP-Complete
+problems無法分類呢?因為沒有人能找出NP-Complete problems 的 polynomial-
+time algorithm，卻又不能證明他們有exponential-time的下限，也就是找不出
+問題的計算複雜度，可是很多重要的問題都是NP-Complete，NP-Complete有
+個很特別的性質，就是一旦有一個NP-Complete問題被找出polynomial-time的
+algorithm的話，那麼所有的NP-Complete問題都找的到polynomial-time的
+algorithm，相反的，如果有一個NP-Complete中的問題被證明出有exponential-
+time的下限的話，那麼所有的NP-Complete問題都有exponential-time的下限，
+也就是這些問題已經無法算出最佳解了，可知NP-Complete problems全是容易
+處理的(tractable)，或著全是不易處理的(intractable)，但要將NP-complete歸類
+是和求NP-complete的polynomial-time algorithm一樣難的問題，所以目前沒人
+能回答，那退而求其次，要如何判斷一個問題是否為NP-Complete呢?如果一個
+問題不是NP-Complete，則可以試著找polynomial-time的algorithm，如果是NP-
+Complete，最好想其他方法，才不會浪費時間，以下就是判斷一個問題是否為
+NP-Complete的方法：
+1.先判斷問題L是否是NP(nondeterministic polynomial time)，若不是NP就不是
+NP-complete。
+2.選一個已知是NP-complete的問題L′。
+3.描述一個演算法可以算出一個函數f，而f可將L′轉變成L。
+∗
+x ∈ L′
+f ( x) ∈ L
+0
+4.證明函數f滿足此條件:
+若且唯若
+，對所有的 x ∈ { ,1} 。
+
+5.證明可算出f的演算法會在polynomial time執行完成
+
+在確定問題是NP-complete或是不易處理(intractable)後，面對這兩種沒有
+polynomial-time algorithms的問題該怎麼做呢?我們要作出選擇，若要算出最佳解
+可以用exponential-time的algorithm或窮舉法，若是近似值也能接受的話，就可找
+近似演算法(approximation algorithms)來作計算，當然你必須先考慮是時間重要
+還是最佳解重要了。
+
+舉個有名的NP-Complete問題Traveling Salesman來比較這兩種方法:
+求通過a,b,c,d,e,且不重覆的最短路徑(此路徑為一Hamiltonian circuit)
+
+Fig 1.1
+
+11
+
+Exact algorithm(Brute force algorithm):
+
+Try (n-1)! Possible solutions
+
+98
+4!=24
+9!=362，800
+69!= 1.71122 × 10
+1.71122 × 10 98
+= 1.71122 × 10 88
+10
+10
+seconds
+88
+1.71122 × 10
+= 5.42626 × 10 78
+60 × 60 × 24 × 365 × 100
+centuries
+
+可知要求最佳解是要算蠻久的
+
+Approximation algorithm: nearest-neighbor method
+
+1.先在G上任選一點，並找出離它最近的點來形成第一條路徑。
+2.設x為最近加入路徑的點，並找一個離x最近且尚未加入路徑的點，將此點和
+它與x的連接線加入路徑，重覆此步直到所有在G上的點都加入路徑為止。
+3.將第一點和最後一點的連線加入路徑後就形成一個環路。
+
+Step 1
+
+Step 2
+
+Step 3
+
+Step 4
+
+Total length d=40
+
+把所得結果和最佳解比較
+the best result is
+
+Total length
+
+Fig 1.2
+
+d
+1
+1
+≤ lg n  +
+2 ，n表示要通過的點數
+可找出d和 的關係為一定律 d 0 2
+證明:
+d 0 =37
+在進行證明之前，先讓我們藉由思考一特定情況來說明我們對證明的作
+法，設D是用nearest-neighbor method得到的Hamiltonian circuit。設 l1 是D中最
+
+長一段線段的長度， l 2 是D中次長線段的長度，依此類推， l i 是第i長線段的長
+度，所以可知
+
+d0
+
+n
+
+d = ∑ li
+
+i =1
+
+14
+
+a
+
+1
+
+13
+
+7
+
+a
+
+4
+
+a
+
+3
+
+12
+
+9
+
+6
+
+a
+
+2
+
+(c )
+
+Fig 1.3
+
+為了要說明，先設n=14，如果我們能證明
+d 0 ≥ 2l1
+
+d 0 ≥ 2l 2
+
+d 0 ≥ 2(l 3 + l 4 )
+
+(1.1)
+
+則我們應該可得
+
+d 0 ≥ 2(l 5 + l 6 + l 7 + l8 )
+
+d 0 ≥ 2(l 9 + l10 + l11 + l12 + l13 + l14 )
+
+5d 0 ≥ 2∑ li = 2d
+
+d
+
+d0
+
+14
+
+i =1
+
+5 1
+1
+= lg 14 +
+2 2
+2
+
+≥
+
+對一般的n，我們可以建立一組類似於(1.1)的不等式組，亦即我們將證明
+d 0 ≥ 2l1
+(1.2)
+
+d0 ≥ 2
+
+2k
+
+d 0 ≥ 2 ∑ li
+
+i = k +1
+
+n
+
+∑l
+
+i
+i = n / 2 +1
+
+n
+1≤ k ≤  
+2
+
+(1.3)
+
+(1.4)
+
+要注意如果n是偶數時(1.4)已被包含在(1.3)中。
+利用三角不等式，(1.2)顯然成立。假設在D中最長的線段是以x和y為端點，
+則依三角不等式可知任何從x到y的任何路徑都大於或等於 l1 。既然任何G中的
+
+Hamiltonian circuit都可以被拆成x和y之間的兩段路徑，因此(1.2)成立。
+
+令 ai 為利用nearest-neighbor method 找Hamiltonian circuit D時，D中的第i長
+的線段所加進去的點(ex:根據這個命名法，在圖Fig. 1.1的點的名字即如圖Fig.
+n 
+a i 1 ≤ i ≤ 2k
+1≤ k ≤  
+ 2  ，設H是包含了點 ，
+1.3a所示)。對一個固定的k，
+，的G的完
+全子圖。設T為H中的Hamiltonian circuit，而它所經過的點的順序是和G中最短
+(佳)的Hamiltonian circuit經過G中的點的順序一樣(所有在G中卻不在H中的點都將
+
+跳過)。設t是T的長度(在圖Fig1.1，設k=2。H如Fig1.3c 所示。在圖Fig1.2所示的
+最短Hamiltonian circuit中，經過點的順序是 a1 , a 2 , a3 , a 4 , a5 。所以T環路就如
+
+Fig1.3b所示，且t=36)。藉由三角不等式，可得
+
+{ , a }是T中的一條線段。假如在我們根據nearest-neighbor method形成
+a
+
+設
+
+i
+
+a a
+w(ai , a j ) ≥ l i
+a
+a
+Hamiltonian circuit時， i 比 j 先經過，則
+。假如 j 比 i 先經過，則
+w(a j , ai ) ≥ l j
+w(ai , a j ) ≥ l j
+a
+a
+。亦即
+，因此，不管先經過 i 或 j ，都可得
+
+w(ai , a j ) ≥ min{i , l j }
+l
+
+將(1.6)對T中的所有的線段依照取和，可以得到
+
+(1.5)
+
+j
+
+(1.6)
+
+∑ min(l , l
+
+t≥
+
+( ai , a j )∈T
+
+)
+
+i
+
+j
+
+(1.7)
+
+min{i , l j }
+l
+l
+l
+中最小的值是 2 k ，第二小的值是 2 k −1 ，等等依此類
+1 ≤ i ≤ 2k l i
+推。同時，對任意i，
+， 在(1.7)右邊的和之中，最多出現兩次。因為
+
+在不等式(1.7)中，
+
+T中共有2k個線段，(1.7)右邊的和大於或等於T中比較小的k個線段的長的和的兩
+倍，因此可得
+
+∑ min(l , l ) ≥ 2(l
+
+( a i , a j )∈T
+
+合併(1.5)和(1.8)，即可得(1.3)
+
+不等式(1.4)的證明方法跟不等式(1.3)類似(只需考慮n為奇數的情形)。令
+
+代表最短的Hamiltonian circuit。利用導出(1.7)的同樣討論，可得
+
+∑ min(l , l )
+
+( a i , a j )∈ D 0
+
+i
+
+j
+
+2k
+
++ l2 k −1 + ... + lk +1 ) = 2 ∑ li
+
+2k
+
+i = k +1
+
+(1.8)
+
+i
+
+j
+
+利用導出(1.8)的同樣討論法，可得
+
+∑ min(l , l )
+
+( a i , a j )∈D 0
+
+i
+
+j
+
+≥ 2(ln + ln −1 + ... + ln / 2 +1 ) + ln / 2 
+
+≥ 2(ln + ln −1 + ... + ln / 2 +1 ) = 2
+
+i
+i = n / 2 +1
+
+n
+
+∑l
+
+1
+2
+lg n − 2
+當k=1， 2 ， 2 ，…..， 2
+時，(1.3)可導出 lg n  − 1 個不等式：
+d 0 ≥ 2l 2
+d 0 ≥ 2(l 3 + l 4 )
+
+d 0 ≥ 2(l 5 + l 6 + l 7 + l8 )
+
+…………………………………………..
+
+d 0 ≥ 2(l 2 lg n − 2 +1 + l 2 lg n − 2 + 2 + ... + l 2 lg n − 2 +1 )
+
+將上面這些不等式相加，可得：
+
+( lg n  − 1) d 0 ≥ 2(
+
+n
+lg n −1
++1
+2 +1 ≤ 2
+ 
+因為
+，如果n>1
+
+由(1.4)可以導出
+
+n
+
+∑l
+
+d0 ≥ 2
+
+i
+i = 2 lg n −1 +1
+
+將(1.2),(1.9)和(1.10)相加，可得
+
+( lg n  − 1)d 0 ≥ 2∑ l i = 2d
+
+2 lg n −1
+
+∑l )
+
+i =2
+
+i
+
+(1.9)
+
+(1.10)
+
+n
+
+i =1
+
+d
+1
+1
+≤ lg n  +
+d0 2
+2
+
+#
+
+當n=14
+
+d
+1
+1 5
+≤ lg 14 + =
+d0 2
+2 2
+
+d
+1
+1 11
+≤ lg 1000 + =
+2 2
+當n=1000 d 0 2
+
+由此可知，以此近似演算法求出的值在n越小的時候誤差越小，n變大時誤
+差會以很緩慢的比例增加，以所需的時間和所得結果來看的話，近似演算法確
+實很有用，在此例中也能看出當problem size很小的時後還可以選擇用全部算出
+的方法，但problem size一旦變大了，只能選擇近似演算法，否則可能永遠都算
+不完。
+
+在很多科學領域中的問題都是NP-Complete，也都要用近似演算法來處理，
+茲舉出幾個較為有名的領域:
+
+PERT Chart (Programming Evaluation and Review Technique)
+Transportation Scheduling
+Process Control
+Robotics
+Avionics
+Parallel Computation
+Synthesis of VLSI Circuits
+
+我們再看一個例子，Job Scheduling:
+下圖代表八個工作所需的工作時間，以及須遵守的執行順序(Ex:最右邊的工作
+要做以前必須先完成兩個有箭頭指向它的工作，其餘依此類推)，有兩個處理器
+可以工作，但是一個工作只限一處理器做，問需多少時間才可完成所有工作？
+
+此題也沒有人找出最佳解的演算法，所以要比過所有的方法後才能得到最
+短的時間，而近似演算法 no intentional idleness卻能找出不錯的結果，當然近似
+演算法不需花太多的時間，這個演算法顧名思義就是只有在沒工作可做時才將
+處理器閒置，以下是近似演算法的結果和最佳結果的比較
+
+approximation algorithm(no intentional idleness) result:
+
+processor 1
+
+processor 2
+
+brute algorithm best result:
+
+10
+
+5
+
+5
+
+5
+
+9
+
+9
+
+9
+
+5
+
+w=34
+
+9
+
+5
+
+5
+
+9
+
+processor 1
+
+processor 2
+
+10
+
+5
+
+5
+
+9
+
+w0 =29
+
+注:
+
+w0
+
+的關係為一定律 w0
+
+代表閒置中
+
+w
+
+≤ 2−
+
+1
+n ，n為處理器的數目
+
+證明:
+一閒置期的結束時刻,正好是某一工作完成時刻
+為了可以用簡化表示法，我們只證明n=2的情形，一般的情形可以同法證
+Fig 2.1
+明，就no intentional idleness的輪工表來看，見圖2.1，我們發現在一個處理器的
+閒置時間結束的同時必是另一個處理器執行完一個工作的時候(否則閒置時間不
+φ
+T
+φ
+會結束)。設 i 是一個處理器的其中一段閒置的時間，一個工作 ij 是和 i 時間相
+T
+φ
+衝的意思是，在輪工表中，一個處理器完成工作 ij 的時段跟 i 相交。例如在圖
+2.1中， Ti1 ， Ti 2 ， Ti 3 和 φ i 時間相衝。對閒置期 φ i ，令 Ti1 ， Ti 2 ，….， Til 為與 φ i 時
+
+間相衝的工作。欲證
+Ti1 ≤ Ti 2 ≤ Ti 3 ≤ ..... ≤ Til
+
+設此關係不成立，那麼 Ti1 ， Ti 2 ， Ti 3 ，這些工作就不必在 P2 中依序執行了，而
+P
+T
+T
+是可以利用 1 閒置的時候來執行。同樣的，跟據剛才的討論，如果 j1 ， j 2 ，
+T j3
+T
+φ
+，…， jm 為與另一閒置期 j 時間相衝的工作，則
+T j1 ≤ T j 2 ≤ T j 3 ≤ ..... ≤ T jm
+
+很清楚的是每件在 Til 完成後才執行的工作一定是 Til 的後繼工作(不然他們可以
+*
+T
+在 φ i 期間以 P1 執行)。由上可推得一原來工作群 的子集合 ，滿足：
+
+1. * 是一鏈
+
+∑φ ∈Φ i
+k
+2. ∑T ∈*
+其中 Φ 為輪工表中所有閒置期所成的集合。
+因為
+
+µ (T ) ≥
+
+µ (φ )
+
+i
+
+ 1
+
+1
+ ∑ µ (T j ) + ∑ µ (φ i ) ≤  ∑ µ (T j ) + ∑ µ (Tk )
+2 T ∈T
+φ ∈Φ
+T ∈*
+ 2 T ∈T
+
+
+
+
+
+
+ω0 ≥
+
+i
+
+1
+∑ µ (T j )
+2 T ∈*
+
+j
+
+j
+
+k
+
+(2.1)
+
+ω0 ≥
+
+並且
+因此，(2.1)式可改寫成
+1
+ω ≥ ω0 + ω0
+2
+
+ω 3
+≤
+即 ω0 2
+
+這就是n=2時，定理的結論
+
+n→∞
+
+∑ µ (T )
+
+k
+
+Tk ∈*
+
+#
+
+n=2
+
+w
+
+≤2
+
+w0
+
+w
+
+3
+2
+
+≤
+
+w0
+
+這個例子中的近似演算法的效果更好，即使在problem size趨近無窮大的情
+況下卻只和最佳解差在兩倍之內，看完這兩個例子後相信你已經對NP-complete
+problems和approximation algorithm有更深一層的認識了，NP-complete讓我們知道
+該以什麼方式來處理問題，approximation algorithm除了能算出近似解之外，更重
+要的是它給了我們一個解答的保證，只要有了approximation algorithm的結果後，
+可以再嘗試其他的algorithm，如randomize algorithm，heuristic algorithm等等，會
+否得到的更好的結果，如果有，當然很好，若沒有也不怕會沒有可用的解答，
+至少有個只和最佳解差在一定程度的答案在備用，這會給我們更多研究的空
+間，來幫麻煩但很重要的NP-complete problems尋求更好的答案。

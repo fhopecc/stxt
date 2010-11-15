@@ -10,12 +10,12 @@ from fnmatch import fnmatch
 import site
 
 def grep(path, keyword):
-    f = open(path)
     if not keyword:
         print u'必須指定關鍵字'
         exit(1)
 
     import chardet
+    f = open(path)
     result = chardet.detect(f.read(1024))
     encode = result['encoding']
     f.close()
