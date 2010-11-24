@@ -214,5 +214,7 @@ q0w，
 狀態 符號 列印 移動 最終狀態
 q1	 B    P0   R    q2
 q2	 B    PB   R    q3
-q3	 B    P1	 R    q4
+q3	 B    P1   R    q4
 q4	 B    PB   R    q1
+
+

@@ -1,0 +1,28 @@
+Moving a profile
+~~~~~~~~~~~~~~~~
+
+Occasionally, you might want to move a profile or tell Thunderbird to
+use a profile stored in another location.
+
+1.Shut down Thunderbird.
+
+2.Move the profile folder to the desired location. For example, on
+ Windows XP, move the profile from C:\Documents and
+ Settings\username\Application
+ Data\Thunderbird\Profiles\xxxxxxxx.default to D:\Stuff\MyMailProfile.
+ (If you are reverting to a backed up profile, this step isn't
+ necessary. Just note the current location of the profile you want to
+ restore.)
+
+3.Open up the profiles.ini file in a text editor. The file is located in
+ the application data folder for Thunderbird:
+    On Windows Vista/XP/2000, the path is %AppData%\Thunderbird\
+    On Windows 95/98/Me, the path is usually C:\WINDOWS\Application Data\Thunderbird\
+    On Linux, the path is ~/.thunderbird/
+    On Mac OS X, the path is ~/Library/Thunderbird/
+
+4.In the profiles.ini file, locate the entry for the profile you've just
+ moved. Change the Path= line to the new location.
+
+5.If you switch from a relative path to a non-relative path, the direction of the slashes may need to change. For example, in Windows, non-relative paths use backslashes, whereas relative ones use forward slashes. Change IsRelative=1 to IsRelative=0.
+Save profiles.ini and restart Thunderbird.
