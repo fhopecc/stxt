@@ -93,6 +93,19 @@ alter table customer add primary key (id);
 我們需要交付被用來當做主鍵的欄是設定為 not null，
 也就是說，那個欄一定不能沒有資料。 
 
+code.sqlserver 
+
+ALTER TABLE Table1
+DROP PRIMARY KEY
+::
+
+code.mysql
+
+ALTER TABLE Table1
+DROP CONSTRAINT PK_Table1_Col1
+
+::
+
 foreign key
 ~~~~~~~~~~~
 foreign key 用來定義參考完整性，

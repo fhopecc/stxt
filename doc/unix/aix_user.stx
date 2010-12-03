@@ -30,3 +30,8 @@ rmuser     Removes a user account.
 
 passwd lmh02527
 
+列出所有使用者
+~~~~~~~~~~~~~~
+
+lsuser -a ALL
+
