@@ -47,11 +47,17 @@ class Parser(GenericParser):
         GenericParser.__init__(self, start)
 
     def p_doc(self, args):
-        ''' doc ::= title docattrs emptyline sects
+        ''' doc ::= sects
             doc ::= title sects
+            doc ::= title docattrs emptyline sects
         '''
-        doc = Node(type="doc", title=args[0])
-        if len(args) == 4:
+        doc = Node(type="doc")
+
+        if len(args) == 1:
+            for s in args[0]:
+                doc.append(s)
+        elif len(args) == 4:
+            doc.title = args[0]
             attrs = {}
             for a in args[1]:
                 a = a.value.split(':')
@@ -60,6 +66,7 @@ class Parser(GenericParser):
             for s in args[3]:
                 doc.append(s)
         else:
+            doc.title = args[0]
             for s in args[1]:
                 doc.append(s)
             
@@ -216,13 +223,15 @@ if __name__ == '__main__':
 
         # To unicode string
         ustr = source.decode(options.fileencoding)
+        if ustr[0] == u'\ufeff':
+            ustr = ustr[1:]
 
-        # tokens = Lexer().tokenize(f.read())
+        # why ustr[0] is u+feff
         tokens = Lexer().tokenize(ustr)
         if options.format == 'tokens':
             for t in tokens:
                 print t.type
-                exit()
+            exit()
 
         doc = Parser().parse(tokens)
         MakeDocTree(doc)

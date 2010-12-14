@@ -18,17 +18,19 @@ class MSWordOut(GenericASTTraversal):
         self.preorder()
 
         # Format Title
-        para = self.doc.Paragraphs.First
-        para.Format.Alignment = 1 # center
-        para.Range.Select()
-        msword.Selection.Font.Size = 18
-        msword.Selection.Font.Bold = 1
+        if ast.title:
+            para = self.doc.Paragraphs.First
+            para.Format.Alignment = 1 # center
+            para.Range.Select()
+            msword.Selection.Font.Size = 18
+            msword.Selection.Font.Bold = 1
         
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last
         para.Style.Font.Size = 12
         para.Style.Font.Bold = 0
-        para.Range.InsertAfter(node.title)
+        if node.title:
+            para.Range.InsertAfter(node.title)
 
     def n_sect(self, node):
         #import pdb;pdb.set_trace()
