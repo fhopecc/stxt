@@ -226,7 +226,7 @@ if __name__ == '__main__':
         if ustr[0] == u'\ufeff':
             ustr = ustr[1:]
 
-        # why ustr[0] is u+feff
+        # Why ustr[0] is u+feff
         tokens = Lexer().tokenize(ustr)
         if options.format == 'tokens':
             for t in tokens:
