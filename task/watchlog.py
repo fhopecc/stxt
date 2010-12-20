@@ -1,7 +1,10 @@
 # coding=utf8
 from __future__ import with_statement
 from optparse import OptionParser
+from datetime import date
+from datetime import timedelta
 import sys, os, re
+
 # TODO
 #
 # 預設為查看原始 LOG 檔，Raw 改為含 3CSyslog 的標頭。
@@ -88,17 +91,18 @@ def hardcopy(path):
 1.1:加入 raw 選項
 1.2:加入 HLTB 選項，作為稅處的網管人員之快捷用
 1.2.1:加入 HLTB 選項，可設定 -p 作為列印用
+1.3:實作 -d 選項，列出指定日期之紀錄
 '''
 if __name__ == "__main__":
     usage = u"usage: %prog log [options]"
-    parser = OptionParser(usage, version="%prog 1.2", 
+    parser = OptionParser(usage, version="%prog 1.3", 
              description=u"檢視、摘要、列印 syslog"
         )
     parser.add_option("-t", "--top", type='int', dest="top", 
                        help=u"只印出前幾筆記錄")
 
     parser.add_option("-d", "--date", dest="date", 
-                       help=u"列出指定日期之紀錄，尚未完成")
+                       help=u"列出指定日期之紀錄，未指定則為昨天，日期格式例子：12-17-2010")
 
     parser.add_option("-D", "--direct", action="store_true",
                        dest="direct", 
@@ -123,26 +127,25 @@ if __name__ == "__main__":
 
     (options, args) = parser.parse_args()
 
+    logdate = (date.today() - timedelta(days=1)).strftime('%m-%d-%Y')
+    if options.date:
+        logdate = options.date
+
     if options.hltb:
-        from datetime import date
-        from datetime import timedelta
         if options.hltb == 'outer':
             cmd = r'%s -r \\99tt005\syslog\%s.192.168.1.254.log' % \
-                  (__file__, \
-                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+                  (__file__, logdate)
             if options.hardcopy: cmd += ' -p'
             os.system(cmd)
         elif options.hltb == 'inner':
             cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log' % \
-                  (__file__, \
-                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+                  (__file__, logdate)
             if options.hardcopy: cmd += ' -p'
             cmd += ' | more'
             os.system(cmd)
 
             cmd = r'%s -r \\99tt004\log\%s.10.66.7.252.log' % \
-                  (__file__, \
-                  (date.today() - timedelta(days=1)).strftime('%m-%d-%Y'))
+                  (__file__, logdate)
             if options.hardcopy: cmd += ' -p'
             cmd += ' | more'
             os.system(cmd)

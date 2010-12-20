@@ -2,6 +2,7 @@
 from __future__ import with_statement
 from spark import *
 from node import Node
+from datetime import date
 import os, template
 
 class Token(object):
@@ -37,7 +38,7 @@ class Lexer(GenericScanner):
 
     def t_date(self, s):
         ur"\d{8}\n"
-        self.rv.append(Token('date', s))
+        self.rv.append(Token('date', s[:-1]))
 
     def t_line(self, s):
         ur"((\d+[^.])|([^\d\-])).+\n"
@@ -132,7 +133,7 @@ class MakeCheckList(GenericASTTraversal):
                 v += p.value
             d[s.title] = v
         self.checks.append(d)
-        print d
+        #print d
         
 class TreeDump(GenericASTTraversal):
     def __init__(self, ast):
@@ -155,6 +156,16 @@ class TreeDump(GenericASTTraversal):
     def default(self, node):
         print '%s%s' % ('*' * node.height, node.type)
 
+def find_check(checks, options):
+    logdate = (date.today()).strftime('%Y%m%d')
+    if options.date:
+        logdate = unicode(options.date)
+        #import pdb; pdb.set_trace()
+        cs = [c for c in checks if c['date'] == logdate]
+        return cs[0]
+    else:
+        return checks
+
 # 1.1 輸入均轉為 unicode 串流 
 if __name__ == '__main__':
     from optparse import OptionParser
@@ -164,6 +175,9 @@ if __name__ == '__main__':
     oparser.add_option("-c", "--fileencoding", dest="fileencoding", 
                        default='utf8',
                        help=u"指定輸入之字串編碼")
+
+    oparser.add_option("-d", "--date", dest="date", 
+                       help=u"列出指定日期之日誌，未指定則為昨天，日期格式例子：12-17-2010")
 
     oparser.add_option("-o", "--output", dest="output", 
                        default='test.html',
@@ -206,15 +220,17 @@ if __name__ == '__main__':
             TreeDump(doc)
         elif options.format == 'checks':
             l = MakeCheckList(doc)
-            print l.checks
+            c = find_check(l.checks, options)
+            print c
         elif options.format == 'html':
-            l = MakeCheckList(doc)
-            checks = l.checks 
             tempf = os.path.join(os.path.dirname(__file__), 'netcheck.html')
             net_check = template.frender(tempf)
-            check = checks[0]
+
+            l = MakeCheckList(doc)
+            check = find_check(l.checks, options)
+            #check = checks[0]
             #import pdb;pdb.set_trace()
-            print net_check('0991110', check)
+            #print net_check('0991110', check)
             if options.output:
                 with open(options.output, 'w') as f:
-                    f.write(str(net_check('20101216', check)))
+                    f.write(str(net_check(check[u'date'], check)))
