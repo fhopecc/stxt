@@ -160,13 +160,17 @@ def find_check(checks, options):
     logdate = (date.today()).strftime('%Y%m%d')
     if options.date:
         logdate = unicode(options.date)
-        #import pdb; pdb.set_trace()
         cs = [c for c in checks if c['date'] == logdate]
+        if len(cs) == 0:
+            c = {}
+            c['date'] = logdate
+            c[u'外網防火牆：'] = u'正常'
+            return c
         return cs[0]
     else:
         return checks
 
-# 1.1 輸入均轉為 unicode 串流 
+# 0.1 預設的 HTML 報告
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog SOURCE [options]"

@@ -10,7 +10,6 @@ import sys, os, re
 # 預設為查看原始 LOG 檔，Raw 改為含 3CSyslog 的標頭。
 # 將查看最近日期記在 .wathlog 中
 # 
-
 pattern  = r'(?P<ts>(\w\w\w) \d\d (\d\d:){2}\d\d) '
 pattern += r'(?P<ip>(\d{1,3}\.){3}\d{1,3}) '
 pattern += r'\w+.\w+( [\w_]+=[\w_\-():.]+)+ (msg="(?P<msg>[^"]+)")'
@@ -85,17 +84,19 @@ def hardcopy(path):
     cmd = 'notepad /P %s' % path
     os.system(cmd)
 
-#import pdb; pdb.set_trace()
 '''
 1.0:檢視、摘要、列印 syslog
 1.1:加入 raw 選項
 1.2:加入 HLTB 選項，作為稅處的網管人員之快捷用
 1.2.1:加入 HLTB 選項，可設定 -p 作為列印用
 1.3:實作 -d 選項，列出指定日期之紀錄
+1.4.1:HLTB 選項，由命令列捷徑改為選項組，更改 options 之選項值，
+      而非組出一條的命令。
+1.4.2:實作輸入多個 LOG 檔。TODO
 '''
 if __name__ == "__main__":
     usage = u"usage: %prog log [options]"
-    parser = OptionParser(usage, version="%prog 1.3", 
+    parser = OptionParser(usage, version="%prog 1.4.1", 
              description=u"檢視、摘要、列印 syslog"
         )
     parser.add_option("-t", "--top", type='int', dest="top", 
@@ -132,11 +133,15 @@ if __name__ == "__main__":
         logdate = options.date
 
     if options.hltb:
+        # options short cut
         if options.hltb == 'outer':
-            cmd = r'%s -r \\99tt005\syslog\%s.192.168.1.254.log' % \
-                  (__file__, logdate)
-            if options.hardcopy: cmd += ' -p'
-            os.system(cmd)
+            logfile = r'\\99tt005\syslog\%s.192.168.1.254.log' % logdate
+
+            if len(args) == 0:
+                args.append(logfile)
+            else:
+                args[0] = logfile 
+            options.raw = True
         elif options.hltb == 'inner':
             cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log' % \
                   (__file__, logdate)
@@ -149,27 +154,27 @@ if __name__ == "__main__":
             if options.hardcopy: cmd += ' -p'
             cmd += ' | more'
             os.system(cmd)
-        exit()
+            exit()
 
     if options.date:
         pass        
     else:
-        file = args[0]
+        logfile = args[0]
         if options.direct:
-            with open(file, 'r') as f:
+            with open(logfile, 'r') as f:
                 #import pdb;pdb.set_trace()
                 print f.read()
                 exit()
 
         if options.raw:
-            with open(file, 'r') as f:
+            with open(logfile, 'r') as f:
                 logs = read3clogs(f.read())
         else:
-            logs = parsefile(file, options.format)
+            logs = parsefile(logfile, options.format)
         first = True
 
         if options.top: i = 0
-        if options.hardcopy: tmplog = open('%s.tmp' % file, 'w')
+        if options.hardcopy: tmplog = open('%s.tmp' % logfile, 'w')
 
         for l in logs:
             if first and not options.raw: 
@@ -192,4 +197,4 @@ if __name__ == "__main__":
                 if i >= options.top: break
         if options.hardcopy:      
             tmplog.close()
-            hardcopy('%s.tmp' % file)
+            hardcopy('%s.tmp' % logfile)
