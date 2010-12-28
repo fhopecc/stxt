@@ -1,0 +1,2 @@
+
+git.exe clone --progress -v  "D:\hltb_docs" "G:\\hltb_docs"

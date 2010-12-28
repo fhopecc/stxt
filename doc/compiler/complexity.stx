@@ -16,14 +16,14 @@
 
 則 M 將任意地選擇一個(qi,xi,di)，按其進行操作，然後進入下一步計算。
 
-非確定型圖靈機M在輸入串ω上的計算過程可以表示為一棵樹，
+非確定型圖靈機 M 在輸入串 w 上的計算過程可以表示為一棵樹，
 不同的分支對應著每一步計算的不同的可能性。
-只要有任意一個分支進入接受狀態，則稱M接受ω；
-只要有任意一個分支進入拒絕狀態，則稱M拒絕ω；
+只要有任意一個分支進入接受狀態，則稱 M 接受 w；
+只要有任意一個分支進入拒絕狀態，則稱 M 拒絕 w；
 
 某些分支可能永遠無法停機，
 但只要有一個分支可以進入接受或拒絕狀態，
-我們就說 M 在輸入ω上可停機。
+我們就說 M 在輸入 w上可停機。
 注意，我們規定 M 必須是無矛盾的，
 即它不能有某個分支接受ω而同時另一個分支拒絕ω，
 這樣有矛盾的非確定型圖靈機是不合法的。
@@ -38,8 +38,8 @@
 
 因為非確定型圖靈機的計算過程就是一棵樹，
 因此我們只需遍歷該樹就可以模擬其計算過程。
-一個簡單的想法是利用深度優先搜索來遍歷M的計算樹，
-但這樣行不通，因為M的某些計算分支可能永遠不停機！
+一個簡單的想法是利用深度優先搜索來遍歷 M 的計算樹，
+但這樣行不通，因為 M 的某些計算分支可能永遠不停機！
 
 所以我們可以採用一種在演算法設計中稱為迭代加深搜索的技巧來遍歷 M 的計算樹。
 具體證明如下：
@@ -48,21 +48,21 @@
 構造一個確定型圖靈機 M' 如下：
 
 令k = 1；
-深度優先地模擬M的每個分支的計算，
-但每個分支最多只計算k步，
-如果某個計算分支在k步內可以停機，
+深度優先地模擬 M 的每個分支的計算，
+但每個分支最多只計算 k 步，
+如果某個計算分支在 k 步內可以停機，
 則M'也停機，並將該計算分支的計算結果輸出。
-令k增加 1，跳轉到上一步繼續執行。
+令 k 增加 1，跳轉到上一步繼續執行。
 
-顯然，若M有某個分支可以停機，
+顯然，若 M 有某個分支可以停機，
 則此M'也一定會找到該分支並停機。
 
 因此L(M) = L(M')。
 
 定理2：
 
-如果語言L被非確定型圖靈機M在多項式時間內接受，
-則一定存在多項式P使得語言L被時間複雜度為O(2P(n))的確定型圖靈機程序所接受。
+如果語言 L 被非確定型圖靈機M在多項式時間內接受，
+則一定存在多項式 P 使得語言 L 被時間複雜度為O(2**P(n))的確定型圖靈機程序所接受。
 
 定理2說明了為什麼在證明P = NP之前，
 
@@ -86,22 +86,13 @@
 在複雜度理論中最重要的問題是瞭解為什麼有的問題在運算上是難題，
 有的則是很簡易。
 
-二、運算性理論
-
-※ 有限自動機，可以描述有限記憶體的運算機器，
-下推自動機則是用來描述記憶體無限的運算機器，
-但只能使用於 LIFO 的堆疊中。
-有些簡單的問題還是沒有辦法用這兩種模型來解決，
-所以不適合當成一般電腦的模型。
-
-※ 杜寧機器（Turing machine）
 
 三、複雜度的理論（complexity theory）
 
-※ 複雜度是可以測量的。
+測量複雜度
+~~~~~~~~~~
 
-複雜度理論,目的就在於了解運算問題在時間、
-記憶體與資源方面的需求。
+複雜度理論，目的就在於了解運算問題在時間、記憶體與資源方面的需求。
 
 ※ 最糟情況的分析(worst-case analysis)
 
@@ -157,17 +148,14 @@ NP 的運算問題代表 nondeterministic polynomial time problem。
 
 ※ Satisfiability problem 是屬於 CLASS NP 問題。
 
-※ 西元 1936 年 Alonzo Church 與 Alan Turing 發表的論文試著給演算法下定
-義，Church 使用λ-calculus 來定義演算法；
+西元 1936 年 Alonzo Church 與 Alan Turing 發表的論文試著給演算法下定義，
+Church 使用 λ-calculus 來定義演算法；
 Turing 使用 machine 的觀念來定義演算法。
 
 ※ 下面各種語言類別之間的關係
 Regular≦Context free sdecidables≦Turing recode（應該是包含於或等於符號）
 
 演算法的複雜度-時間與結果的考量
-
-liucl@mx.nthu.edu.tw
-pentel@nthucad.cs.nthu.edu.tw
 
 為了要以簡單，共通的方法算出問題的答案，人們發現問題中存在的規律
 性後就將其定為所謂的公式，一旦找出公式後，只要將問題的資料代入對映的
@@ -452,14 +440,18 @@ n
 
 9.33 × 10177
 
-用計算複雜度把問題分作易處理和不易處理後，其實中間還是有些灰色地
-帶尚未能做出分類，而這個地帶就是NP-Complete problems，為何NP-Complete
-problems無法分類呢?因為沒有人能找出NP-Complete problems 的 polynomial-
-time algorithm，卻又不能證明他們有exponential-time的下限，也就是找不出
-問題的計算複雜度，可是很多重要的問題都是NP-Complete，NP-Complete有
-個很特別的性質，就是一旦有一個NP-Complete問題被找出polynomial-time的
-algorithm的話，那麼所有的NP-Complete問題都找的到polynomial-time的
-algorithm，相反的，如果有一個NP-Complete中的問題被證明出有exponential-
+用計算複雜度把問題分作易處理和不易處理後，
+其實中間還是有些灰色地帶尚未能做出分類，
+而這個地帶就是NP-Complete problems，
+為何NP-Complete problems無法分類呢?
+因為沒有人能找出 NP-Complete problems 的 polynomial-time algorithm，
+卻又不能證明他們有 exponential-time 的下限，
+也就是找不出問題的計算複雜度，
+可是很多重要的問題都是 NP-Complete，NP-Complete有個很特別的性質，
+就是一旦有一個NP-Complete問題被找出polynomial-time的 algorithm的話，
+那麼所有的NP-Complete問題都找的到polynomial-time的 algorithm，
+
+相反的，如果有一個NP-Complete中的問題被證明出有exponential-
 time的下限的話，那麼所有的NP-Complete問題都有exponential-time的下限，
 也就是這些問題已經無法算出最佳解了，可知NP-Complete problems全是容易
 處理的(tractable)，或著全是不易處理的(intractable)，但要將NP-complete歸類
@@ -1087,7 +1079,6 @@ w0
 problems和approximation algorithm有更深一層的認識了，NP-complete讓我們知道
 該以什麼方式來處理問題，approximation algorithm除了能算出近似解之外，更重
 要的是它給了我們一個解答的保證，只要有了approximation algorithm的結果後，
-可以再嘗試其他的algorithm，如randomize algorithm，heuristic algorithm等等，會
-否得到的更好的結果，如果有，當然很好，若沒有也不怕會沒有可用的解答，
+可以再嘗試其他的algorithm，如randomize algorithm，heuristic algorithm等等，會否得到的更好的結果，如果有，當然很好，若沒有也不怕會沒有可用的解答，
 至少有個只和最佳解差在一定程度的答案在備用，這會給我們更多研究的空
 間，來幫麻煩但很重要的NP-complete problems尋求更好的答案。
