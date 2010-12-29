@@ -1,0 +1,1050 @@
+ºô¸ôºÞ²z¨t²Î OpenNMS
+--------------------
+¤¶²Ð¤ÎÀ³¥Î
+OpenNMS
+¤W¶}µoµL½uºôºÞ¨t²Î¡A»¡©ú¦p¦ó§Q¥Î
+SNMP
+¨ÓºÞ²z¡B³]©wºô¸ô
+³]³Æ¡B¥[±j¸s²ÕºÞ²z¥\¯à¡A¨Ã¦P®É¥[±j
+OpenNMS
+ªº¿ù»~°T®§³qª¾¯à¤O¡A¾ã¦XÂ²
+°Tµo°e¤J
+OpenNMS
+¤¤¡C 
+
+
+ 
+
+
+ºô¸ôºÞ²zÂ²¤¶ 
+
+°ª³tªººô¸ô¥õ¿à»P«áºÝªº³]³Æ¡A³o¨Ç³]³Æ©¹©¹¹L©óÃe¤j¡AºÞ²z°_¨Ó¬Û·íªº¤£
+¤è«K¡A¦]¦¹ºô¸ôºÞ²z·§©À´N¦¹²£¥Í¡C³z¹Lºô¸ôºÞ²z¨t²Î¡A¨Ï¥Î¼Ð·Çªº³q°T¨ó©w¡A
+ÂÇ¦¹»Pºô¸ô¤W¦U¦¡¦U¼Ë¤£¦Pªº³]³Æ¥æ´«¸ê°T¡A¨ú±o³o¨Ç³]³Æ¸Ô²Óªº¸ê°T¤Î²ÕºA 
+(
+¦p¡A
+IP
+¸ê°T¡B¶}¾÷®É¶¡µ¥
+)
+¡A¶i¦Ó¹F¨ìºÞ²zªº¥Øªº¡Cºô¸ôºÞ²zªº¤º®e¥i¥H¥]§t
+:
+ºô¸ô³]³ÆªºµwÅé¸ê°T¡Fºô¸ô¬y¶q¡B¨Ï¥Îªºª¬ºA¡B¤¤¥¡³B²z¾¹¨Ï¥Î²v¥H¤Î¸`ÂI¬G»Ù
+µ¥¡C 
+
+
+ºô¸ôºÞ²zªº¥Ø¼Ð¬°
+:
+§Y®ÉºÊ±±ºô¸ô¸`ÂI¡A·íµo¥Í°ÝÃD®É¡A¥i¥H²Ä¤@®É¶¡¤º­×´_¡A
+´î¤Ö·l¥¢¡A¼W¥[
+QoS
+¡C 
+
+
+ 
+
+
+ºô¸ôºÞ²z¬[ºc 
+~~~~~~~~~~~~~
+
+ºô¸ôºÞ²z¬[ºc¥i¥H¥]§t:
+²ÕºAºÞ²z¡B®Ä¯àºÞ²z¡B¬G»ÙºÞ²z¡B¦w¥þºÞ²z¥H¤Î±b¤á­p¶OºÞ²zµ¥¡C 
+
+²ÕºAºÞ²z: 
+¦bºô¸ô¤¸¥ó©Î¬O¸`ÂI¤W¾A·íªº³]©w¬ÛÃö²ÕºA°Ñ¼Æ 
+(¦p IP Address¡B Mask and Gateway)¡C 
+
+®Ä¯àºÞ²z: 
+
+ºÊ±±¡B¦¬¶°¨Ã¥B¤ÀªRºô¸ô¤¸¥óª¬ºA¡A±Ä¨ú¬Û¹ïÀ³ªº±¹¬I¡A
+½T«Oºô¸ô¸`ÂI¯à°÷´£¨Ñ¨}¦nªº®Ä¯à¡C
+¦¬¶°³o¨Ç¸ê°T¡A¹ï©óºô¸ô©ÝåN´£¨Ñ¦³¥Îªº¸ê°T¡C
+®Ä¯àªºµû¦ô¥i¥H¤À¬°: 
+
+¸ê·½¨Ï¥Î²v 
+¸ê·½­t¸ü«× 
+«Ê¥]¿ò¥¢²v 
+ºô¸ô¶Ç¿é¶q 
+ºô¸ô¾Ã¶ë²v 
+¥H¤Î©µ¿ð®É¶¡µ¥ 
+
+¬G»ÙºÞ²z: 
+
+ºû«ù¾ãÅéºô¸ô¨t²Î¥¿½T¥B¦³®Ä²vªº¹B§@¡A·íºô¸ô¸`ÂIµo¥Í¬G»Ù¨Ã³y¦¨
+ºô¸ô¾ãÅé®Ä¯à¤U­°¥i¥H§Y®É¸Ñ¨M¦¹°ÝÃD¡C
+
+¬G»ÙºÞ²z¨BÆJ¥i¥H¤À¬°: 
+
+* °»´ú°ÝÃD 
+* ­×´_°ÝÃD 
+*„H ­«·s³]©w²ÕºA 
+„H §ó´«µwÅé¹s¥óµ¥ 
+
+
+ 
+
+
+¦w¥þºÞ²z
+: 
+´£¨Ñ¯S©Ê¸ê·½ªº¦s¨ú¾Þ§@¡A¤À¬°»{ÃÒ¡B±ÂÅv¥H¤Î¦s¨ú±±¨î¡C 
+
+
+ 
+
+
+
+±b¤á­p¶OºÞ²z
+: 
+¬ö¿ý¨Ã°lÂÜ¨Ï¥ÎªÌ©Ò­n¨Dªº¦UºØÀ³¥Îµ{¦¡©Ò¹B¥Îºô¸ô¸ê·½ªº±¡
+ªp¡AÂÇ¦¹¦¬¶O¨ÃºÞ¨î¡C¥t¥~°lÂÜ¸ê®Æ¥i¥H¦³®Äªº¨¾¤î¸ê·½³QÀÝ¥Î¡A³o¨Ç¸ê®Æ¹ï©ó
+±N¨Óªººô¸ô³Wµe¬Û·í¦³À°§U¡C 
+
+
+ 
+
+
+ºô¸ôºÞ²z¨t²Î 
+
+
+ 
+
+
+ºô¸ôºÞ²zªº¤u§@«Ü½ÆÂø¡A¥]§tµ¦²¤»P§Þ³N¼h­±¡Cµ¦²¤­±¨Ó»¡´N³æ¤@¨üºÞ²zªº
+¸`ÂI¡A­Y¬Oµo¥Í¬G»Ù®É¡Aºô¸ôºÞ²z¨t²Î­n°»´ú¦h¤Ö¦¸¤~¯à±oª¾¬G»Ù¬O¯uªºµo¥Í¡A
+¥H¤Î¦h¤Ö¬í³qª¾ºÞ²z­û¡F§Þ³N¼h­±¨Ó»¡¡Aºô¸ôºÞ²z»Ý­n¤@­Ó¥i¥HÅýºô¸ôºÞ²zªÌ§ó
+Â²³æ¡B§ó¦³®ÄºÞ²zºô¸ôªº¨ó©w¡Cºô»Úºô¸ô¤uµ{¤u§@¤p²Õ
+(Internet Engineering 
+Task Force, IETF)
+´£¥XÂ²©öºô¸ôºÞ²z³q°T¨ó©w
+(Simple Network Management 
+Protocol, SNMP)
+¡A
+IETF
+´£¥X³\¦h
+RFC(Request for Comments)
+¤å¥ó
+¨Ó»¡©ú¾ã­Ó
+SNMP
+³q°T¨ó©w¡C¥Ñ©ó
+SNMP
+ªº´£¥X¡A¦Ü¤µ¤j³¡¤Àºô¸ôºÞ²z¨t²Î¬Ò¤ä´©
+SNMP
+¨ó©w¡C 
+
+
+ 
+
+
+OpenNMS 
+¤¶²Ð 
+
+
+ 
+
+
+OpenNMS 
+¬O¤@®M¶}©ñ­ì©l½Xªº¥ø·~¯ÅºôºÞ¨t²Î¡A¥Ø«e¬O¥Ñ
+OpenNMS 
+¹Î¶¤ºûÅ@¡C 
+
+
+¶}µo·½°_¬O¥Ñ©ó¥ø·~©Ò¨Ï¥Îªº¤j«¬ºôºÞ¨t²Î»ù½X¬Û·í©ù¶Q¡A¬Û¹ï©ó¤@¯ë¤p¤½¥q©Î
+¾Ç®Õ¦Ó¨¥¥i»¡¬O¥iÆ[ªº¤ä¥X¡C¦Ó¥B´N³o¨Ç¥ø·~©Ò±Ä¥ÎªººôºÞ¨t²Î¤¤¡Aµ{¦¡³q±`«Ü
+Ãe¤j¡A¥²¶·´£¨Ñ¸û¦nªº¸ê·½¨ÓÀç¹BºûÅ@¡A¹ï©ó¤½¥qªººôºÞ¦¨¥»¬O«Ü¤jªº­t¾á¡C 
+
+
+¦b¦è¤¸
+1999 
+¦~¡A¤@¸s¦³¸gÅçªº¨t²Î¤uµ{®v©Mºô¸ô±M®a¦P»E¤@°ó¡A¬°¤F§ïµ½³o¼Ë
+ªº±¡ªp¤Î¹ê²{²z·Q¡A®i¶}¤F
+OpenNMS 
+µo®i­pµe¡C¤T¦~«áªº¬K¤Ñ½Ï¥Í¤F
+OpenNMS
+¡A
+¤@®M·B¬ü¥ø·~¯ÅªººôºÞ¨t²Î¡C 
+
+
+ 
+
+
+OpenNMS 
+¥Ø«e´£¨Ñ¤F
+2 
+ºØª©¥»¡AÃ­©wª©¡]
+1.8.3
+¡^¤Î´ú¸Õª©¡]
+1.9.0 
+ª©¡^¡C 
+
+
+ 
+
+
+¤ä´©¥­¥x
+: 
+
+
+Windows 2000/XP/Vista and 7, both 32
+-
+bit and 64
+-
+bit. 
+
+
+Linux Red Hat/CentOS/SuSE/Mandrake/Debian/Ubuntu/Solaris 
+
+
+Mac OS X 
+
+
+ 
+
+
+OpenNMS 
+¨t²Î®Ö¤ß¬[ºc 
+
+
+ 
+
+
+OpenNMS 
+¬[ºc¤À¬°¤T³¡¤À¡A¤À§O¬°
+User 
+Interface
+¡B
+OpenNMS
+®Ö¤ß¡A¥H¤Î
+Network
+¡C
+¨ä¤¤¦b
+User Interface 
+³¡¥÷¬°
+OpenNMS 
+´£¨Ñªº¹Ï§Î¤Æ¤¶­±¸ê°T¡A¥H¦UºØª½Æ[ªº
+
+
+
+C:\Users\Falsita\Desktop\NMS¬[ºc¹Ï.png
+¤¶­±®i¥Üºô¸ô³]³Æ¤Î¥D¾÷¨t²ÎªºÃöÁp©Ê¡A¦p°t¸m¡B´y­z¡Bª¬ºA¥H¤Î¬G»Ùªº±¡§Î©M
+­ì¦]¡AÅý¨Ï¥ÎªÌ¥i¥H³z¹LÂsÄý¾¹¡A§Y¥i³s±µ
+OpenNMS 
+¨t²ÎºÊ±±ªA°È¾¹ªº¤¶­±¡A
+¥H¬d¬Ý¤ÎÂsÄý³]³ÆªººÊ±±°T®§¡Bª¬ºA°T®§¡A¥H¤Î©Ò²£¥Íªº³]³Æ©Ê¯à³øªí¡C 
+
+
+¦b
+Network 
+³¡¥÷¬°
+OpenNMS 
+«ÝºÞ³]³Æ¡A¬°
+OpenNMS 
+¨t²Î¦¬¶°¸ê°Tªº¨Ó·½¡A¦Ó³o
+¨Ç¸ê°T¬°
+SNMP 
+ªA°È©Î¬°¦UºØÀ³¥Î¤¶­±ªA°È¡A¦p
+FTP
+¡B
+H
+TTP
+¡B
+SQL
+¡A¥H¤Î
+Mail 
+µ¥
+ªA°È¡C¦b 
+OpenNMS 
+®Ö¤ß³¡¥÷¹ê²{ºô¸ô³]³Æ¤Î¥D¾÷¨t²Î¸ê·½ªº¥i¥Î©Ê¡B³]³Æ¬G»Ù
+ºÞ 
+²z¡A¥H¤Î¬Û¹ïÀ³³B²zµ¦²¤À³¥Î¡C¨Ï¥Î¯S©w½ü¸ßªº¤è¦¡¦Ü«ÝºÞ³]³Æ¦¬¶°¸ê®Æ¼Æ
+¾Ú¡A¨Ã¥B§ó·s¡BºûÅ@¡A¥H¤Î°õ¦æ¨Æ¥ó³qª¾¡C
+PostgreSQL 
+¸ê®Æ®w¥D­n¬°
+OpenNMS 
+¨t
+²ÎÀx¦sºô¸ô³]³Æ¥H¤Î¥D¾÷¨t²Îªº¸ê®Æ¼Æ¾Ú¡A¥D­n¬°°O¿ý°t¸m¡B´y­z¡A¥H¤Îª¬ºAªº
+°T®§¡C¨ä¤¤©Ò¦s¸ê®Æ¬°¸g¥Ñ
+OpenNMS 
+¨t²Î³z¹Lºô¸ô±½´y¦Û°Ê«Ø¥ß°_¨Ó¡A¨Ã¥Ñºô
+¸ô³]³Æ¦Û°ÊºûÅ@
+¡C 
+
+
+ 
+
+
+ 
+
+
+¹Ï 
+1. OpenNMS 
+¬[ºc¹Ï 
+
+
+ 
+
+
+CAPSD (
+¹Ï
+1. I)
+¡G
+¥þ¦W¬°
+Capabilities Daemon
+¡C¦¹¤@¼Ò²Õªº¥\¯à¬°¦¬¶°¸`ÂI¤ä
+´©ªºÀ³¥ÎªA°È¡A¦p
+FTP
+¡B
+DNS
+¡B
+HTTP
+¡B
+SMTP
+¡B
+IMAP
+¡A¥H¤Î
+POP
+µ¥¡C¨Ã±Nµ²ªG¶Ç»¼
+¦Ü¸ê®Æ®wÀx¦s¡C 
+
+
+
+DISCOVERY (
+¹Ï
+1. A)
+¡G
+DISCOVERY 
+¼Ò²ÕÂÇ¥Ñ¨Ï¥ÎªÌ©Ò³]©wºÊ±±ªººô¬q¡A­t³d¦b
+°_©l¤Î«áÄò°õ¦æ¹Lµ{¤¤³z¹L 
+ICMP 
+¨ó©wµo²{¸`ÂI¡A¨Ã¥B¸g¥Ñ
+CAPSD
+¼Ò²Õ½T©w¸Ó¸`
+ÂI©Ò¤ä´©ªºÀ³¥ÎªA°È¡A¦p
+FTP
+¡B
+HTTP
+¡B
+DNS
+¡A¥H¤Î
+ICMP 
+µ¥µ¥¡C 
+
+
+ICMPD (
+¹Ï
+1. B)
+¡G
+¥þ¦W¬°
+Internet Control Message Protoco
+l Daemon
+¡C¦¹¤@
+¼Ò²Õªº¥\¯à¬°¨Ï¥Î 
+ICMP 
+¨ó©w°»´ú¤Î½ü¸ßºô¸ô¸`ÂI¡A 
+¨Ã±Nµ²ªG¶Ç¦Ü
+DISCOVERY
+¼Ò²Õ°µ¶i¤@¨Bªº¤ÀªR¤Î§@·~¡C 
+
+
+JETTY (
+¹Ï
+1. C)
+¡G
+¨Ï¥Î
+Java JSP (
+Java Server Pages)
+¬°¶}µo®Ö¤ßªº
+OpenNMS
+¨t²Î¡AÂÇ¥H
+JETTY
+©Ò´£¨Ñ 
+JSP
+©M 
+servlet
+ªº¹B¦æÀô¹Ò«Ø¥ß°_ºô­¶ªA°È¡C 
+
+
+RTC (
+¹Ï
+1. D)
+¡G
+¥þ¦W¬°
+Real Time Console
+¡C
+RTC
+ªº§@¥Î¬°§Y®É¦¬¶°¼Æ¾Ú¡A¥ç¥i
+¥H¬°¨Ï¥ÎªÌ©Ò©w¸qªº¸`ÂIªA°È´£¨Ñ¸ê°T¡C 
+
+
+Outage Manager (
+¹Ï
+1. E)
+¡G
+O
+utage Manager
+±Nµo¥Í°ÝÃDªº¸`ÂI¥H¤Î­ì¦]¶Ç¦Ü¸ê
+®Æ®w¤¤¡A¥H«KÅý¸ê®Æ®wµn°O¦¹¨Æ¥ó¡C 
+
+
+EVENTD (
+¹Ï
+1. F)
+¡G
+¥þ¦W¬°
+Event Daemon
+¡C
+EVENTD
+ªº¥\¯à¬°±N¨t²Î©Òµo¥Íªº¨Æ
+¥ó¤ÀÃþ©Î¬O±N¼Æ¾Ú¤À§O°e¦Ü
+RTC
+¡B
+Outage Manager
+¡B
+COLLECTED
+¡A¥H¤Î
+CAPSD
+¶i
+¦æ­Ó§O³B²z¡C 
+
+
+COLLECTED (
+¹Ï
+1. G)
+¡G
+¥þ¦W¬°
+Collect Daemon
+¡C¦¹¤@¼Ò²Õ¨Ì¾Ú 
+EVENTD
+©Ò¶Ç»¼
+ªº¸`ÂI¸ê°T¡A¶i¦Ó½ü¸ß¸Ó¸`ÂI©Ò¤ä´©ªºªA°È¡C·íªA°È¥X²{²§±`ª¬ºA®É¡A
+COLLETTED
+·|³qª¾
+EVENTD
+¶i¦æ³B²z¡C
+COLLETCED
+¨Ã±N¦¬¶°ªº¸ê°T¶Ç»¼¦Ü¹Ï
+1.(k) RRD 
+(Round
+-
+Robin Database)
+¼Ò²Õ¡A±µµÛ
+RRD
+¼Ò²Õ¦A¨Ì¾Ú¦¬¶°ªº¸ê°Tµe¥X¬Û¹ï©ó®É¶¡
+ªº¼Æ¾Ú¹Ï¥Ü¡A´£¨Ñ¨Ï¥ÎªÌ¬ÛÃö¸ê°T¡C 
+
+
+TRAPD (
+¹Ï
+1. H)
+¡G
+¥þ¦W¬°
+Trap Daemon
+¡C¦¹¤@¼Ò²Õªº¥\¯à¬°±µ¦¬«ÝºÞ³]³Æ©Ò¶Ç»¼
+ªº
+SNMP Trap
+°T®§¡AÂà°e¦Ü
+EVENTD
+¶i¦æ³B²z¡C 
+
+
+PostgreSQL
+¬O
+OpenNMS
+®Ö¤ß¨t²Î³Ì­«­nªº³¡¥÷¡A¬°Àx¦s¨t²Î©Ò²£¥Íªº©Ò¦³¨Æ¥ó
+¥H¤Î¨t²Î©Ò¦¬¶°ªº¸ê°T¡C 
+
+
+OpenNMS 
+§Q¥Î¤W­z©Ò´y­zªº¼Ò²Õ¶i¦æºô¸ôºÞ²z§@·~¡A¶i¦æºôºÞ«e¥²¶·
+¥ý³]©wºÞ²z
+ªººô¬q¡A³z¹L
+DISCOVERY 
+¼Ò²Õ¶}©l°»´ú¸Óºô¬qªº¸`ÂI¡A¶}©lºô¸ô¸Ë¸mªººÞ²z¡C 
+
+
+ 
+
+
+OpenNMS 
+À³¥Î¥\¯à·§½× 
+
+
+ 
+
+
+¹Ï§Î¤ÆºÞ²z¤¶­±
+:
+¦­´Á 
+NMS 
+¬O§Q¥Î§Ç¦C°ð¥H¤Î
+RS232 Console 
+³s±µ¨t²Î¡A¨ä¨Ï
+¥Î¤¶­±¬°²×ºÝ¾÷¤¶­±¡A¬Û·í¤£¤H©Ê¤Æ¡C
+OpenNMS 
+Â\²æ³oºØ«¬ºA¡A´£¨Ñ§óª½Æ[ªº¨Ï
+¥ÎªÌ¤¶­±ÅýºÞ²zªÌ§Ö³tµo²{ºô¸ô³]³Æ¬G»Ù¤Î­ì¦]¡A¨Ã¥B¦b³Ìµuªº®É¶¡¤ººûÅ@¡C¹Ï
+§Î¤ÆºÞ²z¤¶­±´£¨Ñ¨Ï¥ÎªÌ³z¹LÂsÄý¾¹¬d¬Ý¡A¦p¹Ï
+2. 
+©Ò¥Ü¡C 
+
+
+
+
+
+¹Ï 
+2. OpenNMS 
+¨Ï¥Î¤Î¾Þ§@¤¶­± 
+
+
+¦Û°Ê°»´úºô¸ô¸`ÂI
+:OpenNMS 
+¨Ï¥Î
+PostgreSQL 
+¸ê®Æ®wÀx¦s¨t²Î²£¥Íªº¨Æ¥ó¡A¸ê
+®Æ®w¤¤ªººô¸ô¸Ë¸m¸ê®Æ¨Ã«D¥Ñºô¸ôºÞ²z­û¤â°Ê¿é¤J¤ÎºûÅ@¡A¦Ó¬O¥Ñºô¸ôºÞ²z­û¥ý
+¦æ¿é¤J±ýºÊ±±ºô¬q½d³ò 
+(
+¹Ï
+3.(a))
+¡A¸g¨t²Î§Q¥Î
+ICMP 
+½ü¸ß¤è¦¡¡A¦Û°Ê±½´y¶i¦Ó
+µo²{¸`ÂI¡A¨Ã±N¸`ÂI¸ê°TÀx¦s¦Ü¸ê®Æ®w¡C¨t²Î¦A¨ú±o¸ê®Æ®w¤¤¸`ÂI¸ê°T¡A¶i¦Ó¦¬
+¶°¸Ó¸`ÂI©Ò´£¨ÑªºÀ³¥ÎªA°È¡C¦Ó¹Ï
+3.(b)
+¬°¸g¥Ñºô­¶¤¶­±®i¥Ü¦b¸ê®Æ®w¤¤¸`ÂI¸ê
+°T¥Ü·N¹Ï¡C 
+
+
+ 
+
+
+¹Ï 
+3.(a) 
+¦Û°Ê°»´ú¸`ÂI²ÕºA³]©wÀÉ 
+
+
+ 
+
+
+ 
+
+
+¹Ï 
+3.(b) 
+¸`ÂI¸ê°T¥Ü·N¹Ï 
+
+
+ 
+
+
+³]³Æ¸ê°T¦¬¶°»P¦^À³³ø§i
+:
+³]³Æ¸ê°T¼Æ¾Ú¤Îª¬ºAºûÅ@¬° 
+OpenNMS 
+¨t²Î©Ò¹ê
+¦æ¡A³QºÞ²zªººô¸ô³]³Æ¸ê°T¬ÒÀx¦s¦Ü¸ê®Æ®w¡C³QºÞ²zªººô¸ô³]³Æ¥D­n¤À¬°¤ä´©
+SNMP 
+©Î´£¨Ñ¨ä¥¦¤¶­±ªºÀ³¥ÎªA°È¡A¦p´£¨Ñ
+HTTP 
+ºô­¶¦øªA¾¹¡C
+OpenNMS 
+ÂÇ¥Ñ
+ICMP
+¡B
+SNMP
+¡A¥H¤Î
+SNMP Trap
+¨Ó¦¬¶°ºô¸ô³]³Æ¸ê°T¡C¨Ï¥Î
+ICMP 
+¥Î¨Ó´ú¸Õ»P»·ºÝ¸Ë¸m¶¡
+ªººô¸ô¬O§_ºZ³q©Î¬O©¼¦¹¶¡ªº¶Ç¿é³t²v¬O§Ö¬OºC¡CÂÇ¥Ñ¶Ç¦^ªº«Ê¥]¼Æ¥Øªº¿ò¥¢²v¡A
+¤]¥i¥Î¨Ó§PÂ_¥Ø«e©¼¦¹¶¡ªººô¸ô±¡ªp¬O§_¥¿±`©Î¦£¸L¡AÂÇ¦¹±oª¾¸Ë¸m¬O§_¥¿±`¹B
+§@¤¤¡C 
+
+
+
+
+
+³]³Æ¬G»Ù¨Æ¥óºÞ²z
+:
+ºô¸ô³]³Æ¹B¦æª¬ºAµo¥ÍÅÜ¤Æ®É¡A
+OpenNMS 
+¨t²Î³z¹L
+SNMP 
+¥H¤Î
+SNMP Trap
+¦¬
+¶°¬ÛÃö¸ê°T«á¡A«K·|²£¥Í¤@­Ó¨Æ¥ó±N¸ê°T¸ÑªR¨Ã¥B¤ÀÃþ«á³B²z¡C
+·í¨Æ¥ó¬°ºô¸ô³]³Æ¥Ñ¥¿±`ª¬ºAÂàÅÜ¦¨¬G»Ùª¬ºA®É 
+(
+¦p­«¶}¾÷©Î¬O·í¾÷
+)
+¡A¨t²Î§Y
+·|µo°eÄµ§i³qª¾ºô¸ôºÞ²z­û¡Cºô¸ôºÞ²z­û³z¹L¨Æ¥óºÞ²z¥i¥H¤è«K¡B§Ö³tªº´x´¤ºô
+¸ô³]³Æ¤Î¥D¾÷¨t²Îªº¹B¦æª¬ºA¡A¥H½T«O¨t²Î¥¿±`¹B§@¡C 
+
+
+ 
+
+
+OpenNMS 
+¨t²Î±N¨Æ¥ó¤ÀÃþ¡A¤À§O¬°
+Cleared
+¡B
+Normal
+¡B
+Indeterminate
+¡B
+Warning
+¡B
+Minor
+¡B
+Major
+¡A¥H¤Î
+Critical 
+¤CºØÃþ§O¡CÅý¨Ï¥ÎªÌ«Ü®e©ö´N¥i¥Hª¾
+¹D¸Ë¸m¥Ø«e³B©ó¥¿±`ª¬ºA©Î¬G»Ùª¬ºA¡C¥H¤U¤À§O¤¶²Ð¨Æ¥ó¤ÀÃþ©Ò¥Nªíªº·N¸q¡G 
+
+
+„H C
+leared 
+¥Nªí¬°¸Ë¸m¥ý«eµo¥Íªº°ÝÃD¤w¸g¸Ñ¨M¡C 
+„H Normal 
+¥Nªí¬°¸Ë¸m¤w¸g¥¿±`¹B§@¤¤¡C 
+„H Indeterminate 
+¥Nªí¬°¤£½T©wªº°ÝÃDµo¥Í¡A¦ý¤£¼vÅT³]³Æ¥¿±`¹B§@¡C 
+„H Warning 
+¥Nªí¬°Äµ§i·N«ä¡A¨Ò¦p¸Ë¸m
+IP address 
+¤w¸g³Q²§°Ê¡C 
+„H Minor 
+¥Nªí¬°¸Ë¸m³¡¤ÀªA°È¤w¸g²§±`ª¬ºA¡A¨Ò¦p¸Ë¸m´£¨Ñ
+HTTP 
+¤Î
+FTP
+ºô
+¸ôªA°È¡A¨ä¤¤¤@­ÓªA°È²§±`´N·|§Q¥Î
+Minor 
+¨Ó¼Ð¥Ü¡C 
+„H Major 
+¥Nªí¬°¨Ï¥ÎªÌ«È¨î¤Æ­q¾\ªº¨Æ¥óµo¥Í¡A»Ý­n°¨¤W³B²z¡C 
+„H Critical 
+¥Nªí¬°·¥­«­n¨Æ¥ó¡A¸Ë¸m¥i¯à¤w¸gÂ_½u©Î¬O¬G»Ù¡A»Ý­n¥ß§Yºû
+Å@¡C 
+
+
+ 
+
+
+¸`ÂI¸ê°T¬ö¿ý¤ÎºÊ±±
+:OpenNMS 
+¥i¥H¸Ô²Óªº¬ö¿ý¤ÎºÊ±±¨C¤@­Ó¸`ÂIªº¸ê°T¡A·í
+·Q¬d¬Ý¬Y¤@­Ó¸`ÂI¸ê°T®É¡AÂÇ¦¹¥\¯à±oª¾¸Ó¸`ÂIª¬ºA¸ê°T¡B¸Ó¸`ÂI©Ò´£¨ÑÀ³¥ÎªA
+°Èªº¥i¥Î©Ê¡B
+SNMP
+¸ê°T¥H¤Î³Ìªñµo¥Íªº
+5 
+­Ó¨Æ¥ó¤Î¬G»Ù¨Æ¥ó¡C¹Ï
+4. 
+¬°ºô¸ô¸`
+ÂIºÊ±±¥Ü·N¹Ï¡A¥Ñ¹Ï
+4. 
+¥i¥H±oª¾ 
+
+
+(A)
+·í«e³]³Æª¬ºA¸ê°T 
+(
+General Status)
+¡B 
+
+
+(B)
+¸`ÂI´£¨Ñºô¸ôÀ³¥ÎªA°È
+ªº¥i¥Î©Ê 
+(
+Availability)
+¡A¥H¤Î 
+
+
+(C)
+ºÊ±±¨Æ¥óªº¸ê°T 
+(Notification and RecentEvents)
+¡C 
+
+
+ 
+
+
+ 
+
+
+
+¹Ï 
+4. 
+ºô¸ô¸`ÂIºÊ±±¥Ü·N¹Ï 
+
+
+ 
+
+
+¨Æ¥ó³qª¾
+:OpenNMS 
+¥i¥HÅý¨Ï¥ÎªÌ¦Û¦æ¤Ä¿ï­nª¾¹Dªº¨Æ¥ó¸ê°T 
+(
+¦p¹Ï
+5. 
+©Ò
+¥Ü
+)
+¡A¨Æ¥ó¸ê°T¦pÃö¾÷¡B­«¶}¾÷¡A¥H¤Î¯S©wªA°Èµo¥Í¬G»Ù¡C¨Æ¥óµo¥Í«á¡A¨t²Î¬ö
+¿ý¦¹¨Æ¥ó¦Ü¸ê®Æ®w¡A¨Ã§Q¥Î
+E
+-
+mail 
+¥H¤Î¶Ç©I¾÷ 
+(PagerEmail)
+³qª¾¸Ó¨Ï¥ÎªÌ¡C
+¦Ó¹Ï
+6. 
+¬°¸`ÂIÃö¾÷
+E
+-
+mail 
+³qª¾¥Ü·N¹Ï¡C 
+
+
+ 
+
+
+ 
+
+
+ 
+
+
+¹Ï 
+5. 
+¨Æ¥ó³qª¾¬ö¿ý 
+
+
+ 
+
+
+ 
+
+
+¹Ï 
+6. 
+¸`ÂIÃö¾÷¤§
+E
+-
+mail
+³qª¾¥Ü·N¹Ï 
+
+
+ 
+
+
+¸`ÂI¸ê°T°t¸mºÞ²z
+:
+¹ï©óºô¸ôºÞ²zªÌ¦Ó¨¥¡A¨C­ÓºÊ±±¸Ë¸mªº¸ê°T¥²¶·ÁA­Y«ü
+´x¡CºÞ²z­û³z¹L¦¹¥\¯à¥i¥H°w¹ï©ÒºÞÁÒ½d³òªº¸Ë¸m¡A³]©w¼tµP¡B
+«¬¸¹¡B»ù­È¡B§@
+·~¨t²Î¡BºÞ²zªÌ¨­¤À¡A¥H¤Î©Ò©ñ¸mªº¼Ó¼h©M©Ð¶¡µ¥¡A¯à°÷¦³®Äªº´x´¤ºÞÁÒ½d³ò¤º
+ªººô¸ô¨t²Î³]³Æ¡C 
+
+
+ 
+
+
+OpenNMS
+À³¥Î 
+
+
+
+
+
+¶}µo¾ã¦Xªº
+OpenNMS
+ºôºÞ¨t²Î§ïµ½¤F­ì¦³¸Ë¸m³]©w¤Wªº¤£«K¡C°£¤F 
+OpenNMS
+­ì¦³Æ[¹î»·ºÝ¸Ë¸mª¬ªpªº¥\¯à¥~¡A¥[¤J¤F¥i³z¹L 
+SNMP
+³]©w»·ºÝ¸Ë¸mªº¥\¯à¡C¨Ã
+¥B³z¹L¸ê®Æ®wªº¾ã¦X«O¯d­ì¥»
+OpenNMS
+ªº¸ê®Æ®w¡A¥H«K¤é«á
+OpenNMS
+¤É¯Å®É¸ê®Æ
+Ä~Äòªu¥Î¡C 
+
+
+¥t¥~§Q¥Î¸ê®Æ®wÀx¦s¦U¼tµPªº
+OID
+¸ê°T¡A¥H§Q©ó°w¹ï¨C¤@­Ó¼tµPªºµL½u°ò¦a
+¥x³]©w®É¡A·|¦]¬°¨Ï¥Îªº
+OID
+¤£¦P¦Ó¾É­P³]©w¥¢±Ñµ¥ª¬ªpµo¥Í¡A¨Ò¦p
+D
+-
+Link
+©Î
+¬O 
+Proxim
+³]©w¨Ï¥Îªº
+OID
+§Y§¹¥þ¤£¦P¡C¦P®É¬°¤F¨ÏºôºÞ¤H­û¯à§ó¤è«K¦aºÞ²z¾ã
+­Óºô¸ôÀô¹Ò¡A¦b¨t²Î¥\¯à¤¤¥[¤J§ó¦³®Äªº¸s²Õ¤ÀÃþ¥\¯à¡A¦]¦¹ºôºÞ¤H­û«K¥i³z¹L
+¾ã¦Xªº
+OpenNMS
+°w¹ïµL½uºô¸ô¸Ë¸mªº²Ó¶µÄÝ©Ê¨Ó§@¤ÀÃþ¡A±N¬Y¤@°Ï°ìªºµL½uºô¸ô
+¸Ë¸mµø¬°¤@­Ó¸s²Õ¡A¥H«K¦b¦P¤@°Ï°ì¤ºªºµL½uºô¸ô¸Ë¸m¥²¶·¥þ³¡§ó°Ê®É¤è«KºÞ²z
+¤Î³]©w¡A¦Ó¤j¤j¦a´î¤Ö¯Ó¶Oªº®É¶¡¡C 
+
+
+ 
+
+
+¸ê®Æ®w¾ã¦X¤Î´£¨Ñªº¥\¯à 
+
+
+ 
+
+
+¼W­×
+SNMP
+³]©w¤Î
+SNMP OID
+¿é¤J¥\¯à¦Ü­ì
+OpenNMS
+¨t²Î¤W¡A·í°ò¦a¥xµo¥ÍÄµ
+°T©ÎªA°È²§±`®É¡A§Y¥iÂÇ¥Ñ
+SNMP
+¨ó©w¡Aµ¹¤©­«·s±Ò°Ê©Î¬O½Õ¾ã¥\
+¯àªº³]©w¡C 
+
+
+·s¼WÃB¥~ªº¸ê®Æ®wªí³æ¨Ã·f°t¨t²Î­ì¦³ªº¸ê®Æ®wµ²ºc¡A¨Ó°t¦X
+SNMP
+¥\¯à¶i¦æ®É
+ªº»Ý¨D¡C¤@¯ë¨Ó»¡¡A
+MIB
+¸ê®Æ®w°£¤F¼Ð·Ç³W©w¤§¥~¡A¤]¥]§t¼t°Ó¦Û¦æ¬ãµo²Å¦X¸Ë
+¸m¿W¯S¸ê®Æ®w¡A©Ò¥H¨C¤@®a¼t°Óªº
+SNMP OID
+¬Ò¤£¦P¡C¥Ñ©ó
+SNMP
+³]©w¥\¯à«h¶·°Ñ
+¦Ò
+OID
+¸ê°T¶i¦æ³]©w¡A¬°¤F¨Ï¨C¤@®a¼t°Óªº
+SNMP OID
+¸ê°T¯à°÷¤À§O³Q¨t²Î©Ò°O
+¿ý¤Î¨Ï¥Î¡A·s¼W¡u
+snmpmib
+¡vªí³æ¦Ü­ì¸ê®Æ®w¬[ºc¡A¬°Àx¦s
+SNMP
+³]©w¶i¦æ©Ò»Ý­n
+ªº¦U¶µ
+OID
+¸ê°T¡C¥Øªº¬O¬°¤F¦b±µ¤U¨Ó¨Ï¥Î
+SNMP
+³]©w®É¡A¨Ï¨t²Î¯à¦Û°Ê§ä´M¤Î
+¹ïÀ³¸Ó¼tµP
+OID
+¸ê°T¶i¦æ³]©w¡C¥t¥~¬°¤F·s¼W¸s
+²ÕºÞ²z¥\¯à¡A·s¼Wªí³æ¡u
+gmip
+¡v
+ÂÇ¥H°O¿ý·s¼Wªº¸s²Õ¦WºÙ¸ê°T¡A¦AÂÇ¥Ñ·s¼Wªí³æ¡u
+gm
+¡v°O¿ý¨C­Ó³]³ÆÂkÄÝ©ó­þ¨Ç
+¸s²Õ¡A¦¹¤èªk«Y§Q¥Î¡u
+gm
+¡v»P­ì¸ê®Æ®wªºªí³æ¡u
+ipinterface
+¡vªºÄæ¦ì
+nodeid
+§@ÃöÁp¨Ï¥Î¡C 
+
+
+ 
+
+
+OpenNMS °ÝÃD·§­z 
+
+OpenNMS 
+¹ï©ó¨Ï¥ÎªÌ¦Ó¨¥´£¨Ñ¤F«Ü¦h¤è«Kªº¥\¯à¡A¦ý¬O
+OpenNMS 
+¹ï©óºô¸ôºÞ²z
+¤è­±µy¶û¤£¨¬¡C­ì¦]¦p¤U©Ò¦C
+: 
+
+
+„H OpenNMS 
+¨Ï¥Î
+SNMP 
+¥H¤Î
+SNMP Trap 
+¦¬¶°¸`ÂI¸ê°T¡A¦ý¨S¦³´£¨Ñ
+SNMP
+³]
+©wªº¥\¯à¡C¹ï©óºô¸ôºÞ²z¨t²Î·í¸Ë¸mµo¥Í°ÝÃD®É¡A¨Ï¥Î
+SNMP 
+³]©w§Y¥i¶i
+¦æ­«¶}¾÷
+©Î¬O§ó§ï
+Channel 
+©Î
+IP 
+µ¥¸ê°T¡A¹ï©óºô¸ôºÞ²z­û¨Ó»¡¡A§Y¤£¥Î
+¦Ü²{³õºûÅ@¸Ë¸m¡C 
+
+
+OpenNMS 
+¨t²Î´£¨Ñªº³qª¾¥\¯à¦³
+E
+-
+mail 
+¥H¤Î
+PagerEmail 
+¤GºØ¥\¯à¡A¦ý
+¥Ñ©ó
+PagerEmail 
+¦b°ê¤º¤w¸g«Ü¤Ö¨£¡A­ì¦]¬°¥Ø«e¹q«Hµo®i¨³³t¡A°ê¤H¥­
+§¡¤@­Ó¤H¾Ö¦³
+1.5 
+¤ä¤â¾÷¡A©Ò¥H¶Ç©I¾÷ªA°È¤w¸g«Ü¤Ö¤H¨Ï¥Î¡C 
+
+
+OpenNMS
+ªºÀuÂI¦b©ó°ß¤@¶}©ñ­ì©l½X¡A¦]¦¹¥i¥H¦Û¥Ñªºµo¶}
+¡C 
+
+
+ 
+
+
+°Ñ¦Ò¸ê®Æ 
+
+
+ 
+
+
+[1] OpenNMS
+¡G
+http://www.opennms.org/wiki/Main_Page. 
+
+
+[2] J.D. Case, M. Fedor, M.L. Schoffstall, J. Davin, Simple Network 
+Management Protocol (SNMP) ,
+RFC 1157
+,May 1990. 
+
+
+[3] R. Presuhn, Ed. ,Version 2 of the Protocol Operations for the Simple 
+Network Management Protocol (SNMP),
+RFC 3416
+, December 2002. 
+
+
+[4] U. B
+lumenthal, B. Wijnen, User
+-
+based Security Model (USM) for version 
+3 of the Simple Network Management Protocol (SNMPv3),
+RFC 3414
+, December 
+2002. 
+
+
+[5] M.T. Rose, K. McCloghrie , Concise MIB definitions ,
+RFC 1212
+, March 
+1991. 
+
+
+[6] SNMP4J
+¡G 
+http://www.snmp4j.org/ 
+
+
+[7] J. Klensin, Simple Mail Transfer Protocol,
+RFC 5321
+, October 2008. 
+
+
+[8] J. Myers, M. Rose , Post Office Protocol 
+¡V 
+Version 3,
+RFC 1939
+, May 
+1996. 
+
+
+[9] M. Crispin, INTERNET MESSAGE ACCESS PROTOCOL 
+¡V 
+VERSION 
+4rev1 ,RFC 
+3501, March 2003 
+
+
+[10] 3rd Generation P
+artnership Project (3GPP) 
+¡G
+http://www.3gpp.org. 
+
+
+[11] European Telecommunications Standards Institute (ETSI)
+¡G
+http://www.etsi.org/. 
+
+
+[12] EMOME web page
+¡G
+Http://www.emome.net/. 
+
+
+[13] ORiNOCO AP
+-
+4000 : 
+http://www.chu
+-
+an.com/download/wifi/ORiNOCO%20AP
+-
+4000M.pdf. 
+
+
+[14] TwSMS¡¦s web page
+¡G
+http://www.twsms.com/ 
+
+
+[15] Yi
+-
+Bing Lin,Meng
+-
+Hsun Tsai,¡¨ Caching in I
+-
+CSCF of UMTS IP multimedia 
+subsystem,¡¨ Wireless Communications, IEEE Transactions,Vol.5,no.1, 
+PP.186
+-
+192,Jan 2006. 
+
+
+[16] OpenNMS¡¦s install web page
+¡G 
+http://www.opennm
+s.org/index.php/Installation:Debian. 
+
+
+[17] http://linux
+-
+uvc.berlios.de/. 
+
+
+ 
+
+
+
