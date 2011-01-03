@@ -188,7 +188,6 @@ Equivalence;下表可明顯看出polynomial function和exponential function在n�
 大時的變化，在n 變大時，exponential function會遠比polynomial function的值來
 的大，也就是說在n不大時所需的計算時間並不相差很多，但隨著n的變大，所
 
-
 time complexity 為 n
 
 需的計算時間會以難以想像的速度成長。
@@ -521,9 +520,10 @@ problems和approximation algorithm有更深一層的認識了，NP 完全問題�
 難問題，而不是NP 完全問題問題。
 
 第三點，文中的「化約關係的樹」圖，看起來很像Intro. to Algorithms書中的
-圖，不過有些差異。書中的「SUBSET-SUM」是接在「VERTEX-COVER」下面，而「HA
-M-CYCLE」則是接在「3-CNF-SAT」之下。實際上Hamilton-Cycle也的確不適用於
-化約成Vertex-Cover或是Clique，這兩類的問題定義上有較大的差別。
+圖，不過有些差異。書中的「SUBSET-SUM」是接在「VERTEX-COVER」下面，
+而「HAM-CYCLE」則是接在「3-CNF-SAT」之下。
+實際上Hamilton-Cycle也的確不適用於化約成Vertex-Cover或是Clique，
+這兩類的問題定義上有較大的差別。
 
 第四點，因為這張「化約關係的樹」圖的根是「CNF-SAT」，所以可以推知此圖
 是描述最後化約為NP 完全問題的化約關係。那麼這張圖上的TSP，應該可以化約

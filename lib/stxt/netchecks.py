@@ -168,7 +168,12 @@ def find_check(checks, options):
             return c
         return cs[0]
     else:
-        return checks
+        c = {}
+        c[u'date'] = logdate
+        c[u'外網防火牆：'] = u'正常'
+        return c
+
+        #return checks
 
 # 0.1 預設的 HTML 報告
 if __name__ == '__main__':
@@ -200,9 +205,11 @@ if __name__ == '__main__':
     (options, args) = oparser.parse_args()
 
     if len(args) < 1:
-        oparser.error("Must supply the SOURCE file!")
-
-    src = args[0]
+        #oparser.error("Must supply the SOURCE file!")
+        src = r'doc\hltb\netchecks.txt'
+    else:
+        src = args[0]
+        
     with open(src) as f:
         source = f.read() 
 
