@@ -73,8 +73,13 @@ class Parser(GenericParser):
         return doc
 
     def p_title(self, args):
-        ' title ::= line titlesep emptyline'
-        return args[0].value
+        '''title ::= line titlesep emptyline
+           title ::= line line titlesep emptyline'''
+        if len(args) == 4:
+            title = args[0].value + '\n' + args[1].value
+        else:
+            title = args[0].value
+        return title
 
     def p_init_list(self, args):
         '''docattrs ::= docattr
