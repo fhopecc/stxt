@@ -24,6 +24,12 @@ class MSWordOut(GenericASTTraversal):
             para.Range.Select()
             msword.Selection.Font.Size = 18
             msword.Selection.Font.Bold = 1
+            if ast.title.count('\n') == 1:
+                para = self.doc.Paragraphs(2)
+                para.Format.Alignment = 1 # center
+                para.Range.Select()
+                msword.Selection.Font.Size = 18
+                msword.Selection.Font.Bold = 1
         
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last

@@ -1,0 +1,10 @@
+mag@mutation_mutation > show parameter dump_dest
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+background_dump_dest                 string      /u01/app/oracle/admin/mutation
+                                                 /bdump
+core_dump_dest                       string      /u01/app/oracle/admin/mutation
+                                                 /cdump
+user_dump_dest                       string      /u01/app/oracle/admin/mutation
+                                                 /udump
