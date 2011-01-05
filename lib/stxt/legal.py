@@ -102,7 +102,7 @@ class Parser(GenericParser):
         sect = Node(type='sect')
         sect.secnumber = args[0].value
         if len(args) == 3:
-            sect.append(Node(type='para', value = args[1].value))
+            sect.append(Node(type='para', value=args[1].value))
         return sect
 
     def p_sect(self, args):

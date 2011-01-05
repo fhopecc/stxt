@@ -1,173 +1,71 @@
-非確定型圖靈機
---------------
+複雜度理論
+----------
 
-如果不加特殊說明，通常所說的圖靈機都是確定型圖靈機。
-非確定型圖靈機和確定型圖靈機的不同之處在於，在計算的每一時刻，
-根據當前狀態和讀寫頭所讀的符號，機器存在多種狀態轉移方案，
-機器將任意地選擇其中一種方案繼續運作，直到最後停機為止。
-具體而言，其狀態轉移函數為
+複雜度理論，目的就在於了解運算問題在時間、記憶體與資源方面的需求，
+資源需求越多表示題目越困難。
 
-δ: Q\F × Γ → PowerSet(Q × Γ × {L, R})
+測量複雜度
+~~~~~~~~~~
 
-其中 Q 是狀態集合，Γ 是帶字母表，L, R 分別表示讀寫頭向左和向右移動；
-符號2A 表示集合A的冪集，即
+計算所需時間主要以執行次數來衡量，
+所需空間主要以記憶體之用量來衡量。
 
-例如，設非確定型圖靈機 M 的當前狀態為 q，當前讀寫頭所讀的符號為 x，若
+時間複雜度可以下列函數衡量，
+令 f：N -> N 為一個函數，
+則 f(n) 表示輸入長度為 n ，
+圖靈機執行 O(f(n)) 次數所能決定之問題。
 
-則 M 將任意地選擇一個(qi,xi,di)，按其進行操作，然後進入下一步計算。
-
-非確定型圖靈機M在輸入串ω上的計算過程可以表示為一棵樹，
-不同的分支對應著每一步計算的不同的可能性。
-只要有任意一個分支進入接受狀態，則稱M接受ω；
-只要有任意一個分支進入拒絕狀態，則稱M拒絕ω；
-
-某些分支可能永遠無法停機，
-但只要有一個分支可以進入接受或拒絕狀態，
-我們就說 M 在輸入ω上可停機。
-注意，我們規定 M 必須是無矛盾的，
-即它不能有某個分支接受ω而同時另一個分支拒絕ω，
-這樣有矛盾的非確定型圖靈機是不合法的。
-
-定理：
-
-對於任意一個非確定型圖靈機 M，
-存在一個確定型圖靈機 M'，
-使得它們的語言相等，即L(M) = L(M')。
-
-證明：
-
-因為非確定型圖靈機的計算過程就是一棵樹，
-因此我們只需遍歷該樹就可以模擬其計算過程。
-一個簡單的想法是利用深度優先搜索來遍歷M的計算樹，
-但這樣行不通，因為M的某些計算分支可能永遠不停機！
-
-所以我們可以採用一種在演算法設計中稱為迭代加深搜索的技巧來遍歷 M 的計算樹。
-具體證明如下：
-
-對於非確定型圖靈機 M，
-構造一個確定型圖靈機 M' 如下：
-
-令k = 1；
-深度優先地模擬M的每個分支的計算，
-但每個分支最多只計算k步，
-如果某個計算分支在k步內可以停機，
-則M'也停機，並將該計算分支的計算結果輸出。
-令k增加 1，跳轉到上一步繼續執行。
-
-顯然，若M有某個分支可以停機，
-則此M'也一定會找到該分支並停機。
-
-因此L(M) = L(M')。
-
-定理2：
-
-如果語言L被非確定型圖靈機M在多項式時間內接受，
-則一定存在多項式P使得語言L被時間複雜度為O(2P(n))的確定型圖靈機程序所接受。
-
-定理2說明了為什麼在證明P = NP之前，
-
-所有的NP問題都只有指數時間複雜度演算法。
-
-一、 運算理論的領域
-
-※ 自動機（automata）理論
-
-自動機理論探討運算的數學模型，
-包括相關的定義與特性，其中有限自動機應用於文字處理、
-編譯器與硬體設計，
-與上下文無關的文法則應用於程式語言與人工智慧。
-
-※ 運算性（computability）理論
-複雜度與運算性的理論息息相關，複雜度理論以問題的難易來對問題分類，
-運算性的理論則是以問題是否能用電腦解決來加以分類。
-
-※ 複雜度（complexity）理論
-
-在複雜度理論中最重要的問題是瞭解為什麼有的問題在運算上是難題，
-有的則是很簡易。
-
-二、運算性理論
-
-※ 有限自動機，可以描述有限記憶體的運算機器，
-下推自動機則是用來描述記憶體無限的運算機器，
-但只能使用於 LIFO 的堆疊中。
-有些簡單的問題還是沒有辦法用這兩種模型來解決，
-所以不適合當成一般電腦的模型。
-
-※ 杜寧機器（Turing machine）
-
-三、複雜度的理論（complexity theory）
-
-※ 複雜度是可以測量的。
-
-複雜度理論,目的就在於了解運算問題在時間、
-記憶體與資源方面的需求。
-
-※ 最糟情況的分析(worst-case analysis)
+1.最糟情況分析(worst-case analysis)
 
 係指以某個長度的所有字串輸入的最長執行時間來考量。
 
-※ 平均情況分析(average-case analysis)
+2.平均情況分析(average-case analysis)
 
 係指以某個長度的所有字串輸入的平均執行時間來考量。
 
-※ 所謂漸進式的分析是針對大的輸入來分析演算法的執行時間，
-表示執行時間的函數中只要考慮高次項，
-而且係數可省略。
+3.漸進式分析
 
-令 f：N→N 為一個函數，時間複雜度類別，TIME（t（n），
-可定義如下：（TIME（t（n））＝﹛L∣L 
-是一個可由圖靈機花 O（t（n））時間決定
-的語言﹜
+所謂漸進式的分析是針對大的輸入來分析演算法的執行時間，
+表示執行時間的函數中只要__考慮高次項__，
+而且__系數可省略__。
 
-※ 運算模型不同，則語言的時間複雜度也會不同。常見的模型：single-tape
-Turing machine、multitape Turing machine、nondeterministic Turing machine。
+運算模型不同，則語言的時間複雜度也會不同。
+常見的模型：
 
-※ 令 （n）
-t
-為函數， n）
-（ ≧n，則每個使用 （n）
-t
-t
-時間的 multitape Turing machine
-2
-會有一個相等的使用 O（t （n）
-）的 single-tape Turing machine。
-※ 令t
-（n）
-為函數，t n）
-（ ≧n，則每個 t n）
-（ 時間的 nondeterministic single-tape
-）
-O（ t（ n）
-圖靈機有一個相等的 2
-時間的 deterministic single-tape Turing
-machine。
-※ class P 的運算：假如一個運算問題屬於 P，則會有一個能在 nk（k 為常數）
-的時間內解決這個問題的方法。
-※ 屬於 P 類型的運算問題的語言可以由 deterministic single-tape Turing
-machine 在多項式級的時間內決定。
+single-tape Turing machine、
 
-※ class NP 的運算：
-NP 的運算問題代表 nondeterministic polynomial time problem。
+multitape Turing machine、
 
-※ 杜寧機器和有限自動機最大的差異是在於：記憶體無限。
+nondeterministic Turing machine。
 
-※ 運算模型功能比較：狀態變化無限＞狀態無限＆記憶體無限
+P 類型運算
+~~~~~~~~~~
 
-※ Satisfiability problem 是屬於 CLASS NP 問題。
+假如一個運算問題屬於 P，
+則會有一個能在 n**k(k 為常數)時間內解決這個問題的方法。
 
-※ 西元 1936 年 Alonzo Church 與 Alan Turing 發表的論文試著給演算法下定
-義，Church 使用λ-calculus 來定義演算法；
+屬於 P 類型的運算問題的語言可以由 
+deterministic single-tape Turing machine 在多項式級的時間內決定。
+
+NP 類型運算
+~~~~~~~~~~~
+
+NP 運算問題代表 nondeterministic polynomial time problem。
+
+杜寧機器和有限自動機最大的差異是在於：記憶體無限。
+
+運算模型功能比較：狀態變化無限＞狀態無限＆記憶體無限
+
+Satisfiability problem 是屬於 CLASS NP 問題。
+
+西元 1936 年 Alonzo Church 與 Alan Turing 發表的論文試著給演算法下定義，
+Church 使用 λ-calculus 來定義演算法；
 Turing 使用 machine 的觀念來定義演算法。
 
 ※ 下面各種語言類別之間的關係
 Regular≦Context free sdecidables≦Turing recode（應該是包含於或等於符號）
 
 演算法的複雜度-時間與結果的考量
-
-liucl@mx.nthu.edu.tw
-pentel@nthucad.cs.nthu.edu.tw
 
 為了要以簡單，共通的方法算出問題的答案，人們發現問題中存在的規律
 性後就將其定為所謂的公式，一旦找出公式後，只要將問題的資料代入對映的
@@ -196,31 +94,19 @@ computable functions)，就舉個最基本的問題作為例子，假設存在�
 將任何程式(P)和其input data(D)當成自己的input data 然後判斷出那個程式是否最
 後能停止而不會跑進無窮迴圈，則
 
-program(P)
-+
-Data(D)
+program(P) + Data(D)
 
-program(P)
-+
-Data(D)
+program(P) + Data(D)
 
-T
-
-T′
-
-t
-
+T T′ t 
 　
-
 print WILL STOP，stops
 
-　　　print WILL NOT STOP，stops
-
-　
+print WILL NOT STOP，stops
 
 print WILL STOP，enters an infinite loop
 
-　　　print WILL NOT STOP，stops
+print WILL NOT STOP，stops
 
 P+P
 
@@ -302,175 +188,80 @@ Equivalence;下表可明顯看出polynomial function和exponential function在n�
 大時的變化，在n 變大時，exponential function會遠比polynomial function的值來
 的大，也就是說在n不大時所需的計算時間並不相差很多，但隨著n的變大，所
 
-1
-
-1
-
-4
-
-4
-3
-
-4
-3
-
-1
-3
-
-2
-
-2
-
-2
-
-4
-
-4
-
-4
-
-1
-3
-
-3
-1
-
-3
-2
-
-2
-
-2
-
-1
-
-⇒
 
 time complexity 為 n
 
-2
-
-n
-
-n
-
 需的計算時間會以難以想像的速度成長。
 
-2
+NP-困難問題
+~~~~~~~~~~~
+第一點，NP-困難問題的難度「至少」和NP 完全問題是一樣的，
+換句話說，NP-困難至少跟NP 完全問題一樣難，
+而且在許多情況下NP-困難「更難」。
+所有的NP問題(包含NP 完全問題問題)都可以化約成NP-困難問題。
 
-32
+意即其他屬於NP的問題可變換（reducible）成它。
 
-5
+可變換在此意指對每個問題L，
+總有一個多項式時間多對一變換，
+即一個決定性的演算法可以將實例 l in L 轉化成實例 c in C，
+並讓c 回答Yes若且為若答案對 l 也是 Yes。
 
-2
+為了證明某個 NP 問題 A 實際上是NPC問題，
+證明者必須找出一個已知的NPC問題可以變換成A。
 
-5
+NP 完全問題
+~~~~~~~~~~~
 
-4
+它是一個NP-困難問題，
 
-25
+和Non-deterministic對應的就是deterministic了。Deterministic在這邊是指
 
-8
+Turing Machine裡面的行為準則對應表，每一次改變狀態的時候，只要前一步的
+狀態確定，下一步的狀態是確定可預測的。Non-deterministic的行為準則表，
+則是前一步的狀態即使都一樣，下一步的狀態是不可預測的，有兩種以上的可能
+。因此non-deterministic Turing Machine的計算能力會比Deterministic
+ Turing Machine的計算能力多。也因此同樣是polynomial的時間複雜度，NP的
+問題會比P來的難。至於NP是否等於P，目前是仍未解決的問題。講到這邊覺得還
+是不夠白話，也許不懂的讀者可以先跳過這兩段，待日後另外一篇文章再詳細解
+說。
 
-125
+知道了NP怎麼來以後，NP 完全問題的定義就簡單了。一個問題如果是NP，而且
+又是NP-困難，那麼這個問題就是NP 完全問題。之前提到的Job-Shop Problem和
+今天提到的Travelling Salesman Problem，都是NP 完全問題的問題。不過可能
+會問，NP-困難是甚麼呢？NP-困難是指某個問題可以化約成另外一個
+NP 完全問題的問題，就是NP-困難了。也就是說，如果A問題可以化約成B問題，
+就代表說，如果B問題解決了，A問題就跟著解決，也就是A問題比B問題難一點的
+意思。(有學過計算理論的話，補充一下化約過程是要polynomial-reducible)
+ 經由這個化約的過程，我們可以一直化約，把各個問題組織成一個化約關係的
+樹。
 
-3125
+用計算複雜度把問題分作易處理和不易處理後，
+其實中間還是有些灰色地帶尚未能做出分類，
+而這個地帶就是NP 完全問題 problems，
+為何NP 完全問題 problems無法分類呢?
+因為沒有人能找出 NP 完全問題 problems 的 polynomial-time algorithm，
+卻又不能證明他們有 exponential-time 的下限，
+也就是找不出問題的計算複雜度，
+可是很多重要的問題都是 NP 完全問題，
+NP 完全問題有個很特別的性質，
+就是一旦有一個NP 完全問題問題被找出polynomial-time的 algorithm的話，
+那麼所有的NP 完全問題問題都找的到polynomial-time的 algorithm，
 
-4
-
-32
-
-9
-
-243
-
-2
-
-120
-
-10
-
-10
-
-10 2
-
-10 3
-
-10 5
-
-10 3
-
-5.9 × 10 4
-
-3.63 × 10 6
-
-50
-
-50
-
-2.5 × 10 3
-
-1.25 × 10 5
-
-3.12 × 10 8
-
-1.13 × 1015
-
-7.18 × 10 23
-
-3.04 × 10 64
-
-60
-
-60
-
-2.5 × 10 3
-
-2.16 × 10 5
-
-7.78 × 10 8
-
-1.15 × 1018
-
-4.24 × 10 28
-
-8.32 × 10 81
-
-100
-
-10 2
-
-10 4
-
-10 6
-
-1010
-
-1.27 × 10 30
-
-5.15 × 10 47
-
-9.33 × 10177
-
-用計算複雜度把問題分作易處理和不易處理後，其實中間還是有些灰色地
-帶尚未能做出分類，而這個地帶就是NP-Complete problems，為何NP-Complete
-problems無法分類呢?因為沒有人能找出NP-Complete problems 的 polynomial-
-time algorithm，卻又不能證明他們有exponential-time的下限，也就是找不出
-問題的計算複雜度，可是很多重要的問題都是NP-Complete，NP-Complete有
-個很特別的性質，就是一旦有一個NP-Complete問題被找出polynomial-time的
-algorithm的話，那麼所有的NP-Complete問題都找的到polynomial-time的
-algorithm，相反的，如果有一個NP-Complete中的問題被證明出有exponential-
-time的下限的話，那麼所有的NP-Complete問題都有exponential-time的下限，
-也就是這些問題已經無法算出最佳解了，可知NP-Complete problems全是容易
-處理的(tractable)，或著全是不易處理的(intractable)，但要將NP-complete歸類
-是和求NP-complete的polynomial-time algorithm一樣難的問題，所以目前沒人
-能回答，那退而求其次，要如何判斷一個問題是否為NP-Complete呢?如果一個
-問題不是NP-Complete，則可以試著找polynomial-time的algorithm，如果是NP-
-Complete，最好想其他方法，才不會浪費時間，以下就是判斷一個問題是否為
-NP-Complete的方法：
+相反的，如果有一個NP 完全問題中的問題被證明出有exponential-time的下限的話，那麼所有的NP 完全問題問題都有exponential-time的下限，
+也就是這些問題已經無法算出最佳解了，
+可知NP 完全問題 problems全是容易處理的(tractable)，
+或著全是不易處理的(intractable)，
+但要將 NP 完全問題歸類是和求NP 完全問題的polynomial-time algorithm一樣難的問題，
+所以目前沒人能回答，那退而求其次，
+要如何判斷一個問題是否為NP 完全問題呢?
+如果一個問題不是NP 完全問題，
+則可以試著找polynomial-time的algorithm，
+如果是NP 完全問題，最好想其他方法，才不會浪費時間，以下就是判斷一個問題是否為
+NP 完全問題的方法：
 1.先判斷問題L是否是NP(nondeterministic polynomial time)，若不是NP就不是
-NP-complete。
-2.選一個已知是NP-complete的問題L′。
+NP 完全問題。
+2.選一個已知是NP 完全問題的問題L′。
 3.描述一個演算法可以算出一個函數f，而f可將L′轉變成L。
 ∗
 x ∈ L′
@@ -482,13 +273,13 @@ f ( x) ∈ L
 
 5.證明可算出f的演算法會在polynomial time執行完成
 
-在確定問題是NP-complete或是不易處理(intractable)後，面對這兩種沒有
+在確定問題是NP 完全問題或是不易處理(intractable)後，面對這兩種沒有
 polynomial-time algorithms的問題該怎麼做呢?我們要作出選擇，若要算出最佳解
 可以用exponential-time的algorithm或窮舉法，若是近似值也能接受的話，就可找
 近似演算法(approximation algorithms)來作計算，當然你必須先考慮是時間重要
 還是最佳解重要了。
 
-舉個有名的NP-Complete問題Traveling Salesman來比較這兩種方法:
+舉個有名的NP 完全問題問題Traveling Salesman來比較這兩種方法:
 求通過a,b,c,d,e,且不重覆的最短路徑(此路徑為一Hamiltonian circuit)
 
 Fig 1.1
@@ -554,105 +345,11 @@ d 0 =37
 長一段線段的長度， l 2 是D中次長線段的長度，依此類推， l i 是第i長線段的長
 度，所以可知
 
-d0
-
-n
-
-d = ∑ li
-
-i =1
-
-14
-
-a
-
-1
-
-13
-
-7
-
-a
-
-4
-
-a
-
-3
-
-12
-
-9
-
-6
-
-a
-
-2
-
-(c )
-
-Fig 1.3
 
 為了要說明，先設n=14，如果我們能證明
-d 0 ≥ 2l1
-
-d 0 ≥ 2l 2
-
-d 0 ≥ 2(l 3 + l 4 )
-
-(1.1)
-
 則我們應該可得
 
-d 0 ≥ 2(l 5 + l 6 + l 7 + l8 )
-
-d 0 ≥ 2(l 9 + l10 + l11 + l12 + l13 + l14 )
-
-5d 0 ≥ 2∑ li = 2d
-
-d
-
-d0
-
-14
-
-i =1
-
-5 1
-1
-= lg 14 +
-2 2
-2
-
-≥
-
 對一般的n，我們可以建立一組類似於(1.1)的不等式組，亦即我們將證明
-d 0 ≥ 2l1
-(1.2)
-
-d0 ≥ 2
-
-2k
-
-d 0 ≥ 2 ∑ li
-
-i = k +1
-
-n
-
-∑l
-
-i
-i = n / 2 +1
-
-n
-1≤ k ≤  
-2
-
-(1.3)
-
-(1.4)
 
 要注意如果n是偶數時(1.4)已被包含在(1.3)中。
 利用三角不等式，(1.2)顯然成立。假設在D中最長的線段是以x和y為端點，
@@ -701,30 +398,6 @@ l
 
 將(1.6)對T中的所有的線段依照取和，可以得到
 
-(1.5)
-
-j
-
-(1.6)
-
-∑ min(l , l
-
-t≥
-
-( ai , a j )∈T
-
-)
-
-i
-
-j
-
-(1.7)
-
-min{i , l j }
-l
-l
-l
 中最小的值是 2 k ，第二小的值是 2 k −1 ，等等依此類
 1 ≤ i ≤ 2k l i
 推。同時，對任意i，
@@ -745,146 +418,29 @@ T中共有2k個線段，(1.7)右邊的和大於或等於T中比較小的k個線�
 
 代表最短的Hamiltonian circuit。利用導出(1.7)的同樣討論，可得
 
-∑ min(l , l )
-
-( a i , a j )∈ D 0
-
-i
-
-j
-
-2k
-
-+ l2 k −1 + ... + lk +1 ) = 2 ∑ li
-
-2k
-
-i = k +1
-
-(1.8)
-
-i
-
-j
 
 利用導出(1.8)的同樣討論法，可得
 
-∑ min(l , l )
-
-( a i , a j )∈D 0
-
-i
-
-j
-
-≥ 2(ln + ln −1 + ... + ln / 2 +1 ) + ln / 2 
-
-≥ 2(ln + ln −1 + ... + ln / 2 +1 ) = 2
-
-i
-i = n / 2 +1
-
-n
-
-∑l
-
-1
-2
-lg n − 2
-當k=1， 2 ， 2 ，…..， 2
-時，(1.3)可導出 lg n  − 1 個不等式：
-d 0 ≥ 2l 2
-d 0 ≥ 2(l 3 + l 4 )
-
-d 0 ≥ 2(l 5 + l 6 + l 7 + l8 )
-
-…………………………………………..
-
-d 0 ≥ 2(l 2 lg n − 2 +1 + l 2 lg n − 2 + 2 + ... + l 2 lg n − 2 +1 )
-
-將上面這些不等式相加，可得：
-
-( lg n  − 1) d 0 ≥ 2(
-
-n
-lg n −1
-+1
-2 +1 ≤ 2
- 
-因為
-，如果n>1
-
-由(1.4)可以導出
-
-n
-
-∑l
-
-d0 ≥ 2
-
-i
-i = 2 lg n −1 +1
-
-將(1.2),(1.9)和(1.10)相加，可得
-
-( lg n  − 1)d 0 ≥ 2∑ l i = 2d
-
-2 lg n −1
-
-∑l )
-
-i =2
-
-i
-
-(1.9)
-
-(1.10)
-
-n
-
-i =1
-
-d
-1
-1
-≤ lg n  +
-d0 2
-2
-
-#
-
-當n=14
-
-d
-1
-1 5
-≤ lg 14 + =
-d0 2
-2 2
-
-d
-1
-1 11
-≤ lg 1000 + =
-2 2
-當n=1000 d 0 2
-
-由此可知，以此近似演算法求出的值在n越小的時候誤差越小，n變大時誤
 差會以很緩慢的比例增加，以所需的時間和所得結果來看的話，近似演算法確
 實很有用，在此例中也能看出當problem size很小的時後還可以選擇用全部算出
 的方法，但problem size一旦變大了，只能選擇近似演算法，否則可能永遠都算
 不完。
 
-在很多科學領域中的問題都是NP-Complete，也都要用近似演算法來處理，
+在很多科學領域中的問題都是NP 完全問題，也都要用近似演算法來處理，
 茲舉出幾個較為有名的領域:
 
 PERT Chart (Programming Evaluation and Review Technique)
+
 Transportation Scheduling
+
 Process Control
+
 Robotics
+
 Avionics
+
 Parallel Computation
+
 Synthesis of VLSI Circuits
 
 我們再看一個例子，Job Scheduling:
@@ -900,67 +456,10 @@ Synthesis of VLSI Circuits
 演算法不需花太多的時間，這個演算法顧名思義就是只有在沒工作可做時才將
 處理器閒置，以下是近似演算法的結果和最佳結果的比較
 
-approximation algorithm(no intentional idleness) result:
-
-processor 1
-
-processor 2
-
-brute algorithm best result:
-
-10
-
-5
-
-5
-
-5
-
-9
-
-9
-
-9
-
-5
-
-w=34
-
-9
-
-5
-
-5
-
-9
-
-processor 1
-
-processor 2
-
-10
-
-5
-
-5
-
-9
-
-w0 =29
-
-注:
-
-w0
-
 的關係為一定律 w0
 
 代表閒置中
 
-w
-
-≤ 2−
-
-1
 n ，n為處理器的數目
 
 證明:
@@ -1005,89 +504,33 @@ k
 其中 Φ 為輪工表中所有閒置期所成的集合。
 因為
 
-µ (T ) ≥
-
-µ (φ )
-
-i
-
- 1
-
-1
- ∑ µ (T j ) + ∑ µ (φ i ) ≤  ∑ µ (T j ) + ∑ µ (Tk )
-2 T ∈T
-φ ∈Φ
-T ∈*
- 2 T ∈T
-
-
-
-
-
-
-ω0 ≥
-
-i
-
-1
-∑ µ (T j )
-2 T ∈*
-
-j
-
-j
-
-k
-
-(2.1)
-
-ω0 ≥
-
-並且
-因此，(2.1)式可改寫成
-1
-ω ≥ ω0 + ω0
-2
-
-ω 3
-≤
-即 ω0 2
-
-這就是n=2時，定理的結論
-
-n→∞
-
-∑ µ (T )
-
-k
-
-Tk ∈*
-
-#
-
-n=2
-
-w
-
-≤2
-
-w0
-
-w
-
-3
-2
-
-≤
-
-w0
-
 這個例子中的近似演算法的效果更好，即使在problem size趨近無窮大的情
-況下卻只和最佳解差在兩倍之內，看完這兩個例子後相信你已經對NP-complete
-problems和approximation algorithm有更深一層的認識了，NP-complete讓我們知道
+況下卻只和最佳解差在兩倍之內，看完這兩個例子後相信你已經對NP 完全問題
+problems和approximation algorithm有更深一層的認識了，NP 完全問題讓我們知道
 該以什麼方式來處理問題，approximation algorithm除了能算出近似解之外，更重
 要的是它給了我們一個解答的保證，只要有了approximation algorithm的結果後，
-可以再嘗試其他的algorithm，如randomize algorithm，heuristic algorithm等等，會
-否得到的更好的結果，如果有，當然很好，若沒有也不怕會沒有可用的解答，
+可以再嘗試其他的algorithm，如randomize algorithm，heuristic algorithm
+等等，會否得到的更好的結果，如果有，當然很好，若沒有也不怕會沒有可用的
+解答，
 至少有個只和最佳解差在一定程度的答案在備用，這會給我們更多研究的空
-間，來幫麻煩但很重要的NP-complete problems尋求更好的答案。
+間，來幫麻煩但很重要的NP 完全問題 problems尋求更好的答案。
+
+第二點，這篇文章所描述的TSP問題，有一個很重要的關鍵：「用最少的旅費」
+。這種TSP問題，可以在決定任何一條路徑之後，很快得知該路徑的旅費，但是
+卻要把所有的路徑都試完才能得知是否是「最少」。這個問題其實是一個NP-困
+難問題，而不是NP 完全問題問題。
+
+第三點，文中的「化約關係的樹」圖，看起來很像Intro. to Algorithms書中的
+圖，不過有些差異。書中的「SUBSET-SUM」是接在「VERTEX-COVER」下面，而「HA
+M-CYCLE」則是接在「3-CNF-SAT」之下。實際上Hamilton-Cycle也的確不適用於
+化約成Vertex-Cover或是Clique，這兩類的問題定義上有較大的差別。
+
+第四點，因為這張「化約關係的樹」圖的根是「CNF-SAT」，所以可以推知此圖
+是描述最後化約為NP 完全問題的化約關係。那麼這張圖上的TSP，應該可以化約
+為最原始的SAT，也就是NP 完全問題才對。關鍵在於，這張圖上的TSP問題與本
+文中描述的TSP問題是不太相同的。此圖的TSP問題，是一個「decision problem
+」，有一個重要的條件「不超過一個事先給定的旅費數目」，只要決定任何一條
+路徑，都可以很快做出「decision」是否「不超過特定值」，不需要把所有的路
+徑都試完才知道答案。所以圖中的TSP問題，是一個NP-Complete問題。另外補充
+，Hamilton-Cycle的一個特徵則是「每個城市間的旅費是相同的」，這個特性在
+決定「是否為最少旅費」時有關鍵性的作用。

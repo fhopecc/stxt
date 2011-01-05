@@ -136,11 +136,12 @@ if __name__ == "__main__":
         # options short cut
         if options.hltb == 'outer':
             logfile = r'\\99tt005\syslog\%s.192.168.1.254.log' % logdate
-
+            #import pdb; pdb.set_trace()
             if len(args) == 0:
                 args.append(logfile)
             else:
                 args[0] = logfile 
+
             options.raw = True
         elif options.hltb == 'inner':
             cmd = r'%s -r \\99tt004\log\%s.10.66.4.254.log' % \
@@ -156,45 +157,42 @@ if __name__ == "__main__":
             os.system(cmd)
             exit()
 
-    if options.date:
-        pass        
+    logfile = args[0]
+    if options.direct:
+        with open(logfile, 'r') as f:
+            #import pdb;pdb.set_trace()
+            print f.read()
+            exit()
+
+    if options.raw:
+        with open(logfile, 'r') as f:
+            logs = read3clogs(f.read())
     else:
-        logfile = args[0]
-        if options.direct:
-            with open(logfile, 'r') as f:
-                #import pdb;pdb.set_trace()
-                print f.read()
-                exit()
+        logs = parsefile(logfile, options.format)
+    first = True
+
+    if options.top: i = 0
+    if options.hardcopy: tmplog = open('%s.tmp' % logfile, 'w')
+
+    for l in logs:
+        if first and not options.raw: 
+            print l.report_title(); 
+            if options.hardcopy: tmplog.write(l.report_title()+'\n')
+            first = False
 
         if options.raw:
-            with open(logfile, 'r') as f:
-                logs = read3clogs(f.read())
+            print l[0]
+            print l[1]
+            if options.hardcopy:
+                tmplog.write(l[0]+'\n'+l[1] + '\n')
         else:
-            logs = parsefile(logfile, options.format)
-        first = True
+            print l.format()
+            if options.hardcopy:
+                tmplog.write(l.format()+'\n')
 
-        if options.top: i = 0
-        if options.hardcopy: tmplog = open('%s.tmp' % logfile, 'w')
-
-        for l in logs:
-            if first and not options.raw: 
-                print l.report_title(); 
-                if options.hardcopy: tmplog.write(l.report_title()+'\n')
-                first = False
-
-            if options.raw:
-                print l[0]
-                print l[1]
-                if options.hardcopy:
-                    tmplog.write(l[0]+'\n'+l[1] + '\n')
-            else:
-                print l.format()
-                if options.hardcopy:
-                    tmplog.write(l.format()+'\n')
-
-            if options.top: 
-                i+=1
-                if i >= options.top: break
-        if options.hardcopy:      
-            tmplog.close()
-            hardcopy('%s.tmp' % logfile)
+        if options.top: 
+            i+=1
+            if i >= options.top: break
+    if options.hardcopy:      
+        tmplog.close()
+        hardcopy('%s.tmp' % logfile)
