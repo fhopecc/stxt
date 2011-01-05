@@ -156,26 +156,32 @@ class TreeDump(GenericASTTraversal):
     def default(self, node):
         print '%s%s' % ('*' * node.height, node.type)
 
+def pad_check(check):
+    c = check
+    try:
+        c[u'外網防火牆：']
+        c[u'內網防火牆：']
+    except KeyError, k:
+        c[k.message] = '正常'
+        #import pdb; pdb.set_trace()
+    return c
+
 def find_check(checks, options):
     logdate = (date.today()).strftime('%Y%m%d')
     if options.date:
         logdate = unicode(options.date)
-        cs = [c for c in checks if c['date'] == logdate]
-        if len(cs) == 0:
-            c = {}
-            c['date'] = logdate
-            c[u'外網防火牆：'] = u'正常'
-            return c
-        return cs[0]
-    else:
-        c = {}
-        c[u'date'] = logdate
-        c[u'外網防火牆：'] = u'正常'
-        return c
 
-        #return checks
+    cs = [c for c in checks if c['date'] == logdate]
+    if len(cs) == 0:
+        c = {}
+        c['date'] = logdate
+        c[u'外網防火牆：'] = u'正常'
+        c[u'內網防火牆：'] = u'正常'
+        return c
+    return pad_check(cs[0])
 
 # 0.1 預設的 HTML 報告
+# 0.2 加入內網防火牆項目
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog SOURCE [options]"
