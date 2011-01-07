@@ -16,7 +16,7 @@ class MSWordOut(GenericASTTraversal):
         # 設定字型為標楷體
         self.range.Font.Name = u"標楷體".encode('cp950')  
         self.preorder()
-
+        ti = 1 # title line number
         # Format Title
         if ast.title:
             para = self.doc.Paragraphs.First
@@ -30,6 +30,18 @@ class MSWordOut(GenericASTTraversal):
                 para.Range.Select()
                 msword.Selection.Font.Size = 18
                 msword.Selection.Font.Bold = 1
+                ti = 2
+        try:
+            history = ast.attrs[u'訂定'] + u'函訂定'
+            para = self.doc.Paragraphs(ti + 1)
+            para.Format.Alignment = 2 # center
+            para.Range.Select()
+            msword.Selection.Font.Size = 10
+
+        except KeyError, k:
+            pass
+
+
         
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last
@@ -37,6 +49,12 @@ class MSWordOut(GenericASTTraversal):
         para.Style.Font.Bold = 0
         if node.title:
             para.Range.InsertAfter(node.title)
+            try:
+                history = node.attrs[u'訂定'] + u'函訂定'
+                self.doc.Paragraphs.Add() 
+                para.Range.InsertAfter(history)
+            except KeyError, k:
+                pass
 
     def n_sect(self, node):
         #import pdb;pdb.set_trace()
