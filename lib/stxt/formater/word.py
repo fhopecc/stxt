@@ -55,6 +55,8 @@ class MSWordOut(GenericASTTraversal):
                 para.Range.InsertAfter(history)
             except KeyError, k:
                 pass
+            except AttributeError, k:
+                pass
 
     def n_sect(self, node):
         #import pdb;pdb.set_trace()
