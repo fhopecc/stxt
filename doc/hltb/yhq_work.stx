@@ -47,6 +47,7 @@ YHQ 系統例行工作
 
     財稅資料中心列入第二期修改清單。
 8.查調紀錄檔永保作業
+備份檔路徑 /elt/shared_tmp/xdb/yhq/backup 
 
 table.戶役政系統例行事項
 期限 事項
