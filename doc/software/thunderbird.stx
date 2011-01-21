@@ -26,3 +26,10 @@ use a profile stored in another location.
 
 5.If you switch from a relative path to a non-relative path, the direction of the slashes may need to change. For example, in Windows, non-relative paths use backslashes, whereas relative ones use forward slashes. Change IsRelative=1 to IsRelative=0.
 Save profiles.ini and restart Thunderbird.
+
+合併 Outlook 之分割郵件
+~~~~~~~~~~~~~~~~~~~~~~~
+
+下載 join 套件
+
+選取所有分割郵件，按右鍵選 join。

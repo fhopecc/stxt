@@ -30,13 +30,13 @@
 而且__系數可省略__。
 
 運算模型不同，則語言的時間複雜度也會不同。
-常見的模型：
+常見模型如下：
 
-single-tape Turing machine、
+  1.Single-Tape Turing machine
 
-multitape Turing machine、
+  2.Multitape Turing machine
 
-nondeterministic Turing machine。
+  3.Nondeterministic Turing machine
 
 P 類型運算
 ~~~~~~~~~~
@@ -54,7 +54,7 @@ NP 運算問題代表 nondeterministic polynomial time problem。
 
 杜寧機器和有限自動機最大的差異是在於：記憶體無限。
 
-運算模型功能比較：狀態變化無限＞狀態無限＆記憶體無限
+運算模型功能比較：狀態變化無限 > 狀態無限 & 記憶體無限
 
 Satisfiability problem 是屬於 CLASS NP 問題。
 
@@ -214,12 +214,13 @@ NP 完全問題
 
 它是一個NP-困難問題，
 
-和Non-deterministic對應的就是deterministic了。Deterministic在這邊是指
+和非確定對應的就是確定了。
 
+確定在這邊是指
 Turing Machine裡面的行為準則對應表，每一次改變狀態的時候，只要前一步的
-狀態確定，下一步的狀態是確定可預測的。Non-deterministic的行為準則表，
+狀態確定，下一步的狀態是確定可預測的。非確定的行為準則表，
 則是前一步的狀態即使都一樣，下一步的狀態是不可預測的，有兩種以上的可能
-。因此non-deterministic Turing Machine的計算能力會比Deterministic
+。因此non-deterministic Turing Machine的計算能力會比確定
  Turing Machine的計算能力多。也因此同樣是polynomial的時間複雜度，NP的
 問題會比P來的難。至於NP是否等於P，目前是仍未解決的問題。講到這邊覺得還
 是不夠白話，也許不懂的讀者可以先跳過這兩段，待日後另外一篇文章再詳細解

@@ -123,9 +123,11 @@ class Parser(GenericParser):
             ps = args[3]
         else:
             ps = args[2]
-
-        for p in ps:
-            sect.append(Node(type='para', value = p.value))
+        try:
+            for p in ps:
+                sect.append(Node(type='para', value = p.value))
+        except:
+            import pdb; pdb.set_trace()
         return sect
 
     def p_para_0(self, args):
@@ -209,7 +211,7 @@ if __name__ == '__main__':
                        help=u"指定輸入之字串編碼")
 
     oparser.add_option("-f", "--format", dest="format", 
-                       choices=['tree', 'msword', 'tokens'],
+                       choices=['tree', 'msword', 'msword14', 'tokens'],
                        default='tree',
                        help=u"指定輸出格式")
 
@@ -245,3 +247,7 @@ if __name__ == '__main__':
         elif options.format == 'msword':
             from formater import word
             word.MSWordOut(doc)
+        elif options.format == 'msword14':
+            from formater import word14
+            word14.MSWordOut(doc)
+
