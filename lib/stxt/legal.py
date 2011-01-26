@@ -85,6 +85,7 @@ class Parser(GenericParser):
         '''docattrs ::= docattr
            sects ::= sect
            paras ::= para
+           paras ::= para
         '''
         return [args[0]]
 
@@ -111,23 +112,33 @@ class Parser(GenericParser):
         return sect
 
     def p_sect(self, args):
-        ''' sect ::= secnumber line emptyline paras emptyline
-            sect ::= secnumber emptyline paras emptyline
-            sect ::= secnumber line emptyline paras
-            sect ::= secnumber emptyline paras
+        '''sect ::= secnumber emptyline paras emptyline
+           sect ::= secnumber emptyline paras
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0].value
-        if len(args) == 5:
-            sect.append(Node(type='para', value = args[1].value))
-            ps = args[3]
-        else:
-            ps = args[2]
-        try:
-            for p in ps:
-                sect.append(Node(type='para', value = p.value))
-        except:
-            import pdb; pdb.set_trace()
+        ps = args[2]
+        for p in ps:
+            sect.append(Node(type='para', value = p.value))
+        return sect
+
+    def p_sect_1(self, args):
+        ''' sect ::= secnumber line emptyline paras emptyline
+            sect ::= secnumber line emptyline paras
+        '''
+        sect = Node(type='sect')
+        sect.secnumber = args[0].value
+        sect.append(Node(type='para', value = args[1].value))
+        ps = args[3]
+        for p in ps:
+            sect.append(Node(type='para', value = p.value))
+        return sect
+
+    def p_sect_2(self, args):
+        'sect ::= secnumber line'
+        sect = Node(type='sect')
+        sect.secnumber = args[0].value
+        sect.append(Node(type='para', value = args[1].value))
         return sect
 
     def p_para_0(self, args):

@@ -32,8 +32,8 @@ class MSWordOut(GenericASTTraversal):
             para = self.doc.Paragraphs.First
             para.Format.Alignment = 1 # center
             para.Range.Select()
-            msword.Selection.Font.Size = 18
-            msword.Selection.Font.Bold = 1
+            self.word.Selection.Font.Size = 18
+            self.word.Selection.Font.Bold = 1
             if ast.title.count('\n') == 1:
                 para = self.doc.Paragraphs(2)
                 para.Format.Alignment = 1 # center
@@ -103,20 +103,33 @@ class MSWordOut(GenericASTTraversal):
             para.Format.FirstLineIndent = 0
             self.range.ParagraphFormat.LineSpacingRule = 4 
             self.range.ParagraphFormat.LineSpacing = 22 
-
+        
         para.Range.InsertAfter(node.value)
         
+        if node.order == 0:
+            #import pdb; pdb.set_trace()
+            if node.parent.height == 1:
+                para.Range.Select()
+                self.word.Selection.Font.Bold = 1
+            else:
+                para.Range.Select()
+                self.word.Selection.Font.Bold = 0
+        else:
+            para.Range.Select()
+            self.word.Selection.Font.Bold = 0
+
+
     def sect_num(self, node):
         cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',
                u'捌',u'玖',u'拾',u'拾壹', u'拾貳',
                u'拾參',u'拾肆',u'拾伍',u'拾陸','柒','捌','玖','拾']
         cd = [u'零',u'一',u'二',u'三',u'四',u'五',u'六',u'七',
-              u'八',u'九',u'十', u'十一',u'十二',u'十三',u'十四',
+              u'八',u'九',u'十',u'十一',u'十二',u'十三',u'十四',
               u'十五',u'十六',u'十七',u'十九',u'二十'
               u'二十一',u'二十二',u'二十三',u'二十四',u'二十五',u'二十六',
-              '二十七','二十八','二十九', '三十', 
-              '三十一','三十二','三十三','三十四','三十五','三十六',
-              '三十七','三十八','三十九'
+              u'二十七',u'二十八',u'二十九', u'三十', 
+              u'三十一',u'三十二',u'三十三',u'三十四',u'三十五',u'三十六',
+              u'三十七',u'三十八',u'三十九'
              ]
         n = int(node.numbers[-1])
         if node.level == 1:
