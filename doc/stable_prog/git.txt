@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+git.exe clone --progress -v  "D:\hltb_docs" "G:\\hltb_docs"
+=======
 
 git.exe clone --progress -v  "D:\hltb_docs" "G:\\hltb_docs"
 
@@ -67,3 +71,4 @@ want them saved into the repo like that.
 
 For more details on the core.autocrlf setting see the git-config
 documentation.
+>>>>>>> b0ac3ec2cb0234e2e36368a591ff9ab337ada327
