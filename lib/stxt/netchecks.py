@@ -99,7 +99,7 @@ class Parser(GenericParser):
         ''' subsect ::= label emptyline paras
         '''
         subsect = Node(type='subsect')
-        subsect.title = args[0].value
+        subsect.title = args[0].value[:-1]
         ps = args[2]
 
         for p in ps:
@@ -159,8 +159,8 @@ class TreeDump(GenericASTTraversal):
 def pad_check(check):
     c = check
     try:
-        c[u'外網防火牆：']
-        c[u'內網防火牆：']
+        c[u'外網防火牆']
+        c[u'內網防火牆']
     except KeyError, k:
         c[k.message] = '正常'
         #import pdb; pdb.set_trace()
@@ -175,8 +175,8 @@ def find_check(checks, options):
     if len(cs) == 0:
         c = {}
         c['date'] = logdate
-        c[u'外網防火牆：'] = u'正常'
-        c[u'內網防火牆：'] = u'正常'
+        c[u'外網防火牆'] = u'正常'
+        c[u'內網防火牆'] = u'正常'
         return c
     return pad_check(cs[0])
 

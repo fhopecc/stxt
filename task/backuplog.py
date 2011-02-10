@@ -3,10 +3,6 @@ from __future__ import with_statement
 from optparse import OptionParser
 from datetime import date
 import sys, os, re
-'''
-1.0:備份指定日期區間的log
-1.1:加入備份快捷
-'''
 def parselocaldate(l):
     pat = '(?P<y>\d\d\d\d)(?P<m>\d\d)(?P<d>\d\d)' 
     m = re.match(pat, l)
@@ -40,9 +36,14 @@ def match(f, options):
             res = d < b
     return res
 
+'''
+1.0:備份指定日期區間的log
+1.1:加入備份快捷
+1.2:備份檔案檔名其年月格式改為 201101 等 6 位數字表示 
+'''
 if __name__ == "__main__":
     usage = u"usage: %prog logpath [options]"
-    parser = OptionParser(usage, version="%prog 1.1", 
+    parser = OptionParser(usage, version="%prog 1.2", 
              description=u"檢視、摘要、列印 syslog"
         )
     parser.add_option("-b", "--before", dest="before", 
@@ -80,8 +81,8 @@ if __name__ == "__main__":
 
         m = before - timedelta(days = 1)
 
-        file = r'%s_%d%d.logs.bak.tar' % (options.HLTB, 
-                                          m.year, m.month)
+        file = r'%s_%d%02d.logs.bak.tar' % (options.HLTB, 
+                                               m.year, m.month)
         file = os.path.join('bak', file)
         if os.path.exists(file):
             print u'%s 已存在' % file
