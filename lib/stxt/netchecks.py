@@ -161,8 +161,12 @@ def pad_check(check):
     try:
         c[u'外網防火牆']
         c[u'內網防火牆']
+        c[u'網路設備設定備份']
     except KeyError, k:
-        c[k.message] = '正常'
+        if k[0] == u'網路設備設定備份':
+            c[k.message] = u'已備份至紀錄伺服器。'
+        else:
+            c[k.message] = u'正常。'
         #import pdb; pdb.set_trace()
     return c
 
@@ -175,8 +179,8 @@ def find_check(checks, options):
     if len(cs) == 0:
         c = {}
         c['date'] = logdate
-        c[u'外網防火牆'] = u'正常'
-        c[u'內網防火牆'] = u'正常'
+        c[u'外網防火牆'] = u'正常。'
+        c[u'內網防火牆'] = u'正常。'
         return c
     return pad_check(cs[0])
 
