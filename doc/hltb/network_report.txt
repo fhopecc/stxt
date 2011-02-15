@@ -334,7 +334,6 @@ GHost Yahoo!Messenger、Bt、P2P、MP3Files及啟用網路卡功能，
 OpenNMS藉由 ICMP、SNMP及 SNMP Trap 收集網路設備之資訊，
 並可隨時監控重要主機及服務是否異常，計算服務之可用性，供管理者參考。
 
-
 4.1.3.2.監控網路流量
 
 OpenNMS 藉由 ICMP 測試與遠端裝置間的網路是否暢通或彼此間傳輸速率快慢，
