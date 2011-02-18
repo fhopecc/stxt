@@ -70,3 +70,26 @@ fisc02      wan1/210.69.66.61          192.168.1.98          財金公司
 
 6 台 1G Switch 10 萬
 
+Maclock 機制
+------------
+
+:拓撲圖:
+
+10.66.4.254 -+- (資訊科:10.66.4.221)(admin/uecicsed)
+             |
+             +- (中棟:10.66.5.221)
+             |
+             +- (前棟:10.66.6.221)
+             |
+             +- (前棟 2 樓:10.66.7.221)
+
+
+Q.如何查看 maclock 情形？
+
+show maclock
+
+show maclock station
+
+Q.如何將特定 MAC 加入 maclock 表？
+
+set maclock 00-19-21-39-8e-9e fe.0.30 create

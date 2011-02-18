@@ -1,0 +1,12 @@
+MacLock
+=======
+
+看maclock 情形
+--------------
+
+show maclock
+
+加入 maclock
+------------
+
+set maclock 00-19-21-39-8e-9e fe.0.30 create

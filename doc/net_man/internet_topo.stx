@@ -14,3 +14,15 @@ firewall(F-100A) -+-OUTSIDE- HUB -+- cisco 2600 -T1- INTERNET
                   |                   +--時間切換電源--+
                   |
                   +--INSIDE- HUB -+- CISCO -E1- 玉里分局
+
+BackBone
+
+10.66.4.254 -+-10.66.4.221 (admin/uecicsed)
+             |
+             +-10.66.5.221 (admin/uecicsed)
+             |
+             +-10.66.6.221 (admin/uecicsed)
+             |
+             +-10.66.7.221 (admin/uecicsed)
+
+
