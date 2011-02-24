@@ -119,7 +119,11 @@ itez:liao/liao
 檔案傳輸
 --------
 
-ftp
+利用 ftp:
+
+10.66.4.19:3838 
+
+檔案儲存於 FILE/FILE_OUT/HLVtoNB/MainFile/HOU
 
 PAPAGO
 ------
