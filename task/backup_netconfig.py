@@ -7,9 +7,9 @@ def backup_FG100A(src, dest):
     cmd = 'execute backup allconfig FG100A %s' % dest 
     t = Telnet(src)
     print t.read_until('login:')
-    t.write('ccl00695\n')
+    t.write('admin\n')
     print t.read_until('Password:')
-    t.write('btmw_111\n')
+    t.write('!tsinim9\n')
     print t.read_until('#')
     t.write('%s\n' % cmd)
     print t.read_until('done.')
@@ -18,9 +18,9 @@ def backup_FG50B(src, dest):
     cmd = 'execute backup full-config ftp FG50B 10.66.4.56 administrator !tsinim9'
     t = Telnet('10.66.7.252')
     print t.read_until('login:')
-    t.write('ccl00695\n')
+    t.write('admin\n')
     print t.read_until('Password:')
-    t.write('btmw_111\n')
+    t.write('!tsinim9\n')
     print t.read_until('#')
     t.write('%s\n' % cmd)
     print t.read_until('OK.')
@@ -29,7 +29,7 @@ def backup_FG50B(src, dest):
 def backup_EnterasysC2(src, dest):
     t = Telnet('10.66.4.254')
     print t.read_until('Username:')
-    t.write('ce\n')
+    t.write('admin\n')
     print t.read_until('Password:')
     t.write('uecicsed\n')
     print t.read_until('->')

@@ -93,3 +93,5 @@ show maclock station
 Q.如何將特定 MAC 加入 maclock 表？
 
 set maclock 00-19-21-39-8e-9e fe.0.30 create
+
+Q.如何設定enterasys c2？

@@ -161,6 +161,8 @@ def pad_check(check):
     try:
         c[u'外網防火牆']
         c[u'內網防火牆']
+        c[u'SCO防火牆']
+        c[u'內網主幹交換器']
         c[u'網路設備設定備份']
     except KeyError, k:
         if k[0] == u'網路設備設定備份':
@@ -181,6 +183,9 @@ def find_check(checks, options):
         c['date'] = logdate
         c[u'外網防火牆'] = u'正常。'
         c[u'內網防火牆'] = u'正常。'
+        c[u'SCO防火牆'] = u'正常。'
+        c[u'內網主幹交換器'] = u'正常。'
+        c[u'網路設備設定備份'] = u'正常。'
         return c
     return pad_check(cs[0])
 
