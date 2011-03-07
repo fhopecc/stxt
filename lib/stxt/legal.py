@@ -213,7 +213,7 @@ if __name__ == '__main__':
     oparser.add_option("-f", "--format", dest="format", 
                        choices=['tree', 'msword', 'msword14', 'tokens'],
                        default='tree',
-                       help=u"指定輸出格式")
+                       help=u"指定輸出格式，值為 tree msword msword14 tokens")
 
     oparser.add_option("-D", "--debug", action="store_true", 
                        dest="debug", default=False,

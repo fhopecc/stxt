@@ -160,16 +160,31 @@ def pad_check(check):
     c = check
     try:
         c[u'外網防火牆']
+    except KeyError, k:
+        c[k.message] = u'正常。'
+
+    try:
         c[u'內網防火牆']
+    except KeyError, k:
+        c[k.message] = u'正常。'
+
+    try:
         c[u'SCO防火牆']
+
+    except KeyError, k:
+        c[k.message] = u'正常。'
+
+    try:
         c[u'內網主幹交換器']
+
+    except KeyError, k:
+        c[k.message] = u'正常。'
+
+    try:
         c[u'網路設備設定備份']
     except KeyError, k:
-        if k[0] == u'網路設備設定備份':
-            c[k.message] = u'已備份至紀錄伺服器。'
-        else:
-            c[k.message] = u'正常。'
-        #import pdb; pdb.set_trace()
+        c[k.message] = u'已備份至紀錄伺服器。'
+
     return c
 
 def find_check(checks, options):
@@ -191,6 +206,7 @@ def find_check(checks, options):
 
 # 0.1 預設的 HTML 報告
 # 0.2 加入內網防火牆項目
+# 1.1 加入相關項目
 if __name__ == '__main__':
     from optparse import OptionParser
     usage = u"usage: %prog SOURCE [options]"
@@ -255,7 +271,7 @@ if __name__ == '__main__':
             l = MakeCheckList(doc)
             check = find_check(l.checks, options)
             #check = checks[0]
-            #import pdb;pdb.set_trace()
+            import pdb;pdb.set_trace()
             #print net_check('0991110', check)
             if options.output:
                 with open(options.output, 'w') as f:
