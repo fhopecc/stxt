@@ -271,7 +271,7 @@ if __name__ == '__main__':
             l = MakeCheckList(doc)
             check = find_check(l.checks, options)
             #check = checks[0]
-            import pdb;pdb.set_trace()
+            #import pdb;pdb.set_trace()
             #print net_check('0991110', check)
             if options.output:
                 with open(options.output, 'w') as f:
