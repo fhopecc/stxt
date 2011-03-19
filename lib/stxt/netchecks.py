@@ -217,7 +217,7 @@ if __name__ == '__main__':
                        help=u"指定輸入之字串編碼")
 
     oparser.add_option("-d", "--date", dest="date", 
-                       help=u"列出指定日期之日誌，未指定則為昨天，日期格式例子：20101217")
+                       help=u"列出指定日期之日誌，未指定此選項，日期為今天，日期格式例子：20101217")
 
     oparser.add_option("-o", "--output", dest="output", 
                        default='test.html',
@@ -271,7 +271,7 @@ if __name__ == '__main__':
             l = MakeCheckList(doc)
             check = find_check(l.checks, options)
             #check = checks[0]
-            import pdb;pdb.set_trace()
+            #import pdb;pdb.set_trace()
             #print net_check('0991110', check)
             if options.output:
                 with open(options.output, 'w') as f:
