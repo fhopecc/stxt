@@ -1,0 +1,15 @@
+人事系統
+--------
+
+Q.收卡流程
+
+卡機 <-+---刷卡資料--- 人員打卡 
+       |
+       +-取得打卡資料- 收卡程式 -同步寫入-+-> BF.mdb 
+                                          |
+                                          +-> BNEData.mdb/ULOG/keyid(工號)
+                                                 |
+                                              (ToSQLSever)
+                                                 | 
+                                                 v 
+                                        差勤資料庫/Cadlog/cad_cardid(工號)
