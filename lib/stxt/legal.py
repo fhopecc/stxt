@@ -118,7 +118,11 @@ class Parser(GenericParser):
         '''
         sect = Node(type='sect')
         sect.secnumber = args[0].value
+        
         if len(args) == 5:
+            sect.append(Node(type='para', value = args[1].value))
+            ps = args[3]
+        elif args[1].type == 'line':
             sect.append(Node(type='para', value = args[1].value))
             ps = args[3]
         else:
