@@ -1,2 +1,14 @@
 qlat031 分類別檔
 qlat0311 案卷資料檔 ast 卷號 prd 保存年限
+
+財稅入口網案件轉入
+------------------
+
+登入後台
+~~~~~~~~
+網址：https://admin.etax.nat.gov.tw
+帳號：UDD3765501/4rfv5tgb
+
+存放目錄
+~~~~~~~~
+etax -send-> ap1 -store-> /elt/shared_tmp/xmvi/oa
