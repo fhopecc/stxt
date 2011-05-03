@@ -31,7 +31,7 @@ if __name__ == "__main__":
              )
 
     oparser.add_option("-s", "--host", dest="host", 
-                       default='localhost',
+                       default='192.168.1.13',
                        help=u"指定備出之來源設備 IP")
 
     oparser.add_option("-c", "--short_cut", dest="short_cut", 
@@ -47,5 +47,5 @@ if __name__ == "__main__":
             options.host  = '192.168.1.13'
         elif options.short_cut == 'inner':
             options.host  = '10.66.4.17'
-
+    
     backup_onms(options.host)
