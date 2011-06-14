@@ -238,6 +238,7 @@ if __name__ == '__main__':
             ustr = ustr[1:]
 
         # Why ustr[0] is u+feff
+        #import pdb; pdb.set_trace()
         tokens = Lexer().tokenize(ustr)
         if options.format == 'tokens':
             for t in tokens:

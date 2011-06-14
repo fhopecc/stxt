@@ -5,3 +5,9 @@
 刪知識
 ------
 於 KM 刪除該筆知識
+
+改科室主管
+----------
+update Unit1 
+set Unit1_Boss = 'new boss'
+where Unit1_Boss = 'old boss'
