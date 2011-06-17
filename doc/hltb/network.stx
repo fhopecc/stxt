@@ -97,3 +97,15 @@ clear maclock static fe.0.30
 set maclock 00:19:21:39:8e:9e fe.0.30 create
 
 Q.如何設定enterasys c2？
+
+Network Security
+----------------
+
+DDOS IPS
+~~~~~~~~
+
+BEMS Server
+http://192.168.1.13:8080
+
+user/password admin/admin
+

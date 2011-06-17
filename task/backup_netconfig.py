@@ -4,7 +4,8 @@ from telnetlib import Telnet
 
 def backup_FG100A(src, dest):
     #cmd = 'execute backup allconfig FG100A 192.168.1.101'
-    cmd = 'execute backup allconfig FG100A %s' % dest 
+    cmd = 'execute backup full-config tftp FG100A %s' % dest 
+
     t = Telnet(src)
     print t.read_until('login:')
     t.write('admin\n')
@@ -12,7 +13,7 @@ def backup_FG100A(src, dest):
     t.write('!tsinim9\n')
     print t.read_until('#')
     t.write('%s\n' % cmd)
-    print t.read_until('done.')
+    print t.read_until('OK.')
 
 def backup_FG50B(src, dest):
     cmd = 'execute backup full-config ftp FG50B 10.66.4.56 administrator !tsinim9'
@@ -62,6 +63,7 @@ def backupSGS5420():
 
 # 0.1: 可備出外網之 FG100A
 # 0.2: 支援 EnterasysC2, FG50B 之設定備份
+# 0.3: 修正 FG100A 升級之指令
 if __name__ == "__main__":
     from optparse import OptionParser
     usage = u"usage: %prog [options]"
