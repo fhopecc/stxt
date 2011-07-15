@@ -1,0 +1,7 @@
+mail 除錯
+
+日誌檔位置 /var/log/maillog
+
+Q.查看是否關於 hltbface 信的收件情形
+  cat maillog | grep hltbface
+
