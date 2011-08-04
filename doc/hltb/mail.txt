@@ -5,3 +5,8 @@ mail 除錯
 Q.查看是否關於 hltbface 信的收件情形
   cat maillog | grep hltbface
 
+加 mail 帳號
+
+spam@wall
+
+防駭牆/選擇本機設定/新增郵件名單
