@@ -1,0 +1,10 @@
+人事系統
+--------
+
+Q.安裝單機版 PEMIS 2K?
+
+機關代碼:376551300D
+SQL Server:192.168.1.7
+
+帳號:pemis2k/pemis2k SQLServer驗証
+
