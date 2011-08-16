@@ -65,10 +65,11 @@ def backupSGS5420():
 # 0.2: 支援 EnterasysC2, FG50B 之設定備份
 # 0.3: 修正 FG100A 升級之指令
 # 0.4: 改進遠端指令顯示方式
+# 0.5: 命令錯誤會自動顯示用法
 if __name__ == "__main__":
     from optparse import OptionParser
     usage = u"usage: %prog [options]"
-    oparser = OptionParser(usage, version="%prog 0.4", 
+    oparser = OptionParser(usage, version="%prog 0.5", 
                           description=u"備份網路設備設定"
              )
 
@@ -85,7 +86,7 @@ if __name__ == "__main__":
     oparser.add_option("-H", "--HLTB", dest="hltb", 
                        choices=['outer', 'l2', 'sco'],
                        help=u"稅處備份快捷，" \
-                            u"l2 表內網主幹 switch、sco 表 sco 防火牆")
+                            u"outer 表外網FG100A、l2 表內網主幹 switch、sco 表 sco 防火牆")
     
     (options, args) = oparser.parse_args()
 
@@ -104,5 +105,7 @@ if __name__ == "__main__":
             options.dest = '10.66.4.56'
             options.type = 'EnterasysC2'
 
-    globals()['backup_' + options.type](options.src, options.dest)
-
+    if options.src and options.dest:
+        globals()['backup_' + options.type](options.src, options.dest)
+    else:
+        oparser.print_help()

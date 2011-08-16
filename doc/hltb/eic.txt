@@ -1,0 +1,18 @@
+筆硯公文製作
+------------
+
+Q.更新個人電子簿?
+
+一、正規方法
+
+1.開啟 c:\eic\adbook\hltb\addrbook.ini
+2.刪除最後一行 SYNC_COUNT=1111111111 
+3.開啟筆硯
+4.會產出 c:\eic\adbook\hltb\addrbook.ldb 鎖定檔表示資料庫被開啟，
+  而系統正在更新地址簿。
+5.當 c:\eic\adbook\hltb\addrbook.mdb 成長至正常機台 mdb 大小時，
+  表示地址簿已更新完成。
+
+二、簡易方法
+
+複製正常機台 c:\eic\adbook\hltb\addrbook.mdb 覆蓋本機電腦之同檔。
