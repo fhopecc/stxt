@@ -1,4 +1,3 @@
-
 在SQL語句優化過程中，我們經常會用到hint,現總結一下在SQL優化過程中常見Oracle HINT的用法：
 
 1. /*+ALL_ROWS*/

@@ -4,6 +4,16 @@ from win32com.client import Dispatch, constants, DispatchEx
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from spark import GenericASTTraversal
 
+wdHeaderFooterPrimary = 1
+
+wdAlignPageNumberLeft = 0
+wdAlignPageNumberCenter = 1
+wdAlignPageNumberRight = 2
+wdAlignPageNumberInside = 3
+wdAlignPageNumberOutside = 4
+
+wdReplaceAll = 2
+
 class MSWordOut(GenericASTTraversal):
     def __init__(self, ast):
         GenericASTTraversal.__init__(self, ast)
@@ -13,8 +23,21 @@ class MSWordOut(GenericASTTraversal):
         self.word = msword
         self.doc  = msword.Documents.Add() # 開啟一個新的文件。
         pageSetup = self.doc.PageSetup
-        pageSetup.TopMargin = 22
-        pageSetup.BottomMargin = 30
+        pageSetup.TopMargin = 64
+        pageSetup.BottomMargin = 64
+
+        footer = self.word.ActiveDocument.Sections(1).Footers(1)
+
+        footer.PageNumbers.Add()
+
+        #With ActiveDocument.Sections(1).Footers(wdHeaderFooterPrimary)
+        # .PageNumbers.Add PageNumberAlignment:=wdAlignPageNumberRight
+        #End With
+
+        section = self.doc.Sections(1)
+
+        footer = section.Footers(wdHeaderFooterPrimary)
+        footer.PageNumbers.Add(wdAlignPageNumberCenter)
         
         self.range	= self.doc.Range()
         # 設定字型為標楷體
@@ -31,9 +54,8 @@ class MSWordOut(GenericASTTraversal):
         if ast.title:
             para = self.doc.Paragraphs.First
             para.Format.Alignment = 1 # center
-            para.Range.Select()
-            msword.Selection.Font.Size = 18
-            msword.Selection.Font.Bold = 1
+            para.Range.Font.Size = 18
+            para.Range.Font.Bold = 1
             if ast.title.count('\n') == 1:
                 para = self.doc.Paragraphs(2)
                 para.Format.Alignment = 1 # center
@@ -52,6 +74,20 @@ class MSWordOut(GenericASTTraversal):
             pass
         except AttributeError, k:
             pass
+        
+        
+        #import pdb; pdb.set_trace()
+        content = self.doc.Content
+        content.Find.ClearFormatting()
+        content.Find.MatchWildcards=True
+        content.Find.Text = u"「*」".encode('cp950')
+
+        content.Find.Execute()
+
+        while content.Find.Found:
+            content.Find.parent.Font.Bold = True
+            content.Find.Execute()
+            
 
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last
@@ -76,12 +112,15 @@ class MSWordOut(GenericASTTraversal):
         if node.height == 1:
             para.Format.LeftIndent = 20
             para.Format.FirstLineIndent = -20
+            para.Range.Font.Bold = 1
         elif node.height == 2:
             para.Format.LeftIndent = 42 
             para.Format.FirstLineIndent = -26
+            para.Range.Font.Bold = 1
         elif node.height == 3:
             para.Format.LeftIndent = 64
             para.Format.FirstLineIndent = -16
+            para.Range.Font.Bold = 0
         elif node.height == 4:
             para.Format.LeftIndent = 84
             para.Format.FirstLineIndent = -16
@@ -111,6 +150,11 @@ class MSWordOut(GenericASTTraversal):
             self.range.ParagraphFormat.LineSpacing = 22 
 
         para.Range.InsertAfter(node.value)
+
+        if node.order != 0:
+            para.Range.Font.Bold = 0
+        elif node.order == 0 and len(node.value) > 25:
+            para.Range.Font.Bold = 0
         
     def sect_num(self, node):
         cbd = [u'零',u'壹',u'貳',u'參',u'肆',u'伍',u'陸',u'柒',

@@ -66,6 +66,7 @@ def backupSGS5420():
 # 0.3: 修正 FG100A 升級之指令
 # 0.4: 改進遠端指令顯示方式
 # 0.5: 命令錯誤會自動顯示用法
+# 0.6: 加入完成自動郵件通知
 if __name__ == "__main__":
     from optparse import OptionParser
     usage = u"usage: %prog [options]"

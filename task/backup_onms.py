@@ -12,6 +12,7 @@ def backup_onms(options):
                                                  fp)
     os.system(cmd)
     zipfile(fp)
+    os.system('del %s' % fp)
     print u'資料庫已備份至 %s' % fp + '.zip'
 
 def zipfile(fn):
@@ -19,6 +20,7 @@ def zipfile(fn):
     zf = ZipFile(zfn, 'w', ZIP_DEFLATED)
     zf.write(fn)
     zf.close()
+
 
 def fpath(options):
     import datetime
@@ -29,10 +31,11 @@ def fpath(options):
 
 # 0.1: 可備出 onms 之 DB
 # 0.2: 加入 dir 選項，指定備出檔案存放之目錄
+# 0.3: 壓縮完，刪除原始檔案
 if __name__ == "__main__":
     from optparse import OptionParser
     usage = u"usage: %prog [options]"
-    oparser = OptionParser(usage, version="%prog 0.2", 
+    oparser = OptionParser(usage, version="%prog 0.3", 
                            description=u"備份ONMS設定，"\
                                        u"用戶端必須安裝 pgsql。"
               )

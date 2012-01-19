@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh-Hant-TW">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<STYLE TYPE="text/css"> 
+table {
+    border-collapse:collapse;
+}
+table, th, td
+{
+    border: 1px solid black;
+}
+</STYLE>
+<script language="javascript" id="list" src="list.js"></script>
+<script type="text/javascript">
+/* 設定 */
+
+function shuffle(o){ //v1.0
+	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+	return o;
+};
+
+function time_text(d)
+{
+    return d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+}
+
+function make_table_string(l)
+{
+    str = '<table>'
+    for(i=0;i<l.length;i++) {
+        if(i%5 == 0 ) { str += '<tr>' }
+        str += "<td>" + (i+1) + "</td>"
+        str += "<td>" + l[i] + "</td>"
+        if(i%5 == 4) { str += "</tr>" }
+    }
+    str += "</table>"
+    return str
+}
+
+function draw()
+{
+    winnum=document.getElementById('gifts_number').value;
+    winners = shuffle(candidates).slice(0, winnum)
+    html =  time_text(new Date()) + "抽出得獎名單："
+    html += make_table_string(winners)
+    document.getElementById('content').innerHTML = html
+}
+
+function print_candidates()
+{
+    document.getElementById('content').innerHTML = make_table_string(candidates)
+}
+
+</script>
+</head>
+<body>
+
+<center>
+<img src="hltb_logo_ie.bmp" alt="花蓮縣地方稅務局"/>
+<div style="font-size:26pt;font-weight:bold;">
+FaceBook<span style="font-family:標楷體">
+粉絲團抽獎程式(給獎名額：50名)</span></div>
+<!--
+<div id="time">目前時間:<span id="clock"></span></div>
+-->
+<input type="hidden" id="gifts_number" value="50"/><br/>
+<script type="text/javascript">
+function refreshClock()
+{
+    d = new Date()
+    str = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+    document.getElementById('clock').innerHTML = str
+    t=setTimeout("refreshClock()", 1000);
+}
+refreshClock()
+
+</script>
+<!--
+<button onclick="print_candidates()">本次候選名單</button>
+-->
+<button style="font-weight:bold;font-size:26pt" onclick="draw()">*開始抽獎*</button>
+</center>
+<center>
+<div id="content" style="font-size:20pt;font-family:標楷體">
+</div>
+</center>
+</body>
+</html>

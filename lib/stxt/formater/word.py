@@ -40,8 +40,6 @@ class MSWordOut(GenericASTTraversal):
 
         except KeyError, k:
             pass
-
-
         
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last

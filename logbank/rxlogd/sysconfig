@@ -1,7 +1,0 @@
-# VERY simple config file for syslog-ng-emulator
-# where to read incoming syslog from, default is the syslog port (udp)
-LISTENPORT=514
-# where to write files to...
-LOGDIR=/var/log/remote
-# what user to run as
-USER=nobody
