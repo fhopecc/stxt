@@ -1,0 +1,9 @@
+Q. Install Iconv package
+
+Downloaded and installed iconv-1.19 in c:\iconv.
+Collected package iconv-0.4.0.2 thus (just in case adding ways in INCLUDE and LIB):
+
+
+runhaskell Setup configure --extra-include-dirs=c:\iconv\include --extra-lib-dirs=c:\iconv\lib 
+runhaskell Setup build 
+runhaskell Setup install 

@@ -21,7 +21,7 @@ etax -send-> ap1 -store-> /elt/shared_tmp/xmvi/oa
 1.詢問承辦人未更新案號
 2.至 ap1:/elt/shared_tmp/xmvi/oa/backup
 3.複製上述案號至 /elt/shared_tmp/xmvi/oa 目錄
-
+4.可利用 resend.sh resend 案號
 
 中介檔案命名規則:
   OA00002_1001013_

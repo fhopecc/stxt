@@ -5,6 +5,12 @@ parser.out
 parsetab.py
 *.swp
 *.pyc
+*.hi
+*.ho
+*.o
+*.exe
+*.cgi
+bak/*
 log/*
 tmp/*
 lib/sql/*
@@ -24,3 +30,4 @@ structedtext/travel/*
 structedtext/stable_prog/*
 structedtext/poems/*
 structedtext/index.yaml
+twFhopecc/*

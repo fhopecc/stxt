@@ -1,0 +1,2 @@
+
+main = putStr $ hGetEncoding(stdout)
