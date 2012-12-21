@@ -26,9 +26,6 @@ class MSWordOut(GenericASTTraversal):
         pageSetup.TopMargin = 64
         pageSetup.BottomMargin = 64
 
-        footer = self.word.ActiveDocument.Sections(1).Footers(1)
-
-        footer.PageNumbers.Add()
 
         #With ActiveDocument.Sections(1).Footers(wdHeaderFooterPrimary)
         # .PageNumbers.Add PageNumberAlignment:=wdAlignPageNumberRight
@@ -36,8 +33,6 @@ class MSWordOut(GenericASTTraversal):
 
         section = self.doc.Sections(1)
 
-        footer = section.Footers(wdHeaderFooterPrimary)
-        footer.PageNumbers.Add(wdAlignPageNumberCenter)
         
         self.range	= self.doc.Range()
         # 設定字型為標楷體
@@ -87,7 +82,11 @@ class MSWordOut(GenericASTTraversal):
         while content.Find.Found:
             content.Find.parent.Font.Bold = True
             content.Find.Execute()
-            
+        footer = self.word.ActiveDocument.Sections(1).Footers(1)
+        footer.PageNumbers.Add()
+
+        footer = section.Footers(wdHeaderFooterPrimary)
+        footer.PageNumbers.Add(wdAlignPageNumberCenter)
 
     def n_doc(self, node):
         para = self.doc.Paragraphs.Last

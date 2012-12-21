@@ -1,3 +1,12 @@
+公文系統
+========
+
+聯絡人
+------
+
+檔案管理局 公文G2B2C資訊服務中心 0227135770#1 service@good.nat.gov.tw
+
+
 qlat031 分類別檔
 qlat0311 案卷資料檔 ast 卷號 prd 保存年限
 
@@ -7,8 +16,8 @@ qlat0311 案卷資料檔 ast 卷號 prd 保存年限
 登入後台
 ~~~~~~~~
 
-網址：https://admin.etax.nat.gov.tw
-帳號：UDD3765501/4rfv5tgb
+網址：etw.etax.nat.gov.tw/etwn
+帳密：LU00000000/LU00000000
 
 存放目錄
 ~~~~~~~~
@@ -34,3 +43,10 @@ etax -send-> ap1 -store-> /elt/shared_tmp/xmvi/oa
 主機機台號：100TT048
 
 IP:10.66.4.21
+
+
+更新地址簿
+----------
+
+1.把 /eic/ 的 SYN 那行刪掉
+2.重開機

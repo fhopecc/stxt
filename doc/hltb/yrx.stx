@@ -1,0 +1,63 @@
+常見問題集(YRX FAQ)
+===================
+0990506
+
+聯絡人
+------
+饒駿德 0226431155#1705
+
+檔案交換問題
+------------
+Q.代書看到案件已核淮，但無法下載？
+
+至內網
+select *
+from yrxt010
+where 1 = 1
+and trf_drctn = 'O'           -- O 表由內網傳至外網，I 則為外網傳至內網
+and (trf_mid_time is null or  --中介主機收檔時
+     trf_dest_time is null)   --中介主機丟至外網 AP
+
+若 trf_mid_time 非 null 值，而 trf_dest_time 為 null 值，
+表示中介服務有問題，重開中介服務
+
+
+
+代書端問題
+----------
+Q.登入時出現「憑證使用元件未正常安裝等問題」？
+
+  「信任網站」加入 https://etrs.hltb.gov.tw
+
+  打開「功能表列/工具/網際網路選項/安全性/信任的網站/自訂等級」，
+  將「ActiveX 控制項與外掛程式」下所有選項均選啟用。
+
+Q.王代書那一版網路申報才沒問題？
+  至少為 990403。
+
+Q.登入時出現 7303?
+  1.檢查 Smart Card Service 是否啟動。
+  2.若有啟動，檢查卡片是否有插好。
+  3.http://www.casauto.com.tw/ 下載新版趨動程式。
+
+Q.共用代碼，花蓮不見了？
+  1.移除離線版代書軟體。
+  2.刪除 Program Files 之目錄
+  3.重裝離線版代書軟體及更新套件。
+  4.安裝代碼
+
+Q.YRX LOG在那裡?
+
+  /shared_tmp/work/yrx
+  
+Q.出現驗證錯誤？
+
+  「非自然人或工商憑證」
+
+  「驗證 GetCertificateFromGPKI:9000」
+
+  「Out of Memory: line 231」之訊息。 
+
+  YRXT204 記錄已登入的驗證使用者。
+
+  檢查 CRLFile 之目錄是否錯置。

@@ -1,0 +1,24 @@
+Name:                mobian
+Version:             0.1
+Synopsis:            
+Description:         
+License:             GPL
+Author:              fhopecc
+Maintainer:          fhopecc <fhopecc@gmail.com>
+Build-Depends:       base
+Build-type:          Simple
+Cabal-Version:       >=1.2.3
+
+Library
+  Exposed-Modules: Mobian
+  Build-Depends:   base,
+                   bytestring,
+                   containers,
+                   cp950,
+                   parsec
+
+Test-Suite test-mobian
+    type:       exitcode-stdio-1.0
+    main-is:    testMobian.hs
+    build-depends: base,
+                   HUnit

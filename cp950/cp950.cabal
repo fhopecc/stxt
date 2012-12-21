@@ -1,0 +1,18 @@
+Name:                cp950
+Version:             0.1
+Synopsis:            cp950 encoding support
+Description:         cp950 encoding support
+License:             GPL
+Author:              fhopecc
+Maintainer:          fhopecc <fhopecc@gmail.com>
+Build-Depends:       base
+Build-type:          Simple
+Cabal-Version:       >=1.2.3
+Library
+  Exposed-Modules: GHC.IO.Encoding.CP950,
+                   Data.ByteString.CP950,
+                   Data.ByteString.UnicodeCP950
+  Build-Depends: base >= 4.3.1.0 && < 5,
+                 bytestring,
+                 containers
+                 

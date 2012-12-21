@@ -82,14 +82,23 @@ HOUSRV 執行 run.bat
 
 1.請使用者登入
 
-2.確認其帳號包含於本機 PowerUsers 群組中
+2.確認使用者帳號包含於本機 Administrators 群組中
 
-3.打開網址列輸入：\\10.66.4.19\hlv$，
-  之後會提示要驗證，請輸入 administrator/password 
-
-4.按 setupAPP.bat 安裝申辦台
+  a.開啟「控制台/使用者帳戶」程式，
+    若提示要驗證，請輸入 administrator/password。
+    
+  b.查看使用者帳號包含於本機 Administrators 群組中，
+    若無請將該帳號加入本機 Administrators 群組
   
-5.按 setupMobile.bat 安裝行動端
+
+3.打開網址列輸入：\\10.66.4.19\hlv，
+  之後會提示要驗證，請輸入 administrator/password，
+  並勾選「記憶密碼」。
+
+4.請使用者登入系統，並更新程式
+
+4.若在 PC 端按 setupAPP.bat 安裝申辦台。
+  若房屋稅之外業清查筆電，請按 setupMobile.bat 安裝行動端。
 
 上正式機程序
 ------------
