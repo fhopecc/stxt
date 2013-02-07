@@ -1,0 +1,72 @@
+限制(restriction)
+~~~~~~~~~~~~~~~~~
+從一個表中取出符合條件的紀錄，常見條件如下：
+* 相等條件
+* 範圍條件 
+* 布林運算子
+
+table.tax payment
+id payer  date     area tax    amount
+== ====== ======== ==== ====== ======
+ 1 李白   0981107  鳳林 地價稅   1000 
+ 2 李白   0980307  鳳林 土增稅    420 
+ 3 李白   0980307  鳳林 契稅      320 
+ 4 杜甫   0980501  花蓮 房屋稅    200
+ 5 杜甫   0980401  花蓮 牌照稅   7120
+ 6 杜甫   0980301  花蓮 地價稅    200
+ 7 蘇軾   0980402  玉里 土增稅    300
+ 8 蘇軾   0981102  玉里 地價稅    300
+ 9 蘇軾   0980430  玉里 牌照稅   3060 
+10 蘇軾   0980430  玉里 契稅       70
+11 蘇軾   0980501  玉里 娛樂稅   4400
+12 蘇軾   0980530  玉里 房屋稅    200 
+13 蘇軾   0980330  玉里 印花稅   3400 
+== ====== ======== ==== ====== ======
+
+tax_payments 是用來記錄繳稅的檔案。
+
+code[payer_in_fl.sql].相等條件
+select distinct payer
+from tax_payments 
+where area='鳳林'
+::
+
+上述 SQL 表示位於鳳林的納稅人名單。
+
+條件是作用於某個型態上布林函數，
+像是[payer_in_fl.sql]中的條件為相等條件，
+若某紀錄的 area 欄值等於右端的'鳳林'字串，
+則此紀錄會被選擇出來。
+
+code[range_codition].範圍條件
+select *
+from tax_payments 
+where amount < 100
+::
+
+上述代數式表示納稅額小於 100 的所有繳稅紀錄。
+此類條件稱為範圍條件，用來測試值是否符合指定範圍，
+分別有大於、小於、大於等於及小於等於，
+對應的符號分別為 '>', '<', '>=' 及 '<='。
+
+code[fl_and_lt1000.sql].布林運算子
+select *
+from tax_payments 
+where amount < 1000 and area='鳳林'
+::
+
+上述代數式表示取出位於納稅人額小於 1000 且位於鳳林的所有繳稅紀錄。
+因為條件都是布林函數，所以可以用布林運算子串接。
+
+code.集合運算等式(and_as_intersect.sql)
+select *
+from tax_payments 
+where area='鳳林' 
+intersect 
+select *
+from tax_payments 
+where id < 1000
+::
+
+布林運算子串接的條件，可用集合運算表示出來，
+如[and_as_intersect.sql]為[fl_and_lt1000.sql]的等式。

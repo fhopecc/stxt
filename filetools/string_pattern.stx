@@ -1,0 +1,148 @@
+[string_pattern]字串模式
+------------------------
+字串模式是一種語言，用來表示一組字串集合，
+若某一字串 s 屬於某一模式 p 所表示的字串集合，
+則字串 s 匹配於 p。
+
+萬用字元
+~~~~~~~~
+SQL 的模式語言很簡單，只有兩種特別字元，
+底線「_」代表「匹配」任何單個字元，
+而一個百分號「%」匹配零或更多字元長的字串。
+
+除了上述兩個字元，其它字元匹配字元本身，見下表：
+
+table.ANSI SQL 萬用字元表
+ANSI 意義           模式例 可匹配字串 
+==== ============== ====== =================
+'_'  任何單一字元   '_ean' dean, sean
+'%'  零或更多的字元 'com%' computer, company
+==== ============== ====== =================
+
+like 
+~~~~
+like 是另一個在 where 子句中會用到的指令。
+基本上 like 能讓我們依據一個模式來找出我們要的資料。
+相對來說，在運用 in 的時候，我們完全地知道我們需要的條件；
+在運用 between 的時候， 我們則是列出一個範圍。 
+
+code[like.bnf].
+strexpr like 'pattern'
+::
+
+若 strexpr 所表示的字串匹配 pattern 所表示的模式，則 like 傳回真。
+not like 表示式傳回假。
+
+表 employees 用長度為7之字串表示民國年生日，
+例如「0680729」是我的民國年生日之日期字串，
+若要查詢和我同生日的員工，
+可以用 birthday like '___0729' 作為條件，
+每個底線代表任何單一字元，因為日期字串民國年用3個字元表示，
+所以要有三個底線字元表示出生年可以是任何年份，
+而生日必須固定為 0729，如下例：
+
+code[birthday.sql].找出與我同生日的員工
+select *
+from employees
+where birthday like '___0729'
+::
+
+由於中國姓名格式為姓式後加上一至三個字人名，
+所以想查詢與我同姓的同事清單，
+可在 SQL 查詢中輸入 name like '張簡%'，
+利用 % 表示任何字數的人名，
+會傳回 name 中以「張簡」做為開頭的字串紀錄，
+如下碼：
+
+code[chang_chine.sql].找出姓張簡的員工
+select *
+from employees
+where name like '張簡%'
+::
+
+電話號碼前三碼為區碼，
+花蓮的區碼為038，
+所以要找出電話於花蓮區的員工，
+可在 SQL 查詢中輸入 phone like '038%'，
+如下碼：
+
+code[pre038.sql].找出電話區碼為038的員工
+select *
+from employees
+where phone like '038%'
+::
+
+若要搜尋包括一或多個特殊萬用字元的字元字串，
+則必須於底線及百分比前導跳脫字元。
+預設的跳脫字元是反斜線。
+
+例如 customers 資料庫中 discount 欄表示每位顧客的預設折扣值，
+會儲存包括百分比符號「%」的折扣值。
+若要將百分比符號當作普通字元而不是萬用字元來搜尋，
+必須使用跳脫字元。 
+
+由於反斜線在字串常數裡已經有特殊含義了，
+所以若寫一個包含反斜線的模式字串要寫兩個反斜線，代表一反斜線。
+
+code[esc_backslash.sql].查詢顧客其折扣為 10-15 %
+select * 
+from customers
+where discount like '%10-15//% off%';
+::
+
+因此寫一個匹配單反斜線的模式實際上要在語句裡寫四個反斜線。 
+如下例查詢存在 fhopecc 目錄下的圖片，
+檔案路徑一定包含 fhopecc 字串，
+且前後要用反斜線表示目錄，但反斜線要寫成四個反斜線。
+
+code[esc_backslash.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%////fhopecc////%' escape '//';
+::
+
+我們可用 escape 子句自定一個跳脫字元， 
+使反斜線就不再是 like 的跳脫字元了，可避免上述四個反斜線問題。
+如下例以 escape 指定跳脫字元為驚嘆號「!」將顧客折扣查詢改寫如下：
+
+code[discount.sql].查詢顧客其折扣為 10-15 %
+select * 
+from customers
+where discount like '%10-15!% off%' escape '!';
+::
+
+由於反斜線仍然是字串常數的跳脫字元，
+所以還是需要兩個反斜線表示一個反斜線，如下例：
+
+code[fhopecc_images.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%//fhopecc//%' escape '!';
+::
+
+like 模式匹配總是覆蓋整個字串。 
+要匹配在字串內部任何位置的序列，該模式必須以百分號開頭和結尾。
+
+要匹配跳脫字元本身，寫兩個跳脫字元。
+
+escape '' 表示關閉跳脫機制，
+這時就不能關閉底線和百分號的特殊含義。
+
+code[fhopecc_images.sql].查詢存在 fhopecc 目錄下的圖片
+select * 
+from images
+where path like '%//fhopecc//%' escape '';
+::
+
+Microsoft Jet SQL 萬用字元
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Microsoft Jet SQL 萬用字元與 ANSI SQL 是不相容的，
+所以在以 Microsoft Jet 為 SQL 引擎的 Microsoft access 或 dao 中
+使用 ANSI SQL 萬用字元，會被視為文字而中斷。
+
+table.Jet SQL 與 ANSI SQL 萬用字元表
+Microsoft Jet ANSI 意義 
+============= ==== ==============
+'?'           '_'  任何單一字元 
+'*'           '%'  零或更多的字元 
+============= ==== ==============

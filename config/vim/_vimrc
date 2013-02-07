@@ -21,6 +21,7 @@ set guifont=Lucida_Console:h14:cANSI
 set tabstop=4
 set shiftwidth=4
 set textwidth=70
+set history=100
 
 " T 自動 del cursor 停留的 xml tag 所包的整個內容
 " 因為有兩次 del action，要貼回來使用 p 及 "2p

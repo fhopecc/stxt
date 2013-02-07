@@ -1,0 +1,42 @@
+[where]
+-------
+where 子句 的語法是
+code[where.bnf].
+where search_condition
+::
+
+search_condition 是任意條件式，表示搜尋條件，
+條件式的結果只會是真或假。
+
+在完成 from 處理之後，
+產出的基礎表的每一筆紀錄都會依搜尋條件進行測試。
+
+若測試通過，則該筆紀錄便加入到結果資料表中，
+否則就把它拋棄。
+
+搜尋條件可以引用一些在 from 子句引用表裡的欄。
+
+連接條件
+~~~~~~~~
+內連接的連接條件可寫在 where 子句，
+也可寫在 join 子句裡。 
+比如，這些資料表表示式是等效的：
+
+from a, b where a.id = b.id and b.val > 5
+
+和
+
+from a inner join b on (a.id = b.id) where b.val > 5
+
+或
+
+from a natural join b where b.val > 5
+
+由於 from 子句裡的 join 語法可能不是每個產品都有，
+但大部份的產品都支援 where 子句，
+所以以 where 表示連接條件更具有可移值性。
+
+因為外部連接的 on/using 子句不等於 where 條件，
+所以外部連接在任何情況下都沒有選擇，
+必須在 from 子句完成，無法用 where 模擬，
+但 Oracle 是個例外。

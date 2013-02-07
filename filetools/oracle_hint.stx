@@ -1,0 +1,105 @@
+在SQL語句優化過程中，我們經常會用到hint,現總結一下在SQL優化過程中常見Oracle HINT的用法：
+
+1. /*+ALL_ROWS*/
+表明對語句塊選擇基於開銷的優化方法,並獲得最佳吞吐量,使資源消耗最小化.
+例如:
+SELECT /*+ALL+_ROWS*/ EMP_NO,EMP_NAM,DAT_IN FROM BSEMPMS WHERE EMP_NO='SCOTT';
+2. /*+FIRST_ROWS*/
+表明對語句塊選擇基於開銷的優化方法,並獲得最佳響應時間,使資源消耗最小化.
+例如:
+SELECT /*+FIRST_ROWS*/ EMP_NO,EMP_NAM,DAT_IN FROM BSEMPMS WHERE EMP_NO='SCOTT';
+
+3. /*+CHOOSE*/
+表明如果數據字典中有訪問表的統計信息,將基於開銷的優化方法,並獲得最佳的吞吐量;
+表明如果數據字典中沒有訪問表的統計信息,將基於規則開銷的優化方法;
+例如:
+SELECT /*+CHOOSE*/ EMP_NO,EMP_NAM,DAT_IN FROM BSEMPMS WHERE EMP_NO='SCOTT';
+
+4. /*+RULE*/
+表明對語句塊選擇基於規則的優化方法.
+例如:
+SELECT /*+ RULE */ EMP_NO,EMP_NAM,DAT_IN FROM BSEMPMS WHERE EMP_NO='SCOTT';
+
+5. /*+FULL(TABLE)*/
+表明對錶選擇全局掃描的方法.
+例如:
+SELECT /*+FULL(A)*/ EMP_NO,EMP_NAM FROM BSEMPMS A WHERE EMP_NO='SCOTT';
+
+6. /*+ROWID(TABLE)*/
+提示明確表明對指定表根據ROWID進行訪問.
+例如:
+SELECT /*+ROWID(BSEMPMS)*/ * FROM BSEMPMS WHERE ROWID>='AAAAAAAAAAAAAA'
+AND EMP_NO='SCOTT';
+
+7. /*+CLUSTER(TABLE)*/
+提示明確表明對指定表選擇簇掃描的訪問方法,它只對簇對像有效.
+例如:
+SELECT /*+CLUSTER */ BSEMPMS.EMP_NO,DPT_NO FROM BSEMPMS,BSDPTMS
+WHERE DPT_NO='TEC304' AND BSEMPMS.DPT_NO=BSDPTMS.DPT_NO;
+
+8. /*+INDEX(TABLE INDEX_NAME)*/
+表明對錶選擇索引的掃描方法.
+例如:
+SELECT /*+INDEX(BSEMPMS SEX_INDEX) USE SEX_INDEX BECAUSE THERE ARE FEWMALE BSEMPMS */ FROM BSEMPMS WHERE SEX='M';
+
+9. /*+INDEX_ASC(TABLE INDEX_NAME)*/
+表明對錶選擇索引升序的掃描方法.
+例如:
+SELECT /*+INDEX_ASC(BSEMPMS PK_BSEMPMS) */ FROM BSEMPMS WHERE DPT_NO='SCOTT';
+
+10. /*+INDEX_COMBINE*/
+為指定表選擇位圖訪問路經,如果INDEX_COMBINE中沒有提供作為參數的索引,將選擇出位圖索引的布爾組合方式.
+例如:
+SELECT /*+INDEX_COMBINE(BSEMPMS SAL_BMI HIREDATE_BMI)*/ * FROM BSEMPMS
+WHERE SAL<5000000 emp_no="SCOTT" sex="M" dpt_no="V.DPT_NO">V.AVG_SAL;
+
+20. /*+NO_MERGE(TABLE)*/
+對於有可合併的視圖不再合併.
+例如:
+SELECT /*+NO_MERGE(V) */ A.EMP_NO,A.EMP_NAM,B.DPT_NO FROM BSEMPMS A (SELECT DPT_NO,AVG(SAL) AS AVG_SAL FROM BSEMPMS B GROUP BY DPT_NO) V WHERE A.DPT_NO=V.DPT_NO AND A.SAL>V.AVG_SAL;
+
+21. /*+ORDERED*/
+根據表出現在FROM中的順序,ORDERED使ORACLE依此順序對其連接.
+例如:
+SELECT /*+ORDERED*/ A.COL1,B.COL2,C.COL3 FROM TABLE1 A,TABLE2 B,TABLE3 C WHERE A.COL1=B.COL1 AND B.COL1=C.COL1;
+
+22. /*+USE_NL(TABLE)*/
+將指定表與嵌套的連接的行源進行連接,並把指定表作為內部表.
+例如:
+SELECT /*+ORDERED USE_NL(BSEMPMS)*/ BSDPTMS.DPT_NO,BSEMPMS.EMP_NO,BSEMPMS.EMP_NAM FROM BSEMPMS,BSDPTMS WHERE BSEMPMS.DPT_NO=BSDPTMS.DPT_NO;
+
+23. /*+USE_MERGE(TABLE)*/
+將指定的表與其他行源通過合併排序連接方式連接起來.
+例如:
+SELECT /*+USE_MERGE(BSEMPMS,BSDPTMS)*/ * FROM BSEMPMS,BSDPTMS WHERE BSEMPMS.DPT_NO=BSDPTMS.DPT_NO;
+
+24. /*+USE_HASH(TABLE)*/
+將指定的表與其他行源通過哈希連接方式連接起來.
+例如:
+SELECT /*+USE_HASH(BSEMPMS,BSDPTMS)*/ * FROM BSEMPMS,BSDPTMS WHERE BSEMPMS.DPT_NO=BSDPTMS.DPT_NO;
+
+25. /*+DRIVING_SITE(TABLE)*/
+強制與ORACLE所選擇的位置不同的表進行查詢執行.
+例如:
+SELECT /*+DRIVING_SITE(DEPT)*/ * FROM BSEMPMS,DEPT@BSDPTMS WHERE BSEMPMS.DPT_NO=DEPT.DPT_NO;
+
+26. /*+LEADING(TABLE)*/
+將指定的表作為連接次序中的首表.
+
+27. /*+CACHE(TABLE)*/
+當進行全表掃描時,CACHE提示能夠將表的檢索塊放置在緩衝區緩存中最近最少列表LRU的最近使用端
+例如:
+SELECT /*+FULL(BSEMPMS) CAHE(BSEMPMS) */ EMP_NAM FROM BSEMPMS;
+
+28. /*+NOCACHE(TABLE)*/
+當進行全表掃描時,CACHE提示能夠將表的檢索塊放置在緩衝區緩存中最近最少列表LRU的最近使用端
+例如:
+SELECT /*+FULL(BSEMPMS) NOCAHE(BSEMPMS) */ EMP_NAM FROM BSEMPMS;
+
+29. /*+APPEND*/
+直接插入到表的最後,可以提高速度.
+insert /*+append*/ into test1 select * from test4 ;
+
+30. /*+NOAPPEND*/
+通過在插入語句生存期內停止並行模式來啟動常規插入.
+insert /*+noappend*/ into test1 select * from test4 ;

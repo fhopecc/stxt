@@ -1,0 +1,18 @@
+Transact-SQL的交易控制語言(tcl in transact_sql)
+-----------------------------------------------
+在Transact-SQL的交易是使用BEGIN TRAN指令開始，
+如果交易成功，就使用交付交易COMMIT TRAN指令結束，如下所示：
+
+code.commit in Transact-SQL
+BEGIN TRAN
+DELETE FROM Students WHERE sid = 'S001';
+COMMIT TRAN
+::
+
+如果交易失敗，復原是使用ROLLBACK TRAN指令結束，如下所示：
+
+code.rollback in Transact-SQL
+BEGIN TRAN
+DELETE FROM Students WHERE sid = 'S001';
+ROLLBACK TRAN
+::

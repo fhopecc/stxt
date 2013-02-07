@@ -1,0 +1,24 @@
+SQL語言的交易控制語言(tcl)
+--------------------------
+ANSI-SQL的交易並沒有提供明確指令指出交易的開始，
+在交易執行的控制方面提供：COMMIT和ROLLBACK兩個指令，如下所示：
+
+交付（Commit）：
+  如果交易執行過程沒有錯誤，下達COMMIT指令，
+  將交易更改的資料實際寫入資料庫，以便執行下一個交易，如下所示：
+
+code.commit
+DELETE FROM Students WHERE sid = 'S001';
+COMMIT;
+::
+
+復原（Rollback）：
+  如果交易執行過程有錯誤，就是下達ROLLBACK指令放棄交易，
+  並將資料庫回復到交易前狀態，如下所示：
+
+code.rollback
+DELETE FROM Students WHERE sid = 'S001';
+UPDATE Students SET birthday='1968-09-12', GPA=3.0
+WHERE sid = 'S001'
+ROLLBACK;
+::

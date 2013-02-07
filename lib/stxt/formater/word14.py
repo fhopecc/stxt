@@ -176,5 +176,7 @@ class MSWordOut(GenericASTTraversal):
             return str(n) + '.'
         elif node.level == 4:
             return '(' + str(n) + ')' + ' '
+        elif node.level == 5:
+            return chr(64+n) + '.' + ' '
         else:
             return str(n) + '.'

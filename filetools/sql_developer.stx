@@ -1,0 +1,19 @@
+Q. Howto change the menubar language? 
+
+you can change menubar lang by modification of ide.conf
+add following line at $SQLDEVELOPER_INSTALL_DIR\ide\bin\ide.conf
+
+AddVMOption -Duser.language=en
+Jongwoo
+
+
+Q.Using Oracle SQLDeveloper to access SQLServer
+
+It is a pretty cool feature to use Oracle’s SQLDeveper 1.1 to access SQLServer.
+The steps are:
+
+Download jTDS (open-source SQLServer JDBC driver) from here. Unzip and extract the jtds-1.2.jar or whatever the latest version.
+Start Oracle’s SQLDeveloper, Tools->Preferences->Database->Third Party JDBC Drivers. Click “Add Entry” and point to the jtds-1.2.jar
+Create a new connection, choose SQLServer tab, type in hostname, port, username and password. It appears that the initial connection name has to be the same as the database and you can click the “Retrieve database” button. Once you found the database, you can rename the connection.
+Try it out.
+Of course, certain things don’t work. Like explain plan and auto trace.

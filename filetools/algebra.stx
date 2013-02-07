@@ -1,0 +1,101 @@
+[algebra]關聯式代數
+-------------------
+[table_var]表變數
+~~~~~~~~~~~~~~~~~
+表變數是可以表示一個表的符號，通常與表名稱字串相同，
+
+如 employees 便是一個表示 employees 名稱的表。
+
+[table_var]運算子
+~~~~~~~~~~~~~~~~~
+關聯式代數包含了八個運算子，
+每個運算子至少接受一個表作為參數，
+且運算結果均為一個表，
+如 UNION 為聯集運算子，接受兩個表變數，並傳回一個表。
+
+如 RESTRICT 為限制運算子，接受一個表變數，並傳回一個表。
+
+[table_formula]表公式
+~~~~~~~~~~~~~~~~~~~~~
+表變數與運算子可以組合成表公式，
+其組合方式如下[algebra.bnf]。
+
+code[algebra.bnf].文法
+expr        := monadic | dyadic
+monadic     := renaming| restriction | projection
+renaming    := term RENAME col as col
+term        := table | (expr)
+restriction := term WHERE codition
+projection  := term | term[c1,c2,...]
+dyadic      := projection dop expr
+dop         := UNION | INTERSECT | MINUS | TIMES | JOIN | DIVEDBY
+::
+
+每個表公式的運算結果也是一個表。
+
+code[matches.alg].小天使小主人所有可能配對
+matches = angles TIMES masters
+::
+
+matches 等於 angles 與 masters 的積，也是一個表。
+
+所以運算子在關連式運算子文法下是封閉的，
+任意表公式可以組成套疊公式。
+
+以基礎運算比擬，加法、減法及乘法在整數下是封閉的，
+使得運算元及結果都為整數，所以可組成套疊公式，
+算術套疊公式如下所示：
+
+1 + (3 - 4) \* 3
+
+關聯式套疊公式如下所示：
+
+code[mover.alg].搬公文員工名冊
+(employees WHERE gender = 'M')[name]
+UNION (employees JOIN 
+       ((departments WHERE name = '行政室')
+         RENAME id AS dep_id ))[name]
+::
+
+在分組方面，可以用是否為衍生自集合運算分為集合運算子及關聯運算子。
+
+也能依是否以其他的運算子定義分為原始運算子及衍生運算子。
+
+table.運算子
+類型       運算子
+========== =================
+集合運算子 TIMES UNION MINUS 
+           INTERSECT 
+關聯運算子 RESTRICT PROJECT 
+           JOIN DIVEDBY
+原始運算子 TIMES UNION MINUS 
+           RESTRICT PROJECT 
+衍生運算子 INTERSECT 
+           JOIN DIVEDBY
+========== =================
+
+table[rel_alge_vs_rel_calc].關聯式代數與關聯式計算的比較
+關聯式代數                 關聯式計算 
+========================== ==========================
+為一交易式的查詢語言。     為一非交易式查詢語言。 
+-------------------------- --------------------------
+必須明白地指出運算的順序。 不須明白地指出運算的順序。 
+-------------------------- --------------------------
+必須提供基本運算。         不須提供基本運算。 
+-------------------------- --------------------------
+以集合的基本運算與         以集合表示法與謂詞計算
+表式運子為基礎。           為基礎。 
+-------------------------- --------------------------
+表示能力與關聯式計算相等， 表示能力與關聯式代數相等，
+而且每一個關聯式代數的     而且每一個關聯式計算的查詢
+查詢皆可轉成相對的         皆可轉成相對的
+關聯式計算查詢。           關聯式代數查詢。 
+-------------------------- --------------------------
+可直接實現，並可作為       通常是以轉成
+查詢最佳化時的             關聯式代數來實現。
+樹狀結構中間型式。 
+========================== ==========================
+
+<d:\stxt\doc\db\set_operator.stx>
+<d:\stxt\doc\db\relation_operator.stx>
+<d:\stxt\doc\db\primitive_operator.stx>

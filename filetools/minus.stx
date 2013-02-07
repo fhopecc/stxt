@@ -1,0 +1,31 @@
+minus
+=====
+Select count(*) from A where ID Not in (Select ID from B)
+
+這就大概是查詢A裡面不包括B的資料
+
+但是查詢一萬筆，需要大概12秒，效率極差
+
+後來我改用minus效率大大的提升
+
+Select count(*) from A where ID in (Select ID from A minus select ID from B)
+
+子查詢的意思大概就是A-B後剩下的資料
+
+這樣就可以抓到A不包含B的資料，時間只要0.6秒
+
+效率會比較好
+
+Tips on using NOT EXISTS and MINUS in SQL
+
+In this excellent article by Chris Lawson, author of the bestselling “The Art and Science of Oracle Performance Tuning”, we see a great discussion of SQL optimization for NOT EXISTS clauses in Oracle SQL queries:
+ 
+http://www.oraclemagician.com/mag/magic8.pdf
+ 
+Lawson notes that there are many ways to filter SQL results sets, and that the MNINUS operator can often result in faster execution plans.
+ 
+By rewriting our query using the MINUS operator, we accept a full table scan and there really isn’t just one right way to design queries.
+ 
+In some cases, you really are better off using Not Exists. In many cases, however, you should use the set operator MINUS. Once you understand the principles, you can easily choose the best method for your particular case.
+
+

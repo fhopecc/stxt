@@ -1,0 +1,143 @@
+[in]
+----
+code[in.bnf].in 語法
+expression [not] in (subquery)
+::
+expression 若是欄名，代表外查詢每次所傳回的一筆當次紀錄中欄名為 expression 的值，
+若是常數則代表該常數。
+
+in 右式是一個圓括弧括起來的子查詢，結果必須為單欄表，
+其欄型態必須和 expression 之型態相同。
+
+若子查詢表中有一筆紀錄和 expression 相等則結果為 true，否則為 false。
+
+若指定欄值產生 null，
+或者子查詢沒有傳回 true 且至少一個子查詢紀錄為 null，
+那麼 in 結果將是 null，而不是 false。
+
+紀錄建構子
+~~~~~~~~~~
+code[row_constructor_any.bnf].紀錄建構子語法
+row_constructor [not] in (subquery)
+row_constructor = c1[,c2,c3...] 
+::
+紀錄建構子代表外查詢每次所傳回的一筆當次紀錄，
+並利用 c1\[,c2,c3...\] 選擇指定欄成為比較紀錄，
+
+傳入的子查詢的欄數，必須和比較紀錄欄數一樣，
+且各對應欄型態必須相同。
+
+若子查詢表中有一筆紀錄和 row_constructor 相等則結果為 true，否則為 false。
+
+如果左右式對應的成員都是非 null 且相等，那麼認為這兩行相等；
+
+如果左右式任意對應成員為非 null 且不等，那麼該兩行不等；
+
+否則結果是 null。
+
+如果所有行的結果不是不等，就是 null，且至少有一個 null，
+那麼 in 的結果是 null。
+
+和 exists 一樣，子查詢不會完全執行。
+
+查詢表指定欄位內容重覆的紀錄
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+in 語法可應用在查詢表指定欄位內容重覆的紀錄。
+
+如下查詢出非單人科室員工名單，
+即等同查詢表其欄 dep_id 內容重覆的紀錄。
+
+因為只有局長室僅一人，所以會傳回非局長的所有員工。
+
+code[dep_id_not_unique.bnf].非單人科室員工名單
+select name 
+from employees
+where dep_id in (select dep_id
+                 from employees 
+                 group by dep_id 
+                 having count(*) > 1)
+::
+
+in 值組
+~~~~~~~
+值組為用括弧括起來且以逗號分隔的單元值串，
+可視為單欄表。
+
+code[in_values.bnf].in 值組語法
+c [not] in (v1, v2,...)
+::
+
+第二列語法應用在(v1, v2,...)所指定的值組，
+此語法的比較紀錄只能有一欄，
+
+若 c 存在值組中，結果為真，否則為假。
+
+如下式查詢出鳳林及玉里的繳稅紀錄。
+
+code[tax_payment_in_area.sql].查詢出鳳林及玉里的繳稅紀錄
+select * 
+from tax_payments
+where area in ('鳳林', '玉里')
+::
+
+not in 意義如下，
+若 c 不存在於所有值組的值中，結果為真，否則為假。
+
+如下式查詢出不在鳳林或玉里的繳稅紀錄。
+
+code[tax_payment_not_in_area.sql].查詢不在鳳林或玉里的繳稅紀錄
+select * 
+from tax_payments
+where area not in ('鳳林', '玉里')
+::
+
+若指定欄值產生 null，
+或者沒有相等的值組，且值組至少一個值為 null，
+那麼 in 結果將是 null，而不是假。
+
+用 in 取代多個 or 條件式 
+~~~~~~~~~~~~~~~~~~~~~~~~
+in 可用來取代多個 or 條件式。
+
+如 questionnaires 為民服務問卷結果表，
+各欄意義如下：
+* id: 問卷編號
+* name: 受訪者姓名 
+* ltax: 是否來本局辦理過地價稅？
+* litax: 是否來本局辦理過土增稅？
+* htax: 是否來本局辦理過房屋稅？
+* vtax: 是否來本局辦理過牌照稅？
+* atax: 是否來本局辦理過娛樂稅？
+* dtax: 是否來本局辦理過契稅？
+
+table[questionnaires].為民服務問卷表
+id name   ltax litax htax atax atax dtax
+== ====== ==== ===== ==== ==== ==== ====
+ 1 劉邦      Y     N    Y    N    Y    N
+ 2 李世民    N     N    N    N    N    N
+ 3 朱元章    Y     Y    Y    N    N    N
+== ====== ==== ===== ==== ==== ==== ====
+
+查詢至少來本局辦過一個稅的受訪者名單程式如下：
+
+code[least_one_tax.sql].查詢至少來本局辦過一個稅的受訪者名單
+select * 
+from questionnaires
+where ltax = 'Y'
+      or litax = 'Y'
+      or htax = 'Y'
+      or vtax = 'Y'
+      or atax = 'Y'
+      or dtax = 'Y'
+::
+
+可用 in 改寫成下：
+
+code[least_one_tax_with_in.sql].用 in 查詢至少來本局辦過一個稅的受訪者名單
+select * 
+from questionnaires
+where 'Y' in (ltax, litax, htax, vtax, atax, dtax);
+::
+
+一般人不知道 expression 也可寫成常數，
+而值組的項目也可寫成變數。

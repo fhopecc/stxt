@@ -1,0 +1,366 @@
+統計與字串處理
+==============
+統計與字串處理
+--------------
+講師：張簡稜剛
+
+日期：20091224
+
+[group_by_having]group by 和 having
+-----------------------------------
+透過 where 的過濾資料表可續用 group by 進行分組，
+產出分組表，又可再續用 having 產出過濾分組表。
+
+code[group_by.bnf].
+select select_list
+    from ...
+    [where ...]
+    group by grouping_column_reference [, grouping_column_reference]...
+::
+
+分組運算
+--------
+group by 會依分組欄集將相同分組值的紀錄當成一組，
+並對同組紀錄集作統計。
+分組欄集指定欄順序無任何意義。 
+
+分組後會將分組紀錄統計成一筆紀錄，
+此統計紀錄代表該組所有紀錄。 
+
+select * from test1;
+
+不可引用原有欄
+--------------
+select x from test1 group by x;
+
+在上述查詢裡，
+我們不能寫成 select * from test1 group by x，
+因為除了欄 x 裡，沒有其它值可以和每個組相關聯起來。
+分組欄集可以在表頭定義中引用是因為分組欄集在每組只有單一值。
+
+若資料表被分組，那麼沒有在分組欄集的欄都不能引用，
+除非使用統計表示式。
+
+一個帶統計表示式的例子是：
+
+select x, sum(y) from test1 group by x;
+
+這裡的 sum 是一個統計函數，
+它在整個組上計算一個數值。
+
+distinct 同義式 
+---------------
+僅有分組欄集而沒有統計表示式的分組實際上等同計算了欄值中獨立數值的集合，
+可以用 distinct 子句實現，如下式：
+
+select x from test1 group by x;
+
+select distinct x from test1;
+
+這裡是另外一個例子：它計算每種產品的總銷售額。
+「而不是所有產品的總銷售額」。
+
+select pid, p.name, (sum(s.units) * p.price) as sales
+  from products p left join sales s using ( pid )
+  group by pid, p.name, p.price;
+
+在這個例子裡，欄 pid， p.name，和p.price必須在group by子句裡，
+因為它們都在查詢表頭定義裡被引用到。
+「根據產品資料表具體的設置的不同，
+名字和價格可能和產品 id 完全無關，
+因此理論上額外的分組可能是不必的，
+但是這些尚未實現。」 
+
+欄s.units不必在group by列資料表裡，
+因為它只是在一個統計表示式「sum(...)」 裡使用，
+它代資料表一組產品的銷售額。對於每種產品，
+這個查詢都傳回一個該產品的所有銷售額的總和。
+
+在嚴格的 SQL 裡，group by只能對源資料表的列進行分組，
+但 postgresql 把這個擴展為也允許group by那些在表頭定義中的字串。
+也允許對值表示式進行分組，而不僅是簡單的字串．
+
+若一個資料表已經用group by子句分了組，
+然後您又只對其中的某些組感興趣，
+那麼就可以用having子句，它很像where子句，
+用於刪除一個分了組的資料表中的一些組。 語法是：
+
+select select_list from ... [where ...] group by ... 
+having boolean_expression
+在 having 子句中的表示式可以引用分組的表示式和未分組的表示式
+「後者必須涉及一個統計函數」。
+
+例子：
+
+select x, sum(y) from test1 group by x having sum(y) > 3;
+
+select x, sum(y) from test1 group by x having x < 'c';
+然後是一個更現實的例子：
+
+select product_id, p.name, (sum(s.units) * (p.price - p.cost)) as profit
+    from products p left join sales s using (product_id)
+    where s.date > current_date - interval '4 weeks'
+    group by product_id, p.name, p.price, p.cost
+    having sum(p.price * s.units) > 5000;
+
+在上例裡，where子句用於那些非分組欄集選擇資料行。 
+「表示式只是對那些最近四周發生的銷售為真」。
+而 having 子句選擇那些單價超過 5000 的組的行。
+請注意統計函數不需要在查詢中的所有地方都一樣。
+
+[statics]統計函數
+-----------------
+table[tax_pay_table].繳稅檔
+編 納稅            
+號 義務人 繳納日期 鄉鎮 稅種   金額
+== ====== ======== ==== ====== ====
+ 1 李白   0981107  鳳林 地價稅 1000 
+ 2 李白   0980307  鳳林 土增稅  420 
+ 3 李白   0980307  鳳林 契稅    320 
+ 4 杜甫   0980501  花蓮 房屋稅  200
+ 5 杜甫   0980401  花蓮 牌照稅 7120
+ 6 杜甫   0980301  花蓮 地價稅  200
+ 7 蘇軾   0980402  玉里 土增稅  300
+ 8 蘇軾   0981102  玉里 地價稅  300
+ 9 蘇軾   0980430  玉里 牌照稅 3060 
+10 蘇軾   0980430  玉里 契稅     70
+11 蘇軾   0980430  玉里 娛樂稅 4400
+12 蘇軾   0980430  玉里 房屋稅  200 
+== ====== ======== ==== ====== ====
+
+為什麼要有統計函數
+------------------
+當看報紙時，我們很少會從頭到尾逐字的讀，
+通常會先一覽全部的標題，
+當某個夠聳動的標題吸引住你後，
+你才會繼續讀這個標題之下的報導。
+
+標題扮演的角色就是一篇報導的摘要，
+也就是用最少的字(報紙標題很少超過20個字)來代表這篇文章，
+而且提供的資訊要能有效符合此文章的主題。
+
+統計函數就扮演上述報紙標題的角色，
+當看到 [tax_pay_table] 時，
+比如我想知道李白的繳稅金額，
+因為李白具有三筆紀錄，
+所以可能會用 (1000, 420, 320) 來表示繳稅金額，
+但太煩瑣了，我們想要用一個數字，
+來表示李白先生繳稅金額，
+這時就需要統計函數了。
+
+統計函數即是應用了所有母數整體的特性和數據的函數。
+所以統計函數雖只出現一個數目，
+但卻盡可能包含了整體數據的某一性質。
+
+總和
+----
+最常見的統計函數就是總和，把所有的數字加總起來，
+像李白的繳稅金額總和為 1740 可用來表示李白的繳稅金額這個特質。
+
+總和通常用在數值型態的欄位，例如上述的繳稅金額。
+
+次數
+----
+另外一種常見的統計函數是次數，
+次數是針對某個欄位條件出現頻率，
+像杜甫的繳稅次數為 3 次。
+
+平均值
+------
+整體如果均勻分配，每一個成員應該分配得到的數目，
+像上述每個人平均繳的地價稅為 500 元。
+
+[string]字元類型
+----------------
+SQL 定義了兩種基本的字元類型： 
+
+table.字元類型
+名字                             描述
+================================ ======================
+character varying(n), varchar(n) 變長，有長度限制
+character(n), char(n)            定長,不足補空白
+text                             變長，無長度限制
+================================ ======================
+
+對 character varying(n) 和 character(n) 而言，
+n 是一個正整數，指類型最多儲存 n 字元長字串。 
+試圖儲存更長的字串到這些類型的字串裡會產生一個錯誤， 
+除非超出長度的字元都是空白，這種情況下該字串將被截斷為最大長度。
+
+若儲存字串的長度比 n 短， 
+類型 character 將會用空白填滿不足的長度；
+而類型為 character varying 的數值將儲存較短的字串。
+
+若強制將字串轉換成 character(n) 或者 character varying(n)， 
+那麼超過長度的字串將被截斷成 n 個字元，而不會拋出錯誤。
+
+char(n) 和 varchar(n) 分別是 character(n) 和 character varying(n) 的別名， 
+
+沒有長度定義 n 的 character 等於 character(1)；
+
+若不帶長度定義 n 的 character varying，
+則該類型接受任何長度的字串。 
+
+text 類型，它可以儲存任何長度的字串。 
+儘管類型 text 不是SQL標準，但被很多 SQL 資料庫系統支援。
+
+類型 character 字串都用空白填充到指定的長度 n，
+並且以這種方式儲存和顯示。
+不過填充的空白在語意上並不重要。 
+在比較兩個 character 字串時，填充的空白都被忽略，
+在轉型成其它字串類時，character 字串空白會被刪除。
+但在 character varying 和 text 字串中，
+結尾的空白語意上是有含義的。
+
+這些類型的儲存需求是 4 字元加上實際的字串，
+若是 character 的話再加上填充的字元。
+
+長字串會自動被系統壓縮， 
+因此實際儲存空間需求可能會更少些。
+長字串也會儲存在後台資料表裡面，
+這樣就不會干擾對短字串值的快速訪問。 
+允許儲存的最長字串大概是 1 gb。 
+
+允許在資料類型定義的 n 最大值比這還小。 
+修改這個行為沒有甚麼意義，
+因為在多字元編碼下字元和字元的數目可能差別很大。 
+若您想儲存沒有特定上限的長字串，
+那麼使用 text 或者沒有長度定義詞的 character varying，
+而不要選擇一個任意長度限制。
+
+這三種類型之間沒有性能差別，
+只不過是在使用填充空白的類型的時候增加了儲存尺寸，
+通常應該使用 text 或者 character varying。
+
+字串函數和運算子
+----------------
+本節描述檢查和操作字串的函數和運算子。 
+
+字串包括 character， character varying，和 text 類型值。
+除非另外說明，所有下面列出的函數都可以處理這些類型， 
+不過要小心的是，在使用 character 類型的時候，
+它的自動填充的潛在影響。
+通常這裡描述的函數也能用於非字串 類型，
+我們只要先把那些資料轉化為字串資料表現形式就可以了。 有些函數還可以處理位串類型。
+
+SQL 定義了一些字串函數，
+它們有指定的語法，
+裡面是用某種特定的關鍵字，而不是逗號來分隔參數。 
+
+字串連接運算子  
+--------------
+string || string
+
+「||」為字串連接運算子，如下例：
+
+select 'sql' || ' tutorial' => 'sql tutorial'
+
+bit_length
+----------
+bit_length(string)    
+
+字串所佔的 byte 長度，如下例：
+
+select bit_length('jose') => 32
+
+char_length
+-----------
+char_length(string) 或 character_length(string) 
+    
+字串中的字元個數，如下例：    
+
+char_length('jose') => 4
+
+octet_length
+------------
+octet_length(string) => integer
+
+字串中的字元數
+
+octet_length('jose') => 4
+
+convert
+-------
+convert(string using conversion_name) 
+
+使用指定的轉換名字改變編碼。轉換可以透過 create conversion 定義。
+當然系統裡有一些預定義的轉換名字。
+參閱 table 9-7 獲取可用的轉換名。    
+
+convert('sql tutorial' using iso_8859_1_to_utf_8)
+
+傳回 unicode (utf-8) 編碼的 'sql tutorial'
+
+lower
+-----
+lower(string)
+    
+把字串轉化為小寫
+
+lower('Tom') => tom
+
+upper
+-----
+upper(string) => text
+
+把字串轉化為大寫。
+
+upper('tom') => TOM
+
+position
+--------
+position(substring in string) => integer
+
+定義的子字串的位置
+
+position('om' in 'thomas') => 3
+
+overlay
+-------
+overlay(string placing string from integer [for integer])
+
+替換子字串    
+
+overlay('txxxxas' placing 'hom' from 2 for 4) => thomas
+
+position
+--------
+position(substring in string) => integer
+
+指定的子字串的位置    
+
+position('om' in 'thomas') => 3
+
+substring
+---------
+substring(string [from integer] [for integer]) => text     
+
+抽取子字串    
+
+substring('thomas' from 2 for 3) => hom
+
+substring(string from pattern) => text
+
+抽取匹配 posix 正則表示式的子字串    
+
+substring('thomas' from '...$') => mas
+
+substring(string from pattern for escape) => text    
+
+抽取匹配SQL正則表示式的子字串
+
+substring('thomas' from '%#"o_a#"_' for '#') =>     oma
+
+trim
+----
+trim([leading | trailing | both] [characters] from string) => text
+
+從字串 string 的開頭、結尾或兩邊
+刪除只包含 characters 「預設是一個空白」的最長的字串。
+
+trim(both 'x' from 'xtomxx')i => tom
+
+其它
+----
+set sqlblanklines on
+讓 SQL*plus 可辨識含空白行的字串值

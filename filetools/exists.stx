@@ -1,0 +1,83 @@
+[exists]exists
+--------------
+code[exists.bnf].exists 語法
+[not] exists (subquery)
+::
+
+exists 接受一個子查詢作為參數，
+用來測試子查詢是否產出任何紀錄。
+若有結果則條件為真，若無條件為假，
+判斷為真時才會繼續執行外查詢。
+
+若 civil_services 為全國公職名冊，
+下述程式利用 exists 描述本局具公職身份的員工名冊。
+
+code[emp_are_civ.sql].具公職身份的員工名冊
+select name
+from employees e
+where exists
+      (select 1
+       from civil_services c
+       where e.name = c.name);
+::
+
+子查詢通常只執行到產生一行為止，
+而不是等到產出全部結果才停止。
+在這裡寫任何有副作用的子查詢都是不明智的（比如調用序列函數）；
+這些副作用是否發生是很難判斷的。
+
+not exists 則是相對於 exists，判斷為假才會繼續執行外查詢。
+
+下述程式利用 not exists 描述本局不具公職身份的員工名冊。
+
+code[emp_not_civ.sql].不具公職身份的員工名冊
+select name
+from employees e
+where not exists
+      (select 1
+       from civil_services c
+       where e.name = c.name);
+::
+
+因為結果只取決子查詢是否產生任何紀錄，
+而不取決於紀錄內容，
+所以子查詢的產出結果表通常是無用的。
+因此慣寫法常將子查詢寫成「select 1 form...」的形式，
+如[emp_are_civ.sql]
+
+表達全稱量詞
+~~~~~~~~~~~~
+sql 並未提供全稱量詞，
+只提供存在量詞 exists，
+但可用一個雙重否定律利用 exists 表達全稱量詞。
+
+theorem.雙重否定律
+  forall P(x) = not exists x(not exists P(x))
+
+雙重否定律簡言之就是「負負得正」，「否定 + 否定 = 肯定」。
+
+雙重否定的句子如下：
+
+「眼見很多學生上課時打瞌睡，老師不得不承認自己教學法比較沉悶。」
+
+「不得不」包含兩個否定詞。
+
+taxes 為稅種檔，紀錄所有應收的稅，
+tax_payments 為繳稅紀錄檔，紀錄所有繳稅紀錄檔。
+
+「所有稅都繳」為全稱量詞句，
+以雙重否定律可轉成「不存在一個稅他沒有繳的」存在量詞句，
+其程式如下：
+
+code[all_taxes_payers.sql].所有稅都繳名單
+select distinct payer
+from tax_payments as tp1
+where not exists
+      (select 1
+       from taxes
+       where not exists
+             (select 1
+              from tax_payments as tp2
+              where (tp1.payer = tp2.payer)
+              and (tp2.tax = taxes.name)));
+::
