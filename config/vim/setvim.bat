@@ -1,5 +1,5 @@
 rem
-rem è¨­å®šå€‹äºº VIM ç’°å¢ƒ
+rem ³]©w­Ó¤H VIM Àô¹Ò
 rem
 
 set src=D:\stxt\config\vim
@@ -7,6 +7,10 @@ set dst=C:\vim
 
 copy _vimrc %dst%
 
+if not exist %dst%\vimfiles mkdir %dst%\vimfiles
+
 copy %src%\format.vim %dst%\vimfiles
 
-copy %src%\ftdetect\stx.vim %dst%\vimfiles\ftdetect
+if not exist %dst%\vimfiles\ftdetect mkdir %dst%\vimfiles\ftdetect
+
+copy %dst%\vimfiles\ftdetect\

@@ -70,14 +70,14 @@ x * y = mult(x, y)
 
 5.邏輯
 
-5.1.非
+5.1.零特徵函數
 
-not(x) = 0 | x <> 0
+is0(x) = 0 | x <> 0
          1 | x == 0 
 
-not(0)   = 1 
+is0(0)   = 1 
 
-not(k+1) = 0 
+is0(k+1) = 0 
 
 5.2.轉成邏輯值
 
@@ -107,17 +107,29 @@ R(x1, x2,..., xn) = (f(x1, x2,..., xn) == 0)
 
 若 f 為基本遞迴函數，則 R 稱為基本遞迴關係。
 
-7.最小滿足函數
+7.最小界函數
 
-argmin y <= f(x) | R(x)
+g 函數會傳回小於z中最小滿足f(n1, n2,...,nk, y) = 0之數。
 
-x(0  ,xs)   = 0
-x(n+1,xs) = (n+1)*A + x(n, xs) * not(A)
+g(n1, n2,...,nk, z) = mu y <= z (f(n1, n2,...,nk, y) = 0)
 
-A = if (f(0, xs) == 0) 
+g(ns, 0)   = 0        | f(ns, 0) = 0
+             1        | otherwise
+
+g(ns, z+1) = g(ns, z) | g(ns, z) <= z
+             z+1      | g(ns, z) ==  z+1 & f(ns, z+1) == 0
+             z+2      | otherwise
+
+
+g(ns, 0  ) = 0
+g(ns, z+1) = (z+1)*a + g(ns, z) * is0(a)
+
+a = is0(is0(f(ns, 0))) * is0(f(ns, z+1)) * is0(g(ns, z))
+
+a = if (f(ns, 0) == 0) 
     then 0
-    else if (f(n+1, xs) <> 0)
+    else if (f(ns, z+1) <> 0)
          then 0
-         else if (g(n, xs) <> 0)
+         else if (g(ns, z) <> 0)
               then 0
               else 1
