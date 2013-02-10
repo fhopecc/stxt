@@ -219,4 +219,17 @@ not x = seq 5 . para x
 
 14.或
 
-x or y
+x or y = para x . seq 7 . para y
+
+15.全稱量詞
+
+fa x y = seq 9 . seq x . para y
+
+16.前繼函數
+
+s 0   x = x
+s n+1 x = seq 3 . s n x
+
+17.
+
+
