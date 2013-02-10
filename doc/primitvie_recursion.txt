@@ -133,3 +133,17 @@ a = if (f(ns, 0) == 0)
          else if (g(ns, z) <> 0)
               then 0
               else 1
+
+10.Gödel 定理
+
+1.整除
+
+x | y = (Ex z)[z <= x & x = y*z]
+
+指 x 被 y 整除。
+
+2.質數
+
+Prim (x) = not((E z)[z <= x & z <> 1 & z <> x & x | z]) & x > 1
+
+
