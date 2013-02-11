@@ -1,0 +1,55 @@
+Turing 1936 之論文筆記
+----------------------
+2013/02/11 週一於娘家
+
+1.a-machine
+
+自動機(automatic machines)指機器之運作完全由狀態決定。
+
+其對比是選擇機(choice machine)，
+當運作至模糊狀態時，須由外部操作員作出決定，
+機器才能開始運作。
+
+2.figure
+
+數字僅含 0 及 1 兩種符號，
+又稱為第一類符號(symbols of the first kind)。
+
+3.symbols of the second kind
+
+第二類符號是除了 0 及 1 的所有符號，
+也就是第一類符號的補集。
+
+1.circular{p.233}
+
+circular 機器會進入某個狀態，
+此狀態不是停機，就是機器只能不斷印出第二類符號。
+
+1.circle-free{p.233}
+
+機器能不斷印出數字。
+
+7.computable sequence
+
+可計算序列為能由一台圖靈機所印出的序列。
+
+5.S.D
+
+標準描述(Standard Description)
+僅含 A, C, D, L, R, N, ; 之符號列，
+用來描述圖靈機。
+
+4.D.N
+Description Number，描述數
+
+S.D 用下面規則所轉成的數列。
+
+A=1
+C=2
+D=3
+L=4
+R=5
+N=6
+;=7
+
+
