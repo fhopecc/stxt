@@ -230,6 +230,8 @@ fa x y = seq 9 . seq x . para y
 s 0   x = x
 s n+1 x = seq 3 . s n x
 
-17.
+17.數字
+
+num x = s 
 
 
