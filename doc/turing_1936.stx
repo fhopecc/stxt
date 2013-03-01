@@ -22,6 +22,10 @@ Turing 1936 之論文筆記
 第二類符號是除了 0 及 1 的所有符號，
 也就是第一類符號的補集。
 
+2.3.符號是有限
+
+自動機之符號是有限的。
+
 3.m-configuration
 
 機器狀態指機器之內部狀態，
@@ -89,8 +93,6 @@ qi Sj PS0,R qm
 如下例：
 qi Sj     R qm
 qi Sj PSj,R qm
-
-
 
 5.skeleton table
 
@@ -411,10 +413,10 @@ sh5 C             inst
     not C         pe2(inst,1,:)
 
 18.12.inst
-
 2013/02/23 星期六 花蓮  
 
-執行標記之指令，並寫下下一個完整狀態。
+inst 名稱源自 instruction，
+會執行標記之指令，後寫下下一個完整狀態。
 
 inst           g(l(inst1),u)
 
@@ -643,7 +645,7 @@ F 格 S 緊鄰右一個之 E 格，若其符號為α，
 
 簡單操作只能改變正觀察到之方格符號。
 
-25.immediately recognisable
+24.1.immediately recognisable
 
 直接辨識(immediately recognisable)指正掃描的數字，
 或被單一符號標示之數列。
@@ -652,6 +654,11 @@ F 格 S 緊鄰右一個之 E 格，若其符號為α，
 1u2u3u4v5v6v
 
 123 被 u標示，視為一組；456被v標示視為一組可直接辨識之數列。
+
+25.K 機
+
+將 Hilbert 之函數計算(functional calculus)，限定成使用有限符號，
+則可使用自動機 K 找到所有於函數計算中可證明之公式。
 
 26.RSi(x, y) 
 義仁 2013/02/15 星期五 
