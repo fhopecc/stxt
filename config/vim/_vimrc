@@ -12,9 +12,7 @@ set fileformat=unix "EOF is LF, not CR LF
 
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
 
-behave mswin
 colo darkblue
 set guifont=Lucida_Console:h14:cANSI
 
