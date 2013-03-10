@@ -904,20 +904,20 @@ vi. Un(M) 為真，但不可被證明，這意指決定性問題不可解。
 此謂詞描述指令為機器狀態為 qi 、掃描符號為 Sj，
 下一步動作為印出 Sk，左移一格後，機器狀態轉為 ql。
 
-(x, y, x', y'){ (Rsj(x , y )
-                &  I(x , y )
-                &Kqi(x     )
+(x, y, x', y'){ (Rsj(x , y ) & I(x, y) # 掃描符號為 Sj 
+                &Kqi(x     )           # 機器狀態為 qi 
                 &  F(x , x')
-                &  F(y', y )
-              ->(  I(x', y')
-                &Rsk(x', y )
-                &Kqi(x'    )
-                &  F(y', z )
-                v [( Rs0(x ,z) -> Rs0(x',z))
-                  &( Rs1(x ,z) -> Rs1(x',z))
-                  &...
-                  &( RsM(x ,z) -> RsM(x',z))
-                  ]
+                &  F(y', y )           # y' = y-1
+              ->(  I(x', y')           # 指左移一格
+                &Rsk(x', y )           # 於 y 印出 Sk
+                &Kql(x'    )           # 機器狀態轉為 ql 
+                &(z)(F(y', z )
+                    v[( Rs0(x ,z) -> Rs0(x',z))
+                     &( Rs1(x ,z) -> Rs1(x',z))
+                     &...
+                     &( RsM(x ,z) -> RsM(x',z))
+                     ]
+                    )
 31.Des(M)
 
 “Description-of-M”.
