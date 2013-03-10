@@ -993,3 +993,25 @@ y 不是直接後繼數，中間也可以有很多數。
 
 先看要如何證明 Un(M)。
 
+33.1.CCn
+
+CCn 命名源自 n-th Complete Configuration，
+指第 n 個完整狀態。
+
+     Rsr(n    ,0      )(u^(n), u    ) 
+&    Rsr(n    ,1      )(u^(n), u'   )
+&    ...
+&    Rsr(n    ,n      )(u^(n), u^(n))
+&      I(u^(n),u(i(n)))
+& Kqk(n)(u^(n))
+& (y)F(    (y      ,u')
+      v   F(u      ,y )
+      v   F(u'     ,y )
+      v   ...
+      v   F(u^(n-1),y )
+      v Rs0(u^(n)  ,y )
+
+sr(n,y) 第 n 個完整狀態中第 y 格之符號。
+ i(n)   第 n 個完整狀態中掃描之格。
+
+33.2.
