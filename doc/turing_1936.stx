@@ -100,10 +100,10 @@ qi Sj PSj,R qm
 
 5.1.f(C, B, α)
 
-找第一個符號 α，
-若找到後轉入 C；
-若沒找到則轉入 B。
-名字應取自 first。
+找出第一個(最左邊)之 α 符號，8
+若找到狀態轉為 C；沒找到則轉為 B。
+
+命名源自 first。
 
 f (C, B, α) @     L f1(C, B, α)
             not @ L f (C, B, α)
@@ -115,6 +115,24 @@ f1(C, B, α) α       C
 f2(C, B, α) α       C
             not α R f1(C, B, α)
             None  R B
+
+5.2.e(C, B, α)
+
+刪除第一個 α 符號轉為 C；沒找到則轉為 B。
+
+ e(C, B, α)   f(e1(C, B, α), B, α)
+e1(C, B, α) E C
+
+e(B, α) 刪除所有 α 符號轉為 B。
+
+ e(B, α)      e( e(B, α)   , B, α) 
+
+5.3.機器狀態變數
+
+e(C, B, α)中，C 及 B為狀態變數，α 為符號變數，
+e 則稱為機器狀態變數(m-configuration functions)，
+簡寫為 m-函數(m-functions)，表示任一個機器狀態。
+
 
 5.2.g(C, α)
 
@@ -242,8 +260,6 @@ U 表示通用機器，
 
 18.1.complete configuration
 
-花蓮 2013/02/19 星期二 
-
 完整狀態包含當時紙帶上所有的符號，
 並將狀態列於掃描符號之下。
 
@@ -252,6 +268,8 @@ U 表示通用機器，
 
  :@@0 0:@@0 0:@@0 0:@@0 0   :@@0 0 1:
 b   o     q       q        q      p
+
+花蓮 2013/02/19 星期二 
 
 18.1.1.C
 
@@ -302,37 +320,41 @@ b1 R,R,P:,R,R,PD,R,R,PA anf
 
 18.6.anf
 
+anf 命名源自德文 anfangen 表示啟動。
+
 把最後一個完整狀態的狀態標記為 y，
-再轉移至 fom。
+再轉移至 kom。
 
 長遠看來，anf 會找到最後一個完整狀態關聯的指令，
 之後可由標記為 z 的分號，找到指令。
 並轉移至 sim。
 
 anf   g  (anf1, :)
-anf1  con(fom, y)
+anf1  con(kom, y)
 
-18.7.fom
+18.7.kom
 
-fom 找到最後一個沒有標記 z 之分號 ";" ，
+kom 命名源自德文 komparation 表示比較。
+
+kom 找到最後一個沒有標記 z 之分號 ";" ，
 把它標記為 z，並把之後的狀態標記為 x。
 
 等同於把指令表最後一個沒有標記 z 指令的分隔號標為 z，
 狀態標為 x。
 
-fom ;           R, Pz, L con(fmp, x)
-    z           L, L     fom
-    not z nor ; L        fom
+kom ;           R, Pz, L con(kmp, x)
+    z           L, L     kom
+    not z nor ; L        kom
 
-18.8.fmp
+18.8.kmp
 
 比較 x 所標記的指令之狀態，
 及 y 所標記的完整狀態之狀態，
-若一樣則轉移 sim，其它則轉移至 fom。
+若一樣則轉移 sim，其它則轉移至 kom。
 
 再去除 x 及 y。
 
-fmp cpe(c(fom, x, y), sim, x, y)
+kmp cpe(c(kom, x, y), sim, x, y)
 
 18.9.sim
 
@@ -873,7 +895,8 @@ Uη & F^(M) -> F(u^(n-1), u^(n))
 
 證明大綱
 
-i.  存在公式 Un(M) 為真。
+i.  存在公式 Un(M) 為真，
+    此謂詞表示在 M 的一些完整描述中存在 0 於紙帶上。
 
 ii. 若決定性問題可解，則存在一個機器程序決定 Un(M) 是否可證明。
 
@@ -886,20 +909,48 @@ v.  由節 8 之證明 2，得知不存在一個機器程序決定 M 是否會�
 
 vi. Un(M) 為真，但不可被證明，這意指決定性問題不可解。
 
-30.1.RSi(x, y) 
-義仁 2013/02/15 星期五 
+30.1.Un(M)
 
-此謂詞為在 M 的完整狀態 x 中，在格 y 的符號是 Si。
+此謂詞表示在 M 的一些完整描述中，存在 0 於紙帶上。
 
-30.2.I(x, y)
+Un(M) =  (Ex u)A(M) 
+      -> (Ex s)(Ex t)Rs1(s,t) # 存在完整狀態 s 中第 t 格為 0
 
-此謂詞為在 M 的完整狀態 x 中，正掃描到格 y。
+30.2.A(M)
 
-30.3.Kqm(x)
+  Q 
+& (y)RS0(u,y) & I(u,u) & Kq1(u) # 初始值
+& Des(M)
 
-此謂詞為在 M 的完整狀態 x 中，機器狀態為 qm。
+30.3.G(x,y) 
+    
+x 在 y 之前，與 F(x,y) 不同是，
+y 不是直接後繼數，中間也可以有很多數。
 
-30.5.Inst{ qi, Sj Sk L ql} 
+其定義 Q。
+ 
+30.4.Q
+
+Q 主要是定義了 G 這個函數。
+
+(x)(Ex w)(y,z){ F(x,w) 
+              &(F(x,y)          -> G(x,y)) # 定義 G(x,y)
+              &(F(x,z) & G(z,y) -> G(x,y)) # x 在 y 前繼數或 x < y
+              &[  G(z,x)           # z 於 x 之前
+               v (G(x,y) & G(y,z)) # x 於 y 之前且 y 於 z 之前
+               v (F(x,y) & F(z,y)) # y 為 x 及 z 之繼數，
+               ->(-F(x,z))         # 上述條件任一滿足則 z 不是 x 繼數
+               ]
+              }
+
+30.5.Des(M)
+
+命名源自 Description-of-M，
+機器 M 之描述，為 Inst 之合取運算。
+
+原文記為邏輯和(logical sum)，圖靈於 1938 訂正為合取運算。
+
+30.6.Inst{qi Sj Sk L ql} 
 
 此謂詞描述指令為機器狀態為 qi 、掃描符號為 Sj，
 下一步動作為印出 Sk，左移一格後，機器狀態轉為 ql。
@@ -911,107 +962,142 @@ vi. Un(M) 為真，但不可被證明，這意指決定性問題不可解。
               ->(  I(x', y')           # 指左移一格
                 &Rsk(x', y )           # 於 y 印出 Sk
                 &Kql(x'    )           # 機器狀態轉為 ql 
-                &(z)(F(y', z )
-                    v[( Rs0(x ,z) -> Rs0(x',z))
-                     &( Rs1(x ,z) -> Rs1(x',z))
-                     &...
+                &(z)(F(y', z )                  # 完整狀態 x' 除了
+                    v[( Rs0(x ,z) -> Rs0(x',z)) # 印出 Sk 那格 y，
+                     &( Rs1(x ,z) -> Rs1(x',z)) # 其它格與完整狀態 x 
+                     &...                       # 相同
                      &( RsM(x ,z) -> RsM(x',z))
                      ]
                     )
-31.Des(M)
 
-“Description-of-M”.
-機器 M 之描述，為 Inst 之邏輯和，logical sum 指析取運算。
+30.7.RSi(x,y) 
 
-31.1.Q
+此謂詞表示在 M 的完整狀態 x 中，紙帶上格 y 的符號是 Si。
 
-Q 為以下公式之縮寫：
+義仁 2013/02/15 星期五 
 
-(x)(E w)(y, z){  F(x,w) 
-              & (F(x,y) -> G(x,y)) 
-              & (F(x,z) &  G(z,y)->G(x,y)) 
-              & [  G(z,x) 
-                or (G(x,y) & F(y,z)) 
-                or (F(x,y) & F(z,y)) -> (-F(x,z))
-                ]
-              }
+30.8.I(x,y)
 
-32.Un(M)
+此謂詞表示在 M 的完整狀態 x 中，正掃描到格 y。
 
-此謂詞表示在 M 的一些完整描述中，存在 0 於紙帶上。
+30.9.Kqm(x)
 
-Un(M) = (Ex u) [ N(u)                                存在非負數 u
-               & (x)   (N(x)    -> (Ex x')F(x, x'))  存在後繼數 x
-               & (y, z)(F(y, z) -> N(y) & N(z))      
-               & (y)   Rs0(u, y)                     第 y 格為 0
-               & I(u, u)            完整狀態 u 正掃描至第 u 格
-               & Kq1(u)             完整狀態 u 之機器狀態為 q1
-               & Des(M)] 
-     -> (Ex s)(Ex t)[N(s) & N(t) & Rs1(s,t)]
+此謂詞表示在 M 的完整狀態 x 中，機器狀態為 qm。
 
-32.0.Un(M) 
-
-Un(M) = (Ex u)A(M) 
-      ->(Ex s)(Ex t)Rs1(s,t) 完整狀態 s 中第 t 格為 0
-
-32.1.A(M)
-
-  Q 
-& (y)Rs0(u,y) 完整狀態 u 中第 y 格為空格
-&      I(u,u) 完整狀態 u 中正掃描到第 u 格
-&    Kq1(u)   完整狀態 u 中機器狀態為 q1
-&    Des(M)   機器 M 之描述公理
-
-32.2.Q
-
-Q 主要是定義了 G 這個函數。
-
-(x)(Ex w)(y,z){ F(x,w) 
-              &(F(x,y)          -> G(x,y)) # 定義 G(x,y)
-              &(F(x,z) & G(z,y) -> G(x,y)) # x 在 y 前繼數或 x < y
-              &[  G(z,x) 
-               v (G(x,y) & G(y,z))
-               v (F(x,y) & F(z,y))
-               ->(-F(x,z))
-               ]
-              }
-
-32.3.G(x,y) 
-    
-"x precedes y", not necessarily immediately
-
-x 在 y 之前，與 F(x,y) 不同是，
-y 不是直接後繼數，中間也可以有很多數。
-
-其定義為如下 :
- (F(x,y)          -> G(x,y))
-,(F(x,z) & G(z,y) -> G(x,y)) 
- 
-
-33.Lemma 1
-若 S1 出現在 M 的完整狀態中，則 Un(M) 是可證明的。
+31.Lemma 1
+若 S1 出現在 M 的一些完整狀態中，則 Un(M) 是可證明的。
 
 先看要如何證明 Un(M)。
 
-33.1.CCn
+31.1.CCn
 
 CCn 命名源自 n-th Complete Configuration，
 指第 n 個完整狀態。
 
-     Rsr(n    ,0      )(u^(n), u    ) 
+     Rsr(n    ,0      )(u^(n), u    ) # 紙帶上之符號
 &    Rsr(n    ,1      )(u^(n), u'   )
 &    ...
 &    Rsr(n    ,n      )(u^(n), u^(n))
-&      I(u^(n),u(i(n)))
-& Kqk(n)(u^(n))
-& (y)F(    (y      ,u')
-      v   F(u      ,y )
-      v   F(u'     ,y )
-      v   ...
-      v   F(u^(n-1),y )
-      v Rs0(u^(n)  ,y )
+&      I(u^(n),u(i(n)))               # 掃描格
+& Kqk(n)(u^(n))                       # 機器狀態 為 qk
+& (y)(   F(y      ,u')               # 紙帶不在 1 至 n 區間
+     v   F(u      ,y )               # 均為空格
+     v   F(u'     ,y )
+     v   ...
+     v   F(u^(n-1),y )
+     v Rs0(u^(n)  ,y )
 
-sr(n,y) 第 n 個完整狀態中第 y 格之符號。
- i(n)   第 n 個完整狀態中掃描之格。
+31.2.sr(n,y) 
 
-33.2.
+第 n 個完整狀態中第 y 格之符號。
+
+31.3.i(n)
+
+第 n 個完整狀態中掃描之格。
+
+31.4.CC0
+
+  (y)Rs0(u,y) # 初始完整狀態紙帶全為空格
+&  I(u,u)     # 初始完整狀態掃描格是第一格 
+&  Kq1(u)     # 初始完整狀態機器狀態為 q1
+
+31.5.CFn
+
+A(M) & F^(n) -> CCn
+
+31.6.
+
+A(M) -> CC0 是可直接得到的。
+
+31.6.
+
+CFn -> CF(n+1)
+
+31.7.
+
+r(n  , i(n)) = b # 完整狀態 n，其掃描符號為 b
+r(n+1, i(n)) = d # 完整狀態 n，其印出符號為 d
+r 之名源自 reihe
+k(n)         = a # 完整狀態 n  ，其機器狀態為 a
+k(n+1)       = c # 完整狀態 n+1，其機器狀態為 c
+
+31.8.
+
+Des(M) 必須包含下面指令，才有上述之完整狀態之轉換。
+
+Des(M) -> Inst{qa Sb Sd L qc}
+
+由上可推出
+
+A(M) & F^(n+1) -> Inst{qa Sb Sd L qc} & F^(n+1)
+
+因為
+Inst(qa,Sb,Sd,L,qc) & Q & F^(n+1) -> (CCn -> CCn+1)
+是可證的。
+
+所以
+
+A(M) & F^(n+1) -> (CCn -> CCn+1)
+
+且 
+
+(A(M) & F^(n) -> CCn) -> (A(M) & F^(n+1) -> CCn+1)
+
+也就是
+
+CFn -> CFn+1
+
+對每個 n 而言，CFn 是可證的。
+
+A(M) & F^(N) -> CCN
+
+引理 1 假設 S1 出現在 M 的一些完整狀態中，
+那表示存在整數 N, K, CCN
+包含 Rs1(u^(N), u^(K)) 之項目，
+可得 
+CCN -> Rs1(u^(N), u^(K))   
+是可證明的。
+
+又可得
+CCN -> Rs1(u^(N), u^(K)) 且 A(M) & F^(N) -> CCN。
+
+(Ex u)A(M) -> (Ex u)(Ex u')...(Ex u^(N')(a(M) & F^(N)),
+其中 N' = max(N, K)。
+
+(Ex u)A(M) -> (Ex u)(Ex u')...(Ex u^(N')Rs1(u^(N), u^(K)) 
+
+(Ex u)A(M) -> (Ex u^(N)(Ex u^(K))Rs1(u^(N), u^(K)) 
+
+(Ex u)A(M) -> (Ex s)(Ex t)Rs1(s, t) 
+
+得出 Un(M) 是可證明的。
+
+31.Lemma 2
+
+若 Un(M) 是可證明的，則 S1 出現在 M 的一些完整狀態中。
+
+若將可證明公式中的函數變數以命題函數取代，可得一個真的命題。
+特別是若我們取代 Un(M) 的函數變數，
+可得一個真命題，其意義為 S1出現在 M 的一些完整狀態中。
+
+花蓮 2013/03/14 星期四 
