@@ -374,32 +374,32 @@ cr(C,B,α) c(re(C,B,α,β),B,α)        找出第一個標記為 α 的符號γ�
                                     再將標記 α 用 β 取代。
 cr(B,α)   cr(cr(B,α),re(B,β,α),α)   所有標記為 α 的符號於數列尾端印出，
                                     再將標記 β 還原成 α。
-8.11.cp(C,A,F,α,β)
+8.11.cp(C,A,E,α,β)
 
 比較第一個 α 標記之符號 γ 及第一個 β 標記之符號 δ，
 若符號相同則轉入狀態 C，符號不同或只有沒有α標記符號則轉入 A，
-沒有 α 或 β 標記之符號則轉入 F。
+沒有 α 或 β 標記之符號則轉入 E。
 
- cp(C,A,F,α,β)       f'(cp1(C,A,β), f(A,F,β), α)
+ cp(C,A,E,α,β)       f'(cp1(C,A,β), f(A,E,β), α)
 cp1(C,A,    β) γ     f'(cp2(C,A,γ), A       , β)
 
 cp2(C,A,    γ) γ     C
                not γ A
 
-8.12.cpe(C,A,F,α,β)
+8.12.cpe(C,A,E,α,β)
 
 cpe 與 cp 不同在於，比較第一個 α 標記之符號 γ 及第一個 β 標記之符號 δ，
 若符號相同則轉入刪除 γ 及 δ 。
 
 命名源自比較及刪除(compare and erase)。
 
-cpe(C,A,F,α,β) cp(e(e(C,C,β),C,α),A,F,α,β)
+cpe(C,A,E,α,β) cp(e(e(C,C,β),C,α),A,E,α,β)
 
 比較 α 標記之數列 Sα 及 β 標記之數列 Sβ，
-若相同則進入 F，其餘情形進入 A，
+若相同則進入 E，其餘情形進入 A，
 一些 α 及 β 會被刪除。
 
-cpe(A,F,α,β) cpe(cpe(A,F,α,β),A,F,α,β)
+cpe(A,E,α,β) cpe(cpe(A,E,α,β),A,E,α,β)
 
 8.13.g(C, α)
 
@@ -586,7 +586,7 @@ kmp cpe(c(kom, x, y), sim, x, y)
 而要轉換之狀態標為 y，
 再清除 z 標記。 
 
-再進入 mf。
+再進入 mk。
 
 sim                   f'(sim1, sim1, z)
 
@@ -600,7 +600,7 @@ sim3 not A L,Py       e(f, z)
      A     L,Py,R,R,R sim3               若是 A 則是轉換狀態，標為 y。
 
 
-18.10.mf
+18.10.mk
 
 完整狀態被分為 4 部份，
 
@@ -610,27 +610,29 @@ sim3 not A L,Py       e(f, z)
 
 最後印出 ":"，再轉移至 sh。
 
-mf                   g(mf1, :)
+命名源自標記 mark。
 
-mf1 not A R,R        mf1
-    A     L,L,L,L    mf2
+mk                   g(mk1, :)
 
-mf2 C     R,Px,L,L,L mf2
-    :                mf4
-    D     R,Px,L,L,L mf3
+mk1 not A R,R        mk1
+    A     L,L,L,L    mk2
 
-mf3 not : R,Pv,L,L,L mf3
-    :                mf4
+mk2 C     R,Px,L,L,L mk2
+    :                mk4
+    D     R,Px,L,L,L mk3
 
-mf4                  con(r(r(mf5)),)
+mk3 not : R,Pv,L,L,L mk3
+    :                mk4
 
-mf5 any   R,Pw,R     mf5
+mk4                  con(r(r(mk5)),)
+
+mk5 any   R,Pw,R     mk5
     None  P:         sh
 
 
 :DCCCDCCDAADCDDC
 
-會被 mf 標記成
+會被 mk 標記成
 
 :DCCCDCCDAADCDDC:
  vvvvxxx     www
@@ -674,7 +676,7 @@ inst1(R)       ce5(oo,v,x,u,y,w)
 
 inst1(N)       ce5(oo,v,x,y,u,w)
 
-oo             e(anf)
+ov             e(anf)            命名源自英文結束(over)
 
 19.可計算數列是可列舉的
 
@@ -834,6 +836,7 @@ G 會不停的印出 0，若 M 不會印出 0。
 G 會印出 0 後停止。
 
 21.4.E(G)
+
 2013/02/14 星期四 前鎮娘家
 
 E 判定 G 永遠不會印出 0，
