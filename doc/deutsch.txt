@@ -1,0 +1,45 @@
+1.動詞
+
+1.1.變位
+
+所有的動詞在原形時都以 en 或 n 結尾。
+根據主語的不同動詞在每個時態下有七個不同的變位，
+加上許多動詞的變化不規則（尤其常用的動詞非常不規則），
+使得德語的難學度更加增加了。
+以下是幾個常用動詞在現在時態的變位：
+
+            規則動詞例  不規則動詞例 
+中文意義    建造*       是      讀
+原形        bauen       sein    lesen
+ich         baue        bin     lese
+du          baust       bist    liest
+
+
+er,sie,es   baut        ist     liest
+wir         bauen       sind    lesen
+ihr         baut        seid    lest
+sie         bauen       sind    lesen
+
+Sie         bauen       sind    lesen
+
+<建造*> 動作時態顯示詞，在中文無固定詞彙直接能翻譯。
+德語中一共有六個時態：
+現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。下面是一個規則動詞六個時態的例子：
+
+時態        德語                    漢語
+現在時      Ich baue                我在做的
+過去時      Ich baute               我曾做過的
+將來時      Ich werde bauen         我將會做的
+現在完成時  Ich habe gebaut         我剛做完的
+過去完成時  Ich hatte gebaut        我曾經完成的
+將來完成時  Ich werde gebaut haben  我將會完成的
+
+除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。假如一句話里有
+助動詞，那麼這個助動詞放在第二位，真正的動詞要放在句尾。下面的一句話里
+動詞被標重：
+Ich baue ein Haus
+Ich will ein Haus bauen
+我蓋一幢房
+我想要蓋一幢房
+
+在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
