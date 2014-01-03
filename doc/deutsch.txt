@@ -34,12 +34,12 @@ Sie         bauen       sind    lesen
 過去完成時  Ich hatte gebaut        我曾經完成的
 將來完成時  Ich werde gebaut haben  我將會完成的
 
-除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。假如一句話里有
-助動詞，那麼這個助動詞放在第二位，真正的動詞要放在句尾。下面的一句話里
-動詞被標重：
-Ich baue ein Haus
-Ich will ein Haus bauen
-我蓋一幢房
-我想要蓋一幢房
+除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。
+假如一句話里有助動詞，那麼這個助動詞放在第二位，
+真正的動詞要放在句尾。
+下面的一句話里動詞被標重：
+
+Ich baue ein Haus       我蓋一幢房
+Ich will ein Haus bauen 我想要蓋一幢房
 
 在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)

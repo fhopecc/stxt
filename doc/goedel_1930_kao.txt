@@ -1,0 +1,43 @@
+Die Grundzeichen des Systems P sind die folgenden:
+I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
+
+II.Variable ersten Typs(fuer Individuen, d. h. natuerliche Zahlen inklusive 0)):
+
+下列為P系統之基本符：
+I.常符:
+~ : 非
+v : 或
+Π : 對所有
+0 : 零
+f : 後繼函數，命名源自德文後繼 Nachfolger
+( ) :括號
+
+II.第一型變數(對個體，即自然數包含零)
+
+陣列操作
+--------
+
+
+公式操作
+--------
+
+17.Z(n) ≡ nN[R(1)]
+
+Z(n) ist das Zahlzeichen für die Zahl n.
+
+Z(n) 是整數 n 的整數符號表示。
+命名源自德文整數 Zahl。
+
+Satz V. Zu Jeder rekursiven Relation R(x1...xn)  gibt es ein n-stelliges
+Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
+so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
+
+定理V. 對每個遞迴關係 R(x1...xn) 均有一個 n 元關係符號 r (帶有自由變數)
+       (u1,u2...un)，且對所有n元整數序對(x1,x2...xn)滿足下式：
+
+R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
+                     Z(x1)...Z(xn)
+
+~R(x1...xn) => Bew[Neg Sb(r u1     ...un    )]        (4)
+                            Z(x1)...Z(xn)
+
