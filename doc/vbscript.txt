@@ -1,3 +1,36 @@
+系統管理
+========
+
+
+取得命令列參數
+--------------
+
+wscript.arguments 為啟動腳本時接受之參數集合物件。
+
+args.vbs::
+
+dim args, arg
+
+set args = wscript.arguments
+wscript.echo args(1)
+for each arg in args
+    wscript.echo arg
+next
+
+::
+
+arguments 物件是由零開始作索引，因此 args(1) 表示第 2 個傳入之參數。
+
+執行結果如下：
+
+cscript a.vbs arg1 arg2
+
+arg2
+arg1
+arg2
+
+::
+
 轉碼
 ----
 
@@ -10,38 +43,6 @@ Const adTypeText            = 2
 Const adSaveCreateNotExist  = 1
 Const adSaveCreateOverWrite = 2
 
-
-
-strFileIn = WScript.ScriptName
-
-Set objFSO = CreateObject( "Scripting.FileSystemObject" )
-strFileOut = objFSO.GetBaseName( strFileIn ) & "_utf8.txt"
-Set objFSO = Nothing
-
-UTF8 strFileIn, strFileOut
-
-On Error Resume Next
-    
-Set objStream = CreateObject( "ADODB.Stream" )
-objStream.Open
-objStream.Type = adTypeText
-objStream.Position = 0
-objStream.Charset = CdoUTF_8
-objStream.LoadFromFile myFileIn
-objStream.SaveToFile myFileOut, adSaveCreateOverWrite
-objStream.Close
-Set objStream = Nothing
-    
-    If Err Then
-        UTF8 = False
-    Else
-        UTF8 = True
-    End If
-    
-    On Error Goto 0
-End Function
-
-
 Set Src = CreateObject("ADODB.Stream")
 Src.Open
 Src.Type = adTypeText
@@ -52,9 +53,98 @@ Src.LoadFromFile txt
 Set Dst = CreateObject("ADODB.Stream")
 Dst.Open
 Dst.Type = adTypeText
-Dst.Charset = "Shift_JIS"
+Dst.Charset = "big5"
 Src.CopyTo Dst
 Src.Close
 
 Dst.SaveToFile txt, adSaveCreateOverWrite
 Dst.Close
+
+
+VBS字符串的內部實現
+-------------------
+
+VBS 是基於微軟的ActiveX/COM 技術實現的，
+而COM 對象為了做到支持任何語言，定義了一系列通用的數據類型，
+微軟稱之為自動化對像類型（Automation data types），
+其中之一就是BSTR。
+VBS 在內部是以BSTR 來表示字符串的，BSTR 在WTypes.h 中定義：
+
+typedef wchar_t WCHAR;
+typedef WCHAR OLECHAR;
+typedef OLECHAR *BSTR;
+
+從定義可以看出，BSTR 是指向wchar_t 類型（也就是C 語言中的Unicode）的指針，
+但是BSTR 並不是普通的wchar_t 指針。
+標準BSTR 指向一個有長度前綴和NUL 結束符的wchar_t 數組。
+BSTR 的前4字節是一個表示字符串長度的前綴。
+BSTR 長度域的值是字符串的字節數，並且不包括NUL 結束符。
+
+下面用代碼來說明：
+
+str = "Hello" & Chr(0) & "world"
+
+這是一句很簡單的VBS 代碼，但是VBScript 解釋器在內部做了什麼呢？
+其實就是初始化了一個BSTR 變量（不考慮字符串連接過程）：
+
+/* 僅僅為了演示，實際代碼肯定不是這樣的*/
+
+BSTR str = SysAllocStringLen(L"Hello\0world", 11);
+
+為了更清楚地了解BSTR 的結構，我們換一種寫法：
+
+/* BSTR 包含長度前綴，但是卻實際指向第一個字符*/
+
+wchar_t arr[] = {22,0,'H','e','l','l','\0','w','o','r','l','d' ,'\0'};
+BSTR str = &arr[2];
+這個 BSTR 在內存中的結構為：
+
+00000000 16 00 00 00 48 00 65 00 6C 00 6C 00 6F 00 00 00
+00000010 77 00 6F 00 72 00 6C 00 64 00 00 00
+
+前四個字節的長度前綴。第5字節表示 BSTR 指針的當前指向，
+首行最未2字元表示字符串中的Chr(0) 字符，
+次行最未2字元表表示BSTR 的結束字符NUL
+（該字符是SysAllocStringLen 函數加上去的，
+因為是Unicode，所以要佔兩個字節）。
+也就是說，如果不考慮前面四個字節，
+BSTR 就是C 語言中的null-terminated string。
+
+
+VBS 字符串在內部是以Unicode 的形式來保存的，然而在外部，
+VBS 腳本文件的編碼卻不一定是Unicode，
+本文主要探討一下VBS 文件編碼與Unicode的關係。
+
+
+我們一般是用ANSI 編碼注?來保存我們的VBS 腳本文件，但是ANSI 編碼並不兼容某些Unicode 字符，比如版權符號“c” ，
+再比如某些中國古代的文字，
+這種時候就需要保存為Unicode 編碼了。
+
+常用的Unicode 編碼方式有Unicode Little Endian、
+Unicode Big Endian 和UTF-8，
+而每種編碼方式又可以分為帶BOM 和不帶BOM，
+那麼VBScript 解釋引擎支持哪一種方式的Unicode 編碼呢？
+
+
+MsgBox "Copyright c 2011 Demon"
+分別保存為Unicode Little Endian、Unicode Big Endian 和UTF-8，帶BOM 的和不帶BOM 的，測試結果如下：
+
+Unicode Little Endian With BOM	Copyright c 2011 Demon
+Unicode Little Endian Without BOM	Copyright c 2011 Demon
+Unicode Big Endian With BOM	Error: Invalid character
+Unicode Big Endian Without BOM	Error: Invalid character
+UTF-8 With BOM	Error: Invalid character
+UTF-8 Without BOM	Copyright 漏 2011 Demon
+
+由結果可知，只能保存為Unicode Little Endian 編碼，帶不帶BOM 都可以。
+
+簡單解釋一下為什麼保存為不帶BOM 的UTF-8 會顯示“Copyright 漏2011 Demon”：
+不帶BOM 的話VBScript 引擎會按照ANSI 編碼來解析VBS 文件，
+“c”符號保存為UTF-8 後是C2A9，正好對於ANSI 中的“漏”，所以就出現了上面的結果。
+
+當然，你也可以使用Windows 腳本文件（*.wsf）來支持UTF-8 編碼，
+或者在ANSI 編碼中使用ChrW 函數來獲取Unicode 字符。
+
+準確的說ANSI 並不是一種編碼，ANSI 實際對應的編碼跟系統設置的代碼頁有關，
+在簡體中文系統中代碼頁默認是936，對應GB2312 編碼。
+在本文中 ANSI 代表 GB2312。
