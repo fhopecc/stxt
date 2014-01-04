@@ -11,26 +11,18 @@ const adSaveCreateOverWrite = 2
 const adReadAll             = -1
 const adWriteChar           = 0
 
-set src = createObject("ADODB.Stream")
-src.open
-src.type = adTypeBinary
-src.loadFromFile txt
-src.type = adTypeText
-src.charset = "utf-8"
-dim strtxt
-strtxt = src.ReadText(adReadAll)
-src.position = 0
-src.setEOS
-src.charset = "big5"
-src.writeText strtxt, adWriteChar
-src.saveToFile txt & "_big5.txt", adSaveCreateOverWrite
-src.close
-
-'set dst = createObject("ADODB.Stream")
-'dst.open
-'dst.type = adTypeText
-'dst.charset = "big5"
-'src.copyTo dst
-
-'dst.saveToFile txt & "_big5", adSaveCreateOverWrite
-'dst.close
+with createObject("ADODB.Stream")
+    dim strText
+    .open
+    .type = adTypeBinary
+    .loadFromFile txt
+    .type = adTypeText
+    .charset = "utf-8"
+    strText = .ReadText(adReadAll)
+    .position = 0
+    .setEOS
+    .charset = "big5"
+    .writeText strText, adWriteChar
+    .saveToFile txt & "_big5.txt", adSaveCreateOverWrite
+    .close
+end with

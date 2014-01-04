@@ -28,6 +28,15 @@ Z(n) ist das Zahlzeichen für die Zahl n.
 Z(n) 是整數 n 的整數符號表示。
 命名源自德文整數 Zahl。
 
+46.Bew(x) ≡ (Ey) y B x
+
+x ist eine beweisbare Formel.
+[Bew(x) ist der einzige unter Begriffen 1-46.
+von dem nicht behauptet werden kann, er sei rekursiv.]
+
+x 是可證明式。Bew 名稱來自於證明的德文 beweisbare。
+[Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
+
 Satz V. Zu Jeder rekursiven Relation R(x1...xn)  gibt es ein n-stelliges
 Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
 so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
