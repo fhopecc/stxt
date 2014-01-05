@@ -1,5 +1,73 @@
-1.動詞
+發音
+====
 
+母音 Vokale
+-----------
+A  I  U  E  O       只有E有兩個發音，不在主音節念  ，例如 leben。
+
+變母音 Umlaut
+-------------
+Ä  Ü   Ö           E發音時左右開，Ä上下開，例如 Bär、üben、Köln。
+
+雙母音
+------
+AU               Donau、Auto
+EU                heute
+EI                 Eis
+
+子音 Konsonanten   
+----------------
+基本上可參考英文發音，與英文發音不同者如下 :
+V (au)   W (e)    Z (et)    例如: Volkswagen、Zeiss。
+↓                ↓
+ f                 ts
+
+s           母音前念Z，例如 :  sagen
+ß = ss      念S，例如 : müssen；兩個 SS 即使在母音前也唸 S 。
+sch         念，例如 : Schule。(p、t 前的   音，只記s，例如 : sprechen、Student)
+4.  ch      在a、o、u後念 ㄏ，例如 : Bach、doch、Tuch。
+                在i、e後念ㄏㄧ，例如 : ich、sechzehn。
+5.  chs     念ks，例如 : sechs。
+6.  r         位置在母音前要打舌音，例如 : drei、Reise。位在母音後不要念捲舌音，例如 : wir。
+7.  l       leise、also。
+8.  n         發音時舌尖要上去抵住齒齦，例如 : nein。
+9.  nk     n在k前念  ，例如 : danke。
+10. ng        念  ，例如 :übung。
+11. ig      ig後面沒有母音時念法如同ich，例如 : sechzig。
+12. tion    t念ts，例如 : Lektion。
+13. b        b後面沒有母音時念p，例如 : ab。
+14. d        d後面沒有母音時念t，例如 : und。
+15. g       g後面沒有母音時念k，例如 : Tag。
+ 
+語言是聲音---要從聲音學語言
+德文聲音的特質是長、短、高、低。指的是主音節的母音。
+長音  
+1.	如樂譜般，德文文字有長音記號，ie念i : 長音，例如 : sie。
+2.	 h本身如不發音則表示前面的母音念長音，例如 : wohnen。
+3.	兩個母音在一起一定念長音，例如 : Staat。
+短音  
+兩個子音前的母音通常要念短音，如果只有一個子音，但前面是短母音，則此子音連寫兩遍，
+例如 : Wonne、kommen。
+注意事項 
+1.	長短音是固定的。
+2.	高低音是在句子中比較得來的，傳遞重要 訊息 的字音比較高。，例如 : Ich fliege nach Wien.由於中文不是長、短、高、低的語言，所以在念德文時，最常發生的錯誤就是長音不夠長，短音不夠短，高音我們念的很好，但是低音念的不夠標準；應常練習音階1、2、3、4、5。
+                                                               低    中    高
+3. 長、短、高、低組成德文特有的語調(Satzmelodie)，德文的語調後面高，因為重要的訊息都在句尾。 
+
+念句子時需要注意事項:
+1.	念句不念字 : 要把一個句子看成是一個長的字---wie ein Wort。
+2.	念意義單位像一個字 : in der Schule，連音如同念在一起 : Schiffsfahrtgesellschaft。
+3.	重音不重而是高，它是高度，不是強度。
+4.	一個字只有一個高音，例如 : fangen。如高音被佔，則次高音節應低一個音階，例如 : anfangen。此字中兩個a的音高不同。
+5.	一個句子只有一個高音，高有兩種 : 一種是絕對的高；另一種是壓低別人。德文是後者。
+6.	名詞有高音，動詞有高音，如名詞出現在動詞後，則須把動詞壓低一點，例如 : Ich kaufe ein Buch.如果只有動詞傳遞訊息，則動詞最高，例如 : Ich kaufe es.
+7.	代名詞、介係詞、不傳遞訊息的冠詞，沒有高音，例如 : Ich gehe in die Schule.  Ich gehe zweimal am Tag mit dem Hund in den Park.
+8.	字正腔圓，每個字的發音要正確，腔就是語調，要圓滑。
+9.	說德文要輕，要浮起來，像是在水面游泳，而不是像海豚戲水突起突落。
+10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
+
+動詞
+====
 1.1.變位
 
 所有的動詞在原形時都以 en 或 n 結尾。
@@ -44,7 +112,6 @@ Ich will ein Haus bauen 我想要蓋一幢房
 
 在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
 
-
 未來式的複習
 ------------
 未來式 Futur 的句法公式是 werden + Infinitiv （不定式）。
@@ -66,8 +133,8 @@ Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 
 中文也有類似的被動語態，如：
 “我打了他。”是主動語態，
-而反過來，“他被我打了。 ”
-就是被動語態。不難看出，只有及物動詞當謂語才能形成被動語態。
+而反過來，“他被我打了。 ”就是被動語態。
+不難看出，只有及物動詞當謂語才能形成被動語態。
 
 一：德文被動語態的形成，
 要依靠助動詞werden 
@@ -75,15 +142,15 @@ Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 
 基本句型：
 
-Sie fragt mich. 她問我。 (主動式)
-Ich wird von ihr gefragt. 我被她問了。 (被動式)
+Sie fragt mich.             她問我。    主動式
+Ich wird von ihr gefragt.   我被她問了。被動式
 
 我們發現：
 Sie 變成了von ihr 成了介詞短語當狀語，但還是實際上的主語。
 
-mich 變成了Ich 放在主語的位置，但實際上還是賓語。
+mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
 
-用被動語態助詞wird來體現“被”，“讓”等被動意思。
+用被動語態助詞 wird 來體現“被”，“讓”等被動意思。
 用動詞的過去分詞來表達實際主語的動作
 
 寫成句型：
@@ -95,16 +162,19 @@ mich 變成了Ich 放在主語的位置，但實際上還是賓語。
 
 請對照：
 
-Sie fragt mich. 她 問 我.
-Ich wird von ihr gefragt. 我 被 她 問了.
+Sie fragt mich.             她問我。    主動式
+Ich wird von ihr gefragt.   我被她問了。被動式
+
+
 
 注意：
-若實際主語是人時，變成相關狀語時時用von 帶出，若是物，則用durch帶出。如：
+若實際主語是人時，變成相關狀語時時用 von 帶出，
+若是物，則用 durch 帶出。如：
 
-Ich wird von ihr gefragt. 我被她問了。
+Ich wird von ihr gefragt.                   我被她問了。
 Der Motor wird durch Druckknoepfe gesteurt. 馬達是通過按鈕控制的。
 
-在不需要說明實際主語的情況下，von 或durch 介詞短語可省略。如：
+在不需要說明實際主語的情況下，von 或 durch 介詞短語可省略。如：
 
 Ich wird gefragt. 我被人問了(有人問我)。
 
