@@ -1,0 +1,388 @@
+發音
+====
+
+母音 Vokale
+-----------
+A  I  U  E  O       只有E有兩個發音，不在主音節念  ，例如 leben。
+
+變母音 Umlaut
+-------------
+Ä  Ü   Ö           E發音時左右開，Ä上下開，例如 Bär、üben、Köln。
+
+雙母音
+------
+AU               Donau、Auto
+EU                heute
+EI                 Eis
+
+子音 Konsonanten   
+----------------
+基本上可參考英文發音，與英文發音不同者如下 :
+V (au)   W (e)    Z (et)    例如: Volkswagen、Zeiss。
+↓                ↓
+ f                 ts
+
+s           母音前念Z，例如 :  sagen
+ß = ss      念S，例如 : müssen；兩個 SS 即使在母音前也唸 S 。
+sch         念，例如 : Schule。(p、t 前的   音，只記s，例如 : sprechen、Student)
+4.  ch      在a、o、u後念 ㄏ，例如 : Bach、doch、Tuch。
+                在i、e後念ㄏㄧ，例如 : ich、sechzehn。
+5.  chs     念ks，例如 : sechs。
+6.  r         位置在母音前要打舌音，例如 : drei、Reise。位在母音後不要念捲舌音，例如 : wir。
+7.  l       leise、also。
+8.  n         發音時舌尖要上去抵住齒齦，例如 : nein。
+9.  nk     n在k前念  ，例如 : danke。
+10. ng        念  ，例如 :übung。
+11. ig      ig後面沒有母音時念法如同ich，例如 : sechzig。
+12. tion    t念ts，例如 : Lektion。
+13. b        b後面沒有母音時念p，例如 : ab。
+14. d        d後面沒有母音時念t，例如 : und。
+15. g       g後面沒有母音時念k，例如 : Tag。
+ 
+語言是聲音---要從聲音學語言
+德文聲音的特質是長、短、高、低。指的是主音節的母音。
+長音  
+1.	如樂譜般，德文文字有長音記號，ie念i : 長音，例如 : sie。
+2.	 h本身如不發音則表示前面的母音念長音，例如 : wohnen。
+3.	兩個母音在一起一定念長音，例如 : Staat。
+短音  
+兩個子音前的母音通常要念短音，如果只有一個子音，但前面是短母音，則此子音連寫兩遍，
+例如 : Wonne、kommen。
+注意事項 
+1.	長短音是固定的。
+2.	高低音是在句子中比較得來的，傳遞重要 訊息 的字音比較高。，例如 : Ich fliege nach Wien.由於中文不是長、短、高、低的語言，所以在念德文時，最常發生的錯誤就是長音不夠長，短音不夠短，高音我們念的很好，但是低音念的不夠標準；應常練習音階1、2、3、4、5。
+                                                               低    中    高
+3. 長、短、高、低組成德文特有的語調(Satzmelodie)，德文的語調後面高，因為重要的訊息都在句尾。 
+
+念句子時需要注意事項:
+1.	念句不念字 : 要把一個句子看成是一個長的字---wie ein Wort。
+2.	念意義單位像一個字 : in der Schule，連音如同念在一起 : Schiffsfahrtgesellschaft。
+3.	重音不重而是高，它是高度，不是強度。
+4.	一個字只有一個高音，例如 : fangen。如高音被佔，則次高音節應低一個音階，例如 : anfangen。此字中兩個a的音高不同。
+5.	一個句子只有一個高音，高有兩種 : 一種是絕對的高；另一種是壓低別人。德文是後者。
+6.	名詞有高音，動詞有高音，如名詞出現在動詞後，則須把動詞壓低一點，例如 : Ich kaufe ein Buch.如果只有動詞傳遞訊息，則動詞最高，例如 : Ich kaufe es.
+7.	代名詞、介係詞、不傳遞訊息的冠詞，沒有高音，例如 : Ich gehe in die Schule.  Ich gehe zweimal am Tag mit dem Hund in den Park.
+8.	字正腔圓，每個字的發音要正確，腔就是語調，要圓滑。
+9.	說德文要輕，要浮起來，像是在水面游泳，而不是像海豚戲水突起突落。
+10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
+
+動詞
+====
+1.1.變位
+
+所有的動詞在原形時都以 en 或 n 結尾。
+根據主語的不同動詞在每個時態下有七個不同的變位，
+加上許多動詞的變化不規則（尤其常用的動詞非常不規則），
+使得德語的難學度更加增加了。
+以下是幾個常用動詞在現在時態的變位：
+
+            規則動詞例  不規則動詞例 
+中文意義    建造*       是      讀
+原形        bauen       sein    lesen
+ich         baue        bin     lese
+du          baust       bist    liest
+
+
+er,sie,es   baut        ist     liest
+wir         bauen       sind    lesen
+ihr         baut        seid    lest
+sie         bauen       sind    lesen
+
+Sie         bauen       sind    lesen
+
+<建造*> 動作時態顯示詞，在中文無固定詞彙直接能翻譯。
+德語中一共有六個時態：
+現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。下面是一個規則動詞六個時態的例子：
+
+時態        德語                    漢語
+現在時      Ich baue                我在做的
+過去時      Ich baute               我曾做過的
+將來時      Ich werde bauen         我將會做的
+現在完成時  Ich habe gebaut         我剛做完的
+過去完成時  Ich hatte gebaut        我曾經完成的
+將來完成時  Ich werde gebaut haben  我將會完成的
+
+除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。
+假如一句話里有助動詞，那麼這個助動詞放在第二位，
+真正的動詞要放在句尾。
+下面的一句話里動詞被標重：
+
+Ich baue ein Haus       我蓋一幢房
+Ich will ein Haus bauen 我想要蓋一幢房
+
+在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
+
+未來式的複習
+------------
+未來式 Futur 的句法公式是 werden + Infinitiv （不定式）。
+而未來式通常表示對未來的計畫、對將來的預言、或是推測。
+
+下面三個例句可以很清楚的表示推測度的語氣：
+
+Morgen kommt das 颱風. 明天必定有颱風。
+
+（這是以現在式表示未來，表示這是事實，不會改變的，
+肯定會發生，有果斷的意味。）
+
+Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
+
+（儘管中譯看起來差不多，但是這個「一定」卻是推測出的結果。）
+
+被動語態
+========
+
+中文也有類似的被動語態，如：
+“我打了他。”是主動語態，
+而反過來，“他被我打了。 ”就是被動語態。
+不難看出，只有及物動詞當謂語才能形成被動語態。
+
+一：德文被動語態的形成，
+要依靠助動詞werden 
+(請注意把它和“將來時”中的助動詞 werden 區分開。二者很容易混)。
+
+基本句型：
+
+Sie fragt mich.             她問我。    主動式
+Ich wird von ihr gefragt.   我被她問了。被動式
+
+我們發現：
+Sie 變成了von ihr 成了介詞短語當狀語，但還是實際上的主語。
+
+mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
+
+用被動語態助詞 wird 來體現“被”，“讓”等被動意思。
+用動詞的過去分詞來表達實際主語的動作
+
+寫成句型：
+    實際上的賓語變成第一格
++   被動語態助詞werden 
++   von 
++   實際上的主語變成的第三格
++   用動詞的過去分詞
+
+請對照：
+
+Sie fragt mich.             她問我。    主動式
+Ich wird von ihr gefragt.   我被她問了。被動式
+
+
+
+注意：
+若實際主語是人時，變成相關狀語時時用 von 帶出，
+若是物，則用 durch 帶出。如：
+
+Ich wird von ihr gefragt.                   我被她問了。
+Der Motor wird durch Druckknoepfe gesteurt. 馬達是通過按鈕控制的。
+
+在不需要說明實際主語的情況下，von 或 durch 介詞短語可省略。如：
+
+Ich wird gefragt. 我被人問了(有人問我)。
+
+隨人稱的不同，werden 變化如下：
+
+1) 現在時
+
+主動句：Sie fragt mich. 她問我。
+被動句：Ich wird von ihr gefragt. 我被她詢問。
+
+ich werde gefragt.
+du wirst gefragt.
+er, sie, es wird gefragt.
+wir werden gefragt.
+ihr werdet gefragt.
+sie werden gefragt.
+Sie werden gefragt.
+
+2) 過去時
+
+主動句：Sie fragte mich gestern. 她昨天問過我。
+被動句：Ich wurde gestern von ihr gefragt. 我昨天被他詢問了。
+
+ich wurde gefragt.
+du wurdest gefragt.
+er, sie, es wurde gefragt.
+wir wurden gefragt.
+ihr wurdet gefragt.
+sie wurden gefragt.
+Sie wurden gefragt.
+
+3) 現在完成時
+
+主動句：Sie hat mich gefragt. 她問過我了。
+被動句：Ich bin gestern von ihr gefragt worden. 我昨天被她詢問了。
+
+Ich bin gefragt worden.
+du bist gefragt worden.
+er, sie, es ist gefragt worden.
+wir sind gefragt worden.
+ihr seid gefragt worden.
+sie sind gefragt worden.
+Sie sind gefragt worden.
+
+4) 過去完成時
+
+主動句：Sie hatte mich gefragt, bevor du zu mir kam. 你到我這來之前她已詢問完我了。
+被動句：Ich war von ihr gefragt worden, bevor du zu mir kam. 你到我這來之前我已被她詢問完了。
+
+ich war gefragt worden.
+du warst gefragt worden.
+er, sie, es war gefragt worden.
+wir waren gefragt worden.
+ihr wart gefragt worden.
+sie waren gefragt worden.
+Sie waren gefragt worden.
+
+5) 將來時
+
+主動句：Sie wird mich fragen. 她將要詢問我。
+被動句：Ich wird von ihr gefragt werden. 我將被她詢問。
+
+ich werde gefragt werden.
+du wirst gefragt werden.
+er, sie, es wird gefragt werden.
+wir werden gefragt werden.
+ihr werdet gefragt werden.
+sie werden gefragt werden.
+Sie werden gefragt werden.
+
+6) 將來完成時
+
+主動句：Sie wird mich gefragt habeb. 她將完成對我的詢問。
+被動句：Ich wird (von ihr) gefragt worden sein. 我將被她詢問完畢。
+
+ich werde gefragt worden sein.
+du wirst gefragt worden sein.
+er, sie, es wird gefragt worden sein.
+wir werden gefragt worden sein.
+ihr werdet gefragt worden sein.
+sie werden gefragt worden sein.
+Sie werden gefragt worden sein.
+
+二：被動式能加情態動詞。為簡便，下面讓我們只用ich 為例子來說明句型：
+
+主動式 被動式
+1) 現在時：Sie muss mich fragen. Ich muss von ihr gefragt werden.
+2) 過去時：Sie musste mich fragen. Ich musste von ihr gefragt werden.
+3) 現在完成時：Sie hat mich fragen muessen. Ich hat gefragt werden muessen.
+4) 過去完成時：Sie hatte mich fragen muessen. Ich hatte gefragt werden muessen.
+5) 將來時：Sie wird mich fragen muessen. Ich wird gefragt werden muessen.
+
+三：最後，我想告訴你，虛擬式也能改寫成被動式，天哪！ :-))
+
+von
+---
+
+在支配第三格的德語介詞中，aus和von的用法通常會讓德語學習者感到困惑。
+
+兩個介詞都可以表示地點。但是兩者也有區別：
+aus 表示“從……裏面出來”，“來源於……”；
+von表示“從……（方向）來”，“從什麼地方離開”。
+
+在表示“從……來”的時候，用介詞“von”還是“aus”，
+通常要根據表示“到……去”
+時所用的介詞而定。
+
+如果表示“到……去”的介詞用in，
+那麼表示“從……來”多用 aus；
+如果表示“到……去”的介詞用auf/zu/an，
+那麼表示“從……來”則多用von
+。　　
+如：
+
+Ich gehe ins B徂ro . Ich komme aus dem B徂ro .
+
+Ich gehe zum Lehrer: Ich komme vom Lehrer .
+
+Ich gehe zur Post . Ich komme von der Post .
+
+aus 和 von 與國名或城市名連用，表示“來自……”，“從……來”的時候。
+aus 暗含出身，是某國/某地人；
+而von則只表示“從……過來”，不指明國籍或出生地。　
+
+Ich komme aus Berlin . 我是柏林人。
+Ich komme von Berlin . 我從柏林來。
+
+aus 和 von 與物質名詞連用時。
+aus 表示構成物質的材料，強調材料；
+而von多指品質、特性等。
+強調外觀和種類。
+Der Tisch ist aus Holz. 
+Das ist von guter Qualit?t.
+
+常用片語：
+von zu Hause 從家裏來
+
+建議：介詞的支配關係是個難點，例外的情況很多，
+最好能夠把常出現的常用的記著。因為有時候語法規則也有例外或
+者很難解釋的情況出現。
+
+
+虛擬式
+======
+虛擬式一般用來表示說話者認為所陳述的行為、
+事物不符合事實或不確定是事實，如表示想像、猜測、假設、不現實的願望、
+客氣或用來轉述他人的話或觀點。
+虛擬式分為虛擬一式和虛擬二式。
+
+虛擬一式
+--------
+
+虛擬一式由動詞不定式詞幹加人稱詞尾構成，單數第一人稱和第三人稱詞尾是e，單數第二人稱詞尾是est，複數第二人稱詞尾是et，複數第一人稱和第三人稱詞尾是en。所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
+	haben	lesen	können	sein	werden
+Ich	habe	lese	könne	sei	werde
+du	habest	lesest	könnest	sei(e)st	werdest
+er/sie /es	habe	lese	könne	sei	werde
+wir	haben	lesen	können	seien	werden
+ihr	habet	leset	könnet	seiet	werdet
+sie/Sie	haben	lesen	können	seien	werden
+
+虛擬一式使用法
+--------------
+　　虛擬一式主要用於間接引語 (indirekte Rede)，表示說話者轉述他人的話或觀點。因此，虛擬一式常用在引文或新聞報導當中。
+例句：
+(原句) Er hat mir gesagt, „ich schreibe gerade einen Roman.“ (他對我說：「我正在寫一部小說。」)
+(變化) Er hat mir gesagt, er schreibe gerade einen Roman. (他告訴我，他正在寫一部小說。)
+
+※注意事項
+　(1) 間接引語常用從屬連詞dass引導，若間接引句有數個句子，除第一句之外，dass一般會省略。若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
+  (2) 常用下列動詞引起間接引句，例如sagen, behaupten, berichten, betonen, erklären, erzählen, mitteilen, hören, schreiben, fragen, antworten, denken, glauben, meinen, hoffen, wünschen 等。
+  (3) 間接引語不用引號，用引號的引語是直接引語 (direkte Rede)。如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，就使用虛擬一式，否則用陳述式。
+  (4) 在間接引語中，虛擬一式的現在完成式和過去式都是用助動詞haben或sein的虛擬一式加上動詞的第二分詞來表示。
+例句：
+(原句) Er erzählt mir: „Ich habe gestern Tennis gespielt.“ (他對我講：「我昨天打網球了。」)
+(變化) Er erzählt mir, er habe gestern Tennis gespielt. (他對我講他昨天打網球了。)
+  (5) 如果虛擬一式與直陳式形式相同，用虛擬二式代替虛擬一式。口語中常用虛擬二式代替虛擬一式，因為虛擬二式更容易區別直陳式。
+例句：
+(原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
+(變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
+   或 Die Kinder sagen, sie kämen gleich.
+  (6) 轉述對第三者的請求或要求時，可以用dass引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
+例句：
+(原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
+(變化) Herr Li bat eine Reiseführerin, dass eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
+
+反身動詞 (reflexive Verben)
+---------------------------
+　　當動詞所支配的賓語正是主語時，這類動詞稱為反身動詞。反身動詞又分為真返身動詞和非真反身動詞。
+真反身動詞 (echte reflexive Verben)
+　　真反身動詞只能和反身代詞連用，不能用名詞或其他代詞代替反身代詞，反身代詞與動詞構成一個整體。真反身動詞多數帶第四格 (Akkusativ)反身代詞，少數帶第三格(Dativ)反身代詞。
+(1)	帶第四格反身帶詞的反身動詞
+例： sich auskennen、sich beeilen、sich bedanken、sich erkündigen、sich gedulden、sich konzentrieren、sich kümmern、sich verspäten等。
+例句：Ich kenne mich an diesem Ort nicht aus. (我對這地方不熟悉。)
+(2)	帶第三格反身帶詞的反身動詞
+例： sich aneignen、sich ausdenken、sich einbilden等。
+帶第三格反身動詞的真反身動詞通常需要支配一個第四格補足語。
+例句：Er hat sich einen Plan ausgedacht. (他想出了一個計畫。)
+非真反身動詞 (unechte reflexive Verben)
+　　非真反身動詞本是具有一定支配能力的獨立動詞，因此可以有反身與非反身兩種用法。其反身代詞為第四格或第三格，可用名詞或其他代詞取代。例如：sich anziehen、sich aufregen、sich kaufen、sich wünschen等。
+例句：
+(反身) Ich ziehe mich an. (我穿上衣服。)
+(非反身) Ich ziehe das Kind an. (我替孩子穿衣服。)
+
+※有些動詞作反身動詞時，其意義與非反身用法不同。例如：treffen與 sich treffen。
+例句：
+(非反身) Ich habe gestern Herrn Li getroffen. (我昨晚遇到李先生。)
+(反身) Ich treffe mich oft mit mienem Freunden. (我經常和朋友會面。)
+
+※反身代名詞還可以表達交互關係，此時主語為複數。某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
+例句：Die Studenten verstehen sich/einander gut. (大學生們彼此清楚了解。)
