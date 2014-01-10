@@ -4,7 +4,7 @@
 with 陳述式
 -----------
 
-With 區塊可在單一物件上執行一系列的陳述式：
+With 區塊可在單一物件上執行一系列的陳述式，如下碼：
 
 With testObject
     .Height = 100
@@ -26,9 +26,7 @@ With 指定物件 testObject 執行一系列的陳述式，
 取得命令列參數
 --------------
 
-wscript.arguments 為啟動腳本時接受之參數集合物件。
-
-[args.vbs].
+wscript.arguments 為啟動腳本時接受之參數集合物件，如下碼：
 
 dim args, arg
 
@@ -40,8 +38,7 @@ next
 
 
 arguments 物件是由零開始作索引，因此 args(1) 表示第 2 個傳入之參數。
-
-執行結果如下：
+執行結果如下碼：
 
 cscript a.vbs arg1 arg2
 
@@ -54,16 +51,15 @@ arg2
 ----
 
 轉碼主要是利用 stream 物件的 readText 將來源串流轉成字串，
-再用 writeText 方法將字串寫入目標編碼的位元串流。
-
-[utf82big5.vbs].
+再用 writeText 方法將字串寫入目標編碼的位元串流，
+如下碼：
 
 option explicit
 
 dim txt, src, dst
 
 txt = wscript.arguments(0)
- 
+
 'ADODB.Stream file I/O constants
 const adTypeBinary          = 1
 const adTypeText            = 2
@@ -88,15 +84,24 @@ with createObject("ADODB.Stream")
 end with
 
 
+VBS字串實字
+-----------
+
+表：字元常數
+
+常數      意義
+vbCr      CR 字元
+vbNewLine 新行，為 lf 或 cr+lf 字串
+
 VBS字串的內部實現
--------------------
+-----------------
 
 VBS 是基於微軟的 ActiveX/COM 技術實現的，
 而 COM 對象為了做到支持任何語言，定義了一系列通用的數據類型，
 微軟稱之為自動化對像類型(Automation data types)，
 其中之一就是基本字串，簡稱 BSTR。
 
-VBS 在內部是以 BSTR 來表示字串的，BSTR 在 WTypes.h 中定義：
+VBS 在內部是以 BSTR 來表示字串的，BSTR 在 WTypes.h 中定義如下碼：
 
 typedef wchar_t WCHAR;
 typedef WCHAR OLECHAR;
@@ -105,17 +110,12 @@ typedef OLECHAR *BSTR;
 
 從定義可以看出，BSTR 是指向 wchar_t 類型的指針，
 但是 BSTR 並不是普通的 wchar_t 指針。
-
-註：wchar_t 是 C 的寬字元型別，寬字元指大於 1 位元組之字元。
-
-Windows API 中，wchar_t 是以 UTF-16 LE 編碼。  
-
+wchar_t 是 C 的寬字元型別，寬字元指大於 1 位元組之字元資料，
+Windows API 中，wchar_t 是以 UTF-16 LE 編碼。
 BSTR 指向一個有長度前綴和 NUL 結束符的 wchar_t 陣列。
-
 BSTR 的前 4 位元組是一個表示字串長度之前綴，
 長度值是字串的位元組數，且不包括 NUL 結束符。
-
-下面用程式碼來說明：
+如下碼：
 
 str = "Hello" & Chr(0) & "world"
 
@@ -143,7 +143,7 @@ BSTR str = &arr[2];
 所以要佔 2 個位元組）。
 
 若不考慮前面 4 個位元組，
-BSTR 就是C 語言中的 null-terminated string。
+BSTR 就是 C 語言中的 null-terminated string。
 
 VBS 字串在內部是以Unicode 的形式來保存的，然而在外部，
 VBS 腳本文件的編碼卻不一定是Unicode，
@@ -190,12 +190,11 @@ ANSI 實際對應的編碼跟系統設置的程式碼頁有關，
 直譯器資訊
 ----------
 
-用下列碼可顯示版本訊息：
+用下列碼可顯示版本訊息如下碼：
 
 msgbox ScriptEngineMajorVersion & "." & ScriptEngineMinorVersion 
 
 
-直譯器的版本常數如下表::
-
+直譯器的版本常數如下表：
 ScriptEngineMajorVersion    主版號
 ScriptEngineMinorVersion    次版號
