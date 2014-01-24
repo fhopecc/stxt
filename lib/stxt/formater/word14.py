@@ -114,7 +114,7 @@ class MSWordOut(GenericASTTraversal):
             para.Range.Font.Bold = 1
         elif node.height == 2:
             para.Format.LeftIndent = 42 
-            para.Format.FirstLineIndent = -26
+            para.Format.FirstLineIndent = -35
             para.Range.Font.Bold = 1
         elif node.height == 3:
             para.Format.LeftIndent = 64

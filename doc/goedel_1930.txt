@@ -1,8 +1,99 @@
 Über formal unentsheidbare Sätze 
 der Principia Mathematica und verwandter System I
--------------------------------------------------
+論數學原理及相關系統中的形式無法決定陳述句
+=================================================
 花蓮 2013/03/04 星期一 
+花蓮 2013/05/03 星期五 
 
-z.單字表
+Die Entwicklung der Mathematik in 
+der Richtung zu größerer Exaktheit hat bekanntlich dazu geführt, 
+daß weite Gebiete von ihr formalisiert wurden, 
+in der Art, daß das Beweisen nach einigen wenigen
+mechanischen Regeln vollzogen werden kann.
+
+數學朝更為精確的方向發展已全面的引導所有版圖變得更為形式化。
+在此風格下，證明能完美地朝向一致機械化改造。
+
+Die umfassendtsen derzeit aufgestellten formalen Systeme sind
+das System der Principia Mathematica (PM) einerseits, 
+das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
+Axiomensystem der Mengenlehre) andererseits.
+
+
+Die Grundzeichen des Systems P sind die folgenden:
+I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
+
+II.Variable ersten Typs(fuer Individuen, d. h. natuerliche Zahlen inklusive 0)):
+
+下列為P系統之基本符：
+I.常符:
+~ : 非
+v : 或
+Π : 對所有
+0 : 零
+f : 後繼函數，命名源自德文後繼 Nachfolger
+( ) :括號
+
+II.第一型變數(對個體，即自然數包含零)
+
+陣列操作
+........
+
+
+公式操作
+........
+
+16.0 N x ≡ x
+(n+1)N x ≡ R(3) * n N x
+
+n N x entspricht der Operation: 
+"n-maliges Vorsetzen des Zeichens"
+
+n N x 對應到以下操作：
+「前置字符 x 於前 n 次。」 
+
+17.Z(n) ≡ nN[R(1)]
+
+Z(n) ist das Zahlzeichen für die Zahl n.
+
+Z(n) 是整數 n 的整數符號表示。
+命名源自德文整數 Zahl。
+
+46.Bew(x) ≡ (Ey) y B x
+
+x ist eine beweisbare Formel.
+[Bew(x) ist der einzige unter Begriffen 1-46.
+von dem nicht behauptet werden kann, er sei rekursiv.]
+
+x 是可證明式。Bew 名稱來自於證明的德文 beweisbare。
+[Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
+
+Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
+Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
+so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
+
+定理V：
+對每個遞迴關係 R(x1...xn) 均有一個 n 元關係符號 r (帶有自由變數)
+(u1,u2...un)，且對所有n元整數序對(x1,x2...xn)滿足下式：
+
+R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
+                     Z(x1)...Z(xn)
+
+~R(x1...xn) => Bew[Neg Sb(r u1     ...un    )]        (4)
+                            Z(x1)...Z(xn)
+
+
+單字表
+......
+
 verwandter 關連的
-
+bekanntlich 一般可知
+wurden 變成
+Beweisen 證明
+Weite 廣闊
+Gebiet 版圖
+Art 类型、种类方式、方法风格行为、举止习惯（生物）属
+einigen 一致
+wenigen adj一點點、不多
+Regeln 改造
+vollzogen adj 完美的

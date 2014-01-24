@@ -1,0 +1,497 @@
+文件檔頭資料
+
+文件宣告
+
+<HTML></HTML>
+
+內容宣告區
+
+<HEAD></HEAD>
+
+文件主體
+
+<BODY ></BODY>
+
+背景顏色	 BGCOLOR=#******
+
+背景文字顏色	TEXT=#******
+
+未選連結的顏色	LINK=#******
+
+己選連結的顏色	VLINK=#******	 (Nescape不支援)
+
+按下時連結顏色	ALINK=#******
+
+背景圖案	 BACKGROUND=URL
+
+網站標題
+
+<TITLE></TITLE>
+
+排版設定
+
+跳列
+
+<BR>
+
+跳段的設定
+
+<P ALIGN=LEFT、CENTER、RIGHT>
+
+向中對齊
+
+<CENTER></CENTER>
+
+強迫不跳列
+
+<NOBR></NOBR>
+
+　
+
+文字設定
+
+<FONT></FONT>
+
+設定大小	 SIZE=?	其中?=1、2、3、4、5、6、7預設3數字越大文字越大
+
+且若在數字前加上「+」表比預設值大或小上幾級
+
+設定顏色	 COLOR=#******
+
+設定字型	 FACE=字型名稱
+
+設定標題的大小
+
+<H?></H?>	其中?=1、2、3、4、5、6	且1的文字最大
+
+設定排列	 ALIGN=left、center、right
+
+預設文字的大小
+
+<FONTBASE SIZE=?>	 其中?=1、2、3、4、5、6、7
+
+實體字型的控制標籤
+
+<B></B>
+
+　粗體字
+
+<I></I>
+
+　斜體字
+
+<U></U>
+
+　加底線
+
+<S></S>
+
+　加直線
+
+<TT></TT>
+
+　細小型
+
+<SUP></SUP>
+
+　上標字型
+
+<SUB></SUB>
+
+　下標字型
+
+邏輯字型的控制標籤
+
+<EM></EM>
+
+　斜體字
+
+<VAR></VAR>
+
+　斜體字
+
+<CITE></CITE>
+
+　斜體字
+
+<STRONG></STRONG>
+
+　粗體字
+
+<CODE></CODE>
+
+細體字
+
+<DFN></DFN<
+
+正體字
+
+<SMALL></SMALL>
+
+小字型
+
+<BIG></BIG>
+
+　大字型
+
+特殊字型
+
+顯示符號
+
+代碼
+
+<
+
+&lt;
+
+>
+
+&qt;
+
+&
+
+&amp;
+
+“
+
+&quot;
+
+橫線段
+
+<HR SIZE=N>	N表數字，越大越粗
+
+長度的設定	 WIDTH=N	N表百分比或點數
+
+線段的排列	 ALIGN=left、center、right
+
+無陰影的設定	NOSHADE
+
+備註                <!--備註文字-->
+
+原貌呈現            <PRE></PRE> 
+
+每列最前頭空五格    <BLOCKQUOTE>/BLOCKQUOTE>
+
+清單
+
+無序號目錄清單
+
+<MENU>
+
+<LI>項目標題
+
+…
+
+</MENU>
+
+屬性	 TYPE=disc、circle、square　實心圓點、空心圓點、實心方塊
+
+有序號目錄清單
+
+<OL>
+
+<LI>項目標題
+
+…
+
+</OL>
+
+起始號碼設定	START=N	N為數字
+
+號碼型態設定	TYPE=1、a、A、i、I	 i及I表大小寫羅馬數字
+
+每行前加兩空格
+
+<DL>
+
+<DT>標題	 每行前不加空格
+
+<DD>內容	每行前加兩空白
+
+…
+
+</DL>
+
+表格
+
+<TABLE></TABLE>
+
+邊線的設定	 BORDER=N	N表數字
+
+格框線設定	 CELLSPACING=N
+
+框格與內容空隙	CELLPADDING=N　
+
+表格高度	 HEIGHT=N
+
+表格寬度	 WIDTH=N
+
+表格位置	 ALIGN=left、center、right
+
+背景顏色	 BGCOLOR=#******
+
+表格標題(Netscape不支援)
+
+<CAPTION></CAPTION>
+
+靠上靠下	 VALGIN=top、botton
+
+靠左靠右	 ALIGN=left、center、right
+
+宣告列
+
+<TR></TR>
+
+標題、資料欄宣告
+
+<TH></TH>、<TD></TD>
+
+寬度設定	 WIDTH=N
+
+高度設定	 HEIGHT=N
+
+欄位背景顏色	BGCOLOR=#******
+
+內容左右排列	ALIGN=left、center、right
+
+靠上靠下靠中	VALGIN=top、middle、bottom
+
+行的擴張	 CLOSPAN=N	 N表要擴充的欄位數
+
+列的擴張	 ROWSPAN=N	N表要擴充的列位數
+
+超鏈結
+
+URL格式
+
+scheme://host[:port]/path/filename	 scheme的值如http、ftp等...
+
+超鏈結
+
+<A HREF=URL>...</A>
+
+file範例	 <A HREF=file:///c|/windows/text/kkk.txt>...</A>
+
+mail範例	<A HREF=mailto:kk@mail.aa.tw>...</A>
+
+telnet範例	<A HREF=telnet://bbs.kk.tw>...</A>
+
+news範例	<A HREF=news://news.tv.com/joe>...</A>
+
+註.上例是連到伺服器上並載入joe這個討論議題
+
+WAIS範例	<A HREF=wais://www.edu.com/SQLdb?w3-msql>...</A>
+
+註.上例是連到伺服器上的SQLdb資料庫中執行w3-msql的串列指令
+
+gopher範例	<A HREF=gopher://gopher.nsysu.edu.tw:151/11/traveler/train>...</A>
+
+連上層目錄	<A HREF=../kkk.htm>...</A>
+
+連某檔案某處<A HREF=”檔案名#連結處名”>...</A>
+
+在某窗框開啟　TARGET=窗框名、_parent(前視窗)、_top、_blank(新產生視窗)
+
+指定預設位置
+
+<BASE HREF=URL>
+
+連結到檔案某一段
+
+<A HREF=”　#名稱”>...</A>
+
+設定標號	<A NAME=”名稱”＞...</A>
+
+圖形
+
+<IMG SRC=URL></IMG>	 </IMG>可省略
+
+說明文字	 ALT=說明
+
+圖形高度	 HEIGHT=pixel
+
+圖形寬度	 WIDTH=	pixel
+
+圖形邊框	 BORDER=N
+
+文字排列	 ALIGN=bottom、middle、top、left、right
+
+上下空隙設定	VSPACE=pixel
+
+左右空隙設定	HSPACE=pixel
+
+地圖索引
+
+<MAP NAME=名稱>
+
+<AREA SHAPE=rect、circle、poly COORDS=座標 HREF=URL>
+
+…
+
+</MAP>
+
+<IMG SRC=URL USEMAP=#名稱>
+
+註.SHEPE=RECT表長方形，COORDS=X1,Y1,X2,Y2
+
+SHAPE=CIRCLE表圓形，COORDS=X1,Y1,R
+
+SHAPE=POLY表多邊形，COORDS=X1,Y1,X2,Y2,X3,Y3...
+
+分割視窗
+
+(扁)多窗框
+
+<FRAMESET ROWS=”X1,X2,...”>
+
+<FRAME>
+
+　…
+
+<FRAMESET>
+
+FRAME的屬性
+
+路徑	 SRC=URL
+
+無法改變大小	NORESIZE
+
+捲動軸	 SCROLLING=YES、NO
+
+左右空格	 MARGINWIDTH=pixel
+
+上下空格	 MARGINHEIFHT=pixel
+
+是否顯示框邊	FRAMEBORDER=1、0	1表顯示，0表不顯示
+
+窗框分界粗細	FRAMESPACING=pixel
+
+窗框分界線顏色	BORDERCOLOR=#******
+
+窗框名稱	 NAME=窗框名稱
+
+(瘦長)直排多窗框
+
+<FRAMESET COLS=”X1,X2,...”>
+
+<FRAME>
+
+　…
+
+<FRAMESET>
+
+　
+
+表單
+
+<FORM METHOD=get、post ACTION=UTL>
+
+…
+
+</FORM>
+
+表單外框
+
+<FIELDSET>
+
+<LEGEND>標題文字</LEGEND>
+
+　…
+
+</FIELDSET>
+
+註.一個FORM中內可以有多個不同的表單框區
+
+文字欄位
+
+<INPUT TYPE=text>
+
+內定值	 VALUE=預設文字
+
+顯示寬度	 SIZE=顯示寬度(單元是字元數)
+
+最大資料長度	MAXLENGTH=最大字元數
+
+不能修改	 READONLY
+
+按鈕
+
+<INPUT TYPE=rest VALUE=按鈕標題>
+
+<INPUT TYPE=submit VALUE=按鈕標題>
+
+密碼文字欄位
+
+<INPUT TYPE=password NAME=名稱 VALUE=預設值 SIZE=N MAXLENGTH=N>
+
+隱藏文字欄位
+
+<INPUT TYPE=hidden NAME=名稱 VALUE=預設值>
+
+單一選項欄位(圓)
+
+<INPUT TYPE=radio NAME=名稱 VALUE=給CGI程式參考的值>
+
+預設勾選	 CHECKED
+
+無作用(灰色)	 DISABLED
+
+　
+
+　
+
+多選項欄位(方)
+
+<INPUT TYPE=checkbox NAME=名稱 VALUE=給CGI程式參考的值>
+
+預設勾選	 CHECKED
+
+無作用(灰色)	 DISABLED
+
+圖片欄位
+
+<INPUT TYPE=image NAME=名稱 SRC=URL ALIGN=文字排列方式>
+
+註.當此按鈕被按下時尚會傳出”名稱.x”、”名稱.y”兩筆資料表滑鼠位置
+
+清單欄位
+
+<SELECT NAME=名 SIZE=多少選項的高度>
+
+<OPTION VALUE=選項值 SELECTED>選項文字
+
+…
+
+</SELECT>
+
+註.SELECTED表預設值
+
+多行文字區
+
+<TEXTAREA COLS=長度 ROWS=寬度(單位是列)>預設文字</TEXTAREA>
+
+圖像按鈕
+
+<BUTTON NAME=名稱 TYPE=rest、submit>
+
+<IMG SRC=URL>
+
+</BUTTON>
+
+自動轉換網頁
+
+<META HTTP-EQUIV=”refresh” CONTENT=”秒數;URL=位置”>
+
+設定網頁格式
+
+<META HTTP-EQUIV=”Content-Type” CONTENT=”TEXT/HTML;CHARSET=big5”>
+
+　
+
+背景音樂
+
+<BGCOLOR SRC=URL LOOP=撥放次數、infinite DELAY=延遲撥放的秒數>
+
+<EMBED SRC=URL HEIGHT=piel WIDTH=pixel LOOP=次數 UTOSRART=yes、no>
+
+註.infinite表示一直重覆撥放，UTOSTART表是否自動撥放

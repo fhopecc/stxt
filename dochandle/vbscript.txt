@@ -1,0 +1,97 @@
+VB Script
+=========
+
+語法
+----
+
+with 陳述式
+...........
+
+With 區塊可在單一物件上執行一系列的陳述式，如下碼：
+
+With testObject
+    .Height = 100
+    .Text = "Hello, World"
+    .ForeColor = System.Drawing.Color.Green
+    .Font = New System.Drawing.Font(.Font, _
+        System.Drawing.FontStyle.Bold)
+End With
+
+
+With 指定物件 testObject 執行一系列的陳述式，
+變更 testObject 的數個不同屬性，
+請將屬性指派陳述式 (Assignment Statement) 置入 With 區塊中，
+只需參考該物件名稱一次，而不必在每次指派屬性時都要加以參考。
+
+系統管理
+--------
+
+取得命令列參數
+..............
+
+wscript.arguments 為啟動腳本時接受之參數集合物件，如下碼：
+
+dim args, arg
+
+set args = wscript.arguments
+wscript.echo args(1)
+for each arg in args
+    wscript.echo arg
+next
+
+
+arguments 物件是由零開始作索引，因此 args(1) 表示第 2 個傳入之參數。
+執行結果如下碼：
+
+cscript a.vbs arg1 arg2
+
+arg2
+arg1
+arg2
+
+
+轉碼
+....
+
+轉碼主要是利用 stream 物件的 readText 將來源串流轉成字串，
+再用 writeText 方法將字串寫入目標編碼的位元串流，
+如下碼：
+
+option explicit
+
+dim txt, src, dst
+
+txt = wscript.arguments(0)
+
+'ADODB.Stream file I/O constants
+const adTypeBinary          = 1
+const adTypeText            = 2
+const adSaveCreateOverWrite = 2
+const adReadAll             = -1
+const adWriteChar           = 0
+
+with createObject("ADODB.Stream")
+    dim strText
+    .open
+    .type = adTypeBinary
+    .loadFromFile txt
+    .type = adTypeText
+    .charset = "utf-8"
+    strText = .readText(adReadAll)
+    .position = 0
+    .setEOS
+    .charset = "big5"
+    .writeText strText, adWriteChar
+    .saveToFile txt & "_big5.txt", adSaveCreateOverWrite
+    .close
+end with
+
+
+VBS字串實字
+...........
+
+表：字元常數
+
+常數      意義
+vbCr      CR 字元
+vbNewLine 新行，為 lf 或 cr+lf 字串

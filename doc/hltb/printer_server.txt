@@ -1,0 +1,8 @@
+中文列印伺服器
+http://10.66.250.32 admin/admin
+http://10.66.250.34 admin/admin
+
+WIN7 控制台要先開啟 LPR 服務
+
+更新 firmware
+lpr -S 10.66.250.32 -P 10.66.250.32 -o -d cvs2001.zip

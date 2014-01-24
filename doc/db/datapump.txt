@@ -1,0 +1,42 @@
+Oracle datapump
+===============
+
+從 oracle 10g 之後, 就開始有了 import / export datapump, 據說
+performance 更好, 有更多厲害的玩意兒, 所以趁這次升級到 11gR2 的時候,
+把一些 scripts 改成了 datapump, 當然也有遇到了一些問題,
+所以也做個筆記。
+
+語法的不同
+----------
+
+expdp 需要在 database 指定個 directory 物件, 
+所以就不能像 exp 那樣, 愛 export 到那個目錄就到那個目錄, 
+這樣是有比較安全, 但是卻沒什麼彈性,
+也就是說不能從另外一台 server 做 exp 了
+
+create or replace directory exp_dir as '/net/exp';
+grant read, write on directory exp_dir to rd_garlic;
+
+查有那些directory 物件 。
+SELECT directory_path 
+FROM dba_directories 
+WHERE directory_name = 'DATA_PUMP_DIR';
+
+在以前把 schema 匯出是這樣下
+exp garlic/12345678 rows=n file=/net/exp/schema.dmp
+現在要這樣下
+expdp garlic/12345678 content=metadata_only directory=exp_dir dumpfile=schema.dmp reuse_dumpfiles=true
+以前要匯出某個 table 的資料要這樣下
+exp garlic/12345678 tables=${TABLE} rows=y file=/net/exp/${TABLE}.dmp
+現在要這樣下
+expdp garlic/12345678 tables=${TABLE} content=all directory=exp_dir dumpfile=${TABLE}.dmp
+(2) 砍掉 datapump jobs
+以前用 exp 做 export 時, 如果臨時要 cancel 的話, 就把 shell script kill 掉, 然後去 v$session 看看有沒有 session 還在做 exp, 如果有的話就 alter system kill session ..... 就 OK 了, 現在用了 datapump 做 export 的話就得這樣做
+SELECT o.status, o.object_id, o.object_type,
+o.owner||'.'||object_name "OWNER.OBJECT"
+FROM dba_objects o, dba_datapump_jobs j
+WHERE o.owner=j.owner_name AND o.object_name=j.job_name ;
+這樣可以找出目前還在執行的 datapump, 要看的是 OWNER.OBJECT 這個欄位, 會長的像 USER.SYS_EXPORT_FULL_01
+這時要終結這個 job 的話, 要下
+drop table USER.SYS_EXPORT_FULL_01 purge;
+這樣才能把 datapump jobs 給砍掉

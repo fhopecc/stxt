@@ -1,0 +1,6 @@
+錯誤訊息
+........
+
+mount error(127): Key has expired
+
+通常是 mount Windows 的共享目錄時，密碼過時了。

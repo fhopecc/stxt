@@ -1,10 +1,19 @@
-module STXT( run
+module STXT( run, rawRun, runPart, rawRunPart
            , line, para
            , code
            , content, contents
            , sect2title
            , sect1, sect1s
            , sect2, sect2s
+           , doc
+           , Doc(Doc, Error)
+           , Sect1(Sect1)
+           , Sect2(Sect2)
+           , Sect1s
+           , Title
+           , Content(Code, Para)
+           , getSect2s
+           , getSect2sFromSect1
            ) 
 where
 
@@ -12,11 +21,21 @@ import Text.ParserCombinators.Parsec
 import System.Environment
 import System.IO
 import Control.Monad
+import Data.List
+import Data.Maybe
 
-data Sect1    = Sect1 Title Sect2s
+data Doc      = Doc Title Sect1s
+              | Error String
                 deriving (Show)
 
-data Sect2    = Sect2 Title Contents
+type Sect1s   = [Sect1]
+
+data Sect1    = Sect1 Int Title Sect2s
+                deriving (Show)
+
+type Sect2s   = [Sect2]
+
+data Sect2    = Sect2 (Int, Int) Title Contents 
                 deriving (Show)
 
 data Content  = Para Lines
@@ -24,45 +43,53 @@ data Content  = Para Lines
                 deriving (Show)
 
 type Title    = String
-type Lines    = [String]
-type Contents = [Content]
-type Sect2s   = [Sect2]
 
---sect1s = sect1 `sepEndBy` (char '\n') 
+type Lines    = [String]
+
+type Contents = [Content]
+
+getSect2s :: Int -> Doc -> Sect2s
+getSect2s n1 doc@(Doc _ s1s) = s2s
+    where
+        s1@(Sect1 _ _ s2s) = fromMaybe (s1s !! 0) (find (isNumEq n1) s1s)
+        isNumEq num (Sect1 n _ _) = n == num 
+
+getSect2sFromSect1 :: Sect1 -> Sect2s
+getSect2sFromSect1 (Sect1 _ _ s2s) = s2s
+
+doc :: Parser Doc
+doc = do
+    t  <- docTitle
+    cs <- sect1s 
+    return $ Doc t cs
+
+docTitle = title '='
+
 sect1s = many sect1
 
 sect1 :: Parser Sect1
 sect1 = do
     t  <- sect1title
     cs <- sect2s 
-    return $ Sect1 t cs 
+    return $ Sect1 0 t cs
 
-sect1title :: Parser Title
-sect1title = do
-    title <- many $ noneOf "\n"; char '\n'
-    skipMany1 $ char '='; string "\n\n"
-    return title
+sect1title = title '-'
 
---sect2s = sect2 `sepEndBy` (char '\n') 
 sect2s = many sect2
 
-sect2title :: Parser Title
-sect2title = do
-    title <- many1 $ noneOf "\n"; char '\n'
-    skipMany1 $ char '-'; string "\n\n"
-    return title
+sect2title = title '.'
 
 sect2 :: Parser Sect2
 sect2 = do notFollowedBy sect1title
            t  <- sect2title
            cs <- contents 
-           return $ Sect2 t cs 
+           return $ Sect2 (0,0) t cs
 
 contents = many content
 
 content =  code
        <|> (do p <- para
-               many $ char '\n'
+               optional $ char '\n'
                return p
            )
 
@@ -84,16 +111,51 @@ line = do notFollowedBy sect1title
               <|> (many $ noneOf "\n")
           return $ head:tail
 
-run p input
+title :: Char -> Parser Title
+title sep = do
+    t <- many1 $ noneOf "\n"; char '\n'
+    string $ replicate 2 sep;many $ char sep; string "\n\n"
+    return t
+
+rawRunPart p input
     = case (parse p "" input) of
         Left err -> show err
         Right x  -> show x
 
+runPart p input
+    = case (parse p "" input) of
+        Left err -> show err
+        Right x  -> show $ numberDoc x
+
+rawRun input
+    = case (parse doc "" input) of
+        Left err -> Error $ show err
+        Right x  -> x
+
+run input = 
+    case (parse doc "" input) of
+        Left err -> Error $ show err
+        Right x  -> numberDoc x
+
+numberDoc :: Doc -> Doc
+numberDoc (Doc t s1s) = Doc t (numberSect1s s1s)
+
+numberSect1s :: Sect1s -> Sect1s
+numberSect1s s1s = 
+    [updateNumSect1 n s1 | (n, s1) <- zip [1..] s1s]
+     where 
+        updateNumSect1 n (Sect1 _ t s2s) = Sect1 n t (numberSect2s n s2s)
+
+        numberSect2s s1n s2s = 
+            [updateNumSect2 s1n s2n s2 | (s2n, s2) <- zip [1..] s2s]
+
+        updateNumSect2 s1n s2n (Sect2 _ t cs) = Sect2 (s1n, s2n) t cs
+   
 main = do
     args <- getArgs 
     let src  = args !! 0
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
-    let o = run sect1s c
+    let o = rawRunPart sect1s c
     putStr $ o

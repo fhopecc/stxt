@@ -5,15 +5,15 @@ Type RenameDef
 End Type
 
 Sub 平時考核格式()
-    Call 附件及括號黑體
+    Dim anchor As Range
+    Set anchor = Selection.Range
+    Call 括號黑體
     Call 標題灰底
+    Call 附件自動標號及黑體
+    anchor.Select
 End Sub
 
-Sub 附件及括號黑體()
-'
-' 附件及括號黑體 巨集
-' 巨集錄製於 2011/12/19，錄製者 張簡稜剛
-'
+Sub 括號黑體()
     Selection.Find.ClearFormatting
     With Selection.Find
         .Text = "「*」"
@@ -22,22 +22,33 @@ Sub 附件及括號黑體()
         .Format = True
         .MatchWildcards = True
     End With
-    Do
-      Selection.Find.Execute
+    Selection.HomeKey Unit:=wdStory
+    Selection.Find.Execute
+    Do While Selection.Find.Found
       Selection.Font.Bold = True
-    Loop While Selection.Find.Found
-    
+      Selection.Find.Execute
+    Loop
+End Sub
+
+Sub 附件自動標號及黑體()
+    Dim seq As Integer
+    seq = 1
     With Selection.Find
         .Text = "(附件[0-9]{1,}*)"
         .Forward = True
-        .Wrap = wdFindContinue
+        .Wrap = wdFindStop
         .Format = True
         .MatchWildcards = True
     End With
-    Do
-      Selection.Find.Execute
-      Selection.Font.Bold = True
-    Loop While Selection.Find.Found
+    
+    Selection.HomeKey Unit:=wdStory
+    Selection.Find.Execute
+    Do While Selection.Find.Found
+        Selection.Font.Bold = True
+        Selection.Text = "附件" + CStr(seq)
+        seq = seq + 1
+        Selection.Find.Execute
+    Loop
     
 End Sub
 
@@ -47,18 +58,20 @@ Sub 標題灰底()
 '
     Selection.Find.ClearFormatting
     With Selection.Find
-        .Text = "([一二三四五六七八九十].*？)"
+        .Text = "[一二三四五六七八九十]、"
         .Forward = True
-        .Wrap = wdFindContinue
+        .Wrap = wdFindStop
         .Format = True
         .MatchWildcards = True
     End With
-        
-    Do
-      Selection.Find.Execute
+    
+    Selection.HomeKey Unit:=wdStory
+    Selection.Find.Execute
+    Do While Selection.Find.Found
       Selection.Paragraphs(1).Shading.BackgroundPatternColor = wdColorGray15
       Selection.Font.Bold = False
-    Loop While Selection.Find.Found
+      Selection.Find.Execute
+    Loop
     
 End Sub
 

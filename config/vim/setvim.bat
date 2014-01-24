@@ -5,7 +5,7 @@ rem
 set src=D:\stxt\config\vim
 set dst=C:\vim
 
-copy _vimrc %dst%
+copy %src%\_vimrc %dst%
 
 if not exist %dst%\vimfiles mkdir %dst%\vimfiles
 

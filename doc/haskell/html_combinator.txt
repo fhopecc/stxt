@@ -1,0 +1,307 @@
+html 組合子
+-----------
+
+使用 html 組合子
+................
+
+使用 html 組合子方式如下：
+
+import Text.Html
+
+htmlPage :: [Html]
+htmlPage
+      = header
+        << thetitle 
+           << "My Haskell Home Page"
+   +++ body ! [bgcolor "#aaff88"] << theBody
+
+theBody :: [Html]
+theBody =
+      table ! [border 0] << tableContents
+  +++ br
+  +++ p << message
+message 
+ = "Haskell is a general purpose, purely functional programming language."
+
+tableContents :: HtmlTable
+tableContents = (haskell `above` purely) `beside` lambda
+    where
+      haskell = td ! [align "center"]
+                  << font ![size "7",face "Arial Black"] 
+                      << "Haskell"
+      purely  = td << font ! [size "6"] 
+                      << "A Purely Functional Language"
+      lambda  = td << image ! [src "lambda.gif"]
+
+-- writeFile 用來寫入
+main = writeFile "example.htm" (renderHtml htmlPage)
+
+
+上式會產出 HTML 檔如下碼：
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<!--Rendered using the Haskell Html Library v0.1-->
+<HTML
+><HEAD
+  ><TITLE
+    >My Haskell Home Page</TITLE
+    ></HEAD
+  ><BODY BGCOLOR = "#aaff88"
+  ><TABLE BORDER = "1"
+    ><TR
+      ><TD ALIGN = "center"
+	><FONT SIZE = "7" FACE = "Arial Black"
+	  >Haskell</FONT
+	  ></TD
+	><TD ROWSPAN = "2"
+	><IMG SRC = "lambda.gif"
+	  ></TD
+	></TR
+      ><TR
+      ><TD
+	><FONT SIZE = "6"
+	  >A Purely Functional Language</FONT
+	  ></TD
+	></TR
+      ></TABLE
+    ><BR
+    ><P
+    >Haskell is a general purpose, purely functional programming language.</P
+    ></BODY
+  ></HTML
+>
+
+
+產出碼看來有點怪，但在 HTML 中，空格是有作用的，
+上述的排版可避免多餘的空格。
+
+巢狀組合子
+..........
+
+組合子利用巢狀串列表示 Html 文件之巢狀結構，如下：
+
+htmlPage :: [Html]
+htmlPage = 
+    [header [thetitle [stringToHtml "My Haskell Home Page"]],
+     body theBody]
+
+
+故組合子定義為接受 Html 之串列類型，並產出一個 Html，
+其類型定義如下：
+
+header              :: [Html] -> Html
+thetitle            :: [Html] -> Html
+body                :: [Html] -> Html
+stringToHtml        :: String -> Html
+
+
+a << b 表示第 b 標籤內嵌於 a 標籤中，
+會比上面用巢狀串列表示更為簡明，如下：
+
+htmlPage :: [Html]
+htmlPage = 
+   [header 
+      << thetitle 
+         << "My Haskell Home Page",
+     body << theBody]
+
+
+由上例可知 << 運算子的第 2 個合法參數，
+可為 Html, [Html] 及 String 類型。
+
+
+序列組合子
+..........
+
+a +++ b 運算子表示將 b 加入與 a 同個父節點之下，如下例：
+
+htmlPage :: [Html]
+htmlPage = 
+   header 
+      << thetitle 
+         << "My Haskell Home Page",
+  +++ body << theBody
+
+
+body 和 thetitle 是同為 thetitle 之子標籤。
+
+參數組合子
+..........
+
+利用 tag ! [attr value,  加入參數的語法如下：
+
+infixl 8 !    -- adding optional arguments
+class ADDATTRS a where
+      (!) :: a -> [HtmlAttr] -> a
+
+
+
+This says that we can use ! to add arguments. ADDATTRS is overloaded for (a -> Html) and Html. (We actually jump through a few hoops here to allow Haskell98 complience). So ...
+(body ! [bgcolor "orange"]) :: [Html] -> Html
+
+... but the body also has the attribute, bgcolor "orange". So we can now say:
+
+! 運算子用來加入參數，
+ADDATTRS 類別被 (a -> Html) 及 Html 兩個類型多載。
+
+
+htmlPage :: [Html]
+htmlPage = 
+   header 
+      << thetitle 
+         << "My Haskell Home Page",
+  +++ body ! [ bgcolor "orange"] << theBody
+
+This library provides many specific functions like header and thetitle, as well as attribute builders, like bgcolor. Look at the source for more details.
+
+其它組合子
+..........
+
+tag str 為一個標籤名為 str。
+
+primHtml str 直接把未經處理的 str 字串加入原始碼中。
+
+noHtml 表示空 html 字串，
+可用來把 Html -> Html 之組合子轉成 Html 組合子，如下碼：
+
+thelink ! [ rel "stylesheet", href  "web.css"] << noHtml
+
+
+建立表格
+--------
+
+表格建構組合子如下：
+
+cell :: (HTMLTABLE ht) => ht -> HtmlTable
+
+(</>),above,(<->),beside 
+
+     :: (HTMLTABLE ht1,HTMLTABLE ht2) => ht1 -> ht2 -> HtmlTable
+
+aboves,besides
+     :: (HTMLTABLE ht) => [ht] -> HtmlTable
+
+HTML 類別有 2 個實例為 Html 及 HtmlTable。
+cell 能包裝個別元素為小表格。
+above, aboves, beside, besides 等函數可將小表格組成更大的表格。
+
+tableContents = (haskell `above` purely) `beside` lambda
+      haskell = td ! [align "center"]
+                  << font ![size "7",face "Arial Black"] 
+                      << "Haskell"
+      purely  = td << font ! [size "6"] 
+                      << "A Purely Functional Language"
+      lambda  = td << image ! [src "lambda.gif"]
+
+使用 above 及 beside 可自動應用 cell 去包裝 td 等元素。
+
+HtmlTable 是 MARKUP 的實例，所以可用 table 將內容 HtmlTable
+表示的表格轉成 HTML。
+
+
+example :: Html
+example = table ! [border 0] << tableContents
+
+除錯及顯示巢狀結構
+..................
+
+Consider if we now want to debug the above example.
+example :: Html
+example = table ! [border 0] << tableContents
+
+How can we do this? Html is an instance of Show, giving.
+ <TABLE BORDER = "0">
+   <TR>
+      <TD ALIGN = "center">
+         <FONT SIZE = "7" FACE = "Arial Black">
+            Haskell
+         </FONT>
+      </TD>
+      <TD ROWSPAN = "2">
+         <IMG SRC = "lambda.gif">
+      </TD>
+   </TR>
+   <TR>
+      <TD>
+         <FONT SIZE = "6">
+            A Purely Functional Language
+         </FONT>
+      </TD>
+   </TR>
+</TABLE>
+	
+However, we can do better. This is pure ASCII. Why not use HTML to debug HTML?
+example2 :: Html
+example2 = debugHtml example
+
+Rendering example2 gives:
+Debugging Output
+<TABLE BORDER="0">
+ 	<TR >
+ 	<TD ALIGN="center">
+ 	<FONT SIZE="7" FACE="Arial Black">
+ 	 Haskell
+</FONT>
+</TD>
+<TD ROWSPAN="2">
+ 	<IMG SRC="lambda.gif">
+</TD>
+</TR>
+<TR >
+ 	<TD >
+ 	<FONT SIZE="6">
+ 	 A Purely Functional Language
+</FONT>
+</TD>
+</TR>
+</TABLE>
+The nesting here is explicit. This is especially useful when you have a non-trivial piece of code that generates Html, and you want to see whats actually happening.
+
+You can use the mechanism used by the debugHtml function to display your own nesting structures! Just translate your data into an HtmlTree structure.
+
+data HtmlTree
+      = HtmlLeaf [Html]
+      | HtmlNode [Html] [HtmlTree] [Html]
+
+HtmlLeaf are printed without background color, and HtmlNode displays the first [Html] as a header, the subtrees nested, and the second [Html] as a footer. Here is how we transliterate the Html structure in the debugging code
+
+debug :: Html -> HtmlTree
+debug (HtmlString str) = HtmlLeaf (spaceHtml : markup str)
+debug (HtmlTag {
+        thetag = thetag,
+        innerHtml = innerHtml,
+        attrs  = attrs
+        }) = 
+        case innerHtml of
+          [] -> HtmlNode [hd] [] []
+          xs -> HtmlNode [hd] (map debug xs) [tl]
+  where
+        args = unwords (map show attrs)
+        hd = font ! [size "1"] << ("<" ++ thetag ++ " " ++ args ++ ">")
+        tl = font ! [size "1"] << ("</" ++ thetag ++ ">")
+
+HtmlTree is an instance of MARKUP, so if you have a tree called treeExample, you can use:
+
+exampleTree :: HtmlTree
+example :: [Html]
+example = br +++ exampleTree +++ br
+
+實作
+....
+
+巢狀運算子 << 接受一個將 Html 串對應到某些東西的參數，
+並將第2個參數給 markup 的轉換函數。
+MARKUP 組合子讓語法更清楚:
+
+class MARKUP a where { markup  :: a -> [Html] }
+infixr 7 <<
+(<<) :: (MARKUP a) => ([Html] -> b) -> a  -> b
+fn << arg = fn (markup arg)
+
++++ 運算子定義如下：
+
+infixr 2 +++  -- combining Html
+(+++) :: (MARKUP a,MARKUP b) => a -> b -> [Html]
+a +++ b = concat [markup a,markup b]
+
+
