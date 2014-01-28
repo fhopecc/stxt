@@ -10,6 +10,7 @@ module STXT( run, rawRun, runPart, rawRunPart
            , Sect1(Sect1)
            , Sect2(Sect2)
            , Sect1s
+           , Sect2s
            , Title
            , Content(Code, Para)
            , getSect2s

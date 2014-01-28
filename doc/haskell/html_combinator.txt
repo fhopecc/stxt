@@ -167,6 +167,28 @@ noHtml 表示空 html 字串，
 thelink ! [ rel "stylesheet", href  "web.css"] << noHtml
 
 
+thehtml ! [lang "zh-tw"] << noHtml
+
+header
+
+表：the 類的組合子
+
+thehtml thetitle thelink thediv
+
+表：tag 組合子
+
+header body
+
+表：itag組合子
+
+meta hr
+
+屬性
+.....
+
+httpequiv
+
+
 建立表格
 --------
 

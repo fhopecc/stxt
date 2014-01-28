@@ -5,3 +5,95 @@ forM
 main = forM [1..10] $ \x -> do
           putStr "Looping: "
           print x
+
+Reader Monad
+............
+
+使用 Reader Monad 先要 import Control.Monad.Reader 模組如下：
+
+import Control.Monad.Reader
+
+Now let's define some data structure (that we're going to use to hold
+ a name and an age)
+
+data Config = Config { name :: String, age :: Int }
+
+Now define a function that works in the Reader monad (it's type is
+ Reader Config (String, Int) but we don't need to specify that - it
+ can be inferred). All this function does is ask for the environment
+ (of type Config) and then extracts the fields and does something with
+ them.
+
+example = do
+    c <- ask
+    return ("Hello " ++ name c, 2 * age c)
+
+Now we put it all together into a program. The first four lines after
+ the do block allow the user to enter their name and age. Then we
+ build a Config structure using the user's inputs (we have to use read
+ to convert the variable _age, which is a String, into an Int so that
+ we can feed it to the Config constructor) and execute example with
+ this environment, using the runReader function. Finally, we use the
+ result of this computation to generate some output.
+
+main = do
+    putStrLn "Enter your name:"
+    _name <- getLine
+    putStrLn "Enter your age:"
+    _age <- getLine
+    let config = Config _name (read _age)
+    let result = runReader example config
+    putStrLn $ fst result
+    putStrLn $ "Twice your age is: " ++ show (snd result)
+
+
+ST Monad
+........
+
+使用 ST 單子主要
+So, I’m wanting to put more examples on the Monad/ST page on the
+ Haskell wiki, but I’m not sure what else I can do with it that’s
+ simple. I’ve been using Haskell for too long to remember what sort of
+ problems I’d write statefully! So, if you have any ideas, either let
+ me know, or just post them on the wiki! My first example is:
+
+import Control.Monad.ST
+import Data.STRef
+import Control.Monad
+ 
+sumST :: Num a => [a] -> a
+
+sumST xs = runST $ do        -- runST 接受狀態碼，並轉成純碼。
+    n <- newSTRef 0          -- Create an STRef (place in memory to store values)
+    forM_ xs $ x -> do       -- For each element of xs ..
+        modifySTRef n (+x)   -- add it to what we have in n.
+        readSTRef n          -- read the value of n, and return it.
+
+which is a version of the sum function, that uses the ST monad to
+ update a variable in place, but also run in a purely functional way
+ (notice the lack of ST in the type signature) And foldl and Fibonacci
+ using ST:
+
+foldlST :: (a -> b -> a) -> a -> [b] -> a
+foldlST f acc xs = runST $ do
+acc' <- newSTRef acc            -- Create a variable for the accumulator
+forM_ xs $ x -> do             -- For each x in xs...
+a <- readSTRef acc'         -- read the accumulator
+writeSTRef acc' (f a x)     -- apply f to the accumulator and x
+readSTRef acc'                  -- and finally read the result
+fibST :: Integer -> Integer
+fibST n =
+if n < 2
+then n
+else runST $ do
+x <- newSTRef 0
+y <- newSTRef 1
+fibST' n x y
+where fibST' 0 x _ = readSTRef x
+fibST' n x y = do
+x' <- readSTRef x
+y' <- readSTRef y
+writeSTRef x y'
+writeSTRef y (x'+y')
+fibST' (n-1) x y
+*Output created by HsColor
