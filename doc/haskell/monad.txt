@@ -6,6 +6,11 @@ main = forM [1..10] $ \x -> do
           putStr "Looping: "
           print x
 
+mapM
+....
+
+mapM :: Monad m => (a -> m b) -> [a] -> m [a]
+
 Reader Monad
 ............
 

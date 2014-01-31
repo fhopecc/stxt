@@ -8,26 +8,54 @@ main = do
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
+    
+    mapM_ writeHtml (runReader askHtmls (Env { getSource = src
+                                       , getOutDir = "d:\\stxt\\myweb\\vbscript"
+                                       , getDoc = STXT.run c
+                                       }))
 
-    writeIndexHtml (runReader askWriteIndexHtml (Env 
-        { getSource = src
-        , getOutDir = "d:\\stxt\\myweb\\vbscript"
-        , getDoc = STXT.run c
-        }))
-
-writeIndexHtml :: (FilePath, Html) -> IO ()
-writeIndexHtml (path, html) = do
+writeHtml :: (FilePath, Html) -> IO ()
+writeHtml (path, html) = do
     f <- openFile path WriteMode
     hSetEncoding f utf8
     hPutStr f (renderHtml html)
+    putStrLn path
     hFlush f
     hClose f
 
-askWriteIndexHtml :: Reader Env (FilePath, Html)
-askWriteIndexHtml = do
+askHtmls :: Reader Env [(FilePath, Html)]
+askHtmls = do
+    ihtml <- askIndexHtml
+    s1htmls <- askSect1Htmls  
+    return $ ihtml : s1htmls
+
+askIndexHtml :: Reader Env (FilePath, Html)
+askIndexHtml = do
     f <- askIndexPath
     html <- askIndexPage
     return (f, html)
+
+askSect1Htmls :: Reader Env [(FilePath, Html)]
+askSect1Htmls = do
+    s1s <- askSect1s
+    mapM askSect1Html s1s
+
+askSect1Html :: STXT.Sect1 -> Reader Env (FilePath, Html)
+askSect1Html s1@(STXT.Sect1 n t s2s) = do
+    doc@(STXT.Doc _ s1s) <- askDoc
+    sect1bar <- askSect1Bar s1
+    sect2bar <- askSect2Bar (head s1s)
+    let html = thehtml ! [lang "zh-tw"] 
+                << header 
+                    << myMeta
+                   +++ myLink
+                   +++ thetitle << t
+               +++ body 
+                    << sect1bar 
+                   +++ sect2bar 
+    s1File <- askSect1File s1
+    return $ (s1File, html)
+
 
 data Env = Env { getSource :: FilePath  
                , getOutDir :: FilePath  
@@ -38,7 +66,7 @@ askIndexPage :: Reader Env Html
 askIndexPage = do
     t <- askDocTitle
     doc@(STXT.Doc _ s1s) <- askDoc
-    sect1bar <- askSect1Bar
+    sect1bar <- askSect1Bar $ head s1s
     sect2bar <- askSect2Bar (head s1s)
     return $ thehtml ! [lang "zh-tw"] 
                 << header 
@@ -63,12 +91,22 @@ askIndexPath = do
     outdir <- askOutDir 
     return $ outdir ++ "\\" ++ "index.html"
 
-askSect1Bar :: Reader Env Html
-askSect1Bar = do
+askSect1File :: STXT.Sect1 -> Reader Env String
+askSect1File s1@(STXT.Sect1 n t _) = do
+    outdir <- askOutDir 
+    return $ outdir ++ "\\" ++ show n ++ ".html" 
+
+askSect2File :: STXT.Sect2 -> Reader Env String
+askSect2File s2@(STXT.Sect2 (n1, n2) t _) = do
+    outdir <- askOutDir 
+    return $ outdir ++ "\\" ++ show n1 ++ show n2 ++ ".html" 
+
+askSect1Bar :: STXT.Sect1 -> Reader Env Html
+askSect1Bar (STXT.Sect1 selected t _) = do
     s1s <- askSect1s 
     return $ thediv ! [identifier "sect1_bar"] 
                 << table 
-                    << besides [ (label (1==n)) << sect1Anchor s1 
+                    << besides [ (label (n==selected)) << sect1Anchor s1 
                                | s1@(STXT.Sect1 n _ _) <- s1s
                                ]
 

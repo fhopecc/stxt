@@ -1,3 +1,0 @@
-select versions_xid, col1 from table1
-versions between timestamp t1 and t2
-where conditions;

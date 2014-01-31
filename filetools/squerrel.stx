@@ -1,7 +1,0 @@
-Q.howto use explain plan oracle?
-I've used it without problems. Just click on the Explain Plan Tab,
-when you're at the SQL Entry Area and Run your SQL. If you havent got
-a PLAN_TABLE created, SQuirreL will ask permission to create one. The
-meaning of the output is Oracle specific, so you must on the online
-Oracle docs for further information.
-
