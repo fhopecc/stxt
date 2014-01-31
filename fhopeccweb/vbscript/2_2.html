@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HTML LANG = "zh-tw"
+  ><HEAD
+    ><META HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset=utf-8"
+      ></HEAD
+    ></HTML
+  ><LINK REL = "stylesheet" HREF = "web.css"
+  ></LINK
+  ><TITLE
+  >轉碼</TITLE
+  ><BODY
+  ><DIV ID = "sect1_bar"
+    ><TABLE
+      ><TR
+	><TD
+	  ><A HREF = "1.html"
+	    >語法</A
+	    ></TD
+	  ><TD CLASS = "selected"
+	  ><A HREF = "2.html"
+	    >系統管理</A
+	    ></TD
+	  ></TR
+	></TABLE
+      ></DIV
+    ></BODY
+  ><DIV ID = "sect2_bar"
+  ><TABLE
+    ><TR
+      ><TD
+	><A HREF = "2_1.html"
+	  >取得命令列參數</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD CLASS = "selected"
+	><A HREF = "2_2.html"
+	  >轉碼</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD
+	><A HREF = "2_3.html"
+	  >VBS字串實字</A
+	  ></TD
+	></TR
+      ><TR
+      ><TD
+	><A HREF = "2_4.html"
+	  >VBS字串的內部實現</A
+	  ></TD
+	></TR
+      ></TABLE
+    ></DIV
+  ><P
+  >轉碼主要是利用 stream 物件的 readText 將來源串流轉成字串，再用 writeText 方法將字串寫入目標編碼的位元串流，如下</P
+  ><PRE
+  >option explicit
+
+dim txt, src, dst
+
+txt = wscript.arguments(0)
+
+'ADODB.Stream file I/O constants
+const adTypeBinary          = 1
+const adTypeText            = 2
+const adSaveCreateOverWrite = 2
+const adReadAll             = -1
+const adWriteChar           = 0
+
+with createObject(&quot;ADODB.Stream&quot;)
+    dim strText
+    .open
+    .type = adTypeBinary
+    .loadFromFile txt
+    .type = adTypeText
+    .charset = &quot;utf-8&quot;
+    strText = .readText(adReadAll)
+    .position = 0
+    .setEOS
+    .charset = &quot;big5&quot;
+    .writeText strText, adWriteChar
+    .saveToFile txt &amp; &quot;_big5.txt&quot;, adSaveCreateOverWrite
+    .close
+end with</PRE
+  ></HTML
+>

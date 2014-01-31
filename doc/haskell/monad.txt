@@ -11,6 +11,13 @@ mapM
 
 mapM :: Monad m => (a -> m b) -> [a] -> m [a]
 
+Maybe
+.....
+
+可用 id 函數將 maybe 函數轉成 NVL 函數如下：
+
+maybe (head s1s) id (find (\s1@(STXT.Sect1 n _ _) -> n == n1))
+
 Reader Monad
 ............
 

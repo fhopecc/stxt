@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HTML LANG = "zh-tw"
+  ><HEAD
+    ><META HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset=utf-8"
+      ></HEAD
+    ></HTML
+  ><LINK REL = "stylesheet" HREF = "web.css"
+  ></LINK
+  ><TITLE
+  >with 陳述式</TITLE
+  ><BODY
+  ><DIV ID = "sect1_bar"
+    ><TABLE
+      ><TR
+	><TD CLASS = "selected"
+	  ><A HREF = "1.html"
+	    >語法</A
+	    ></TD
+	  ><TD
+	  ><A HREF = "2.html"
+	    >系統管理</A
+	    ></TD
+	  ></TR
+	></TABLE
+      ></DIV
+    ></BODY
+  ><DIV ID = "sect2_bar"
+  ><TABLE
+    ><TR
+      ><TD CLASS = "selected"
+	><A HREF = "1_1.html"
+	  >with 陳述式</A
+	  ></TD
+	></TR
+      ></TABLE
+    ></DIV
+  ><P
+  >With 區塊可在單一物件上執行一系列的陳述式，如下</P
+  ><PRE
+  >With testObject
+    .Height = 100
+    .Text = &quot;Hello, World&quot;
+    .ForeColor = System.Drawing.Color.Green
+    .Font = New System.Drawing.Font(.Font, _
+        System.Drawing.FontStyle.Bold)
+End With</PRE
+  ><P
+  >With 指定物件 testObject 執行一系列的陳述式，變更 testObject 的數個不同屬性，請將屬性指派陳述式 (Assignment Statement) 置入 With 區塊中，只需參考該物件名稱一次，而不必在每次指派屬性時都要加以參考。</P
+  ></HTML
+>

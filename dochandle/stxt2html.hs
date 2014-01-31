@@ -2,6 +2,7 @@ import qualified STXT
 import Text.Html
 import Control.Monad.Reader
 import System.IO
+import Data.List
 
 main = do 
     let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
@@ -10,7 +11,7 @@ main = do
     c <- hGetContents f
     
     mapM_ writeHtml (runReader askHtmls (Env { getSource = src
-                                       , getOutDir = "d:\\stxt\\myweb\\vbscript"
+                                       , getOutDir = "d:\\stxt\\fhopeccweb\\vbscript"
                                        , getDoc = STXT.run c
                                        }))
 
@@ -27,7 +28,8 @@ askHtmls :: Reader Env [(FilePath, Html)]
 askHtmls = do
     ihtml <- askIndexHtml
     s1htmls <- askSect1Htmls  
-    return $ ihtml : s1htmls
+    s2htmls <- askSect2Htmls
+    return $ ihtml : s1htmls ++ s2htmls
 
 askIndexHtml :: Reader Env (FilePath, Html)
 askIndexHtml = do
@@ -40,11 +42,17 @@ askSect1Htmls = do
     s1s <- askSect1s
     mapM askSect1Html s1s
 
+askSect2Htmls ::  Reader Env [(FilePath, Html)]
+askSect2Htmls = do
+    s1s <- askSect1s
+    mapM askSect2Html $ concat [s2s | s1@(STXT.Sect1 _ _ s2s) <- s1s]
+
+
 askSect1Html :: STXT.Sect1 -> Reader Env (FilePath, Html)
 askSect1Html s1@(STXT.Sect1 n t s2s) = do
     doc@(STXT.Doc _ s1s) <- askDoc
     sect1bar <- askSect1Bar s1
-    sect2bar <- askSect2Bar (head s1s)
+    sect2bar <- askSect2Bar (head s2s)
     let html = thehtml ! [lang "zh-tw"] 
                 << header 
                     << myMeta
@@ -56,18 +64,46 @@ askSect1Html s1@(STXT.Sect1 n t s2s) = do
     s1File <- askSect1File s1
     return $ (s1File, html)
 
+askSect2Html :: STXT.Sect2 -> Reader Env (FilePath, Html)
+askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
+    doc@(STXT.Doc _ s1s) <- askDoc
+    s1 <- askSect1OfSect2 s2
+    sect1bar <- askSect1Bar s1
+    sect2bar <- askSect2Bar s2
+    let html = thehtml ! [lang "zh-tw"] 
+                << header 
+                    << myMeta
+                   +++ myLink
+                   +++ thetitle << t
+               +++ body 
+                    << sect1bar 
+                   +++ sect2bar 
+                   +++ map content2Html cs
+    file <- askSect2File s2
+    return $ (file, html)
+
+askSect1OfSect2 :: STXT.Sect2 -> Reader Env STXT.Sect1
+askSect1OfSect2 s2@(STXT.Sect2 (n1, n2) _ _) = do
+    s1s <- askSect1s
+    return $ maybe (head s1s) id (find (\s1@(STXT.Sect1 n _ _) -> n == n1) s1s)
+
 
 data Env = Env { getSource :: FilePath  
                , getOutDir :: FilePath  
                , getDoc    :: STXT.Doc
                }
 
+content2Html :: STXT.Content -> Html
+content2Html (STXT.Para ls) = paragraph << concat ls 
+content2Html (STXT.Code c) = pre << c
+
 askIndexPage :: Reader Env Html
 askIndexPage = do
     t <- askDocTitle
     doc@(STXT.Doc _ s1s) <- askDoc
     sect1bar <- askSect1Bar $ head s1s
-    sect2bar <- askSect2Bar (head s1s)
+    let s1@(STXT.Sect1 _ _ s2s) = head s1s
+    sect2bar <- askSect2Bar (head s2s)
     return $ thehtml ! [lang "zh-tw"] 
                 << header 
                     << myMeta
@@ -76,7 +112,6 @@ askIndexPage = do
                +++ body 
                     << sect1bar 
                    +++ sect2bar 
-
 
 myMeta = meta ! [ httpequiv "Content-Type"
                 , content   "text/html; charset=utf-8"
@@ -99,7 +134,7 @@ askSect1File s1@(STXT.Sect1 n t _) = do
 askSect2File :: STXT.Sect2 -> Reader Env String
 askSect2File s2@(STXT.Sect2 (n1, n2) t _) = do
     outdir <- askOutDir 
-    return $ outdir ++ "\\" ++ show n1 ++ show n2 ++ ".html" 
+    return $ outdir ++ "\\" ++ sect2Path s2
 
 askSect1Bar :: STXT.Sect1 -> Reader Env Html
 askSect1Bar (STXT.Sect1 selected t _) = do
@@ -110,12 +145,13 @@ askSect1Bar (STXT.Sect1 selected t _) = do
                                | s1@(STXT.Sect1 n _ _) <- s1s
                                ]
 
-askSect2Bar :: STXT.Sect1 -> Reader Env Html
-askSect2Bar s1 = do
+askSect2Bar :: STXT.Sect2 -> Reader Env Html
+askSect2Bar s2@(STXT.Sect2 (sn1, sn2) _ _) = do
+    s1  <- askSect1OfSect2 s2
     s2s <- askSect2s s1 
     return $ thediv ! [identifier "sect2_bar"] 
                 << table 
-                    << aboves [ (label (1==n2)) << sect2Anchor s2 
+                    << aboves [ (label (n1 == sn1 && n2 == sn2 )) << sect2Anchor s2 
                               | s2@(STXT.Sect2 (n1,n2) _ _) <- s2s
                               ]
 
