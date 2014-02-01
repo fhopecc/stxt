@@ -54,18 +54,38 @@
 	></TR
       ></TABLE
     ></DIV
-  ><P
-  >VBS 是基於微軟的 ActiveX/COM 技術實現的，而 COM 對象為了做到支持任何語言，定義了一系列通用的數據類型，微軟稱之為自動化對像類型(Automation data types)，其中之一就是基本字串，簡稱 BSTR。</P
-  ><P
-  >VBS 在內部是以 BSTR 來表示字串的，BSTR 在 WTypes.h 中定義如下</P
-  ><PRE
-  >typedef wchar_t WCHAR;
+  ><DIV ID = "rightbar"
+  ><script TYPE = "text/javascript"
+    ><!--
+google_ad_client = "pub-7516968926110807";
+/* Structed text left vertical unit */
+google_ad_slot = "5496674888";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script
+    ><script TYPE = "text/javascript" SRC = "http://pagead2.googlesyndication.com/pagead/show_ads.js"
+    ></script
+    ></DIV
+  ><DIV ID = "content"
+  ><DIV CLASS = "para"
+    ><P
+      >VBS 是基於微軟的 ActiveX/COM 技術實現的，而 COM 對象為了做到支持任何語言，定義了一系列通用的數據類型，微軟稱之為自動化對像類型(Automation data types)，其中之一就是基本字串，簡稱 BSTR。</P
+      ></DIV
+    ><DIV CLASS = "para"
+    ><P
+      >VBS 在內部是以 BSTR 來表示字串的，BSTR 在 WTypes.h 中定義如下</P
+      ></DIV
+    ><PRE
+    >typedef wchar_t WCHAR;
 typedef WCHAR OLECHAR;
 typedef OLECHAR *BSTR;</PRE
-  ><P
-  >從定義可以看出，BSTR 是指向 wchar_t 類型的指針，但是 BSTR 並不是普通的 wchar_t 指針。wchar_t 是 C 的寬字元型別，寬字元指大於 1 位元組之字元資料，Windows API 中，wchar_t 是以 UTF-16 LE 編碼。BSTR 指向一個有長度前綴和 NUL 結束符的 wchar_t 陣列。BSTR 的前 4 位元組是一個表示字串長度之前綴，長度值是字串的位元組數，且不包括 NUL 結束符。如下</P
-  ><PRE
-  >str = &quot;Hello&quot; &amp; Chr(0) &amp; &quot;world&quot;
+    ><DIV CLASS = "para"
+    ><P
+      >從定義可以看出，BSTR 是指向 wchar_t 類型的指針，但是 BSTR 並不是普通的 wchar_t 指針。wchar_t 是 C 的寬字元型別，寬字元指大於 1 位元組之字元資料，Windows API 中，wchar_t 是以 UTF-16 LE 編碼。BSTR 指向一個有長度前綴和 NUL 結束符的 wchar_t 陣列。BSTR 的前 4 位元組是一個表示字串長度之前綴，長度值是字串的位元組數，且不包括 NUL 結束符。如下</P
+      ></DIV
+    ><PRE
+    >str = &quot;Hello&quot; &amp; Chr(0) &amp; &quot;world&quot;
 
 這句 VBS 程式碼初始化了一個 BSTR 變數：
 
@@ -141,7 +161,10 @@ ANSI 實際對應的編碼跟系統設置的程式碼頁有關，
 用下列碼可顯示版本訊息如下碼：
 
 msgbox ScriptEngineMajorVersion &amp; &quot;.&quot; &amp; ScriptEngineMinorVersion </PRE
-  ><P
-  >直譯器的版本常數如下表：ScriptEngineMajorVersion    主版號ScriptEngineMinorVersion    次版號</P
+    ><DIV CLASS = "para"
+    ><P
+      >直譯器的版本常數如下表：ScriptEngineMajorVersion    主版號ScriptEngineMinorVersion    次版號</P
+      ></DIV
+    ></DIV
   ></HTML
 >

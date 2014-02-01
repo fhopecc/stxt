@@ -54,23 +54,42 @@
 	></TR
       ></TABLE
     ></DIV
-  ><P
-  >wscript.arguments 為啟動腳本時接受之參數集合物件，如下</P
-  ><PRE
-  >dim args, arg
+  ><DIV ID = "rightbar"
+  ><script TYPE = "text/javascript"
+    ><!--
+google_ad_client = "pub-7516968926110807";
+/* Structed text left vertical unit */
+google_ad_slot = "5496674888";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script
+    ><script TYPE = "text/javascript" SRC = "http://pagead2.googlesyndication.com/pagead/show_ads.js"
+    ></script
+    ></DIV
+  ><DIV ID = "content"
+  ><DIV CLASS = "para"
+    ><P
+      >wscript.arguments 為啟動腳本時接受之參數集合物件，如下</P
+      ></DIV
+    ><PRE
+    >dim args, arg
 
 set args = wscript.arguments
 wscript.echo args(1)
 for each arg in args
     wscript.echo arg
 next</PRE
-  ><P
-  >arguments 物件是由零開始作索引，因此 args(1) 表示第 2 個傳入之參數。執行結果如下</P
-  ><PRE
-  >cscript a.vbs arg1 arg2
+    ><DIV CLASS = "para"
+    ><P
+      >arguments 物件是由零開始作索引，因此 args(1) 表示第 2 個傳入之參數。執行結果如下</P
+      ></DIV
+    ><PRE
+    >cscript a.vbs arg1 arg2
 
 arg2
 arg1
 arg2</PRE
+    ></DIV
   ></HTML
 >

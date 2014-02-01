@@ -31,12 +31,6 @@ askHtmls = do
     s2htmls <- askSect2Htmls
     return $ ihtml : s1htmls ++ s2htmls
 
-askIndexHtml :: Reader Env (FilePath, Html)
-askIndexHtml = do
-    f <- askIndexPath
-    html <- askIndexPage
-    return (f, html)
-
 askSect1Htmls :: Reader Env [(FilePath, Html)]
 askSect1Htmls = do
     s1s <- askSect1s
@@ -59,8 +53,9 @@ askSect1Html s1@(STXT.Sect1 n t s2s) = do
                    +++ myLink
                    +++ thetitle << t
                +++ body 
-                    << sect1bar 
-                   +++ sect2bar 
+                    << sect1bar
+                   +++ sect2bar
+                   +++ rightAds
     s1File <- askSect1File s1
     return $ (s1File, html)
 
@@ -76,9 +71,11 @@ askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
                    +++ myLink
                    +++ thetitle << t
                +++ body 
-                    << sect1bar 
-                   +++ sect2bar 
-                   +++ map content2Html cs
+                    << sect1bar
+                   +++ sect2bar
+                   +++ rightAds
+                   +++ thediv ![identifier "content"]
+                        << map content2Html cs
     file <- askSect2File s2
     return $ (file, html)
 
@@ -94,17 +91,18 @@ data Env = Env { getSource :: FilePath
                }
 
 content2Html :: STXT.Content -> Html
-content2Html (STXT.Para ls) = paragraph << concat ls 
+content2Html (STXT.Para ls) = thediv ! [theclass "para"]
+                                << paragraph << concat ls 
 content2Html (STXT.Code c) = pre << c
 
-askIndexPage :: Reader Env Html
-askIndexPage = do
+askIndexHtml :: Reader Env (FilePath, Html)
+askIndexHtml = do
     t <- askDocTitle
     doc@(STXT.Doc _ s1s) <- askDoc
     sect1bar <- askSect1Bar $ head s1s
     let s1@(STXT.Sect1 _ _ s2s) = head s1s
     sect2bar <- askSect2Bar (head s2s)
-    return $ thehtml ! [lang "zh-tw"] 
+    let html = thehtml ! [lang "zh-tw"] 
                 << header 
                     << myMeta
                    +++ myLink
@@ -112,6 +110,10 @@ askIndexPage = do
                +++ body 
                     << sect1bar 
                    +++ sect2bar 
+                   +++ rightAds
+
+    f <- askIndexPath
+    return (f, html)
 
 myMeta = meta ! [ httpequiv "Content-Type"
                 , content   "text/html; charset=utf-8"
@@ -161,6 +163,7 @@ label selected child = (if selected then
     else 
         td) << child
 
+
 sect1Anchor :: STXT.Sect1 -> Html
 sect1Anchor s1@(STXT.Sect1 n t _) = 
     anchor ! [href (sect1Path s1)] << t
@@ -200,3 +203,20 @@ askSect1s = do
 askSect2s :: STXT.Sect1 -> Reader Env STXT.Sect2s
 askSect2s (STXT.Sect1 _ _ s2s) = do 
     return s2s
+
+rightAds :: Html
+rightAds = thediv ! [identifier "rightbar"]
+            << [ tag "script"  ! [thetype "text/javascript"] 
+                 << (primHtml $ concat [ "<!--\n"
+                                       , "google_ad_client = \"pub-7516968926110807\";\n"
+                                       , "/* Structed text left vertical unit */\n"
+                                       , "google_ad_slot = \"5496674888\";\n"
+                                       , "google_ad_width = 120;\n"
+                                       , "google_ad_height = 600;\n"
+                                       , "//-->\n"
+                                       ])
+               , tag "script" ! [ thetype "text/javascript"
+                               , src "http://pagead2.googlesyndication.com/pagead/show_ads.js"
+                               ] << noHtml
+               ]
+           
