@@ -4,6 +4,13 @@ import Control.Monad.Reader
 import System.IO
 import Data.List
 
+data Env = Env { getSource :: FilePath  
+               , getOutDir :: FilePath  
+               , getDoc    :: STXT.Doc
+               }
+
+weburl = "http://fhopeccweb.appspot.com"
+
 main = do 
     let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
     f <- openFile src ReadMode
@@ -14,6 +21,7 @@ main = do
                                        , getOutDir = "d:\\stxt\\fhopeccweb\\vbscript"
                                        , getDoc = STXT.run c
                                        }))
+
 
 writeHtml :: (FilePath, Html) -> IO ()
 writeHtml (path, html) = do
@@ -31,6 +39,26 @@ askHtmls = do
     s2htmls <- askSect2Htmls
     return $ ihtml : s1htmls ++ s2htmls
 
+askIndexHtml :: Reader Env (FilePath, Html)
+askIndexHtml = do
+    t <- askDocTitle
+    doc@(STXT.Doc _ s1s) <- askDoc
+    sect1bar <- askSect1Bar $ head s1s
+    let s1@(STXT.Sect1 _ _ s2s) = head s1s
+    sect2bar <- askSect2Bar (head s2s)
+    let html = thehtml ! [lang "zh-tw"] 
+                << header 
+                    << myMeta
+                   +++ myLink
+                   +++ thetitle << t
+               +++ body 
+                    << sect1bar 
+                   +++ sect2bar 
+                   +++ rightAds
+
+    f <- askIndexFile
+    return (f, html)
+
 askSect1Htmls :: Reader Env [(FilePath, Html)]
 askSect1Htmls = do
     s1s <- askSect1s
@@ -40,7 +68,6 @@ askSect2Htmls ::  Reader Env [(FilePath, Html)]
 askSect2Htmls = do
     s1s <- askSect1s
     mapM askSect2Html $ concat [s2s | s1@(STXT.Sect1 _ _ s2s) <- s1s]
-
 
 askSect1Html :: STXT.Sect1 -> Reader Env (FilePath, Html)
 askSect1Html s1@(STXT.Sect1 n t s2s) = do
@@ -85,46 +112,8 @@ askSect1OfSect2 s2@(STXT.Sect2 (n1, n2) _ _) = do
     return $ maybe (head s1s) id (find (\s1@(STXT.Sect1 n _ _) -> n == n1) s1s)
 
 
-data Env = Env { getSource :: FilePath  
-               , getOutDir :: FilePath  
-               , getDoc    :: STXT.Doc
-               }
-
-content2Html :: STXT.Content -> Html
-content2Html (STXT.Para ls) = thediv ! [theclass "para"]
-                                << paragraph << concat ls 
-content2Html (STXT.Code c) = pre << c
-
-askIndexHtml :: Reader Env (FilePath, Html)
-askIndexHtml = do
-    t <- askDocTitle
-    doc@(STXT.Doc _ s1s) <- askDoc
-    sect1bar <- askSect1Bar $ head s1s
-    let s1@(STXT.Sect1 _ _ s2s) = head s1s
-    sect2bar <- askSect2Bar (head s2s)
-    let html = thehtml ! [lang "zh-tw"] 
-                << header 
-                    << myMeta
-                   +++ myLink
-                   +++ thetitle << t
-               +++ body 
-                    << sect1bar 
-                   +++ sect2bar 
-                   +++ rightAds
-
-    f <- askIndexPath
-    return (f, html)
-
-myMeta = meta ! [ httpequiv "Content-Type"
-                , content   "text/html; charset=utf-8"
-                ] 
-
-myLink = thelink ! [ rel  "stylesheet"
-                   , href "web.css" 
-                   ] << noHtml
-
-askIndexPath :: Reader Env String
-askIndexPath = do
+askIndexFile :: Reader Env String
+askIndexFile = do
     outdir <- askOutDir 
     return $ outdir ++ "\\" ++ "index.html"
 
@@ -137,6 +126,15 @@ askSect2File :: STXT.Sect2 -> Reader Env String
 askSect2File s2@(STXT.Sect2 (n1, n2) t _) = do
     outdir <- askOutDir 
     return $ outdir ++ "\\" ++ sect2Path s2
+
+askTitleBar :: Reader Env Html
+askTitleBar = do
+    t <- askDocTitle 
+    return $ thediv ! [identifier "sect1_bar"] 
+                << table 
+                    << besides [ (label (n==selected)) << sect1Anchor s1 
+                               | s1@(STXT.Sect1 n _ _) <- s1s
+                               ]
 
 askSect1Bar :: STXT.Sect1 -> Reader Env Html
 askSect1Bar (STXT.Sect1 selected t _) = do
@@ -156,12 +154,6 @@ askSect2Bar s2@(STXT.Sect2 (sn1, sn2) _ _) = do
                     << aboves [ (label (n1 == sn1 && n2 == sn2 )) << sect2Anchor s2 
                               | s2@(STXT.Sect2 (n1,n2) _ _) <- s2s
                               ]
-
-label :: Bool -> Html -> Html
-label selected child = (if selected then
-        td ! [theclass "selected"]   
-    else 
-        td) << child
 
 
 sect1Anchor :: STXT.Sect1 -> Html
@@ -204,6 +196,19 @@ askSect2s :: STXT.Sect1 -> Reader Env STXT.Sect2s
 askSect2s (STXT.Sect1 _ _ s2s) = do 
     return s2s
 
+content2Html :: STXT.Content -> Html
+content2Html (STXT.Para ls) = thediv ! [theclass "para"]
+                                << paragraph << concat ls 
+content2Html (STXT.Code c) = pre << c
+
+myMeta = meta ! [ httpequiv "Content-Type"
+                , content   "text/html; charset=utf-8"
+                ] 
+
+myLink = thelink ! [ rel  "stylesheet"
+                   , href "web.css" 
+                   ] << noHtml
+
 rightAds :: Html
 rightAds = thediv ! [identifier "rightbar"]
             << [ tag "script"  ! [thetype "text/javascript"] 
@@ -220,3 +225,10 @@ rightAds = thediv ! [identifier "rightbar"]
                                ] << noHtml
                ]
            
+label :: Bool -> Html -> Html
+label selected child = (if selected then
+        td ! [theclass "selected"]   
+    else 
+        td) << child
+
+
