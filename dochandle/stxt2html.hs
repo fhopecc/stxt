@@ -9,7 +9,8 @@ data Env = Env { getSource :: FilePath
                , getDoc    :: STXT.Doc
                }
 
-weburl = "http://fhopeccweb.appspot.com"
+siteUrl = "http://fhopeccweb.appspot.com"
+siteName = "剛的網站"
 
 main = do 
     let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
@@ -130,10 +131,10 @@ askSect2File s2@(STXT.Sect2 (n1, n2) t _) = do
 askTitleBar :: Reader Env Html
 askTitleBar = do
     t <- askDocTitle 
-    return $ thediv ! [identifier "sect1_bar"] 
+    return $ thediv ! [identifier "title_bar"] 
                 << table 
-                    << besides [ (label (n==selected)) << sect1Anchor s1 
-                               | s1@(STXT.Sect1 n _ _) <- s1s
+                    << besides [ td << anchor ! [href siteUrl] 
+                                        << siteName  
                                ]
 
 askSect1Bar :: STXT.Sect1 -> Reader Env Html
@@ -230,5 +231,4 @@ label selected child = (if selected then
         td ! [theclass "selected"]   
     else 
         td) << child
-
 
