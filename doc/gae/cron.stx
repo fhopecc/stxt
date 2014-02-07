@@ -1,9 +1,0 @@
-Q.Possible to Schedule a Cron Job for Specific Day of Every Month 
-  on Google App Engine?
-
-It appears this currently is not possible, though I still don't know
-for certain.
-
-Thus, my work around is to setup a cronjob to run every day, and have
-the method it's calling return early if it's not the 27th. ~29 extra
-requests per day isn't that bad, right?

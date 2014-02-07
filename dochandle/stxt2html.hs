@@ -1,8 +1,11 @@
 import qualified STXT
 import Text.Html
 import Control.Monad.Reader
+import System.Environment 
 import System.IO
+import qualified System.FilePath.Windows as FP
 import Data.List
+import System.Directory
 
 data Env = Env { getSource :: FilePath  
                , getOutDir :: FilePath  
@@ -11,17 +14,27 @@ data Env = Env { getSource :: FilePath
 
 siteUrl = "http://fhopeccweb.appspot.com"
 siteName = "剛的網站"
+webdir = "d:\\stxt\\fhopecc\\www"
+webcss = "d:\\stxt\\dochandle\\web.css"
 
 main = do 
-    let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
+    --let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
+    args <- getArgs 
+    let src = args !! 0
+    let basename = FP.takeBaseName src
+    let outDir = FP.combine webdir basename
+    createDirectoryIfMissing True outDir
+    putStr "outDir="
+    putStrLn $ outDir 
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
-    
+    copyFile webcss (FP.combine outDir "web.css")
+    putStrLn "copy web.css"
     mapM_ writeHtml (runReader askHtmls (Env { getSource = src
-                                       , getOutDir = "d:\\stxt\\fhopeccweb\\vbscript"
-                                       , getDoc = STXT.run c
-                                       }))
+                                             , getOutDir = outDir
+                                             , getDoc = STXT.run c
+                                             }))
 
 
 writeHtml :: (FilePath, Html) -> IO ()
@@ -181,8 +194,10 @@ askOutDir = do
 askDoc :: Reader Env STXT.Doc
 askDoc = do
     env <- ask
-    return $ getDoc env
-
+    case (getDoc env) of
+       doc@(STXT.Doc _ _) -> return $ doc
+       (STXT.Error msg)   -> error $ "Error happen:\n" ++ msg
+        
 askDocTitle :: Reader Env String
 askDocTitle = do 
     (STXT.Doc t _) <- askDoc

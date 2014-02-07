@@ -95,7 +95,7 @@ content =  code
            )
 
 code :: Parser Content
-code = do string "碼：\n\n"
+code = do string "：\n\n"
           src <- manyTill anyChar (try (string "\n\n\n"))
           return $ Code src
 
@@ -108,7 +108,7 @@ line = do notFollowedBy sect1title
           notFollowedBy sect2title  
           head <- noneOf "\n"
           tail <- try (manyTill (noneOf "\n") 
-                                (lookAhead (string "碼：\n\n")))
+                                (lookAhead (string "：\n\n")))
               <|> (many $ noneOf "\n")
           return $ head:tail
 
@@ -158,5 +158,5 @@ main = do
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
-    let o = rawRunPart sect1s c
-    putStr $ o
+    let o = run c
+    putStr $ show o

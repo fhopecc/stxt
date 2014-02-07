@@ -32,7 +32,7 @@ testLine = test [ "testLine" ~:
 testParser = test [ "testParser" ~: 
     [ "test code" ~: 
         [ "Code \"c d\\nc d 2\\nc d 3 \""~=? 
-          rawRunPart code "碼：\n\nc d\nc d 2\nc d 3 \n\n\n"
+          rawRunPart code "：\n\nc d\nc d 2\nc d 3 \n\n\n"
         ]
 
     , "test sect2title" ~: 
@@ -42,17 +42,17 @@ testParser = test [ "testParser" ~:
         [ "Sect2 (0,0) \"s2\" []" ~=?  rawRunPart sect2 "s2\n..\n\n"
         , "Sect2 (0,0) \"s2\" [Para [\"p1\"]]" ~=?  rawRunPart sect2 "s2\n..\n\np1"
         , "Sect2 (0,0) \"s2\" [Para [\"p1\"],Code \"c\"]" ~=?  
-          rawRunPart sect2 "s2\n..\n\np1碼：\n\nc\n\n\n"
+          rawRunPart sect2 "s2\n..\n\np1：\n\nc\n\n\n"
 
         , "Sect2 (0,0) \"s2\" [Para [\"p1\"],Code \"c\",Para [\"p2\"]]" ~=?  
-          rawRunPart sect2 "s2\n..\n\np1碼：\n\nc\n\n\np2"
+          rawRunPart sect2 "s2\n..\n\np1：\n\nc\n\n\np2"
         ]
     , "test sect2s" ~: 
         [ "[Sect2 (0,0) \"s2\" []]" ~=?  rawRunPart sect2s "s2\n..\n\n"
         , "[Sect2 (0,0) \"s2\" [Para [\"p1\"]]]" ~=?  rawRunPart sect2s "s2\n..\n\np1"
         , "[Sect2 (0,0) \"t1\" [Para [\"p1\"]],Sect2 (0,0) \"t2\" "
           ++ "[Para [\"p1\"],Code \"c\"]]" 
-          ~=?  rawRunPart sect2s "t1\n..\n\np1\nt2\n..\n\np1碼：\n\nc\n\n\n"
+          ~=?  rawRunPart sect2s "t1\n..\n\np1\nt2\n..\n\np1：\n\nc\n\n\n"
         , "[Sect2 (0,0) \"t1\" [Para [\"l1\",\"l2\"]],Sect2 (0,0) \"t2\" "
           ++ "[Para [\"l1\"]]]" 
           ~=?  rawRunPart sect2s "t1\n..\n\nl1\nl2\nt2\n..\n\nl1"
@@ -61,7 +61,7 @@ testParser = test [ "testParser" ~:
         [ "Sect1 0 \"s1\" [Sect2 (0,0) \"s2\" []]" ~=? 
           rawRunPart sect1 "s1\n--\n\ns2\n..\n\n"
         , "Sect1 0 \"s1\" [Sect2 (0,0) \"s2\" [Para [\"l1\",\"l2\"],Code \"c1\\nc2\\n c3\"]]" ~=? 
-          rawRunPart sect1 "s1\n--\n\ns2\n..\n\nl1\nl2碼：\n\nc1\nc2\n c3\n\n\n"
+          rawRunPart sect1 "s1\n--\n\ns2\n..\n\nl1\nl2：\n\nc1\nc2\n c3\n\n\n"
         ]
     , "test sect1s" ~: 
         [ "[Sect1 0 \"s1\" [Sect2 (0,0) \"s2\" []]]" ~=? 
