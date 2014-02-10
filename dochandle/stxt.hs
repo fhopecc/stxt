@@ -15,6 +15,8 @@ module STXT( run, rawRun, runPart, rawRunPart
            , Content(Code, Para)
            , getSect2s
            , getSect2sFromSect1
+           , ParaObj(Link)
+           , paraLink, paraObj, paraObjs
            ) 
 where
 
@@ -39,13 +41,20 @@ type Sect2s   = [Sect2]
 data Sect2    = Sect2 (Int, Int) Title Contents 
                 deriving (Show)
 
-data Content  = Para Lines
+data Content  = Para ParaObjs
               | Code String
                 deriving (Show)
+
+data ParaObj = Str String
+             | Link Title URL 
+               deriving (Show)
+type ParaObjs = [ParaObj]
 
 type Title    = String
 
 type Lines    = [String]
+
+type URL  = String -- Maybe use Network.URI to parse
 
 type Contents = [Content]
 
@@ -95,20 +104,39 @@ content =  code
            )
 
 code :: Parser Content
-code = do string "碼：\n\n"
+code = do string "：\n\n"
           src <- manyTill anyChar (try (string "\n\n\n"))
           return $ Code src
 
 para :: Parser Content
 para  = do ls <- line `sepEndBy1` (char '\n')
-           return $ Para ls
+           let objs = case parse paraObjs "paraObjs" (concat ls) of
+                           Left err -> [Str $ concat ls]
+                           Right x  -> x
+           return $ Para objs
+
+-- [food|http://fhopehltb.appspot.com/food/food.html]
+paraLink :: Parser ParaObj
+paraLink = between (char '[') (char ']') $ do
+    t <- manyTill (noneOf "|") (char '|')
+    uri <- many $ noneOf "]"
+    return $ Link t uri
+
+paraObj :: Parser ParaObj
+paraObj =  try paraLink
+       <|> (do str <- many1 $ noneOf "[" 
+               return $ Str str
+           )
+
+paraObjs :: Parser ParaObjs
+paraObjs = many1 paraObj
 
 line :: Parser String
 line = do notFollowedBy sect1title
           notFollowedBy sect2title  
           head <- noneOf "\n"
           tail <- try (manyTill (noneOf "\n") 
-                                (lookAhead (string "碼：\n\n")))
+                                (lookAhead (string "：\n\n")))
               <|> (many $ noneOf "\n")
           return $ head:tail
 
@@ -158,5 +186,5 @@ main = do
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
-    let o = rawRunPart sect1s c
-    putStr $ o
+    let o = run c
+    putStr $ show o
