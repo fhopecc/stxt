@@ -15,6 +15,8 @@ module STXT( run, rawRun, runPart, rawRunPart
            , Content(Code, Para)
            , getSect2s
            , getSect2sFromSect1
+           , ParaObj(Link)
+           , paraLink, paraObj, paraObjs
            ) 
 where
 
@@ -39,13 +41,20 @@ type Sect2s   = [Sect2]
 data Sect2    = Sect2 (Int, Int) Title Contents 
                 deriving (Show)
 
-data Content  = Para Lines
+data Content  = Para ParaObjs
               | Code String
                 deriving (Show)
+
+data ParaObj = Str String
+             | Link Title URL 
+               deriving (Show)
+type ParaObjs = [ParaObj]
 
 type Title    = String
 
 type Lines    = [String]
+
+type URL  = String -- Maybe use Network.URI to parse
 
 type Contents = [Content]
 
@@ -101,7 +110,26 @@ code = do string "：\n\n"
 
 para :: Parser Content
 para  = do ls <- line `sepEndBy1` (char '\n')
-           return $ Para ls
+           let objs = case parse paraObjs "paraObjs" (concat ls) of
+                           Left err -> [Str $ concat ls]
+                           Right x  -> x
+           return $ Para objs
+
+-- [food|http://fhopehltb.appspot.com/food/food.html]
+paraLink :: Parser ParaObj
+paraLink = between (char '[') (char ']') $ do
+    t <- manyTill (noneOf "|") (char '|')
+    uri <- many $ noneOf "]"
+    return $ Link t uri
+
+paraObj :: Parser ParaObj
+paraObj =  try paraLink
+       <|> (do str <- many1 $ noneOf "[" 
+               return $ Str str
+           )
+
+paraObjs :: Parser ParaObjs
+paraObjs = many1 paraObj
 
 line :: Parser String
 line = do notFollowedBy sect1title

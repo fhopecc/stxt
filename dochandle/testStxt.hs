@@ -1,7 +1,22 @@
 import Test.HUnit
 import STXT
 
-main = runTestTT testParser
+main = runTestTT testParaObj
+
+testParaObj = test [ "test ParaObj" ~:
+    [ "test Link" ~:
+        [ "Link \"t\" \"url\"" ~=? rawRunPart paraLink "[t|url]"
+        , "Link \"t\" \"url\"" ~=? rawRunPart paraObj "[t|url]"
+        , "Str \"str\"" ~=? rawRunPart paraObj "str[t|url]"
+        ]
+    , "test ParaObjs" ~:
+        [ "Str \"str\"" ~=? rawRunPart paraObj "str[t|url]"
+        , "[Str \"str\",Link \"t\" \"url\"]" ~=? 
+           rawRunPart paraObjs "str[t|url]"
+        , "[Str \"s 1\",Link \"t\" \"url\",Str \"s2\"]" ~=? 
+           rawRunPart paraObjs "s 1[t|url]s2"
+        ]
+    ]]
 
 testLine = test [ "testLine" ~: 
     [ "test line" ~: 
@@ -13,6 +28,7 @@ testLine = test [ "testLine" ~:
         , "\"l1\\65306\"" ~=?  rawRunPart line "l1：\n"
         , "\"l1\\30908\\65306\"" ~=?  rawRunPart line "l1碼：\n"
         ]
+
     ,  "test para" ~: 
         [ "Para [\"l1\"]" ~=?  rawRunPart para "l1"
         , "Para [\"l1\"]" ~=?  rawRunPart para "l1\n"

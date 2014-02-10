@@ -1,20 +1,17 @@
 剛的筆記
 ........
 
-最新專案！！
-如何寫出穩固的程式
-教導大家怎麼寫出穩固的程式
+因為我也參加許多次資訊處理職系的國家考試， 在平常的準備中，都會針對不
+同的考古題作筆記， 現在陸陸續續把筆記放上來分享給各位， 
+祝各位金榜題名。
 
-其它文件。
+[資料庫系統筆記|http://structedtext.appspot.com/db/db.html]
+[電腦網路筆記|http://structedtext.appspot.com/net/network.html]
+[資料結構筆記|http://structedtext.appspot.com/ds/data_structure.html]
+[資通安全筆記|http://structedtext.appspot.com/ds/data_structure.html]
+[VBScript筆記|http://fhopehltb.appspot.com/vbscript/index.html]
 
-關於食物
+[食物||http://fhopehltb.appspot.com/food/food.html]
 我寫的詩
 我寫的小說
 太極拳
-因為我也參加許多次資訊處理職系的國家考試， 在平常的準備中，都會針對不同的考古題作筆記， 現在陸陸續續把筆記放上來分享給各位， 祝各位金榜題名。
-
-資料庫系統筆記
-電腦網路筆記
-資料結構筆記
-[資通安全筆記|http://structedtext.appspot.com/ds/data_structure.html]
-[VBScript筆記|http://fhopehltb.appspot.com/vbscript/index.html]
