@@ -142,7 +142,6 @@ manyTill
 manyTill p end 應用 p 剖析器剖析 0 或多次直到 end 剖析器成功，
 並回傳 p 剖析器結果值的串列，通常用來實作註解，如下碼：
 
-
 simpleComment   = do{ string "<!--"
                     ; manyTill anyChar (try (string "-->"))
                     }
@@ -158,6 +157,11 @@ lookAhead p 應用 p 剖析器剖析，剖析成功會傳回 p 剖析器剖值�
 
 若 p 剖析失敗且消化部分字串，lookAhead 也會失敗及消化部分字串。
 通常會與 try 併用。
+
+choice
+......
+
+choice ps 會依序應用 ps 中每個剖析器，並傳回第一個成功之剖析器。 
 
 optional
 ........

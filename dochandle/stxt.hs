@@ -1,6 +1,7 @@
 module STXT( run, rawRun, runPart, rawRunPart
            , line, para
-           , code
+           , codePara
+           , codeParas
            , content, contents
            , sect2title
            , sect1, sect1s
@@ -15,7 +16,7 @@ module STXT( run, rawRun, runPart, rawRunPart
            , Content(Code, Para)
            , getSect2s
            , getSect2sFromSect1
-           , ParaObj(Link)
+           , ParaObj(Str, Link)
            , paraLink, paraObj, paraObjs
            ) 
 where
@@ -26,8 +27,9 @@ import System.IO
 import Control.Monad
 import Data.List
 import Data.Maybe
+import Network.URI
 
-data Doc      = Doc Title Sect1s
+data Doc      = Doc Title Contents Sect1s
               | Error String
                 deriving (Show)
 
@@ -45,9 +47,12 @@ data Content  = Para ParaObjs
               | Code String
                 deriving (Show)
 
+type Contents = [Content]
+
 data ParaObj = Str String
              | Link Title URL 
                deriving (Show)
+
 type ParaObjs = [ParaObj]
 
 type Title    = String
@@ -56,10 +61,9 @@ type Lines    = [String]
 
 type URL  = String -- Maybe use Network.URI to parse
 
-type Contents = [Content]
 
 getSect2s :: Int -> Doc -> Sect2s
-getSect2s n1 doc@(Doc _ s1s) = s2s
+getSect2s n1 doc@(Doc _ _ s1s) = s2s
     where
         s1@(Sect1 _ _ s2s) = fromMaybe (s1s !! 0) (find (isNumEq n1) s1s)
         isNumEq num (Sect1 n _ _) = n == num 
@@ -69,9 +73,10 @@ getSect2sFromSect1 (Sect1 _ _ s2s) = s2s
 
 doc :: Parser Doc
 doc = do
-    t  <- docTitle
-    cs <- sect1s 
-    return $ Doc t cs
+    t   <- docTitle
+    cs  <- contents
+    s1s <- sect1s 
+    return $ Doc t cs s1s
 
 docTitle = title '='
 
@@ -97,16 +102,24 @@ sect2 = do notFollowedBy sect1title
 
 contents = many content
 
-content =  code
-       <|> (do p <- para
-               optional $ char '\n'
-               return p
-           )
+content = choice [ codePara
+                 , codeParas
+                 ,(do p <- para
+                      optional $ char '\n'
+                      return p
+                  )
+                 ]
 
-code :: Parser Content
-code = do string "：\n\n"
-          src <- manyTill anyChar (try (string "\n\n\n"))
-          return $ Code src
+codePara :: Parser Content
+codePara = do notFollowedBy codeParas
+              string "：\n\n"
+              src <- manyTill anyChar (try (string "\n\n"))
+              return $ Code src
+
+codeParas :: Parser Content
+codeParas = do string "：：\n\n"
+               src <- manyTill anyChar (try (string "\n\n\n"))
+               return $ Code src
 
 para :: Parser Content
 para  = do ls <- line `sepEndBy1` (char '\n')
@@ -117,10 +130,18 @@ para  = do ls <- line `sepEndBy1` (char '\n')
 
 -- [food|http://fhopehltb.appspot.com/food/food.html]
 paraLink :: Parser ParaObj
-paraLink = between (char '[') (char ']') $ do
-    t <- manyTill (noneOf "|") (char '|')
-    uri <- many $ noneOf "]"
-    return $ Link t uri
+paraLink = between (char '[') (char ']') ( 
+    try( do t <- many $ noneOf "|]\n"
+            char '|'
+            uri <- many $ noneOf "]\n"
+            if (isNothing $ parseURI uri) then
+                return $ Str $ "[" ++ t ++ "|" ++ uri ++ "]"
+            else
+                return $ Link t uri
+    )<|>(do r <- many $ noneOf "]\n"
+            return $ Str $ "[" ++ r ++ "]"
+        )
+    )
 
 paraObj :: Parser ParaObj
 paraObj =  try paraLink
@@ -135,8 +156,10 @@ line :: Parser String
 line = do notFollowedBy sect1title
           notFollowedBy sect2title  
           head <- noneOf "\n"
-          tail <- try (manyTill (noneOf "\n") 
-                                (lookAhead (string "：\n\n")))
+          tail <- try (do str <- manyTill (noneOf "\n") 
+                                          (lookAhead (string "：\n\n"))
+                          return $ str ++ "："
+                      )
               <|> (many $ noneOf "\n")
           return $ head:tail
 
@@ -167,7 +190,7 @@ run input =
         Right x  -> numberDoc x
 
 numberDoc :: Doc -> Doc
-numberDoc (Doc t s1s) = Doc t (numberSect1s s1s)
+numberDoc (Doc t cs s1s) = Doc t cs (numberSect1s s1s)
 
 numberSect1s :: Sect1s -> Sect1s
 numberSect1s s1s = 

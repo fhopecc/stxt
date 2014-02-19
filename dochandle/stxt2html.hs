@@ -12,10 +12,11 @@ data Env = Env { getSource :: FilePath
                , getDoc    :: STXT.Doc
                }
 
-siteUrl = "http://fhopeccweb.appspot.com"
+siteUrl = "http://fhopehltb.appspot.com"
 siteName = "剛的網站"
 webdir = "d:\\stxt\\fhopecc\\www"
 webcss = "d:\\stxt\\dochandle\\web.css"
+index  = "d:\\stxt\\fhopecc\\www\\index\\index.html"
 
 main = do 
     --let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
@@ -35,6 +36,8 @@ main = do
                                              , getOutDir = outDir
                                              , getDoc = STXT.run c
                                              }))
+
+    copyFile index "d:\\stxt\\fhopecc\\www\\index.html"
 
 
 writeHtml :: (FilePath, Html) -> IO ()
@@ -56,19 +59,28 @@ askHtmls = do
 askIndexHtml :: Reader Env (FilePath, Html)
 askIndexHtml = do
     t <- askDocTitle
-    doc@(STXT.Doc _ s1s) <- askDoc
-    sect1bar <- askSect1Bar $ head s1s
-    let s1@(STXT.Sect1 _ _ s2s) = head s1s
-    sect2bar <- askSect2Bar (head s2s)
+    doc@(STXT.Doc _ cs s1s) <- askDoc
+    titlebar <- askTitleBar 
+    sect1bar <- if null s1s then 
+                   return $ toHtml "" 
+                else askSect1Bar $ head s1s
+    sect2bar <- if null s1s then 
+                   return $ toHtml "" 
+                else do 
+                    let s1@(STXT.Sect1 _ _ s2s) = head s1s
+                    askSect2Bar (head s2s)
     let html = thehtml ! [lang "zh-tw"] 
                 << header 
                     << myMeta
                    +++ myLink
                    +++ thetitle << t
                +++ body 
-                    << sect1bar 
+                    << titlebar
+                   +++ sect1bar 
                    +++ sect2bar 
                    +++ rightAds
+                   +++ thediv ![identifier "content"]
+                        << map content2Html cs
 
     f <- askIndexFile
     return (f, html)
@@ -85,7 +97,8 @@ askSect2Htmls = do
 
 askSect1Html :: STXT.Sect1 -> Reader Env (FilePath, Html)
 askSect1Html s1@(STXT.Sect1 n t s2s) = do
-    doc@(STXT.Doc _ s1s) <- askDoc
+    doc@(STXT.Doc _ _ s1s) <- askDoc
+    titlebar <- askTitleBar
     sect1bar <- askSect1Bar s1
     sect2bar <- askSect2Bar (head s2s)
     let html = thehtml ! [lang "zh-tw"] 
@@ -94,7 +107,8 @@ askSect1Html s1@(STXT.Sect1 n t s2s) = do
                    +++ myLink
                    +++ thetitle << t
                +++ body 
-                    << sect1bar
+                    << titlebar
+                   +++ sect1bar
                    +++ sect2bar
                    +++ rightAds
     s1File <- askSect1File s1
@@ -102,8 +116,9 @@ askSect1Html s1@(STXT.Sect1 n t s2s) = do
 
 askSect2Html :: STXT.Sect2 -> Reader Env (FilePath, Html)
 askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
-    doc@(STXT.Doc _ s1s) <- askDoc
+    doc@(STXT.Doc _ _ s1s) <- askDoc
     s1 <- askSect1OfSect2 s2
+    titlebar <- askTitleBar
     sect1bar <- askSect1Bar s1
     sect2bar <- askSect2Bar s2
     let html = thehtml ! [lang "zh-tw"] 
@@ -112,7 +127,8 @@ askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
                    +++ myLink
                    +++ thetitle << t
                +++ body 
-                    << sect1bar
+                    << titlebar
+                   +++ sect1bar
                    +++ sect2bar
                    +++ rightAds
                    +++ thediv ![identifier "content"]
@@ -148,6 +164,7 @@ askTitleBar = do
                 << table 
                     << besides [ td << anchor ! [href siteUrl] 
                                         << siteName  
+                               , td << t
                                ]
 
 askSect1Bar :: STXT.Sect1 -> Reader Env Html
@@ -195,17 +212,17 @@ askDoc :: Reader Env STXT.Doc
 askDoc = do
     env <- ask
     case (getDoc env) of
-       doc@(STXT.Doc _ _) -> return $ doc
+       doc@(STXT.Doc _ _ _) -> return $ doc
        (STXT.Error msg)   -> error $ "Error happen:\n" ++ msg
         
 askDocTitle :: Reader Env String
 askDocTitle = do 
-    (STXT.Doc t _) <- askDoc
+    (STXT.Doc t _ _) <- askDoc
     return t
 
 askSect1s :: Reader Env STXT.Sect1s
 askSect1s = do 
-    (STXT.Doc _ s1s) <- askDoc
+    (STXT.Doc _ _ s1s) <- askDoc
     return s1s
 
 askSect2s :: STXT.Sect1 -> Reader Env STXT.Sect2s
@@ -213,9 +230,14 @@ askSect2s (STXT.Sect1 _ _ s2s) = do
     return s2s
 
 content2Html :: STXT.Content -> Html
-content2Html (STXT.Para ls) = thediv ! [theclass "para"]
-                                << paragraph << concat ls 
+content2Html (STXT.Para ps) = thediv ! [theclass "para"]
+                                << paragraph << [paraObj2Html p | p <- ps]
 content2Html (STXT.Code c) = pre << c
+
+paraObj2Html :: STXT.ParaObj -> Html
+paraObj2Html (STXT.Str s) = toHtml s
+paraObj2Html (STXT.Link t url) = anchor ! [href url] << t  
+
 
 myMeta = meta ! [ httpequiv "Content-Type"
                 , content   "text/html; charset=utf-8"
