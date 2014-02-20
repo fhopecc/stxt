@@ -35,7 +35,7 @@ data Doc      = Doc Title Contents Sect1s
 
 type Sect1s   = [Sect1]
 
-data Sect1    = Sect1 Int Title Sect2s
+data Sect1    = Sect1 Int Title Contents Sect2s
                 deriving (Show)
 
 type Sect2s   = [Sect2]
@@ -61,15 +61,14 @@ type Lines    = [String]
 
 type URL  = String -- Maybe use Network.URI to parse
 
-
 getSect2s :: Int -> Doc -> Sect2s
 getSect2s n1 doc@(Doc _ _ s1s) = s2s
     where
-        s1@(Sect1 _ _ s2s) = fromMaybe (s1s !! 0) (find (isNumEq n1) s1s)
-        isNumEq num (Sect1 n _ _) = n == num 
+        s1@(Sect1 _ _ _ s2s) = fromMaybe (s1s !! 0) (find (isNumEq n1) s1s)
+        isNumEq num (Sect1 n _ _ _) = n == num 
 
 getSect2sFromSect1 :: Sect1 -> Sect2s
-getSect2sFromSect1 (Sect1 _ _ s2s) = s2s
+getSect2sFromSect1 (Sect1 _ _ _ s2s) = s2s
 
 doc :: Parser Doc
 doc = do
@@ -85,8 +84,9 @@ sect1s = many sect1
 sect1 :: Parser Sect1
 sect1 = do
     t  <- sect1title
-    cs <- sect2s 
-    return $ Sect1 0 t cs
+    cs  <- contents
+    s2s <- sect2s 
+    return $ Sect1 0 t cs s2s
 
 sect1title = title '-'
 
@@ -196,7 +196,7 @@ numberSect1s :: Sect1s -> Sect1s
 numberSect1s s1s = 
     [updateNumSect1 n s1 | (n, s1) <- zip [1..] s1s]
      where 
-        updateNumSect1 n (Sect1 _ t s2s) = Sect1 n t (numberSect2s n s2s)
+        updateNumSect1 n (Sect1 _ t cs s2s) = Sect1 n t cs (numberSect2s n s2s)
 
         numberSect2s s1n s2s = 
             [updateNumSect2 s1n s2n s2 | (s2n, s2) <- zip [1..] s2s]

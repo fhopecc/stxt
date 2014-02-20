@@ -67,7 +67,7 @@ askIndexHtml = do
     sect2bar <- if null s1s then 
                    return $ toHtml "" 
                 else do 
-                    let s1@(STXT.Sect1 _ _ s2s) = head s1s
+                    let s1@(STXT.Sect1 _ _ _ s2s) = head s1s
                     askSect2Bar (head s2s)
     let html = thehtml ! [lang "zh-tw"] 
                 << header 
@@ -93,10 +93,10 @@ askSect1Htmls = do
 askSect2Htmls ::  Reader Env [(FilePath, Html)]
 askSect2Htmls = do
     s1s <- askSect1s
-    mapM askSect2Html $ concat [s2s | s1@(STXT.Sect1 _ _ s2s) <- s1s]
+    mapM askSect2Html $ concat [s2s | s1@(STXT.Sect1 _ _ _ s2s) <- s1s]
 
 askSect1Html :: STXT.Sect1 -> Reader Env (FilePath, Html)
-askSect1Html s1@(STXT.Sect1 n t s2s) = do
+askSect1Html s1@(STXT.Sect1 n t cs s2s) = do
     doc@(STXT.Doc _ _ s1s) <- askDoc
     titlebar <- askTitleBar
     sect1bar <- askSect1Bar s1
@@ -111,6 +111,9 @@ askSect1Html s1@(STXT.Sect1 n t s2s) = do
                    +++ sect1bar
                    +++ sect2bar
                    +++ rightAds
+                   +++ thediv ![identifier "content"]
+                        << map content2Html cs
+
     s1File <- askSect1File s1
     return $ (s1File, html)
 
@@ -139,7 +142,7 @@ askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
 askSect1OfSect2 :: STXT.Sect2 -> Reader Env STXT.Sect1
 askSect1OfSect2 s2@(STXT.Sect2 (n1, n2) _ _) = do
     s1s <- askSect1s
-    return $ maybe (head s1s) id (find (\s1@(STXT.Sect1 n _ _) -> n == n1) s1s)
+    return $ maybe (head s1s) id (find (\s1@(STXT.Sect1 n _ _ _) -> n == n1) s1s)
 
 
 askIndexFile :: Reader Env String
@@ -148,7 +151,7 @@ askIndexFile = do
     return $ outdir ++ "\\" ++ "index.html"
 
 askSect1File :: STXT.Sect1 -> Reader Env String
-askSect1File s1@(STXT.Sect1 n t _) = do
+askSect1File s1@(STXT.Sect1 n t _ _) = do
     outdir <- askOutDir 
     return $ outdir ++ "\\" ++ show n ++ ".html" 
 
@@ -168,12 +171,12 @@ askTitleBar = do
                                ]
 
 askSect1Bar :: STXT.Sect1 -> Reader Env Html
-askSect1Bar (STXT.Sect1 selected t _) = do
+askSect1Bar (STXT.Sect1 selected t _ _) = do
     s1s <- askSect1s 
     return $ thediv ! [identifier "sect1_bar"] 
                 << table 
                     << besides [ (label (n==selected)) << sect1Anchor s1 
-                               | s1@(STXT.Sect1 n _ _) <- s1s
+                               | s1@(STXT.Sect1 n _ _ _) <- s1s
                                ]
 
 askSect2Bar :: STXT.Sect2 -> Reader Env Html
@@ -188,7 +191,7 @@ askSect2Bar s2@(STXT.Sect2 (sn1, sn2) _ _) = do
 
 
 sect1Anchor :: STXT.Sect1 -> Html
-sect1Anchor s1@(STXT.Sect1 n t _) = 
+sect1Anchor s1@(STXT.Sect1 n t _ _) = 
     anchor ! [href (sect1Path s1)] << t
 
 sect2Anchor :: STXT.Sect2 -> Html
@@ -197,7 +200,7 @@ sect2Anchor s2@(STXT.Sect2 _ t _) =
 
 
 sect1Path :: STXT.Sect1 -> String
-sect1Path s1@(STXT.Sect1 n t _) = show n ++ ".html"
+sect1Path s1@(STXT.Sect1 n t _ _) = show n ++ ".html"
 
 sect2Path :: STXT.Sect2 -> String
 sect2Path s1@(STXT.Sect2 (n1, n2) t _) = 
@@ -226,7 +229,7 @@ askSect1s = do
     return s1s
 
 askSect2s :: STXT.Sect1 -> Reader Env STXT.Sect2s
-askSect2s (STXT.Sect1 _ _ s2s) = do 
+askSect2s (STXT.Sect1 _ _ _ s2s) = do 
     return s2s
 
 content2Html :: STXT.Content -> Html
