@@ -1,6 +1,7 @@
 import qualified STXT
 import Text.Html
 import Control.Monad.Reader
+import Control.Monad.State
 import System.Environment 
 import System.IO
 import qualified System.FilePath.Windows as FP
@@ -11,6 +12,11 @@ data Env = Env { getSource :: FilePath
                , getOutDir :: FilePath  
                , getDoc    :: STXT.Doc
                }
+
+data Page = Page { fetchDoc   :: STXT.Doc
+                 , fetchSect1 :: STXT.Sect1
+                 , fetchSect2 :: STXT.Sect2
+                 } 
 
 siteUrl = "http://fhopehltb.appspot.com"
 siteName = "剛的網站"
@@ -84,6 +90,7 @@ askIndexHtml = do
 
     f <- askIndexFile
     return (f, html)
+
 
 askSect1Htmls :: Reader Env [(FilePath, Html)]
 askSect1Htmls = do
