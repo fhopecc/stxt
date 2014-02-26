@@ -6,6 +6,7 @@ import System.Environment
 import System.IO
 import qualified System.FilePath.Windows as FP
 import Data.List
+import Data.Maybe
 import System.Directory
 
 data Env = Env { getSource :: FilePath  
@@ -13,9 +14,15 @@ data Env = Env { getSource :: FilePath
                , getDoc    :: STXT.Doc
                }
 
-data Page = Page { fetchDoc   :: STXT.Doc
-                 , fetchSect1 :: STXT.Sect1
-                 , fetchSect2 :: STXT.Sect2
+data Page = Page { pSource  :: FilePath
+                 , pOutDir  :: FilePath
+                 , pDoc     :: STXT.Doc
+                 , pTitle   :: String
+                 , pContent :: STXT.Content
+                 , pSect1s  :: STXT.Sect1s
+                 , pSect1   :: Maybe STXT.Sect1
+                 , pSect2s  :: STXT.Sect2s
+                 , pSect2   :: Maybe STXT.Sect2
                  } 
 
 siteUrl = "http://fhopehltb.appspot.com"
@@ -38,13 +45,18 @@ main = do
     c <- hGetContents f
     copyFile webcss (FP.combine outDir "web.css")
     putStrLn "copy web.css"
-    mapM_ writeHtml (runReader askHtmls (Env { getSource = src
+    mapM_ writeHtml (runState getHtmls (Page  { getSource = src
                                              , getOutDir = outDir
                                              , getDoc = STXT.run c
                                              }))
-
     copyFile index "d:\\stxt\\fhopecc\\www\\index.html"
 
+getHtmls :: State Page [(FilePath, Html)]
+getHtmls = do
+    ihtml <- askIndexHtml
+    s1htmls <- askSect1Htmls  
+    s2htmls <- askSect2Htmls
+    return $ ihtml : s1htmls ++ s2htmls
 
 writeHtml :: (FilePath, Html) -> IO ()
 writeHtml (path, html) = do
@@ -62,6 +74,136 @@ askHtmls = do
     s2htmls <- askSect2Htmls
     return $ ihtml : s1htmls ++ s2htmls
 
+setIndexPage :: State Page ()
+setIndexPage = do
+    s  <- get
+    (STXT.Doc t cs s1s) <- pDoc s
+    put s { pTitle   = t
+          , pContent = cs
+          , pSect1   = Nothing
+          , pSect2   = Nothing
+          , pSect1s  = s1s
+          , pSect2s  = []
+          }
+
+getSect1s = do
+    p <- get
+    return $ pSect1s p
+
+getSect1 = do
+    p <- get
+    return $ pSect1 p  
+
+getSect2s = do
+    p <- get
+    return $ pSect2s p  
+
+getSect2 = do
+    p <- get
+    return $ pSect2 p
+
+getContent = do
+    p <- get
+    return $ pContent p  
+
+getTitle = do
+    p <- get
+    return $ pTitle p  
+
+getIndexFile :: State Page String
+getIndexFile = do
+    outdir <- getOutDir 
+    return $ outdir ++ "\\" ++ "index.html"
+
+getTitleBar = do
+    title <- getTitle 
+    return $ thediv ! [identifier "title_bar"] 
+                << table 
+                    << besides [ td << anchor ! [href siteUrl] 
+                                        << siteName  
+                               , td << title
+                               ]
+
+
+getSect1Bar :: State Page Html
+getSect1Bar = do
+    s1s <- getSect1s
+    s1  <- getSect1
+    return $ if isJust s1 then do
+                let (STXT.Sect1 selected _ _ _) = fromJust s1
+                thediv ! [identifier "sect1_bar"] 
+                    << table 
+                        << besides [(label (n==selected)) << sect1Anchor s1 
+                                   | s1@(STXT.Sect1 n _ _ _) <- s1s
+                                   ]
+              else toHtml ""
+
+getSect2Bar :: State Page Html
+getSect2Bar = do
+    Page { pSect1  = s1
+         , pSect2s = s2s 
+         , pSect2  = ss2
+         } <- get
+
+    return $ thediv ! [identifier "sect2_bar"] 
+                << table 
+                    << aboves [ (label (s2 == selected )) << sect2Anchor s2 
+                              | s2 <- s2s
+                              ]
+
+getPageHtml :: State Page (FilePath, Html)
+getPageHtml = do
+    title    <- getTitle
+    titlebar <- getTitleBar
+    sect1bar <- getSect1Bar 
+    sect2bar <- getSect2Bar
+    content  <- getContent
+    let html = thehtml ! [lang "zh-tw"] 
+                << header 
+                    << myMeta
+                   +++ myLink
+                   +++ thetitle << title
+               +++ body 
+                    << titlebar
+                   +++ sect1bar 
+                   +++ sect2bar 
+                   +++ rightAds
+                   +++ thediv ![identifier "content"]
+                        << map elem2Html content
+    f <- getIndexFile
+    return (f, html)
+
+getIndexHtml :: Reader Env (FilePath, Html)
+getIndexHtml = do
+    t <- askDocTitle
+    doc@(STXT.Doc _ cs s1s) <- askDoc
+    titlebar <- askTitleBar 
+    sect1bar <- if null s1s then 
+                   return $ toHtml "" 
+                else askSect1Bar $ head s1s
+    sect2bar <- if null s1s then 
+                   return $ toHtml "" 
+                else do 
+                    let s1@(STXT.Sect1 _ _ _ s2s) = head s1s
+                    askSect2Bar (head s2s)
+
+    let html = thehtml ! [lang "zh-tw"] 
+                << header 
+                    << myMeta
+                   +++ myLink
+                   +++ thetitle << t
+               +++ body 
+                    << titlebar
+                   +++ sect1bar 
+                   +++ sect2bar 
+                   +++ rightAds
+                   +++ thediv ![identifier "content"]
+                        << map elem2Html cs
+    f <- askIndexFile
+    return (f, html)
+
+
+
 askIndexHtml :: Reader Env (FilePath, Html)
 askIndexHtml = do
     t <- askDocTitle
@@ -75,6 +217,7 @@ askIndexHtml = do
                 else do 
                     let s1@(STXT.Sect1 _ _ _ s2s) = head s1s
                     askSect2Bar (head s2s)
+
     let html = thehtml ! [lang "zh-tw"] 
                 << header 
                     << myMeta
@@ -86,11 +229,9 @@ askIndexHtml = do
                    +++ sect2bar 
                    +++ rightAds
                    +++ thediv ![identifier "content"]
-                        << map content2Html cs
-
+                        << map elem2Html cs
     f <- askIndexFile
     return (f, html)
-
 
 askSect1Htmls :: Reader Env [(FilePath, Html)]
 askSect1Htmls = do
@@ -119,7 +260,7 @@ askSect1Html s1@(STXT.Sect1 n t cs s2s) = do
                    +++ sect2bar
                    +++ rightAds
                    +++ thediv ![identifier "content"]
-                        << map content2Html cs
+                        << map elem2Html cs
 
     s1File <- askSect1File s1
     return $ (s1File, html)
@@ -142,7 +283,7 @@ askSect2Html s2@(STXT.Sect2 (n1, n2) t cs) = do
                    +++ sect2bar
                    +++ rightAds
                    +++ thediv ![identifier "content"]
-                        << map content2Html cs
+                        << map elem2Html cs
     file <- askSect2File s2
     return $ (file, html)
 
@@ -239,10 +380,10 @@ askSect2s :: STXT.Sect1 -> Reader Env STXT.Sect2s
 askSect2s (STXT.Sect1 _ _ _ s2s) = do 
     return s2s
 
-content2Html :: STXT.Content -> Html
-content2Html (STXT.Para ps) = thediv ! [theclass "para"]
+elem2Html :: STXT.Elem -> Html
+elem2Html (STXT.Para ps) = thediv ! [theclass "para"]
                                 << paragraph << [paraObj2Html p | p <- ps]
-content2Html (STXT.Code c) = pre << c
+elem2Html (STXT.Code c) = pre << c
 
 paraObj2Html :: STXT.ParaObj -> Html
 paraObj2Html (STXT.Str s) = toHtml s
@@ -274,7 +415,7 @@ rightAds = thediv ! [identifier "rightbar"]
                ]
            
 label :: Bool -> Html -> Html
-label selected child = (if selected then
+label isSelected child = (if isSelected then
         td ! [theclass "selected"]   
     else 
         td) << child

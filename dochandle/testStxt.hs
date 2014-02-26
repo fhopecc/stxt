@@ -41,9 +41,9 @@ testParser = test [ "test ParaObj" ~:
         [ "Code \"c1\\n\\nc2\\n\\nc3\"" ~=?  
           rawRunPart codeParas "：：\n\nc1\n\nc2\n\nc3\n\n\n"
         ]
-    ,  "test contents" ~: 
+    ,  "test content" ~: 
         [ "[Para [Str \"l1\"],Para [Str \"l2\"]]" ~=?  
-          rawRunPart contents "l1\n\nl2\n"
+          rawRunPart content "l1\n\nl2\n"
         ]
     , "test sect2title" ~: 
         [ "\"s2\"" ~=?  rawRunPart sect2title "s2\n..\n\n"

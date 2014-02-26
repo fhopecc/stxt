@@ -2,7 +2,7 @@ module STXT( run, rawRun, runPart, rawRunPart
            , line, para
            , codePara
            , codeParas
-           , content, contents
+           , content
            , sect2title
            , sect1, sect1s
            , sect2, sect2s
@@ -13,7 +13,8 @@ module STXT( run, rawRun, runPart, rawRunPart
            , Sect1s
            , Sect2s
            , Title
-           , Content(Code, Para)
+           , Elem(Code, Para)
+           , Content
            , getSect2s
            , getSect2sFromSect1
            , ParaObj(Str, Link)
@@ -29,29 +30,29 @@ import Data.List
 import Data.Maybe
 import Network.URI
 
-data Doc      = Doc Title Contents Sect1s
+data Doc      = Doc Title Content Sect1s
               | Error String
-                deriving (Show)
+                deriving (Show, Eq)
 
 type Sect1s   = [Sect1]
 
-data Sect1    = Sect1 Int Title Contents Sect2s
-                deriving (Show)
+data Sect1    = Sect1 Int Title Content Sect2s
+                deriving (Show, Eq)
 
 type Sect2s   = [Sect2]
 
-data Sect2    = Sect2 (Int, Int) Title Contents 
-                deriving (Show)
+data Sect2    = Sect2 (Int, Int) Title Content
+                deriving (Show, Eq)
 
-data Content  = Para ParaObjs
-              | Code String
-                deriving (Show)
+data Elem = Para ParaObjs
+          | Code String
+            deriving (Show, Eq)
 
-type Contents = [Content]
+type Content = [Elem]
 
 data ParaObj = Str String
              | Link Title URL 
-               deriving (Show)
+               deriving (Show, Eq)
 
 type ParaObjs = [ParaObj]
 
@@ -72,10 +73,10 @@ getSect2sFromSect1 (Sect1 _ _ _ s2s) = s2s
 
 doc :: Parser Doc
 doc = do
-    t   <- docTitle
-    cs  <- contents
+    t <- docTitle
+    c <- content
     s1s <- sect1s 
-    return $ Doc t cs s1s
+    return $ Doc t c s1s
 
 docTitle = title '='
 
@@ -84,7 +85,7 @@ sect1s = many sect1
 sect1 :: Parser Sect1
 sect1 = do
     t  <- sect1title
-    cs  <- contents
+    cs  <- content
     s2s <- sect2s 
     return $ Sect1 0 t cs s2s
 
@@ -97,31 +98,31 @@ sect2title = title '.'
 sect2 :: Parser Sect2
 sect2 = do notFollowedBy sect1title
            t  <- sect2title
-           cs <- contents 
+           cs <- content
            return $ Sect2 (0,0) t cs
 
-contents = many content
+content = many theElement
 
-content = choice [ codePara
-                 , codeParas
-                 ,(do p <- para
-                      optional $ char '\n'
-                      return p
-                  )
-                 ]
+theElement = choice [ codePara
+              , codeParas
+              ,(do p <- para
+                   optional $ char '\n'
+                   return p
+               )
+              ]
 
-codePara :: Parser Content
+codePara :: Parser Elem
 codePara = do notFollowedBy codeParas
               string "：\n\n"
               src <- manyTill anyChar (try (string "\n\n"))
               return $ Code src
 
-codeParas :: Parser Content
+codeParas :: Parser Elem
 codeParas = do string "：：\n\n"
                src <- manyTill anyChar (try (string "\n\n\n"))
                return $ Code src
 
-para :: Parser Content
+para :: Parser Elem
 para  = do ls <- line `sepEndBy1` (char '\n')
            let objs = case parse paraObjs "paraObjs" (concat ls) of
                            Left err -> [Str $ concat ls]
