@@ -31,6 +31,7 @@ main = do
     args <- getArgs 
     let src = args !! 0
     let basename = FP.takeBaseName src
+    let srcdir = FP.takeDirectory src
     let outDir = FP.combine webdir basename
     createDirectoryIfMissing True outDir
     putStr "outDir="
@@ -40,9 +41,10 @@ main = do
     c <- hGetContents f
     copyFile webcss (FP.combine outDir "web.css")
     putStrLn "copy web.css"
+    doc <- STXT.runInclude srcdir c
     mapM_ writeHtml (evalState getHtmls (Page { pSource  = src
                                               , pOutDir  = outDir
-                                              , pDoc     = STXT.run c
+                                              , pDoc     = doc
                                               , pTitle   = ""
                                               , pContent = []
                                               , pSect1s  = []
@@ -198,6 +200,8 @@ getPageHtml = do
 sect1Anchor :: STXT.Sect1 -> Html
 sect1Anchor s1@(STXT.Sect1 n t _ _) = 
     anchor ! [href (sect1Path s1)] << t
+
+--sect1Anchor (STXT.Include _) = noHtml
 
 sect2Anchor :: STXT.Sect2 -> Html
 sect2Anchor s2@(STXT.Sect2 _ t _) = 

@@ -1,5 +1,5 @@
-module STXT( run, rawRun, runPart, rawRunPart
-           , line, para
+module STXT( run, rawRun, runPart, rawRunPart, runInclude
+           , line, para, include
            , codePara
            , codeParas
            , content
@@ -8,7 +8,7 @@ module STXT( run, rawRun, runPart, rawRunPart
            , sect2, sect2s
            , doc
            , Doc(Doc, Error)
-           , Sect1(Sect1)
+           , Sect1(Sect1, Include)
            , Sect2(Sect2)
            , Sect1s
            , Sect2s
@@ -29,6 +29,7 @@ import Control.Monad
 import Data.List
 import Data.Maybe
 import Network.URI
+import qualified System.FilePath as FP
 
 data Doc      = Doc Title Content Sect1s
               | Error String
@@ -37,6 +38,7 @@ data Doc      = Doc Title Content Sect1s
 type Sect1s   = [Sect1]
 
 data Sect1    = Sect1 Int Title Content Sect2s
+              | Include FilePath
                 deriving (Show, Eq)
 
 type Sect2s   = [Sect2]
@@ -80,7 +82,7 @@ doc = do
 
 docTitle = title '='
 
-sect1s = many sect1
+sect1s = many (include <|> sect1)
 
 sect1 :: Parser Sect1
 sect1 = do
@@ -96,12 +98,18 @@ sect2s = many sect2
 sect2title = title '.'
 
 sect2 :: Parser Sect2
-sect2 = do notFollowedBy sect1title
+sect2 = do notFollowedBy sect1title 
            t  <- sect2title
            cs <- content
            return $ Sect2 (0,0) t cs
 
 content = many theElement
+
+include :: Parser Sect1
+include = do filepath <- between (string "<") 
+                  (do {char '>'; many $ oneOf "\n"}) 
+                  (many (letter <|> oneOf "\\/.:"))
+             return $ Include filepath
 
 theElement = choice [ codePara
               , codeParas
@@ -156,7 +164,7 @@ paraObjs = many1 paraObj
 line :: Parser String
 line = do notFollowedBy sect1title
           notFollowedBy sect2title  
-          head <- noneOf "\n"
+          head <- noneOf "<\n"
           tail <- try (do str <- manyTill (noneOf "\n") 
                                           (lookAhead (string "：\n\n"))
                           return $ str ++ "："
@@ -166,7 +174,7 @@ line = do notFollowedBy sect1title
 
 title :: Char -> Parser Title
 title sep = do
-    t <- many1 $ noneOf "\n"; char '\n'
+    t <- many1 $ noneOf "<\n"; char '\n'
     string $ replicate 2 sep;many $ char sep; string "\n\n"
     return t
 
@@ -190,6 +198,30 @@ run input =
         Left err -> Error $ show err
         Right x  -> numberDoc x
 
+runSect1 input =
+    case (parse sect1 "" input) of
+        Left err -> Sect1 0 (show err) [] []
+        Right x  -> x
+
+runInclude :: FilePath -> String -> IO Doc
+runInclude srcdir input = do
+    let d = rawRun input
+    d' <- execInclude srcdir d
+    return $ numberDoc d'
+
+execInclude :: FilePath -> Doc -> IO Doc
+execInclude srcdir d@(Doc t cs s1s)= do
+    ns1s <- forM s1s $ \s1 -> include2Sect1 s1
+    return $ Doc t cs ns1s
+    where
+        include2Sect1 (Include src) = do
+            f <- openFile (FP.combine srcdir src) ReadMode
+            hSetEncoding f utf8
+            c <- hGetContents f
+            return $ runSect1 c
+
+        include2Sect1 s1 = return $ s1 
+            
 numberDoc :: Doc -> Doc
 numberDoc (Doc t cs s1s) = Doc t cs (numberSect1s s1s)
 
@@ -198,6 +230,7 @@ numberSect1s s1s =
     [updateNumSect1 n s1 | (n, s1) <- zip [1..] s1s]
      where 
         updateNumSect1 n (Sect1 _ t cs s2s) = Sect1 n t cs (numberSect2s n s2s)
+        updateNumSect1 n i@(Include _ ) = i
 
         numberSect2s s1n s2s = 
             [updateNumSect2 s1n s2n s2 | (s2n, s2) <- zip [1..] s2s]
@@ -207,8 +240,10 @@ numberSect1s s1s =
 main = do
     args <- getArgs 
     let src  = args !! 0
+    let srcdir = FP.takeDirectory src
     f <- openFile src ReadMode
     hSetEncoding f utf8
     c <- hGetContents f
     let o = run c
-    putStr $ show o
+    o' <- execInclude srcdir o
+    putStr $ show o'

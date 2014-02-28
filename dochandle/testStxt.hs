@@ -83,6 +83,14 @@ testParser = test [ "test ParaObj" ~:
        ++  "Sect1 0 \"c2\" [] []]" 
        ~=? 
           rawRunPart sect1s "c1\n--\n\nt1\n..\n\nl1\n\nc2\n--\n\n"
+        ,  "[Sect1 0 \"c1\" [] [Sect2 (0,0) \"t1\" [Para [Str \"l1\"]]],"
+       ++  "Include \"i\",Sect1 0 \"c2\" [] []]" 
+       ~=? 
+          rawRunPart sect1s "c1\n--\n\nt1\n..\n\nl1\n\n<i>\n\nc2\n--\n\n"
+        ]
+
+        , "test include" ~: 
+        [ "Include \"d:\\\\dir\\\\file.txt\"" ~=? rawRunPart include "<d:\\dir\\file.txt>"
         ]
         , "test doc" ~: 
         [ "Doc \"doc\" [] [Sect1 1 \"s1\" [] []]" ~=? 
