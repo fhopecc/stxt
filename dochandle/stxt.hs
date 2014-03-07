@@ -108,7 +108,7 @@ content = many theElement
 include :: Parser Sect1
 include = do filepath <- between (string "<") 
                   (do {char '>'; many $ oneOf "\n"}) 
-                  (many (letter <|> oneOf "\\/.:"))
+                  (many (letter <|> oneOf "\\/.:_"))
              return $ Include filepath
 
 theElement = choice [ codePara
@@ -206,8 +206,11 @@ runSect1 input =
 runInclude :: FilePath -> String -> IO Doc
 runInclude srcdir input = do
     let d = rawRun input
-    d' <- execInclude srcdir d
-    return $ numberDoc d'
+    case d of  
+        (Doc _ _ _) -> do
+            d' <- execInclude srcdir d
+            return $ numberDoc d'
+        (Error msg) -> error msg 
 
 execInclude :: FilePath -> Doc -> IO Doc
 execInclude srcdir d@(Doc t cs s1s)= do
@@ -221,7 +224,7 @@ execInclude srcdir d@(Doc t cs s1s)= do
             return $ runSect1 c
 
         include2Sect1 s1 = return $ s1 
-            
+
 numberDoc :: Doc -> Doc
 numberDoc (Doc t cs s1s) = Doc t cs (numberSect1s s1s)
 

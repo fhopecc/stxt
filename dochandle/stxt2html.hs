@@ -7,54 +7,71 @@ import System.IO
 import qualified System.FilePath.Windows as FP
 import Data.List
 import Data.Maybe
+import System.Console.GetOpt
 import System.Directory
+    
+data Page = Page 
+  { pSiteURL  :: String
+  , pSiteName :: String
+  , pBase     :: FilePath
+  , pCSSPath  :: FilePath
+  , pSource   :: FilePath
+  , pOutDir   :: FilePath
+  , pDoc      :: Maybe STXT.Doc
+  , pTitle    :: String
+  , pContent  :: STXT.Content
+  , pSect1s   :: STXT.Sect1s
+  , pSect1    :: Maybe STXT.Sect1
+  , pSect2s   :: STXT.Sect2s
+  , pSect2    :: Maybe STXT.Sect2
+  } 
 
-data Page = Page { pSource  :: FilePath
-                 , pOutDir  :: FilePath
-                 , pDoc     :: STXT.Doc
-                 , pTitle   :: String
-                 , pContent :: STXT.Content
-                 , pSect1s  :: STXT.Sect1s
-                 , pSect1   :: Maybe STXT.Sect1
-                 , pSect2s  :: STXT.Sect2s
-                 , pSect2   :: Maybe STXT.Sect2
-                 } 
+defaultPage = Page 
+  { pSiteURL  = "http://fhopehltb.appspot.com" 
+  , pSiteName = "剛的網站"
+  , pBase     = "d:\\fhopehltb\\www"
+  , pCSSPath  = "d:\\stxt\\dochandle\\web.css"
+  , pSource   = ""
+  , pOutDir   = ""
+  , pDoc      = Nothing   
+  , pTitle    = ""   
+  , pContent  = []  
+  , pSect1s   = [] 
+  , pSect1    = Nothing 
+  , pSect2s   = []     
+  , pSect2    = Nothing
+  }
 
-siteUrl = "http://fhopehltb.appspot.com"
-siteName = "剛的網站"
-webdir = "d:\\fhopehltb\\"
-webcss = "d:\\stxt\\dochandle\\web.css"
-index  = FP.combine webdir "index.html"
+options :: [OptDescr (Page -> IO Page)]
+options =
+ [ Option "s" ["source"]
+     (ReqArg
+         (\src page -> do
+            let srcdir = FP.takeDirectory src
+            let basename = FP.takeBaseName src
+            let basedir = pBase page
+            f <- openFile src ReadMode
+            hSetEncoding f utf8
+            c <- hGetContents f
+            doc <- STXT.runInclude srcdir c
+            return $ page 
+                { pSource = src  
+                , pDoc    = Just doc
+                , pOutDir = FP.combine basedir basename
+                })
+         "FILE")
+     "Source File"
+ ]
 
-main = do 
-    --let src = "d:\\stxt\\doc\\vbscript\\vbscript.txt"
-    args <- getArgs 
-    let src = args !! 0
-    let basename = FP.takeBaseName src
-    let srcdir = FP.takeDirectory src
-    let outDir = FP.combine webdir basename
-    createDirectoryIfMissing True outDir
-    putStr "outDir="
-    putStrLn $ outDir 
-    f <- openFile src ReadMode
-    hSetEncoding f utf8
-    c <- hGetContents f
-    copyFile webcss (FP.combine outDir "web.css")
-    putStrLn "copy web.css"
-    doc <- STXT.runInclude srcdir c
-    mapM_ writeHtml (evalState getHtmls (Page { pSource  = src
-                                              , pOutDir  = outDir
-                                              , pDoc     = doc
-                                              , pTitle   = ""
-                                              , pContent = []
-                                              , pSect1s  = []
-                                              , pSect1   = Nothing
-                                              , pSect2s  = []
-                                              , pSect2   = Nothing
-                                              }))
-    --copyFile index "d:\\stxt\\fhopecc\\www\\index.html"
-    --
+main = do
+    args <- getArgs
+ 
+    let (actions, nonOptions, errors) = getOpt RequireOrder options args
 
+    page <- foldl (>>=) (return defaultPage) actions
+
+    mapM_ writeHtml (evalState getHtmls page)
+    
 writeHtml :: (FilePath, Html) -> IO ()
 writeHtml (path, html) = do
     f <- openFile path WriteMode
@@ -63,7 +80,6 @@ writeHtml (path, html) = do
     putStrLn path
     hFlush f
     hClose f
-
 
 getHtmls :: State Page [(FilePath, Html)]
 getHtmls = do
@@ -74,7 +90,7 @@ getHtmls = do
 
 getIndexHtml :: State Page (FilePath, Html)
 getIndexHtml = do
-    p@(Page {pDoc = (STXT.Doc t cs s1s)})  <- get
+    p@(Page {pDoc = Just (STXT.Doc t cs s1s)})  <- get
     put p { pTitle   = t
           , pContent = cs
           , pSect1   = Nothing
@@ -129,7 +145,11 @@ getFilePath = do
     return $ outdir ++ "\\" ++ f
 
 getTitleBar = do
-    Page{pTitle = title} <- get
+    Page 
+      { pTitle    = title
+      , pSiteName = siteName
+      , pSiteURL  = siteUrl
+      } <- get
     return $ thediv ! [identifier "title_bar"] 
                 << table 
                     << besides [ td << anchor ! [href siteUrl] 
@@ -172,7 +192,6 @@ getSect2Bar = do
                          aboves [(label False) << sect2Anchor s2
                                 | s2 <- s2s
                                 ]
-
 
 getPageHtml :: State Page (FilePath, Html)
 getPageHtml = do
@@ -253,4 +272,3 @@ label isSelected child = (if isSelected then
         td ! [theclass "selected"]   
     else 
         td) << child
-
