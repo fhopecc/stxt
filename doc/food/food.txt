@@ -1,6 +1,8 @@
 野食記
 ======
 
+[野菜]
+
 <cereal.txt>
 
 <bean.txt>

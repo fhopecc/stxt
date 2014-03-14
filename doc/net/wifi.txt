@@ -1,0 +1,13 @@
+
+WinAirCrackPack工具包是一款無線局域網掃瞄和密鑰破解工具，主要包括
+airodump和aircrack等工具。它可以監視無線網絡中傳輸的數據，收集數據包，
+並能計算出WEP/WPA密鑰。
+
+NetStumbler
+...........
+免費無線網路訊號測試軟體–NetStumbler(Network Stumbler)，可以偵測 AP 無
+線基地台的訊號強度，測試方法很簡單，只要在 SSIDs 下面點選你要即時監測
+的 AP 名稱下的 MAC 位址，便可以顯示訊號的雜訊比 dBm 值，雜訊比越小代表
+訊號越強，圖形也就越高，可以用來比較 AP 的訊號強度，且有明確的數據，由
+於他是 Packet Sniffer for Wireless Networks 軟體，封包監測的時候會卡頻
+寬，不用的時候要停止監測或關閉他，才不會影響你上網。

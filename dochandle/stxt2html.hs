@@ -195,8 +195,9 @@ getSect2Bar = do
 
 getPageHtml :: State Page (FilePath, Html)
 getPageHtml = do
-    Page { pTitle = title
+    Page { pTitle   = title
          , pContent = content
+         , pDoc     = Just doc
          } <- get
     titlebar <- getTitleBar
     sect1bar <- getSect1Bar 
@@ -212,7 +213,7 @@ getPageHtml = do
                    +++ sect2bar 
                    +++ rightAds
                    +++ thediv ![identifier "content"]
-                        << map elem2Html content
+                        << map (elem2Html doc) content 
     f <- getFilePath
     return (f, html)
 
@@ -233,15 +234,24 @@ sect2Path :: STXT.Sect2 -> String
 sect2Path s1@(STXT.Sect2 (n1, n2) t _) = 
     show n1 ++ "_" ++ show n2 ++ ".html"
 
-elem2Html :: STXT.Elem -> Html
-elem2Html (STXT.Para ps) = thediv ! [theclass "para"]
-                                << paragraph << [paraObj2Html p | p <- ps]
-elem2Html (STXT.Code c) = pre << c
+elem2Html :: STXT.Doc -> STXT.Elem -> Html
+elem2Html doc (STXT.Para ps) = thediv ! [theclass "para"]
+                                << paragraph << [paraObj2Html doc p | p <- ps]
+elem2Html doc (STXT.Code c) = pre << c
 
-paraObj2Html :: STXT.ParaObj -> Html
-paraObj2Html (STXT.Str s) = toHtml s
-paraObj2Html (STXT.Link t url) = anchor ! [href url] << t  
-
+paraObj2Html :: STXT.Doc -> STXT.ParaObj -> Html
+paraObj2Html doc (STXT.Str s) = toHtml s
+paraObj2Html doc (STXT.Link t url) = anchor ! [href url] << t  
+paraObj2Html doc (STXT.ILink t) = 
+    let s1 = doc `STXT.getSect1` t
+    in if not (isNothing s1) then
+          sect1Anchor $ fromJust s1 
+       else
+          let s2 = doc `STXT.getSect2` t 
+          in if not (isNothing s2) then
+                sect2Anchor $ fromJust s2
+             else
+                toHtml t
 
 myMeta = meta ! [ httpequiv "Content-Type"
                 , content   "text/html; charset=utf-8"

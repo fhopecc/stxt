@@ -1,7 +1,6 @@
 module STXT( run, rawRun, runPart, rawRunPart, runInclude
            , line, para, include
-           , codePara
-           , codeParas
+           , codePara, codeParas
            , content
            , sect2title
            , sect1, sect1s
@@ -17,8 +16,9 @@ module STXT( run, rawRun, runPart, rawRunPart, runInclude
            , Content
            , getSect2s
            , getSect2sFromSect1
-           , ParaObj(Str, Link)
+           , ParaObj(Str, Link, ILink)
            , paraLink, paraObj, paraObjs
+           , getSect1, getSect2
            ) 
 where
 
@@ -30,6 +30,24 @@ import Data.List
 import Data.Maybe
 import Network.URI
 import qualified System.FilePath as FP
+
+class Accessable a where
+    address :: a -> String 
+    hasAddr :: a -> String -> Bool
+    a `hasAddr` addr = (address a) == addr
+
+instance Accessable Sect1 where
+    address (Sect1 n t c s2s) = t
+
+instance Accessable Sect2 where
+    address (Sect2 n t c) = t
+
+getSect1 :: Doc -> String -> Maybe Sect1
+getSect1 (Doc _ _ s1s) addr = find (`hasAddr` addr) s1s
+
+getSect2 :: Doc -> String -> Maybe Sect2
+getSect2 d@(Doc _ _ s1s) addr = find (`hasAddr` addr) $ sect2s d
+    where sect2s d = concat [s2s | (Sect1 _ _ _ s2s) <- s1s] 
 
 data Doc      = Doc Title Content Sect1s
               | Error String
@@ -54,6 +72,7 @@ type Content = [Elem]
 
 data ParaObj = Str String
              | Link Title URL 
+             | ILink Title          -- Inner Link
                deriving (Show, Eq)
 
 type ParaObjs = [ParaObj]
@@ -148,7 +167,7 @@ paraLink = between (char '[') (char ']') (
             else
                 return $ Link t uri
     )<|>(do r <- many $ noneOf "]\n"
-            return $ Str $ "[" ++ r ++ "]"
+            return $ ILink $ r
         )
     )
 

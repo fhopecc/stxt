@@ -13,7 +13,7 @@ testParser = test [ "test ParaObj" ~:
         ]
     , "test Link" ~:
         [ "Str \"[t|url]\"" ~=? rawRunPart paraLink "[t|url]"
-        , "Str \"[t]\"" ~=? rawRunPart paraLink "[t]"
+        , "ILink \"t\"" ~=? rawRunPart paraLink "[t]"
         , "Link \"t\" \"http://www.hltb.gov.tw\"" ~=? rawRunPart paraObj "[t|http://www.hltb.gov.tw]"
         , "Str \"str\"" ~=? rawRunPart paraObj "str[t|url]"
         ]
@@ -102,4 +102,12 @@ testParser = test [ "test ParaObj" ~:
         , "Doc \"doc\" [Para [Str \"l1l2\"]] [Sect1 1 \"s1\" [] []]"~=? 
           runPart doc "doc\n==\n\nl1\nl2\n\ns1\n--\n\n"
         ]
+        , "test accessNode" ~: 
+        [ "Just (Sect1 0 \"s1\" [] [])" ~=? 
+          show ((rawRun "doc\n==\n\ns1\n--\n\n") `getSect1` "s1")
+        , "Just (Sect2 (0,0) \"t2\" [])" ~=? 
+          show ((rawRun "doc\n==\n\ns1\n--\n\nt1\n..\n\nt2\n..\n\n") 
+                `getSect2` "t2")
+        ]
+
     ]]
