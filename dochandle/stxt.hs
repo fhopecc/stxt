@@ -7,15 +7,13 @@ module STXT( run, rawRun, runPart, rawRunPart, runInclude
            , sect2, sect2s
            , doc
            , Doc(Doc, Error)
-           , Sect1(Sect1, Include)
-           , Sect2(Sect2)
+           , Sect1(Sect1, Include, EmptySect1)
+           , Sect2(Sect2, EmptySect2)
            , Sect1s
            , Sect2s
            , Title
            , Elem(Code, Para)
            , Content
-           , getSect2s
-           , getSect2sFromSect1
            , ParaObj(Str, Link, ILink)
            , paraLink, paraObj, paraObjs
            , getSect1, getSect2
@@ -33,8 +31,9 @@ import qualified System.FilePath as FP
 
 class Accessable a where
     address :: a -> String 
-    hasAddr :: a -> String -> Bool
-    a `hasAddr` addr = (address a) == addr
+    addrIs :: String -> a -> Bool
+    addrIs addr a = 
+        (address a) == addr
 
 instance Accessable Sect1 where
     address (Sect1 n t c s2s) = t
@@ -43,11 +42,11 @@ instance Accessable Sect2 where
     address (Sect2 n t c) = t
 
 getSect1 :: Doc -> String -> Maybe Sect1
-getSect1 (Doc _ _ s1s) addr = find (`hasAddr` addr) s1s
+(Doc _ _ s1s) `getSect1` addr = find (addrIs addr) s1s
 
 getSect2 :: Doc -> String -> Maybe Sect2
-getSect2 d@(Doc _ _ s1s) addr = find (`hasAddr` addr) $ sect2s d
-    where sect2s d = concat [s2s | (Sect1 _ _ _ s2s) <- s1s] 
+(Doc _ _ s1s) `getSect2` addr = find (addrIs addr) s2s
+    where s2s = concat [s2s | (Sect1 _ _ _ s2s) <- s1s] 
 
 data Doc      = Doc Title Content Sect1s
               | Error String
@@ -57,11 +56,13 @@ type Sect1s   = [Sect1]
 
 data Sect1    = Sect1 Int Title Content Sect2s
               | Include FilePath
+              | EmptySect1
                 deriving (Show, Eq)
 
 type Sect2s   = [Sect2]
 
 data Sect2    = Sect2 (Int, Int) Title Content
+              | EmptySect2
                 deriving (Show, Eq)
 
 data Elem = Para ParaObjs
@@ -82,15 +83,6 @@ type Title    = String
 type Lines    = [String]
 
 type URL  = String -- Maybe use Network.URI to parse
-
-getSect2s :: Int -> Doc -> Sect2s
-getSect2s n1 doc@(Doc _ _ s1s) = s2s
-    where
-        s1@(Sect1 _ _ _ s2s) = fromMaybe (s1s !! 0) (find (isNumEq n1) s1s)
-        isNumEq num (Sect1 n _ _ _) = n == num 
-
-getSect2sFromSect1 :: Sect1 -> Sect2s
-getSect2sFromSect1 (Sect1 _ _ _ s2s) = s2s
 
 doc :: Parser Doc
 doc = do

@@ -1,6 +1,5 @@
 import qualified STXT
 import Text.Html
-import Control.Monad.Reader
 import Control.Monad.State
 import System.Environment 
 import System.IO
@@ -43,37 +42,38 @@ defaultPage = Page
   }
 
 options :: [OptDescr (Page -> IO Page)]
-options =
- [ Option "s" ["source"]
-     (ReqArg
-         (\src page -> do
-            let srcdir = FP.takeDirectory src
-            let basename = FP.takeBaseName src
-            let basedir = pBase page
-            f <- openFile src ReadMode
-            hSetEncoding f utf8
-            c <- hGetContents f
-            doc <- STXT.runInclude srcdir c
-            return $ page 
-                { pSource = src  
-                , pDoc    = Just doc
-                , pOutDir = FP.combine basedir basename
-                })
-         "FILE")
-     "Source File"
- ]
+options = []
 
 main = do
     args <- getArgs
  
     let (actions, nonOptions, errors) = getOpt RequireOrder options args
+    
+    when (null nonOptions) 
+        (error "syntax: stxt2html options source")
 
-    page <- foldl (>>=) (return defaultPage) actions
+    let src = head nonOptions
+    let srcdir = FP.takeDirectory src
+    let basename = FP.takeBaseName src
+    let basedir = pBase defaultPage
+    f <- openFile src ReadMode
+    hSetEncoding f utf8
+    c <- hGetContents f
+    doc <- STXT.runInclude srcdir c
+
+    page <- foldl (>>=) 
+                  ( return defaultPage 
+                            { pSource = src  
+                            , pDoc    = Just doc
+                            , pOutDir = FP.combine basedir basename
+                            }
+                  ) actions 
 
     mapM_ writeHtml (evalState getHtmls page)
     
 writeHtml :: (FilePath, Html) -> IO ()
 writeHtml (path, html) = do
+    createDirectoryIfMissing True $ FP.takeDirectory path 
     f <- openFile path WriteMode
     hSetEncoding f utf8
     hPutStr f (renderHtml html)
@@ -124,11 +124,6 @@ getSect2Htmls = do
             getPageHtml
     return $ concat s2s
 
-getIndexFile :: State Page String
-getIndexFile = do
-    Page {pOutDir = outdir} <- get
-    return $ outdir ++ "\\" ++ "index.html"
-
 getFilePath :: State Page String
 getFilePath = do
     Page { pOutDir = outdir
@@ -150,48 +145,34 @@ getTitleBar = do
       , pSiteName = siteName
       , pSiteURL  = siteUrl
       } <- get
-    return $ thediv ! [identifier "title_bar"] 
-                << table 
-                    << besides [ td << anchor ! [href siteUrl] 
-                                        << siteName  
-                               , td << anchor ! [href "index.html"] 
-                                        << title
-                               ]
+    return $ thediv ! [identifier "title_bar"] << table 
+               << besides [ td << anchor ! [href siteUrl] << siteName  
+                          , td << anchor ! [href "index.html"] << title
+                          ]
 
 getSect1Bar :: State Page Html
 getSect1Bar = do
     Page { pSect1s = s1s
          , pSect1  = ss1
          } <- get
-    return $ if null s1s then toHtml ""
+    let selected = fromMaybe STXT.EmptySect1 ss1
+    return $ if null s1s then noHtml
              else thediv ! [identifier "sect1_bar"] << table 
-                      << if isJust ss1 then 
-                            let (STXT.Sect1 selected _ _ _) = fromJust ss1
-                            in besides [(label (n==selected)) << sect1Anchor s1 
-                                       | s1@(STXT.Sect1 n _ _ _) <- s1s
-                                       ]
-                         else
-                            besides [(label False) << sect1Anchor s1 
-                                     | s1 <- s1s
-                                     ]
- 
+                    << besides [(label (s1 == selected)) << sect1Anchor s1 
+                               | s1 <- s1s
+                               ]
 
 getSect2Bar :: State Page Html
 getSect2Bar = do
     Page { pSect2s = s2s 
          , pSect2  = ss2
          } <- get
-    return $ if null s2s then toHtml ""
+    let selected = fromMaybe STXT.EmptySect2 ss2
+    return $ if null s2s then noHtml
              else thediv ! [identifier "sect2_bar"] << table
-                << if isJust ss2 then 
-                      let selected = fromJust ss2
-                      in aboves [ (label (s2 == selected )) << sect2Anchor s2 
-                                |  s2 <- s2s
-                                ]
-                      else
-                         aboves [(label False) << sect2Anchor s2
-                                | s2 <- s2s
-                                ]
+                    << aboves [(label (s2 == selected)) << sect2Anchor s2 
+                              | s2 <- s2s
+                              ]
 
 getPageHtml :: State Page (FilePath, Html)
 getPageHtml = do
@@ -217,26 +198,22 @@ getPageHtml = do
     f <- getFilePath
     return (f, html)
 
-sect1Anchor :: STXT.Sect1 -> Html
 sect1Anchor s1@(STXT.Sect1 n t _ _) = 
     anchor ! [href (sect1Path s1)] << t
 
---sect1Anchor (STXT.Include _) = noHtml
-
-sect2Anchor :: STXT.Sect2 -> Html
 sect2Anchor s2@(STXT.Sect2 _ t _) = 
     anchor ! [href (sect2Path s2)] << t
 
-sect1Path :: STXT.Sect1 -> String
-sect1Path s1@(STXT.Sect1 n t _ _) = show n ++ ".html"
+sect1Path (STXT.Sect1 n _ _ _) = show n ++ ".html"
 
-sect2Path :: STXT.Sect2 -> String
-sect2Path s1@(STXT.Sect2 (n1, n2) t _) = 
+sect2Path (STXT.Sect2 (n1, n2) _ _) = 
     show n1 ++ "_" ++ show n2 ++ ".html"
 
 elem2Html :: STXT.Doc -> STXT.Elem -> Html
-elem2Html doc (STXT.Para ps) = thediv ! [theclass "para"]
-                                << paragraph << [paraObj2Html doc p | p <- ps]
+elem2Html doc (STXT.Para ps) = 
+    thediv ! [theclass "para"]
+       << paragraph << [paraObj2Html doc p | p <- ps]
+
 elem2Html doc (STXT.Code c) = pre << c
 
 paraObj2Html :: STXT.Doc -> STXT.ParaObj -> Html
