@@ -67,6 +67,7 @@ data Sect2    = Sect2 (Int, Int) Title Content
 
 data Elem = Para ParaObjs
           | Code String
+          | Image Title URL
             deriving (Show, Eq)
 
 type Content = [Elem]
