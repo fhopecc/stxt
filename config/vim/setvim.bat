@@ -2,8 +2,8 @@ rem
 rem 設定個人 VIM 環境
 rem
 
-set src=D:\stxt\config\vim
-set dst=C:\vim
+set src=f:\stxt\config\vim
+set dst=C:\vim7\vim
 
 copy %src%\_vimrc %dst%
 
