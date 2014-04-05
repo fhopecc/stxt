@@ -1,0 +1,188 @@
+Vim Script
+----------
+
+|資料型態|
+
+vim 僅有二種資料型態，數字及字串。
+
+表：數字實字型態
+
+型態            語法                            備註
+
+十六進位實字    0x[1..9abcdef][0..9abcdef]*
+
+八進位實字      0[1..7][0..7]*
+
+十進位實字      [1..9][0..9]*                   前面不可前置 0 這個數字
+                                                ，否則會視為 8 進位
+
+數學運算式
+{add}={variable}+{variable}
+{minus}={variable}-{variable}
+{multiply}={variable}*{variable}
+{divide}={variable}/{variable}
+{modula}={variable}%{variable}
+
+例子：
+:echo 1*3
+3
+字串實字
+{double-quote-string-literal}="[a..zA..Z0..9]*"
+字串相連
+{string-concatenate}={string}.{string}
+
+ex.
+:echo "foo"."bar"
+foobar
+
+
+|控制結構|
+
+Vim Script 為一組 Ex 命令組成。
+
+Ex 命令為 vim 的 normal mode 中，打 ":" 起始的命令。
+
+:while 命令 - 迴圈
+
+語法：
+:while {condition}
+{statement}
+:endwhile
+
+
+變數
+:let 命令 - 設值給變數，都是全域變數的
+語法：
+:let {variable}={expression}
+
+例子：
+:let i=1
+:echo "i is" i
+vim 會印出 i is 1
+
+:let
+vim 會印出所有的全域變數
+
+變數種類
+s:var - 草稿檔變數
+{script-local-variable}=s:{variablename}
+僅作用於目前的草稿檔，
+若用 source 匯入的草稿變數，
+雖同名，但有不同的值
+
+{buffer-local-var}=b:{varname}
+{window-local-var}=w:{varname}
+{global-var}=g:{varname}
+{vim-var}=v:{varname} - vim 預定變數
+
+清除變數
+{clear-var}=unlet[!] {variable}
+
+判斷變數是否已定義
+boolean exist(string varname)
+判斷變數名為 varname 是否有定義
+
+
+表示式
+{enviroment-variable}=$NAME
+{option}=&name
+{register}=@r
+
+絛件表示式
+{expr}?{expr}:{expr}
+a?b:c
+若 a 為真，則 b，反之為 c
+
+:let i=4
+:echo i>5:"i is big":"i is small"
+i is small
+
+:if {condition}
+{statements}
+:endif
+
+:if {condition}
+{statements}
+:else
+{statements}
+:endif
+
+:if {condition}
+{statements}
+:elseif{condition}
+{statements}
+:else
+{statements}
+:endif
+
+比較運算子
+a==b
+
+ex.
+:if 0 == "one"
+: echo "yes"
+:endif
+yes
+
+因為 "one" 不是數字，故為 0
+
+a!=b
+a> b
+a>=b
+a< a="~b" style="font-weight: bold;">:excute str -直譯傳入字串
+:execute "tag " . tag_name
+直譯器的直譯
+
+:normal str -將傳入字串以 normal mode 直譯
+
+暫存區
+......
+
+|表示式暫存區|
+
+直接按下 " 符號，再輸入 =expr，
+則會將 expr 的值存入暫存區，
+之後再用 P 把值貼入。
+
+函數
+....
+
+|呼叫函數|
+
+:call function
+
+|定義函數|
+
+:function {name}({varlist})
+: {body}
+:endfunction
+
+ex.
+:function min(n1, n2)
+: if a:n1 < res="a:n2" res="a:n1">
+
+|插入時間|
+
+:nnoremap <F5> "=strftime("%Y%")<CR>P
+:inoremap <F5> <C-R>=strftime("%c")<CR>
+
+strftime 接受的格式碼及輸出如下：
+
+格式碼                      輸出   
+
+%c                          Thu 27 Sep 2007 07:37:42 AM EDT (本地時間)
+%a %d %b %Y                 Thu 27 Sep 2007
+%b %d, %Y                   Sep 27, 2007
+%d/%m/%y %H:%M:%S           27/09/07 07:36:32
+%H:%M:%S                    07:36:44
+%T                          07:38:09
+%m/%d/%y                    09/27/07
+%y%m%d                      070927
+%x %X (%Z)                  09/27/2007 08:00:59 AM (EDT)
+%a, %d %b %Y %H:%M:%S %z    Wed, 29 Aug 2007 02:37:15 -0400
+%FT%T%z                     2007-08-29T02:37:13-0400
+
+資訊顯示命令
+------------
+
+g CTRL-G    顯示選擇區目前的字元數、詞數等資訊。

@@ -34,7 +34,10 @@ map Q F<lyeF<y/<\/<C-R>">/0<CR>
 "make a deploy function by fhopecc modified at 2006-10-12
 "map <F4> :w<CR>:!rant deploy<CR>
 "run ruby script in current buffer
-map <F5> :r !date /T<CR>
+"
+" ´¡¤J®É¶¡
+:nnoremap <F5> "=strftime("%Y%m%d %a")<CR>Po<CR>
+:inoremap <F5> <C-R>=strftime("%Y%m%d %a")<CR><CR><CR>
 
 function MyDiff()
   let opt = '-a --binary '
