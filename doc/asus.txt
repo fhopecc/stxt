@@ -1,0 +1,36 @@
+Hey folks,
+Just purchased a new ASUS laptop today with Win 8 pre-installed.
+I am trying to access the BIOS to boot from DVD to I can install
+Windows 7, however for the life of me I cannot access the BIOS.
+Is this a new thing? Have ASUS removed BIOS options?
+Any assistance to boot from disc greatly appreciated!
+I figured it out, and I'll post here for reference.
+ASUS BIOS in laptops by default are locked. You need to unlock it. To
+do this in Windows 8:
+
+In Metro, go to the bottom right and in the hover menu select Settings
+GO to General
+Go to Advanced
+Go to Boot to UEFI (or something like that).
+Then it will reset the laptop and go to BIOS. In BIOS:
+
+Disable Secure Boot
+Enable Launch CSM
+Save and Exit, repeat the above steps to get to BIOS.
+
+NOW you can change the boot order.
+
+The fact that you need to do all this work just to access the
+traditional F2/Del/F12 menu demonstrates the lack of faith I have in
+the computer scene.
+
+ASUS stated their drivers are for Win 8 but they all work in Win 7.
+Probably they will since the driver model is very similar.
+
+P.S: I don't see much of a point in downgrading a computer shipped
+with Win 8, because the two OS s are pretty much identical. There are
+only very few compatibility issues with a handful of old hardware
+devices and apps. If you dont have any such issues then you are
+better off with Win 8. Like I have said in few other threads, if the
+modern UI is the only reason for going back to Windows 7 then use a
+3rd party start menu replacement app.

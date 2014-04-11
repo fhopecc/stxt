@@ -1,0 +1,94 @@
+Oracle裡有一個不錯的階層式查詢功能,可以用很簡短的Script來達成目標,階層
+的意思就有點像是(總經理->副總->協理->經理->副理…..)的這種層級關係,這樣
+看可能還是很難懂階層或查詢的用法關係,以下是Demo的資料表:
+ 
+TableName : UserMgrInfo
+UserNo
+[人員編號]
+UserName
+[人員名稱]
+UserMgrNo
+[主管代號]
+UserActive
+[人員生失效]
+Z001
+Jeff
+X059
+1
+X059
+Kevin
+X043
+1
+X040
+Judy
+B001
+1
+X043
+David
+X040
+0
+B001
+Andy
+A001
+1
+A001
+Frank
+ 
+1
+C001
+Cindy
+B001
+1
+ 
+　　上面這個表格的關係很簡單,每筆資料都有一個主管代號,這個主管代號就是他的上一階主管,當UserMgrNo為空時,代表為最上階主管,階層結束,之中也有人員生失效的控制,現在要做的是如何下一個查詢,找出該員的主管清單?而且只要找出生效的人員。
+ 
+　　在Oracle裡有個Start with connect by prior可以使用,以下的語法就是找出該員的生效主管清單:
+ 
+Select UserNo,UserName from
+(
+        Select UserNo,UserName,UserActive from UserMgrInfo
+        Start with UserNo=’Z001’
+        Connect by UserNo=prior UserMgrNo
+)
+Where UserActive=’1’
+ 
+這個語法所下的條件,就是找出編號Z001這個人的主管清單,這個語法所輸出的結果如下 :
+UserNo
+[人員編號]
+UserName
+[人員名稱]
+Z001
+Jeff
+X059
+Kevin
+X040
+Judy
+B001
+Andy
+A001
+Frank
+　　而編號X043的David並不會輸出,因為他是失效人員,為什麼要用子查詢的方式去下UserActive=’1’,而不直接下在裡面就好? 因為如果直接下在裡面,這個查詢結果就只會到X059就停下來了,這個情況就很像rownum :
+ 
+Select * from UserMgrInfo where rownum=1
+這時會帶回第一筆資料
+Select * from UserMgrInfo where rownum=2
+這時並不是帶回二筆資料,而是一筆也沒有,如果要帶回第二筆,就要用子查詢的方式
+Select * from
+(
+Select rownum,* from UserMgrInfo
+)
+Where rownum=2
+ 
+　　回正題,如果此時要查Cindy編號C001的主管清單,同樣的語法所帶回的結果如下 :
+UserNo
+[人員編號]
+UserName
+[人員名稱]
+C001
+Cindy
+B001
+Andy
+A001
+Frank
+所以用這個Start wit connect by prior就可以很快的達成階層式查詢囉~ 
+ 
