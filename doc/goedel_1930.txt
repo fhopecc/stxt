@@ -19,11 +19,9 @@ das System der Principia Mathematica (PM) einerseits,
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre) andererseits.
 
-
 Die Grundzeichen des Systems P sind die folgenden:
 I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
 
-II.Variable ersten Typs(fuer Individuen, d. h. natuerliche Zahlen inklusive 0)):
 
 下列為P系統之基本符：
 I.常符:
@@ -34,11 +32,56 @@ v : 或
 f : 後繼函數，命名源自德文後繼 Nachfolger
 ( ) :括號
 
-II.第一型變數(對個體，即自然數包含零)
+II.Variable ersten Typs(fuer Individuen, 
+   d. h. natuerliche Zahlen inklusive 0)): "x1", "y1", "z1"...
+
+II.第一型變數(對個體，即自然數包含零):  "x1", "y1", "z1"...
+
+Variable zweiten Typs (für Klassen von Individuen):
+"x2", "y2", "z2"...
+
+Variable dritten Typs (für Klassen von Klassen von Individuen):
+"x3", "y3", "z3"...
+
+第二型變數(表個體的類別):
+"x2", "y2", "z2"...
+
+第三型變數(表個體類別的類別):
+"x3", "y3", "z3"...
+
+usw. für jede natürliche Zahl als Typus (17
+17) Es wird vorausgesezt, daß für jeden Variablentypus abzählbar viele
+    Zeichen zur Verfügung stehen.
+
+等同：對每個作為型態自然數
+17) 可假定，對每個變數型別，可數多的符號是可行的。
+
+Anm.: Variable für zwei und mehr stellige Functionen (Relationen) sind
+als Grundzeichen überflüssig, da man Relationen als Klassen
+geordneter Paare definieren kann und geordnete Paare
+wiederum als Klassen von Klassen, z. B. das geordnete Paar a, b durch
+((a), (a,b)), wo (x,z) bzw. (x) die Klassen bedeuten, deren einzige
+Elemente x, y bzw. x sind. 18).
+
+注釋：表示 2 元或更多元函數(關係)之變數可視為多出的基本符號。
+因為關係可用序對類別來定義且序對可再由類別之類別而定義，
+例如序對 a, b 可由((a), (a,b))定義，其中 (w, z) 或 (x) 指類別，
+其成員含 x, y 或 x。18)
+
+18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
+z. B. eine Relation zwischen Individuen und Klassen als eine Klasse als
+Elementen der Form: ((x2), ((x1),x2)). Alle in den PM über Relationen
+beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, auch bei
+dieser Behandlung beweisbar.
+
+18)不等關係也可用此方式定義，例如一個個體與含一個成員之類別之類別，
+如下式：
+((x2), ((x1),x2))
+所有 PM 在此關係下可證句是如此，作為一個簡單教學的考慮，
+如此作法也是可證的。
 
 陣列操作
 ........
-
 
 公式操作
 ........
@@ -97,3 +140,7 @@ einigen 一致
 wenigen adj一點點、不多
 Regeln 改造
 vollzogen adj 完美的
+
+德語拼音
+........
+
