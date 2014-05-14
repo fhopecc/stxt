@@ -205,7 +205,9 @@ Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 不難看出，只有及物動詞當謂語才能形成被動語態。
 
 一：德文被動語態的形成，
+
 要依靠助動詞werden 
+
 (請注意把它和“將來時”中的助動詞 werden 區分開。二者很容易混)。
 
 基本句型：
@@ -232,8 +234,6 @@ mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
 
 Sie fragt mich.             她問我。    主動式
 Ich wird von ihr gefragt.   我被她問了。被動式
-
-
 
 注意：
 若實際主語是人時，變成相關狀語時時用 von 帶出，
@@ -429,28 +429,152 @@ sie/Sie	haben	lesen	können	seien	werden
 (原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
 (變化) Herr Li bat eine Reiseführerin, dass eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
-反身動詞 (reflexive Verben)
----------------------------
-　　當動詞所支配的賓語正是主語時，這類動詞稱為反身動詞。反身動詞又分為真返身動詞和非真反身動詞。
-真反身動詞 (echte reflexive Verben)
-　　真反身動詞只能和反身代詞連用，不能用名詞或其他代詞代替反身代詞，反身代詞與動詞構成一個整體。真反身動詞多數帶第四格 (Akkusativ)反身代詞，少數帶第三格(Dativ)反身代詞。
+反身動詞 
+--------
+
+當動詞所支配的賓語正是主語時，
+這類動詞稱為反身動詞(reflexive Verben)。
+
+反身動詞又分為真返身動詞和非真反身動詞。
+
+真反身動詞 
+..........
+
+真反身動詞(echte reflexive Verben)只能和反身代詞連用，
+不能用名詞或其他代詞代替反身代詞，
+反身代詞與動詞構成一個整體。
+真反身動詞多數帶第四格 (Akkusativ)反身代詞，少數帶第三格(Dativ)反身代詞。
+
 (1)	帶第四格反身帶詞的反身動詞
-例： sich auskennen、sich beeilen、sich bedanken、sich erkündigen、sich gedulden、sich konzentrieren、sich kümmern、sich verspäten等。
+例： sich auskennen、
+     sich beeilen、sich bedanken、sich erkündigen、sich gedulden、
+     sich konzentrieren、sich kümmern、sich verspäten等。
+
 例句：Ich kenne mich an diesem Ort nicht aus. (我對這地方不熟悉。)
+
 (2)	帶第三格反身帶詞的反身動詞
-例： sich aneignen、sich ausdenken、sich einbilden等。
+
+例：sich aneignen、sich ausdenken、sich einbilden 等。
+
 帶第三格反身動詞的真反身動詞通常需要支配一個第四格補足語。
-例句：Er hat sich einen Plan ausgedacht. (他想出了一個計畫。)
-非真反身動詞 (unechte reflexive Verben)
-　　非真反身動詞本是具有一定支配能力的獨立動詞，因此可以有反身與非反身兩種用法。其反身代詞為第四格或第三格，可用名詞或其他代詞取代。例如：sich anziehen、sich aufregen、sich kaufen、sich wünschen等。
+
 例句：
+
+Er hat sich einen Plan ausgedacht.
+
+他想出了一個計畫。
+
+非真反身動詞 
+............
+
+非真反身動詞(unechte reflexive Verben)本是具有一定支配能力的獨立動詞，
+因此可以有反身與非反身兩種用法。
+
+其反身代詞為第四格或第三格，可用名詞或其他代詞取代。
+例如：sich anziehen、sich aufregen、sich kaufen、sich wünschen等。
+例句：
+
 (反身) Ich ziehe mich an. (我穿上衣服。)
+
 (非反身) Ich ziehe das Kind an. (我替孩子穿衣服。)
 
-※有些動詞作反身動詞時，其意義與非反身用法不同。例如：treffen與 sich treffen。
+有些動詞作反身動詞時，其意義與非反身用法不同。
+例如：treffen與 sich treffen。
 例句：
 (非反身) Ich habe gestern Herrn Li getroffen. (我昨晚遇到李先生。)
 (反身) Ich treffe mich oft mit mienem Freunden. (我經常和朋友會面。)
 
-※反身代名詞還可以表達交互關係，此時主語為複數。某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
+反身代名詞還可以表達交互關係，此時主語為複數。
+某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
 例句：Die Studenten verstehen sich/einander gut. (大學生們彼此清楚了解。)
+
+
+反身動詞
+........
+ Reflexive Verben
+
+拖油瓶動詞。德文有一類動詞，必須與反身代名詞合用，
+稱為reflexive Verben。
+細分起來，有的是毫無道理非加不可，
+有的則只是為了表達特定意思才要使用反身型態。
+
+I. Funktion（功能）
+
+1.reflexiv：
+沒有表達特殊的意義，固定的用法，就是要這樣講，這種動詞永遠都帶著反身代名詞
+
+der Unfall sich ereigen = 發生意外
+
+Gestern hat sich hier ein schwerer Unfall ereignet.
+昨天此地發生嚴重車禍。
+
+sich um....bewerben = 應徵（某職位）
+
+Ich habe mich um eine neue Stelle beworben. 
+我應徵了一個新職位。
+
+2.teilreflexiv：為了表達「同自身做什麼」、「互相」、「交互」的意思，才使用反身型態。
+
+＊Die beiden streiten sich ja schon wieder.
+這兩人果然又互相吵架了。
+
+＊Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
+他不喜歡她，她不喜歡他----他們彼此不喜歡。
+
+＊Die Müllers bauen sich ein Haus.
+繆勒家給自己蓋了房子。
+
+II. Formen （型態）
+
+反身代名詞都是受格（自己受，咦），德文受格有兩種，反身代名詞當然也就有兩種。
+記憶要訣：只有單數的第一人稱第二人稱，其反身代名詞的Akkusativ和Dativ是不同型態的。
+
+單數（Singular）
+ich: mich(A) mir(D)
+du: dich(A) dir(D)
+er/sie/es: sich(A+D)
+
+複數（Plural）
+wir: uns(A+D)
+ihr: euch(A+D)
+sie: sich(A+D)
+
+＊大多數情況下，反身代名詞是Akkusativ，但有些狀況下，特別是一些給予動詞（同時有兩個受格）時，會用到Dativ
+
+Ich wasche mich. 我洗澡（sich waschen，從頭到腳自己洗）
+
+Ich wasche mir die Hände. 我洗手（我洗我自己的手，動詞還是sich waschen，但因為指定了洗的是「手」，「手」在這個動詞的意思下必須為Akkusativ，表示被洗的物體，所以反身代名詞此刻為Dativ了）
+
+特別注意：
+
+接在介係詞後面的Dativ（例如永遠只接Dativ的mit, an, seit, zu, vor,.....）只能算是補語而不是受格，對動詞來說不是真正的Dativ，不能混淆。
+
+III. Satzstruktur （語序）
+
+五個原則：
+
+1. 代名詞先於名詞
+
+＊Jens kämmt sich die Haare selten. （顏斯很少梳頭髮。以下例句意思同）
+
+2. 都是代名詞的話，Akkusativ先於Dativ
+
+＊Jens kämmt sie sich selten.
+
+3. 如果與主詞並排，主詞先於受詞
+
+＊Selten kämmt Jens sich die Haare.
+
+＊Selten kämmt er sich die Haare.
+
+＊Selten kämmt er sie sich.
+
+
+4. 在副句的狀況下，反身代名詞直接放在副句連接詞後
+
+＊ Ich glaube, dass sich Max amüsiert.
+＊ Ich glaube, dass er sich amüsiert. （主詞的代名詞型態還是要放受格前面）
+
+5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
+
+＊Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.

@@ -40,11 +40,11 @@ II.第一型變數(對個體，即自然數包含零):  "x1", "y1", "z1"...
 Variable zweiten Typs (für Klassen von Individuen):
 "x2", "y2", "z2"...
 
-Variable dritten Typs (für Klassen von Klassen von Individuen):
-"x3", "y3", "z3"...
-
 第二型變數(表個體的類別):
 "x2", "y2", "z2"...
+
+Variable dritten Typs (für Klassen von Klassen von Individuen):
+"x3", "y3", "z3"...
 
 第三型變數(表個體類別的類別):
 "x3", "y3", "z3"...
@@ -79,6 +79,28 @@ dieser Behandlung beweisbar.
 ((x2), ((x1),x2))
 所有 PM 在此關係下可證句是如此，作為一個簡單教學的考慮，
 如此作法也是可證的。
+
+數符
+....
+
+Unter einem Zeichen ersten Typs verstehen 
+wir eine Zeichenkombination der Form:
+a, fa, ffa, fffa... usw.
+
+wo a entweder 0 oder eine Variable ersten Typs.
+
+基於第一型符號下，我們理解下列形式之符號組合：
+a, fa, ffa, fffa... 等等
+
+其中 a 是 0 或第一型符號。
+
+Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
+
+在第一種情形下，我們稱這樣的符號為數符。
+
+Für n > 1 verstehen wir unter einem Zeichen n-ten Typs.
+
+對 n > 1 的情形下，表示符號為第 n 型。
 
 陣列操作
 ........
