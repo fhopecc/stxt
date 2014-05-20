@@ -102,6 +102,13 @@ Für n > 1 verstehen wir unter einem Zeichen n-ten Typs.
 
 對 n > 1 的情形下，表示符號為第 n 型。
 
+Zeichenkombinationen der Form a(b), 
+wo b ein Zeichen und n-ten a ein Zeichen (n+1)-ten Typs ist, 
+nennen wir Elementarformeln.
+
+a(b) 型式的符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
+我們稱為基本式。
+
 陣列操作
 ........
 
