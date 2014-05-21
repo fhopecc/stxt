@@ -123,16 +123,46 @@ x   ic[ks]
 3. 長、短、高、低組成德文特有的語調(Satzmelodie)，德文的語調後面高，因為重要的訊息都在句尾。 
 
 念句子時需要注意事項:
-1.	念句不念字 : 要把一個句子看成是一個長的字---wie ein Wort。
-2.	念意義單位像一個字 : in der Schule，連音如同念在一起 : Schiffsfahrtgesellschaft。
-3.	重音不重而是高，它是高度，不是強度。
-4.	一個字只有一個高音，例如 : fangen。如高音被佔，則次高音節應低一個音階，例如 : anfangen。此字中兩個a的音高不同。
-5.	一個句子只有一個高音，高有兩種 : 一種是絕對的高；另一種是壓低別人。德文是後者。
+1.念句不念字 : 要把一個句子看成是一個長的字---wie ein Wort。
+2.念意義單位像一個字 : 
+  in der Schule，連音如同念在一起 : Schiffsfahrtgesellschaft。
+3.重音不重而是高，它是高度，不是強度。
+4.一個字只有一個高音，例如 : fangen。如高音被佔，
+  則次高音節應低一個音階，例如 : anfangen。此字中兩個a的音高不同。
+5.一個句子只有一個高音，高有兩種 :
+  一種是絕對的高；另一種是壓低別人。德文是後者。
 6.	名詞有高音，動詞有高音，如名詞出現在動詞後，則須把動詞壓低一點，例如 : Ich kaufe ein Buch.如果只有動詞傳遞訊息，則動詞最高，例如 : Ich kaufe es.
 7.	代名詞、介係詞、不傳遞訊息的冠詞，沒有高音，例如 : Ich gehe in die Schule.  Ich gehe zweimal am Tag mit dem Hund in den Park.
 8.	字正腔圓，每個字的發音要正確，腔就是語調，要圓滑。
 9.	說德文要輕，要浮起來，像是在水面游泳，而不是像海豚戲水突起突落。
 10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
+
+名詞
+----
+
+格      陽性    陰性    中性    複數
+
+主格    der     die     das     die 
+
+屬格    des     der     des     der 
+
+與格    dem     der     dem     den 
+
+賓格    den     die     das     die 
+
+代名詞
+------
+
+格      第一人稱
+        單數    複數 
+
+主格    ich     wir 
+
+屬格    meiner  unser 
+
+與格    mir     uns 
+
+賓格    mich    uns 
 
 動詞
 ====
