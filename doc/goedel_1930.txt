@@ -110,6 +110,14 @@ a(b) 型式的符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 我們稱為基本式。
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
+zu welcher sämtliche Elementarformeln gehören und 
+zu welcher zugleich mit a, b stets auch ~(a), (a) | (b), 
+x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
+
+我們所定式的式類別作為最小的類別19)，
+對所有基本式所屬的和所有 a, b 像是 ~(a), (a) | (b), x Π (a)
+所屬的，
+
 
 陣列操作
 ........
