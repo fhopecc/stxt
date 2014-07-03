@@ -138,6 +138,16 @@ x   ic[ks]
 10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
 
 名詞
+....
+
+Klasse
+......
+陰性、類別
+
+Klasse Klassen
+ 
+
+冠詞
 ----
 
 格      陽性    陰性    中性    複數
@@ -152,6 +162,20 @@ x   ic[ks]
 
 Die Entwicklung der Mathematik 數學的發展，兩個名詞皆為陰性。
 
+Formel 陰性，公式
+
+格      陰性        複數
+
+主格    die Formel  die Formeln 
+
+屬格    der Formel  der Formeln
+
+與格    der Formel  den Formeln
+
+賓格    die Formel  die Formeln 
+
+
+
 代名詞
 ------
 
@@ -165,6 +189,8 @@ Die Entwicklung der Mathematik 數學的發展，兩個名詞皆為陰性。
 與格    mir     uns 
 
 賓格    mich    uns 
+
+
 
 動詞
 ====
@@ -213,8 +239,30 @@ Ich will ein Haus bauen 我想要蓋一幢房
 
 在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
 
+gehören 
+.......
+
+etwas gehört zu etwas
+
+屬於、是…的一部分
+
+Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
+zu welcher sämtliche Elementarformeln gehören.
+
+我們所定義的公式類別作為最小的類別 19)，
+所有基本式為其一部份。
+
+副詞
+----
+
+zugleich
+........
+
+副詞：同時
+
 未來式的複習
 ------------
+
 未來式 Futur 的句法公式是 werden + Infinitiv （不定式）。
 而未來式通常表示對未來的計畫、對將來的預言、或是推測。
 
@@ -222,8 +270,8 @@ Ich will ein Haus bauen 我想要蓋一幢房
 
 Morgen kommt das 颱風. 明天必定有颱風。
 
-（這是以現在式表示未來，表示這是事實，不會改變的，
-肯定會發生，有果斷的意味。）
+這是以現在式表示未來，表示這是事實，
+不會改變的，肯定會發生，有果斷的意味。
 
 Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 
@@ -611,3 +659,76 @@ III. Satzstruktur （語序）
 5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
 
 ＊Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
+
+definieren 
+..........
+
+定義
+
+形容詞
+......
+
+形容詞用於修飾名詞，一般置於名詞之前，
+該名詞若有冠詞則列於冠詞後。
+
+德語中大部分形容詞不需變化即可直接作「副詞」使用，修飾動詞。如：
+
+Er ist schnell. （他很快）
+Er läuft schnell. （他走得快）
+
+這點與英語等語言不同。
+
+如 kleinsten
+
+sämtliche 
+.........
+
+形容詞：全部的、所有的、全體的
+
+
+形容詞變格
+..........
+
+作為定語的形容詞在德語中需要變格，
+而作為表語的形容詞與副詞形式一樣，不需要改變。
+
+需要變格的情況又可細分為無冠詞還是跟在定冠詞、不定冠詞之後三種情況。
+
+定冠詞或代詞後：
+
+        單數                    複數
+格      陽性    陰性    中性    陽性    陰性    中性 
+
+主格    -e      -e      -e      -en     -en     -en
+
+屬格    -en     -en     -en     -en     -en     -en
+
+與格    -en     -en     -en     -en     -en     -en
+
+賓格    -en     -e      -e      -en     -en     -en
+
+例句：
+die kleinste Klasse 
+
+am kleinsten[最小的]在定冠詞後變格為 kleinste
+
+
+klein
+.....
+小的、不重要的
+
+klein < kleiner < am kleinsten
+
+定語
+....
+
+定語是句子中主語和賓語的中心語的修飾限制成份。
+定語和中心語之間是修飾和被修飾、限制和被限制的關係，
+
+
+表語
+....
+
+表示主語的身份、性質、狀態和特徵，一般由名詞、形容詞、或相當於名詞、
+形容詞的詞、短語或句子充當，位於連繫動詞之後，
+與連繫動詞一起構成句子的謂語。

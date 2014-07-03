@@ -114,7 +114,7 @@ zu welcher sämtliche Elementarformeln gehören und
 zu welcher zugleich mit a, b stets auch ~(a), (a) | (b), 
 x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
 
-我們所定式的式類別作為最小的類別19)，
+我們所定義的公式類別作為最小的類別 19)，
 對所有基本式所屬的和所有 a, b 像是 ~(a), (a) | (b), x Π (a)
 所屬的，
 
