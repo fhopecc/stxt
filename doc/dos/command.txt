@@ -1,0 +1,63 @@
+預設變數
+........
+
+%n 是代表批次檔的引數之變數，
+%0 表示本批次檔的路徑，
+%1 為第一個引數，
+%2 為第二個引數等等。
+
+變數修飾子
+..........
+
+因為引數通常為路徑，
+可在變數名稱前加修飾子來取得路徑的資訊。
+修飾子以前置 ~ 並加上一個字母來表示。
+
+如 ~d 修飾子表示取得磁碟路徑，
+~p 表示取得路徑，但不包含磁碟
+~n 表示取得檔名，修飾子也可組合，
+如~dp 表示磁碟加路徑。
+
+所以 %~dp0 表示對 %0 批次檔的路徑變數，
+取出磁碟加路徑。
+
+
+~t 取出檔案時戳
+~z 取出檔案大小
+
+code[rmdir_s].
+rmdir c:\test /s
+::
+
+Windows 2000, Windows XP and later versions of Windows 
+can use this option with a prompt to permanently delete 
+the test directory and all subdirectories and files. 
+Adding the /q switch would suppress the prompt.
+
+MOVE [/Y|/-Y] [d:][path]filename[,[d:][path]filename[...]] destination
+
+Purpose: Moves one or more files to the location you specify. Can also be used to rename directories. 
+
+To rename the 89MEMOS directory on drive C to 90MEMOS, enter the following:
+
+move c:\89memos c:\90memos
+
+Q.複製整個目錄？
+A.如下述程式碼會將
+
+To copy a directory in MS-DOS you will need to use 
+the MS-DOS xcopy command.  Below is a basic example with 
+each of the steps to do this in MS-DOS. If you need additional information about the xcopy command or additional examples see the above xcopy command page.
+
+1. Move to the directory you wish to copy the directories and subdirectories to. In the below example we will be moving to the temp2 directory using the cd command.
+
+cd\temp2
+
+2. Once in the directory use the xcopy command to copy another 
+directories subdirectories and contents. 
+In the below example we're copying the temp3 
+contents into the temp2 directory. Keep in mind that this will not copy the actual directory "temp2" just the files and directories in that directory.
+
+xcopy c:\temp3 /e
+
+Once the above steps have been completed everything should be copied into the temp2 folder.

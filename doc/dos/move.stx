@@ -1,7 +1,0 @@
-MOVE [/Y|/-Y] [d:][path]filename[,[d:][path]filename[...]] destination
-
-Purpose: Moves one or more files to the location you specify. Can also be used to rename directories. 
-
-To rename the 89MEMOS directory on drive C to 90MEMOS, enter the following:
-
-move c:\89memos c:\90memos

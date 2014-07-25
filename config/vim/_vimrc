@@ -1,4 +1,10 @@
-cd d:\stxt
+let computername=system("echo %computername")
+if $computername=="FRANKSHEN-PC"
+    cd j:\stxt
+else
+    cd d:\stxt
+endif
+
 source $VIM/vimfiles/format.vim
 let g:xml_namespace_transparent=1
 let g:xml_syntax_folding = 1
