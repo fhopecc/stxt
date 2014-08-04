@@ -2,17 +2,23 @@
 ====
 
 元音
+....
 a   park
-ä   ㄟ  
-e   
-i  
-o       
-ö   口噘成圓型發ㄜ音。
+ä   ㄟ
+
+i   一 
+o   歐       
+
+ö   口噘成圓型發ㄜ音。  König
+oe                      Goethe
+
 u   good      
 ü   迂
 au  Donau、Auto
 eu  heute
 ei  Eis
+e   ㄜ
+er  ㄜ捲舌
 
 長音  
 ....
@@ -37,6 +43,8 @@ dritten
 Wonne
 kommen
 
+音節
+se  e 發一音                  Esel,
 
 子音
 ----
@@ -234,9 +242,9 @@ Ich will ein Haus bauen 我想要蓋一幢房
 gehören 
 .......
 
-etwas gehört zu etwas
+A gehört zu B
 
-屬於、是…的一部分
+A 屬於 B
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören.
@@ -247,10 +255,13 @@ zu welcher sämtliche Elementarformeln gehören.
 副詞
 ----
 
-zugleich
-........
+zugleich    同時
+stets       始終、不斷地
 
-副詞：同時
+介詞
+----
+
+mit         with
 
 未來式的複習
 ------------
@@ -672,10 +683,7 @@ Er läuft schnell. （他走得快）
 
 如 kleinsten
 
-sämtliche 
-.........
-
-形容詞：全部的、所有的、全體的
+sämtliche   全部的、所有的、全體的
 
 
 形容詞變格

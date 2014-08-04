@@ -8,8 +8,11 @@ set src=%~dp0
 set dst=C:\vim
 goto copyfile
 
-set src=%~p0
+:103TT047
+echo "µ|³B¹q¸£"
+set src=%~dp0
 set dst=C:\vim
+goto copyfile
 
 :copyfile
 copy %src%_vimrc %dst%
