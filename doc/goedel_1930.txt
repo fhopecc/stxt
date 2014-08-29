@@ -111,11 +111,30 @@ a(b) 型式的符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören und 
-zu welcher zugleich mit a, b stets auch ~(a), (a) | (b), 
+zu welcher zugleich mit a, b stets auch ~(a), (a) V (b), 
 x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
 
 我們所定義的公式類別作為最小的類別 19)，
-包含所有的基本式和所有以 a, b 形成 ~(a), (a) | (b), x Π (a)。
+包含所有的基本式和所有以 a, b 形成 ~(a), (a) V (b), x Π (a)
+(x 是一個任意的變數) 18a)。
+
+(a) V (b) nennen wir die Disjunktion aus a und b,  
+~(a) die Negation und x Π (a) eine Generalisation von a.
+
+我們稱 (a) V (b) 為 a 及 b 的析取，
+~(a) 為否定而
+x Π (a) 為 a 的一般化。
+
+Satzformel heißt eine Formel, 
+in der keine freie Variable vorkommt 
+(freie Variable in der bekannten Weise definiert).
+Eine Formel mit genan n-freien Individuenvariablen
+(und sonst keinen freien Variablen) nennen wir n-stelliges 
+Relationszeichen, fuer n=1 auch Klassenzeichen.
+
+句式為不含任何自由變數的式(自由變數如已知方法所定義)。
+
+
 
 
 陣列操作
@@ -125,7 +144,7 @@ x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
 ........
 
 16.0 N x ≡ x
-(n+1)N x ≡ R(3) * n N x
+(n+1)N x ≡ R(3) * n N 
 
 n N x entspricht der Operation: 
 "n-maliges Vorsetzen des Zeichens"
