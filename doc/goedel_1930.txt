@@ -133,8 +133,20 @@ Eine Formel mit genan n-freien Individuenvariablen
 Relationszeichen, fuer n=1 auch Klassenzeichen.
 
 句式為不含任何自由變數的式(自由變數如已知方法所定義)。
+式若有 n 個自由個體變數(且沒有其它的自由變數)
+稱為 n元關係符，在 n=1 的情形為類別符。
 
-
+Unter Subst a|v| 
+             |b|
+(wo a eine Formel, 
+    v eine Variable und 
+    b eine Zeichen vom selben Typ wie v bedeutet)
+verstehen wir die Formel, welche aus a entsteht, 
+wenn man darin v ueberall, wo es frei ist, durch b ersetzt 20), 
+Wir sagen, dass eine Formel a eine Typenerhoehung einer anderen b ist, 
+wenn a aus b dadurch entsteht, 
+dass man den Typus aller in b vorkommenden Variablen
+um die gleiche Zahl erhoert.
 
 
 陣列操作
