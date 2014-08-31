@@ -142,11 +142,30 @@ Unter Subst a|v|
     v eine Variable und 
     b eine Zeichen vom selben Typ wie v bedeutet)
 verstehen wir die Formel, welche aus a entsteht, 
-wenn man darin v ueberall, wo es frei ist, durch b ersetzt 20), 
-Wir sagen, dass eine Formel a eine Typenerhoehung einer anderen b ist, 
+wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
+Subst a|v| 
+       |b| 
+(其中 a 為式，v 為變數且 b 為與 v 同型之變數。)
+此式結果如下，
+若且惟若式中所有 v，其為自由變數，都由 b 取代 20)。
+
+型別提升
+........
+
+Wir sagen, dass eine Formel a eine Typenerhöhung einer anderen b ist, 
 wenn a aus b dadurch entsteht, 
-dass man den Typus aller in b vorkommenden Variablen
-um die gleiche Zahl erhoert.
+daß man den Typus aller in b vorkommenden Variablen
+um die gleiche Zahl erhört.
+
+我們稱一式 a 為另一式 b 的型別提升其定義如下：
+若且惟若 a 衍生自 b 並滿足，
+所有於 b 發生之變數之型別，為其同等數遞增。
+
+dadurch:thereby, thus
+aus:from, off, over, out, of
+vorkommenden: occurring
+gleiche: resemble
+um: at, about
 
 
 陣列操作
