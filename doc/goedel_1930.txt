@@ -19,11 +19,15 @@ das System der Principia Mathematica (PM) einerseits,
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre) andererseits.
 
-Die Grundzeichen des Systems P sind die folgenden:
-I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
+P 系統
+......
 
+Die Grundzeichen des Systems P sind die folgenden:
 
 下列為P系統之基本符：
+
+I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
+
 I.常符:
 ~ : 非
 v : 或
@@ -128,13 +132,22 @@ x Π (a) 為 a 的一般化。
 Satzformel heißt eine Formel, 
 in der keine freie Variable vorkommt 
 (freie Variable in der bekannten Weise definiert).
+
+句式為不含任何自由變數的式(自由變數如已知方法所定義)。
+
 Eine Formel mit genan n-freien Individuenvariablen
 (und sonst keinen freien Variablen) nennen wir n-stelliges 
 Relationszeichen, fuer n=1 auch Klassenzeichen.
 
-句式為不含任何自由變數的式(自由變數如已知方法所定義)。
 式若有 n 個自由個體變數(且沒有其它的自由變數)
 稱為 n元關係符，在 n=1 的情形為類別符。
+
+genannt: named
+
+heißt: is called
+
+取代
+....
 
 Unter Subst a|v| 
              |b|
@@ -143,6 +156,7 @@ Unter Subst a|v|
     b eine Zeichen vom selben Typ wie v bedeutet)
 verstehen wir die Formel, welche aus a entsteht, 
 wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
+
 Subst a|v| 
        |b| 
 (其中 a 為式，v 為變數且 b 為與 v 同型之變數。)
@@ -152,20 +166,22 @@ Subst a|v|
 型別提升
 ........
 
-Wir sagen, dass eine Formel a eine Typenerhöhung einer anderen b ist, 
+Wir sagen, daß eine Formel a eine Typenerhöhung einer anderen b ist, 
 wenn a aus b dadurch entsteht, 
 daß man den Typus aller in b vorkommenden Variablen
 um die gleiche Zahl erhört.
 
-我們稱一式 a 為另一式 b 的型別提升其定義如下：
+我們稱一式 a 為另一式 b 的型別提升，
 若且惟若 a 衍生自 b 並滿足，
-所有於 b 發生之變數之型別，為其同等數遞增。
+所有在 b 出現變數的型別，以同樣的整數遞增之式。
 
 dadurch:thereby, thus
 aus:from, off, over, out, of
 vorkommenden: occurring
-gleiche: resemble
+gleiche: equally
 um: at, about
+aller:all的屬格
+den:賓格
 
 
 陣列操作

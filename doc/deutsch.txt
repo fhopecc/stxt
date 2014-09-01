@@ -1,3 +1,4 @@
+au      Donau、Auto
 eu      heute
 ei      Eis
 l       leise、also。
@@ -9,7 +10,7 @@ tion    t 讀ts，例如：Lektion。
 
 a       啊
 aa      長讀「啊」，例：Staat
-au      Donau、Auto
+
 ä       讀「ㄟ」，例：Sätze 
 
 b       [b]ig
@@ -164,6 +165,20 @@ Formel 陰性，公式
 
 賓格    die Formel  die Formeln 
 
+不定冠詞
+........
+
+        單數    複數 
+
+主格    
+
+屬格    einer  
+
+與格    
+
+賓格    
+
+
 
 代詞
 ----
@@ -196,9 +211,8 @@ Formel 陰性，公式
 原形        bauen       sein    lesen
 ich         baue        bin     lese
 du          baust       bist    liest
-
-
 er,sie,es   baut        ist     liest
+
 wir         bauen       sind    lesen
 ihr         baut        seid    lest
 sie         bauen       sind    lesen
@@ -270,18 +284,15 @@ Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 （儘管中譯看起來差不多，但是這個「一定」卻是推測出的結果。）
 
 被動語態
-========
+........
 
 中文也有類似的被動語態，如：
 “我打了他。”是主動語態，
 而反過來，“他被我打了。 ”就是被動語態。
 不難看出，只有及物動詞當謂語才能形成被動語態。
 
-一：德文被動語態的形成，
-
-要依靠助動詞werden 
-
-(請注意把它和“將來時”中的助動詞 werden 區分開。二者很容易混)。
+德文被動語態的形成，要依靠助動詞 werden 
+(請注意把它和「將來時」中的助動詞 werden 區分開。二者很容易混)。
 
 基本句型：
 
@@ -413,11 +424,13 @@ Sie werden gefragt worden sein.
 von
 ---
 
-在支配第三格的德語介詞中，aus和von的用法通常會讓德語學習者感到困惑。
+在支配第三格的德語介詞中，
+aus 和 von 的用法通常會讓德語學習者感到困惑。
 
-兩個介詞都可以表示地點。但是兩者也有區別：
+兩個介詞都可以表示地點。
+但是兩者也有區別：
 aus 表示“從……裏面出來”，“來源於……”；
-von表示“從……（方向）來”，“從什麼地方離開”。
+von 表示“從……（方向）來”，“從什麼地方離開”。
 
 在表示“從……來”的時候，用介詞“von”還是“aus”，
 通常要根據表示“到……去”
@@ -445,12 +458,13 @@ Ich komme von Berlin . 我從柏林來。
 
 aus 和 von 與物質名詞連用時。
 aus 表示構成物質的材料，強調材料；
-而von多指品質、特性等。
-強調外觀和種類。
+而 von 多指品質、特性等，強調外觀和種類。
+
 Der Tisch ist aus Holz. 
 Das ist von guter Qualit?t.
 
 常用片語：
+
 von zu Hause 從家裏來
 
 建議：介詞的支配關係是個難點，例外的情況很多，
@@ -460,6 +474,7 @@ von zu Hause 從家裏來
 
 虛擬式
 ======
+
 虛擬式一般用來表示說話者認為所陳述的行為、
 事物不符合事實或不確定是事實，如表示想像、猜測、假設、不現實的願望、
 客氣或用來轉述他人的話或觀點。
@@ -468,24 +483,39 @@ von zu Hause 從家裏來
 虛擬一式
 --------
 
-虛擬一式由動詞不定式詞幹加人稱詞尾構成，單數第一人稱和第三人稱詞尾是e，單數第二人稱詞尾是est，複數第二人稱詞尾是et，複數第一人稱和第三人稱詞尾是en。所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
-	haben	lesen	können	sein	werden
-Ich	habe	lese	könne	sei	werde
-du	habest	lesest	könnest	sei(e)st	werdest
-er/sie /es	habe	lese	könne	sei	werde
-wir	haben	lesen	können	seien	werden
-ihr	habet	leset	könnet	seiet	werdet
-sie/Sie	haben	lesen	können	seien	werden
+虛擬一式由動詞不定式詞幹加人稱詞尾構成，
+單數第一人稱和第三人稱詞尾是e，
+單數第二人稱詞尾是est，複數第二人稱詞尾是et，
+複數第一人稱和第三人稱詞尾是en。
+所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
+
+	        haben	lesen	können	sein	werden
+Ich	        habe	lese	könne	sei	werde
+du	        habest	lesest	könnest	sei(e)st	werdest
+er/sie/es	habe	lese	könne	sei	werde
+wir	        haben	lesen	können	seien	werden
+ihr	        habet	leset	könnet	seiet	werdet
+sie/Sie	    haben	lesen	können	seien	werden
 
 虛擬一式使用法
 --------------
-　　虛擬一式主要用於間接引語 (indirekte Rede)，表示說話者轉述他人的話或觀點。因此，虛擬一式常用在引文或新聞報導當中。
-例句：
-(原句) Er hat mir gesagt, „ich schreibe gerade einen Roman.“ (他對我說：「我正在寫一部小說。」)
-(變化) Er hat mir gesagt, er schreibe gerade einen Roman. (他告訴我，他正在寫一部小說。)
 
-※注意事項
-　(1) 間接引語常用從屬連詞dass引導，若間接引句有數個句子，除第一句之外，dass一般會省略。若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
+虛擬一式主要用於間接引語 (indirekte Rede)，
+表示說話者轉述他人的話或觀點。
+因此，虛擬一式常用在引文或新聞報導當中。
+
+例句：
+Er hat mir gesagt, "ich schreibe gerade einen Roman."
+(他對我說：「我正在寫一部小說。」)
+                            |
+                            V
+Er hat mir gesagt, er schreibe gerade einen Roman. 
+(他告訴我，他正在寫一部小說。)
+
+注意事項
+
+(1)間接引語常用從屬連詞daß引導，若間接引句有數個句子，
+除第一句之外，daß一般會省略。若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
   (2) 常用下列動詞引起間接引句，例如sagen, behaupten, berichten, betonen, erklären, erzählen, mitteilen, hören, schreiben, fragen, antworten, denken, glauben, meinen, hoffen, wünschen 等。
   (3) 間接引語不用引號，用引號的引語是直接引語 (direkte Rede)。如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，就使用虛擬一式，否則用陳述式。
   (4) 在間接引語中，虛擬一式的現在完成式和過去式都是用助動詞haben或sein的虛擬一式加上動詞的第二分詞來表示。
@@ -497,10 +527,10 @@ sie/Sie	haben	lesen	können	seien	werden
 (原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
 (變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
    或 Die Kinder sagen, sie kämen gleich.
-  (6) 轉述對第三者的請求或要求時，可以用dass引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
+  (6) 轉述對第三者的請求或要求時，可以用daß引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
 例句：
 (原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
-(變化) Herr Li bat eine Reiseführerin, dass eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
+(變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
 反身動詞 
 --------
@@ -508,7 +538,7 @@ sie/Sie	haben	lesen	können	seien	werden
 當動詞所支配的賓語正是主語時，
 這類動詞稱為反身動詞(reflexive Verben)。
 
-反身動詞又分為真返身動詞和非真反身動詞。
+反身動詞又分為真反身動詞和非真反身動詞。
 
 真反身動詞 
 ..........
@@ -516,7 +546,7 @@ sie/Sie	haben	lesen	können	seien	werden
 真反身動詞(echte reflexive Verben)只能和反身代詞連用，
 不能用名詞或其他代詞代替反身代詞，
 反身代詞與動詞構成一個整體。
-真反身動詞多數帶第四格 (Akkusativ)反身代詞，少數帶第三格(Dativ)反身代詞。
+真反身動詞多數帶第四格 (Akkusativ) 反身代詞，少數帶第三格(Dativ)反身代詞。
 
 (1)	帶第四格反身帶詞的反身動詞
 例： sich auskennen、
@@ -645,8 +675,8 @@ III. Satzstruktur （語序）
 
 4. 在副句的狀況下，反身代名詞直接放在副句連接詞後
 
-＊ Ich glaube, dass sich Max amüsiert.
-＊ Ich glaube, dass er sich amüsiert. （主詞的代名詞型態還是要放受格前面）
+＊ Ich glaube, daß sich Max amüsiert.
+＊ Ich glaube, daß er sich amüsiert. （主詞的代名詞型態還是要放受格前面）
 
 5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
 
@@ -697,16 +727,23 @@ sämtliche   全部的、所有的、全體的
 賓格    -en     -e      -e      -en     -en     -en
 
 例句：
+
 die kleinste Klasse 
 
 am kleinsten[最小的]在定冠詞後變格為 kleinste
-
 
 klein
 .....
 小的、不重要的
 
 klein < kleiner < am kleinsten
+
+
+daß
+...
+
+從屬連詞
+
 
 定語
 ....
@@ -718,6 +755,6 @@ klein < kleiner < am kleinsten
 表語
 ....
 
-表示主語的身份、性質、狀態和特徵，一般由名詞、形容詞、或相當於名詞、
-形容詞的詞、短語或句子充當，位於連繫動詞之後，
-與連繫動詞一起構成句子的謂語。
+表示主語的身份、性質、狀態和特徵，
+一般由名詞、形容詞、或相當於名詞、形容詞的詞、短語或句子充當，
+位於連繫動詞之後，與連繫動詞一起構成句子的謂語。
