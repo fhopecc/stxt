@@ -128,18 +128,17 @@ kommen
 9.	說德文要輕，要浮起來，像是在水面游泳，而不是像海豚戲水突起突落。
 10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
 
-名詞
-....
-
-Klasse
-......
-陰性、類別
-
-Klasse Klassen
- 
-
 冠詞
 ----
+
+冠詞（Article）是印歐語系和閃含語系的諸語中，
+位於名詞或名詞片語之前或之後，
+在句子里主要是對名詞起限定作用的詞。
+冠詞是一種虛詞。
+在漢語中，粵語和吳語除外，這兩門漢語里的量詞作定冠詞。
+
+定冠詞
+......
 
 格      陽性    陰性    中性    複數
 
@@ -153,6 +152,62 @@ Klasse Klassen
 
 Die Entwicklung der Mathematik 數學的發展，兩個名詞皆為陰性。
 
+man den Typus aller in b vorkommenden Variablen
+um die gleiche Zahl erhöht.
+
+den Typus 是陽性賓格，作為 erhöht 之對象。
+aller 為屬格，表示在 b 出現之所有變數。
+
+所有在 b 出現變數的型別，以同樣的整數遞增之式。
+
+不定冠詞
+........
+
+格      陽性    陰性    中性    複數
+
+主格    ein     eine    ein     keine*   
+
+屬格    einer   eine    ein     keine*
+
+與格    einem   eine    einem   keinem*
+
+賓格    eines   einer   eines   keiner*
+
+*ein 的否定型只要在前置 k即可，表示沒有的意思，
+ 但與 ein 不同，它可用到複數。
+ sonst keinen freien Variablen.(通常沒有自由變數)
+ 其中 Variablen 是複數名詞。
+ 
+
+格      陽性    陰性    中性    複數
+
+主格    aller   alle    alles   alle
+
+屬格    alles   aller   alles   aller
+        allen           allen
+
+與格    allem   aller   allem   allen 
+
+賓格    allen   alle    alles   alle 
+
+1.單數中性alles後未接名詞時為不定代詞意表示每件事。
+
+2.單數後接複數名詞表示不定冠詞表全部。
+
+3.複數未接名詞時為不定代詞意表示每人。
+
+4.複數後接複數名詞表示不定冠詞表全部。
+
+名詞
+....
+
+Klasse
+......
+陰性、類別
+
+Klasse Klassen
+ 
+
 Formel 陰性，公式
 
 格      陰性        複數
@@ -165,18 +220,7 @@ Formel 陰性，公式
 
 賓格    die Formel  die Formeln 
 
-不定冠詞
-........
 
-        單數    複數 
-
-主格    
-
-屬格    einer  
-
-與格    
-
-賓格    
 
 
 
@@ -193,6 +237,18 @@ Formel 陰性，公式
 與格    mir     uns 
 
 賓格    mich    uns 
+
+不定代詞
+
+格      單數
+
+主格    man
+
+屬格    
+
+與格   
+
+賓格  
 
 
 動詞

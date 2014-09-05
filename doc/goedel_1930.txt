@@ -163,13 +163,14 @@ Subst a|v|
 此式結果如下，
 若且惟若式中所有 v，其為自由變數，都由 b 取代 20)。
 
+
 型別提升
 ........
 
 Wir sagen, daß eine Formel a eine Typenerhöhung einer anderen b ist, 
 wenn a aus b dadurch entsteht, 
 daß man den Typus aller in b vorkommenden Variablen
-um die gleiche Zahl erhört.
+um die gleiche Zahl erhöht.
 
 我們稱一式 a 為另一式 b 的型別提升，
 若且惟若 a 衍生自 b 並滿足，
@@ -181,7 +182,34 @@ vorkommenden: occurring
 gleiche: equally
 um: at, about
 aller:all的屬格
+man:one單數代詞
 den:賓格
+
+Folgende Formeln (I bis V) heißen Axiome 
+(sie sind mit Hilfe der in bekannter Weise 
+ definierten Abkürzungen: ., ->, ≡, (Ex), = 21)
+ und mit Verwendung der üblichen  Konventionen über
+ das Weglassen von Klammern angeschrieben)22):
+I.
+1.～(fx1=0)
+2.fx1 = fy1 -> x1 = y1
+3.x2(0).x1Π(x2(x1) -> x2(fx1)) -> x1 Π (x2(x1)).
+
+II. Jede Formel, die aus den folgenden Schemata durch Einesetzung
+beliebiger Fromeln für p, q, r entsteht.
+
+1. p V p -> p
+2. p -> p V p
+3. p V q -> q V p
+4. (p -> q) -> (r V p -> r V q)
+
+III. Jede Formel, die aus einem der beiden Schemata
+
+1. v Π (a) -> Subst a |v|
+                      |c|
+
+2. v Π (b V a) -> b V vΠ(a)
+
 
 
 陣列操作
