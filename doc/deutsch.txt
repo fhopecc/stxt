@@ -52,8 +52,8 @@ se  e 發一音                  Esel,
 
 b       b 後面沒有母音時念p，例如 : ab。
 
-ch      在 a、o、u 後念 ㄏ，例如 : Bach、doch、Tuch。
-        在i、e 後念ㄏㄧ，例如 : ich、sechzehn。
+ch      a, o, u 後 ㄏ，例如 : Bach、doch、Tuch。
+        i, e    後念ㄏㄧ，例如 : ich、sechzehn。
 
 chs     ks，例如 : sechs。
 
