@@ -42,9 +42,14 @@ n       發音時舌尖要上去抵住齒齦，例如：nein。
 nk      n在k前讀，例如：danke。
 ng      例如 :übung。
 
+<<<<<<< HEAD
 o       歐       
 oe      Goethe
 oh      長讀「歐」，例：wonen
+=======
+ch      a, o, u 後 ㄏ，例如 : Bach、doch、Tuch。
+        i, e    後念ㄏㄧ，例如 : ich、sechzehn。
+>>>>>>> b1cc593610f6cca025e3aec10836792fdbaffc46
 
 ö       口噘成圓型發ㄜ音。例：König
 
@@ -220,10 +225,6 @@ Formel 陰性，公式
 
 賓格    die Formel  die Formeln 
 
-
-
-
-
 代詞
 ----
 
@@ -249,6 +250,22 @@ Formel 陰性，公式
 與格   
 
 賓格  
+
+jede
+....
+
+代詞：每個
+
+格      陽性    陰性    中性
+
+主格    jeder   jede    jedes
+
+屬格    jedes   jeder   jedes
+
+與格    jedem   jeder   jedem
+
+賓格    jeden   jede    jedes
+
 
 
 動詞
@@ -311,16 +328,69 @@ zu welcher sämtliche Elementarformeln gehören.
 我們所定義的公式類別作為最小的類別 19)，
 所有基本式為其一部份。
 
+heißen
+......
+
+[及動]稱為
+
+Folgende Formeln (I bis V) heißen Axiome.
+
+以下公式(I 至 V)稱為公理。
+
 副詞
 ----
 
-zugleich    同時
-stets       始終、不斷地
+zugleich    同時 stets       始終、不斷地
 
 介詞
 ----
 
-mit         with
+mit 
+...
+
+介詞：藉..
+
+über
+....
+
+介詞：在...之上
+
+反義詞：unter
+
+über 若動詞為兩地間之移動用賓格，
+     為表示停在某地用與格。
+
+Verwendung der üblichen Konventionen über
+das Weglassen von Klammern angeschrieben)22):
+
+aus & von
+.........
+
+支配與格
+
+與國名或城市名連用，
+aus 表示出身，是某國/某地人；
+von 表示「從某地來」，不指明國籍或出生地。
+
+Ich komme aus Berlin. 我是柏林人。
+Ich komme von Berlin. 我從柏林來。
+
+aus 和 von 與物質名詞連用時。
+aus 表示構成物質的材料，強調材料；
+von 多指品質、特性等，強調外觀和種類。
+
+Der Tisch ist aus Holz.
+Das ist von guter Qualit?t.
+
+常用片語：
+
+von zu Hause 從家裏來
+
+:衍生詞:
+
+vom = von + dem
+
+
 
 未來式的複習
 ------------
@@ -476,56 +546,6 @@ Sie werden gefragt worden sein.
 5) 將來時：Sie wird mich fragen muessen. Ich wird gefragt werden muessen.
 
 三：最後，我想告訴你，虛擬式也能改寫成被動式，天哪！ :-))
-
-von
----
-
-在支配第三格的德語介詞中，
-aus 和 von 的用法通常會讓德語學習者感到困惑。
-
-兩個介詞都可以表示地點。
-但是兩者也有區別：
-aus 表示“從……裏面出來”，“來源於……”；
-von 表示“從……（方向）來”，“從什麼地方離開”。
-
-在表示“從……來”的時候，用介詞“von”還是“aus”，
-通常要根據表示“到……去”
-時所用的介詞而定。
-
-如果表示“到……去”的介詞用in，
-那麼表示“從……來”多用 aus；
-如果表示“到……去”的介詞用auf/zu/an，
-那麼表示“從……來”則多用von
-。　　
-如：
-
-Ich gehe ins B徂ro . Ich komme aus dem B徂ro .
-
-Ich gehe zum Lehrer: Ich komme vom Lehrer .
-
-Ich gehe zur Post . Ich komme von der Post .
-
-aus 和 von 與國名或城市名連用，表示“來自……”，“從……來”的時候。
-aus 暗含出身，是某國/某地人；
-而von則只表示“從……過來”，不指明國籍或出生地。　
-
-Ich komme aus Berlin . 我是柏林人。
-Ich komme von Berlin . 我從柏林來。
-
-aus 和 von 與物質名詞連用時。
-aus 表示構成物質的材料，強調材料；
-而 von 多指品質、特性等，強調外觀和種類。
-
-Der Tisch ist aus Holz. 
-Das ist von guter Qualit?t.
-
-常用片語：
-
-von zu Hause 從家裏來
-
-建議：介詞的支配關係是個難點，例外的情況很多，
-最好能夠把常出現的常用的記著。因為有時候語法規則也有例外或
-者很難解釋的情況出現。
 
 
 虛擬式
@@ -788,6 +808,7 @@ die kleinste Klasse
 
 am kleinsten[最小的]在定冠詞後變格為 kleinste
 
+
 klein
 .....
 小的、不重要的
@@ -795,11 +816,18 @@ klein
 klein < kleiner < am kleinsten
 
 
+連詞
+----
+
 daß
 ...
 
 從屬連詞
 
+bit
+...
+
+[並列連詞]某數至某數
 
 定語
 ....

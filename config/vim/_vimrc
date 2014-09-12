@@ -45,7 +45,6 @@ map Q F<lyeF<y/<\/<C-R>">/0<CR>
 :nnoremap <F5> o<CR><C-R>=strftime("%Y%m%d %a")<CR><CR><CR>
 :inoremap <F5> <END><CR><CR><C-R>=strftime("%Y%m%d %a")<CR><CR><CR>
 
-
 function MyDiff()
   let opt = '-a --binary '
 	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
@@ -130,40 +129,3 @@ map Q F<lyeF<y/<\/<C-R>">/0<CR>
 :inoremap <F5> <END><CR><C-R>=strftime("%Y%m%d %a")<CR><CR><CR>
 
 
-function MyDiff()
-  let opt = '-a --binary '
-	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  silent execute '!c:\vim\vim71\diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-endfunction
-
-function! OutlineToggle()
-    if (! exists ("b:outline_mode"))
-        let b:outline_mode = 0
-    endif
-
-    if (b:outline_mode == 0)
-        syn region myFold start="{" end="}" transparent fold
-        syn sync fromstart
-        set foldmethod=syntax
-
-        silent! exec "%s/{{{/<<</"
-        silent! exec "%s/}}}/>>>/"
-
-        let b:outline_mode = 1
-    else
-        set foldmethod=marker
-
-        silent! exec "%s/<<</{{{/"
-        silent! exec "%s/>>>/}}}/"
-
-        let b:outline_mode = 0
-    endif
-endfunction
-

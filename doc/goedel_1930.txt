@@ -188,15 +188,24 @@ den:賓格
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
  definierten Abkürzungen: ., ->, ≡, (Ex), = 21)
- und mit Verwendung der üblichen  Konventionen über
+ und mit Verwendung der üblichen Konventionen über
  das Weglassen von Klammern angeschrieben)22):
+
+下式(I 至 V)稱為公理
+(它藉由以已知方法定義縮寫的幫助：., ->, ≡, (Ex), = 21)
+及使用通用慣寫並忽略括號記下 22)。
+
 I.
 1.～(fx1=0)
 2.fx1 = fy1 -> x1 = y1
 3.x2(0).x1Π(x2(x1) -> x2(fx1)) -> x1 Π (x2(x1)).
 
-II. Jede Formel, die aus den folgenden Schemata durch Einesetzung
+II. Jede Formel, die aus den folgenden Schemata durch Einsetzung
 beliebiger Fromeln für p, q, r entsteht.
+
+
+II. 每個公式，其衍生自將以下框架中 p, q, r 配置任意公式，
+    將使得下式成立：
 
 1. p V p -> p
 2. p -> p V p
@@ -205,12 +214,18 @@ beliebiger Fromeln für p, q, r entsteht.
 
 III. Jede Formel, die aus einem der beiden Schemata
 
+III. 每個公式，其衍生自以下兩框架其中之一
+
 1. v Π (a) -> Subst a |v|
                       |c|
 
 2. v Π (b V a) -> b V vΠ(a)
 
+dadurch entsteht, daß man für a, v, b, c folgende Einsetzugen
+vornimmt ( und in 1. die durch "Subst" angezeigte Operation 
+ausführt):
 
+會滿足，
 
 陣列操作
 ........
