@@ -278,7 +278,6 @@ R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
 verwandter 關連的
 bekanntlich 一般可知
 wurden 變成
-Beweisen 證明
 Weite 廣闊
 Gebiet 版圖
 Art 类型、种类方式、方法风格行为、举止习惯（生物）属
@@ -286,8 +285,3 @@ einigen 一致
 wenigen adj一點點、不多
 Regeln 改造
 vollzogen adj 完美的
-
-德語拼音
-........
-
-

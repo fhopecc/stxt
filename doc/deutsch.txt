@@ -255,24 +255,9 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 名詞
 ....
 
-Klasse
-......
-陰性、類別
-
-Klasse Klassen
- 
-
+Klasse 陰性，類別
 Formel 陰性，公式
-
-格      陰性        複數
-
-主格    die Formel  die Formeln 
-
-屬格    der Formel  der Formeln
-
-與格    der Formel  den Formeln
-
-賓格    die Formel  die Formeln 
+Beweisen 證明
 
 代詞
 ----
@@ -833,7 +818,5 @@ Die Grundzeichen des Systems P
 表示主語的身份、性質、狀態和特徵，
 一般由名詞、形容詞、或相當於名詞、形容詞的詞、短語或句子充當，
 位於連繫動詞之後，與連繫動詞一起構成句子的謂語。
-
-
 
 
