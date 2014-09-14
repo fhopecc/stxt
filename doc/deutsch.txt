@@ -165,6 +165,55 @@ aller 為屬格，表示在 b 出現之所有變數。
 
 所有在 b 出現變數的型別，以同樣的整數遞增之式。
 
+diser
+.....
+
+定冠詞，這，表示指示物靠近說話者，同英文之 this。
+
+格      陽性    陰性    中性    複數
+
+主格    dieser  diese   dieses  diese
+
+屬格    diese   dieser  diese   dieser
+
+與格    diesen  diese   dieses  diese
+
+賓格    diesem  dieser  diesem  diesen
+
+jener
+.....
+
+定冠詞，那，表示指示物遠離說話者，同英文之 that。
+
+但德文少用，
+而是將該詞移至句前作強調詞，表示那的語氣。 
+
+Den Namen kenne ich nicht.  那名字我不認識。
+主賓語互換。
+
+或是將中心語之冠詞的字母間插入空白作強調。
+
+Wir wohnen in d e m Haus. 我們住在那間房子。
+              dem 插入空白，用來強調 Haus。 
+
+mancher
+.......
+
+定冠詞，一些，通常用在複數事物。
+
+Manche Leute mögen es so.   一些人喜歡這喜歡那。
+
+solche
+......
+
+定冠詞，這樣的，通常用在複數事物。
+
+Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
+
+在第一種情形下，我們稱這樣的符號為數符。
+
+
+
 不定冠詞
 ........
 
@@ -391,6 +440,11 @@ von zu Hause 從家裏來
 vom = von + dem
 
 
+dadurch
+........
+
+thereby, thus
+
 
 未來式的複習
 ------------
@@ -412,10 +466,7 @@ Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
 被動語態
 ........
 
-中文也有類似的被動語態，如：
-“我打了他。”是主動語態，
-而反過來，“他被我打了。 ”就是被動語態。
-不難看出，只有及物動詞當謂語才能形成被動語態。
+及物動詞當謂語才能形成被動語態。
 
 德文被動語態的形成，要依靠助動詞 werden 
 (請注意把它和「將來時」中的助動詞 werden 區分開。二者很容易混)。
@@ -426,12 +477,13 @@ Sie fragt mich.             她問我。    主動式
 Ich wird von ihr gefragt.   我被她問了。被動式
 
 我們發現：
+
 Sie 變成了von ihr 成了介詞短語當狀語，但還是實際上的主語。
 
 mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
 
-用被動語態助詞 wird 來體現“被”，“讓”等被動意思。
-用動詞的過去分詞來表達實際主語的動作
+用被動語態助詞 wird 來體現「被」，「讓」等被動意思。
+用動詞的過去分詞來表達實際主語的動作。
 
 寫成句型：
     實際上的賓語變成第一格
@@ -445,7 +497,6 @@ mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
 Sie fragt mich.             她問我。    主動式
 Ich wird von ihr gefragt.   我被她問了。被動式
 
-注意：
 若實際主語是人時，變成相關狀語時時用 von 帶出，
 若是物，則用 durch 帶出。如：
 
@@ -456,86 +507,6 @@ Der Motor wird durch Druckknoepfe gesteurt. 馬達是通過按鈕控制的。
 
 Ich wird gefragt. 我被人問了(有人問我)。
 
-隨人稱的不同，werden 變化如下：
-
-1) 現在時
-
-主動句：Sie fragt mich. 她問我。
-被動句：Ich wird von ihr gefragt. 我被她詢問。
-
-ich werde gefragt.
-du wirst gefragt.
-er, sie, es wird gefragt.
-wir werden gefragt.
-ihr werdet gefragt.
-sie werden gefragt.
-Sie werden gefragt.
-
-2) 過去時
-
-主動句：Sie fragte mich gestern. 她昨天問過我。
-被動句：Ich wurde gestern von ihr gefragt. 我昨天被他詢問了。
-
-ich wurde gefragt.
-du wurdest gefragt.
-er, sie, es wurde gefragt.
-wir wurden gefragt.
-ihr wurdet gefragt.
-sie wurden gefragt.
-Sie wurden gefragt.
-
-3) 現在完成時
-
-主動句：Sie hat mich gefragt. 她問過我了。
-被動句：Ich bin gestern von ihr gefragt worden. 我昨天被她詢問了。
-
-Ich bin gefragt worden.
-du bist gefragt worden.
-er, sie, es ist gefragt worden.
-wir sind gefragt worden.
-ihr seid gefragt worden.
-sie sind gefragt worden.
-Sie sind gefragt worden.
-
-4) 過去完成時
-
-主動句：Sie hatte mich gefragt, bevor du zu mir kam. 你到我這來之前她已詢問完我了。
-被動句：Ich war von ihr gefragt worden, bevor du zu mir kam. 你到我這來之前我已被她詢問完了。
-
-ich war gefragt worden.
-du warst gefragt worden.
-er, sie, es war gefragt worden.
-wir waren gefragt worden.
-ihr wart gefragt worden.
-sie waren gefragt worden.
-Sie waren gefragt worden.
-
-5) 將來時
-
-主動句：Sie wird mich fragen. 她將要詢問我。
-被動句：Ich wird von ihr gefragt werden. 我將被她詢問。
-
-ich werde gefragt werden.
-du wirst gefragt werden.
-er, sie, es wird gefragt werden.
-wir werden gefragt werden.
-ihr werdet gefragt werden.
-sie werden gefragt werden.
-Sie werden gefragt werden.
-
-6) 將來完成時
-
-主動句：Sie wird mich gefragt habeb. 她將完成對我的詢問。
-被動句：Ich wird (von ihr) gefragt worden sein. 我將被她詢問完畢。
-
-ich werde gefragt worden sein.
-du wirst gefragt worden sein.
-er, sie, es wird gefragt worden sein.
-wir werden gefragt worden sein.
-ihr werdet gefragt worden sein.
-sie werden gefragt worden sein.
-Sie werden gefragt worden sein.
-
 二：被動式能加情態動詞。為簡便，下面讓我們只用ich 為例子來說明句型：
 
 主動式 被動式
@@ -544,9 +515,6 @@ Sie werden gefragt worden sein.
 3) 現在完成時：Sie hat mich fragen muessen. Ich hat gefragt werden muessen.
 4) 過去完成時：Sie hatte mich fragen muessen. Ich hatte gefragt werden muessen.
 5) 將來時：Sie wird mich fragen muessen. Ich wird gefragt werden muessen.
-
-三：最後，我想告訴你，虛擬式也能改寫成被動式，天哪！ :-))
-
 
 虛擬式
 ======
@@ -667,10 +635,9 @@ Er hat sich einen Plan ausgedacht.
 某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
 例句：Die Studenten verstehen sich/einander gut. (大學生們彼此清楚了解。)
 
-
 反身動詞
 ........
- Reflexive Verben
+Reflexive Verben
 
 拖油瓶動詞。德文有一類動詞，必須與反身代名詞合用，
 稱為reflexive Verben。
@@ -835,6 +802,30 @@ bit
 定語是句子中主語和賓語的中心語的修飾限制成份。
 定語和中心語之間是修飾和被修飾、限制和被限制的關係，
 
+中文一般以助詞「的」或「之」來連接定語與中心語，
+德文則以屬格來連接定語與中心語，
+
+中文的語序是定語+「的」+中心語，
+而德文的語序是中心語+定語。
+
+數學的發展其德文如下：
+
+Die Entwicklung der Mathematik
+中心語          定語(屬格)
+
+德文的名詞作為屬格時，
+如同英語會後置 -s 來表示此名詞作屬格用，
+但不像英語會加單引號字元「'」。
+
+一個第一型的變數
+eine Variable ersten Typs
+     中心語   定語      s 指示 Typ 為屬格作定語用
+
+a variable of first type
+
+P系統之基本符
+Die Grundzeichen des Systems P 
+    中心語       定語      s 指示 System 為屬格作定語用
 
 表語
 ....
@@ -842,3 +833,7 @@ bit
 表示主語的身份、性質、狀態和特徵，
 一般由名詞、形容詞、或相當於名詞、形容詞的詞、短語或句子充當，
 位於連繫動詞之後，與連繫動詞一起構成句子的謂語。
+
+
+
+

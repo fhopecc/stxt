@@ -36,7 +36,7 @@ v : 或
 f : 後繼函數，命名源自德文後繼 Nachfolger
 ( ) :括號
 
-II.Variable ersten Typs(fuer Individuen, 
+II.Variable ersten Typs(für Individuen, 
    d. h. natuerliche Zahlen inklusive 0)): "x1", "y1", "z1"...
 
 II.第一型變數(對個體，即自然數包含零):  "x1", "y1", "z1"...
@@ -176,7 +176,6 @@ um die gleiche Zahl erhöht.
 若且惟若 a 衍生自 b 並滿足，
 所有在 b 出現變數的型別，以同樣的整數遞增之式。
 
-dadurch:thereby, thus
 aus:from, off, over, out, of
 vorkommenden: occurring
 gleiche: equally
