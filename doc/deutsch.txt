@@ -371,6 +371,9 @@ Folgende Formeln (I bis V) heißen Axiome.
 
 以下公式(I 至 V)稱為公理。
 
+angezeigte
+vornehmen   執行動作
+
 副詞
 ----
 

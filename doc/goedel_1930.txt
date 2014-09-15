@@ -221,10 +221,25 @@ III. 每個公式，其衍生自以下兩框架其中之一
 2. v Π (b V a) -> b V vΠ(a)
 
 dadurch entsteht, daß man für a, v, b, c folgende Einsetzugen
-vornimmt ( und in 1. die durch "Subst" angezeigte Operation 
+vornimmt (und in 1. die durch "Subst" angezeigte Operation 
 ausführt):
 
-會滿足，
+Für a eine beliebige Formel, für v eine beliebige Variable.
+für b eine Forml, in der v nicht frei vorkommt, 
+für c ein Zeichen vom selben Typ wie v, 
+vorausgesetzt, 
+daß c keine Variable enthält,
+welche in a an einer Stelle gebunden ist, 
+an der v frei ist 23).
+
+會滿足，執行如下建構 a, v, b, c 
+(而在 1 中，是執行經由 "Subst" 所指出的操作) 
+
+對任一式 a 及任一變數 v，
+b 為一式，在其中沒有 v 是自由的，
+對 c 為一符號與 v 同型，前題是，
+c 沒有變數包含於
+v 是自由的。
 
 陣列操作
 ........
