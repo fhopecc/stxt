@@ -300,22 +300,33 @@ jede
 
 賓格    jeden   jede    jedes
 
-
-
 動詞
 ====
 
-1.1.變位
+變位
+....
 
-所有的動詞在原形時都以 en 或 n 結尾。
-根據主語的不同動詞在每個時態下有七個不同的變位，
-加上許多動詞的變化不規則（尤其常用的動詞非常不規則），
-使得德語的難學度更加增加了。
+動詞的不定式表示還未決定動作是由誰執行。
+所有的動詞在不定式時都以 en 或 n 結尾。
+英文的不定式則是在動詞前加上 to
+
+形態            字母    英文
+
+不定式(原形)    baue    to make 
+過去式          baute   made  
+過去分詞        baut    made
+
+當動詞用到句子中，則已知主語(執行者)是誰，
+並會根據主語的不同在每個時態下有七個不同的變位，
+動詞的字根是不定式去掉 en，
+規則動詞的變位則是字根加上不同的詞尾。
+
 以下是幾個常用動詞在現在時態的變位：
 
-            規則動詞例  不規則動詞例 
-中文意義    建造*       是      讀
-原形        bauen       sein    lesen
+主語       規則動詞例  不規則動詞例 
+
+不定式      bauen       sein    lesen
+
 ich         baue        bin     lese
 du          baust       bist    liest
 er,sie,es   baut        ist     liest
@@ -326,13 +337,35 @@ sie         bauen       sind    lesen
 
 Sie         bauen       sind    lesen
 
+中文意義    建造*       是      讀
+
+當字根尾是 t, d, n, m 時，變位加入-st 或 -t 之詞尾時會先補 e，再加詞尾。
+
+ich arbeite     ich finde       ich öffne       ich widme
+du  arbeitest   du  findest     du  öffnest     du  widmest
+er  arbeitet    er  findet      er  öffnet      er  widmet
+    工作            找              開              投票
+
+當字根尾是 -s, -ß, -tz, -z 時，第二人稱之詞尾為 -t 不是 -st，
+第三人稱與第二人稱詞尾都是 -t 。
+
+du heißt    du reist    du sitzt
+er heißt    er reist    er sitzt
+   被稱為      旅行        坐
+
+時態
+....
+
+過去式表動作已作過。
+
 <建造*> 動作時態顯示詞，在中文無固定詞彙直接能翻譯。
 德語中一共有六個時態：
 現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。
 下面是一個規則動詞六個時態的例子：
 
-時態        德語                    漢語
-現在時      Ich baue                我在做的
+時態        德語                    漢語            
+
+現在時      Ich baue                我在做的        
 過去時      Ich baute               我曾做過的
 將來時      Ich werde bauen         我將會做的
 現在完成時  Ich habe gebaut         我剛做完的
@@ -348,6 +381,28 @@ Ich baue ein Haus       我蓋一幢房
 Ich will ein Haus bauen 我想要蓋一幢房
 
 在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
+
+完成式
+......
+
+完成式是表示已完成的動作，
+英文的完成式是 have + 過去分詞，
+德文的完成式是 haben/sein + 過去分詞，
+故德文有助動詞 haben 還有 sein，
+haben 通常用在及物動詞，
+sein 用在狀態動詞。
+
+規則動詞的過去分詞形成法如下：
+
+ge+動詞詞幹+t
+
+kaufen -> gekauft 買
+
+詞幹尾是 -d, -t 或 -n 則加 -et
+
+reden  -> geredet 說
+
+
 
 gehören 
 .......
@@ -822,4 +877,17 @@ Die Grundzeichen des Systems P
 一般由名詞、形容詞、或相當於名詞、形容詞的詞、短語或句子充當，
 位於連繫動詞之後，與連繫動詞一起構成句子的謂語。
 
+genannt: named
 
+heißt: is called
+
+verwandter 關連的
+bekanntlich 一般可知
+wurden 變成
+Weite 廣闊
+Gebiet 版圖
+Art 类型、种类方式、方法风格行为、举止习惯（生物）属
+einigen 一致
+wenigen adj一點點、不多
+Regeln 改造
+vollzogen adj 完美的

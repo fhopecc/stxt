@@ -137,14 +137,10 @@ in der keine freie Variable vorkommt
 
 Eine Formel mit genan n-freien Individuenvariablen
 (und sonst keinen freien Variablen) nennen wir n-stelliges 
-Relationszeichen, fuer n=1 auch Klassenzeichen.
+Relationszeichen, für n=1 auch Klassenzeichen.
 
 式若有 n 個自由個體變數(且沒有其它的自由變數)
 稱為 n元關係符，在 n=1 的情形為類別符。
-
-genannt: named
-
-heißt: is called
 
 取代
 ....
@@ -235,10 +231,8 @@ an der v frei ist 23).
 會滿足，執行如下建構 a, v, b, c 
 (而在 1 中，是執行經由 "Subst" 所指出的操作) 
 
-對任一式 a 及任一變數 v，
-b 為一式，在其中沒有 v 是自由的，
-對 c 為一符號與 v 同型，前題是，
-c 沒有變數包含於
+對任一式 a 及任一變數 v， b 為一式，在其中沒有 v 是自由的，
+對 c 為一與 v 同型的符號，前題是， c 沒有包含在 a 的受限變數
 v 是自由的。
 
 陣列操作
@@ -287,16 +281,3 @@ R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
                             Z(x1)...Z(xn)
 
 
-單字表
-......
-
-verwandter 關連的
-bekanntlich 一般可知
-wurden 變成
-Weite 廣闊
-Gebiet 版圖
-Art 类型、种类方式、方法风格行为、举止习惯（生物）属
-einigen 一致
-wenigen adj一點點、不多
-Regeln 改造
-vollzogen adj 完美的
