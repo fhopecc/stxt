@@ -235,6 +235,15 @@ an der v frei ist 23).
 對 c 為一與 v 同型的符號，前題是， c 沒有包含在 a 的受限變數
 v 是自由的。
 
+IV. Jede Formel, die aus dem Schema
+
+1. (Eu)(v Π(u(v)≡a))
+
+dadureh entsteht, daß man für v bzw. u beliebige Variable vom
+Typ n bzw. n + 1 und für a eine Formel, die u nicht frei enthält,
+einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom 
+(Komprehensionsaxiom der Mengenlehre).
+
 陣列操作
 ........
 
