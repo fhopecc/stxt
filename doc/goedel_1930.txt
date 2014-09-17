@@ -198,7 +198,6 @@ I.
 II. Jede Formel, die aus den folgenden Schemata durch Einsetzung
 beliebiger Fromeln für p, q, r entsteht.
 
-
 II. 每個公式，其衍生自將以下框架中 p, q, r 配置任意公式，
     將使得下式成立：
 
@@ -237,8 +236,11 @@ v 是自由的。
 
 IV. Jede Formel, die aus dem Schema
 
+IV. 從下框架衍生之式
+
 1. (Eu)(v Π(u(v)≡a))
 
+滿足，
 dadureh entsteht, daß man für v bzw. u beliebige Variable vom
 Typ n bzw. n + 1 und für a eine Formel, die u nicht frei enthält,
 einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom 
