@@ -1006,3 +1006,4 @@ u.dgl.  und dergleichen     and such like
 u.s.f.  und so fort         etc. et cetera …等等
 u.s.w.  und so weiter       
 z.B.    zum Beispiel        e.g. 舉例而言
+bzw.    beziehungsweise     resp. 分別是

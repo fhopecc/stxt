@@ -240,11 +240,15 @@ IV. 從下框架衍生之式
 
 1. (Eu)(v Π(u(v)≡a))
 
-滿足，
 dadureh entsteht, daß man für v bzw. u beliebige Variable vom
 Typ n bzw. n + 1 und für a eine Formel, die u nicht frei enthält,
 einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom 
 (Komprehensionsaxiom der Mengenlehre).
+
+應滿足，v 及 u 分別為 n 型及 n+1 型之任意變數，
+且 a 為一式，其不含 u 為自由變數。
+這些公理表示可簡化公理
+(集合論之理解公理)
 
 陣列操作
 ........
