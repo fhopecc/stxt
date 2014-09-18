@@ -250,6 +250,27 @@ einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom
 這些公理表示可簡化公理
 (集合論之理解公理)
 
+V.Jede Formel, die aus der folgenden durch Typenerhöhung 
+  entsteht (und diese Formel selbst):
+
+1. x1 Π (x2(x1)≡y2(x1)) -> x2=Y2.
+
+Dieses Axiom besagt, 
+daß eine Klasse dureh ihre Elemente vollständig bestimmt ist.
+
+Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
+aus a), wenn a die Formel (~(b))V (c) ist 
+(bzw. wenn c die Formel v Π (a) ist, 
+wo v eine beliebige Variable bedeutet). 
+
+Die Klasse der beweisbaren Formeln wird definiert 
+als die kleinste Klasse von Formeln, 
+welche die Axiome enthält und gegen die Relation 
+"unmittelbare Folge" abgeschlossen ist 24).
+
+Wit ordnen nun den Grnndzeichen des Systems P in folgender
+Weise eineindeutig nattirliehe Zahlen zu:
+
 陣列操作
 ........
 
