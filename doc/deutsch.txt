@@ -267,10 +267,6 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 -heit   陰性
 -keit   陰性
 
-數個名詞所組成的新名詞，其性別與最後一個名詞相同。
-
-das Haus + die Tür = die Haustür (家+門=大門)
-
 陽性名詞
 ........
 
@@ -384,24 +380,72 @@ die Disjunktion die Disjunktionen   析取
 
 5.3.某些法文及英文借字
 
+形容名詞
+........
+
+形容名詞是由形容詞轉變來，一般而言其名詞的性別由冠詞決定。
+
+der alte man        der/die Alte        老人
+
+der verwandte man   der/die Verwandte   親戚
+
+一些形容名詞後置 -in 可轉成陰性。
+
+der Beamt   die Beamtin    官員
+
+一些中性形容名詞用來描述抽象概念。
+
+das Gute/Schlechte/Blöde daran 好/壞/笨
+
+這些形容名詞常與非人稱代詞連用。
+
+alles, etwas, nichts, viel, wenig
+
+Ich habe schon alles Mögliche probiert.
+我總是試所有可能的方法。
+
+Auf wiedersehen. Alles Gute.
+再見，所有事平安。
+
+Das ist nichts Neues/etwas Besonderes.
+無事是新的/一些事物是特殊的。
+
+複合名詞
+........
+
+德文喜歡把數個名詞合成一個複合名詞。
+
+數個名詞所組成的新名詞，其性別與最後一個名詞相同。
+
+das Haus + die Tür = die Haustür (家+門=大門)
+
+1.-e 結尾名詞，通常會以 -n- 來連結名詞
+
+die Küche + der Tisch -> der Küche-n-tisch
+
+2.-heit/-keit, -ung 結尾之名詞，會以 -s- 來連結。
+Gelegenheit-s-arbeit    雜事
+Zeitung-s-zar           媒體汽球
+
 代詞
 ----
 
-格      第一人稱
-        單數    複數 
+代詞用來代替名詞。
 
-主格    ich     wir 
+人稱代詞
+........
 
-屬格    meiner  unser 
+主格 ich  du   er  sie es  wir ihr  Sie   sie
 
-與格    mir     uns 
+賓格 mich dich ihn sie es  uns euch Sie   sie
 
-賓格    mich    uns 
+與格 mir  dir  ihm ihr ihm uns euch Ihnen ihnen
 
 man
 ...
 
-不定代詞，一個，等同英文的 one，源自成年男人。
+不定代詞，一個，等同英文的 one，源自成年男人，
+其格變化如下：
 
 格      單數
 
@@ -418,6 +462,17 @@ dass einen seine Freund vergessen haben.
 
 When one is having a hard time one often finds
 that one's friends have forgotten one.
+
+man 的反身代詞為 sein。
+
+Man befindet sich hier in einer Traumwelt.
+One finds oneself in a dreamworld here.
+
+man 通常是指英文的 you。
+
+Man muss in Kairo aufpassen, dass man nicht beraubt wird.
+
+You must be careful in Cairo that you don't get robbed.
 
 jede
 ....
