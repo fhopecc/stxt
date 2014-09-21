@@ -5,28 +5,32 @@ der Principia Mathematica und verwandter System I
 花蓮 2013/03/04 星期一 
 花蓮 2013/05/03 星期五 
 
-Die Entwicklung der Mathematik in 
-der Richtung zu größerer Exaktheit hat bekanntlich dazu geführt, 
+Die Entwicklung der Mathematik in der Richtung 
+zu größerer Exaktheit hat bekanntlich dazu geführt, 
 daß weite Gebiete von ihr formalisiert wurden, 
 in der Art, daß das Beweisen nach einigen wenigen
 mechanischen Regeln vollzogen werden kann.
 
-數學朝更為精確的方向發展已全面的引導所有版圖變得更為形式化。
-在此風格下，證明能完美地朝向一致機械化改造。
+眾所皆知數學的發展朝著更為精確的方向已引導其所有版圖變得更為形式化。
+在此風格下，證明能成為執行少數統整的機械化規則。
 
 Die umfassendtsen derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) einerseits, 
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
-Axiomensystem der Mengenlehre) andererseits.
+Axiomensystem der Mengenlehre 3) andererseits.
+
+現在百科全書式的形式系統一個是 Principia Mathematica，
+另一個是 Zermelo-Fraenkelsche(由馮鈕曼繼續擴增)
+集合論之公理系統。
 
 P 系統
 ......
 
 Die Grundzeichen des Systems P sind die folgenden:
 
-下列為P系統之基本符：
+P 系統之基本符如下：
 
-I.Konstante: "~"(nicht), "v"(oder), "Π" (fuer alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
+I.Konstante: "~"(nicht), "v"(oder), "Π" (für alle), "0" (null), "f" (der Nachfolger von), "(", ")", (Klammern).
 
 I.常符:
 ~ : 非
@@ -37,9 +41,9 @@ f : 後繼函數，命名源自德文後繼 Nachfolger
 ( ) :括號
 
 II.Variable ersten Typs(für Individuen, 
-   d. h. natuerliche Zahlen inklusive 0)): "x1", "y1", "z1"...
+   d.h. natürliche Zahlen inklusive 0)): "x1", "y1", "z1"...
 
-II.第一型變數(對個體，即自然數包含零):  "x1", "y1", "z1"...
+II.第一型變數(表個體，即包含零之自然數):  "x1", "y1", "z1"...
 
 Variable zweiten Typs (für Klassen von Individuen):
 "x2", "y2", "z2"...
@@ -53,12 +57,14 @@ Variable dritten Typs (für Klassen von Klassen von Individuen):
 第三型變數(表個體類別的類別):
 "x3", "y3", "z3"...
 
-usw. für jede natürliche Zahl als Typus (17
+usw. für jede natürliche Zahl als Typus 17).
+
 17) Es wird vorausgesezt, daß für jeden Variablentypus abzählbar viele
     Zeichen zur Verfügung stehen.
 
-等同：對每個作為型態自然數
-17) 可假定，對每個變數型別，可數多的符號是可行的。
+等等。 對每個作為型態之自然數
+
+17) 可假定，對每個變數型別，可數多種符號之定義域是成立的。
 
 Anm.: Variable für zwei und mehr stellige Functionen (Relationen) sind
 als Grundzeichen überflüssig, da man Relationen als Klassen
@@ -155,10 +161,9 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 
 Subst a|v| 
        |b| 
-(其中 a 為式，v 為變數且 b 為與 v 同型之變數。)
-此式結果如下，
+(其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
+我們可視為從 a 衍生之式，
 若且惟若式中所有 v，其為自由變數，都由 b 取代 20)。
-
 
 型別提升
 ........
@@ -171,14 +176,6 @@ um die gleiche Zahl erhöht.
 我們稱一式 a 為另一式 b 的型別提升，
 若且惟若 a 衍生自 b 並滿足，
 所有在 b 出現變數的型別，以同樣的整數遞增之式。
-
-aus:from, off, over, out, of
-vorkommenden: occurring
-gleiche: equally
-um: at, about
-aller:all的屬格
-man:one單數代詞
-den:賓格
 
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
@@ -253,23 +250,37 @@ einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom
 V.Jede Formel, die aus der folgenden durch Typenerhöhung 
   entsteht (und diese Formel selbst):
 
+V.每個式由下式之型別提升衍生而來(包含式本身)：
+
 1. x1 Π (x2(x1)≡y2(x1)) -> x2=Y2.
 
 Dieses Axiom besagt, 
-daß eine Klasse dureh ihre Elemente vollständig bestimmt ist.
+daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
+
+這些公理隱喻著類可完全由其元素決定。
 
 Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
-aus a), wenn a die Formel (~(b))V (c) ist 
+aus a), wenn a die Formel (~(b)) V (c) ist
 (bzw. wenn c die Formel v Π (a) ist, 
 wo v eine beliebige Variable bedeutet). 
+
+當 a 是式 (~(b)) V (c)。
+一式 c 稱為 a 及 b (分別來自a) 的直接後繼，
+(分別是當 c 為式 v Π (a)，
+其中 v 意為任一個變數)。
 
 Die Klasse der beweisbaren Formeln wird definiert 
 als die kleinste Klasse von Formeln, 
 welche die Axiome enthält und gegen die Relation 
 "unmittelbare Folge" abgeschlossen ist 24).
 
-Wit ordnen nun den Grnndzeichen des Systems P in folgender
-Weise eineindeutig nattirliehe Zahlen zu:
+可證式之類別定義為最小之式類別，
+其包含公理及直接後繼關係所推論之式。
+
+Wir ordnen nun den Grundzeichen des Systems P in folgender
+Weise eineindeutig natürliche Zahlen zu:
+
+我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
 
 陣列操作
 ........

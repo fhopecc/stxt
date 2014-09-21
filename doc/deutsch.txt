@@ -131,6 +131,49 @@ kommen
 9.	說德文要輕，要浮起來，像是在水面游泳，而不是像海豚戲水突起突落。
 10.	念句子要有張力，像葉上露珠，不要把句子念的支離破碎像地上的一灘水。
 
+格
+--
+
+德語分四格，
+分別為主格(N)、屬格(G)、賓格(A)及與格(D)。
+
+這四格用來區分名詞在句子中之功能。
+
+主格在句中為主語、賓格在句中為動作的直接對象而與格為間接對象。
+
+定語
+....
+
+定語是句子中主語和賓語的中心語的修飾限制成份。
+定語和中心語之間是修飾和被修飾、限制和被限制的關係，
+
+中文一般以助詞「的」或「之」來連接定語與中心語，
+德文則以屬格來連接定語與中心語，
+
+中文的語序是定語+「的」+中心語，
+而德文的語序是中心語+定語。
+
+數學的發展其德文如下：
+
+Die Entwicklung der Mathematik
+中心語          定語(屬格)
+
+德文的名詞作為屬格時，
+如同英語會後置 -s 來表示此名詞作屬格用，
+但不像英語會加單引號字元「'」。
+
+一個第一型的變數
+eine Variable ersten Typs
+     中心語   定語      s 指示 Typ 為屬格作定語用
+
+a variable of first type
+
+P系統之基本符
+
+Die Grundzeichen des Systems P 
+    中心語       定語      s 指示 System 為屬格作定語用
+
+
 冠詞
 ----
 
@@ -210,8 +253,6 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
 在第一種情形下，我們稱這樣的符號為數符。
 
-
-
 不定冠詞
 ........
 
@@ -221,11 +262,11 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
 屬格    einer   eine    ein     keine*
 
-與格    einem   eine    einem   keinem*
+賓格    einem   eine    einem   keinem*
 
-賓格    eines   einer   eines   keiner*
+與格    eines   einer   eines   keiner*
 
-*ein 的否定型只要在前置 k即可，表示沒有的意思，
+*ein 的否定型只要在前置 k 即可，表示沒有的意思，
  但與 ein 不同，它可用到複數。
  sonst keinen freien Variablen.(通常沒有自由變數)
  其中 Variablen 是複數名詞。
@@ -238,9 +279,10 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 屬格    alles   aller   alles   aller
         allen           allen
 
-與格    allem   aller   allem   allen 
+賓格    allem   aller   allem   allen 
 
-賓格    allen   alle    alles   alle 
+與格    allen   alle    alles   alle 
+
 
 1.單數中性alles後未接名詞時為不定代詞意表示每件事。
 
@@ -249,6 +291,47 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 3.複數未接名詞時為不定代詞意表示每人。
 
 4.複數後接複數名詞表示不定冠詞表全部。
+
+
+不定冠詞的省略
+..............
+
+在以下情況不定冠詞會省略。
+
+1.als   之後
+2.ohne  之後
+
+所有權狀語作定語用
+..................
+
+所有權狀語作定語用，其格變化如同 ein。
+
+kein
+
+所有權狀語
+
+mein, dein, sein, ihr, unser, euer, ihr。
+
+不定代詞作定語用
+................
+
+以下之不定代詞用在複數名詞之前可作定語。
+
+alle            全部
+andere          其它
+einige          一些
+mehrere         一些
+viele           很多
+winige          少許
+verschiedene    多樣
+
+補語是用主格
+............
+
+copula 動詞在其前或其後均接主格，包含
+bleiben(保持、留下)，scheinen(顯示)，sein(是)，werden(變成)
+
+Er ist ein sehr guter Lehrer. 他是非常好的老師。
 
 名詞
 ----
@@ -287,8 +370,7 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
   -ist, -it, 
   -krat, -nom, -ot, -soph
 
-  結尾的名詞，在主格以外的四格均會加字尾 -en。
-
+結尾的名詞，在主格以外的四格均會加字尾 -en。
 
 陰性名詞
 ........
@@ -302,6 +384,8 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
 3.-ung 
 
+Entwicklung 發展，源自動詞 entwickeln
+
 4.-ie, -ik, -ion
   源自法文之名詞後置如上詞尾。
   die Biologie, die Musik, die Station
@@ -311,7 +395,6 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
   die Weser, die Seine, die Themse
 
 Klasse 陰性，類別
-Formel 陰性，公式
 
 中性名詞
 ........
@@ -321,8 +404,11 @@ Formel 陰性，公式
   das Hündchen(der Hund) 小馬
 
 2.從不定動詞衍生之名詞，動詞不定式之首字母大寫即變成名詞。
+
   das Essen     食物，源自吃之不定式 Essen。
+
   das Beweisen  證明，源自證明之不定式 beweisen。
+
   das Weglassen 省略，源自省略之不定式 weglassen。 
 
 3.國名或城市名。
@@ -336,21 +422,22 @@ Formel 陰性，公式
 
 1.複數名詞不變化
 
-1.1.-el, -en, -er 之陽性及中性名詞。
+-el, -en, -er 之陽性及中性名詞。
 
-1.2.-chen, -lein 之動物幼兒名詞後置上述詞尾。
+-chen, -lein 之動物幼兒名詞後置上述詞尾。
 
-1.3.Ge-*-e 之中性名詞
+Ge-*-e 之中性名詞
 
 2.字尾加入 ¨e, -e 
 
-2.1.單音節陽性名詞及少數雙音節陽性名詞。
+單音節陽性名詞及少數雙音節陽性名詞。
 
-2.2.單音節中性名詞，除了 das Floß，都會音變。
+單音節中性名詞，除了 das Floß，都會音變。
 
-2.3.單音節陰性名詞。
+單音節陰性名詞。
+die Axiom -> die Axiome 公理
 
-2.4.-ich, -ig, -ing, -nis, -sal 之陽性及中性名詞。
+-ich, -ig, -ing, -nis, -sal 之陽性及中性名詞。
 
 3.字尾加入 ¨er,-er
 
@@ -360,17 +447,17 @@ Formel 陰性，公式
 
 3.3.-tum 之陽性名詞及中性名詞
 
-4.字尾加入 -en, -n
+4.加入 -n, -en
 
-4.1.大部分陰性名詞
+|大部分陰性名詞|
 
+die Elemente    die Elementen       元素
 die Formel      die Formeln         公式
-
 die Disjunktion die Disjunktionen   析取
 
-4.2.弱陽性名詞
+|弱陽性名詞|
 
-4.3.一些中性名詞
+|一些中性名詞|
 
 5.字尾加入 -s
 
@@ -426,6 +513,16 @@ die Küche + der Tisch -> der Küche-n-tisch
 2.-heit/-keit, -ung 結尾之名詞，會以 -s- 來連結。
 Gelegenheit-s-arbeit    雜事
 Zeitung-s-zar           媒體汽球
+
+名詞的格變
+..........
+
+-(e)s   陽性及中性名詞之屬格
+
+-e      陽性及中性名詞之賓格，在古老或書寫文中
+
+-n      複數名詞在與格時且結尾不為 -n。
+
 
 代詞
 ----
@@ -485,9 +582,10 @@ jede
 
 屬格    jedes   jeder   jedes
 
+賓格    jeden   jede    jedes
+
 與格    jedem   jeder   jedem
 
-賓格    jeden   jede    jedes
 
 動詞
 ====
@@ -593,8 +691,6 @@ kaufen -> gekauft 買
 
 reden  -> geredet 說
 
-
-
 gehören 
 .......
 
@@ -624,9 +720,23 @@ vornehmen   執行動作
 ----
 
 zugleich    同時 stets       始終、不斷地
+gleiche: equally
+vorkommenden: occurring
 
 介詞
 ----
+
+介詞常以片語的形態出現，
+所以意義相當不固定。
+
+um: at, about
+
+支配賓格
+........
+
+bis
+
+für 
 
 mit 
 ...
@@ -646,8 +756,16 @@ mit
 Verwendung der üblichen Konventionen über
 das Weglassen von Klammern angeschrieben)22):
 
+支配與格
+........
+
+含 aus, von, mit, nach, seit, bei 及 zu
+
+aus:from, off, over, out, of
+
 aus & von
 .........
+
 
 支配與格
 
@@ -1030,37 +1148,6 @@ bit
 
 [並列連詞]某數至某數
 
-定語
-....
-
-定語是句子中主語和賓語的中心語的修飾限制成份。
-定語和中心語之間是修飾和被修飾、限制和被限制的關係，
-
-中文一般以助詞「的」或「之」來連接定語與中心語，
-德文則以屬格來連接定語與中心語，
-
-中文的語序是定語+「的」+中心語，
-而德文的語序是中心語+定語。
-
-數學的發展其德文如下：
-
-Die Entwicklung der Mathematik
-中心語          定語(屬格)
-
-德文的名詞作為屬格時，
-如同英語會後置 -s 來表示此名詞作屬格用，
-但不像英語會加單引號字元「'」。
-
-一個第一型的變數
-eine Variable ersten Typs
-     中心語   定語      s 指示 Typ 為屬格作定語用
-
-a variable of first type
-
-P系統之基本符
-Die Grundzeichen des Systems P 
-    中心語       定語      s 指示 System 為屬格作定語用
-
 表語
 ....
 
@@ -1092,5 +1179,6 @@ u.a.    unter anderen/-em   i.a. inter alia 除此之外
 u.dgl.  und dergleichen     and such like
 u.s.f.  und so fort         etc. et cetera …等等
 u.s.w.  und so weiter       
+usw.
 z.B.    zum Beispiel        e.g. 舉例而言
 bzw.    beziehungsweise     resp. 分別是
