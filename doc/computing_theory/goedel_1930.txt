@@ -11,7 +11,7 @@ daß weite Gebiete von ihr formalisiert wurden,
 in der Art, daß das Beweisen nach einigen wenigen
 mechanischen Regeln vollzogen werden kann.
 
-眾所皆知數學的發展朝著更為精確的方向已引導其所有版圖變得更為形式化。
+眾所皆知數學的發展朝著更精確的方向已引導其所有版圖變得更為形式化。
 在此風格下，證明能成為執行少數統整的機械化規則。
 
 Die umfassendtsen derzeit aufgestellten formalen Systeme sind
@@ -310,8 +310,11 @@ x ist eine beweisbare Formel.
 [Bew(x) ist der einzige unter Begriffen 1-46.
 von dem nicht behauptet werden kann, er sei rekursiv.]
 
-x 是可證明式。Bew 名稱來自於證明的德文 beweisbare。
+x 是一可證式。
+
 [Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
+
+註：Bew 名稱來自於證明的德文 beweisbare。
 
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
 Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
