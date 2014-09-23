@@ -36,9 +36,13 @@ Axiomensystem der Mengenlehre 3) andererseits.
 集合論之公理系統。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
-Cambridge 1925. Zu den Axiomen des Systems PM rechnen wir insbesondere
-aueh: Das Unendlichkeitsaxiom (in der Form: es gibt genau abziihlbar viele
-Individuen), das Reduzibilitäts- und das Auswahlaxiom (für alle Typen).
+Cambridge 1925. 
+Zu den Axiomen des Systems PM rechnen wir insbesondere aueh: 
+Das Unendlichkeitsaxiom (in der Form: 
+es gibt genau abziihlbar viele Individuen), 
+das Reduzibilitäts- und das Auswahlaxiom (für alle Typen).
+
+2) 懷海德及羅素，數學原理，2. 
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen iiber die Grundlegung der Mengenlehre,
 Wissensch. u. Hyp. Bd. XXXI. J,v. Neumann, Die Axiomatisierung
@@ -350,8 +354,8 @@ Relationenszeichen r (mit den freien Variablen) (u1, u2...un),
 so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
 
 定理V：
-對每個遞迴關係 R(x1...xn) 均有一個 n 元關係符號 r (帶有自由變數)
-(u1,u2...un)，且對所有n元整數序對(x1,x2...xn)滿足下式：
+對每個遞迴關係 R(x1...xn) 給定一個 n 元關係符號 r (帶有自由變數)
+(u1,u2...un)，故對所有n元整數序對(x1,x2...xn)滿足下式：
 
 R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
                      Z(x1)...Z(xn)
