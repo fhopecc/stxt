@@ -151,26 +151,24 @@ kommen
 德文則以屬格來連接定語與中心語，
 
 中文的語序是定語+「的」+中心語，
-而德文的語序是中心語+定語。
+而德文的語序是中心語+定語如下：
 
-數學的發展其德文如下：
+Anfang nächsten Monats 下個月的開始
+                Monat  變格為屬格。 
 
-Die Entwicklung der Mathematik
+Die Entwicklung der Mathematik  數學的發展其德文
 中心語          定語(屬格)
 
 德文的名詞作為屬格時，
 如同英語會後置 -s 來表示此名詞作屬格用，
 但不像英語會加單引號字元「'」。
 
-一個第一型的變數
-eine Variable ersten Typs
+eine Variable ersten Typs   一個第一型的變數
      中心語   定語      s 指示 Typ 為屬格作定語用
 
 a variable of first type
 
-P系統之基本符
-
-Die Grundzeichen des Systems P 
+Die Grundzeichen des Systems P  P系統之基本符
     中心語       定語      s 指示 System 為屬格作定語用
 
 表語
@@ -393,6 +391,10 @@ Er ist ein sehr guter Lehrer. 他是非常好的老師。
   -ist, -it, 
   -krat, -nom, -ot, -soph
 
+7.-er 所有衍生自動詞之名詞，動詞之不定式去掉 -en 再加 -er 即為名詞
+
+anzeigen -> der Anzeiger 指示->期刊
+
 結尾的名詞，在主格以外的四格均會加字尾 -en。
 
 陰性名詞
@@ -407,7 +409,8 @@ Er ist ein sehr guter Lehrer. 他是非常好的老師。
 
 3.-ung 
 
-Entwicklung 發展，源自動詞 entwickeln
+Entwicklung         發展，源自動詞 entwickeln
+Zusammenfassung     摘要，源自動詞 zusammenfassen 
 
 4.-ie, -ik, -ion
   源自法文之名詞後置如上詞尾。
@@ -455,9 +458,12 @@ Ge-*-e 之中性名詞
 
 單音節陽性名詞及少數雙音節陽性名詞。
 
-單音節中性名詞，除了 das Floß，都會音變。
+單音節中性名詞及少數雙音節陽性名詞，除了 das Floß，都會音變。
+
+das Resultat -> die Resultate 結果
 
 單音節陰性名詞。
+
 die Axiom -> die Axiome 公理
 
 -ich, -ig, -ing, -nis, -sal 之陽性及中性名詞。
@@ -541,6 +547,8 @@ Zeitung-s-zar           媒體汽球
 ..........
 
 -(e)s   陽性及中性名詞之屬格
+
+das Resultat -> des Resultats 結果
 
 -e      陽性及中性名詞之賓格，在古老或書寫文中
 
@@ -714,7 +722,9 @@ ein Guter Mann  一個好人
 主要是陽性及中性名詞，會在屬格變格為 -s。
 
 Anfang nächsten Monats 下個月的開始
-                Monat 變格為屬格。 
+                Monat  變格為屬格。 
+
+
 
 比較級變格
 ..........
@@ -825,7 +835,7 @@ er heißt    er reist    er sitzt
    被稱為      旅行        坐
 
 enthalten   包含
-
+erschienene 出版
 時態
 ....
 
@@ -1278,3 +1288,4 @@ u.s.w.  und so weiter
 usw.
 z.B.    zum Beispiel        e.g. 舉例而言
 bzw.    beziehungsweise     resp. 分別是
+vgl.    vergleiche          cp. 比較

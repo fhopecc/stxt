@@ -1,9 +1,21 @@
 Über formal unentsheidbare Sätze 
-der Principia Mathematica und verwandter System I
-論數學原理及相關系統中的形式無法決定陳述句
+der Principia Mathematica und verwandter System I 1)
+論數學原理及相關系統中的形式無法決定陳述句 1)
 =================================================
+
 花蓮 2013/03/04 星期一 
 花蓮 2013/05/03 星期五 
+
+Von Kurt Gödel in Wien.
+
+庫爾特．哥德爾於維也納
+
+1) Vgl. die im Anzeiger der Akad. d. Wiss. 
+   in Wien (math.-naturw. KI.) 1930, Nr. 19 
+   erschienene Zusammenfassung der Resultate dieser Arbeit.
+   
+1) 參閱於維也納，1930 年 19 期的阿卡德．德．維斯期刊(math.-naturw. KI.) 
+   發表這個工作成果的摘要。
 
 Die Entwicklung der Mathematik in der Richtung 
 zu größerer Exaktheit hat bekanntlich dazu geführt, 
@@ -22,6 +34,23 @@ Axiomensystem der Mengenlehre 3) andererseits.
 現在百科全書式的形式系統一個是 Principia Mathematica，
 另一個是 Zermelo-Fraenkelsche(由馮鈕曼繼續擴增)
 集合論之公理系統。
+
+2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
+Cambridge 1925. Zu den Axiomen des Systems PM rechnen wir insbesondere
+aueh: Das Unendlichkeitsaxiom (in der Form: es gibt genau abziihlbar viele
+Individuen), das Reduzibilitäts- und das Auswahlaxiom (für alle Typen).
+
+3) Vgl. A. Fraenkel, Zehn Vorlesungen iiber die Grundlegung der Mengenlehre,
+Wissensch. u. Hyp. Bd. XXXI. J,v. Neumann, Die Axiomatisierung
+der Mengenlehre. Math. Zeitschr. 27, 1928. Journ. f. reine u. angew. Math. 154
+(1925), 160 (1929). Wir bemerken, daii man zu den in der angeftihrten Literatur
+gegebenen mengentheoretisehen Axiomen noeh die Axiome und Schh~regeln des
+Logikkalktils hinzufiigen muir, um die Formalisierung zu vollenden. -- Die
+naehfolgenden Oberlegungen gelten aueh ftir die in den letzten Jahren yon
+D. H ilb e r t und seinen Mitarbeitern aufgestellten formalen Systeme (soweit diese
+bisher vorliegen). Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. der
+Univ. Hamburg I (1922), VI (1928). P. B ernay s, Math. Ann. 90. J.v.Neumann,
+Math. Zeitsehr. 26 (1927). W. Aekermann, Math. Ann. 93...
 
 P 系統
 ......
