@@ -42,7 +42,9 @@ Das Unendlichkeitsaxiom (in der Form:
 es gibt genau abziihlbar viele Individuen), 
 das Reduzibilitäts- und das Auswahlaxiom (für alle Typen).
 
-2) 懷海德及羅素，數學原理，2. 
+2) 懷海德及羅素，數學原理，2. Aufl., 劍橋出版 1925。
+對 PM 系統之公理，我們計算出特別是以下：
+無限公理(以形式：
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen iiber die Grundlegung der Mengenlehre,
 Wissensch. u. Hyp. Bd. XXXI. J,v. Neumann, Die Axiomatisierung
@@ -297,10 +299,9 @@ aus a), wenn a die Formel (~(b)) V (c) ist
 (bzw. wenn c die Formel v Π (a) ist, 
 wo v eine beliebige Variable bedeutet). 
 
-當 a 是式 (~(b)) V (c)。
-一式 c 稱為 a 及 b (分別來自a) 的直接後繼，
-(分別是當 c 為式 v Π (a)，
-其中 v 意為任一個變數)。
+若 a 是式 (~(b)) V (c)。
+則式 c 稱為 a 及 b (分別來自a) 的直接後繼，
+(分別是當 c 為式 v Π (a)，其中 v 意為任一個變數)。
 
 Die Klasse der beweisbaren Formeln wird definiert 
 als die kleinste Klasse von Formeln, 
