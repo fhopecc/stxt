@@ -28,7 +28,8 @@ Dieses Axiom besagt,
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.  
 這些公理隱喻著類可完全由其元素決定。
 
-上面從屬句其動詞 ist 移至句尾。
+上面從屬句其動詞 ist 移至句尾，
+並由從屬連詞 daß 連接，該詞相當於英文的 that。 
 
 與複合句不同是，從屬句可移主句前方，
 但主句語序要變化，動詞要移到句首。
@@ -41,14 +42,21 @@ Während meine Frau abwusch, machte ich die Betten.當我老婆在洗澡時，�
 
 英語不同的是複雜句若從屬句移至主句前方，主句動詞要移到子句首。
 
+當用並列連詞連接兩個從屬句時，
+也會要注意從屬句的語序。
 
-連詞
-----
+Was war sie froh, als sie seine Stimme hörte und 
+(als sie) sein Gesicht wieder sah.
 
-daß
-...
+她是如此高興，當聽到他的聲音及再看到他的臉。
 
-從屬連詞
+並列句另一句為從屬句在前之複雜句。
+Ich bleibe zu Hause, und weil ich nicht gut geschlafen habe, 
+gehe ich wieder ins Bett.
+
+我在家，且因為我沒有睡好，我又再次上床睡覺。
+
+
 
 bit
 ...
@@ -792,12 +800,15 @@ ein Guter Mann  一個好人
 與格    -em     -er     -em     -en
 與格    dem     der     dem     den 
 
+geordneter Paare 序對 
+geordnet -> geordneter 排序，複數屬格屈折
+Paar -> Paare 一對，複數名詞屈折
+
 屬格之變格不與 des 相同，還是 -en，
 主要是陽性及中性名詞，會在屬格變格為 -s。
 
 Anfang nächsten Monats 下個月的開始
                 Monat  變格為屬格。 
-
 
 
 比較級變格

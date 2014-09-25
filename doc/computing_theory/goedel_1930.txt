@@ -109,7 +109,7 @@ wiederum als Klassen von Klassen, z. B. das geordnete Paar a, b durch
 ((a), (a,b)), wo (x,z) bzw. (x) die Klassen bedeuten, deren einzige
 Elemente x, y bzw. x sind. 18).
 
-注釋：表示 2 元或更多元函數(關係)之變數可視為多出的基本符號。
+注釋：對二或多元函數(關係)之變數作為基本符號是多餘的，
 因為關係可用序對類別來定義且序對可再由類別之類別而定義，
 例如序對 a, b 可由((a), (a,b))定義，其中 (w, z) 或 (x) 指類別，
 其成員含 x, y 或 x。18)
