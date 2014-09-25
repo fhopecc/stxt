@@ -9,33 +9,38 @@
 並列句
 ......
 
-複合句是由主子句及聯合子句而成，
-每個子句的地位相同，子句也不會有語序變化，
-英語與德語聯合子句不能在主子句前方。
+德語中複合句經由並列連詞連接主句與一或數個並列句，
+主句與並列句的地位相同，並列句也不會有語序變化。
 
-複合句以並列連詞連接。
+英語同德語一樣並列句不能在主句前方，
+我想這是因為並列句沒有語序變化，所以必須用句序來表示主副關係。
+
+Er hat selbst keine Kinder, aber er hat Kinder sehr gern.
+他自已沒小孩，但他卻很喜歡小孩。
 
 複雜句
 ......
 
-複雜句是由一個主子句以從屬連詞連接許多副子句連合而成，
-副子句用來補充主子句，
-與複合句不同是，副子句可在主子句前方，
-且副子句會有語序變化，其限定動詞會移至句尾。
+複雜句經從屬連詞連接主句數個從屬句，
+從屬句用來補充主子句，且從屬句會有語序變化，其限定動詞會移至句尾。
 
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.  
 這些公理隱喻著類可完全由其元素決定。
 
-上面副子句將其動詞 ist 移至句尾。
+上面從屬句其動詞 ist 移至句尾。
 
+與複合句不同是，從屬句可移主句前方，
+但主句語序要變化，動詞要移到句首。
+我們便可可由句的語序區分主句與從屬句。
 
-與英語不同的是複雜句若副子句移至主子句前方，主子句動詞要移到子句首。
+Ich machte die Betten, während meine Frau abwusch.我作床當我老婆在洗澡時。
 
-Ich machte die Betten, während meine Frau abwusch.  我作床當我老婆在洗澡時。
+Während meine Frau abwusch, machte ich die Betten.當我老婆在洗澡時，我作床。
+主句動詞 machte 移到子句首。
 
-Während meine Frau abwusch, machte ich die Betten.  當我老婆在洗澡時，我作床。
-主子句動詞 machte 移到子句首。
+英語不同的是複雜句若從屬句移至主句前方，主句動詞要移到子句首。
+
 
 連詞
 ----
@@ -49,8 +54,6 @@ bit
 ...
 
 [並列連詞]某數至某數
-
-
 
 發音
 ----

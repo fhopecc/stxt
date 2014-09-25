@@ -37,14 +37,15 @@ Axiomensystem der Mengenlehre 3) andererseits.
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
 Cambridge 1925. 
-Zu den Axiomen des Systems PM rechnen wir insbesondere aueh: 
+Zu den Axiomen des Systems PM rechnen wir insbesondere auch: 
 Das Unendlichkeitsaxiom (in der Form: 
-es gibt genau abziihlbar viele Individuen), 
-das Reduzibilitäts- und das Auswahlaxiom (für alle Typen).
+es gibt genau abzählbar viele Individuen), 
+das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
 2) 懷海德及羅素，數學原理，2. Aufl., 劍橋出版 1925。
-對 PM 系統之公理，我們計算出特別是以下：
-無限公理(以形式：
+對 PM 系統之公理，我們也計算出特別是：
+無窮公理(形式如下：它給定精確可數多的個體)，
+簡化和選擇公理(對所有類型)。
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen iiber die Grundlegung der Mengenlehre,
 Wissensch. u. Hyp. Bd. XXXI. J,v. Neumann, Die Axiomatisierung
