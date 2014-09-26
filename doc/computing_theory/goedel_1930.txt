@@ -47,17 +47,40 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 無窮公理(形式如下：它給定精確可數多的個體)，
 簡化和選擇公理(對所有類型)。
 
-3) Vgl. A. Fraenkel, Zehn Vorlesungen iiber die Grundlegung der Mengenlehre,
-Wissensch. u. Hyp. Bd. XXXI. J,v. Neumann, Die Axiomatisierung
-der Mengenlehre. Math. Zeitschr. 27, 1928. Journ. f. reine u. angew. Math. 154
-(1925), 160 (1929). Wir bemerken, daii man zu den in der angeftihrten Literatur
-gegebenen mengentheoretisehen Axiomen noeh die Axiome und Schh~regeln des
-Logikkalktils hinzufiigen muir, um die Formalisierung zu vollenden. -- Die
-naehfolgenden Oberlegungen gelten aueh ftir die in den letzten Jahren yon
-D. H ilb e r t und seinen Mitarbeitern aufgestellten formalen Systeme (soweit diese
-bisher vorliegen). Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. der
-Univ. Hamburg I (1922), VI (1928). P. B ernay s, Math. Ann. 90. J.v.Neumann,
-Math. Zeitsehr. 26 (1927). W. Aekermann, Math. Ann. 93...
+3) Vgl. A. Fraenkel, Zehn Vorlesungen über 
+   die Grundlegung der Mengenlehre, Wissensch. u. Hyp. Bd. XXXI. 
+   參閱艾．法蘭柯，論集合論基礎工作之十個講題，科學雜誌．尤．XXXI.期。
+
+   J,v. Neumann, Die Axiomatisierung der Mengenlehre. 
+   Math. Zeitschr. 27, 1928. 
+   Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
+   馮．紐曼，集合論之公理化。數學精選 27 期，1928。
+
+   Wir bemerken, daß man zu den in der angeführten Literatur
+   gegebenen mengentheoretisehen Axiomen noch die Axiome und Sclußregeln 
+   des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
+
+   Die nachfolgenden Überlegungen gelten aueh für die in den letzten 
+   Jahren von D. Hilbert und seinen Mitarbeitern aufgestellten 
+   formalen Systeme (soweit diese bisher vorliegen). 
+
+   Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
+   der Univ. Hamburg I (1922), VI (1928). 
+   P. Bernay s, Math. Ann. 90. J.v.Neumann, 
+   Math. Zeitsehr. 26 (1927). W. Aekermann, Math. Ann. 93.
+
+Diese beiden Systeme sind so weit,
+daß alle heute in der Mathematik angewendeten Beweismethoden in ihnen
+formalisiert, d.h. auf einige wenige Axiome und Schlußregeln
+zurüekgeführt sind. 
+
+Es liegt daher die Vermutung nahe, da~ diese Axiome
+und Sehlultregeln dazu ausreichen, alle mathematisehen Fragen~ die
+sich in den betreffenden Systemen tiberhaupt formal ausdriicken
+lassen: aueh zu entscheiden. Im folgenden wird gezeigt~ da~ dies
+nieht der Fall ist, sondern dait es in den beiden angefiihrten
+Systemen sogar relativ einfache Probleme aus der Theorie der gewShnliehen
+ganzen Zahlen gibt4)/die sich aus den Axiomen nicht
 
 P 系統
 ......
@@ -103,16 +126,19 @@ usw. für jede natürliche Zahl als Typus 17).
 17) 可假定，對每個變數型別，可數多種符號之定義域是成立的。
 
 Anm.: Variable für zwei und mehr stellige Functionen (Relationen) sind
-als Grundzeichen überflüssig, da man Relationen als Klassen
-geordneter Paare definieren kann und geordnete Paare
-wiederum als Klassen von Klassen, z. B. das geordnete Paar a, b durch
-((a), (a,b)), wo (x,z) bzw. (x) die Klassen bedeuten, deren einzige
-Elemente x, y bzw. x sind. 18).
+als Grundzeichen überflüssig, 
+da man Relationen als Klassen geordneter Paare definieren kann 
+und geordnete Paare wiederum als Klassen von Klassen, 
+z. B. das geordnete Paar a, b durch ((a), (a,b)),
+wo (x,y) bzw. (x) die Klassen bedeuten, 
+deren einzige Elemente x, y bzw. x sind. 18).
 
-注釋：對二或多元函數(關係)之變數作為基本符號是多餘的，
-因為關係可用序對類別來定義且序對可再由類別之類別而定義，
-例如序對 a, b 可由((a), (a,b))定義，其中 (w, z) 或 (x) 指類別，
-其成員含 x, y 或 x。18)
+注：對二或多元函數(關係)之變數作為基本符號是多餘的，
+因為關係可用序對類別來定義，
+而序對可再由類別之類別而定義，
+例如序對 a, b 可由((a), (a,b))定義，
+其中 (x, y) 及 (x) 表示類別，
+其成員成員分別僅含 x, y 及 x。18)
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
 z. B. eine Relation zwischen Individuen und Klassen als eine Klasse als
