@@ -1,6 +1,50 @@
 基礎德文
 ========
 
+語序
+----
+
+五個原則：
+
+1. 代名詞先於名詞
+
+＊Jens kämmt sich die Haare selten. （顏斯很少梳頭髮。以下例句意思同）
+
+2. 都是代名詞的話，Akkusativ先於Dativ
+
+＊Jens kämmt sie sich selten.
+
+3. 如果與主詞並排，主詞先於受詞
+
+＊Selten kämmt Jens sich die Haare.
+
+＊Selten kämmt er sich die Haare.
+
+＊Selten kämmt er sie sich.
+
+4. 在副句的狀況下，反身代名詞直接放在副句連接詞後
+
+＊ Ich glaube, daß sich Max amüsiert.
+＊ Ich glaube, daß er sich amüsiert. （主詞的代名詞型態還是要放受格前面）
+
+5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
+
+＊Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
+
+TMP原則
++++++++
+
+德語偏好將時間副詞置於首，方法次之及最後地點的資訊。
+
+副詞在前
+++++++++
+
+若副詞在前，則動詞及主語要互換。
+
+Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.  
+在第一種情形下，我們稱這樣的符號為數符。
+
+
 句
 --
 
@@ -233,6 +277,9 @@ a variable of first type
 Die Grundzeichen des Systems P  P系統之基本符
     中心語       定語      s 指示 System 為屬格作定語用
 
+Schlußregeln des Logikkalküls  
+
+
 表語
 ....
 
@@ -439,16 +486,8 @@ Er ist ein sehr guter Lehrer. 他是非常好的老師。
 德語的單數名詞有分三個性別，陽性、陰性及中性，
 可由名詞前置的冠詞或形容詞來判斷性別。
 
-陰性名詞
-........
-
 中性名詞在德文中佔不到百分之十，所以不要先猜名詞為中性，
 但可由名詞詞尾來大致判斷性別。
-
-詞尾    性別
--e      陰性，少數為中性，須強記 
--heit   陰性
--keit   陰性
 
 陽性名詞
 ........
@@ -479,27 +518,37 @@ anzeigen -> der Anzeiger 指示->期刊
 陰性名詞
 ........
 
-1.-in 
+
+1.-e    陰性，少數為中性及陽性須強記 
+
+die Elemente    元素
+die Klasse      類別
+
+2.-in 
   原本為陽性之職業或國家名詞後置，即變為陰性名詞。
 
-2.-heit, -keit 
+3.-heit, -keit 
   通常為抽象名詞
   größerer Exaktheit  更精確
 
-3.-ung 
+4.-ung 
+  動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞。  
+   
+  Entwicklung         發展，源自動詞 entwickeln
+  Zusammenfassung     摘要，源自動詞 zusammenfassen 
+  Formalisierung      形式化，源自動詞 formalisieren
 
-Entwicklung         發展，源自動詞 entwickeln
-Zusammenfassung     摘要，源自動詞 zusammenfassen 
-
-4.-ie, -ik, -ion
+5.-ie, -ik, -ion
   源自法文之名詞後置如上詞尾。
   die Biologie, die Musik, die Station
 
-5.陰性之河流
+6.陰性之河流
   die Donau, die Elbe, die Isar, die Oder, 
   die Weser, die Seine, die Themse
 
-Klasse 陰性，類別
+7.其它
+
+die Literatur   文獻 
 
 中性名詞
 ........
@@ -562,6 +611,7 @@ die Axiom -> die Axiome 公理
 die Elemente    die Elementen       元素
 die Formel      die Formeln         公式
 die Disjunktion die Disjunktionen   析取
+die Regel       die Regeln          改造
 
 |弱陽性名詞|
 
@@ -713,13 +763,25 @@ Der Mann hat die Absich nach Amerika auszuwandern.
 
 插入關係句為 der nebenan wohnt。
 
+wo
+++
 
+wo 為帶回主句地點及時間之關係代詞。
+
+Unter einem Zeichen ersten Typs verstehen 
+wir eine Zeichenkombination der Form:
+a, fa, ffa, fffa... usw.
+wo a entweder 0 oder eine Variable ersten Typs.
+
+基於第一型符號下，我們理解下列形式之符號組合：
+a, fa, ffa, fffa... 等等
+其中 a 是 0 或第一型符號。
 
 形容詞
 ------
 
-形容詞分為表語形容詞，另一種稱為定語形容詞，說明如下：
-表語形容詞不置於名詞之前，直接作主語之表語，且不作詞尾變化。
+形容詞可作為表語，及定語，說明如下：
+形容詞作表語不置於名詞之前，直接作主語之表語，且不作詞尾變化。
 
 定語形容詞用於修飾名詞，置於名詞之前，作詞尾變化
 該名詞若有冠詞則列於冠詞後。
@@ -735,10 +797,10 @@ Er läuft schnell. （他走得快）
 
 sämtliche   全部的、所有的、全體的
 
-形容詞變格
+形容詞變化
 ..........
 
-作為定語的形容詞在德語中需要變格，
+作為定語的形容詞在德語中需要變化，
 而作為表語的形容詞與副詞形式一樣，不需要改變。
 
 Sein Auto ist rot.  他的車是紅的。
@@ -766,10 +828,13 @@ sein rotes Auto.    他的紅車。
 
 例句：
 
-die kleinste Klasse 
+die kleinste Klasse 主格，最小的類別 
 
 am kleinsten[最小的]在定冠詞後變格為 kleinste
 
+der angeführten Literatur 屬格，前揭文獻的
+
+angeführt -> angeführten 前揭
 
 klein 小的、不重要的
 
@@ -864,72 +929,24 @@ Gebiet 版圖
 Art 类型、种类方式、方法风格行为、举止习惯（生物）属
 einigen 一致
 wenigen adj一點點、不多
-Regeln 改造
 vollzogen adj 完美的
-
-
 
 動詞
 ----
 
-變位
-....
+動詞具有時態，表示動作執行的時點。
+每個時態有會因人稱不同而有不同詞變。
 
-動詞的不定式表示還未決定動作是由誰執行。
-所有的動詞在不定式時都以 en 或 n 結尾。
-英文的不定式則是在動詞前加上 to
+不定動詞
+........
 
-形態            字母    英文
+不定動詞的表示還未決定動作是由誰執行。
+所有的不定動詞在式時都以 en 或 n 結尾。
+英文的不定式則是在動詞前加上 to。
 
-不定式(原形)    baue    to make 
-過去式          baute   made  
-過去分詞        baut    made
+當不定動詞放到句中，則已知主語(執行者)是誰，
+便成為限定動詞，其會因執行者的人稱而詞變。
 
-當動詞用到句子中，則已知主語(執行者)是誰，
-並會根據主語的不同在每個時態下有七個不同的變位，
-動詞的字根是不定式去掉 en，
-規則動詞的變位則是字根加上不同的詞尾。
-
-以下是幾個常用動詞在現在時態的變位：
-
-主語       規則動詞例  不規則動詞例 
-
-不定式      bauen       sein    lesen
-
-ich         baue        bin     lese
-du          baust       bist    liest
-er,sie,es   baut        ist     liest
-
-wir         bauen       sind    lesen
-ihr         baut        seid    lest
-sie         bauen       sind    lesen
-
-Sie         bauen       sind    lesen
-
-中文意義    建造*       是      讀
-
-當字根尾是 t, d, n, m 時，變位加入-st 或 -t 之詞尾時會先補 e，再加詞尾。
-
-ich arbeite     ich finde       ich öffne       ich widme
-du  arbeitest   du  findest     du  öffnest     du  widmest
-er  arbeitet    er  findet      er  öffnet      er  widmet
-    工作            找              開              投票
-
-當字根尾是 -s, -ß, -tz, -z 時，第二人稱之詞尾為 -t 不是 -st，
-第三人稱與第二人稱詞尾都是 -t 。
-
-du heißt    du reist    du sitzt
-er heißt    er reist    er sitzt
-   被稱為      旅行        坐
-
-enthalten   包含
-erschienene 出版
-時態
-....
-
-過去式表動作已作過。
-
-<建造*> 動作時態顯示詞，在中文無固定詞彙直接能翻譯。
 德語中一共有六個時態：
 現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。
 下面是一個規則動詞六個時態的例子：
@@ -951,7 +968,213 @@ erschienene 出版
 Ich baue ein Haus       我蓋一幢房
 Ich will ein Haus bauen 我想要蓋一幢房
 
-在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)
+在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)。
+
+現在式
+......
+
+動詞的詞幹是不定動詞去掉字尾 -en。
+現在式依人稱的詞變是詞幹加上不同的字尾。
+
+人稱詞變現在式詞尾變化如下：
+
+不定式      -en
+
+ich         -e
+du          -st
+er,sie,es   -t 
+
+wir         -en
+ihr         -t 
+sie         -en
+
+主語       規則動詞例  不規則動詞例 
+中文意義    建造*       是      讀
+不定式      bauen       sein    lesen
+
+ich         baue        bin     lese
+du          baust       bist    liest
+er,sie,es   baut        ist     liest
+
+wir         bauen       sind    lesen
+ihr         baut        seid    lest
+sie         bauen       sind    lesen
+Sie         bauen       sind    lesen
+
+
+規則動詞
+++++++++
+
+當詞幹尾是 -t, -d, -n, -m 時，
+人稱詞變為 -st 或 -t 時會先補 e，再加詞尾。
+
+ich arbeite     ich finde       ich öffne       ich widme
+du  arbeitest   du  findest     du  öffnest     du  widmest
+er  arbeitet    er  findet      er  öffnet      er  widmet
+    工作            找              開              投票
+
+當詞幹尾是 -s, -ß, -tz, -z 時，
+第二人稱及第三人稱與詞變都是 -t 。
+
+   被稱為      旅行        坐
+   heißen
+du heißt    du reist    du sitzt
+er heißt    er reist    er sitzt
+
+
+當詞幹尾是 -eln 時，第一人稱之詞幹先去掉 -e-，再作人稱詞變。
+
+    笑
+    lächeln
+ich lächle
+du  lächelst
+er  lächelt
+wir lächeln
+ihr lächelt
+sie lächeln
+
+enthalten   包含
+erschienene 出版
+
+不規則動詞
+++++++++++
+
+詞幹包含 -e- 時，會在單數第二及第三人稱將 -e- 變成 -i-。
+
+    geben   helfen 
+    給      幫 
+ich geben   helfen  
+du  gibst   hilfst
+er  gibt    hilft
+wir geben   helfen
+ihr gebt    helft
+sie geben   helfen
+
+詞幹包含 -e- 時，會在單數第二及第三人稱音變將 -e- 變成 -ie-。
+
+詞幹包含 -a- 時，會在單數第二及第三人稱音變將 -a- 變成 -ä-。
+
+haben 及 werden，會在單數第二及第三人稱作詞幹變化。
+
+    haben   werden
+    給      成為
+ich habe    werde
+du  hast    wirst
+er  hat     wird
+wir haben   werden
+ihr habt    werdet
+sie haben   werden
+
+tun 會去掉 -n 作人稱詞變。 
+
+    tun
+    做
+ich tue
+du  tust
+er  tut
+wir tun
+ihr tut
+sie tun
+
+sein 完全沒有規則變化。
+
+    sein
+    是
+ich bin
+du  bist
+er  ist
+wir sind
+ihr seid
+sie sind
+
+未來式
+......
+
+未來式通常表示對未來的計畫、對將來的預言、或是推測。
+
+句法公式是 werden + 不定動詞。
+
+現在式表示未來式
+.................
+
+現在式表示未來式主要是用時間副詞修飾現在式成為未來式。
+
+Das tu' ich morgen.             明天我會作。
+
+Er kommt nächste Woche zurück.  他下週回來
+
+下面三個例句可以很清楚的表示推測度的語氣：
+
+Morgen kommt das 颱風. 明天必定有颱風。
+
+這是以現在式表示未來，表示這是事實，
+不會改變的，肯定會發生，有果斷的意味。
+
+Morgen wird bestimmt das 颱風 kommen. 明天應該是有颱風。
+
+請求
+++++
+
+werden + 不定動詞，也可表示請求，
+würde  + 不定動詞更有禮貌。
+
+很有可能
+++++++++
+
+werden + wohl 表示很有可能
+
+變成
+++++
+
+werden 表示變成。
+
+命令式
+......
+
+過去式
+......
+
+過去式表動作為過去已作的。
+
+人稱詞變過去式詞尾變化如下：
+
+不定式      -en
+
+ich         -te
+du          -test
+er,sie,es   -te 
+
+wir         -ten
+ihr         -tet 
+sie         -ten
+
+當詞幹尾是 -t, -d 時，會先補 e，再加詞尾。
+
+不規則動詞
+++++++++++
+
+不規則動詞之依時態不同其會音變。
+
+  不定式    現在式   過去式  過去分詞   
+1 schreiben schreibt schrieb geschrieben 
+  -ei-      -ei-     -ie-    -ie-
+  beißen    beißt    biss    gebissen    
+  -ei-      -ei-     -i-     -i-
+2 fliegen   fliegt   flog    geflogen 
+  -ie-      -ie-     -o-     -o-
+3 trinken   trinkt   trank   getrunken 
+  -i-       -i-      -a-     -u-
+4 sprechen  spricht  sprach  gesprochen  
+  -e-       -i-      -a-     -o-
+5 geben     gibt     gab     gegeben
+  -e-       -i-      -a-     -e-
+6 fahren    fährt    fuhr    gefahren
+  -a-       -ä-      -u-     -a-
+7 schlafen  schläft  schlief geschlafen
+  -a-       -ä-      -ie-     -a-
+  fangen    fängt    fing    gefangen
+  -a-       -ä-      -i-     -a-
+
 
 完成式
 ......
@@ -971,131 +1194,68 @@ kaufen -> gekauft 買
 
 詞幹尾是 -d, -t 或 -n 則加 -et
 
-reden  -> geredet 說
-
-gehören 
-.......
-
-A gehört zu B
-
-A 屬於 B
-
-Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
-zu welcher sämtliche Elementarformeln gehören.
-
-我們所定義的公式類別作為最小的類別 19)，
-所有基本式為其一部份。
-
-heißen
+助動詞 
 ......
 
-[及動]稱為
+助動詞在現在式的單複數會把詞幹的母音音變。 
+ich muss -> wir müssen
 
-Folgende Formeln (I bis V) heißen Axiome.
+助動詞 + 不定動詞，其中不定動詞移到句尾。
 
-以下公式(I 至 V)稱為公理。
+können
+++++++
+意：能，可以
 
-angezeigte
-vornehmen   執行動作
+können  不定詞
+gekonnt 過去分詞
 
-副詞
-----
-
-zugleich    同時 stets       始終、不斷地
-gleiche: equally
-vorkommenden: occurring
-
-介詞
-----
-
-介詞常以片語的形態出現，
-所以意義相當不固定。
-
-um: at, about
-
-支配賓格
-........
-
-bis
-
-für 
-
-mit 
-...
-
-介詞：藉..
-
-über
-....
-
-介詞：在...之上
-
-反義詞：unter
-
-über 若動詞為兩地間之移動用賓格，
-     為表示停在某地用與格。
-
-Verwendung der üblichen Konventionen über
-das Weglassen von Klammern angeschrieben)22):
-
-支配與格
-........
-
-含 aus, von, mit, nach, seit, bei 及 zu
-
-aus:from, off, over, out, of
-
-aus & von
-.........
+    現代式 過去式
+ich kann   konnte
+du  kannst konntest
+er  kann   konnte
+wir können konnten
+ihr könnt  konntet
+sie können konnten
 
 
-支配與格
+18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
+    z. B. eine Relation zwischen Individuen und Klassen 
+    als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
+    Alle in den PM über Relationen
+    beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, 
+    auch bei dieser Behandlungsweise beweisbar.
+    查證 definiert 是否為過去分詞
 
-與國名或城市名連用，
-aus 表示出身，是某國/某地人；
-von 表示「從某地來」，不指明國籍或出生地。
-
-Ich komme aus Berlin. 我是柏林人。
-Ich komme von Berlin. 我從柏林來。
-
-aus 和 von 與物質名詞連用時。
-aus 表示構成物質的材料，強調材料；
-von 多指品質、特性等，強調外觀和種類。
-
-Der Tisch ist aus Holz.
-Das ist von guter Qualit?t.
-
-常用片語：
-
-von zu Hause 從家裏來
-
-:衍生詞:
-
-vom = von + dem
+18) 不等關係也可用此方式定義，
+    例如一個個體與一類別含類別作為成員間的關係含一個成員之類別之類別，
+    如下式：
+    ((x2), ((x1),x2))
+    所有在 PM 及前述關係是可證句，我們教一個教簡單考慮，
+    如此作法也是可證的。
 
 
-dadurch
-........
+müssen
+++++++
 
-thereby, thus
+müssen 必須
 
+    現在式  過去式
+ich muss    musste
+du  musst   musstest
+er  muss    musste
 
-未來式的複習
-------------
+wir müssen  mussten
+ihr müsst   musstet
+sie müssen  mussten
 
-未來式 Futur 的句法公式是 werden + Infinitiv （不定式）。
-而未來式通常表示對未來的計畫、對將來的預言、或是推測。
+Wir bemerken, daß man zu den in der angeführten Literatur
+gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
+des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
-下面三個例句可以很清楚的表示推測度的語氣：
+我們可觀察到，必須加上前述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
+才能完成形式化。
 
-Morgen kommt das 颱風. 明天必定有颱風。
-
-這是以現在式表示未來，表示這是事實，
-不會改變的，肯定會發生，有果斷的意味。
-
-Morgen wird bestimmt das 颱風 kommen. 明天（應該是）一定有颱風。
-
-（儘管中譯看起來差不多，但是這個「一定」卻是推測出的結果。）
+hinzufügen muß 被移到句尾，是因為副句的動詞要移至最後。
 
 被動語態
 ........
@@ -1121,7 +1281,7 @@ mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
 
 寫成句型：
     實際上的賓語變成第一格
-+   被動語態助詞werden 
++   被動語態助詞 werden 
 +   von 
 +   實際上的主語變成的第三格
 +   用動詞的過去分詞
@@ -1150,68 +1310,8 @@ Ich wird gefragt. 我被人問了(有人問我)。
 4) 過去完成時：Sie hatte mich fragen muessen. Ich hatte gefragt werden muessen.
 5) 將來時：Sie wird mich fragen muessen. Ich wird gefragt werden muessen.
 
-虛擬式
-======
-
-虛擬式一般用來表示說話者認為所陳述的行為、
-事物不符合事實或不確定是事實，如表示想像、猜測、假設、不現實的願望、
-客氣或用來轉述他人的話或觀點。
-虛擬式分為虛擬一式和虛擬二式。
-
-虛擬一式
---------
-
-虛擬一式由動詞不定式詞幹加人稱詞尾構成，
-單數第一人稱和第三人稱詞尾是e，
-單數第二人稱詞尾是est，複數第二人稱詞尾是et，
-複數第一人稱和第三人稱詞尾是en。
-所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
-
-	        haben	lesen	können	sein	werden
-Ich	        habe	lese	könne	sei	werde
-du	        habest	lesest	könnest	sei(e)st	werdest
-er/sie/es	habe	lese	könne	sei	werde
-wir	        haben	lesen	können	seien	werden
-ihr	        habet	leset	könnet	seiet	werdet
-sie/Sie	    haben	lesen	können	seien	werden
-
-虛擬一式使用法
---------------
-
-虛擬一式主要用於間接引語 (indirekte Rede)，
-表示說話者轉述他人的話或觀點。
-因此，虛擬一式常用在引文或新聞報導當中。
-
-例句：
-Er hat mir gesagt, "ich schreibe gerade einen Roman."
-(他對我說：「我正在寫一部小說。」)
-                            |
-                            V
-Er hat mir gesagt, er schreibe gerade einen Roman. 
-(他告訴我，他正在寫一部小說。)
-
-注意事項
-
-(1)間接引語常用從屬連詞daß引導，若間接引句有數個句子，
-除第一句之外，daß一般會省略。若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
-  (2) 常用下列動詞引起間接引句，例如sagen, behaupten, berichten, betonen, erklären, erzählen, mitteilen, hören, schreiben, fragen, antworten, denken, glauben, meinen, hoffen, wünschen 等。
-  (3) 間接引語不用引號，用引號的引語是直接引語 (direkte Rede)。如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，就使用虛擬一式，否則用陳述式。
-  (4) 在間接引語中，虛擬一式的現在完成式和過去式都是用助動詞haben或sein的虛擬一式加上動詞的第二分詞來表示。
-例句：
-(原句) Er erzählt mir: „Ich habe gestern Tennis gespielt.“ (他對我講：「我昨天打網球了。」)
-(變化) Er erzählt mir, er habe gestern Tennis gespielt. (他對我講他昨天打網球了。)
-  (5) 如果虛擬一式與直陳式形式相同，用虛擬二式代替虛擬一式。口語中常用虛擬二式代替虛擬一式，因為虛擬二式更容易區別直陳式。
-例句：
-(原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
-(變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
-   或 Die Kinder sagen, sie kämen gleich.
-  (6) 轉述對第三者的請求或要求時，可以用daß引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
-例句：
-(原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
-(變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
-
 反身動詞 
---------
+........
 
 當動詞所支配的賓語正是主語時，
 這類動詞稱為反身動詞(reflexive Verben)。
@@ -1219,7 +1319,7 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 反身動詞又分為真反身動詞和非真反身動詞。
 
 真反身動詞 
-..........
+++++++++++
 
 真反身動詞(echte reflexive Verben)只能和反身代詞連用，
 不能用名詞或其他代詞代替反身代詞，
@@ -1246,7 +1346,7 @@ Er hat sich einen Plan ausgedacht.
 他想出了一個計畫。
 
 非真反身動詞 
-............
+++++++++++++
 
 非真反身動詞(unechte reflexive Verben)本是具有一定支配能力的獨立動詞，
 因此可以有反身與非反身兩種用法。
@@ -1329,43 +1429,222 @@ Ich wasche mir die Hände. 我洗手（我洗我自己的手，動詞還是sich 
 
 接在介係詞後面的Dativ（例如永遠只接Dativ的mit, an, seit, zu, vor,.....）只能算是補語而不是受格，對動詞來說不是真正的Dativ，不能混淆。
 
-III. Satzstruktur （語序）
 
-五個原則：
+虛擬式
+......
 
-1. 代名詞先於名詞
+虛擬式一般用來表示說話者認為所陳述的行為、
+事物不符合事實或不確定是事實，如表示想像、猜測、假設、不現實的願望、
+客氣或用來轉述他人的話或觀點。
+虛擬式分為虛擬一式和虛擬二式。
 
-＊Jens kämmt sich die Haare selten. （顏斯很少梳頭髮。以下例句意思同）
+虛擬一式
+++++++++
 
-2. 都是代名詞的話，Akkusativ先於Dativ
+虛擬一式由動詞不定式詞幹加人稱詞尾構成，
+單數第一人稱和第三人稱詞尾是e，
+單數第二人稱詞尾是est，複數第二人稱詞尾是et，
+複數第一人稱和第三人稱詞尾是en。
+所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
 
-＊Jens kämmt sie sich selten.
+	        haben	lesen	können	sein	werden
+Ich	        habe	lese	könne	sei	werde
+du	        habest	lesest	könnest	sei(e)st	werdest
+er/sie/es	habe	lese	könne	sei	werde
+wir	        haben	lesen	können	seien	werden
+ihr	        habet	leset	könnet	seiet	werdet
+sie/Sie	    haben	lesen	können	seien	werden
 
-3. 如果與主詞並排，主詞先於受詞
+虛擬一式主要用於間接引語 (indirekte Rede)，
+表示說話者轉述他人的話或觀點。
+因此，虛擬一式常用在引文或新聞報導當中。
 
-＊Selten kämmt Jens sich die Haare.
+例句：
+Er hat mir gesagt, "ich schreibe gerade einen Roman."
+(他對我說：「我正在寫一部小說。」)
+                            |
+                            V
+Er hat mir gesagt, er schreibe gerade einen Roman. 
+(他告訴我，他正在寫一部小說。)
 
-＊Selten kämmt er sich die Haare.
+注意事項
 
-＊Selten kämmt er sie sich.
+(1)間接引語常用從屬連詞daß引導，若間接引句有數個句子，
+除第一句之外，daß一般會省略。若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
+  (2) 常用下列動詞引起間接引句，例如sagen, behaupten, berichten, betonen, erklären, erzählen, mitteilen, hören, schreiben, fragen, antworten, denken, glauben, meinen, hoffen, wünschen 等。
+  (3) 間接引語不用引號，用引號的引語是直接引語 (direkte Rede)。如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，就使用虛擬一式，否則用陳述式。
+  (4) 在間接引語中，虛擬一式的現在完成式和過去式都是用助動詞haben或sein的虛擬一式加上動詞的第二分詞來表示。
+例句：
+(原句) Er erzählt mir: „Ich habe gestern Tennis gespielt.“ (他對我講：「我昨天打網球了。」)
+(變化) Er erzählt mir, er habe gestern Tennis gespielt. (他對我講他昨天打網球了。)
+  (5) 如果虛擬一式與直陳式形式相同，用虛擬二式代替虛擬一式。口語中常用虛擬二式代替虛擬一式，因為虛擬二式更容易區別直陳式。
+例句：
+(原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
+(變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
+   或 Die Kinder sagen, sie kämen gleich.
+  (6) 轉述對第三者的請求或要求時，可以用daß引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
+例句：
+(原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
+(變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
 
-4. 在副句的狀況下，反身代名詞直接放在副句連接詞後
 
-＊ Ich glaube, daß sich Max amüsiert.
-＊ Ich glaube, daß er sich amüsiert. （主詞的代名詞型態還是要放受格前面）
+動詞索引
+........
 
-5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
+definieren 定義
 
-＊Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
+heißen [及動]稱為
 
-definieren 
-..........
+Folgende Formeln (I bis V) heißen Axiome.  以下公式(I 至 V)稱為公理。
 
-定義
+gehören 屬於  
+
+A gehört zu B
+
+A 屬於 B
+
+Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
+zu welcher sämtliche Elementarformeln gehören.
+
+我們所定義的公式類別作為最小的類別 19)，
+所有基本式為其一部份。
+
+angezeigte
+vornehmen   執行動作
+reden  -> geredet 說
+
+副詞
+----
+
+副詞用來修飾動詞，給予時間、地點、原因、方式之資訊。
+
+副詞與形容詞在德語並未區分，
+但副詞不會詞變。
+
+頻率副詞
+++++++++
+
+zugleich    同時 stets       始終、不斷地
+
+時間副詞
+++++++++
+
+nun   現在
+
+Wir ordnen nun den Grundzeichen des Systems P in folgender
+Weise eineindeutig natürliche Zahlen zu:
+
+我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
+
+
+
+heute 今日
+
+Diese beiden Systeme sind so weit,
+daß alle heute in der Mathematik angewendeten Beweismethoden in ihnen
+formalisiert, d.h. auf einige wenige Axiome und Schlußregeln
+zurückgeführt sind. 
+
+這兩個系統是如此廣闊，
+所有今天在數學用到的證明方法在以在其下形式化，
+也就是推回到統整少數的公理及推論規則
+
+
+
+
+其它副詞
+++++++++
+
+gleiche: equally
+
+vorkommenden: occurring
+
+
+
+介詞
+----
+
+介詞常以片語的形態出現，
+所以意義相當不固定。
+
+um: at, about
+
+支配賓格
+........
+
+bis
+
+für 
+
+mit 
+...
+
+介詞：藉..
+
+über
+....
+
+介詞：在...之上
+
+反義詞：unter
+
+über 若動詞為兩地間之移動用賓格，
+     為表示停在某地用與格。
+
+Verwendung der üblichen Konventionen über
+das Weglassen von Klammern angeschrieben)22):
+
+支配與格
+........
+
+含 aus, von, mit, nach, seit, bei 及 zu
+
+aus:from, off, over, out, of
+
+aus & von
+.........
+
+
+支配與格
+
+與國名或城市名連用，
+aus 表示出身，是某國/某地人；
+von 表示「從某地來」，不指明國籍或出生地。
+
+Ich komme aus Berlin. 我是柏林人。
+Ich komme von Berlin. 我從柏林來。
+
+aus 和 von 與物質名詞連用時。
+aus 表示構成物質的材料，強調材料；
+von 多指品質、特性等，強調外觀和種類。
+
+Der Tisch ist aus Holz.
+Das ist von guter Qualit?t.
+
+常用片語：
+
+von zu Hause 從家裏來
+
+:衍生詞:
+
+vom = von + dem
+
+
+dadurch
+........
+
+thereby, thus
+
+
+支配與格及賓格
+..............
+
+zwischen    之間
+
 
 縮寫
-....
+----
 
 d.h     das heißt           that is
 u.      und                 & and

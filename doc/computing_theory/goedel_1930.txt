@@ -54,33 +54,59 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    J,v. Neumann, Die Axiomatisierung der Mengenlehre. 
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
-   馮．紐曼，集合論之公理化。數學精選 27 期，1928。
+   馮．紐曼，集合論之公理化。
+   數學精選 27 期，1928。
+   純粹及應用數學期刊。154(1925)，160(1929)。
+   
+   譯註：我認為的上述期刊的縮寫如下：
+   Mathematik Zeitschrift
+   Journal für reine und angewandte Mathematik. 
 
    Wir bemerken, daß man zu den in der angeführten Literatur
-   gegebenen mengentheoretisehen Axiomen noch die Axiome und Sclußregeln 
+   gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
    des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
-   Die nachfolgenden Überlegungen gelten aueh für die in den letzten 
+   我們可觀察到，必須加上前述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
+   才能完成形式化。
+
+   Die nachfolgenden Überlegungen gelten auch für die in den letzten 
    Jahren von D. Hilbert und seinen Mitarbeitern aufgestellten 
    formalen Systeme (soweit diese bisher vorliegen). 
 
    Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
    der Univ. Hamburg I (1922), VI (1928). 
+   參閱笛．希爾伯特，88，漢堡大學 I(1922), VI(1928)
+
    P. Bernay s, Math. Ann. 90. J.v.Neumann, 
-   Math. Zeitsehr. 26 (1927). W. Aekermann, Math. Ann. 93.
+   Math. Zeitsehr. 26 (1927). 
+   W. Aekermann, Math. Ann. 93.
+   批．伯內，數學年報
 
 Diese beiden Systeme sind so weit,
 daß alle heute in der Mathematik angewendeten Beweismethoden in ihnen
 formalisiert, d.h. auf einige wenige Axiome und Schlußregeln
-zurüekgeführt sind. 
+zurückgeführt sind. 
 
-Es liegt daher die Vermutung nahe, da~ diese Axiome
-und Sehlultregeln dazu ausreichen, alle mathematisehen Fragen~ die
-sich in den betreffenden Systemen tiberhaupt formal ausdriicken
-lassen: aueh zu entscheiden. Im folgenden wird gezeigt~ da~ dies
-nieht der Fall ist, sondern dait es in den beiden angefiihrten
-Systemen sogar relativ einfache Probleme aus der Theorie der gewShnliehen
-ganzen Zahlen gibt4)/die sich aus den Axiomen nicht
+這兩個系統是如此廣闊，
+所有今天在數學用到的證明方法在以在其下形式化，
+也就是推回到統整少數的公理及推論規則
+
+Es liegt daher die Vermutung nahe, 
+daß diese Axiome und Sehlußregeln dazu ausreichen, 
+alle mathematischen Fragen, 
+die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
+auch zu entscheiden. 
+
+這有賴相近的假定，這些公理及推論法則滿足，
+所有數學問題，假定在相關系統都用形式表達，也可被決定。
+
+Im folgenden wird gezeigt, 
+daß dies nicht der Fall ist, 
+sondern daß es in den beiden angeführten Systemen sogar relativ 
+einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
+die sich aus den Axiomen nicht entscheiden lassen.
+
+以下展示，不是上述情況，但前述系統
 
 P 系統
 ......
@@ -117,11 +143,10 @@ Variable dritten Typs (für Klassen von Klassen von Individuen):
 "x3", "y3", "z3"...
 
 usw. für jede natürliche Zahl als Typus 17).
+等等。 對每個作為型態之自然數
 
 17) Es wird vorausgesezt, daß für jeden Variablentypus abzählbar viele
     Zeichen zur Verfügung stehen.
-
-等等。 對每個作為型態之自然數
 
 17) 可假定，對每個變數型別，可數多種符號之定義域是成立的。
 
@@ -141,16 +166,19 @@ deren einzige Elemente x, y bzw. x sind. 18).
 其成員成員分別僅含 x, y 及 x。18)
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
-z. B. eine Relation zwischen Individuen und Klassen als eine Klasse als
-Elementen der Form: ((x2), ((x1),x2)). Alle in den PM über Relationen
-beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, auch bei
-dieser Behandlung beweisbar.
+    z. B. eine Relation zwischen Individuen und Klassen 
+    als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
+    Alle in den PM über Relationen
+    beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, 
+    auch bei dieser Behandlungsweise beweisbar.
+    查證 definiert 是否為過去分詞
 
-18)不等關係也可用此方式定義，例如一個個體與含一個成員之類別之類別，
-如下式：
-((x2), ((x1),x2))
-所有 PM 在此關係下可證句是如此，作為一個簡單教學的考慮，
-如此作法也是可證的。
+18) 不等關係也可用此方式定義，
+    例如一個個體與一類別含類別作為成員間的關係含一個成員之類別之類別，
+    如下式：
+    ((x2), ((x1),x2))
+    所有在 PM 及前述關係是可證句，我們教一個教簡單考慮，
+    如此作法也是可證的。
 
 數符
 ....
@@ -158,12 +186,10 @@ dieser Behandlung beweisbar.
 Unter einem Zeichen ersten Typs verstehen 
 wir eine Zeichenkombination der Form:
 a, fa, ffa, fffa... usw.
-
 wo a entweder 0 oder eine Variable ersten Typs.
 
 基於第一型符號下，我們理解下列形式之符號組合：
 a, fa, ffa, fffa... 等等
-
 其中 a 是 0 或第一型符號。
 
 Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
