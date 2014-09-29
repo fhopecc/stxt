@@ -83,9 +83,9 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    批．伯內，數學年報
 
 Diese beiden Systeme sind so weit,
-daß alle heute in der Mathematik angewendeten Beweismethoden in ihnen
-formalisiert, d.h. auf einige wenige Axiome und Schlußregeln
-zurückgeführt sind. 
+daß alle heute in der Mathematik angewendeten Beweismethoden 
+in ihnen formalisiert, 
+d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
 這兩個系統是如此廣闊，
 所有今天在數學用到的證明方法在以在其下形式化，
@@ -97,7 +97,7 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-這有賴相近的假定，這些公理及推論法則滿足，
+這因此有賴相近的假定，這些公理及推論法則滿足，
 所有數學問題，假定在相關系統都用形式表達，也可被決定。
 
 Im folgenden wird gezeigt, 

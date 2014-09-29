@@ -1204,6 +1204,7 @@ ich muss -> wir müssen
 
 können
 ++++++
+
 意：能，可以
 
 können  不定詞
@@ -1219,19 +1220,8 @@ sie können konnten
 
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
-    z. B. eine Relation zwischen Individuen und Klassen 
-    als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
-    Alle in den PM über Relationen
-    beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, 
-    auch bei dieser Behandlungsweise beweisbar.
-    查證 definiert 是否為過去分詞
 
 18) 不等關係也可用此方式定義，
-    例如一個個體與一類別含類別作為成員間的關係含一個成員之類別之類別，
-    如下式：
-    ((x2), ((x1),x2))
-    所有在 PM 及前述關係是可證句，我們教一個教簡單考慮，
-    如此作法也是可證的。
 
 
 müssen
@@ -1260,55 +1250,50 @@ hinzufügen muß 被移到句尾，是因為副句的動詞要移至最後。
 被動語態
 ........
 
-及物動詞當謂語才能形成被動語態。
-
-德文被動語態的形成，要依靠助動詞 werden 
-(請注意把它和「將來時」中的助動詞 werden 區分開。二者很容易混)。
-
-基本句型：
-
-Sie fragt mich.             她問我。    主動式
-Ich wird von ihr gefragt.   我被她問了。被動式
-
-我們發現：
-
-Sie 變成了von ihr 成了介詞短語當狀語，但還是實際上的主語。
-
-mich 變成了 Ich 放在主語的位置，但實際上還是賓語。
-
+德文被動語態的形成，要依靠助動詞 werden， 
+德語中的被動語態一般把著眼點放在動作的本身而忽略了動作的施事者，
+即沒有特殊的原因的話，在被動句中一般可以不用表示動作的施事者。
+德語被動語態另外一個特點是不及物動詞的被動態，
+這一點是和英語有本質的區別的。
 用被動語態助詞 wird 來體現「被」，「讓」等被動意思。
 用動詞的過去分詞來表達實際主語的動作。
 
-寫成句型：
-    實際上的賓語變成第一格
-+   被動語態助詞 werden 
-+   von 
-+   實際上的主語變成的第三格
-+   用動詞的過去分詞
+werden + 過去分詞
 
-請對照：
+在德語中，有一部分動詞盡管不能支配第四格（即不及物動詞），
+但也可以構成被動語態，就是我們說的無人稱被動態。
+無人稱被動態可以在句首es作爲語法上的主語，
+但如果把其它成分放在動詞前的話，就應該省略es。
+及物動詞當謂語才能形成被動語態。
 
-Sie fragt mich.             她問我。    主動式
+Die Klasse der beweisbaren Formeln wird definiert 
+als die kleinste Klasse von Formeln, 
+
+可證式之類別被定義為下式之最小類別，
+
+被動語態可以通過介詞von，durch 或者 mit 來表示動作的施事者，
+其中用von來表示動作的直接行爲人，
+用durch來表示一種方法和手段，
+用mit來表示媒介或材料。如： 
+
 Ich wird von ihr gefragt.   我被她問了。被動式
 
-若實際主語是人時，變成相關狀語時時用 von 帶出，
 若是物，則用 durch 帶出。如：
 
-Ich wird von ihr gefragt.                   我被她問了。
 Der Motor wird durch Druckknoepfe gesteurt. 馬達是通過按鈕控制的。
 
 在不需要說明實際主語的情況下，von 或 durch 介詞短語可省略。如：
 
 Ich wird gefragt. 我被人問了(有人問我)。
 
-二：被動式能加情態動詞。為簡便，下面讓我們只用ich 為例子來說明句型：
+情態動詞本身不能構成被動語態，
+但可以和實義動詞一起構成被動句，形式如下： 
 
-主動式 被動式
-1) 現在時：Sie muss mich fragen. Ich muss von ihr gefragt werden.
-2) 過去時：Sie musste mich fragen. Ich musste von ihr gefragt werden.
-3) 現在完成時：Sie hat mich fragen muessen. Ich hat gefragt werden muessen.
-4) 過去完成時：Sie hatte mich fragen muessen. Ich hatte gefragt werden muessen.
-5) 將來時：Sie wird mich fragen muessen. Ich wird gefragt werden muessen.
+情態動詞+第二分詞+werden 
+
+Auch inhomogene Relationen können auf diese Weise definiert werden, 
+
+不等關係也能被此方式定義，
 
 反身動詞 
 ........
@@ -1492,7 +1477,8 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 動詞索引
 ........
 
-definieren 定義
+definieren  定義
+haben definiert   過去分詞
 
 heißen [及動]稱為
 
