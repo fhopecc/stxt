@@ -17,6 +17,8 @@ Von Kurt Gödel in Wien.
 1) 參閱於維也納，1930 年 19 期的阿卡德．德．維斯期刊(math.-naturw. KI.) 
    發表這個工作成果的摘要。
 
+1.
+
 Die Entwicklung der Mathematik in der Richtung 
 zu größerer Exaktheit hat bekanntlich dazu geführt, 
 daß weite Gebiete von ihr formalisiert wurden, 
@@ -66,7 +68,8 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
    des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
-   我們可觀察到，必須加上前述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
+   我們可觀察到，
+   必須加上前述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
    才能完成形式化。
 
    Die nachfolgenden Überlegungen gelten auch für die in den letzten 
@@ -87,18 +90,19 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統是如此廣闊，
+這兩個系統都是如此廣泛，
 所有今天在數學用到的證明方法在以在其下形式化，
 也就是推回到統整少數的公理及推論規則
 
 Es liegt daher die Vermutung nahe, 
-daß diese Axiome und Sehlußregeln dazu ausreichen, 
+daß diese Axiome und Schlußregeln dazu ausreichen, 
 alle mathematischen Fragen, 
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-這因此有賴相近的假定，這些公理及推論法則滿足，
-所有數學問題，假定在相關系統都用形式表達，也可被決定。
+這基於相近的假定，
+這些公理及推論法則除了滿足對所有數學問題可以提到之系統確切形式表達，
+也可被決定。
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
@@ -107,6 +111,41 @@ einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4),
 die sich aus den Axiomen nicht entscheiden lassen.
 
 以下展示，不是上述情況，但前述系統
+
+Dieser Umstand liegt nicht etwa an der speziellen
+Natur der aufgestellten Systeme, sondern gilt ffir eine sehr weite
+Klasse formaler Systeme~ zu denen insbesondere alle geh5ren, die
+aus den beiden angeftihrten durch ttinzuffignng endlich vieler Axiome
+entstehen ~)~ vorausgesetzt, dal3 durch die hinzugeffigten Axiome keine
+falsehen Siitze yon der in Fu~note~) angegebenen Art beweisbar
+werden.
+
+Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
+Hauptgedanken des Beweises, natiirlich ohne auf Exaktheit Anspruch
+zu erheben. Die 'Formeln eines formalen Systems (wit besehri~nken
+uns hier auf das System PM) sind ~nfierlieh betraehtet endliche
+Reihen der Gz'undze!ehen~(Variable , logische Konstante und Klammern
+bzw. Trennungspunkte) und man kann leieht genau priizisieren,
+welche Reihen yon Grundzeichen sinnvolle Formeln sind und
+welche nieht6). Analog sind Beweise Vom formalen Standpunkt'
+niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
+angebbaren Eigenschaften). Ftir metamathematische Betrachtungen
+ist es nattirlich gleiehgtiltig~ welche Gegenstiinde man als Grundzeiehen
+nimmt, nnd wit entsehliegen uns dazu, natfirliehe Zahlen 7)
+als solche zu verwenden. Dementsprechend ist dann eine Formel
+eine endliehe Folge nattirlieher Zahlen s) nnd eine Beweisfigur eine
+endliehe Folge yon endlichen Folgen natfirlieher Zahlen. Die metamathematisehen
+Begriffe (Si~tze) werden dadurch zu Begriffen (Siitzen)
+fiber nattirliche Z.ahlen bzw. Folgen yon solehen 9) und daher (wenigstens
+teilweise) in den Symbolen des Systems PM selbst ausdr[ickbar.
+Insbesondere kaun man zeigen, dal3 die Begriffe ~,Formel:', ,,Beweisflgur",
+,beweisbare Formel" innerhalb des Systems PM definierbar
+sind, d.h. man kann z. B. eine Formel F(v) aus PM mit einer freien
+Variablen v (yore Typus einer Zahlenfolge) angeben~0), so dalg F(v)
+inhaltlich interpretiert besagt: v ist eine beweisbare Formel. Nun
+stellen wit einen unentseheidbaren Satz des Systems PM, d.h. einen
+Satz A, ftir den weder A noch non-A beweisbar ist, folgendermal~
+en her:
 
 P 系統
 ......

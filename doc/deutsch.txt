@@ -836,6 +836,8 @@ der angeführten Literatur 屬格，前揭文獻的
 
 angeführt -> angeführten 前揭
 
+angewendet -> angewendeten  應用地
+
 klein 小的、不重要的
 
 klein < kleiner < am kleinsten
@@ -1202,6 +1204,18 @@ ich muss -> wir müssen
 
 助動詞 + 不定動詞，其中不定動詞移到句尾。
 
+雙重不動式
+
+alle mathematischen Fragen, 
+die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
+
+所有數學問題，假定在相關系統都用形式表達，也可被決定。
+
+lassen
+++++++
+
+lassen  [情境動詞]可以，允許
+
 können
 ++++++
 
@@ -1246,6 +1260,7 @@ des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 才能完成形式化。
 
 hinzufügen muß 被移到句尾，是因為副句的動詞要移至最後。
+
 
 被動語態
 ........
@@ -1308,6 +1323,7 @@ Auch inhomogene Relationen können auf diese Weise definiert werden,
 
 真反身動詞(echte reflexive Verben)只能和反身代詞連用，
 不能用名詞或其他代詞代替反身代詞，
+
 反身代詞與動詞構成一個整體。
 真反身動詞多數帶第四格 (Akkusativ) 反身代詞，少數帶第三格(Dativ)反身代詞。
 
@@ -1336,6 +1352,18 @@ Er hat sich einen Plan ausgedacht.
 非真反身動詞(unechte reflexive Verben)本是具有一定支配能力的獨立動詞，
 因此可以有反身與非反身兩種用法。
 
+為了表達「同自身做什麼」、「互相」、「交互」的意思，才使用反身型態。
+
+＊Die beiden streiten sich ja schon wieder.
+這兩人果然又互相吵架了。
+
+＊Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
+他不喜歡她，她不喜歡他----他們彼此不喜歡。
+
+＊Die Müllers bauen sich ein Haus.
+繆勒家給自己蓋了房子。
+
+
 其反身代詞為第四格或第三格，可用名詞或其他代詞取代。
 例如：sich anziehen、sich aufregen、sich kaufen、sich wünschen等。
 例句：
@@ -1354,19 +1382,6 @@ Er hat sich einen Plan ausgedacht.
 某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
 例句：Die Studenten verstehen sich/einander gut. (大學生們彼此清楚了解。)
 
-反身動詞
-........
-Reflexive Verben
-
-拖油瓶動詞。德文有一類動詞，必須與反身代名詞合用，
-稱為reflexive Verben。
-細分起來，有的是毫無道理非加不可，
-有的則只是為了表達特定意思才要使用反身型態。
-
-I. Funktion（功能）
-
-1.reflexiv：
-沒有表達特殊的意義，固定的用法，就是要這樣講，這種動詞永遠都帶著反身代名詞
 
 der Unfall sich ereigen = 發生意外
 
@@ -1378,16 +1393,7 @@ sich um....bewerben = 應徵（某職位）
 Ich habe mich um eine neue Stelle beworben. 
 我應徵了一個新職位。
 
-2.teilreflexiv：為了表達「同自身做什麼」、「互相」、「交互」的意思，才使用反身型態。
 
-＊Die beiden streiten sich ja schon wieder.
-這兩人果然又互相吵架了。
-
-＊Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
-他不喜歡她，她不喜歡他----他們彼此不喜歡。
-
-＊Die Müllers bauen sich ein Haus.
-繆勒家給自己蓋了房子。
 
 II. Formen （型態）
 
@@ -1414,6 +1420,15 @@ Ich wasche mir die Hände. 我洗手（我洗我自己的手，動詞還是sich 
 
 接在介係詞後面的Dativ（例如永遠只接Dativ的mit, an, seit, zu, vor,.....）只能算是補語而不是受格，對動詞來說不是真正的Dativ，不能混淆。
 
+
+假反身動詞索引
+..............
+
+ausdrücken  [分離][假反身]表達
+aus  drücken  
+之外 壓
+
+die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 
 虛擬式
 ......
@@ -1472,7 +1487,19 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 (原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
 (變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
+分離動詞
+........
 
+在主句中分離，在副句中不分離。
+
+ausreichen  [分離]reichen(到達) aus(之外)
+reicht aus
+haben ausgereicht
+
+daß diese Axiome und Sehlußregeln dazu ausreichen, 
+這些公理及推論法則滿足，
+
+ausdrücken
 
 動詞索引
 ........
@@ -1495,6 +1522,13 @@ zu welcher sämtliche Elementarformeln gehören.
 
 我們所定義的公式類別作為最小的類別 19)，
 所有基本式為其一部份。
+
+liegen  [不及物][不規則]躺、坐落、在
+lag
+haben gelegen
+
+Es liegt daher die Vermutung nahe, 
+這基於相近的假定
 
 angezeigte
 vornehmen   執行動作
@@ -1523,30 +1557,29 @@ Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
 
-
-
 heute 今日
 
-Diese beiden Systeme sind so weit,
 daß alle heute in der Mathematik angewendeten Beweismethoden in ihnen
-formalisiert, d.h. auf einige wenige Axiome und Schlußregeln
-zurückgeführt sind. 
+formalisiert, 
 
-這兩個系統是如此廣闊，
-所有今天在數學用到的證明方法在以在其下形式化，
+今天所有在其數學應用的證明方法在以在其下形式化，
 也就是推回到統整少數的公理及推論規則
-
-
-
 
 其它副詞
 ++++++++
 
-gleiche: equally
+daher  從，因此
 
-vorkommenden: occurring
+dazu    除此之外、為此、對它
 
+daß diese Axiome und Schlußregeln dazu ausreichen, 
+這些公理及推論法則除了滿足，
 
+gleiche 相等地
+
+vorkommenden 發生
+
+überhaupt   根本
 
 介詞
 ----
