@@ -33,7 +33,7 @@ das System der Principia Mathematica (PM) einerseits,
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
-現在百科全書式的形式系統一個是 Principia Mathematica，
+如今淺白的形式系統一個是 Principia Mathematica，
 另一個是 Zermelo-Fraenkelsche(由馮鈕曼繼續擴增)
 集合論之公理系統。
 
@@ -76,6 +76,10 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    Jahren von D. Hilbert und seinen Mitarbeitern aufgestellten 
    formalen Systeme (soweit diese bisher vorliegen). 
 
+   之後的考量也給陳述後幾年從希爾伯特和他的同事所建置之形式系統。
+   (到現在的展示)。
+
+
    Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
    der Univ. Hamburg I (1922), VI (1928). 
    參閱笛．希爾伯特，88，漢堡大學 I(1922), VI(1928)
@@ -83,7 +87,7 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    P. Bernay s, Math. Ann. 90. J.v.Neumann, 
    Math. Zeitsehr. 26 (1927). 
    W. Aekermann, Math. Ann. 93.
-   批．伯內，數學年報
+   伯內，數學年報
 
 Diese beiden Systeme sind so weit,
 daß alle heute in der Mathematik angewendeten Beweismethoden 
@@ -110,11 +114,21 @@ sondern daß es in den beiden angeführten Systemen sogar relativ
 einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
 die sich aus den Axiomen nicht entscheiden lassen.
 
-以下展示，不是上述情況，但前述系統
+以下展示，這並非上述情況，
+而是可給定與前述系統都確實關連之簡易一般整數論問題，
+也不可從公理被決定。
 
-Dieser Umstand liegt nicht etwa an der speziellen
-Natur der aufgestellten Systeme, sondern gilt ffir eine sehr weite
-Klasse formaler Systeme~ zu denen insbesondere alle geh5ren, die
+Dieser Umstand liegt nicht 
+etwa an der speziellen Natur der aufgestellten Systeme, 
+sondern gilt für eine sehr weite Klasse formaler Systeme,
+
+查 aufgestellten 及 gilt 之意
+
+這些事實不基於前述系統之特別自然處，
+而是滿足一個更廣泛類別更形式化之系統。
+
+
+zu denen insbesondere alle geh5ren, die
 aus den beiden angeftihrten durch ttinzuffignng endlich vieler Axiome
 entstehen ~)~ vorausgesetzt, dal3 durch die hinzugeffigten Axiome keine
 falsehen Siitze yon der in Fu~note~) angegebenen Art beweisbar
@@ -290,7 +304,7 @@ Subst a|v|
        |b| 
 (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
 我們可視為從 a 衍生之式，
-若且惟若式中所有 v，其為自由變數，都由 b 取代 20)。
+若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
 
 型別提升
 ........

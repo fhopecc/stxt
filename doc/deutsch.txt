@@ -62,6 +62,20 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 Er hat selbst keine Kinder, aber er hat Kinder sehr gern.
 他自已沒小孩，但他卻很喜歡小孩。
 
+sondern
++++++++
+
+sondern 「而是」，用在主句為否定句，並列句說明為何否定。
+
+daß dies nicht der Fall ist, 
+sondern daß es in den beiden angeführten Systemen sogar relativ 
+einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
+die sich aus den Axiomen nicht entscheiden lassen.
+
+這並非上述情況，
+而是給定與前述系統都確實關連之簡易一般整數論問題，
+也不可從公理被決定。
+
 複雜句
 ......
 
@@ -353,8 +367,8 @@ aller 為屬格，表示在 b 出現之所有變數。
 
 所有在 b 出現變數的型別，以同樣的整數遞增之式。
 
-diser
-.....
+dieser
+......
 
 定冠詞，這，表示指示物靠近說話者，同英文之 this。
 
@@ -585,6 +599,8 @@ Ge-*-e 之中性名詞
 2.字尾加入 ¨e, -e 
 
 單音節陽性名詞及少數雙音節陽性名詞。
+
+dieser Umstand -> diese Umstände 事實
 
 單音節中性名詞及少數雙音節陽性名詞，除了 das Floß，都會音變。
 
@@ -842,6 +858,22 @@ klein 小的、不重要的
 
 klein < kleiner < am kleinsten
 
+ganze       整個 
+
+ganze Zahle 整數
+
+gewöhnlich 一般的
+
+der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
+    屬格詞變     屬格詞變 複數詞變
+
+nachfolgend 序列，下一個
+
+Die nachfolgenden Überlegungen 之後的考量 
+    詞變    
+
+letzte 最後
+
 不定冠詞後：
 
         陽性    陰性    中性    複數
@@ -886,6 +918,7 @@ ein Guter Mann  一個好人
 geordneter Paare 序對 
 geordnet -> geordneter 排序，複數屬格屈折
 Paar -> Paare 一對，複數名詞屈折
+
 
 屬格之變格不與 des 相同，還是 -en，
 主要是陽性及中性名詞，會在屬格變格為 -s。
@@ -1539,8 +1572,19 @@ reden  -> geredet 說
 
 副詞用來修飾動詞，給予時間、地點、原因、方式之資訊。
 
-副詞與形容詞在德語並未區分，
-但副詞不會詞變。
+形容詞作副詞
+++++++++++++
+
+副詞與形容詞在德語並未區分，但副詞不會詞變。
+
+副詞的比較級及最高級與形容詞一樣。
+
+程度副詞
+++++++++
+
+程度副詞是用來表示副詞或形容詞的程度。
+
+通常置於修飾詞前。
 
 頻率副詞
 ++++++++
@@ -1564,6 +1608,19 @@ formalisiert,
 
 今天所有在其數學應用的證明方法在以在其下形式化，
 也就是推回到統整少數的公理及推論規則
+
+位向副詞
+++++++++
+
+位向副詞用來表示位置及方向
+
+darin 在裡面
+
+überall 每處
+
+wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
+
+若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
 
 其它副詞
 ++++++++
