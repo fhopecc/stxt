@@ -684,8 +684,10 @@ das Haus + die Tür = die Haustür (家+門=大門)
 
 die Küche + der Tisch -> der Küche-n-tisch
 
-2.-heit/-keit, -ung 結尾之名詞，會以 -s- 來連結。
+2.-heit/-keit, -ung     結尾之名詞，會以 -s- 來連結。
+
 Gelegenheit-s-arbeit    雜事
+
 Zeitung-s-zar           媒體汽球
 
 名詞的格變
@@ -698,7 +700,6 @@ das Resultat -> des Resultats 結果
 -e      陽性及中性名詞之賓格，在古老或書寫文中
 
 -n      複數名詞在與格時且結尾不為 -n。
-
 
 代詞
 ----
@@ -813,6 +814,17 @@ Er läuft schnell. （他走得快）
 
 sämtliche   全部的、所有的、全體的
 
+過去分詞作形容詞
+++++++++++++++++
+
+過去分詞可作形容詞。
+
+an-gewendet 利用，由 anwenden 之過去分詞。
+上 投入
+
+auf-gestellt 指派的，由 aufstellen 之過去分詞轉成
+上  置放
+
 形容詞變化
 ..........
 
@@ -852,17 +864,13 @@ der angeführten Literatur 屬格，前揭文獻的
 
 angeführt -> angeführten 前揭
 
-angewendet -> angewendeten  應用地
-
-klein 小的、不重要的
-
 klein < kleiner < am kleinsten
 
 ganze       整個 
 
 ganze Zahle 整數
 
-gewöhnlich 一般的
+gewöhnlich  一般的
 
 der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
     屬格詞變     屬格詞變 複數詞變
@@ -918,7 +926,6 @@ ein Guter Mann  一個好人
 geordneter Paare 序對 
 geordnet -> geordneter 排序，複數屬格屈折
 Paar -> Paare 一對，複數名詞屈折
-
 
 屬格之變格不與 des 相同，還是 -en，
 主要是陽性及中性名詞，會在屬格變格為 -s。
@@ -1076,14 +1083,14 @@ erschienene 出版
 
 詞幹包含 -e- 時，會在單數第二及第三人稱將 -e- 變成 -i-。
 
-    geben   helfen 
-    給      幫 
-ich geben   helfen  
-du  gibst   hilfst
-er  gibt    hilft
-wir geben   helfen
-ihr gebt    helft
-sie geben   helfen
+    geben   helfen  gelten
+    給      幫      適用
+ich geben   helfen  gelte
+du  gibst   hilfst  giltst
+er  gibt    hilft   gilt
+wir geben   helfen  gelten
+ihr gebt    helft   geltet
+sie geben   helfen  gelten
 
 詞幹包含 -e- 時，會在單數第二及第三人稱音變將 -e- 變成 -ie-。
 

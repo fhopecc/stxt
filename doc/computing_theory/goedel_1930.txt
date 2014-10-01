@@ -122,11 +122,8 @@ Dieser Umstand liegt nicht
 etwa an der speziellen Natur der aufgestellten Systeme, 
 sondern gilt für eine sehr weite Klasse formaler Systeme,
 
-查 aufgestellten 及 gilt 之意
-
-這些事實不基於前述系統之特別自然處，
-而是滿足一個更廣泛類別更形式化之系統。
-
+這些事實非略基於指定系統特別處，
+而是適用一個更廣泛類別更形式化之系統。
 
 zu denen insbesondere alle geh5ren, die
 aus den beiden angeftihrten durch ttinzuffignng endlich vieler Axiome
