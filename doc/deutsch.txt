@@ -794,185 +794,6 @@ wo a entweder 0 oder eine Variable ersten Typs.
 a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
 
-形容詞
-------
-
-形容詞可作為表語，及定語，說明如下：
-形容詞作表語不置於名詞之前，直接作主語之表語，且不作詞尾變化。
-
-定語形容詞用於修飾名詞，置於名詞之前，作詞尾變化
-該名詞若有冠詞則列於冠詞後。
-
-德語中大部分形容詞不需變化即可直接作「副詞」使用，修飾動詞。如：
-
-Er ist schnell. （他很快）
-Er läuft schnell. （他走得快）
-
-這點與英語等語言不同。
-
-如 kleinsten
-
-sämtliche   全部的、所有的、全體的
-
-過去分詞作形容詞
-++++++++++++++++
-
-過去分詞可作形容詞。
-
-an-gewendet 利用，由 anwenden 之過去分詞。
-上 投入
-
-auf-gestellt 指派的，由 aufstellen 之過去分詞轉成
-上  置放
-
-形容詞變化
-..........
-
-作為定語的形容詞在德語中需要變化，
-而作為表語的形容詞與副詞形式一樣，不需要改變。
-
-Sein Auto ist rot.  他的車是紅的。
-
-形容詞作為車之表語，不需變格。
-
-sein rotes Auto.    他的紅車。
-
-形容詞作為車之定語，需變格。
-
-需要變格的情況可細分為
-還是跟在定冠詞(弱變化)、不定冠詞(混合變化)、無冠詞(強變化)之後三種情況。
-
-定冠詞或代詞後：
-
-        陽性    陰性    中性    複數
-
-主格    -e      -e      -e      -en 
-
-屬格    -en     -en     -en     -en  
-
-與格    -en     -en     -en     -en
-
-賓格    -en     -e      -e      -en
-
-例句：
-
-die kleinste Klasse 主格，最小的類別 
-
-am kleinsten[最小的]在定冠詞後變格為 kleinste
-
-der angeführten Literatur 屬格，前揭文獻的
-
-angeführt -> angeführten 前揭
-
-klein < kleiner < am kleinsten
-
-ganze       整個 
-
-ganze Zahle 整數
-
-gewöhnlich  一般的
-
-der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
-    屬格詞變     屬格詞變 複數詞變
-
-nachfolgend 序列，下一個
-
-Die nachfolgenden Überlegungen 之後的考量 
-    詞變    
-
-letzte 最後
-
-不定冠詞後：
-
-        陽性    陰性    中性    複數
-
-主格    -er     -e      -es     -en     因為陽性及中性冠詞一樣，
-主格    ein     eine    ein     keine   所以形容詞需變格區分
-
-屬格    -en     -en     -en     -en  
-屬格    einer   eine    ein     keine
-
-與格    -en     -en     -en     -en
-與格    eines   einer   eines   keiner
-
-賓格    -en     -e      -es     -en     
-賓格    einem   eine    einem   keinem
-
-由上可觀察到，名詞前之定語，不論冠詞及形容詞數量，
-只會出現一次字尾 r，或字尾 s。
-
-der Gute  Mann  這個好人
-ein Guter Mann  一個好人
-
-無冠詞後：
-
-無冠詞為了判斷格、性別及數目，
-設計大致上與定冠詞 der 之變格相同。
-
-        陽性    陰性    中性    複數
-
-主格    -er     -e      -es     -e 
-主格    der     die     das     die 
-
-賓格    -en     -e      -es     -e
-賓格    den     die     das     die 
-
-屬格    -en     -er     -en     -er  
-屬格    des     der     des     der 
-
-與格    -em     -er     -em     -en
-與格    dem     der     dem     den 
-
-geordneter Paare 序對 
-geordnet -> geordneter 排序，複數屬格屈折
-Paar -> Paare 一對，複數名詞屈折
-
-屬格之變格不與 des 相同，還是 -en，
-主要是陽性及中性名詞，會在屬格變格為 -s。
-
-Anfang nächsten Monats 下個月的開始
-                Monat  變格為屬格。 
-
-
-比較級變格
-..........
-
--er 為比較級變格。
-
-klein -> kleiner    小->較小 
-
-¨er 通常元音為 a, o, u，元音會變音。
-
-groß  -> größer     大->較大
-
--el/-er 結尾之形容詞，會刪除原結尾之 e，加上 -er。
-
-dunkel -> dunker    暗->更暗
-
-teuer  ->  teurer   貴->更貴
-
-形容詞與名詞組成複合名詞
-........................
-
-形容詞在名詞前組成複合名詞時，形容詞不變格。
-
-roter  Wein -> Rotwein      紅酒
-weißes Brot -> Weißesbrot   白麵包
-
-genannt: named
-
-heißt: is called
-
-verwandter 關連的
-bekanntlich 一般可知
-wurden 變成
-Weite 廣闊
-Gebiet 版圖
-Art 类型、种类方式、方法风格行为、举止习惯（生物）属
-einigen 一致
-wenigen adj一點點、不多
-vollzogen adj 完美的
-
 動詞
 ----
 
@@ -1574,6 +1395,187 @@ angezeigte
 vornehmen   執行動作
 reden  -> geredet 說
 
+形容詞
+------
+
+形容詞可作為表語，及定語，說明如下：
+形容詞作表語不置於名詞之前，直接作主語之表語，且不作詞尾變化。
+
+定語形容詞用於修飾名詞，置於名詞之前，作詞尾變化
+該名詞若有冠詞則列於冠詞後。
+
+德語中大部分形容詞不需變化即可直接作「副詞」使用，修飾動詞。如：
+
+Er ist schnell. （他很快）
+Er läuft schnell. （他走得快）
+
+這點與英語等語言不同。
+
+如 kleinsten
+
+sämtliche   全部的、所有的、全體的
+
+過去分詞作形容詞
+++++++++++++++++
+
+過去分詞可作形容詞。
+
+an-gewendet 利用，由 anwenden 之過去分詞。
+上 投入
+
+auf-gestellt 指派的，由 aufstellen 之過去分詞轉成
+上  置放
+
+形容詞變化
+..........
+
+作為定語的形容詞在德語中需要變化，
+而作為表語的形容詞與副詞形式一樣，不需要改變。
+
+Sein Auto ist rot.  他的車是紅的。
+
+形容詞作為車之表語，不需變格。
+
+sein rotes Auto.    他的紅車。
+
+形容詞作為車之定語，需變格。
+
+需要變格的情況可細分為
+還是跟在定冠詞(弱變化)、不定冠詞(混合變化)、無冠詞(強變化)之後三種情況。
+
+定冠詞或代詞後：
+
+        陽性    陰性    中性    複數
+
+主格    -e      -e      -e      -en 
+
+屬格    -en     -en     -en     -en  
+
+與格    -en     -en     -en     -en
+
+賓格    -en     -e      -e      -en
+
+例句：
+
+die kleinste Klasse 主格，最小的類別 
+
+am kleinsten[最小的]在定冠詞後變格為 kleinste
+
+der angeführten Literatur 屬格，前揭文獻的
+
+angeführt -> angeführten 前揭
+
+klein < kleiner < am kleinsten
+
+ganze       整個 
+
+ganze Zahle 整數
+
+gewöhnlich  一般的
+
+der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
+    屬格詞變     屬格詞變 複數詞變
+
+nachfolgend 序列，下一個
+
+Die nachfolgenden Überlegungen 之後的考量 
+    詞變    
+
+letzte 最後
+
+不定冠詞後：
+
+        陽性    陰性    中性    複數
+
+主格    -er     -e      -es     -en     因為陽性及中性冠詞一樣，
+主格    ein     eine    ein     keine   所以形容詞需變格區分
+
+屬格    -en     -en     -en     -en  
+屬格    einer   eine    ein     keine
+
+與格    -en     -en     -en     -en
+與格    eines   einer   eines   keiner
+
+賓格    -en     -e      -es     -en     
+賓格    einem   eine    einem   keinem
+
+由上可觀察到，名詞前之定語，不論冠詞及形容詞數量，
+只會出現一次字尾 r，或字尾 s。
+
+der Gute  Mann  這個好人
+ein Guter Mann  一個好人
+
+無冠詞後：
+
+無冠詞為了判斷格、性別及數目，
+設計大致上與定冠詞 der 之變格相同。
+
+        陽性    陰性    中性    複數
+
+主格    -er     -e      -es     -e 
+主格    der     die     das     die 
+
+賓格    -en     -e      -es     -e
+賓格    den     die     das     die 
+
+屬格    -en     -er     -en     -er  
+屬格    des     der     des     der 
+
+與格    -em     -er     -em     -en
+與格    dem     der     dem     den 
+
+geordneter Paare 序對 
+geordnet -> geordneter 排序，複數屬格屈折
+Paar -> Paare 一對，複數名詞屈折
+
+屬格之變格不與 des 相同，還是 -en，
+主要是陽性及中性名詞，會在屬格變格為 -s。
+
+Anfang nächsten Monats 下個月的開始
+                Monat  變格為屬格。 
+
+
+比較級變格
+..........
+
+-er 為比較級變格。
+
+klein -> kleiner    小->較小 
+
+¨er 通常元音為 a, o, u，元音會變音。
+
+groß  -> größer     大->較大
+
+-el/-er 結尾之形容詞，會刪除原結尾之 e，加上 -er。
+
+dunkel -> dunker    暗->更暗
+
+teuer  ->  teurer   貴->更貴
+
+形容詞與名詞組成複合名詞
+........................
+
+形容詞在名詞前組成複合名詞時，形容詞不變格。
+
+roter  Wein -> Rotwein      紅酒
+weißes Brot -> Weißesbrot   白麵包
+
+genannt: named
+
+heißt: is called
+
+verwandter 關連的
+bekanntlich 一般可知
+wurden 變成
+Weite 廣闊
+Gebiet 版圖
+Art 类型、种类方式、方法风格行为、举止习惯（生物）属
+einigen 一致
+wenigen adj一點點、不多
+vollzogen adj 完美的
+
+
+
 副詞
 ----
 
@@ -1593,13 +1595,26 @@ reden  -> geredet 說
 
 通常置於修飾詞前。
 
+sehr  非常
+
 頻率副詞
 ++++++++
 
-zugleich    同時 stets       始終、不斷地
+頻率副詞不能在限定動詞前面。
+
+zugleich    同時 
+stets       始終、不斷地
 
 時間副詞
 ++++++++
+
+時間副詞通常用介詞家時間名詞表達。
+
+多個副詞的順序為時間副詞，再來是方法副詞，最後是地點副詞。
+
+兩個時間副詞以週期長的為優先。
+
+時間副詞總在賓語名詞前，但在賓語代詞後。
 
 nun   現在
 
@@ -1607,6 +1622,8 @@ Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
+
+nun 在賓語名詞 den Grundzeichen 前。
 
 heute 今日
 
