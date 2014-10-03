@@ -1353,14 +1353,21 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 
 在主句中分離，在副句中不分離。
 
-ausreichen  [分離]reichen(到達) aus(之外)
-reicht aus
-haben ausgereicht
-
 daß diese Axiome und Sehlußregeln dazu ausreichen, 
 這些公理及推論法則滿足，
 
-ausdrücken
+aus-drücken     
+
+分離動詞索引
+++++++++++++
+
+aus-reichen     達到
+外  到達
+reicht aus
+haben ausgereicht
+
+voraus-setzen   假設
+之前    設定
 
 動詞索引
 ........
@@ -1378,10 +1385,8 @@ A gehört zu B
 
 A 屬於 B
 
-Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören.
 
-我們所定義的公式類別作為最小的類別 19)，
 所有基本式為其一部份。
 
 liegen  [不及物][不規則]躺、坐落、在
@@ -1420,11 +1425,17 @@ sämtliche   全部的、所有的、全體的
 
 過去分詞可作形容詞。
 
-an-gewendet 利用，由 anwenden 之過去分詞。
+an-gewendet     利用，為 anwenden 之過去分詞。
 上 投入
 
-auf-gestellt 指派的，由 aufstellen 之過去分詞轉成
+auf-gestellt    指派，為 aufstellen 之過去分詞轉成
 上  置放
+
+an-geführt      引述，為 anführen 之過去分詞。
+上 領導
+
+der angeführten Literatur 屬格，引述文獻的
+
 
 形容詞變化
 ..........
@@ -1460,10 +1471,6 @@ sein rotes Auto.    他的紅車。
 die kleinste Klasse 主格，最小的類別 
 
 am kleinsten[最小的]在定冠詞後變格為 kleinste
-
-der angeführten Literatur 屬格，前揭文獻的
-
-angeführt -> angeführten 前揭
 
 klein < kleiner < am kleinsten
 
@@ -1573,6 +1580,7 @@ Art 类型、种类方式、方法风格行为、举止习惯（生物）属
 einigen 一致
 wenigen adj一點點、不多
 vollzogen adj 完美的
+alle
 
 
 
@@ -1588,14 +1596,25 @@ vollzogen adj 完美的
 
 副詞的比較級及最高級與形容詞一樣。
 
-程度副詞
+強化副詞
 ++++++++
 
-程度副詞是用來表示副詞或形容詞的程度。
+強化副詞是用來加強副詞或形容詞的程度。
 
 通常置於修飾詞前。
 
 sehr  非常
+
+特別
+++++
+
+用來描述「特別」的強化副詞，有三種，
+其中 insbesondere 及 besonders 均是置於形容詞或副詞前。
+若非放在前二種詞前，則使用 vor allem。
+
+insbesondere    特別
+besonders       特別
+vor allem       特別是，其英文為 above all   
 
 頻率副詞
 ++++++++

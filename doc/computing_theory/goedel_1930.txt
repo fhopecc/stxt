@@ -69,7 +69,7 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
    des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
    我們可觀察到，
-   必須加上前述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
+   必須加上引述文獻給定之集合理論公理至邏輯計算之公理及推論規則，
    才能完成形式化。
 
    Die nachfolgenden Überlegungen gelten auch für die in den letzten 
@@ -78,7 +78,6 @@ das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
    之後的考量也給陳述後幾年從希爾伯特和他的同事所建置之形式系統。
    (到現在的展示)。
-
 
    Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
    der Univ. Hamburg I (1922), VI (1928). 
@@ -115,7 +114,7 @@ einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4),
 die sich aus den Axiomen nicht entscheiden lassen.
 
 以下展示，這並非上述情況，
-而是可給定與前述系統都確實關連之簡易一般整數論問題，
+而是可給定與引述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
 Dieser Umstand liegt nicht 
@@ -125,11 +124,14 @@ sondern gilt für eine sehr weite Klasse formaler Systeme,
 這些事實非略基於指定系統特別處，
 而是適用一個更廣泛類別更形式化之系統。
 
-zu denen insbesondere alle geh5ren, die
-aus den beiden angeftihrten durch ttinzuffignng endlich vieler Axiome
-entstehen ~)~ vorausgesetzt, dal3 durch die hinzugeffigten Axiome keine
-falsehen Siitze yon der in Fu~note~) angegebenen Art beweisbar
-werden.
+zu denen insbesondere alle gehören, 
+die aus den beiden angeführten 
+durch Hinzufügung endlich vieler Axiome entstehen 5), 
+vorausgesetzt, daß durch die binzugefügten Axiome 
+keine falschen Sätze von der in Fußnote 4) 
+angegebenen Art beweisbar werden.
+
+特別是全部包含從加入有限多的公理至兩個引述並，
 
 Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
 Hauptgedanken des Beweises, natiirlich ohne auf Exaktheit Anspruch
@@ -140,7 +142,8 @@ bzw. Trennungspunkte) und man kann leieht genau priizisieren,
 welche Reihen yon Grundzeichen sinnvolle Formeln sind und
 welche nieht6). Analog sind Beweise Vom formalen Standpunkt'
 niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
-angebbaren Eigenschaften). Ftir metamathematische Betrachtungen
+angebbaren Eigenschaften). 
+Ftir metamathematische Betrachtungen
 ist es nattirlich gleiehgtiltig~ welche Gegenstiinde man als Grundzeiehen
 nimmt, nnd wit entsehliegen uns dazu, natfirliehe Zahlen 7)
 als solche zu verwenden. Dementsprechend ist dann eine Formel
