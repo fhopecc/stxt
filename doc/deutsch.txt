@@ -800,15 +800,97 @@ a, fa, ffa, fffa... 等等
 動詞具有時態，表示動作執行的時點。
 每個時態有會因人稱不同而有不同詞變。
 
-不定動詞
-........
+不定式
+......
 
-不定動詞的表示還未決定動作是由誰執行。
-所有的不定動詞在式時都以 en 或 n 結尾。
-英文的不定式則是在動詞前加上 to。
-
+動詞的不定式的表示動作未知是由誰執行，
 當不定動詞放到句中，則已知主語(執行者)是誰，
 便成為限定動詞，其會因執行者的人稱而詞變。
+
+所有的不定式都以 -en 或 -n 結尾，
+以 -n 結尾的不定式為「做」 tun 及「是」 sein。
+
+英文會在不定式前加上 to 區隔，
+德文則不一定在不定式前加加上 zu 區隔。 
+
+zu+不定式
+++++++++
+
+在句未一定為 zu+不定式。
+
+Dieser Ausdruck ist nicht leicht zu übersetzen. 這表情不容易翻譯。
+
+命令語氣可以省略 zu。
+
+Nicht so viel Krach machen! 不要製造這麼多譟音。
+
+um...zu+不定式
+++++++++++++++
+
+um...zu+不定式表示為了做什麼之意。
+
+Ich gehe in die Stadt, um einen Schirm zu kaufen.
+我走到街上去買傘。
+
+Es ist nicht notwendig, die Straße zu überqueren, 
+um zur Post zu kommen.
+並不需要穿過路去郵局。
+
+當不定句在前時，其 zu 為示為了做什麼，
+所以一定要用 um...zu+不定式。
+
+Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
+為了學好外文，你一定要至那個國家旅遊。
+
+不定式作名詞
+++++++++++++
+
+不定式如同英文的動名詞可作名詞使用，且一定為中性名詞。
+
+Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
+
+分詞
+....
+
+現在分詞
+++++++++
+
+現在分詞衍生自不定式，只要將不定式加上字尾 -d，如下：
+
+現在分詞 = 不定式 + -d
+
+現在分詞作形容詞
+++++++++++++++++
+
+很多形容詞源自現在分詞，也會作形容詞詞變，如下：
+
+eine lachende Frau      正在笑的婦女。
+
+den folgenden Schemata  以下的框架
+    源自 folgen
+
+現在分詞作態度副詞
+++++++++++++++++++
+
+現在分詞作態度副詞用來描述態度。
+
+Er reagierte wütend. 他生氣地反應。
+
+現在分詞作形容名詞
+++++++++++++++++++
+
+Im folgenden wird gezeigt, 以下被展示  
+   形容名詞
+
+過去分詞作形容詞
+++++++++++++++++
+
+如同英語一樣，過去分詞可作形容詞。
+
+der gedeckte Tisch.     放下的桌子。
+
+時態
+....
 
 德語中一共有六個時態：
 現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。
@@ -832,6 +914,58 @@ Ich baue ein Haus       我蓋一幢房
 Ich will ein Haus bauen 我想要蓋一幢房
 
 在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)。
+
+動詞字首
+........
+
+許多字首，可與原動詞結合，形成一個全新的動詞。
+
+介詞作為字首：
+
+ab-, an-, auf-, aus-, bei-, mit-, nach-, vor-, zu-
+
+副詞作為字首：
+
+dar-, fort-, her-, hin-, los-, nieder-, statt-, teil-, voran-, voraus-,
+vorbei-, vorüber-, weg-, zurück-, zusammen-
+
+
+分離動詞
+++++++++
+
+有的字首形成的新動詞是可分離的，
+
+其在主句中分離，在副句中不分離。
+
+daß diese Axiome und Sehlußregeln dazu ausreichen, 
+這些公理及推論法則滿足，
+
+aus-drücken     
+
+不可分離字首
+++++++++++++
+
+不可分離字首
+be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
+
+由兩個動詞組成
+++++++++++++++
+
+20141007 週二 中美
+
+Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
+
+
+分離動詞索引
+++++++++++++
+
+aus-reichen     達到
+外  到達
+reicht aus
+haben ausgereicht
+
+voraus-setzen   假設
+之前    設定
 
 現在式
 ......
@@ -863,7 +997,6 @@ wir         bauen       sind    lesen
 ihr         baut        seid    lest
 sie         bauen       sind    lesen
 Sie         bauen       sind    lesen
-
 
 規則動詞
 ++++++++
@@ -991,27 +1124,32 @@ werden + wohl 表示很有可能
 
 werden 表示變成。
 
-命令式
-......
-
 過去式
 ......
 
 過去式表動作為過去已作的。
+但德文除書寫外，一般不用過去式，
+而是以完成式表達過去已作的。
 
-人稱詞變過去式詞尾變化如下：
+英文中規則動詞的過去式只是加 -ed，
+而德文過去式會依人稱詞如下：
 
-不定式      -en
 
-ich         -te
-du          -test
-er,sie,es   -te 
+中文                讀      找
+不定式      -en     lesen   finden
 
-wir         -ten
-ihr         -tet 
-sie         -ten
+ich         -te     las     fand
+du          -test   lasest  fandest
+er,sie,es   -te     las     fand
+
+wir         -ten    lasen   fanden
+ihr         -tet    last    fandet
+sie         -ten    lasen   fanden
 
 當詞幹尾是 -t, -d 時，會先補 e，再加詞尾。
+
+當詞幹尾是 -s 時，會於單數第二人稱補 e，再加詞尾。
+
 
 不規則動詞
 ++++++++++
@@ -1038,7 +1176,6 @@ sie         -ten
   fangen    fängt    fing    gefangen
   -a-       -ä-      -i-     -a-
 
-
 完成式
 ......
 
@@ -1046,8 +1183,25 @@ sie         -ten
 英文的完成式是 have + 過去分詞，
 德文的完成式是 haben/sein + 過去分詞，
 故德文有助動詞 haben 還有 sein，
-haben 通常用在及物動詞，
-sein 用在狀態動詞。
+
+haben 通常用在及物動詞，及除了狀態動詞及移動動詞外的不及物動詞。
+
+ich habe gelesen.   我已讀過。
+         及物動詞
+
+ich habe gelacht.   我笑過。
+         不及物動詞
+
+sein 用在狀態動詞或移動動詞。
+
+ch bin  gestorben. 我死過。
+         狀態動詞
+
+ich bin  gekommen.  我來過。 
+         移動動詞
+
+過去分詞
+++++++++
 
 規則動詞的過去分詞形成法如下：
 
@@ -1056,6 +1210,60 @@ ge+動詞詞幹+t
 kaufen -> gekauft 買
 
 詞幹尾是 -d, -t 或 -n 則加 -et
+
+reden  -> getredet   說
+beten  -> gebetet    祈禱
+regnen -> geregnet     
+
+詞幹首為 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-，
+前置 ge-。
+
+詞幹尾為 -ieren，表示其自法文，通常前置 ge-。
+
+過去完成式
+++++++++++
+
+過去完成式是將完成式的助動詞 haben/sein 改成過去式，
+用來表達比作過的動作之前所做的動作。
+
+當她起床時，她老公已吃完早餐。
+Als sie aufstand, hatte ihr Mann schon gefrühstückt.
+        過去式    過去式               過去分詞
+
+未來完成式
+++++++++++
+
+未來完成式是 werden + (完成分詞 = 過去分詞+haben/sein)
+
+假日時她將消失。
+Er wird shcon in Urlaub gegangen sein.
+   將                   完 成 分 詞 
+
+條件式
+......
+
+條件式為 würde + 不定分詞，與條件子句連用，
+表示何種條件下，何種動作會完成。
+
+我有時間的話，我會去。
+Ich würde mitgehen, wenn ich Zeit hätte.
+    würde 不定分詞
+
+動詞若為 haben/sein 則可合併成 hätte/wäre，
+如下式：
+
+würde + haben/sein 合併成 hätte/wäre。
+
+若我沒有小孩，我會有時間。
+Ich hätte Zeit, wenn ich keine Kinder hätte. 
+
+完成條件式
+++++++++++
+
+完成條件式原式為
+würde + (完成分詞=不定分詞+haben/sein)，
+würde + (haben/sein) 合併成 hätte/wäre 後，
+成為 hätte/wäre + 不定分詞。
 
 助動詞 
 ......
@@ -1122,32 +1330,36 @@ des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
 hinzufügen muß 被移到句尾，是因為副句的動詞要移至最後。
 
+命令式
+......
+
+
 
 被動語態
 ........
 
-德文被動語態的形成，要依靠助動詞 werden， 
-德語中的被動語態一般把著眼點放在動作的本身而忽略了動作的施事者，
-即沒有特殊的原因的話，在被動句中一般可以不用表示動作的施事者。
-德語被動語態另外一個特點是不及物動詞的被動態，
-這一點是和英語有本質的區別的。
-用被動語態助詞 wird 來體現「被」，「讓」等被動意思。
-用動詞的過去分詞來表達實際主語的動作。
+
+被動語態的形成利用被動語態助詞 wird 來體現「被」，
+「讓」等被動意思，用過去分詞來表達實際主語的動作，其形式如下：
 
 werden + 過去分詞
 
-在德語中，有一部分動詞盡管不能支配第四格（即不及物動詞），
-但也可以構成被動語態，就是我們說的無人稱被動態。
-無人稱被動態可以在句首es作爲語法上的主語，
+被動語態著眼點放在動作本身而忽略了動作施事者，
+在被動句中一般可以不用表示動作的施事者。
+
+德語被動語態另外一個特點是不及物動詞的被動態，
+這一點是和英語有本質的區別的。
+
+不及物動詞也可以構成被動語態，就是無人稱被動態。
+無人稱被動態可以在句首 es 作爲語法上的主語，
 但如果把其它成分放在動詞前的話，就應該省略es。
-及物動詞當謂語才能形成被動語態。
 
 Die Klasse der beweisbaren Formeln wird definiert 
 als die kleinste Klasse von Formeln, 
 
 可證式之類別被定義為下式之最小類別，
 
-被動語態可以通過介詞von，durch 或者 mit 來表示動作的施事者，
+被動語態可以通過介詞 von，durch 或者 mit 來表示動作的施事者，
 其中用von來表示動作的直接行爲人，
 用durch來表示一種方法和手段，
 用mit來表示媒介或材料。如： 
@@ -1158,14 +1370,10 @@ Ich wird von ihr gefragt.   我被她問了。被動式
 
 Der Motor wird durch Druckknoepfe gesteurt. 馬達是通過按鈕控制的。
 
-在不需要說明實際主語的情況下，von 或 durch 介詞短語可省略。如：
-
-Ich wird gefragt. 我被人問了(有人問我)。
-
 情態動詞本身不能構成被動語態，
 但可以和實義動詞一起構成被動句，形式如下： 
 
-情態動詞+第二分詞+werden 
+情態動詞+過去分詞+werden 
 
 Auch inhomogene Relationen können auf diese Weise definiert werden, 
 
@@ -1348,26 +1556,6 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 (原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
 (變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
-分離動詞
-........
-
-在主句中分離，在副句中不分離。
-
-daß diese Axiome und Sehlußregeln dazu ausreichen, 
-這些公理及推論法則滿足，
-
-aus-drücken     
-
-分離動詞索引
-++++++++++++
-
-aus-reichen     達到
-外  到達
-reicht aus
-haben ausgereicht
-
-voraus-setzen   假設
-之前    設定
 
 動詞索引
 ........
@@ -1573,7 +1761,6 @@ heißt: is called
 
 verwandter 關連的
 bekanntlich 一般可知
-wurden 變成
 Weite 廣闊
 Gebiet 版圖
 Art 类型、种类方式、方法风格行为、举止习惯（生物）属
@@ -1582,12 +1769,19 @@ wenigen adj一點點、不多
 vollzogen adj 完美的
 alle
 
-
-
 副詞
 ----
 
 副詞用來修飾動詞，給予時間、地點、原因、方式之資訊。
+
+多個副詞的語序為時間副詞，再來是方法副詞，最後是地點副詞，
+
+兩個時間副詞以週期長的為優先，這與英語相反，與中文相同。
+
+Er hat jeden Morgen um sieben Uhr aufgestanden. 他每天早上7點起床。
+
+he got up at seven o'clock every morning.
+
 
 形容詞作副詞
 ++++++++++++
@@ -1628,10 +1822,6 @@ stets       始終、不斷地
 ++++++++
 
 時間副詞通常用介詞家時間名詞表達。
-
-多個副詞的順序為時間副詞，再來是方法副詞，最後是地點副詞。
-
-兩個時間副詞以週期長的為優先。
 
 時間副詞總在賓語名詞前，但在賓語代詞後。
 
