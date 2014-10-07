@@ -889,31 +889,13 @@ Im folgenden wird gezeigt, 以下被展示
 
 der gedeckte Tisch.     放下的桌子。
 
-時態
-....
 
-德語中一共有六個時態：
-現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。
-下面是一個規則動詞六個時態的例子：
+及物動詞與不及物動詞
+....................
 
-時態        德語                    漢語            
+20141007 週二
 
-現在時      Ich baue                我在做的        
-過去時      Ich baute               我曾做過的
-將來時      Ich werde bauen         我將會做的
-現在完成時  Ich habe gebaut         我剛做完的
-過去完成時  Ich hatte gebaut        我曾經完成的
-將來完成時  Ich werde gebaut haben  我將會完成的
 
-除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。
-假如一句話里有助動詞，那麼這個助動詞放在第二位，
-真正的動詞要放在句尾。
-下面的一句話里動詞被標重：
-
-Ich baue ein Haus       我蓋一幢房
-Ich will ein Haus bauen 我想要蓋一幢房
-
-在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)。
 
 動詞字首
 ........
@@ -928,7 +910,6 @@ ab-, an-, auf-, aus-, bei-, mit-, nach-, vor-, zu-
 
 dar-, fort-, her-, hin-, los-, nieder-, statt-, teil-, voran-, voraus-,
 vorbei-, vorüber-, weg-, zurück-, zusammen-
-
 
 分離動詞
 ++++++++
@@ -966,6 +947,33 @@ haben ausgereicht
 
 voraus-setzen   假設
 之前    設定
+
+
+時態
+....
+
+德語中一共有六個時態：
+現在時、過去時、將來時、現在完成時、過去完成時和將來完成時。
+下面是一個規則動詞六個時態的例子：
+
+時態        德語                    漢語            
+
+現在時      Ich baue                我在做的        
+過去時      Ich baute               我曾做過的
+將來時      Ich werde bauen         我將會做的
+現在完成時  Ich habe gebaut         我剛做完的
+過去完成時  Ich hatte gebaut        我曾經完成的
+將來完成時  Ich werde gebaut haben  我將會完成的
+
+除命令式和一般疑問句外一般動詞在一個句子里被放在第二位。
+假如一句話里有助動詞，那麼這個助動詞放在第二位，
+真正的動詞要放在句尾。
+下面的一句話里動詞被標重：
+
+Ich baue ein Haus       我蓋一幢房
+Ich will ein Haus bauen 我想要蓋一幢房
+
+在副句中動詞一律被放在句子的最後(以als為連詞的非現實比較句除外)。
 
 現在式
 ......
@@ -1330,6 +1338,31 @@ des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
 hinzufügen muß 被移到句尾，是因為副句的動詞要移至最後。
 
+進行式
+......
+
+德語表達正在進行中的動作並非如同英語是用動詞變化表示，
+而是用副詞來表達。
+
+Sie duscht sich gerade. 她正在沖澡。
+    沖澡        正在
+
+Ich komme schon.    我正在來。
+    來    已
+
+gerade dabei sein, etwas zu tun 可用來強講進行中的動作
+
+Er war gerade dabei, das Auto aus dem Schlamm zu ziehen, 
+als das Tau auf einmal riss.
+
+他正將車從泥灘中拉出來，當車子的外身被弄破。
+
+Beim + 不定動名詞也能表達動作的進行。
+
+Wir waren beim Essen, als das Telefon klingelte.
+當電話響時，我們正在吃東西。
+
+
 命令式
 ......
 
@@ -1555,6 +1588,22 @@ Er hat mir gesagt, er schreibe gerade einen Roman.
 例句：
 (原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
 (變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
+
+與介詞合用
+..........
+
+動詞常會藉由介詞來與目標事物連結。
+
+賓語句
+++++++
+
+賓語句可為 daß 連結的從屬句或是 zu 形成的不定句。
+
+Er hat mich an ihren Geburtstag erinnert.
+他已提醒我她的生日。
+
+Er hat mich daran erinnert, daß sie heute Geburtstag hat.
+他已提醒我今天她生日。
 
 
 動詞索引
