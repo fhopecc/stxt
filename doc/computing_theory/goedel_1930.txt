@@ -126,8 +126,8 @@ vorausgesetzt, daß durch die binzugefügten Axiome
 keine falschen Sätze von der in Fußnote 4) 
 angegebenen Art beweisbar werden.
 
-這些事實非略基於指定系統特別處，
-而是適用一個更廣泛類別更形式化之系統， 
+這些事實非略基於所給定系統特定本質，
+而是適用一個形式系統的更廣泛類別 
 其包含特別是全部從加入有限多的公理至兩個引述並且，
 假定無註腳給定的方法中假命題成為可證。
 

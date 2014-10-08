@@ -1915,11 +1915,21 @@ zugleich    同時
 stets       始終、不斷地
 
 時間副詞
-++++++++
+........
 
-時間副詞通常用介詞家時間名詞表達。
+時間副詞通常用介詞加時間名詞表達。
 
 時間副詞總在賓語名詞前，但在賓語代詞後。
+
+一般時間副詞
+++++++++++++
+
+immer   總是
+oft     經常
+selten  偶爾
+
+特定時間副詞
+++++++++++++
 
 nun   現在
 
@@ -1937,6 +1947,8 @@ formalisiert,
 
 今天所有在其數學應用的證明方法在以在其下形式化，
 也就是推回到統整少數的公理及推論規則
+
+
 
 位向副詞
 ++++++++
@@ -2046,6 +2058,60 @@ thereby, thus
 ..............
 
 zwischen    之間
+
+否定
+----
+
+否定分詞    
+........
+
+否定分詞包含
+
+nicht   非
+
+nie     從不    
+
+niemals 從不
+
+否定分詞總在特定時間副詞後。
+
+Wir wollen es diese Woche nicht machen. 我們不要這週作。
+             特定時間副詞 否定分詞
+
+否定分詞卻總在一般時間副詞前。
+
+Er ist nicht immer so faul gewesen. 他不常很懶。
+    否定分詞 一般時間副詞
+
+否定分詞總在特定賓語後。
+
+Ich habe das Buch nicht finden können.  我不能找到書。
+         特定賓語 否定分詞 
+
+Kennst du ihn nicht?    你不認識他？
+
+否定分詞總在不定賓語前。
+
+Er hat nie ein Buch gelesen.    他從沒讀過一本書。
+  否定分詞 不定賓語      
+
+否定分詞總在方法副詞前。
+
+Ich fahre nicht mit dem Zug. 我不是搭火車去。
+                方法副詞
+
+否定分詞總在地點副詞前。
+
+Ich wohne nicht im achten Stock. 我不住在八樓。
+                地點副詞前
+
+否定分詞總在介詞賓語前。
+
+Hast du nie von ihm gehört? 你從未聽到他嗎？
+
+否定分詞總在謂語形容詞前。
+
+Ich bin nicht blöd. 我不笨。
 
 
 縮寫
