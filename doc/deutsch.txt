@@ -115,6 +115,85 @@ gehe ich wieder ins Bett.
 我在家，且因為我沒有睡好，我又再次上床睡覺。
 
 
+關係子句
+........
+
+20141008 週三   花稅處
+
+關係子句或定語從句，是關係詞引導的子句，
+其句法功能主要是做名詞的定語，
+但也可以起其他作用，
+如相當於狀語從句等。
+
+關係代詞
+++++++++
+
+德語中，關係子句是透過關係代詞來構造。
+關係代詞會為主句插入一個從屬句，稱為關係子句，
+關係句為主句的主語，提供更多的資訊。
+在德語書寫中，所有的關係子句都以逗號分格。
+
+Der Mann, der nebenan wohnt, hat die Absicht nach Amerika auszuwandern.
+這人，住隔壁，想要移民到美國。
+
+主句為
+Der Mann hat die Absich nach Amerika auszuwandern.
+這人想要移民到美國。
+
+插入關係句為 der nebenan wohnt。
+
+關係代詞會根據性、數、格等做變化，
+其性與數與頭詞相同，而格則根據其在子句中的角色決定。
+
+關係子句也是從屬句用來補充主句，所以會有語序變化，
+其限定動詞會移至句尾。
+
+德語有兩個關係代名詞系統，
+其中一套是基於定冠詞 der、die、das 等的，
+但其中的屬格形式(dessen、deren)與普通的定冠詞不盡相同，
+其複數與格的形式(denen)也不相同。
+
+格      陽性    陰性    中性    複數
+
+主格    der     die     das     die 
+        
+賓格    den     die     das     die 
+
+屬格    dessen  deren   dessen  deren 
+        des     der     des     der 
+        
+與格    dem     der     dem     denen 
+        dem     der     dem     den 
+
+另一套較文學並用於強調的系統，
+是基於代詞 welcher、welche 和welches的，
+
+Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
+
+關係代名詞dem為中性單數形，其與名詞Haus保持一致，
+但因在子句中置於介詞後之故，因此關代為與格，它亦有可能以welchem取代。
+
+然當頭詞為alles、etwas或nichts時，
+德語會使用一個不做變化的關代was來構造子句。
+
+Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
+
+
+wo
+++
+
+wo 為帶回主句地點及時間之關係代詞。
+
+Unter einem Zeichen ersten Typs verstehen 
+wir eine Zeichenkombination der Form:
+a, fa, ffa, fffa... usw.
+wo a entweder 0 oder eine Variable ersten Typs.
+
+基於第一型符號下，我們理解下列形式之符號組合：
+a, fa, ffa, fffa... 等等
+其中 a 是 0 或第一型符號。
+
+
 bit
 ...
 
@@ -292,7 +371,6 @@ Die Grundzeichen des Systems P  P系統之基本符
     中心語       定語      s 指示 System 為屬格作定語用
 
 Schlußregeln des Logikkalküls  
-
 
 表語
 ....
@@ -765,35 +843,6 @@ jede
 
 與格    jedem   jeder   jedem
 
-關係代詞
-........
-
-關係代詞會為主句插入一個從屬句，稱為關係句，
-關係句為主句的主語，提供更多的資訊。
-
-Der Mann, der nebenan wohnt, hat die Absicht nach Amerika auszuwandern.
-這人，住隔壁，想要移民到美國。
-
-主句為
-Der Mann hat die Absich nach Amerika auszuwandern.
-這人想要移民到美國。
-
-插入關係句為 der nebenan wohnt。
-
-wo
-++
-
-wo 為帶回主句地點及時間之關係代詞。
-
-Unter einem Zeichen ersten Typs verstehen 
-wir eine Zeichenkombination der Form:
-a, fa, ffa, fffa... usw.
-wo a entweder 0 oder eine Variable ersten Typs.
-
-基於第一型符號下，我們理解下列形式之符號組合：
-a, fa, ffa, fffa... 等等
-其中 a 是 0 或第一型符號。
-
 動詞
 ----
 
@@ -889,12 +938,10 @@ Im folgenden wird gezeigt, 以下被展示
 
 der gedeckte Tisch.     放下的桌子。
 
-
 及物動詞與不及物動詞
 ....................
 
 20141007 週二
-
 
 
 動詞字首

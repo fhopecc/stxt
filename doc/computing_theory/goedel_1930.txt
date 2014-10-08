@@ -119,10 +119,6 @@ die sich aus den Axiomen nicht entscheiden lassen.
 Dieser Umstand liegt nicht 
 etwa an der speziellen Natur der aufgestellten Systeme, 
 sondern gilt für eine sehr weite Klasse formaler Systeme,
-
-這些事實非略基於指定系統特別處，
-而是適用一個更廣泛類別更形式化之系統。
-
 zu denen insbesondere alle gehören, 
 die aus den beiden angeführten 
 durch Hinzufügung endlich vieler Axiome entstehen 5), 
@@ -130,7 +126,9 @@ vorausgesetzt, daß durch die binzugefügten Axiome
 keine falschen Sätze von der in Fußnote 4) 
 angegebenen Art beweisbar werden.
 
-特別是全部包含從加入有限多的公理至兩個引述並且，
+這些事實非略基於指定系統特別處，
+而是適用一個更廣泛類別更形式化之系統， 
+其包含特別是全部從加入有限多的公理至兩個引述並且，
 假定無註腳給定的方法中假命題成為可證。
 
 Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
@@ -143,12 +141,14 @@ welche Reihen yon Grundzeichen sinnvolle Formeln sind und
 welche nieht6). Analog sind Beweise Vom formalen Standpunkt'
 niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
 angebbaren Eigenschaften). 
+
 Ftir metamathematische Betrachtungen
 ist es nattirlich gleiehgtiltig~ welche Gegenstiinde man als Grundzeiehen
 nimmt, nnd wit entsehliegen uns dazu, natfirliehe Zahlen 7)
 als solche zu verwenden. Dementsprechend ist dann eine Formel
 eine endliehe Folge nattirlieher Zahlen s) nnd eine Beweisfigur eine
-endliehe Folge yon endlichen Folgen natfirlieher Zahlen. Die metamathematisehen
+endliehe Folge yon endlichen Folgen natfirlieher Zahlen. 
+Die metamathematisehen
 Begriffe (Si~tze) werden dadurch zu Begriffen (Siitzen)
 fiber nattirliche Z.ahlen bzw. Folgen yon solehen 9) und daher (wenigstens
 teilweise) in den Symbolen des Systems PM selbst ausdr[ickbar.
