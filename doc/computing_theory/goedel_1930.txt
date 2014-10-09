@@ -128,8 +128,16 @@ angegebenen Art beweisbar werden.
 
 這些事實非略基於所給定系統特定本質，
 而是適用一個形式系統的更廣泛類別 
-其包含特別是全部從加入有限多的公理至兩個引述並且，
-假定無註腳給定的方法中假命題成為可證。
+其包含由兩個提過的引述開始，並加入有限多公理，
+假定經由加入的公理，無註腳給定的方法中的假命題成為可證。
+
+4) D.h. genauer, es gibt unentseheidbare Shtze, 
+   in denen aul]er den logisehen Konstanten: 
+   -- (nieht), V (0der), (x) (far alle), = (identiseh mit) 
+   keine
+anderen Begriffe vorkomfnen als + (Addition), . (Multip!ikation), beide bezogen
+auf nattirliehe Zahlen, wobei aueh die Pri~fixe (x) sich nur auf nattlrliehe Zahlen
+beziehen dtirfen.
 
 Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
 Hauptgedanken des Beweises, natiirlich ohne auf Exaktheit Anspruch
