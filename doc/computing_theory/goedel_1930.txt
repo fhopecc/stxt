@@ -38,16 +38,18 @@ Axiomensystem der Mengenlehre 3) andererseits.
 集合論之公理系統。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
-Cambridge 1925. 
-Zu den Axiomen des Systems PM rechnen wir insbesondere auch: 
-Das Unendlichkeitsaxiom (in der Form: 
-es gibt genau abzählbar viele Individuen), 
-das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
+   Cambridge 1925. 
+
+   Zu den Axiomen des Systems PM rechnen wir insbesondere auch: 
+   Das Unendlichkeitsaxiom (in der Form: 
+   es gibt genau abzählbar viele Individuen), 
+   das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
 2) 懷海德及羅素，數學原理，2. Aufl., 劍橋出版 1925。
-對 PM 系統之公理，我們也計算出特別是：
-無窮公理(形式如下：它給定精確可數多的個體)，
-簡化和選擇公理(對所有類型)。
+
+   對 PM 系統之公理，我們也計算出特別是：
+   無窮公理(形式如下：它給定精確可數多的個體)，
+   簡化和選擇公理(對所有類型)。
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen über 
    die Grundlegung der Mengenlehre, Wissensch. u. Hyp. Bd. XXXI. 
@@ -112,7 +114,7 @@ sondern daß es in den beiden angeführten Systemen sogar relativ
 einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
 die sich aus den Axiomen nicht entscheiden lassen.
 
-以下被展示，這並非上述情況，
+以下展示這並非上述情況，
 而是可給定與引述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
@@ -128,16 +130,22 @@ angegebenen Art beweisbar werden.
 
 這些事實非略基於所給定系統特定本質，
 而是適用一個形式系統的更廣泛類別 
-其包含由兩個提過的引述開始，並加入有限多公理，
+包含由兩個提過的引述開始，並加入有限多公理，
 假定經由加入的公理，無註腳給定的方法中的假命題成為可證。
 
-4) D.h. genauer, es gibt unentseheidbare Shtze, 
-   in denen aul]er den logisehen Konstanten: 
-   -- (nieht), V (0der), (x) (far alle), = (identiseh mit) 
-   keine
-anderen Begriffe vorkomfnen als + (Addition), . (Multip!ikation), beide bezogen
-auf nattirliehe Zahlen, wobei aueh die Pri~fixe (x) sich nur auf nattlrliehe Zahlen
-beziehen dtirfen.
+4) D.h. genauer, es gibt unentscheidbare Sätze, 
+   in denen außer den logischen Konstanten: 
+   -- (nieht), V (oder), (x) (für alle), = (identiseh mit) 
+   keine anderen Begriffe vorkommen als + (Addition), 
+   . (Multiplikation), beide bezogen auf natürliche Zahlen, 
+   wobei auch die Präfixe (x) sich nur auf natürliche Zahlen
+   beziehen dürfen.
+
+4) 這精確地說，給定一個未判定陳述，其除了邏輯常數：
+    -- (非), V (或), (x) (對全部), = (等於) 
+   沒有其它的詞如 + (加), . (乘)出現， 
+   都基於整數，前置 (x) 也僅包含整數。
+   
 
 Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
 Hauptgedanken des Beweises, natiirlich ohne auf Exaktheit Anspruch
