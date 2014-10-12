@@ -131,7 +131,7 @@ angegebenen Art beweisbar werden.
 這些事實非略基於所給定系統特定本質，
 而是適用一個形式系統的更廣泛類別 
 包含由兩個提過的引述開始，並加入有限多公理，
-假定經由加入的公理，無註腳給定的方法中的假命題成為可證。
+假定經由加入的公理，無註腳 4) 給定的類型中的假命題成為可證。
 
 4) D.h. genauer, es gibt unentscheidbare Sätze, 
    in denen außer den logischen Konstanten: 
@@ -147,14 +147,23 @@ angegebenen Art beweisbar werden.
    都基於整數，前置 (x) 也僅包含整數。
    
 
-Wir skizzieren~ bevor wir auf Details eingehen, zuniichst den
-Hauptgedanken des Beweises, natiirlich ohne auf Exaktheit Anspruch
-zu erheben. Die 'Formeln eines formalen Systems (wit besehri~nken
-uns hier auf das System PM) sind ~nfierlieh betraehtet endliche
-Reihen der Gz'undze!ehen~(Variable , logische Konstante und Klammern
-bzw. Trennungspunkte) und man kann leieht genau priizisieren,
-welche Reihen yon Grundzeichen sinnvolle Formeln sind und
-welche nieht6). Analog sind Beweise Vom formalen Standpunkt'
+Wir skizzieren, bevor wir auf Details eingehen, zunächst den
+Hauptgedanken des Beweises, natürlich ohne auf Exaktheit Anspruch
+zu erheben. 
+
+在進入細節前，我們草繪證明的主要觀念，自然地不引入精確的聲明。
+
+Die Formeln eines formalen Systems 
+(wir besehränken uns hier auf das System PM) sind äußerlich 
+betrachtet endliche Reihen der Gzundzeiehen 
+(Variable, logische Konstante und Klammern bzw. Trennungspunkte) 
+und man kann leieht genau präzisieren,
+welche Reihen von Grundzeichen sinnvolle Formeln sind und
+welche nicht 6). 
+
+形式系統之式為外部考慮有限基礎符字串偶
+
+Analog sind Beweise Vom formalen Standpunkt'
 niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
 angebbaren Eigenschaften). 
 

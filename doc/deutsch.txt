@@ -245,6 +245,7 @@ die sich aus den Axiomen nicht entscheiden lassen.
 而是給定與前述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
+
 複雜句
 ......
 
@@ -283,6 +284,7 @@ gehe ich wieder ins Bett.
 
 我在家，且因為我沒有睡好，我又再次上床睡覺。
 
+bevor   之前，同英語的 before
 
 關係子句
 ........
@@ -752,7 +754,8 @@ die Klasse      類別
 
 3.-heit, -keit 
   通常為抽象名詞
-  größerer Exaktheit  更精確
+
+  Exaktheit  精確，從 exakt 形容詞來。
 
 4.-ung 
   動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞。  
@@ -784,11 +787,14 @@ die Literatur   文獻
 
   das Essen     食物，源自吃之不定式 Essen。
 
-  das Beweisen  證明，源自證明之不定式 beweisen。
 
   das Weglassen 省略，源自省略之不定式 weglassen。 
 
-3.國名或城市名。
+3.從不定動詞衍生之名詞，動詞首字根字母大寫即變成名詞。
+
+  das Beweis    證明，源自證明之不定式 beweisen。
+
+4.國名或城市名。
 
 複數名詞
 ........
@@ -898,6 +904,13 @@ die Küche + der Tisch -> der Küche-n-tisch
 Gelegenheit-s-arbeit    雜事
 
 Zeitung-s-zar           媒體汽球
+
+3.字首加名詞
+
+haupt- 頭
+
+Haupt-gedanken          主要觀念 
+頭    心        
 
 名詞的格變
 ..........
@@ -1066,12 +1079,7 @@ Er reagierte wütend. 他生氣地反應。
 Im folgenden wird gezeigt, 以下被展示  
    形容名詞
 
-過去分詞作形容詞
-++++++++++++++++
 
-如同英語一樣，過去分詞可作形容詞。
-
-der gedeckte Tisch.     放下的桌子。
 
 及物動詞與不及物動詞
 ....................
@@ -1093,6 +1101,23 @@ ab-, an-, auf-, aus-, bei-, mit-, nach-, vor-, zu-
 dar-, fort-, her-, hin-, los-, nieder-, statt-, teil-, voran-, voraus-,
 vorbei-, vorüber-, weg-, zurück-, zusammen-
 
+不可分離字首
+++++++++++++
+
+不可分離字首
+be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
+
+be-         指示動詞為及物動詞
+
+be-trachten 小心練習 
+   嘗試
+
+er-         完成、死亡、殺害
+
+er-heben    舉起、帶來
+完成 舉
+
+
 分離動詞
 ++++++++
 
@@ -1105,12 +1130,6 @@ daß diese Axiome und Sehlußregeln dazu ausreichen,
 
 aus-drücken     
 
-不可分離字首
-++++++++++++
-
-不可分離字首
-be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
-
 由兩個動詞組成
 ++++++++++++++
 
@@ -1122,10 +1141,15 @@ Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
 分離動詞索引
 ++++++++++++
 
+aus-    外  
+
 aus-reichen     達到
 外  到達
-reicht aus
-haben ausgereicht
+
+ein- 字首為進入之意，其反意為 aus-
+
+ein-gehen   走進       
+    走
 
 voraus-setzen   假設
 之前    設定
@@ -1830,6 +1854,8 @@ angezeigte
 vornehmen   執行動作
 reden  -> geredet 說
 
+skizzieren  草繪
+
 形容詞
 ------
 
@@ -1853,12 +1879,16 @@ sämtliche   全部的、所有的、全體的
 過去分詞作形容詞
 ++++++++++++++++
 
+如同英語一樣，過去分詞可作形容詞。
+
+der gedeckte Tisch.     放下的桌子。
+
 過去分詞可作形容詞。
 
 an-gewendet     利用，為 anwenden 之過去分詞。
 上 投入
 
-auf-gestellt    指派，為 aufstellen 之過去分詞轉成
+auf-gestellt    指派，為 aufstellen 之過去分詞
 上  置放
 
 an-geführt      引述，為 anführen 之過去分詞。
@@ -1866,6 +1896,18 @@ an-geführt      引述，為 anführen 之過去分詞。
 
 der angeführten Literatur 屬格，引述文獻的
 
+an-gegeben      指定，為 angeben 之過去分詞。
+上  給
+
+betrachtet      考慮，為 betrachten 之過去分詞。
+
+-lich形容詞
++++++++++++
+
+-lich 字尾如同英文的 -ly，會把詞變形容詞。
+
+außer-lich  外部地
+end-lich    有限的 end 為名詞 Ende 終點而來。
 
 形容詞變化
 ..........
@@ -2048,6 +2090,9 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 原來就作為副詞的詞都有重要的意義，
 如否定副詞 nicht。
 
+etwa        關於、一些、例如、無論
+zunächst    首先
+
 賓格名詞片語作副詞
 ..................
 
@@ -2218,43 +2263,46 @@ auf dem Tisch 在桌子上
 auf den Tisch 往桌子上放 
     第四格
 
-um: at, about
+über 若動詞為兩地間之移動用賓格，
+     為表示停在某地用與格。
 
-支配賓格
+
+
+
+憑藉介詞
 ........
+
+ohne    不藉著，相反詞 mit
+
+mit     藉著，相反詞 ohne
+
+dadurch thereby, thus
+
+方向介詞
+........
+
+aus     from, off, over, out, of
+
+äußer   在其之外、除了、自其分離
+
+über    在...之上，反義詞 unter
+
+um      在 at, about
+
+zwischen    之間
+
 
 bis
 
 für 
 
-mit 
-...
-
-介詞：藉..
-
-über
-....
-
-介詞：在...之上
-
-反義詞：unter
-
-über 若動詞為兩地間之移動用賓格，
-     為表示停在某地用與格。
-
 Verwendung der üblichen Konventionen über
 das Weglassen von Klammern angeschrieben)22):
 
-支配與格
-........
-
 含 aus, von, mit, nach, seit, bei 及 zu
 
-aus:from, off, over, out, of
-
 aus & von
-.........
-
++++++++++
 
 支配與格
 
@@ -2280,17 +2328,6 @@ von zu Hause 從家裏來
 
 vom = von + dem
 
-
-dadurch
-........
-
-thereby, thus
-
-
-支配與格及賓格
-..............
-
-zwischen    之間
 
 否定
 ----
