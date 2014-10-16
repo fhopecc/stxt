@@ -120,20 +120,6 @@ die Löwin       雌獅
 例如關於該動作的開始、持續、完成或重複等方面的情況，
 但不涉及該動作發生的時間。
 
-態
-..
-
-態(voice)是描述句中動詞和參與此動作之主語之間關係的一個術語。
-
-當主語是動作的發起者時，
-稱為主動語態；
-如果主語為動作之承受者，稱為被動語態。
-例如：「貓吃老鼠。」這句話是主動語態，
-而「老鼠被貓吃。」則是被動語態。
-
-通常，反轉一個句子的語態會導致主語和賓語的換位。
-即主動句的賓語變為被動句的主語，而主動句的主語變為被動句的賓語。
-
 句
 --
 
@@ -342,7 +328,6 @@ Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
 德語會使用一個不做變化的關代was來構造子句。
 
 Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
-
 
 wo
 ++
@@ -713,6 +698,8 @@ das Resultat -> des Resultats 結果
 
 -n      複數名詞在與格時且結尾不為 -n。
 
+名詞詞源
+........
 
 德語的單數名詞有分三個性別，陽性、陰性及中性，
 可由名詞前置的冠詞或形容詞來判斷性別。
@@ -721,7 +708,7 @@ das Resultat -> des Resultats 結果
 但可由名詞詞尾來大致判斷性別。
 
 陽性名詞
-........
+++++++++
 
 下類名詞為陽性名詞：
 
@@ -731,7 +718,7 @@ das Resultat -> des Resultats 結果
 
 3.日名、四季名、月份名
 
-4.所有衍生自動詞之名詞，動詞之不定式去掉 -en 即為名詞
+4.動名詞，動詞不定式去掉 -en 即為名詞
 
 5.陽性河名，河名不是陽性就是陰性，沒有中性。
 
@@ -742,13 +729,12 @@ das Resultat -> des Resultats 結果
 
 7.-er 所有衍生自動詞之名詞，動詞之不定式去掉 -en 再加 -er 即為名詞
 
-anzeigen -> der Anzeiger 指示->期刊
+  anzeigen -> der Anzeiger 指示->期刊
 
 結尾的名詞，在主格以外的四格均會加字尾 -en。
 
 陰性名詞
-........
-
+++++++++
 
 1.-e    陰性，少數為中性及陽性須強記 
 
@@ -787,10 +773,11 @@ die Klasse      類別
 
 7.其它
 
-die Literatur   文獻 
+  die Literatur   文獻 
+  die Art         类型、种类方式、方法风格行为、举止习惯（生物）属
 
 中性名詞
-........
+++++++++
 
 1.-chen, -lein
   所有動物幼兒名詞後置上述詞尾，德國人認為小孩為中性吧。
@@ -809,68 +796,8 @@ die Literatur   文獻
 
 4.國名或城市名。
 
-複數名詞
-........
-
-德語的名詞轉為複數有九種。
-
-德語的複數名詞也可由名詞前置的冠詞或形容詞來判斷。
-
-1.複數名詞不變化
-
--el, -en, -er 之陽性及中性名詞。
-
--chen, -lein 之動物幼兒名詞後置上述詞尾。
-
-Ge-*-e 之中性名詞
-
-2.字尾加入 ¨e, -e 
-
-單音節陽性名詞及少數雙音節陽性名詞。
-
-dieser Umstand -> diese Umstände 事實
-
-單音節中性名詞及少數雙音節陽性名詞，除了 das Floß，都會音變。
-
-das Resultat -> die Resultate 結果
-
-單音節陰性名詞。
-
-die Axiom -> die Axiome 公理
-
--ich, -ig, -ing, -nis, -sal 之陽性及中性名詞。
-
-3.字尾加入 ¨er,-er
-
-3.1.一些陽性名詞
-
-3.2.一些中性名詞
-
-3.3.-tum 之陽性名詞及中性名詞
-
-4.加入 -n, -en
-
-|大部分陰性名詞|
-
-die Elemente    die Elementen       元素
-die Formel      die Formeln         公式
-die Disjunktion die Disjunktionen   析取
-die Regel       die Regeln          改造
-
-|弱陽性名詞|
-
-|一些中性名詞|
-
-5.字尾加入 -s
-
-5.1.-a, -i, -u 之外來詞
-
-5.2.-y  之英文借字
-
-5.3.某些法文及英文借字
-
 形容名詞
-........
+++++++++
 
 形容名詞是由形容詞轉變來，一般而言其名詞的性別由冠詞決定。
 
@@ -943,6 +870,65 @@ Haupt-gedanken          主要觀念
 roter  Wein -> Rotwein      紅酒
 weißes Brot -> Weißesbrot   白麵包
 
+名詞數變
+........
+
+德語的名詞轉為複數有九種。
+
+德語的複數名詞也可由名詞前置的冠詞或形容詞來判斷。
+
+1.複數名詞不變化
+
+-el, -en, -er 之陽性及中性名詞。
+
+-chen, -lein 之動物幼兒名詞後置上述詞尾。
+
+Ge-*-e 之中性名詞
+
+2.字尾加入 ¨e, -e 
+
+單音節陽性名詞及少數雙音節陽性名詞。
+
+dieser Umstand -> diese Umstände 事實
+
+單音節中性名詞及少數雙音節陽性名詞，除了 das Floß，都會音變。
+
+das Resultat -> die Resultate 結果
+
+單音節陰性名詞。
+
+die Axiom -> die Axiome 公理
+
+-ich, -ig, -ing, -nis, -sal 之陽性及中性名詞。
+
+3.字尾加入 ¨er,-er
+
+3.1.一些陽性名詞
+
+3.2.一些中性名詞
+
+3.3.-tum 之陽性名詞及中性名詞
+
+4.加入 -n, -en
+
+|大部分陰性名詞|
+
+die Elemente    die Elementen       元素
+die Formel      die Formeln         公式
+die Disjunktion die Disjunktionen   析取
+die Regel       die Regeln          改造
+
+|弱陽性名詞|
+
+|一些中性名詞|
+
+5.字尾加入 -s
+
+5.1.-a, -i, -u 之外來詞
+
+5.2.-y  之英文借字
+
+5.3.某些法文及英文借字
 
 代詞
 ----
@@ -1032,7 +1018,6 @@ präzisieren 澄清
 
 äußern  說出，「反身」發表意見，源自 außen
 
-
 不定式
 ......
 
@@ -1047,7 +1032,7 @@ präzisieren 澄清
 德文則不一定在不定式前加加上 zu 區隔。 
 
 zu+不定式
-++++++++
++++++++++
 
 在句未一定為 zu+不定式。
 
@@ -1075,10 +1060,10 @@ um zur Post zu kommen.
 Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
 為了學好外文，你一定要至那個國家旅遊。
 
-不定式作名詞
-++++++++++++
+不定式作名詞片語
+++++++++++++++++
 
-不定式如同英文的動名詞可作名詞使用，且一定為中性名詞。
+不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
 
 Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
 
@@ -1115,13 +1100,10 @@ Er reagierte wütend. 他生氣地反應。
 Im folgenden wird gezeigt, 以下被展示  
    形容名詞
 
-
-
 及物動詞與不及物動詞
 ....................
 
 20141007 週二
-
 
 動詞字首
 ........
@@ -1170,20 +1152,9 @@ ver-stehen  明白
 daß diese Axiome und Sehlußregeln dazu ausreichen, 
 這些公理及推論法則滿足，
 
-aus-drücken     
-
-由兩個動詞組成
-++++++++++++++
-
-20141007 週二 中美
-
-Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
-
-
-分離動詞索引
-++++++++++++
-
 aus-    外  
+
+aus-drücken     
 
 aus-reichen     達到
 外  到達
@@ -1196,6 +1167,13 @@ ein-gehen   走進
 voraus-setzen   假設
 之前    設定
 
+
+由兩個動詞組成
+++++++++++++++
+
+20141007 週二 中美
+
+Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
 
 時態
 ....
@@ -2131,7 +2109,6 @@ verwandter 關連的
 bekanntlich 一般可知
 Weite 廣闊
 Gebiet 版圖
-Art 类型、种类方式、方法风格行为、举止习惯（生物）属
 einigen 一致
 alle
 

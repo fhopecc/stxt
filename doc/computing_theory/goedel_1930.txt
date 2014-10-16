@@ -26,7 +26,7 @@ in der Art, daß das Beweisen nach einigen wenigen
 mechanischen Regeln vollzogen werden kann.
 
 眾所皆知數學的發展朝著更精確的方向已引導其所有版圖變得更形式化。
-在此風格下，證明能成為執行少數統整的機械化規則。
+以此方式則證明能成為執行少數統整的機械化規則。
 
 Die umfassendtsen derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) einerseits, 
@@ -173,7 +173,7 @@ welche nicht 6).
    prinzipiell überflüssig.
 
 6) 我們可理解這裡及以下 PM 之式總是沒有已寫式之縮寫(即沒有應用定義)。
-   如妳所知定義只是幫助書寫更為精簡及
+   如妳所知定義只是幫助書寫更為精簡，因此原則上是不必要的。
 
 Analog sind Beweise Vom formalen Standpunkt'
 niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
