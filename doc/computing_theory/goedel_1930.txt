@@ -154,14 +154,26 @@ zu erheben.
 在進入細節前，我們草繪證明的主要觀念，自然地不引入精確的聲明。
 
 Die Formeln eines formalen Systems 
-(wir besehränken uns hier auf das System PM) sind äußerlich 
-betrachtet endliche Reihen der Gzundzeiehen 
+(wir beschränken uns hier auf das System PM) sind 
+äußerlich betrachtet endliche Reihen der Gzundzeichen 
 (Variable, logische Konstante und Klammern bzw. Trennungspunkte) 
-und man kann leieht genau präzisieren,
+und man kann leicht genau präzisieren,
 welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
-形式系統之式為外部考慮有限基礎符字串偶
+形式系統之式(在此限制為PM系統)為
+外部考慮有限基礎符(變數、邏輯常數及括號分別為分隔點)字串
+而且可輕易辨別那些基礎符字串是有意義之式及那些不是 6)。
+
+6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
+   immer eine ohne Abkürzungen (d.h. ohne Verwendung von Definitionen) 
+   geschriebene Formel. 
+
+   Definitionen dienen ja nur der kürzeren Schreibweise und sind daher
+   prinzipiell überflüssig.
+
+6) 我們可理解這裡及以下 PM 之式總是沒有已寫式之縮寫(即沒有應用定義)。
+   如妳所知定義只是幫助書寫更為精簡及
 
 Analog sind Beweise Vom formalen Standpunkt'
 niehts anderes als endliehe Reihen yon Formeln (mit bestimmten

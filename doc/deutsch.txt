@@ -134,12 +134,6 @@ die Löwin       雌獅
 通常，反轉一個句子的語態會導致主語和賓語的換位。
 即主動句的賓語變為被動句的主語，而主動句的主語變為被動句的賓語。
 
-級
-..
-
-級是關於形容詞和副詞的性質、狀態在用於比較時的不同程度的語法範疇，
-屬於比較常見的一類語法範疇。
-
 句
 --
 
@@ -708,6 +702,18 @@ Er ist ein sehr guter Lehrer. 他是非常好的老師。
 名詞
 ----
 
+名詞變格
+........
+
+-(e)s   陽性及中性名詞之屬格
+
+das Resultat -> des Resultats 結果
+
+-e      陽性及中性名詞之賓格，在古老或書寫文中
+
+-n      複數名詞在與格時且結尾不為 -n。
+
+
 德語的單數名詞有分三個性別，陽性、陰性及中性，
 可由名詞前置的冠詞或形容詞來判斷性別。
 
@@ -758,12 +764,19 @@ die Klasse      類別
   Exaktheit  精確，從 exakt 形容詞來。
 
 4.-ung 
+
   動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞。  
    
+  Abkürzung           縮寫，源自動詞 abkürzen
+
   Entwicklung         發展，源自動詞 entwickeln
-  Zusammenfassung     摘要，源自動詞 zusammenfassen 
+
   Formalisierung      形式化，源自動詞 formalisieren
 
+  Zusammenfassung     摘要，源自動詞 zusammenfassen 
+
+  Verwendung          應用，源自動詞 verwenden 
+  
 5.-ie, -ik, -ion
   源自法文之名詞後置如上詞尾。
   die Biologie, die Musik, die Station
@@ -889,9 +902,10 @@ Das ist nichts Neues/etwas Besonderes.
 複合名詞
 ........
 
-德文喜歡把數個名詞合成一個複合名詞。
+數個名詞組成複合名詞
+++++++++++++++++++++
 
-數個名詞所組成的新名詞，其性別與最後一個名詞相同。
+數個名詞所組成的複合名詞，其性與最後一個名詞相同。
 
 das Haus + die Tür = die Haustür (家+門=大門)
 
@@ -903,25 +917,32 @@ die Küche + der Tisch -> der Küche-n-tisch
 
 Gelegenheit-s-arbeit    雜事
 
+Trennung-s-punkte       分隔點
+分隔       點
+
 Zeitung-s-zar           媒體汽球
 
-3.字首加名詞
+3.-e 結尾名詞，去掉 e 直接連結名詞
+
+Schreib-weise   記號
+寫      方法
+
+字首加名詞
+++++++++++
 
 haupt- 頭
 
 Haupt-gedanken          主要觀念 
 頭    心        
 
-名詞的格變
-..........
+形容詞與名詞組成複合名詞
+++++++++++++++++++++++++
 
--(e)s   陽性及中性名詞之屬格
+形容詞在名詞前組成複合名詞時，形容詞不變格。
 
-das Resultat -> des Resultats 結果
+roter  Wein -> Rotwein      紅酒
+weißes Brot -> Weißesbrot   白麵包
 
--e      陽性及中性名詞之賓格，在古老或書寫文中
-
--n      複數名詞在與格時且結尾不為 -n。
 
 代詞
 ----
@@ -996,6 +1017,21 @@ anderer 其它的
 
 德語動詞具有時態，表示動作執行的時點。
 每個時態有會因人稱不同而有不同詞變。
+
+原生動詞
+........
+
+dienen      服務
+
+präzisieren 澄清
+
+源自副詞之動詞
+..............
+
+20141014 週二   稅務局
+
+äußern  說出，「反身」發表意見，源自 außen
+
 
 不定式
 ......
@@ -1109,14 +1145,20 @@ be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
 
 be-         指示動詞為及物動詞
 
-be-trachten 小心練習 
+be-trachten     小心練習 
    嘗試
+be-schränken    限制
+   小房間
 
 er-         完成、死亡、殺害
 
 er-heben    舉起、帶來
 完成 舉
 
+ver-        動作完成
+
+ver-stehen  明白
+    顯示
 
 分離動詞
 ++++++++
@@ -1859,11 +1901,15 @@ skizzieren  草繪
 形容詞
 ------
 
-形容詞可作為表語，及定語，說明如下：
-形容詞作表語不置於名詞之前，直接作主語之表語，且不作詞尾變化。
+形容詞可作為表語及定語，
+作表語時不置於名詞之前，直接作主語之表語，且不作詞尾變化。
 
-定語形容詞用於修飾名詞，置於名詞之前，作詞尾變化
+名詞主語 + 表語
+
+形容詞定語用於修飾名詞，置於名詞之前，作詞尾變化
 該名詞若有冠詞則列於冠詞後。
+
+(冠詞) + 形容詞定語 + 名詞主語
 
 德語中大部分形容詞不需變化即可直接作「副詞」使用，修飾動詞。如：
 
@@ -1874,7 +1920,27 @@ Er läuft schnell. （他走得快）
 
 如 kleinsten
 
-sämtliche   全部的、所有的、全體的
+形容詞來源
+..........
+
+原生形容詞
+++++++++++
+
+20141015 週三   稅務局
+
+genau       精確的
+
+leicht      輕的、輕易的
+
+wenigen     一點點、不多
+
+vollzogen   完美的
+
+字首加形容詞合成
+++++++++++++++++
+
+über-flüssig    多餘的
+超過
 
 過去分詞作形容詞
 ++++++++++++++++
@@ -1894,6 +1960,7 @@ auf-gestellt    指派，為 aufstellen 之過去分詞
 an-geführt      引述，為 anführen 之過去分詞。
 上 領導
 
+
 der angeführten Literatur 屬格，引述文獻的
 
 an-gegeben      指定，為 angeben 之過去分詞。
@@ -1901,13 +1968,26 @@ an-gegeben      指定，為 angeben 之過去分詞。
 
 betrachtet      考慮，為 betrachten 之過去分詞。
 
+geschrieben     寫的
+
 -lich形容詞
 +++++++++++
 
 -lich 字尾如同英文的 -ly，會把詞變形容詞。
 
-außer-lich  外部地
+äußer-lich  外部的
+
 end-lich    有限的 end 為名詞 Ende 終點而來。
+
+sämt-lich   全部的、所有的、全體的
+
+-voll形容詞
++++++++++++
+
+-voll 字尾如同英文的 -ful，表充滿。
+
+sinn-volle    有意義的
+感覺
 
 形容詞變化
 ..........
@@ -2013,11 +2093,21 @@ Paar -> Paare 一對，複數名詞屈折
 Anfang nächsten Monats 下個月的開始
                 Monat  變格為屬格。 
 
+級
+..
 
-比較級變格
-..........
+級是關於形容詞和副詞的性質、狀態在用於比較時的不同程度的語法範疇。
 
--er 為比較級變格。
+德語形容詞可分為三級：一般級、比較級和最高級。
+
+做定語的不同級形容詞後都需要加上變格的詞尾，
+表語則不用，與基礎規則相同。
+
+
+形容詞變級
+++++++++++
+
+-er 為比較級變級。
 
 klein -> kleiner    小->較小 
 
@@ -2025,19 +2115,13 @@ klein -> kleiner    小->較小
 
 groß  -> größer     大->較大
 
+kurz  -> kürzer     短->較短
+
 -el/-er 結尾之形容詞，會刪除原結尾之 e，加上 -er。
 
 dunkel -> dunker    暗->更暗
 
 teuer  ->  teurer   貴->更貴
-
-形容詞與名詞組成複合名詞
-........................
-
-形容詞在名詞前組成複合名詞時，形容詞不變格。
-
-roter  Wein -> Rotwein      紅酒
-weißes Brot -> Weißesbrot   白麵包
 
 genannt: named
 
@@ -2049,8 +2133,6 @@ Weite 廣闊
 Gebiet 版圖
 Art 类型、种类方式、方法风格行为、举止习惯（生物）属
 einigen 一致
-wenigen adj一點點、不多
-vollzogen adj 完美的
 alle
 
 副詞
@@ -2059,6 +2141,20 @@ alle
 副詞用來修飾動詞，給予時間、地點、原因、方式之資訊。
 
 多個副詞的語序為時間副詞，再來是方法副詞，最後是地點副詞。
+
+原生副詞
+........
+
+20141010 星期五 義仁
+
+原來就作為副詞的詞都有重要的意義，
+如否定副詞 nicht。
+
+außen       在外地
+nur         僅、只有
+etwa        關於、一些、例如、無論
+ja          對、就妳所知、確實
+zunächst    首先
 
 -erweise 副詞
 .............
@@ -2081,17 +2177,6 @@ Er hat lustigerweise gesungen.  他唱是有趣地。
 
 Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.  
 在第一種情形下，我們稱這樣的符號為數符。
-
-原生副詞
-........
-
-20141010 星期五 義仁
-
-原來就作為副詞的詞都有重要的意義，
-如否定副詞 nicht。
-
-etwa        關於、一些、例如、無論
-zunächst    首先
 
 賓格名詞片語作副詞
 ..................
@@ -2193,7 +2278,9 @@ he got up at seven o'clock every morning.
 ++++++++++++
 
 immer   總是
+
 oft     經常
+
 selten  偶爾
 
 特定時間副詞
@@ -2219,7 +2306,9 @@ formalisiert,
 位向副詞
 ++++++++
 
-位向副詞用來表示位置及方向
+位向副詞用來指示位置及方向。
+
+daher  從此、因此
 
 darin 在裡面
 
@@ -2232,9 +2321,7 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 其它副詞
 ++++++++
 
-daher  從，因此
-
-dazu    除此之外、為此、對它
+dazu   除此之外、為此、對它
 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
 這些公理及推論法則除了滿足，
@@ -2267,8 +2354,6 @@ auf den Tisch 往桌子上放
      為表示停在某地用與格。
 
 
-
-
 憑藉介詞
 ........
 
@@ -2284,6 +2369,8 @@ dadurch thereby, thus
 aus     from, off, over, out, of
 
 äußer   在其之外、除了、自其分離
+
+auf     之上 
 
 über    在...之上，反義詞 unter
 
