@@ -870,6 +870,15 @@ Haupt-gedanken          主要觀念
 roter  Wein -> Rotwein      紅酒
 weißes Brot -> Weißesbrot   白麵包
 
+
+形容詞加字尾轉成名詞
+++++++++++++++++++++
+
+-schaft         質
+
+Eigen-schaft    特質
+擁有
+
 名詞數變
 ........
 
@@ -995,6 +1004,15 @@ jede
 與格    jedem   jeder   jedem
 
 anderer 其它的
+
+非人稱代詞
+..........
+
+nichts  沒有任何事
+
+Ich weiß, dass ich nichts weiß.     我知道我一無所知。
+
+anderer 另一個
 
 動詞
 ----

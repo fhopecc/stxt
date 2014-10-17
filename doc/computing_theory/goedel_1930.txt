@@ -168,16 +168,19 @@ welche nicht 6).
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
    immer eine ohne Abkürzungen (d.h. ohne Verwendung von Definitionen) 
    geschriebene Formel. 
-
    Definitionen dienen ja nur der kürzeren Schreibweise und sind daher
    prinzipiell überflüssig.
 
 6) 我們可理解這裡及以下 PM 之式總是沒有已寫式之縮寫(即沒有應用定義)。
    如妳所知定義只是幫助書寫更為精簡，因此原則上是不必要的。
 
-Analog sind Beweise Vom formalen Standpunkt'
-niehts anderes als endliehe Reihen yon Formeln (mit bestimmten
-angebbaren Eigenschaften). 
+Analog sind Beweise vom formalen Standpunkt nichts anderes 
+als endliche Reihen von Formeln 
+(mit bestimmten angebbaren Eigenschaften). 
+
+類比是形式觀點之證明沒有另一個為式之有限字串
+(經由特定特質)。
+
 
 Ftir metamathematische Betrachtungen
 ist es nattirlich gleiehgtiltig~ welche Gegenstiinde man als Grundzeiehen
