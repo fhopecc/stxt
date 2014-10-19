@@ -151,7 +151,7 @@ Wir skizzieren, bevor wir auf Details eingehen, zunächst den
 Hauptgedanken des Beweises, natürlich ohne auf Exaktheit Anspruch
 zu erheben. 
 
-在進入細節前，我們草繪證明的主要觀念，自然地不引入精確的聲明。
+在進入細節前，我們首先草繪證明的主要觀念，自然地不引入精確的聲明。
 
 Die Formeln eines formalen Systems 
 (wir beschränken uns hier auf das System PM) sind 
@@ -365,8 +365,8 @@ Folgende Formeln (I bis V) heißen Axiome
  das Weglassen von Klammern angeschrieben)22):
 
 下式(I 至 V)稱為公理
-(它藉由以已知方法定義縮寫的幫助：., ->, ≡, (Ex), = 21)
-及使用通用慣寫並忽略括號記下 22)。
+(它藉由已知方法定義縮寫的幫助：., ->, ≡, (Ex), = 21)
+及應用省略括號之通用慣寫22)。
 
 I.
 1.～(fx1=0)

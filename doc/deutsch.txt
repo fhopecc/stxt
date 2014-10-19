@@ -225,7 +225,6 @@ die sich aus den Axiomen nicht entscheiden lassen.
 而是給定與前述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
-
 複雜句
 ......
 
@@ -348,7 +347,6 @@ bit
 ...
 
 [並列連詞]某數至某數
-
 
 語序
 ----
@@ -1932,6 +1930,8 @@ wenigen     一點點、不多
 
 vollzogen   完美的
 
+üblich      一般
+
 字首加形容詞合成
 ++++++++++++++++
 
@@ -1971,11 +1971,15 @@ geschrieben     寫的
 
 -lich 字尾如同英文的 -ly，會把詞變形容詞。
 
-äußer-lich  外部的
+äußer-lich   外部的
 
-end-lich    有限的 end 為名詞 Ende 終點而來。
+bekannt-lich 一般可知
 
-sämt-lich   全部的、所有的、全體的
+end-lich     有限的 end 為名詞 Ende 終點而來。
+
+gewöhn-lich  一般的
+
+sämt-lich    全部的、所有的、全體的
 
 -voll形容詞
 +++++++++++
@@ -2124,7 +2128,6 @@ genannt: named
 heißt: is called
 
 verwandter 關連的
-bekanntlich 一般可知
 Weite 廣闊
 Gebiet 版圖
 einigen 一致
@@ -2369,17 +2372,16 @@ auf     之上
 
 über    在...之上，反義詞 unter
 
+Verwendung der üblichen Konventionen über
+das Weglassen von Klammern angeschrieben)22):
+
 um      在 at, about
 
 zwischen    之間
 
-
 bis
 
 für 
-
-Verwendung der üblichen Konventionen über
-das Weglassen von Klammern angeschrieben)22):
 
 含 aus, von, mit, nach, seit, bei 及 zu
 
@@ -2464,6 +2466,33 @@ Hast du nie von ihm gehört? 你從未聽到他嗎？
 否定分詞總在謂語形容詞前。
 
 Ich bin nicht blöd. 我不笨。
+
+數
+--
+
+基數
+....
+
+0  null   10 zehn      20 zwan-zig                       
+1  eins   11 elf       21 ein-und-zwanzig                
+2  zwei   12 zwölf     22 zwei-und-zwanzig 
+3  drei   13 drei-zehn 23 drei-und-zwanzig   30 drei-ßig
+4  vier   14 vier-zehn 24 vier-und-zwanzig   40 vier-zig
+5  fünf   15 fünf-zehn 25 fünf-und-zwanzig   50 fünf-zig
+6  sechs  16 sech-zehn 26 sechs-und-zwanzig  60 sech-zig
+7  seiben 17 seib-zehn 27 seiben-und-zwanzig 70 seib-zig
+8  acht   18 acht-zehn 28 acht-und-zwanzig   80 acht-zig
+9  neun   19 neun-zehn 29 neun-und-zwanzig   90 neun-zig
+
+100 hundert
+101 hundert-eins
+153 hundert-drei-und-fünf-zig
+266 zweihundert-sechs-und-sech-zig
+
+1000 tausend
+1008 tausend-acht
+5010 fünf-tausend-zehn
+
 
 
 縮寫
