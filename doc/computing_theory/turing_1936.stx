@@ -1518,7 +1518,7 @@ CCN -> Rs1(u^(N), u^(K)) 且 A(M) & F^(N) -> CCN。
 
 (Ex u)A(M) -> (Ex u^(N)(Ex u^(K))Rs1(u^(N), u^(K)) 
 
-(Ex u)A(M) -> (Ex s)(Ex t)Rs1(s, t) 
+(Ex u)A(M) -> (Ex s)(Ex t)Rs1(s, t)
 
 得出 Un(M) 是可證明的。
 
