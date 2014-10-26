@@ -9,8 +9,8 @@ module STXT( run, rawRun, runPart, rawRunPart, runInclude
            , Doc(Doc, Error)
            , Sect1(Sect1, Include, EmptySect1)
            , Sect2(Sect2, EmptySect2)
-           , Sect1s
-           , Sect2s
+           , Sect3(Sect3, EmptySect3)
+           , Sect1s, Sect2s, Sect3s
            , Title
            , Elem(Code, Para)
            , Content
@@ -39,7 +39,7 @@ instance Accessable Sect1 where
     address (Sect1 n t c s2s) = t
 
 instance Accessable Sect2 where
-    address (Sect2 n t c) = t
+    address (Sect2 n t c s3s) = t
 
 getSect1 :: Doc -> String -> Maybe Sect1
 (Doc _ _ s1s) `getSect1` addr = find (addrIs addr) s1s
@@ -61,8 +61,14 @@ data Sect1    = Sect1 Int Title Content Sect2s
 
 type Sect2s   = [Sect2]
 
-data Sect2    = Sect2 (Int, Int) Title Content
+data Sect2    = Sect2 (Int, Int) Title Content Sect3s
               | EmptySect2
+                deriving (Show, Eq)
+
+type Sect3s   = [Sect3]
+
+data Sect3    = Sect3 (Int, Int, Int) Title Content
+              | EmptySect3
                 deriving (Show, Eq)
 
 data Elem = Para ParaObjs
@@ -113,7 +119,20 @@ sect2 :: Parser Sect2
 sect2 = do notFollowedBy sect1title 
            t  <- sect2title
            cs <- content
-           return $ Sect2 (0,0) t cs
+           s3s <- sect3s
+           return $ Sect2 (0,0) t cs s3s
+
+sect3s = many sect3
+
+sect3title = title '+'
+
+sect3 :: Parser Sect3
+sect3 = do notFollowedBy sect1title 
+           notFollowedBy sect2title
+           t  <- sect3title
+           cs <- content
+           return $ Sect3 (0,0,0) t cs
+
 
 content = many theElement
 
@@ -176,6 +195,7 @@ paraObjs = many1 paraObj
 line :: Parser String
 line = do notFollowedBy sect1title
           notFollowedBy sect2title  
+          notFollowedBy sect3title  
           head <- noneOf "<\n"
           tail <- try (do str <- manyTill (noneOf "\n") 
                                           (lookAhead (string "：\n\n"))
@@ -250,7 +270,7 @@ numberSect1s s1s =
         numberSect2s s1n s2s = 
             [updateNumSect2 s1n s2n s2 | (s2n, s2) <- zip [1..] s2s]
 
-        updateNumSect2 s1n s2n (Sect2 _ t cs) = Sect2 (s1n, s2n) t cs
+        updateNumSect2 s1n s2n (Sect2 _ t cs s3s) = Sect2 (s1n, s2n) t cs s3s
    
 main = do
     args <- getArgs 

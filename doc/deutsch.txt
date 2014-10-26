@@ -384,10 +384,10 @@ bit
 
 a       啊
 aa      長讀「啊」，例：Staat
+au      Donau、Auto
 
 ä       讀「ㄟ」，例：Sätze 
-
-au      Donau、Auto
+äu      同 eu 之音。
 
 b       [b]ig
 b       b 後面沒有母音時讀[p]ig，例：ab
@@ -406,7 +406,7 @@ ei      Eis
 
 er      ㄜ捲舌
 
-eu      heute
+eu      同英文的 b[oy]，例：heute
 
 f       [f]ather
 
@@ -868,7 +868,6 @@ Haupt-gedanken          主要觀念
 roter  Wein -> Rotwein      紅酒
 weißes Brot -> Weißesbrot   白麵包
 
-
 形容詞加字尾轉成名詞
 ++++++++++++++++++++
 
@@ -1075,6 +1074,13 @@ um zur Post zu kommen.
 
 Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
 為了學好外文，你一定要至那個國家旅遊。
+
+Wir bemerken, daß man zu den in der angeführten Literatur
+gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
+des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
+
+我們觀察到必須加上引述文獻給定之集合理論公理
+至邏輯計算之公理及推論規則以達成形式化。
 
 不定式作名詞片語
 ++++++++++++++++
@@ -1604,10 +1610,8 @@ Beim + 不定動名詞也能表達動作的進行。
 Wir waren beim Essen, als das Telefon klingelte.
 當電話響時，我們正在吃東西。
 
-
 命令式
 ......
-
 
 被動語態
 ........
@@ -1667,20 +1671,21 @@ Auch inhomogene Relationen können auf diese Weise definiert werden,
 不能用名詞或其他代詞代替反身代詞，
 
 反身代詞與動詞構成一個整體。
-真反身動詞多數帶第四格 (Akkusativ) 反身代詞，少數帶第三格(Dativ)反身代詞。
+真反身動詞多數帶賓格 (Akkusativ) 反身代詞，
+少數帶與格(Dativ)反身代詞。
 
-(1)	帶第四格反身帶詞的反身動詞
+(1)	帶賓格反身代詞的反身動詞
 例： sich auskennen、
      sich beeilen、sich bedanken、sich erkündigen、sich gedulden、
      sich konzentrieren、sich kümmern、sich verspäten等。
 
 例句：Ich kenne mich an diesem Ort nicht aus. (我對這地方不熟悉。)
 
-(2)	帶第三格反身帶詞的反身動詞
+(2)	帶與格反身帶詞的反身動詞
 
 例：sich aneignen、sich ausdenken、sich einbilden 等。
 
-帶第三格反身動詞的真反身動詞通常需要支配一個第四格補足語。
+帶與格反身動詞的真反身動詞通常需要支配一個賓格補足語。
 
 例句：
 
@@ -1696,13 +1701,13 @@ Er hat sich einen Plan ausgedacht.
 
 為了表達「同自身做什麼」、「互相」、「交互」的意思，才使用反身型態。
 
-＊Die beiden streiten sich ja schon wieder.
+Die beiden streiten sich ja schon wieder.
 這兩人果然又互相吵架了。
 
-＊Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
+Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
 他不喜歡她，她不喜歡他----他們彼此不喜歡。
 
-＊Die Müllers bauen sich ein Haus.
+Die Müllers bauen sich ein Haus.
 繆勒家給自己蓋了房子。
 
 
@@ -1734,8 +1739,6 @@ sich um....bewerben = 應徵（某職位）
 
 Ich habe mich um eine neue Stelle beworben. 
 我應徵了一個新職位。
-
-
 
 II. Formen （型態）
 
@@ -2127,12 +2130,6 @@ genannt: named
 
 heißt: is called
 
-verwandter 關連的
-Weite 廣闊
-Gebiet 版圖
-einigen 一致
-alle
-
 副詞
 ----
 
@@ -2492,8 +2489,6 @@ Ich bin nicht blöd. 我不笨。
 1000 tausend
 1008 tausend-acht
 5010 fünf-tausend-zehn
-
-
 
 縮寫
 ----

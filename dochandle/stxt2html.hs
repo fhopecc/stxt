@@ -23,6 +23,7 @@ data Page = Page
   , pSect1    :: Maybe STXT.Sect1
   , pSect2s   :: STXT.Sect2s
   , pSect2    :: Maybe STXT.Sect2
+  , pSect3s   :: STXT.Sect3s
   } 
 
 defaultPage = Page 
@@ -39,6 +40,7 @@ defaultPage = Page
   , pSect1    = Nothing 
   , pSect2s   = []     
   , pSect2    = Nothing
+  , pSect3s   = []     
   }
 
 options :: [OptDescr (Page -> IO Page)]
@@ -115,11 +117,12 @@ getSect2Htmls :: State Page [(FilePath, Html)]
 getSect2Htmls = do
     p@(Page {pSect1s=s1s}) <- get
     s2s <- forM s1s $ \s1@(STXT.Sect1 _ _ _ s2s) -> do 
-        forM s2s $ \s2@(STXT.Sect2 n t cs) -> do
+        forM s2s $ \s2@(STXT.Sect2 n t cs s3s) -> do
             put p{ pContent = cs
                  , pSect1 = Just s1
                  , pSect2s = s2s
                  , pSect2 = Just s2
+                 , pSect3s = s3s
                  }
             getPageHtml
     return $ concat s2s
@@ -178,6 +181,7 @@ getPageHtml :: State Page (FilePath, Html)
 getPageHtml = do
     Page { pTitle   = title
          , pContent = content
+         , pSect3s  = sect3s
          , pDoc     = Just doc
          } <- get
     titlebar <- getTitleBar
@@ -195,19 +199,27 @@ getPageHtml = do
                    +++ rightAds
                    +++ thediv ![identifier "content"]
                         << map (elem2Html doc) content 
+                       +++ map (sect32Html doc) sect3s
     f <- getFilePath
     return (f, html)
 
 sect1Anchor s1@(STXT.Sect1 n t _ _) = 
     anchor ! [href (sect1Path s1)] << t
 
-sect2Anchor s2@(STXT.Sect2 _ t _) = 
+sect2Anchor s2@(STXT.Sect2 _ t _ _) = 
     anchor ! [href (sect2Path s2)] << t
 
 sect1Path (STXT.Sect1 n _ _ _) = show n ++ ".html"
 
-sect2Path (STXT.Sect2 (n1, n2) _ _) = 
+sect2Path (STXT.Sect2 (n1, n2) _ _ _) = 
     show n1 ++ "_" ++ show n2 ++ ".html"
+
+sect32Html :: STXT.Doc -> STXT.Sect3 -> Html
+
+sect32Html doc (STXT.Sect3 _ title content) = 
+    thediv ! [theclass "sect3"]
+        << h1 << title
+       +++ map (elem2Html doc) content 
 
 elem2Html :: STXT.Doc -> STXT.Elem -> Html
 elem2Html doc (STXT.Para ps) = 

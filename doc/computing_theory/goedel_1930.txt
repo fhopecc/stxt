@@ -26,7 +26,7 @@ in der Art, daß das Beweisen nach einigen wenigen
 mechanischen Regeln vollzogen werden kann.
 
 眾所皆知數學的發展朝著更精確的方向已引導其所有版圖變得更形式化。
-以此方式則證明能成為執行少數統整的機械化規則。
+以此方式，證明能成為執行少數統整的機械化規則。
 
 Die umfassendtsen derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) einerseits, 
@@ -95,8 +95,8 @@ in ihnen formalisiert,
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
 這兩個系統都是如此廣泛，
-所有今天在數學用到的證明方法在以在其下形式化，
-也就是推回到統整少數的公理及推論規則
+所有今天在數學上應用到之證明方法在其下形式化，
+即回到統整少數的公理及推論規則
 
 Es liegt daher die Vermutung nahe, 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
