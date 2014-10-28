@@ -182,12 +182,14 @@ als endliche Reihen von Formeln
 (經由特定特質)。
 
 
-Ftir metamathematische Betrachtungen
-ist es nattirlich gleiehgtiltig~ welche Gegenstiinde man als Grundzeiehen
-nimmt, nnd wit entsehliegen uns dazu, natfirliehe Zahlen 7)
+Für metamathematische Betrachtungen ist 
+es natürlich gleichgtültig, welche Gegenstände man als Grundzeiehen
+nimmt, und wir entschlißen uns dazu, natürliche Zahlen 7)
 als solche zu verwenden. Dementsprechend ist dann eine Formel
-eine endliehe Folge nattirlieher Zahlen s) nnd eine Beweisfigur eine
-endliehe Folge yon endlichen Folgen natfirlieher Zahlen. 
+eine endliche Folge natürlicher Zahlen 3) und eine Beweisfigur eine
+endliche Folge von endlichen Folgen natürlicher Zahlen. 
+
+
 Die metamathematisehen
 Begriffe (Si~tze) werden dadurch zu Begriffen (Siitzen)
 fiber nattirliche Z.ahlen bzw. Folgen yon solehen 9) und daher (wenigstens

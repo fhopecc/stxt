@@ -753,6 +753,8 @@ die Klasse      類別
    
   Abkürzung           縮寫，源自動詞 abkürzen
 
+  Betrachtung         考量，源自動詞 betracht 
+
   Entwicklung         發展，源自動詞 entwickeln
 
   Formalisierung      形式化，源自動詞 formalisieren
@@ -1991,6 +1993,14 @@ sämt-lich    全部的、所有的、全體的
 
 sinn-volle    有意義的
 感覺
+
+-isch形容詞
++++++++++++
+
+-isch 字尾如同英文的 -ic 及 -cal，
+      通常加在名詞後，表示擁有名詞這項特質。
+
+metamathemat-isch 元數學的，從元數學之名詞 Metamathematik 而來
 
 形容詞變化
 ..........
