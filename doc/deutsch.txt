@@ -1013,6 +1013,19 @@ Ich weiß, dass ich nichts weiß.     我知道我一無所知。
 
 anderer 另一個
 
+指示代詞
+........
+
+指示代詞(Demonstrativpronomen) 
+
+der, die, das; 
+
+denen, dessen; 
+
+dieser, derjenige
+
+solche      就是
+
 動詞
 ----
 
@@ -1155,6 +1168,14 @@ be-trachten     小心練習
    嘗試
 be-schränken    限制
    小房間
+
+ent-            出來、離開、相反、開始
+  
+ent-schließen   決定
+    總結、關閉 
+
+ent-sprechen    對應、代表
+    說出
 
 er-         完成、死亡、殺害
 
@@ -1929,6 +1950,10 @@ Er läuft schnell. （他走得快）
 
 genau       精確的
 
+gleich      相等
+
+gültig      有效、合法、可用
+
 leicht      輕的、輕易的
 
 wenigen     一點點、不多
@@ -2001,6 +2026,12 @@ sinn-volle    有意義的
       通常加在名詞後，表示擁有名詞這項特質。
 
 metamathemat-isch 元數學的，從元數學之名詞 Metamathematik 而來
+
+雙形容詞合成
+++++++++++++
+
+gleich-gültig   無關緊要
+相同   可用
 
 形容詞變化
 ..........
@@ -2161,6 +2192,7 @@ etwa        關於、一些、例如、無論
 ja          對、就妳所知、確實
 zunächst    首先
 
+
 -erweise 副詞
 .............
 
@@ -2227,6 +2259,8 @@ Ich laufe ins Haus. 我跑進房子。
 met dat -> daarmee 以那個
 met dit -> hiermee 以這個
 
+dem-entsprechend 根據，由對應的現在分詞轉來
+
 副詞子句
 ........
 
@@ -2262,7 +2296,7 @@ vor allem       特別是，其英文為 above all
 
 頻率副詞不能在限定動詞前面。
 
-zugleich    同時 
+zu-gleich   同時 
 stets       始終、不斷地
 
 時間副詞
@@ -2331,11 +2365,11 @@ dazu   除此之外、為此、對它
 daß diese Axiome und Schlußregeln dazu ausreichen, 
 這些公理及推論法則除了滿足，
 
-gleiche 相等地
+gleich       相等地
 
 vorkommenden 發生
 
-überhaupt   根本
+überhaupt    根本
 
 介詞
 ----

@@ -182,12 +182,17 @@ als endliche Reihen von Formeln
 (經由特定特質)。
 
 
-Für metamathematische Betrachtungen ist 
-es natürlich gleichgtültig, welche Gegenstände man als Grundzeiehen
-nimmt, und wir entschlißen uns dazu, natürliche Zahlen 7)
-als solche zu verwenden. Dementsprechend ist dann eine Formel
+Für metamathematische Betrachtungen ist es natürlich gleichgültig, 
+welche Gegenstände man als Grundzeichen
+nimmt, und wir entschlißen uns dazu, 
+natürliche Zahlen 7) als solche zu verwenden. 
+Dementsprechend ist dann eine Formel
 eine endliche Folge natürlicher Zahlen 3) und eine Beweisfigur eine
 endliche Folge von endlichen Folgen natürlicher Zahlen. 
+
+後設數學觀點這自然是無異的，其接受作為基礎符之物件，
+而我們決定如此，自然數視為去利用。
+
 
 
 Die metamathematisehen
