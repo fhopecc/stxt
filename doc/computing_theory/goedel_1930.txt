@@ -191,22 +191,36 @@ eine endliche Folge natürlicher Zahlen 3) und eine Beweisfigur eine
 endliche Folge von endlichen Folgen natürlicher Zahlen. 
 
 後設數學觀點這自然是無異的，其接受作為基礎符之物件，
-而我們決定如此，自然數視為去利用。
+而我們決定如此，自然數 7) 視為去利用。
+據此公式可是自然數的有限數列 3) 而一個證明是有限數列，
+由自然數之有限數列組成。
 
+Die metamathematischen Begriffe (Sätze) werden dadurch 
+zu Begriffen (Sätzen) über natürliche Zahlen bzw. 
+Folgen von solchen 9) 
+und daher (wenigstens teilweise) in den Symbolen des Systems PM 
+selbst ausdrückbar.
 
+後設數學之項目(命題)成為自然數下之命題分別為。
+這樣組成之數列和那樣 (至少部分) 以PM系統之符號表達。
 
-Die metamathematisehen
-Begriffe (Si~tze) werden dadurch zu Begriffen (Siitzen)
-fiber nattirliche Z.ahlen bzw. Folgen yon solehen 9) und daher (wenigstens
-teilweise) in den Symbolen des Systems PM selbst ausdr[ickbar.
-Insbesondere kaun man zeigen, dal3 die Begriffe ~,Formel:', ,,Beweisflgur",
-,beweisbare Formel" innerhalb des Systems PM definierbar
-sind, d.h. man kann z. B. eine Formel F(v) aus PM mit einer freien
-Variablen v (yore Typus einer Zahlenfolge) angeben~0), so dalg F(v)
-inhaltlich interpretiert besagt: v ist eine beweisbare Formel. Nun
-stellen wit einen unentseheidbaren Satz des Systems PM, d.h. einen
-Satz A, ftir den weder A noch non-A beweisbar ist, folgendermal~
-en her:
+Insbesondere kann man zeigen, 
+daß die Begriffe "Formel", "Beweisfigur", "beweisbare Formel" 
+innerhalb des Systems PM definierbar sind, 
+d.h. man kann z.B. eine Formel F(v) aus PM mit einer freien
+Variablen v (vom Typus einer Zahlenfolge) angeben 10), 
+so daß F(v) inhaltlich interpretiert besagt: 
+v ist eine beweisbare Formel. 
+Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
+d.h. einen Satz A, für den weder A noch non-A beweisbar ist, 
+folgendermalßen her:
+
+可特別指出項目「式」、「證明數」、「可證式」是在 PM 系統內可定義，
+就是說，例如可設 PM 之式 F(v) 具一個自由變數 v (其類別為數列)， 
+當 F(v) 其內部意義可說為：v 是一個可證式。
+
+現在建構一個系統 PM 之不可決定之命題，
+即對命題 A而言，A 或非 A 都可證，如下：
 
 P 系統
 ......

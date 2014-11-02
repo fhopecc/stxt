@@ -2256,8 +2256,22 @@ Ich laufe ins Haus. 我跑進房子。
 代詞副詞是將原本的介詞片語，其形式為介詞加代詞，
 將代詞轉成地點副詞並將介詞置於後形成代詞副詞。
 
-met dat -> daarmee 以那個
-met dit -> hiermee 以這個
+daarmee met dat     以那個
+
+hiermee met dit     以這個
+
+dadurch durch da    thereby, thus
+
+dazu    zu dat      除此之外、為此、對它
+
+daß diese Axiome und Schlußregeln dazu ausreichen, 
+這些公理及推論法則除了滿足，
+
+überall 每處
+
+wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
+
+若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
 
 dem-entsprechend 根據，由對應的現在分詞轉來
 
@@ -2349,21 +2363,10 @@ formalisiert,
 
 daher  從此、因此
 
-darin 在裡面
-
-überall 每處
-
-wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
-
-若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
+darin  在裡面
 
 其它副詞
 ++++++++
-
-dazu   除此之外、為此、對它
-
-daß diese Axiome und Schlußregeln dazu ausreichen, 
-這些公理及推論法則除了滿足，
 
 gleich       相等地
 
@@ -2400,7 +2403,6 @@ ohne    不藉著，相反詞 mit
 
 mit     藉著，相反詞 ohne
 
-dadurch thereby, thus
 
 方向介詞
 ........
