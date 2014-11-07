@@ -222,6 +222,37 @@ folgendermalßen her:
 現在建構一個系統 PM 之不可決定之命題，
 即對命題 A而言，A 或非 A 都可證，如下：
 
+Eine Formel aus PM mit genau einer freien Variablen, 
+u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) wollen 
+wir ein Klassenzeichen nennen. 
+
+PM 中僅具一自由變數之式，
+具體而言即自然數之類別(類別的類別)，我們稱為類別符號。
+
+Die Klassenzeichen denken wir uns irgendwie
+in eine Folge geordnet 11), 
+bezeichnen das n-te mit R(n) und bemerken, 
+daß sich der Begriff "Klassenzeichen" sowie 
+die ordnende Relation R im System PM definieren lassen. 
+
+類別符可想成某種序列 11)，
+以 R(n) 指示其為 n 元並通知
+允許類別符和順序關係 R 於 PM 系統中定義。
+
+Sei α ein beliebiges Klassenzeichen; 
+mit [α; n] bezeichnen wir diejenige Formel, 
+welche aus dem Klassenzeichen α dadurch entsteht, 
+daß man die freie Variable 
+durch das Zeichen für die natürliche Zahl n ersetzt. 
+Auch die Tripel-Relation x = [y; z] erweist sich 
+als innerhalb PM definierbar.
+Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
+
+令 α 為任意類別符；用 [α; n] 提示公式，
+由此 α 由此產生以自然數之符號取代自由變數，
+三元關係 x = [y; z] 也可被證明能於 PM 中定義。
+現在我們定義自然數之類 K 如下：
+
 P 系統
 ......
 
@@ -482,6 +513,8 @@ Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
+
+
 
 陣列操作
 ........

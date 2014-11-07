@@ -348,6 +348,8 @@ bit
 
 [並列連詞]某數至某數
 
+sowie   與
+
 語序
 ----
 
@@ -796,6 +798,11 @@ die Klasse      類別
 
 4.國名或城市名。
 
+拉丁源名詞
+++++++++++
+
+Typus   陽性    類別，特質  屬格Typus，複數Typen
+
 形容名詞
 ++++++++
 
@@ -1037,9 +1044,13 @@ solche      就是
 原生動詞
 ........
 
+原生動詞通常來自高地德語。
+
 dienen      服務
 
 präzisieren 澄清
+
+denke       想，與英文 think 同源
 
 源自副詞之動詞
 ..............
@@ -1047,6 +1058,11 @@ präzisieren 澄清
 20141014 週二   稅務局
 
 äußern  說出，「反身」發表意見，源自 außen
+
+源自名詞之動詞
+..............
+
+zeichnen    畫，源自標示符號的名詞 Zeichen
 
 不定式
 ......
@@ -1107,6 +1123,8 @@ Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
 分詞
 ....
 
+分詞(Partizip) 分成現在分詞(Partizip I)與過去分詞(Partizip II)。
+
 現在分詞
 ++++++++
 
@@ -1159,7 +1177,7 @@ vorbei-, vorüber-, weg-, zurück-, zusammen-
 不可分離字首
 ++++++++++++
 
-不可分離字首
+不可分離字首(Vorsilbe)。
 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
 
 be-         指示動詞為及物動詞
@@ -1168,6 +1186,10 @@ be-trachten     小心練習
    嘗試
 be-schränken    限制
    小房間
+be-zeichnen     指出、命名為
+   畫、標記
+be-merken       通告
+   通知
 
 ent-            出來、離開、相反、開始
   
@@ -1177,10 +1199,17 @@ ent-schließen   決定
 ent-sprechen    對應、代表
     說出
 
+ent-stehen      出現、產生
+    站
+
 er-         完成、死亡、殺害
 
 er-heben    舉起、帶來
-完成 舉
+   舉
+er-setzen   取代
+   放置
+er-weisen   證明
+   指示
 
 ver-        動作完成
 
@@ -1559,10 +1588,19 @@ die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 
 所有數學問題，假定在相關系統都用形式表達，也可被決定。
 
+情態動詞
+........
+
+句是表達說話者的所知、看法或要求的，
+而情態則是為了表達說話者主觀上認為自己的所知、
+看法的真實性（可能），
+或實現自己要求的強制性（必要）或意願性（意願)如何，
+提供了若干種不同的選擇表示允許、可能或可以。
+
 lassen
 ++++++
 
-lassen  [情境動詞]可以，允許
+lassen  可以，允許
 
 können
 ++++++
@@ -1873,6 +1911,11 @@ Er erzählt mir, er habe gestern Tennis gespielt.
 
 動詞常會藉由介詞來與目標事物連結。
 
+介詞與冠詞縮寫
+..............
+
+vom = von + dem
+
 賓語句
 ++++++
 
@@ -1961,6 +2004,14 @@ wenigen     一點點、不多
 vollzogen   完美的
 
 üblich      一般
+
+形容詞字尾
+++++++++++
+
+-ig     從名詞和動詞產生形容詞和副詞。表示具有某種性質的。 
+
+beliebig 任意的，源自 belieben + -ig 
+                      喜歡
 
 字首加形容詞合成
 ++++++++++++++++
@@ -2186,12 +2237,12 @@ heißt: is called
 原來就作為副詞的詞都有重要的意義，
 如否定副詞 nicht。
 
-außen       在外地
-nur         僅、只有
-etwa        關於、一些、例如、無論
-ja          對、就妳所知、確實
-zunächst    首先
-
+außen           在外地
+nur             僅、只有
+etwa            關於、一些、例如、無論
+ja              對、就妳所知、確實
+zunächst        首先
+folgendermaßen  如下
 
 -erweise 副詞
 .............
@@ -2206,6 +2257,13 @@ Er hat lustig gesungen.         他唱地很有趣。
 Er hat lustigerweise gesungen.  他唱是有趣地。
 
 英語是用位置區分副詞修飾的目標，放在句首即修飾句子。
+
+irgend-副詞
+...........
+
+irgend      根本、絲毫、完全
+
+irgend-wie  以某種方式，即英文的 somehow
 
 句首副詞
 ........
@@ -2253,14 +2311,17 @@ Ich laufe ins Haus. 我跑進房子。
 
 20141010 星期五 義仁
 
-代詞副詞是將原本的介詞片語，其形式為介詞加代詞，
+
+
+代詞副詞(Pronominaladverb)是將原本的介詞片語，
+其形式為介詞加代詞，
 將代詞轉成地點副詞並將介詞置於後形成代詞副詞。
 
 daarmee met dat     以那個
 
 hiermee met dit     以這個
 
-dadurch durch da    thereby, thus
+dadurch durch da    由此，thereby, thus
 
 dazu    zu dat      除此之外、為此、對它
 
@@ -2274,6 +2335,7 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
 
 dem-entsprechend 根據，由對應的現在分詞轉來
+
 
 副詞子句
 ........
@@ -2451,9 +2513,7 @@ Das ist von guter Qualit?t.
 
 von zu Hause 從家裏來
 
-:衍生詞:
 
-vom = von + dem
 
 
 否定
@@ -2539,6 +2599,8 @@ Ich bin nicht blöd. 我不笨。
 縮寫
 ----
 
+anm.    Anmerkung           remark. 註
+bzw.    beziehungsweise     resp. 分別是
 d.h     das heißt           that is
 u.      und                 & and
 u.a.    unter anderen/-em   i.a. inter alia 除此之外
@@ -2546,7 +2608,7 @@ u.dgl.  und dergleichen     and such like
 u.s.f.  und so fort         etc. et cetera …等等
 u.s.w.  und so weiter       
 usw.
-z.B.    zum Beispiel        e.g. 舉例而言
-bzw.    beziehungsweise     resp. 分別是
 vgl.    vergleiche          cp. 比較
-anm.    Anmerkung           remark. 註
+z.B.    zum Beispiel        e.g. 舉例而言
+zw.     zwar                的確
+u.zw.   und zwar            具體而言
