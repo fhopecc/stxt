@@ -253,6 +253,45 @@ Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 三元關係 x = [y; z] 也可被證明能於 PM 中定義。
 現在我們定義自然數之類 K 如下：
 
+nεK ≡ ~Bew[R(n);n] 11a) (1)
+
+(wobei Bew x bedeutet: x ist eine beweisbare Formel). 
+Da die Begriffe,
+welche im Definiens vorkommen, 
+sämtlich in PM definierbar sind, 
+so auch der daraus zusammengesetzte Begriff K, 
+d.h. es gibt ein Klassenzeichen S 12), 
+so daß die Formel [S; n] inhaltlich gedeutet besagt, 
+daß die natürliche Zahl n zu K gehört. 
+S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
+d. h. es gilt
+
+(這裡 Bew x 指 x 是一個可證式)。
+出現在之前定義的詞，全部都可在 PM 中定義。
+由複合項 K 也是如此，
+即給定一類符 S，
+故式 [S; n] 可說是內容上可解釋，
+包含整數 n 至 K。
+S 是類符並有某些 R(q)，即如下式：
+
+S=R(q) 
+
+für eine bestimmte natürliche Zahl q. 
+Wir zeigen nun, 
+daß der Satz [R(g); q] 12) in PM unentseheidbar ist. 
+Denn angenommen der Satz [R(q); q] wäre beweisbar, 
+dann wäre er auch richtig, 
+d.h. aber nach dem obigen q würde zu K gehören, 
+d.h. nach (1) es würde ~Bew [R(q); q] gelten, 
+im Widerspruch mit der Annahme. 
+對某
+
+Wäre dagegen die Negation von [R(q); q] beweisbar, 
+so würde ~(nεK), 
+d.h. Bew[R (q); q] gelten. 
+[R(q); q] wäre also zugleich mit seiner 
+Negation beweisbar, was wiederum unmöglich ist. 
+
 P 系統
 ......
 

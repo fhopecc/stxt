@@ -265,6 +265,11 @@ gehe ich wieder ins Bett.
 
 bevor   之前，同英語的 before
 
+da  因為
+
+Da ich krank war, konnte ich nicht kommen.
+因為我生病了，所以我不能來。
+
 關係子句
 ........
 
@@ -349,6 +354,8 @@ bit
 [並列連詞]某數至某數
 
 sowie   與
+
+
 
 語序
 ----
@@ -675,6 +682,7 @@ mehrere         一些
 viele           很多
 winige          少許
 verschiedene    多樣
+sämtlich        全部、完整
 
 補語是用主格
 ............
@@ -1215,6 +1223,10 @@ ver-        動作完成
 
 ver-stehen  明白
     顯示
+
+vor-        之前的
+
+vor-kommen  發生
 
 分離動詞
 ++++++++
@@ -2060,6 +2072,8 @@ end-lich     有限的 end 為名詞 Ende 終點而來。
 
 gewöhn-lich  一般的
 
+inhalt-lich  實質上
+
 sämt-lich    全部的、所有的、全體的
 
 -voll形容詞
@@ -2311,8 +2325,6 @@ Ich laufe ins Haus. 我跑進房子。
 
 20141010 星期五 義仁
 
-
-
 代詞副詞(Pronominaladverb)是將原本的介詞片語，
 其形式為介詞加代詞，
 將代詞轉成地點副詞並將介詞置於後形成代詞副詞。
@@ -2328,7 +2340,7 @@ dazu    zu dat      除此之外、為此、對它
 daß diese Axiome und Schlußregeln dazu ausreichen, 
 這些公理及推論法則除了滿足，
 
-überall 每處
+über-all 每處
 
 wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
 
@@ -2336,6 +2348,7 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 
 dem-entsprechend 根據，由對應的現在分詞轉來
 
+dar-aus 從中  
 
 副詞子句
 ........
