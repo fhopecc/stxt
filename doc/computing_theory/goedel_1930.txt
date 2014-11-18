@@ -278,13 +278,20 @@ S=R(q)
 
 für eine bestimmte natürliche Zahl q. 
 Wir zeigen nun, 
-daß der Satz [R(g); q] 12) in PM unentseheidbar ist. 
+daß der Satz [R(q); q] 12) in PM unentseheidbar ist. 
 Denn angenommen der Satz [R(q); q] wäre beweisbar, 
 dann wäre er auch richtig, 
 d.h. aber nach dem obigen q würde zu K gehören, 
-d.h. nach (1) es würde ~Bew [R(q); q] gelten, 
+d.h. nach (1) es würde ~Bew[R(q); q] gelten, 
 im Widerspruch mit der Annahme. 
-對某
+
+對某一自然數q，
+現在我們展示 PM 中命題 [R(q);q] 12) 是不可決定。
+因為假定命題 [R(q);q] 是可證的，
+它也是對的，
+即對強制 q K 為前題，
+即對 (1) 而言 ~Bew[R(q); q] 可為真，
+與假設矛盾。 
 
 Wäre dagegen die Negation von [R(q); q] beweisbar, 
 so würde ~(nεK), 

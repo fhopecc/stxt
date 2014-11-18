@@ -120,6 +120,148 @@ die Löwin       雌獅
 例如關於該動作的開始、持續、完成或重複等方面的情況，
 但不涉及該動作發生的時間。
 
+語氣
+----
+
+語氣(mood)或式是指通過一定的語法形式，
+也就是說話者對行為或動作的態度。
+一般有陳述語氣，祈使語氣，虛擬語氣等。
+
+虛擬式
+......
+
+虛擬式一般用來表示說話者認為所陳述的行為、事物不符合事實或不確定是事實，
+如表示想像、猜測、假設、不現實的願望、客氣或用來轉述他人的話或觀點。
+虛擬式分為虛擬一式和虛擬二式。
+
+虛擬一式
+++++++++
+
+虛擬一式由動詞不定式詞幹加人稱詞尾構成，
+單數第一人稱和第三人稱詞尾是e，
+單數第二人稱詞尾是est，複數第二人稱詞尾是et，
+複數第一人稱和第三人稱詞尾是en。
+所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。
+舉例如下：
+
+	        haben	lesen	können	sein	werden
+Ich	        habe	lese	könne	sei	werde
+du	        habest	lesest	könnest	sei(e)st	werdest
+er/sie/es	habe	lese	könne	sei	werde
+wir	        haben	lesen	können	seien	werden
+ihr	        habet	leset	könnet	seiet	werdet
+sie/Sie	    haben	lesen	können	seien	werden
+
+虛擬一式主要用於間接引語，表示說話者轉述他人的話或觀點。
+因此，虛擬一式常用在引文或新聞報導當中：
+
+Er hat mir gesagt, "ich schreibe gerade einen Roman."
+他對我說：「我正在寫一部小說。」
+                            |
+                            V
+Er hat mir gesagt, er schreibe gerade einen Roman. 
+他告訴我，他正在寫一部小說。
+
+間接引語常用從屬連詞 daß 引導，若間接引句有數個句子，
+除第一句之外，daß一般會省略。
+若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
+
+常用下列動詞引起間接引句，例如
+sagen, behaupten, berichten, betonen, erklären, erzählen, 
+mitteilen, hören, schreiben, fragen, antworten, denken, 
+glauben, meinen, hoffen, wünschen 等。
+
+間接引語不用引號，用引號的引語是直接引語。
+如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，
+就使用虛擬一式，否則用陳述式。
+
+在間接引語中，
+虛擬一式的現在完成式和過去式都是用助動詞haben或sein
+的虛擬一式加上動詞的第二分詞來表示。
+
+Er erzählt mir: "Ich habe gestern Tennis gespielt." 
+他對我講：「我昨天打網球了。」
+
+Er erzählt mir, er habe gestern Tennis gespielt. 
+他對我講他昨天打網球了。
+
+如果虛擬一式與直陳式形式相同，用虛擬二式代替虛擬一式。
+口語中常用虛擬二式代替虛擬一式，因為虛擬二式更容易區別直陳式。
+
+例句：
+(原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
+(變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
+   或 Die Kinder sagen, sie kämen gleich.
+  (6) 轉述對第三者的請求或要求時，可以用daß引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
+例句：
+(原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
+(變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
+
+虛擬二式
+++++++++
+
+虛擬二式(Konjunktiv II)
+
+型態
+
+虛擬二式的表達法並不是只有 würden + Infinitiv，事實上虛擬二式的原始型態，是「過去式字幹＋虛擬式字尾」。以kommen為例：
+
+人稱	    現在式	過去式	虛擬二式
+ich	        komme	kam	    käme
+du	        kommst	kamst	kämest
+er,sie,es	kommt	kam	    käme
+wir	        kommen	kammen	kämmen
+ihr	        kommet	kammt	kämmet
+sie,Sie	    kommen	kammen	kämmen
+
+對於強變化動詞，字幹的母音如果遇到a, o, u 也要加以變音。
+
+然而對於許多動詞，特別是弱變化動詞的過去式，
+會出現虛擬二式與過去式無法分別的狀況。例如：
+
+人稱	    現在式	過去式	    虛擬二式
+ich	        frage	fragte	    fragte
+du	        fragst	fragtest	fragt(e)st
+er, sie, es	fragt	fragte	    fragte
+wir	fragen	fragten	fragten
+ihr	fraget	fragtet	fragt(e)t
+sie, Sie	fragen	fragten	    fragten
+
+所以對於大多數的動詞，虛擬二式的表達方式，
+現在大多採用würden+Infinitiv的方法。
+但對於一些特定習用的強變化動詞，依然使用原始的型態，例如：
+
+kommen→ er käme
+sein→ er wäre
+gehen→ er ginge
+geben→ er gäbe
+dürfen→ er dürfte
+haben→ er hätte
+brauchen→ er bräuchte
+helfen→ er hülfte（老式說法，較罕用）
+
+用途
+
+虛擬二式的用法類似英文的假設語氣，但比較嚴謹。通常有四種應用場合：
+1. 表示與事實相反
+
+2. 表示客氣、禮貌、請求
+3. 表示希望、願望、夢想
+4. 譬喻的修辭
+
+表示與事實相反：
+
+Wenn ich doch 12 Jahre alt wäre, hätte ich mehr Roman gelesen. 
+如果我只有12歲，我會讀更多小說。
+
+表示客氣、禮貌、請求：
+Könnten Sie mir sagen, warum der Verkäufer mir auf meine Frage bis heute noch nicht antwortet.（可否請您告訴我，為甚麼賣家至今仍未回答我的問題？）
+表示希望、願望、夢想：
+Hätte ich doch bloß ein großes Haus!（但願我有一棟大房子！）
+譬喻的修辭（要和als ob, als wenn合用）：
+Er aß zu viel, als ob er schon zehn Jahre lang kein Essen gesehen hätte. （他吃得極多，彷彿已經十年沒有見過食物了。）
+（以上例句多半是我自己造的，如果有錯還請多多指正，謝謝！）
+
 句
 --
 
@@ -1847,76 +1989,6 @@ aus  drücken
 之外 壓
 
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
-
-虛擬式
-......
-
-虛擬式一般用來表示說話者認為所陳述的行為、
-事物不符合事實或不確定是事實，如表示想像、猜測、假設、不現實的願望、
-客氣或用來轉述他人的話或觀點。
-虛擬式分為虛擬一式和虛擬二式。
-
-虛擬一式
-++++++++
-
-虛擬一式由動詞不定式詞幹加人稱詞尾構成，
-單數第一人稱和第三人稱詞尾是e，
-單數第二人稱詞尾是est，複數第二人稱詞尾是et，
-複數第一人稱和第三人稱詞尾是en。
-所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。舉例如下
-
-	        haben	lesen	können	sein	werden
-Ich	        habe	lese	könne	sei	werde
-du	        habest	lesest	könnest	sei(e)st	werdest
-er/sie/es	habe	lese	könne	sei	werde
-wir	        haben	lesen	können	seien	werden
-ihr	        habet	leset	könnet	seiet	werdet
-sie/Sie	    haben	lesen	können	seien	werden
-
-虛擬一式主要用於間接引語，表示說話者轉述他人的話或觀點。
-因此，虛擬一式常用在引文或新聞報導當中：
-
-Er hat mir gesagt, "ich schreibe gerade einen Roman."
-他對我說：「我正在寫一部小說。」
-                            |
-                            V
-Er hat mir gesagt, er schreibe gerade einen Roman. 
-他告訴我，他正在寫一部小說。
-
-間接引語常用從屬連詞 daß 引導，若間接引句有數個句子，
-除第一句之外，daß一般會省略。
-若間接引句是問句，用表示疑問的從屬連詞 ob、was、wer、wie、wann、wo等引導。
-
-常用下列動詞引起間接引句，例如
-sagen, behaupten, berichten, betonen, erklären, erzählen, 
-mitteilen, hören, schreiben, fragen, antworten, denken, 
-glauben, meinen, hoffen, wünschen 等。
-
-間接引語不用引號，用引號的引語是直接引語。
-如果說話者只是客觀轉述他人的話或觀點，而非表明自己贊同與否，
-就使用虛擬一式，否則用陳述式。
-
-在間接引語中，
-虛擬一式的現在完成式和過去式都是用助動詞haben或sein
-的虛擬一式加上動詞的第二分詞來表示。
-
-Er erzählt mir: "Ich habe gestern Tennis gespielt." 
-他對我講：「我昨天打網球了。」
-
-Er erzählt mir, er habe gestern Tennis gespielt. 
-他對我講他昨天打網球了。
-
-如果虛擬一式與直陳式形式相同，用虛擬二式代替虛擬一式。
-口語中常用虛擬二式代替虛擬一式，因為虛擬二式更容易區別直陳式。
-
-例句：
-(原句) Die Kinder sagen, „Wir kommen gleich.“ (孩子們說：「我們馬上來。」)
-(變化) Die Kinder sagen, sie würden gliech kommen. (孩子們說他們馬上來。)
-   或 Die Kinder sagen, sie kämen gleich.
-  (6) 轉述對第三者的請求或要求時，可以用daß引導從句，也可不用引導詞。一般要用情態動詞sollen的直陳式或虛擬式，或用mögen的虛擬一式或虛擬二式，mögen比sollen語氣委婉客氣。
-例句：
-(原句) Herr Li bat eine Reiseführerin: „Bestellen Sie mir bitte ein Taxi.“ (李先生向一位導遊請求道：「請您幫我叫一台計程車。」)
-(變化) Herr Li bat eine Reiseführerin, daß eine Reiseführerin ihm ein Taxi bestellen möge/ möchte. (李先生請一位導遊幫他叫一輛計程車。)
 
 與介詞合用
 ..........
