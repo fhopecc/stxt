@@ -127,20 +127,18 @@ die Löwin       雌獅
 也就是說話者對行為或動作的態度。
 一般有陳述語氣，祈使語氣，虛擬語氣等。
 
-虛擬式
-......
+虛擬一式
+........
 
 虛擬式一般用來表示說話者認為所陳述的行為、事物不符合事實或不確定是事實，
 如表示想像、猜測、假設、不現實的願望、客氣或用來轉述他人的話或觀點。
 虛擬式分為虛擬一式和虛擬二式。
 
-虛擬一式
-++++++++
-
 虛擬一式由動詞不定式詞幹加人稱詞尾構成，
 單數第一人稱和第三人稱詞尾是e，
 單數第二人稱詞尾是est，複數第二人稱詞尾是et，
 複數第一人稱和第三人稱詞尾是en。
+
 所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。
 舉例如下：
 
@@ -202,9 +200,9 @@ Er erzählt mir, er habe gestern Tennis gespielt.
 
 虛擬二式(Konjunktiv II)
 
-型態
-
-虛擬二式的表達法並不是只有 würden + Infinitiv，事實上虛擬二式的原始型態，是「過去式字幹＋虛擬式字尾」。以kommen為例：
+虛擬二式為 würden + Infinitiv，
+虛擬二式的原始型態，是「過去式字幹＋虛擬式字尾」。
+以kommen為例：
 
 人稱	    現在式	過去式	虛擬二式
 ich	        komme	kam	    käme
@@ -241,12 +239,16 @@ brauchen→ er bräuchte
 helfen→ er hülfte（老式說法，較罕用）
 
 用途
+++++
 
 虛擬二式的用法類似英文的假設語氣，但比較嚴謹。通常有四種應用場合：
+
 1. 表示與事實相反
 
 2. 表示客氣、禮貌、請求
+
 3. 表示希望、願望、夢想
+
 4. 譬喻的修辭
 
 表示與事實相反：
@@ -255,12 +257,20 @@ Wenn ich doch 12 Jahre alt wäre, hätte ich mehr Roman gelesen.
 如果我只有12歲，我會讀更多小說。
 
 表示客氣、禮貌、請求：
-Könnten Sie mir sagen, warum der Verkäufer mir auf meine Frage bis heute noch nicht antwortet.（可否請您告訴我，為甚麼賣家至今仍未回答我的問題？）
+Könnten Sie mir sagen, 
+warum der Verkäufer mir auf meine Frage bis heute noch nicht antwortet.
+
+可否請您告訴我，為甚麼賣家至今仍未回答我的問題？
+
 表示希望、願望、夢想：
-Hätte ich doch bloß ein großes Haus!（但願我有一棟大房子！）
+
+Hätte ich doch bloß ein großes Haus!
+但願我有一棟大房子！
+
 譬喻的修辭（要和als ob, als wenn合用）：
-Er aß zu viel, als ob er schon zehn Jahre lang kein Essen gesehen hätte. （他吃得極多，彷彿已經十年沒有見過食物了。）
-（以上例句多半是我自己造的，如果有錯還請多多指正，謝謝！）
+
+Er aß zu viel, als ob er schon zehn Jahre lang kein Essen gesehen hätte.
+他吃得極多，彷彿已經十年沒有見過食物了。
 
 句
 --

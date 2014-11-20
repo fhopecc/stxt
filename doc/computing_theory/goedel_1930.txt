@@ -296,8 +296,30 @@ im Widerspruch mit der Annahme.
 Wäre dagegen die Negation von [R(q); q] beweisbar, 
 so würde ~(nεK), 
 d.h. Bew[R (q); q] gelten. 
-[R(q); q] wäre also zugleich mit seiner 
-Negation beweisbar, was wiederum unmöglich ist. 
+[R(q); q] wäre also zugleich 
+mit seiner Negation beweisbar, 
+was wiederum unmöglich ist. 
+
+對 [R(q); q] 之否定是否可證，
+所以 ~(nεK)，
+即 Bew[R (q); q] 是有效的。
+
+[R(q); q] 與其否定同時可證，這再次是不可能的。
+
+Die Analogie dieses Schlusses 
+mit der Antinomie Richard springt in die Augen; 
+auch mit dem "Lügner" besteht eine nahe Verwandtschaff 14), 
+denn der unentseheidbare Satz [R(q); q] besagt ja, 
+daß q zuK geh~rt, d.h. naeh (1), da~ [R(~); q] nicht beweisbar
+ist. Wit haben also einen Satz voruns, der seine eigene Unbeweisbarkeit
+behauptet~5). Die eben auseinandergesetzte Beweismethodelal~t sieh offenbar auf jedes formale System anwenden, das erstens 
+inhaltlieh gedeutet fiber gentigend Ausdrueksmittel vcrNgt, um die 
+in der obigen tJberlegung vorkommendcn Begriffe (insbesondere den 
+Begriff ,,beweisbare Formel") zu definieren, and in dem zweitens 
+jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende 
+exakte Durchffihrung des obigen Beweises wird unter anderem die 
+Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
+dutch eine rein formale nnd weit schwachere zu ersetzen. 
 
 P 系統
 ......
