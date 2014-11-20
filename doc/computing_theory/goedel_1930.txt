@@ -147,9 +147,9 @@ angegebenen Art beweisbar werden.
    都基於整數，前置 (x) 也僅包含整數。
    
 
-Wir skizzieren, bevor wir auf Details eingehen, zunächst den
-Hauptgedanken des Beweises, natürlich ohne auf Exaktheit Anspruch
-zu erheben. 
+Wir skizzieren, bevor wir auf Details eingehen, 
+zunächst den Hauptgedanken des Beweises, 
+natürlich ohne auf Exaktheit Anspruch zu erheben. 
 
 在進入細節前，我們首先草繪證明的主要觀念，自然地不引入精確的聲明。
 
@@ -162,74 +162,77 @@ welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
 形式系統之式(在此限制為PM系統)為
-外部考慮有限基礎符(變數、邏輯常數及括號分別為分隔點)字串
-而且可輕易辨別那些基礎符字串是有意義之式及那些不是 6)。
+外在視為有限基礎符(變數、邏輯常數及括號分別為分隔點)字串
+而且可輕易辨別那些基礎符字串是有意義之式而那些不是 6)。
 
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
    immer eine ohne Abkürzungen (d.h. ohne Verwendung von Definitionen) 
    geschriebene Formel. 
-   Definitionen dienen ja nur der kürzeren Schreibweise und sind daher
-   prinzipiell überflüssig.
+   Definitionen dienen ja nur der kürzeren Schreibweise und 
+   sind daher prinzipiell überflüssig.
 
-6) 我們可理解這裡及以下 PM 之式總是沒有已寫式之縮寫(即沒有應用定義)。
+6) 我們知道以下 PM 之式總是以不含有縮寫(即沒有應用定義)。
    如妳所知定義只是幫助書寫更為精簡，因此原則上是不必要的。
 
-Analog sind Beweise vom formalen Standpunkt nichts anderes 
-als endliche Reihen von Formeln 
+Analog sind Beweise vom formalen Standpunkt 
+nichts anderes als endliche Reihen von Formeln 
 (mit bestimmten angebbaren Eigenschaften). 
 
-類比是形式觀點之證明沒有另一個為式之有限字串
+類似而言，形式證明不過是式之有限字串
 (經由特定特質)。
 
-
 Für metamathematische Betrachtungen ist es natürlich gleichgültig, 
-welche Gegenstände man als Grundzeichen
-nimmt, und wir entschlißen uns dazu, 
+welche Gegenstände man als Grundzeichen nimmt, 
+und wir entschlißen uns dazu, 
 natürliche Zahlen 7) als solche zu verwenden. 
-Dementsprechend ist dann eine Formel
-eine endliche Folge natürlicher Zahlen 3) und eine Beweisfigur eine
-endliche Folge von endlichen Folgen natürlicher Zahlen. 
 
-後設數學觀點這自然是無異的，其接受作為基礎符之物件，
-而我們決定如此，自然數 7) 視為去利用。
-據此公式可是自然數的有限數列 3) 而一個證明是有限數列，
-由自然數之有限數列組成。
+後設數學下，這自然是無異的，其接受作為基礎符之物件，
+而我們自行決定自然數 7) 以此來利用。
 
+Dementsprechend ist 
+dann eine Formel eine endliche Folge natürlicher Zahlen 3) und 
+eine Beweisfigur eine endliche Folge von 
+endlichen Folgen natürlicher Zahlen. 
 Die metamathematischen Begriffe (Sätze) werden dadurch 
 zu Begriffen (Sätzen) über natürliche Zahlen bzw. 
+
+據此公式為自然數的有限序列 3) 
+而證明數是自然數之有限數列組成之有限序列。
+後設數學之項目(命題)以此轉為自然數之項目(命題)分別為。
+
 Folgen von solchen 9) 
 und daher (wenigstens teilweise) in den Symbolen des Systems PM 
 selbst ausdrückbar.
 
-後設數學之項目(命題)成為自然數下之命題分別為。
-這樣組成之數列和那樣 (至少部分) 以PM系統之符號表達。
+這樣和那樣 (至少部分) 組成之數列以PM系統之符號自我表達。
 
 Insbesondere kann man zeigen, 
 daß die Begriffe "Formel", "Beweisfigur", "beweisbare Formel" 
 innerhalb des Systems PM definierbar sind, 
-d.h. man kann z.B. eine Formel F(v) aus PM mit einer freien
-Variablen v (vom Typus einer Zahlenfolge) angeben 10), 
+d.h. man kann z.B. eine Formel F(v) aus PM 
+mit einer freien Variablen v (vom Typus einer Zahlenfolge) angeben 10), 
 so daß F(v) inhaltlich interpretiert besagt: 
 v ist eine beweisbare Formel. 
-Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
-d.h. einen Satz A, für den weder A noch non-A beweisbar ist, 
-folgendermalßen her:
 
 可特別指出項目「式」、「證明數」、「可證式」是在 PM 系統內可定義，
 就是說，例如可設 PM 之式 F(v) 具一個自由變數 v (其類別為數列)， 
 當 F(v) 其內部意義可說為：v 是一個可證式。
 
+Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
+d.h. einen Satz A, für den weder A noch non-A beweisbar ist, 
+folgendermalßen her:
+
 現在建構一個系統 PM 之不可決定之命題，
 即對命題 A而言，A 或非 A 都可證，如下：
 
 Eine Formel aus PM mit genau einer freien Variablen, 
-u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) wollen 
-wir ein Klassenzeichen nennen. 
+u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
+wollen wir ein Klassenzeichen nennen. 
 
 PM 中僅具一自由變數之式，
-具體而言即自然數之類別(類別的類別)，我們稱為類別符號。
+且具體上使其類別即屬自然數(類別的類別)，稱為類別符號。
 
-Die Klassenzeichen denken wir uns irgendwie
+Die Klassenzeichen denken wir uns irgendwie 
 in eine Folge geordnet 11), 
 bezeichnen das n-te mit R(n) und bemerken, 
 daß sich der Begriff "Klassenzeichen" sowie 
