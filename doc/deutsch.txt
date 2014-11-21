@@ -2402,6 +2402,13 @@ Ich laufe ins Haus. 我跑進房子。
           ins = in das
 動態故用與格
 
+nichts anderes als  不過是
+
+Analog sind Beweise vom formalen Standpunkt 
+nichts anderes als endliche Reihen von Formeln 
+
+類似而言，形式證明不過是式之有限字串。
+
 代詞副詞
 ........
 
@@ -2534,7 +2541,8 @@ vorkommenden 發生
 介詞
 ----
 
-介詞通常為前置詞，置於其所支配之名詞前，常以片語的形態出現，所以意義相當不固定。
+介詞通常為前置詞，置於其所支配之名詞前，常以片語的形態出現，
+所以意義相當不固定。
 
 德語中有的介詞要求其後的名詞用第二格，有的要求第三格，有的要求第四格，
 有的根據語句中的不同情況有時要求三格，有時要求四格。

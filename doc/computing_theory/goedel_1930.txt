@@ -239,22 +239,24 @@ daß sich der Begriff "Klassenzeichen" sowie
 die ordnende Relation R im System PM definieren lassen. 
 
 類別符可想成某種序列 11)，
-以 R(n) 指示其為 n 元並通知
-允許類別符和順序關係 R 於 PM 系統中定義。
+以 R(n) 表示其第 n 個元素且可注意到
+類別符和順序關係 R 允許於 PM 系統中定義。
 
 Sei α ein beliebiges Klassenzeichen; 
 mit [α; n] bezeichnen wir diejenige Formel, 
 welche aus dem Klassenzeichen α dadurch entsteht, 
 daß man die freie Variable 
 durch das Zeichen für die natürliche Zahl n ersetzt. 
-Auch die Tripel-Relation x = [y; z] erweist sich 
-als innerhalb PM definierbar.
-Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 
-令 α 為任意類別符；用 [α; n] 提示公式，
-由此 α 由此產生以自然數之符號取代自由變數，
+令 α 為任意類別符；
+用 [α; n] 代表以自然數 n 取代 α 中自由變數之式，。
+
+Auch die Tripel-Relation x = [y; z] erweist 
+sich als innerhalb PM definierbar.
+
 三元關係 x = [y; z] 也可被證明能於 PM 中定義。
-現在我們定義自然數之類 K 如下：
+
+Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 
 nεK ≡ ~Bew[R(n);n] 11a) (1)
 
@@ -269,8 +271,12 @@ daß die natürliche Zahl n zu K gehört.
 S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
 d. h. es gilt
 
+現在我們定義自然數之類 K 如下：
+
+nεK ≡ ~Bew[R(n);n] 11a) (1)
+
 (這裡 Bew x 指 x 是一個可證式)。
-出現在之前定義的詞，全部都可在 PM 中定義。
+出現於定義的項全部都可在 PM 中定義。
 由複合項 K 也是如此，
 即給定一類符 S，
 故式 [S; n] 可說是內容上可解釋，
@@ -322,7 +328,7 @@ Begriff ,,beweisbare Formel") zu definieren, and in dem zweitens
 jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende 
 exakte Durchffihrung des obigen Beweises wird unter anderem die 
 Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
-dutch eine rein formale nnd weit schwachere zu ersetzen. 
+dutch eine rein formale nnd weit schwachere zu ersetzen.
 
 P 系統
 ......
