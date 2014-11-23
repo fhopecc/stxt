@@ -161,9 +161,9 @@ und man kann leicht genau präzisieren,
 welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
-形式系統之式(在此限制為PM系統)為
-外在視為有限基礎符(變數、邏輯常數及括號分別為分隔點)字串
-而且可輕易辨別那些基礎符字串是有意義之式而那些不是 6)。
+形式系統之式(在此限制為PM系統)
+可被語法上視為有限基礎符(變數、邏輯常數及括號或分隔點)序列，
+而且可輕易辨別那些基礎符字串是正確之式而那些不是 6)。
 
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
    immer eine ohne Abkürzungen (d.h. ohne Verwendung von Definitionen) 
@@ -178,7 +178,7 @@ Analog sind Beweise vom formalen Standpunkt
 nichts anderes als endliche Reihen von Formeln 
 (mit bestimmten angebbaren Eigenschaften). 
 
-類似而言，形式證明不過是式之有限字串
+同樣地形式證明不過是式之有限字串
 (經由特定特質)。
 
 Für metamathematische Betrachtungen ist es natürlich gleichgültig, 
@@ -242,6 +242,11 @@ die ordnende Relation R im System PM definieren lassen.
 以 R(n) 表示其第 n 個元素且可注意到
 類別符和順序關係 R 允許於 PM 系統中定義。
 
+11) Etwa nach steigender Gliedersumme und 
+    bei gleicher Summe lexikographisch.
+
+11) 例如漸增的成員和及有字彙順序有同樣和
+
 Sei α ein beliebiges Klassenzeichen; 
 mit [α; n] bezeichnen wir diejenige Formel, 
 welche aus dem Klassenzeichen α dadurch entsteht, 
@@ -261,6 +266,15 @@ Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 nεK ≡ ~Bew[R(n);n] 11a) (1)
 
 (wobei Bew x bedeutet: x ist eine beweisbare Formel). 
+
+現在我們定義自然數類 K 如下：
+nεK ≡ ~Bew[R(n);n] 11a) (1)
+(這裡 Bew x 指 x 是一個可證式)。
+
+11a) Durch Überstreichen wird die Negation bezeichnet.
+                                                         --- 
+11a) 覆寫線標記否定。譯註：原文否定是詞上面覆寫線 ~Bew = Bew 
+
 Da die Begriffe,
 welche im Definiens vorkommen, 
 sämtlich in PM definierbar sind, 
@@ -269,51 +283,60 @@ d.h. es gibt ein Klassenzeichen S 12),
 so daß die Formel [S; n] inhaltlich gedeutet besagt, 
 daß die natürliche Zahl n zu K gehört. 
 S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
-d. h. es gilt
-
-現在我們定義自然數之類 K 如下：
-
-nεK ≡ ~Bew[R(n);n] 11a) (1)
-
-(這裡 Bew x 指 x 是一個可證式)。
-出現於定義的項全部都可在 PM 中定義。
-由複合項 K 也是如此，
-即給定一類符 S，
-故式 [S; n] 可說是內容上可解釋，
-包含整數 n 至 K。
-S 是類符並有某些 R(q)，即如下式：
+d.h. es gilt
 
 S=R(q) 
 
 für eine bestimmte natürliche Zahl q. 
+
+出現於定義的項全都可在 PM 中定義。
+複合項 K 也是如此，
+即給定類符 S 12)，
+式 [S; n] 定義為 K 包含自然數 n 。
+S 是類符並與某些 R(q) 同義，存在自然數 q 使得下式成立：S=R(q) 
+
+12) Es macht wieder nicht die geringsten Schwierigkeiten, 
+    die Formel S tatsächlich hinzuschreiben.
+
+12) 這再次沒有變得更不麻煩，S 的確寫下了。
+
 Wir zeigen nun, 
-daß der Satz [R(q); q] 12) in PM unentseheidbar ist. 
-Denn angenommen der Satz [R(q); q] wäre beweisbar, 
+daß der Satz [R(q);q] 12) in PM unentseheidbar ist. 
+
+現在我們展示 PM 中命題 [R(q);q] 13) 是不可決定。
+
+13) Man beachte, daß "[R(q); q]" (oder was dasselbe bedeutet "[S;q]")
+    bloß eine metamathematische Beschreibung 
+    des unentseheidbaren Satzes ist.
+    Doch kann man, sobald man die Formel S ermittelt hat, 
+    natürlich auch die Zahl q bestimmen und damit 
+    den unentscheidbaren Satz selbst effektiv hinschreiben
+
+13) 可觀察到 "[R(q);q]" (或同義詞 "[R;q]") 
+    僅是用後設數學描敘之不可決定命題。
+    可是當式 S 已判定，
+     
+Denn angenommen der Satz [R(q);q] wäre beweisbar, 
 dann wäre er auch richtig, 
 d.h. aber nach dem obigen q würde zu K gehören, 
 d.h. nach (1) es würde ~Bew[R(q); q] gelten, 
 im Widerspruch mit der Annahme. 
 
-對某一自然數q，
-現在我們展示 PM 中命題 [R(q);q] 12) 是不可決定。
-因為假定命題 [R(q);q] 是可證的，
-它也是對的，
-即對強制 q K 為前題，
-即對 (1) 而言 ~Bew[R(q); q] 可為真，
+假定命題 [R(q);q] 是可證的，即此命題為真，
+也就是若 q 屬於 K，
+即對 (1) 而言 ~Bew[R(q);q] 可為真，
 與假設矛盾。 
 
-Wäre dagegen die Negation von [R(q); q] beweisbar, 
+Wäre dagegen die Negation von [R(q);q] beweisbar, 
 so würde ~(nεK), 
 d.h. Bew[R (q); q] gelten. 
-[R(q); q] wäre also zugleich 
-mit seiner Negation beweisbar, 
+另假定 [R(q);q] 之否定可證，則 ~(nεK)，
+也就是 Bew[R(q); q] 為真。
+
+[R(q);q] wäre also zugleich mit seiner Negation beweisbar, 
 was wiederum unmöglich ist. 
 
-對 [R(q); q] 之否定是否可證，
-所以 ~(nεK)，
-即 Bew[R (q); q] 是有效的。
-
-[R(q); q] 與其否定同時可證，這再次是不可能的。
+[R(q);q] 與其否定同時可證，這還是不可能的。
 
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
@@ -321,7 +344,19 @@ auch mit dem "Lügner" besteht eine nahe Verwandtschaff 14),
 denn der unentseheidbare Satz [R(q); q] besagt ja, 
 daß q zuK geh~rt, d.h. naeh (1), da~ [R(~); q] nicht beweisbar
 ist. Wit haben also einen Satz voruns, der seine eigene Unbeweisbarkeit
-behauptet~5). Die eben auseinandergesetzte Beweismethodelal~t sieh offenbar auf jedes formale System anwenden, das erstens 
+behauptet~5). 
+
+譯註：Antinomie Richard 理查悖論，若對每個關於整數的命題，
+      以至多100個中文字描述，並將命題依字典順序排列給予編號，
+      若編號數字符合命題描述的性質，則此數為理查數，否則此數
+      不為理查數。
+      假設某個命題的編號為 q，此命題內容如下：
+      「理查數是與對應的編號命題不相符之正整數。」，
+      則無法決定 q 是否為理查數。
+      若 q 為理查數，則其命題為真，其應與命題內容不相符，
+      若 q 不為理查數，則其命題為假，應與命題內容相符。
+   
+Die eben auseinandergesetzte Beweismethodelal~t sieh offenbar auf jedes formale System anwenden, das erstens 
 inhaltlieh gedeutet fiber gentigend Ausdrueksmittel vcrNgt, um die 
 in der obigen tJberlegung vorkommendcn Begriffe (insbesondere den 
 Begriff ,,beweisbare Formel") zu definieren, and in dem zweitens 
@@ -329,6 +364,8 @@ jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende
 exakte Durchffihrung des obigen Beweises wird unter anderem die 
 Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
 dutch eine rein formale nnd weit schwachere zu ersetzen.
+
+
 
 P 系統
 ......
