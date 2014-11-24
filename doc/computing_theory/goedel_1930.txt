@@ -25,15 +25,15 @@ daß weite Gebiete von ihr formalisiert wurden,
 in der Art, daß das Beweisen nach einigen wenigen
 mechanischen Regeln vollzogen werden kann.
 
-眾所皆知數學的發展朝著更精確的方向已引導其所有版圖變得更形式化。
-以此方式，證明能成為執行少數統整的機械化規則。
+眾所皆知數學的發展朝著更精確的方向已引導其廣闊版圖變得更形式化，
+以此證明能成為執行少數統整的機械化規則。
 
 Die umfassendtsen derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) einerseits, 
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
-如今淺白的形式系統一個是 Principia Mathematica，
+現在最淺白的形式系統一個是 Principia Mathematica，
 另一個是 Zermelo-Fraenkelsche(由馮鈕曼繼續擴增)
 集合論之公理系統。
 
@@ -94,9 +94,8 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統都是如此廣泛，
-所有今天在數學上應用到之證明方法在其下形式化，
-即回到統整少數的公理及推論規則
+這兩個系統至今所有現行數學上應用到之證明方法都可在其下形式化，
+即化約至統整少數的公理及推論規則。
 
 Es liegt daher die Vermutung nahe, 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
@@ -104,9 +103,9 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-這基於相近的假定，
-這些公理及推論法則除了滿足對所有數學問題可以提到之系統確切形式表達，
-也可被決定。
+因此它似是而非的假定這些公理及推論法則，
+使以前述系統之形式所表達的所有數學問題也可被決定。
+
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
