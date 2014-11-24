@@ -340,13 +340,21 @@ was wiederum unmöglich ist.
 
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
-auch mit dem "Lügner" besteht eine nahe Verwandtschaff 14), 
+auch mit dem "Lügner" besteht eine nahe Verwandtschaft 14), 
 denn der unentseheidbare Satz [R(q); q] besagt ja, 
-daß q zuK geh~rt, d.h. naeh (1), da~ [R(~); q] nicht beweisbar
-ist. Wit haben also einen Satz voruns, der seine eigene Unbeweisbarkeit
-behauptet~5). 
+daß q zu K gehört, 
+d.h. nach (1), daß [R(q); q] nicht beweisbar ist. 
+Wir haben also einen Satz vor uns, 
+der seine eigene Unbeweisbarkeit behauptet 15). 
 
-譯註：Antinomie Richard 理查悖論，若對每個關於整數的命題，
+結論與理查悖論之類比在眼前出現，
+也與說謊者悖論存有關聯。
+因為不可決定命題 [R(q); q] 說明 q 包含於 K，
+即依據 (1) 可知 [R(q); q] 是不可證明。
+因為在我們前面有一個定理斷言它本身是不可證明的。
+
+
+譯註：Antinomie Richard 理查悖論內容為，若對每個關於整數的命題，
       以至多100個中文字描述，並將命題依字典順序排列給予編號，
       若編號數字符合命題描述的性質，則此數為理查數，否則此數
       不為理查數。
@@ -364,8 +372,6 @@ jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende
 exakte Durchffihrung des obigen Beweises wird unter anderem die 
 Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
 dutch eine rein formale nnd weit schwachere zu ersetzen.
-
-
 
 P 系統
 ......

@@ -1029,6 +1029,13 @@ haupt- 頭
 Haupt-gedanken          主要觀念 
 頭    心        
 
+名詞化字尾
+++++++++++
+
+-shaft          產物、特性及意義如同英文的 ship
+
+Verwandt-shaft  關係
+
 形容詞與名詞組成複合名詞
 ++++++++++++++++++++++++
 
@@ -2615,9 +2622,6 @@ Das ist von guter Qualit?t.
 常用片語：
 
 von zu Hause 從家裏來
-
-
-
 
 否定
 ----
