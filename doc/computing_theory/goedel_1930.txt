@@ -364,14 +364,18 @@ der seine eigene Unbeweisbarkeit behauptet 15).
       若 q 為理查數，則其命題為真，其應與命題內容不相符，
       若 q 不為理查數，則其命題為假，應與命題內容相符。
    
-Die eben auseinandergesetzte Beweismethodelal~t sieh offenbar auf jedes formale System anwenden, das erstens 
-inhaltlieh gedeutet fiber gentigend Ausdrueksmittel vcrNgt, um die 
-in der obigen tJberlegung vorkommendcn Begriffe (insbesondere den 
-Begriff ,,beweisbare Formel") zu definieren, and in dem zweitens 
-jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende 
+Die eben auseinandergesetzte Beweismethode
+läßt sich offenbar auf jedes formale System anwenden, 
+das erstens inhaltlieh gedeutet über genügend Ausdrueksmittel vcrfügt, 
+um die in der obigen Überlegung vorkommendcn Begriffe (insbesondere den 
+Begriff "beweisbare Formel") zu definieren, 
+und in dem zweitens jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende 
 exakte Durchffihrung des obigen Beweises wird unter anderem die 
 Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
 dutch eine rein formale nnd weit schwachere zu ersetzen.
+
+上面正區分出之證明方法明顯可可應用在形式系統，
+
 
 P 系統
 ......
