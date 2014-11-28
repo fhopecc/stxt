@@ -365,16 +365,19 @@ der seine eigene Unbeweisbarkeit behauptet 15).
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
-das erstens inhaltlieh gedeutet über genügend Ausdrueksmittel vcrfügt, 
-um die in der obigen Überlegung vorkommendcn Begriffe 
+das erstens inhaltlich gedeutet über genügend Ausdrucksmittel verfügt, 
+um die in der obigen Überlegung vorkommenden Begriffe 
 (insbesondere den Begriff "beweisbare Formel") 
 zu definieren, 
-und in dem zweitens jede beweisbare Formel auch inhaltlieh riehtig ist. Die nun folgende 
+und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
+Die nun folgende 
 exakte Durchffihrung des obigen Beweises wird unter anderem die 
 Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
 dutch eine rein formale nnd weit schwachere zu ersetzen.
 
-上面正特定區分出之證明方法明顯可可應用在形式系統，
+上面正特定區分出之證明方法明顯可應用在每個形式系統，
+首先其內容詮釋具有足夠表達力去定義上述考量下出現之項目（特別是可證式）
+其次所有可證式內容也為真。
 
 
 P 系統
