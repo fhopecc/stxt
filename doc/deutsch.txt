@@ -343,7 +343,7 @@ Die Grundzeichen des Systems P  P系統之基本符
 
 Schlußregeln des Logikkalküls  
 
-狀語是用來修飾、限制謂語的語言單位，
+狀語(adverbial)是用來修飾、限制謂語(的語言單位，
 以表明謂語的狀態、方式、時間、處所或程度等
 
 補語的作用對象是主語和賓語，
