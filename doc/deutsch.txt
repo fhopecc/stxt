@@ -1258,6 +1258,35 @@ Nicht so viel Krach machen! 不要製造這麼多譟音。
 um...zu+不定式
 ++++++++++++++
 
+um...zu+不定式作目的狀語，意為“為了……”。
+目的不定式結構中不能出現主語，其動作主體應該與主句主語一致。
+
+目的不定式結構可放在句首、句中或句末，
+並用逗號將前後句分開。
+提問用 wozu, warum或 zu welchem Zweck, mit welcher Absicht
+
+Viele Deutsche fahren gern mit dem Fahrrad, um gesund zu bleiben.
+
+Wozu fahren viele Deutsche gern Fahrrad?
+
+注意：
+1. zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之間，並連寫，
+例如：
+ich gehe zum Bahnhof, um meine Großmutter abzuholen.
+
+
+2.目的不定式結構放在句首，主句用反語序，緊跟的是可變位動詞；
+目的不定式結構放在主句後，主句用正語序：
+
+Um gesund zu bleiben, fahren viele Deutsche Rad.
+Viele Deutsche fahren Rad, um gesund zu bleiben.
+
+3.目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
+
+Herr Li gibt seinem Sohn 100 Yuan, 
+damit er (der Sohn) das Englischwörterbuch kauft.
+李先生給他兒子100元錢，以便他兒子買一本英語字典。
+
 um...zu+不定式表示為了做什麼之意。
 
 Ich gehe in die Stadt, um einen Schirm zu kaufen.
