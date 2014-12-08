@@ -370,15 +370,17 @@ um die in der obigen Überlegung vorkommenden Begriffe
 (insbesondere den Begriff "beweisbare Formel") 
 zu definieren, 
 und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
-Die nun folgende 
-exakte Durchffihrung des obigen Beweises wird unter anderem die 
-Aufgabe hubert, die zweite der eben angefUhrten Voraussetzungen 
-dutch eine rein formale nnd weit schwachere zu ersetzen.
+
+Die nun folgende exakte Durchführung des obigen Beweises wird 
+unter anderem die Aufgabe haben, 
+die zweite der eben angeführten Voraussetzungen 
+durch eine rein formale und weit schwächere zu ersetzen.
 
 上面正特定區分出之證明方法明顯可應用在每個形式系統，
 首先其內容詮釋具有足夠表達力去定義上述考量下出現之項目（特別是可證式）
 其次所有可證式內容也為真。
 
+以下上述證明的精確實作有將剛提到的第二個前題取代為純形式且較弱的一個。
 
 P 系統
 ......
