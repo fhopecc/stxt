@@ -371,16 +371,32 @@ um die in der obigen Überlegung vorkommenden Begriffe
 zu definieren, 
 und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
 
+上面正特定區分出之證明方法明顯可應用在每個形式系統，
+首先其內容詮釋具有足夠表達力去定義上述考量下出現之項目（特別是可證式）
+其次所有可證式內容也為真。
+
 Die nun folgende exakte Durchführung des obigen Beweises wird 
 unter anderem die Aufgabe haben, 
 die zweite der eben angeführten Voraussetzungen 
 durch eine rein formale und weit schwächere zu ersetzen.
 
-上面正特定區分出之證明方法明顯可應用在每個形式系統，
-首先其內容詮釋具有足夠表達力去定義上述考量下出現之項目（特別是可證式）
-其次所有可證式內容也為真。
+以下上述證明的精確實作，
+其中目標是將剛提的第二個前題取代為純形式且較弱的一個。
 
-以下上述證明的精確實作有將剛提到的第二個前題取代為純形式且較弱的一個。
+Aus der Bemerkung, 
+daß [R(q); q] seine eigene Unbeweisbarkeit behauptet, 
+folgt sofort, daß [R(q);q] richtig ist, 
+denn [R(q); q] ist ja unbeweisbar (weil unentscheidbar). 
+Der im System PM unentscheidbare Satz wurde also durch 
+metamathematische Überlegungen doch entschieden. 
+Die genaue Analyse dieses merkwürdigen Umstandes führt 
+zu überraschenden Resultaten, 
+bezüglich der Widerspruchsfreiheitsbeweise formaler Systeme, 
+die in Abschn. 4 (Satz XI)
+näher behandelt werden.
+
+從注釋知 [R(q);q] 聲明其本身為不可證，
+
 
 P 系統
 ......
@@ -642,7 +658,6 @@ Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
-
 
 
 陣列操作

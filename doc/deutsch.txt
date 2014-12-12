@@ -907,23 +907,28 @@ die Klasse      類別
 3.-heit, -keit 
   通常為抽象名詞
 
-  Exaktheit  精確，從 exakt 形容詞來。
+  Exaktheit         精確，從 exakt 形容詞來。
+
+  Unbeweisbar-keit  不可證性
 
 4.-ung 
 
-  動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞。  
+  動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞，
+  表示由動作產生之事件，或結果。  
    
-  Abkürzung           縮寫，源自動詞 abkürzen
+  Abkürzung           縮寫，源自 abkürzen
 
-  Betrachtung         考量，源自動詞 betracht 
+  Betrachtung         考量，源自 betracht 
 
-  Entwicklung         發展，源自動詞 entwickeln
+  Entwicklung         發展，源自 entwickeln
 
-  Formalisierung      形式化，源自動詞 formalisieren
+  Formalisierung      形式化，源自 formalisieren
 
-  Zusammenfassung     摘要，源自動詞 zusammenfassen 
+  Zusammenfassung     摘要，源自 zusammenfassen 
 
-  Verwendung          應用，源自動詞 verwenden 
+  Verwendung          應用，源自 verwenden 
+
+  Bemerkung           標注，源自 bemerken
   
 5.-ie, -ik, -ion
   源自法文之名詞後置如上詞尾。
@@ -1051,6 +1056,9 @@ weißes Brot -> Weißesbrot   白麵包
 
 Eigen-schaft    特質
 擁有
+
+動詞轉形容詞
+++++++++++++
 
 名詞數變
 ........
@@ -1376,7 +1384,7 @@ vorbei-, vorüber-, weg-, zurück-, zusammen-
 不可分離字首(Vorsilbe)。
 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
 
-be-         指示動詞為及物動詞
+be-             指示動詞為及物動詞
 
 be-trachten     小心練習 
    嘗試
@@ -1386,6 +1394,8 @@ be-zeichnen     指出、命名為
    畫、標記
 be-merken       通告
    通知
+be-Haupt-en     主張
+   頭   
 
 ent-            出來、離開、相反、開始
   
@@ -2137,6 +2147,10 @@ vollzogen   完美的
 
 形容詞字尾
 ++++++++++
+
+-bar    可…的，可以…的。與動詞合成之形容词
+
+unbeweisbar     不可證
 
 -ig     從名詞和動詞產生形容詞和副詞。表示具有某種性質的。 
 
