@@ -401,6 +401,16 @@ näher behandelt werden.
 這特殊情況的精確分析產出關於形式系統的一致性證明的驚訝結果，
 將於第 4 章(定理 XI)提到。
 
+2.
+
+Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
+und gehen zunächst eine genaue Beschreibung des formalen Systems P, 
+für welches wir die Existenz unentscheidbarer Sätze nachweisen wollen. 
+P ist im wesentlichen das System, 
+welches man erhält, wenn man die Peanoschen Axiome 
+mit der Logik der PM 16) überbaut 
+(Zahlen als Individuen, Nachfolgerrelation als undefinierten Grundbegriff).
+
 P 系統
 ......
 

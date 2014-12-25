@@ -485,6 +485,30 @@ Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
 
 Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
 
+welcher
++++++++
+
+用以提問已明確的人或物的某一個或某一些）哪個
+
+變格如下表
+格	    陽性	陰性	中性	複數
+
+主格	welcher	welche	welches	welche
+
+屬格	welches	welcher	welchem	welcher
+
+與格	welchem	welcher	welchem	welchen
+
+賓格	welchen	welche	welches	welche
+
+Meine Nachbarin, welche immer gut zu mir war, 
+ist nun gestorben.　
+總是對我很好的那個鄰居已經去世了。
+
+Die Flaschen, welche nun verschlossen wurden, 
+sind jetzt verkaufsbereit.　
+已經密封好的瓶子可以出售了。
+
 wo
 ++
 
