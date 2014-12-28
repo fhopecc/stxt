@@ -30,11 +30,9 @@ Sub 括號黑體()
     Loop
 End Sub
 
-Sub 附件自動標號及黑體()
-    Dim seq As Integer
-    seq = 1
+Sub 附件黑體灰底()
     With Selection.Find
-        .Text = "(附件[0-9]{1,}*)"
+        .Text = "（(附件[0-9]{1,}*)）"
         .Forward = True
         .Wrap = wdFindStop
         .Format = True
@@ -45,7 +43,29 @@ Sub 附件自動標號及黑體()
     Selection.Find.Execute
     Do While Selection.Find.Found
         Selection.Font.Bold = True
-        Selection.Text = "附件" + CStr(seq)
+        Selection.Font.Shading.Texture = wdTexture10Percent
+        Selection.Find.Execute
+    Loop
+    
+End Sub
+
+Sub 附件自動標號及黑體灰底()
+    Dim seq As Integer
+    seq = 1
+    With Selection.Find
+        .Text = "（(附件[0-9]{1,}*)）"
+        .Forward = True
+        .Wrap = wdFindStop
+        .Format = True
+        .MatchWildcards = True
+    End With
+    
+    Selection.HomeKey Unit:=wdStory
+    Selection.Find.Execute
+    Do While Selection.Find.Found
+        Selection.Font.Bold = True
+        Selection.Font.Shading.Texture = wdTexture10Percent
+        Selection.Text = "（附件" + CStr(seq) + "）"
         seq = seq + 1
         Selection.Find.Execute
     Loop

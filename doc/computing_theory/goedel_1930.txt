@@ -396,7 +396,29 @@ die in Abschn. 4 (Satz XI)
 näher behandelt werden.
 
 從注釋知 [R(q);q] 聲明其本身為不可證，
+可推得 [R(q);q] 為真，因為 [R(q);q] 實際上不可證（由於其不可決定）。
+在 PM 系統中不可判定之命題仍可經由後設數學考量決定。
+這特殊情況的精確分析產出關於形式系統的一致性證明的驚訝結果，
+將於第 4 章(定理 XI)提到。
 
+2.
+
+Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
+und gehen zunächst eine genaue Beschreibung des formalen Systems P, 
+für welches wir die Existenz unentscheidbarer Sätze nachweisen wollen. 
+
+P ist im wesentlichen das System, 
+welches man erhält, 
+wenn man die Peanoschen Axiome 
+mit der Logik der PM 16) überbaut 
+(Zahlen als Individuen, Nachfolgerrelation als undefinierten Grundbegriff).
+
+我們現在精確實作出上述草繪證明，
+而首先給定形式系統 P 之精確描述，
+我們將證明存在不可決定命題於該系統中。
+
+P 實質上可由建構 PM 邏輯於皮亞諾公理 16) 上。
+(整數視為個體、後繼關係視為未定義之基本概念)。
 
 P 系統
 ......

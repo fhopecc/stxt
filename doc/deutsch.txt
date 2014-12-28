@@ -377,15 +377,66 @@ die sich aus den Axiomen nicht entscheiden lassen.
 而是給定與前述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
-複雜句
-......
+從句
+....
 
-複雜句經從屬連詞連接主句數個從屬句，
-從屬句用來補充主子句，且從屬句會有語序變化，其限定動詞會移至句尾。
+複雜句經從屬連詞連接主句數個從句，
+從句用來補充主子句，且從句會有語序變化，其限定動詞會移至句尾。
+
+主語從句
+++++++++
+
+Es wundert mich sehr, dass niemand zu Hause ist.
+沒人在家使我覺得奇怪。
+
+Dass er Erfolge hatte, freut mich sehr.
+他成功了使我很高興。
+
+賓語從句
+++++++++
+
+Ich finde es gut, dass er uns genau informiert hat.
+
+我認為這很好，他把精確的訊息告訴我們。
+
+Ich weiss, dass Frau Müller unzufrieden ist.
+
+我知道米勒夫人不滿意。
 
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.  
 這些公理隱喻著類可完全由其元素決定。
+
+定語從句
+++++++++
+
+Die Vermutung, dass er nichts davon wusste, ist falsch.
+猜測他對此一無所知是不對的。
+
+Ich bin der Meinung, dass er heute nicht kommen wird.
+我認為他今天不會來。
+
+表語從句
+++++++++
+
+Das Wichtigste ist, dass die Aufgabe erfüllt werden muss.
+最重要是必須完成任務。
+
+目的從句
+++++++++
+
+Dein Vater hat dir das Geld nicht deshalb geschickt, 
+dass du es für nutzlose Dinge ausgibst.
+你父親寄錢不是給你亂花。
+
+情況從句
+++++++++
+
+Dieser alte Mann hat sein Leben lang dafür gearbeitet, 
+dass sein Sohn ein besseres Leben haben kann als er selbst.
+
+這老人工作一生是為了讓兒子過比自已好的生活。
+
 
 上面從屬句其動詞 ist 移至句尾，
 並由從屬連詞 daß 連接，該詞相當於英文的 that。 
@@ -498,6 +549,30 @@ welcher
 與格    welchen welche  welches welche 
 
 
+
+welcher
++++++++
+
+用以提問已明確的人或物的某一個或某一些）哪個
+
+變格如下表
+格	    陽性	陰性	中性	複數
+
+主格	welcher	welche	welches	welche
+
+屬格	welches	welcher	welchem	welcher
+
+與格	welchem	welcher	welchem	welchen
+
+賓格	welchen	welche	welches	welche
+
+Meine Nachbarin, welche immer gut zu mir war, 
+ist nun gestorben.　
+總是對我很好的那個鄰居已經去世了。
+
+Die Flaschen, welche nun verschlossen wurden, 
+sind jetzt verkaufsbereit.　
+已經密封好的瓶子可以出售了。
 
 wo
 ++
