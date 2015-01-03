@@ -29,7 +29,7 @@ mechanischen Regeln vollzogen werden kann.
 以此證明能成為執行少數統整的機械化規則。
 
 Die umfassendsten derzeit aufgestellten formalen Systeme sind
-das System der Principia Mathematica (PM) einerseits, 
+das System der Principia Mathematica (PM) 2) einerseits, 
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
@@ -45,9 +45,9 @@ Axiomensystem der Mengenlehre 3) andererseits.
    es gibt genau abzählbar viele Individuen), 
    das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
-2) 懷海德及羅素，數學原理，2. Aufl., 劍橋出版 1925。
+2) 懷海德及羅素，數學原理，第二版，劍橋出版 1925。
 
-   對 PM 系統之公理，我們也特別計算出以下定理：
+   對 PM 系統之定理，我們也特別計算出以下定理：
    無窮公理(形式如下：它給定精確可數多的個體)，
    簡化和選擇公理(對所有類型)。
 

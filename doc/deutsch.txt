@@ -1341,12 +1341,43 @@ zeichnen    畫，源自標示符號的名詞 Zeichen
 英文會在不定式前加上 to 區隔，
 德文則不一定在不定式前加加上 zu 區隔。 
 
+不定式作名詞片語
+++++++++++++++++
+
+不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
+
+Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
+
 zu+不定式
-+++++++++
+.........
 
-在句未一定為 zu+不定式。
+可作名詞的定語用：
 
-Dieser Ausdruck ist nicht leicht zu übersetzen. 這表情不容易翻譯。
+Eine Sprache zu beherrschen ist sehr schwer.
+要精通一門語言是很難。
+
+作名詞之補語用：
+
+Dieser Ausdruck ist nicht leicht zu übersetzen. 
+這表情不容易翻譯。
+
+作動詞或者是形容詞之狀語，
+德文不定句之中的句子成分要被逗號隔開，而且zu+原形動詞放在句尾例如：
+
+Ich bitte ihn, zu mir zu kommen.
+我拜託他到我這來
+
+zu mir 是由不定句 zu 所引導的句子成分，所以要被逗號隔開。
+
+
+***題外話：什麼時候用dass句；什麼時候用zu句????***
+
+dass句用在主句和從句的主語都一樣的時候或者都不一樣的時候
+
+例如：Ich hoffe, dass ich eine Reise machen. (我希望我去旅行)<兩主語一致>
+或者：Ich hoffe, dass er zum Erfolg wird. (我希望他能成功)<兩主語不一致>
+
+zu句只能用在主句和從句的主語都一樣的時候
 
 命令語氣可以省略 zu。
 
@@ -1355,39 +1386,44 @@ Nicht so viel Krach machen! 不要製造這麼多譟音。
 um...zu+不定式
 ++++++++++++++
 
-um...zu+不定式作目的狀語，意為“為了……”。
+um...zu+不定式作目的狀語，意為「為了…]。
 目的不定式結構中不能出現主語，其動作主體應該與主句主語一致。
 
-目的不定式結構可放在句首、句中或句末，
-並用逗號將前後句分開。
-提問用 wozu, warum或 zu welchem Zweck, mit welcher Absicht
 
-Viele Deutsche fahren gern mit dem Fahrrad, um gesund zu bleiben.
+Ich uebe Deutsch, um in Deutschland zu reisen.
+為了去德國旅遊(目的狀語)，我練習德文(主句)。
+
+Ich gehe in die Stadt, um einen Schirm zu kaufen.
+我走到街上(主句)去買傘(目的狀語)。
+
+目的不定式可置在句首、句中或句末，並用逗號將前後句分開。
+提問用 wozu, warum 或 zu welchem Zweck, mit welcher Absicht
 
 Wozu fahren viele Deutsche gern Fahrrad?
+為什麼許多德國人想要騎腳踏車？
 
-注意：
-1. zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之間，並連寫，
-例如：
+Viele Deutsche fahren gern mit dem Fahrrad, um gesund zu bleiben.
+許多德國人想要騎腳踏車是為了保持健康。
+
+zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之間，並連寫。
+
 ich gehe zum Bahnhof, um meine Großmutter abzuholen.
+我去車站接我祖母。
 
-
-2.目的不定式結構放在句首，主句用反語序，緊跟的是可變位動詞；
-目的不定式結構放在主句後，主句用正語序：
+目的不定式放在句首，主句用反語序，緊跟的是可變位動詞；
+目的不定式放在主句後，主句用正語序：
 
 Um gesund zu bleiben, fahren viele Deutsche Rad.
 Viele Deutsche fahren Rad, um gesund zu bleiben.
+為了健康許多德國人騎單車。
 
-3.目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
+目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
 
 Herr Li gibt seinem Sohn 100 Yuan, 
 damit er (der Sohn) das Englischwörterbuch kauft.
 李先生給他兒子100元錢，以便他兒子買一本英語字典。
 
 um...zu+不定式表示為了做什麼之意。
-
-Ich gehe in die Stadt, um einen Schirm zu kaufen.
-我走到街上去買傘。
 
 Es ist nicht notwendig, die Straße zu überqueren, 
 um zur Post zu kommen.
@@ -1405,13 +1441,6 @@ des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
 我們觀察到必須加上引述文獻給定之集合理論公理
 至邏輯計算之公理及推論規則以達成形式化。
-
-不定式作名詞片語
-++++++++++++++++
-
-不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
-
-Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
 
 分詞
 ....
@@ -2839,6 +2868,7 @@ Ich bin nicht blöd. 我不笨。
 ----
 
 anm.    Anmerkung           remark. 註
+Aufl.   Auflage             edition
 bzw.    beziehungsweise     resp. 分別是
 d.h     das heißt           that is
 u.      und                 & and
