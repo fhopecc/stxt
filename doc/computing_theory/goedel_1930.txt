@@ -28,13 +28,13 @@ mechanischen Regeln vollzogen werden kann.
 眾所皆知數學的發展朝著更精確的方向已引導其廣闊版圖變得更形式化，
 以此證明能成為執行少數統整的機械化規則。
 
-Die umfassendtsen derzeit aufgestellten formalen Systeme sind
+Die umfassendsten derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) einerseits, 
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
-現在最淺白的形式系統一個是 Principia Mathematica，
-另一個是 Zermelo-Fraenkelsche(由馮鈕曼繼續擴增)
+現在已建構之最全面形式系統一個是「數學原理」(PM)，
+另一個是「熱梅若．佛蘭克」(由馮鈕曼繼續擴增)
 集合論之公理系統。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
@@ -47,7 +47,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
 
 2) 懷海德及羅素，數學原理，2. Aufl., 劍橋出版 1925。
 
-   對 PM 系統之公理，我們也計算出特別是：
+   對 PM 系統之公理，我們也特別計算出以下定理：
    無窮公理(形式如下：它給定精確可數多的個體)，
    簡化和選擇公理(對所有類型)。
 
@@ -94,7 +94,7 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統至今所有現行數學上應用到之證明方法都可在其下形式化，
+這兩個系統如此廣闊使如今所有數學上應用到之證明方法都可在其下形式化，
 即化約至統整少數的公理及推論規則。
 
 Es liegt daher die Vermutung nahe, 
