@@ -420,9 +420,6 @@ mit der Logik der PM 16) überbaut
 P 實質上可由建構 PM 邏輯於皮亞諾公理 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
-P 系統
-......
-
 Die Grundzeichen des Systems P sind die folgenden:
 
 P 系統之基本符如下：
@@ -463,7 +460,8 @@ usw. für jede natürliche Zahl als Typus 17).
 
 17) 可假定，對每個變數型別，可數多種符號之定義域是成立的。
 
-Anm.: Variable für zwei und mehr stellige Functionen (Relationen) sind
+Anm.: 
+Variable für zwei und mehr stellige Functionen (Relationen) sind
 als Grundzeichen überflüssig, 
 da man Relationen als Klassen geordneter Paare definieren kann 
 und geordnete Paare wiederum als Klassen von Klassen, 
