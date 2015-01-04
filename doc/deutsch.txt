@@ -1386,17 +1386,42 @@ Nicht so viel Krach machen! 不要製造這麼多譟音。
 um...zu+不定式
 ++++++++++++++
 
-um...zu+不定式作目的狀語，意為「為了…]。
-目的不定式結構中不能出現主語，其動作主體應該與主句主語一致。
-
+um...zu+不定式作目的狀語，意為「為了…」。
+目的不定式中不能出現主語，其動作主體應該與主句主語一致。
+目的不定式可置在句首、句中或句末，並用逗號將前後句分開。
+目的不定式放在主句後，主句用正語序：
 
 Ich uebe Deutsch, um in Deutschland zu reisen.
-為了去德國旅遊(目的狀語)，我練習德文(主句)。
+我練習德文(主句)是為了去德國旅遊(目的狀語)。
 
 Ich gehe in die Stadt, um einen Schirm zu kaufen.
 我走到街上(主句)去買傘(目的狀語)。
 
-目的不定式可置在句首、句中或句末，並用逗號將前後句分開。
+Es ist nicht notwendig, die Straße zu überqueren, 
+um zur Post zu kommen.
+並不需要穿過路去郵局。
+
+Viele Deutsche fahren Rad, um gesund zu bleiben.
+許多德國人騎單車是為了健康。
+
+Wir bemerken, daß man zu den in der angeführten Literatur
+gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
+des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
+
+可注意到必須加上邏輯計算之公理及推論規則至前述文獻給定之集合理論公理
+以達成形式化。
+
+目的不定式放在句首，主句用反語序，緊跟的是可變位動詞；
+
+Um gesund zu bleiben, fahren viele Deutsche Rad.
+為了健康許多德國人騎單車。
+
+Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
+為了學好外文，你一定要至那個國家旅遊。
+
+
+
+
 提問用 wozu, warum 或 zu welchem Zweck, mit welcher Absicht
 
 Wozu fahren viele Deutsche gern Fahrrad?
@@ -1410,37 +1435,11 @@ zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之�
 ich gehe zum Bahnhof, um meine Großmutter abzuholen.
 我去車站接我祖母。
 
-目的不定式放在句首，主句用反語序，緊跟的是可變位動詞；
-目的不定式放在主句後，主句用正語序：
-
-Um gesund zu bleiben, fahren viele Deutsche Rad.
-Viele Deutsche fahren Rad, um gesund zu bleiben.
-為了健康許多德國人騎單車。
-
 目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
 
 Herr Li gibt seinem Sohn 100 Yuan, 
 damit er (der Sohn) das Englischwörterbuch kauft.
 李先生給他兒子100元錢，以便他兒子買一本英語字典。
-
-um...zu+不定式表示為了做什麼之意。
-
-Es ist nicht notwendig, die Straße zu überqueren, 
-um zur Post zu kommen.
-並不需要穿過路去郵局。
-
-當不定句在前時，其 zu 為示為了做什麼，
-所以一定要用 um...zu+不定式。
-
-Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
-為了學好外文，你一定要至那個國家旅遊。
-
-Wir bemerken, daß man zu den in der angeführten Literatur
-gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
-des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
-
-我們觀察到必須加上引述文獻給定之集合理論公理
-至邏輯計算之公理及推論規則以達成形式化。
 
 分詞
 ....

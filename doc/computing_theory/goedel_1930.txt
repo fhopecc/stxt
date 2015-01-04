@@ -59,8 +59,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
    馮．紐曼，集合論之公理化。
-   數學精選 27 期，1928。
-   純粹及應用數學期刊。154(1925)，160(1929)。
+   數學精選 27 期，1928。純粹及應用數學期刊。154(1925)，160(1929)。
    
    譯註：我認為的上述期刊的縮寫如下：
    Mathematik Zeitschrift
@@ -70,15 +69,15 @@ Axiomensystem der Mengenlehre 3) andererseits.
    gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
    des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
-   我們觀察到必須加上引述文獻給定之集合理論公理
-   至邏輯計算之公理及推論規則以達成形式化。
+   應注意到必須加上邏輯計算之公理及推論規則
+   至前述文獻給定之集合理論公理以達成形式化。 
 
-   Die nachfolgenden Überlegungen gelten auch für die in den letzten 
-   Jahren von D. Hilbert und seinen Mitarbeitern aufgestellten 
-   formalen Systeme (soweit diese bisher vorliegen). 
+   Die nachfolgenden Überlegungen gelten auch für die 
+   in den letzten Jahren 
+   von D. Hilbert und seinen Mitarbeitern 
+   aufgestellten formalen Systeme (soweit diese bisher vorliegen). 
 
-   之後的考量也給陳述後幾年從希爾伯特和他的同事所建置之形式系統。
-   (到現在的展示)。
+   近幾年希爾伯特和他的同事所建置之形式系統(與未出版的工作)也是如此。
 
    Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
    der Univ. Hamburg I (1922), VI (1928). 
@@ -94,8 +93,8 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統如此廣闊使如今所有數學上應用到之證明方法都可在其下形式化，
-即化約至統整少數的公理及推論規則。
+這兩個系統如此廣泛使如今所有數學上應用到之證明方法都可在其下形式化，
+即簡化至少數的公理及推論規則。
 
 Es liegt daher die Vermutung nahe, 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
@@ -103,9 +102,7 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-因此它似是而非的假定這些公理及推論法則，
-使以前述系統之形式所表達的所有數學問題也可被決定。
-
+因此使我們以為這些公理及推論法則可決定以前述系統形式所表達的所有數學問題。
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
@@ -113,10 +110,23 @@ sondern daß es in den beiden angeführten Systemen sogar relativ
 einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
 die sich aus den Axiomen nicht entscheiden lassen.
 
-以下展示這並非上述情況，
-而是可給定與引述系統都確實關連之簡易一般整數論問題，
-也不可從公理被決定。
+下面將展示並非如此，
+而是就算是前述兩個系統下實際相對簡單的一般整數論問題 4)
+也不可從前述公理被決定。
 
+4) D.h. genauer, es gibt unentscheidbare Sätze, 
+   in denen außer den logischen Konstanten: 
+   -- (nicht), V (oder), (x) (für alle), = (identiseh mit) 
+   keine anderen Begriffe vorkommen als + (Addition), . (Multiplikation), 
+   beide bezogen auf natürliche Zahlen, 
+   wobei auch die Präfixe (x) sich nur auf natürliche Zahlen
+   beziehen dürfen.
+
+4) 即更精確而言，存在一個不可判定定理，除了邏輯常數：
+    -- (非), V (或), (x) (對全部), = (等於) 
+   沒有其它的詞如 + (加), . (乘) 出現， 
+   都基於整數，前置 (x) 也僅包含整數。
+ 
 Dieser Umstand liegt nicht 
 etwa an der speziellen Natur der aufgestellten Systeme, 
 sondern gilt für eine sehr weite Klasse formaler Systeme,
@@ -127,24 +137,16 @@ vorausgesetzt, daß durch die binzugefügten Axiome
 keine falschen Sätze von der in Fußnote 4) 
 angegebenen Art beweisbar werden.
 
-這些事實非略基於所給定系統特定本質，
-而是適用一個形式系統的更廣泛類別 
-包含由兩個提過的引述開始，並加入有限多公理，
-假定經由加入的公理，無註腳 4) 給定的類型中的假命題成為可證。
+這情形並所建置系統特定本質所致，
+而是存在於更廣泛之形式系統類別，
+特別是包含加入有限公理 5) 至前述兩個系統之系統，
+並假定經由加入的公理，無註腳 4 給定的類型中的假命題成為可證。
 
-4) D.h. genauer, es gibt unentscheidbare Sätze, 
-   in denen außer den logischen Konstanten: 
-   -- (nieht), V (oder), (x) (für alle), = (identiseh mit) 
-   keine anderen Begriffe vorkommen als + (Addition), 
-   . (Multiplikation), beide bezogen auf natürliche Zahlen, 
-   wobei auch die Präfixe (x) sich nur auf natürliche Zahlen
-   beziehen dürfen.
+5) Dabei werden in PM nur solche Axiome als verschieden gezählt, 
+   die aus einander nicht bloß durch Typenwechsel entstehen. 
 
-4) 這精確地說，給定一個未判定陳述，其除了邏輯常數：
-    -- (非), V (或), (x) (對全部), = (等於) 
-   沒有其它的詞如 + (加), . (乘)出現， 
-   都基於整數，前置 (x) 也僅包含整數。
-   
+5) 這即是在 PM 中僅這些公理被視為不同而計數，
+   純粹從公理以形別轉換衍生的不算。
 
 Wir skizzieren, bevor wir auf Details eingehen, 
 zunächst den Hauptgedanken des Beweises, 
