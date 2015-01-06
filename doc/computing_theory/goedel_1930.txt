@@ -152,7 +152,7 @@ Wir skizzieren, bevor wir auf Details eingehen,
 zunächst den Hauptgedanken des Beweises, 
 natürlich ohne auf Exaktheit Anspruch zu erheben. 
 
-在進入細節前，我們首先草繪證明的主要觀念，自然地不引入精確的聲明。
+進入細節前，首先草繪證明的主要觀念，自然地不引入精確的聲明。
 
 Die Formeln eines formalen Systems 
 (wir beschränken uns hier auf das System PM) sind 
@@ -163,7 +163,7 @@ welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
 形式系統之式(在此限制為PM系統)
-可被語法上視為有限基礎符(變數、邏輯常數及括號或分隔點)序列，
+外觀上為有限基礎符(變數、邏輯常數和括號或分隔點)字串，
 而且可輕易辨別那些基礎符字串是正確之式而那些不是 6)。
 
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
@@ -172,23 +172,27 @@ welche nicht 6).
    Definitionen dienen ja nur der kürzeren Schreibweise und 
    sind daher prinzipiell überflüssig.
 
-6) 我們知道以下 PM 之式總是以不含有縮寫(即沒有應用定義)。
-   如妳所知定義只是幫助書寫更為精簡，因此原則上是不必要的。
+6) 以下「 PM 之式」總是指不含有縮寫之公式(即沒有使用定義)。
+   定義只是幫助書寫更為精簡，因此原則上是不必要的。
 
 Analog sind Beweise vom formalen Standpunkt 
 nichts anderes als endliche Reihen von Formeln 
 (mit bestimmten angebbaren Eigenschaften). 
 
-同樣地形式證明不過是式之有限字串
+同樣地形式觀點上，證明不過是式之有限字串
 (經由特定特質)。
 
 Für metamathematische Betrachtungen ist es natürlich gleichgültig, 
 welche Gegenstände man als Grundzeichen nimmt, 
-und wir entschlißen uns dazu, 
+und wir entschließen uns dazu, 
 natürliche Zahlen 7) als solche zu verwenden. 
 
-後設數學下，這自然是無異的，其接受作為基礎符之物件，
-而我們自行決定自然數 7) 以此來利用。
+後設數學觀點下，我們接受何種物件表示基礎符號本就沒有差別，
+我們決定使用自然數 7) 來表示基礎符號。
+
+7) D.h. wit bilden die Grundzeichen in eineindeutigerWeise 
+   auf nattirliche Zahlen ab. 
+   (Vgl.die Durchftihrung auf S. 179.)
 
 Dementsprechend ist 
 dann eine Formel eine endliche Folge natürlicher Zahlen 3) und 
