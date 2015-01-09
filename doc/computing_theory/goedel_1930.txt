@@ -190,25 +190,26 @@ natürliche Zahlen 7) als solche zu verwenden.
 後設數學觀點下，我們接受何種物件表示基礎符號本就沒有差別，
 我們決定使用自然數 7) 來表示基礎符號。
 
-7) D.h. wit bilden die Grundzeichen in eineindeutigerWeise 
-   auf nattirliche Zahlen ab. 
-   (Vgl.die Durchftihrung auf S. 179.)
+7) D.h. wir bilden die Grundzeichen in eineindeutiger Weise 
+   auf natürliche Zahlen ab. 
+   (Vgl.die Durchführung auf S. 179.)
+
+7) 即將基礎符號以一對一方式對應到自然數。(實作請參閱頁 179)
 
 Dementsprechend ist 
-dann eine Formel eine endliche Folge natürlicher Zahlen 3) und 
+dann eine Formel eine endliche Folge natürlicher Zahlen 8) und 
 eine Beweisfigur eine endliche Folge von 
 endlichen Folgen natürlicher Zahlen. 
+據此公式為自然數的有限序列 8) 
+而證明是自然數之有限數列組成之有限序列。
+
 Die metamathematischen Begriffe (Sätze) werden dadurch 
 zu Begriffen (Sätzen) über natürliche Zahlen bzw. 
-
-據此公式為自然數的有限序列 3) 
-而證明數是自然數之有限數列組成之有限序列。
-後設數學之項目(命題)以此轉為自然數之項目(命題)分別為。
-
 Folgen von solchen 9) 
 und daher (wenigstens teilweise) in den Symbolen des Systems PM 
 selbst ausdrückbar.
 
+後設數學之項目(命題)可轉少為自然數之項目(命題)。
 這樣和那樣 (至少部分) 組成之數列以PM系統之符號自我表達。
 
 Insbesondere kann man zeigen, 
