@@ -200,8 +200,27 @@ Dementsprechend ist
 dann eine Formel eine endliche Folge natürlicher Zahlen 8) und 
 eine Beweisfigur eine endliche Folge von 
 endlichen Folgen natürlicher Zahlen. 
+
 據此公式為自然數的有限序列 8) 
 而證明框架是自然數之有限數列組成之有限序列。
+
+8) D.h. eine Belegung eines Abschnittes der Zahlenreihe 
+   mit natürlichen Zahlen. (Zahlen können ja nicht in räumliche
+   Anordnung gebraeht werden.)
+
+8) 即配賦自然數作為數列元素之值。
+
+譯註：在德文維基百科，Belegung 定義如下：
+      Belegung (Mathematik), 
+      Zuweisung eines Wertes zu einer Variablen
+
+      配賦一個數值給變數。
+   
+      B. MELTZER 的英譯本亂譯成下文：
+      i.e. a covering of a section of the number series 
+      by natural numbers.  
+      
+      專有名詞還是要看德文本才行。
 
 Die metamathematischen Begriffe (Sätze) werden dadurch 
 zu Begriffen (Sätzen) über natürliche Zahlen bzw. 
