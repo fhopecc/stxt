@@ -205,10 +205,12 @@ endlichen Folgen natürlicher Zahlen.
 而證明框架是自然數之有限數列組成之有限序列。
 
 8) D.h. eine Belegung eines Abschnittes der Zahlenreihe 
-   mit natürlichen Zahlen. (Zahlen können ja nicht in räumliche
-   Anordnung gebraeht werden.)
+   mit natürlichen Zahlen. 
+   (Zahlen können ja nicht in räumliche Anordnung 
+    gebracht werden.)
 
 8) 即配賦自然數作為數列元素之值。
+   (數字無法作為排列次序使用)。
 
 譯註：在德文維基百科，Belegung 定義如下：
       Belegung (Mathematik), 
