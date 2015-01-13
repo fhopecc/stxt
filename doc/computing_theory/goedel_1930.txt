@@ -201,7 +201,7 @@ dann eine Formel eine endliche Folge natürlicher Zahlen 8) und
 eine Beweisfigur eine endliche Folge von 
 endlichen Folgen natürlicher Zahlen. 
 據此公式為自然數的有限序列 8) 
-而證明是自然數之有限數列組成之有限序列。
+而證明框架是自然數之有限數列組成之有限序列。
 
 Die metamathematischen Begriffe (Sätze) werden dadurch 
 zu Begriffen (Sätzen) über natürliche Zahlen bzw. 
@@ -209,8 +209,22 @@ Folgen von solchen 9)
 und daher (wenigstens teilweise) in den Symbolen des Systems PM 
 selbst ausdrückbar.
 
-後設數學之項目(命題)可轉少為自然數之項目(命題)。
-這樣和那樣 (至少部分) 組成之數列以PM系統之符號自我表達。
+後設數學之項目(命題)可轉為自然數之項目(命題)。
+此類數列 9) 因而(至少部分)可以PM系統之符號自我表達。
+
+9) m.a.W.: Das oben beschriebene Verfahren liefert 
+   ein isomorphes Bild des Systems PM im Bereich der Arithmetik und 
+   man kann alle metamathematischen Überlegungen ebenso gut 
+   an diesem isomorphen Bild vornehmen. 
+   Dies geschieht in der folgenden Beweisskizze, 
+   d.h. unter "Formel", "Satz", "Variable" etc.  
+   sind immer die entsprechenden Gegenstände 
+   des isomorphen Bildes zu verstehen.
+   
+   換言之，上述程序提供一個 PM 系統在算術領域的同構對映，
+   所有後設數學推論均可在此對映下作同等程度的執行。
+   這會應用在以下的證明大綱，即「式」、「命題」、「變數」等等，
+   均可被理解為同構對映的對應物件。
 
 Insbesondere kann man zeigen, 
 daß die Begriffe "Formel", "Beweisfigur", "beweisbare Formel" 

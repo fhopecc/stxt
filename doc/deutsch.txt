@@ -498,19 +498,19 @@ Der Mann hat die Absich nach Amerika auszuwandern.
 
 插入關係句為 der nebenan wohnt。
 
+關係子句也是從屬句用來補充主句，所以會有語序變化，
+其限定動詞會移至句尾，wohnt 移到句尾。
+
 關係代詞會根據性、數、格等做變化，
 其性與數與先行詞相同，而格則根據其在子句中的角色決定。
-
-關係子句也是從屬句用來補充主句，所以會有語序變化，
-其限定動詞會移至句尾。
 
 Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
 
 關係代名詞 dem 為中性單數形，其與名詞 Haus 保持一致，
 但因在子句中置於介詞後之故，其格為與格，它亦有可能以welchem取代。
 
-然當頭詞為alles、etwas或nichts時，
-德語會使用一個不做變化的關代was來構造子句。
+然當頭詞為 alles、etwas 或 nichts 時，
+德語會使用一個不做變化的關代 was 來構造子句。
 
 Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
 
