@@ -255,16 +255,21 @@ mit einer freien Variablen v (vom Typus einer Zahlenfolge) angeben 10),
 so daß F(v) inhaltlich interpretiert besagt: 
 v ist eine beweisbare Formel. 
 
-可特別指出項目「式」、「證明數」、「可證式」是在 PM 系統內可定義，
-就是說，例如可設 PM 之式 F(v) 具一個自由變數 v (其類別為數列)， 
-當 F(v) 其內部意義可說為：v 是一個可證式。
+特別是可指出項目「式」、「證明」、「可證式」可以 PM 系統來定義，
+即可建置一個自由變數 v (其類別為數列) PM 系統之式 F(v) 10)， 
+其意義為：v 是一個可證式。
+
+10) Es wäre sehr leicht (nur etwas umständlich), diese Formel 
+    tatsächlich hinzuschreiben.
+
+10) 實際很容易(但要費點功夫)去寫下此式。
 
 Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
 d.h. einen Satz A, für den weder A noch non-A beweisbar ist, 
 folgendermalßen her:
 
-現在建構一個系統 PM 之不可決定之命題，
-即對命題 A而言，A 或非 A 都可證，如下：
+現在建置一個系統 PM 之不可決定之命題，
+即對命題 A 而言，A 或非 A 都可證，如下：
 
 Eine Formel aus PM mit genau einer freien Variablen, 
 u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
