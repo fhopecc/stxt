@@ -275,8 +275,7 @@ Eine Formel aus PM mit genau einer freien Variablen,
 u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
 wollen wir ein Klassenzeichen nennen. 
 
-PM 中僅具一自由變數之式，
-且具體上使其類別即屬自然數(類別的類別)，稱為類別符號。
+PM 中我們稱僅具一自然數(類別的類別)自由變數之式為類別符號。
 
 Die Klassenzeichen denken wir uns irgendwie 
 in eine Folge geordnet 11), 
@@ -284,14 +283,13 @@ bezeichnen das n-te mit R(n) und bemerken,
 daß sich der Begriff "Klassenzeichen" sowie 
 die ordnende Relation R im System PM definieren lassen. 
 
-類別符可想成某種序列 11)，
-以 R(n) 表示其第 n 個元素且可注意到
-類別符和順序關係 R 允許於 PM 系統中定義。
+類別符可想成某種序列 11)以 R(n) 表示其第 n 個元素，
+且可發現能於 PM 系統中定義類別符及順序關係 R。
 
 11) Etwa nach steigender Gliedersumme und 
     bei gleicher Summe lexikographisch.
 
-11) 例如漸增的成員和及有字彙順序有同樣和
+11) 如以成員和之漸增順序，當和相等時以字彙順序。
 
 Sei α ein beliebiges Klassenzeichen; 
 mit [α; n] bezeichnen wir diejenige Formel, 
@@ -305,7 +303,7 @@ durch das Zeichen für die natürliche Zahl n ersetzt.
 Auch die Tripel-Relation x = [y; z] erweist 
 sich als innerhalb PM definierbar.
 
-三元關係 x = [y; z] 也可被證明能於 PM 中定義。
+三元關係 x = [y; z] 也可證明能於 PM 中定義。
 
 Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 
@@ -313,8 +311,10 @@ nεK ≡ ~Bew[R(n);n] 11a) (1)
 
 (wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
-現在我們定義自然數類 K 如下：
+現在我們定義自然數類別 K 如下：
+
 nεK ≡ ~Bew[R(n);n] 11a) (1)
+
 (這裡 Bew x 指 x 是一個可證式)。
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
@@ -335,11 +335,12 @@ S=R(q)
 
 für eine bestimmte natürliche Zahl q. 
 
-出現於定義的項全都可在 PM 中定義。
-複合項 K 也是如此，
-即給定類符 S 12)，
-式 [S; n] 定義為 K 包含自然數 n 。
-S 是類符並與某些 R(q) 同義，存在自然數 q 使得下式成立：S=R(q) 
+出現於定義的項目均可在 PM 中定義。
+衍生自前述項目之複合項目 K 也是如此，
+即存在類符 S 12) 使式 [S; n] 之意義為 K 包含自然數 n 。
+S 是類符並與特定 R(q) 同義，存在自然數 q 使得下式成立：
+
+S=R(q) 
 
 12) Es macht wieder nicht die geringsten Schwierigkeiten, 
     die Formel S tatsächlich hinzuschreiben.
@@ -347,20 +348,21 @@ S 是類符並與某些 R(q) 同義，存在自然數 q 使得下式成立：S=R
 12) 這再次沒有變得更不麻煩，S 的確寫下了。
 
 Wir zeigen nun, 
-daß der Satz [R(q);q] 12) in PM unentseheidbar ist. 
+daß der Satz [R(q);q] 13) in PM unentseheidbar ist. 
 
-現在我們展示 PM 中命題 [R(q);q] 13) 是不可決定。
+現在我們展示命題 [R(q);q] 13) 在 PM 下是不可決定。
 
 13) Man beachte, daß "[R(q); q]" (oder was dasselbe bedeutet "[S;q]")
     bloß eine metamathematische Beschreibung 
     des unentseheidbaren Satzes ist.
     Doch kann man, sobald man die Formel S ermittelt hat, 
-    natürlich auch die Zahl q bestimmen und damit 
-    den unentscheidbaren Satz selbst effektiv hinschreiben
+    natürlich auch die Zahl q bestimmen und 
+    damit den unentscheidbaren Satz selbst effektiv hinschreiben.
 
-13) 可觀察到 "[R(q);q]" (或同義詞 "[R;q]") 
-    僅是用後設數學描敘之不可決定命題。
-    可是當式 S 已判定，
+13) 注意 "[R(q);q]" (或同義詞 "[S;q]") 
+    只是用後設數學描敘之不可決定命題。
+    可是當 S 被決定時自然地，數 q 也會被決定，
+    因此可有效寫出不可決定命題。 
      
 Denn angenommen der Satz [R(q);q] wäre beweisbar, 
 dann wäre er auch richtig, 
@@ -376,13 +378,14 @@ im Widerspruch mit der Annahme.
 Wäre dagegen die Negation von [R(q);q] beweisbar, 
 so würde ~(nεK), 
 d.h. Bew[R (q); q] gelten. 
+
 另假定 [R(q);q] 之否定可證，則 ~(nεK)，
 也就是 Bew[R(q); q] 為真。
 
 [R(q);q] wäre also zugleich mit seiner Negation beweisbar, 
 was wiederum unmöglich ist. 
 
-[R(q);q] 與其否定同時可證，這還是不可能的。
+[R(q);q] 與其否定同時可證，這也是不可能的。
 
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
