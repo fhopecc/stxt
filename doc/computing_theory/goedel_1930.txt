@@ -371,8 +371,8 @@ d.h. nach (1) es würde ~Bew[R(q); q] gelten,
 im Widerspruch mit der Annahme. 
 
 假定命題 [R(q);q] 是可證的，即此命題為真，
-也就是若 q 屬於 K，
-即對 (1) 而言 ~Bew[R(q);q] 可為真，
+也就是若上述 q 屬於 K，
+由 (1) ~Bew[R(q);q] 為真，
 與假設矛盾。 
 
 Wäre dagegen die Negation von [R(q);q] beweisbar, 
@@ -380,28 +380,29 @@ so würde ~(nεK),
 d.h. Bew[R (q); q] gelten. 
 
 另假定 [R(q);q] 之否定可證，則 ~(nεK)，
-也就是 Bew[R(q); q] 為真。
+即 Bew[R(q); q] 為真。
 
 [R(q);q] wäre also zugleich mit seiner Negation beweisbar, 
 was wiederum unmöglich ist. 
 
 [R(q);q] 與其否定同時可證，這也是不可能的。
 
+譯註：
+
+
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
 auch mit dem "Lügner" besteht eine nahe Verwandtschaft 14), 
-denn der unentseheidbare Satz [R(q); q] besagt ja, 
+denn der unentscheidbare Satz [R(q); q] besagt ja, 
 daß q zu K gehört, 
 d.h. nach (1), daß [R(q); q] nicht beweisbar ist. 
 Wir haben also einen Satz vor uns, 
 der seine eigene Unbeweisbarkeit behauptet 15). 
 
-結論與理查悖論之類比在眼前出現，
-也與說謊者悖論存有關聯。
+上述結果似乎於眼前出現了理查悖論之類比，也與說謊者悖論相當接近。
 因為不可決定命題 [R(q); q] 說明 q 包含於 K，
-即依據 (1) 可知 [R(q); q] 是不可證明。
-因為在我們前面有一個定理斷言它本身是不可證明的。
-
+依據 (1) 得 [R(q); q] 是不可證明。
+我們得到一個定理斷言它本身是不可證明的。
 
 譯註：Antinomie Richard 理查悖論內容為，若對每個關於整數的命題，
       以至多100個中文字描述，並將命題依字典順序排列給予編號，
@@ -412,6 +413,20 @@ der seine eigene Unbeweisbarkeit behauptet 15).
       則無法決定 q 是否為理查數。
       若 q 為理查數，則其命題為真，其應與命題內容不相符，
       若 q 不為理查數，則其命題為假，應與命題內容相符。
+
+14) Es läßt sich überhaupt jede epistemologische Antinomie 
+    zu einem derartigen Unentscheidbarkeitsbeweis verwenden.
+
+14) 每個認識論悖論都可使用如此的不可決定證明。
+
+15) Ein solcher Satz hat entgegen dem Anschein nichts 
+    Zirkelhaftes an sich, 
+    denn er behauptet zunächst die Unbeweisbarkeit einer ganz 
+    bestimmten Formel 
+    (nämlich der q-ten in der lexikographischen Anordnung bei 
+    einer bestimmten Einsetzung), und erst nachträglich 
+    (gewissermaßen zufällig) stellt sich heraus, 
+    daß diese Formel gerade die ist, in der er selbst ausgedrtickt wurde.
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
@@ -421,9 +436,9 @@ um die in der obigen Überlegung vorkommenden Begriffe
 zu definieren, 
 und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
 
-上面正特定區分出之證明方法明顯可應用在每個形式系統，
-首先其內容詮釋具有足夠表達力去定義上述考量下出現之項目（特別是可證式）
-其次所有可證式內容也為真。
+上面正用過之證明方法明顯可應用於下述的每個形式系統，
+第一其本質詮釋具有足夠表達力其去定義前述之觀念（特別是可證式），
+其次每個可證式本質為真。
 
 Die nun folgende exakte Durchführung des obigen Beweises wird 
 unter anderem die Aufgabe haben, 

@@ -221,8 +221,8 @@ sie,Sie	    kommen	kammen	kämmen
 ich	        frage	fragte	    fragte
 du	        fragst	fragtest	fragt(e)st
 er, sie, es	fragt	fragte	    fragte
-wir	fragen	fragten	fragten
-ihr	fraget	fragtet	fragt(e)t
+wir	        fragen	fragten	    fragten
+ihr	        fraget	fragtet	    fragt(e)t
 sie, Sie	fragen	fragten	    fragten
 
 所以對於大多數的動詞，虛擬二式的表達方式，
