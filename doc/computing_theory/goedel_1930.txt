@@ -371,9 +371,8 @@ d.h. nach (1) es würde ~Bew[R(q); q] gelten,
 im Widerspruch mit der Annahme. 
 
 假定命題 [R(q);q] 是可證的，即此命題為真，
-也就是若上述 q 屬於 K，
-由 (1) ~Bew[R(q);q] 為真，
-與假設矛盾。 
+也就是上述 q 若屬於 K，
+由 (1) 得 ~Bew[R(q);q] 為真，這與假設矛盾。 
 
 Wäre dagegen die Negation von [R(q);q] beweisbar, 
 so würde ~(nεK), 
@@ -426,7 +425,8 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     (nämlich der q-ten in der lexikographischen Anordnung bei 
     einer bestimmten Einsetzung), und erst nachträglich 
     (gewissermaßen zufällig) stellt sich heraus, 
-    daß diese Formel gerade die ist, in der er selbst ausgedrtickt wurde.
+    daß diese Formel gerade die ist, 
+    in der er selbst ausgedrtickt wurde.
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
