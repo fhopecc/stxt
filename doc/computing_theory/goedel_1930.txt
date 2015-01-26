@@ -427,6 +427,8 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     (gewissermaßen zufällig) stellt sich heraus, 
     daß diese Formel gerade die ist, 
     in der er selbst ausgedrtickt wurde.
+    
+    如此的命題與顯現相反，本沒有循環論證。
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
