@@ -2727,6 +2727,46 @@ auf den Tisch 往桌子上放
 über 若動詞為兩地間之移動用賓格，
      為表示停在某地用與格。
 
+bei
+...
+
+支配與格。 bei dem 簡寫作 beim。
+
+1.在側，在旁；在，在某處
+
+Ich habe es nicht bei mir.　我身上沒帶。
+
+Bleib bei mir!　別走！
+
+Pinneberg liegt bei Hamburg.　皮內伯格在漢堡。
+
+2.在，在某時
+
+bei der Arbeit　在工作時
+
+Bitte treten Sie bei Abfahrt des Zuges vom Bahnsteig zurück!
+火車離站時請向後站！
+
+Sie wollte unbedingt London bei Nacht sehen.
+她想看倫敦夜景。
+
+3.經，經過，經由，過去
+（形容可能發生或不發生的事情） 如果有
+bei Schnee　如果有雪
+
+4.因為
+bei der Firma arbeiten　為公司工作
+
+5.以，依據，靠，由
+
+Selbst bei größter Anstrengung konnte er nicht mehr weiter.
+即使用盡全身力氣，他還是走不動了。
+
+Bei dem Verdienst kann er sich locker den Urlaub in der Karibik leisten.　用自己的收入，他完全可以去加勒比群島度假。
+
+6.每…
+（宣誓用語）借，於
+Ich schwöre bei meiner Ehre / bei Gott.　我宣誓……
 
 憑藉介詞
 ........
@@ -2862,6 +2902,8 @@ Ich bin nicht blöd. 我不笨。
 1000 tausend
 1008 tausend-acht
 5010 fünf-tausend-zehn
+
+
 
 縮寫
 ----

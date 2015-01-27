@@ -420,15 +420,17 @@ der seine eigene Unbeweisbarkeit behauptet 15).
 
 15) Ein solcher Satz hat entgegen dem Anschein nichts 
     Zirkelhaftes an sich, 
-    denn er behauptet zunächst die Unbeweisbarkeit einer ganz 
-    bestimmten Formel 
-    (nämlich der q-ten in der lexikographischen Anordnung bei 
-    einer bestimmten Einsetzung), und erst nachträglich 
+    denn er behauptet zunächst 
+    die Unbeweisbarkeit einer ganz bestimmten Formel 
+    (nämlich der q-ten in der lexikographischen Anordnung 
+    bei einer bestimmten Einsetzung), 
+    und erst nachträglich 
     (gewissermaßen zufällig) stellt sich heraus, 
     daß diese Formel gerade die ist, 
     in der er selbst ausgedrtickt wurde.
     
     如此的命題與顯現相反，本沒有循環論證。
+    因為一開始便聲明該公式(亦即以特定安排之字母順序的第 q 個)不可證性。
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
