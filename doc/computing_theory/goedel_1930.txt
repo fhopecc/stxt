@@ -427,10 +427,12 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     und erst nachträglich 
     (gewissermaßen zufällig) stellt sich heraus, 
     daß diese Formel gerade die ist, 
-    in der er selbst ausgedrtickt wurde.
+    in der er selbst ausgedrückt wurde.
     
-    如此的命題與顯現相反，本沒有循環論證。
-    因為一開始便聲明該公式(亦即以特定安排之字母順序的第 q 個)不可證性。
+    相對於呈現此命題沒有循環論證。
+    因為一開始便聲明該公式(亦即以特定安排之字母順序的第 q 個)不可證性，
+    僅有附加(隨機延展)置於外。
+    且這些公式可以直接被自我表達
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
