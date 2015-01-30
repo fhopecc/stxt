@@ -298,7 +298,11 @@ daß man die freie Variable
 durch das Zeichen für die natürliche Zahl n ersetzt. 
 
 令 α 為任意類別符；
-用 [α; n] 代表以自然數 n 取代 α 中自由變數之式，。
+用 [α; n] 代表以自然數 n 取代 α 中自由變數所得之式。
+
+譯註：
+entsteht 為 durch etwas hervorgerufen werden，
+由某些事物影響。
 
 Auch die Tripel-Relation x = [y; z] erweist 
 sich als innerhalb PM definierbar.
@@ -307,19 +311,18 @@ sich als innerhalb PM definierbar.
 
 Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 
-nεK ≡ ~Bew[R(n);n] 11a) (1)
-
-(wobei Bew x bedeutet: x ist eine beweisbare Formel). 
-
 現在我們定義自然數類別 K 如下：
 
 nεK ≡ ~Bew[R(n);n] 11a) (1)
+
+(wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
 (這裡 Bew x 指 x 是一個可證式)。
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
                                                          --- 
-11a) 覆寫線標記否定。譯註：原文否定是詞上面覆寫線 ~Bew = Bew 
+11a) 覆寫線標記否定。
+     譯註：原文否定是詞上面覆寫線 ~Bew = Bew 
 
 Da die Begriffe,
 welche im Definiens vorkommen, 
@@ -401,12 +404,14 @@ der seine eigene Unbeweisbarkeit behauptet 15).
 上述結果似乎於眼前出現了理查悖論之類比，也與說謊者悖論相當接近。
 因為不可決定命題 [R(q); q] 說明 q 包含於 K，
 依據 (1) 得 [R(q); q] 是不可證明。
-我們得到一個定理斷言它本身是不可證明的。
+我們得到一個定理斷言它本身是不可證明的。15)
 
-譯註：Antinomie Richard 理查悖論內容為，若對每個關於整數的命題，
-      以至多100個中文字描述，並將命題依字典順序排列給予編號，
+譯註：Antinomie Richard 理查悖論內容為，
+      若對每個整數命題以至多100個中文字描述，
+      並將命題依字母順序排列編號，
       若編號數字符合命題描述的性質，則此數為理查數，否則此數
       不為理查數。
+
       假設某個命題的編號為 q，此命題內容如下：
       「理查數是與對應的編號命題不相符之正整數。」，
       則無法決定 q 是否為理查數。
@@ -431,8 +436,14 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     
     相對於呈現此命題沒有循環論證。
     因為一開始便聲明該公式(亦即以特定安排之字母順序的第 q 個)不可證性，
-    僅有附加(隨機延展)置於外。
-    且這些公式可以直接被自我表達
+    僅在之後(一定程度之隨機)證明這些公式可以直接被自我表達。
+    
+    譯註：
+    stellt sich heraus 在句中為反身動詞形式，
+    在 Duden 上其意義為
+    sich herausstellen: sich [als etwas Bestimmtes] erweisen
+    
+    當某事確定時，可被證明
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
@@ -467,8 +478,11 @@ die in Abschn. 4 (Satz XI)
 näher behandelt werden.
 
 從注釋知 [R(q);q] 聲明其本身為不可證，
+
+譯注：應是注釋 15)
+
 可推得 [R(q);q] 為真，因為 [R(q);q] 實際上不可證（由於其不可決定）。
-在 PM 系統中不可判定之命題仍可經由後設數學考量決定。
+在 PM 系統中不可判定之命題仍可經由後設數學決定。
 這特殊情況的精確分析產出關於形式系統的一致性證明的驚訝結果，
 將於第 4 章(定理 XI)提到。
 
@@ -491,6 +505,13 @@ mit der Logik der PM 16) überbaut
 P 實質上可由建構 PM 邏輯於皮亞諾公理 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
+16) Die Hinzufügung der Peanosehen Axiome 
+    ebenso wie alle anderen am System PM 
+    angebrachten Abänderungen dienen lediglich zur 
+    Vereinfachung des Beweises 
+    und sind prinzipiell entbehrlich.
+    皮亞諾公理的擴充就像其它 PM 系統上修訂僅為了簡化證明且原則上可刪除。
+    
 Die Grundzeichen des Systems P sind die folgenden:
 
 P 系統之基本符如下：
@@ -726,7 +747,7 @@ V.每個式由下式之型別提升衍生而來(包含式本身)：
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
 
-這些公理隱喻著類可完全由其元素決定。
+這些公理說明類可完全由其元素決定。
 
 Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
 aus a), wenn a die Formel (~(b)) V (c) ist

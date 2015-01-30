@@ -2099,7 +2099,6 @@ Er mag ihr nicht, sie mag ihn nicht----Sie mögen sich nicht.
 Die Müllers bauen sich ein Haus.
 繆勒家給自己蓋了房子。
 
-
 其反身代詞為第四格或第三格，可用名詞或其他代詞取代。
 例如：sich anziehen、sich aufregen、sich kaufen、sich wünschen等。
 例句：
@@ -2118,7 +2117,6 @@ Die Müllers bauen sich ein Haus.
 某些動詞在表式交互關係時，可用交互代詞einander代替反身代詞。
 例句：Die Studenten verstehen sich/einander gut. (大學生們彼此清楚了解。)
 
-
 der Unfall sich ereigen = 發生意外
 
 Gestern hat sich hier ein schwerer Unfall ereignet.
@@ -2131,8 +2129,10 @@ Ich habe mich um eine neue Stelle beworben.
 
 II. Formen （型態）
 
-反身代名詞都是受格（自己受，咦），德文受格有兩種，反身代名詞當然也就有兩種。
-記憶要訣：只有單數的第一人稱第二人稱，其反身代名詞的Akkusativ和Dativ是不同型態的。
+反身代名詞都是受格（自己受，咦），德文受格有兩種，
+反身代名詞當然也就有兩種。
+記憶要訣：只有單數的第一人稱第二人稱，
+其反身代名詞的Akkusativ和Dativ是不同型態的。
 
 單數（Singular）
 ich: mich(A) mir(D)
