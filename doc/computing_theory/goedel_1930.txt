@@ -6,6 +6,14 @@ der Principia Mathematica und verwandter System I 1)
 花蓮 2013/03/04 星期一 
 花蓮 2013/05/03 星期五 
 
+譯序
+----
+
+本文中沒有一句廢話。
+
+本文
+----
+
 Von Kurt Gödel in Wien.
 
 庫爾特．哥德爾於維也納
@@ -320,8 +328,8 @@ nεK ≡ ~Bew[R(n);n] 11a) (1)
 (這裡 Bew x 指 x 是一個可證式)。
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
-                                                         --- 
-11a) 覆寫線標記否定。
+                                                         
+11a) 覆寫線標記否定。                    --- 
      譯註：原文否定是詞上面覆寫線 ~Bew = Bew 
 
 Da die Begriffe,
@@ -444,6 +452,8 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     sich herausstellen: sich [als etwas Bestimmtes] erweisen
     
     當某事確定時，可被證明
+    但許多英譯本將其譯為 emerge 或 turn out，
+    這證明德文與英文是 2 種截然不同的語言。
    
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
@@ -462,8 +472,11 @@ unter anderem die Aufgabe haben,
 die zweite der eben angeführten Voraussetzungen 
 durch eine rein formale und weit schwächere zu ersetzen.
 
-以下上述證明的精確實作，
-其中目標是將剛提的第二個前題取代為純形式且較弱的一個。
+以下為上述證明的精確實作，
+目標特別是是將剛提的第二個前題取代為純形式且較弱的一個。
+
+譯註：
+unter anderem 副詞片語：特別地
 
 Aus der Bemerkung, 
 daß [R(q); q] seine eigene Unbeweisbarkeit behauptet, 
@@ -477,13 +490,13 @@ bezüglich der Widerspruchsfreiheitsbeweise formaler Systeme,
 die in Abschn. 4 (Satz XI)
 näher behandelt werden.
 
-從注釋知 [R(q);q] 聲明其本身為不可證，
+從注釋知 [R(q);q] 聲明其本身為不可證，可推得 [R(q);q] 為真，
 
 譯注：應是注釋 15)
 
-可推得 [R(q);q] 為真，因為 [R(q);q] 實際上不可證（由於其不可決定）。
+因為 [R(q);q] 實際上不可證（由於其不可決定）。
 在 PM 系統中不可判定之命題仍可經由後設數學決定。
-這特殊情況的精確分析產出關於形式系統的一致性證明的驚訝結果，
+這特殊情況的精確分析產出關於形式系統之一致性證明的驚奇結果，
 將於第 4 章(定理 XI)提到。
 
 2.
@@ -492,25 +505,30 @@ Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises
 und gehen zunächst eine genaue Beschreibung des formalen Systems P, 
 für welches wir die Existenz unentscheidbarer Sätze nachweisen wollen. 
 
+現在進行上述草繪證明之精確實作，
+首先進行形式系統 P 之精確描述，
+後將證明該系統中存在不可決定命題。
+
 P ist im wesentlichen das System, 
 welches man erhält, 
 wenn man die Peanoschen Axiome 
 mit der Logik der PM 16) überbaut 
-(Zahlen als Individuen, Nachfolgerrelation als undefinierten Grundbegriff).
+(Zahlen als Individuen, 
+ Nachfolgerrelation als undefinierten Grundbegriff).
 
-我們現在精確實作出上述草繪證明，
-而首先給定形式系統 P 之精確描述，
-我們將證明存在不可決定命題於該系統中。
-
-P 實質上可由建構 PM 邏輯於皮亞諾公理 16) 上。
+P 實質上可視為建構 PM 邏輯於皮亞諾公理 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
-16) Die Hinzufügung der Peanosehen Axiome 
+譯註：
+erhält 被接受，應譯為視為
+
+16) Die Hinzufügung der Peanoschen Axiome 
     ebenso wie alle anderen am System PM 
     angebrachten Abänderungen dienen lediglich zur 
     Vereinfachung des Beweises 
     und sind prinzipiell entbehrlich.
-    皮亞諾公理的擴充就像其它 PM 系統上修訂僅為了簡化證明且原則上可刪除。
+    皮亞諾公理的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
+    故原則上不需要。
     
 Die Grundzeichen des Systems P sind die folgenden:
 
@@ -545,15 +563,18 @@ Variable dritten Typs (für Klassen von Klassen von Individuen):
 "x3", "y3", "z3"...
 
 usw. für jede natürliche Zahl als Typus 17).
-等等。 對每個作為型態之自然數
+對每個作為型別之自然數均如此…
 
-17) Es wird vorausgesezt, daß für jeden Variablentypus abzählbar viele
-    Zeichen zur Verfügung stehen.
+17) Es wird vorausgesezt, daß für jeden Variablentypus 
+    abzählbar viele Zeichen zur Verfügung stehen.
 
-17) 可假定，對每個變數型別，可數多種符號之定義域是成立的。
+17) 假定對每個變數型別可具有可數多種符號。
+
+譯註：
+zur Verfügung stellen 可行的
 
 Anm.: 
-Variable für zwei und mehr stellige Functionen (Relationen) sind
+Variable für zwei- und mehr stellige Functionen (Relationen) sind
 als Grundzeichen überflüssig, 
 da man Relationen als Klassen geordneter Paare definieren kann 
 und geordnete Paare wiederum als Klassen von Klassen, 
@@ -565,22 +586,23 @@ deren einzige Elemente x, y bzw. x sind. 18).
 因為關係可用序對類別來定義，
 而序對可再由類別之類別而定義，
 例如序對 a, b 可由((a), (a,b))定義，
-其中 (x, y) 及 (x) 表示類別，
-其成員成員分別僅含 x, y 及 x。18)
+其中 (x, y) 及 (x) 分別為成員僅含 x, y 及 x 之類別。18)
+
+譯註：
+wiederum 副詞：可再由
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
-    z. B. eine Relation zwischen Individuen und Klassen 
-    als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
+    z. B. eine Relation zwischen Individuen 
+    und Klassen als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
     Alle in den PM über Relationen
     beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, 
     auch bei dieser Behandlungsweise beweisbar.
 
-18) 不等關係也可用此方式定義，
-    例如一個個體與一類別含類別作為成員間的關係含一個成員之類別之類別，
-    如下式：
+18) 不等關係也可如此定義，
+    例如一個體與類別之間的關係作為一個類別其成員如下形式：
     ((x2), ((x1),x2))
-    所有在 PM 及前述關係是可證句，我們教一個教簡單考慮，
-    如此作法也是可證的。
+    所有在 PM 中前述可證句之關係，以此簡單考慮，
+    以此方式也是可證的。
 
 數符
 ....
@@ -589,25 +611,36 @@ Unter einem Zeichen ersten Typs verstehen
 wir eine Zeichenkombination der Form:
 a, fa, ffa, fffa... usw.
 wo a entweder 0 oder eine Variable ersten Typs.
-
-基於第一型符號下，我們理解下列形式之符號組合：
-a, fa, ffa, fffa... 等等
-其中 a 是 0 或第一型符號。
-
 Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
-在第一種情形下，我們稱這樣的符號為數符。
+基於第一型符號我們可理解符號組合如以下形式：
+a, fa, ffa, fffa... 等等
+其中 a 是 0 或第一型符號。
+在第一種情形下，我們稱這種符號為數符。
 
-Für n > 1 verstehen wir unter einem Zeichen n-ten Typs.
+Für n > 1 verstehen wir 
+unter einem Zeichen n-ten Typs dasselbe wie Variable n-ten Typs.
 
-對 n > 1 的情形下，表示符號為第 n 型。
+第 n 型符號
+...........
+
+對 n > 1 可知第 n 型符號即為第 n 型變數。
+
+譯註：
+dasselbe 表一模一樣的東西
+
+基本式
+......
+
+a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
+稱為基本式。
 
 Zeichenkombinationen der Form a(b), 
-wo b ein Zeichen und n-ten a ein Zeichen (n+1)-ten Typs ist, 
+wo b ein Zeichen n-ten und a ein Zeichen (n+1)-ten Typs ist, 
 nennen wir Elementarformeln.
 
-a(b) 型式的符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
-我們稱為基本式。
+a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
+稱為基本式。
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören und 
@@ -616,27 +649,52 @@ x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
 
 我們所定義的公式類別作為最小的類別 19)，
 包含所有的基本式和所有以 a, b 形成 ~(a), (a) V (b), x Π (a)
-(x 是一個任意的變數) 18a)。
+(其中 x 是一任意變數) 18a)。
+
+18a) xΠ(a) ist also auch dann eine Formel, 
+     wenn x in a nicht oder nicht frei vorkommt. 
+     In diesem Fall bedeutet xΠ(a) natürlich dasselbe wie a.
+     若 x 未在 a 出現或是非自由變數，
+     xΠ(a) 也是一式。 
+     此情況下 xΠ(a) 意義與 a 一樣。 
+
+19) Bez. dieser Definition (und analoger später vorkommender) vgl.
+    J. Łukasiewiez und A. Tarski, Untersuchungen über den Aussagenkalkül,
+    Comptes Rendus des séances de la Société des Sciences et des 
+    Lettres de Varsovie
+    XXIII, 1930, C1. III.
+
+19) 依據定義（及接下來出現），參見武卡謝維奇及塔斯基，
+    命題演算研究，
+    Comptes Rendus des séances 
+    de la Société des Sciences et des Lettres de Varsovie
+    XXIII, 1930, C1. III.
 
 (a) V (b) nennen wir die Disjunktion aus a und b,  
 ~(a) die Negation und x Π (a) eine Generalisation von a.
 
-我們稱 (a) V (b) 為 a 及 b 的析取，
-~(a) 為否定而
-x Π (a) 為 a 的一般化。
+(a) V (b) 稱為 a 及 b 的析取，
+~(a) 為否定而 x Π (a) 為 a 的一般化。
+
+句式
+....
 
 Satzformel heißt eine Formel, 
 in der keine freie Variable vorkommt 
 (freie Variable in der bekannten Weise definiert).
 
-句式為不含任何自由變數的式(自由變數如已知方法所定義)。
+句式為不含任何自由變數的式(自由變數定義如慣例)。
 
-Eine Formel mit genan n-freien Individuenvariablen
-(und sonst keinen freien Variablen) nennen wir n-stelliges 
-Relationszeichen, für n=1 auch Klassenzeichen.
+n 元關係符
+..........
 
-式若有 n 個自由個體變數(且沒有其它的自由變數)
-稱為 n元關係符，在 n=1 的情形為類別符。
+Eine Formel mit genau n-freien Individuenvariablen
+(und sonst keinen freien Variablen) nennen wir 
+n-stelliges Relationszeichen, 
+für n=1 auch Klassenzeichen.
+
+一式若具 n 個自由個體變數(且沒有其它的自由變數)
+稱為 n 元關係符，在 n=1 下也為類別符。
 
 取代
 ....
@@ -652,8 +710,20 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 Subst a|v| 
        |b| 
 (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
-我們可視為從 a 衍生之式，
+可理解為一式由 a 衍生，
 若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
+
+
+20) Falls v in a nicht als freie Variable vorkommt, 
+    soll Subst a|v| = a sein.
+                |c|
+    Man beachte, daß "Subst" ein Zeichen der Metamathematik ist.
+    v 並非 a 的自由變數情況下，則 Subst a|v|=a。
+                                         |c|
+    要注意 Subst 是後設數學之符號。
+
+    譯註：即 v 並非 a 的自由變數情況下，Subst a|v| 仍為 a。
+                                               |c| 
 
 型別提升
 ........
@@ -663,9 +733,11 @@ wenn a aus b dadurch entsteht,
 daß man den Typus aller in b vorkommenden Variablen
 um die gleiche Zahl erhöht.
 
-我們稱一式 a 為另一式 b 的型別提升，
-若且惟若 a 衍生自 b 並滿足，
-所有在 b 出現變數的型別，以同樣的整數遞增之式。
+若 a 衍生自 b 且所有在 b 出現變數的型別，以同樣的整數遞增。
+則 a 為另 b 的型別提升，
+
+公理
+----
 
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
@@ -674,19 +746,45 @@ Folgende Formeln (I bis V) heißen Axiome
  das Weglassen von Klammern angeschrieben)22):
 
 下式(I 至 V)稱為公理
-(它藉由已知方法定義縮寫的幫助：., ->, ≡, (Ex), = 21)
-及應用省略括號之通用慣寫22)。
+(藉由已知方法定義縮寫：., ->, ≡, (Ex), = 21)
+ 且利用一般慣寫法去省略括號 22)。
+
+21) x1=y1 ist, wie in PM I, *13 durch x2Π(x2(x1) -> x2(y1)) definiert
+    zu denken (ebenso für die höheren Typen).
+    如同在 PM I, *13 中，
+    x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
+    
+    譯註：故 = 並非基礎符號，可不定義。
+
+22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
+    muß man also 
+    (in II, III, IV nach Ausführung der erlaubten Einsetzungen) 
+    noch
+    1. die Abkürzungen eliminieren,
+    2. die unterdrückten Klammern hinzufügen.
+    Man beachte, daß die so entstehenden Ausdrücke "Formeln" 
+    in obigem Sinn sein müssen. 
+    (Vgl. auch die exakten Definitionen der metamathem. 
+     Begriffe S. 182 fg.) 
+    Monatsh. für Mathematik und Physik. XXXVIII. Band.
+
+    為了自前述框架推得公理(在 II, III, IV 中，要執行允許之取代後)，
+    仍必須作
+    1. 消除縮寫
+    2. 增加省略的括號
+    須注意結果表示式仍須如前定義之「式」之樣。
+    (也參閱後設數學觀念 182 頁之精確定義)
+    Monatsh. 數學和物理. XXXVIII. Band. 
 
 I.
-1.～(fx1=0)
+1.~(fx1=0)
 2.fx1 = fy1 -> x1 = y1
 3.x2(0).x1Π(x2(x1) -> x2(fx1)) -> x1 Π (x2(x1)).
 
-II. Jede Formel, die aus den folgenden Schemata durch Einsetzung
-beliebiger Fromeln für p, q, r entsteht.
+II. Jede Formel, die aus den folgenden Schemata durch 
+    Einsetzung beliebiger Fromeln für p, q, r entsteht.
 
-II. 每個公式，其衍生自將以下框架中 p, q, r 配置任意公式，
-    將使得下式成立：
+II. 將以下框架中以任意公式取代 p, q, r 之式：
 
 1. p V p -> p
 2. p -> p V p
@@ -695,7 +793,7 @@ II. 每個公式，其衍生自將以下框架中 p, q, r 配置任意公式，
 
 III. Jede Formel, die aus einem der beiden Schemata
 
-III. 每個公式，其衍生自以下兩框架其中之一
+III. 由以下兩框架其中之一推演之公式，
 
 1. v Π (a) -> Subst a |v|
                       |c|
@@ -706,6 +804,9 @@ dadurch entsteht, daß man für a, v, b, c folgende Einsetzugen
 vornimmt (und in 1. die durch "Subst" angezeigte Operation 
 ausführt):
 
+執行對 a, v, b, c 執行以下取代
+(而在 1 中所執行的是 "Subst" 所指出的操作) 
+
 Für a eine beliebige Formel, für v eine beliebige Variable.
 für b eine Forml, in der v nicht frei vorkommt, 
 für c ein Zeichen vom selben Typ wie v, 
@@ -713,9 +814,6 @@ vorausgesetzt,
 daß c keine Variable enthält,
 welche in a an einer Stelle gebunden ist, 
 an der v frei ist 23).
-
-會滿足，執行如下建構 a, v, b, c 
-(而在 1 中，是執行經由 "Subst" 所指出的操作) 
 
 對任一式 a 及任一變數 v， b 為一式，在其中沒有 v 是自由的，
 對 c 為一與 v 同型的符號，前題是， c 沒有包含在 a 的受限變數
@@ -771,7 +869,6 @@ Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
 
-
 陣列操作
 ........
 
@@ -784,8 +881,7 @@ Weise eineindeutig natürliche Zahlen zu:
 n N x entspricht der Operation: 
 "n-maliges Vorsetzen des Zeichens"
 
-n N x 對應到以下操作：
-「前置字符 x 於前 n 次。」 
+n N x 對應到以下操作：「前置字符 x 於前 n 次。」 
 
 17.Z(n) ≡ nN[R(1)]
 
@@ -819,5 +915,3 @@ R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
 
 ~R(x1...xn) => Bew[Neg Sb(r u1     ...un    )]        (4)
                             Z(x1)...Z(xn)
-
-

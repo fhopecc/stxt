@@ -2905,6 +2905,40 @@ Ich bin nicht blöd. 我不笨。
 5010 fünf-tausend-zehn
 
 
+als
+---
+1、als 做連詞，表示“當……的時候”，用於指過去發生的一次性的行為。
+　　Als ich nach Hause kam, war meine Frau bereits weg.
+　　當我回到家的時候，我的妻子已經走了。
+　　Als er nach China gekommen war, fing das Oktoberfest an.
+　　當他回到中國後，啤酒節才開始。
+　　Als ich gestern dich anrief, bist du nicht da.
+　　當我昨天給你打電話的時候，你不在家。
+
+　　2、als 做連詞，用於比較從句。之前有形容詞的比較級。
+　　Thomas ist kleiner als sein Bruder.
+　　Thomas比他的哥哥個子矮。
+　　Das Problem ist viel schwerer, als wir gedacht haben.
+　　這個問題比我們想像中的要難的多。
+　　3、als 做連詞，用於第二虛擬式中，表示非現實比較，
+       als後面跟動詞或動詞的變化形式。
+　　Er tat so, als h?tte er nichts davon geh?rt.
+　　他這麼做，好像是沒聽說過此事似的。
+　　Er spricht so gut Deutsch, als w?re er lange in Deutschland gewesen.
+　　他的德語說的很好，好像他在德國待過很久似的。
+　　4、als 做連詞，表示“作為……”。
+　　Als ein Deutschlehrer soll er viel davon wissen.
+　　作為一名德語老師他應該知道此事。
+
+　　5、als 用於固定表達或片語中。
+
+　　如：
+    anders als 不同於
+　　nichts als 僅僅，無非
+　　zu ... als dass 太……，以至於不……
+
+　　z.B. Er kommt zu sp?t, als dass er den Zug erreichen k?nnte.
+　　他來得太晚了以至於沒趕上火車。
 
 縮寫
 ----
