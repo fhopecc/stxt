@@ -711,7 +711,7 @@ Subst a|v|
        |b| 
 (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
 可理解為一式由 a 衍生，
-若且惟若在裡面每處的 v，其為自由變數，都由 b 取代 20)。
+且在裡面每處的 v，其為自由變數，都由 b 取代 20)。
 
 
 20) Falls v in a nicht als freie Variable vorkommt, 
@@ -733,8 +733,8 @@ wenn a aus b dadurch entsteht,
 daß man den Typus aller in b vorkommenden Variablen
 um die gleiche Zahl erhöht.
 
-若 a 衍生自 b 且所有在 b 出現變數的型別，以同樣的整數遞增。
-則 a 為另 b 的型別提升，
+若 a 衍生自 b 且所有出現於 b 的變數，其型別增加同樣的數量，
+則稱 a 為 b 的型別提升。
 
 公理
 ----
@@ -805,19 +805,35 @@ vornimmt (und in 1. die durch "Subst" angezeigte Operation
 ausführt):
 
 執行對 a, v, b, c 執行以下取代
-(而在 1 中所執行的是 "Subst" 所指出的操作) 
+(而在 1 中執行之操作是記為 "Subst") 
 
 Für a eine beliebige Formel, für v eine beliebige Variable.
 für b eine Forml, in der v nicht frei vorkommt, 
 für c ein Zeichen vom selben Typ wie v, 
 vorausgesetzt, 
 daß c keine Variable enthält,
-welche in a an einer Stelle gebunden ist, 
-an der v frei ist 23).
+welche in a an einer Stelle gebunden ist, an der v frei ist 23).
 
-對任一式 a 及任一變數 v， b 為一式，在其中沒有 v 是自由的，
-對 c 為一與 v 同型的符號，前題是， c 沒有包含在 a 的受限變數
-v 是自由的。
+a 為任一式、
+v 為任一變數，
+b 為式其中不出現自由的 v，
+c 為與 v 同型的符號，
+且 c 不包含在 a 中，v 為自由變數位置上的受限變數 23)。
+
+23) c ist also entweder eine Variable oder 0 oder 
+    ein Zeichen der Form f....f u, 
+    wo u entweder 0 oder eine Variable 1. Typs ist. 
+    Bez. des Begriffs "frei (gebunden) an einer Stelle von a" 
+    vgl. die in Fußnote 24) zitierte Arbeit I A 5.
+
+    c 也是變數或是 0 或是形式為 f....fu 之符號， 
+    其中 u 為 0 或 1 型變數。
+    
+24) Die Einsetzungsregel wird dadurch überflüssig, 
+    daß wir alle möglichen Einsetzungen bereits 
+    in den Axiomen selbst vorgenommen haben 
+    (analog bei J. v. Neumann, Zur Hilbertschen Beweistheorie, 
+     Math. Zeitschr. 26, 1927).
 
 IV. Jede Formel, die aus dem Schema
 
