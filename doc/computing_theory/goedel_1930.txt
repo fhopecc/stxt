@@ -710,8 +710,8 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
 Subst a|v| 
        |b| 
 (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
-可理解為一式由 a 衍生，
-且在裡面每處的 v，其為自由變數，都由 b 取代 20)。
+為一式由 a 衍生，
+且在裡面每處自由之 v，均由 b 取代 20)。
 
 
 20) Falls v in a nicht als freie Variable vorkommt, 
@@ -751,6 +751,7 @@ Folgende Formeln (I bis V) heißen Axiome
 
 21) x1=y1 ist, wie in PM I, *13 durch x2Π(x2(x1) -> x2(y1)) definiert
     zu denken (ebenso für die höheren Typen).
+
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
@@ -829,11 +830,20 @@ c 為與 v 同型的符號，
     c 也是變數或是 0 或是形式為 f....fu 之符號， 
     其中 u 為 0 或 1 型變數。
     
+    關於「a 的自由(受限)位置」觀念，
+    參考注釋 24)參考資料之第 I 節 A 5。
+
+    
 24) Die Einsetzungsregel wird dadurch überflüssig, 
     daß wir alle möglichen Einsetzungen bereits 
     in den Axiomen selbst vorgenommen haben 
     (analog bei J. v. Neumann, Zur Hilbertschen Beweistheorie, 
      Math. Zeitschr. 26, 1927).
+
+    因為所有可能的取代已在公理中處理，
+    所以取代規則將變為多餘的，
+    （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
+    
 
 IV. Jede Formel, die aus dem Schema
 
