@@ -43,7 +43,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
 
 現在已建構之最全面形式系統一個是「數學原理」(PM)，
 另一個是「熱梅若．佛蘭克」(由馮鈕曼繼續擴增)
-集合論之公理系統。
+集合論之公設系統。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
    Cambridge 1925. 
@@ -56,8 +56,8 @@ Axiomensystem der Mengenlehre 3) andererseits.
 2) 懷海德及羅素，數學原理，第二版，劍橋出版 1925。
 
    對 PM 系統之定理，我們也特別計算出以下定理：
-   無窮公理(形式如下：它給定精確可數多的個體)，
-   簡化和選擇公理(對所有類型)。
+   無窮公設(形式如下：它給定精確可數多的個體)，
+   簡化和選擇公設(對所有類型)。
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen über 
    die Grundlegung der Mengenlehre, Wissensch. u. Hyp. Bd. XXXI. 
@@ -66,7 +66,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
    J,v. Neumann, Die Axiomatisierung der Mengenlehre. 
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
-   馮．紐曼，集合論之公理化。
+   馮．紐曼，集合論之公設化。
    數學精選 27 期，1928。純粹及應用數學期刊。154(1925)，160(1929)。
    
    譯註：我認為的上述期刊的縮寫如下：
@@ -77,8 +77,8 @@ Axiomensystem der Mengenlehre 3) andererseits.
    gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
    des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
 
-   應注意到必須加上邏輯計算之公理及推論規則
-   至前述文獻給定之集合理論公理以達成形式化。 
+   應注意到必須加上邏輯計算之公設及推論規則
+   至前述文獻給定之集合理論公設以達成形式化。 
 
    Die nachfolgenden Überlegungen gelten auch für die 
    in den letzten Jahren 
@@ -102,7 +102,7 @@ in ihnen formalisiert,
 d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
 這兩個系統如此廣泛使如今所有數學上應用到之證明方法都可在其下形式化，
-即簡化至少數的公理及推論規則。
+即簡化至少數的公設及推論規則。
 
 Es liegt daher die Vermutung nahe, 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
@@ -110,7 +110,7 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-因此使我們以為這些公理及推論法則可決定以前述系統形式所表達的所有數學問題。
+因此使我們以為這些公設及推論法則可決定以前述系統形式所表達的所有數學問題。
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
@@ -120,7 +120,7 @@ die sich aus den Axiomen nicht entscheiden lassen.
 
 下面將展示並非如此，
 而是就算是前述兩個系統下實際相對簡單的一般整數論問題 4)
-也不可從前述公理被決定。
+也不可從前述公設被決定。
 
 4) D.h. genauer, es gibt unentscheidbare Sätze, 
    in denen außer den logischen Konstanten: 
@@ -147,14 +147,14 @@ angegebenen Art beweisbar werden.
 
 這情形並所建置系統特定本質所致，
 而是存在於更廣泛之形式系統類別，
-特別是包含加入有限公理 5) 至前述兩個系統之系統，
-並假定經由加入的公理，無註腳 4 給定的類型中的假命題成為可證。
+特別是包含加入有限公設 5) 至前述兩個系統之系統，
+並假定經由加入的公設，無註腳 4 給定的類型中的假命題成為可證。
 
 5) Dabei werden in PM nur solche Axiome als verschieden gezählt, 
    die aus einander nicht bloß durch Typenwechsel entstehen. 
 
-5) 這即是在 PM 中僅這些公理被視為不同而計數，
-   純粹從公理以形別轉換衍生的不算。
+5) 這即是在 PM 中僅這些公設被視為不同而計數，
+   純粹從公設以形別轉換衍生的不算。
 
 Wir skizzieren, bevor wir auf Details eingehen, 
 zunächst den Hauptgedanken des Beweises, 
@@ -516,7 +516,7 @@ mit der Logik der PM 16) überbaut
 (Zahlen als Individuen, 
  Nachfolgerrelation als undefinierten Grundbegriff).
 
-P 實質上可視為建構 PM 邏輯於皮亞諾公理 16) 上。
+P 實質上可視為建構皮亞諾公設於 PM 邏輯 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
 譯註：
@@ -527,7 +527,7 @@ erhält 被接受，應譯為視為
     angebrachten Abänderungen dienen lediglich zur 
     Vereinfachung des Beweises 
     und sind prinzipiell entbehrlich.
-    皮亞諾公理的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
+    皮亞諾公設的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
     故原則上不需要。
     
 Die Grundzeichen des Systems P sind die folgenden:
@@ -604,8 +604,8 @@ wiederum 副詞：可再由
     所有在 PM 中前述可證句之關係，以此簡單考慮，
     以此方式也是可證的。
 
-數符
-....
+第一型符號
+..........
 
 Unter einem Zeichen ersten Typs verstehen 
 wir eine Zeichenkombination der Form:
@@ -618,11 +618,11 @@ a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
 在第一種情形下，我們稱這種符號為數符。
 
-Für n > 1 verstehen wir 
-unter einem Zeichen n-ten Typs dasselbe wie Variable n-ten Typs.
-
 第 n 型符號
 ...........
+
+Für n > 1 verstehen wir 
+unter einem Zeichen n-ten Typs dasselbe wie Variable n-ten Typs.
 
 對 n > 1 可知第 n 型符號即為第 n 型變數。
 
@@ -632,9 +632,6 @@ dasselbe 表一模一樣的東西
 基本式
 ......
 
-a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
-稱為基本式。
-
 Zeichenkombinationen der Form a(b), 
 wo b ein Zeichen n-ten und a ein Zeichen (n+1)-ten Typs ist, 
 nennen wir Elementarformeln.
@@ -642,13 +639,17 @@ nennen wir Elementarformeln.
 a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 稱為基本式。
 
+邏輯運算子
+..........
+
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören und 
 zu welcher zugleich mit a, b stets auch ~(a), (a) V (b), 
-x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
+xΠ(a) gehören (wobei x eine beliebige Variable ist) 18a).
 
 我們所定義的公式類別作為最小的類別 19)，
-包含所有的基本式和所有以 a, b 形成 ~(a), (a) V (b), x Π (a)
+包含所有的基本式，
+且若包含 a, b 同時也包含 ~(a), (a) V (b), xΠ(a)
 (其中 x 是一任意變數) 18a)。
 
 18a) xΠ(a) ist also auch dann eine Formel, 
@@ -676,14 +677,14 @@ x Π (a) gehören (wobei x eine beliebige Variable ist)18a).
 (a) V (b) 稱為 a 及 b 的析取，
 ~(a) 為否定而 x Π (a) 為 a 的一般化。
 
-句式
-....
+命題式
+......
 
 Satzformel heißt eine Formel, 
 in der keine freie Variable vorkommt 
 (freie Variable in der bekannten Weise definiert).
 
-句式為不含任何自由變數的式(自由變數定義如慣例)。
+命題式為不含任何自由變數的式(自由變數定義如慣例)。
 
 n 元關係符
 ..........
@@ -708,9 +709,8 @@ verstehen wir die Formel, welche aus a entsteht,
 wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
 
 Subst a|v| 
-       |b| 
-(其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
-為一式由 a 衍生，
+       |b| (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
+視為一式由 a 衍生，
 且在裡面每處自由之 v，均由 b 取代 20)。
 
 
@@ -718,6 +718,7 @@ Subst a|v|
     soll Subst a|v| = a sein.
                 |c|
     Man beachte, daß "Subst" ein Zeichen der Metamathematik ist.
+
     v 並非 a 的自由變數情況下，則 Subst a|v|=a。
                                          |c|
     要注意 Subst 是後設數學之符號。
@@ -736,16 +737,13 @@ um die gleiche Zahl erhöht.
 若 a 衍生自 b 且所有出現於 b 的變數，其型別增加同樣的數量，
 則稱 a 為 b 的型別提升。
 
-公理
-----
-
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
  definierten Abkürzungen: ., ->, ≡, (Ex), = 21)
  und mit Verwendung der üblichen Konventionen über
  das Weglassen von Klammern angeschrieben)22):
 
-下式(I 至 V)稱為公理
+下式(I 至 V)稱為公設
 (藉由已知方法定義縮寫：., ->, ≡, (Ex), = 21)
  且利用一般慣寫法去省略括號 22)。
 
@@ -755,7 +753,7 @@ Folgende Formeln (I bis V) heißen Axiome
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
-    譯註：故 = 並非基礎符號，可不定義。
+    譯註：故基礎符號義不包含 =。
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -769,7 +767,7 @@ Folgende Formeln (I bis V) heißen Axiome
      Begriffe S. 182 fg.) 
     Monatsh. für Mathematik und Physik. XXXVIII. Band.
 
-    為了自前述框架推得公理(在 II, III, IV 中，要執行允許之取代後)，
+    為了自前述框架推得公設(在 II, III, IV 中，要執行允許之取代後)，
     仍必須作
     1. 消除縮寫
     2. 增加省略的括號
@@ -777,38 +775,48 @@ Folgende Formeln (I bis V) heißen Axiome
     (也參閱後設數學觀念 182 頁之精確定義)
     Monatsh. 數學和物理. XXXVIII. Band. 
 
+皮亞諾公設
+..........
+
 I.
 1.~(fx1=0)
 2.fx1 = fy1 -> x1 = y1
 3.x2(0).x1Π(x2(x1) -> x2(fx1)) -> x1 Π (x2(x1)).
 
+邏輯恆等式
+..........
+
 II. Jede Formel, die aus den folgenden Schemata durch 
     Einsetzung beliebiger Fromeln für p, q, r entsteht.
 
-II. 將以下框架中以任意公式取代 p, q, r 之式：
+II. 任一公式，其衍生自以下框架中 p, q, r 位置配置任意公式：
 
 1. p V p -> p
 2. p -> p V p
 3. p V q -> q V p
 4. (p -> q) -> (r V p -> r V q)
 
+取代操作
+........
+
 III. Jede Formel, die aus einem der beiden Schemata
 
-III. 由以下兩框架其中之一推演之公式，
+III. 由以下兩框架其中之一推演之公式
 
-1. v Π (a) -> Subst a |v|
+1. vΠ(a) -> Subst a |v|
                       |c|
 
-2. v Π (b V a) -> b V vΠ(a)
+2. vΠ(b V a) -> b V vΠ(a)
 
-dadurch entsteht, daß man für a, v, b, c folgende Einsetzugen
-vornimmt (und in 1. die durch "Subst" angezeigte Operation 
-ausführt):
+dadurch entsteht, 
+daß man für a, v, b, c folgende Einsetzungen vornimmt 
+(und in 1. die durch "Subst" angezeigte Operation ausführt):
 
-執行對 a, v, b, c 執行以下取代
-(而在 1 中執行之操作是記為 "Subst") 
+對 a, v, b, c 作以下配置：
+(並執行於 1. 記為 "Subst" 之操作) 
 
-Für a eine beliebige Formel, für v eine beliebige Variable.
+Für a eine beliebige Formel, 
+für v eine beliebige Variable.
 für b eine Forml, in der v nicht frei vorkommt, 
 für c ein Zeichen vom selben Typ wie v, 
 vorausgesetzt, 
@@ -819,7 +827,7 @@ a 為任一式、
 v 為任一變數，
 b 為式其中不出現自由的 v，
 c 為與 v 同型的符號，
-且 c 不包含在 a 中，v 為自由變數位置上的受限變數 23)。
+且 c 不包含變數，其在 a 中位置為受限，但 v 於此為自由 23)。
 
 23) c ist also entweder eine Variable oder 0 oder 
     ein Zeichen der Form f....f u, 
@@ -830,7 +838,7 @@ c 為與 v 同型的符號，
     c 也是變數或是 0 或是形式為 f....fu 之符號， 
     其中 u 為 0 或 1 型變數。
     
-    關於「a 的自由(受限)位置」觀念，
+    關於「a 的位置為自由(受限)」之觀念，
     參考注釋 24)參考資料之第 I 節 A 5。
 
     
@@ -840,38 +848,75 @@ c 為與 v 同型的符號，
     (analog bei J. v. Neumann, Zur Hilbertschen Beweistheorie, 
      Math. Zeitschr. 26, 1927).
 
-    因為所有可能的取代已在公理中處理，
+    因為所有可能的取代已在公設中處理，
     所以取代規則將變為多餘的，
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
     
-
 IV. Jede Formel, die aus dem Schema
 
-IV. 從下框架衍生之式
+IV. 以下框架衍生之式
 
-1. (Eu)(v Π(u(v)≡a))
+1. (Eu)(vΠ(u(v)≡a))
 
-dadureh entsteht, daß man für v bzw. u beliebige Variable vom
-Typ n bzw. n + 1 und für a eine Formel, die u nicht frei enthält,
-einsetzt. Dieses Axiom vertritt das Reduzibilitätsaxiom 
+dadurch entsteht, 
+daß man für v bzw. u beliebige Variable vom Typ n bzw. n + 1 
+und für a eine Formel, 
+die u nicht frei enthält, einsetzt. 
+Dieses Axiom vertritt das Reduzibilitätsaxiom 
 (Komprehensionsaxiom der Mengenlehre).
 
-應滿足，v 及 u 分別為 n 型及 n+1 型之任意變數，
-且 a 為一式，其不含 u 為自由變數。
-這些公理表示可簡化公理
-(集合論之理解公理)
+配置 v 及 u 分別為 n 型及 n+1 型之任意變數，
+a 為一式，其不含自由的 u。
+這些公設表達可化約公設
+(集合論之概括公設)
+
+譯註：
+
+Reduzibilitätsaxiom 可化約公設
+
+任何命題函數可用述語命題函數表示。
+
+Komprehensionsaxiom der Mengenlehre 概括公設
+
+如果P是一個性質，那麼具有性質P(x) 的所有物體x就構成一個集合，
+寫成 Y = {x: P(x)}。
+
+所有偶數所成的集合就可以寫成 E = { x : x 是偶數}。
+此例性質P(x) 說的就是「x 是偶數」，
+它利用偶數這個性質建造起了E這個集合。
+
+另例, 
+所有質數所形成的集合P = { x : x 是質數}= {2, 3, 5, 7, 11…}。
+這裡所謂的性質P(x)指的就是「x是質數」。
+
+羅素詭論
+
+在概括公設的許可利用上述的性質P製造出來的集合，
+其數學形式相當簡單，依據概括公設，可設計集合
+R = { X : X 不屬於 X}。
+X 不屬於 X 到底是什麼意思?
+如果用麻袋隱喻來理解的話，它說的不就是一個集合不能把自己裝進去嗎，
+這不是理所當然嗎?
+一個袋子怎麼能夠把自己當成元素放進去呢?
+這不就像一條蛇想把自己吞進去?
+
+元素決定類
+..........
 
 V.Jede Formel, die aus der folgenden durch Typenerhöhung 
   entsteht (und diese Formel selbst):
 
 V.每個式由下式之型別提升衍生而來(包含式本身)：
 
-1. x1 Π (x2(x1)≡y2(x1)) -> x2=Y2.
+1. x1Π(x2(x1)≡y2(x1)) -> x2=Y2.
 
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
 
-這些公理說明類可完全由其元素決定。
+此公設說明類可完全由其元素決定。
+
+直接後繼
+........
 
 Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
 aus a), wenn a die Formel (~(b)) V (c) ist
@@ -882,21 +927,414 @@ wo v eine beliebige Variable bedeutet).
 則式 c 稱為 a 及 b (分別來自a) 的直接後繼，
 (分別是當 c 為式 v Π (a)，其中 v 意為任一個變數)。
 
+可證式
+......
+
 Die Klasse der beweisbaren Formeln wird definiert 
 als die kleinste Klasse von Formeln, 
 welche die Axiome enthält und gegen die Relation 
 "unmittelbare Folge" abgeschlossen ist 24).
 
 可證式之類別定義為最小之式類別，
-其包含公理及直接後繼關係所推論之式。
+其包含公設及直接後繼關係所推論之式。
+
+哥德爾數
+........
 
 Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
 
-陣列操作
+"0" ... 1 "V"...7 "("...11
+"f" ... 3 "Π"...9 ")"...13
+"~" ... 5
+
+ferner den Variablen n-ten Typs die Zahlen der Form p^n 
+(wo p eine Primzahl >13 ist). 
+
+此外第 n 型變數配置形式為 p^n 之整數
+(其中 p 為大於 13 之質數)。
+
+Dadurch entspricht jeder endlichen Reihe von Grundzeichen 
+(also auch jeder Formel) 
+in eineindeutiger Weise eine endliche Reihe natürlicher Zahlen. 
+
+因此每個基礎符號序列(也是每個公式)以1對1方式對應自然數序列。
+
+Die endlichen Reihen natürlicher Zahlen bilden wir nun 
+(wieder eineindeutig) auf natürliche Zahlen ab, 
+indem wir der Reihe n1, n2,...,nk die Zahl 2^n1, 3^n2,...,pk^nk
+entsprechen lassen, 
+wo pk die k-te Primzahl (der Größe nach) bedeutet.
+
+現在我們把有限自然數序列(一樣是1對1)對應到自然數，
+藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
+其中 pk 指第 k 個質數(漸增順序)。
+
+Dadurch ist nicht nur jedem Grundzeichen,
+sondern auch jeder endlichen Reihe von solchen 
+in eineindeutiger Weise eine natürliche Zahl zugeordnet. 
+
+因此不只是基礎符號，
+而是每個這之有限序列以 1 對 1 方式對應一個到自然數。
+
+Die dem Grundzeichen 
+(bzw. der Grundzeichenreihe)
+a zugeordnete Zahl bezeichnen wir mit Φ(a). 
+
+我們以 Φ(a) 表示基礎符號(或基礎符號序列) a 對應之整數。
+
+Sei nun irgend eine Klasse oder Relation R(a1,a2,...,an) 
+zwischen Grundzeichen oder Reihen von solchen gegeben. 
+
+假設現在給定一個基礎符或該序列之間的類別或關係 R(a1,a2,...,an)。 
+
+Wir ordnen ihr diejenige Klasse (Relation) R'(x1,x2,...,xn) 
+zwischen natürlichen Zahlen zu,
+welche dann und nur dann zwischen x1,x2...xn besteht, 
+wenn es solchs a1,a2...an gibt, 
+daß xi=Φ(ai) (i=1,2,...n) 
+und R(a1,a2...an) gilt. 
+
+我們配置這些整數類別(關係) R'(x1,x2,...,xn)，
+若且惟若 x1,x2...xn 
+使得給定 a1,a2...an，其中 xi=Φ(ai) (i=1,2,...n) 
+且 R(a1,a2...an) 是成立的。
+
+Diejenigen Klassen und Relationen natürlicher Zahlen, 
+welche auf diese Weise den bisher 
+definierten metamathematischen Begriffen, 
+z.B. "Variable", "Formel", "Satzformel", "Axiom", 
+"beweisbare Formel" usw.  zugeordnet sind, 
+bezeichnen wir mit denselben Worten in Kursivschrift. 
+
+這些整數類別及關係將被配置給至今所定義之後設數學觀念，
+例如：變數、公式、命題公式、公設、可證式等等，
+我們將以該觀念以斜體字表示。
+
+Der Satz, daß es im System P unentscheidbare Probleme gibt, 
+lautet z.B. folgendermaßen: 
+Es gibt Satzformeln a, 
+so daß weder a noch die Negation von a beweisbare Formeln sind.
+
+命題，其為 P 系統中存在不可決定問題，讀作如下：
+存在命題式 a，使得 a 及其否定都非可證式。
+
+遞迴函數
 ........
+
+Wir schalten nun eine Zwischenbetrachtung ein, 
+die mit dem formalen System P vorderhand nichts zu tun hat, 
+und geben zunächst folgende Definition: 
+
+現在先轉換至一個觀念，現在其與 P 系統沒有關聯，
+首先給定以下定義：
+
+數論函數
+++++++++
+
+Eine zahlentheoretische Funktion 25) 
+φ(x1,x2...xn) 
+heißt rekursiv definiert aus 
+den zahlentheoretischen Funktionen 
+ψ(x1,x2...x(n-1)) und μ(x1,x2...x(n+1)), 
+wenn für alle x2...xn,k 26)
+folgendes gilt:
+
+一個數論函數 25) 
+φ(x1,x2...xn) 
+稱作遞迴定義自數論函數
+ψ(x1,x2...x(n-1)) 及 μ(x1,x2...x(n+1))，
+且對所有 x2...xn,k 26)
+下式成立：
+
+φ(0  ,x2...xn) = ψ(x2...xn)                          (2)
+φ(k+1,x2...xn) = μ(k,φ(k,x2...xn),x2...xn)
+
+25) D.h. ihr Definitionsbereich ist die Klasse 
+    der nicht negativen ganzen Zahlen (bzw. der n-tupel von solchen) 
+    und ihre Werte sind nicht negative ganze Zahlen.
+
+25) 即其定義域為非負整數(或 n 元之非負整數)
+    且其值為非負整數。
+
+26) Kleine lateinische Buchstaben (ev. mit Indizes) sind 
+    im folgenden immer Variable für nicht negative ganze Zahlen 
+    (falls nicht ausdrücklich das Gegenteil bemerkt ist).
+
+26) 小寫斜體字(可能帶有索引)於後文總是為非負整數變數
+    (除非例外情形已被明確說明)
+
+譯註：ev. 為 eventuell 之縮寫
+
+遞迴函數
+++++++++
+
+Eine zahlentheoretische Funktion φ heißt rekursiv, 
+wenn es eine endliche Reihe 
+von zahlentheor Funktionen φ1,φ2...φn gibt, 
+welche mit φ endet and die Eigenschaft hat, 
+daß jede Funktion φk der Reihe 
+entweder aus zwei der vorhergehenden rskursiv definiert ist 
+oder aus irgend welchen der vorhergehenden durch Einsetzung entsteht 27)
+oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist. 
+
+一個數論函數 φ 稱為遞迴的，
+若且惟若存在一個數論函數的有限序列 φ1,φ2...φn，
+其以 φ 結束而具備以下特性，
+序列中的每個函數 φk 不是由前兩項遞迴定義而來，
+就是由前幾項以執行取代而得 27)，
+不然就是一個常數或是後繼函數 x+1。
+
+27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
+    an die Leerstellen einer der vorhergehenden, z.B. 
+
+27) 精確而言：經由配置一些前項函數於前面項目之空位置，例如：
+
+    φp(X1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
+
+    Nicht alle Variable der linken Seite müssen auch rechts vorkommen
+    (ebenso im Rekursionsschema (2)).
+    
+    並非所有左側變數也要在右側出現(遞迴框架(2)也是)。
+
+級別
+++++
+
+Die Länge der kürzesten Reihe von φi, 
+welche zu einer rekursiven Funktion φ gehört, 
+heißt ihre Stufe. 
+
+最小的 φi，其屬於遞迴函數 φ，之序列長度，
+稱為它的級別。
+
+遞迴關係
+++++++++
+
+Eine Relation zwischen natürlichen Zahlen 
+R(x1...xn) heißt rekursiv 28), 
+wenn es eine rekursive Funktion φ(x1...xn) gibt, 
+so daß für alle x1,x2...xn
+
+一個自然數關係 R(x1...xn) 稱為遞迴 28)，
+若且惟若存在一個遞迴函數 φ(x1...xn)，
+使得所有的 x1,x2...xn 有下式成立：
+
+R(x1...xn) ～ [φ(x1...xn)=0] 29).
+
+28) Klassen rechnen wir mit zu den Relationen (einstellige Retationen).
+    Rekursive Relationen R haben natürlich die Eigenschaft, 
+    daß man für jedes spezielle Zahlen-n-tupel entscheiden kann, 
+    ob R(x1...xn) gilt oder nicht.
+    
+    包含關係(單元關係)之類別，
+    遞迴關係 R 自然具備下列特性，
+    對每個特定 n 元數對，可決定對 R(x1...xn) 是否成立。
+
+29) Für alle inhaltlichen (insbes. auch die metamathematischen) 
+    Überlegungen wird die Hilbertsche Symbolik verwendet. 
+
+    所有內容(特別也是後設數學)觀點是使用希爾伯特符號。
+
+    Vgl. Hilbert-Ackermann, 
+    Grundzüge der theoretischen Logik, Berlin 1928.
+
+    參考 Hilbert-Ackermann, 
+    Grundzüge der theoretischen Logik, Berlin 1928.
+    
+    譯註：～符號定義是否是自上述文獻而來。
+    
+Es gelten folgende Sätze:
+
+以下命題成立：
+
+I.  Jede aus rekursiven Funktionen (Relationen) 
+    durch Einsetzung rekursiver Funktionen 
+    an Stelle der Variablen entstehende Funktion (Relation) ist rekursiv; 
+    ebenso jede Funktion, die aus rekursiven Funktionen 
+    durch rekursive Definition nach dem Schema (2) entsteht.
+   
+I.  每個函數，衍生自遞迴函數(關係)，
+    藉由配置遞迴數在母函數(關係)變數位置而得，是遞迴的；
+    同樣地每個函數自其它遞迴函數藉由框架(2)之遞迴定義也成立。 
+
+II. Wenn R und S rekursive Relationen sind, 
+              _
+    dann auch R, R V S (daher auch R & S).
+                             _
+II. 若 R 及 S 為遞迴關係，則 R, R V S 也是(因此 R & S 也是) 。
+
+III.Wenn die Funktionen φ(<x>), ψ(<y>) rekursiv sind,
+    dann auch die Relation: φ(<x>) = ψ(<y>) 30) 
+
+III.若 φ(<x>) 及 ψ(<y>) 是遞迴，則以下關係也是：φ(<x>) = ψ(<y>) 30)
+
+
+30) Wir verwenden deutsche Buchstaben <x>, <y> als abkürzende 
+    Bezeichnung für beliebige Variablen-n-tupel, z. B. x1 x2 ... xn.
+
+    利用哥德字母 <x>, <y> 記為 n 元數對變數，例如 x1 x2 ... xn。
+
+IV. Wenn die Funktion φ(<x>) und die Relation R(x,<y>) rekursiv sind, 
+    dann auch die Relationen S,T
+    
+    若 φ(<x>) 及 R(x,<y>) 是遞迴，則以下關係 S, T 也是：
+
+    S(<x>,<y>)～(Ex)[x≦ φ(<x>)&R(x,<y>)]
+    T(<x>,<y>)～(x) [x≦ φ(<x>)→R(x,<y>)]
+
+    sowie die Funktion ψ
+    
+    以及函數為 ψ：
+
+    ψ(<x>,<y>)= εx  [x≦ φ(<x>)&R(x,<y>)]
+
+    wobei εx F(x) bedeutet: 
+    Die kleinste Zahl x, für welche F(x) gilt 
+    und 0, falls es keine solche Zahl gibt.
+
+    其中 εx F(x) 指：
+    最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
+
+命題 I 證明
++++++++++++
+
+Satz I folgt unmittelbar aus der Definition von "rekursiv".
+
+命題 I 由遞迴之定義直接推得。
+
+命題 II 及 III 證明
++++++++++++++++++++
+
+Satz II und III beruhen darauf, 
+daß die den logischen Begriffen -, V, = 
+entsprechenden zahlentheoretischen Funktionen
+
+命題 II 及 III 根據邏輯觀念 -, V, = 對應到數論函數
+
+    α(x), β(x,y), γ(x,y)
+
+nämlich:
+
+    α(0)=1         ; α(x)  =0 für x≠0
+
+    β(0,x)=β(x,0)=0; β(x,y)=1, wenn x,y beide ≠0 sind
+
+    γ(x,y)=0, wenn x=y;γ(x,y)=1, wenn x≠y 
+
+即：
+
+    α(0)=1         ; α(x)  =0 當 x≠0
+
+    β(0,x)=β(x,0)=0; β(x,y)=1, 當 x,y 都 ≠0 
+
+    γ(x,y)=0, 當 x=y;γ(x,y)=1, 當 x≠y 
+
+
+
+recursiv sind,
+wie man sich leicht überzeugen kann. 
+
+前揭函數是遞迴能輕易證明。
+
+命題 IV 證明
+++++++++++++
+
+Der Beweis für Satz IV ist kurz der folgende: 
+Nach der Voraussetzung gibt es ein rekursives ρ(x,<y>), so daß:
+
+命題 IV 之證明很簡短如下：
+
+設存在一個遞迴函數 ρ(x,<y>) 使得：
+
+    R(x,<y>)～[ρ(x,<y>) = 0].
+
+Wir definieren nun nach dem Rekursionsschema (2) 
+eine Funktion χ(x,<y>) folgendermaßen:
+
+現在根據遞迴框架 (2) 定義函數 χ(0,<y>) 如下：
+    
+    χ(0,  <y>)=0
+    χ(n+1,<y>)=(n+1).a+χ(n,<y>).α(a) 31)
+
+31) Wir setzen als bekannt voraus, 
+    daß die Funktionen x+y (Addition), 
+    x.y (Multiplikation) rekursiv sind.
+
+31) 我們先假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。
+
+wobei 
+
+其中  
+
+a=α[α(ρ(0,<y>))].α[ρ(n+1,<y>))].α[χ(n,<y>)].
+
+譯註：a 為以下程式碼：
+    a = if    ρ(0  ,<y>) = 0 then 0
+        elsif ρ(n+1,<y>) ≠ 0 then 0
+        elsif χ(n  ,<y>) ≠ 0 then 0
+        else 1
+
+χ(n+1,<y>) ist daher entweder =n+1 (wenn a = 1) 
+oder == χ(n, <y>) (wenn a = 0) 32) 
+
+因此 χ(n+1,<y>) 若非 =n+1 (當 a = 1 時) 
+則 = χ(n, <y>) (當 a = 0 時) 32)
+
+Der erste Fall tritt offenbar dann und
+nur dann ein, wenn sämtliche Faktoren von a 1 sind, 
+d.h. wenn gilt:
+
+第一種情形顯然僅在所有 a 的因數是 1 時才成立，
+即如下：
+    _
+    R(0,<y>) & R(n+1,<y>) & [χ(n,<y>)=0].
+
+Daraus folgt, daß die Funktion χ(n, <y>) 
+(als Funktion von n betrachtet) 0 bleibt bis zum kleinsten Wert von n, 
+für den R(n, <y>) gilt, 
+und von da ab gleich diesem Weft ist 
+(falls schon R(0,<y>) gilt, 
+ist dem entsprechend χ(n,<y>) konstant und =0).
+Demnach gilt:
+
+可推得函數 χ(n, <y>) (視為 n 之單元函數 ) 保持為 0 直到最小值 n 
+滿足 R(n, <y>)，且從這時起都等於此值
+(當 R(0,<y>) 總是滿足時， χ(n,<y>) 為常數且 =0). 
+因此： 
+
+ψ(X,<y>) =  χ(φ(X)  ,<y>)
+S(X,<y>) ～ R[ψ(X,<y>),<y>]
+
+Die Relation T läßt sich durch Negation auf einen 
+zu S analogen Fall zurückführen, 
+womit Satz IV bewiesen ist.
+
+關係 T 可輕易藉由負值運算簡化成 S 的類比，
+故命題 IV 已證明。
+
+譯註：etw auf eine Formel/Regel zurückführen
+to reduce sth to a formula/rule
+
+後設觀念表達 
+............
+
+Die Funktionen x+y, x.y, x^y, 
+ferner die Relationen x<y, x=y sind, 
+wie man sich leicht überzeugt, 
+rekursiv und wir deftnieren nun, 
+von diesen Begriffen ausgehend, 
+eine Reihe von Fnnktionen (Relationen) 1-45, 
+deren jede aus den vorhergehenden mittels der 
+in den Sätzen I bis IV genannten Verfahren definiert ist. 
+Dabei sind meistens mehrere der nach Satz I bis IV 
+erlaubten Definitionsschritte 
+in einen zusammengefaßt. 
+
+Jede der Funktionen (Relationen) 1-45, 
+unter denen z.B. die Begriffe "Formel", "Axiom", 
+"unmittelbare Folge" vorkommen, ist daher rekursiv.
 
 公式操作
 ........

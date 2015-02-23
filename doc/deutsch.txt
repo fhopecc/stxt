@@ -142,13 +142,13 @@ die Löwin       雌獅
 所有動詞的各人稱之虛擬一式都是如此構成，只有sein的虛擬一式除外。
 舉例如下：
 
-	        haben	lesen	können	sein	werden
-Ich	        habe	lese	könne	sei	werde
+	        haben	lesen	können	sein	    werden
+Ich	        habe	lese	könne	sei	        werde
 du	        habest	lesest	könnest	sei(e)st	werdest
-er/sie/es	habe	lese	könne	sei	werde
-wir	        haben	lesen	können	seien	werden
-ihr	        habet	leset	könnet	seiet	werdet
-sie/Sie	    haben	lesen	können	seien	werden
+er/sie/es	habe	lese	könne	sei	        werde
+wir	        haben	lesen	können	seien	    werden
+ihr	        habet	leset	könnet	seiet	    werdet
+sie/Sie	    haben	lesen	können	seien	    werden
 
 虛擬一式主要用於間接引語，表示說話者轉述他人的話或觀點。
 因此，虛擬一式常用在引文或新聞報導當中：
@@ -156,7 +156,6 @@ sie/Sie	    haben	lesen	können	seien	werden
 Er hat mir gesagt, "ich schreibe gerade einen Roman."
 他對我說：「我正在寫一部小說。」
                             |
-                            V
 Er hat mir gesagt, er schreibe gerade einen Roman. 
 他告訴我，他正在寫一部小說。
 
@@ -212,10 +211,11 @@ wir	        kommen	kammen	kämmen
 ihr	        kommet	kammt	kämmet
 sie,Sie	    kommen	kammen	kämmen
 
-對於強變化動詞，字幹的母音如果遇到a, o, u 也要加以變音。
+對於強變化動詞，字幹的母音如果遇到 a, o, u 要變音。
 
 然而對於許多動詞，特別是弱變化動詞的過去式，
-會出現虛擬二式與過去式無法分別的狀況。例如：
+會出現虛擬二式與過去式無法分別的狀況。
+例如：
 
 人稱	    現在式	過去式	    虛擬二式
 ich	        frage	fragte	    fragte
@@ -548,8 +548,6 @@ welcher
         
 與格    welchen welche  welches welche 
 
-
-
 welcher
 +++++++
 
@@ -830,6 +828,11 @@ Den Namen kenne ich nicht.  那名字我不認識。
 
 Wir wohnen in d e m Haus. 我們住在那間房子。
               dem 插入空白，用來強調 Haus。 
+
+derjenige
+.........
+
+代詞或冠詞，用來表示在之後句子會更仔細描述之事物。
 
 mancher
 .......
@@ -1441,6 +1444,27 @@ Herr Li gibt seinem Sohn 100 Yuan,
 damit er (der Sohn) das Englischwörterbuch kauft.
 李先生給他兒子100元錢，以便他兒子買一本英語字典。
 
+sein
+....
+            人稱        形式
+現在時      ich         bin
+
+            du          bist
+
+            er,sie      ist
+            es
+
+過去時      ich         war
+
+虛擬二態    ich         wäre
+
+命令語氣    單數        sei
+            
+            複數        seid
+
+完成時      第二分詞    助動詞 
+
+            gewesen     sein
 分詞
 ....
 
@@ -1475,6 +1499,70 @@ Er reagierte wütend. 他生氣地反應。
 
 Im folgenden wird gezeigt, 以下被展示  
    形容名詞
+
+第二分詞
+........
+
+第二分詞建構
+++++++++++++
+
+第二分詞(Partizip II)，類比於英文之過去分詞，
+規則動詞的過去分詞形成法如下：
+
+ge+動詞詞幹+t
+
+kaufen -> gekauft       買
+
+詞幹尾是 -d, -t 或 -n 則加 -et
+
+reden  -> getredet   說
+beten  -> gebetet    祈禱
+regnen -> geregnet     
+
+詞幹首為 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-，
+前置 ge-。
+
+詞幹尾為 -ieren，表示其自法文，通常前置 ge-。
+
+第二分詞用法
+++++++++++++
+
+1.完成時(Perfekt)
+2.過去完成時(Plusquamperfekt)
+3.未來二時(Futur II)
+4.被動態
+
+第二分詞作定語
+++++++++++++++
+
+如同英語一樣，第二分詞可作定語，表示完成或被動的意義。
+
+der gedeckte Tisch. = der Tisch, der gedeckte wurden.
+放下的桌子。
+
+das verlorene Buch = das Buch, das verloren ist.
+遺失的書
+
+第二分詞可作形容詞。
+
+an-gewendet     利用，為 anwenden 之第二分詞。
+上 投入
+
+auf-gestellt    指派，為 aufstellen 之第二分詞
+上  置放
+
+an-geführt      引述，為 anführen 之第二分詞。
+上 領導
+
+der angeführten Literatur 屬格，引述文獻的
+
+an-gegeben      指定，為 angeben 之第二分詞。
+上  給
+
+betrachtet      考慮，為 betrachten 之第二分詞。
+
+geschrieben     寫的
+
 
 及物動詞與不及物動詞
 ....................
@@ -1835,26 +1923,6 @@ ch bin  gestorben. 我死過。
 
 ich bin  gekommen.  我來過。 
          移動動詞
-
-過去分詞
-++++++++
-
-規則動詞的過去分詞形成法如下：
-
-ge+動詞詞幹+t
-
-kaufen -> gekauft 買
-
-詞幹尾是 -d, -t 或 -n 則加 -et
-
-reden  -> getredet   說
-beten  -> gebetet    祈禱
-regnen -> geregnet     
-
-詞幹首為 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-，
-前置 ge-。
-
-詞幹尾為 -ieren，表示其自法文，通常前置 ge-。
 
 過去完成式
 ++++++++++
@@ -2281,34 +2349,6 @@ beliebig 任意的，源自 belieben + -ig
 über-flüssig    多餘的
 超過
 
-過去分詞作形容詞
-++++++++++++++++
-
-如同英語一樣，過去分詞可作形容詞。
-
-der gedeckte Tisch.     放下的桌子。
-
-過去分詞可作形容詞。
-
-an-gewendet     利用，為 anwenden 之過去分詞。
-上 投入
-
-auf-gestellt    指派，為 aufstellen 之過去分詞
-上  置放
-
-an-geführt      引述，為 anführen 之過去分詞。
-上 領導
-
-
-der angeführten Literatur 屬格，引述文獻的
-
-an-gegeben      指定，為 angeben 之過去分詞。
-上  給
-
-betrachtet      考慮，為 betrachten 之過去分詞。
-
-geschrieben     寫的
-
 -lich形容詞
 +++++++++++
 
@@ -2348,7 +2388,7 @@ metamathemat-isch 元數學的，從元數學之名詞 Metamathematik 而來
 gleich-gültig   無關緊要
 相同   可用
 
-形容詞變化
+形容詞變格
 ..........
 
 作為定語的形容詞在德語中需要變化，
@@ -2705,6 +2745,24 @@ gleich       相等地
 vorkommenden 發生
 
 überhaupt    根本
+
+dann
+++++
+
+1.之後之意，通常用在小孩子報告一連串事件之語氣。
+
+Erst waren wir bei der Oma 
+und dann sind wir in den Zoo 
+und dann ist die Polizei gekommen 
+und dann der Krankenwagen 
+und dann sind wir wieder zur Oma und dann 
+首先我們在祖母家，
+然後在動物園，
+然後警察來了，
+然後救護車，
+然後回到祖母家，
+然後...
+
 
 介詞
 ----
