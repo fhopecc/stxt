@@ -1273,14 +1273,18 @@ a=α[α(ρ(0,<y>))].α[ρ(n+1,<y>))].α[χ(n,<y>)].
 譯註：a 為以下程式碼：
     a = if    ρ(0  ,<y>) = 0 then 0
         elsif ρ(n+1,<y>) ≠ 0 then 0
-        elsif χ(n  ,<y>) ≠ 0 then 0
+        elsif χ(n  ,<y>) ≠ 0 then 0 
         else 1
+
 
 χ(n+1,<y>) ist daher entweder =n+1 (wenn a = 1) 
 oder == χ(n, <y>) (wenn a = 0) 32) 
 
 因此 χ(n+1,<y>) 若非 =n+1 (當 a = 1 時) 
 則 = χ(n, <y>) (當 a = 0 時) 32)
+
+譯註：
+
 
 Der erste Fall tritt offenbar dann und
 nur dann ein, wenn sämtliche Faktoren von a 1 sind, 
