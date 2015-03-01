@@ -399,7 +399,6 @@ was wiederum unmöglich ist.
 
 譯註：
 
-
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
 auch mit dem "Lügner" besteht eine nahe Verwandtschaft 14), 
@@ -611,11 +610,16 @@ Unter einem Zeichen ersten Typs verstehen
 wir eine Zeichenkombination der Form:
 a, fa, ffa, fffa... usw.
 wo a entweder 0 oder eine Variable ersten Typs.
-Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
 基於第一型符號我們可理解符號組合如以下形式：
 a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
+
+數符
+....
+
+Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
+
 在第一種情形下，我們稱這種符號為數符。
 
 第 n 型符號
@@ -644,12 +648,13 @@ a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören und 
-zu welcher zugleich mit a, b stets auch ~(a), (a) V (b), 
-xΠ(a) gehören (wobei x eine beliebige Variable ist) 18a).
+zu welcher zugleich mit a, b 
+stets auch ~(a), (a) V (b), xΠ(a) gehören 
+(wobei x eine beliebige Variable ist) 18a).
 
 我們所定義的公式類別作為最小的類別 19)，
 包含所有的基本式，
-且若包含 a, b 同時也包含 ~(a), (a) V (b), xΠ(a)
+且若包含 a, b 總是也包含 ~(a), (a) V (b), xΠ(a)
 (其中 x 是一任意變數) 18a)。
 
 18a) xΠ(a) ist also auch dann eine Formel, 
@@ -754,6 +759,7 @@ Folgende Formeln (I bis V) heißen Axiome
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
     譯註：故基礎符號義不包含 =。
+    
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -1121,7 +1127,7 @@ so daß für alle x1,x2...xn
 若且惟若存在一個遞迴函數 φ(x1...xn)，
 使得所有的 x1,x2...xn 有下式成立：
 
-R(x1...xn) ～ [φ(x1...xn)=0] 29).
+R(x1...xn) ~ [φ(x1...xn)=0] 29).
 
 28) Klassen rechnen wir mit zu den Relationen (einstellige Retationen).
     Rekursive Relationen R haben natürlich die Eigenschaft, 
@@ -1143,7 +1149,7 @@ R(x1...xn) ～ [φ(x1...xn)=0] 29).
     參考 Hilbert-Ackermann, 
     Grundzüge der theoretischen Logik, Berlin 1928.
     
-    譯註：～符號定義是否是自上述文獻而來。
+    譯註：~符號定義是否是自上述文獻而來。
     
 Es gelten folgende Sätze:
 
@@ -1181,8 +1187,8 @@ IV. Wenn die Funktion φ(<x>) und die Relation R(x,<y>) rekursiv sind,
     
     若 φ(<x>) 及 R(x,<y>) 是遞迴，則以下關係 S, T 也是：
 
-    S(<x>,<y>)～(Ex)[x≦ φ(<x>)&R(x,<y>)]
-    T(<x>,<y>)～(x) [x≦ φ(<x>)→R(x,<y>)]
+    S(<x>,<y>)~(Ex)[x≦ φ(<x>)&R(x,<y>)]
+    T(<x>,<y>)~(x) [x≦ φ(<x>)→R(x,<y>)]
 
     sowie die Funktion ψ
     
@@ -1248,7 +1254,7 @@ Nach der Voraussetzung gibt es ein rekursives ρ(x,<y>), so daß:
 
 設存在一個遞迴函數 ρ(x,<y>) 使得：
 
-    R(x,<y>)～[ρ(x,<y>) = 0].
+    R(x,<y>)~[ρ(x,<y>) = 0].
 
 Wir definieren nun nach dem Rekursionsschema (2) 
 eine Funktion χ(x,<y>) folgendermaßen:
@@ -1319,7 +1325,7 @@ Demnach gilt:
 因此： 
 
 ψ(<x>,<y>) =  χ(φ(<x>)    ,<y>)
-S(<x>,<y>) ～ R[ψ(<x>,<y>),<y>]
+S(<x>,<y>) ~ R[ψ(<x>,<y>),<y>]
 
 譯註：
     ψ(<x>,<y>)= εx  [x≦ φ(<x>)&R(x,<y>)]
@@ -1374,6 +1380,50 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 
 公式操作
 ........
+
+1. x/y≡(Ez)[z≦ x&x=y.z] 33)
+
+33) Das Zeichen ≡ wird im Sinne von "Definitionsgleichheit" verwendet,
+    vertritt also bei Definitionen entweder = oder ~ 
+    (im übrigen ist die Symbolik die Hilbertsche).
+
+33) ≡ 用來表示定義等價，
+    在定義裡用來表示 = 或 ~
+    (另外這是希爾伯特之符號)。
+
+x ist teilbar durch y 34).
+
+x 整除以 y 34)。
+
+
+34) Überall, wo in den folgenden Definitionen eines 
+    der Zeichen (x), (Ex), εx auftritt, 
+    ist es von einer Abschätzung für x gefolgt. 
+    Diese Abschätzung dient lediglich dazu, 
+    um die rekursive Natur des definierten Begriffs 
+    (vgl. Satz IV) zu sichern. 
+    Dagegen würde sich der Umfang der definierten Begriffe durch 
+    Weglassung dieser Abschätzung meistens nicht ändern.
+
+34) 以下定義所有出現符號 (x), (Ex), εx 之處，
+    是之後 x 的估算值，
+    這些僅估算值作為確保定義觀念的遞迴本質(見命題 IV)。
+    
+譯註：此句應該是說明量詞限定 x 值範圍是為了確何不違觀念的遞迴性。
+
+2.Prim(x)≡(Ez)[z≦ x & z≠1 & z≠x & x/z] & x>1
+
+x is Primzahl.
+
+x 是質數。
+
+3.0    Pr x ≡ 0
+ (n+1) Pr x ≡ εy[y≦ x & Prim(y) & x/y & y>n Pr x]
+
+ n Pr x ist die n-te(der Größe nach) 
+ in x enthaltene Primzahl 34a).
+
+ n Pr x 是 x 中第 n 個(漸增序)質因數。
 
 16.0 N x ≡ x
 (n+1)N x ≡ R(3) * n N 
