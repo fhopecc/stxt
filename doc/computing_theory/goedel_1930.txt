@@ -1425,6 +1425,56 @@ x 是質數。
 
  n Pr x 是 x 中第 n 個(漸增序)質因數。
 
+4.    0! ≡ 1
+  (n+1)! ≡ (n+1)*n!
+
+5.Pr(0)   ≡ 0
+  Pr(n+1) ≡ εy[y≦ {Pr(n)}!+1 & Prim(y) & y > Pr(n)]
+
+  Pr(n) ist die n-te Primzahl (der Größe nach).
+
+  Pr(n) 指第 n 個質數(以漸增序)。
+
+數列操作
+........
+
+譯註：重復哥德爾數表示數列之方法。
+
+      現在我們把有限自然數序列(一樣是1對1)對應到自然數，
+      藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
+      其中 pk 指第 k 個質數(漸增順序)。
+
+                                    ________________ 
+6.n Gl x ≡ εy[y≦ x & x/(n Pr x)^y & x/(n Pr x)^(y+1)]
+
+  n Gl x ist das n-re Glied der der Zahl x zugeordneten Zahlenreihe 
+  (für n > 0 und n nicht größer als die Länge dieser Reihe).
+
+  n Gl x 是整數 x 被配賦之數列的第 n 個元素
+  (其中 n > 0 且 n 不大於數列之長度)。
+
+7.l(x) ≡ εy[y≦ x & y Pr x > 0 & (y+1) Pr x = 0] 
+  
+  l(x) ist die Länge der x zugeordneten Zahlenreihe.
+
+  l(x) 是整數 x 被配賦之數列的長度。
+
+8.x*y ≡  εz{z≦ [Pr(l(x)+l(y)]^(x+y) & 
+        (n)[n≦ l(x)   ->  n Gl z = n Gl x] &
+        (n)[0<n≦ l(y) -> (n + l(x)) Gl z = n Gl y]} 
+
+  x*y entspricht der Operation des "Aneinanderfügens" zweier
+  endlicher Zahlenreihen.
+    
+  x*y 代表 2 個有限數列的串接。
+
+9.R(x) ≡ 2^x
+
+  R(x) entspricht der nur aus der Zahl x bestehenden Zahlenreihe
+  (für x > 0).
+
+  R(x) 為只包含數 x 之數列(其中 x > 0)。
+
 16.0 N x ≡ x
 (n+1)N x ≡ R(3) * n N 
 
