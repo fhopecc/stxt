@@ -1425,6 +1425,13 @@ x 是質數。
 
  n Pr x 是 x 中第 n 個(漸增序)質因數。
 
+34a) Für 0<n≦ z, wenn z die Anzahl der verschiedenen in x 
+     aufgehenden Primzahlen ist. 
+     Man beachte, daß für n=z+1 n Pr x=0 ist!
+
+     對 0<n≦ z 而言，當 z 為一數與 x 之質因數都不同，
+     須注意對 n = z+1 ，n Pr x = 0。
+
 4.    0! ≡ 1
   (n+1)! ≡ (n+1)*n!
 
@@ -1435,10 +1442,18 @@ x 是質數。
 
   Pr(n) 指第 n 個質數(以漸增序)。
 
-數列操作
-........
+哥德爾數操作
+............
 
-譯註：重復哥德爾數表示數列之方法。
+譯註：重提哥德爾數表示數列之方法。
+      哥德爾數是整數，可轉成系統 P 公式，
+      系統 P 之公式也可轉成哥德爾數。
+      公式之操作也可轉成數論操作。
+
+      數論                  系統 P
+
+      哥德爾數 <---對應---> 公式
+      數論操作 <---對應---> 公式操作
 
       現在我們把有限自然數序列(一樣是1對1)對應到自然數，
       藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
@@ -1475,20 +1490,173 @@ x 是質數。
 
   R(x) 為只包含數 x 之數列(其中 x > 0)。
 
-16.0 N x ≡ x
-(n+1)N x ≡ R(3) * n N 
+10.E(x) ≡ R(11) * x * R(13)
 
-n N x entspricht der Operation: 
-"n-maliges Vorsetzen des Zeichens"
+  E(x) entspricht der Operation des "Einklammerns" 
+  [11 und 13 sind den Grundzeichen "(" und ")" zugeordnet].
 
-n N x 對應到以下操作：「前置字符 x 於前 n 次。」 
+  E(x) 對應「加括號」之操作
+ 「11 及 13 分別配賦基礎符 "(" 及 ")"」。
+
+11.n Var x ≡ (Ez)[13<z≦ x & Prim(z) & x = z^n] & n≠0
+
+   x ist eine Variable n-ten Typs.
+
+   x 是一個 n 型變數。
+
+   譯註：此外第 n 型變數配置形式為 p^n 之整數。
+
+12.Var(x) ≡ (En)[n≦ x & n Var x]
+
+   x ist eine Variable.
+   
+   x 是一個變數。
+
+13.Neg(x) ≡ R(5) * E(x)
+
+   Neg(x) ist die Negation von x.
+
+   Neg(x) 是 x 負值操作。
+
+14.x Dis y ≡ E(x) * R(7) * E(y)
+
+   x Dis y ist die Disjunktion aus x und y.
+
+   x Dis y 是 x 及 y 的析取。
+
+15.x Gen y ≡ R(x) * R(9) * E(y)
+
+   x Gen y ist die Generalisation von y mittels der Variablen x
+   (vorausgesetzt, da x eine Variable ist).
+    
+   x Gen y 是藉由變數 x 之 y 的一般化。
+
+公式操作
+........
+
+譯註：公式操作是一堆操作公式數之函數.
+
+數符操作
+........
+
+譯註：16 及 17 分別為操作數符。
+
+16.   0 N x ≡ x
+   (n+1)N x ≡ R(3) * n N x
+
+   n N x entspricht der Operation: 
+   "n-maliges Vorsetzen des Zeichens 'f' vor x"
+
+   n N x 對應到以下操作：
+  「前置字符 f 於 x 前 n 次。」 
 
 17.Z(n) ≡ nN[R(1)]
 
-Z(n) ist das Zahlzeichen für die Zahl n.
+   Z(n) ist das Zahlzeichen für die Zahl n.
 
-Z(n) 是整數 n 的整數符號表示。
-命名源自德文整數 Zahl。
+   Z(n) 是數 n 的數符表示。
+
+   命名源自德文整數 Zahl。
+
+18.Typ1'(x) ≡ (Em,n){m,n≦ x & [m=1 V 1 Var m]
+                      & x = n N [R(m)]} 34b)
+
+   x ist Zeichen ersten Typs.
+
+   x 是 1 型符號。
+
+19.Typn(x) ≡ [n=1 & Typ1'(x)] V 
+             [n > 1 & (Ev){v≦ x & n Var v & x=R(v)}]
+
+   x ist Zeichen n-ten Typs.
+
+   x 是 n 型符號。
+
+20.Elf(x) ≡ (Ey,z,n)[y,z,n≦ x & Typn(y)
+                    & Typ_n+1(z) & x = z * E(y)]
+
+   x ist Elementarformel.
+
+   x 是基礎式。
+
+21.Op(x y z) ≡ x=Neg(y) V x=y Dis z V
+               (Ev)[v≦ x & Var(v) & x = v Gen y]
+
+22.FR(x) ≡ (n){0<n≦ l(x) -> Elf(n Gl x) V
+              (Ep,q)[0<p,q<n & Op(nGlx,pGlx,qGlx)]}
+              & l(x)>0
+
+   x ist eine Reihe von Formeln, 
+   deren jede entweder Elementarformel ist 
+   oder aus den vorhergehenden durch die Operationen 
+   der Negation, Disjunktion, Generalisation hervorgeht.
+
+   x 是一個公式串列，
+   其成員不是基礎式就是
+   由前面出現公式經由否定、析取、一般化等操作衍生而來。
+
+   譯註：後一句的 hervorgeht，
+   主要是組成片語 aus etw hervorgehen 意為從某事衍生。
+                                         
+                                 
+23.Form(x) ≡ (En){n≦ (Pr[l(x)^2])^x.[l(x)]^2
+             & FR(n) & x=[l(n)] Gln} 35)
+
+   x ist Formel (d.h. letztes Glied einer Formelreihe n).
+
+   x 是公式(即公式串列 n 之最後一個成員)。
+
+35) Die Abschätzung n≦ (Pr[l(x)^2])^x.l(x)^2 erkennt man etwa so: 
+    Die Länge der kürzesten zu x gehörigen Formelreihe kann höchstens 
+    gleich der Anzahl der Teilformeln von x sein. 
+
+    Es gibt aber höchstens l(x) Teilformeln der Lange 1, 
+    höchstens l(x)-1 der Länge 2 usw., 
+    im ganzen also höchstens
+    l(x)[l(x)+1]/2 ≦ l(x)^2. 
+
+    Die Primzahlen aus n können also sämtlich kleiner als 
+    Pr{[l(x)]^2} angenommen werden, 
+    ihre Anzahl≦ l(x)^2 und 
+    ihre Exponenten (welche Teilformeln von x sind) ≦ x.
+
+35) n≦ (Pr[l(x)^2])^x.l(x)^2 之估算大致理解如下：
+    屬於 x 之最短的公式序列長度最多等於 x 中之成員公式數目。
+
+    存在長度為 1 之成員公式最多為 l(x) 個，
+    長度為 2 之成員公式最多為 l(x) - 1 個等等，
+    所以全部最多為 l(x)[l(x)+1]/2 ≦  l(x)^2。 
+    
+    n 之全部質因數可被假定為不小於 Pr{[l(x)]^2}，
+    其數≦ l(x)^2 且其次方數(其為 x 之成員公式) ≦ x。
+
+
+譯註：zu etw gehörigen etw2
+      etw2 屬於 etw
+
+24.v Geb n,x ≡ Var(v) & Form(x) &
+               (Ea,b,c)[a,b,c≦ x & x=a * (v Gen b) * c
+                       & Form(b) & l(a)+1≦ n≦ l(a)+l(v Gen b)]
+
+   Die Variable v ist in x an n-ter Stelle gebunden.
+
+   x 中的變數 v 是綁定於 n 個位置。
+
+25.v Fr n,x ≡ Var(v) & Form(x) & v = n Gl x &
+                        _________
+              n≦ l(x) & v Geb n,x
+
+   Die Variable v ist in x an n-ter Stelle frei.
+
+   x 中的綁定位置 n 之變數 v 是自由的。
+
+26.v Fr x ≡ (En)[n≦ l(x) & v Fr n, x]
+
+   v kommt in x als freie Variable vor.
+
+   v 於 x 是自由變數。 
+
+27.S u x (n,y) ≡ εz
 
 46.Bew(x) ≡ (Ey) y B x
 
