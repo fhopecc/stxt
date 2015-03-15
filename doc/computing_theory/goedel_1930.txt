@@ -1633,6 +1633,10 @@ x 是質數。
 
 譯註：zu etw gehörigen etw2
       etw2 屬於 etw
+      
+      Teilformel von x 應是指由 x 部分組成的公式。
+      如 x ≡ a+2，Teilformel 可為 a, a+2, 2 等，
+      這可解釋其後的計數的結果。
 
 24.v Geb n,x ≡ Var(v) & Form(x) &
                (Ea,b,c)[a,b,c≦ x & x=a * (v Gen b) * c
@@ -1656,7 +1660,18 @@ x 是質數。
 
    v 於 x 是自由變數。 
 
-27.S u x (n,y) ≡ εz
+27.S u x (n,y) ≡ εz{ z≦ [Pr(l(x)+l(y)]^x+y 
+                   & [(Eu,v)u,v≦ x
+                     & x = u*R(n Gl x) v 
+                     & z = u*y*v
+                     & n = l(u)+1]}
+
+   S u x (n,y) entsteht aus x, 
+   wenn man an Stelle des n-ten Gliedes von x y einsetzt 
+   (vorausgesetzt, daß 0<n≦ l(x)).
+
+   S u x (n,y) 衍生自 x，在 x 第 n 個成員之位置上插入 y
+   「預設 0<n≦ l(x)」。
 
 46.Bew(x) ≡ (Ey) y B x
 

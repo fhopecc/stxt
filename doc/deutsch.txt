@@ -944,7 +944,8 @@ Er ist ein sehr guter Lehrer. 他是非常好的老師。
 
 -(e)s   陽性及中性名詞之屬格
 
-das Resultat -> des Resultats 結果
+das Resultat der Resultats 結果
+das Glied    der Gliedes  
 
 名詞複數變格
 ............
