@@ -514,8 +514,8 @@ Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
 
 Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
 
-der
-+++
+關係代名詞der
++++++++++++++
 
 德語有兩個關係代名詞系統，
 其中一套是基於定冠詞 der、die、das 等的，
@@ -959,11 +959,17 @@ Zahl    Zahlen  數
 
 Baum    Bäume   樹
 
+名詞與格變格
+............
+
+-n     某些複數名詞的與格變格 
+
+Axiom Axiome Axiomen 定理複數之與格變格
+
 名詞賓格變格
 ............
+
 -e      陽性及中性名詞之賓格，在古老或書寫文中
-
-
 
 名詞詞源
 ........

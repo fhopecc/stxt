@@ -11,6 +11,12 @@ der Principia Mathematica und verwandter System I 1)
 
 本文中沒有一句廢話。
 
+譯詞規則：
+
+Axiom   公設
+Begriff 概念
+Stelle  位置
+
 本文
 ----
 
@@ -797,10 +803,12 @@ II. Jede Formel, die aus den folgenden Schemata durch
 
 II. 任一公式，其衍生自以下框架中 p, q, r 位置配置任意公式：
 
-1. p V p -> p
-2. p -> p V p
-3. p V q -> q V p
-4. (p -> q) -> (r V p -> r V q)
+1. p v p -> p
+2. p -> p v p
+3. p v q -> q v p
+4. (p -> q) -> (r v p -> r v q)
+
+譯註：上述即為公設框架，即此框架表示一群公設。
 
 取代操作
 ........
@@ -810,7 +818,7 @@ III. Jede Formel, die aus einem der beiden Schemata
 III. 由以下兩框架其中之一推演之公式
 
 1. vΠ(a) -> Subst a |v|
-                      |c|
+                    |c|
 
 2. vΠ(b V a) -> b V vΠ(a)
 
@@ -1652,7 +1660,7 @@ x 是質數。
 
    Die Variable v ist in x an n-ter Stelle frei.
 
-   x 中的綁定位置 n 之變數 v 是自由的。
+   x 中位置 n 之變數 v 是自由的。
 
 26.v Fr x ≡ (En)[n≦ l(x) & v Fr n, x]
 
@@ -1673,17 +1681,213 @@ x 是質數。
    S u x (n,y) 衍生自 x，在 x 第 n 個成員之位置上插入 y
    「預設 0<n≦ l(x)」。
 
+28.    0 St v,x ≡ εn{ n≦ l(x)
+                    & v Fr n, x
+                      ____
+                    & (Ep)[ n<p≦ l(x)
+                          & v Fr p, x]}
+
+   (k+1) St v,x ≡ εn{ n<k St v, x
+                    & v Fr n, x
+                      ____
+                    & (Ep)[ n<p≦ k St v, x 
+                          & v Fr p, x]}
+
+    k St v, x ist die k+1-te Stelle in x 
+    (vom Ende der Formel x an gezählt), 
+    an der v in x frei ist 
+    (und 0, falls es keine solche Stelle gibt).
+
+    k St v, x 是 x 之第 k+1 位置
+    (從公式 x 的端點開始計算)，
+    於此 v 在 x 是自由的
+    (而 0 是指不存在這樣的位置)
+
+29.A(v, x) ≡ εn{ n≦ l(x)
+                & n St v,x=0}
+
+   A(v, x) ist die Anzahl der Stellen, an denen v in x frei ist.
+
+   A(v, x) 是位置的數目，於該位置 v 在 x 是自由的。  
+
+30.Sb_0  (x_v_y) ≡ x
+                                  |k St v,x| 
+   Sb_k+1(x_v_y) ≡ Su [Sbk(x_v_y)]|    y   |
+
+     |  v|            |  v|
+31.Sb|x y| ≡ SbA(v,x) |x y| 36)
+
+     |  v|                                         |v|
+   Sb|x y| ist der oben definierte Begriff Subst a |b| 37)
+
+     |  v|                          |v|
+   Sb|x y| 是前所定義的概念 Subst a |b| 37)
+  
+
+32.x Imp y ≡ [Neg (x)] Dis y
+   x Con y ≡ Neg {[Neg (x)] Dis [Neg (y)]}
+   x Aeq y ≡ (x Imp y) Con ( y Imp x )
+   v Ex  y ≡ Neg {v Gen [Neg (y)]}
+
+譯註：定義四個邏輯運算子：
+      Imp 指推論，x -> y ≡ ~x v y
+      Con 指合取，x &  y ≡ ~{~x v ~y}
+      Aeq 指相等，x =  y ≡ (x -> y) & (y -> x)
+      Ex  指存在， (Ev)y ≡ ~{(v)[~y]}
+
+                   | n|
+                   |x |
+33.n Th x ≡ εy{ y≦ x
+              & (k)[ k≦ l(x) -> (k Gl x ≦ 13 &k Gl y =  k Gl x)
+                              v (k Gl x > 13 
+                                                                 n
+                                &k Gl y =  k Gl x.[1 Pr (k Gl x)] )]}
+
+   n Th x ist die n-te Typenerhöhung von x 
+   (falls x und n Th x Formeln sind).
+
+   n Th x 是 x 的第 n 型提升
+  「若 x 及 n Th 是公式」。
+
+   Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
+   die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
+
+   有 3 個特定數對應到公設 I 之 1 至 3 並分別以 z1, z2, z3 代表，
+   而我們定義如下：
+   
+   譯註：公設 I 是皮亞諾公設。
+    
+34.Z-Ax(x) ≡ (x=z1 v x=z2 v x=z3)
+
+35.A1-Ax(x) ≡ (Ey)[ y≦ x
+                  & Form(y)
+                  & x = (y Dis y) imp y]
+       
+   x ist eine durch Einsetzung in das Axiomenschema II, 1 
+   entstehende Formel. 
+   
+   x 是經由公設框架 II, 1 衍生之公式。
+   
+   Analog werden A2-Ax, A3-Ax, A4-Ax entsprechend den Axiomen II, 
+   2 bis 4 definiert.
+
+   同樣地 A2-Ax, A3-Ax, A4-Ax 被定義為對映到公理 II, 2 至 3。
+
+36.A-A(x) ≡ A1-Ax(x) v A2-Ax(x) v A3-Ax(x) v A4-Ax(x) 
+
+  x ist eine durch Einsetzung 
+  in ein Aussagenaxiom entstehende Formel.
+
+  x 是經由命題公設衍生之公式。
+
+  譯註：公設 II 此地命名為命題公設。
+ 
+              ________
+37.Q(z,y,v) ≡ E(n,m,w)[n≦ l(y) & m ≦ l(z) & w≦ z 
+                      & w=m Gl z & w Geb n, y & v Fr n,y]
+
+  z enthält keine Variable, 
+  die in y an einer Stelle gebunden ist,
+  an der v frei ist.
+  
+  z 不包含變數其在 y 是綁定的位置，但 v 在此位置是自由地。
+
+38.L1-Ax(x) ≡ (Ev,y,z,n){ v,y,z,n≦ x 
+                        & n Var v & Typn(z) & Form(y)
+                        & Q(z,y,v)
+                                            |  v|
+                        & x=(v Gen y) Imp[Sb|y z|]}
+
+   x ist eine aus dem Axiomenschema III, 1 
+   durch Einsetzung entstehende Formel.
+
+   x 是經由配置公設框架 III,1 衍生之公式。
+
+譯註：III, 1. vΠ(a) -> Subst a |v|
+                               |c|
+
+39.L2-Ax(x) ≡ (Ev,p,q){ v,p,q≦ x & Var(v) & Form(p)
+                        ______ 
+                      & v Fr p & Form(q)
+                      & x = [v Gen (p Dis q)] Imp [p Dis (v Gen q)]}
+
+   x ist eine aus dem Axiomenschema III, 2
+   durch Einsetzung entstehende Formel.
+
+   x 是經由配置公設框架 III,2 衍生之公式。
+
+
+譯註：III, 2. vΠ(b V a) -> b V vΠ(a)
+
+40.R-Ax(x) ≡ (Eu,v,y,n)[ u,v,y,n≦ x & n Var v
+                                       ______
+                       & (n+1) Var u & u Fr y & Form(y)
+                       & x = u Ex{v Gen[[R(u)*E(R(v))] Aeq y]}]
+
+   x ist eine aus dem Axiomenschema IV, 1
+   durch Einsetzung entstehende Formel.
+
+   x 是經由配置公設框架 IV, 1 衍生之公式。
+
+   譯註：IV, 1. (Eu)(vΠ(u(v)≡a))
+
+   Dem Axiom V, 1 entspricht eine bestimmte Zahl z4 
+   und wir definieren:
+
+   將特定數 z4 對應到公設 v, 1 而我們定義：
+
+41.M-Ax(x) ≡ (En)[n≦ x & x = n Th z4]
+
+42.Ax(x) ≡  Z-Ax(x) v A-Ax(x) v L1-Ax(x)
+         v L2-Ax(x) v R-Ax(x) v  M-Ax(x)
+
+   x ist ein Axiom.
+ 
+   x 是一個公設。
+
+43.Fl(x y z) ≡ z Imp x
+             V (Ev)[v≦ x & Var(v) & x = v Gen y]
+
+   x ist unmittelbare Folge aus y und z.
+  
+   x 是 y 及 z 之直接後繼。
+
+44.Bw(x) ≡ (n){ 0<n≦ l(x) -> Ax(n Gl x) 
+              V (Ep,q)[ 0<p,q<n 
+                      & Fl(n Gl x, p Gl x, q Gl x)]}
+         & l(x) > 0
+
+   x ist eine BeweisFigur (eine endliche Folge von Formeln, 
+   deren jede entweder Axiom 
+   oder unmittelbare Folge aus zwei der vorhergehenden ist).
+   
+   x 是一個證明數
+  「有限的公式序列，其中公式不是公設就是前二項之直接後繼」。
+
+45.x B y ≡ Bw(x) & [l(x)] Gl x = y
+
+   x ist ein Beweis für die Formel y.
+
+   x 是公式 y 之證明。
+
 46.Bew(x) ≡ (Ey) y B x
 
-x ist eine beweisbare Formel.
-[Bew(x) ist der einzige unter Begriffen 1-46.
-von dem nicht behauptet werden kann, er sei rekursiv.]
+   x ist eine beweisbare Formel.
+   [Bew(x) ist der einzige unter Begriffen 1-46.
+   von dem nicht behauptet werden kann, er sei rekursiv.]
 
-x 是一可證式。
+   x 是一可證式。
 
-[Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
+   [Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
 
-註：Bew 名稱來自於證明的德文 beweisbare。
+   譯註：Bew 名稱來自於證明的德文 beweisbare。
+
+Die Tatsache, die man vage so formulieren kann: 
+Jede rekursive Relation ist innerhalb des Systems P 
+(dieses inhaltlich gedeutet) definierbar, wird, 
+ohne auf eine inhaltliche Deutung 
+der Formeln aus P Bezug zu nehmen, 
+durch folgenden Satz exakt ausgedrückt:
 
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
 Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
