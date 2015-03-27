@@ -16,6 +16,7 @@ der Principia Mathematica und verwandter System I 1)
 Axiom   公設
 Begriff 概念
 Stelle  位置
+tupel   值組
 
 本文
 ----
@@ -1403,13 +1404,13 @@ x ist teilbar durch y 34).
 
 x 整除以 y 34)。
 
-
 34) Überall, wo in den folgenden Definitionen eines 
     der Zeichen (x), (Ex), εx auftritt, 
     ist es von einer Abschätzung für x gefolgt. 
     Diese Abschätzung dient lediglich dazu, 
     um die rekursive Natur des definierten Begriffs 
     (vgl. Satz IV) zu sichern. 
+
     Dagegen würde sich der Umfang der definierten Begriffe durch 
     Weglassung dieser Abschätzung meistens nicht ändern.
 
@@ -1882,23 +1883,105 @@ x 是質數。
 
    譯註：Bew 名稱來自於證明的德文 beweisbare。
 
-Die Tatsache, die man vage so formulieren kann: 
-Jede rekursive Relation ist innerhalb des Systems P 
-(dieses inhaltlich gedeutet) definierbar, wird, 
-ohne auf eine inhaltliche Deutung 
-der Formeln aus P Bezug zu nehmen, 
-durch folgenden Satz exakt ausgedrückt:
+   Die Tatsache, die man vage so formulieren kann: 
+   Jede rekursive Relation ist innerhalb des Systems P 
+   (dieses inhaltlich gedeutet) definierbar, wird, 
+   ohne auf eine inhaltliche Deutung der Formeln aus P 
+   Bezug zu nehmen, 
+   durch folgenden Satz exakt ausgedrückt:
+
+   這事實可大致陳述如下：
+   每個遞迴關係可於 P 系統內定義(這被內容詮譯)，
+   不須參照由 P 衍生之公式之內容詮譯，
+   而由以下之命題精確表達：
+   
+   譯註：innerhalb(介詞) + 屬格：在什麼之中
+
+   譯註：Bezug nehmen auf：參考到
 
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
-Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
-so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
+        Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
+        so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
 
-定理V：
-對每個遞迴關係 R(x1...xn) 給定一個 n 元關係符號 r (帶有自由變數)
-(u1,u2...un)，故對所有n元整數序對(x1,x2...xn)滿足下式：
+定理 V：對每個遞迴關係 R(x1...xn) 而言，
+        存在一個 n 元關係符號 r (帶有自由變數) (u1,u2...un)，
+        使得所有 n 元整數值組 (x1,x2...xn) 滿足下式：
 
-R(x1...xn) => Bew[Sb(r u1     ...un    )]             (3)
-                     Z(x1)...Z(xn)
+                     |r u1......un   |
+ R(x1...xn) => Bew[Sb|  Z(x1)...Z(xn)|]      (3)
+                    
+                         |r u1     ...un |
+~R(x1...xn) => Bew[Neg Sb|  Z(x1)...Z(xn)|]  (4)
+                         
+Wir begnügen uns hier damit, den Beweis dieses Satzes, 
+da er keine prinzipiellen Schwierigkeiten bietet und 
+ziemlich umständlich ist, in Umrissen anzudeuten 39). 
 
-~R(x1...xn) => Bew[Neg Sb(r u1     ...un    )]        (4)
-                            Z(x1)...Z(xn)
+指出此命題證明之概要 39) 可說服我們，
+因為它不提供任何原則上之困難及適當涉入。
+
+
+譯註：sich damit begnügen, etw zu tun 滿足去做。
+
+譯註：anzudeuten 建議、指示動詞之不定式，特別是其 zu 是加在字中。
+      an+deuten(不定式) an+zu+deuten(不定式)
+
+39) Satz V beruht natürlich darauf, 
+    daß bei einer rekursiven Relation R 
+    für jedes n-tupel von Zahlen aus den Axiomen des Systems P 
+    entscheidbar ist, ob die Relation R besteht oder nicht.
+
+39) 命題 V 自然基於對每個系統 P 之公設，其 n 元整數數組之遞迴關係 R
+    是可決定的，不管 R 關係是成立或否定。
+
+Wir beweisen den Satz für alle Relationen R(x1...xn) der Form: 
+
+我們證明所有具以下形式之關係 R(x1...xn) 之命題：
+
+x1=φ(x2...xn) 40) 
+
+(wo φ eine rekursive Funktion ist) und 
+wenden vollständige Induktion nach der Stufe von φ an. 
+
+(其中 φ 是一個遞迴函數) 
+並應用完整歸納法在 φ 之步驟。
+
+譯註：Stufe 在數學歸納法內容中，由等級改譯為步驟較符合中文語氣。
+
+40) Daraus folgt sofort seine Geltung für jede rekursive Relation, 
+    da eine solche gleichbedeutend ist mit 0=φ(x1... xn), 
+    wo φ rekursiv ist.
+
+40) 於此直接可得出每個遞迴關係是有效的，
+    由於此類關係 0=φ(x1... xn) 同義，
+    其中 φ 是遞迴的。
+
+Für Funktionen erster Stufe 
+(d.h. Konstante and die Funktion x+1) ist der Satz trivial. 
+
+譯註：degree 即為應用歸納法第幾次。
+
+對初始步驟函數(即常數及函數 x+1) 是顯而成立的。
+
+Habe also φ die m-te Stufe.
+Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
+durch die Operationen der Einsetzung oder der rekursiven Definition. 
+Da für φ1...φk nach induktiver Annahme bereits alles bewiesen ist, 
+gibt es zugehörige Relationszeichen r1...rk, 
+so daß (3), (4) gilt. 
+
+接著當 φ 為 m 階時。
+它以替換操作或遞迴定義推論自較為低級之函數 φ1...φk。
+因為對 φ1...φk 而言，均可由遞迴假設證明，
+存在對映的關係符號 r1...rk 使得 (3)、(4) 成立。
+
+Die Definitionsprozesse,
+durch die φ aus φ1...φk entsteht 
+(Einsetzung und rekursive Definition), 
+können sämtlich im System P formal nachgebildet werden. 
+
+Tut man dies, so erhält man aus r1...rk ein neues Relationszeichen r 41),
+für welches man die Geltung yon (3), (4) 
+unter Verwendung der induktiven Annahme ohne Schwierigkeit beweisen kann, 
+Ein Relationszeichen r, welches auf diesem Wege einer rckursiven Relation
+zugeordnet ist 42), soll rekursiv heißen.

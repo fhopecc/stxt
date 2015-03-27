@@ -2330,6 +2330,146 @@ Er läuft schnell. （他走得快）
 
 如 kleinsten
 
+形容詞變格
+..........
+
+作為定語的形容詞在德語中需要變化，
+而作為表語的形容詞與副詞形式一樣，不需要改變。
+
+Sein Auto ist rot.  他的車是紅的。
+
+形容詞作為車之表語，不需變格。
+
+sein rotes Auto.    他的紅車。
+
+形容詞作為車之定語，需變格。
+
+需要變格的情況可細分為
+還是跟在定冠詞(弱變化)、不定冠詞(混合變化)、無冠詞(強變化)之後三種情況。
+
+定冠詞或代詞後
+++++++++++++++
+
+        陽性    陰性    中性    複數
+
+主格    -e      -e      -e      -en 
+
+屬格    -en     -en     -en     -en  
+
+與格    -en     -en     -en     -en
+
+賓格    -en     -e      -e      -en
+
+例句：
+
+die kleinste Klasse 主格，最小的類別 
+
+am kleinsten[最小的]在定冠詞後變格為 kleinste
+
+klein < kleiner < am kleinsten
+
+ganze       整個 
+
+ganze Zahle 整數
+
+gewöhnlich  一般的
+
+der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
+    屬格詞變     屬格詞變 複數詞變
+
+nachfolgend 序列，下一個
+
+Die nachfolgenden Überlegungen 之後的考量 
+    詞變    
+
+letzte 最後
+
+不定冠詞後
+++++++++++
+
+        陽性    陰性    中性    複數
+
+主格    -er     -e      -es     -en     因為陽性及中性冠詞一樣，
+主格    ein     eine    ein     keine   所以形容詞需變格區分
+
+屬格    -en     -en     -en     -en  
+屬格    einer   eine    ein     keine
+
+與格    -en     -en     -en     -en
+與格    eines   einer   eines   keiner
+
+賓格    -en     -e      -es     -en     
+賓格    einem   eine    einem   keinem
+
+由上可觀察到，名詞前之定語，不論冠詞及形容詞數量，
+只會出現一次字尾 r，或字尾 s。
+
+der Gute  Mann  這個好人
+ein Guter Mann  一個好人
+
+無冠詞
+++++++
+
+無冠詞為了判斷格、性別及數目，
+設計大致上與定冠詞 der 之變格相同。
+
+        陽性    陰性    中性    複數
+
+主格    -er     -e      -es     -e 
+主格    der     die     das     die 
+
+賓格    -en     -e      -es     -e
+賓格    den     die     das     die 
+
+屬格    -en     -er     -en     -er  
+屬格    des     der     des     der 
+
+與格    -em     -er     -em     -en
+與格    dem     der     dem     den 
+
+geordneter Paare 序對 
+geordnet -> geordneter 排序，複數屬格屈折
+Paar -> Paare 一對，複數名詞屈折
+
+屬格之變格不與 des 相同，還是 -en，
+主要是陽性及中性名詞，會在屬格變格為 -s。
+
+Anfang nächsten Monats 下個月的開始
+                Monat  變格為屬格。 
+
+
+形容詞變級
+..........
+
+級
+++
+
+級是關於形容詞和副詞的性質、狀態在用於比較時的不同程度的語法範疇。
+
+德語形容詞可分為三級：一般級、比較級和最高級。
+
+做定語的不同級形容詞後都需要加上變格的詞尾，
+表語則不用，與基礎規則相同。
+
+比較級變級
+++++++++++
+
+1.-er 為比較級變級。
+
+klein -> kleiner    小->較小 
+
+2.¨er 通常元音為 a, o, u，元音會變音。
+
+groß  -> größer     大->較大
+
+kurz  -> kürzer     短->較短
+
+3.-el/-er 結尾之形容詞，會刪除原結尾之 e，加上 -er。
+
+dunkel -> dunker    暗->更暗
+
+teuer  ->  teurer   貴->更貴
+
 形容詞來源
 ..........
 
@@ -2351,6 +2491,12 @@ wenigen     一點點、不多
 vollzogen   完美的
 
 üblich      一般
+
+genannt: named
+
+heißt: is called
+
+
 
 形容詞字尾
 ++++++++++
@@ -2409,143 +2555,7 @@ metamathemat-isch 元數學的，從元數學之名詞 Metamathematik 而來
 gleich-gültig   無關緊要
 相同   可用
 
-形容詞變格
-..........
 
-作為定語的形容詞在德語中需要變化，
-而作為表語的形容詞與副詞形式一樣，不需要改變。
-
-Sein Auto ist rot.  他的車是紅的。
-
-形容詞作為車之表語，不需變格。
-
-sein rotes Auto.    他的紅車。
-
-形容詞作為車之定語，需變格。
-
-需要變格的情況可細分為
-還是跟在定冠詞(弱變化)、不定冠詞(混合變化)、無冠詞(強變化)之後三種情況。
-
-定冠詞或代詞後：
-
-        陽性    陰性    中性    複數
-
-主格    -e      -e      -e      -en 
-
-屬格    -en     -en     -en     -en  
-
-與格    -en     -en     -en     -en
-
-賓格    -en     -e      -e      -en
-
-例句：
-
-die kleinste Klasse 主格，最小的類別 
-
-am kleinsten[最小的]在定冠詞後變格為 kleinste
-
-klein < kleiner < am kleinsten
-
-ganze       整個 
-
-ganze Zahle 整數
-
-gewöhnlich  一般的
-
-der gewöhnlichen ganzen   Zahlen   屬格，一般整數的
-    屬格詞變     屬格詞變 複數詞變
-
-nachfolgend 序列，下一個
-
-Die nachfolgenden Überlegungen 之後的考量 
-    詞變    
-
-letzte 最後
-
-不定冠詞後：
-
-        陽性    陰性    中性    複數
-
-主格    -er     -e      -es     -en     因為陽性及中性冠詞一樣，
-主格    ein     eine    ein     keine   所以形容詞需變格區分
-
-屬格    -en     -en     -en     -en  
-屬格    einer   eine    ein     keine
-
-與格    -en     -en     -en     -en
-與格    eines   einer   eines   keiner
-
-賓格    -en     -e      -es     -en     
-賓格    einem   eine    einem   keinem
-
-由上可觀察到，名詞前之定語，不論冠詞及形容詞數量，
-只會出現一次字尾 r，或字尾 s。
-
-der Gute  Mann  這個好人
-ein Guter Mann  一個好人
-
-無冠詞後：
-
-無冠詞為了判斷格、性別及數目，
-設計大致上與定冠詞 der 之變格相同。
-
-        陽性    陰性    中性    複數
-
-主格    -er     -e      -es     -e 
-主格    der     die     das     die 
-
-賓格    -en     -e      -es     -e
-賓格    den     die     das     die 
-
-屬格    -en     -er     -en     -er  
-屬格    des     der     des     der 
-
-與格    -em     -er     -em     -en
-與格    dem     der     dem     den 
-
-geordneter Paare 序對 
-geordnet -> geordneter 排序，複數屬格屈折
-Paar -> Paare 一對，複數名詞屈折
-
-屬格之變格不與 des 相同，還是 -en，
-主要是陽性及中性名詞，會在屬格變格為 -s。
-
-Anfang nächsten Monats 下個月的開始
-                Monat  變格為屬格。 
-
-級
-..
-
-級是關於形容詞和副詞的性質、狀態在用於比較時的不同程度的語法範疇。
-
-德語形容詞可分為三級：一般級、比較級和最高級。
-
-做定語的不同級形容詞後都需要加上變格的詞尾，
-表語則不用，與基礎規則相同。
-
-
-形容詞變級
-++++++++++
-
--er 為比較級變級。
-
-klein -> kleiner    小->較小 
-
-¨er 通常元音為 a, o, u，元音會變音。
-
-groß  -> größer     大->較大
-
-kurz  -> kürzer     短->較短
-
--el/-er 結尾之形容詞，會刪除原結尾之 e，加上 -er。
-
-dunkel -> dunker    暗->更暗
-
-teuer  ->  teurer   貴->更貴
-
-genannt: named
-
-heißt: is called
 
 副詞
 ----
