@@ -805,13 +805,15 @@ dieser
 
 格      陽性    陰性    中性    複數
 
-主格    dieser  diese   dieses  diese
+主格    dieser  diese   dieses/ diese
+                        dies
 
-屬格    diese   dieser  diese   dieser
+屬格    dieses  dieser  diese   dieser
 
-與格    diesen  diese   dieses  diese
+賓格    diesen  diese   dieses/ diese
+                        dies
 
-賓格    diesem  dieser  diesem  diesen
+與格    diesem  dieser  diesem  diesen
 
 jener
 .....

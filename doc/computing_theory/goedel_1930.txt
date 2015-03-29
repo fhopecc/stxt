@@ -1920,7 +1920,6 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
 指出此命題證明之概要 39) 可說服我們，
 因為它不提供任何原則上之困難及適當涉入。
 
-
 譯註：sich damit begnügen, etw zu tun 滿足去做。
 
 譯註：anzudeuten 建議、指示動詞之不定式，特別是其 zu 是加在字中。
@@ -1931,14 +1930,15 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
     für jedes n-tupel von Zahlen aus den Axiomen des Systems P 
     entscheidbar ist, ob die Relation R besteht oder nicht.
 
-39) 命題 V 自然基於對每個系統 P 之公設，其 n 元整數數組之遞迴關係 R
+39) 命題 V 自然基於對每個系統 P 之公設，
+    其 n 元整數數組之遞迴關係 R
     是可決定的，不管 R 關係是成立或否定。
 
 Wir beweisen den Satz für alle Relationen R(x1...xn) der Form: 
 
 我們證明所有具以下形式之關係 R(x1...xn) 之命題：
 
-x1=φ(x2...xn) 40) 
+x1 = φ(x2...xn) 40) 
 
 (wo φ eine rekursive Funktion ist) und 
 wenden vollständige Induktion nach der Stufe von φ an. 
@@ -1953,7 +1953,7 @@ wenden vollständige Induktion nach der Stufe von φ an.
     wo φ rekursiv ist.
 
 40) 於此直接可得出每個遞迴關係是有效的，
-    由於此類關係 0=φ(x1... xn) 同義，
+    由於此類關係 0 = φ(x1... xn) 同義，
     其中 φ 是遞迴的。
 
 Für Funktionen erster Stufe 
@@ -1980,8 +1980,39 @@ durch die φ aus φ1...φk entsteht
 (Einsetzung und rekursive Definition), 
 können sämtlich im System P formal nachgebildet werden. 
 
-Tut man dies, so erhält man aus r1...rk ein neues Relationszeichen r 41),
-für welches man die Geltung yon (3), (4) 
-unter Verwendung der induktiven Annahme ohne Schwierigkeit beweisen kann, 
-Ein Relationszeichen r, welches auf diesem Wege einer rckursiven Relation
+定義流程藉由衍生自 φ1...φk 之 φ (替代及遞迴定義)
+可全部於系統 P 形式模型化。
+
+Tut man dies, 
+so erhält man aus r1...rk ein neues Relationszeichen r 41),
+für welches man die Geltung von (3), (4) 
+unter Verwendung der induktiven Annahme ohne Schwierigkeit beweisen kann. 
+
+這些完成後，自 r1...rk 可得一個新的關係符號 r 41)，
+應用歸納假設之下可毫無困難的證明 (3)、(4) 是有效。
+
+41) Bei der genauen Durchführung dieses Beweises 
+    wird natürlich r nicht auf dem Umweg über die inhaltliche Deutung, 
+    sondern durch seine rein formale Beschaffenheit definiert.
+
+41) 這證明的精確發展中 r 自然地並非於此內容解釋之迂迴中，
+    而是經由其本身之純形式組成定義。
+
+Ein Relationszeichen r, welches auf diesem Wege einer rekursiven Relation
 zugeordnet ist 42), soll rekursiv heißen.
+
+源自這些方法之關係符號 r 其被對應到遞迴關係應稱為遞迴。
+
+42) Welches also, inhaltlich gedeutet, 
+    das Bestehen dieser Relation ausdrückt.
+
+42) 其於此內容解釋下也表達了此關係的存在。
+
+Wir kommen nun arts Ziel unserer Ausfiihrungen. 
+Sei × eine beliebige Klasse von Formeln. 
+Wir bezeiehnen mit Flg (×) (Folgerungsmenge von ×) 
+die kleinste Menge von Formeln, 
+die alle Formeln aus × und alle Axiome enthält und gegen 
+die Relation "unmittelbare Folge" abgeschlossen ist. 
+× heißt ω-widerspruchsfrei,
+wenn es kein Klassenzeichen a gibt, so daß:
