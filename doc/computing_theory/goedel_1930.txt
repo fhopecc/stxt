@@ -14,9 +14,13 @@ der Principia Mathematica und verwandter System I 1)
 譯詞規則：
 
 Axiom   公設
-Begriff 概念
+Begriff 概念、項目、定義
 Stelle  位置
 tupel   值組
+Menge   集合
+wider-spruchs-freie 一致，源自沒有矛盾 
+Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
+
 
 本文
 ----
@@ -711,17 +715,15 @@ für n=1 auch Klassenzeichen.
 
 取代
 ....
-
-Unter Subst a|v| 
-             |b|
+             |v| 
+Unter Subst a|b|
 (wo a eine Formel, 
     v eine Variable und 
     b eine Zeichen vom selben Typ wie v bedeutet)
 verstehen wir die Formel, welche aus a entsteht, 
 wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
-
-Subst a|v| 
-       |b| (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
+       |v| 
+Subst a|b| (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
 視為一式由 a 衍生，
 且在裡面每處自由之 v，均由 b 取代 20)。
 
@@ -1724,6 +1726,19 @@ x 是質數。
      |  v|                          |v|
    Sb|x y| 是前所定義的概念 Subst a |b| 37)
   
+                                                           |  v|
+36) Falls v keine Variable oder x keine Formel ist, ist Sb |x y| = x.
+
+                                      |  v|
+36) 若 v 不是變數或 x 不是公式，則 Sb |x y| = x。
+
+            |   |  v| w|                   |  v w|
+37) Statt Sb|Sb |x y| z| schreiben wir: Sb |x y z| 
+    (analog für mehr als zwei Variable).
+
+               |   |  v| w|            |  v w|
+37) 我們取代 Sb|Sb |x y| z| 寫法為: Sb |x y z| 
+    (對 2 個以上變數也是類似的方法)。
 
 32.x Imp y ≡ [Neg (x)] Dis y
    x Con y ≡ Neg {[Neg (x)] Dis [Neg (y)]}
@@ -2008,11 +2023,89 @@ zugeordnet ist 42), soll rekursiv heißen.
 
 42) 其於此內容解釋下也表達了此關係的存在。
 
-Wir kommen nun arts Ziel unserer Ausfiihrungen. 
+Wir kommen nun ans Ziel unserer Ausführungen. 
 Sei × eine beliebige Klasse von Formeln. 
-Wir bezeiehnen mit Flg (×) (Folgerungsmenge von ×) 
+Wir bezeiehnen mit Flg(×) (Folgerungsmenge von ×) 
 die kleinste Menge von Formeln, 
-die alle Formeln aus × und alle Axiome enthält und gegen 
-die Relation "unmittelbare Folge" abgeschlossen ist. 
+die alle Formeln aus × und 
+alle Axiome enthält und gegen die Relation "unmittelbare Folge" 
+abgeschlossen ist. 
 × heißt ω-widerspruchsfrei,
 wenn es kein Klassenzeichen a gibt, so daß:
+
+現在來到我們實作的目標。
+令 × 為任一個公式類別。
+以 Flg(×) (× 之結論集合) 
+代表最小之公式集合，
+包含所有 × 之公式及所有「立即推論」關係所包含之公理。
+× 稱為 ω-一致性，
+且不存在類別符號 a 如下：
+
+   |   /  v  \        |   |             |
+(n)|Sb| a     |εFlg(×)| & |Neg (v Gen a)| εFlg(×)
+   |   \ Z(n)/        |   |             |
+
+
+wobei v die freie Variable des Klassenzeichens a ist.
+
+其中 v 是類別符號 a 之自由變數。
+
+Jedes ω-widerspruchsfreie System ist 
+selbstverständlich auch widerspruchsfrei. 
+Es gilt aber, wie später gezeigt werden wird, 
+nicht das Umgekehrte.
+
+每個 ω 一致系統是自我證明本身為一致。
+但其反向是無效的，這將在之後證明。
+
+Das allgemeine Resultat über 
+die Existenz unentseheidbarer Sätze lautet:
+
+存在不可決定命題之一般結果如下述：
+
+Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse × von Formeln 
+         gibt es rekursive Klassenzeichen r, so
+         daß weder v Gen r noch Neg(v Gen r) zu Flg(×) gehört 
+         (wobei v die freie Variable aus r ist).
+
+命題VI： 對每個 ω-一致遞迴之公式類別 ×，存在遞迴類別符號 r，
+         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(x)。
+         (其中 v 是 r 中的自由變數)。
+
+Beweis: Sei × eine beliebige rekursive ω-widerspruchsfreien Klasse
+        von Formeln. Wir definieren:
+
+證明：  設 × 為任意一個 ω-一致遞迴之公式類別。我們定義： 
+
+Bw×(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) V (n Gl x)ε× V              (5)
+      (Ep,q){0<q,q<n & Fl(n Gl x, p Gl x, q Gl x)}] & l(x) > 0
+
+(vgl. den analogen Begriff 44)
+
+(參閱相似的定義 44) 
+
+x B× y ≡ Bw×(x) & [l(x)] Gl x=y      (6)
+
+Bew×(x) & [Ey]y B×x                  (6.1)
+
+(vgl. die analogen Begriffe 45, 46).
+
+(參閱相似的定義 45, 46)。
+
+Es gilt offenbar:
+
+以下明顯地有效：
+
+(x)[Bew×(x) ～ xεFlg(×)]  (7)
+(x)[ Bew(x) ～  Bew×(x)]  (8)
+
+Nun definieren wir die Relation:
+
+現在定義關係：
+
+         _______________
+            |  |  19  ||
+Q(x,y) ≡ xB×|Sb|y Z(y)||
+
+譯註：整數 19 依哥德爾數定義，代表第 2 個 1 型變數，即 y。
+
