@@ -13,11 +13,12 @@ der Principia Mathematica und verwandter System I 1)
 
 譯詞規則：
 
-Axiom   公設
-Begriff 概念、項目、定義
-Stelle  位置
-tupel   值組
-Menge   集合
+Axiom       公設：預設為真之陳述
+Satz        命題：可判定真假之陳述
+Begriff     概念、項目、定義
+Stelle      位置
+tupel       值組
+Menge       集合
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
@@ -2109,3 +2110,48 @@ Q(x,y) ≡ xB×|Sb|y Z(y)||
 
 譯註：整數 19 依哥德爾數定義，代表第 2 個 1 型變數，即 y。
 
+                              |    19|
+Da xB×y [nach (6), (5)] und Sb|Y Z(y)| (nach Def. 17, 31) rekursiv sind, 
+so auch Q(x). 
+
+因為 xB×y 「依據 (6), (5)」及 Sb|Y Z(y)| 「依據定義 17, 31」為遞迴，
+故 Q(x) 也是。
+
+Nach Satz V und (8) gibt es also ein Relationszeichen q 
+(mit den freien Variablen 17, 19), so daß gilt:
+
+依據定理 V 及 (8)，
+故存在一個關係符號 q 「具自由變數 17, 19」使得：
+
+_______________
+   |  |    19||        |  |    17   19||
+xB×|Sb|y Z(y)|| -> Bew×|Sb|q Z(x) Z(y)||     (9)
+
+   |  |    19||        |      |    17   19||
+xB×|Sb|y Z(y)|| -> Bew×|Neg Sb|q Z(x) Z(y)|| (10)
+
+Wir setzen:
+
+我們設：
+
+p = 17 Gen q (11)
+
+(p ist ein Klassenzeichen mit der freien Variablen 19) und
+
+「p 是具有一個自由變數 19 之類別符號。」且
+
+      |    19|
+r = Sb|q Z(p)| (12)
+
+(r ist ein rekursives Klassenzeichen mit der freien Variablen 17 43).
+
+「r 是具有一個自由變數 17 之遞迴類別符號。43)」
+
+43) r entsteht ja aus dem rekursiven Relationszeiehen q durch 
+    Ersetzen einer Variablen durch eine bestimmte Zahl (p).
+
+43) r 實際上衍生自遞迴類別符號 q，其變數以特定數字 p 取代。
+
+Dann gilt:
+
+則：
