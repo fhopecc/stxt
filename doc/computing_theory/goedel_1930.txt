@@ -2042,9 +2042,8 @@ wenn es kein Klassenzeichen a gibt, so daß:
 × 稱為 ω-一致性，
 且不存在類別符號 a 如下：
 
-   |   /  v  \        |   |             |
-(n)|Sb| a     |εFlg(×)| & |Neg (v Gen a)| εFlg(×)
-   |   \ Z(n)/        |   |             |
+   |  |    v |       |   |             |
+(n)|Sb|a Z(n)|εFlg(×)| & |Neg (v Gen a)| εFlg(×)
 
 
 wobei v die freie Variable des Klassenzeichens a ist.
@@ -2155,3 +2154,91 @@ r = Sb|q Z(p)| (12)
 Dann gilt:
 
 則：
+
+  |    19|            |             19|
+Sb|p Z(p)| =        Sb|[17 Gen q] Z(p)| 
+                      |    19|
+           = 17 Gen Sb|q Z(p)| 
+           = 17 Gen r 44)                 (13)
+
+44) Die Operationen Gen, Sb sind natürlich immer vertauschbar,
+    falls sie sich auf verschiedene Variable beziehen.
+    
+44) Gen 及 Sb 操作若參照到不同的變數，自然地可永遠互換，
+
+[wegen (11) und (12)] ferner:
+
+「依據 (11) 及 (12)」推得：
+    
+  |    17   19|     |    17|
+Sb|q Z(x) Z(p)| = Sb|r Z(x)| (14)
+
+[nach (12)]. Setzt man nun in (9) und (10) p für y ein, 
+so entsteht unter Berücksichtigung von (13) und (14)
+
+「根據(12)」現在於 (9) 及 (10) 我們以 p 取代 y，
+財於 (13) 及 (14) 下可得：
+
+_____________         |  |   17 ||
+xB×(17 Gen r) -> Bew× |Sb|r Z(x)||     (15)
+
+                      |      |   17 ||
+xB×(17 Gen r) -> Bew× |Neg Sb|r Z(x)|| (16)
+
+Nun definieren wir die Relation:
+
+現在我們定義關係：
+         _______________ 
+            |  |   19 ||
+Q(x,y) ≡ xB×|Sb|y Z(y)|| (8.1)
+
+                              |   19 |
+Da xB×y [nach (6), (5)] und Sb|y Z(y)| (nach Def. 17, 31)
+rekursiv sind, so auch Q(xy). 
+
+因為 xB×y「依據 (6), (5)」及Sb|y Z(y)|「依據定義 17, 31」是遞迴的，
+故 Q(x y) 也是如此。
+
+Nach Satz V und (8) gibt es also ein Relationszeichen q 
+(mit den freien Variablen 17, 19), so daß gilt:
+
+依據命題 V 及 (8)，
+也存在一個關係符號 q 「具有自由變數 17 及 19」，
+使得以下成立：
+_______________
+   |  |   19 ||        |  |   17   19 ||
+xB×|Sb|y Z(y)|| -> Bew×|Sb|q Z(x) Z(y)||      (9)
+
+   |  |   19 ||        |      |   17   19 ||
+xB×|Sb|y Z(y)|| -> Bew×|Neg Sb|q Z(x) Z(y)||  (10)
+
+Wir setzen:
+
+我們設定：
+
+p = 17 Gen q (11)
+
+(p ist ein Klassenzeichen mit der freien Variablen 19) und
+
+(p 是一個具有自由變數 19 之類別符號)且
+
+      |   19 |
+r = Sb|q Z(p)| (12)
+
+
+(r ist ein rekursives Klassenzeichen mit der freien Variablen 17 43).
+
+(r 是一個具自由變數 17 之遞迴類別符號 43)。
+
+43) r entsteht ja aus dem rekursiven Relationszeichen q 
+    durch Ersetzen einer Variablen durch eine bestimmte Zahl (p).
+    
+43) r 正是將遞迴關係符號 q 之變數配賦特定整數 p 所得。
+
+Dann gilt:
+
+則：
+
+               |            19 |            |   19 |
+Sb|p Z(p)| = Sb|[17 Gen q] Z(p)| = 17 Gen Sb|q Z(p)|  (13)
+           = 17 Gen r 44) 
