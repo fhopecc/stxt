@@ -2242,3 +2242,24 @@ Dann gilt:
                |            19 |            |   19 |
 Sb|p Z(p)| = Sb|[17 Gen q] Z(p)| = 17 Gen Sb|q Z(p)|  (13)
            = 17 Gen r 44) 
+
+[wegen (11) und (12)] ferner:
+
+[依 (11) 及 (12)] 可得：
+
+  |    17   19 |     |  17 |
+Sb| q Z(x) Z(p)| = Sb|rZ(x)| (14)
+
+
+[nach (12)]. Setzt man nun in (9) und (10) p für y ein, 
+so entsteht unter Berüeksichtigung von (13) und (14):
+
+[依據 (12)]. 現在將 (9) 及 (10) 中的 p 以 y 取代，
+依 (13) 及 (14) 下，以下成立：
+
+_____________         |     17 |
+xB×(17 Gen r) -> Bew× |Sb|rZ(x)|      (15) 
+
+                      |         17 |
+xB×(17 Gen r) -> Bew× |Neg Sb|rZ(x)|  (16) 
+
