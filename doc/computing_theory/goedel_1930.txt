@@ -2055,7 +2055,7 @@ selbstverständlich auch widerspruchsfrei.
 Es gilt aber, wie später gezeigt werden wird, 
 nicht das Umgekehrte.
 
-每個 ω 一致系統是自我證明本身為一致。
+每個 ω-一致系統是自我證明本身為一致。
 但其反向是無效的，這將在之後證明。
 
 Das allgemeine Resultat über 
@@ -2077,12 +2077,22 @@ Beweis: Sei × eine beliebige rekursive ω-widerspruchsfreien Klasse
 
 證明：  設 × 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
-Bw×(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) V (n Gl x)ε× V              (5)
-      (Ep,q){0<q,q<n & Fl(n Gl x, p Gl x, q Gl x)}] & l(x) > 0
+Bw×(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) 
+            V (n Gl x)ε× 
+            V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
+            & l(x) > 0    (5)
 
 (vgl. den analogen Begriff 44)
 
 (參閱相似的定義 44) 
+
+譯註：
+
+44.Bw(x) ≡ (n){ 0<n≦ l(x) -> Ax(n Gl x) 
+              V (Ep,q)[ 0<p,q<n 
+                      & Fl(n Gl x, p Gl x, q Gl x)]}
+         & l(x) > 0
+
 
 x B× y ≡ Bw×(x) & [l(x)] Gl x=y      (6)
 
@@ -2257,9 +2267,35 @@ so entsteht unter Berüeksichtigung von (13) und (14):
 [依據 (12)]. 現在將 (9) 及 (10) 中的 p 以 y 取代，
 依 (13) 及 (14) 下，以下成立：
 
-_____________         |     17 |
+_____________         |  |  17 |
 xB×(17 Gen r) -> Bew× |Sb|rZ(x)|      (15) 
 
-                      |         17 |
+                      |      |  17 |
 xB×(17 Gen r) -> Bew× |Neg Sb|rZ(x)|  (16) 
 
+
+Daraus ergibt sich:
+
+由此可得：
+
+1. 17 Gen r ist nicht ×-beweisbar 45). 
+   Denn wäre dies der Fall, so gäbe es (naeh 6.1) ein n, 
+   so daß n B× (17 Gen r). 
+                              |      |  17 ||
+   Nach (16) gälte also: Bew× |Neg Sb|rZ(n)||, 
+   während andererseits aus der ×-Beweisbarkeit von 17 Gen r 
+                  |  17 |
+   auch die von Sb|rZ(n)| folgt. 
+   × wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+
+1. 17 Gen r 不是 ×-可證 45).
+   
+
+45) x ist ×-beweisbar, soll bedeuten: xεFlg(×), 
+    was nach (7) dasselbe besagt wie: Bew×(x).
+
+45) x 是 ×-可證，應意指：xεFlg(×)，
+    是依據 (7) 等同於：Bew×(x).
+
+45a) Denn alle ira Beweise vorkommenden Existentialbehauptungen beruhen
+auf Satz V, der~ wie leicht zu sehen~ intuitionistisch einwandfrei ist.
