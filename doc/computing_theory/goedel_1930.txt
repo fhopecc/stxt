@@ -22,9 +22,40 @@ Menge       集合
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
+譯者作的P 系統與整數對應表
+
+P 系統      P系統的P系統意義
+----------- ----------- ----             
+
+0            1          零
+f            3          後繼函數
+~            5          非
+v            7          或
+Π            9          對所有
+(           11          右括號
+)           13          左括號
+x           17          第 1 個 1 型變數
+y           19          第 2 個 1 型變數
+
+n           Z(n)        數 n 的數符表示。
+
+       |v|    |  v|     其中 a 為式，v 為變數且 b 為與 v 同型之符號。
+Subst a|b|  Sb|x y|     視為一式由 a 衍生，
+                        且在裡面每處自由之 v，均由 b 取代。
+
+x->y        x Imp y 
+x& y        x Con y 
+x~ y        x Aeq y 
+э           v Ex  y 
+
+
+   
+            Bew(x)      x 是一可證式
+
 
 本文
 ----
+
 
 Von Kurt Gödel in Wien.
 
@@ -2055,7 +2086,7 @@ selbstverständlich auch widerspruchsfrei.
 Es gilt aber, wie später gezeigt werden wird, 
 nicht das Umgekehrte.
 
-每個 ω 一致系統是自我證明本身為一致。
+每個 ω-一致系統是自我證明本身為一致。
 但其反向是無效的，這將在之後證明。
 
 Das allgemeine Resultat über 
@@ -2242,3 +2273,5 @@ Dann gilt:
                |            19 |            |   19 |
 Sb|p Z(p)| = Sb|[17 Gen q] Z(p)| = 17 Gen Sb|q Z(p)|  (13)
            = 17 Gen r 44) 
+
+
