@@ -2188,6 +2188,8 @@ r = Sb|q Z(p)| (12)
 
 「r 是具有一個自由變數 17 之遞迴類別符號。43)」
 
+譯註：r 的內容直說就是 x 不是「x不是y的證明」的證明。
+
 43) r entsteht ja aus dem rekursiven Relationszeiehen q durch 
     Ersetzen einer Variablen durch eine bestimmte Zahl (p).
 
@@ -2226,85 +2228,6 @@ xB×(17 Gen r) -> Bew× |Sb|r Z(x)||     (15)
 
                       |      |   17 ||
 xB×(17 Gen r) -> Bew× |Neg Sb|r Z(x)|| (16)
-
-Nun definieren wir die Relation:
-
-現在我們定義關係：
-         _______________ 
-            |  |   19 ||
-Q(x,y) ≡ xB×|Sb|y Z(y)|| (8.1)
-
-                              |   19 |
-Da xB×y [nach (6), (5)] und Sb|y Z(y)| (nach Def. 17, 31)
-rekursiv sind, so auch Q(xy). 
-
-因為 xB×y「依據 (6), (5)」及Sb|y Z(y)|「依據定義 17, 31」是遞迴的，
-故 Q(x y) 也是如此。
-
-Nach Satz V und (8) gibt es also ein Relationszeichen q 
-(mit den freien Variablen 17, 19), so daß gilt:
-
-依據命題 V 及 (8)，
-也存在一個關係符號 q 「具有自由變數 17 及 19」，
-使得以下成立：
-_______________
-   |  |   19 ||        |  |   17   19 ||
-xB×|Sb|y Z(y)|| -> Bew×|Sb|q Z(x) Z(y)||      (9)
-
-   |  |   19 ||        |      |   17   19 ||
-xB×|Sb|y Z(y)|| -> Bew×|Neg Sb|q Z(x) Z(y)||  (10)
-
-Wir setzen:
-
-我們設定：
-
-p = 17 Gen q (11)
-
-(p ist ein Klassenzeichen mit der freien Variablen 19) und
-
-(p 是一個具有自由變數 19 之類別符號)且
-
-      |   19 |
-r = Sb|q Z(p)| (12)
-
-
-(r ist ein rekursives Klassenzeichen mit der freien Variablen 17 43).
-
-(r 是一個具自由變數 17 之遞迴類別符號 43)。
-
-43) r entsteht ja aus dem rekursiven Relationszeichen q 
-    durch Ersetzen einer Variablen durch eine bestimmte Zahl (p).
-    
-43) r 正是將遞迴關係符號 q 之變數配賦特定整數 p 所得。
-
-Dann gilt:
-
-則：
-
-               |            19 |            |   19 |
-Sb|p Z(p)| = Sb|[17 Gen q] Z(p)| = 17 Gen Sb|q Z(p)|  (13)
-           = 17 Gen r 44) 
-
-[wegen (11) und (12)] ferner:
-
-[依 (11) 及 (12)] 可得：
-
-  |    17   19 |     |  17 |
-Sb| q Z(x) Z(p)| = Sb|rZ(x)| (14)
-
-
-[nach (12)]. Setzt man nun in (9) und (10) p für y ein, 
-so entsteht unter Berüeksichtigung von (13) und (14):
-
-[依據 (12)]. 現在將 (9) 及 (10) 中的 p 以 y 取代，
-依 (13) 及 (14) 下，以下成立：
-
-_____________         |  |  17 |
-xB×(17 Gen r) -> Bew× |Sb|rZ(x)|      (15) 
-
-                      |      |  17 |
-xB×(17 Gen r) -> Bew× |Neg Sb|rZ(x)|  (16) 
-
 
 Daraus ergibt sich:
 
