@@ -25,8 +25,7 @@ Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 譯者作的P 系統與整數對應表
 
 P 系統      P系統的P系統意義
------------ ----------- ----             
-
+----------- ----------------             
 0            1          零
 f            3          後繼函數
 ~            5          非
@@ -36,9 +35,7 @@ v            7          或
 )           13          左括號
 x           17          第 1 個 1 型變數
 y           19          第 2 個 1 型變數
-
 n           Z(n)        數 n 的數符表示。
-
        |v|    |  v|     其中 a 為式，v 為變數且 b 為與 v 同型之符號。
 Subst a|b|  Sb|x y|     視為一式由 a 衍生，
                         且在裡面每處自由之 v，均由 b 取代。
@@ -48,11 +45,16 @@ x& y        x Con y
 x~ y        x Aeq y 
 э           v Ex  y 
 
-
-   
+            n Gl x      數列 x 的第 n 個元素
+            Ax(x)       x 是一個公設
             Bew(x)      x 是一可證式
-
-
+            Q(x,y)      x 不是 y 的證明
+            17 Gen r    x 不是「x不是y的證明」的證明  
+            χ           任一公式集合。
+            Flg(χ)      χ 之推論集合。
+            Bwχ(x)      x 在 χ 下為證明數。
+            x Bχ y      x 在 χ 下為 y 的證明。
+            Bewχ(x)     x 在 χ 下可證。
 本文
 ----
 
@@ -2056,26 +2058,25 @@ zugeordnet ist 42), soll rekursiv heißen.
 42) 其於此內容解釋下也表達了此關係的存在。
 
 Wir kommen nun ans Ziel unserer Ausführungen. 
-Sei × eine beliebige Klasse von Formeln. 
-Wir bezeiehnen mit Flg(×) (Folgerungsmenge von ×) 
+Sei χ eine beliebige Klasse von Formeln. 
+Wir bezeiehnen mit Flg(χ) (Folgerungsmenge von χ) 
 die kleinste Menge von Formeln, 
-die alle Formeln aus × und 
+die alle Formeln aus χ und 
 alle Axiome enthält und gegen die Relation "unmittelbare Folge" 
 abgeschlossen ist. 
-× heißt ω-widerspruchsfrei,
+χ heißt ω-widerspruchsfrei,
 wenn es kein Klassenzeichen a gibt, so daß:
 
 現在來到我們實作的目標。
-令 × 為任一個公式類別。
-以 Flg(×) (× 之結論集合) 
+令 χ 為任一個公式類別。
+以 Flg(χ) (χ 之推論集合) 
 代表最小之公式集合，
-包含所有 × 之公式及所有「立即推論」關係所包含之公理。
-× 稱為 ω-一致性，
-且不存在類別符號 a 如下：
+包含所有 χ 之公式及所有「立即推論」關係所包含之公理。
+χ 稱為 ω-一致性，
+若其不存在類別符號 a 如下：
 
    |  |    v |       |   |             |
-(n)|Sb|a Z(n)|εFlg(×)| & |Neg (v Gen a)| εFlg(×)
-
+(n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
 
 wobei v die freie Variable des Klassenzeichens a ist.
 
@@ -2094,40 +2095,40 @@ die Existenz unentseheidbarer Sätze lautet:
 
 存在不可決定命題之一般結果如下述：
 
-Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse × von Formeln 
+Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse χ von Formeln 
          gibt es rekursive Klassenzeichen r, so
-         daß weder v Gen r noch Neg(v Gen r) zu Flg(×) gehört 
+         daß weder v Gen r noch Neg(v Gen r) zu Flg(χ) gehört 
          (wobei v die freie Variable aus r ist).
 
-命題VI： 對每個 ω-一致遞迴之公式類別 ×，存在遞迴類別符號 r，
+命題VI： 對每個 ω-一致遞迴之公式類別 χ，存在遞迴類別符號 r，
          使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(x)。
          (其中 v 是 r 中的自由變數)。
 
-Beweis: Sei × eine beliebige rekursive ω-widerspruchsfreien Klasse
+譯註：命題VI說明ω-一致之系統存在不可決定之命題。
+
+Beweis: Sei χ eine beliebige rekursive ω-widerspruchsfreien Klasse
         von Formeln. Wir definieren:
 
-證明：  設 × 為任意一個 ω-一致遞迴之公式類別。我們定義： 
+證明：  設 χ 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
-Bw×(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) 
-            V (n Gl x)ε× 
-            V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
-            & l(x) > 0    (5)
+Bwχ(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) 
+                      V (n Gl x)εχ 
+                      V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
+            & l(x) > 0                                               (5)
 
 (vgl. den analogen Begriff 44)
 
 (參閱相似的定義 44) 
 
-譯註：
+譯註：Bwχ(x) 指 x 在 χ 下可證。
 
-44.Bw(x) ≡ (n){ 0<n≦ l(x) -> Ax(n Gl x) 
-              V (Ep,q)[ 0<p,q<n 
-                      & Fl(n Gl x, p Gl x, q Gl x)]}
-         & l(x) > 0
+x Bχ y ≡ Bwχ(x) & [l(x)] Gl x=y      (6)
 
+譯註：x Bχ y 指 x 在 χ 下為 y 的證明。
 
-x B× y ≡ Bw×(x) & [l(x)] Gl x=y      (6)
+Bewχ(x) & [Ey]y Bχ x                 (6.1)
 
-Bew×(x) & [Ey]y B×x                  (6.1)
+譯註：Bewχ(x) 指 x 在 χ 下可證。
 
 (vgl. die analogen Begriffe 45, 46).
 
@@ -2137,8 +2138,8 @@ Es gilt offenbar:
 
 以下明顯地有效：
 
-(x)[Bew×(x) ～ xεFlg(×)]  (7)
-(x)[ Bew(x) ～  Bew×(x)]  (8)
+(x)[Bewχ(x) ～ xεFlg(χ)]  (7)
+(x)[ Bew(x) ->  Bewχ(x)]  (8)
 
 Nun definieren wir die Relation:
 
@@ -2146,16 +2147,15 @@ Nun definieren wir die Relation:
 
          _______________
             |  |  19  ||
-Q(x,y) ≡ xB×|Sb|y Z(y)||
+Q(x,y) ≡ xBχ|Sb|y Z(y)|| (8.1)
 
 譯註：整數 19 依哥德爾數定義，代表第 2 個 1 型變數，即 y。
-      Q(x,y)內容直說就是 x 不是 y 的證明。
 
                               |    19|
-Da xB×y [nach (6), (5)] und Sb|Y Z(y)| (nach Def. 17, 31) rekursiv sind, 
+Da xBχy [nach (6), (5)] und Sb|y Z(y)| (nach Def. 17, 31) rekursiv sind, 
 so auch Q(x). 
 
-因為 xB×y 「依據 (6), (5)」及 Sb|Y Z(y)| 「依據定義 17, 31」為遞迴，
+因為 xBχy 「依據 (6), (5)」及 Sb|Y Z(y)| 「依據定義 17, 31」為遞迴，
 故 Q(x) 也是。
 
 Nach Satz V und (8) gibt es also ein Relationszeichen q 
@@ -2166,10 +2166,12 @@ Nach Satz V und (8) gibt es also ein Relationszeichen q
 
 _______________
    |  |    19||        |  |    17   19||
-xB×|Sb|y Z(y)|| -> Bew×|Sb|q Z(x) Z(y)||     (9)
+xBχ|Sb|y Z(y)|| -> Bewχ|Sb|q Z(x) Z(y)||     (9)
 
    |  |    19||        |      |    17   19||
-xB×|Sb|y Z(y)|| -> Bew×|Neg Sb|q Z(x) Z(y)|| (10)
+xBχ|Sb|y Z(y)|| -> Bewχ|Neg Sb|q Z(x) Z(y)|| (10)
+
+譯註：推論端去除了否定，是因為根據關係 Q 之定義。
 
 Wir setzen:
 
@@ -2214,7 +2216,7 @@ Sb|p Z(p)| =        Sb|[17 Gen q] Z(p)|
 
 「依據 (11) 及 (12)」推得：
     
-  |    17   19|     |    17|
+  |   17   19 |     |   17 |
 Sb|q Z(x) Z(p)| = Sb|r Z(x)| (14)
 
 [nach (12)]. Setzt man nun in (9) und (10) p für y ein, 
@@ -2224,33 +2226,88 @@ so entsteht unter Berücksichtigung von (13) und (14)
 財於 (13) 及 (14) 下可得：
 
 _____________         |  |   17 ||
-xB×(17 Gen r) -> Bew× |Sb|r Z(x)||     (15)
+xBχ(17 Gen r) -> Bewχ |Sb|r Z(x)||     (15)
 
                       |      |   17 ||
-xB×(17 Gen r) -> Bew× |Neg Sb|r Z(x)|| (16)
+xBχ(17 Gen r) -> Bewχ |Neg Sb|r Z(x)|| (16)
 
 Daraus ergibt sich:
 
 由此可得：
 
-1. 17 Gen r ist nicht ×-beweisbar 45). 
-   Denn wäre dies der Fall, so gäbe es (naeh 6.1) ein n, 
-   so daß n B× (17 Gen r). 
-                              |      |  17 ||
-   Nach (16) gälte also: Bew× |Neg Sb|rZ(n)||, 
-   während andererseits aus der ×-Beweisbarkeit von 17 Gen r 
-                  |  17 |
-   auch die von Sb|rZ(n)| folgt. 
-   × wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+1. 17 Gen r ist nicht χ-beweisbar 45). 
+   Denn wäre dies der Fall, so gäbe es (nach 6.1) ein n, 
+   so daß n Bχ (17 Gen r).  
+   Nach (16) gälte also: 
 
-1. 17 Gen r 不是 ×-可證 45).
-   
+1.17 Gen r 不是 χ-可證 45).
+  因為若是 χ-可證，則(依據 6.1)存在一個 n 使得 n Bχ (17 Gen r)。 
+  依據(16)下式成立：
+ 
+       |      |  17 ||
+  Bewχ |Neg Sb|rZ(n)||, 
 
-45) x ist ×-beweisbar, soll bedeuten: xεFlg(×), 
-    was nach (7) dasselbe besagt wie: Bew×(x).
+  während andererseits aus der χ-Beweisbarkeit von 17 Gen r 
 
-45) x 是 ×-可證，應意指：xεFlg(×)，
-    是依據 (7) 等同於：Bew×(x).
+                 |  17 |
+  auch die von Sb|rZ(n)| folgt. 
 
-45a) Denn alle ira Beweise vorkommenden Existentialbehauptungen beruhen
-auf Satz V, der~ wie leicht zu sehen~ intuitionistisch einwandfrei ist.
+  然而另一面觀看從 17 Gen r 的 χ-可證性也可推得下式：
+
+    |  17 |
+  Sb|rZ(n)|
+
+  χ wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+
+  故 χ 也是不一致(甚至為 ω-不一致)。 
+
+45) x ist χ-beweisbar, soll bedeuten: xεFlg(χ), 
+    was nach (7) dasselbe besagt wie: Bewχ(x).
+
+45) x 是 χ-可證，應意指：xεFlg(χ)，
+    是依據 (7) 等同於：Bewχ(x).
+
+2.Neg(17 Gen r) ist nicht χ-beweisbar.
+  Beweis: 
+  Wie eben bewiesen wurde, ist 17 Gen r nicht χ-beweisbar, 
+  d.h,(nach 6.1) es gilt 
+
+2.Neg(17 Gen r) 不是 χ-可證。
+  證明：
+  正如同前之證明方式，17 Gen r 也不是 χ-可證， 
+  即,(依據 6.1)下式成立：
+
+     ________________
+  (n) n Bχ (17 Gen r). 
+                    
+  Daraus folgt nach (15) 
+
+  由此且依據 (15) 可得
+
+          |  |   17 ||
+  (n) Bewχ|Sb|r z(n)||,
+
+  was zusammen mit Bewχ[Neg (17 Gen r)] 
+  gegen die ω-Widerspruchsfreiheit von χ verstoßen würde.
+
+  與 Bewχ[Neg (17 Gen r)] 可反駁 χ 的 ω-一致性。
+
+  17 Gen r ist also aus χ unentscheidbar, 
+  womit Satz VI bewiesen ist.
+
+  χ 中的 17 Gen r 也是不可決定的，
+  由此命題 VI 得證。 
+ 
+Man kann sieh leieht tiberzeugen, dal~ der eben geNhrte
+Beweis konstruktiv ist~5~), d.h. es ist intuitionistiseh einwandfrei
+folgendes bewiesen: Sei eine beliebige rekursiv definierte Klasse z
+yon Forme!n vorgelegt. Wenn dann eine formale Entseheidung (aus •
+air die (effektiv aufweisbare) NatzSormel 17 Gen r vorgelegt ist, so
+kann man effektiv angeben:
+
+45a) Denn alle im Beweise vorkommenden Existentialbehauptungen 
+     beruhen auf Satz V, der, wie leicht zu sehen, 
+     intuitionistisch einwandfrei ist.
+
+45a) 因為所有證明中的存在聲明均根植於命題 v，這可簡易的看出，
+     直覺上是是無反例的。
