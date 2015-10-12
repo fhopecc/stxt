@@ -2298,16 +2298,26 @@ Daraus ergibt sich:
   χ 中的 17 Gen r 也是不可決定的，
   由此命題 VI 得證。 
  
-Man kann sieh leieht tiberzeugen, dal~ der eben geNhrte
-Beweis konstruktiv ist~5~), d.h. es ist intuitionistiseh einwandfrei
-folgendes bewiesen: Sei eine beliebige rekursiv definierte Klasse z
-yon Forme!n vorgelegt. Wenn dann eine formale Entseheidung (aus •
-air die (effektiv aufweisbare) NatzSormel 17 Gen r vorgelegt ist, so
-kann man effektiv angeben:
+Man kann sich leicht überzeugen, 
+daß der eben geführte Beweis konstruktiv ist 45), 
+d.h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
+Sei eine beliebige rekursiv definierte Klasse χ von Formeln vorgelegt. 
+Wenn dann eine formale Entscheidung (aus χ)
+für die (effektiv aufweisbare) SatzFormel 17 Gen r vorgelegt ist, 
+so kann man effektiv angeben:
+
+可以輕易說服我們前述的證明是可建構的 45)，
+即直覺上可無反例證明以下：
+給定任一個以遞迴定義衍生自已定義公式之類別χ，
+若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於χ)，
+則可以有效的聲明：
+
+譯註：英譯本未譯出 vorgelegt，即類別χ是自已定義公式衍生。
+
 
 45a) Denn alle im Beweise vorkommenden Existentialbehauptungen 
      beruhen auf Satz V, der, wie leicht zu sehen, 
      intuitionistisch einwandfrei ist.
 
-45a) 因為所有證明中的存在聲明均根植於命題 v，這可簡易的看出，
+45a) 因為所有證明中的存在聲明均根植於命題 V，這可簡易的看出，
      直覺上是是無反例的。
