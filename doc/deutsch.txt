@@ -864,11 +864,11 @@ beide
 
 主格    ein     eine    ein     keine*   
 
-屬格    einer   eine    ein     keine*
+屬格    eines   einer   eines   keine*
 
-賓格    einem   eine    einem   keinem*
+賓格    einen   eine    einem   keinem*
 
-與格    eines   einer   eines   keiner*
+與格    einem   eine    ein     keiner*
 
 *ein 的否定型只要在前置 k 即可，表示沒有的意思，
  但與 ein 不同，它可用到複數。
