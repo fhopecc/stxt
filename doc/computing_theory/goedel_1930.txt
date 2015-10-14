@@ -2382,6 +2382,13 @@ für die weder ein Gegenbeispiel angebbar,
 noch beweisbar ist, 
 daß sie allen Zahlen zukommt. 
 
+預設衍生自 χ 之式，除了 ω-一致外，僅有一致，
+則可推得實際上除了不可決定命題之存在性，
+更可推得 (r) 性質之存在性，
+其不存在被指定之反例，
+也給定所有整數也不可被證明。
+
+
 Denn zum Beweise, daß 17 Gen r nicht χ-beweisbar ist,
 wurde nur die Widerspruchsfreiheit von χ verwendet (vgl. S. 189) und 
     ____
@@ -2411,7 +2418,7 @@ daß die Klasse χ aus endlich vielen Formeln
 Jede endliche Klasse α ist natürlich rekursiv. 
 Sei a die größte in α enthaltene Zahl. Dann gilt in diesem Fall für χ:
 
-x~c~z (Era, n) [ m ~ x & n ~ a & n ~ . & x = m T h n ]
+xc~z (Era, n) [ m ~ x & n ~ a & n ~ . & x = m T h n ]
 
 z ist also rekursiv. Das erlaubt z. B. zu sehliegen, daf auch
 mit Hilfe des Auswahlaxioms (für alle Typen) oder der verall
