@@ -2341,7 +2341,7 @@ so daß (3) und (4) (vgl. Satz V) gilt.
 Insbesondere ist also nach Satz V 
 jede rekursive Relation entscheidungsdefinit.
 
-我們將稱一個自然數之關係(類別) R(x1...xn) 可有限決定，
+我們將稱一個自然數之關係(類別) R(x1...xn) 可有限決定{1}，
 若存在一個 n-元類別符號 r 使得 (3) 及 (4) (參閱命題 V) 成立。
 因此，特別是依據命題 V，每個遞迴關係都是可有限決定。
 
@@ -2374,3 +2374,57 @@ daß χ in dem durch χ erweiterten System entscheidungsdefinit ist).
 其中 r 是一個可有限決定之類別符號
 (因此它確實滿足 χ 在經由 χ 所擴展的系統下是可有限決定的)。
 
+Setzt man von χ statt ω-Widerspruchsfreiheit, 
+bloß Widerspruchsfreiheit voraus, 
+so folgt zwar nicht die Existenz eines unentscheidbaren Satzes, 
+wohl aber die Existenz einer Eigenschaft (r),
+für die weder ein Gegenbeispiel angebbar, 
+noch beweisbar ist, 
+daß sie allen Zahlen zukommt. 
+
+Denn zum Beweise, daß 17 Gen r nicht χ-beweisbar ist,
+wurde nur die Widerspruchsfreiheit von χ verwendet (vgl. S. 189) und 
+    ____
+aus Bewχ(17 Gen r) folgt nach (15),
+                      |   17 |
+daß für jede Zahl x Sb|r Z(x)|, 
+                              |   17 |
+folglich für keine Zahl Neg Sb|r Z(x)| χ-beweisbar ist.
+
+Adjungiert man Neg(17 Gen r) zu χ, 
+so erhält man eine widerspruehsfreie aber nicht 
+ω-widerspruchsfreie Formelklasse χ'. 
+χ' ist widerspruchsfri, denn sonst wäre 17 Gen r χ-beweisbar, 
+χ' ist aber nicht ω-widerspruchsfrei,
+           ____
+denn wegen Bewχ(17 Gen r) und (15) gilt: 
+          |   17 |
+(x)Bewχ Sb|r Z(x)|, umsomehr also: 
+           |   17 |
+(x)Bewχ' Sb|r Z(x)| und anderseits gilt natürlich: 
+Bewχ' [Neg (17 Gen r)]) 46).
+
+Ein Spezialfall von Satz VI ist der, 
+daß die Klasse χ aus endlich vielen Formeln 
+(und ev. den daraus durch Typenerhöhung entstehenden) besteht. 
+
+Jede endliche Klasse α ist natürlich rekursiv. 
+Sei a die größte in α enthaltene Zahl. Dann gilt in diesem Fall für χ:
+
+x~c~z (Era, n) [ m ~ x & n ~ a & n ~ . & x = m T h n ]
+
+z ist also rekursiv. Das erlaubt z. B. zu sehliegen, daf auch
+mit Hilfe des Auswahlaxioms (für alle Typen) oder der verall
+gemeinerten Kontinuumhypothese nieht alle Si~tze entscheidbar sind,
+vorausgesetzt, da$ diese Hypothesen ~o-widerspruchsfrei sind.
+Beim Beweise von Satz VI wurden keine anderen Eigenschaften
+des Systems P verwendet als die folgenden:
+1. Die K!asse der Axiome und die Schlugregeln (d. h. die Rela
+tion ,,unmittelbare Folge~) sind rekursiv definierbar (sobald man die
+Grundzeiehen in irgend einer Weise dureh natiirliche Zahlen ersetzt).
+2. Jede rekursive Relation ist innerhalb des Systems P deft
+nierbar (ira Sinn von Satz V).
+Daher gibt es in jedem formalen System~ das den Voraus
+setzungen l, 2 gentigt und r ist, unentscheidbare
+S~itze der Form (x)F(x), wo F eine rekursiv definierte Eigensehaft
+nattirlieher Zahlen ist, und ebenso in jeder Erweiterung eines solehen
