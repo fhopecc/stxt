@@ -47,6 +47,7 @@ x~ y        x Aeq y
 
             n Gl x      數列 x 的第 n 個元素
             Ax(x)       x 是一個公設
+            x B y       x 是 y 的證明，B 源自 Beweis
             Bew(x)      x 是一可證式
             Q(x,y)      x 不是 y 的證明
             17 Gen r    x 不是「x不是y的證明」的證明  
@@ -252,11 +253,15 @@ natürliche Zahlen 7) als solche zu verwenden.
 
 Dementsprechend ist 
 dann eine Formel eine endliche Folge natürlicher Zahlen 8) und 
-eine Beweisfigur eine endliche Folge von 
+eine Beweisfigur# eine endliche Folge von 
 endlichen Folgen natürlicher Zahlen. 
 
 據此公式為自然數的有限序列 8) 
-而證明框架是自然數之有限數列組成之有限序列。
+而證明表示是自然數之有限數列組成之有限序列。
+
+譯註：Beweisfigur 源自 Beweis(證明) 及 Figur(資訊表示) 
+      之複合名詞，Figur 是一種承載某向資訊之描繪或表示，
+      在此為用來描繪一個證明的表示，所以譯為證明表示。
 
 8) D.h. eine Belegung eines Abschnittes der Zahlenreihe 
    mit natürlichen Zahlen. 
@@ -309,7 +314,7 @@ mit einer freien Variablen v (vom Typus einer Zahlenfolge) angeben 10),
 so daß F(v) inhaltlich interpretiert besagt: 
 v ist eine beweisbare Formel. 
 
-特別是可指出項目「式」、「證明」、「可證式」可以 PM 系統來定義，
+特別是可指出項目「式」、「證明表示」、「可證式」可以 PM 系統來定義，
 即可建置一個自由變數 v (其類別為數列) PM 系統之式 F(v) 10)， 
 其意義為：v 是一個可證式。
 
@@ -2382,15 +2387,14 @@ für die weder ein Gegenbeispiel angebbar,
 noch beweisbar ist, 
 daß sie allen Zahlen zukommt. 
 
-預設衍生自 χ 之式，除了 ω-一致外，僅有一致，
+假設衍生自 χ 之式，除了 ω-一致外，僅有一致，
 則可推得實際上除了不可決定命題之存在性，
 更可推得 (r) 性質之存在性，
 其不存在被指定之反例，
-也給定所有整數也不可被證明。
-
+也對所有整數不可被證明。
 
 Denn zum Beweise, daß 17 Gen r nicht χ-beweisbar ist,
-wurde nur die Widerspruchsfreiheit von χ verwendet (vgl. S. 189) und 
+wurde nur die Widerspruchsfreiheit von χ verwendet (vgl.S.189) und 
     ____
 aus Bewχ(17 Gen r) folgt nach (15),
                       |   17 |
@@ -2398,11 +2402,28 @@ daß für jede Zahl x Sb|r Z(x)|,
                               |   17 |
 folglich für keine Zahl Neg Sb|r Z(x)| χ-beweisbar ist.
 
+因為對 17 Gen r 不是 χ-可證之證明僅應用了 χ 之一致性(見 189 頁)
+           ____
+且依據(15) Bewχ(17 Gen r) 可推論出，
+                      |   17 |
+對每個整數 x 都使得 Sb|r Z(x)| 是 χ-可證，
+                       |   17 |
+以及沒有整數使得 Neg Sb|r Z(x)| 是 χ-可證。
+
 Adjungiert man Neg(17 Gen r) zu χ, 
-so erhält man eine widerspruehsfreie aber nicht 
-ω-widerspruchsfreie Formelklasse χ'. 
-χ' ist widerspruchsfri, denn sonst wäre 17 Gen r χ-beweisbar, 
+so erhält man eine widerspruchsfreie 
+aber nicht ω-widerspruchsfreie Formelklasse χ'. 
+
+將 Neg(17 Gen r) 加給 χ，
+可得一個一致但非 ω-一致之公式類別 χ'。
+
+χ' ist widerspruchsfrei, 
+denn sonst wäre 17 Gen r χ-beweisbar, 
 χ' ist aber nicht ω-widerspruchsfrei,
+
+χ' 是一致的，除非 17 Gen r 是 χ-可證，
+然而 χ' 並非 ω-一致。
+
            ____
 denn wegen Bewχ(17 Gen r) und (15) gilt: 
           |   17 |
