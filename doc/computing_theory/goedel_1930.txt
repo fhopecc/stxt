@@ -2484,14 +2484,35 @@ anderen Eigenschaften des Systems P verwendet als die folgenden:
 
 在命題 VI 的證明中僅應用 P 系統如下的性質：
 
-1. Die Klasse der Axiome und die Schlußregeln 
-(d.h. die Relation "unmittelbare Folge") 
-sind rekursiv definierbar 
-(sobald man die Grundzeichen in irgend einer Weise durch natürliche Zahlen ersetzt).
+1.Die Klasse der Axiome und die Schlußregeln 
+  (d.h. die Relation "unmittelbare Folge") 
+  sind rekursiv definierbar 
+  (sobald man die Grundzeichen in irgend einer Weise 
+   durch natürliche Zahlen ersetzt).
 
-2. Jede rekursive Relation ist innerhalb des Systems P deft
-nierbar (ira Sinn von Satz V).
-Daher gibt es in jedem formalen System~ das den Voraus
-setzungen l, 2 gentigt und r ist, unentscheidbare
-S~itze der Form (x)F(x), wo F eine rekursiv definierte Eigensehaft
-nattirlieher Zahlen ist, und ebenso in jeder Erweiterung eines solehen
+1.公設之類別及推論規則(即「直接推論」關係)
+  是遞迴可定義(只要基礎符號以前面方法配置給自然數)。
+
+2.Jede rekursive Relation ist innerhalb des Systems P definierbar 
+  (im Sinn von Satz V).
+
+2.每個遞迴關係可由系統 P 定義(依命題 V 之意義)。
+
+Daher gibt es in jedem formalen System, 
+das den Voraussetzungen l, 2 genügt und ω-widerspruchsfrei ist, 
+unentscheidbare Sätze der Form (x)F(x), 
+wo F eine rekursiv definierte Eigensehaft natürlieher Zahlen ist, 
+und ebenso in jeder Erweiterung eines solehen Systems 
+durch eine rekursiv definierbare ω-widerspruehsfreie Klasse von Axiomen. 
+Zu den Systeman, welche die Voraussetzungen 1, 2 erfüllen,
+gehöran, wie man leicht bastätigen kann, 
+das Zermelo-Fraenkalsehe und 
+das v.Neumannsehe Axiomensystem der Mengenlehre 47), 
+ferner das Axiomensystem der Zahlenthaorie, 
+welches aus den Peanosehen Axiomen, 
+der reknrsiven Definition [nach Schema (2)] 
+und den logisehen Regeln besteht 48). 
+Die Voraassetzung 1. erfüllt überhaupt jedes System;
+dessen Schlußregeln die gewöhnliehen sind und dessen Axiome 
+(analog wie in P) dureh Einsetzung 
+aus endlich vielen Schemata entstehen 48a).
