@@ -1116,14 +1116,14 @@ folgendes gilt:
 25) 即其定義域為非負整數(或 n 元之非負整數)
     且其值為非負整數。
 
-26) Kleine lateinische Buchstaben (ev. mit Indizes) sind 
+26) Kleine lateinische Buchstaben (ev.# mit Indizes) sind 
     im folgenden immer Variable für nicht negative ganze Zahlen 
     (falls nicht ausdrücklich das Gegenteil bemerkt ist).
 
 26) 小寫斜體字(可能帶有索引)於後文總是為非負整數變數
     (除非例外情形已被明確說明)
 
-譯註：ev. 為 eventuell 之縮寫
+譯註：ev. 為 eventuell 之縮寫，即可能地。
 
 遞迴函數
 ++++++++
@@ -1803,7 +1803,7 @@ x 是質數。
    (falls x und n Th x Formeln sind).
 
    n Th x 是 x 的第 n 型提升
-  「若 x 及 n Th 是公式」。
+  「若 x 及 n Th x 是公式」。
 
    Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
    die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
@@ -2431,25 +2431,64 @@ denn wegen Bewχ(17 Gen r) und (15) gilt:
            |   17 |
 (x)Bewχ' Sb|r Z(x)| und anderseits gilt natürlich: 
 Bewχ' [Neg (17 Gen r)]) 46).
+         ____
+因為依據 Bewχ(17 Gen r) 及 (15) 使得： 
+
+          |   17 |
+(x)Bewχ Sb|r Z(x)|，更可得： 
+           |   17 |
+(x)Bewχ' Sb|r Z(x)| 且另一方面自然可得：
+
+Bewχ'[Neg (17 Gen r)]) 46)。
+
+
+46) Die Existenz widerspruchsfreier und nicht ω-widerspruchsfreier 
+    χ ist damit natürlich nur unter der Voraussetzung bewiesen, 
+    daß es überhaupt widerspruchsfreie χ gibt (d.h. daß P widerspruchsfrei ist).
+
+46) 一致但非 ω-一致 χ 之存在性可僅基於以下假定自然被證明：
+    大致上存在一致的 χ(即 P 是一致地)。
 
 Ein Spezialfall von Satz VI ist der, 
 daß die Klasse χ aus endlich vielen Formeln 
 (und ev. den daraus durch Typenerhöhung entstehenden) besteht. 
-
 Jede endliche Klasse α ist natürlich rekursiv. 
-Sei a die größte in α enthaltene Zahl. Dann gilt in diesem Fall für χ:
 
-xc~z (Era, n) [ m ~ x & n ~ a & n ~ . & x = m T h n ]
+命題 VI 之特例存在有限公式之類別 χ
+(且可能經由型別提升產生)。 
+每個有限類別 α 自然是遞迴地。
 
-z ist also rekursiv. Das erlaubt z. B. zu sehliegen, daf auch
-mit Hilfe des Auswahlaxioms (für alle Typen) oder der verall
-gemeinerten Kontinuumhypothese nieht alle Si~tze entscheidbar sind,
-vorausgesetzt, da$ diese Hypothesen ~o-widerspruchsfrei sind.
-Beim Beweise von Satz VI wurden keine anderen Eigenschaften
-des Systems P verwendet als die folgenden:
-1. Die K!asse der Axiome und die Schlugregeln (d. h. die Rela
-tion ,,unmittelbare Folge~) sind rekursiv definierbar (sobald man die
-Grundzeiehen in irgend einer Weise dureh natiirliche Zahlen ersetzt).
+Sei a die größte in α enthaltene Zahl. 
+Dann gilt in diesem Fall für χ:
+
+令 a 是 α 中最大的整數。
+則對 χ 而言下式成立：
+
+x ε χ (E m,n) [m≦ x & n≦ a & nεα & x = m Th n ]
+
+χ ist also rekursiv. 
+Das erlaubt z. B. zu schließen, 
+daß auch mit Hilfe des Auswahlaxioms (für alle Typen) oder 
+der verallgemeinerten Kontinuumhypothese 
+nicht alle Sätze entscheidbar sind,
+vorausgesetzt, daß diese Hypothesen ω-widerspruchsfrei sind.
+
+χ 也是遞迴地。
+例如這允許推論如下：
+即使經由選擇公理(對所有型別)或一般化連續統假設之幫助下，
+不是所有命題都可被決定，
+這些假設都預設為 ω-一致。
+
+Beim Beweise von Satz VI wurden keine 
+anderen Eigenschaften des Systems P verwendet als die folgenden:
+
+在命題 VI 的證明中僅應用 P 系統如下的性質：
+
+1. Die Klasse der Axiome und die Schlußregeln 
+(d.h. die Relation "unmittelbare Folge") 
+sind rekursiv definierbar 
+(sobald man die Grundzeichen in irgend einer Weise durch natürliche Zahlen ersetzt).
+
 2. Jede rekursive Relation ist innerhalb des Systems P deft
 nierbar (ira Sinn von Satz V).
 Daher gibt es in jedem formalen System~ das den Voraus
