@@ -2115,7 +2115,7 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse χ von Formeln
 Beweis: Sei χ eine beliebige rekursive ω-widerspruchsfreien Klasse
         von Formeln. Wir definieren:
 
-證明：  設 χ 為任意一個 ω-一致遞迴之公式類別。我們定義： 
+證明：  χ 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
 Bwχ(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) 
                       V (n Gl x)εχ 
@@ -2307,7 +2307,7 @@ Daraus ergibt sich:
 Man kann sich leicht überzeugen, 
 daß der eben geführte Beweis konstruktiv ist 45a), 
 d.h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
-Sei eine beliebige rekursiv definierte Klasse χ von Formeln vorgelegt. 
+Sei eine beliebige rekursiv definierte Klasse χ von Formeln vorgelegt*. 
 Wenn dann eine formale Entscheidung (aus χ)
 für die (effektiv aufweisbare) SatzFormel 17 Gen r vorgelegt ist, 
 so kann man effektiv angeben:
@@ -2410,13 +2410,16 @@ folglich für keine Zahl Neg Sb|r Z(x)| χ-beweisbar ist.
                        |   17 |
 以及沒有整數使得 Neg Sb|r Z(x)| 是 χ-可證。
 
-Adjungiert man Neg(17 Gen r) zu χ, 
+Adjungiert* man Neg(17 Gen r) zu χ, 
 so erhält man eine widerspruchsfreie 
 aber nicht ω-widerspruchsfreie Formelklasse χ'. 
 
 將 Neg(17 Gen r) 加給 χ，
 可得一個一致但非 ω-一致之公式類別 χ'。
 
+譯註：Adjungiert 指代數物件之擴充，
+      指得是代數物件擴充原本不屬於其之元素。
+      
 χ' ist widerspruchsfrei, 
 denn sonst wäre 17 Gen r χ-beweisbar, 
 χ' ist aber nicht ω-widerspruchsfrei,
