@@ -2507,6 +2507,9 @@ unentscheidbare Sätze der Form (x)F(x),
 wo F eine rekursiv definierte Eigensehaft natürlieher Zahlen ist, 
 und ebenso in jeder Erweiterung eines solehen Systems 
 durch eine rekursiv definierbare ω-widerspruehsfreie Klasse von Axiomen. 
+
+由於這存在每個形式系統中，
+
 Zu den Systeman, welche die Voraussetzungen 1, 2 erfüllen,
 gehöran, wie man leicht bastätigen kann, 
 das Zermelo-Fraenkalsehe und 
