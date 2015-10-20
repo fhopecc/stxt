@@ -1581,6 +1581,7 @@ x 是質數。
    (vorausgesetzt, da x eine Variable ist).
     
    x Gen y 是藉由變數 x 之 y 的一般化。
+   (x 預設為一個變數)
 
 公式操作
 ........
@@ -2504,21 +2505,35 @@ anderen Eigenschaften des Systems P verwendet als die folgenden:
 Daher gibt es in jedem formalen System, 
 das den Voraussetzungen l, 2 genügt und ω-widerspruchsfrei ist, 
 unentscheidbare Sätze der Form (x)F(x), 
-wo F eine rekursiv definierte Eigensehaft natürlieher Zahlen ist, 
-und ebenso in jeder Erweiterung eines solehen Systems 
-durch eine rekursiv definierbare ω-widerspruehsfreie Klasse von Axiomen. 
+wo F eine rekursiv definierte Eigenschaft natürlieher Zahlen ist, 
+und ebenso in jeder Erweiterung eines solchen Systems 
+durch eine rekursiv definierbare ω-widerspruchsfreie Klasse von Axiomen. 
 
-由於這存在每個形式系統中，
+由於滿足預設 1, 2 及 ω-一致性之每個形式系統中存在
+型式為 (x)F(x) 之不可決定命題，
+其中 F 是一個自然數的遞迴定義屬性，
+且對每個經由增加一個由公設遞迴定義
+且 ω-一致性之類別對前述系統之擴展也是如此。
 
 Zu den Systeman, welche die Voraussetzungen 1, 2 erfüllen,
-gehöran, wie man leicht bastätigen kann, 
-das Zermelo-Fraenkalsehe und 
-das v.Neumannsehe Axiomensystem der Mengenlehre 47), 
+gehöran, wie man leicht bestätigen kann, 
+das Zermelo-Fraenkalsche und 
+das v.Neumannsche Axiomensystem der Mengenlehre 47), 
 ferner das Axiomensystem der Zahlenthaorie, 
 welches aus den Peanosehen Axiomen, 
-der reknrsiven Definition [nach Schema (2)] 
-und den logisehen Regeln besteht 48). 
-Die Voraassetzung 1. erfüllt überhaupt jedes System;
-dessen Schlußregeln die gewöhnliehen sind und dessen Axiome 
-(analog wie in P) dureh Einsetzung 
+der rekursiven Definition [nach Schema (2)] 
+und den logischen Regeln besteht 48). 
+
+對滿足預設 1, 2之系統，
+可輕易推論出其包含策梅諾-法蘭科西及馮紐曼之集合公設系統 47)，
+由皮亞諾公設之數論公理系統也是如此，
+遞迴定義[依據框架 (2)]及邏輯規則也成立。
+
+Die Voraassetzung 1. erfüllt überhaupt jedes System,
+dessen Schlußregeln die gewöhnlichen sind und 
+dessen Axiome (analog wie in P) durch Einsetzung 
 aus endlich vielen Schemata entstehen 48a).
+
+預設 1 一般滿足每個系統，
+其具有普遍之書寫規則
+且其公設(如 P 中之公設)由有限的框架之取代所產出 48a)。 
