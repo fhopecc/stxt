@@ -2527,13 +2527,41 @@ und den logischen Regeln besteht 48).
 對滿足預設 1, 2之系統，
 可輕易推論出其包含策梅諾-法蘭科西及馮紐曼之集合公設系統 47)，
 由皮亞諾公設之數論公理系統也是如此，
-遞迴定義[依據框架 (2)]及邏輯規則也成立。
+遞迴定義[依據框架 (2)]及邏輯規則也成立 48)。
+
+47) Der Beweis von Voraussetzung 1. gestaltet sich hier 
+    sogar einfacher als im Falle des Systems P, 
+    da es our eine Art von Grundvariablen gibt 
+    (bzw.zwei bei J. v. Neumann).
+
+48) Vgl. Problem III in D. Hilberts Vortrag: Probleme der Grundlegung
+    der Mathematik. Math. Ann. 102.
 
 Die Voraassetzung 1. erfüllt überhaupt jedes System,
 dessen Schlußregeln die gewöhnlichen sind und 
 dessen Axiome (analog wie in P) durch Einsetzung 
 aus endlich vielen Schemata entstehen 48a).
 
+48a) Der wahre Grund für die Unvollständigkeit, welche allen formalen
+     Systemen der Mathematik anhaftet, liegt, wie im II. Teil 
+     dieser Abhandlung gezeigt werden wird, darin, daß die Bildung immer höherer 
+     Typen sich ins Transfinite fortsetzen läßt. 
+     (Vgl. D. Hilbert, Über das Unendliche, Math. Ann. 95, S. 184), 
+     während in jedem formalen System höchstens abzählbar viele vorhanden sind. 
+     Man kann nämlich zeigen, daß die hier aufgestellten unentscheidbaren Sätze 
+     durch Adjunktion passender höherer Typen (z. B. des Typus ω zum System P) 
+     immer entseheidbar werden. 
+     Analoges gilt auch für das Axiomensystem der Mengenlehre.
+
+
 預設 1 一般滿足每個系統，
 其具有普遍之書寫規則
 且其公設(如 P 中之公設)由有限的框架之取代所產出 48a)。 
+
+49) Die Null wird hier und im folgenden immer 
+    mit zu den natürlichen Zahlen gerechnet.
+50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
+    der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
+    und den Zeiehen 0, 1 aufbauen 
+    (Funktions und Mengenvariable dürfen nicht vorkommen). 
+    (In den Präfixen daft statt x natürlich auch jede andere Zahlvariable stehen.)
