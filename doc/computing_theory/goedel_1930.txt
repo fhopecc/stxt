@@ -2531,35 +2531,50 @@ und den logischen Regeln besteht 48).
 
 47) Der Beweis von Voraussetzung 1. gestaltet sich hier 
     sogar einfacher als im Falle des Systems P, 
-    da es our eine Art von Grundvariablen gibt 
+    da es nur eine Art von Grundvariablen gibt 
     (bzw.zwei bei J. v. Neumann).
 
-48) Vgl. Problem III in D. Hilberts Vortrag: Probleme der Grundlegung
-    der Mathematik. Math. Ann. 102.
+47) 預設 1 之證明在此甚至比系統 P 更簡單，
+    因為只存在一種基礎變數(或 2 種，根據馮紐曼)。
 
-Die Voraassetzung 1. erfüllt überhaupt jedes System,
+48) Vgl. Problem III in D. Hilberts Vortrag: 
+    Probleme der Grundlegung der Mathematik. Math. Ann. 102.
+
+48) 參閱希爾伯特演講之問題 III：數學基礎之問題，數學年報，102。
+
+Die Vorassetzung 1. erfüllt überhaupt jedes System,
 dessen Schlußregeln die gewöhnlichen sind und 
 dessen Axiome (analog wie in P) durch Einsetzung 
 aus endlich vielen Schemata entstehen 48a).
 
-48a) Der wahre Grund für die Unvollständigkeit, welche allen formalen
-     Systemen der Mathematik anhaftet, liegt, wie im II. Teil 
-     dieser Abhandlung gezeigt werden wird, darin, daß die Bildung immer höherer 
-     Typen sich ins Transfinite fortsetzen läßt. 
+預設 1 一般滿足每個系統如下，
+其具有普遍之書寫規則
+且其公設(如 P 中之公設)由有限的框架之取代所產出 48a)。 
+
+48a) Der wahre Grund für die Unvollständigkeit, 
+     welche allen formalen Systemen der Mathematik anhaftet, 
+     liegt, wie im II. Teil dieser Abhandlung gezeigt werden wird, 
+     darin, daß die Bildung immer höherer Typen sich ins Transfinite fortsetzen läßt. 
      (Vgl. D. Hilbert, Über das Unendliche, Math. Ann. 95, S. 184), 
      während in jedem formalen System höchstens abzählbar viele vorhanden sind. 
      Man kann nämlich zeigen, daß die hier aufgestellten unentscheidbaren Sätze 
      durch Adjunktion passender höherer Typen (z. B. des Typus ω zum System P) 
-     immer entseheidbar werden. 
+     immer entscheidbar werden. 
      Analoges gilt auch für das Axiomensystem der Mengenlehre.
 
-
-預設 1 一般滿足每個系統，
-其具有普遍之書寫規則
-且其公設(如 P 中之公設)由有限的框架之取代所產出 48a)。 
+48a) 連接在所有數學形式系統之不完備性的真正基礎在於，
+     如同此論文第 II. 部分所展示，
+     其甚至可提升型別到超限。
+     (參閱希爾伯特，超越無限，數學年報 95，184 頁)，
+     而每個形式系統中至多出現有限多個型別。
+     同樣可以展示，
+     不可決定命題總是可透過擴展適合之更高型別(例如系統 P 的 ω 型別)而可被決定。
+     同樣地於集合公理系統也是成立。
 
 49) Die Null wird hier und im folgenden immer 
     mit zu den natürlichen Zahlen gerechnet.
+
+
 50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
     der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
     und den Zeiehen 0, 1 aufbauen 

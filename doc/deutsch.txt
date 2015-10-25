@@ -883,9 +883,9 @@ beide
 屬格    alles   aller   alles   aller
         allen           allen
 
-賓格    allem   aller   allem   allen 
+與格    allem   aller   allem   allen 
 
-與格    allen   alle    alles   alle 
+賓格    allen   alle    alles   alle 
 
 
 1.單數中性alles後未接名詞時為不定代詞意表示每件事。
