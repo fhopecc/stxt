@@ -2571,6 +2571,52 @@ aus endlich vielen Schemata entstehen 48a).
      不可決定命題總是可透過擴展適合之更高型別(例如系統 P 的 ω 型別)而可被決定。
      同樣地於集合公理系統也是成立。
 
+3.
+
+Wir ziehen nun aus Satz VI weitere Folgerungen und 
+geben zu diesem Zweck folgende Definition:
+
+現從命題 VI 導出更進一步的結論，為此給定以下定義：
+
+Eine Relation (Klasse) heißt arithmetisch, 
+wenn sie sich allein mittels der Begriffe +, . 
+[Addition und Multiplikation, bezogan auf natürliche Zahlen 49)] und 
+den logischen Konstanten V, - , (x), = definieren läßt, 
+wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 5O). 
+Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
+Insbesondere sind z.B. die Relationen "größer" und
+"kongruent" nach einem Modul" arithmetisch, denn es gilt:
+
+一個關係(類別)稱為算術，
+在於其本身僅由 +, .「加法和乘法，其作用在自然數 49)」和
+邏輯常數 V, -, (x), = 等概念定義，
+其中 (x) 和 = 僅可應用在自然數 50)。
+「算術命題」概念可對應地定義出來。
+特別是如關係「較大」和「同餘」都是算術，因為：
+        ____
+x > y ~ (Ez) [y = x + z]
+
+x ≡ y (mod n) ~ (Ez)[x=y+z.nVy=x+z.n]
+
+Es gilt der
+
+Satz VII: Jede rekursive Relation ist arithmetisch.
+
+這可得
+
+命題 VII：每個遞迴關係是算術的。
+
+Wir beweisen den Satz in der Gestalt: 
+Jede Relation der Form X0 = φ(x1...xn), wo φ rekursiv ist, ist arithmetisch, 
+und wenden vollständige Induktion nach der Stufe von φ an. 
+φ habe die s-te Stufe (s > 1). Dann gilt entweder:
+
+我們以下述建構證明此命題：
+
+每個形式 X0=φ(x1...xn) 之關係，其中 φ 是遞迴的，是算術的，
+且可應用完整歸納至 φ 的階級。
+
+
 49) Die Null wird hier und im folgenden immer 
     mit zu den natürlichen Zahlen gerechnet.
 
