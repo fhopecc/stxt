@@ -2598,6 +2598,22 @@ x > y ~ (Ez) [y = x + z]
 
 x ≡ y (mod n) ~ (Ez)[x=y+z.nVy=x+z.n]
 
+49) Die Null wird hier und im folgenden immer 
+    mit zu den natürlichen Zahlen gerechnet.
+
+49) 零於此後都算進自然數。 
+
+50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
+    der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
+    und den Zeichen 0, 1 aufbauen 
+    (Funktions und Mengenvariable dürfen nicht vorkommen). 
+    (In den Präfixen daft statt x natürlich auch jede andere Zahlvariable stehen.)
+
+50) 這些概念之定義僅由已提過之符號、自然數變數 x, y,...及
+    符號 0, 1 建構。
+    (函數與集合變數不能出現)。
+    (其它的數目變數可能自然地出現在前置以取代 x.)。
+
 Es gilt der
 
 Satz VII: Jede rekursive Relation ist arithmetisch.
@@ -2613,16 +2629,98 @@ und wenden vollständige Induktion nach der Stufe von φ an.
 
 我們以下述建構證明此命題：
 
-每個形式 X0=φ(x1...xn) 之關係，其中 φ 是遞迴的，是算術的，
-且可應用完整歸納至 φ 的階級。
+每個形式 x0=φ(x1...xn) 之關係是算術的，其中 φ 是遞迴的
+且可應用完整歸納至 φ 的階級。 
+φ 具有 s-級(s > 1)。後除了可推得：
+
+1.φ(x1...xn)=ρ[χ1(x1...xn),χ2(x1...xn)...χm(x1...xn)]51)
+
+(wo ρ und sämtliche χi kleinere Stufe haben als s) oder:
+
+(其中 ρ 和所有的 χi 其級數小於 s) 且可推得：
+
+51) Es brauchen natürlich nicht alle x1...xn in den χi tatsächlich vorzukommen 
+    [vgl. das Beispiel in Fußnote 27)].
+
+51) 不是所有於 χi 中的 x1...xn 都需要實際出現。
+    「參閱腳註 27) 之例子」。
+
+2.φ(0  ,x2...xn)=ψ(               x2...xn)
+  φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
+
+(wo ψ,μ niedrigere Stufe als s haben).
+
+(其中 ψ,μ 其級數小於 s)。
+
+Im ersten Falle gilt:
+
+第一種情形可得： 
+
+x0=φ(x1...xn)~(Ey1...ym)[R(x0y1...ym)&
+                         S1(y1,x1...xn)&...&Sm(y1,x1...xn)],
+
+wo R bzw. Si die nach induktiver Annahme existierenden mit
+x0=ρ(y1...ym) bzw. y=χ1(x1...xn) äquivalenten arithmetischen Relationen sind,
+Daher ist x0=φ(x1,x2...xn) in diesem Fall arithmetisch.
+
+其中 R 和 Si 依據歸納假設之存在為分別等值於 
+x0=ρ(y1...ym) 及 y=χ1(x1...xn) 之算術關係，
+因此在此情形下 x0=φ(x1,x2...xn) 為算術地。
+
+Im zweiten Fall wenden wir folgendes Verfahren an: 
+Man kann die Relation x0=φ(x1,x2...xn) mit Hilfe des Begriffes "Folge von Zahlen"
+(f) 52) folgendermaßen ausdrüeken:
+
+第二種情形下我們應用以下程序：
+我們可藉由「整數序列」(f) 52) 觀念之幫助來表達 x0=φ(x1,x2...xn) 關係如下：
+
+x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) &
+         (k)[k<x1->fk+1=μ(k,fk,x2...xn)] & x0=fx1}
+
+52) f bedeutet hier eine Variable, deren Wertbereich die Folgen natürl. Zahlen sind. 
+    Mit fk wird das k+1-te Glied einer Folge f bezeichnet (mit f0 das erste).
+
+52) f 於此意指一個變數，其值域是自然數序列。
+    fk 用來表示 f 序列之第 k+1-個元素（f0 表示第一個）。
+
+Wenn S(y,x2...xn) bzw. T(z,x,...xn+l) die nach induktiver Annahme existierenden 
+mit y=ψ(x2...xn) bzw. z=μ(x1...xn+1) äquivalenten arithmetische Relationen sind, 
+gilt daher:
+
+其中 S(y,x2...xn) 和 T(z,x,...xn+l) 依據歸納假設之存在為分別等值於 
+y=ψ(x2...xn)及z=μ(x1...xn+1)之算術關係，
+由此下述成立：
+
+x0=φ(x1...xn)~(Ef){S(       f0,x2...xn) &
+         (k)[k<x1->T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
+
+Nun ersetzen wir den Begriff "Folge von Zahlen" durch "Paar von Zahlen", 
+indem wir dam Zahlenpaar n, d die Zahlenfolge
+f^(n, d)(fk^(n,d)=[n]1+(k+1)d) zuordnen,
+wobei [n] den kleinsten nicht negativen Rest von n modulo p bedeutet.
+
+現在我們可用「整數對」替代「整數序列」之觀念，
+如我們將整數對 n, d 對映到 f^(n, d)(fk^(n,d)=[n]1+(k+1)d)，
+其中 [n]p 意指最小 n 除 p 之非負數餘數。 
+
+Es gilt dann der Hilfssatz 1: 
+Ist f eine beliebige Folge natürlicher Zahlen und
+k eine beliebige natürliche Zahl, so gibt es ein Paar von natürlichen
+Zahlen n, d, so daß f^(n,d) und f in den ersten k Gliedern übereinstimmen.
+
+後可得輔助命題 1：
+f 是一個任意的自然數序列且
+k 是一個任意自然數，故存在一個自然數 n, d 之數對，
+使得 f^(n,d) 和 f 與第一個 k 項目一致。
+
+Beweis: 
+Sei l die größte der Zahlen k,f0,f1...fk-1. 
+Man bestimme n so, daß:
+
+證明：
+令 l 為 k,f0,f1...fk-1 中最大的整數，
+我們限定 n 為：
+
+n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
 
 
-49) Die Null wird hier und im folgenden immer 
-    mit zu den natürlichen Zahlen gerechnet.
-
-
-50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
-    der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
-    und den Zeiehen 0, 1 aufbauen 
-    (Funktions und Mengenvariable dürfen nicht vorkommen). 
-    (In den Präfixen daft statt x natürlich auch jede andere Zahlvariable stehen.)
