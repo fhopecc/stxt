@@ -2723,4 +2723,51 @@ Man bestimme n so, daß:
 
 n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
 
+was möglich ist, 
+da je zwei der Zahlen 1+(i+1)l!(i=0,1...k-1) relativ prim sind. 
+Denn eine in zwei von diesen Zahlen enthaltene Primzahl müßte auch 
+in der Differenz (i1-i2)l! und 
+daher wegen |i1-i2|<l in l! enthalten sein, was unmöglich ist. 
+Das Zahlenpaar n,l! leistet dann das Verlangte.
 
+是可能的，
+因為於 1+(i+1)l!(i=0,1...k-1) 中每 2 個數是互質的。
+上述數字中任 2 個數所包含的質數也包含在 (i1-i2)l! 數段中且
+由於在 l! 中，|i1-i2|<1 是不可能的。
+數對 n,l! 可滿足此需求。
+
+Da die Relation x=[n]p durch:
+
+x≡n(mod p)&x<p
+
+definiert und daher arithmetisch ist, 
+so ist auch die folgendermaßen
+definierte Relation P(x0,xl...xn):
+
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&(k)[k<x1->
+T([n]1+d(k+2),k,[n]1+d(k+1),x2...xn] & x0=[n]1+d(x1+1)}
+
+arithmetisch, welche nach (17) and Hilfssatz I mit: 
+x0=Φ(x1...xn) äiquivalent ist 
+(es kommt bei der Folge f in (17) nur auf ihren Verlauf bis 
+zum x1+1-ten Glied an). Damit ist Satz VII bewiesen.
+
+Gemäß Satz VII gibt es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes arithmetisches Problem und 
+da der ganze Beweis von Satz VII sich (für jedes spezielle F) 
+innerhalb des Systems P formalisieren läßt, 
+ist diese Äquivalenz in P beweisbar. Daher gilt:
+
+Satz VIII: In jedem der in Satz VI genannten formalen Systeme 53) gibt es 
+unentscheidbare arithmetische Sätze.
+
+Dasselbe gilt (nach der Bemerkung auf Seite 190) für das
+Axiomensystem der Mengenlehre nnd dessen Erweiterungen durch
+(ω-widerspruchsfreie rekursive Klassen von Axiomen.
+
+Wir leiten schließlich noch folgendes Resultat her:
+Satz XI: In allen in Satz VI genannten formalen Systemen 53) gibt es 
+unentscheidbare Problem des engeren Funktionenkalküls 54)
+(d.h. Formeln des engeren Funktionenkalküls,
+für die weder Allgemeingültigkeit noch Existenz eines )
+Gegenbeispiels beweisbar ist) 55).
