@@ -2582,7 +2582,7 @@ aus endlich vielen Schemata entstehen 48a).
 Wir ziehen nun aus Satz VI weitere Folgerungen und 
 geben zu diesem Zweck folgende Definition:
 
-現從命題 VI 導出更進一步的結論，為此給定以下定義：
+現在要從命題 VI 導出更廣泛的結論且因此給定以下定義：
 
 Eine Relation (Klasse) heißt arithmetisch, 
 wenn sie sich allein mittels der Begriffe +, . 
@@ -2594,9 +2594,9 @@ Insbesondere sind z.B. die Relationen "größer" und
 "kongruent" nach einem Modul" arithmetisch, denn es gilt:
 
 一個關係(類別)稱為算術，
-在於其本身僅由 +, .「加法和乘法，其作用在自然數 49)」和
-邏輯常數 V, -, (x), = 等概念定義，
-其中 (x) 和 = 僅可應用在自然數 50)。
+在於其本身僅由 +, .「自然數之加法和乘法 49)」之觀念和
+邏輯常數 V, -, (x), = 所定義，
+其中 (x) 和 = 僅能應用在自然數 50)。
 「算術命題」概念可對應地定義出來。
 特別是如關係「較大」和「同餘」都是算術，因為：
     ____
@@ -2613,12 +2613,12 @@ x≡y(mod n)~(Ez)[x=y+z.nVy=x+z.n]
     der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
     und den Zeichen 0, 1 aufbauen 
     (Funktions und Mengenvariable dürfen nicht vorkommen). 
-    (In den Präfixen daft statt x natürlich auch jede andere Zahlvariable stehen.)
+    (In den Präfixen darf statt x natürlich auch jede andere Zahlvariable stehen.)
 
 50) 這些概念之定義僅由已提過之符號、自然數變數 x, y,...及
     符號 0, 1 建構。
-    (函數與集合變數不能出現)。
-    (其它的數目變數可能自然地出現在前置以取代 x.)。
+    (不允許出現函數與集合變數)。
+    (每個其它出現於 x 之前數目變數能自然地取代 x)。
 
 Es gilt der
 
