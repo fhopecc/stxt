@@ -506,6 +506,7 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     但許多英譯本將其譯為 emerge 或 turn out，
     這證明德文與英文是 2 種截然不同的語言。
    
+/176/
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
 das erstens inhaltlich gedeutet über genügend Ausdrucksmittel verfügt, 
@@ -514,7 +515,7 @@ um die in der obigen Überlegung vorkommenden Begriffe
 zu definieren, 
 und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
 
-上面正用過之證明方法明顯可應用於下述的每個形式系統，
+上面正解釋過之證明方法顯然可應用於下述的每個形式系統，
 第一其本質詮釋具有足夠表達力其去定義前述之觀念（特別是可證式），
 其次每個可證式本質為真。
 
@@ -655,6 +656,7 @@ wiederum 副詞：可再由
     所有在 PM 中前述可證句之關係，以此簡單考慮，
     以此方式也是可證的。
 
+/177/
 第一型符號
 ..........
 
@@ -2788,6 +2790,12 @@ unentscheidbare arithmetische Sätze.
 
 在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
 
+53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
+    welche aus P durch Hinzufügung einer rekursiv definierbaren Klasse 
+    von Axiomen entstehen.
+    
+53) 這些 ω-一致系統係由公理類別遞迴定義擴展 P 系統而來。
+
 Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
 das Axiomensystem der Mengenlehre 
 und dessen Erweiterungen durch ω-widerspruchsfreie rekursive Klassen von Axiomen.
@@ -2797,13 +2805,86 @@ Wir leiten schließlich noch folgendes Resultat her:
 及其經由公理之ω-一致性遞迴類別所擴展之系統。
 最後可得以下這樣之結果：
 
-Satz XI: 
+Satz IX: 
 In allen in Satz VI genannten formalen Systemen 53) gibt es 
 unentscheidbare Problem des engeren Funktionenkalküls 54)
 (d.h. Formeln des engeren Funktionenkalküls,
  für die weder Allgemeingültigkeit 
  noch Existenz eines Gegenbeispiels beweisbar ist) 55).
 
-命題 XI:
+命題 IX:
 命題 VI 提到之所有形式系統 53)存在有限函數計算之不可決定問題 54)
 （即有限函數計算之公式，不只其有效性且其反例之存在均不可證明）55)。
+
+54) Vgl. Hilbert-Ackermann, Grundzüge der theoretischen Logik.
+    Im System P sind unter Formeln des engeren Funktionenkalküls 
+    diejenigen zu verstehen, welche aus den Formeln 
+    des engeren Funktionenkalküls der PM durch die 
+    auf S.176 angedeutete Ersetzung der Relationen durch Klassen höheren 
+    Typs entstehen.
+
+54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
+    在系統 P 中，有限函數計算之公式可理解為其為 PM 中的有限函數計算己
+
+55) In meiner Arbeit: Die Vollstiändigkeit der Axiome des logischen
+    Funktionenkalküls, Monatsh. f. Math. u. Phys. XXXVII, 2, 
+    habe ich gezeigt, daß jede Formel des engeren Funktionenkalküls 
+    entweder als allgemeingtiltig nachweisbar ist 
+    oder ein Gegenbeispiel existiert; 
+    die Existenz dieses Gegenbeispiels ist aber nach Satz IX nicht immer 
+    nachweisbar (in den angeführten formalen Systemen).
+    Monatsh. far Mathematik and Physik. XXXVIII. Band. 1
+/194/
+Dies beruht auf:
+Satz X:
+Jedes Problem der Form (x)F(x) (F rekursiv) läßt sich zuriickführen 
+auf die Frage nach der Erfüllbarkeit einer Formel 
+des engeren Funktionenkalküls 
+(d.h. zujedem rekursiven F kann man eine Formel des engeren 
+ Funktionenkalküls angeben, deren Erfüllbarkeit mit 
+ der Richtigkeit von (x)F(x) äquivalent ist).
+
+Zum engeren Funktionenkalkül (e. F.) rechnen wir diejenigen Formeln, 
+welche sich aus den Grundzeiehen: -,V, (x), =; 
+x,y...(Individuenvariable) 
+F(x), G(x y), H(x, y, z)... (Eigenschafts- und Relationsvariable) 
+aufbauen 56), wobei (x) and = sich nur auf Individuen beziehen dürfen. 
+Wir fügen zu diesen Zeichen noch eine dritte Art 
+von Variatilen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
+die Gegenstandsfunktionen vertreten 
+(d.h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
+deren Argumente und Werte Individuen sind 57).
+
+Eine Formel, die außer den zuerst angeführten Zeichen des e.F.
+noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthät, 
+soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
+Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
+ohneweiters auf Formeln i.w.S. and es gilt der Satz, 
+daß man zu jeder Formel i.w.S. 
+A eine gewöhnliche Formel des e.F.B angeben kann, 
+so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
+B erhält man aus A, 
+indem man die in A vorkommenden Variablen 
+dritter Art φ(x), ψ(x y )..durch Ausdrücke der Form: 
+
+(i z) F (z x)~ (~z) G (z~x y) . : . ersetzt~ die
+i~besehreibenden" Funktionen im Sinne der PM. I a 14 auflbst and
+die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59)~
+der besagt, da~ siimtliehe an Stelle der % 5 . . gesetzte F~ G :. hinsiehtlich der ersten Leerstelle genau eindeutig sind.
+Wir zeigen nun~ da~ es zu jedem Problem der Form (x)F(x)
+( F rekursiv) ein ~tquivalentes betreffend die Erftillbarkeit einer
+Formel i. w. S. gibt~ woraus naeh der eben gemachten Bemerkung
+Satz X folgt.
+Da /7' rekursiv ist, gibt es eine rekursive Funktion (P (x)~ so
+dal~ F ( x ) ~ [q) (x) -- 01~ a n d fiir (P gibt es eine Reihe yon Funki~onen (P~ (P~ . .. (P~ so da~/: (P,~:~q)l (x):x+]. and ftir jedes
+q)Z (1 ~ / c ~ n ) entweder:
+1. (x., . . . x~,) [cPk(0, x e . . . x~) ----cpp (x~... x~)] (18)
+(x), - % (x,
+~) D. H i l b e r t and W . A c k e r m a n n rechnenin dem eben zitierten Bach das
+Zeichen = nicht zum engeren Funktionenkalkiil. Es gibt aber zu jeder Formel~
+in der das Zeiehen -----vorkommt, einc solche ohne dicses Zcichi~n, die mit der
+urspriinglichen glcichzeitig erftillbar ist (vgl. die in Ful~note ~) zitierte Arbeit).
+9 ~7) Und zwar soll der Definitionsbereich immer der g a n z e ]ndividuenl~ereich sein.
+~s) Variable dritter Art dtirfen dabei an ~llen Leerstellen ftir Individuem:
+variable stehen, z.B.: y=~(x), F(x,~, (y)), G [+(x, 7(y)),x]:usw.
+~) D.h. die Konjunkfion bildet.
