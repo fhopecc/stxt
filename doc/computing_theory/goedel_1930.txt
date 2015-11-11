@@ -2824,7 +2824,9 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     Typs entstehen.
 
 54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
-    在系統 P 中，有限函數計算之公式可理解為其為 PM 中的有限函數計算己
+    在系統 P 中，較受限函數計算之公式可理解
+    那些衍生自 176 頁所指出的，PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
+    
 
 55) In meiner Arbeit: Die Vollstiändigkeit der Axiome des logischen
     Funktionenkalküls, Monatsh. f. Math. u. Phys. XXXVII, 2, 
@@ -2834,6 +2836,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     die Existenz dieses Gegenbeispiels ist aber nach Satz IX nicht immer 
     nachweisbar (in den angeführten formalen Systemen).
     Monatsh. far Mathematik and Physik. XXXVIII. Band. 1
+
 /194/
 Dies beruht auf:
 Satz X:
