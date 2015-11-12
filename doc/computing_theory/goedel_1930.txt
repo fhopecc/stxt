@@ -2828,8 +2828,9 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     較受限函數計算之公式可理解為那些衍生自 176 頁所指出的，
     PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
 
-55) In meiner Arbeit: Die Vollstiändigkeit der Axiome des logischen
-    Funktionenkalküls, Monatsh. f. Math. u. Phys. XXXVII, 2, 
+55) In meiner Arbeit: 
+    Die Vollstiändigkeit der Axiome des logischen Funktionenkalküls, 
+    Monatsh. f. Math. u. Phys. XXXVII, 2, 
     habe ich gezeigt, daß jede Formel des engeren Funktionenkalküls 
     entweder als allgemeingtiltig nachweisbar ist 
     oder ein Gegenbeispiel existiert; 
