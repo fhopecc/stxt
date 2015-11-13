@@ -2839,6 +2839,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     Monatsh. far Mathematik and Physik. XXXVIII. Band. 1
 
 55) 在我的工作：
+
 /194/
 Dies beruht auf:
 Satz X:
@@ -2872,24 +2873,40 @@ B erhält man aus A,
 indem man die in A vorkommenden Variablen 
 dritter Art φ(x), ψ(x y )..durch Ausdrücke der Form: 
 
-(i z) F (z x)~ (~z) G (z~x y) . : . ersetzt~ die
-i~besehreibenden" Funktionen im Sinne der PM. I a 14 auflbst and
-die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59)~
-der besagt, da~ siimtliehe an Stelle der % 5 . . gesetzte F~ G :. hinsiehtlich der ersten Leerstelle genau eindeutig sind.
-Wir zeigen nun~ da~ es zu jedem Problem der Form (x)F(x)
-( F rekursiv) ein ~tquivalentes betreffend die Erftillbarkeit einer
-Formel i. w. S. gibt~ woraus naeh der eben gemachten Bemerkung
-Satz X folgt.
-Da /7' rekursiv ist, gibt es eine rekursive Funktion (P (x)~ so
-dal~ F ( x ) ~ [q) (x) -- 01~ a n d fiir (P gibt es eine Reihe yon Funki~onen (P~ (P~ . .. (P~ so da~/: (P,~:~q)l (x):x+]. and ftir jedes
-q)Z (1 ~ / c ~ n ) entweder:
-1. (x., . . . x~,) [cPk(0, x e . . . x~) ----cpp (x~... x~)] (18)
+('z)F(z x),('z)G(z,xy)... ersetzt, 
+die "beschreibenden" Funktionen im Sinne der PM. 
+I*14 auflöst und die so erhaltene Formel mit einem Ausdruck logisch 
+multipliziert 59), der besagt, 
+daß sämtliche an Stelle der φ,ψ.. 
+gesetzte F,G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
+
+Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes betreffend 
+die Erfüllbarkeit einer Formel i.w.S. gibt, 
+woraus naeh der eben gemachten Bemerkung Satz X folgt.
+
+Da F rekursiv ist, gibt es eine rekursive Funktion Φ(x), so
+daß F(x)~[Φ(x)=0], und für Φ gibt es eine Reihe von 
+Funktionen Φ1 Φ2...Φn so daß: Φn=Φ, Φ1(x)=x+1 und für jedes
+Φk(1<k≦ n) entweder:
+
+1.(x2...xm) [Φk(0,x2...xm)=Φp(x2...xm)] (18)
 (x), - % (x,
-~) D. H i l b e r t and W . A c k e r m a n n rechnenin dem eben zitierten Bach das
-Zeichen = nicht zum engeren Funktionenkalkiil. Es gibt aber zu jeder Formel~
-in der das Zeiehen -----vorkommt, einc solche ohne dicses Zcichi~n, die mit der
-urspriinglichen glcichzeitig erftillbar ist (vgl. die in Ful~note ~) zitierte Arbeit).
-9 ~7) Und zwar soll der Definitionsbereich immer der g a n z e ]ndividuenl~ereich sein.
-~s) Variable dritter Art dtirfen dabei an ~llen Leerstellen ftir Individuem:
-variable stehen, z.B.: y=~(x), F(x,~, (y)), G [+(x, 7(y)),x]:usw.
-~) D.h. die Konjunkfion bildet.
+(x,x2...xm) {Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
+p,q<k
+
+56) D. Hilbert und W.Ackermann rechnenin dem eben zitierten Bach das
+    Zeichen = nicht zum engeren Funktionenkalkül. 
+    Es gibt aber zu jeder Formel, in der das Zeichen = vorkommt, 
+    eine solche ohne dieses Zeichen, 
+    die mit der ursprünglichen gleichzeitig erfüllbar ist 
+    (vgl. die in Fußnote 55) zitierte Arbeit).
+
+57) Und zwar soll der Definitionsbereich immer 
+    der ganze individuenlbereich sein.
+
+58) Variable dritter Art dürfen dabei an allen Leerstellen für 
+    Individuenvariable stehen, 
+    z.B.: y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] usw.
+
+59) D.h. die Konjunktion bildet.
