@@ -2832,13 +2832,16 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     Die Vollstiändigkeit der Axiome des logischen Funktionenkalküls, 
     Monatsh. f. Math. u. Phys. XXXVII, 2, 
     habe ich gezeigt, daß jede Formel des engeren Funktionenkalküls 
-    entweder als allgemeingtiltig nachweisbar ist 
+    entweder als allgemeingültig nachweisbar ist 
     oder ein Gegenbeispiel existiert; 
-    die Existenz dieses Gegenbeispiels ist aber nach Satz IX nicht immer 
-    nachweisbar (in den angeführten formalen Systemen).
-    Monatsh. far Mathematik and Physik. XXXVIII. Band. 1
+    die Existenz dieses Gegenbeispiels ist aber nach Satz IX 
+    nicht immer nachweisbar (in den angeführten formalen Systemen).
+    Monatsh. für Mathematik and Physik. XXXVIII. Band. 1
 
-55) 在我的工作：
+55) 在我的工作：邏輯函數運算公理之完全性，數學與物理月刊 XXXVII, 2,
+    已指出每個受限函數計算之公式既非普遍可證也不存在任一反例；
+    依據命題 IX 反例之存在並非總是可證（在前述形式系統內）。
+    數學與物理月刊 XXXVIII, 2, Band. 1。
 
 /194/
 Dies beruht auf:
