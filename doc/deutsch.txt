@@ -3031,6 +3031,12 @@ als
 　　z.B. Er kommt zu sp?t, als dass er den Zug erreichen k?nnte.
 　　他來得太晚了以至於沒趕上火車。
 
+Reverso 網站的文法標示
+----------------------
+
+System Sys.tem  nt  , -s      ,  -e      system
+系統   音節標注 中性，屬格變格，複數變格 英文意義
+
 縮寫
 ----
 

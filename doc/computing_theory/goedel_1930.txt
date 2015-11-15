@@ -2845,71 +2845,128 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
 
 /194/
 Dies beruht auf:
+
+這基於：
+
 Satz X:
-Jedes Problem der Form (x)F(x) (F rekursiv) läßt sich zuriickführen 
-auf die Frage nach der Erfüllbarkeit einer Formel 
+Jedes Problem der Form (x)F(x) (F rekursiv) läßt sich 
+zurückführen auf die Frage nach der Erfüllbarkeit einer Formel 
 des engeren Funktionenkalküls 
 (d.h. zujedem rekursiven F kann man eine Formel des engeren 
  Funktionenkalküls angeben, deren Erfüllbarkeit mit 
  der Richtigkeit von (x)F(x) äquivalent ist).
 
-Zum engeren Funktionenkalkül (e. F.) rechnen wir diejenigen Formeln, 
-welche sich aus den Grundzeiehen: -,V, (x), =; 
+命題 X：
+每個形式如 (x)F(x) （F 遞迴）之問題可化約成受限函數運算公式可否滿足之問題。
+（即對每個遞迴 F 可給定一個受限函數運算之公式，
+  其可滿足性等價於 (x)F(x) 之正確性）。
+
+Zum engeren Funktionenkalkül (e.F.) rechnen wir diejenigen Formeln, 
+welche sich aus den Grundzeichen: -,V, (x), =; 
 x,y...(Individuenvariable) 
 F(x), G(x y), H(x, y, z)... (Eigenschafts- und Relationsvariable) 
-aufbauen 56), wobei (x) and = sich nur auf Individuen beziehen dürfen. 
+aufbauen 56), wobei (x) und = sich nur auf Individuen beziehen dürfen. 
 Wir fügen zu diesen Zeichen noch eine dritte Art 
-von Variatilen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
+von Variablen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
 die Gegenstandsfunktionen vertreten 
 (d.h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
 deren Argumente und Werte Individuen sind 57).
 
-Eine Formel, die außer den zuerst angeführten Zeichen des e.F.
-noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthät, 
-soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
-Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
-ohneweiters auf Formeln i.w.S. and es gilt der Satz, 
-daß man zu jeder Formel i.w.S. 
-A eine gewöhnliche Formel des e.F.B angeben kann, 
-so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
-B erhält man aus A, 
-indem man die in A vorkommenden Variablen 
-dritter Art φ(x), ψ(x y )..durch Ausdrücke der Form: 
-
-('z)F(z x),('z)G(z,xy)... ersetzt, 
-die "beschreibenden" Funktionen im Sinne der PM. 
-I*14 auflöst und die so erhaltene Formel mit einem Ausdruck logisch 
-multipliziert 59), der besagt, 
-daß sämtliche an Stelle der φ,ψ.. 
-gesetzte F,G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
-
-Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
-(F rekursiv) ein äquivalentes betreffend 
-die Erfüllbarkeit einer Formel i.w.S. gibt, 
-woraus naeh der eben gemachten Bemerkung Satz X folgt.
-
-Da F rekursiv ist, gibt es eine rekursive Funktion Φ(x), so
-daß F(x)~[Φ(x)=0], und für Φ gibt es eine Reihe von 
-Funktionen Φ1 Φ2...Φn so daß: Φn=Φ, Φ1(x)=x+1 und für jedes
-Φk(1<k≦ n) entweder:
-
-1.(x2...xm) [Φk(0,x2...xm)=Φp(x2...xm)] (18)
-(x), - % (x,
-(x,x2...xm) {Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
-p,q<k
-
-56) D. Hilbert und W.Ackermann rechnenin dem eben zitierten Bach das
-    Zeichen = nicht zum engeren Funktionenkalkül. 
+受限函數計算（以下稱為 e.F.）包含這些公式，
+其本身由下述基本符號建構 56)：
+-,V,(x),=;
+x,y...（單元變數）
+F(x), G(x y), H(x, y, z)...（屬性變數及關係變數） 
+其中 (x) 及 = 僅可應用在個體。
+對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
+表示物件函數（即 φ(x), ψ(x y) 等等明確指向其參數與值為個體之函數。57) 
+ 
+56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
+    das Zeichen = nicht zum engeren Funktionenkalkül. 
     Es gibt aber zu jeder Formel, in der das Zeichen = vorkommt, 
     eine solche ohne dieses Zeichen, 
     die mit der ursprünglichen gleichzeitig erfüllbar ist 
     (vgl. die in Fußnote 55) zitierte Arbeit).
 
-57) Und zwar soll der Definitionsbereich immer 
-    der ganze individuenlbereich sein.
+56) 希爾伯特及阿克曼在正引述的書中，
+    並未將符號 = 含於較受限函數運算。
+    對每個出現符號 = 之公式，存在一個沒有此符號，
+    卻自然可同時滿足之公式
+    （參閱腳註 55 引述之成果）。
 
-58) Variable dritter Art dürfen dabei an allen Leerstellen für 
-    Individuenvariable stehen, 
+57) Und zwar soll der Definitionsbereich immer der ganze individuenlbereich sein.
+
+57) 且事實上定義域總可為全部的個體域。
+
+Eine Formel, die außer den zuerst angeführten Zeichen des e.F.
+noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthät, 
+soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
+Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
+ohneweiters auf Formeln i.w.S. und es gilt der Satz, 
+daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
+so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
+
+除了前述第一個受限函數計算之符號也包含第三種變數（φ(x), ψ(x y) 等等）
+之公式稱為較廣意義（簡寫 i. w. S.） 58)。
+「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
+對每個較廣義公式 A 而言，可給定一個較受限函數計算之普通公式，
+使得 A 的可滿足性等價於 B 的。
+
+58) Variable dritter Art dürfen dabei 
+    an allen Leerstellen für Individuenvariable stehen, 
     z.B.: y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] usw.
 
+58) 第三類變數可作為個體變數參數之值，
+    如： y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] 等等。
+
+B erhält man aus A, 
+indem man die in A vorkommenden Variablen 
+dritter Art φ(x), ψ(x y)..durch Ausdrücke der Form: 
+('z)F(z x),('z)G(z,xy)... ersetzt, 
+die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und 
+die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
+der besagt, 
+daß sämtliche an Stelle der φ,ψ.. 
+gesetzte F,G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
+
+B 可以下述方式從 A 推得，
+將 A 中出現的第三型之變數 φ(x), ψ(x y) 
+以 (ι z)F(z x),(ι z)G(z,xy)... 表示式來取代。 
+這是同 PM I*14 中之風格清除「描述」函數且
+將結果式與表示式作邏輯相乘59)，
+也就是說將 φ,ψ.. 全部的參數取代 F,G.. 第一個空參數是明確的。 
+
+
+20151115 週日
+譯註：最後一句 B. Meltzer 譯本為：
+      which states that all the F,G... substituted for the φ,ψ..
+      are strictly one-valued with respect to the first empty place.
+      完全譯錯 ~~
+      Stelle der φ,ψ.. 中 Stelle 是複數，用在說明 φ,ψ.. 中所有位置，
+      其實就是指所有參數。
+
 59) D.h. die Konjunktion bildet.
+
+59) 即建構合取操作。
+
+Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes betreffend 
+die Erfüllbarkeit einer Formel i.w.S. gibt, 
+woraus nach der eben gemachten Bemerkung Satz X folgt.
+
+現在可指出對每個形式 (x)F(x) （F 遞迴）之問題，
+存有一個相關較廣義公式其可滿足性等價於它，
+依據前述解譯可推得命題 X。
+
+Da F rekursiv ist, 
+gibt es eine rekursive Funktion Φ(x), so daß F(x)~[Φ(x)=0], 
+und für Φ gibt es eine Reihe von Funktionen Φ1 Φ2...Φn 
+so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
+
+若 F 是遞迴的，則存在一個遞迴函數 Φ(x)，使得 F(x)~[Φ(x)=0]，
+又對 Φ 而言存在函數序列 Φ1 Φ2...Φn，其中 Φn=Φ, Φ1(x)=x+1，
+且對每個 Φk (1<k≦ n) 除了：
+
+1.(x2...xm) [Φk(0,x2...xm)=Φp(x2...xm)] (18)
+(x,x2...xm) {Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
+p,q<k
