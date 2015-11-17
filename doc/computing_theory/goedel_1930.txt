@@ -2970,3 +2970,41 @@ so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
 1.(x2...xm) [Φk(0,x2...xm)=Φp(x2...xm)] (18)
 (x,x2...xm) {Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
 p,q<k
+
+oder:
+2.(x1...xm) [Φk(x1...xm) = (p, (~p,, ( ~ ) . . . (p,, (~,))] oo) (19)
+r < k, i~< k (f~r v= l, 2 . . . 0
+3. ( x l . . . x~) [,v~ ( ~ . . . . ~,~) = , ~ ( ~ . . . % (o))] (20)
+Ferner bilden wir die Si~tze:
+(x) ~)~ ( x ) = 0 & (xy) [~)~ (~)=~)1 O) ~ x=y] (20
+(x) ['~)~'(x) = 0] (22)
+Wir ersetzen nun in allen Formeln (18), (19), (20) (ftir k = 2 ,
+3 . . . n) and in (21)(22) die Funktionen (P~ dureh Funktions-~-
+variable ~, die Zahl 0 (lurch eine sonst nieht vorkommende Individuenvariable xo und bilden die Konjunktion C si~mtlieher so erhaltener Formeln.
+Die Formel (Exo)C hat dann die verlangte Eigensehaft, d. b.
+1. Wenn (x) [~ (x)=0] gilt, ist (Exo)C erftillbar, denn die
+Funktionen alP1, ( P 2 - . . (P~ ergeben dann offenbar in (Exo)C ftir
+~1, %~-.. ~,~ eingesetzt einen lriehtigen Satz.
+2. Wenn (Exo) C erftillbar ist, gilt (x) [(P (x)--0].
+Beweis: Seien qPl, ~ F ~ . . . q:,~ die nach Voraussetzung existierenden Funktionen, welehe in (Exo) C ftir ~1, ~2 99~?,,eingesetzt einen
+richtigen Satz liefern. Ihr Individuenbereich sei 3. Wegen der Richtigkeit
+yon (Ex0) C ftir die Funktionen q:~ gibt es ein Individuum a (aus 3),
+so dag siimtliehe Formeln (18) bis (22) bei Ersetzung der (I), dutch
+LF, nnd yon 0 dutch a in riehtige Siitze (18') bis (22') tibergehen.
+Wir bilden nun die kleinste Teilklasse yon 3, welehe a enthiilt and
+gegen die Operation qz (x) abgesehlossen ist. Diese Teilklasse (3~)
+hat die Eigensehaft~ dag jede der Funktionen W', auf Elemente aus
+$~ angewendet wieder Elemente aus 3 ' ergibt. Denn ftir q:~ gilt
+dies naeh Definition yon ,q' und wegen (18'), (19'), (20') iibertriigt
+sich diese Eigensehaft yon ~F, mit niedrigerem Index auf solche
+mit h(iherem. Die Funktionen, welehe aus ~F, dureh Beschrankung
+auf den Individuenbereich 3' entstehen, nennen wir Wi'. Auch fiir
+diese Funktion gelten siimtliche Formeln (18)his (22) (bei der Ersetzung yon 0 dureh a und (Pi dureh q;().
+Wegen der Riehtigkeit yen (21) ftir q:l' und a kann man die
+Individuen aus 3 ~eineindeutig auf die natiirlichen Zahlen abbilden u. zw.
+so, dal] a in 0 und die Funktion I~1" in die Naehfolgerfunktion q)l
+tibergeht. Dutch diese Abbildung gehen aber siimtliche Fanktionen
+Wi' in die Funktionen q)~ tiber and wegen der Riehtigkeit yon (22)
+6o) ~ ( i = l . . s) vertreten irgend welche Komplexe der Variablen x~, x2 .. x,+~,
+z.B." xl xa x ~.
+13
