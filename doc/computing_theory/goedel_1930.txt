@@ -3085,3 +3085,90 @@ was zu beweisen war 61).
 這可被證明 61)。 
 
 /196/
+
+Da man die Überlegungen, welche zu Satz X führen, 
+(für jedes spezielle F) auch innerhalb des Systems P durehführen kann,
+so ist die Äquivalenz zwischen einem Satz der Form (x)F(x)(F rekursiv) 
+und der Erfüllbarkeit der entsprechenden Formel des e. F. in P beweisbar 
+und daher folgt aus der Unentseheidbarkeit des einen
+die des anderen, womit Satz IX bewiesen ist. 62)
+
+Aus den Ergebnissen von Abschnitt 2 folgt ein merkwürdiges
+Resultat, bezüglich eines Widerspruchslosigkeitsbeweises des Systems P
+(und seiner Erweiterungen), 
+das durch folgenden Satz ausgesprochen wird:
+
+Satz XI: 
+Sei χ eine beliebige rekursive widerspruchsfreie 63) Klasse von Formeln, 
+dann gilt: Die Satzformel, welche besagt, daß χ widerspruchsfrei ist, 
+ist nicht χ-beweisbar; 
+insbesondere ist die Widerspruchsfreiheit von P in P unbeweisbar 64),
+vorausgesetzt, daß P widerspruchsfrei ist 
+(im entgegengesetzten Fall ist natürlich jede Aussage beweisbar).
+
+Der Beweis ist (in Umrissen skizziert) der folgende: Sei z eine
+beliebige fiir die folgenden Betrachtungen ein fiir allemal gewiihlte
+rekursive Ktasse yon Formeln (ira einfachsten Falle die leere
+Klasse). Zum Beweise der Tatsaehe~ da~ 17 Gen r nieht •
+ist 65), wurde~ wie aus 1. Seite 189 hervorgeht, nut die Widerspruehsfreiheit yon • benutzt, d, h. es gilt:
+d. h. naeh (6"1):
+Wid (z) ~ Bew~ (17 Gen r) (23)
+Wid(z) - )~ (x) xB~ (17 Gen r)
+Naeh ( I 3 ) i s t 17 G e n t = S b I"[~ ~( 1 und daher:
+6~) Aus Satz X folgt z.B., daI~ das F e r m a t s c h e und das G o l d b a c h s c h e
+Problem 16sbar wiiren, wena man das Eutscheidungsproblem des e. F. gel6st hiitte.
+~ ) Satz IX gilt nattirlich auch far das Axiomensystem der Mengenlehre
+und dessert Erweiterungen durch rekursiv definierbare o)-widerspruchsfreie Klassea yon Axiomen, da es ja auch in diesen Systemen unentscheidbare S~ttze der
+Form (x)F(x) (F rekursiv) gibt.
+~a) 7. ist widerspruchsfrei (abgektirzt als Wid (x)) wird folgenderma~ea
+definiert: Wid (z) ~_ (E x) [Form (x) &Bewu (x)].
+~4) Dies folgt, wenn man ftir z die leere Klasse yon Formeln einsetzt.
+~) r h~ngt nattirlieh (ebenso wie p) yon z ab.
+Uber formal unentscheidbare S~tz~der Prineipia Mathematica etc. 197
+d. h. nach (8"1):
+=
+Wid (• - - k (x) O (x, p) (24)
+Wir stellen nun folgendes fest: Siimtliehe in Abschnitt 2 6,) und
+Abschnitt 4 bisher definierte Begriffe (bzw. bewiesene Behauptungen)
+sind anch in/? ausdrtickbar (bzw. beweisbar). Denn es wurden tibcrall
+nur die gewShnlichen Definitions- und Beweismethoden der klassischen
+Mathematik verwendet~ wie sic im System _P formalisiert sind. Insbesondere ist z (wie jede rekursive Klasse) in P definierbar. Set
+w die Satzformel, dutch welche in P Wid (~) ausgedrtiekt wird. Die
+Relation Q(x, y) wird gemal3 (8"1)~ (9), (10) durch das l~elationszeiehen ~ ausgedrtiekt, folglieh Q (x,p) dureh r da naeh (12)r~ =
+= Sb fl Z(p) und der Sa~z (x) Q(x,p) dureh 17 Gen r.
+Wegen (24) ist also w Imp (17 Gen r) in P beweisbar 67) (urn
+so mehr ~-beweisbar). W~re nun w x-beweisbar, ~o w~re aueh 17 Gen r
+z-beweisbar und daraus wtirde naeh (23) folgen, dag • nieht widerspruehsfrei ist.
+Es sei bemerkt, dag aueh dieser Beweis konstruktiv ist, d. h.
+er gestattet, falls ein Beweis aus z Nr w vorgelegt ist, einen Widersprueh aus z effektiv herzuleiten. Der ganze Beweis fiir Satz XI
+lagt sieh wSrtlieh aueh auf das Axiomensystem der Mengenlehre M
+und der klassisehen Mathematik ~s) A ttbertragen und liefert aueh hier
+alas Resultat: Es gibt keinen Widerspruehslosigkeitsbeweis ftir M
+bzw. A, der innerhalb yon M bzw. A formalisiert werden k~nnte,
+vorausgesetzt da$ M bzw. A widerspruehsfrei ist. Es set ausdrtieklieh bemerkt, dal~ Satz XI (und die entspreehenden Resultate fiber
+M~ A) in keinem Widersprueh zum Hilbertsehen formalistisehen
+Standpunkt stehen. Denn dieser setzt nur die Existenz eines mit
+finiten Mitteln gefiihrten Widerspruehsfreiheitsbeweises voraus und
+es ware denkbar, dag es finite Beweise gibt, die sieh in .P (bzw.
+M~ A) nicht darstellen lassen.
+Da ftir jede widerspruehsfreie Klasse z w nieht • ist,
+so gibt es sehon immer dann (aus • unentseheidbare S~ttze (ntimlieh
+w), wenn Neff (w) nieht z-beweisbar ist; m. a. W. man kann in Satz VI
+66) Vonder Definition ftlr ,rekursiv" auf Seite 179 bis zum Beweis yon
+Satz VI inkl.
+67) DaB aus (23) auf die Riehtigkeit yon w Imp (17 Gen r) geschlosse~
+werden kann, beruht einfach darauf, daii der unentscheidbare Satz 17 Gen r,
+wie gleich zu Anfang bemerkt, seine eigene Unbeweisbarkeitbehauptet.
+68)u J. v. :Neumann, Zur Hilbertsehen Beweistheorie,Math. Zeitschr.
+~6, 2927. n
+198 Kurt G6 del, Cber formal unentscheidbareShtze etc.
+die Voraussetzung der ~o-Widerspruchsfreiheit ersetzen dureh die
+folgende: Die Aussage ,,z ist widerspruehsvoll" ist nieht z-beweisbar.
+(Man beachte, da~ es widerspruchsfreie • gibt, fiir die diese Aussage
+• ist.)
+Wit haben uns in dieser Arbeit im wesentliehen auf das System P besehrankt und die Anwendungen auf andere Systeme nut
+angedeutet. In roller Allgemeinheit werden die Besultate in einer
+demnaehst erseheinenden Fortsetzung ausgesproehen und bewiesen
+werden. In dieser Arbeit wird aueh der nut skizzenhaft gefiihrte
+Beweis yon Satz XI ausftihrlieh dargestellt werden.
+(Eingelangt: 17. XI. 1930.)
