@@ -3106,23 +3106,38 @@ insbesondere ist die Widerspruchsfreiheit von P in P unbeweisbar 64),
 vorausgesetzt, daß P widerspruchsfrei ist 
 (im entgegengesetzten Fall ist natürlich jede Aussage beweisbar).
 
-Der Beweis ist (in Umrissen skizziert) der folgende: Sei z eine
-beliebige fiir die folgenden Betrachtungen ein fiir allemal gewiihlte
-rekursive Ktasse yon Formeln (ira einfachsten Falle die leere
-Klasse). Zum Beweise der Tatsaehe~ da~ 17 Gen r nieht •
-ist 65), wurde~ wie aus 1. Seite 189 hervorgeht, nut die Widerspruehsfreiheit yon • benutzt, d, h. es gilt:
-d. h. naeh (6"1):
-Wid (z) ~ Bew~ (17 Gen r) (23)
-Wid(z) - )~ (x) xB~ (17 Gen r)
-Naeh ( I 3 ) i s t 17 G e n t = S b I"[~ ~( 1 und daher:
-6~) Aus Satz X folgt z.B., daI~ das F e r m a t s c h e und das G o l d b a c h s c h e
-Problem 16sbar wiiren, wena man das Eutscheidungsproblem des e. F. gel6st hiitte.
-~ ) Satz IX gilt nattirlich auch far das Axiomensystem der Mengenlehre
-und dessert Erweiterungen durch rekursiv definierbare o)-widerspruchsfreie Klassea yon Axiomen, da es ja auch in diesen Systemen unentscheidbare S~ttze der
-Form (x)F(x) (F rekursiv) gibt.
-~a) 7. ist widerspruchsfrei (abgektirzt als Wid (x)) wird folgenderma~ea
+Der Beweis ist (in Umrissen skizziert) der folgende: 
+Sei χ eine beliebige für die folgenden Betrachtungen ein 
+für allemal gewhälte rekursive Klasse von Formeln 
+(im einfachsten Falle die leere Klasse). 
+Zum Beweise der Tatsache, 
+daß 17 Gen r nicht χ-beweisbar ist 65), 
+wurde, wie aus 1. Seite 189 hervorgeht, nur die Widerspruchsfreiheit von χ benutzt, 
+d. h. es gilt:
+        ____
+Wid(χ)->Bewχ(17 Gen r) (23)
+
+d. h. nach (6.1):
+
+           ___
+Wid(χ)->(x)xBχ(17 Gen r)
+                         |   19 |
+Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
+
+61) Aus Satz X folgt z.B., 
+    daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
+    wenn man das Entscheidungsproblem des e. F. gelöst hätte.
+
+62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre und 
+    dessert Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
+    Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
+    der Form (x)F(x) (F rekursiv) gibt.
+
+63) 7. ist widerspruchsfrei (abgektirzt als Wid (x)) wird folgenderma~ea
 definiert: Wid (z) ~_ (E x) [Form (x) &Bewu (x)].
+
 ~4) Dies folgt, wenn man ftir z die leere Klasse yon Formeln einsetzt.
+
 ~) r h~ngt nattirlieh (ebenso wie p) yon z ab.
 Uber formal unentscheidbare S~tz~der Prineipia Mathematica etc. 197
 d. h. nach (8"1):
