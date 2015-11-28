@@ -3140,52 +3140,83 @@ Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
 
 64) Dies folgt, wenn man für χ die leere Klasse von Formeln einsetzt.
 
-65) r h~ngt nattirlieh (ebenso wie p) yon z ab.
-Uber formal unentscheidbare S~tz~der Prineipia Mathematica etc. 197
-d. h. nach (8"1):
-=
-Wid (• - - k (x) O (x, p) (24)
-Wir stellen nun folgendes fest: Siimtliehe in Abschnitt 2 6,) und
+65) r hängt natürlich (ebenso wie p) von χ ab.
+
+/197/
+           _____________
+                |   19 |
+Wid(χ)->(x)xBχSb|p Z(p)|
+
+d. h. nach (8.1):
+
+Wid(χ)->(x)Q(x,p) (24)
+
+Wir stellen nun folgendes fest: 
+Sämtliche in Abschnitt 2 66) und
 Abschnitt 4 bisher definierte Begriffe (bzw. bewiesene Behauptungen)
-sind anch in/? ausdrtickbar (bzw. beweisbar). Denn es wurden tibcrall
-nur die gewShnlichen Definitions- und Beweismethoden der klassischen
-Mathematik verwendet~ wie sic im System _P formalisiert sind. Insbesondere ist z (wie jede rekursive Klasse) in P definierbar. Set
-w die Satzformel, dutch welche in P Wid (~) ausgedrtiekt wird. Die
-Relation Q(x, y) wird gemal3 (8"1)~ (9), (10) durch das l~elationszeiehen ~ ausgedrtiekt, folglieh Q (x,p) dureh r da naeh (12)r~ =
-= Sb fl Z(p) und der Sa~z (x) Q(x,p) dureh 17 Gen r.
-Wegen (24) ist also w Imp (17 Gen r) in P beweisbar 67) (urn
-so mehr ~-beweisbar). W~re nun w x-beweisbar, ~o w~re aueh 17 Gen r
-z-beweisbar und daraus wtirde naeh (23) folgen, dag • nieht widerspruehsfrei ist.
-Es sei bemerkt, dag aueh dieser Beweis konstruktiv ist, d. h.
-er gestattet, falls ein Beweis aus z Nr w vorgelegt ist, einen Widersprueh aus z effektiv herzuleiten. Der ganze Beweis fiir Satz XI
-lagt sieh wSrtlieh aueh auf das Axiomensystem der Mengenlehre M
-und der klassisehen Mathematik ~s) A ttbertragen und liefert aueh hier
-alas Resultat: Es gibt keinen Widerspruehslosigkeitsbeweis ftir M
-bzw. A, der innerhalb yon M bzw. A formalisiert werden k~nnte,
-vorausgesetzt da$ M bzw. A widerspruehsfrei ist. Es set ausdrtieklieh bemerkt, dal~ Satz XI (und die entspreehenden Resultate fiber
-M~ A) in keinem Widersprueh zum Hilbertsehen formalistisehen
-Standpunkt stehen. Denn dieser setzt nur die Existenz eines mit
-finiten Mitteln gefiihrten Widerspruehsfreiheitsbeweises voraus und
-es ware denkbar, dag es finite Beweise gibt, die sieh in .P (bzw.
-M~ A) nicht darstellen lassen.
-Da ftir jede widerspruehsfreie Klasse z w nieht • ist,
-so gibt es sehon immer dann (aus • unentseheidbare S~ttze (ntimlieh
-w), wenn Neff (w) nieht z-beweisbar ist; m. a. W. man kann in Satz VI
-66) Vonder Definition ftlr ,rekursiv" auf Seite 179 bis zum Beweis yon
-Satz VI inkl.
-67) DaB aus (23) auf die Riehtigkeit yon w Imp (17 Gen r) geschlosse~
-werden kann, beruht einfach darauf, daii der unentscheidbare Satz 17 Gen r,
-wie gleich zu Anfang bemerkt, seine eigene Unbeweisbarkeitbehauptet.
-68)u J. v. :Neumann, Zur Hilbertsehen Beweistheorie,Math. Zeitschr.
-~6, 2927. n
-198 Kurt G6 del, Cber formal unentscheidbareShtze etc.
-die Voraussetzung der ~o-Widerspruchsfreiheit ersetzen dureh die
-folgende: Die Aussage ,,z ist widerspruehsvoll" ist nieht z-beweisbar.
-(Man beachte, da~ es widerspruchsfreie • gibt, fiir die diese Aussage
-• ist.)
-Wit haben uns in dieser Arbeit im wesentliehen auf das System P besehrankt und die Anwendungen auf andere Systeme nut
-angedeutet. In roller Allgemeinheit werden die Besultate in einer
-demnaehst erseheinenden Fortsetzung ausgesproehen und bewiesen
-werden. In dieser Arbeit wird aueh der nut skizzenhaft gefiihrte
-Beweis yon Satz XI ausftihrlieh dargestellt werden.
+sind anch in P ausdrückbar (bzw. beweisbar). 
+Denn es wurden überall nur die gewöhnlichen Definitions- und 
+Beweismethoden der klassischen Mathematik verwendet, 
+wie sie im System P formalisiert sind. 
+Insbesondere ist χ (wie jede rekursive Klasse) in P definierbar. 
+
+66) Von der Definition für "rekursiv" auf Seite 179 bis zum 
+    Beweis von Satz VI inkl.
+
+Sei w die Satzformel, durch welche in P Wid(χ) ausgedrückt wird. 
+Die Relation Q(x, y) wird gemäß (8.1), (9), (10) durch 
+das Relationszeichen q ausgedrückt, 
+folglich Q(x,p) durch r 
+                  |   19 |
+[da nach (12) r=Sb|q Z(p)| 
+und der Satz (x)Q(x,p) durch 17 Gen r.
+
+Wegen (24) ist also w Imp (17 Gen r) in P beweisbar 67) 
+(um so mehr χ-beweisbar). 
+Wäre nun w χ-beweisbar, so wäre auch 17 Gen r χ-beweisbar und 
+daraus wtirde nach (23) folgen, daß χ nicht widerspruehsfrei ist.
+
+67) Daß aus (23) auf die Richtigkeit von w Imp (17 Gen r) geschlossen werden kann, 
+    beruht einfach darauf, daß der unentscheidbare Satz 17 Gen r,
+    wie gleich zu Anfang bemerkt, seine eigene Unbeweisbarkeit behauptet.
+
+Es sei bemerkt, daß auch dieser Beweis konstruktiv ist, 
+d. h.  er gestattet, falls ein Beweis aus χ für w vorgelegt ist, 
+einen Widerspruch aus χ effektiv herzuleiten. 
+Der ganze Beweis für Satz XI läßt sich wörtlich auch auf 
+das Axiomensystem der Mengenlehre M und 
+der klassisehen Mathematik 68) A übertragen und liefert auch hier alas Resultat: 
+Es gibt keinen Widerspruchslosigkeitsbeweis für M bzw. A, 
+der innerhalb von M bzw. A formalisiert werden könnte,
+vorausgesetzt daß M bzw. A widerspruehsfrei ist. 
+Es sei ausdrücklich bemerkt, daß Satz XI (und die entsprechenden
+Resultate über M, A) in keinem Widersprueh zum Hilbertschen
+formalistischen Standpunkt stehen. 
+Denn dieser setzt nur die Existenz eines mit
+finiten Mitteln geführten Widerspruchsfreiheitsbeweises voraus und
+es wäre denkbar, daß es finite Beweise gibt, 
+die sich in .P (bzw.  M, A) nicht darstellen lassen.
+
+68) Vgl. J. v. Neumann, Zur Hilbertschen Beweistheorie, Math. Zeitschr.
+    26, 1927.
+
+Da für jede widerspruchsfreie Klasse χ w nicht χ-beweisbar ist,
+so gibt es schon immer dann (aus χ) unentscheidbare Sätze (nämlich w), 
+wenn Neg(w) nicht χ-beweisbar ist; 
+
+/198/
+m.a.W. man kann in Satz VI die Voraussetzung der ω-Widerspruchsfreiheit ersetzen 
+durch die folgende: 
+Die Aussage "χ ist widerspruehsvoll" ist nicht ×-beweisbar.
+(Man beachte, daß es widerspruchsfreie × gibt, 
+für die diese Aussage ×-beweisbar ist.)
+
+Wir haben uns in dieser Arbeit im wesentliehen auf das System P beschränkt und 
+die Anwendungen auf andere Systeme nut angedeutet. 
+In roller Allgemeinheit werden die Besultate in 
+einer demnaehst erseheinenden Fortsetzung ausgesproehen und bewiesen werden. 
+In dieser Arbeit wird auch der nut skizzenhaft geführte
+Beweis von Satz XI ausführlich dargestellt werden.
 (Eingelangt: 17. XI. 1930.)
+
+
