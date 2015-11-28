@@ -3133,12 +3133,14 @@ Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
     Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
     der Form (x)F(x) (F rekursiv) gibt.
 
-63) 7. ist widerspruchsfrei (abgektirzt als Wid (x)) wird folgenderma~ea
-definiert: Wid (z) ~_ (E x) [Form (x) &Bewu (x)].
+63) χ ist widerspruchsfrei (abgekürzt als Wid (χ)) wird 
+    folgendermaßen definiert: 
+                        ____
+    Wid(χ)≡(Ex)[Form(x)&Bewχ(x)].
 
-~4) Dies folgt, wenn man ftir z die leere Klasse yon Formeln einsetzt.
+64) Dies folgt, wenn man für χ die leere Klasse von Formeln einsetzt.
 
-~) r h~ngt nattirlieh (ebenso wie p) yon z ab.
+65) r h~ngt nattirlieh (ebenso wie p) yon z ab.
 Uber formal unentscheidbare S~tz~der Prineipia Mathematica etc. 197
 d. h. nach (8"1):
 =
