@@ -3084,19 +3084,47 @@ was zu beweisen war 61).
 且因為 (22) 之正確性，對 Ψn' 及 a 而言，(x)[Φn(x)=0] 或 (x)[Φ(x)=0] 成立,
 這可被證明 61)。 
 
+61) Aus Satz X folgt z.B., 
+    daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
+    wenn man das Entscheidungsproblem des e. F. gelöst hätte.
+
+61) 從命題 X 導出，
+    例如若已解出受限函數計算決定問題，則費馬及哥德巴赫問題可解。
+    
+
 /196/
 
 Da man die Überlegungen, welche zu Satz X führen, 
-(für jedes spezielle F) auch innerhalb des Systems P durehführen kann,
+(für jedes spezielle F) auch innerhalb des Systems P durchführen kann,
 so ist die Äquivalenz zwischen einem Satz der Form (x)F(x)(F rekursiv) 
 und der Erfüllbarkeit der entsprechenden Formel des e. F. in P beweisbar 
-und daher folgt aus der Unentseheidbarkeit des einen
-die des anderen, womit Satz IX bewiesen ist. 62)
+und daher folgt aus der Unentscheidbarkeit des einen die des anderen, 
+womit Satz IX bewiesen ist. 62)
 
-Aus den Ergebnissen von Abschnitt 2 folgt ein merkwürdiges
-Resultat, bezüglich eines Widerspruchslosigkeitsbeweises des Systems P
+因為導出命題 X 之脈絡也能於 P 系統（對每個特例 F）重新實現，
+所以形式如 (x)F(x)（F 遞迴） 之命題與
+在 P 中所對應受限函數計算公式之可滿足性之間的等價性是可證的，
+且於此推論出對立面之不可決定性，
+故命題 IX 是可證的。62)
+
+62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre und 
+    dessen Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
+    Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
+    der Form (x)F(x) (F rekursiv) gibt.
+
+62) 命題 IX 自然也對集合公理系統及
+    其經由公理之遞迴可定義ω-一致性類別之擴充有效，
+    這是因為這些系統也確實存在形式如(x)F(x)（F 遞迴）之不可決定命題。 
+
+4.
+
+Aus den Ergebnissen von Abschnitt 2 folgt ein merkwürdiges Resultat, 
+bezüglich eines Widerspruchslosigkeitsbeweises des Systems P
 (und seiner Erweiterungen), 
 das durch folgenden Satz ausgesprochen wird:
+
+由第 2 節之結論且對 P 系統（及其擴充）之邏輯一致性之證明，可推論出這特別的結果，
+其由以下命題表達：
 
 Satz XI: 
 Sei χ eine beliebige rekursive widerspruchsfreie 63) Klasse von Formeln, 
@@ -3123,15 +3151,6 @@ d. h. nach (6.1):
 Wid(χ)->(x)xBχ(17 Gen r)
                          |   19 |
 Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
-
-61) Aus Satz X folgt z.B., 
-    daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
-    wenn man das Entscheidungsproblem des e. F. gelöst hätte.
-
-62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre und 
-    dessert Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
-    Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
-    der Form (x)F(x) (F rekursiv) gibt.
 
 63) χ ist widerspruchsfrei (abgekürzt als Wid (χ)) wird 
     folgendermaßen definiert: 
