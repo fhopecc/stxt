@@ -292,7 +292,7 @@ Folgen von solchen 9)
 und daher (wenigstens teilweise) in den Symbolen des Systems PM 
 selbst ausdrückbar.
 
-後設數學之項目(命題)可轉為自然數之項目(命題)。
+後設數學之項目(命題)可轉為自然數之項目(命題)或
 此類數列 9) 因而(至少部分)可以PM系統之符號自我表達。
 
 9) m.a.W.: Das oben beschriebene Verfahren liefert 
@@ -3128,38 +3128,68 @@ das durch folgenden Satz ausgesprochen wird:
 
 Satz XI: 
 Sei χ eine beliebige rekursive widerspruchsfreie 63) Klasse von Formeln, 
-dann gilt: Die Satzformel, welche besagt, daß χ widerspruchsfrei ist, 
+dann gilt: 
+Die Satzformel, welche besagt, daß χ widerspruchsfrei ist, 
 ist nicht χ-beweisbar; 
 insbesondere ist die Widerspruchsfreiheit von P in P unbeweisbar 64),
 vorausgesetzt, daß P widerspruchsfrei ist 
 (im entgegengesetzten Fall ist natürlich jede Aussage beweisbar).
 
-Der Beweis ist (in Umrissen skizziert) der folgende: 
-Sei χ eine beliebige für die folgenden Betrachtungen ein 
-für allemal gewhälte rekursive Klasse von Formeln 
-(im einfachsten Falle die leere Klasse). 
-Zum Beweise der Tatsache, 
-daß 17 Gen r nicht χ-beweisbar ist 65), 
-wurde, wie aus 1. Seite 189 hervorgeht, nur die Widerspruchsfreiheit von χ benutzt, 
-d. h. es gilt:
-        ____
-Wid(χ)->Bewχ(17 Gen r) (23)
-
-d. h. nach (6.1):
-
-           ___
-Wid(χ)->(x)xBχ(17 Gen r)
-                         |   19 |
-Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
+命題 XI：
+χ 是一個任意遞迴一致公式 63) 類別使得：
+前述 χ 為一致之命題公式不是 χ-可證；
+特別是假設 P 是一致的（其反面自然是每個陳述都可證），
+P 的一致性在 P 中是不可證 64)。
 
 63) χ ist widerspruchsfrei (abgekürzt als Wid (χ)) wird 
     folgendermaßen definiert: 
+
+63) χ 是一致的（簡寫為 Wid(χ)）定義如下：
+
                         ____
     Wid(χ)≡(Ex)[Form(x)&Bewχ(x)].
 
 64) Dies folgt, wenn man für χ die leere Klasse von Formeln einsetzt.
 
+64) 若以公式之空類別取代 χ 可推論出來。
+
+Der Beweis ist (in Umrissen skizziert) der folgende: 
+Sei χ eine beliebige für die folgenden Betrachtungen 
+ein für allemal gewählte rekursive Klasse von Formeln 
+(im einfachsten Falle die leere Klasse). 
+Zum Beweise der Tatsache, 
+daß 17 Gen r nicht χ-beweisbar ist 65), 
+wurde, wie aus 1. Seite 189 hervorgeht, nur die Widerspruchsfreiheit von χ benutzt, 
+d. h. es gilt:
+
+證明（草繪出大綱）如下：
+令 χ 為以下論述中每次所選定的遞迴公式類別
+（最簡單的情形為空類別）。
+對 17 Gen r 非 χ-可證 65) 事實之證明將僅應用 χ 之一致性，
+如用 189 頁之 1. 節所呈現一般，
+即如下：
+        ____
+Wid(χ)->Bewχ(17 Gen r) (23)
+
+
 65) r hängt natürlich (ebenso wie p) von χ ab.
+
+65) r 取決於 χ （就如同 p 般）。
+
+譯註：von etw abhängt 取決於某物 depned on sth.
+
+d. h. nach (6.1):
+
+依據（6.1）即如下：
+           ___
+Wid(χ)->(x)xBχ(17 Gen r)
+
+                         |   19 |
+Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
+
+                        |   19 |
+依據 (13) 得 17 Gen r=Sb|p Z(p)| 且由此可得：
+
 
 /197/
            _____________
@@ -3168,74 +3198,129 @@ Wid(χ)->(x)xBχSb|p Z(p)|
 
 d. h. nach (8.1):
 
+即為依據（8.1）可得：
+
 Wid(χ)->(x)Q(x,p) (24)
 
 Wir stellen nun folgendes fest: 
 Sämtliche in Abschnitt 2 66) und
 Abschnitt 4 bisher definierte Begriffe (bzw. bewiesene Behauptungen)
-sind anch in P ausdrückbar (bzw. beweisbar). 
+sind auch in P ausdrückbar (bzw. beweisbar). 
 Denn es wurden überall nur die gewöhnlichen Definitions- und 
 Beweismethoden der klassischen Mathematik verwendet, 
 wie sie im System P formalisiert sind. 
 Insbesondere ist χ (wie jede rekursive Klasse) in P definierbar. 
 
-66) Von der Definition für "rekursiv" auf Seite 179 bis zum 
-    Beweis von Satz VI inkl.
+現在建構如下：
+第 2 節 66) 及第 4 節至今所有已定義的觀念（和已證明的斷言）
+也都可於 P 中表達（及證明）。
+因為如同形式化 P 系統般，
+每處僅應用古典數學中一般的定義及證明方法。
+特別是 χ （如同每個遞迴類別）可定義於 P 中。
+
+
+66) Von der Definition für "rekursiv" auf Seite 179 bis 
+    zum Beweis von Satz VI inkl.
+
+66) 包含自 179 頁的「遞迴」定義到命題 VI 之證明。
 
 Sei w die Satzformel, durch welche in P Wid(χ) ausgedrückt wird. 
 Die Relation Q(x, y) wird gemäß (8.1), (9), (10) durch 
 das Relationszeichen q ausgedrückt, 
 folglich Q(x,p) durch r 
                   |   19 |
-[da nach (12) r=Sb|q Z(p)| 
+[da nach (12) r=Sb|q Z(p)|] 
 und der Satz (x)Q(x,p) durch 17 Gen r.
 
-Wegen (24) ist also w Imp (17 Gen r) in P beweisbar 67) 
+
+令 w 為於 P 中表達 Wid(χ) 之命題式。
+按照 (8.1), (9), (10) 中以關係符號 q 表達關係 Q(x, y)，
+                                         |   19 |
+接著以 r 表達 Q(x,p) 「因為依據 (12) r=Sb|q Z(p)|」
+及以 17 Gen r 表達命題 (x)Q(x,p)。 
+
+Wegen (24) ist also w Imp(17 Gen r) in P beweisbar 67) 
 (um so mehr χ-beweisbar). 
 Wäre nun w χ-beweisbar, so wäre auch 17 Gen r χ-beweisbar und 
-daraus wtirde nach (23) folgen, daß χ nicht widerspruehsfrei ist.
+daraus würde nach (23) folgen, daß χ nicht widerspruehsfrei ist.
+
+依據 (24) w Imp(17 Gen r) 於 P 中也是可證 67)（更不用說也是 χ-可證）。
+若現在 w 是 χ-可證，則 17 Gen r 也是 χ-可證且由此可依據 (23) 
+推得 χ 是不一致。
 
 67) Daß aus (23) auf die Richtigkeit von w Imp (17 Gen r) geschlossen werden kann, 
     beruht einfach darauf, daß der unentscheidbare Satz 17 Gen r,
     wie gleich zu Anfang bemerkt, seine eigene Unbeweisbarkeit behauptet.
 
+67) 由 (23) 可推論出 w Imp (17 Gen r) 的正確性，
+    這基於不可決定命題 17 Gen r，如同一開始所強調的，
+    其陳述本身的不可證性。 
+
 Es sei bemerkt, daß auch dieser Beweis konstruktiv ist, 
-d. h.  er gestattet, falls ein Beweis aus χ für w vorgelegt ist, 
+d. h. er gestattet, falls ein Beweis aus χ für w vorgelegt ist, 
 einen Widerspruch aus χ effektiv herzuleiten. 
 Der ganze Beweis für Satz XI läßt sich wörtlich auch auf 
 das Axiomensystem der Mengenlehre M und 
-der klassisehen Mathematik 68) A übertragen und liefert auch hier alas Resultat: 
+der klassisehen Mathematik 68) A übertragen und 
+liefert auch hier das Resultat: 
 Es gibt keinen Widerspruchslosigkeitsbeweis für M bzw. A, 
 der innerhalb von M bzw. A formalisiert werden könnte,
 vorausgesetzt daß M bzw. A widerspruehsfrei ist. 
-Es sei ausdrücklich bemerkt, daß Satz XI (und die entsprechenden
-Resultate über M, A) in keinem Widersprueh zum Hilbertschen
-formalistischen Standpunkt stehen. 
-Denn dieser setzt nur die Existenz eines mit
-finiten Mitteln geführten Widerspruchsfreiheitsbeweises voraus und
-es wäre denkbar, daß es finite Beweise gibt, 
-die sich in .P (bzw.  M, A) nicht darstellen lassen.
+
+這強調這些證明也是可建構的，
+即若 χ 的證明可產出 w 則允許可有效推導出 χ 之矛盾。
+命題 XI 之完整證明由集合公理系統 M 或古典數學 68) A 逐字推論出來，
+且於此也推論出以下結果：
+假設 M 或 A 均為一致的，不存在可於 M 或 A 下形式化之矛盾證明。
+
 
 68) Vgl. J. v. Neumann, Zur Hilbertschen Beweistheorie, Math. Zeitschr.
     26, 1927.
+
+68) 參閱馮紐曼，希爾伯特的證明理論，數學期刊 26, 1927。
+
+Es sei ausdrücklich bemerkt, daß Satz XI 
+(und die entsprechenden Resultate über M, A) 
+in keinem Widerspruch zum Hilbertschen formalistischen Standpunkt stehen. 
+Denn dieser setzt nur die Existenz eines 
+mit finiten Mitteln geführten Widerspruchsfreiheitsbeweises voraus und
+es wäre denkbar, daß es finite Beweise gibt, 
+die sich in P (bzw.  M, A) nicht darstellen lassen.
+
+明確的注意到命題 XI（與在 M, A 下對應之結果）
+在希爾伯特形式化觀點下是沒有矛盾的。
+因為這些觀點僅假定存在以有限方法執行之一致性證明，
+且可想像存在不可以 P (或 M 或 A) 下建構之有限證明
+
+/198/
 
 Da für jede widerspruchsfreie Klasse χ w nicht χ-beweisbar ist,
 so gibt es schon immer dann (aus χ) unentscheidbare Sätze (nämlich w), 
 wenn Neg(w) nicht χ-beweisbar ist; 
 
-/198/
-m.a.W. man kann in Satz VI die Voraussetzung der ω-Widerspruchsfreiheit ersetzen 
-durch die folgende: 
+因為每個一致類別 χ w 不是 χ-可證，
+故已總是存在（源自 χ）的不可決定命題（名為 w），
+
+m. a. W. man kann in Satz VI die Voraussetzung der ω-Widerspruchsfreiheit 
+ersetzen durch die folgende: 
 Die Aussage "χ ist widerspruehsvoll" ist nicht ×-beweisbar.
 (Man beachte, daß es widerspruchsfreie × gibt, 
 für die diese Aussage ×-beweisbar ist.)
 
-Wir haben uns in dieser Arbeit im wesentliehen auf das System P beschränkt und 
-die Anwendungen auf andere Systeme nut angedeutet. 
-In roller Allgemeinheit werden die Besultate in 
-einer demnaehst erseheinenden Fortsetzung ausgesproehen und bewiesen werden. 
-In dieser Arbeit wird auch der nut skizzenhaft geführte
+換言之在命題 VI 中，ω-一致性之假定可用以下取代：
+「χ 是矛盾的」之陳述不是 χ-可證。
+（可再推得，存在一致的 χ 使得這些陳述是 χ-可證。）
+
+Wir haben uns in dieser Arbeit im wesentlichen auf das System P beschränkt und 
+die Anwendungen auf andere Systeme nur angedeutet. 
+In voller Allgemeinheit werden die Resultate in 
+einer demnächst erscheinenden Fortsetzung ausgesprochen und bewiesen werden. 
+In dieser Arbeit wird auch der nur skizzenhaft geführte
 Beweis von Satz XI ausführlich dargestellt werden.
 (Eingelangt: 17. XI. 1930.)
 
+這項工作局限在 P 系統之基礎及僅指出其它系統中的應用。
+在即將來到的續篇中將更為一般化表達且證明這些結果。
+這些工作僅將前述草繪的證明去展現其細節。
+（接受日期： 17. XI. 1930.）
 
