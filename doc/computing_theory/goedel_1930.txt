@@ -5,6 +5,8 @@ der Principia Mathematica und verwandter System I 1)
 
 花蓮 2013/03/04 星期一 
 花蓮 2013/05/03 星期五 
+昭明 2015/11/29 星期六 初譯完畢
+
 
 譯序
 ----
@@ -62,9 +64,10 @@ x~ y        x Aeq y
 本文
 ----
 
+/173 頁/
+
 Von Kurt Gödel in Wien.
 
-/173 頁/
 庫爾特．哥德爾於維也納
 
 1) Vgl. die im Anzeiger der Akad. d. Wiss. 
@@ -79,34 +82,37 @@ Von Kurt Gödel in Wien.
 Die Entwicklung der Mathematik in der Richtung 
 zu größerer Exaktheit hat bekanntlich dazu geführt, 
 daß weite Gebiete von ihr formalisiert wurden, 
-in der Art, daß das Beweisen nach einigen wenigen
-mechanischen Regeln vollzogen werden kann.
+in der Art, daß das Beweisen nach einigen wenigen mechanischen Regeln 
+vollzogen werden kann.
 
-眾所皆知數學的發展朝著更精確的方向已引導其廣闊版圖變得更形式化，
-以此證明能成為執行少數統整的機械化規則。
+眾所皆知數學朝著更精確方向的發展使得其眾多領域更為形式化，
+以此方式，證明能依據少數統整之機械化規則達成。
+
+譯註：vollzogen 完成地，vollziehen的過去分詞
 
 Die umfassendsten derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) 2) einerseits, 
 das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
-現在已建構之最全面形式系統一個是「數學原理」(PM)，
-另一個是「熱梅若．佛蘭克」(由馮鈕曼繼續擴增)
-集合論之公設系統。
+現今已建構之最全面形式系統一個是數學原理(PM) 2)之系統，
+另一個是熱梅若．佛蘭克集合論之公設系統 3)(由馮鈕曼繼續擴增)。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
    Cambridge 1925. 
-
    Zu den Axiomen des Systems PM rechnen wir insbesondere auch: 
    Das Unendlichkeitsaxiom (in der Form: 
    es gibt genau abzählbar viele Individuen), 
    das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
 2) 懷海德及羅素，數學原理，第二版，劍橋出版 1925。
-
-   對 PM 系統之定理，我們也特別計算出以下定理：
-   無窮公設(形式如下：它給定精確可數多的個體)，
+   PM 系統也特別包含以下定理：
+   無窮公設(形式如下：存在精確可數多個之個體)，
    簡化和選擇公設(對所有類型)。
+                    
+譯註：無窮公設：EN: φεN,{(xεN)->(xU{x})εN}
+      簡化公設：
+      選擇公設：
 
 3) Vgl. A. Fraenkel, Zehn Vorlesungen über 
    die Grundlegung der Mengenlehre, Wissensch. u. Hyp. Bd. XXXI. 
@@ -118,16 +124,17 @@ Axiomensystem der Mengenlehre 3) andererseits.
    馮．紐曼，集合論之公設化。
    數學精選 27 期，1928。純粹及應用數學期刊。154(1925)，160(1929)。
    
-   譯註：我認為的上述期刊的縮寫如下：
+   譯註：上述期刊的縮寫應如下：
    Mathematik Zeitschrift
    Journal für reine und angewandte Mathematik. 
 
    Wir bemerken, daß man zu den in der angeführten Literatur
-   gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
-   des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
+   gegebenen mengentheoretischen Axiomen noch 
+   die Axiome und Schlußregeln des Logikkalküls hinzufügen muß, 
+   um die Formalisierung zu vollenden.
 
-   應注意到必須加上邏輯計算之公設及推論規則
-   至前述文獻給定之集合理論公設以達成形式化。 
+   可注意到，對前述文獻給定之集合理論公設而言，
+   仍必須加上邏輯計算之公設及推論規則以達成形式化。 
 
    Die nachfolgenden Überlegungen gelten auch für die 
    in den letzten Jahren 
@@ -148,9 +155,9 @@ Axiomensystem der Mengenlehre 3) andererseits.
 Diese beiden Systeme sind so weit,
 daß alle heute in der Mathematik angewendeten Beweismethoden 
 in ihnen formalisiert, 
-d.h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
+d. h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統如此廣泛使如今所有數學上應用到之證明方法都可在其下形式化，
+這兩個系統如此廣泛到使得現今所有數學上應用到之證明方法都可在其下形式化，
 即簡化至少數的公設及推論規則。
 
 Es liegt daher die Vermutung nahe, 
@@ -184,6 +191,8 @@ die sich aus den Axiomen nicht entscheiden lassen.
    沒有其它的詞如 + (加), . (乘) 出現， 
    都基於整數，前置 (x) 也僅包含整數。
  
+/174頁/
+
 Dieser Umstand liegt nicht 
 etwa an der speziellen Natur der aufgestellten Systeme, 
 sondern gilt für eine sehr weite Klasse formaler Systeme,
@@ -194,7 +203,6 @@ vorausgesetzt, daß durch die binzugefügten Axiome
 keine falschen Sätze von der in Fußnote 4) 
 angegebenen Art beweisbar werden.
 
-/174頁/
 這情形並所建置系統特定本質所致，
 而是存在於更廣泛之形式系統類別，
 特別是包含加入有限公設 5) 至前述兩個系統之系統，
@@ -332,6 +340,8 @@ folgendermalßen her:
 
 現在建置一個系統 PM 之不可決定之命題，
 即對命題 A 而言，A 或非 A 都可證，如下：
+
+/175頁/
 
 Eine Formel aus PM mit genau einer freien Variablen, 
 u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
@@ -509,6 +519,7 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     這證明德文與英文是 2 種截然不同的語言。
    
 /176/
+
 Die eben auseinandergesetzte Beweismethode
 läßt sich offenbar auf jedes formale System anwenden, 
 das erstens inhaltlich gedeutet über genügend Ausdrucksmittel verfügt, 
@@ -845,6 +856,7 @@ I.
 
 邏輯恆等式
 ..........
+/178/
 
 II. Jede Formel, die aus den folgenden Schemata durch 
     Einsetzung beliebiger Fromeln für p, q, r entsteht.
@@ -1008,6 +1020,8 @@ Weise eineindeutig natürliche Zahlen zu:
 
 我們以下列方式一對一的配置自然數給每個系統 P 之基礎符號：
 
+/179/
+
 "0" ... 1 "V"...7 "("...11
 "f" ... 3 "Π"...9 ")"...13
 "~" ... 5
@@ -1164,6 +1178,8 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 級別
 ++++
 
+/180/
+
 Die Länge der kürzesten Reihe von φi, 
 welche zu einer rekursiven Funktion φ gehört, 
 heißt ihre Stufe. 
@@ -1293,7 +1309,7 @@ nämlich:
 
     γ(x,y)=0, 當 x=y;γ(x,y)=1, 當 x≠y 
 
-
+/181/
 
 recursiv sind,
 wie man sich leicht überzeugen kann. 
@@ -1436,6 +1452,7 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 
 公式操作
 ........
+/182/
 
 1. x/y≡(Ez)[z≦ x&x=y.z] 33)
 
@@ -1573,7 +1590,7 @@ x 是質數。
    Neg(x) ist die Negation von x.
 
    Neg(x) 是 x 負值操作。
-
+/183/
 14.x Dis y ≡ E(x) * R(7) * E(y)
 
    x Dis y ist die Disjunktion aus x und y.
@@ -1703,7 +1720,8 @@ x 是質數。
 
    x 中的變數 v 是綁定於 n 個位置。
 
-/184頁/
+/184/
+
 25.v Fr n,x ≡ Var(v) & Form(x) & v = n Gl x &
                         _________
               n≦ l(x) & v Geb n,x
@@ -1822,7 +1840,7 @@ x 是質數。
     
 34.Z-Ax(x) ≡ (x=z1 v x=z2 v x=z3)
 
-/185頁/
+/185/
 35.A1-Ax(x) ≡ (Ey)[ y≦ x
                   & Form(y)
                   & x = (y Dis y) imp y]
@@ -1918,6 +1936,7 @@ x 是質數。
 
 
 /186頁/
+
 44.Bw(x) ≡ (n){ 0<n≦ l(x) -> Ax(n Gl x) 
               V (Ep,q)[ 0<p,q<n 
                       & Fl(n Gl x, p Gl x, q Gl x)]}
@@ -2048,6 +2067,8 @@ können sämtlich im System P formal nachgebildet werden.
 定義流程藉由衍生自 φ1...φk 之 φ (替代及遞迴定義)
 可全部於系統 P 形式模型化。
 
+/187頁/
+
 Tut man dies, 
 so erhält man aus r1...rk ein neues Relationszeichen r 41),
 für welches man die Geltung von (3), (4) 
@@ -2157,6 +2178,8 @@ Es gilt offenbar:
 (x)[Bewχ(x) ～ xεFlg(χ)]  (7)
 (x)[ Bew(x) ->  Bewχ(x)]  (8)
 
+/188頁/
+
 Nun definieren wir die Relation:
 
 現在定義關係：
@@ -2246,6 +2269,8 @@ xBχ(17 Gen r) -> Bewχ |Sb|r Z(x)||     (15)
 
                       |      |   17 ||
 xBχ(17 Gen r) -> Bewχ |Neg Sb|r Z(x)|| (16)
+
+/189頁/
 
 Daraus ergibt sich:
 
@@ -2374,10 +2399,12 @@ daß sie ω-widerspruehsfrei und entscheidungsdefinit ist.
 於是這滿足不可決定命題之存在，
 藉由假設正個類別χ，設定其為 ω-一致且可有限決定。
 
-Denn die Entscheidungsdefinitheit überträgt sich von χ auf x Bχ y (vgl.(5),(6)) 
-und auf Q(x, y) (vgl. (8.1)) und nur dies wurde in obigem Beweise verwendet. 
-
 /190頁/
+Denn die Entscheidungsdefinitheit überträgt sich 
+von χ auf x Bχ y (vgl.(5),(6)) 
+und auf Q(x, y) (vgl. (8.1)) und nur dies wurde 
+in obigem Beweise verwendet. 
+
 因為可有限決定性自 χ 傳遞至 x Bχ y (依據(5),(6)) 及 Q(x,y) (依據(8.1))，
 且上述證明僅應用到這些。 
 
@@ -2525,6 +2552,8 @@ durch eine rekursiv definierbare ω-widerspruchsfreie Klasse von Axiomen.
 且對每個經由增加一個由公設遞迴定義
 且 ω-一致性之類別對前述系統之擴展也是如此。
 
+/191頁/
+
 Zu den Systeman, welche die Voraussetzungen 1, 2 erfüllen,
 gehöran, wie man leicht bestätigen kann, 
 das Zermelo-Fraenkalsche und 
@@ -2642,6 +2671,8 @@ und wenden vollständige Induktion nach der Stufe von φ an.
 每個形式如 x0=φ(x1...xn) 之關係是算術的，其中 φ 是遞迴的
 且可應用完整歸納至 φ 的階級。 
 φ 為第 s-階級(s>1)。因此除了可得：
+
+/192頁/
 
 1.φ(x1...xn)=ρ[χ1(x1...xn),χ2(x1...xn)...χm(x1...xn)]51)
 
@@ -2845,7 +2876,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     依據命題 IX 反例之存在並非總是可證（在前述形式系統內）。
     數學與物理月刊 XXXVIII, 2, Band. 1。
 
-/194/
+/194頁/
 Dies beruht auf:
 
 這基於：
