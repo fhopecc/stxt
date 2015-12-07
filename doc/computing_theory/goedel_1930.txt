@@ -11,16 +11,24 @@ der Principia Mathematica und verwandter System I 1)
 譯序
 ----
 
+中國在戰國初期邏輯發展似乎是為了辨論而產生。
+西方與中國最大的差別就在公理化系統，
+該系統藉由少數預設公理出發，應用有限的推論程序，
+推論出定理，成就整個理論。
+
+此種想法，根植於整個西方思想中，
+如同美國憲法也應用了公設法。
+
 本文中沒有一句廢話。
 
 譯詞規則：
 
 Axiom       公設：預設為真之陳述
-Begriff     概念、項目、定義
+Satz        命題：可判定真假之陳述
+Begriff     觀念或定義：引入一個新的詞代表某項事物
 Individuenbereich   定義域，函數之定義域
 Individuum  個體，可區分之成員
 Menge       集合
-Satz        命題：可判定真假之陳述
 Stelle      位置
 tupel       值組
 wider-spruchs-freie 一致，源自沒有矛盾 
@@ -157,7 +165,7 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d. h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統如此廣泛到使得現今所有數學上應用到之證明方法都可在其下形式化，
+這兩個系統已廣泛到現今所有數學上應用到之證明方法都可在其下形式化，
 即簡化至少數的公設及推論規則。
 
 Es liegt daher die Vermutung nahe, 
