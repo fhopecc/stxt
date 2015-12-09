@@ -17,7 +17,16 @@ der Principia Mathematica und verwandter System I 1)
 推論出定理，成就整個理論。
 
 此種想法，根植於整個西方思想中，
-如同美國憲法也應用了公設法。
+最好的例子美國獨立宣言也呈現公設法的推理模式。
+
+公設法邏輯最重要的特質是其提供了嚴謹的推論程序，
+使人們可由少數預設公理出發，
+推論出其它的事實。
+就好像是一個望遠鏡，藉由公設法推理，可以看到很遠的事物。
+最佳的例子便是牛頓的力學，
+從幾個觀察到的基本定律(law)出發，推論出整個力學體係。
+
+中國文化的本質，缺少公設法。
 
 本文中沒有一句廢話。
 
@@ -120,15 +129,22 @@ Axiomensystem der Mengenlehre 3) andererseits.
                     
 譯註：無窮公設：EN: φεN,{(xεN)->(xU{x})εN}
       簡化公設：
-      選擇公設：
+      選擇公設：能從無限個集合中，每個集合取一個元素組成新的集合。
 
-3) Vgl. A. Fraenkel, Zehn Vorlesungen über 
-   die Grundlegung der Mengenlehre, Wissensch. u. Hyp. Bd. XXXI. 
-   參閱艾．法蘭柯，論集合論基礎工作之十個講題，科學雜誌．尤．XXXI.期。
+3) Vgl. A. Fraenkel, 
+   Zehn Vorlesungen über die Grundlegung der Mengenlehre, 
+   Wissensch. u. Hyp. Bd. XXXI. 
+
+   參閱艾．法蘭柯，論集合論基礎工作之十個講題，科學與假設 XXXI 期。
+
+譯註：Wissensch. u. Hyp. Bd. XXXI 將題目 google 後，找出原始資料，
+      為以下之縮寫：
+      Wissenschaft und Hypothese Bd. XXXI
 
    J,v. Neumann, Die Axiomatisierung der Mengenlehre. 
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
+
    馮．紐曼，集合論之公設化。
    數學精選 27 期，1928。純粹及應用數學期刊。154(1925)，160(1929)。
    
