@@ -167,14 +167,29 @@ Axiomensystem der Mengenlehre 3) andererseits.
 
    近幾年希爾伯特和他的同事所建置之形式系統(與未出版的工作)也是如此。
 
-   Vgl. D. Hilbert, Math. Ann. 88, Abh. aus d. math. Sem. 
-   der Univ. Hamburg I (1922), VI (1928). 
-   參閱笛．希爾伯特，88，漢堡大學 I(1922), VI(1928)
+   Vgl. D. Hilbert, Math. Ann. 88, 
+   Abh. aus d. math. Sem.  der Univ. Hamburg I (1922), VI (1928). 
+   參閱希爾伯特，88，漢堡大學數學研討會論文集 I(1922), VI(1928)
 
-   P. Bernay s, Math. Ann. 90. J.v.Neumann, 
-   Math. Zeitsehr. 26 (1927). 
-   W. Aekermann, Math. Ann. 93.
-   伯內，數學年報
+   譯註：Abh. aus d. math. Sem. der Univ. Hamburg 
+   為以下縮寫：
+   Abhandlungen aus dem Mathematischen Seminar der Universität Hamburg
+
+   P. Bernays, Math. Ann. 90. 
+   伯納斯，數學年報 90.
+
+   譯註：Math. Ann.
+   為以下縮寫：
+   Mathematische Annalen
+
+   J. v. Neumann, Math. Zeitsch. 26 (1927).  
+   馮紐曼，數學雜誌 26 (1927)   
+
+   譯註：Math. Zeitsch.
+   Mathematische Zeitschrift
+
+   W. Ackermann, Math. Ann. 93.
+   亞克瑪，數學年報 93 
 
 Diese beiden Systeme sind so weit,
 daß alle heute in der Mathematik angewendeten Beweismethoden 
@@ -190,17 +205,21 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-因此使我們以為這些公設及推論法則可決定以前述系統形式所表達的所有數學問題。
+因此似乎可假定這些公設及推論法可以決定
+能完全以前述系統所表達的所有數學問題。
+
+譯註：die Vermutung nahe, daß ... 似乎可假定 ... 
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
-sondern daß es in den beiden angeführten Systemen sogar relativ 
-einfache Probleme aus der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
+sondern daß es in den beiden angeführten Systemen sogar 
+relativ einfache Probleme aus 
+der Theorie der gewöhnlichen ganzen Zahlen gibt 4), 
 die sich aus den Axiomen nicht entscheiden lassen.
 
 下面將展示並非如此，
-而是就算是前述兩個系統下實際相對簡單的一般整數論問題 4)
-也不可從前述公設被決定。
+而是就算是前述兩個系統下實際相對簡單的普通整數論問題 4)
+也不可從公設被決定。
 
 4) D.h. genauer, es gibt unentscheidbare Sätze, 
    in denen außer den logischen Konstanten: 
