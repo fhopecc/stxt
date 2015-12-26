@@ -37,9 +37,20 @@ der Principia Mathematica und verwandter System I 1)
 造物者創造了平等的個人，並賦予他們若干不可剝奪的權利，
 其中包括生命權、自由權和追求幸福的權利。」
 
-心理很希望能將公設法植入中國文化中，
-所以有了將這篇哥德爾之經典論文從原文德文，直譯為中文的想法，
-雖然我之前完全未學過德文，也僅利用工餘時間進行翻譯，
+中國對物質界的許多觀察及操作經驗都曾經大幅度領先西方，
+例如很早便知道如何使用火藥、製作指南車及比西方更早紀錄許多天文現象等等。
+但使用火藥沒有昇華成化學，
+知道製作指南車，卻始終未能發展成如馬克斯威的電磁學理論，
+該理論預言了電磁波的速度，這無法由人類直接感知現象的重大特質。
+知道許多天文現象，卻沒有發展成物理學，
+從而得出萬有引力理論或相對論等極為抽象，卻可精準解釋許多現象的理論。
+這不就是因為中國缺乏公設法這樣的思維模式，
+使得空有許多超越西方文化的經驗知識，
+卻無法昇華成科學理論。
+
+於是我下定決心能將公設法深化至中國文化中，
+所以有了將這篇哥德爾之經典論文從原文德文直譯為中文的想法，
+雖然我之前完全未學過德文，也僅利用公餘時間進行翻譯，
 但也只花費大致 2 年時間，即完成初譯，
 多虧了現在網際網路的發達，在查找資料大幅節省時間。
 
@@ -181,8 +192,8 @@ Axiomensystem der Mengenlehre 3) andererseits.
    die Axiome und Schlußregeln des Logikkalküls hinzufügen muß, 
    um die Formalisierung zu vollenden.
 
-   可注意到，對前述文獻給定之集合理論公設而言，
-   仍必須加上邏輯計算之公設及推論規則以達成形式化。 
+   注意對前述文獻給定之集合理論公設而言，
+   仍須加上邏輯計算之公設及推論規則以達成形式化。 
 
    Die nachfolgenden Überlegungen gelten auch für die 
    in den letzten Jahren 
@@ -220,7 +231,7 @@ daß alle heute in der Mathematik angewendeten Beweismethoden
 in ihnen formalisiert, 
 d. h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
-這兩個系統已廣泛到現今所有數學上應用到之證明方法都可在其下形式化，
+這兩系統廣泛到現今所有數學上應用到之證明方法都可在其下形式化，
 即簡化至少數的公設及推論規則。
 
 Es liegt daher die Vermutung nahe, 
@@ -229,8 +240,7 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-因此似乎可假定這些公設及推論法可以決定
-能完全以前述系統所表達的所有數學問題。
+因此似乎可假定這些公設及推論法可決定所有能完全以前述系統所表達的數學問題。
 
 譯註：die Vermutung nahe, daß ... 似乎可假定 ... 
 
@@ -242,12 +252,12 @@ der Theorie der gewöhnlichen ganzen Zahlen gibt 4),
 die sich aus den Axiomen nicht entscheiden lassen.
 
 下面將展示並非如此，
-而是就算是前述兩個系統下實際相對簡單的普通整數論問題 4)
-也不可從公設被決定。
+且就算前述兩個系統下公設所衍生實際相對簡單的普通整數論問題 4)
+也不可從被決定。
 
-4) D.h. genauer, es gibt unentscheidbare Sätze, 
+4) D. h. genauer, es gibt unentscheidbare Sätze, 
    in denen außer den logischen Konstanten: 
-   -- (nicht), V (oder), (x) (für alle), = (identiseh mit) 
+   -- (nicht), V (oder), (x) (für alle), = (identisch mit) 
    keine anderen Begriffe vorkommen als + (Addition), . (Multiplikation), 
    beide bezogen auf natürliche Zahlen, 
    wobei auch die Präfixe (x) sich nur auf natürliche Zahlen
@@ -285,7 +295,7 @@ Wir skizzieren, bevor wir auf Details eingehen,
 zunächst den Hauptgedanken des Beweises, 
 natürlich ohne auf Exaktheit Anspruch zu erheben. 
 
-進入細節前，首先草繪證明的主要觀念，自然地不引入精確的聲明。
+進入細節前先草繪證明的主要觀念並自然地不引入精確的聲明。
 
 Die Formeln eines formalen Systems 
 (wir beschränken uns hier auf das System PM) sind 
@@ -295,17 +305,16 @@ und man kann leicht genau präzisieren,
 welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
-形式系統之式(在此限制為PM系統)
-外觀上為有限基礎符(變數、邏輯常數和括號或分隔點)字串，
-而且可輕易辨別那些基礎符字串是正確之式而那些不是 6)。
+形式系統之式(在此限制為PM系統)外顯上可視為有限基礎符(變數、邏輯常數和括號或分隔點)字串，
+而且可輕易指出那些基礎符字串是有意義地而那些不是 6)。
 
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
-   immer eine ohne Abkürzungen (d.h. ohne Verwendung von Definitionen) 
+   immer eine ohne Abkürzungen (d. h. ohne Verwendung von Definitionen) 
    geschriebene Formel. 
    Definitionen dienen ja nur der kürzeren Schreibweise und 
    sind daher prinzipiell überflüssig.
 
-6) 以下「 PM 之式」總是指不含有縮寫之公式(即沒有使用定義)。
+6) 現在開始「 PM 之式」是指不含有縮寫（即沒有使用定義）之已寫出之式。
    定義只是幫助書寫更為精簡，因此原則上是不必要的。
 
 Analog sind Beweise vom formalen Standpunkt 
