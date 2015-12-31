@@ -263,10 +263,10 @@ die sich aus den Axiomen nicht entscheiden lassen.
    wobei auch die Präfixe (x) sich nur auf natürliche Zahlen
    beziehen dürfen.
 
-4) 即更精確而言，存在一個不可判定定理，除了邏輯常數：
+4) 即更精確一點，存在一個不可判定定理，除了邏輯常數：
     -- (非), V (或), (x) (對全部), = (等於) 
-   沒有其它的詞如 + (加), . (乘) 出現， 
-   都基於整數，前置 (x) 也僅包含整數。
+   沒有其它的詞，例如基於整數的 + (加), . (乘) 出現於中， 
+   這裡前置 (x) 也僅能包含整數。
  
 /174頁/
 
@@ -288,14 +288,20 @@ angegebenen Art beweisbar werden.
 5) Dabei werden in PM nur solche Axiome als verschieden gezählt, 
    die aus einander nicht bloß durch Typenwechsel entstehen. 
 
-5) 這即是在 PM 中僅這些公設被視為不同而計數，
-   純粹從公設以形別轉換衍生的不算。
+5) 這是在 PM 中僅這些公設視為不同而計數，
+   其不只以形別轉換自公設間相互衍生。
+   譯註：好難，有時間再看
 
 Wir skizzieren, bevor wir auf Details eingehen, 
 zunächst den Hauptgedanken des Beweises, 
 natürlich ohne auf Exaktheit Anspruch zu erheben. 
 
-進入細節前先草繪證明的主要觀念並自然地不引入精確的聲明。
+進入細節前，我們先草繪證明的主要觀念，
+自然不作出精確之聲明。
+
+譯註：Anspruch auf etw erheben      
+      對某事作出聲明
+      to make a claim for damages  
 
 Die Formeln eines formalen Systems 
 (wir beschränken uns hier auf das System PM) sind 
