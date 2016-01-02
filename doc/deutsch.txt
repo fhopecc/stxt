@@ -1367,15 +1367,21 @@ zeichnen    畫，源自標示符號的名詞 Zeichen
 英文會在不定式前加上 to 區隔，
 德文則不一定在不定式前加加上 zu 區隔。 
 
-不定式作名詞片語
-++++++++++++++++
+不定子句
+++++++++
 
-不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
+不定子句(Infinitivsätze)其形式如下：
 
-Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
+zu+" "+不定式
 
-zu+不定式
-.........
+分離動詞之不定子句形式如下：
+
+prefix+zu+verb
+
+an+deuten -> an+zu+deuten  建議、指示
+
+此子句(satz)是用來補充更多資訊，
+通常用來補充情態動詞。
 
 可作名詞的定語用：
 
@@ -1396,7 +1402,8 @@ Ich bitte ihn, zu mir zu kommen.
 zu mir 是由不定句 zu 所引導的句子成分，所以要被逗號隔開。
 
 
-***題外話：什麼時候用dass句；什麼時候用zu句????***
+什麼時候用dass句，什麼時候用不定子句?
++++++++++++++++++++++++++++++++++++++
 
 dass句用在主句和從句的主語都一樣的時候或者都不一樣的時候
 
@@ -1446,8 +1453,6 @@ Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
 為了學好外文，你一定要至那個國家旅遊。
 
 
-
-
 提問用 wozu, warum 或 zu welchem Zweck, mit welcher Absicht
 
 Wozu fahren viele Deutsche gern Fahrrad?
@@ -1466,6 +1471,15 @@ ich gehe zum Bahnhof, um meine Großmutter abzuholen.
 Herr Li gibt seinem Sohn 100 Yuan, 
 damit er (der Sohn) das Englischwörterbuch kauft.
 李先生給他兒子100元錢，以便他兒子買一本英語字典。
+
+
+
+不定式作名詞片語
+++++++++++++++++
+
+不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
+
+Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
 
 sein
 ....
@@ -3030,6 +3044,9 @@ als
 
 　　z.B. Er kommt zu sp?t, als dass er den Zug erreichen k?nnte.
 　　他來得太晚了以至於沒趕上火車。
+
+
+
 
 Reverso 網站的文法標示
 ----------------------

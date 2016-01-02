@@ -75,6 +75,7 @@ Individuum  個體，可區分之成員
 Menge       集合
 Stelle      位置
 tupel       值組
+Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
@@ -252,8 +253,8 @@ der Theorie der gewöhnlichen ganzen Zahlen gibt 4),
 die sich aus den Axiomen nicht entscheiden lassen.
 
 下面將展示並非如此，
-且就算前述兩個系統下公設所衍生實際相對簡單的普通整數論問題 4)
-也不可從被決定。
+就算前述兩個系統下公設所衍生實際相對簡單的普通整數論問題 4)
+也不可被決定。
 
 4) D. h. genauer, es gibt unentscheidbare Sätze, 
    in denen außer den logischen Konstanten: 
@@ -276,14 +277,17 @@ sondern gilt für eine sehr weite Klasse formaler Systeme,
 zu denen insbesondere alle gehören, 
 die aus den beiden angeführten 
 durch Hinzufügung endlich vieler Axiome entstehen 5), 
-vorausgesetzt, daß durch die binzugefügten Axiome 
+vorausgesetzt, daß durch die hinzugefügten Axiome 
 keine falschen Sätze von der in Fußnote 4) 
 angegebenen Art beweisbar werden.
 
 這情形並所建置系統特定本質所致，
-而是存在於更廣泛之形式系統類別，
-特別是包含加入有限公設 5) 至前述兩個系統之系統，
-並假定經由加入的公設，無註腳 4 給定的類型中的假命題成為可證。
+而對更廣泛形式系統類別也是如此，
+特別是包含加入有限公設 5) 至前兩個系統衍生之系統，
+並假定加入的公設不會使得註腳 4 給定方式之假命題可證。
+
+譯註：an jdm/etw liegen 是因為誰/什麼所致
+      
 
 5) Dabei werden in PM nur solche Axiome als verschieden gezählt, 
    die aus einander nicht bloß durch Typenwechsel entstehen. 
@@ -311,8 +315,9 @@ und man kann leicht genau präzisieren,
 welche Reihen von Grundzeichen sinnvolle Formeln sind und
 welche nicht 6). 
 
-形式系統之式(在此限制為PM系統)外顯上可視為有限基礎符(變數、邏輯常數和括號或分隔點)字串，
-而且可輕易指出那些基礎符字串是有意義地而那些不是 6)。
+形式系統之式(在此限制為PM系統)外顯上可視為
+有限基礎符(變數、邏輯常數和括號或分隔點)字串，
+而且可輕易精確指出那些基礎符字串是有意義地而那些不是 6)。
 
 6) Wir verstehen hier und im folgenden unter "Formel aus PM" 
    immer eine ohne Abkürzungen (d. h. ohne Verwendung von Definitionen) 
@@ -327,7 +332,7 @@ Analog sind Beweise vom formalen Standpunkt
 nichts anderes als endliche Reihen von Formeln 
 (mit bestimmten angebbaren Eigenschaften). 
 
-同樣地形式觀點上，證明不過是式之有限字串
+同樣地形式觀點上，證明不過是式之有限序列
 (經由特定特質)。
 
 Für metamathematische Betrachtungen ist es natürlich gleichgültig, 
@@ -335,22 +340,22 @@ welche Gegenstände man als Grundzeichen nimmt,
 und wir entschließen uns dazu, 
 natürliche Zahlen 7) als solche zu verwenden. 
 
-後設數學觀點下，我們接受何種物件表示基礎符號本就沒有差別，
-我們決定使用自然數 7) 來表示基礎符號。
+從後設數學觀點考慮接受何種物件來表示基礎符號本就沒有差異，
+因此決定使用自然數 7) 來表示基礎符號。
 
-7) D.h. wir bilden die Grundzeichen in eineindeutiger Weise 
+7) D. h. wir bilden die Grundzeichen in eineindeutiger Weise 
    auf natürliche Zahlen ab. 
-   (Vgl.die Durchführung auf S. 179.)
+   (Vgl. die Durchführung auf S. 179.)
 
 7) 即將基礎符號以一對一方式對應到自然數。(實作請參閱頁 179)
 
 Dementsprechend ist 
 dann eine Formel eine endliche Folge natürlicher Zahlen 8) und 
-eine Beweisfigur# eine endliche Folge von 
+eine Beweisfigur eine endliche Folge von 
 endlichen Folgen natürlicher Zahlen. 
 
-據此公式為自然數的有限序列 8) 
-而證明表示是自然數之有限數列組成之有限序列。
+據此公式為有限自然數數列 8) 
+而證明表示是有限自然數數列組成之有限序列。
 
 譯註：Beweisfigur 源自 Beweis(證明) 及 Figur(資訊表示) 
       之複合名詞，Figur 是一種承載某向資訊之描繪或表示，
@@ -370,7 +375,7 @@ endlichen Folgen natürlicher Zahlen.
 
       配賦一個數值給變數。
    
-      B. MELTZER 的英譯本亂譯成下文：
+      B. MELTZER 的英譯本誤譯成下文：
       i.e. a covering of a section of the number series 
       by natural numbers.  
       
@@ -2088,8 +2093,11 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
 
 譯註：sich damit begnügen, etw zu tun 滿足去做。
 
-譯註：anzudeuten 建議、指示動詞之不定式，特別是其 zu 是加在字中。
-      an+deuten(不定式) an+zu+deuten(不定式)
+譯註：德語分離動詞之不定子句形式如下：
+      prefix+zu+verb
+      an+deuten -> an+zu+deuten  建議、指示
+
+
 
 39) Satz V beruht natürlich darauf, 
     daß bei einer rekursiven Relation R 
