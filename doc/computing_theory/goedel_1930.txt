@@ -387,22 +387,27 @@ Folgen von solchen 9)
 und daher (wenigstens teilweise) in den Symbolen des Systems PM 
 selbst ausdrückbar.
 
-後設數學之項目(命題)可轉為自然數之項目(命題)或
-此類數列 9) 因而(至少部分)可以PM系統之符號自我表達。
+後設數學之項目(命題)可轉為自然數或其數列 9) 之項目(命題)，
+因而(至少部分)可以PM系統之符號表達。
 
-9) m.a.W.: Das oben beschriebene Verfahren liefert 
+9) m. a. W.: Das oben beschriebene Verfahren liefert 
    ein isomorphes Bild des Systems PM im Bereich der Arithmetik und 
-   man kann alle metamathematischen Überlegungen ebenso gut 
-   an diesem isomorphen Bild vornehmen. 
+   man kann alle metamathematischen Überlegungen 
+   ebenso gut an diesem isomorphen Bild vornehmen. 
    Dies geschieht in der folgenden Beweisskizze, 
-   d.h. unter "Formel", "Satz", "Variable" etc.  
+   d. h. unter "Formel", "Satz", "Variable" etc.  
    sind immer die entsprechenden Gegenstände 
    des isomorphen Bildes zu verstehen.
    
-   換言之，上述程序提供一個 PM 系統在算術領域的同構對映，
-   所有後設數學推論均可在此對映下作同等程度的執行。
-   這會應用在以下的證明大綱，即「式」、「命題」、「變數」等等，
-   均可被理解為同構對映的對應物件。
+   換言之，上述程序產出一個 PM 系統在算術領域的同構對映，
+   在此對映下可得出所有同等之後設數學推論。
+   這應用在以下的證明大綱，即「式」、「命題」、「變數」等等，
+   均可被理解為同構對映之對應物件。
+   
+   譯註：beschreiben 過去式為 beschriebene，為強變化不規則動詞，
+         母音由 ei 變音為 ie。
+         A unter B verstehen 
+         A 可被理解為 B  
 
 Insbesondere kann man zeigen, 
 daß die Begriffe "Formel", "Beweisfigur", "beweisbare Formel" 
@@ -412,7 +417,7 @@ mit einer freien Variablen v (vom Typus einer Zahlenfolge) angeben 10),
 so daß F(v) inhaltlich interpretiert besagt: 
 v ist eine beweisbare Formel. 
 
-特別是可指出項目「式」、「證明表示」、「可證式」可以 PM 系統來定義，
+特別是可指出「式」、「證明表示」、「可證式」項目可以 PM 系統來定義，
 即可建置一個自由變數 v (其類別為數列) PM 系統之式 F(v) 10)， 
 其意義為：v 是一個可證式。
 
