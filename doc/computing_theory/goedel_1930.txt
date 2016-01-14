@@ -401,7 +401,7 @@ selbst ausdrückbar.
    
    換言之，上述程序產出一個 PM 系統在算術領域的同構對映，
    在此對映下可得出所有同等之後設數學推論。
-   這應用在以下的證明大綱，即「式」、「命題」、「變數」等等，
+   這應用在以下的證明大綱，即「式」、「命題」及「變數」等等，
    均可被理解為同構對映之對應物件。
    
    譯註：beschreiben 過去式為 beschriebene，為強變化不規則動詞，
@@ -412,14 +412,14 @@ selbst ausdrückbar.
 Insbesondere kann man zeigen, 
 daß die Begriffe "Formel", "Beweisfigur", "beweisbare Formel" 
 innerhalb des Systems PM definierbar sind, 
-d.h. man kann z.B. eine Formel F(v) aus PM 
+d. h. man kann z. B. eine Formel F(v) aus PM 
 mit einer freien Variablen v (vom Typus einer Zahlenfolge) angeben 10), 
 so daß F(v) inhaltlich interpretiert besagt: 
 v ist eine beweisbare Formel. 
 
 特別是可指出「式」、「證明表示」、「可證式」項目可以 PM 系統來定義，
-即可建置一個自由變數 v (其類別為數列) PM 系統之式 F(v) 10)， 
-其意義為：v 是一個可證式。
+即例如存在具有一個自由變數 v (其類別為數列) 的 PM 系統式 F(v) 10)， 
+其意義可說為：v 是一個可證式。
 
 10) Es wäre sehr leicht (nur etwas umständlich), diese Formel 
     tatsächlich hinzuschreiben.
