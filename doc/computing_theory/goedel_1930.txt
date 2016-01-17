@@ -421,13 +421,13 @@ v ist eine beweisbare Formel.
 即例如存在具有一個自由變數 v (其類別為數列) 的 PM 系統式 F(v) 10)， 
 其意義可說為：v 是一個可證式。
 
-10) Es wäre sehr leicht (nur etwas umständlich), diese Formel 
-    tatsächlich hinzuschreiben.
+10) Es wäre sehr leicht (nur etwas umständlich), 
+    diese Formel tatsächlich hinzuschreiben.
 
-10) 實際很容易(但要費點功夫)去寫下此式。
+10) 這將很容易(但要費點功夫)去實際寫下此式。
 
 Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
-d.h. einen Satz A, für den weder A noch non-A beweisbar ist, 
+d. h. einen Satz A, für den weder A noch non-A beweisbar ist, 
 folgendermalßen her:
 
 現在建置一個系統 PM 之不可決定之命題，
@@ -436,10 +436,15 @@ folgendermalßen her:
 /175頁/
 
 Eine Formel aus PM mit genau einer freien Variablen, 
-u.zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
+u. zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
 wollen wir ein Klassenzeichen nennen. 
 
-PM 中我們稱僅具一自然數(類別的類別)自由變數之式為類別符號。
+僅具一個自由變數 PM 之式且實際上其型別為自然數群(類別群的類別)
+我們自由變數之式為類別符號。
+
+譯註：u. zw. 是 und zwar 的縮寫，意為事實上。
+      Zahlen 為名詞之複數形，故譯為數群，即此型別定義域為數群。
+      Klassen 也為複數形，故譯為類別群。
 
 Die Klassenzeichen denken wir uns irgendwie 
 in eine Folge geordnet 11), 
@@ -447,13 +452,16 @@ bezeichnen das n-te mit R(n) und bemerken,
 daß sich der Begriff "Klassenzeichen" sowie 
 die ordnende Relation R im System PM definieren lassen. 
 
-類別符可想成某種序列 11)以 R(n) 表示其第 n 個元素，
-且可發現能於 PM 系統中定義類別符及順序關係 R。
+類別符號可想成某種序列 11)，
+並以 R(n) 表示其第 n 個元素，
+且注意能於 PM 系統中定義「類別符號」觀念及順序關係 R。
 
 11) Etwa nach steigender Gliedersumme und 
     bei gleicher Summe lexikographisch.
 
 11) 如以成員和之漸增順序，當和相等時以字彙順序。
+
+譯註：etwa nach 有大致上之意。
 
 Sei α ein beliebiges Klassenzeichen; 
 mit [α; n] bezeichnen wir diejenige Formel, 
@@ -476,8 +484,8 @@ sich als innerhalb PM definierbar.
 Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 
 現在我們定義自然數類別 K 如下：
-
-nεK ≡ ~Bew[R(n);n] 11a) (1)
+      ___
+nεK ≡ Bew[R(n);n] 11a) (1)
 
 (wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
@@ -485,29 +493,27 @@ nεK ≡ ~Bew[R(n);n] 11a) (1)
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
                                                          
-11a) 覆寫線標記否定。                    --- 
-     譯註：原文否定是詞上面覆寫線 ~Bew = Bew 
+11a) 覆寫線標記否定。                    
 
 Da die Begriffe,
 welche im Definiens vorkommen, 
 sämtlich in PM definierbar sind, 
 so auch der daraus zusammengesetzte Begriff K, 
-d.h. es gibt ein Klassenzeichen S 12), 
+d. h. es gibt ein Klassenzeichen S 12), 
 so daß die Formel [S; n] inhaltlich gedeutet besagt, 
 daß die natürliche Zahl n zu K gehört. 
 S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
-d.h. es gilt
+d. h. es gilt
+
+所有出現於定義的項目均可在 PM 中定義。
+衍生自複合項目 K 之項目也是如此，
+即存在類別符號 S 12) 使式 [S; n] 之意義可陳述為：
+自然數 n 屬於 K。
+S 是與特定 R(q) 同義之類別符號，即一僤存在特定自然數 q 使得：
 
 S=R(q) 
 
 für eine bestimmte natürliche Zahl q. 
-
-出現於定義的項目均可在 PM 中定義。
-衍生自前述項目之複合項目 K 也是如此，
-即存在類符 S 12) 使式 [S; n] 之意義為 K 包含自然數 n 。
-S 是類符並與特定 R(q) 同義，存在自然數 q 使得下式成立：
-
-S=R(q) 
 
 12) Es macht wieder nicht die geringsten Schwierigkeiten, 
     die Formel S tatsächlich hinzuschreiben.
