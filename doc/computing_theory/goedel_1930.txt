@@ -502,28 +502,36 @@ so auch der daraus zusammengesetzte Begriff K,
 d. h. es gibt ein Klassenzeichen S 12), 
 so daß die Formel [S; n] inhaltlich gedeutet besagt, 
 daß die natürliche Zahl n zu K gehört. 
+
+所有出現於定義項目均可在 PM 中定義。
+衍生自複合項目 K 之項目也是如此，
+即存在一個類別符號 S 12) 使式 [S; n] 之意義可陳述為：
+自然數 n 屬於 K。
+
 S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
 d. h. es gilt
 
-所有出現於定義的項目均可在 PM 中定義。
-衍生自複合項目 K 之項目也是如此，
-即存在類別符號 S 12) 使式 [S; n] 之意義可陳述為：
-自然數 n 屬於 K。
-S 是與特定 R(q) 同義之類別符號，即一僤存在特定自然數 q 使得：
+S 是與特定 R(q) 同義之類別符號，即一個存在特定自然數 q 使得：
 
 S=R(q) 
 
 für eine bestimmte natürliche Zahl q. 
 
+譯註：從此可知類別符號以大寫拉丁字母，常數以小寫拉丁字母表示。
+
 12) Es macht wieder nicht die geringsten Schwierigkeiten, 
     die Formel S tatsächlich hinzuschreiben.
 
-12) 這再次沒有變得更不麻煩，S 的確寫下了。
+12) 再次毫無困難地具體寫下 S。
+
+譯註：hinzuschreiben 是不定子句，作為名詞之定語，
+      因為 hin+schreiben 是分離動詞，
+      所以不定式的 zu 加在分離動詞中間 hin+zu+schreiben。
 
 Wir zeigen nun, 
 daß der Satz [R(q);q] 13) in PM unentseheidbar ist. 
 
-現在我們展示命題 [R(q);q] 13) 在 PM 下是不可決定。
+現在展示在 PM 下，命題 [R(q);q] 13) 不可決定。
 
 13) Man beachte, daß "[R(q); q]" (oder was dasselbe bedeutet "[S;q]")
     bloß eine metamathematische Beschreibung 

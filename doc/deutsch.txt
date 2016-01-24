@@ -624,7 +624,7 @@ sowie   與
 
 5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
 
-＊Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
+＊ Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
 
 
 發音
@@ -1379,6 +1379,7 @@ zu+" "+不定式
 prefix+zu+verb
 
 an+deuten -> an+zu+deuten  建議、指示
+hin+schreiben -> hin+zu+schreiben 寫下
 
 此子句(satz)是用來補充更多資訊，
 通常用來補充情態動詞。
@@ -1400,7 +1401,6 @@ Ich bitte ihn, zu mir zu kommen.
 我拜託他到我這來
 
 zu mir 是由不定句 zu 所引導的句子成分，所以要被逗號隔開。
-
 
 什麼時候用dass句，什麼時候用不定子句?
 +++++++++++++++++++++++++++++++++++++
