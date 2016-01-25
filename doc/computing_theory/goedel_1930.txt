@@ -535,21 +535,20 @@ daß der Satz [R(q);q] 13) in PM unentseheidbar ist.
 
 13) Man beachte, daß "[R(q); q]" (oder was dasselbe bedeutet "[S;q]")
     bloß eine metamathematische Beschreibung 
-    des unentseheidbaren Satzes ist.
+    des unentscheidbaren Satzes ist.
     Doch kann man, sobald man die Formel S ermittelt hat, 
     natürlich auch die Zahl q bestimmen und 
     damit den unentscheidbaren Satz selbst effektiv hinschreiben.
 
 13) 注意 "[R(q);q]" (或同義詞 "[S;q]") 
     只是用後設數學描敘之不可決定命題。
-    可是當 S 被決定時自然地，數 q 也會被決定，
+    事實上當決定公式 S 時，明顯地也決定數 q，
     因此可有效寫出不可決定命題。 
-     
+
 Denn angenommen der Satz [R(q);q] wäre beweisbar, 
-dann wäre er auch richtig, 
-d.h. aber nach dem obigen q würde zu K gehören, 
+dann wäre er auch richtig, d.h. aber nach dem obigen q würde zu K gehören, 
 d.h. nach (1) es würde ~Bew[R(q); q] gelten, 
-im Widerspruch mit der Annahme. 
+im Widerspruch mit der Annahme.  
 
 假定命題 [R(q);q] 是可證的，即此命題為真，
 也就是上述 q 若屬於 K，
@@ -557,7 +556,7 @@ im Widerspruch mit der Annahme.
 
 Wäre dagegen die Negation von [R(q);q] beweisbar, 
 so würde ~(nεK), 
-d.h. Bew[R (q); q] gelten. 
+d.h. Bew[R(q); q] gelten. 
 
 另假定 [R(q);q] 之否定可證，則 ~(nεK)，
 即 Bew[R(q); q] 為真。
