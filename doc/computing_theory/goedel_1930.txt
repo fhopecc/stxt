@@ -546,19 +546,24 @@ daß der Satz [R(q);q] 13) in PM unentseheidbar ist.
     因此可有效寫出不可決定命題。 
 
 Denn angenommen der Satz [R(q);q] wäre beweisbar, 
-dann wäre er auch richtig, d.h. aber nach dem obigen q würde zu K gehören, 
-d.h. nach (1) es würde ~Bew[R(q); q] gelten, 
+dann wäre er auch richtig, 
+d. h. aber nach dem obigen q würde zu K gehören, 
+                        ___
+d. h. nach (1) es würde Bew[R(q); q] gelten, 
 im Widerspruch mit der Annahme.  
 
-假定命題 [R(q);q] 是可證的，即此命題為真，
-也就是上述 q 若屬於 K，
-由 (1) 得 ~Bew[R(q);q] 為真，這與假設矛盾。 
+假定命題 [R(q);q] 是可證的，
+即由此推得上述 q 屬於 K 為真。
+            ___
+即由 (1) 得 Bew[R(q);q] 為真，
+這與假設矛盾。 
 
 Wäre dagegen die Negation von [R(q);q] beweisbar, 
-so würde ~(nεK), 
-d.h. Bew[R(q); q] gelten. 
-
-另假定 [R(q);q] 之否定可證，則 ~(nεK)，
+          ___
+so würde (nεK), 
+d. h. Bew[R(q); q] gelten. 
+                              ___
+假定 [R(q);q] 之否定可證，則 (nεK)，
 即 Bew[R(q); q] 為真。
 
 [R(q);q] wäre also zugleich mit seiner Negation beweisbar, 
@@ -566,20 +571,18 @@ was wiederum unmöglich ist.
 
 [R(q);q] 與其否定同時可證，這也是不可能的。
 
-譯註：
-
 Die Analogie dieses Schlusses 
 mit der Antinomie Richard springt in die Augen; 
 auch mit dem "Lügner" besteht eine nahe Verwandtschaft 14), 
 denn der unentscheidbare Satz [R(q); q] besagt ja, 
 daß q zu K gehört, 
-d.h. nach (1), daß [R(q); q] nicht beweisbar ist. 
+d. h. nach (1), daß [R(q); q] nicht beweisbar ist. 
 Wir haben also einen Satz vor uns, 
 der seine eigene Unbeweisbarkeit behauptet 15). 
 
-上述結果似乎於眼前出現了理查悖論之類比，也與說謊者悖論相當接近。
+上述結果顯見類比於理查悖論，也與說謊者悖論相當接近14)。
 因為不可決定命題 [R(q); q] 說明 q 包含於 K，
-依據 (1) 得 [R(q); q] 是不可證明。
+即依據 (1) 得 [R(q); q] 是不可證明。
 我們得到一個定理斷言它本身是不可證明的。15)
 
 譯註：Antinomie Richard 理查悖論內容為，
