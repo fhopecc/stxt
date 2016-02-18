@@ -439,10 +439,11 @@ Eine Formel aus PM mit genau einer freien Variablen,
 u. zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
 wollen wir ein Klassenzeichen nennen. 
 
-僅具一個自由變數 PM 之式且實際上其型別為自然數群(類別群的類別)
-我們自由變數之式為類別符號。
+僅具一個自由變數之 PM 公式，且具體型別為自然數群(類別群的類別)
+稱為類別符號。
 
-譯註：u. zw. 是 und zwar 的縮寫，意為事實上。
+譯註：自然數在本文中定義為類別群之類別。
+      u. zw. 是 und zwar 的縮寫，意為事實上。
       Zahlen 為名詞之複數形，故譯為數群，即此型別定義域為數群。
       Klassen 也為複數形，故譯為類別群。
 
@@ -455,6 +456,8 @@ die ordnende Relation R im System PM definieren lassen.
 類別符號可想成某種序列 11)，
 並以 R(n) 表示其第 n 個元素，
 且注意能於 PM 系統中定義「類別符號」觀念及順序關係 R。
+
+譯註：R(n) 之名應該來自於序列之德語名詞 Rheine。
 
 11) Etwa nach steigender Gliedersumme und 
     bei gleicher Summe lexikographisch.
@@ -469,12 +472,13 @@ welche aus dem Klassenzeichen α dadurch entsteht,
 daß man die freie Variable 
 durch das Zeichen für die natürliche Zahl n ersetzt. 
 
-令 α 為任意類別符；
+令 α 為任意類別符號；
 用 [α; n] 代表以自然數 n 取代 α 中自由變數所得之式。
 
-譯註：
-entsteht 為 durch etwas hervorgerufen werden，
-由某些事物影響。
+譯註：[α; n] 類比於 λ 運算中的應用。
+
+      entsteht 為 durch etwas hervorgerufen werden，
+      由某些事物影響。
 
 Auch die Tripel-Relation x = [y; z] erweist 
 sich als innerhalb PM definierbar.
@@ -487,9 +491,12 @@ Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
       ___
 nεK ≡ Bew[R(n);n] 11a) (1)
 
+譯註：K 集合中的數字為 R 集合中不可證數之索引。
+
 (wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
 (這裡 Bew x 指 x 是一個可證式)。
+
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
                                                          
@@ -507,6 +514,8 @@ daß die natürliche Zahl n zu K gehört.
 衍生自複合項目 K 之項目也是如此，
 即存在一個類別符號 S 12) 使式 [S; n] 之意義可陳述為：
 自然數 n 屬於 K。
+
+譯註：S 指命名於 R 之後。
 
 S ist als Klassenzeichen mit einem bestimmten R(q) identisch,
 d. h. es gilt
@@ -582,8 +591,8 @@ der seine eigene Unbeweisbarkeit behauptet 15).
 
 上述結果顯見類比於理查悖論，也與說謊者悖論相當接近14)。
 因為不可決定命題 [R(q); q] 說明 q 包含於 K，
-即依據 (1) 得 [R(q); q] 是不可證明。
-我們得到一個定理斷言它本身是不可證明的。15)
+依據 (1) 即為 [R(q); q] 是不可證明。
+我們眼前有一個定理斷言它本身是不可證明15)。
 
 譯註：Antinomie Richard 理查悖論內容為，
       若對每個整數命題以至多100個中文字描述，
@@ -597,27 +606,37 @@ der seine eigene Unbeweisbarkeit behauptet 15).
       若 q 為理查數，則其命題為真，其應與命題內容不相符，
       若 q 不為理查數，則其命題為假，應與命題內容相符。
 
+      本文哥德爾之證明類比於理查悖論如下：
+      假設某個命題的編號為 q，此命題內容如下：
+      「q 為不可證命題之編號。」
+      若 q 為不可證命題之編號為真，則證明編號 q 命題為真，q 為假。
+      若 q 非不可證命題之編號，則 q 不符合命題之內容。
+
 14) Es läßt sich überhaupt jede epistemologische Antinomie 
     zu einem derartigen Unentscheidbarkeitsbeweis verwenden.
 
-14) 每個認識論悖論都可使用如此的不可決定證明。
+14) 每個認識論悖論都可應用此類不可決定證明。
 
 15) Ein solcher Satz hat entgegen dem Anschein nichts 
     Zirkelhaftes an sich, 
     denn er behauptet zunächst 
     die Unbeweisbarkeit einer ganz bestimmten Formel 
     (nämlich der q-ten in der lexikographischen Anordnung 
-    bei einer bestimmten Einsetzung), 
+     bei einer bestimmten Einsetzung), 
     und erst nachträglich 
     (gewissermaßen zufällig) stellt sich heraus, 
     daß diese Formel gerade die ist, 
     in der er selbst ausgedrückt wurde.
     
-    相對於呈現此命題沒有循環論證。
-    因為一開始便聲明該公式(亦即以特定安排之字母順序的第 q 個)不可證性，
-    僅在之後(一定程度之隨機)證明這些公式可以直接被自我表達。
+    此命題於形式上並非循環論證，
+    因為先聲明指定之公式(因為以特定排序之字母順序的第 q 個)的不可證性，
+    僅在之後(適時地)證明這些公式可以直接被自我表達。
     
     譯註：
+    「因為以特定排序之字母順序的第 q 個」
+    參見前面類別符號 R(n) 的定義，
+    R(n) 為一個以特定排序類別的第 n 個元素。
+
     stellt sich heraus 在句中為反身動詞形式，
     在 Duden 上其意義為
     sich herausstellen: sich [als etwas Bestimmtes] erweisen
@@ -625,6 +644,9 @@ der seine eigene Unbeweisbarkeit behauptet 15).
     當某事確定時，可被證明
     但許多英譯本將其譯為 emerge 或 turn out，
     這證明德文與英文是 2 種截然不同的語言。
+    
+    gewissermaßen zufällig 以隨機的方式，意為不能確定何時發生，但會發生，
+                           我譯為適時地。
    
 /176/
 
@@ -636,20 +658,28 @@ um die in der obigen Überlegung vorkommenden Begriffe
 zu definieren, 
 und in dem zweitens jede beweisbare Formel auch inhaltlich richtig ist. 
 
-上面正解釋過之證明方法顯然可應用於下述的每個形式系統，
-第一其本質詮釋具有足夠表達力其去定義前述之觀念（特別是可證式），
+上面解釋過之證明方法顯然可應用於下述每個形式系統，
+首先其內容詮釋具有具足夠表達力其去定義前述之觀念（特別是可證式），
 其次每個可證式本質為真。
 
+譯註：sich auf etw (acc) anwenden lassen
+      可應用到某事
+
+      über etw (acc) verfügen
+      提供某物
+      
 Die nun folgende exakte Durchführung des obigen Beweises wird 
 unter anderem die Aufgabe haben, 
 die zweite der eben angeführten Voraussetzungen 
 durch eine rein formale und weit schwächere zu ersetzen.
 
-以下為上述證明的精確實作，
-目標特別是是將剛提的第二個前題取代為純形式且較弱的一個。
+現在下面前述證明精確實作特別具以下目標，
+將剛提的第二個假設取代為純形式且較弱的一個。
 
-譯註：
-unter anderem 副詞片語：特別地
+譯註：第二個假設：[R(q);q] 之否定可證並用 (nεK) 取代。
+
+      folgende 為 folgend 於冠詞後主格變格
+      unter anderem 副詞片語：特別地
 
 Aus der Bemerkung, 
 daß [R(q); q] seine eigene Unbeweisbarkeit behauptet, 
@@ -667,11 +697,14 @@ näher behandelt werden.
 
 譯注：應是注釋 15)
 
-因為 [R(q);q] 實際上不可證（由於其不可決定）。
-在 PM 系統中不可判定之命題仍可經由後設數學決定。
-這特殊情況的精確分析產出關於形式系統之一致性證明的驚奇結果，
-將於第 4 章(定理 XI)提到。
+因為 [R(q);q] 實際上不可證（因為其不可判定）。
+在 PM 系統中不可判定之命題無論如何已經由後設數學內容決定。
+這特殊情況的精確分析產生關於形式系統一致性之證明的驚奇結果，
+即將於第 4 章(定理 XI)提到。
 
+譯注：doch 無論如何
+      entschieden 是 entscheiden 之過去分詞。
+      bezüglich 有關於，介詞。
 2.
 
 Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
@@ -692,17 +725,26 @@ mit der Logik der PM 16) überbaut
 P 實質上可視為建構皮亞諾公設於 PM 邏輯 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
-譯註：
-erhält 被接受，應譯為視為
+譯註：im wesentlichen 本質上、實質上 
+      erhält 被接受，應譯為視為
 
 16) Die Hinzufügung der Peanoschen Axiome 
     ebenso wie alle anderen am System PM 
     angebrachten Abänderungen dienen lediglich zur 
     Vereinfachung des Beweises 
     und sind prinzipiell entbehrlich.
+
     皮亞諾公設的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
     故原則上不需要。
     
+譯註：angebrachten 為 anbringen 之過去分詞轉成之副詞，
+      an+bringen 意為安裝上去。
+
+      dienen 不及物動詞，幫助、服務之意。
+      lediglich 副詞，僅僅
+      Vereinfachung 名詞，簡化
+      entbehrlich   形容詞，可丟棄地。
+
 Die Grundzeichen des Systems P sind die folgenden:
 
 P 系統之基本符如下：
@@ -719,7 +761,7 @@ f : 後繼函數，命名源自德文後繼 Nachfolger
 ( ) :括號
 
 II.Variable ersten Typs(für Individuen, 
-   d.h. natürliche Zahlen inklusive 0)): "x1", "y1", "z1"...
+   d. h. natürliche Zahlen inklusive 0)): "x1", "y1", "z1"...
 
 II.第一型變數(表個體，即包含零之自然數):  "x1", "y1", "z1"...
 
@@ -743,8 +785,7 @@ usw. für jede natürliche Zahl als Typus 17).
 
 17) 假定對每個變數型別可具有可數多種符號。
 
-譯註：
-zur Verfügung stellen 可行的
+譯註：zur Verfügung stellen 可行的
 
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
@@ -756,27 +797,26 @@ wo (x,y) bzw. (x) die Klassen bedeuten,
 deren einzige Elemente x, y bzw. x sind. 18).
 
 注：對二或多元函數(關係)之變數作為基本符號是多餘的，
-因為關係可用序對類別來定義，
-而序對可再由類別之類別而定義，
+因為關係可用序對類別來定義，而序對可再由類別之類別而定義，
 例如序對 a, b 可由((a), (a,b))定義，
 其中 (x, y) 及 (x) 分別為成員僅含 x, y 及 x 之類別。18)
 
-譯註：
-wiederum 副詞：可再由
+譯註 wiederum 副詞：可再由 
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
     z. B. eine Relation zwischen Individuen 
     und Klassen als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
-    Alle in den PM über Relationen
-    beweisbaren Sätze sind, wie eine einfache Überlegung lehrt, 
+    Alle in den PM über Relationen beweisbaren Sätze sind, 
+    wie eine einfache Überlegung lehrt, 
     auch bei dieser Behandlungsweise beweisbar.
 
 18) 不等關係也可如此定義，
-    例如一個體與類別之間的關係作為一個類別其成員如下形式：
-    ((x2), ((x1),x2))
-    所有在 PM 中前述可證句之關係，以此簡單考慮，
-    以此方式也是可證的。
+    例如一個體群與類別群作為類別且為形式 ((x2), ((x1),x2)) 成員間的關係 
+    所有在 PM 中描述關係之可證句，簡言之在這個方式下也是可證的。
 
+譯註: Individuum 個體其複數形態為 Individuen，字尾 um 改為 en。
+      Form 屬格不變形，其為陰性名詞，所以冠詞 der 表示屬格或與格，
+      本文中 der From 是屬格。
 /177/
 
 第一型符號
@@ -804,10 +844,9 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 Für n > 1 verstehen wir 
 unter einem Zeichen n-ten Typs dasselbe wie Variable n-ten Typs.
 
-對 n > 1 可知第 n 型符號即為第 n 型變數。
+在此符號下，對 n > 1 可知第 n 型符號即為第 n 型變數。
 
-譯註：
-dasselbe 表一模一樣的東西
+譯註：dasselbe 表一模一樣的東西
 
 基本式
 ......
@@ -836,9 +875,9 @@ stets auch ~(a), (a) V (b), xΠ(a) gehören
 18a) xΠ(a) ist also auch dann eine Formel, 
      wenn x in a nicht oder nicht frei vorkommt. 
      In diesem Fall bedeutet xΠ(a) natürlich dasselbe wie a.
-     若 x 未在 a 出現或是非自由變數，
-     xΠ(a) 也是一式。 
-     此情況下 xΠ(a) 意義與 a 一樣。 
+
+18a) 若 x 既非出現於 a 且非自由變數，xΠ(a) 仍是公式。 
+     在這情況下 xΠ(a) 明顯與 a 同義。 
 
 19) Bez. dieser Definition (und analoger später vorkommender) vgl.
     J. Łukasiewiez und A. Tarski, Untersuchungen über den Aussagenkalkül,
@@ -846,17 +885,16 @@ stets auch ~(a), (a) V (b), xΠ(a) gehören
     Lettres de Varsovie
     XXIII, 1930, C1. III.
 
-19) 依據定義（及接下來出現），參見武卡謝維奇及塔斯基，
+19) 依據定義（及類比於接下來出現），參見武卡謝維奇及塔斯基，
     命題演算研究，
-    Comptes Rendus des séances 
-    de la Société des Sciences et des Lettres de Varsovie
+    科學學會會議報告及華沙信件
     XXIII, 1930, C1. III.
 
-(a) V (b) nennen wir die Disjunktion aus a und b,  
-~(a) die Negation und x Π (a) eine Generalisation von a.
+(a)V(b) nennen wir die Disjunktion aus a und b,  
+~(a) die Negation und xΠ(a) eine Generalisation von a.
 
-(a) V (b) 稱為 a 及 b 的析取，
-~(a) 為否定而 x Π (a) 為 a 的一般化。
+(a)V(b) 稱為 a 及 b 的析取，
+~(a) 為否定而 xΠ(a) 為 a 的一般化。
 
 命題式
 ......
@@ -875,8 +913,8 @@ Eine Formel mit genau n-freien Individuenvariablen
 n-stelliges Relationszeichen, 
 für n=1 auch Klassenzeichen.
 
-一式若具 n 個自由個體變數(且沒有其它的自由變數)
-稱為 n 元關係符，在 n=1 下也為類別符。
+若一個公式具有 n 個自由個體變數(且無其餘自由變數)
+稱為 n 元關係符，n=1 時則為類別符。
 
 取代
 ....
@@ -889,21 +927,20 @@ verstehen wir die Formel, welche aus a entsteht,
 wenn man darin v überall, wo es frei ist, durch b ersetzt 20), 
        |v| 
 Subst a|b| (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
-視為一式由 a 衍生，
-且在裡面每處自由之 v，均由 b 取代 20)。
+理解為為將 a 裡面每處自由之 v 均以 b 取代 20)。
 
 
 20) Falls v in a nicht als freie Variable vorkommt, 
-    soll Subst a|v| = a sein.
-                |c|
+                |v|
+    soll Subst a|c| = a sein.
     Man beachte, daß "Subst" ein Zeichen der Metamathematik ist.
 
-    v 並非 a 的自由變數情況下，則 Subst a|v|=a。
-                                         |c|
+                                         |v|
+    v 並非 a 的自由變數情況下，則 Subst a|c|=a。
     要注意 Subst 是後設數學之符號。
 
-    譯註：即 v 並非 a 的自由變數情況下，Subst a|v| 仍為 a。
-                                               |c| 
+                                           |v| 
+譯註：即 v 並非 a 的自由變數情況下，Subst a|c| 仍為 a。
 
 型別提升
 ........
@@ -923,8 +960,8 @@ Folgende Formeln (I bis V) heißen Axiome
  das Weglassen von Klammern angeschrieben)22):
 
 下式(I 至 V)稱為公設
-(藉由已知方法定義縮寫：., ->, ≡, (Ex), = 21)
- 且利用一般慣寫法去省略括號 22)。
+(受益於已知方法所定義之縮寫：., ->, ≡, (Ex), = 21)
+ 並利用一般省略括號慣寫法去書寫 22)。
 
 21) x1=y1 ist, wie in PM I, *13 durch x2Π(x2(x1) -> x2(y1)) definiert
     zu denken (ebenso für die höheren Typen).
@@ -933,7 +970,6 @@ Folgende Formeln (I bis V) heißen Axiome
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
     譯註：故基礎符號義不包含 =。
-    
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -2101,11 +2137,11 @@ Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
         存在一個 n 元關係符號 r (帶有自由變數) (u1,u2...un)，
         使得所有 n 元整數值組 (x1,x2...xn) 滿足下式：
 
-                     |r u1......un   |
- R(x1...xn) => Bew[Sb|  Z(x1)...Z(xn)|]      (3)
+                     |     u1 .....un |
+ R(x1...xn) => Bew[Sb|r  Z(x1)...Z(xn)|]     (3)
                     
-                         |r u1     ...un |
-~R(x1...xn) => Bew[Neg Sb|  Z(x1)...Z(xn)|]  (4)
+                         |    u1......un |
+~R(x1...xn) => Bew[Neg Sb|r Z(x1)...Z(xn)|]  (4)
                          
 Wir begnügen uns hier damit, den Beweis dieses Satzes, 
 da er keine prinzipiellen Schwierigkeiten bietet und 
@@ -2120,16 +2156,14 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
       prefix+zu+verb
       an+deuten -> an+zu+deuten  建議、指示
 
-
-
 39) Satz V beruht natürlich darauf, 
     daß bei einer rekursiven Relation R 
     für jedes n-tupel von Zahlen aus den Axiomen des Systems P 
     entscheidbar ist, ob die Relation R besteht oder nicht.
 
-39) 命題 V 自然基於對每個系統 P 之公設，
-    其 n 元整數數組之遞迴關係 R
-    是可決定的，不管 R 關係是成立或否定。
+39) 命題 V 自然基於下面：
+    衍生自系統 P 之公設之 n 元整數數組遞迴關係 R 是可決定的，
+    不管 R 關係是成立或否定。
 
 Wir beweisen den Satz für alle Relationen R(x1...xn) der Form: 
 
@@ -2222,8 +2256,7 @@ wenn es kein Klassenzeichen a gibt, so daß:
 以 Flg(χ) (χ 之推論集合) 
 代表最小之公式集合，
 包含所有 χ 之公式及所有「立即推論」關係所包含之公理。
-χ 稱為 ω-一致性，
-若其不存在類別符號 a 如下：
+若不存在類別符號 a 如下，χ 稱為 ω-一致性：
 
    |  |    v |       |   |             |
 (n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
@@ -2251,7 +2284,7 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse χ von Formeln
          (wobei v die freie Variable aus r ist).
 
 命題VI： 對每個 ω-一致遞迴之公式類別 χ，存在遞迴類別符號 r，
-         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(x)。
+         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(χ)。
          (其中 v 是 r 中的自由變數)。
 
 譯註：命題VI說明ω-一致之系統存在不可決定之命題。
@@ -2307,6 +2340,7 @@ Q(x,y) ≡ xBχ|Sb|y Z(y)|| (8.1)
 Da xBχy [nach (6), (5)] und Sb|y Z(y)| (nach Def. 17, 31) rekursiv sind, 
 so auch Q(x). 
 
+                                |    19|
 因為 xBχy 「依據 (6), (5)」及 Sb|Y Z(y)| 「依據定義 17, 31」為遞迴，
 故 Q(x) 也是。
 
@@ -2335,9 +2369,8 @@ p = 17 Gen q (11)
 
 「p 是具有一個自由變數 19 之類別符號。」且
 
-      |    19|
+      |   19 |
 r = Sb|q Z(p)| (12)
-
 (r ist ein rekursives Klassenzeichen mit der freien Variablen 17 43).
 
 「r 是具有一個自由變數 17 之遞迴類別符號。43)」

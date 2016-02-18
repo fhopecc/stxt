@@ -3054,6 +3054,9 @@ Reverso 網站的文法標示
 System Sys.tem  nt  , -s      ,  -e      system
 系統   音節標注 中性，屬格變格，複數變格 英文意義
 
+über etw ($) verfügen acc to have sth at one's disposal
+($) 指示介詞後的名詞變格， acc 指變為賓格。
+
 縮寫
 ----
 
