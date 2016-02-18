@@ -563,7 +563,7 @@ Wäre dagegen die Negation von [R(q);q] beweisbar,
 so würde (nεK), 
 d. h. Bew[R(q); q] gelten. 
                               ___
-假定 [R(q);q] 之否定可證，則 (nεK)，
+假定 [R(q);q] 之否定可證，則 (nεK) 如此，
 即 Bew[R(q); q] 為真。
 
 [R(q);q] wäre also zugleich mit seiner Negation beweisbar, 
@@ -778,6 +778,7 @@ wiederum 副詞：可再由
     以此方式也是可證的。
 
 /177/
+
 第一型符號
 ..........
 
@@ -964,6 +965,7 @@ I.
 
 邏輯恆等式
 ..........
+
 /178/
 
 II. Jede Formel, die aus den folgenden Schemata durch 
