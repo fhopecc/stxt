@@ -816,7 +816,7 @@ deren einzige Elemente x, y bzw. x sind. 18).
 
 譯註: Individuum 個體其複數形態為 Individuen，字尾 um 改為 en。
       Form 屬格不變形，其為陰性名詞，所以冠詞 der 表示屬格或與格，
-      本文中 der From 是屬格。
+      本文中 der Form 是屬格。
 /177/
 
 第一型符號
@@ -827,9 +827,11 @@ wir eine Zeichenkombination der Form:
 a, fa, ffa, fffa... usw.
 wo a entweder 0 oder eine Variable ersten Typs.
 
-基於第一型符號我們可理解符號組合如以下形式：
+第一型符號可理解以下形式之符號組合：
 a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
+
+譯註：unter A verstehen B 片語：將 A 理解為 B。
 
 數符
 ....
@@ -844,7 +846,7 @@ Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 Für n > 1 verstehen wir 
 unter einem Zeichen n-ten Typs dasselbe wie Variable n-ten Typs.
 
-在此符號下，對 n > 1 可知第 n 型符號即為第 n 型變數。
+若 n > 1 第 n 型符號可視為第 n 型變數。
 
 譯註：dasselbe 表一模一樣的東西
 
@@ -867,17 +869,16 @@ zu welcher zugleich mit a, b
 stets auch ~(a), (a) V (b), xΠ(a) gehören 
 (wobei x eine beliebige Variable ist) 18a).
 
-我們所定義的公式類別作為最小的類別 19)，
-包含所有的基本式，
-且若包含 a, b 總是也包含 ~(a), (a) V (b), xΠ(a)
-(其中 x 是一任意變數) 18a)。
+我們定義公式類別為包含所有的基本式及
+若包含 a, b 必包含 ~(a), (a) V (b), xΠ(a) (其中 x 是一任意變數) 
+等公式 18a) 的最小的類別 19)。
 
 18a) xΠ(a) ist also auch dann eine Formel, 
      wenn x in a nicht oder nicht frei vorkommt. 
      In diesem Fall bedeutet xΠ(a) natürlich dasselbe wie a.
 
-18a) 若 x 既非出現於 a 且非自由變數，xΠ(a) 仍是公式。 
-     在這情況下 xΠ(a) 明顯與 a 同義。 
+18a) 即使 x 未出現或未自由地出現於 a 中，
+     xΠ(a) 仍是公式，在這情況下 xΠ(a) 明顯與 a 相同。 
 
 19) Bez. dieser Definition (und analoger später vorkommender) vgl.
     J. Łukasiewiez und A. Tarski, Untersuchungen über den Aussagenkalkül,
