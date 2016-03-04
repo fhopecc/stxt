@@ -1,4 +1,4 @@
-Attribute VB_Name = "NewMacros"
+Attribute VB_Name = "NewMacros1"
 Type RenameDef
     OldName As String
     NewName As String
@@ -50,10 +50,12 @@ Sub 附件黑體灰底()
 End Sub
 
 Sub 附件自動標號及黑體灰底()
+'（附件99）為重新開始計數標籤，若找到（附件99）附件計數會從1開始
+
     Dim seq As Integer
-    seq = 1
+    seq = 0
     With Selection.Find
-        .Text = "（(附件[0-9]{1,}*)）"
+        .Text = "（(附件[0-9]{1,2})）"
         .Forward = True
         .Wrap = wdFindStop
         .Format = True
@@ -61,14 +63,21 @@ Sub 附件自動標號及黑體灰底()
     End With
     
     Selection.HomeKey Unit:=wdStory
-    Selection.Find.Execute
-    Do While Selection.Find.Found
-        Selection.Font.Bold = True
-        Selection.Font.Shading.Texture = wdTexture10Percent
-        Selection.Text = "（附件" + CStr(seq) + "）"
-        seq = seq + 1
+    
+    Do
         Selection.Find.Execute
-    Loop
+        If Selection.Find.Found Then
+            If Selection.Text = "（附件99）" Then
+                seq = 1
+            Else
+                seq = seq + 1
+            End If
+            Selection.Font.Bold = True
+            Selection.Font.Shading.Texture = wdTexture10Percent
+            Selection.Text = "（附件" + CStr(seq) + "）"
+        End If
+    
+    Loop While Selection.Find.Found
     
 End Sub
 
