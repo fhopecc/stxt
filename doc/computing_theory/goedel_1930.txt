@@ -787,6 +787,18 @@ usw. für jede natürliche Zahl als Typus 17).
 
 譯註：zur Verfügung stellen 可行的
 
+譯註：羅素的型別理論
+      哥德爾曾深入研究羅素及懷海德的數學原理，
+      自然地他於 P 系統引入羅素之型別理論，
+      所以把變數又分為型別(Typ)。
+
+      型別理論是為了解決集合不可包含自已本身之問題，
+      故強制集合的成員比集合本身的型別階級還低。
+
+      Typ 一詞源自拉丁文 Typus，可發現哥德爾 Typ 及 Typus 均有使用，
+      Typus 又源自古希臘文 τῠ́πος，係標記、類型之意。
+      Typs 是屬格，Typen 是複數格。
+
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
 als Grundzeichen überflüssig, 
@@ -801,7 +813,8 @@ deren einzige Elemente x, y bzw. x sind. 18).
 例如序對 a, b 可由((a), (a,b))定義，
 其中 (x, y) 及 (x) 分別為成員僅含 x, y 及 x 之類別。18)
 
-譯註 wiederum 副詞：可再由 
+譯註：
+wiederum 副詞：可再由 
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
     z. B. eine Relation zwischen Individuen 
@@ -817,6 +830,7 @@ deren einzige Elemente x, y bzw. x sind. 18).
 譯註: Individuum 個體其複數形態為 Individuen，字尾 um 改為 en。
       Form 屬格不變形，其為陰性名詞，所以冠詞 der 表示屬格或與格，
       本文中 der Form 是屬格。
+
 /177/
 
 第一型符號
@@ -1098,7 +1112,6 @@ a 為一式，其不含自由的 u。
 (集合論之概括公設)
 
 譯註：
-
 Reduzibilitätsaxiom 可化約公設
 
 任何命題函數可用述語命題函數表示。
