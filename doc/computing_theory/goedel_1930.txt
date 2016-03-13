@@ -795,38 +795,14 @@ usw. für jede natürliche Zahl als Typus 17).
       自然地他於 P 系統引入羅素之論型論，
       所以把變數用型別(Typ)標記其不同層次。
 
-      型別理論是為了解決集合不可包含自已本身之問題，
+      型別理論是為了解決集合不可包含自已本身之問題(會引起羅素悖論)，
       故強制集合的成員比集合本身的型別階級還低。
 
       Typ 一詞源自拉丁文 Typus，可發現哥德爾 Typ 及 Typus 均有使用，
       Typus 又源自古希臘文 τῠ́πος，係標記、類型之意。
       Typs 是屬格，Typen 是複數格。
 
-      任何命題函數可用述語命題函數表示。
-
-      如果P是一個性質，那麼具有性質P(x) 的所有物體x就構成一個集合，
-      寫成 Y = {x: P(x)}。
-
-      所有偶數所成的集合就可以寫成 E = { x : x 是偶數}。
-      此例性質P(x) 說的就是「x 是偶數」，
-       它利用偶數這個性質建造起了E這個集合。
-
-      另例, 
-      所有質數所形成的集合P = { x : x 是質數}= {2, 3, 5, 7, 11…}。
-        這裡所謂的性質P(x)指的就是「x是質數」。
-
-      羅素詭論
-
-      在概括公設的許可利用上述的性質P製造出來的集合，
-      其數學形式相當簡單，依據概括公設，可設計集合
-      R = { X : X 不屬於 X}。
-      X 不屬於 X 到底是什麼意思?
-      如果用麻袋隱喻來理解的話，它說的不就是一個集合不能把自己裝進去嗎，
-      這不是理所當然嗎?
-      一個袋子怎麼能夠把自己當成元素放進去呢?
-這不就像一條蛇想把自己吞進去?
-
-
+      羅素悖論請見譯註還原公設。
 
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
@@ -1043,13 +1019,34 @@ Folgende Formeln (I bis V) heißen Axiome
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
-    譯註：= 之定義自然引入了羅素之外延公理，
-          外延公理說明 2 個元素相同的集合是相等的，
-          為簡化說明，我引入屬於 ε 符號用較現代形式寫出外延公理。
-          xi+1 Π (yi+1 Π ( zi Π 
-               (zi ε xi+1 ~ zi ε yi+1) -> xi+1 = yi+1
+    譯註：哥德爾未提到的縮寫概述如下：
+          
 
-          基礎常數不包含 =。
+          . 符號合取邏輯連接子定義為：
+          a . b ≡ ~(~a v ~b)
+          證明如以下真值表：
+          a b ~a ~b ~av~b ~(~av~b) a.b
+          0 0  1  1     1       0    0  
+          0 1  1  0     1       0    0 
+          1 0  0  1     1       0    0
+          1 1  0  0     0       1    1
+ 
+          -> 為推論邏輯連接子定義為：
+          a -> b ≡ ~a v b          
+          證明如以下真值表：
+          a b ~a ~avb a->b
+          0 0  1    1    1   
+          0 1  1    1    1
+          1 0  0    0    0
+          1 1  0    1    1
+
+          ≡ 為等價符號，a ≡ b 即 a 的值與 b 的值相同，定義為：
+          a≡b := a->b . b->a
+          哥德爾在後面將等價符號以 ~ 表示，≡ 用來引入定義。          
+
+          Ex 為存在量詞常數定義為：
+          ExP(x) ≡ ~(xΠ(~P(x)))
+ 
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -1085,22 +1082,28 @@ I.
       3.表示數學歸納法。
 
 
-邏輯恆等式
-..........
-
 /178/
+
+一階邏輯推論規則
+................
 
 II. Jede Formel, die aus den folgenden Schemata durch 
     Einsetzung beliebiger Fromeln für p, q, r entsteht.
 
-II. 任一公式，其衍生自以下框架中 p, q, r 位置配置任意公式：
+II. 任一公式衍生自將以下框架中 p, q, r 位置以任意公式替換：
 
 1. p v p -> p
 2. p -> p v p
 3. p v q -> q v p
 4. (p -> q) -> (r v p -> r v q)
 
-譯註：上述即為公設框架，即此框架表示一群公設。
+譯註：Schemata 為產生公理之形式框架被哥德爾用來表示一群相同形式之公理，
+      ZF 公理系統也是使用公理框架。
+      以現代術語說明每個框架及意義如下：
+      1. p v p -> p     重言律
+      2. p -> p v p     後項引入了 v 邏輯析取運算子，故稱 v 引入律
+      3. p v q -> q v p 交換律
+      4. (p -> q) -> (r v p -> r v q)
 
 取代操作
 ........
@@ -1117,10 +1120,6 @@ III. 由以下兩框架其中之一推演之公式
 dadurch entsteht, 
 daß man für a, v, b, c folgende Einsetzungen vornimmt 
 (und in 1. die durch "Subst" angezeigte Operation ausführt):
-
-對 a, v, b, c 作以下配置：
-(並執行於 1. 記為 "Subst" 之操作) 
-
 Für a eine beliebige Formel, 
 für v eine beliebige Variable.
 für b eine Forml, in der v nicht frei vorkommt, 
@@ -1129,11 +1128,17 @@ vorausgesetzt,
 daß c keine Variable enthält,
 welche in a an einer Stelle gebunden ist, an der v frei ist 23).
 
+對 a, v, b, c 作以下配置：
+(於 1. 中已被執行標記為 "Subst" 之操作) 
 a 為任一式、
 v 為任一變數，
 b 為式其中不出現自由的 v，
 c 為與 v 同型的符號，
 且 c 不包含變數，其在 a 中位置為受限，但 v 於此為自由 23)。
+
+譯註：Subst 是後設操作，非 P 系統本身，
+             |v|
+      Subst a|c| 即視為已將公式 a 中所有變數 v 以 c 取代之公式。 
 
 23) c ist also entweder eine Variable oder 0 oder 
     ein Zeichen der Form f....f u, 
@@ -1157,7 +1162,10 @@ c 為與 v 同型的符號，
     因為所有可能的取代已在公設中處理，
     所以取代規則將變為多餘的，
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
-    
+
+還原公理
+........
+   
 IV. Jede Formel, die aus dem Schema
 
 IV. 以下框架衍生之式
@@ -1173,14 +1181,39 @@ Dieses Axiom vertritt das Reduzibilitätsaxiom
 
 配置 v 及 u 分別為 n 型及 n+1 型之任意變數，
 a 為一式，其不含自由的 u。
-這些公設表達還原公設
-(集合論之概括公設)
+這些公設表達還原公理
+(集合論之概括公理)
 
-譯註：Reduzibilitätsaxiom 還原公設
-      Komprehensionsaxiom der Mengenlehre 概括公設
+譯註：Reduzibilitätsaxiom 還原公理
+      Komprehensionsaxiom der Mengenlehre 概括公理
 
-元素決定類
-..........
+      哥德爾的 P 系統是採取羅素的邏輯主義，意即數學是由邏輯所建構，
+      所以到此都未引入「屬於 ε」這個集合論的運算子。
+      
+      此公理說明存在某個命題函數 u，
+      所有符合命題函數 u(v) 的所有物體 v 相等集合 a，
+      於是可推得任何集合可用描述其性質之述語命題函數表示。
+      以現式符號可寫成 Y = {x: P(x)}。
+
+      所有偶數所成的集合就可以寫成 E = { x : x 是偶數}。
+      此例性質P(x) 說的就是「x 是偶數」，
+      它利用偶數這個性質建造 E 這個集合。
+
+      所有質數所形成的集合P = { x : x 是質數}= {2, 3, 5, 7, 11…}。
+      這裡所謂的性質P(x)指的就是「x是質數」。
+      
+      羅素悖論
+
+      依據還原公理，可設計集合
+      R = { X : X 不屬於 X}。
+      X 不屬於 X 到底是什麼意思?
+      如果用麻袋隱喻來理解的話，它說的不就是一個集合不能把自己裝進去嗎，
+      這不是理所當然嗎?
+      一個袋子怎麼能夠把自己當成元素放進去呢?
+      這不就像一條蛇想把自己吞進去?
+
+外延公理
+........
 
 V.Jede Formel, die aus der folgenden durch Typenerhöhung 
   entsteht (und diese Formel selbst):
@@ -1193,6 +1226,13 @@ Dieses Axiom besagt,
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
 
 此公設說明類可完全由其元素決定。
+
+譯註：引入了羅素之外延公理，
+      外延公理說明 2 個元素相同的集合是相等的，
+      為簡化說明，我引入屬於 ε 符號用較現代形式寫出外延公理。
+      xi+1 Π (yi+1 Π ( zi Π 
+               (zi ε xi+1 ~ zi ε yi+1) -> xi+1 = yi+1
+
 
 直接後繼
 ........
