@@ -159,13 +159,11 @@ Axiomensystem der Mengenlehre 3) andererseits.
    das Reduzibilitäts und das Auswahlaxiom (für alle Typen).
 
 2) 懷海德及羅素，數學原理，第二版，劍橋出版 1925。
-   PM 系統也特別包含以下定理：
-   無窮公設(形式如下：存在精確可數多個之個體)，
+   PM 系統特別包含以下公理：
+   無窮公理(形式如下：存在精確可數多個之個體)，
    簡化和選擇公設(對所有類型)。
                     
-譯註：無窮公設：EN: φεN,{(xεN)->(xU{x})εN}
-      簡化公設：
-      選擇公設：能從無限個集合中，每個集合取一個元素組成新的集合。
+譯註：論文之後哥德爾引入這三項公理，請見 P 系統。
 
 3) Vgl. A. Fraenkel, 
    Zehn Vorlesungen über die Grundlegung der Mengenlehre, 
@@ -705,6 +703,10 @@ näher behandelt werden.
 譯注：doch 無論如何
       entschieden 是 entscheiden 之過去分詞。
       bezüglich 有關於，介詞。
+
+P 系統
+------
+
 2.
 
 Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
@@ -787,10 +789,11 @@ usw. für jede natürliche Zahl als Typus 17).
 
 譯註：zur Verfügung stellen 可行的
 
-譯註：羅素的型別理論
+譯註：羅素的類型論
+
       哥德爾曾深入研究羅素及懷海德的數學原理，
-      自然地他於 P 系統引入羅素之型別理論，
-      所以把變數又分為型別(Typ)。
+      自然地他於 P 系統引入羅素之論型論，
+      所以把變數用型別(Typ)標記其不同層次。
 
       型別理論是為了解決集合不可包含自已本身之問題，
       故強制集合的成員比集合本身的型別階級還低。
@@ -798,6 +801,32 @@ usw. für jede natürliche Zahl als Typus 17).
       Typ 一詞源自拉丁文 Typus，可發現哥德爾 Typ 及 Typus 均有使用，
       Typus 又源自古希臘文 τῠ́πος，係標記、類型之意。
       Typs 是屬格，Typen 是複數格。
+
+      任何命題函數可用述語命題函數表示。
+
+      如果P是一個性質，那麼具有性質P(x) 的所有物體x就構成一個集合，
+      寫成 Y = {x: P(x)}。
+
+      所有偶數所成的集合就可以寫成 E = { x : x 是偶數}。
+      此例性質P(x) 說的就是「x 是偶數」，
+       它利用偶數這個性質建造起了E這個集合。
+
+      另例, 
+      所有質數所形成的集合P = { x : x 是質數}= {2, 3, 5, 7, 11…}。
+        這裡所謂的性質P(x)指的就是「x是質數」。
+
+      羅素詭論
+
+      在概括公設的許可利用上述的性質P製造出來的集合，
+      其數學形式相當簡單，依據概括公設，可設計集合
+      R = { X : X 不屬於 X}。
+      X 不屬於 X 到底是什麼意思?
+      如果用麻袋隱喻來理解的話，它說的不就是一個集合不能把自己裝進去嗎，
+      這不是理所當然嗎?
+      一個袋子怎麼能夠把自己當成元素放進去呢?
+這不就像一條蛇想把自己吞進去?
+
+
 
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
@@ -845,7 +874,11 @@ wo a entweder 0 oder eine Variable ersten Typs.
 a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
 
-譯註：unter A verstehen B 片語：將 A 理解為 B。
+譯註：這裡已內含羅素的無窮公理，即有無窮的個體
+      無窮公設：EN: φεN,{(xεN)->(xU{x})εN}
+      選擇公設：能從無限個集合中，每個集合取一個元素組成新的集合。
+
+      unter A verstehen B 片語：將 A 理解為 B。
 
 數符
 ....
@@ -874,7 +907,7 @@ nennen wir Elementarformeln.
 a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 稱為基本式。
 
-邏輯運算子
+公式類別
 ..........
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
@@ -882,10 +915,43 @@ zu welcher sämtliche Elementarformeln gehören und
 zu welcher zugleich mit a, b 
 stets auch ~(a), (a) V (b), xΠ(a) gehören 
 (wobei x eine beliebige Variable ist) 18a).
+(a)V(b) nennen wir die Disjunktion aus a und b,  
+~(a) die Negation und xΠ(a) eine Generalisation von a.
+
 
 我們定義公式類別為包含所有的基本式及
 若包含 a, b 必包含 ~(a), (a) V (b), xΠ(a) (其中 x 是一任意變數) 
 等公式 18a) 的最小的類別 19)。
+(a)V(b) 稱為 a 及 b 的析取，
+~(a) 為否定而 xΠ(a) 為 a 的一般化。
+
+譯註：公式類別於現代數學稱為合式公式，
+      用更精簡的 BNF 描述 P 系統之語法如下表：
+
+      C    := '~' | 'v' | 'Π'       常數
+           |  '0' | 'f' | '(' 
+           |  ')'
+      V1   := 'x1' | 'y1' | 'z1'... 第1型變數，可數
+      V2   := 'x2' | 'y2' | 'z3'... 第2型變數
+      . 
+      .
+      .
+      Vn   := 'xn' | 'yn' | 'zn'... 第n型變數
+      V    := V1 | V2 | V3...       變數
+      Z1   := '0'                   第1型符號
+           |  V1 
+           |  'f' Z1  
+      Z2   := V2                    第2型符號
+      . 
+      .
+      .
+      Zn   := Vn                    第n型符號
+
+      EF   := Zn+1 '(' Zn ')'      基本`式
+      F    := EF                   公式
+           |  '~' '(' F ')'        否定
+           |  F 'V' F              析取式
+           |  V 'Π' '(' F ')'      一般化式
 
 18a) xΠ(a) ist also auch dann eine Formel, 
      wenn x in a nicht oder nicht frei vorkommt. 
@@ -904,12 +970,6 @@ stets auch ~(a), (a) V (b), xΠ(a) gehören
     命題演算研究，
     科學學會會議報告及華沙信件
     XXIII, 1930, C1. III.
-
-(a)V(b) nennen wir die Disjunktion aus a und b,  
-~(a) die Negation und xΠ(a) eine Generalisation von a.
-
-(a)V(b) 稱為 a 及 b 的析取，
-~(a) 為否定而 xΠ(a) 為 a 的一般化。
 
 命題式
 ......
@@ -943,7 +1003,6 @@ wenn man darin v überall, wo es frei ist, durch b ersetzt 20),
        |v| 
 Subst a|b| (其中 a 為式，v 為變數且 b 為與 v 同型之符號。)
 理解為為將 a 裡面每處自由之 v 均以 b 取代 20)。
-
 
 20) Falls v in a nicht als freie Variable vorkommt, 
                 |v|
@@ -984,7 +1043,13 @@ Folgende Formeln (I bis V) heißen Axiome
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
-    譯註：故基礎符號義不包含 =。
+    譯註：= 之定義自然引入了羅素之外延公理，
+          外延公理說明 2 個元素相同的集合是相等的，
+          為簡化說明，我引入屬於 ε 符號用較現代形式寫出外延公理。
+          xi+1 Π (yi+1 Π ( zi Π 
+               (zi ε xi+1 ~ zi ε yi+1) -> xi+1 = yi+1
+
+          基礎常數不包含 =。
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -1108,37 +1173,11 @@ Dieses Axiom vertritt das Reduzibilitätsaxiom
 
 配置 v 及 u 分別為 n 型及 n+1 型之任意變數，
 a 為一式，其不含自由的 u。
-這些公設表達可化約公設
+這些公設表達還原公設
 (集合論之概括公設)
 
-譯註：
-Reduzibilitätsaxiom 可化約公設
-
-任何命題函數可用述語命題函數表示。
-
-Komprehensionsaxiom der Mengenlehre 概括公設
-
-如果P是一個性質，那麼具有性質P(x) 的所有物體x就構成一個集合，
-寫成 Y = {x: P(x)}。
-
-所有偶數所成的集合就可以寫成 E = { x : x 是偶數}。
-此例性質P(x) 說的就是「x 是偶數」，
-它利用偶數這個性質建造起了E這個集合。
-
-另例, 
-所有質數所形成的集合P = { x : x 是質數}= {2, 3, 5, 7, 11…}。
-這裡所謂的性質P(x)指的就是「x是質數」。
-
-羅素詭論
-
-在概括公設的許可利用上述的性質P製造出來的集合，
-其數學形式相當簡單，依據概括公設，可設計集合
-R = { X : X 不屬於 X}。
-X 不屬於 X 到底是什麼意思?
-如果用麻袋隱喻來理解的話，它說的不就是一個集合不能把自己裝進去嗎，
-這不是理所當然嗎?
-一個袋子怎麼能夠把自己當成元素放進去呢?
-這不就像一條蛇想把自己吞進去?
+譯註：Reduzibilitätsaxiom 還原公設
+      Komprehensionsaxiom der Mengenlehre 概括公設
 
 元素決定類
 ..........
@@ -3520,4 +3559,10 @@ Beweis von Satz XI ausführlich dargestellt werden.
 在即將來到的續篇中將更為一般化表達且證明這些結果。
 這些工作僅將前述草繪的證明去展現其細節。
 （接受日期： 17. XI. 1930.）
+
+譯註：譯者參考書目
+
+1.張錦文、王雪生，連續統假設，1989年，九章出版社。
+
+2.李巍，关于罗素的类型论和还原公理，2013年第27卷第9期，重庆理工大学学报。
 
