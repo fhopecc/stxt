@@ -54,8 +54,6 @@ der Principia Mathematica und verwandter System I 1)
 但也只花費大致 2 年時間，即完成初譯，
 多虧了現在網際網路的發達，在查找資料大幅節省時間。
 
-
-
 數學完全由邏輯所組成，
 
 中國在戰國初期邏輯發展似乎是為了辨論而產生。
@@ -65,54 +63,7 @@ der Principia Mathematica und verwandter System I 1)
 
 本文中沒有一句廢話。
 
-譯詞規則：
-
-Axiom       公設：預設為真之陳述
-Satz        命題：可判定真假之陳述
-Begriff     觀念或定義：引入一個新的詞代表某項事物
-Individuenbereich   定義域，函數之定義域
-Individuum  個體，可區分之成員
-Menge       集合
-Stelle      位置
-tupel       值組
-Folge       序列，有序之數列
-wider-spruchs-freie 一致，源自沒有矛盾 
-Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
-
-譯者作的P 系統與整數對應表
-
-P 系統      P系統的P系統意義
------------ ----------------             
-0            1          零
-f            3          後繼函數
-~            5          非
-v            7          或
-Π            9          對所有
-(           11          右括號
-)           13          左括號
-x           17          第 1 個 1 型變數
-y           19          第 2 個 1 型變數
-n           Z(n)        數 n 的數符表示。
-       |v|    |  v|     其中 a 為式，v 為變數且 b 為與 v 同型之符號。
-Subst a|b|  Sb|x y|     視為一式由 a 衍生，
-                        且在裡面每處自由之 v，均由 b 取代。
-
-x->y        x Imp y 
-x& y        x Con y 
-x~ y        x Aeq y 
-э           v Ex  y 
-
-            n Gl x      數列 x 的第 n 個元素
-            Ax(x)       x 是一個公設
-            x B y       x 是 y 的證明，B 源自 Beweis
-            Bew(x)      x 是一可證式
-            Q(x,y)      x 不是 y 的證明
-            17 Gen r    x 不是「x不是y的證明」的證明  
-            χ           任一公式集合。
-            Flg(χ)      χ 之推論集合。
-            Bwχ(x)      x 在 χ 下為證明數。
-            x Bχ y      x 在 χ 下為 y 的證明。
-            Bewχ(x)     x 在 χ 下可證。
+iderspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
 本文
 ----
@@ -141,7 +92,16 @@ vollzogen werden kann.
 眾所皆知數學朝著更精確方向的發展使得其眾多領域更為形式化，
 以此方式，證明能依據少數統整之機械化規則達成。
 
-譯註：vollzogen 完成地，vollziehen的過去分詞
+譯註：形式主義
+
+      一開頭哥德爾便指出本論文的數學基礎是希爾伯特的形式主義。
+      形式主義係視數學可化為一組無預先詮釋意義的符號操作。
+
+      在形式主義之前是以集合論作為數學基礎的 ZF 公理系統，
+      其又是衍生自羅素的邏輯主義，
+      其認為數學可用邏輯建構出來，也就是邏輯是數學的基礎。
+
+      vollzogen 完成地，vollziehen的過去分詞
 
 Die umfassendsten derzeit aufgestellten formalen Systeme sind
 das System der Principia Mathematica (PM) 2) einerseits, 
@@ -161,9 +121,9 @@ Axiomensystem der Mengenlehre 3) andererseits.
 2) 懷海德及羅素，數學原理，第二版，劍橋出版 1925。
    PM 系統特別包含以下公理：
    無窮公理(形式如下：存在精確可數多個之個體)，
-   簡化和選擇公設(對所有類型)。
+   簡化公理和選擇公理(對所有類型)。
                     
-譯註：論文之後哥德爾引入這三項公理，請見 P 系統。
+譯註：哥德爾會於之後直接定義簡化公理，請見 P 系統。
 
 3) Vgl. A. Fraenkel, 
    Zehn Vorlesungen über die Grundlegung der Mengenlehre, 
@@ -175,7 +135,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
       為以下之縮寫：
       Wissenschaft und Hypothese Bd. XXXI
 
-   J,v. Neumann, Die Axiomatisierung der Mengenlehre. 
+   J.v. Neumann, Die Axiomatisierung der Mengenlehre. 
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
 
@@ -787,22 +747,22 @@ usw. für jede natürliche Zahl als Typus 17).
 
 17) 假定對每個變數型別可具有可數多種符號。
 
-譯註：zur Verfügung stellen 可行的
-
 譯註：羅素的類型論
 
       哥德爾曾深入研究羅素及懷海德的數學原理，
       自然地他於 P 系統引入羅素之論型論，
       所以把變數用型別(Typ)標記其不同層次。
 
-      型別理論是為了解決集合不可包含自已本身之問題(會引起羅素悖論)，
+      型別理論是為了解決集合包含自已本身之問題(這會引起羅素悖論)，
       故強制集合的成員比集合本身的型別階級還低。
 
       Typ 一詞源自拉丁文 Typus，可發現哥德爾 Typ 及 Typus 均有使用，
       Typus 又源自古希臘文 τῠ́πος，係標記、類型之意。
       Typs 是屬格，Typen 是複數格。
 
-      羅素悖論請見譯註還原公設。
+      羅素悖論請參見還原公設那節之譯註。
+
+      zur Verfügung stellen 可行的
 
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
@@ -1019,10 +979,9 @@ Folgende Formeln (I bis V) heißen Axiome
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
     
-    譯註：哥德爾未提到的縮寫概述如下：
+    譯註：哥德爾未提到的縮寫定義概述如下：
           
-
-          . 符號合取邏輯連接子定義為：
+          "." 為合取邏輯連接子定義為：
           a . b ≡ ~(~a v ~b)
           證明如以下真值表：
           a b ~a ~b ~av~b ~(~av~b) a.b
@@ -1031,7 +990,7 @@ Folgende Formeln (I bis V) heißen Axiome
           1 0  0  1     1       0    0
           1 1  0  0     0       1    1
  
-          -> 為推論邏輯連接子定義為：
+          "->" 為推論邏輯連接子定義為：
           a -> b ≡ ~a v b          
           證明如以下真值表：
           a b ~a ~avb a->b
@@ -1045,9 +1004,8 @@ Folgende Formeln (I bis V) heißen Axiome
           哥德爾在後面將等價符號以 ~ 表示，≡ 用來引入定義。          
 
           Ex 為存在量詞常數定義為：
-          ExP(x) ≡ ~(xΠ(~P(x)))
+          ExA(x) ≡ ~(xΠ(~A(x)))
  
-
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
     (in II, III, IV nach Ausführung der erlaubten Einsetzungen) 
@@ -1081,7 +1039,6 @@ I.
       2.表示後繼函數為單射函數，沒有 2 個數之後繼數為相同的。
       3.表示數學歸納法。
 
-
 /178/
 
 一階邏輯推論規則
@@ -1104,6 +1061,7 @@ II. 任一公式衍生自將以下框架中 p, q, r 位置以任意公式替換�
       2. p -> p v p     後項引入了 v 邏輯析取運算子，故稱 v 引入律
       3. p v q -> q v p 交換律
       4. (p -> q) -> (r v p -> r v q)
+      這四個推論都是套套邏輯。
 
 取代操作
 ........
@@ -1232,7 +1190,6 @@ daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
       為簡化說明，我引入屬於 ε 符號用較現代形式寫出外延公理。
       xi+1 Π (yi+1 Π ( zi Π 
                (zi ε xi+1 ~ zi ε yi+1) -> xi+1 = yi+1
-
 
 直接後繼
 ........
@@ -3600,7 +3557,57 @@ Beweis von Satz XI ausführlich dargestellt werden.
 這些工作僅將前述草繪的證明去展現其細節。
 （接受日期： 17. XI. 1930.）
 
-譯註：譯者參考書目
+譯者作的P 系統與整數對應表
+
+P 系統      P系統的P系統意義
+----------- ----------------             
+0            1          零
+f            3          後繼函數
+~            5          非
+v            7          或
+Π            9          對所有
+(           11          右括號
+)           13          左括號
+x           17          第 1 個 1 型變數
+y           19          第 2 個 1 型變數
+n           Z(n)        數 n 的數符表示。
+       |v|    |  v|     其中 a 為式，v 為變數且 b 為與 v 同型之符號。
+Subst a|b|  Sb|x y|     視為一式由 a 衍生，
+                        且在裡面每處自由之 v，均由 b 取代。
+
+x->y        x Imp y 
+x& y        x Con y 
+x~ y        x Aeq y 
+э           v Ex  y 
+
+            n Gl x      數列 x 的第 n 個元素
+            Ax(x)       x 是一個公設
+            x B y       x 是 y 的證明，B 源自 Beweis
+            Bew(x)      x 是一可證式
+            Q(x,y)      x 不是 y 的證明
+            17 Gen r    x 不是「x不是y的證明」的證明  
+            χ           任一公式集合。
+            Flg(χ)      χ 之推論集合。
+            Bwχ(x)      x 在 χ 下為證明數。
+            x Bχ y      x 在 χ 下為 y 的證明。
+            Bewχ(x)     x 在 χ 下可證。
+
+譯詞規則
+--------
+Axiom       公理：預設為真之陳述
+Satz        命題：可判定真假之陳述
+Begriff     觀念或定義：引入一個新的詞代表某項事物
+Individuenbereich   定義域，函數之定義域
+Individuum  個體，可區分之成員
+Menge       集合
+Stelle      位置
+tupel       值組
+Folge       序列，有序之數列
+wider-spruchs-freie 一致，源自沒有矛盾 
+W
+
+譯者參考書目
+------------
 
 1.張錦文、王雪生，連續統假設，1989年，九章出版社。
 
