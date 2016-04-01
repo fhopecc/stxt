@@ -1289,8 +1289,6 @@ welche die Axiome enthält und gegen die Relation
     所以取代規則將變為多餘的，
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
 
-
-
 哥德爾數
 ........
 
@@ -1414,7 +1412,7 @@ folgendes gilt:
 25) 即其定義域為非負整數(或 n 元之非負整數)
     且其值為非負整數。
 
-26) Kleine lateinische Buchstaben (ev.# mit Indizes) sind 
+26) Kleine lateinische Buchstaben (ev. mit Indizes) sind 
     im folgenden immer Variable für nicht negative ganze Zahlen 
     (falls nicht ausdrücklich das Gegenteil bemerkt ist).
 
@@ -1444,14 +1442,12 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 
 27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
     an die Leerstellen einer der vorhergehenden, z.B. 
-
-27) 精確而言：經由配置一些前項函數於前面項目之空位置，例如：
-
     φp(X1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
-
     Nicht alle Variable der linken Seite müssen auch rechts vorkommen
     (ebenso im Rekursionsschema (2)).
-    
+ 
+27) 精確而言：經由配置一些前項函數於前面項目之空位置，例如：
+    φp(X1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
     並非所有左側變數也要在右側出現(遞迴框架(2)也是)。
 
 級別
