@@ -450,7 +450,6 @@ Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
 nεK ≡ Bew[R(n);n] 11a) (1)
 
 譯註：K 集合中的數字為 R 集合中不可證數之索引。
-
 (wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
 (這裡 Bew x 指 x 是一個可證式)。
@@ -811,7 +810,7 @@ a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
 
 譯註：這裡已內含羅素的無窮公理，即有無窮的個體
-      無窮公設：EN: φεN,{(xεN)->(xU{x})εN}
+      無窮公設：EN: φεN,{(xεN)⊃(xU{x})εN}
       選擇公設：能從無限個集合中，每個集合取一個元素組成新的集合。
 
       unter A verstehen B 片語：將 A 理解為 B。
@@ -975,19 +974,19 @@ um die gleiche Zahl erhöht.
 
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
- definierten Abkürzungen: ., ->, ≡, (Ex), = 21)
+ definierten Abkürzungen: ., ⊃, ≡, (Ex), = 21)
  und mit Verwendung der üblichen Konventionen über
  das Weglassen von Klammern angeschrieben)22):
 
 下式(I 至 V)稱為公設
-(受益於已知方法所定義之縮寫：., ->, ≡, (Ex), = 21)
+(受益於已知方法所定義之縮寫：., ⊃, ≡, (Ex), = 21)
  並利用一般省略括號慣寫法去書寫 22)。
 
-21) x1=y1 ist, wie in PM I, *13 durch x2Π(x2(x1) -> x2(y1)) definiert
+21) x1=y1 ist, wie in PM I, *13 durch x2Π(x2(x1) ⊃ x2(y1)) definiert
     zu denken (ebenso für die höheren Typen).
 
     如同在 PM I, *13 中，
-    x1=y1 可想成由 x2Π(x2(x1) -> x2(y1)) 定義(更高型別也類似)。 
+    x1=y1 可想成由 x2Π(x2(x1) ⊃ x2(y1)) 定義(更高型別也類似)。 
    
     譯註：相等與等價
 
@@ -996,13 +995,13 @@ Folgende Formeln (I bis V) heißen Axiome
           數值相同稱為等價。
 
           論文中，哥德爾定義相等如下：
-          x1=y1 := x2Π(x2(x1) -> x2(y1)) 
+          x1=y1 := x2Π(x2(x1) ⊃ x2(y1)) 
           x1=y1 定義為所有滿足於 x1 的述詞 x2 也滿足於 y1。
           
           某種測量即為述詞，2 事物接受所有測量都相等稱為相等。
 
           ≡ 為等價，於 PM 的第 7 頁定義為：
-          a≡b := a->b . b->a
+          a≡b := a⊃b . b⊃a
           羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
           以真值表定義等價如下：
 
@@ -1051,10 +1050,10 @@ Folgende Formeln (I bis V) heißen Axiome
           1 0  0  1     1       0    0
           1 1  0  0     0       1    1
  
-          "->" 為推論邏輯連接子定義為：
-          a -> b ≡ ~a v b          
+          "⊃" 為推論邏輯連接子定義為：
+          a ⊃ b ≡ ~a v b          
           證明如以下真值表：
-          a b ~a ~avb a->b
+          a b ~a ~avb a⊃b
           0 0  1    1    1   
           0 1  1    1    1
           1 0  0    0    0
@@ -1088,8 +1087,8 @@ Folgende Formeln (I bis V) heißen Axiome
 
 I.
 1.~(fx1=0)
-2.fx1 = fy1 -> x1 = y1
-3.x2(0).x1Π(x2(x1) -> x2(fx1)) -> x1 Π (x2(x1)).
+2.fx1 = fy1 ⊃ x1 = y1
+3.x2(0).x1Π(x2(x1) ⊃ x2(fx1)) ⊃ x1 Π (x2(x1)).
 
 譯註：皮亞諾公設在此論文以 3 個公式表達，每個公式意義如下：
       1.表示 0 是數之始，不可能存在後繼數為 0 之情形，
@@ -1106,18 +1105,19 @@ II. Jede Formel, die aus den folgenden Schemata durch
 
 II. 任一公式衍生自將以下框架中 p, q, r 位置以任意公式替換：
 
-1. p v p -> p
-2. p -> p v p
-3. p v q -> q v p
-4. (p -> q) -> (r v p -> r v q)
+1. p v p ⊃ p
+2. p ⊃ p v p
+3. p v q ⊃ q v p
+4. (p ⊃ q) ⊃ (r v p ⊃ r v q)
 
 譯註：Schemata 為產生公理之形式框架被哥德爾用來表示一群相同形式之公理，
       ZF 公理系統也是使用公理框架。
+      以下的公理系統是取自希爾伯特的理論邏輯基礎，
       以現代術語說明每個框架及意義如下：
-      1. p v p -> p     重言律
-      2. p -> p v p     後項引入了 v 邏輯析取運算子，故稱 v 引入律
-      3. p v q -> q v p 交換律
-      4. (p -> q) -> (r v p -> r v q)
+      1. p v p ⊃ p     重言律
+      2. p ⊃ p v p     後項引入了 v 邏輯析取運算子，故稱 v 引入律
+      3. p v q ⊃ q v p 交換律
+      4. (p ⊃ q) ⊃ (r v p ⊃ r v q)
       這四個推論都是套套邏輯。
 
 取代操作
@@ -1128,9 +1128,9 @@ III. Jede Formel, die aus einem der beiden Schemata
 III. 由以下兩框架其中之一推演之公式
 
                    |v|
-1. vΠ(a) -> Subst a|c| 
+1. vΠ(a) ⊃ Subst a|c| 
 
-2. vΠ(b V a) -> b V vΠ(a)
+2. vΠ(b V a) ⊃ b V vΠ(a)
 
 dadurch entsteht, 
 daß man für a, v, b, c folgende Einsetzungen vornimmt 
@@ -1232,7 +1232,7 @@ V.Jede Formel, die aus der folgenden durch Typenerhöhung
 
 V.每個式由下式之型別提升衍生而來(包含式本身)：
 
-1. x1Π(x2(x1)≡y2(x1)) -> x2=y2.
+1. x1Π(x2(x1)≡y2(x1)) ⊃ x2=y2.
 
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
@@ -1254,19 +1254,23 @@ daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
 
       為簡化說明，我引入屬於 ε 符號用較形式寫出外延公理。
       xi+1 Π (yi+1 Π ( zi Π 
-               (zi ε xi+1 ~ zi ε yi+1) -> xi+1 = yi+1
+               (zi ε xi+1 ~ zi ε yi+1) ⊃ xi+1 = yi+1
 
 直接後繼
 ........
 
 Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
-aus a), wenn a die Formel (~(b)) V (c) ist
-(bzw. wenn c die Formel v Π (a) ist, 
+aus a), wenn a die Formel (~(b)) ∨ (c) ist
+(bzw. wenn c die Formel vΠ(a) ist, 
 wo v eine beliebige Variable bedeutet). 
 
-若 a 是式 (~(b)) V (c)。
-則式 c 稱為 a 及 b (分別來自a) 的直接後繼，
-(分別是當 c 為式 v Π (a)，其中 v 意為任一個變數)。
+若 a 是式 (~(b)) ∨ (c)，
+(或 c 為式 vΠ(a)，其中 v 為任意一個變數)。
+則式 c 稱為 a 及 b (或來自 a) 的直接後繼，
+
+譯註：本文描述直接推論的兩種型式如下：
+      1. (~(b))∨(c) & b ⊢ c
+      2. a ⊢ vΠ(a)
 
 可證式
 ......
@@ -1276,8 +1280,7 @@ als die kleinste Klasse von Formeln,
 welche die Axiome enthält und gegen die Relation 
 "unmittelbare Folge" abgeschlossen ist 24).
 
-可證式之類別定義為最小之式類別，
-其包含公設及直接後繼關係所推論之式。
+可證式之類別定義為包含公設及所有具直接推論關係之最小式類別，。
 
 24) Die Einsetzungsregel wird dadurch überflüssig, 
     daß wir alle möglichen Einsetzungen bereits 
@@ -1290,7 +1293,10 @@ welche die Axiome enthält und gegen die Relation
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
 
 哥德爾數
-........
+--------
+
+基礎符號對應到自然數
+....................
 
 Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
@@ -1309,28 +1315,39 @@ ferner den Variablen n-ten Typs die Zahlen der Form p^n
 此外第 n 型變數配置形式為 p^n 之整數
 (其中 p 為大於 13 之質數)。
 
+譯註：小於 13 之質數已配賦給基礎符號，
+      大於 13 之質數為變數符號，
+      因哥德爾引入羅素型別論，
+      每個變數具有型別，故以質數的次方註記變數型別。
+
+公式對應到自然數
+................
+
 Dadurch entspricht jeder endlichen Reihe von Grundzeichen 
 (also auch jeder Formel) 
 in eineindeutiger Weise eine endliche Reihe natürlicher Zahlen. 
 
-因此每個基礎符號序列(也是每個公式)以1對1方式對應自然數序列。
+由此每個基礎符號序列(即每個公式)
+便以1對1方式對應到一個有限自然數序列。
+
+譯註：entspricht 是 entsprechen (對應)的第三人稱變格。
 
 Die endlichen Reihen natürlicher Zahlen bilden wir nun 
 (wieder eineindeutig) auf natürliche Zahlen ab, 
-indem wir der Reihe n1, n2,...,nk die Zahl 2^n1, 3^n2,...,pk^nk
+indem wir der Reihe n1, n2,...,nk die Zahl 2^n1.3^n2...pk^nk
 entsprechen lassen, 
 wo pk die k-te Primzahl (der Größe nach) bedeutet.
 
-現在我們把有限自然數序列(一樣是1對1)對應到自然數，
-藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
+現在把有限自然數序列(一樣是1對1)對應到自然數，
+藉由序列 n1,n2,...nk 對應到整數 2^n1.3^n2...pk^nk，
 其中 pk 指第 k 個質數(漸增順序)。
 
 Dadurch ist nicht nur jedem Grundzeichen,
 sondern auch jeder endlichen Reihe von solchen 
 in eineindeutiger Weise eine natürliche Zahl zugeordnet. 
 
-因此不只是基礎符號，
-而是每個這之有限序列以 1 對 1 方式對應一個到自然數。
+因此不只基礎符號，
+而是每個有限序列也以 1 對 1 方式對應到一個自然數。
 
 Die dem Grundzeichen 
 (bzw. der Grundzeichenreihe)
@@ -1340,9 +1357,6 @@ a zugeordnete Zahl bezeichnen wir mit Φ(a).
 
 Sei nun irgend eine Klasse oder Relation R(a1,a2,...,an) 
 zwischen Grundzeichen oder Reihen von solchen gegeben. 
-
-假設現在給定一個基礎符或該序列之間的類別或關係 R(a1,a2,...,an)。 
-
 Wir ordnen ihr diejenige Klasse (Relation) R'(x1,x2,...,xn) 
 zwischen natürlichen Zahlen zu,
 welche dann und nur dann zwischen x1,x2...xn besteht, 
@@ -1350,10 +1364,12 @@ wenn es solchs a1,a2...an gibt,
 daß xi=Φ(ai) (i=1,2,...n) 
 und R(a1,a2...an) gilt. 
 
-我們配置這些整數類別(關係) R'(x1,x2,...,xn)，
-若且惟若 x1,x2...xn 
-使得給定 a1,a2...an，其中 xi=Φ(ai) (i=1,2,...n) 
-且 R(a1,a2...an) 是成立的。
+關係對應到自然數關係
+....................
+
+現給定一個基礎符或其序列的類別或關係 R(a1,a2,...,an)。 
+並配置這些類別(關係)至自然數關係 R'(x1,x2,...,xn)，
+若且惟若存在 a1,a2...an 使 R(a1,a2...an) 成立且 xi=Φ(ai) (i=1,2,...n)。 
 
 Diejenigen Klassen und Relationen natürlicher Zahlen, 
 welche auf diese Weise den bisher 
@@ -1362,20 +1378,25 @@ z.B. "Variable", "Formel", "Satzformel", "Axiom",
 "beweisbare Formel" usw.  zugeordnet sind, 
 bezeichnen wir mit denselben Worten in Kursivschrift. 
 
-這些整數類別及關係將被配置給至今所定義之後設數學觀念，
+這些自然數類別及關係將被配置給至今所定義之後設數學觀念，
 例如：變數、公式、命題公式、公設、可證式等等，
-我們將以該觀念以斜體字表示。
+我們將該觀念以斜體字表示。
+
+譯註：斜體字我是用 / 括住的詞，如/Formel/
 
 Der Satz, daß es im System P unentscheidbare Probleme gibt, 
 lautet z.B. folgendermaßen: 
-Es gibt Satzformeln a, 
-so daß weder a noch die Negation von a beweisbare Formeln sind.
+Es gibt /Satzformeln/ a, 
+so daß weder a noch die /Negation/ von a /beweisbare Formeln/ sind.
 
-命題，其為 P 系統中存在不可決定問題，讀作如下：
-存在命題式 a，使得 a 及其否定都非可證式。
+P 系統中存在不可決定問題之命題，讀作如下：
+存在/命題式/ a，使得 a 及其/否定/都非/可證式/。
+
+譯註：哥德爾依序將基礎符號、符號序列(即公式)對應到一個自然數，
+      並將後設數學觀念對應到自然數的關係。
 
 遞迴函數
-........
+--------
 
 Wir schalten nun eine Zwischenbetrachtung ein, 
 die mit dem formalen System P vorderhand nichts zu tun hat, 
@@ -1384,8 +1405,19 @@ und geben zunächst folgende Definition:
 現在先轉換至一個觀念，現在其與 P 系統沒有關聯，
 首先給定以下定義：
 
-數論函數
-++++++++
+基礎遞迴函數公理
+................
+
+譯註：以下為基本基礎遞迴函數，即直接接受之基礎遞廻函數。
+      RA1.0(x) = 0                        零函數
+      RA2.f(x) = x+1                      後繼函數
+
+      RA3.p_k_j(x1,x2,...,xj,...,xk) = xj 投影函數
+    
+      RA4.i(n) = n                        自身函數
+
+遞迴定義數論函數
+................
 
 Eine zahlentheoretische Funktion 25) 
 φ(x1,x2...xn) 
@@ -1395,34 +1427,38 @@ den zahlentheoretischen Funktionen
 wenn für alle x2...xn,k 26)
 folgendes gilt:
 
-一個數論函數 25) 
-φ(x1,x2...xn) 
+一個數論函數 25) φ(x1,x2...xn) 
 稱作遞迴定義自數論函數
-ψ(x1,x2...x(n-1)) 及 μ(x1,x2...x(n+1))，
-且對所有 x2...xn,k 26)
-下式成立：
+ψ(x1,x2...x(n-1)) 及 
+μ(x1,x2...x(n+1))，
+若其對所有 x2...xn,k 26) 使得：
 
 φ(0  ,x2...xn) = ψ(x2...xn)                          (2)
 φ(k+1,x2...xn) = μ(k,φ(k,x2...xn),x2...xn)
 
-25) D.h. ihr Definitionsbereich ist die Klasse 
+數論函數
+........
+
+25) D. h. ihr Definitionsbereich ist die Klasse 
     der nicht negativen ganzen Zahlen (bzw. der n-tupel von solchen) 
     und ihre Werte sind nicht negative ganze Zahlen.
 
-25) 即其定義域為非負整數(或 n 元之非負整數)
+25) 即其定義域為非負整數(或 n 元非負整數值組)
     且其值為非負整數。
 
 26) Kleine lateinische Buchstaben (ev. mit Indizes) sind 
     im folgenden immer Variable für nicht negative ganze Zahlen 
     (falls nicht ausdrücklich das Gegenteil bemerkt ist).
 
-26) 小寫斜體字(可能帶有索引)於後文總是為非負整數變數
+26) 小寫拉丁字母(可能帶有索引)於後文總是為非負整數變數
     (除非例外情形已被明確說明)
 
 譯註：ev. 為 eventuell 之縮寫，即可能地。
 
-遞迴函數
-++++++++
+/180/
+
+遞迴數論函數
+............
 
 Eine zahlentheoretische Funktion φ heißt rekursiv, 
 wenn es eine endliche Reihe 
@@ -1437,7 +1473,7 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 若且惟若存在一個數論函數的有限序列 φ1,φ2...φn，
 其以 φ 結束而具備以下特性，
 序列中的每個函數 φk 不是由前兩項遞迴定義而來，
-就是由前幾項以執行取代而得 27)，
+就是由對前幾項執行取代而得 27)，
 不然就是一個常數或是後繼函數 x+1。
 
 27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
@@ -1446,12 +1482,12 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
     Nicht alle Variable der linken Seite müssen auch rechts vorkommen
     (ebenso im Rekursionsschema (2)).
  
-27) 精確而言：經由配置一些前項函數於前面項目之空位置，例如：
-    φp(X1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
-    並非所有左側變數也要在右側出現(遞迴框架(2)也是)。
+27) 精確而言：經由配置一些前項函數於前項之空位置，例如：
+    φk(x1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
+    所有左側變數不一定要在右側出現(就如同遞迴框架(2))。
 
 級別
-++++
+....
 
 /180/
 
@@ -1459,16 +1495,17 @@ Die Länge der kürzesten Reihe von φi,
 welche zu einer rekursiven Funktion φ gehört, 
 heißt ihre Stufe. 
 
-最小的 φi，其屬於遞迴函數 φ，之序列長度，
-稱為它的級別。
+遞迴函數 φ 的 φi 最短的序列之長度為其級別。
 
 遞迴關係
-++++++++
+........
 
 Eine Relation zwischen natürlichen Zahlen 
 R(x1...xn) heißt rekursiv 28), 
 wenn es eine rekursive Funktion φ(x1...xn) gibt, 
 so daß für alle x1,x2...xn
+
+R(x1...xn) ~ [φ(x1...xn)=0] 29).
 
 一個自然數關係 R(x1...xn) 稱為遞迴 28)，
 若且惟若存在一個遞迴函數 φ(x1...xn)，
@@ -1476,95 +1513,129 @@ so daß für alle x1,x2...xn
 
 R(x1...xn) ~ [φ(x1...xn)=0] 29).
 
-28) Klassen rechnen wir mit zu den Relationen (einstellige Retationen).
+28) Klassen rechnen wir mit zu den Relationen (einstellige Relationen).
     Rekursive Relationen R haben natürlich die Eigenschaft, 
     daß man für jedes spezielle Zahlen-n-tupel entscheiden kann, 
     ob R(x1...xn) gilt oder nicht.
     
-    包含關係(單元關係)之類別，
+    類別也算此種關係(其為單元關係)，
     遞迴關係 R 自然具備下列特性，
     對每個特定 n 元數對，可決定對 R(x1...xn) 是否成立。
 
+譯註：φ 函數稱為關係 R 的特徵函數，類別(或集合)可視為單元關係。
+      
+      譯註中使用 χ{K} 表示類別 K 的特徵函數。
+
+      以下是幾個遞迴類別的證明。
+
+      引理 R1：{0} 是遞迴的。
+      
+               令 χ{0}(0)   = 1
+                  χ{0}(k+1) = 0
+               得證。
+
+      引理 R2：正整數類別是遞迴的。
+               令 ℕ* = ℕ \ {0}，
+               上式說明自然數類別不含 0 即為正整數類別。
+               
+               已知下 2 式成立：
+
+               1.若 n = 0 則 χ{0}(n) = 1，
+                 可得 χ{0}(χ{0}(0)) = χ{0}(1) = 0
+
+               2.若 n > 0 則 χ{0}(n) = 0，
+                 可得 χ{0}(χ{0}(n)) = χ{0}(0) = 1
+
+               令 χℕ*(n) = χ{0}(χ{0}(n))，
+               由引理 R1 知 χℕ*(n) 為遞迴，
+               得證。
+
 29) Für alle inhaltlichen (insbes. auch die metamathematischen) 
     Überlegungen wird die Hilbertsche Symbolik verwendet. 
-
-    所有內容(特別也是後設數學)觀點是使用希爾伯特符號。
-
     Vgl. Hilbert-Ackermann, 
     Grundzüge der theoretischen Logik, Berlin 1928.
 
-    參考 Hilbert-Ackermann, 
-    Grundzüge der theoretischen Logik, Berlin 1928.
+    所有內容觀念(特別是後設數學)是使用希爾伯特符號。
+    參考希爾伯特-阿克曼，
+    理論邏輯基礎，柏林 1928。
     
-    譯註：~符號定義是否是自上述文獻而來。
-    
+    譯註：希爾伯特的符號
+    希爾伯特 意義    
+    -        否定，此符號為命題符號上方的 bar
+    &        合取
+    ∨        析取
+    →        推論
+    ~        等值
+    (x)      全稱量詞
+    (Ex)     存在量詞
+
+遞迴定理
+........
+
 Es gelten folgende Sätze:
 
-以下命題成立：
+以下定理成立：
 
 I.  Jede aus rekursiven Funktionen (Relationen) 
     durch Einsetzung rekursiver Funktionen 
-    an Stelle der Variablen entstehende Funktion (Relation) ist rekursiv; 
+    an Stelle der Variablen entstehende Funktion (Relation) 
+    ist rekursiv; 
     ebenso jede Funktion, die aus rekursiven Funktionen 
     durch rekursive Definition nach dem Schema (2) entsteht.
    
-I.  每個函數，衍生自遞迴函數(關係)，
-    藉由配置遞迴數在母函數(關係)變數位置而得，是遞迴的；
-    同樣地每個函數自其它遞迴函數藉由框架(2)之遞迴定義也成立。 
+I.  每個經由配置遞迴函數在根源函數(關係)變數位置而得之函數是遞迴的；
+    同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
 
 II. Wenn R und S rekursive Relationen sind, 
               _
-    dann auch R, R V S (daher auch R & S).
+    dann auch R, R ∨ S (daher auch R & S).
                              _
-II. 若 R 及 S 為遞迴關係，則 R, R V S 也是(因此 R & S 也是) 。
+II. 若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
 
-III.Wenn die Funktionen φ(<x>), ψ(<y>) rekursiv sind,
-    dann auch die Relation: φ(<x>) = ψ(<y>) 30) 
+III.Wenn die Funktionen φ(𝔵), ψ(𝔶)  rekursiv sind,
+    dann auch die Relation: φ(𝔵) =ψ(𝔶) 30) 
 
-III.若 φ(<x>) 及 ψ(<y>) 是遞迴，則以下關係也是：φ(<x>) = ψ(<y>) 30)
+III.若φ(𝔵)及ψ(𝔶)是遞迴，則以下關係也是：φ(𝔵)=ψ(𝔶)30)
 
-
-30) Wir verwenden deutsche Buchstaben <x>, <y> als abkürzende 
+30) Wir verwenden deutsche Buchstaben 𝔵, 𝔶 als abkürzende 
     Bezeichnung für beliebige Variablen-n-tupel, z. B. x1 x2 ... xn.
 
-    利用哥德字母 <x>, <y> 記為 n 元數對變數，例如 x1 x2 ... xn。
+    利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
 
-IV. Wenn die Funktion φ(<x>) und die Relation R(x,<y>) rekursiv sind, 
+IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
     dann auch die Relationen S,T
     
-    若 φ(<x>) 及 R(x,<y>) 是遞迴，則以下關係 S, T 也是：
+    若 φ(𝔵) 及 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
 
-    S(<x>,<y>)~(Ex)[x≦ φ(<x>)&R(x,<y>)]
-    T(<x>,<y>)~(x) [x≦ φ(<x>)→R(x,<y>)]
+    S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
+    T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
 
     sowie die Funktion ψ
-    
-    以及函數為 ψ：
-
-    ψ(<x>,<y>)= εx  [x≦ φ(<x>)&R(x,<y>)]
-
-    wobei εx F(x) bedeutet: 
+    ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
+    wobei εxF(x) bedeutet: 
     Die kleinste Zahl x, für welche F(x) gilt 
     und 0, falls es keine solche Zahl gibt.
 
-    其中 εx F(x) 指：
+   以及函數為 ψ：
+
+    ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
+
+    其中 εxF(x) 指：
     最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
 
-命題 I 證明
-+++++++++++
+定理 I 證明
+...........
 
 Satz I folgt unmittelbar aus der Definition von "rekursiv".
 
-命題 I 由遞迴之定義直接推得。
+定理 I 由遞迴之定義直接推得。
 
-命題 II 及 III 證明
-+++++++++++++++++++
+定理 II 及 III 證明
+...................
 
 Satz II und III beruhen darauf, 
-daß die den logischen Begriffen -, V, = 
+daß die den logischen Begriffen -, ∨, = 
 entsprechenden zahlentheoretischen Funktionen
-
-命題 II 及 III 根據邏輯觀念 -, V, = 對應到數論函數
 
     α(x), β(x,y), γ(x,y)
 
@@ -1576,6 +1647,13 @@ nämlich:
 
     γ(x,y)=0, wenn x=y;γ(x,y)=1, wenn x≠y 
 
+/181/
+
+recursiv sind,
+wie man sich leicht überzeugen kann. 
+
+定理 II 及 III 根據邏輯觀念 -, ∨, = 對應到數論函數
+
 即：
 
     α(0)=1         ; α(x)  =0 當 x≠0
@@ -1584,32 +1662,106 @@ nämlich:
 
     γ(x,y)=0, 當 x=y;γ(x,y)=1, 當 x≠y 
 
-/181/
-
-recursiv sind,
-wie man sich leicht überzeugen kann. 
-
 前揭函數是遞迴能輕易證明。
 
-命題 IV 證明
-++++++++++++
+邏輯對應遞迴函數
+................
+
+譯註：哥德爾將邏輯真以 0 表示，邏輯假以 1 表示。
+
+      引理 R21：否定是遞迴
+        α 即 {0} 的特徵函數，可由 R1 {0} 是遞迴，得證
+
+      引理 R22：析取是遞迴
+       令 β 定義如下：
+       β(x,y) = α(α(x.y))  
+       由 R21 否定是遞迴及R12乘法是遞迴得證。
+
+       例子如下：
+       β(0,0) = α(α(0.0))   
+              = α(α(0))   
+              = α(1)
+              = 0
+       β(0,2) = α(α(0.1))   
+              = α(α(0))   
+              = α(1)
+              = 0
+       β(2,0) = α(α(2.0))   
+              = α(α(0))   
+              = α(1)
+              = 0
+       β(2,4) = α(α(2.4))   
+              = α(α(8))   
+              = α(0)
+              = 1
+
+相等關係為遞迴
+..............
+
+譯註：證明如下：
+      引理 R3:前項函數是遞迴。
+        前項函數 p 為後繼函數之對立函數。
+        
+        定義 p 如下：
+        p(n) = 0                 : n = 0
+             = pr2_1(n-1,p(n-1)) : n >0
+        由 RA1 0 為遞迴及 RA3 投影函數為遞迴，
+        得證。 
+
+      引理 R4:隔斷減法是遞迴。
+        隔斷減法 -| 定義如下：
+
+        n -| m = 0   : n < m       
+               = n-m : n > m       
+        可得
+        n -| m+1 = 0        : n-|m = 0       
+                 = (n-|m)-1 : n-|m > 0
+
+        可將 n -| m 遞迴定義如下：
+
+        n -| m = n           : m=0      
+               = p(n-|(m-1)) : m>0       
+ 
+        由 R4 前項函數為遞迴，得證。
+
+      引理 R5：絕對差是遞迴。
+        絕對差 adf 定義如下：
+        adf(n,m) = |n-m|
+                 = (n-|m) + (m-|n) 
+                 = (n-|m) + (p2_2(n,m) -| p2_1(m,n))
+        由 RA3 投影函數為遞迴、R4 隔斷減法是遞迴及
+           RA11 加法為遞迴，
+        得證。
+
+      引理 R6：相等關係是遞迴。
+        哥德爾令 γ 為相等關係之特徵函數，
+        令
+        x=y ~ |x-y|=0 
+        x≠y ~ |x-y|>0
+      
+        令 γ(x,y) = χ{0}(|x-y|)，
+        由 R1 {0} 是遞迴及 R5 絕對差是遞迴，
+        得證。
+
+定理 IV 證明
+............
 
 Der Beweis für Satz IV ist kurz der folgende: 
-Nach der Voraussetzung gibt es ein rekursives ρ(x,<y>), so daß:
+Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
 
 命題 IV 之證明很簡短如下：
 
-設存在一個遞迴函數 ρ(x,<y>) 使得：
+設存在一個遞迴函數 ρ(x,𝔶) 使得：
 
-    R(x,<y>)~[ρ(x,<y>) = 0].
+    R(x,𝔶)~[ρ(x,𝔶) = 0].
 
 Wir definieren nun nach dem Rekursionsschema (2) 
-eine Funktion χ(x,<y>) folgendermaßen:
+eine Funktion χ(x,𝔶) folgendermaßen:
 
-現在根據遞迴框架 (2) 定義函數 χ(0,<y>) 如下：
+現在根據遞迴框架 (2) 定義函數 χ(0,𝔶) 如下：
     
-    χ(0,  <y>)=0
-    χ(n+1,<y>)=(n+1).a+χ(n,<y>).α(a) 31)
+    χ(0,  𝔶)=0
+    χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
 
 31) Wir setzen als bekannt voraus, 
     daß die Funktionen x+y (Addition), 
@@ -1621,20 +1773,20 @@ wobei
 
 其中  
 
-a=α[α(ρ(0,<y>))].α[ρ(n+1,<y>))].α[χ(n,<y>)].
+a=α[α(ρ(0,𝔶))].α[ρ(n+1,𝔶))].α[χ(n,𝔶)].
 
 譯註：a 為以下程式碼：
-    a = if    ρ(0  ,<y>) = 0 then 0
-        elsif ρ(n+1,<y>) ≠ 0 then 0
-        elsif χ(n  ,<y>) ≠ 0 then 0 
+    a = if    ρ(0  ,𝔶) = 0 then 0
+        elsif ρ(n+1,𝔶) ≠ 0 then 0
+        elsif χ(n  ,𝔶) ≠ 0 then 0 
         else 1
 
 
-χ(n+1,<y>) ist daher entweder =n+1 (wenn a = 1) 
-oder == χ(n, <y>) (wenn a = 0) 32) 
+χ(n+1,𝔶) ist daher entweder =n+1 (wenn a = 1) 
+oder == χ(n, 𝔶) (wenn a = 0) 32) 
 
-因此 χ(n+1,<y>) 若非 =n+1 (當 a = 1 時) 
-則 = χ(n, <y>) (當 a = 0 時) 32)
+因此 χ(n+1,𝔶) 若非 =n+1 (當 a = 1 時) 
+則 = χ(n, 𝔶) (當 a = 0 時) 32)
 
 32) Andere Werte als 0 und 1 kann a, 
     wie aus der Definition für α ersichtlich
@@ -1650,32 +1802,32 @@ d.h. wenn gilt:
 第一種情形顯然僅在所有 a 的因數是 1 時才成立，
 即如下：
     _
-    R(0,<y>) & R(n+1,<y>) & [χ(n,<y>)=0].
+    R(0,𝔶) & R(n+1,𝔶) & [χ(n,𝔶)=0].
 
 譯註：
     _
-    R(0,<y>)   & R(n+1,<y>)   & [χ(n,<y>)=0]
+    R(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
  即 
-    ρ(0,<y>)≠0 & ρ(n+1,<y>)=0 & χ(n  ,<y>)=0 
+    ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 
  
-Daraus folgt, daß die Funktion χ(n, <y>) 
+Daraus folgt, daß die Funktion χ(n, 𝔶) 
 (als Funktion von n betrachtet) 0 bleibt bis zum kleinsten Wert von n, 
-für den R(n, <y>) gilt, 
+für den R(n, 𝔶) gilt, 
 und von da ab gleich diesem Weft ist 
-(falls schon R(0,<y>) gilt, 
-ist dem entsprechend χ(n,<y>) konstant und =0).
+(falls schon R(0,𝔶) gilt, 
+ist dem entsprechend χ(n,𝔶) konstant und =0).
 Demnach gilt:
 
-可推得函數 χ(n, <y>) (視為 n 之單元函數 ) 保持為 0 直到最小值 n 
-滿足 R(n, <y>)，且從這時起都等於此值
-(當 R(0,<y>) 總是滿足時， χ(n,<y>) 為常數且 =0). 
+可推得函數 χ(n, 𝔶) (視為 n 之單元函數 ) 保持為 0 直到最小值 n 
+滿足 R(n, 𝔶)，且從這時起都等於此值
+(當 R(0,𝔶) 總是滿足時， χ(n,𝔶) 為常數且 =0). 
 因此： 
 
-ψ(<x>,<y>) =  χ(φ(<x>)    ,<y>)
-S(<x>,<y>) ~ R[ψ(<x>,<y>),<y>]
+ψ(𝔵,𝔶) =  χ(φ(𝔵)    ,𝔶)
+S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
 
 譯註：
-    ψ(<x>,<y>)= εx  [x≦ φ(<x>)&R(x,<y>)]
+    ψ(𝔵,𝔶)= εx  [x≦ φ(𝔵)&R(x,𝔶)]
 
     其中 εx F(x) 指：
     最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
@@ -1690,8 +1842,8 @@ womit Satz IV bewiesen ist.
 譯註：etw auf eine Formel/Regel zurückführen
 to reduce sth to a formula/rule
 
-後設觀念表達 
-............
+基本算術是遞迴的
+................
 
 Die Funktionen x+y, x.y, x^y, 
 ferner die Relationen x<y, x=y sind, 
@@ -1708,9 +1860,34 @@ mittels der in den Sätzen I bis IV genannten Verfahren definiert ist.
 我們現在定義一系列 1-45 的函數(關係)，
 其中每項由前項以命題 I 至 IV 提到之操作定義而來。
 
-譯註：
+譯註：genannten Verfahren 已提到的操作比已命名的操作好。
 
-genannten Verfahren 已提到的操作比已命名的操作好。
+譯註：引理 R11：加法是遞迴的。
+        x+y 可遞迴定義如下：
+        x+y = x          : y=0
+        x+y = f(x+(y-1)) : y>0
+            = f(p3_3(x,y-1,x+(y-1)))
+
+        由 RA2 後繼函數為遞迴及RA3 投影函數為遞迴，
+        得證。
+
+      引理 R12：乘法是遞迴的。
+        x.y 可遞迴定義如下：
+         x   .y = 0     : x=0
+        (x+1).y = x.y+y : x>0
+            = p3_2(x,x.y,y)+p3_3(x,x.y,y)
+
+        由 RA3 投影函數為遞迴及 R12 加法是遞迴的，
+        得證。
+
+      引理 R13：次方是遞迴的。
+        x^y 可遞迴定義如下：
+         x ^y     = 1     : y=0
+         x ^(y+1) = x^y.x : y>0
+                  = p3_2(y,x^y,x).p3_3(y,x^y,x)
+
+        由 RA3 投影函數為遞迴及 RA12 乘法是遞迴的，
+        得證。
 
 Dabei sind meistens mehrere der nach Satz I bis IV 
 erlaubten Definitionsschritte 
@@ -1800,8 +1977,8 @@ x 是質數。
 
       數論                  系統 P
 
-      哥德爾數 <---對應---> 公式
-      數論操作 <---對應---> 公式操作
+      哥德爾數 <---對應--⊃ 公式
+      數論操作 <---對應--⊃ 公式操作
 
       現在我們把有限自然數序列(一樣是1對1)對應到自然數，
       藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
@@ -1823,8 +2000,8 @@ x 是質數。
   l(x) 是整數 x 被配賦之數列的長度。
 
 8.x*y ≡  εz{z≦ [Pr(l(x)+l(y)]^(x+y) & 
-        (n)[n≦ l(x)   ->  n Gl z = n Gl x] &
-        (n)[0<n≦ l(y) -> (n + l(x)) Gl z = n Gl y]} 
+        (n)[n≦ l(x)   ⊃  n Gl z = n Gl x] &
+        (n)[0<n≦ l(y) ⊃ (n + l(x)) Gl z = n Gl y]} 
 
   x*y entspricht der Operation des "Aneinanderfügens" zweier
   endlicher Zahlenreihen.
@@ -1931,7 +2108,7 @@ x 是質數。
 21.Op(x y z) ≡ x=Neg(y) V x=y Dis z V
                (Ev)[v≦ x & Var(v) & x = v Gen y]
 
-22.FR(x) ≡ (n){0<n≦ l(x) -> Elf(n Gl x) V
+22.FR(x) ≡ (n){0<n≦ l(x) ⊃ Elf(n Gl x) V
               (Ep,q)[0<p,q<n & Op(nGlx,pGlx,qGlx)]}
               & l(x)>0
 
@@ -2086,15 +2263,15 @@ x 是質數。
    v Ex  y ≡ Neg {v Gen [Neg (y)]}
 
 譯註：定義四個邏輯運算子：
-      Imp 指推論，x -> y ≡ ~x v y
+      Imp 指推論，x ⊃ y ≡ ~x v y
       Con 指合取，x &  y ≡ ~{~x v ~y}
-      Aeq 指相等，x =  y ≡ (x -> y) & (y -> x)
+      Aeq 指相等，x =  y ≡ (x ⊃ y) & (y ⊃ x)
       Ex  指存在， (Ev)y ≡ ~{(v)[~y]}
 
                    | n|
                    |x |
 33.n Th x ≡ εy{ y≦ x
-              & (k)[ k≦ l(x) -> (k Gl x ≦ 13 &k Gl y =  k Gl x)
+              & (k)[ k≦ l(x) ⊃ (k Gl x ≦ 13 &k Gl y =  k Gl x)
                               v (k Gl x > 13 
                                                                  n
                                 &k Gl y =  k Gl x.[1 Pr (k Gl x)] )]}
@@ -2160,7 +2337,7 @@ x 是質數。
 
    x 是經由配置公設框架 III,1 衍生之公式。
 
-譯註：III, 1. vΠ(a) -> Subst a |v|
+譯註：III, 1. vΠ(a) ⊃ Subst a |v|
                                |c|
 
 39.L2-Ax(x) ≡ (Ev,p,q){ v,p,q≦ x & Var(v) & Form(p)
@@ -2174,7 +2351,7 @@ x 是質數。
    x 是經由配置公設框架 III,2 衍生之公式。
 
 
-譯註：III, 2. vΠ(b V a) -> b V vΠ(a)
+譯註：III, 2. vΠ(b V a) ⊃ b V vΠ(a)
 
 40.R-Ax(x) ≡ (Eu,v,y,n)[ u,v,y,n≦ x & n Var v
                                        ______
@@ -2212,7 +2389,7 @@ x 是質數。
 
 /186頁/
 
-44.Bw(x) ≡ (n){ 0<n≦ l(x) -> Ax(n Gl x) 
+44.Bw(x) ≡ (n){ 0<n≦ l(x) ⊃ Ax(n Gl x) 
               V (Ep,q)[ 0<p,q<n 
                       & Fl(n Gl x, p Gl x, q Gl x)]}
          & l(x) > 0
@@ -2283,7 +2460,7 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
 
 譯註：德語分離動詞之不定子句形式如下：
       prefix+zu+verb
-      an+deuten -> an+zu+deuten  建議、指示
+      an+deuten ⊃ an+zu+deuten  建議、指示
 
 39) Satz V beruht natürlich darauf, 
     daß bei einer rekursiven Relation R 
@@ -2423,7 +2600,7 @@ Beweis: Sei χ eine beliebige rekursive ω-widerspruchsfreien Klasse
 
 證明：  χ 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
-Bwχ(x) ≡ (n)[n≦ l(x) -> Ax(n Gl x) 
+Bwχ(x) ≡ (n)[n≦ l(x) ⊃ Ax(n Gl x) 
                       V (n Gl x)εχ 
                       V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
             & l(x) > 0                                               (5)
@@ -2451,7 +2628,7 @@ Es gilt offenbar:
 以下明顯地有效：
 
 (x)[Bewχ(x) ～ xεFlg(χ)]  (7)
-(x)[ Bew(x) ->  Bewχ(x)]  (8)
+(x)[ Bew(x) ⊃  Bewχ(x)]  (8)
 
 /188頁/
 
@@ -2481,10 +2658,10 @@ Nach Satz V und (8) gibt es also ein Relationszeichen q
 
 _______________
    |  |    19||        |  |    17   19||
-xBχ|Sb|y Z(y)|| -> Bewχ|Sb|q Z(x) Z(y)||     (9)
+xBχ|Sb|y Z(y)|| ⊃ Bewχ|Sb|q Z(x) Z(y)||     (9)
 
    |  |    19||        |      |    17   19||
-xBχ|Sb|y Z(y)|| -> Bewχ|Neg Sb|q Z(x) Z(y)|| (10)
+xBχ|Sb|y Z(y)|| ⊃ Bewχ|Neg Sb|q Z(x) Z(y)|| (10)
 
 譯註：推論端去除了否定，是因為根據關係 Q 之定義。
 
@@ -2540,10 +2717,10 @@ so entsteht unter Berücksichtigung von (13) und (14)
 財於 (13) 及 (14) 下可得：
 
 _____________         |  |   17 ||
-xBχ(17 Gen r) -> Bewχ |Sb|r Z(x)||     (15)
+xBχ(17 Gen r) ⊃ Bewχ |Sb|r Z(x)||     (15)
 
                       |      |   17 ||
-xBχ(17 Gen r) -> Bewχ |Neg Sb|r Z(x)|| (16)
+xBχ(17 Gen r) ⊃ Bewχ |Neg Sb|r Z(x)|| (16)
 
 /189頁/
 
@@ -2990,7 +3167,7 @@ Man kann die Relation x0=φ(x1,x2...xn) mit Hilfe des Begriffes "Folge von Zahle
 我們可藉由「整數序列」(f) 之觀念 52)來表達關係 x0=φ(x1,x2...xn) 如下：
 
 x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) &
-         (k)[k<x1->fk+1=μ(k,fk,x2...xn)] & x0=fx1}
+         (k)[k<x1⊃fk+1=μ(k,fk,x2...xn)] & x0=fx1}
 
 52) f bedeutet hier eine Variable, deren Wertbereich die Folgen natürl. Zahlen sind. 
     Mit fk wird das k+1-te Glied einer Folge f bezeichnet (mit f0 das erste).
@@ -3007,7 +3184,7 @@ y=ψ(x2...xn) 及 z=μ(x1...xn+1)，
 由此下述成立：
 
 x0=φ(x1...xn)~(Ef){S(       f0,x2...xn) &
-         (k)[k<x1->T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
+         (k)[k<x1⊃T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
 
 Nun ersetzen wir den Begriff "Folge von Zahlen" durch "Paar von Zahlen", 
 indem wir dam Zahlenpaar n, d 
@@ -3067,7 +3244,7 @@ definierte Relation P(x0,xl...xn):
 
 因此以下述定義關係 P(x0,xl...xn)也是算術的。
 
-P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&(k)[k<x1->
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&(k)[k<x1⊃
 T([n]1+d(k+2),k,[n]1+d(k+1),x2...xn] & x0=[n]1+d(x1+1)}
 
 arithmetisch, welche nach (17) and Hilfssatz I mit: 
@@ -3300,7 +3477,7 @@ Ferner bilden wir die Sätze:
 
 更進一步我們建構以下命題：
    _______
-(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)->x=y] (21)
+(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)⊃x=y] (21)
               (x)[Φn(x)=0]          (22)
 
 Wir ersetzen nun in allen Formeln (18), (19), (20) (für k=2,3...n) und 
@@ -3475,7 +3652,7 @@ d. h. es gilt:
 如用 189 頁之 1. 節所呈現一般，
 即如下：
         ____
-Wid(χ)->Bewχ(17 Gen r) (23)
+Wid(χ)⊃Bewχ(17 Gen r) (23)
 
 
 65) r hängt natürlich (ebenso wie p) von χ ab.
@@ -3488,7 +3665,7 @@ d. h. nach (6.1):
 
 依據（6.1）即如下：
            ___
-Wid(χ)->(x)xBχ(17 Gen r)
+Wid(χ)⊃(x)xBχ(17 Gen r)
 
                          |   19 |
 Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
@@ -3500,13 +3677,13 @@ Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
 /197/
            _____________
                 |   19 |
-Wid(χ)->(x)xBχSb|p Z(p)|
+Wid(χ)⊃(x)xBχSb|p Z(p)|
 
 d. h. nach (8.1):
 
 即為依據（8.1）可得：
 
-Wid(χ)->(x)Q(x,p) (24)
+Wid(χ)⊃(x)Q(x,p) (24)
 
 Wir stellen nun folgendes fest: 
 Sämtliche in Abschnitt 2 66) und
@@ -3648,7 +3825,7 @@ n           Z(n)        數 n 的數符表示。
 Subst a|b|  Sb|x y|     視為一式由 a 衍生，
                         且在裡面每處自由之 v，均由 b 取代。
 
-x->y        x Imp y 
+x⊃y        x Imp y 
 x& y        x Con y 
 x~ y        x Aeq y 
 э           v Ex  y 
