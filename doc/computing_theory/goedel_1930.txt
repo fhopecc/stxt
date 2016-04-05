@@ -1522,19 +1522,22 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
     遞迴關係 R 自然具備下列特性，
     對每個特定 n 元數對，可決定對 R(x1...xn) 是否成立。
 
-譯註：φ 函數稱為關係 R 的特徵函數，類別(或集合)可視為單元關係。
-      
-      譯註中使用 χ{K} 表示類別 K 的特徵函數。
+譯註：φ 函數稱為關係 R 的特徵函數，
+      哥德爾特徵函數 0 值表關係成立，
+      故定義 0 為邏輯真值，1 為邏輯假值。
+
+      類別(或集合)可視為單元關係，也可定義其特徵函數，
+      譯註中我們使用 χ{K} 表示類別 K 的特徵函數。
 
       以下是幾個遞迴類別的證明。
 
-      引理 R1：{0} 是遞迴的。
+      定理 R1：{0} 是遞迴的。
       
                令 χ{0}(0)   = 1
                   χ{0}(k+1) = 0
                得證。
 
-      引理 R2：正整數類別是遞迴的。
+      定理 R2：正整數類別是遞迴的。
                令 ℕ* = ℕ \ {0}，
                上式說明自然數類別不含 0 即為正整數類別。
                
@@ -1604,8 +1607,6 @@ III.若φ(𝔵)及ψ(𝔶)是遞迴，則以下關係也是：φ(𝔵)=ψ(𝔶)3
 
 IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
     dann auch die Relationen S,T
-    
-    若 φ(𝔵) 及 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
 
     S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
     T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
@@ -1616,7 +1617,12 @@ IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind,
     Die kleinste Zahl x, für welche F(x) gilt 
     und 0, falls es keine solche Zahl gibt.
 
-   以及函數為 ψ：
+    若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
+
+    S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
+    T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
+
+    以及函數為 ψ：
 
     ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
 
@@ -1669,10 +1675,10 @@ wie man sich leicht überzeugen kann.
 
 譯註：哥德爾將邏輯真以 0 表示，邏輯假以 1 表示。
 
-      引理 R21：否定是遞迴
+      定理 R21：否定是遞迴
         α 即 {0} 的特徵函數，可由 R1 {0} 是遞迴，得證
 
-      引理 R22：析取是遞迴
+      定理 R22：析取是遞迴
        令 β 定義如下：
        β(x,y) = α(α(x.y))  
        由 R21 否定是遞迴及R12乘法是遞迴得證。
@@ -1699,7 +1705,7 @@ wie man sich leicht überzeugen kann.
 ..............
 
 譯註：證明如下：
-      引理 R3:前項函數是遞迴。
+      定理 R3:前項函數是遞迴。
         前項函數 p 為後繼函數之對立函數。
         
         定義 p 如下：
@@ -1708,7 +1714,7 @@ wie man sich leicht überzeugen kann.
         由 RA1 0 為遞迴及 RA3 投影函數為遞迴，
         得證。 
 
-      引理 R4:隔斷減法是遞迴。
+      定理 R4:隔斷減法是遞迴。
         隔斷減法 -| 定義如下：
 
         n -| m = 0   : n < m       
@@ -1724,7 +1730,7 @@ wie man sich leicht überzeugen kann.
  
         由 R4 前項函數為遞迴，得證。
 
-      引理 R5：絕對差是遞迴。
+      定理 R5：絕對差是遞迴。
         絕對差 adf 定義如下：
         adf(n,m) = |n-m|
                  = (n-|m) + (m-|n) 
@@ -1733,7 +1739,7 @@ wie man sich leicht überzeugen kann.
            RA11 加法為遞迴，
         得證。
 
-      引理 R6：相等關係是遞迴。
+      定理 R6：相等關係是遞迴。
         哥德爾令 γ 為相等關係之特徵函數，
         令
         x=y ~ |x-y|=0 
@@ -1758,16 +1764,39 @@ Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
 Wir definieren nun nach dem Rekursionsschema (2) 
 eine Funktion χ(x,𝔶) folgendermaßen:
 
+譯註：取 ρ 表 R 之特徵函數係其為 R 的希臘音字母。    
+
 現在根據遞迴框架 (2) 定義函數 χ(0,𝔶) 如下：
     
     χ(0,  𝔶)=0
     χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
 
+譯註：χ 表特徵函數，德文為 charakteristische Funktion 
+      ，其為 ch 的希臘音字母。    
+
 31) Wir setzen als bekannt voraus, 
     daß die Funktionen x+y (Addition), 
     x.y (Multiplikation) rekursiv sind.
 
-31) 我們先假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。
+31) 假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。
+
+譯註：引理 R11：加法是遞迴的。
+        x+y 可遞迴定義如下：
+        x+y = x          : y=0
+        x+y = f(x+(y-1)) : y>0
+            = f(p3_3(x,y-1,x+(y-1)))
+
+        由 RA2 後繼函數為遞迴及RA3 投影函數為遞迴，
+        得證。
+
+      引理 R12：乘法是遞迴的。
+        x.y 可遞迴定義如下：
+         x   .y = 0     : x=0
+        (x+1).y = x.y+y : x>0
+            = p3_2(x,x.y,y)+p3_3(x,x.y,y)
+
+        由 RA3 投影函數為遞迴及 R12 加法是遞迴的，
+        得證。
 
 wobei 
 
@@ -1776,10 +1805,12 @@ wobei
 a=α[α(ρ(0,𝔶))].α[ρ(n+1,𝔶))].α[χ(n,𝔶)].
 
 譯註：a 為以下程式碼：
-    a = if    ρ(0  ,𝔶) = 0 then 0
-        elsif ρ(n+1,𝔶) ≠ 0 then 0
-        elsif χ(n  ,𝔶) ≠ 0 then 0 
-        else 1
+      a = if    ρ(0  ,𝔶) = 0 # ρ 是關係 R 的特徵函數，
+                             # 此句表若 0     符合關係 R
+            and ρ(n+1,𝔶) ≠ 0 # 此句表若 n+1 不符合關係 R
+            and χ(n  ,𝔶) ≠ 0
+          then 0
+          else 1
 
 
 χ(n+1,𝔶) ist daher entweder =n+1 (wenn a = 1) 
@@ -1789,11 +1820,10 @@ oder == χ(n, 𝔶) (wenn a = 0) 32)
 則 = χ(n, 𝔶) (當 a = 0 時) 32)
 
 32) Andere Werte als 0 und 1 kann a, 
-    wie aus der Definition für α ersichtlich
-    ist, nicht annehmen.
+    wie aus der Definition für α ersichtlich ist, 
+    nicht annehmen.
 
-32) a 不能接受 0 與 1 外之值，
-    這可從 α 的定義明顯知道。 
+32) 由 α 的定義明顯得知 a 不能接受 0 與 1 以外之值。
 
 Der erste Fall tritt offenbar dann und
 nur dann ein, wenn sämtliche Faktoren von a 1 sind, 
@@ -1803,13 +1833,12 @@ d.h. wenn gilt:
 即如下：
     _
     R(0,𝔶) & R(n+1,𝔶) & [χ(n,𝔶)=0].
+      _
+譯註：R(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
+      即  
+      ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 
+      由上可知哥德爾以乘法代表合取，故取 0 表示邏輯假值，
 
-譯註：
-    _
-    R(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
- 即 
-    ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 
- 
 Daraus folgt, daß die Funktion χ(n, 𝔶) 
 (als Funktion von n betrachtet) 0 bleibt bis zum kleinsten Wert von n, 
 für den R(n, 𝔶) gilt, 
@@ -1818,29 +1847,58 @@ und von da ab gleich diesem Weft ist
 ist dem entsprechend χ(n,𝔶) konstant und =0).
 Demnach gilt:
 
-可推得函數 χ(n, 𝔶) (視為 n 之單元函數 ) 保持為 0 直到最小值 n 
-滿足 R(n, 𝔶)，且從這時起都等於此值
-(當 R(0,𝔶) 總是滿足時， χ(n,𝔶) 為常數且 =0). 
+可推得函數 χ(n, 𝔶) (視為 n 之單元函數 ) 
+保持為 0 直到 n 等於滿足 R(n, 𝔶) 的最小值，
+且開始恆等於此值。
+(若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0)。
 因此： 
 
-ψ(𝔵,𝔶) =  χ(φ(𝔵)    ,𝔶)
+ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)
 S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
-
-譯註：
-    ψ(𝔵,𝔶)= εx  [x≦ φ(𝔵)&R(x,𝔶)]
-
-    其中 εx F(x) 指：
-    最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
 
 Die Relation T läßt sich durch Negation auf einen 
 zu S analogen Fall zurückführen, 
 womit Satz IV bewiesen ist.
 
-關係 T 可輕易藉由否定運算簡化成 S 的類比，
-故命題 IV 已證明。
+關係 T 可輕易以 S 的否定寫成，
+故命題 IV 得證。
 
 譯註：etw auf eine Formel/Regel zurückführen
-to reduce sth to a formula/rule
+      to reduce sth to a formula/rule
+
+      若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0。
+      此句說明從 0 開始找符合 R 的數，
+      若該數等於 0，則 χ 永遠為 0，
+      因為一開始就找到啦！
+
+      ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
+      可輕易以 χ 定義如下：
+      ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)
+
+      S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
+      可輕易以 ψ 定義如下：
+      S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
+
+      T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
+      可輕易以 S 否定定義。
+
+      由以下得知：
+      χ(0,  𝔶)=0
+      χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a)
+
+      χ(n+1,𝔶) = if ρ(0  ,𝔶) = 0 # 此句表若 0     符合關係 R
+                and ρ(n+1,𝔶) ≠ 0 # 此句表若 n+1 不符合關係 R
+                and χ(n  ,𝔶) ≠ 0 
+              then n+1
+              else χ(n  ,𝔶) 
+
+      即在 n 尚未為符合 R 的數前，
+      會不停遞增，直到符合 R 後，便停止遞增。 
+      以虛擬碼表示如下：
+      χ=0
+      while ρ(χ,𝔶)≠0  
+        χ++ 
+      return χ 
 
 基本算術是遞迴的
 ................
@@ -1862,29 +1920,11 @@ mittels der in den Sätzen I bis IV genannten Verfahren definiert ist.
 
 譯註：genannten Verfahren 已提到的操作比已命名的操作好。
 
-譯註：引理 R11：加法是遞迴的。
-        x+y 可遞迴定義如下：
-        x+y = x          : y=0
-        x+y = f(x+(y-1)) : y>0
-            = f(p3_3(x,y-1,x+(y-1)))
-
-        由 RA2 後繼函數為遞迴及RA3 投影函數為遞迴，
-        得證。
-
-      引理 R12：乘法是遞迴的。
-        x.y 可遞迴定義如下：
-         x   .y = 0     : x=0
-        (x+1).y = x.y+y : x>0
-            = p3_2(x,x.y,y)+p3_3(x,x.y,y)
-
-        由 RA3 投影函數為遞迴及 R12 加法是遞迴的，
-        得證。
-
-      引理 R13：次方是遞迴的。
+譯註：引理 R13：次方是遞迴的。
         x^y 可遞迴定義如下：
-         x ^y     = 1     : y=0
-         x ^(y+1) = x^y.x : y>0
-                  = p3_2(y,x^y,x).p3_3(y,x^y,x)
+        x ^y     = 1     : y=0
+        x ^(y+1) = x^y.x : y>0
+                 = p3_2(y,x^y,x).p3_3(y,x^y,x)
 
         由 RA3 投影函數為遞迴及 RA12 乘法是遞迴的，
         得證。
