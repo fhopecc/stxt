@@ -1715,26 +1715,26 @@ wie man sich leicht überzeugen kann.
         得證。 
 
       定理 R4:隔斷減法是遞迴。
-        隔斷減法 -| 定義如下：
+        隔斷減法 ㅗ定義如下（我以韓文字母 o 表示）：
 
-        n -| m = 0   : n < m       
+        n ㅗ m = 0   : n < m       
                = n-m : n > m       
         可得
-        n -| m+1 = 0        : n-|m = 0       
-                 = (n-|m)-1 : n-|m > 0
+        n ㅗ m+1 = 0        : nㅗm = 0       
+                 = (n-|m)-1 : nㅗm > 0
 
-        可將 n -| m 遞迴定義如下：
+        可將 n ㅗ m 遞迴定義如下：
 
-        n -| m = n           : m=0      
-               = p(n-|(m-1)) : m>0       
+        n ㅗ m = n           : m=0      
+               = p(nㅗ(m-1)) : m>0       
  
         由 R4 前項函數為遞迴，得證。
 
       定理 R5：絕對差是遞迴。
         絕對差 adf 定義如下：
         adf(n,m) = |n-m|
-                 = (n-|m) + (m-|n) 
-                 = (n-|m) + (p2_2(n,m) -| p2_1(m,n))
+                 = (nㅗm) + (mㅗn) 
+                 = (nㅗm) + (p2_2(n,m) -| p2_1(m,n))
         由 RA3 投影函數為遞迴、R4 隔斷減法是遞迴及
            RA11 加法為遞迴，
         得證。
@@ -1747,6 +1747,16 @@ wie man sich leicht überzeugen kann.
       
         令 γ(x,y) = χ{0}(|x-y|)，
         由 R1 {0} 是遞迴及 R5 絕對差是遞迴，
+        得證。
+
+      定理 R7：符號函數是遞迴。
+        符號函數 sgn 用來判斷一數值的正負號，
+        定義如下：
+        sgn(n) = 1 : n > 0
+               = 0 : n < 0
+
+        取 sgn(n) = χℕ*(n)，
+        再由 R2 正整數類別是遞迴的，
         得證。
 
 定理 IV 證明
@@ -1929,11 +1939,34 @@ mittels der in den Sätzen I bis IV genannten Verfahren definiert ist.
         由 RA3 投影函數為遞迴及 RA12 乘法是遞迴的，
         得證。
 
+      定理 R14：次序關係是遞迴的。
+        次序關係等價於以下關係：
+        n<m ~ mㅗn>0
+        n≥m ~ mㅗn=0
+
+        故可以定義 < 的特徵函數為
+        χ<(n,m) = sgn(mㅗn)
+        
+        由 R7 符號函數是遞迴的及 R4 隔斷減法是遞迴，得證。 
+        
+        令 ≥ 的特徵函數為
+        χ≥(n,m) = χ{0}(mㅗn)
+        
+        由 R1 {0} 是遞迴的及 R4 隔斷減法是遞迴，得證。
+
+不可證式是遞迴
+--------------
+
 Dabei sind meistens mehrere der nach Satz I bis IV 
 erlaubten Definitionsschritte 
 in einen zusammengefaßt. 
 
 從命題 I 至 IV 允許的定義步驟組合而來。
+
+譯註：哥德爾以算術基本公式逐步建構表達不可證式的算術公式，
+      其建構僅應用定理 I 至 IV 之方法，
+      係為證明不可證式是遞迴的，
+      遞迴的意義在此便是能以有限步驟算出。
 
 Jede der Funktionen (Relationen) 1-45, 
 unter denen z.B. die Begriffe "Formel", "Axiom", 
@@ -1952,9 +1985,17 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
     vertritt also bei Definitionen entweder = oder ~ 
     (im übrigen ist die Symbolik die Hilbertsche).
 
-33) ≡ 用來表示定義等價，
-    在定義裡用來表示 = 或 ~
+33) ≡ 符號用來表示「定義等價」，
+    在以下定義裡代表 = 或 ~(譯註：依內容而定)
     (另外這是希爾伯特之符號)。
+
+譯註：vertritt 為 vertrete 第三人稱變格
+      entweder A oder B，意為 A 或 B 任選 1 個。
+      
+      bei Definitionen，意為在以下的定義中
+
+譯註：至今可知哥德爾函數等價使用 =，
+      邏輯等價使用 ~ 而定義等價使用≡。
 
 x ist teilbar durch y 34).
 
