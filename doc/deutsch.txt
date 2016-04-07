@@ -1249,21 +1249,17 @@ die Regel       die Regeln          改造
 
 與格 mir  dir  ihm ihr ihm uns euch Ihnen ihnen
 
-man
-...
+不定代詞
+........
 
-不定代詞，一個，等同英文的 one，源自成年男人，
-其格變化如下：
+不定代詞用以表示不特定的人、事、物，
+並不像一般名詞需要開頭大寫，
+第一個字母僅小寫即可。
 
-格      單數
+man (sein, einen, einem)
 
-主格    man
-
-屬格    sein 
-
-與格    einen
-
-賓格    einem
+表示多數未特定的人或情況的單數名詞，
+等同英文的 one，源自成年男人。
 
 Wenn es einem schlecht geht, findet man oft,
 dass einen seine Freund vergessen haben.
@@ -1285,19 +1281,38 @@ zunehmen 是長胖，為分離動詞。
 主句放後，故動詞移至主句首。
 
 jede
-....
 
-代詞：每個
+每個，類似英文中的each或every，等同於單數名詞，
+字尾變化與冠詞相同，在句子中能夠單獨用jed-或jed-後接上一個名詞。
+
+例：Jeder liebt den Fußball.  每個人都喜歡足球
+例：Jeder Junge liebt den Fußball.  每個男孩都喜歡足球 
 
 格      陽性    陰性    中性
-
 主格    jeder   jede    jedes
-
 屬格    jedes   jeder   jedes
-
+與格    jedem   jeder   jedem
 賓格    jeden   jede    jedes
 
-與格    jedem   jeder   jedem
+
+jemand、niemand
+jemand--指有人(不特定)，類似英文中的somebody/someone；在疑問句中表示有人嗎?，類似英文中的anybody/anyone，jemand的字尾會因其代稱的名詞是陰、陽、中性(在不特定情況下大多以陽性的字尾變化)以及第一格(Nominativ)、第二格、第三格(Dativ)、第四格(Akkusativ)而有所變化，例如：jemand(陽性的第一格)、jemanden(陽性的第四格)、jemandem(陽性的第三格)。
+
+niemand--指沒有人，類似英文中的nobody/no one，niemand的字尾也會因其代稱的名詞是陰、陽、中性(在不特定情況下大多以陽性的字尾變化)以及第一格、第二格、第三格、第四格而有所變化，例如：niemand(陽性的第一格)、niemanden(陽性的第四格)、niemandem(陽性的第三格)。
+etwas、nichts
+etwas--指某物，類似英文中的something，疑問句中則指有任何東西嗎?，類似英文中的anything，etwas的字尾並不變化
+
+nichts--指沒有某物，類似英文中的nothing，nichts的字尾並不變化
+alle、viele、einige、wenige
+alle--指全部、所有，alle等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為alle，第三格為allen.
+例：Alle haben die Schule gegangen.  所有人都去上學
+
+viele--指很多，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為viele，第三格為vielen
+例：Viele gehen das Konzert.  很多人去演唱會
+
+einige--指一些，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為einige，第三格為einigen
+
+wenige--旨一點點、少部分，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為wenige，第三格為wenigen
 
 anderer 其它的
 
@@ -2110,10 +2125,10 @@ Wir waren beim Essen, als das Telefon klingelte.
 被動態
 ......
 
-被動態的形成利用被動語態助詞 wird 來體現「被」，
-「讓」等被動意思，用過去分詞來表達實際主語的動作，其形式如下：
-
 werden + 過去分詞
+
+被動態的形成利用被動語態助詞 wird 來體現「被」，
+「讓」等被動意思，用過去分詞來表達實際主語的動作。
 
 被動語態著眼點放在動作本身而忽略了動作施事者，
 在被動句中一般可以不用表示動作的施事者。
@@ -2130,10 +2145,10 @@ als die kleinste Klasse von Formeln,
 
 可證式之類別被定義為下式之最小類別，
 
-被動語態可以通過介詞 von，durch 或者 mit 來表示動作的施事者，
-其中用von來表示動作的直接行爲人，
-用durch來表示一種方法和手段，
-用mit來表示媒介或材料。如： 
+被動語態可以通過介詞 von、durch 或 mit 來表示動作的施事者，
+其中用 von 來表示動作的直接行爲人，
+用 durch 來表示一種方法和手段，
+用 mit 來表示媒介或材料。如： 
 
 Ich wird von ihr gefragt.   我被她問了。被動式
 

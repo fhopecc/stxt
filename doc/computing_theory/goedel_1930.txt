@@ -1562,15 +1562,17 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
     參考希爾伯特-阿克曼，
     理論邏輯基礎，柏林 1928。
     
-    譯註：希爾伯特的符號
-    希爾伯特 意義    
-    -        否定，此符號為命題符號上方的 bar
-    &        合取
-    ∨        析取
-    →        推論
-    ~        等值
-    (x)      全稱量詞
-    (Ex)     存在量詞
+    譯註：哥德爾在後面建構算術系統除了 ≡ 外，
+          都是使用希爾伯特的符號，可參閱註 33)，
+          符號定義如下表：
+          符號 意義    
+          -    否定，此符號為命題符號上方的 bar
+          &    合取
+          ∨    析取
+          →    推論
+          ~    等值
+          (x)  全稱量詞
+          (Ex) 存在量詞
 
 遞迴定理
 ........
@@ -1920,13 +1922,13 @@ rekursiv und wir definieren nun,
 von diesen Begriffen ausgehend, 
 eine Reihe von Funktionen (Relationen) 1-45, 
 deren jede aus den vorhergehenden 
-mittels der in den Sätzen I bis IV genannten Verfahren definiert ist. 
+mittels der in den Sätzen I bis IV genannten Verfahren 
+definiert ist. 
 
-函數 x+y, x.y, x^y，甚至是關係 x<y, x=y，
+x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
 可以輕易證明為遞迴的，
-從這些觀念開始，
-我們現在定義一系列 1-45 的函數(關係)，
-其中每項由前項以命題 I 至 IV 提到之操作定義而來。
+後可從這些項目開始定義 1-45 一系列的函數(關係)，
+其中每項經由定理 I 至 IV 相關之操作自前項定義而來。
 
 譯註：genannten Verfahren 已提到的操作比已命名的操作好。
 
@@ -1981,13 +1983,14 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 
 1. x/y≡(Ez)[z≦ x&x=y.z] 33)
 
-33) Das Zeichen ≡ wird im Sinne von "Definitionsgleichheit" verwendet,
+33) Das Zeichen ≡ wird im Sinne von "Definitionsgleichheit" 
+    verwendet,
     vertritt also bei Definitionen entweder = oder ~ 
     (im übrigen ist die Symbolik die Hilbertsche).
 
 33) ≡ 符號用來表示「定義等價」，
     在以下定義裡代表 = 或 ~(譯註：依內容而定)
-    (另外這是希爾伯特之符號)。
+    (除此符號外都是使用是希爾伯特之符號)。
 
 譯註：vertritt 為 vertrete 第三人稱變格
       entweder A oder B，意為 A 或 B 任選 1 個。
@@ -2263,14 +2266,14 @@ x 是質數。
 
    x 中位置 n 之變數 v 是自由的。
 
-26.v Fr x ≡ (En)[n≦ l(x) & v Fr n, x]
+26.v Fr x ≡ (En)[n≦l(x) & v Fr n, x]
 
    v kommt in x als freie Variable vor.
 
    v 於 x 是自由變數。 
 
-27.S u x (n,y) ≡ εz{ z≦ [Pr(l(x)+l(y)]^x+y 
-                   & [(Eu,v)u,v≦ x
+27.S u x (n,y) ≡ εz{ z≦[Pr(l(x)+l(y)]^x+y 
+                   & [(Eu,v)u,v≦x
                      & x = u*R(n Gl x) v 
                      & z = u*y*v
                      & n = l(u)+1]}
@@ -2492,13 +2495,16 @@ x 是質數。
 
    x ist eine beweisbare Formel.
    [Bew(x) ist der einzige unter Begriffen 1-46.
-   von dem nicht behauptet werden kann, er sei rekursiv.]
+    von dem nicht behauptet werden kann, er sei rekursiv.]
 
    x 是一可證式。
 
-   [Bew(x) 是 1-46 項目中唯一不能被聲明的，他本身也是遞迴的。]
+   [Bew(x) 是 1-46 項目中唯一不能被聲明自身是遞迴的。]
 
    譯註：Bew 名稱來自於證明的德文 beweisbare。
+
+   譯註：Bew(x) 形式非 S(X,Y)=(Ex)[x≦φ(X)&R(x,Y)]，
+         無法以定理 IV 推論其為遞迴的。
 
    Die Tatsache, die man vage so formulieren kann: 
    Jede rekursive Relation ist innerhalb des Systems P 
@@ -3014,7 +3020,6 @@ Bewχ' [Neg (17 Gen r)]) 46).
 (x)Bewχ' Sb|r Z(x)| 且另一方面自然可得：
 
 Bewχ'[Neg (17 Gen r)]) 46)。
-
 
 46) Die Existenz widerspruchsfreier und nicht ω-widerspruchsfreier χ ist 
     damit natürlich nur unter der Voraussetzung bewiesen, 
