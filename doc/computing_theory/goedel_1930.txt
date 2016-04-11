@@ -86,7 +86,8 @@ Von Kurt Gödel in Wien.
 Die Entwicklung der Mathematik in der Richtung 
 zu größerer Exaktheit hat bekanntlich dazu geführt, 
 daß weite Gebiete von ihr formalisiert wurden, 
-in der Art, daß das Beweisen nach einigen wenigen mechanischen Regeln 
+in der Art, 
+daß das Beweisen nach einigen wenigen mechanischen Regeln 
 vollzogen werden kann.
 
 眾所皆知數學朝著更精確方向的發展使得其眾多領域更為形式化，
@@ -2513,17 +2514,17 @@ x 是質數。
    Bezug zu nehmen, 
    durch folgenden Satz exakt ausgedrückt:
 
-   這事實可大致陳述如下：
-   每個遞迴關係可於 P 系統內定義(這被內容詮譯)，
+   以下定理精確表達之事實概略形式化如下：
+   每個遞迴關係可於 P 系統內定義(這可於內容內詮譯)，
    不須參照由 P 衍生之公式之內容詮譯，
-   而由以下之命題精確表達：
    
    譯註：innerhalb(介詞) + 屬格：在什麼之中
 
-   譯註：Bezug nehmen auf：參考到
+         Bezug nehmen auf + 賓格：參考到
 
-Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
-        Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
+Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es 
+        ein n-stelliges Relationenszeichen r 
+        (mit den freien Variablen) (u1, u2...un), 
         so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
 
 定理 V：對每個遞迴關係 R(x1...xn) 而言，
