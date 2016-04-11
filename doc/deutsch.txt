@@ -1039,7 +1039,7 @@ kommen
 冠詞
 ----
 
-冠詞（Article）是印歐語系和閃含語系的諸語中，
+冠詞（Artikle）是印歐語系和閃含語系的諸語中，
 位於名詞或名詞片語之前或之後，
 在句子主要是對名詞起限定作用的詞。
 
@@ -1047,20 +1047,79 @@ kommen
 
 在漢語中，粵語和吳語除外，這兩門漢語里的量詞作定冠詞。
 
+德語中，第一次提到的事物用不定冠詞，
+再次提到便用定冠詞，
+三次提到便用指示代詞。
+
+不定冠詞
+........
+
+unbestimmter Artikle
+表示此名詞是第一次提到。
+
+ein
+格      陽性    陰性    中性    
+主格    ein     eine    ein    
+屬格    eines   einer   eines 
+與格    einem   einer   einem 
+賓格    einen   eine    ein
+
+例 1：
+
+Eine Formel aus PM mit genau einer freien Variablen, 
+u. zw. vom Typus der natürlichen Zahlen (Klasse von Klassen) 
+wollen wir ein Klassenzeichen nennen. 
+
+僅具一個自由變數之 PM 公式，
+且其實際型別為自然數群(類別群的類別)
+稱為類別符號。
+
+Formel          為陰性名詞，且為主格，不定冠詞用 eine
+Variablen       為陰性名詞，在 mit 後應用與格，不定冠詞用 einer
+Klassenzeichen  為中性名詞，且為賓格，不定冠詞用 ein
+
+例 2：
+
+Nun stellen wir einen unentscheidbaren Satz des Systems PM, 
+d. h. einen Satz A, für den weder A noch non-A beweisbar ist, 
+folgendermalßen her:
+
+現在建置一個系統 PM 之不可決定之命題，
+即對命題 A 而言，A 或非 A 都可證，如下：
+
+Satz  為陽性名詞，且為賓格，不定冠詞用 einen
+Satz  為陽性名詞，d. h. 為 daß heißt 簡寫，故為賓格，
+      不定冠詞用 einen
+
 定冠詞
 ......
 
+事物再次提到便用定冠詞。
+
+der 
+
 格      陽性    陰性    中性    複數
-
 主格    der     die     das     die 
-
 屬格    des     der     des     der 
-
 與格    dem     der     dem     den 
-
 賓格    den     die     das     die 
 
-Die Entwicklung der Mathematik 數學的發展，兩個名詞皆為陰性。
+例 1：
+Die Entwicklung der Mathematik in der Richtung 
+zu größerer Exaktheit hat bekanntlich dazu geführt, 
+daß weite Gebiete von ihr formalisiert wurden, 
+in der Art, 
+daß das Beweisen nach einigen wenigen mechanischen Regeln 
+vollzogen werden kann.
+
+眾所皆知數學朝著更精確方向的發展使得其眾多領域更為形式化，
+以此方式，證明能依據少數統整之機械化規則達成。
+
+Entwicklung 陰性，主格，用die。
+Mathematik  陰性，屬格，用der。
+Richtung    陰性，in 表位置應用與格，用der。
+Art         陰性，in 表位置應用與格，用der。
+Beweisen    不定式動詞作名詞為中性，主格，用 das。
 
 man den Typus aller in b vorkommenden Variablen
 um die gleiche Zahl erhöht.
@@ -1070,22 +1129,15 @@ aller 為屬格，表示在 b 出現之所有變數。
 
 所有在 b 出現變數的型別，以同樣的整數遞增之式。
 
-dieser
-......
+例 2：
 
-定冠詞，這，表示指示物靠近說話者，同英文之 this。
+ohne auf eine inhaltliche Deutung der Formeln aus P 
+Bezug zu nehmen, 
+ 
+不須參照由 P 衍生之公式之內容詮譯，
 
-格      陽性    陰性    中性    複數
-
-主格    dieser  diese   dieses/ diese
-                        dies
-
-屬格    dieses  dieser  diese   dieser
-
-賓格    diesen  diese   dieses/ diese
-                        dies
-
-與格    diesem  dieser  diesem  diesen
+Formeln 複數，屬格，用 der
+Deutung 陰性，賓格，用 eine
 
 jener
 .....
@@ -1129,24 +1181,7 @@ beide
 
 都是
 
-不定冠詞
-........
 
-格      陽性    陰性    中性    複數
-
-主格    ein     eine    ein     keine*   
-
-屬格    eines   einer   eines   keine*
-
-賓格    einen   eine    einem   keinem*
-
-與格    einem   eine    ein     keiner*
-
-*ein 的否定型只要在前置 k 即可，表示沒有的意思，
- 但與 ein 不同，它可用到複數。
- sonst keinen freien Variablen.(通常沒有自由變數)
- 其中 Variablen 是複數名詞。
- 
 
 格      陽性    陰性    中性    複數
 
@@ -1294,9 +1329,14 @@ die Regel       die Regeln          改造
 並不像一般名詞需要開頭大寫，
 第一個字母僅小寫即可。
 
-man (sein, einen, einem)
+單數不定代詞
+++++++++++++
 
-表示多數未特定的人或情況的單數名詞，
+單數不定代詞等同於單數名詞。
+
+man (sein, einem, einen)
+
+表示多數未特定的人或，
 等同英文的 one，源自成年男人。
 
 Wenn es einem schlecht geht, findet man oft,
@@ -1308,6 +1348,7 @@ that one's friends have forgotten one.
 man 的反身代詞為 sein。
 
 Man befindet sich hier in einer Traumwelt.
+
 One finds oneself in a dreamworld here.
 
 man 通常是指英文的 you。
@@ -1320,7 +1361,7 @@ zunehmen 是長胖，為分離動詞。
 
 jede
 
-每個，類似英文中的each或every，等同於單數名詞，
+每個，類似英文中的each或every，
 字尾變化與冠詞相同，在句子中能夠單獨用jed-或jed-後接上一個名詞。
 
 例：Jeder liebt den Fußball.  每個人都喜歡足球
@@ -1331,26 +1372,27 @@ jede
 屬格    jedes   jeder   jedes
 與格    jedem   jeder   jedem
 賓格    jeden   jede    jedes
+      
 
 
 jemand、niemand
-jemand--指有人(不特定)，類似英文中的somebody/someone；在疑問句中表示有人嗎?，類似英文中的anybody/anyone，jemand的字尾會因其代稱的名詞是陰、陽、中性(在不特定情況下大多以陽性的字尾變化)以及第一格(Nominativ)、第二格、第三格(Dativ)、第四格(Akkusativ)而有所變化，例如：jemand(陽性的第一格)、jemanden(陽性的第四格)、jemandem(陽性的第三格)。
+jemand--指有人(不特定)，類似英文中的somebody/someone；
+在疑問句中表示有人嗎?，類似英文中的anybody/anyone，
 
-niemand--指沒有人，類似英文中的nobody/no one，niemand的字尾也會因其代稱的名詞是陰、陽、中性(在不特定情況下大多以陽性的字尾變化)以及第一格、第二格、第三格、第四格而有所變化，例如：niemand(陽性的第一格)、niemanden(陽性的第四格)、niemandem(陽性的第三格)。
-etwas、nichts
-etwas--指某物，類似英文中的something，疑問句中則指有任何東西嗎?，類似英文中的anything，etwas的字尾並不變化
+niemand--指沒有人，類似英文中的nobody/no one，
+
+etwas--指某物，類似英文中的something，疑問句中則指有任何東西嗎?，
+類似英文中的anything，etwas的字尾並不變化
 
 nichts--指沒有某物，類似英文中的nothing，nichts的字尾並不變化
-alle、viele、einige、wenige
-alle--指全部、所有，alle等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為alle，第三格為allen.
-例：Alle haben die Schule gegangen.  所有人都去上學
 
-viele--指很多，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為viele，第三格為vielen
-例：Viele gehen das Konzert.  很多人去演唱會
+alle--指全部、所有，alle等同於複數名詞，
 
-einige--指一些，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為einige，第三格為einigen
+viele--指很多，等同於複數名詞，
 
-wenige--旨一點點、少部分，等同於複數名詞，字尾變化等同複數形容詞變化，即第一格、第四格為wenige，第三格為wenigen
+einige--指一些，等同於複數名詞，
+
+wenige--旨一點點、少部分，等同於複數名詞，
 
 anderer 其它的
 
@@ -1368,13 +1410,16 @@ anderer 另一個
 
 指示代詞(Demonstrativpronomen) 
 
-der, die, das; 
+dieser
+這，表示指示物靠近說話者，同英文之 this。
 
-denen, dessen; 
+格      陽性    陰性    中性    複數
+主格    dieser  diese   dieses  diese
+屬格    dieses  dieser  diese   dieser
+與格    diesem  dieser  diesem  diesen
+賓格    diesen  diese   dieses  diese
 
-dieser, derjenige
 
-solche      就是
 
 動詞
 ----
