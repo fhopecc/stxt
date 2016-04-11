@@ -6,6 +6,278 @@
 
 20141010 星期五 義仁
 
+名詞
+----
+
+Revorso 線上字典對名詞形式註記了性，屬格及複數如下：
+
+Glied       nt   , -(e)s, -er  
+            性     屬格   複數
+
+名詞變格    
+........
+
+變格係指因名詞的格或數作字尾格式變化。
+
+陽性及中性名詞會對屬格變格，
+
+某些複數名詞會對與格變格。
+
+如下表：
+        屬格    與格 複
+陽      -(e)s        -(e)n
+                     ¨-e
+
+陰                   -(e)n 
+
+中      -(e)s
+                     -um→-en 
+複              -n
+
+例 1：陽性名詞作屬格變格
+
+zunächst den Hauptgedanken des Beweises, 
+
+Beweis 為中性名詞，於前例中作屬格變格修飾 Hauptgedanken。
+
+例 2：陽性名詞作複數變數
+
+前例中 Hauptgedanke 為陽性名詞，複數變格於字尾加 n。
+
+例 3：中性名詞作屬格變格
+
+Zu den Axiomen des Systems PM rechnen wir insbesondere auch: 
+
+System 為中性名詞，於前例中作屬格變格修飾 Axiomen。
+
+例 4：複數名詞作與格變格
+
+一般名詞僅對屬格變格，但對某些複數名詞會作與格變格，
+同上例介詞 zu 後 Axiom 複數 Axiome 作與格變格
+成為 Axiomen。      
+
+例 5：陽性名詞作變數
+
+Über formal unentsheidbare Sätze 
+der Principia Mathematica und verwandter System I 1)
+
+Satz 為陽性名詞，複數變格作音變並於字尾加 e。
+
+Grundzüge der theoretischen Logik, Berlin 1928.
+
+Grundzug 為陽性名詞，複數變格作音變並於字尾加 e。
+
+例 6：陰性名詞作複數變格
+
+x ist eine Reihe von Formeln, 
+
+例 7：中性名詞作不規則複數變格
+
+z. B. eine Relation zwischen Individuen 
+und Klassen als eine Klasse als Elementen der Form: 
+((x2), ((x1),x2)). 
+
+Individuum 其複數變格為 Individuen，字尾 um 改為 en。
+
+名詞性別
+........
+
+德語的單數名詞有分三個性別，陽性、陰性及中性，
+可由名詞前置的冠詞或形容詞來判斷性別。
+
+中性名詞在德文中佔不到百分之十，所以不要先猜名詞為中性，
+但可由名詞詞尾來大致判斷性別。
+
+陽性名詞
+++++++++
+
+下類名詞為陽性名詞：
+
+1.通常由男性擔任的職業或國家
+
+2.大型野生動物
+
+3.日名、四季名、月份名
+
+4.動名詞，動詞不定式去掉 -en 即為名詞
+
+5.陽性河名，河名不是陽性就是陰性，沒有中性。
+
+6.-arch, -ant, -anz,
+  -ent,  -enz, 
+  -ist, -it, 
+  -krat, -nom, -ot, -soph
+
+7.-er 所有衍生自動詞之名詞，動詞之不定式去掉 -en 再加 -er 即為名詞
+
+  anzeigen -> der Anzeiger 指示->期刊
+
+結尾的名詞，在主格以外的四格均會加字尾 -en。
+
+陰性名詞
+++++++++
+
+1.-e    陰性，少數為中性及陽性須強記 
+
+die Elemente    元素
+die Klasse      類別
+
+2.-in 
+  原本為陽性之職業或國家名詞後置，即變為陰性名詞。
+
+3.-heit, -keit 
+  通常為抽象名詞
+
+  Exaktheit         精確，從 exakt 形容詞來。
+
+  Unbeweisbar-keit  不可證性
+
+4.-ung 
+
+  動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞，
+  表示由動作產生之事件，或結果。  
+   
+  Abkürzung           縮寫，源自 abkürzen
+
+  Betrachtung         考量，源自 betracht 
+
+  Entwicklung         發展，源自 entwickeln
+
+  Formalisierung      形式化，源自 formalisieren
+
+  Zusammenfassung     摘要，源自 zusammenfassen 
+
+  Verwendung          應用，源自 verwenden 
+
+  Bemerkung           標注，源自 bemerken
+  
+5.-ie, -ik, -ion
+  源自法文之名詞後置如上詞尾。
+  die Biologie, die Musik, die Station
+
+6.陰性之河流
+  die Donau, die Elbe, die Isar, die Oder, 
+  die Weser, die Seine, die Themse
+
+7.其它
+
+  die Literatur   文獻 
+  die Art         类型、种类方式、方法风格行为、举止习惯（生物）属
+
+中性名詞
+++++++++
+
+1.-chen, -lein
+  所有動物幼兒名詞後置上述詞尾，德國人認為小孩為中性吧。
+  das Hündchen(der Hund) 小馬
+
+2.從不定動詞衍生之名詞，動詞不定式之首字母大寫即變成名詞。
+
+  das Essen     食物，源自吃之不定式 Essen。
+
+
+  das Weglassen 省略，源自省略之不定式 weglassen。 
+
+3.從不定動詞衍生之名詞，動詞首字根字母大寫即變成名詞。
+
+  das Beweis    證明，源自證明之不定式 beweisen。
+
+4.國名或城市名。
+
+拉丁源名詞
+++++++++++
+
+Typus   陽性    類別，特質  屬格Typus，複數Typen
+
+形容名詞
+++++++++
+
+形容名詞是由形容詞轉變來，一般而言其名詞的性別由冠詞決定。
+
+der alte man        der/die Alte        老人
+
+der verwandte man   der/die Verwandte   親戚
+
+一些形容名詞後置 -in 可轉成陰性。
+
+der Beamt   die Beamtin    官員
+
+一些中性形容名詞用來描述抽象概念。
+
+das Gute/Schlechte/Blöde daran 好/壞/笨
+
+這些形容名詞常與非人稱代詞連用。
+
+alles, etwas, nichts, viel, wenig
+
+Ich habe schon alles Mögliche probiert.
+我總是試所有可能的方法。
+
+Auf wiedersehen. Alles Gute.
+再見，所有事平安。
+
+Das ist nichts Neues/etwas Besonderes.
+無事是新的/一些事物是特殊的。
+
+複合名詞
+........
+
+數個名詞組成複合名詞
+++++++++++++++++++++
+
+數個名詞所組成的複合名詞，其性與最後一個名詞相同。
+
+das Haus + die Tür = die Haustür (家+門=大門)
+
+1.-e 結尾名詞，通常會以 -n- 來連結名詞
+
+die Küche + der Tisch -> der Küche-n-tisch
+
+2.-heit/-keit, -ung     結尾之名詞，會以 -s- 來連結。
+
+Gelegenheit-s-arbeit    雜事
+
+Trennung-s-punkte       分隔點
+分隔       點
+
+Zeitung-s-zar           媒體汽球
+
+3.-e 結尾名詞，去掉 e 直接連結名詞
+
+Schreib-weise   記號
+寫      方法
+
+字首加名詞
+++++++++++
+
+haupt- 頭
+
+Haupt-gedanken          主要觀念 
+頭    心        
+
+名詞化字尾
+++++++++++
+
+-shaft          產物、特性及意義如同英文的 ship
+
+Verwandt-shaft  關係
+
+形容詞與名詞組成複合名詞
+++++++++++++++++++++++++
+
+形容詞在名詞前組成複合名詞時，形容詞不變格。
+
+roter  Wein -> Rotwein      紅酒
+weißes Brot -> Weißesbrot   白麵包
+
+形容詞加字尾轉成名詞
+++++++++++++++++++++
+
+-schaft         質
+
+Eigen-schaft    特質
+擁有
+
 詞形變化
 ........
 
@@ -937,240 +1209,6 @@ copula 動詞在其前或其後均接主格，包含
 bleiben(保持、留下)，scheinen(顯示)，sein(是)，werden(變成)
 
 Er ist ein sehr guter Lehrer. 他是非常好的老師。
-
-名詞
-----
-
-名詞屬格變格
-............
-
--(e)s   陽性及中性名詞之屬格
-
-das Resultat der Resultats 結果
-das Glied    der Gliedes  
-
-名詞複數變格
-............
-
--n      複數名詞且結尾不為 -n。
-
-Formel  Formeln 公式
-Zahl    Zahlen  數
-
--ä-e    a變為ä，並加上詞尾e。
-
-Baum    Bäume   樹
-
-名詞與格變格
-............
-
--n     某些複數名詞的與格變格 
-
-Axiom Axiome Axiomen 定理複數之與格變格
-
-名詞賓格變格
-............
-
--e      陽性及中性名詞之賓格，在古老或書寫文中
-
-名詞詞源
-........
-
-德語的單數名詞有分三個性別，陽性、陰性及中性，
-可由名詞前置的冠詞或形容詞來判斷性別。
-
-中性名詞在德文中佔不到百分之十，所以不要先猜名詞為中性，
-但可由名詞詞尾來大致判斷性別。
-
-陽性名詞
-++++++++
-
-下類名詞為陽性名詞：
-
-1.通常由男性擔任的職業或國家
-
-2.大型野生動物
-
-3.日名、四季名、月份名
-
-4.動名詞，動詞不定式去掉 -en 即為名詞
-
-5.陽性河名，河名不是陽性就是陰性，沒有中性。
-
-6.-arch, -ant, -anz,
-  -ent,  -enz, 
-  -ist, -it, 
-  -krat, -nom, -ot, -soph
-
-7.-er 所有衍生自動詞之名詞，動詞之不定式去掉 -en 再加 -er 即為名詞
-
-  anzeigen -> der Anzeiger 指示->期刊
-
-結尾的名詞，在主格以外的四格均會加字尾 -en。
-
-陰性名詞
-++++++++
-
-1.-e    陰性，少數為中性及陽性須強記 
-
-die Elemente    元素
-die Klasse      類別
-
-2.-in 
-  原本為陽性之職業或國家名詞後置，即變為陰性名詞。
-
-3.-heit, -keit 
-  通常為抽象名詞
-
-  Exaktheit         精確，從 exakt 形容詞來。
-
-  Unbeweisbar-keit  不可證性
-
-4.-ung 
-
-  動詞不定式去掉字尾 -en 加上 -ung 即成為陰性名詞，
-  表示由動作產生之事件，或結果。  
-   
-  Abkürzung           縮寫，源自 abkürzen
-
-  Betrachtung         考量，源自 betracht 
-
-  Entwicklung         發展，源自 entwickeln
-
-  Formalisierung      形式化，源自 formalisieren
-
-  Zusammenfassung     摘要，源自 zusammenfassen 
-
-  Verwendung          應用，源自 verwenden 
-
-  Bemerkung           標注，源自 bemerken
-  
-5.-ie, -ik, -ion
-  源自法文之名詞後置如上詞尾。
-  die Biologie, die Musik, die Station
-
-6.陰性之河流
-  die Donau, die Elbe, die Isar, die Oder, 
-  die Weser, die Seine, die Themse
-
-7.其它
-
-  die Literatur   文獻 
-  die Art         类型、种类方式、方法风格行为、举止习惯（生物）属
-
-中性名詞
-++++++++
-
-1.-chen, -lein
-  所有動物幼兒名詞後置上述詞尾，德國人認為小孩為中性吧。
-  das Hündchen(der Hund) 小馬
-
-2.從不定動詞衍生之名詞，動詞不定式之首字母大寫即變成名詞。
-
-  das Essen     食物，源自吃之不定式 Essen。
-
-
-  das Weglassen 省略，源自省略之不定式 weglassen。 
-
-3.從不定動詞衍生之名詞，動詞首字根字母大寫即變成名詞。
-
-  das Beweis    證明，源自證明之不定式 beweisen。
-
-4.國名或城市名。
-
-拉丁源名詞
-++++++++++
-
-Typus   陽性    類別，特質  屬格Typus，複數Typen
-
-形容名詞
-++++++++
-
-形容名詞是由形容詞轉變來，一般而言其名詞的性別由冠詞決定。
-
-der alte man        der/die Alte        老人
-
-der verwandte man   der/die Verwandte   親戚
-
-一些形容名詞後置 -in 可轉成陰性。
-
-der Beamt   die Beamtin    官員
-
-一些中性形容名詞用來描述抽象概念。
-
-das Gute/Schlechte/Blöde daran 好/壞/笨
-
-這些形容名詞常與非人稱代詞連用。
-
-alles, etwas, nichts, viel, wenig
-
-Ich habe schon alles Mögliche probiert.
-我總是試所有可能的方法。
-
-Auf wiedersehen. Alles Gute.
-再見，所有事平安。
-
-Das ist nichts Neues/etwas Besonderes.
-無事是新的/一些事物是特殊的。
-
-複合名詞
-........
-
-數個名詞組成複合名詞
-++++++++++++++++++++
-
-數個名詞所組成的複合名詞，其性與最後一個名詞相同。
-
-das Haus + die Tür = die Haustür (家+門=大門)
-
-1.-e 結尾名詞，通常會以 -n- 來連結名詞
-
-die Küche + der Tisch -> der Küche-n-tisch
-
-2.-heit/-keit, -ung     結尾之名詞，會以 -s- 來連結。
-
-Gelegenheit-s-arbeit    雜事
-
-Trennung-s-punkte       分隔點
-分隔       點
-
-Zeitung-s-zar           媒體汽球
-
-3.-e 結尾名詞，去掉 e 直接連結名詞
-
-Schreib-weise   記號
-寫      方法
-
-字首加名詞
-++++++++++
-
-haupt- 頭
-
-Haupt-gedanken          主要觀念 
-頭    心        
-
-名詞化字尾
-++++++++++
-
--shaft          產物、特性及意義如同英文的 ship
-
-Verwandt-shaft  關係
-
-形容詞與名詞組成複合名詞
-++++++++++++++++++++++++
-
-形容詞在名詞前組成複合名詞時，形容詞不變格。
-
-roter  Wein -> Rotwein      紅酒
-weißes Brot -> Weißesbrot   白麵包
-
-形容詞加字尾轉成名詞
-++++++++++++++++++++
-
--schaft         質
-
-Eigen-schaft    特質
-擁有
 
 動詞轉形容詞
 ++++++++++++
@@ -2449,14 +2487,14 @@ ein Guter Mann  一個好人
 主格    -er     -e      -es     -e 
 主格    der     die     das     die 
 
-賓格    -en     -e      -es     -e
-賓格    den     die     das     die 
-
 屬格    -en     -er     -en     -er  
 屬格    des     der     des     der 
 
 與格    -em     -er     -em     -en
 與格    dem     der     dem     den 
+
+賓格    -en     -e      -es     -e
+賓格    den     die     das     die 
 
 geordneter Paare 序對 
 geordnet -> geordneter 排序，複數屬格屈折

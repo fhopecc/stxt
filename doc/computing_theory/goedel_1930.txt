@@ -61,7 +61,8 @@ der Principia Mathematica und verwandter System I 1)
 該系統藉由少數預設公理出發，應用有限的推論程序，
 推論出定理，成就整個理論。
 
-本文中沒有一句廢話。
+不像洪蘭譯語言本能等大部頭的書，譯錯處可由前後文校正，
+本文很短，字字菁華，任何一字譯錯，立即會導向錯誤結論。
 
 iderspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
@@ -746,22 +747,21 @@ usw. für jede natürliche Zahl als Typus 17).
 
 17) 假定對每個變數型別可具有可數多種符號。
 
-譯註：羅素的類型論
+譯註：羅素型別論之實作
 
-      哥德爾曾深入研究羅素及懷海德的數學原理，
-      自然地他於 P 系統引入羅素之論型論，
-      所以把變數用型別(Typ)標記其不同層次。
+      哥德爾於 P 系統引入羅素之型別論，
+      所以P 系統之變數具型別(Typ)。
 
-      型別理論是為了解決集合包含自已本身之問題(這會引起羅素悖論)，
+      型別論是為了解決集合包含自已本身之問題(這會引起羅素悖論)，
       故強制集合的成員比集合本身的型別階級還低。
+
+      羅素悖論請參見還原公設那節之譯註。
+
+譯註：zur Verfügung stellen 可行的
 
       Typ 一詞源自拉丁文 Typus，可發現哥德爾 Typ 及 Typus 均有使用，
       Typus 又源自古希臘文 τῠ́πος，係標記、類型之意。
       Typs 是屬格，Typen 是複數格。
-
-      羅素悖論請參見還原公設那節之譯註。
-
-      zur Verfügung stellen 可行的
 
 Anm.: 
 Variable für zwei- und mehr stellige Functionen (Relationen) sind
@@ -782,7 +782,8 @@ wiederum 副詞：可再由
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
     z. B. eine Relation zwischen Individuen 
-    und Klassen als eine Klasse als Elementen der Form: ((x2), ((x1),x2)). 
+    und Klassen als eine Klasse als Elementen der Form: 
+    ((x2), ((x1),x2)). 
     Alle in den PM über Relationen beweisbaren Sätze sind, 
     wie eine einfache Überlegung lehrt, 
     auch bei dieser Behandlungsweise beweisbar.
@@ -791,9 +792,10 @@ wiederum 副詞：可再由
     例如一個體群與類別群作為類別且為形式 ((x2), ((x1),x2)) 成員間的關係 
     所有在 PM 中描述關係之可證句，簡言之在這個方式下也是可證的。
 
-譯註: Individuum 個體其複數形態為 Individuen，字尾 um 改為 en。
-      Form 屬格不變形，其為陰性名詞，所以冠詞 der 表示屬格或與格，
-      本文中 der Form 是屬格。
+譯註: Individuum 其複數變格為 Individuen，字尾 um 改為 en。
+
+      der Form 是屬格，德語陰性名詞不對屬格變格，
+      所以冠詞 der 表示屬格或與格，
 
 /177/
 
@@ -842,18 +844,14 @@ nennen wir Elementarformeln.
 a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
 稱為基本式。
 
-譯註：哥德爾採取型別理論是去解決集合不可包含自已本身之問題(會引起羅素悖論)，
-      故強制集合的成員比集合本身的型別階級還低，
-      強制將個體與集合物件分開，文法上互不隸屬。
-      
-      故上述 a(b)，表示 b 為 a 之元素，b 的型別一定比 a 的型別低，
-      基本式形式如 a(b)，其中 b 為 n 型符號且 a 為 n+1 型符號，
-      即以形式系統的文法限制，支援類型論。
-
-
+譯註：哥德爾採取型別論去解決集合不可包含自已本身之問題
+      (會引起羅素悖論)，
+      故強制集合的成員比集合本身的型別還低，
+      故基本式形式如 a(b)，其中 b 為 n 型符號且 a 為 n+1 型符號，
+      即以形式系統的文法限制，支援型別論。
     
 公式類別
-..........
+........
 
 Die Klasse der Formeln definieren wir als die kleinste Klasse 19),
 zu welcher sämtliche Elementarformeln gehören und 
@@ -863,7 +861,6 @@ stets auch ~(a), (a) V (b), xΠ(a) gehören
 (a)V(b) nennen wir die Disjunktion aus a und b,  
 ~(a) die Negation und xΠ(a) eine Generalisation von a.
 
-
 我們定義公式類別為包含所有的基本式及
 若包含 a, b 必包含 ~(a), (a) V (b), xΠ(a) (其中 x 是一任意變數) 
 等公式 18a) 的最小的類別 19)。
@@ -871,32 +868,7 @@ stets auch ~(a), (a) V (b), xΠ(a) gehören
 ~(a) 為否定而 xΠ(a) 為 a 的一般化。
 
 譯註：公式類別於現代數學稱為合式公式，
-      用更精簡的 BNF 描述 P 系統之語法如下表：
-
-      C    := '~' | 'v' | 'Π'       常數
-           |  '0' | 'f' | '(' 
-           |  ')'
-      V1   := 'x1' | 'y1' | 'z1'... 第1型變數，可數
-      V2   := 'x2' | 'y2' | 'z3'... 第2型變數
-      . 
-      .
-      .
-      Vn   := 'xn' | 'yn' | 'zn'... 第n型變數
-      V    := V1 | V2 | V3...       變數
-      Z1   := '0'                   第1型符號
-           |  V1 
-           |  'f' Z1  
-      Z2   := V2                    第2型符號
-      . 
-      .
-      .
-      Zn   := Vn                    第n型符號
-
-      EF   := Zn+1 '(' Zn ')'      基本`式
-      F    := EF                   公式
-           |  '~' '(' F ')'        否定
-           |  F 'V' F              析取式
-           |  V 'Π' '(' F ')'      一般化式
+      見 P 系統的 BNF 描述。
 
 18a) xΠ(a) ist also auch dann eine Formel, 
      wenn x in a nicht oder nicht frei vorkommt. 
@@ -1000,16 +972,16 @@ Folgende Formeln (I bis V) heißen Axiome
           
           某種測量即為述詞，2 事物接受所有測量都相等稱為相等。
 
-          ≡ 為等價，於 PM 的第 7 頁定義為：
-          a≡b := a⊃b . b⊃a
-          羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
-          以真值表定義等價如下：
-
-          a b a≡b
-          0 0  1 
-          0 1  0
-          1 0  0
-          1 1  1
+          定義 PD1：等價
+            ≡ 為等價，於 PM 的第 7 頁定義為：
+            a≡b := a⊃b . b⊃a
+            羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
+            以真值表定義等價如下：
+            a b a≡b a⊃b b⊃a a⊃b.b⊃a 
+            0 0  1   1   1     1
+            0 1  0   1   0     0
+            1 0  0   0   1     0
+            1 1  1   1   1     1
             
           就我的觀念而言，等價是較不嚴格的相等，
           也就是說相等一定是等價，但等價不一定是相等。
@@ -1037,27 +1009,26 @@ Folgende Formeln (I bis V) heißen Axiome
           化學中，產出量相等的稱為等價，例如營養學中
           6 μg的膳食β-胡蘿蔔素提供了等效於1 μg的視黃醛，
           等效於3⅓IU的維生素A。
-
            
     譯註：哥德爾未提到的縮寫概述如下：
           
-          . 符號合取邏輯連接子定義為：
-          a . b ≡ ~(~a v ~b)
+          定義 PD2：. 合取邏輯連接子
+          令 a . b ≡ ~(~a ∨ ~b)
           證明如以下真值表：
-          a b ~a ~b ~av~b ~(~av~b) a.b
-          0 0  1  1     1       0    0  
-          0 1  1  0     1       0    0 
-          1 0  0  1     1       0    0
-          1 1  0  0     0       1    1
+          a b ~a ~b ~a∨~b ~(~a∨~b) a.b
+          0 0  1  1   1       0     0  
+          0 1  1  0   1       0     0 
+          1 0  0  1   1       0     0
+          1 1  0  0   0       1     1
  
-          "⊃" 為推論邏輯連接子定義為：
-          a ⊃ b ≡ ~a v b          
+          定義 PD3：. 合取邏輯連接子
+          令 a⊃b ≡ ~a∨b          
           證明如以下真值表：
           a b ~a ~avb a⊃b
-          0 0  1    1    1   
-          0 1  1    1    1
-          1 0  0    0    0
-          1 1  0    1    1
+          0 0  1   1   1   
+          0 1  1   1   1
+          1 0  0   0   0
+          1 1  0   1   1
 
           Ex 為存在量詞常數定義為：
           ExA(x) ≡ ~(xΠ(~A(x)))
@@ -1256,7 +1227,7 @@ daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
       xi+1 Π (yi+1 Π ( zi Π 
                (zi ε xi+1 ~ zi ε yi+1) ⊃ xi+1 = yi+1
 
-直接後繼
+推論規則
 ........
 
 Eine Formel c heißt unmittelbare Folge aus a und b (bzw.
@@ -1268,7 +1239,7 @@ wo v eine beliebige Variable bedeutet).
 (或 c 為式 vΠ(a)，其中 v 為任意一個變數)。
 則式 c 稱為 a 及 b (或來自 a) 的直接後繼，
 
-譯註：本文描述直接推論的兩種型式如下：
+譯註：P 系統的推論規則的兩種型式如下：
       1. (~(b))∨(c) & b ⊢ c
       2. a ⊢ vΠ(a)
 
@@ -1289,8 +1260,12 @@ welche die Axiome enthält und gegen die Relation
      Math. Zeitschr. 26, 1927).
 
     因為所有可能的取代已在公設中處理，
-    所以取代規則將變為多餘的，
+    所以取代規則將變為多餘的。
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
+
+   譯註：一般名詞僅對屬格變格，但對某些複數名詞會作與格變格，
+         如上例介詞 in 後 Axiom 複數 Axiome 作與格變格
+         成為 Axiomen。      
 
 哥德爾數
 --------
@@ -1405,19 +1380,8 @@ und geben zunächst folgende Definition:
 現在先轉換至一個觀念，現在其與 P 系統沒有關聯，
 首先給定以下定義：
 
-基礎遞迴函數公理
-................
-
-譯註：以下為基本基礎遞迴函數，即直接接受之基礎遞廻函數。
-      RA1.0(x) = 0                        零函數
-      RA2.f(x) = x+1                      後繼函數
-
-      RA3.p_k_j(x1,x2,...,xj,...,xk) = xj 投影函數
-    
-      RA4.i(n) = n                        自身函數
-
-遞迴定義數論函數
-................
+遞迴定義
+........
 
 Eine zahlentheoretische Funktion 25) 
 φ(x1,x2...xn) 
@@ -1473,8 +1437,23 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 若且惟若存在一個數論函數的有限序列 φ1,φ2...φn，
 其以 φ 結束而具備以下特性，
 序列中的每個函數 φk 不是由前兩項遞迴定義而來，
-就是由對前幾項執行取代而得 27)，
+就是由對前幾項執行取代操作而得 27)，
 不然就是一個常數或是後繼函數 x+1。
+
+基礎遞迴函數
+............
+
+譯註：哥德爾定義 φk 不是一個常數或是後繼函數 x+1，
+      現代術語為基礎遞迴函數公理，
+      基礎遞迴函數不是經由遞迴定義或取代操作前項函數，
+      而是預先就接受為遞迴函數，如同邏輯上，公理是預先就接受的定理。
+
+      哥德爾提到基本基礎遞迴函數如下：
+      RA1.0(x) = 0                        零函數或常數函數
+      RA2.f(x) = x+1                      後繼函數
+      
+      現代通常會包含投影函數：
+      RA3.p_k_j(x1,x2,...,xj,...,xk) = xj 投影函數
 
 27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
     an die Leerstellen einer der vorhergehenden, z.B. 
@@ -1486,7 +1465,7 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
     φk(x1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r < k).
     所有左側變數不一定要在右側出現(就如同遞迴框架(2))。
 
-級別
+級數
 ....
 
 /180/
@@ -1495,8 +1474,19 @@ Die Länge der kürzesten Reihe von φi,
 welche zu einer rekursiven Funktion φ gehört, 
 heißt ihre Stufe. 
 
-遞迴函數 φ 的 φi 最短的序列之長度為其級別。
+定義遞迴函數 φ 的最短 φi 序列長度稱為其級數。
 
+譯註：由此可知級數 1 的 φ 應為基礎遞迴函數，
+      即為 φ(x)=0(x) 及 φ(x)=x+1 的級數為 1。
+     
+      先看定理 R1 的證明 
+      定理 R1：{0} 是遞迴的。
+
+               令 χ{0}(0)   = f(0)
+                  χ{0}(x+1) = 0(x)
+               得證。
+      因為χ{0}(x) 是經過一次的遞迴定義，故其級數為 2。
+     
 遞迴關係
 ........
 
@@ -1530,12 +1520,6 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
       譯註中我們使用 χ{K} 表示類別 K 的特徵函數。
 
       以下是幾個遞迴類別的證明。
-
-      定理 R1：{0} 是遞迴的。
-      
-               令 χ{0}(0)   = 1
-                  χ{0}(k+1) = 0
-               得證。
 
       定理 R2：正整數類別是遞迴的。
                令 ℕ* = ℕ \ {0}，
@@ -2522,6 +2506,9 @@ x 是質數。
 
    譯註：Bezug nehmen auf：參考到
 
+表示定理
+........
+
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
         Relationenszeichen r (mit den freien Variablen) (u1, u2...un), 
         so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
@@ -2530,37 +2517,46 @@ Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es ein n-stelliges
         存在一個 n 元關係符號 r (帶有自由變數) (u1,u2...un)，
         使得所有 n 元整數值組 (x1,x2...xn) 滿足下式：
 
-                     |     u1 .....un |
- R(x1...xn) => Bew[Sb|r  Z(x1)...Z(xn)|]     (3)
+                    |    u1 .....un |
+ R(x1...xn) → Bew[Sb|r Z(x1)...Z(xn)|]     (3)
                     
-                         |    u1......un |
-~R(x1...xn) => Bew[Neg Sb|r Z(x1)...Z(xn)|]  (4)
+                        |    u1......un |
+~R(x1...xn) → Bew[Neg Sb|r Z(x1)...Z(xn)|]  (4)
                          
 Wir begnügen uns hier damit, den Beweis dieses Satzes, 
 da er keine prinzipiellen Schwierigkeiten bietet und 
 ziemlich umständlich ist, in Umrissen anzudeuten 39). 
 
-指出此命題證明之概要 39) 可說服我們，
-因為它不提供任何原則上之困難及適當涉入。
+概略指出此定理證明是沒有任何理論障礙且
+在合理的複雜程度內可說服我們 39) 。
 
-譯註：sich damit begnügen, etw zu tun 滿足去做。
+譯註：此定理下標題為表示定理指出此定理
+      證明所有遞迴函數均於 P 系統內表示，
+      P 系統之證又可使用數論函數操作，
+      故所有遞迴函數都是可證的。
 
-譯註：德語分離動詞之不定子句形式如下：
+譯註：sich damit begnügen, etw zu tun 作某事可說服我們。
+
+      德語分離動詞之不定子句形式如下：
       prefix+zu+verb
-      an+deuten ⊃ an+zu+deuten  建議、指示
+      an+deuten → an+zu+deuten  建議、指示
+
+      bieteten Schwierigkeiten 具有或出現障礙困難
+      
+      ziemlich umständlich 合理的複雜
 
 39) Satz V beruht natürlich darauf, 
     daß bei einer rekursiven Relation R 
     für jedes n-tupel von Zahlen aus den Axiomen des Systems P 
     entscheidbar ist, ob die Relation R besteht oder nicht.
 
-39) 命題 V 自然基於下面：
-    衍生自系統 P 之公設之 n 元整數數組遞迴關係 R 是可決定的，
+39) 命題 V 自然基於以下事實，
+    由系統 P 之公理，遞迴關係 R 對每個 n 元整數數組是可決定的，
     不管 R 關係是成立或否定。
 
 Wir beweisen den Satz für alle Relationen R(x1...xn) der Form: 
 
-我們證明所有具以下形式之關係 R(x1...xn) 之命題：
+我們證明對所有具以下形式關係 R(x1...xn) 而言，定理成立：
 
 x1 = φ(x2...xn) 40) 
 
@@ -2568,24 +2564,37 @@ x1 = φ(x2...xn) 40)
 wenden vollständige Induktion nach der Stufe von φ an. 
 
 (其中 φ 是一個遞迴函數) 
-並應用完整歸納法在 φ 之步驟。
+並對 φ 之級數應用完整歸納法。
 
-譯註：Stufe 在數學歸納法內容中，由等級改譯為步驟較符合中文語氣。
+譯註：an+wenden 應用
 
 40) Daraus folgt sofort seine Geltung für jede rekursive Relation, 
     da eine solche gleichbedeutend ist mit 0=φ(x1... xn), 
     wo φ rekursiv ist.
 
-40) 於此直接可得出每個遞迴關係是有效的，
-    由於此類關係 0 = φ(x1... xn) 同義，
-    其中 φ 是遞迴的。
+40) 這可直接推得對每個遞迴關係也成立，
+    因為此類關係與 0 = φ(x1... xn)（其中 φ 是遞迴的） 同義，
 
 Für Funktionen erster Stufe 
-(d.h. Konstante and die Funktion x+1) ist der Satz trivial. 
+(d. h. Konstante and die Funktion x+1) ist der Satz trivial. 
 
-譯註：degree 即為應用歸納法第幾次。
+對 1 級函數（即常數及函數 x+1）此定理是顯而成立的。
 
-對初始步驟函數(即常數及函數 x+1) 是顯而成立的。
+譯註：1 級函數請先參見基礎遞迴函數該節
+      
+      定理 R31：0(x) 可由 P 系統表示。
+      已知 0(x)=0 為基礎遞迴公理，
+      令 R(x1,x2)~0=φ(x2)，
+      P 系統可寫出公式 r(u1,u2)≡u2=0，
+      明顯地符合 R(x1, x2) 之數組 (x1, x2)   
+      以 Z(x1) 及 Z(x2) 代入 r(u1,u2) 可證明都成立。
+
+      定理 R32：0(x) 可由 P 系統表示。
+      已知 f(x)=x+1 為基礎遞迴公理，
+      令 R(x1,x2)~x1+1=x2，
+      在 P 系統可寫下 r(u1,u2) ≡ f(u1)=u2，
+      明顯地符合 R(x1, x2) 之數組 (x1, x2)   
+      以 Z(x1) 及 Z(x2) 代入 r(u1,u2) 可證明都成立。
 
 Habe also φ die m-te Stufe.
 Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
@@ -2598,6 +2607,29 @@ so daß (3), (4) gilt.
 它以替換操作或遞迴定義推論自較為低級之函數 φ1...φk。
 因為對 φ1...φk 而言，均可由遞迴假設證明，
 存在對映的關係符號 r1...rk 使得 (3)、(4) 成立。
+
+譯註：替換操作於 P 系統表示如下：
+      
+      定理 R33：替換操作可由 P 系統表示。
+        遞迴函數 f(g1(x1,...,xn),...,gk(x1,...,xn))
+        可於 P 系統寫出公式，
+        在此我們引入 "&" 取代 "." 
+        其較能與 "..." 區別。 
+
+        r(x1,...,xn,y)≡(Ey1,...,yk)[rf (y1,...,yk,y)
+                                   &rg1(x1,...,xn,y1)
+                                   .
+                                   .
+                                   .
+                                   &rgk(x1,...,xn,yk)]
+
+      定理 R34：遞迴定義可由 P 系統表示。
+        φ(0  ,x2...xn) = ψ(x2...xn)
+        φ(k+1,x2...xn) = μ(k,φ(k,x2...xn),x2...xn)
+        可於 P 系統寫出公式 
+        rφ(z,x2...xn,y)≡(Eσ)[|σ|=z+1&rψ(x2...xn,σ(0))
+                            &(iΠ(i<z)[rμ(i,x2...xn,σ(i+1))
+                                     &y=σ(z)]
 
 Die Definitionsprozesse,
 durch die φ aus φ1...φk entsteht 
@@ -2612,7 +2644,8 @@ können sämtlich im System P formal nachgebildet werden.
 Tut man dies, 
 so erhält man aus r1...rk ein neues Relationszeichen r 41),
 für welches man die Geltung von (3), (4) 
-unter Verwendung der induktiven Annahme ohne Schwierigkeit beweisen kann. 
+unter Verwendung der induktiven Annahme 
+ohne Schwierigkeit beweisen kann. 
 
 這些完成後，自 r1...rk 可得一個新的關係符號 r 41)，
 應用歸納假設之下可毫無困難的證明 (3)、(4) 是有效。
@@ -2624,7 +2657,8 @@ unter Verwendung der induktiven Annahme ohne Schwierigkeit beweisen kann.
 41) 這證明的精確發展中 r 自然地並非於此內容解釋之迂迴中，
     而是經由其本身之純形式組成定義。
 
-Ein Relationszeichen r, welches auf diesem Wege einer rekursiven Relation
+Ein Relationszeichen r, 
+welches auf diesem Wege einer rekursiven Relation
 zugeordnet ist 42), soll rekursiv heißen.
 
 源自這些方法之關係符號 r 其被對應到遞迴關係應稱為遞迴。
@@ -2635,8 +2669,8 @@ zugeordnet ist 42), soll rekursiv heißen.
 42) 其於此內容解釋下也表達了此關係的存在。
 
 Wir kommen nun ans Ziel unserer Ausführungen. 
-Sei χ eine beliebige Klasse von Formeln. 
-Wir bezeiehnen mit Flg(χ) (Folgerungsmenge von χ) 
+Sei 𝛘 eine beliebige Klasse von Formeln. 
+Wir bezeiehnen mit Flg(𝛘) (Folgerungsmenge von 𝛘) 
 die kleinste Menge von Formeln, 
 die alle Formeln aus χ und 
 alle Axiome enthält und gegen die Relation "unmittelbare Folge" 
@@ -2645,11 +2679,13 @@ abgeschlossen ist.
 wenn es kein Klassenzeichen a gibt, so daß:
 
 現在來到我們實作的目標。
-令 χ 為任一個公式類別。
-以 Flg(χ) (χ 之推論集合) 
+令 𝛘 為任一個公式類別。
+以 Flg(𝛘) (𝛘 之推論集合) 
 代表最小之公式集合，
 包含所有 χ 之公式及所有「立即推論」關係所包含之公理。
 若不存在類別符號 a 如下，χ 稱為 ω-一致性：
+
+譯註：𝛘 是希臘字母的 chi 的粗體小寫。
 
    |  |    v |       |   |             |
 (n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
@@ -3676,7 +3712,8 @@ womit Satz IX bewiesen ist. 62)
 且於此推論出對立面之不可決定性，
 故命題 IX 是可證的。62)
 
-62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre und 
+62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre 
+    und 
     dessen Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
     Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
     der Form (x)F(x) (F rekursiv) gibt.
@@ -3941,6 +3978,36 @@ tupel       值組
 Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
 W
+
+P 系統之 BNF
+------------
+用更精簡的 BNF 描述 P 系統之語法如下表：
+
+C    := '~' | 'v' | 'Π'       常數
+     |  '0' | 'f' | '(' 
+     |  ')'
+V1   := 'x1' | 'y1' | 'z1'... 第1型變數，可數
+V2   := 'x2' | 'y2' | 'z3'... 第2型變數
+. 
+.
+.
+Vn   := 'xn' | 'yn' | 'zn'... 第n型變數
+V    := V1 | V2 | V3...       變數
+Z1   := '0'                   第1型符號
+     |  V1 
+     |  'f' Z1  
+Z2   := V2                    第2型符號
+. 
+.
+.
+Zn   := Vn                    第n型符號
+
+EF   := Zn+1 '(' Zn ')'      基本`式
+F    := EF                   公式
+     |  '~' '(' F ')'        否定
+     |  F 'V' F              析取式
+     |  V 'Π' '(' F ')'      一般化式
+
 
 譯者參考書目
 ------------
