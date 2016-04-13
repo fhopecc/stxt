@@ -64,7 +64,17 @@ der Principia Mathematica und verwandter System I 1)
 不像洪蘭譯語言本能等大部頭的書，譯錯處可由前後文校正，
 本文很短，字字菁華，任何一字譯錯，立即會導向錯誤結論。
 
-iderspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
+基本論述
+
+定義 P 系統
+定義遞迴函數
+遞迴函數可於 P 系統表示
+遞迴函數成立，可於 P 系統證明
+P 系統可用算術系統操作
+P 系統存在不可決定命題
+算術系統是遞迴的
+
+widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
 本文
 ----
@@ -2629,7 +2639,12 @@ so daß (3), (4) gilt.
 因為對 φ1...φk 而言，均可由遞迴假設證明，
 存在對映的關係符號 r1...rk 使得 (3)、(4) 成立。
 
-譯註：定理 R33：替換操作可於 P 系統表示。
+譯註：哥德爾於定理 VII 說明
+      遞迴函數的替換操作(函數合成)及
+      遞迴定義以算術系統表示的方法，
+      於表現定理也可應用，說明如下。
+
+      定理 R33：替換操作可於 P 系統表示。
         替換操作即為現代述語的函數合成。
         以下的定義以希臘字母代表遞迴函數，
         以拉丁字母代表 P 系統關係符號。
@@ -3118,7 +3133,7 @@ daß die Klasse χ aus endlich vielen Formeln
 (und ev. den daraus durch Typenerhöhung entstehenden) besteht. 
 Jede endliche Klasse α ist natürlich rekursiv. 
 
-命題 VI 之特例存在有限公式之類別 χ
+定理 VI 之特例存在有限公式之類別 χ
 (且可能經由型別提升產生)。 
 每個有限類別 α 自然是遞迴地。
 
@@ -3282,18 +3297,22 @@ Satz VII: Jede rekursive Relation ist arithmetisch.
 
 這可得
 
-命題 VII：每個遞迴關係是算術的。
+定理 VII：每個遞迴關係是算術的。
 
 Wir beweisen den Satz in der Gestalt: 
-Jede Relation der Form x0=φ(x1...xn), wo φ rekursiv ist, ist arithmetisch, 
+
+Jede Relation der Form x0=φ(x1...xn), 
+wo φ rekursiv ist, ist arithmetisch, 
 und wenden vollständige Induktion nach der Stufe von φ an. 
+
 φ habe die s-te Stufe(s>1). Dann gilt entweder:
 
-我們以下述建構證明此命題：
+我們以下述論述證明此命題：
 
-每個形式如 x0=φ(x1...xn) 之關係是算術的，其中 φ 是遞迴的
-且可應用完整歸納至 φ 的階級。 
-φ 為第 s-階級(s>1)。因此除了可得：
+每個形式如 x0=φ(x1...xn)（其中 φ 是遞迴的）之關係是算術的，
+且可對 φ 的級數作完整歸納法。 
+
+φ 為第 s-級(s>1)。因此除了下式成立：
 
 /192頁/
 
@@ -3301,9 +3320,12 @@ und wenden vollständige Induktion nach der Stufe von φ an.
 
 (wo ρ und sämtliche χi kleinere Stufe haben als s) oder:
 
-(其中 ρ 和所有的 χi 其階級小於 s) 且可推得：
+(其中 ρ 和所有的 χi 其級數小於 s) 
 
-51) Es brauchen natürlich nicht alle x1...xn in den χi tatsächlich vorzukommen 
+另一式也成立：
+
+51) Es brauchen natürlich nicht alle x1...xn 
+    in den χi tatsächlich vorzukommen 
     [vgl. das Beispiel in Fußnote 27)].
 
 51) 不是所有於 χi 中的 x1...xn 都需要實際出現。
@@ -3314,53 +3336,70 @@ und wenden vollständige Induktion nach der Stufe von φ an.
 
 (wo ψ,μ niedrigere Stufe als s haben).
 
-(其中 ψ,μ 其階級小於 s)。
+(其中 ψ,μ 其級數小於 s)。
+
+譯註：1.式即為函數合成、
+      2.式即為遞迴定義。
+      等式右側的函數級數（ρ、χ、ψ 及 µ）均小於 φ
+      之級數 s，說明函數合成及遞迴定義須由已定義之遞迴函數生成。
+      此定義新的遞迴函數操作，即可利用作為推論規則之實作。
 
 Im ersten Falle gilt:
 
-第一種情形可得： 
+第一種情形有下式成立： 
 
 x0=φ(x1...xn)~(Ey1...ym)[ R(x0,y1...ym)&
                          S1(y1,x1...xn)&...&Sm(y1,x1...xn)],
 
 wo R bzw. Si die nach induktiver Annahme existierenden mit
-x0=ρ(y1...ym) bzw. y=χ1(x1...xn) äquivalenten arithmetischen Relationen sind,
+x0=ρ(y1...ym) bzw. y=χ1(x1...xn) 
+äquivalenten arithmetischen Relationen sind.
 Daher ist x0=φ(x1,x2...xn) in diesem Fall arithmetisch.
 
-依據歸納假設 R 和 Si 分別等值於算術關係 x0=ρ(y1...ym) 及 y=χ1(x1...xn)，
-因此此情形下 x0=φ(x1,x2...xn) 為算術的。
+依據歸納假設，存在分別與 x0=ρ(y1...ym) 及 y=χ1(x1...xn)
+等值之算術關係  R 和 Si。
+因此於此情形下 x0=φ(x1,x2...xn) 為算術的。
+
+譯註：existierenden 為 existierend 現在分詞轉形容詞，
+      並對 Relationen 作複數與格變格，故於字尾加 en。
 
 Im zweiten Fall wenden wir folgendes Verfahren an: 
-Man kann die Relation x0=φ(x1,x2...xn) mit Hilfe des Begriffes "Folge von Zahlen"
+Man kann die Relation x0=φ(x1,x2...xn) mit Hilfe 
+des Begriffes "Folge von Zahlen"
 (f) 52) folgendermaßen ausdrüeken:
 
 第二種情形應用以下程序：
-我們可藉由「整數序列」(f) 之觀念 52)來表達關係 x0=φ(x1,x2...xn) 如下：
+之後可藉由「整數序列」(f) 之觀念 52)來表達關係 x0=φ(x1,x2...xn)如下：
 
 x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) &
-         (k)[k<x1⊃fk+1=μ(k,fk,x2...xn)] & x0=fx1}
+         (k)[k<x1→fk+1=μ(k,fk,x2...xn)] & x0=fx1}
 
-52) f bedeutet hier eine Variable, deren Wertbereich die Folgen natürl. Zahlen sind. 
-    Mit fk wird das k+1-te Glied einer Folge f bezeichnet (mit f0 das erste).
+52) f bedeutet hier eine Variable, 
+    deren Wertbereich die Folgen natürl. Zahlen sind. 
+    Mit fk wird das k+1-te Glied einer Folge f bezeichnet
+    (mit f0 das erste).
 
 52) f 於此指一個變數，其值域是自然數序列。
     fk 用來表示 f 序列之第 k+1-個元素（f0 表示第一個）。
 
-Wenn S(y,x2...xn) bzw. T(z,x,...xn+l) die nach induktiver Annahme existierenden 
-mit y=ψ(x2...xn) bzw. z=μ(x1...xn+1) äquivalenten arithmetische Relationen sind, 
+Wenn S(y,x2...xn) bzw. T(z,x,...xn+l) die nach induktiver Annahme 
+existierenden mit y=ψ(x2...xn) bzw. z=μ(x1...xn+1) 
+äquivalenten arithmetische Relationen sind, 
 gilt daher:
 
-依據歸納假設之存在 S(y,x2...xn) 和 T(z,x,...xn+l) 為分別等值於算術關係 
-y=ψ(x2...xn) 及 z=μ(x1...xn+1)，
+依據歸納假設，存在分別與 y=ψ(x2...xn) 及 z=μ(x1...xn+1)
+等值之算術關係 S(y,x2...xn) 和 T(z,x,...xn+l)。
 由此下述成立：
 
-x0=φ(x1...xn)~(Ef){S(       f0,x2...xn) &
-         (k)[k<x1⊃T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
+x0=φ(x1...xn)~(Ef){S(       f0,x2...xn)  &
+          (k)[k<x1→T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
 
-Nun ersetzen wir den Begriff "Folge von Zahlen" durch "Paar von Zahlen", 
+Nun ersetzen wir den Begriff "Folge von Zahlen" 
+durch "Paar von Zahlen", 
 indem wir dam Zahlenpaar n, d 
 die Zahlenfolge f^(n, d)(fk^(n,d)=[n]1+(k+1)d) zuordnen,
-wobei [n] den kleinsten nicht negativen Rest von n modulo p bedeutet.
+wobei [n] den kleinsten nicht negativen Rest von n modulo p 
+bedeutet.
 
 現在可用「整數對」替代「整數序列」之觀念，
 將整數對 n, d 對映到 f^(n, d)(fk^(n,d)=[n]1+(k+1)d)，
@@ -3371,7 +3410,7 @@ Ist f eine beliebige Folge natürlicher Zahlen und k eine beliebige natürliche 
 so gibt es ein Paar von natürlichen Zahlen n, d, 
 so daß f^(n,d) und f in den ersten k Gliedern übereinstimmen.
 
-則可得輔助命題 1：
+則以下成立，輔助命題 1：
 f 是一個任意的自然數序列且 k 是一個任意自然數，
 存在一個自然數 n, d 之數對，
 使得 f^(n,d) 和 f 與第一個 k 項目一致。
