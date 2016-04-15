@@ -3434,11 +3434,12 @@ Das Zahlenpaar n,l! leistet dann das Verlangte.
 
 /193頁/
 
-是可能的， 
-因為於數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
-上述數字中任 2 個數所包含的質數也包含在 (i1-i2)l! 數段中且
-由於在 l! 中，|i1-i2|<1 是不可能的。
-數對 n,l! 可滿足此需求。
+是可能的，因為於數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
+
+可由數列中任 2 個數所包含的質數也應包含在 (i1-i2)l! 數段中
+且因|i1-i2|<1，也應包含於 l!中，這是不可能的。
+
+數對 n,l! 滿足前面規範。
 
 譯註：以下命題 41 之證明參閱 gribskoff, 2013。
 
@@ -3471,6 +3472,50 @@ Das Zahlenpaar n,l! leistet dann das Verlangte.
         故 p 不整除 l!。 
         得證。
 
+
+      定理 42：中國剩餘定理
+        已知任意數列 a1,a2...an 及 m1,m2...mn，
+        若 m1,m2...mn 任 2 數互質，
+        則下列一元線性同餘方程組 S
+        
+        x≡a1 (mod m1)
+        x≡a2 (mod m2)
+        .
+        .
+        .
+        x≡an (mod mn)
+
+        有解且可由下列通用程序解出：
+        1.設 M  = m1.m2...mn
+             Mi = M/mi 
+        2.令 tiMi = 1 (mod mi)，求得 ti。
+        3.方程組 S 的通解為
+          x = a1t1M1 + a2t2M2 +...+ antnMn + kM (K 為任意整數)
+
+      例子：
+        孫子算經「物不知數」問題，原文如下：
+        有物不知其數，三三數之剩二，五五數之剩三，
+        七七數之剩二。問物幾何？
+            
+      解：
+        x≡2 (mod 3)
+        x≡3 (mod 5)
+        x≡2 (mod 7)
+
+        t1.35 = 1 (mod 3)    
+        t1 = 2
+
+        t2.21 = 1 (mod 5)    
+        t2 = 1
+
+        t2.15 = 1 (mod 7)    
+        t2 = 1
+
+        x=2.2.35+3.1.21+2.1.15=140+63+30=233
+ 
+      證明：
+        
+
 Da die Relation x=[n]p durch:
 
 這裡關係 x=[n]p 藉由 
@@ -3486,8 +3531,8 @@ definierte Relation P(x0,xl...xn):
 
 因此以下述定義關係 P(x0,xl...xn)也是算術的。
 
-P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&(k)[k<x1⊃
-T([n]1+d(k+2),k,[n]1+d(k+1),x2...xn] & x0=[n]1+d(x1+1)}
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&
+(k)[k<x1→T([n]1+d(k+2),k,[n]1+d(k+1),x2...xn] & x0=[n]1+d(x1+1)}
 
 arithmetisch, welche nach (17) and Hilfssatz I mit: 
 x0=Φ(x1...xn) äiquivalent ist 
