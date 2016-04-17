@@ -112,6 +112,10 @@ Individuum 其複數變格為 Individuen，字尾 um 改為 en。
 
   anzeigen -> der Anzeiger 指示->期刊
 
+8.拉丁源名詞
+
+  Typus   陽性    類別，特質  屬格Typus，複數Typen
+
 結尾的名詞，在主格以外的四格均會加字尾 -en。
 
 陰性名詞
@@ -178,16 +182,15 @@ die Klasse      類別
 
   das Weglassen 省略，源自省略之不定式 weglassen。 
 
-3.從不定動詞衍生之名詞，動詞首字根字母大寫即變成名詞。
+3.動名詞
+  中性，由不定動詞衍生之名詞，
+  動詞字根首字母大寫即變成名詞。
 
   das Beweis    證明，源自證明之不定式 beweisen。
+  das Verlauf   進行、處理，源自 Verlaufen
 
 4.國名或城市名。
 
-拉丁源名詞
-++++++++++
-
-Typus   陽性    類別，特質  屬格Typus，複數Typen
 
 形容名詞
 ++++++++
@@ -278,6 +281,386 @@ weißes Brot -> Weißesbrot   白麵包
 
 Eigen-schaft    特質
 擁有
+
+動詞
+----
+
+20141010 星期五 義仁
+
+德語動詞具有時態，表示動作執行的時點。
+每個時態有會因人稱不同而有不同詞變。
+
+原生動詞
+........
+
+原生動詞通常來自高地德語。
+
+dienen      服務
+
+präzisieren 澄清
+
+denke       想，與英文 think 同源
+
+源自副詞之動詞
+..............
+
+20141014 週二   稅務局
+
+äußern  說出，「反身」發表意見，源自 außen
+
+源自名詞之動詞
+..............
+
+zeichnen    畫，源自標示符號的名詞 Zeichen
+
+不定式
+......
+
+動詞的不定式的表示動作未知是由誰執行，
+當不定動詞放到句中，則已知主語(執行者)是誰，
+便成為限定動詞，其會因執行者的人稱而詞變。
+
+所有的不定式都以 -en 或 -n 結尾，
+以 -n 結尾的不定式為「做」 tun 及「是」 sein。
+
+英文會在不定式前加上 to 區隔，
+德文則不一定在不定式前加加上 zu 區隔。 
+
+不定子句
+++++++++
+
+不定子句(Infinitivsätze)其形式如下：
+
+zu+" "+不定式
+
+分離動詞之不定子句形式如下：
+
+prefix+zu+verb
+
+an+deuten -> an+zu+deuten  建議、指示
+hin+schreiben -> hin+zu+schreiben 寫下
+
+此子句(satz)是用來補充更多資訊，
+通常用來補充情態動詞。
+
+可作名詞的定語用：
+
+Eine Sprache zu beherrschen ist sehr schwer.
+要精通一門語言是很難。
+
+作名詞之補語用：
+
+Dieser Ausdruck ist nicht leicht zu übersetzen. 
+這表情不容易翻譯。
+
+作動詞或者是形容詞之狀語，
+德文不定句之中的句子成分要被逗號隔開，而且zu+原形動詞放在句尾例如：
+
+Ich bitte ihn, zu mir zu kommen.
+我拜託他到我這來
+
+zu mir 是由不定句 zu 所引導的句子成分，所以要被逗號隔開。
+
+什麼時候用dass句，什麼時候用不定子句?
++++++++++++++++++++++++++++++++++++++
+
+dass句用在主句和從句的主語都一樣的時候或者都不一樣的時候
+
+例如：Ich hoffe, dass ich eine Reise machen. (我希望我去旅行)<兩主語一致>
+或者：Ich hoffe, dass er zum Erfolg wird. (我希望他能成功)<兩主語不一致>
+
+zu句只能用在主句和從句的主語都一樣的時候
+
+命令語氣可以省略 zu。
+
+Nicht so viel Krach machen! 不要製造這麼多譟音。
+
+um...zu+不定式
+++++++++++++++
+
+um...zu+不定式作目的狀語，意為「為了…」。
+目的不定式中不能出現主語，其動作主體應該與主句主語一致。
+目的不定式可置在句首、句中或句末，並用逗號將前後句分開。
+目的不定式放在主句後，主句用正語序：
+
+Ich uebe Deutsch, um in Deutschland zu reisen.
+我練習德文(主句)是為了去德國旅遊(目的狀語)。
+
+Ich gehe in die Stadt, um einen Schirm zu kaufen.
+我走到街上(主句)去買傘(目的狀語)。
+
+Es ist nicht notwendig, die Straße zu überqueren, 
+um zur Post zu kommen.
+並不需要穿過路去郵局。
+
+Viele Deutsche fahren Rad, um gesund zu bleiben.
+許多德國人騎單車是為了健康。
+
+Wir bemerken, daß man zu den in der angeführten Literatur
+gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
+des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
+
+可注意到必須加上邏輯計算之公理及推論規則至前述文獻給定之集合理論公理
+以達成形式化。
+
+目的不定式放在句首，主句用反語序，緊跟的是可變位動詞；
+
+Um gesund zu bleiben, fahren viele Deutsche Rad.
+為了健康許多德國人騎單車。
+
+Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
+為了學好外文，你一定要至那個國家旅遊。
+
+
+提問用 wozu, warum 或 zu welchem Zweck, mit welcher Absicht
+
+Wozu fahren viele Deutsche gern Fahrrad?
+為什麼許多德國人想要騎腳踏車？
+
+Viele Deutsche fahren gern mit dem Fahrrad, um gesund zu bleiben.
+許多德國人想要騎腳踏車是為了保持健康。
+
+zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之間，並連寫。
+
+ich gehe zum Bahnhof, um meine Großmutter abzuholen.
+我去車站接我祖母。
+
+目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
+
+Herr Li gibt seinem Sohn 100 Yuan, 
+damit er (der Sohn) das Englischwörterbuch kauft.
+李先生給他兒子100元錢，以便他兒子買一本英語字典。
+
+
+
+不定式作名詞片語
+++++++++++++++++
+
+不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
+
+Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
+
+sein
+....
+            人稱        形式
+現在時      ich         bin
+
+            du          bist
+
+            er,sie      ist
+            es
+
+過去時      ich         war
+
+虛擬二態    ich         wäre
+
+命令語氣    單數        sei
+            
+            複數        seid
+
+完成時      第二分詞    助動詞 
+
+            gewesen     sein
+分詞
+....
+
+分詞(Partizip) 分成現在分詞(Partizip I)與過去分詞(Partizip II)。
+
+現在分詞
+........
+
+現在分詞衍生自不定式，只要將不定式加上字尾 -d，如下：
+
+現在分詞 = 不定式 + -d
+
+現在分詞作形容詞
+++++++++++++++++
+
+很多形容詞源自現在分詞，也會作形容詞詞變，如下：
+
+eine lachende Frau      正在笑的婦女。
+
+den folgenden Schemata  以下的框架
+    源自 folgen
+
+現在分詞作態度副詞
+++++++++++++++++++
+
+現在分詞作態度副詞用來描述態度。
+
+Er reagierte wütend. 他生氣地反應。
+
+現在分詞作形容名詞
+++++++++++++++++++
+
+Im folgenden wird gezeigt, 以下被展示  
+   形容名詞
+
+第二分詞
+........
+
+第二分詞建構
+++++++++++++
+
+第二分詞(Partizip II)，類比於英文之過去分詞，
+規則動詞的過去分詞形成法如下：
+
+ge+動詞詞幹+t
+
+kaufen -> gekauft       買
+
+詞幹尾是 -d, -t 或 -n 則加 -et
+
+reden  -> getredet   說
+beten  -> gebetet    祈禱
+regnen -> geregnet     
+
+詞幹首為 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-，
+前置 ge-。
+
+詞幹尾為 -ieren，表示其自法文，通常前置 ge-。
+
+第二分詞用法
+++++++++++++
+
+1.完成時(Perfekt)
+2.過去完成時(Plusquamperfekt)
+3.未來二時(Futur II)
+4.被動態
+
+第二分詞作定語
+++++++++++++++
+
+如同英語一樣，第二分詞可作定語，表示完成或被動的意義。
+
+der gedeckte Tisch. = der Tisch, der gedeckte wurden.
+放下的桌子。
+
+das verlorene Buch = das Buch, das verloren ist.
+遺失的書
+
+第二分詞可作形容詞。
+
+an-gewendet     利用，為 anwenden 之第二分詞。
+上 投入
+
+auf-gestellt    指派，為 aufstellen 之第二分詞
+上  置放
+
+an-geführt      引述，為 anführen 之第二分詞。
+上 領導
+
+der angeführten Literatur 屬格，引述文獻的
+
+an-gegeben      指定，為 angeben 之第二分詞。
+上  給
+
+betrachtet      考慮，為 betrachten 之第二分詞。
+
+geschrieben     寫的
+
+
+及物動詞與不及物動詞
+....................
+
+20141007 週二
+
+動詞字首
+........
+
+許多字首，可與原動詞結合，形成一個全新的動詞。
+
+介詞作為字首：
+
+ab-, an-, auf-, aus-, bei-, mit-, nach-, vor-, zu-
+
+副詞作為字首：
+
+dar-, fort-, her-, hin-, los-, nieder-, statt-, teil-, voran-, voraus-,
+vorbei-, vorüber-, weg-, zurück-, zusammen-
+
+不可分離字首
+++++++++++++
+
+不可分離字首(Vorsilbe)。
+be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
+
+be-             指示動詞為及物動詞
+
+be-trachten     小心練習 
+   嘗試
+be-schränken    限制
+   小房間
+be-zeichnen     指出、命名為
+   畫、標記
+be-merken       通告
+   通知
+be-Haupt-en     主張
+   頭   
+
+ent-            出來、離開、相反、開始
+  
+ent-schließen   決定
+    總結、關閉 
+
+ent-sprechen    對應、代表
+    說出
+
+ent-stehen      出現、產生
+    站
+
+er-         完成、死亡、殺害
+
+er-heben    舉起、帶來
+   舉
+er-setzen   取代
+   放置
+er-weisen   證明
+   指示
+
+ver-        動作完成
+
+ver-stehen  明白
+    顯示
+
+vor-        之前的
+
+vor-kommen  發生
+
+分離動詞
+++++++++
+
+有的字首形成的新動詞是可分離的，
+
+其在主句中分離，在副句中不分離。
+
+daß diese Axiome und Sehlußregeln dazu ausreichen, 
+這些公理及推論法則滿足，
+
+aus-    外  
+
+aus-drücken     
+
+aus-reichen     達到
+外  到達
+
+ein- 字首為進入之意，其反意為 aus-
+
+ein-gehen   走進       
+    走
+
+voraus-setzen   假設
+之前    設定
+
+
+由兩個動詞組成
+++++++++++++++
+
+20141007 週二 中美
+
+Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
+
+
 
 詞形變化
 ........
@@ -545,8 +928,8 @@ Hätte ich doch bloß ein großes Haus!
 Er aß zu viel, als ob er schon zehn Jahre lang kein Essen gesehen hätte.
 他吃得極多，彷彿已經十年沒有見過食物了。
 
-句
---
+連詞
+----
 
 20140924 週三 中美
 
@@ -636,9 +1019,6 @@ Schlußregeln des Logikkalküls
 Er hat selbst keine Kinder, aber er hat Kinder sehr gern.
 他自已沒小孩，但他卻很喜歡小孩。
 
-sondern
-+++++++
-
 sondern 「而是」，用在主句為否定句，並列句說明為何否定。
 
 daß dies nicht der Fall ist, 
@@ -650,11 +1030,18 @@ die sich aus den Axiomen nicht entscheiden lassen.
 而是給定與前述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
-從句
-....
+複雜句
+......
 
-複雜句經從屬連詞連接主句數個從句，
-從句用來補充主子句，且從句會有語序變化，其限定動詞會移至句尾。
+複雜句經從屬連詞連接主句和數個從句，
+從句用來補充主子句，並有語序變化，
+其限定動詞會移至句尾。
+
+主句可獨立存在，從句不可獨立存在。
+
+從句可移至主句前方，
+但主句語序要變化，將動詞要移到句首，
+故可由語序區分主句與從句。
 
 主語從句
 ++++++++
@@ -710,15 +1097,13 @@ dass sein Sohn ein besseres Leben haben kann als er selbst.
 
 這老人工作一生是為了讓兒子過比自已好的生活。
 
-
 上面從屬句其動詞 ist 移至句尾，
 並由從屬連詞 daß 連接，該詞相當於英文的 that。 
 
-與複合句不同是，從屬句可移主句前方，
-但主句語序要變化，動詞要移到句首。
-我們便可可由句的語序區分主句與從屬句。
 
 Ich machte die Betten, während meine Frau abwusch.我作床當我老婆在洗澡時。
+
+
 
 Während meine Frau abwusch, machte ich die Betten.當我老婆在洗澡時，我作床。
 主句動詞 machte 移到子句首。
@@ -741,7 +1126,7 @@ gehe ich wieder ins Bett.
 
 bevor   之前，同英語的 before
 
-da  因為
+da 因為
 
 Da ich krank war, konnte ich nicht kommen.
 因為我生病了，所以我不能來。
@@ -1421,384 +1806,6 @@ dieser
 賓格    diesen  diese   dieses  diese
 
 
-
-動詞
-----
-
-20141010 星期五 義仁
-
-德語動詞具有時態，表示動作執行的時點。
-每個時態有會因人稱不同而有不同詞變。
-
-原生動詞
-........
-
-原生動詞通常來自高地德語。
-
-dienen      服務
-
-präzisieren 澄清
-
-denke       想，與英文 think 同源
-
-源自副詞之動詞
-..............
-
-20141014 週二   稅務局
-
-äußern  說出，「反身」發表意見，源自 außen
-
-源自名詞之動詞
-..............
-
-zeichnen    畫，源自標示符號的名詞 Zeichen
-
-不定式
-......
-
-動詞的不定式的表示動作未知是由誰執行，
-當不定動詞放到句中，則已知主語(執行者)是誰，
-便成為限定動詞，其會因執行者的人稱而詞變。
-
-所有的不定式都以 -en 或 -n 結尾，
-以 -n 結尾的不定式為「做」 tun 及「是」 sein。
-
-英文會在不定式前加上 to 區隔，
-德文則不一定在不定式前加加上 zu 區隔。 
-
-不定子句
-++++++++
-
-不定子句(Infinitivsätze)其形式如下：
-
-zu+" "+不定式
-
-分離動詞之不定子句形式如下：
-
-prefix+zu+verb
-
-an+deuten -> an+zu+deuten  建議、指示
-hin+schreiben -> hin+zu+schreiben 寫下
-
-此子句(satz)是用來補充更多資訊，
-通常用來補充情態動詞。
-
-可作名詞的定語用：
-
-Eine Sprache zu beherrschen ist sehr schwer.
-要精通一門語言是很難。
-
-作名詞之補語用：
-
-Dieser Ausdruck ist nicht leicht zu übersetzen. 
-這表情不容易翻譯。
-
-作動詞或者是形容詞之狀語，
-德文不定句之中的句子成分要被逗號隔開，而且zu+原形動詞放在句尾例如：
-
-Ich bitte ihn, zu mir zu kommen.
-我拜託他到我這來
-
-zu mir 是由不定句 zu 所引導的句子成分，所以要被逗號隔開。
-
-什麼時候用dass句，什麼時候用不定子句?
-+++++++++++++++++++++++++++++++++++++
-
-dass句用在主句和從句的主語都一樣的時候或者都不一樣的時候
-
-例如：Ich hoffe, dass ich eine Reise machen. (我希望我去旅行)<兩主語一致>
-或者：Ich hoffe, dass er zum Erfolg wird. (我希望他能成功)<兩主語不一致>
-
-zu句只能用在主句和從句的主語都一樣的時候
-
-命令語氣可以省略 zu。
-
-Nicht so viel Krach machen! 不要製造這麼多譟音。
-
-um...zu+不定式
-++++++++++++++
-
-um...zu+不定式作目的狀語，意為「為了…」。
-目的不定式中不能出現主語，其動作主體應該與主句主語一致。
-目的不定式可置在句首、句中或句末，並用逗號將前後句分開。
-目的不定式放在主句後，主句用正語序：
-
-Ich uebe Deutsch, um in Deutschland zu reisen.
-我練習德文(主句)是為了去德國旅遊(目的狀語)。
-
-Ich gehe in die Stadt, um einen Schirm zu kaufen.
-我走到街上(主句)去買傘(目的狀語)。
-
-Es ist nicht notwendig, die Straße zu überqueren, 
-um zur Post zu kommen.
-並不需要穿過路去郵局。
-
-Viele Deutsche fahren Rad, um gesund zu bleiben.
-許多德國人騎單車是為了健康。
-
-Wir bemerken, daß man zu den in der angeführten Literatur
-gegebenen mengentheoretischen Axiomen noch die Axiome und Schlußregeln 
-des Logikkalküls hinzufügen muß, um die Formalisierung zu vollenden.
-
-可注意到必須加上邏輯計算之公理及推論規則至前述文獻給定之集合理論公理
-以達成形式化。
-
-目的不定式放在句首，主句用反語序，緊跟的是可變位動詞；
-
-Um gesund zu bleiben, fahren viele Deutsche Rad.
-為了健康許多德國人騎單車。
-
-Um eine Fremdsprache gut zu lernen, muss man das Land besuchen.
-為了學好外文，你一定要至那個國家旅遊。
-
-
-提問用 wozu, warum 或 zu welchem Zweck, mit welcher Absicht
-
-Wozu fahren viele Deutsche gern Fahrrad?
-為什麼許多德國人想要騎腳踏車？
-
-Viele Deutsche fahren gern mit dem Fahrrad, um gesund zu bleiben.
-許多德國人想要騎腳踏車是為了保持健康。
-
-zu位於動詞不定式之前，如動詞是分離動詞，則zu位於兩者之間，並連寫。
-
-ich gehe zum Bahnhof, um meine Großmutter abzuholen.
-我去車站接我祖母。
-
-目的不定式假設主語同主句主語不一致時，用damit目的從句，如：
-
-Herr Li gibt seinem Sohn 100 Yuan, 
-damit er (der Sohn) das Englischwörterbuch kauft.
-李先生給他兒子100元錢，以便他兒子買一本英語字典。
-
-
-
-不定式作名詞片語
-++++++++++++++++
-
-不定式如同英文的動名詞可作名詞片語使用，且一定為中性名詞。
-
-Das Lernen von neuen Vokaeln macht Spaß. 學新單字很有趣。
-
-sein
-....
-            人稱        形式
-現在時      ich         bin
-
-            du          bist
-
-            er,sie      ist
-            es
-
-過去時      ich         war
-
-虛擬二態    ich         wäre
-
-命令語氣    單數        sei
-            
-            複數        seid
-
-完成時      第二分詞    助動詞 
-
-            gewesen     sein
-分詞
-....
-
-分詞(Partizip) 分成現在分詞(Partizip I)與過去分詞(Partizip II)。
-
-現在分詞
-........
-
-現在分詞衍生自不定式，只要將不定式加上字尾 -d，如下：
-
-現在分詞 = 不定式 + -d
-
-現在分詞作形容詞
-++++++++++++++++
-
-很多形容詞源自現在分詞，也會作形容詞詞變，如下：
-
-eine lachende Frau      正在笑的婦女。
-
-den folgenden Schemata  以下的框架
-    源自 folgen
-
-現在分詞作態度副詞
-++++++++++++++++++
-
-現在分詞作態度副詞用來描述態度。
-
-Er reagierte wütend. 他生氣地反應。
-
-現在分詞作形容名詞
-++++++++++++++++++
-
-Im folgenden wird gezeigt, 以下被展示  
-   形容名詞
-
-第二分詞
-........
-
-第二分詞建構
-++++++++++++
-
-第二分詞(Partizip II)，類比於英文之過去分詞，
-規則動詞的過去分詞形成法如下：
-
-ge+動詞詞幹+t
-
-kaufen -> gekauft       買
-
-詞幹尾是 -d, -t 或 -n 則加 -et
-
-reden  -> getredet   說
-beten  -> gebetet    祈禱
-regnen -> geregnet     
-
-詞幹首為 be-, emp-, ent-, er-, ge-, miss-, ver-, zer-，
-前置 ge-。
-
-詞幹尾為 -ieren，表示其自法文，通常前置 ge-。
-
-第二分詞用法
-++++++++++++
-
-1.完成時(Perfekt)
-2.過去完成時(Plusquamperfekt)
-3.未來二時(Futur II)
-4.被動態
-
-第二分詞作定語
-++++++++++++++
-
-如同英語一樣，第二分詞可作定語，表示完成或被動的意義。
-
-der gedeckte Tisch. = der Tisch, der gedeckte wurden.
-放下的桌子。
-
-das verlorene Buch = das Buch, das verloren ist.
-遺失的書
-
-第二分詞可作形容詞。
-
-an-gewendet     利用，為 anwenden 之第二分詞。
-上 投入
-
-auf-gestellt    指派，為 aufstellen 之第二分詞
-上  置放
-
-an-geführt      引述，為 anführen 之第二分詞。
-上 領導
-
-der angeführten Literatur 屬格，引述文獻的
-
-an-gegeben      指定，為 angeben 之第二分詞。
-上  給
-
-betrachtet      考慮，為 betrachten 之第二分詞。
-
-geschrieben     寫的
-
-
-及物動詞與不及物動詞
-....................
-
-20141007 週二
-
-動詞字首
-........
-
-許多字首，可與原動詞結合，形成一個全新的動詞。
-
-介詞作為字首：
-
-ab-, an-, auf-, aus-, bei-, mit-, nach-, vor-, zu-
-
-副詞作為字首：
-
-dar-, fort-, her-, hin-, los-, nieder-, statt-, teil-, voran-, voraus-,
-vorbei-, vorüber-, weg-, zurück-, zusammen-
-
-不可分離字首
-++++++++++++
-
-不可分離字首(Vorsilbe)。
-be-, emp-, ent-, er-, ge-, miss-, ver-, zer-
-
-be-             指示動詞為及物動詞
-
-be-trachten     小心練習 
-   嘗試
-be-schränken    限制
-   小房間
-be-zeichnen     指出、命名為
-   畫、標記
-be-merken       通告
-   通知
-be-Haupt-en     主張
-   頭   
-
-ent-            出來、離開、相反、開始
-  
-ent-schließen   決定
-    總結、關閉 
-
-ent-sprechen    對應、代表
-    說出
-
-ent-stehen      出現、產生
-    站
-
-er-         完成、死亡、殺害
-
-er-heben    舉起、帶來
-   舉
-er-setzen   取代
-   放置
-er-weisen   證明
-   指示
-
-ver-        動作完成
-
-ver-stehen  明白
-    顯示
-
-vor-        之前的
-
-vor-kommen  發生
-
-分離動詞
-++++++++
-
-有的字首形成的新動詞是可分離的，
-
-其在主句中分離，在副句中不分離。
-
-daß diese Axiome und Sehlußregeln dazu ausreichen, 
-這些公理及推論法則滿足，
-
-aus-    外  
-
-aus-drücken     
-
-aus-reichen     達到
-外  到達
-
-ein- 字首為進入之意，其反意為 aus-
-
-ein-gehen   走進       
-    走
-
-voraus-setzen   假設
-之前    設定
-
-
-由兩個動詞組成
-++++++++++++++
-
-20141007 週二 中美
-
-Ich habe ihn in Wien kennen gelernt. 我第一次在維也納遇到他。
 
 時態
 ....
@@ -3144,6 +3151,8 @@ als
 　　z.B. Er kommt zu sp?t, als dass er den Zug erreichen k?nnte.
 　　他來得太晚了以至於沒趕上火車。
 
+連詞
+----
 
 
 

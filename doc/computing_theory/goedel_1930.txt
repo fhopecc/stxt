@@ -64,6 +64,10 @@ der Principia Mathematica und verwandter System I 1)
 不像洪蘭譯語言本能等大部頭的書，譯錯處可由前後文校正，
 本文很短，字字菁華，任何一字譯錯，立即會導向錯誤結論。
 
+數學女孩，哥德爾不完全定理有相當詳細的說明，
+但像是遞迴函數的定義，或是遞迴函數可由 P 系統表示，
+遞迴函數是算術的，含如何以 2 個數存取數列指定的數等，均不包括。
+
 基本論述
 
 定義 P 系統
@@ -74,7 +78,6 @@ P 系統可用算術系統操作
 P 系統存在不可決定命題
 算術系統是遞迴的
 
-widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
 本文
 ----
@@ -456,15 +459,17 @@ sich als innerhalb PM definierbar.
 三元關係 x = [y; z] 也可證明能於 PM 中定義。
 
 Nun definieren wir eine Klasse K natürlicher Zahlen folgendermaßen:
+      ___
+nεK ≡ Bew[R(n);n] 11a) (1)
+
+(wobei Bew x bedeutet: x ist eine beweisbare Formel). 
 
 現在我們定義自然數類別 K 如下：
       ___
 nεK ≡ Bew[R(n);n] 11a) (1)
 
-譯註：K 集合中的數字為 R 集合中不可證數之索引。
-(wobei Bew x bedeutet: x ist eine beweisbare Formel). 
-
 (這裡 Bew x 指 x 是一個可證式)。
+譯註：K 集合中的數字為 R 集合中不可證數之索引。
 
 
 11a) Durch Überstreichen wird die Negation bezeichnet.
@@ -955,6 +960,9 @@ um die gleiche Zahl erhöht.
 若 a 衍生自 b 且所有出現於 b 的變數，其型別增加同樣的數量，
 則稱 a 為 b 的型別提升。
 
+P 系統縮寫
+..........
+
 Folgende Formeln (I bis V) heißen Axiome 
 (sie sind mit Hilfe der in bekannter Weise 
  definierten Abkürzungen: ., ⊃, ≡, (Ex), = 21)
@@ -970,80 +978,84 @@ Folgende Formeln (I bis V) heißen Axiome
 
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) ⊃ x2(y1)) 定義(更高型別也類似)。 
-   
-    譯註：相等與等價
-
-          事物經由測量後，得到相同的值我們稱作相等，
-          若事不能直接比較，但間接經由某些特質測量比較，
-          數值相同稱為等價。
-
-          論文中，哥德爾定義相等如下：
-          x1=y1 := x2Π(x2(x1) ⊃ x2(y1)) 
-          x1=y1 定義為所有滿足於 x1 的述詞 x2 也滿足於 y1。
           
-          某種測量即為述詞，2 事物接受所有測量都相等稱為相等。
-
-          定義 PD1：等價
-            ≡ 為等價，於 PM 的第 7 頁定義為：
-            a≡b := a⊃b . b⊃a
-            羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
-            以真值表定義等價如下：
-            a b a≡b a⊃b b⊃a a⊃b.b⊃a 
-            0 0  1   1   1     1
-            0 1  0   1   0     0
-            1 0  0   0   1     0
-            1 1  1   1   1     1
-            
-          就我的觀念而言，等價是較不嚴格的相等，
-          也就是說相等一定是等價，但等價不一定是相等。
-          只針對某項特定的值作比較。
-          羅素為等價提出的例子：
-          「牛頓是男人」與「太陽從東邊出來」兩個陳述句是等價，因為恆真。   
-          我則把這句陳述再加上一個述語，
-          『「牛頓是男人」是描述牛頓的性別』這句陳述是真的。
-          反之『「太陽從東邊出來」是描述牛頓的性別』這句陳述是假的。
-          令 a=「牛頓是男人」與 b=「太陽從東邊出來」，
-          x2(a) 為 a 是描述牛頓的性別，          
-          可得 a≡b 但 a /= b 之例子。
-
-          幾何上，兩個面積相同的圓稱為相等，
-          但面積相同的三角形，但其它特質不同稱為等價，
-          因為面積相同的圓其幾何特質都相同，故稱為相等，
-          面積相同的直角三角形及等腰三角形稱為等價。
-
-          集合論中，
-          兩個集合包含相同且數量一樣的元素，稱為相等。
-          集合元素不同，但數目相等則可稱為等價。 
-          例如集合 A = {a, b, c}，集合 B = {1, 2, 3}，
-          雖然元素不同，但都包含 3 個元素，集合 A 與 B 等價。
-
-          化學中，產出量相等的稱為等價，例如營養學中
-          6 μg的膳食β-胡蘿蔔素提供了等效於1 μg的視黃醛，
-          等效於3⅓IU的維生素A。
-           
-    譯註：哥德爾未提到的縮寫概述如下：
+譯註：哥德爾未提到的縮寫概述如下：
           
-          定義 PD2：. 合取邏輯連接子
-          令 a . b ≡ ~(~a ∨ ~b)
-          證明如以下真值表：
-          a b ~a ~b ~a∨~b ~(~a∨~b) a.b
-          0 0  1  1   1       0     0  
-          0 1  1  0   1       0     0 
-          1 0  0  1   1       0     0
-          1 1  0  0   0       1     1
+      定義 PD2：合取連接子
+        a.b 可由 ~(~a ∨ ~b) 定義。
+        哥德爾於 32. 所作之定義。
+        證明如以下真值表：
+        a b ~a ~b ~a∨~b ~(~a∨~b) a.b
+        0 0  1  1   1       0     0  
+        0 1  1  0   1       0     0 
+        1 0  0  1   1       0     0
+        1 1  0  0   0       1     1
  
-          定義 PD3：. 合取邏輯連接子
-          令 a⊃b ≡ ~a∨b          
-          證明如以下真值表：
-          a b ~a ~avb a⊃b
-          0 0  1   1   1   
-          0 1  1   1   1
-          1 0  0   0   0
-          1 1  0   1   1
+      定義 PD3：推論邏輯連接子
+        a⊃b 可由 ~a∨b 定義。
+        哥德爾於 32. 所作之定義。
+        證明如以下真值表：
+        a b ~a ~avb a⊃b 
+        0 0  1   1   1   
+        0 1  1   1   1
+        1 0  0   0   0
+        1 1  0   1   1
 
-          Ex 為存在量詞常數定義為：
-          ExA(x) ≡ ~(xΠ(~A(x)))
- 
+      定義 PD3：存在量詞
+        Ex 為存在量詞常數定義為：
+        Ex y(v) ≡ ~(vΠ(~y(v)))
+        哥德爾於 32. 所作之定義。
+
+譯註：相等與等價
+
+      事物經由測量後，得到相同的值我們稱作相等，
+      若事不能直接比較，但間接經由某些特質測量比較，
+      數值相同稱為等價。
+
+      論文中，哥德爾定義相等如下：
+      x1=y1 := x2Π(x2(x1) ⊃ x2(y1)) 
+      x1=y1 定義為所有滿足於 x1 的述詞 x2 也滿足於 y1。
+      
+      某種測量即為述詞，2 事物接受所有測量都相等稱為相等。
+
+      定義 PD1：等價
+        ≡ 為等價，於 PM 的第 7 頁定義為：
+        a≡b := a⊃b . b⊃a
+        羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
+        以真值表定義等價如下：
+        a b a≡b a⊃b b⊃a a⊃b.b⊃a 
+        0 0  1   1   1     1
+        0 1  0   1   0     0
+        1 0  0   0   1     0
+        1 1  1   1   1     1
+        
+      就我的觀念而言，等價是較不嚴格的相等，
+      也就是說相等一定是等價，但等價不一定是相等。
+      只針對某項特定的值作比較。
+      羅素為等價提出的例子：
+      「牛頓是男人」與「太陽從東邊出來」兩個陳述句是等價，因為恆真。   
+      我則把這句陳述再加上一個述語，
+      『「牛頓是男人」是描述牛頓的性別』這句陳述是真的。
+      反之『「太陽從東邊出來」是描述牛頓的性別』這句陳述是假的。
+      令 a=「牛頓是男人」與 b=「太陽從東邊出來」，
+      x2(a) 為 a 是描述牛頓的性別，          
+      可得 a≡b 但 a /= b 之例子。
+
+      幾何上，兩個面積相同的圓稱為相等，
+      但面積相同的三角形，但其它特質不同稱為等價，
+      因為面積相同的圓其幾何特質都相同，故稱為相等，
+      面積相同的直角三角形及等腰三角形稱為等價。
+
+      集合論中，
+      兩個集合包含相同且數量一樣的元素，稱為相等。
+      集合元素不同，但數目相等則可稱為等價。 
+      例如集合 A = {a, b, c}，集合 B = {1, 2, 3}，
+      雖然元素不同，但都包含 3 個元素，集合 A 與 B 等價。
+
+      化學中，產出量相等的稱為等價，例如營養學中
+      6 μg的膳食β-胡蘿蔔素提供了等效於1 μg的視黃醛，
+      等效於3⅓IU的維生素A。
+
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
     (in II, III, IV nach Ausführung der erlaubten Einsetzungen) 
@@ -1565,17 +1577,17 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
     參考希爾伯特-阿克曼，
     理論邏輯基礎，柏林 1928。
     
-    譯註：哥德爾在後面建構算術系統除了 ≡ 外，
-          都是使用希爾伯特的符號，可參閱註 33)，
-          符號定義如下表：
-          符號 意義    
-          -    否定，此符號為命題符號上方的 bar
-          &    合取
-          ∨    析取
-          →    推論
-          ~    等值
-          (x)  全稱量詞
-          (Ex) 存在量詞
+譯註：哥德爾在後面建構算術系統除了 ≡ 外，
+      都是使用希爾伯特的符號，可參閱註 33)，
+      符號定義如下表：
+      符號 意義    
+      -    否定，此符號為命題符號上方的 bar
+      &    合取
+      ∨    析取
+      →    推論
+      ~    等值
+      (x)  全稱量詞
+      (Ex) 存在量詞
 
 遞迴定理
 ........
@@ -1595,7 +1607,6 @@ I.  每個經由配置遞迴函數在根源函數(關係)變數位置而得之�
     同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
 
 II. Wenn R und S rekursive Relationen sind, 
-              _
     dann auch R, R ∨ S (daher auch R & S).
                              _
 II. 若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
@@ -2350,10 +2361,10 @@ x 是質數。
    v Ex  y ≡ Neg {v Gen [Neg (y)]}
 
 譯註：定義四個邏輯運算子：
-      Imp 指推論，x ⊃ y ≡ ~x v y
-      Con 指合取，x &  y ≡ ~{~x v ~y}
-      Aeq 指相等，x =  y ≡ (x ⊃ y) & (y ⊃ x)
-      Ex  指存在， (Ev)y ≡ ~{(v)[~y]}
+      Imp 指推論，x⊃y   ≡ ~x ∨ y
+      Con 指合取，x&y   ≡ ~{~x∨~y}
+      Aeq 指相等，x=y   ≡ (x ⊃ y) & (y ⊃ x)
+      Ex  指存在，(Ev)y ≡ ~{(v)[~y]}
 
                    | n|
                    |x |
@@ -2407,8 +2418,8 @@ x 是質數。
 37.Q(z,y,v) ≡ E(n,m,w)[n≦ l(y) & m ≦ l(z) & w≦ z 
                       & w=m Gl z & w Geb n, y & v Fr n,y]
 
-  z enthält keine Variable, 
-  die in y an einer Stelle gebunden ist,
+  z enthält keine /Variable/, 
+  die in y an einer Stelle /gebunden/ ist,
   an der v frei ist.
   
   z 不包含變數其在 y 是綁定的位置，但 v 在此位置是自由地。
@@ -2732,29 +2743,36 @@ zugeordnet ist 42), soll rekursiv heißen.
 
 42) 其於此內容解釋下也表達了此關係的存在。
 
+建構不可判定之命題
+..................
+
 Wir kommen nun ans Ziel unserer Ausführungen. 
-Sei 𝛘 eine beliebige Klasse von Formeln. 
+Sei 𝛘 eine beliebige Klasse von /Formeln/. 
 Wir bezeiehnen mit Flg(𝛘) (Folgerungsmenge von 𝛘) 
-die kleinste Menge von Formeln, 
-die alle Formeln aus χ und 
-alle Axiome enthält und gegen die Relation "unmittelbare Folge" 
+die kleinste Menge von /Formeln/, 
+die alle /Formeln/ aus 𝛘 und 
+alle /Axiome/ enthält und 
+gegen die Relation /"unmittelbare Folge"/ 
 abgeschlossen ist. 
 χ heißt ω-widerspruchsfrei,
-wenn es kein Klassenzeichen a gibt, so daß:
-
-現在來到我們實作的目標。
-令 𝛘 為任一個公式類別。
-以 Flg(𝛘) (𝛘 之推論集合) 
-代表最小之公式集合，
-包含所有 χ 之公式及所有「立即推論」關係所包含之公理。
-若不存在類別符號 a 如下，χ 稱為 ω-一致性：
-
-譯註：𝛘 是希臘字母的 chi 的粗體小寫。
+wenn es kein /Klassenzeichen/ a gibt, so daß:
 
    |  |    v |       |   |             |
 (n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
 
 wobei v die freie Variable des Klassenzeichens a ist.
+
+譯註：𝛘 是希臘字母的 chi 的粗體小寫。
+
+現在來到我們實作的目標。
+令 𝛘 為任一個公式類別。
+以 Flg(𝛘) (𝛘 之推論集合) 
+代表最小之公式集合，
+包含所有 𝛘 之公式及所有「立即推論」關係所包含之公理。
+若不存在類別符號 a 如下，𝛘 稱為 ω-一致性：
+
+   |  |    v |       |   |             |
+(n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
 
 其中 v 是類別符號 a 之自由變數。
 
@@ -2796,7 +2814,7 @@ Bwχ(x) ≡ (n)[n≦ l(x) ⊃ Ax(n Gl x)
 
 (參閱相似的定義 44) 
 
-譯註：Bw𝛘(x) 指 x 在 χ 下可證。
+譯註：Bw𝛘(x) 指 x 在 𝛘 下可證。
 
 x B𝛘 y ≡ Bwχ(x) & [l(x)] Gl x=y      (6)
 
@@ -2824,7 +2842,7 @@ Nun definieren wir die Relation:
 現在定義關係：
 
          _______________
-            |  |  19  ||
+             |  |  19 ||
 Q(x,y) ≡ xB𝛘|Sb|y Z(y)|| (8.1)
 
 譯註：整數 19 依哥德爾數定義，代表第 2 個 1 型變數，即 y。
@@ -2832,10 +2850,10 @@ Q(x,y) ≡ xB𝛘|Sb|y Z(y)|| (8.1)
                               |   19 |
 Da xB𝛘y [nach (6), (5)] und Sb|y Z(y)| (nach Def. 17, 31) 
 rekursiv sind, 
-so auch Q(x). 
+so auch Q(x,y). 
                                 |    19|
 因為 xB𝛘y 「依據 (6), (5)」及 Sb|Y Z(y)| 「依據定義 17, 31」為遞迴，
-故 Q(x) 也是。
+故 Q(x,y) 也是。
 
 Nach Satz V und (8) gibt es also ein Relationszeichen q 
 (mit den freien Variablen 17, 19), so daß gilt:
@@ -3324,13 +3342,6 @@ und wenden vollständige Induktion nach der Stufe von φ an.
 
 另一式也成立：
 
-51) Es brauchen natürlich nicht alle x1...xn 
-    in den χi tatsächlich vorzukommen 
-    [vgl. das Beispiel in Fußnote 27)].
-
-51) 不是所有於 χi 中的 x1...xn 都需要實際出現。
-    「參閱腳註 27) 之例子」。
-
 2.φ(0  ,x2...xn)=ψ(               x2...xn)
   φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
 
@@ -3343,6 +3354,13 @@ und wenden vollständige Induktion nach der Stufe von φ an.
       等式右側的函數級數（ρ、χ、ψ 及 µ）均小於 φ
       之級數 s，說明函數合成及遞迴定義須由已定義之遞迴函數生成。
       此定義新的遞迴函數操作，即可利用作為推論規則之實作。
+
+51) Es brauchen natürlich nicht alle x1...xn 
+    in den χi tatsächlich vorzukommen 
+    [vgl. das Beispiel in Fußnote 27)].
+
+51) 不是所有於 χi 中的 x1...xn 都需要實際出現。
+    「參閱腳註 27) 之例子」。
 
 Im ersten Falle gilt:
 
@@ -3419,11 +3437,9 @@ Beweis:
 Sei l die größte der Zahlen k,f0,f1...fk-1. 
 Man bestimme n so, daß:
 
-證明：
-令 l 為 k,f0,f1...fk-1 中最大的整數，
-我們限定 n 為：
-
 n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
+
+/193頁/
 
 was möglich ist, 
 da je zwei der Zahlen 1+(i+1)l!(i=0,1...k-1) relativ prim sind. 
@@ -3432,46 +3448,79 @@ in der Differenz (i1-i2)l! und
 daher wegen |i1-i2|<l in l! enthalten sein, was unmöglich ist. 
 Das Zahlenpaar n,l! leistet dann das Verlangte.
 
-/193頁/
 
-是可能的，因為於數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
+證明：
+令 l 為 k,f0,f1...fk-1 中最大的整數，
 
-可由數列中任 2 個數所包含的質數也應包含在 (i1-i2)l! 數段中
-且因|i1-i2|<1，也應包含於 l!中，這是不可能的。
+可限定 n 為：
+
+n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
+
+這是因為數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
+
+因為若否，則數列中任 2 個數所包含的質數也應包含在 (i1-i2)l! 數段中，
+且因 |i1-i2|<1 故應包含於 l!中，這是不可能的。 
 
 數對 n,l! 滿足前面規範。
 
-譯註：以下命題 41 之證明參閱 gribskoff, 2013。
+譯註：我先舉一例說明哥德爾如何用上述方法以數對表示數列：
+      設有一數列 s 其元性為 2, 3, 2。
+
+      1.找出 l。
+        取 3(數列長度)及數列所有元素值 2, 3, 2 中最大數，得 l=3。
+      2.求出 n。
+        n 滿足以下的一元同餘方程組 S 如下：
+
+        n≡fi[mod(1+(i+1)l!   ]
+        n≡ 2[mod 1+(0+1)3!=7 ]
+        n≡ 3[mod 1+(1+1)3!=13]
+        n≡ 2[mod 1+(2+1)3!=19]
+
+        利用中國剩餘定理解 S 的最小解 n 如下：
+        n = 2.4.19.13 + 3.9.7.19 + 2.14.7.13 + kM (K 為任意整數)
+          = 8115 + k.7.13.19 = 8115 + (-4).1729 = 1199 
+
+      3.知道 n 及 l 後，數列 s 第 i 個元素值可使用以下算式求出：
+
+                    fi = n  mod 1+(i+1)l!
+        第 0 個元素 f1=1199 mod 1+(0+1)3! = 2 
+        第 1 個元素 f2=1199 mod 1+(1+1)3! = 3
+        第 2 個元素 f3=1199 mod 1+(2+1)3! = 2
+      
+      哥德爾對數列 1+(i+1)l! 任 2 數為互質，
+      僅用 2 句話即說明完成，但基本上已提示使用反證法來證明此命題，
+      但太精簡，讓人不容易理解，我將在以下的命題 41 詳細說明。
+      命題 41 之證明是參閱 gribskoff, 2013。
 
       命題 41：數列 1+(i+1)l! (i=0,1...k-1) 中任 2 個數是互質的。
-        應用反證法
-        
-        設存在質數 p 使得
-        p | (i  +1)l!+1 及
-        p | (i+j+1)l!+1。
+        反證法
+        1.設反命題為真，即數列 1+(i+1)l! 存在 2 個數並非互質，
+          故存在質數 p 使得下式成立：
+          p | (i  +1)l!+1 
+          p | (i+j+1)l!+1, j 為任意整數。
     
-        故具以下同餘關係：
+          即等同以下同餘關係：
 
-        [(i+1)l!+1]≡[(i+j+1)l!+1] (mod p)
+          [(i+1)l!+1]≡[(i+j+1)l!+1] (mod p)
 
-        可推得下式成立：
-        p | [(i+j+1)l!+1]-[(i+1)l!+1] = kl! 
+          可推得下式成立：
+          p | [(i+j+1)l!+1]-[(i+1)l!+1] = kl! 
         
-        可推得：
-        p|jl! → p|j ∨ p|l!
+          再推得：
+          p|jl! → p|j ∨ p|l!
         
-        若 p|l!
-        則 p|l!(i+1) 與假設 p|(i+1)l!+1 不可能同時成立，
-        故 p 不整除 l!。 
+        2.若 p|l! 成立，則 p|l!(i+1) 成立，
+          但其與前述 p|(i+1)l!+1 不可能同時成立，
+          故 p 不整除 l!。 
 
-        若 p|j
-        因為 j≦k≦max(1...k)
-        故 (j)j|l! 
-        由 p|j ∧ j|l! → p|l!
-        則 p|l!(i+1) 與假設 p|(i+1)l!+1 不可能同時成立，
-        故 p 不整除 l!。 
-        得證。
-
+        3.若 p|j 成立，因為 j≦k≦max(1...k)
+          故對所有 j，以下成立：
+          j|l! 
+          由 p|j ∧ j|l! → p|l!
+          若 p|l! 成立，則 p|l!(i+1) 成立，
+          但其與前述 p|(i+1)l!+1 不可能同時成立，
+          故 p 不整除 j。 
+        4.依反證法得證。
 
       定理 42：中國剩餘定理
         已知任意數列 a1,a2...an 及 m1,m2...mn，
@@ -3501,7 +3550,7 @@ Das Zahlenpaar n,l! leistet dann das Verlangte.
         x≡2 (mod 3)
         x≡3 (mod 5)
         x≡2 (mod 7)
-
+        M=3.5.7=105 
         t1.35 = 1 (mod 3)    
         t1 = 2
 
@@ -3512,37 +3561,84 @@ Das Zahlenpaar n,l! leistet dann das Verlangte.
         t2 = 1
 
         x=2.2.35+3.1.21+2.1.15=140+63+30=233
- 
+         ≡ 23 (mod 105)
+
       證明：
-        
+            
 
 Da die Relation x=[n]p durch:
-
-這裡關係 x=[n]p 藉由 
-
-x≡n(mod p)&x<p
-
+x≡n (mod p) & x<p
 definiert und daher arithmetisch ist, 
+so ist auch 
+die folgendermaßen definierte Relation P(x0,xl...xn):
 
-所定義且因此是算術的，
-
-so ist auch die folgendermaßen
-definierte Relation P(x0,xl...xn):
-
-因此以下述定義關係 P(x0,xl...xn)也是算術的。
-
-P(x0...xn)≡(En,d){S([n]d+1,x2...xn)&
-(k)[k<x1→T([n]1+d(k+2),k,[n]1+d(k+1),x2...xn] & x0=[n]1+d(x1+1)}
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                 & (k)[k<x1 → T([n]1+d(k+2)
+                               ,k
+                               ,[n]1+d(k+1)
+                               ,x2...xn] 
+                 & x0=[n]1+d(x1+1)}
 
 arithmetisch, welche nach (17) and Hilfssatz I mit: 
-x0=Φ(x1...xn) äiquivalent ist 
-(es kommt bei der Folge f in (17) nur auf ihren Verlauf bis 
-zum x1+1-ten Glied an). 
+x0=φ(x1...xn) äiquivalent ist 
+(es kommt bei der Folge f in (17) nur auf ihren Verlauf 
+ bis zum x1+1-ten Glied an). 
 Damit ist Satz VII bewiesen.
 
-依據 (17) 與輔助定理 I 其等價於 x0=Φ(x1...xn)。
-(這可得 (17) 中的串列 f 僅由其值直到第 x1+1 個元素)。
+譯註：bis 介詞，直到。
+      因為 bis 通常不直接連接一個冠詞，
+      所以通常與另一個介詞 zum 搭配。
+
+      Verlauf  進行、處理，源自動詞 verlaufen
+
+因為關係 x=[n]p 可由下式：
+
+x≡n (mod p) & x<p
+
+所定義且因該式為算術的，
+所以如下所定義的關係 P(x0,xl...xn) 也是算術的。
+
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                 & (k)[k<x1 → T([n]1+d(k+2)
+                               ,k
+                               ,[n]1+d(k+1)
+                               ,x2...xn] 
+                 & x0=[n]1+d(x1+1)}
+
+依據 (17) 與輔助定理 I 知關係 P 等價於 x0=φ(x1...xn)。
+(藉由 (17) 中之數列 f，只要對其前 x1+1 個元素進行運算便能推得)。
 據此命題 VII 已證明。
+
+譯註：20160417 週日 美崙
+      關係 P 是用來描述遞迴定義，
+      但論文中公式之轉換與說明交雜，不易看出轉換方式，
+      若將 4 個建構的公式並列一起，
+      便能簡易的看出 P 是如何建構的：
+      1.原遞迴定義：
+
+        φ(0  ,x2...xn)=ψ(               x2...xn)
+        φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
+        
+      2.導入 f 數列，f 數列為函數 φ 的前 k 階遞迴結果值。
+        x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) 
+                          &(k)[k<x1 → fk+1=μ(k,fk,x2...xn)] 
+                          & x0=fx1}
+  
+      3.去除右式等號，將其轉為一般化關係 S 及 T 之表示。
+        x0=φ(x1...xn)~(Ef){S(       f0,x2...xn)
+                          &(k)[k<x1 → T(fk+1
+                                       ,k
+                                       ,fk
+                                       ,x2...xn)] 
+                          & x0=fx1}
+  
+      4.導入數對 n 及 d 取代 f 來表示前 k 階結果數列。
+        P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                         & (k)[k<x1 → T([n]1+d(k+2)
+                                       ,k
+                                       ,[n]1+d(k+1)
+                                       ,x2...xn] 
+                         & x0=[n]1+d(x1+1)}
 
 Gemäß Satz VII gibt es zu jedem Problem der Form (x)F(x)
 (F rekursiv) ein äquivalentes arithmetisches Problem und 
@@ -4095,45 +4191,87 @@ Beweis von Satz XI ausführlich dargestellt werden.
 這些工作僅將前述草繪的證明去展現其細節。
 （接受日期： 17. XI. 1930.）
 
-譯者作的P 系統與整數對應表
+符號意義對照表
+..............
+20160417 週日 美崙
 
-P 系統      P系統的P系統意義
------------ ----------------             
-0            1          零
-f            3          後繼函數
-~            5          非
-v            7          或
-Π            9          對所有
-(           11          右括號
-)           13          左括號
-x           17          第 1 個 1 型變數
-y           19          第 2 個 1 型變數
-n           Z(n)        數 n 的數符表示。
-       |v|    |  v|     其中 a 為式，v 為變數且 b 為與 v 同型之符號。
-Subst a|b|  Sb|x y|     視為一式由 a 衍生，
-                        且在裡面每處自由之 v，均由 b 取代。
+此對照表用來快速檢閱論文使用到的符號之意義。
 
-x⊃y        x Imp y 
-x& y        x Con y 
-x~ y        x Aeq y 
-э           v Ex  y 
+符號是依論文出現的順序編排。
 
-            n Gl x      數列 x 的第 n 個元素
-            Ax(x)       x 是一個公設
-            x B y       x 是 y 的證明，B 源自 Beweis
-            Bew(x)      x 是一可證式
-            Q(x,y)      x 不是 y 的證明
-            17 Gen r    x 不是「x不是y的證明」的證明  
-            χ           任一公式集合。
+定義索引係用來標示符號定義之位置，
+會先使用哥德爾的標題、公式編號、命題編號及腳註，
+都不具備才使用譯者加註的中文標題，
+哥德爾的標題有混淆時，會前置中文標題。
+
+符號        內容     定義索引    意義
+----        -------- ----------- ----------------------
+ε           一般邏輯 (1)         屬於
+                                 詞源?。
+_
+A           一般邏輯 (1)         A 的否定，
+                                 詞源為希爾伯特。
+0           P 系統   I.Konstante 零
+f           P 系統   I.Konstante 後繼函數
+~           P 系統   I.Konstante 非
+∨           P 系統   I.Konstante 或
+Π           P 系統   I.Konstante 對所有
+(           P 系統   I.Konstante 右括號
+)           P 系統   I.Konstante 左括號
+x           P 系統   I.Konstante 第 1 個 1 型變數
+y           P 系統   I.Konstante 第 2 個 1 型變數
+n           P 系統   I.Konstante 數 n 的數符表示。
+
+       |v|  P 系統   取代        其中 a 為式，v 為變數，
+Subst a|b|                       b 為與 v 同型之符號。
+                                 視為一式由 a 衍生，
+                                 且在裡面每處自由之 v，
+                                 均由 b 取代。
+.           P 系統   P 系統縮寫  合取連接子
+⊃           P 系統   P 系統縮寫  推論連接子
+(Ex)        P 系統   P 系統縮寫  存在量詞
+=           P 系統   21)         相等關係，
+                                 詞源為PM。
+&           遞迴函數 遞迴定理II. 合取連接子，   
+                                 詞源為希爾伯特。
+~           遞迴函數 29)         表示相等關係，
+                                 詞源為希爾伯特。
+n Gl x      遞迴函數 6.          表示數列 x 的第 n 個元素函數，
+                                 詞源為德文 Glied。
+Imp         遞迴函數 32.         表示推論之函數，
+                                 詞源為德文 Implikation。
+Con         遞迴函數 32.         表示合取之函數
+                                 詞源為德文 Conjunktion。
+Aeq         遞迴函數 32.         表示等價之函數，
+                                 詞源為德文 Äequivalenz。
+Ex          遞迴函數 32.         表示存在量詞之函數，
+                                 詞源為德文 Existenz。
+Q(z,y,v)    遞迴函數 37.         ?
+Ax(x)       遞迴函數 42.         表示 x 是一個公設之函數，
+                                 詞源為德文 Axiom。
+x B y       遞迴函數 45.         表示 x 是 y 的證明之函數，
+                                 詞源為德文 Beweis。
+Bew(x)      遞迴函數 46.         表示 x 是一可證式之函數，
+                                 詞源為德文 beweisbar。
+Q(x,y)      遞迴函數 (8.1)       ? 
+17 Gen r    遞迴函數 (13)        ? 
+𝛘           遞迴函數 建構不可判  任一公式集合。
+                     定之命題    詞源?
             Flg(χ)      χ 之推論集合。
             Bwχ(x)      x 在 χ 下為證明數。
             x Bχ y      x 在 χ 下為 y 的證明。
             Bewχ(x)     x 在 χ 下可證。
+≡           P 系統   ?           等價連接子 
 
 譯詞規則
 --------
 Axiom       公理：預設為真之陳述
-Satz        命題：可判定真假之陳述
+Satz        命題：可判定真假之陳述，
+              英文譯為 Theorem 其中文一般譯為定理，
+              「定理」一詞隱涵為真之意，
+              但本論文主題為不可決定之命題，
+              若照英文譯法為不可決定之定理，
+              造成矛盾，故本文統一譯為命題。
 Begriff     觀念或定義：引入一個新的詞代表某項事物
 Individuenbereich   定義域，函數之定義域
 Individuum  個體，可區分之成員
@@ -4142,7 +4280,7 @@ Stelle      位置
 tupel       值組
 Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
-W
+Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
 P 系統之 BNF
 ------------
@@ -4173,13 +4311,19 @@ F    := EF                   公式
      |  F 'V' F              析取式
      |  V 'Π' '(' F ')'      一般化式
 
+譯註：證明方法
+  反證法
+
+  quod est absurdum 拉丁文：這是荒謬的
+  
+  存在性證明
+  不用構造性方法證明某物之存在
 
 譯者參考書目
 ------------
 
 1.張錦文、王雪生，1989年，連續統假設，九章出版社。
 
-2.李巍，2013年，关于罗素的类型论和还原公理，2013年第27卷第9期，重庆理工大学学报。
 3.gribskoff,2013,Gödel's beta function, 
   http://planetmath.org/sites/default/files/texpdf/41307.pdf,
   PlanetMath.
