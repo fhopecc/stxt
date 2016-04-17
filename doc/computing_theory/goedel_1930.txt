@@ -95,6 +95,9 @@ Von Kurt Gödel in Wien.
 1) 參閱於維也納，1930 年 19 期的阿卡德．德．維斯期刊(math.-naturw. KI.) 
    發表這個工作成果的摘要。
 
+概要
+----
+
 1.
 
 Die Entwicklung der Mathematik in der Richtung 
@@ -680,10 +683,13 @@ näher behandelt werden.
       entschieden 是 entscheiden 之過去分詞。
       bezüglich 有關於，介詞。
 
-P 系統
-------
+建構不可決定命題
+----------------
 
 2.
+
+P 系統
+......
 
 Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
 und gehen zunächst eine genaue Beschreibung des formalen Systems P, 
@@ -766,7 +772,7 @@ usw. für jede natürliche Zahl als Typus 17).
 譯註：羅素型別論之實作
 
       哥德爾於 P 系統引入羅素之型別論，
-      所以P 系統之變數具型別(Typ)。
+      所以 P 系統之變數具型別(Typ)。
 
       型別論是為了解決集合包含自已本身之問題(這會引起羅素悖論)，
       故強制集合的成員比集合本身的型別階級還低。
@@ -1121,7 +1127,7 @@ III. Jede Formel, die aus einem der beiden Schemata
 
 III. 由以下兩框架其中之一推演之公式
 
-                   |v|
+                  |v|
 1. vΠ(a) ⊃ Subst a|c| 
 
 2. vΠ(b V a) ⊃ b V vΠ(a)
@@ -1394,7 +1400,7 @@ P 系統中存在不可決定問題之命題，讀作如下：
       並將後設數學觀念對應到自然數的關係。
 
 遞迴函數
---------
+.......
 
 Wir schalten nun eine Zwischenbetrachtung ein, 
 die mit dem formalen System P vorderhand nichts zu tun hat, 
@@ -1755,7 +1761,7 @@ wie man sich leicht überzeugen kann.
            RA11 加法為遞迴，
         得證。
 
-      定理 R6：相等關係是遞迴。
+      命題 R6：相等關係是遞迴。
         哥德爾令 γ 為相等關係之特徵函數，
         令
         x=y ~ |x-y|=0 
@@ -1765,7 +1771,7 @@ wie man sich leicht überzeugen kann.
         由 R1 {0} 是遞迴及 R5 絕對差是遞迴，
         得證。
 
-      定理 R7：符號函數是遞迴。
+      命題 R7：符號函數是遞迴。
         符號函數 sgn 用來判斷一數值的正負號，
         定義如下：
         sgn(n) = 1 : n > 0
@@ -2006,13 +2012,13 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
     在以下定義裡代表 = 或 ~(譯註：依內容而定)
     (除此符號外都是使用是希爾伯特之符號)。
 
+譯註：至今可知哥德爾函數等價使用 =，
+      邏輯等價使用 ~ 而定義等價使用≡。
+
 譯註：vertritt 為 vertrete 第三人稱變格
       entweder A oder B，意為 A 或 B 任選 1 個。
       
       bei Definitionen，意為在以下的定義中
-
-譯註：至今可知哥德爾函數等價使用 =，
-      邏輯等價使用 ~ 而定義等價使用≡。
 
 x ist teilbar durch y 34).
 
@@ -3266,7 +3272,13 @@ aus endlich vielen Schemata entstehen 48a).
      不可決定命題總是可透過擴展適合之更高型別(例如系統 P 的 ω 型別)而可被決定。
      同樣地於集合公理系統也是成立。
 
+推廣至算術系統
+--------------
+
 3.
+
+算術定義
+........
 
 Wir ziehen nun aus Satz VI weitere Folgerungen und 
 geben zu diesem Zweck folgende Definition:
@@ -3276,33 +3288,44 @@ geben zu diesem Zweck folgende Definition:
 Eine Relation (Klasse) heißt arithmetisch, 
 wenn sie sich allein mittels der Begriffe +, . 
 [Addition und Multiplikation, bezogan auf natürliche Zahlen 49)] und 
-den logischen Konstanten V, - , (x), = definieren läßt, 
+                            __
+den logischen Konstanten ∨,   , (x), = definieren läßt, 
 wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 5O). 
+
+一個關係（類別）稱為算術，
+在於其本身僅由 +, .「自然數之加法和乘法 49)」之觀念和
+           __
+邏輯常數 ∨,  , (x), = 所定義，
+其中 (x) 和 = 僅能應用在自然數 50)。
+
+算術命題
+--------
+
 Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
-Insbesondere sind z.B. die Relationen "größer" und
+Insbesondere sind z. B. die Relationen "größer" und
 "kongruent" nach einem Modul" arithmetisch, denn es gilt:
 
-一個關係(類別)稱為算術，
-在於其本身僅由 +, .「自然數之加法和乘法 49)」之觀念和
-邏輯常數 V, -, (x), = 所定義，
-其中 (x) 和 = 僅能應用在自然數 50)。
 「算術命題」概念可對應地定義出來。
-特別是如關係「較大」和「同餘」都是算術，因為：
-    ____
-x>y~(Ez)[y=x+z]
+特別是如關係「大於」和對一個模數之「同餘」都是算術，
+由於以下關係成立：
+           ____
+x>y       ~(Ez)[y=x+z]
 
-x≡y(mod n)~(Ez)[x=y+z.nVy=x+z.n]
+x≡y(mod n)~(Ez)[x=y+z.n ∨ y=x+z.n]
 
+譯註：上述是用算術來定義大於與同餘關係。
+  
 49) Die Null wird hier und im folgenden immer 
     mit zu den natürlichen Zahlen gerechnet.
 
-49) 零於此後都算進自然數。 
+49) 此後自然數包括零。
 
 50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
     der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
     und den Zeichen 0, 1 aufbauen 
     (Funktions und Mengenvariable dürfen nicht vorkommen). 
-    (In den Präfixen darf statt x natürlich auch jede andere Zahlvariable stehen.)
+    (In den Präfixen darf statt x natürlich auch jede 
+     andere Zahlvariable stehen.)
 
 50) 這些概念之定義僅由已提過之符號、自然數變數 x, y,...及
     符號 0, 1 建構。
@@ -3990,7 +4013,8 @@ bezüglich eines Widerspruchslosigkeitsbeweises des Systems P
 (und seiner Erweiterungen), 
 das durch folgenden Satz ausgesprochen wird:
 
-由第 2 節之結論且對 P 系統（及其擴充）之邏輯一致性之證明，可推論出這特別的結果，
+由第 2 節之結論且對 P 系統（及其擴充）之邏輯一致性之證明，
+可推論出這特別的結果，
 其由以下命題表達：
 
 Satz XI: 
@@ -4232,6 +4256,7 @@ Subst a|b|                       b 為與 v 同型之符號。
 (Ex)        P 系統   P 系統縮寫  存在量詞
 =           P 系統   21)         相等關係，
                                  詞源為PM。
+≡           遞迴函數 33)         定義等價，關係為 ~，函數為 =。
 &           遞迴函數 遞迴定理II. 合取連接子，   
                                  詞源為希爾伯特。
 ~           遞迴函數 29)         表示相等關係，
@@ -4257,11 +4282,31 @@ Q(x,y)      遞迴函數 (8.1)       ?
 17 Gen r    遞迴函數 (13)        ? 
 𝛘           遞迴函數 建構不可判  任一公式集合。
                      定之命題    詞源?
-            Flg(χ)      χ 之推論集合。
-            Bwχ(x)      x 在 χ 下為證明數。
-            x Bχ y      x 在 χ 下為 y 的證明。
-            Bewχ(x)     x 在 χ 下可證。
-≡           P 系統   ?           等價連接子 
+Flg(𝛘)      遞迴函數 建構不可判  𝛘 之推論集合。
+                     定之命題    詞源為德文 Folgerungsmenge。
+Bw𝛘(x)      遞迴函數 建構不可判  x 在 𝛘 下為證明過程。
+                     定之命題    詞源為德文 Bewisfigur。
+x Bχ y      遞迴函數 建構不可判  x 在 𝛘 下為 y 的證明。
+                     定之命題    詞源為德文 Beweis。
+Bewχ(x)     遞迴函數 建構不可判  x 在 𝛘 下可證。
+                     定之命題    詞源為德文 beweisbar。
++           算術     算術定義    加法
+.           算術     算術定義    乘法
+∨           算術     算術定義    或
+_
+A           算術     算術定義    A 的否定，
+                                 詞源為希爾伯特。
+(x)         算術     算術定義    全稱量詞，
+                                 詞源為希爾伯特。
+=           算術     算術定義    等於
+>           算術     算術命題    大於
+x≡y(mod n)  算術     算術命題    同餘
+
+           __
+邏輯常數 ∨,  , (x), = 所定義，
+其中 (x) 和 = 僅能應用在自然數 50)。
+
+
 
 譯詞規則
 --------
