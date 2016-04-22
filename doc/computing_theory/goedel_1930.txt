@@ -2504,28 +2504,31 @@ x 是質數。
 
    [Bew(x) 是 1-46 項目中唯一不能被聲明自身是遞迴的。]
 
-   譯註：Bew 名稱來自於證明的德文 beweisbare。
-
    譯註：Bew(x) 形式非 S(X,Y)=(Ex)[x≦φ(X)&R(x,Y)]，
          無法以定理 IV 推論其為遞迴的。
 
-   Die Tatsache, die man vage so formulieren kann: 
-   Jede rekursive Relation ist innerhalb des Systems P 
-   (dieses inhaltlich gedeutet) definierbar, wird, 
-   ohne auf eine inhaltliche Deutung der Formeln aus P 
-   Bezug zu nehmen, 
-   durch folgenden Satz exakt ausgedrückt:
-
-   以下定理精確表達之事實概略形式化如下：
-   每個遞迴關係可於 P 系統內定義(這可於內容內詮譯)，
-   不須參照由 P 衍生之公式之內容詮譯，
-   
-   譯註：innerhalb(介詞) + 屬格：在什麼之中
-
-         Bezug nehmen auf + 賓格：參考到
-
-表示定理
+表現定理
 ........
+
+譯註：表現定理之名稱指出此定理
+      證明所有遞迴函數均於 P 系統內表現，
+      P 系統之證又可使用數論函數操作，
+      故所有遞迴函數都是可證的。
+
+Die Tatsache, die man vage so formulieren kann: 
+Jede rekursive Relation ist innerhalb des Systems P 
+(dieses inhaltlich gedeutet) definierbar, wird, 
+ohne auf eine inhaltliche Deutung der Formeln aus P 
+Bezug zu nehmen, 
+durch folgenden Satz exakt ausgedrückt:
+
+以下定理精確表達之事實概略形式化如下：
+每個遞迴關係可於 P 系統內定義（這被內容詮譯），
+不須參照由 P 衍生之公式之內容詮譯，
+
+譯註：innerhalb(介詞) + 屬格：在什麼之中
+
+      Bezug nehmen auf + 賓格：參考到
 
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es 
         ein n-stelliges
@@ -2547,13 +2550,8 @@ Wir begnügen uns hier damit, den Beweis dieses Satzes,
 da er keine prinzipiellen Schwierigkeiten bietet und 
 ziemlich umständlich ist, in Umrissen anzudeuten 39). 
 
-概略指出此定理證明是沒有任何理論障礙且
-在合理的複雜程度內可說服我們 39) 。
-
-譯註：此定理下標題為表示定理指出此定理
-      證明所有遞迴函數均於 P 系統內表示，
-      P 系統之證又可使用數論函數操作，
-      故所有遞迴函數都是可證的。
+概略指出此定理證明可說服我們，
+因為沒有任何理論障礙且在合理的複雜程度內 39) 。
 
 譯註：sich damit begnügen, etw zu tun 作某事可說服我們。
 
@@ -2570,18 +2568,22 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
     für jedes n-tupel von Zahlen aus den Axiomen des Systems P 
     entscheidbar ist, ob die Relation R besteht oder nicht.
 
-39) 命題 V 自然基於以下事實，
-    由系統 P 之公理，遞迴關係 R 對每個 n 元整數數組是可決定的，
-    不管 R 關係是成立或否定。
+39) 命題 V 自然基於，
+    無論 R 關係是成立與否，
+    遞迴關係 R 對每個 n 元整數數組是可由系統 P 之公理決定的，
+    
+    譯註：beruht daruf, daß etw 基於某事
 
 Wir beweisen den Satz für alle Relationen R(x1...xn) der Form: 
-
-我們證明對所有具以下形式關係 R(x1...xn) 而言，定理成立：
 
 x1 = φ(x2...xn) 40) 
 
 (wo φ eine rekursive Funktion ist) und 
 wenden vollständige Induktion nach der Stufe von φ an. 
+
+我們證明對所有具以下形式關係 R(x1...xn) 而言，定理成立：
+
+x1 = φ(x2...xn) 40) 
 
 (其中 φ 是一個遞迴函數) 
 並對 φ 之級數應用完整歸納法。
@@ -2613,14 +2615,16 @@ Für Funktionen erster Stufe
 
 譯註：1 級函數請先參見基礎遞迴函數該節
       
-      定理 R31：0(x) 可由 P 系統表示。
+      定理 R31：0(x) 可由 P 系統證明。
         已知 0(x)=0 為基礎遞迴公理，
         令 R(x1,x2)~0=φ(x2)，
-        P 系統可寫出公式 r(u1,u2)≡u2=0，
+        P 系統可寫出公式 r(x1,y1)≡x1,y1Π()，
+
         明顯地符合 R(x1, x2) 之數組 (x1, x2)   
         以 Z(x1) 及 Z(x2) 代入 r(u1,u2) 可證明都成立。
 
-      定理 R32：0(x) 可由 P 系統表示。
+      定理 R32：x+1 可於 P 系統決定。
+        R(x1,x2)~x1=φ(x2...xn)
         已知 f(x)=x+1 為基礎遞迴公理，
         令 R(x1,x2)~x1+1=x2，
         在 P 系統可寫下 r(u1,u2) ≡ f(u1)=u2，
