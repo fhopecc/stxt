@@ -1134,18 +1134,14 @@ Da ich krank war, konnte ich nicht kommen.
 關係子句
 ........
 
-20141008 週三   花稅處
+20141008 週三 花稅處
+20160424 週日 美崙家
 
-關係子句是關係詞引導的子句，
-其句法功能主要是做名詞的定語，
-但也可以起其他作用，
-如相當於狀語從句等。
-
-關係子句是透過關係代詞來構造。
-關係代詞會為主句插入一個從屬句，稱為關係子句，
-關係子句為主句的主語，稱為先行詞，提供更多的資訊。
-
-所有的關係子句都以逗號分格。
+1.關係子句為主句的主語，稱為先行詞，提供更多的資訊。
+2.關係子句是一種從屬句。
+3.關係子句是透過關係代詞來構造。
+4.關係子句都以逗號分格。
+5.關係子句通常插入於先行詞後。
 
 Der Mann, der nebenan wohnt, hat die Absicht nach Amerika auszuwandern.
 這人，住隔壁，想要移民到美國。
@@ -1156,39 +1152,34 @@ Der Mann hat die Absich nach Amerika auszuwandern.
 
 插入關係句為 der nebenan wohnt。
 
-關係子句也是從屬句用來補充主句，所以會有語序變化，
-其限定動詞會移至句尾，wohnt 移到句尾。
+6.關係子句也是從屬句用來補充主句，所以會有語序變化，
+  其限定動詞會移至句尾，wohnt 移到句尾。
 
-關係代詞會根據性、數、格等做變化，
-其性與數與先行詞相同，而格則根據其在子句中的角色決定。
+7.關係代詞會根據性、數、格等做變化，
+  其性與數與先行詞相同，而格則根據其在子句中的角色決定。
 
 Das Haus, in dem Sena wohnt, ist sehr groß. 星奈住的房子很大
 
-關係代名詞 dem 為中性單數形，其與名詞 Haus 保持一致，
-但因在子句中置於介詞後之故，其格為與格，它亦有可能以welchem取代。
+8.關係代名詞 dem 為中性單數形，其與名詞 Haus 保持一致，
+  但因在子句中置於介詞後之故，其格為與格，它亦有可能以welchem取代。
 
-然當頭詞為 alles、etwas 或 nichts 時，
-德語會使用一個不做變化的關代 was 來構造子句。
+9.頭詞為 alles、etwas 或 nichts 時，
+  德語會使用一個不做變化的關代 was 來構造子句。
 
 Alles, was er tut, gelingt ihm. 凡他所做的盡都順利
 
-關係代名詞der
-+++++++++++++
 
-德語有兩個關係代名詞系統，
-其中一套是基於定冠詞 der、die、das 等的，
-但其中的屬格形式(dessen、deren)與普通的定冠詞不盡相同，
-其複數與格的形式(denen)也不相同。
+10.德語有兩個關係代名詞系統，
+   其中一套是基於定冠詞 der、die、das 等的，
+   但其中的屬格形式(dessen、deren)與普通的定冠詞不盡相同，
+   其複數與格的形式(denen)也不相同。
 
-格      陽性    陰性    中性    複數
-
-主格    der     die     das     die 
-        
-賓格    den     die     das     die 
-
-屬格    dessen  deren   dessen  deren 
-        
-與格    dem     der     dem     denen 
+   格      陽性    陰性    中性    複數
+   
+   主格    der     die     das     die 
+   屬格    dessen  deren   dessen  deren 
+   與格    dem     der     dem     denen 
+   賓格    den     die     das     die 
 
 welcher
 +++++++
@@ -1230,10 +1221,7 @@ Die Flaschen, welche nun verschlossen wurden,
 sind jetzt verkaufsbereit.　
 已經密封好的瓶子可以出售了。
 
-wo
-++
-
-wo 為帶回主句地點及時間之關係代詞。
+12.wo 為帶回主句地點及時間之關係代詞。
 
 Unter einem Zeichen ersten Typs verstehen 
 wir eine Zeichenkombination der Form:
@@ -1443,7 +1431,6 @@ kommen
 unbestimmter Artikle
 表示此名詞是第一次提到。
 
-ein
 格      陽性    陰性    中性    
 主格    ein     eine    ein    
 屬格    eines   einer   eines 

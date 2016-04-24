@@ -11,6 +11,63 @@ der Principia Mathematica und verwandter System I 1)
 譯序
 ----
 
+20160424 週日 美崙
+
+2005 年我開始第一份工作，
+在高雄前鎮一間教學醫院的資訊室擔任程式設計師。
+
+當時醫院使用 Oracle 8i PL/SQL 來開發應用程式，
+此語言無法操作位元組資料型態，
+那時我習慣用 1 個位元組表示數個環境選項，
+例如第 1 個位元表示是否為主治醫師、
+第 2 個位元表示是否為內科或外科、
+第 3 個位元表示醫師的性別等等。
+這樣作既節省記憶體也不用去寫一堆程式碼來宣告一種新抽象資料型態。
+
+某天突然想起服替代役時，
+要往南投受管理幹部訓時，
+在彰化的書局讀了一本介紹了哥德爾不完全定理的科普書，
+這定理如同高中時代的我一直想讀懂愛因思坦的相對論般，
+激起我求知的熱情，一股想讀本文的衝動，
+終於我在網路上找到 IBM 工程師 Hirzel 提供的免費英譯版，
+這是第 1 次認識到此論文的本文，認真的讀了 1 次 2 次，
+說真的懂得既少又粗淺，
+但起碼我了解到哥德爾數這項技術，
+他用數字來表示數列，
+其原理源自算術基本定理，正整數具有唯一的質數乘積。
+
+這靈感讓我想到以下的方法，
+先把第 1 個選項對應到質數 2，
+第 2 個選項對應到質數 3，
+第 3 個之後選項依序對應到相應順序的質數，
+這樣便能以 1 個整數變數去表示 1 組環境選項。
+若要知道第 2 個選項是否開啟，
+只要看該整數是否能整除 3 即可；
+若要設定第 3 個選項為開啟，
+將該整數乘以 5 即可；
+當程式寫完時且上線無誤時，
+有一種總舖師上了一桌好菜的快感。
+
+不論是科普書及文章，
+總愛以哥德爾不完全定理來宣揚其實有些真理是無法證明的，
+尤其是宗教，用來說明神蹟的存在，
+但這其實是一篇技術文章，
+其中包含許多現在電腦理論的思想。
+
+哥德爾在此篇文章中，使用了許多表現技術，
+所謂的表現即是一個形式系統，用另一個系統去表現它。
+
+首先哥德爾利用算術基本定理，
+即正整數的唯一分解定理
+利用遞迴函數表現 P 系統，
+證明 P 系統可一步步計算出來。
+
+體用於現代，表現即是編譯技術，
+在電腦科學中，
+如何用電路去表現布爾邏輯，
+如何用布爾邏輯去表現程式語言，
+如何用程式語言去表現人類的商業邏輯，。
+
 中國文化的本質缺少公設法，這是很大的缺失，
 即使現在許多中國人自我感覺良好的提倡未來東方文化是主流，
 不停闡明老莊哲學、禪宗哲學及孔孟哲學那玄之又玄的道理，
@@ -799,8 +856,7 @@ deren einzige Elemente x, y bzw. x sind. 18).
 例如序對 a, b 可由((a), (a,b))定義，
 其中 (x, y) 及 (x) 分別為成員僅含 x, y 及 x 之類別。18)
 
-譯註：
-wiederum 副詞：可再由 
+譯註： wiederum 副詞：可再由 
 
 18) Auch inhomogene Relationen können auf diese Weise definiert werden, 
     z. B. eine Relation zwischen Individuen 
@@ -919,8 +975,8 @@ in der keine freie Variable vorkommt
 
 命題式為不含任何自由變數的式(自由變數定義如慣例)。
 
-n 元關係符
-..........
+n 元關係符與類別符
+..................
 
 Eine Formel mit genau n-freien Individuenvariablen
 (und sonst keinen freien Variablen) nennen wir 
@@ -985,72 +1041,51 @@ Folgende Formeln (I bis V) heißen Axiome
     如同在 PM I, *13 中，
     x1=y1 可想成由 x2Π(x2(x1) ⊃ x2(y1)) 定義(更高型別也類似)。 
           
-譯註：哥德爾未提到的縮寫概述如下：
+譯註：哥德爾於 21) 未提到的縮寫將於之後 32. 定義。
           
-      定義 PD2：合取連接子
-        a.b 可由 ~(~a ∨ ~b) 定義。
-        哥德爾於 32. 所作之定義。
-        證明如以下真值表：
-        a b ~a ~b ~a∨~b ~(~a∨~b) a.b
-        0 0  1  1   1       0     0  
-        0 1  1  0   1       0     0 
-        1 0  0  1   1       0     0
-        1 1  0  0   0       1     1
- 
-      定義 PD3：推論邏輯連接子
-        a⊃b 可由 ~a∨b 定義。
-        哥德爾於 32. 所作之定義。
-        證明如以下真值表：
-        a b ~a ~avb a⊃b 
-        0 0  1   1   1   
-        0 1  1   1   1
-        1 0  0   0   0
-        1 1  0   1   1
-
-      定義 PD3：存在量詞
-        Ex 為存在量詞常數定義為：
-        Ex y(v) ≡ ~(vΠ(~y(v)))
-        哥德爾於 32. 所作之定義。
-
 譯註：相等與等價
+      20160424 週日 美崙家
 
       事物經由測量後，得到相同的值我們稱作相等，
-      若事不能直接比較，但間接經由某些特質測量比較，
+      若事物不能直接比較，但間接經由某些特質測量比較，
       數值相同稱為等價。
 
-      論文中，哥德爾定義相等如下：
+      哥德爾於 21) 定義相等如下：
       x1=y1 := x2Π(x2(x1) ⊃ x2(y1)) 
-      x1=y1 定義為所有滿足於 x1 的述詞 x2 也滿足於 y1。
-      
-      某種測量即為述詞，2 事物接受所有測量都相等稱為相等。
+      定義源自羅素的 PM I, *13，
+      其描述所有滿足於 x1 的述詞 x2 也滿足於 y1，
+      可理解為述詞即為某種測量，2 事物接受所有測量都相等稱為相等。
 
-      定義 PD1：等價
-        ≡ 為等價，於 PM 的第 7 頁定義為：
-        a≡b := a⊃b . b⊃a
-        羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
-        以真值表定義等價如下：
-        a b a≡b a⊃b b⊃a a⊃b.b⊃a 
-        0 0  1   1   1     1
-        0 1  0   1   0     0
-        1 0  0   0   1     0
-        1 1  1   1   1     1
+      哥德爾於 32. 定義等價如下：
+      a≡b := a⊃b . b⊃a
+      定義源自 PM 的第 7 頁，
+      那裡羅素提到 a ≡ b 表示 a 與 b 同時為真或 a 與 b 同時為假，
+      以真值表可驗證定義符合羅素的描述：
+      a b a≡b a⊃b b⊃a a⊃b.b⊃a 
+      0 0  1   1   1     1
+      0 1  0   1   0     0
+      1 0  0   0   1     0
+      1 1  1   1   1     1
         
       就我的觀念而言，等價是較不嚴格的相等，
       也就是說相等一定是等價，但等價不一定是相等。
-      只針對某項特定的值作比較。
+
       羅素為等價提出的例子：
       「牛頓是男人」與「太陽從東邊出來」兩個陳述句是等價，因為恆真。   
+
       我則把這句陳述再加上一個述語，
       『「牛頓是男人」是描述牛頓的性別』這句陳述是真的。
       反之『「太陽從東邊出來」是描述牛頓的性別』這句陳述是假的。
-      令 a=「牛頓是男人」與 b=「太陽從東邊出來」，
-      x2(a) 為 a 是描述牛頓的性別，          
+
+      令 a=「牛頓是男人」 
+         b=「太陽從東邊出來」
+         x2(a) 為 a 是描述牛頓的性別，          
       可得 a≡b 但 a /= b 之例子。
 
       幾何上，兩個面積相同的圓稱為相等，
-      但面積相同的三角形，但其它特質不同稱為等價，
-      因為面積相同的圓其幾何特質都相同，故稱為相等，
-      面積相同的直角三角形及等腰三角形稱為等價。
+      但面積相同的三角形稱為等價，
+      因為面積相同的圓其幾何特質都相同，
+      面積相同的三角形，卻可為直角三角形及等腰三角形。
 
       集合論中，
       兩個集合包含相同且數量一樣的元素，稱為相等。
@@ -1059,8 +1094,9 @@ Folgende Formeln (I bis V) heißen Axiome
       雖然元素不同，但都包含 3 個元素，集合 A 與 B 等價。
 
       化學中，產出量相等的稱為等價，例如營養學中
-      6 μg的膳食β-胡蘿蔔素提供了等效於1 μg的視黃醛，
-      等效於3⅓IU的維生素A。
+      6 μg 的膳食 β-胡蘿蔔素提供了等效於 1 μg 的視黃醛，
+      等效於 3⅓IU 的維生素A，
+      因為β-胡蘿蔔素會由身體的酵素轉成視黃醛及維生素 A 之緣故。
 
 22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
     muß man also 
@@ -1090,7 +1126,7 @@ I.
 2.fx1 = fy1 ⊃ x1 = y1
 3.x2(0).x1Π(x2(x1) ⊃ x2(fx1)) ⊃ x1 Π (x2(x1)).
 
-譯註：皮亞諾公設在此論文以 3 個公式表達，每個公式意義如下：
+譯註：皮亞諾公設每個公式意義如下：
       1.表示 0 是數之始，不可能存在後繼數為 0 之情形，
       2.表示後繼函數為單射函數，沒有 2 個數之後繼數為相同的。
       3.表示數學歸納法。
@@ -1191,7 +1227,6 @@ a 為一式，其不含自由的 u。
 
 譯註：Reduzibilitätsaxiom 還原公理
       Komprehensionsaxiom der Mengenlehre 概括公理
-
      
       此公理描述對任意集合 a，
       可找到某個命題函數 u 使得所有符合命題函數 u 的所有物體 v 相等於 a。
@@ -1298,6 +1333,21 @@ welche die Axiome enthält und gegen die Relation
 
 哥德爾數
 --------
+
+譯註：重提哥德爾數表示數列之方法。
+      哥德爾數是整數，可轉成系統 P 公式，
+      系統 P 之公式也可轉成哥德爾數。
+      公式之操作也可轉成數論操作。
+
+      數論                  系統 P
+
+      哥德爾數 <---對應--⊃ 公式
+      數論操作 <---對應--⊃ 公式操作
+
+      現在我們把有限自然數序列(一樣是1對1)對應到自然數，
+      藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
+      其中 pk 指第 k 個質數(漸增順序)。
+ 
 
 基礎符號對應到自然數
 ....................
@@ -1976,7 +2026,7 @@ x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
         
         由 R1 {0} 是遞迴的及 R4 隔斷減法是遞迴，得證。
 
-不可證式是遞迴
+後設觀念是遞迴
 --------------
 
 Dabei sind meistens mehrere der nach Satz I bis IV 
@@ -2001,7 +2051,7 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 ........
 /182/
 
-1. x/y≡(Ez)[z≦ x&x=y.z] 33)
+1. x/y≡(Ez)[z≦x&x=y.z] 33)
 
 33) Das Zeichen ≡ wird im Sinne von "Definitionsgleichheit" 
     verwendet,
@@ -2017,7 +2067,6 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 
 譯註：vertritt 為 vertrete 第三人稱變格
       entweder A oder B，意為 A 或 B 任選 1 個。
-      
       bei Definitionen，意為在以下的定義中
 
 x ist teilbar durch y 34).
@@ -2036,11 +2085,11 @@ x 整除以 y 34)。
 
 34) 以下定義所有出現符號 (x), (Ex), εx 之處，
     是之後 x 的估算值，
-    這些僅估算值作為確保定義觀念的遞迴本質(見命題 IV)。
-    
-譯註：此句應該是說明量詞限定 x 值範圍是為了確何不違觀念的遞迴性。
+    這些估算值僅用來確保所定義觀念的遞迴本質(見命題 IV)。
 
-2.Prim(x)≡(Ez)[z≦ x & z≠1 & z≠x & x/z] & x>1
+譯註：dient 是動詞 dienen 的第三人稱現代式變格。
+
+2.Prim(x)≡(Ez)[z≦x & z≠1 & z≠x & x/z] & x>1
 
 x is Primzahl.
 
@@ -2054,11 +2103,11 @@ x 是質數。
 
  n Pr x 是 x 中第 n 個(漸增序)質因數。
 
-34a) Für 0<n≦ z, wenn z die Anzahl der verschiedenen in x 
+34a) Für 0<n≦z, wenn z die Anzahl der verschiedenen in x 
      aufgehenden Primzahlen ist. 
      Man beachte, daß für n=z+1 n Pr x=0 ist!
 
-     對 0<n≦ z 而言，當 z 為一數與 x 之質因數都不同，
+     對 0<n≦z 而言，當 z 為一數與 x 之質因數都不同，
      須注意對 n = z+1 ，n Pr x = 0。
 
 4.    0! ≡ 1
@@ -2071,31 +2120,16 @@ x 是質數。
 
   Pr(n) 指第 n 個質數(以漸增序)。
 
-哥德爾數操作
-............
-
-譯註：重提哥德爾數表示數列之方法。
-      哥德爾數是整數，可轉成系統 P 公式，
-      系統 P 之公式也可轉成哥德爾數。
-      公式之操作也可轉成數論操作。
-
-      數論                  系統 P
-
-      哥德爾數 <---對應--⊃ 公式
-      數論操作 <---對應--⊃ 公式操作
-
-      現在我們把有限自然數序列(一樣是1對1)對應到自然數，
-      藉由序列 n1,n2,...nk 對應到整數 2^n1, 3^n2,...,pk，
-      其中 pk 指第 k 個質數(漸增順序)。
-
-                                    ________________ 
-6.n Gl x ≡ εy[y≦ x & x/(n Pr x)^y & x/(n Pr x)^(y+1)]
+數列操作
+........
+                                   ________________ 
+6.n Gl x ≡ εy[y≦x & x/(n Pr x)^y & x/(n Pr x)^(y+1)]
 
   n Gl x ist das n-re Glied der der Zahl x zugeordneten Zahlenreihe 
   (für n > 0 und n nicht größer als die Länge dieser Reihe).
 
   n Gl x 是整數 x 被配賦之數列的第 n 個元素
-  (其中 n > 0 且 n 不大於數列之長度)。
+  (其中 n > 0 且 n 不大於此數列之長度)。
 
 7.l(x) ≡ εy[y≦ x & y Pr x > 0 & (y+1) Pr x = 0] 
   
@@ -2112,12 +2146,15 @@ x 是質數。
     
   x*y 代表 2 個有限數列的串接。
 
+建構公式
+........
+ 
 9.R(x) ≡ 2^x
 
   R(x) entspricht der nur aus der Zahl x bestehenden Zahlenreihe
   (für x > 0).
 
-  R(x) 為只包含數 x 之數列(其中 x > 0)。
+  R(x) 為僅由數 x 衍生之數列(其中 x > 0)。
 
 10.E(x) ≡ R(11) * x * R(13)
 
@@ -2127,7 +2164,7 @@ x 是質數。
   E(x) 對應「加括號」之操作
  「11 及 13 分別配賦基礎符 "(" 及 ")"」。
 
-11.n Var x ≡ (Ez)[13<z≦ x & Prim(z) & x = z^n] & n≠0
+11.n Var x ≡ (Ez)[13<z≦x & Prim(z) & x = z^n] & n≠0
 
    x ist eine Variable n-ten Typs.
 
@@ -2135,7 +2172,7 @@ x 是質數。
 
    譯註：此外第 n 型變數配置形式為 p^n 之整數。
 
-12.Var(x) ≡ (En)[n≦ x & n Var x]
+12.Var(x) ≡ (En)[n≦x & n Var x]
 
    x ist eine Variable.
    
@@ -2145,8 +2182,10 @@ x 是質數。
 
    Neg(x) ist die Negation von x.
 
-   Neg(x) 是 x 負值操作。
+   Neg(x) 是 x 的否定。
+
 /183/
+
 14.x Dis y ≡ E(x) * R(7) * E(y)
 
    x Dis y ist die Disjunktion aus x und y.
@@ -2159,17 +2198,10 @@ x 是質數。
    (vorausgesetzt, da x eine Variable ist).
     
    x Gen y 是藉由變數 x 之 y 的一般化。
-   (x 預設為一個變數)
+   （x 預設為一個變數）
 
-公式操作
+建構數符
 ........
-
-譯註：公式操作是一堆操作公式數之函數.
-
-數符操作
-........
-
-譯註：16 及 17 分別為操作數符。
 
 16.   0 N x ≡ x
    (n+1)N x ≡ R(3) * n N x
@@ -2186,17 +2218,22 @@ x 是質數。
 
    Z(n) 是數 n 的數符表示。
 
-   命名源自德文整數 Zahl。
-
-18.Typ1'(x) ≡ (Em,n){m,n≦ x & [m=1 V 1 Var m]
-                      & x = n N [R(m)]} 34b)
+18.Typ1'(x) ≡ (Em,n){m,n≦x
+                    & [m=1 ∨ 1 Var m]
+                    & x = n N [R(m)]} 34b)
 
    x ist Zeichen ersten Typs.
 
    x 是 1 型符號。
 
-19.Typn(x) ≡ [n=1 & Typ1'(x)] V 
-             [n > 1 & (Ev){v≦ x & n Var v & x=R(v)}]
+34b) m,n≦x steht für: m≦x & n≦x (ebenso für mehr als 2 Variable).
+
+34b) m,n≦x 表示 m≦x & n≦x （2 個變數以上也適用）.
+
+19.Typn(x) ≡ [n=1 & Typ1'(x)] ∨ 
+             [n>1 & (Ev){v≦x 
+                    & n Var v 
+                    & x=R(v)}]
 
    x ist Zeichen n-ten Typs.
 
@@ -2209,11 +2246,12 @@ x 是質數。
 
    x 是基礎式。
 
-21.Op(x y z) ≡ x=Neg(y) V x=y Dis z V
-               (Ev)[v≦ x & Var(v) & x = v Gen y]
+21.Op(x y z) ≡ x=Neg(y) 
+             ∨ x=y Dis z 
+             ∨ (Ev)[v≦x & Var(v) & x = v Gen y]
 
-22.FR(x) ≡ (n){0<n≦ l(x) ⊃ Elf(n Gl x) V
-              (Ep,q)[0<p,q<n & Op(nGlx,pGlx,qGlx)]}
+22.FR(x) ≡ (n){0<n≦l(x)⊃Elf(n Gl x) 
+              ∨ (Ep,q)[0<p,q<n & Op(nGlx,pGlx,qGlx)]}
               & l(x)>0
 
    x ist eine Reihe von Formeln, 
@@ -2222,21 +2260,20 @@ x 是質數。
    der Negation, Disjunktion, Generalisation hervorgeht.
 
    x 是一個公式串列，
-   其成員不是基礎式就是
-   由前面出現公式經由否定、析取、一般化等操作衍生而來。
+   其成員不是基礎式
+   就是經由對前項公式進行否定、析取、一般化等操作而來。
 
-   譯註：後一句的 hervorgeht，
-   主要是組成片語 aus etw hervorgehen 意為從某事衍生。
-                                         
+   譯註：aus etw hervorgehen 意為從某事衍生。
                                  
-23.Form(x) ≡ (En){n≦ (Pr[l(x)^2])^x.[l(x)]^2
-             & FR(n) & x=[l(n)] Gln} 35)
+23.Form(x) ≡ (En){ n≦(Pr[l(x)^2])^x.[l(x)]^2
+                 & FR(n)
+                 & x=[l(n)] Gl n} 35)
 
-   x ist Formel (d.h. letztes Glied einer Formelreihe n).
+   x ist Formel (d. h. letztes Glied einer Formelreihe n).
 
    x 是公式(即公式串列 n 之最後一個成員)。
 
-35) Die Abschätzung n≦ (Pr[l(x)^2])^x.l(x)^2 erkennt man etwa so: 
+35) Die Abschätzung n≦(Pr[l(x)^2])^x.l(x)^2 erkennt man etwa so: 
     Die Länge der kürzesten zu x gehörigen Formelreihe kann höchstens 
     gleich der Anzahl der Teilformeln von x sein. 
 
@@ -2250,7 +2287,7 @@ x 是質數。
     ihre Anzahl≦ l(x)^2 und 
     ihre Exponenten (welche Teilformeln von x sind) ≦ x.
 
-35) n≦ (Pr[l(x)^2])^x.l(x)^2 之估算大致理解如下：
+35) n≦(Pr[l(x)^2])^x.l(x)^2 之估算大致理解如下：
     屬於 x 之最短的公式序列長度最多等於 x 中之成員公式數目。
 
     存在長度為 1 之成員公式最多為 l(x) 個，
@@ -2259,7 +2296,6 @@ x 是質數。
     
     n 之全部質因數可被假定為不小於 Pr{[l(x)]^2}，
     其數≦ l(x)^2 且其次方數(其為 x 之成員公式) ≦ x。
-
 
 譯註：zu etw gehörigen etw2
       etw2 屬於 etw
@@ -2369,7 +2405,7 @@ x 是質數。
 譯註：定義四個邏輯運算子：
       Imp 指推論，x⊃y   ≡ ~x ∨ y
       Con 指合取，x&y   ≡ ~{~x∨~y}
-      Aeq 指相等，x=y   ≡ (x ⊃ y) & (y ⊃ x)
+      Aeq 指相等，x≡y   ≡ (x ⊃ y) & (y ⊃ x)
       Ex  指存在，(Ev)y ≡ ~{(v)[~y]}
 
                    | n|
@@ -2549,12 +2585,12 @@ durch folgenden Satz exakt ausgedrückt:
 
 Satz V. Zu Jeder rekursiven Relation R(x1...xn) gibt es 
         ein n-stelliges
-        Relationenszeichen r (mit den freien Variablen) 
+        Relationenszeichen r (mit den freien Variablen 38) 
         (u1, u2...un), 
         so daß für alle Zahlen-n-tuple (x1, x2,...xn) gilt:
 
 定理 V：對每個遞迴關係 R(x1...xn) 而言，
-        存在一個 n 元關係符號 r (帶有自由變數) (u1,u2...un)，
+        存在一個 n 元關係符號 r (帶有自由變數) (u1,u2...un) 38)，
         使得所有 n 元整數值組 (x1,x2...xn) 滿足下式：
 
                     |    u1 .....un |
@@ -2579,6 +2615,14 @@ ziemlich umständlich ist, in Umrissen anzudeuten 39).
       bieteten Schwierigkeiten 具有或出現障礙困難
       
       ziemlich umständlich 合理的複雜
+
+38) Die /Variablen u1...un/ können willkürlich vorgegeben werden.
+    Es gibt z. B. immer r mit den /freien Variablen/ 
+    17, 19, 23...usw., für welches (3) und (4) gilt.
+
+38) /變數 u1...un/ 可被任意指定，
+    例如總是存在 r 帶有自由變數 17, 19, 23...等等，
+    使得 (3) 及 (4) 成立。
 
 39) Satz V beruht natürlich darauf, 
     daß bei einer rekursiven Relation R 
@@ -2633,21 +2677,36 @@ Für Funktionen erster Stufe
 譯註：1 級函數請先參見基礎遞迴函數該節
       
       定理 R31：0(x) 可由 P 系統證明。
-        已知 0(x)=0 為基礎遞迴公理，
-        令 R(x1,x2)~0=φ(x2)，
-        P 系統可寫出公式 r(x1,y1)≡x1,y1Π()，
+        1.令R(x1,x2)~0=x2
+        2.在 P 系統可寫下 r(u1,u2) ≡ 0=u2，
+        3.0=u2 標準化為 0=y1
+        4.證明 0=y1
+        5.0, y1 為基礎符號
+        6.x2(0), x2(y1) 為基礎式 
+        7.~x2(0)∨x2(y1) 為基礎式
+        8.式 7 可簡寫為 x2(0)⊃x2(y1)
+        9.依直接推論第2式，前式可直接推論出 x2Π(x2(0)⊃x2(y1))
+        10.依 21) 0=y1 為上式之簡寫。
 
-        明顯地符合 R(x1, x2) 之數組 (x1, x2)   
-        以 Z(x1) 及 Z(x2) 代入 r(u1,u2) 可證明都成立。
+      命題 R32：x+1 可於 P 系統決定。
+        1.令R(x1,x2)~x1=x2+1
+        2.依 P 系統縮寫，可寫下 r(u1,u2) ≡ u1=fu2，
+        3.u1=fu2 標準化為 x1=fy1
+        4.證明 x1=fy1
+        5.x1, fy1 為基礎符號
+        6.x2(x1), x2(fy1) 為基礎式 
+        7.~x2(x1)∨x2(fy1) 為基礎式
+        8.式 7 可簡寫為 x2(x1)⊃x2(fy1)
+        9.依直接推論第2式，前式可直接推論出 x2Π(x2(x1)⊃x2(fy1))
+        10.依 21) x1=fy1 為上式之簡寫。
 
-      定理 R32：x+1 可於 P 系統決定。
-        R(x1,x2)~x1=φ(x2...xn)
-        已知 f(x)=x+1 為基礎遞迴公理，
-        令 R(x1,x2)~x1+1=x2，
-        在 P 系統可寫下 r(u1,u2) ≡ f(u1)=u2，
-        明顯地符合 R(x1, x2) 之數組 (x1, x2)   
-        以 Z(x1) 及 Z(x2) 代入 r(u1,u2) 可證明都成立。
+        舉例說明： 
+        1.R(1,0) ~ 1 = 0+1
 
+            |   u1 , u2 |
+        2.Sb|r Z(1),Z(0)| = r(f0,0) ≡ f0=f(0)=f0 
+        3.由 P 系統縮寫可建構 f0=f0 之公式。
+        
 Habe also φ die m-te Stufe.
 Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
 durch die Operationen der Einsetzung oder der rekursiven Definition. 
@@ -2670,34 +2729,36 @@ so daß (3), (4) gilt.
         以下的定義以希臘字母代表遞迴函數，
         以拉丁字母代表 P 系統關係符號。
  
-        若函數 η 為自遞迴函數 θ 及 γ1...γk 之函數合成，
-        則以下等式關係成立：
+        1.若函數 η 為自遞迴函數 θ 及 γ1...γk 之函數合成，
+          則以下等式關係成立：
 
-        η(χ1...χn)=θ(γ1(χ1...χn)...γk(χ1...χn))
+          η(χ1...χn)=θ(γ1(χ1...χn)...γk(χ1...χn))
 
-        依據定理 V 之歸納假設，θ 與 γ1...γk 等函數為遞迴函數，
-        故於 P 系統存在以下公式 f, g1...gn，使得
-           f (y1...yk,y ) 為表示 υ =θ (υ1...υk) 之關係符號，
-           g1(x1...xn,y1) 為表示 υ1=γ1(χ1...χn) 之關係符號，
-           .
-           .
-           .
-           gk(x1...xn,yk) 為表示 υk=γk(χ1...χn) 之關係符號。
+        2.依據定理 V 之歸納假設，θ 與 γ1...γk 等函數為遞迴函數，
+          故於 P 系統存在以下公式 f, g1...gn，使得
+            f (y1...yk,y ) 為表示 υ =θ (υ1...υk) 之關係符號，
+            g1(x1...xn,y1) 為表示 υ1=γ1(χ1...χn) 之關係符號，
+            .
+            .
+            .
+            gk(x1...xn,yk) 為表示 υk=γk(χ1...χn) 之關係符號。
 
-        由上述關係符號，可於 P 系統中定義出新的關係符號 h 如下：
-           h(x1,...,xn,y)≡(Ey1,...,yk)[f (y1,...,yk,y)
-                                      &g1(x1,...,xn,y1)
-                                      .
-                                      .
-                                      .
-                                      &gk(x1,...,xn,yk)]
-        
-        類別符號、存在量詞及合取連接子都已於 P 系統定義，
-        本定理得證。
+        3.依據 P 系統縮寫定義可寫出下式：
+          (Ey1,...,yk)[f (y1,...,yk,y)
+                      .g1(x1,...,xn,y1)
+                      .
+                      .
+                      .
+                      .gk(x1,...,xn,yk)]
 
-        注意：為能與 "..." 區別，
-              在此我們引入 "&" 替換 "." 作為合取連接子。
-  
+        4.可於 P 系統中定義出新的關係符號 h 如下：
+            h(x1,...,xn,y)≡(Ey1,...,yk)[f (y1,...,yk,y)
+                                       .g1(x1,...,xn,y1)
+                                       .
+                                       .
+                                       .
+                                       .gk(x1,...,xn,yk)]
+
       定理 R34：遞迴定義可由 P 系統表示。
 
         若函數 φ 為自函數 ψ 及 μ 之遞迴定義，
@@ -2712,9 +2773,10 @@ so daß (3), (4) gilt.
           p(x2...xn,y ) 為表示 υ=θ(χ1...χk) 之關係符號。
 
         可於 P 系統寫出公式，
-        f(z,x2...xn,y)≡(Es)[|s|=z+1&p(  x2...xn,s(0))
-                          &(iΠ(i<z)[m(i,x2...xn,s(i+1))
-                          & y=s(z)]
+        f(z,x2...xn,y)≡(Es)[|s|=z+1
+                           .p(  x2...xn,s(0))
+                           .(iΠ(i<z)[m(i,x2...xn,s(i+1))
+                           . y=s(z)]
 
 Die Definitionsprozesse,
 durch die φ aus φ1...φk entsteht 
@@ -2791,11 +2853,13 @@ selbstverständlich auch widerspruchsfrei.
 Es gilt aber, wie später gezeigt werden wird, 
 nicht das Umgekehrte.
 
-每個 ω-一致系統是自我證明本身為一致。
+每個 ω-一致系統當也為一致。
 但其反向是無效的，這將在之後證明。
 
 Das allgemeine Resultat über 
 die Existenz unentseheidbarer Sätze lautet:
+
+譯註：證明在那?
 
 存在不可決定命題之一般結果如下述：
 
@@ -2804,7 +2868,8 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse 𝛘 von Formeln
          so daß weder v Gen r noch Neg(v Gen r) zu Flg(𝛘) gehört 
          (wobei v die freie Variable aus r ist).
 
-命題VI： 對每個 ω-一致遞迴之公式類別 𝛘，存在遞迴類別符號 𝛘，
+命題VI： 對每個 ω-一致遞迴之公式類別 𝛘，
+         存在遞迴類別符號 r，
          使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
          (其中 v 是 r 中的自由變數)。
 
@@ -3673,8 +3738,9 @@ da der ganze Beweis von Satz VII sich (für jedes spezielle F)
 innerhalb des Systems P formalisieren läßt, 
 ist diese Äquivalenz in P beweisbar. Daher gilt:
 
-依據命題 VII 每個形式為 (x)F(x) 之問題(F 遞迴)均存在一個等值算術問題且
-由於命題 VII 整個證明本身可由系統 P 定義，
+依據命題 VII 每個形式為 (x)F(x) 之問題（F 為遞迴）
+均存在一個等值算術問題，
+且由於命題 VII 整個證明本身（對每個特定之 F）可由系統 P 定義，
 此等值性在 P 中可證。因此可得：
 
 Satz VIII: 
@@ -3685,20 +3751,22 @@ unentscheidbare arithmetische Sätze.
 
 在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
 
+Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
+das Axiomensystem der Mengenlehre 
+und dessen Erweiterungen durch 
+ω-widerspruchsfreie rekursive Klassen von Axiomen.
+Wir leiten schließlich noch folgendes Resultat her:
+
+（依據頁190之注釋）同樣可推廣至集合公理系統
+及其經由公理之ω-一致性遞迴類別所擴展之系統。
+最後可得以下這樣之結果：
+
 53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
     welche aus P durch Hinzufügung einer rekursiv definierbaren Klasse 
     von Axiomen entstehen.
     
 53) 這些 ω-一致系統係由公理類別遞迴定義擴展 P 系統而來。
 
-Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
-das Axiomensystem der Mengenlehre 
-und dessen Erweiterungen durch ω-widerspruchsfreie rekursive Klassen von Axiomen.
-Wir leiten schließlich noch folgendes Resultat her:
-
-（依據頁190之注釋）同樣可推廣至集合公理系統
-及其經由公理之ω-一致性遞迴類別所擴展之系統。
-最後可得以下這樣之結果：
 
 Satz IX: 
 In allen in Satz VI genannten formalen Systemen 53) gibt es 
@@ -4255,8 +4323,9 @@ Subst a|b|                       b 為與 v 同型之符號。
                                  視為一式由 a 衍生，
                                  且在裡面每處自由之 v，
                                  均由 b 取代。
-.           P 系統   P 系統縮寫  合取連接子
-⊃           P 系統   P 系統縮寫  推論連接子
+.           P 系統   P 系統縮寫  合取連接子。
+⊃           P 系統   P 系統縮寫  推論連接子。
+≡           P 系統   P 系統縮寫  等價關係。
 (Ex)        P 系統   P 系統縮寫  存在量詞
 =           P 系統   21)         相等關係，
                                  詞源為PM。
@@ -4265,8 +4334,53 @@ Subst a|b|                       b 為與 v 同型之符號。
                                  詞源為希爾伯特。
 ~           遞迴函數 29)         表示相等關係，
                                  詞源為希爾伯特。
+1           遞迴函數 基礎符號對  0
+                     應到自然數
+3           遞迴函數 基礎符號對  f
+                     應到自然數
+5           遞迴函數 基礎符號對  ~
+                     應到自然數
+7           遞迴函數 基礎符號對  ∨
+                     應到自然數
+9           遞迴函數 基礎符號對  Π
+                     應到自然數
+11          遞迴函數 基礎符號對  (
+                     應到自然數
+13          遞迴函數 基礎符號對  )
+                     應到自然數
 n Gl x      遞迴函數 6.          表示數列 x 的第 n 個元素函數，
                                  詞源為德文 Glied。
+x*y         遞迴函數 8.          表示數列 x 與數列 y 串接，
+                                 故本論文中，乘法均用 . 不用 *。
+R(x)        遞迴函數 9.          數列化符號 x，
+                                 詞源為德文 Reihe。
+E(x)        遞迴函數 10.         將數列 x 加括號，
+n Var x     遞迴函數 11.         x 為 n 型變數，
+                                 詞源為德文 Variable。
+Var(x)      遞迴函數 12.         x 為變數，
+                                 詞源為德文 Variable。
+Neg(x)      遞迴函數 13.         x 的否定，
+                                 詞源為德文 Negation。
+x Dis y     遞迴函數 14.         x 與 y 的析取，
+                                 詞源為德文 Disjunktion。
+x Gen y     遞迴函數 15.         x 與 y 的一般化，
+                                 詞源為德文 Generalisation。
+n N x       遞迴函數 16.         於 x 前置 n 個 'f'，
+                                 詞源或許為 Number。
+Z(n)        遞迴函數 17.         建置表示數 n 的數符，
+                                 詞源為德文 Zahl。
+Typ1'(x)    遞迴函數 18.         x 為 1 型變數，
+                                 詞源為德文 Typ。
+Typn(x)     遞迴函數 19.         x 為 n 型變數，
+                                 詞源為德文 Typ。
+Elf(x)      遞迴函數 20.         x 為基礎式，
+                                 詞源為德文 Elementarformel。
+Op(x y z)   遞迴函數 21.         x 為否定、析取或一般化之操作，
+                                 詞源為德文 Operation。
+FR(x)       遞迴函數 22.         x 為公式串列，
+                                 詞源為德文 Reihe von Formeln。
+Form(x)     遞迴函數 22.         x 為公式串列的最後一個公式，
+                                 詞源為德文 Formel。
 Imp         遞迴函數 32.         表示推論之函數，
                                  詞源為德文 Implikation。
 Con         遞迴函數 32.         表示合取之函數
@@ -4373,6 +4487,11 @@ F    := EF                   公式
 
 1.張錦文、王雪生，1989年，連續統假設，九章出版社。
 
+2.Martin Hirzel,2000,On formally undecidable propositions 
+  of Principia Mathematica and related systems I,
+  http://www.research.ibm.com/people/h/hirzel/papers/canon00-goedel.pdf
+
 3.gribskoff,2013,Gödel's beta function, 
   http://planetmath.org/sites/default/files/texpdf/41307.pdf,
   PlanetMath.
+
