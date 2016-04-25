@@ -2096,7 +2096,10 @@ x is Primzahl.
 x 是質數。
 
 3.0    Pr x ≡ 0
- (n+1) Pr x ≡ εy[y≦ x & Prim(y) & x/y & y>n Pr x]
+ (n+1) Pr x ≡ εy[y≦x 
+                & Prim(y) 
+                & x/y 
+                & y>n Pr x]
 
  n Pr x ist die n-te(der Größe nach) 
  in x enthaltene Primzahl 34a).
@@ -2107,14 +2110,16 @@ x 是質數。
      aufgehenden Primzahlen ist. 
      Man beachte, daß für n=z+1 n Pr x=0 ist!
 
-     對 0<n≦z 而言，當 z 為一數與 x 之質因數都不同，
-     須注意對 n = z+1 ，n Pr x = 0。
+     對 0<n≦z 而言，當數 z 與 x 之質因數都不同，
+     須注意對 n=z+1 時，n Pr x = 0。
 
 4.    0! ≡ 1
   (n+1)! ≡ (n+1)*n!
 
 5.Pr(0)   ≡ 0
-  Pr(n+1) ≡ εy[y≦ {Pr(n)}!+1 & Prim(y) & y > Pr(n)]
+  Pr(n+1) ≡ εy[ y≦{Pr(n)}!+1 
+              & Prim(y) 
+              & y>Pr(n)]
 
   Pr(n) ist die n-te Primzahl (der Größe nach).
 
@@ -2274,9 +2279,8 @@ x 是質數。
    x 是公式(即公式串列 n 之最後一個成員)。
 
 35) Die Abschätzung n≦(Pr[l(x)^2])^x.l(x)^2 erkennt man etwa so: 
-    Die Länge der kürzesten zu x gehörigen Formelreihe kann höchstens 
-    gleich der Anzahl der Teilformeln von x sein. 
-
+    Die Länge der kürzesten zu x gehörigen Formelreihe 
+    kann höchstens gleich der Anzahl der Teilformeln von x sein. 
     Es gibt aber höchstens l(x) Teilformeln der Lange 1, 
     höchstens l(x)-1 der Länge 2 usw., 
     im ganzen also höchstens
@@ -4348,8 +4352,18 @@ Subst a|b|                       b 為與 v 同型之符號。
                      應到自然數
 13          遞迴函數 基礎符號對  )
                      應到自然數
-n Gl x      遞迴函數 6.          表示數列 x 的第 n 個元素函數，
+x/y         遞迴函數 1.          x 整除以 y。
+Prim(x)     遞迴函數 2.          x 是質數，
+                                 詞源為德文 Primzahl。
+n Pr x      遞迴函數 3.          x 的第 n 個質數，
+                                 詞源為德文 Primzahl。
+n!          遞迴函數 4.          n 的階乘。
+Pr(n)       遞迴函數 4.          第 n 個質數，
+                                 詞源為德文 Primzahl。
+n Gl x      遞迴函數 6.          數列 x 的第 n 個元素函數，
                                  詞源為德文 Glied。
+l(x)        遞迴函數 7.          數列 x 的長度，
+                                 詞源為德文 Länge。
 x*y         遞迴函數 8.          表示數列 x 與數列 y 串接，
                                  故本論文中，乘法均用 . 不用 *。
 R(x)        遞迴函數 9.          數列化符號 x，
