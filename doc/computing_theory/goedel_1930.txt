@@ -2373,6 +2373,8 @@ x 是質數。
    Die Variable v ist in x an n-ter Stelle gebunden.
 
    變數 v 在 x 中的位置 n 是綁定的。
+   
+   譯註：x 是一個公式。
 
 /184/
 
@@ -2384,11 +2386,15 @@ x 是質數。
 
    變數 v 在 x 中位置 n 是自由的。
 
+   譯註：x 是一個公式。
+
 26.v Fr x ≡ (En)[n≦l(x) & v Fr n, x]
 
    v kommt in x als freie Variable vor.
 
    v 於 x 是自由變數。 
+
+   譯註：x 是一個公式。
 
 27.S u x (n,y) ≡ εz{ z≦[Pr(l(x)+l(y)]^x+y 
                    & [(Eu,v)u,v≦x
@@ -2408,16 +2414,16 @@ x 是質數。
          少了一個串接運算子，應更正為下式：
          x = u*R(n Gl x)*v   
 
-28.    0 St v,x ≡ εn{ n≦ l(x)
+28.    0 St v,x ≡ εn{ n≦l(x)
                     & v Fr n, x
                       ____
-                    & (Ep)[ n<p≦ l(x)
+                    & (Ep)[ n<p≦l(x)
                           & v Fr p, x]}
 
    (k+1) St v,x ≡ εn{ n<k St v, x
                     & v Fr n, x
                       ____
-                    & (Ep)[ n<p≦ k St v, x 
+                    & (Ep)[ n<p≦k St v, x 
                           & v Fr p, x]}
 
     k St v, x ist die k+1-te Stelle in x 
@@ -2426,9 +2432,9 @@ x 是質數。
     (und 0, falls es keine solche Stelle gibt).
 
     k St v, x 是 x 之第 k+1 位置
-    (從公式 x 的端點開始計算)，
+    （從公式 x 的端點開始計算），
     於此 v 在 x 是自由的
-    (而 0 是指不存在這樣的位置)
+    （而 0 是指不存在這樣的位置）。
 
 29.A(v, x) ≡ εn{ n≦ l(x)
                 & n St v,x=0}
@@ -4458,11 +4464,13 @@ FR(x)       遞迴函數 22.         x 為公式串列，
                                  詞源為德文 Reihe von Formeln。
 Form(x)     遞迴函數 23.         x 為公式串列的最後一個公式，
                                  詞源為德文 Formel。
-v Geb n,x   遞迴函數 24.         x 中的變數 v 是綁定於第 n 個位置。
+v Geb n,x   遞迴函數 24.         公式 x 中的變數 v 是
+                                 綁定於第 n 個位置。
                                  詞源為德文 gebunden。
-v Fr n,x    遞迴函數 25.         變數 v 在 x 中位置 n 是自由的。
+v Fr n,x    遞迴函數 25.         變數 v 在公式 x 中
+                                 位置 n 是自由的，
                                  詞源為德文 frei。
-v Fr x      遞迴函數 26.         v 於 x 是自由變數。 
+v Fr x      遞迴函數 26.         v 於公式 x 是自由變數， 
                                  詞源為德文 frei。
 S u x (n y) 遞迴函數 27.         以 y 取代 x 第 n 個成員。
                                  詞源為德文 Substitution。
