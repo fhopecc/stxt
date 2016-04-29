@@ -163,6 +163,10 @@ der Principia Mathematica und verwandter System I 1)
 但像是遞迴函數的定義，或是遞迴函數可由 P 系統表示，
 遞迴函數是算術的，含如何以 2 個數存取數列指定的數等，均不包括。
 
+20160429 週五
+
+P 系統要由其幾個算術定義的 P 系統而設。
+
 基本論述
 
 定義 P 系統
@@ -2374,7 +2378,7 @@ x 是質數。
 
    變數 v 在 x 中的位置 n 是綁定的。
    
-   譯註：x 是一個公式。
+   譯註：24 至 28 定義中 x 是一個公式。
 
 /184/
 
@@ -2386,27 +2390,23 @@ x 是質數。
 
    變數 v 在 x 中位置 n 是自由的。
 
-   譯註：x 是一個公式。
-
 26.v Fr x ≡ (En)[n≦l(x) & v Fr n, x]
 
    v kommt in x als freie Variable vor.
 
    v 於 x 是自由變數。 
 
-   譯註：x 是一個公式。
-
-27.S u x (n,y) ≡ εz{ z≦[Pr(l(x)+l(y)]^x+y 
+27.Su x (n,y) ≡ εz{ z≦[Pr(l(x)+l(y)]^x+y 
                    & [(Eu,v)u,v≦x
                      & x = u*R(n Gl x) v 
                      & z = u*y*v
                      & n = l(u)+1]}
 
-   S u x (n,y) entsteht aus x, 
+   Su x (n,y) entsteht aus x, 
    wenn man an Stelle des n-ten Gliedes von x y einsetzt 
    (vorausgesetzt, daß 0<n≦l(x)).
 
-   S u x (n,y) 衍生自 x 且滿足在 x 的第 n 個成員位置上插入 y
+   Su x (n,y) 衍生自 x 且滿足在 x 的第 n 個成員位置上插入 y
    「預設 0<n≦l(x)」。
 
    譯註：哥德爾原文印刷有誤，下式：
@@ -2432,7 +2432,7 @@ x 是質數。
     (und 0, falls es keine solche Stelle gibt).
 
     k St v, x 是 x 之第 k+1 位置
-    （從公式 x 的端點開始計算），
+    （從公式 x 的結尾開始計算），
     於此 v 在 x 是自由的
     （而 0 是指不存在這樣的位置）。
 
@@ -4472,7 +4472,7 @@ v Fr n,x    遞迴函數 25.         變數 v 在公式 x 中
                                  詞源為德文 frei。
 v Fr x      遞迴函數 26.         v 於公式 x 是自由變數， 
                                  詞源為德文 frei。
-S u x (n y) 遞迴函數 27.         以 y 取代 x 第 n 個成員。
+Su x (n y)  遞迴函數 27.         以 y 取代公式 x 第 n 個成員，
                                  詞源為德文 Substitution。
 Imp         遞迴函數 32.         表示推論之函數，
                                  詞源為德文 Implikation。
