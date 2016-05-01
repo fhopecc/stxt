@@ -1184,7 +1184,7 @@ II. Jede Formel, die aus den folgenden Schemata durch
 II. 任一公式衍生自將以下框架中 p, q, r 位置以任意公式替換：
 
 1. p v p ⊃ p
-2. p ⊃ p v p
+2. p ⊃ p v q
 3. p v q ⊃ q v p
 4. (p ⊃ q) ⊃ (r v p ⊃ r v q)
 
@@ -1192,10 +1192,10 @@ II. 任一公式衍生自將以下框架中 p, q, r 位置以任意公式替換�
       ZF 公理系統也是使用公理框架。
       以下的公理系統是取自希爾伯特的理論邏輯基礎，
       以現代術語說明每個框架及意義如下：
-      1. p v p ⊃ p     重言律
-      2. p ⊃ p v p     後項引入了 v 邏輯析取運算子，故稱 v 引入律
-      3. p v q ⊃ q v p 交換律
-      4. (p ⊃ q) ⊃ (r v p ⊃ r v q)
+      1. p ∨ p ⊃ p     析取消去律
+      2. p ⊃ p ∨ 1     析取引入律
+      3. p ∨ q ⊃ q ∨ p 析取交換律
+      4. (p ⊃ q) ⊃ (r ∨ p ⊃ r ∨ q)
       這四個推論都是套套邏輯。
 
 取代操作
@@ -2093,7 +2093,7 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 ........
 /182/
 
-1. x/y≡(Ez)[z≦x&x=y.z] 33)
+1.x/y≡(Ez)[z≦x&x=y.z] 33)
 
 33) Das Zeichen ≡ wird im Sinne von "Definitionsgleichheit" 
     verwendet,
@@ -2133,21 +2133,30 @@ x 整除以 y 34)。
 
 2.Prim(x)≡(Ez)[z≦x & z≠1 & z≠x & x/z] & x>1
 
-x is Primzahl.
+  x is Primzahl.
 
-x 是質數。
+  x 是質數。
 
 3.0    Pr x ≡ 0
- (n+1) Pr x ≡ εy[y≦x 
-                & Prim(y) 
-                & x/y 
-                & y>n Pr x]
+  (n+1) Pr x ≡ εy[y≦x 
+                 & Prim(y) 
+                 & x/y 
+                 & y>n Pr x]
 
- n Pr x ist die n-te(der Größe nach) 
- in x enthaltene Primzahl 34a).
+  n Pr x ist die n-te(der Größe nach) 
+  in x enthaltene Primzahl 34a).
 
- n Pr x 是 x 中第 n 個(漸增序)質因數。
-
+  n Pr x 是 x 中第 n 個(漸增序)質因數。
+  
+  譯註：以下例說明 Pr 函數。
+        x = 3.5.13.19.23  
+        1 Pr x = 3  > (0 Pr x=0)
+        2 Pr x = 5  > (1 Pr x=3)
+        3 Pr x = 13 > (2 Pr x=5)
+        
+        由前例得知哥德爾數列是以 1 為第 1 個元素索引，
+        與目前許多程式語言以 0 為第 1 個元素索引不同。
+    
 34a) Für 0<n≦z, wenn z die Anzahl der verschiedenen in x 
      aufgehenden Primzahlen ist. 
      Man beachte, daß für n=z+1 n Pr x=0 ist!
@@ -2217,7 +2226,8 @@ x 是質數。
 
    x 是一個 n 型變數。
 
-   譯註：此外第 n 型變數配置形式為 p^n 之整數。
+   譯註：第 n 型變數配置形式為 p^n 之整數。
+         x1 應對映到 17，y1 對映到 19。 
 
 12.Var(x) ≡ (En)[n≦x & n Var x]
 
@@ -2230,6 +2240,8 @@ x 是質數。
    Neg(x) ist die Negation von x.
 
    Neg(x) 是 x 的否定。
+   
+譯註：~(0) 其序列表示為 5 11 0 13
 
 /183/
 
@@ -2246,6 +2258,8 @@ x 是質數。
     
    x Gen y 是藉由變數 x 之 y 的一般化。
    （x 預設為一個變數）
+
+   譯註：例如 x1Π(~(x1)∨(x1))
 
 建構數符
 ........
@@ -2272,6 +2286,8 @@ x 是質數。
    x ist Zeichen ersten Typs.
 
    x 是 1 型符號。
+   
+譯註：~(0) 其序列表示為 5 11 0 13
 
 34b) m,n≦x steht für: m≦x & n≦x (ebenso für mehr als 2 Variable).
 
@@ -2311,6 +2327,16 @@ x 是質數。
    就是經由對前項公式進行否定、析取、一般化等操作而來。
 
    譯註：aus etw hervorgehen 意為從某事衍生。
+         下例是一個公式串列
+         x1
+         x2
+         ~x1
+         ~x1∨x2 
+         x2Π(~x1∨x2)
+         x1Π(~(x1)∨(x1))
+         ~x1∨x1       # 由此例的建構，可知要選析取作基礎式，
+                      # 而非合取，會大幅簡化合式公式之定義。
+                      # 不用寫下需避免 ~x1∧x1 之規則。
                                  
 23.Form(x) ≡ (En){ n≦(Pr[l(x)^2])^x.[l(x)]^2
                  & FR(n)
@@ -2319,6 +2345,8 @@ x 是質數。
    x ist Formel (d. h. letztes Glied einer Formelreihe n).
 
    x 是公式(即公式串列 n 之最後一個成員)。
+   
+   譯註：上例的公式串列最後一員即為 ~x1∨x1 
 
 35) Die Abschätzung n≦(Pr[l(x)^2])^x.l(x)^2 erkennt man etwa so: 
     Die Länge der kürzesten zu x gehörigen Formelreihe 
@@ -2378,7 +2406,33 @@ x 是質數。
 
    變數 v 在 x 中的位置 n 是綁定的。
    
-   譯註：24 至 28 定義中 x 是一個公式。
+   譯註：24 至 28 定義中的 x 都是一個公式數列，
+         我們以一個例子來看哥德爾如何定義綁定：
+
+         位置            111 11111 1122 222 2222233 3
+              123 4567 89012 34567 8901 234 5678901 2
+         例式 ((x1)∨(x3))∨(x1Π(~(x1)∨(x2∨(x1))))∨(x2)
+              aaa aaaa aaaa+ +++++ ++++ +++ +++cccc c
+
+         前面例式中變數 x1 名稱有 2 個字元，
+         在上式看來佔有 2 個位置，
+         但在公式數列上，仍算 1 個位置，
+         因為公式數列上所有變數仍以 1 個數表示，
+         並為數列的一個元素，以此為前式的位置標數，
+         可得知前式長度為 31。
+         
+         哥德爾定義綁定是查看該變數所在之子公式
+         是否具有對該變數一般化操作，
+         他先將該公式拆成 3 部份，
+         其中中間的部分是具有一般化操作之子公式，
+         例式中，以 + 號標記的部分即為該子公式，
+         該子公式不包含前後的括號，故其長度為 27-12+1 = 16。
+         子公式之前公式為 a 公式，其長度為 11。
+         l(a)+1≦n≦l(a)+l(v Gen b)] → 
+         11+1≦n≦11+16 → 
+         12≦n≦27 
+         n 表示 x1 綁定的區間，由前式得知為 12 至 27 的子數列。
+  
 
 /184/
 
@@ -2435,27 +2489,41 @@ x 是質數。
     （從公式 x 的結尾開始計算），
     於此 v 在 x 是自由的
     （而 0 是指不存在這樣的位置）。
+    譯註：我們以一個例子來看哥德爾如何定義自由位置：
 
-29.A(v, x) ≡ εn{ n≦ l(x)
-                & n St v,x=0}
+          位置            111 11111 1122 222 2222233 3
+               123 4567 89012 34567 8901 234 5678901 2
+          例式 ((x1)∨(x3))∨(x1Π(~(x1)∨(x2∨(x1))))∨(x1)
+               aaa aaaa aaaa+ +++++ ++++ +++ +++cccc c
+
+          0 St x1, x = 31
+          1 St x1, x = 3 < (0 St x1,x=31)
+
+29.A(v, x) ≡ εn{ n≦l(x)
+               & n St v,x=0}
 
    A(v, x) ist die Anzahl der Stellen, an denen v in x frei ist.
 
    A(v, x) 是位置的數目，於該位置 v 在 x 是自由的。  
 
-30.Sb_0  (x_v_y) ≡ x
-                                  |k St v,x| 
-   Sb_k+1(x_v_y) ≡ Su [Sbk(x_v_y)]|    y   |
+   譯註：應理解為 x 中自由變數 v 的數目。
 
-     |  v|            |  v|
-31.Sb|x y| ≡ SbA(v,x) |x y| 36)
+30.Sb 0 (x,v,y)   ≡ x
+                                      |k St v,x| 
+   Sb k+1 (x,v,y) ≡ Su [Sb k (x,v,y)] |    y   |
+
+   譯註：Sb n (x,v,y) 為將後面數來第 n 個自由變數 v 以 y 取代。
+
+     |  v|             |  v|
+31.Sb|x y| ≡ Sb A(v,x) |x y| 36)
 
      |  v|                                         |v|
    Sb|x y| ist der oben definierte Begriff Subst a |b| 37)
 
      |  v|                          |v|
    Sb|x y| 是前所定義的概念 Subst a |b| 37)
-  
+
+   譯註：將公式 x 中所有自由變數 v 以 y 取代，
                                                            |  v|
 36) Falls v keine Variable oder x keine Formel ist, ist Sb |x y| = x.
 
@@ -2468,7 +2536,7 @@ x 是質數。
 
                |   |  v| w|            |  v w|
 37) 我們取代 Sb|Sb |x y| z| 寫法為: Sb |x y z| 
-    (對 2 個以上變數也是類似的方法)。
+    （可類推至 2 個以上的變數情形）。
 
 32.x Imp y ≡ [Neg (x)] Dis y
    x Con y ≡ Neg {[Neg (x)] Dis [Neg (y)]}
@@ -2481,13 +2549,13 @@ x 是質數。
       Aeq 指相等，x≡y   ≡ (x ⊃ y) & (y ⊃ x)
       Ex  指存在，(Ev)y ≡ ~{(v)[~y]}
 
-                   | n|
-                   |x |
-33.n Th x ≡ εy{ y≦ x
-              & (k)[ k≦ l(x) ⊃ (k Gl x ≦ 13 &k Gl y =  k Gl x)
-                              v (k Gl x > 13 
-                                                                 n
-                                &k Gl y =  k Gl x.[1 Pr (k Gl x)] )]}
+                  | n|
+                  |x |
+33.n Th x ≡ εy{ y≦x
+              & (k)[ k≦l(x) ⊃ (k Gl x ≦ 13 &k Gl y =  k Gl x)
+                             ∨(k Gl x > 13 
+                                                               n
+                              &k Gl y =  k Gl x.[1 Pr (k Gl x)] )]}
 
    n Th x ist die n-te Typenerhöhung von x 
    (falls x und n Th x Formeln sind).
@@ -2495,17 +2563,34 @@ x 是質數。
    n Th x 是 x 的第 n 型提升
   「若 x 及 n Th x 是公式」。
 
+   譯註：為何 k Gl y 定義為 k Gl x.[1 Pr (k Gl x)]^n
+         而不是更直覺的 k Gl x.(k Gl x)^(n)？
+
+         舉例有以下的不同型別變數：
+         x1 對應到 17
+         x2 對應到 17^2
+         x3 對應到 17^3
+         x4 對應到 17^3
+        
+         將 x1 提昇 2 型，的確等於 17.17^(2) = 17^3，
+         但若將 x2 提昇 2 型，17.(17^2)^(2) = 17^5 便錯了，
+         所以要用 1 Pr (k Gl x) 將基底質數 17 取出再作次方。
+         
    Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
    die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
 
    有 3 個特定數對應到公設 I 之 1 至 3 並分別以 z1, z2, z3 代表，
    而我們定義如下：
    
-   譯註：公設 I 是皮亞諾公設。
     
 34.Z-Ax(x) ≡ (x=z1 v x=z2 v x=z3)
 
+   譯註：公設 I 是皮亞諾公設，其並非公設框架，不會衍生太多公設，
+         所以可以直接以公設對映的哥德爾數 z1, z2, z3 表達。
+         取名為 Z-Ax 應源自整數公理之德語：Zahlenaxiom
+
 /185/
+
 35.A1-Ax(x) ≡ (Ey)[ y≦ x
                   & Form(y)
                   & x = (y Dis y) imp y]
@@ -2520,15 +2605,15 @@ x 是質數。
 
    同樣地 A2-Ax, A3-Ax, A4-Ax 被定義為對映到公理 II, 2 至 3。
 
-36.A-A(x) ≡ A1-Ax(x) v A2-Ax(x) v A3-Ax(x) v A4-Ax(x) 
+36.A-Ax(x) ≡ A1-Ax(x) v A2-Ax(x) v A3-Ax(x) v A4-Ax(x) 
 
   x ist eine durch Einsetzung 
   in ein Aussagenaxiom entstehende Formel.
 
   x 是經由命題公設衍生之公式。
 
-  譯註：公設 II 此地命名為命題公設。
- 
+  譯註：公設 II 此地命名為命題公設 。
+
               ________
 37.Q(z,y,v) ≡ E(n,m,w)[n≦ l(y) & m ≦ l(z) & w≦ z 
                       & w=m Gl z & w Geb n, y & v Fr n,y]
@@ -2563,7 +2648,6 @@ x 是質數。
 
    x 是經由配置公設框架 III,2 衍生之公式。
 
-
 譯註：III, 2. vΠ(b V a) ⊃ b V vΠ(a)
 
 40.R-Ax(x) ≡ (Eu,v,y,n)[ u,v,y,n≦ x & n Var v
@@ -2592,13 +2676,17 @@ x 是質數。
  
    x 是一個公設。
 
-43.Fl(x y z) ≡ z Imp x
-             V (Ev)[v≦ x & Var(v) & x = v Gen y]
+43.Fl(x y z) ≡ y=z Imp x
+             ∨ (Ev)[ v≦x 
+                   & Var(v) 
+                   & x = v Gen y]
 
    x ist unmittelbare Folge aus y und z.
   
    x 是 y 及 z 之直接後繼。
 
+   譯註：y.z → (z⊃x).z → x
+         y   →  vΠ(y)  → x
 
 /186頁/
 
@@ -4474,21 +4562,50 @@ v Fr x      遞迴函數 26.         v 於公式 x 是自由變數，
                                  詞源為德文 frei。
 Su x (n y)  遞迴函數 27.         以 y 取代公式 x 第 n 個成員，
                                  詞源為德文 Substitution。
+n St v,x    遞迴函數 28.         公式 x 中第 n 個自由變數 v 的位置，
+                                 詞源為德文 Stelle。
+A(v, x)     遞迴函數 29.         公式 x 中，自由變數 v 的個數，
+                                 詞源為德文 Anzahl。
+Sb n (x,v,y)遞迴函數 30.         將公式 x 中，從後數來的 n 個自由變數 v 
+                                 以 y 取代，
+                                 詞源為德文 Substitution。
+Sb(x,v,y)   遞迴函數 31.         將公式 x 中所有自由變數 v 以 y 取代，
+                                 詞源為德文 Substitution。
 Imp         遞迴函數 32.         表示推論之函數，
                                  詞源為德文 Implikation。
-Con         遞迴函數 32.         表示合取之函數
+Con         遞迴函數 32.         合取，
                                  詞源為德文 Conjunktion。
-Aeq         遞迴函數 32.         表示等價之函數，
+Aeq         遞迴函數 32.         等價，
                                  詞源為德文 Äequivalenz。
-Ex          遞迴函數 32.         表示存在量詞之函數，
+Ex          遞迴函數 32.         存在量詞，
                                  詞源為德文 Existenz。
+n Th x      遞迴函數 33.         x 的 n 型別提昇，
+                                 詞源為德文 Typenerhöhung。
+Z-Ax(x)     遞迴函數 34.         x 是否為整數公理，
+                                 詞源為德文 Zahlenaxiom。
+A1-Ax(x)    遞迴函數 35.         x 是否為命題公理 1，
+                                 詞源為德文 Aussagenaxiom。
+A-Ax(x)     遞迴函數 36.         x 是否為命題公理，
+                                 詞源為德文 Aussagenaxiom。
 Q(z,y,v)    遞迴函數 37.         ?
-Ax(x)       遞迴函數 42.         表示 x 是一個公設之函數，
+L1-Ax(x)    遞迴函數 38.         x 是否為第 1 邏輯公理，
+                                 詞源為德文 Logikaxiom。
+L2-Ax(x)    遞迴函數 39.         x 是否為第 2 邏輯公理，
+                                 詞源為德文 Logikaxiom。
+R-Ax(x)     遞迴函數 40.         x 是否為還原公設，
+                                 詞源為德文 Reduzibilitätsaxiom。
+M-Ax(x)     遞迴函數 41.         x 是否為集合公設，
+                                 詞源為德文 Mengenaxiom。
+Ax(x)       遞迴函數 42.         x 是否為公理，
                                  詞源為德文 Axiom。
-x B y       遞迴函數 45.         表示 x 是 y 的證明之函數，
+Fl(x y z)   遞迴函數 43.         x 是否為 y 及 z 的直接後繼，
+                                 詞源為德文 unmittelbare Folge。
+Bw(x)       遞迴函數 44.         x 是否為證明表示，
+                                 詞源為德文 Beweisfigur。
+x B y       遞迴函數 45.         x 是否為公式 y 的證明，
                                  詞源為德文 Beweis。
-Bew(x)      遞迴函數 46.         表示 x 是一可證式之函數，
-                                 詞源為德文 beweisbar。
+Bew(x)      遞迴函數 46.         x 是否為可證式，
+                                 詞源為德文 beweisbar Formel。
 Q(x,y)      遞迴函數 (8.1)       ? 
 17 Gen r    遞迴函數 (13)        ? 
 𝛘           遞迴函數 建構不可判  任一公式集合。
