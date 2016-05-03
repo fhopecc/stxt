@@ -2577,7 +2577,7 @@ kurz  -> kürzer     短->較短
 
 dunkel -> dunker    暗->更暗
 
-teuer  ->  teurer   貴->更貴
+teuer  -> teurer   貴->更貴
 
 形容詞來源
 ..........

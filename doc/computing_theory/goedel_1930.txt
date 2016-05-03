@@ -76,13 +76,13 @@ der Principia Mathematica und verwandter System I 1)
 會是西方創造力學體系，不是中國人。
 
 西元前300年希臘人歐幾里德編輯了「幾何原本」，
-完整呈現公設法之經典。
-自此公設法根植於整個西方思想中，
+完整呈現公理法之經典。
+自此公理法根植於整個西方思想中，
 西方社會在建構理論時，
 總是不斷尋找以最少的事實及推論規則，
 去解釋最多的世界現象，
 這個文化偏好，可從從幾何原本出現，
-數學家們便一直尋找取代歐幾里德第五公設的定義，
+數學家們便一直尋找取代歐幾里德第五公理的定義，
 即使於現在仍是一無所獲。
 
 循此思潮一個廣大的理論，
@@ -105,27 +105,27 @@ der Principia Mathematica und verwandter System I 1)
 現今的遊戲，實作了力學幾個基本定律，
 模擬出許多現實世界於小小的畫面中。
 
-這裡公設法就好像是一座望遠鏡，藉由推理，可以發現許多事實。
+這裡公理法就好像是一座望遠鏡，藉由推理，可以發現許多事實。
 
 
 推論出其它的定理，
 
-中國文化的本質缺少公設法，這是很大的缺失，
+中國文化的本質缺少公理法，這是很大的缺失，
 即使現在許多中國人自我感覺良好的提倡未來東方文化是主流，
 不停闡明老莊哲學、禪宗哲學及孔孟哲學那玄之又玄的道理，
 但在我看來，都是錯誤解讀，偏離了現實，
 人在世間生存，最重要的便是順應事實。
 
-先說說公設法是什麼，
-公設法是其僅僅利用幾個預定嚴謹的推論程序，
+先說說公理法是什麼，
+公理法是其僅僅利用幾個預定嚴謹的推論程序，
 使人們可由少數預設公理出發，
 推論出其它的定理，最重要的是，
 若預設的公理在現實世界是正確描述的話，
-則依公設法所推論出來的定理在現實世界也為真。
+則依公理法所推論出來的定理在現實世界也為真。
 
-在西方公設法從柏拉圖就開始了，
-西元前300年希臘人歐幾里德完成完整呈現公設法之經典「幾何原本」，
-自此公設法幾乎已根植於整個西方思想中，
+在西方公理法從柏拉圖就開始了，
+西元前300年希臘人歐幾里德完成完整呈現公理法之經典「幾何原本」，
+自此公理法幾乎已根植於整個西方思想中，
 最好的例子美國獨立宣言也呈現公設法的推理模式。
 
 「我們認為下面這些真理是不言而喻的：
@@ -226,7 +226,7 @@ das Zermelo-Fraenkelsche(von J. v. Neumann weiter ausgebildete)
 Axiomensystem der Mengenlehre 3) andererseits.
 
 現今已建構之最全面形式系統一個是數學原理(PM) 2)之系統，
-另一個是熱梅若．佛蘭克集合論之公設系統 3)(由馮鈕曼繼續擴增)。
+另一個是熱梅若．佛蘭克集合論之公理系統 3)(由馮鈕曼繼續擴增)。
 
 2) A. Whitehead und B. Russell, Principia Mathematica, 2. Aufl.,
    Cambridge 1925. 
@@ -256,7 +256,7 @@ Axiomensystem der Mengenlehre 3) andererseits.
    Math. Zeitschr. 27, 1928. 
    Journ. f. reine u. angew. Math. 154 (1925), 160 (1929).
 
-   馮．紐曼，集合論之公設化。
+   馮．紐曼，集合論之公理化。
    數學精選 27 期，1928。純粹及應用數學期刊。154(1925)，160(1929)。
    
    譯註：上述期刊的縮寫應如下：
@@ -268,8 +268,8 @@ Axiomensystem der Mengenlehre 3) andererseits.
    die Axiome und Schlußregeln des Logikkalküls hinzufügen muß, 
    um die Formalisierung zu vollenden.
 
-   注意對前述文獻給定之集合理論公設而言，
-   仍須加上邏輯計算之公設及推論規則以達成形式化。 
+   注意對前述文獻給定之集合理論公理而言，
+   仍須加上邏輯計算之公理及推論規則以達成形式化。 
 
    Die nachfolgenden Überlegungen gelten auch für die 
    in den letzten Jahren 
@@ -308,7 +308,7 @@ in ihnen formalisiert,
 d. h. auf einige wenige Axiome und Schlußregeln zurückgeführt sind. 
 
 這兩系統廣泛到現今所有數學上應用到之證明方法都可在其下形式化，
-即簡化至少數的公設及推論規則。
+即簡化至少數的公理及推論規則。
 
 Es liegt daher die Vermutung nahe, 
 daß diese Axiome und Schlußregeln dazu ausreichen, 
@@ -316,7 +316,7 @@ alle mathematischen Fragen,
 die sich in den betreffenden Systemen überhaupt formal ausdrücken lassen,
 auch zu entscheiden. 
 
-因此似乎可假定這些公設及推論法可決定所有能完全以前述系統所表達的數學問題。
+因此似乎可假定這些公理及推論法可決定所有能完全以前述系統所表達的數學問題。
 
 譯註：die Vermutung nahe, daß ... 似乎可假定 ... 
 
@@ -328,7 +328,7 @@ der Theorie der gewöhnlichen ganzen Zahlen gibt 4),
 die sich aus den Axiomen nicht entscheiden lassen.
 
 下面將展示並非如此，
-就算前述兩個系統下公設所衍生實際相對簡單的普通整數論問題 4)
+就算前述兩個系統下公理所衍生實際相對簡單的普通整數論問題 4)
 也不可被決定。
 
 4) D. h. genauer, es gibt unentscheidbare Sätze, 
@@ -358,8 +358,8 @@ angegebenen Art beweisbar werden.
 
 這情形並所建置系統特定本質所致，
 而對更廣泛形式系統類別也是如此，
-特別是包含加入有限公設 5) 至前兩個系統衍生之系統，
-並假定加入的公設不會使得註腳 4 給定方式之假命題可證。
+特別是包含加入有限公理 5) 至前兩個系統衍生之系統，
+並假定加入的公理不會使得註腳 4 給定方式之假命題可證。
 
 譯註：an jdm/etw liegen 是因為誰/什麼所致
       
@@ -367,8 +367,8 @@ angegebenen Art beweisbar werden.
 5) Dabei werden in PM nur solche Axiome als verschieden gezählt, 
    die aus einander nicht bloß durch Typenwechsel entstehen. 
 
-5) 這是在 PM 中僅這些公設視為不同而計數，
-   其不只以形別轉換自公設間相互衍生。
+5) 這是在 PM 中僅這些公理視為不同而計數，
+   其不只以形別轉換自公理間相互衍生。
    譯註：好難，有時間再看
 
 Wir skizzieren, bevor wir auf Details eingehen, 
@@ -805,7 +805,7 @@ mit der Logik der PM 16) überbaut
 (Zahlen als Individuen, 
  Nachfolgerrelation als undefinierten Grundbegriff).
 
-P 實質上可視為建構皮亞諾公設於 PM 邏輯 16) 上。
+P 實質上可視為建構皮亞諾公理於 PM 邏輯 16) 上。
 (整數視為個體、後繼關係視為未定義之基本概念)。
 
 譯註：im wesentlichen 本質上、實質上 
@@ -817,7 +817,7 @@ P 實質上可視為建構皮亞諾公設於 PM 邏輯 16) 上。
     Vereinfachung des Beweises 
     und sind prinzipiell entbehrlich.
 
-    皮亞諾公設的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
+    皮亞諾公理的擴充就像是其它於 PM 系統上之修訂僅為了簡化證明，
     故原則上不需要。
     
 譯註：angebrachten 為 anbringen 之過去分詞轉成之副詞，
@@ -876,7 +876,7 @@ usw. für jede natürliche Zahl als Typus 17).
       型別論是為了解決集合包含自已本身之問題(這會引起羅素悖論)，
       故強制集合的成員比集合本身的型別階級還低。
 
-      羅素悖論請參見還原公設那節之譯註。
+      羅素悖論請參見還原公理那節之譯註。
 
 譯註：zur Verfügung stellen 可行的
 
@@ -932,8 +932,8 @@ a, fa, ffa, fffa... 等等
 其中 a 是 0 或第一型符號。
 
 譯註：這裡已內含羅素的無窮公理，即有無窮的個體
-      無窮公設：EN: φεN,{(xεN)⊃(xU{x})εN}
-      選擇公設：能從無限個集合中，每個集合取一個元素組成新的集合。
+      無窮公理：EN: φεN,{(xεN)⊃(xU{x})εN}
+      選擇公理：能從無限個集合中，每個集合取一個元素組成新的集合。
 
       unter A verstehen B 片語：將 A 理解為 B。
 
@@ -1073,7 +1073,7 @@ Folgende Formeln (I bis V) heißen Axiome
  und mit Verwendung der üblichen Konventionen über
  das Weglassen von Klammern angeschrieben)22):
 
-下式(I 至 V)稱為公設
+下式(I 至 V)稱為公理
 (受益於已知方法所定義之縮寫：., ⊃, ≡, (Ex), = 21)
  並利用一般省略括號慣寫法去書寫 22)。
 
@@ -1140,27 +1140,34 @@ Folgende Formeln (I bis V) heißen Axiome
       等效於 3⅓IU 的維生素A，
       因為β-胡蘿蔔素會由身體的酵素轉成視黃醛及維生素 A 之緣故。
 
-22) Um aus den angeschriebenen Schemata die Axiome zu erhalten, 
-    muß man also 
-    (in II, III, IV nach Ausführung der erlaubten Einsetzungen) 
+22) Um aus den angeschriebenen Schemata die Axiome 
+    zu erhalten, muß man also 
+    (in II, III, IV nach Ausführung
+     der erlaubten Einsetzungen) 
     noch
     1. die Abkürzungen eliminieren,
     2. die unterdrückten Klammern hinzufügen.
-    Man beachte, daß die so entstehenden Ausdrücke "Formeln" 
-    in obigem Sinn sein müssen. 
+
+    Man beachte, daß die so entstehenden Ausdrücke
+    "Formeln" in obigem Sinn sein müssen. 
     (Vgl. auch die exakten Definitionen der metamathem. 
      Begriffe S. 182 fg.) 
     Monatsh. für Mathematik und Physik. XXXVIII. Band.
 
-    為了自前述框架推得公設(在 II, III, IV 中，要執行允許之取代後)，
+    為了自前述框架推得公理(在 II, III, IV 中，
+    要執行允許之取代後)，
     仍必須作
     1. 消除縮寫
     2. 增加省略的括號
-    須注意結果表示式仍須如前定義之「式」之樣。
+
+    應注意如此建構表示式仍須符合前述「公式」之定義。
     (也參閱後設數學觀念 182 頁之精確定義)
     Monatsh. 數學和物理. XXXVIII. Band. 
+    
+    譯註：entstehenden 是 entstehen 的現代分詞變格，
+          形容事物是現正存在的。
 
-皮亞諾公設
+皮亞諾公理
 ..........
 
 I.
@@ -1168,7 +1175,7 @@ I.
 2.fx1 = fy1 ⊃ x1 = y1
 3.x2(0).x1Π(x2(x1) ⊃ x2(fx1)) ⊃ x1 Π (x2(x1)).
 
-譯註：皮亞諾公設每個公式意義如下：
+譯註：皮亞諾公理每個公式意義如下：
       1.表示 0 是數之始，不可能存在後繼數為 0 之情形，
       2.表示後繼函數為單射函數，沒有 2 個數之後繼數為相同的。
       3.表示數學歸納法。
@@ -1264,7 +1271,7 @@ Dieses Axiom vertritt das Reduzibilitätsaxiom
 
 配置 v 及 u 分別為 n 型及 n+1 型之任意變數，
 a 為一式，其不含自由的 u。
-這些公設表達還原公理
+這些公理表達還原公理
 (集合論之概括公理)
 
 譯註：Reduzibilitätsaxiom 還原公理
@@ -1314,7 +1321,7 @@ V.每個式由下式之型別提升衍生而來(包含式本身)：
 Dieses Axiom besagt, 
 daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
 
-此公設說明類可完全由其元素決定。
+此公理說明類可完全由其元素決定。
 
 譯註：引入了羅素之外延公理，
       外延公理說明 2 個元素相同的集合是相等的，
@@ -1357,7 +1364,7 @@ als die kleinste Klasse von Formeln,
 welche die Axiome enthält und gegen die Relation 
 "unmittelbare Folge" abgeschlossen ist 24).
 
-可證式之類別定義為包含公設及所有具直接推論關係之最小式類別，。
+可證式之類別定義為包含公理及所有具直接推論關係之最小式類別，。
 
 24) Die Einsetzungsregel wird dadurch überflüssig, 
     daß wir alle möglichen Einsetzungen bereits 
@@ -1365,7 +1372,7 @@ welche die Axiome enthält und gegen die Relation
     (analog bei J. v. Neumann, Zur Hilbertschen Beweistheorie, 
      Math. Zeitschr. 26, 1927).
 
-    因為所有可能的取代已在公設中處理，
+    因為所有可能的取代已在公理中處理，
     所以取代規則將變為多餘的。
     （如馮紐曼在「論希爾伯特證明論」，數學雜誌 26 1927）。
 
@@ -1475,7 +1482,7 @@ z.B. "Variable", "Formel", "Satzformel", "Axiom",
 bezeichnen wir mit denselben Worten in Kursivschrift. 
 
 這些自然數類別及關係將被配置給至今所定義之後設數學觀念，
-例如：變數、公式、命題公式、公設、可證式等等，
+例如：變數、公式、命題公式、公理、可證式等等，
 我們將該觀念以斜體字表示。
 
 譯註：斜體字我是用 / 括住的詞，如/Formel/
@@ -2086,7 +2093,7 @@ Jede der Funktionen (Relationen) 1-45,
 unter denen z.B. die Begriffe "Formel", "Axiom", 
 "unmittelbare Folge" vorkommen, ist daher rekursiv.
 
-函數(關係) 1-45 其中出現的概念「公式」、「公設」、
+函數(關係) 1-45 其中出現的概念「公式」、「公理」、
 「直接後繼」，也是遞迴的。
 
 公式操作
@@ -2279,7 +2286,7 @@ x 整除以 y 34)。
 
    Z(n) 是數 n 的數符表示。
 
-18.Typ1'(x) ≡ (Em,n){m,n≦x
+18.Typ1'(x) ≡ (Em,n){ m,n≦x
                     & [m=1 ∨ 1 Var m]
                     & x = n N [R(m)]} 34b)
 
@@ -2293,8 +2300,8 @@ x 整除以 y 34)。
 
 34b) m,n≦x 表示 m≦x & n≦x （2 個變數以上也適用）.
 
-19.Typn(x) ≡ [n=1 & Typ1'(x)] ∨ 
-             [n>1 & (Ev){v≦x 
+19.Typn(x) ≡ [n=1 & Typ1'(x)] 
+           ∨ [n>1 & (Ev){v≦x 
                     & n Var v 
                     & x=R(v)}]
 
@@ -2579,14 +2586,14 @@ x 整除以 y 34)。
    Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
    die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
 
-   有 3 個特定數對應到公設 I 之 1 至 3 並分別以 z1, z2, z3 代表，
+   有 3 個特定數對應到公理 I 之 1 至 3 並分別以 z1, z2, z3 代表，
    而我們定義如下：
    
     
 34.Z-Ax(x) ≡ (x=z1 v x=z2 v x=z3)
 
-   譯註：公設 I 是皮亞諾公設，其並非公設框架，不會衍生太多公設，
-         所以可以直接以公設對映的哥德爾數 z1, z2, z3 表達。
+   譯註：公理 I 是皮亞諾公理，其並非公理框架，不會衍生太多公理，
+         所以可以直接以公理對映的哥德爾數 z1, z2, z3 表達。
          取名為 Z-Ax 應源自整數公理之德語：Zahlenaxiom
 
 /185/
@@ -2598,7 +2605,7 @@ x 整除以 y 34)。
    x ist eine durch Einsetzung in das Axiomenschema II, 1 
    entstehende Formel. 
    
-   x 是經由公設框架 II, 1 衍生之公式。
+   x 是經由公理框架 II, 1 衍生之公式。
    
    Analog werden A2-Ax, A3-Ax, A4-Ax entsprechend den Axiomen II, 
    2 bis 4 definiert.
@@ -2610,22 +2617,28 @@ x 整除以 y 34)。
   x ist eine durch Einsetzung 
   in ein Aussagenaxiom entstehende Formel.
 
-  x 是經由命題公設衍生之公式。
+  x 是經由命題公理衍生之公式。
 
-  譯註：公設 II 此地命名為命題公設 。
+  譯註：公理 II 此地命名為命題公理 。
 
               ________
-37.Q(z,y,v) ≡ E(n,m,w)[n≦ l(y) & m ≦ l(z) & w≦ z 
-                      & w=m Gl z & w Geb n, y & v Fr n,y]
+37.Q(z,y,v) ≡ E(n,m,w)[ n≦l(y) 
+                      & m≦l(z) 
+                      & w≦z 
+                      & w=m Gl z 
+                      & w Geb n,y 
+                      & v Fr  n,y]
 
   z enthält keine /Variable/, 
   die in y an einer Stelle /gebunden/ ist,
   an der v frei ist.
   
-  z 不包含變數其在 y 是綁定的位置，但 v 在此位置是自由地。
+  z 不包含變數其綁定於 y 中 v 是自由的位置。
 
-38.L1-Ax(x) ≡ (Ev,y,z,n){ v,y,z,n≦ x 
-                        & n Var v & Typn(z) & Form(y)
+38.L1-Ax(x) ≡ (Ev,y,z,n){ v,y,z,n≦x 
+                        & n Var v 
+                        & Typn(z) 
+                        & Form(y)
                         & Q(z,y,v)
                                             |  v|
                         & x=(v Gen y) Imp[Sb|y z|]}
@@ -2633,10 +2646,10 @@ x 整除以 y 34)。
    x ist eine aus dem Axiomenschema III, 1 
    durch Einsetzung entstehende Formel.
 
-   x 是經由配置公設框架 III,1 衍生之公式。
+   x 是現存公式配置於公理框架 III,1 所衍生。
 
-譯註：III, 1. vΠ(a) ⊃ Subst a |v|
-                               |c|
+                              |v|
+   譯註：III, 1. vΠ(a) ⊃ Subst a |c|
 
 39.L2-Ax(x) ≡ (Ev,p,q){ v,p,q≦ x & Var(v) & Form(p)
                         ______ 
@@ -2646,9 +2659,9 @@ x 整除以 y 34)。
    x ist eine aus dem Axiomenschema III, 2
    durch Einsetzung entstehende Formel.
 
-   x 是經由配置公設框架 III,2 衍生之公式。
+   x 是現存公式配置於公理框架 III,2 所衍生。
 
-譯註：III, 2. vΠ(b V a) ⊃ b V vΠ(a)
+   譯註：III, 2. vΠ(b V a) ⊃ b V vΠ(a)
 
 40.R-Ax(x) ≡ (Eu,v,y,n)[ u,v,y,n≦ x & n Var v
                                        ______
@@ -2658,23 +2671,23 @@ x 整除以 y 34)。
    x ist eine aus dem Axiomenschema IV, 1
    durch Einsetzung entstehende Formel.
 
-   x 是經由配置公設框架 IV, 1 衍生之公式。
+   x 是現存公式配置於公理框架 IV,1 所衍生。
 
    譯註：IV, 1. (Eu)(vΠ(u(v)≡a))
 
    Dem Axiom V, 1 entspricht eine bestimmte Zahl z4 
    und wir definieren:
 
-   將特定數 z4 對應到公設 v, 1 而我們定義：
+   將特定數 z4 對應到公理 v, 1 而我們定義：
 
-41.M-Ax(x) ≡ (En)[n≦ x & x = n Th z4]
+41.M-Ax(x) ≡ (En)[n≦x & x = n Th z4]
 
 42.Ax(x) ≡  Z-Ax(x) v A-Ax(x) v L1-Ax(x)
          v L2-Ax(x) v R-Ax(x) v  M-Ax(x)
 
    x ist ein Axiom.
  
-   x 是一個公設。
+   x 是一個公理。
 
 43.Fl(x y z) ≡ y=z Imp x
              ∨ (Ev)[ v≦x 
@@ -2700,7 +2713,7 @@ x 整除以 y 34)。
    oder unmittelbare Folge aus zwei der vorhergehenden ist).
    
    x 是一個證明數
-  「有限的公式序列，其中公式不是公設就是前二項之直接後繼」。
+  「有限的公式序列，其中公式不是公理就是前二項之直接後繼」。
 
 45.x B y ≡ Bw(x) & [l(x)] Gl x = y
 
@@ -3423,7 +3436,7 @@ anderen Eigenschaften des Systems P verwendet als die folgenden:
   (sobald man die Grundzeichen in irgend einer Weise 
    durch natürliche Zahlen ersetzt).
 
-1.公設之類別及推論規則(即「直接推論」關係)
+1.公理之類別及推論規則(即「直接推論」關係)
   是遞迴可定義(只要基礎符號以前面方法配置給自然數)。
 
 2.Jede rekursive Relation ist innerhalb des Systems P definierbar 
@@ -3441,7 +3454,7 @@ durch eine rekursiv definierbare ω-widerspruchsfreie Klasse von Axiomen.
 由於滿足預設 1, 2 及 ω-一致性之每個形式系統中存在
 型式為 (x)F(x) 之不可決定命題，
 其中 F 是一個自然數的遞迴定義屬性，
-且對每個經由增加一個由公設遞迴定義
+且對每個經由增加一個由公理遞迴定義
 且 ω-一致性之類別對前述系統之擴展也是如此。
 
 /191頁/
@@ -3456,8 +3469,8 @@ der rekursiven Definition [nach Schema (2)]
 und den logischen Regeln besteht 48). 
 
 對滿足預設 1, 2之系統，
-可輕易推論出其包含策梅諾-法蘭科西及馮紐曼之集合公設系統 47)，
-由皮亞諾公設之數論公理系統也是如此，
+可輕易推論出其包含策梅諾-法蘭科西及馮紐曼之集合公理系統 47)，
+由皮亞諾公理之數論公理系統也是如此，
 遞迴定義[依據框架 (2)]及邏輯規則也成立 48)。
 
 47) Der Beweis von Voraussetzung 1. gestaltet sich hier 
@@ -3480,7 +3493,7 @@ aus endlich vielen Schemata entstehen 48a).
 
 預設 1 一般滿足每個系統如下，
 其具有普遍之書寫規則
-且其公設(如 P 中之公設)由有限的框架之取代所產出 48a)。 
+且其公理(如 P 中之公理)由有限的框架之取代所產出 48a)。 
 
 48a) Der wahre Grund für die Unvollständigkeit, 
      welche allen formalen Systemen der Mathematik anhaftet, 
@@ -4592,9 +4605,9 @@ L1-Ax(x)    遞迴函數 38.         x 是否為第 1 邏輯公理，
                                  詞源為德文 Logikaxiom。
 L2-Ax(x)    遞迴函數 39.         x 是否為第 2 邏輯公理，
                                  詞源為德文 Logikaxiom。
-R-Ax(x)     遞迴函數 40.         x 是否為還原公設，
+R-Ax(x)     遞迴函數 40.         x 是否為還原公理，
                                  詞源為德文 Reduzibilitätsaxiom。
-M-Ax(x)     遞迴函數 41.         x 是否為集合公設，
+M-Ax(x)     遞迴函數 41.         x 是否為集合公理，
                                  詞源為德文 Mengenaxiom。
 Ax(x)       遞迴函數 42.         x 是否為公理，
                                  詞源為德文 Axiom。
