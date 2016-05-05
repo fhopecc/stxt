@@ -3250,23 +3250,20 @@ so kann man effektiv angeben:
 可以輕易說服我們前述的證明是可建構的 45a)，
 即直覺上可無反例證明以下：
 
-給定任一個以遞迴定義衍生自已定義公式之類別 𝛘，
-若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於χ)，
-則可以有效的聲明：
-
-譯註：英譯本未譯出 vorgelegt，即類別𝛘是自已定義公式衍生。
+給定任一個遞迴定義公式類別 𝛘，
+若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於𝛘)，
+則可以有效的展現：
 
 1.Einen Beweis für Neg (17 Gen r).
                                            |   17 |
 2.Für jedes beliebige n einen Beweis für Sb|r Z(n)| 
-  d.h. eine formale Entscheidung von 17 Gen r würde 
+  d. h. eine formale Entscheidung von 17 Gen r würde 
   die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
 
 1.Neg (17 Gen r) 的證明。
                        |   17 |
-2.對每個任意 n，一個 Sb|r Z(n)| 的證明，
-  即一個 17 Gen r 之形式決定將存有一個 ω-不一致之有效顯示之結果。
-
+2.對任意每個 n，一個 Sb|r Z(n)| 的證明，
+  即一個 17 Gen r 之形式決定會存有一個 ω-不一致推論之有效證明。
 
 45a) Denn alle im Beweise vorkommenden Existentialbehauptungen 
      beruhen auf Satz V, der, wie leicht zu sehen, 
@@ -3282,9 +3279,9 @@ so daß (3) und (4) (vgl. Satz V) gilt.
 Insbesondere ist also nach Satz V 
 jede rekursive Relation entscheidungsdefinit.
 
-我們將稱一個自然數之關係(類別) R(x1...xn) 可有限決定{1}，
+我們稱一個自然數之關係(類別) R(x1...xn) 可有限決定，
 若存在一個 n-元類別符號 r 使得 (3) 及 (4) (參閱命題 V) 成立。
-因此，特別是依據命題 V，每個遞迴關係都是可有限決定。
+特別是依據命題 V，每個遞迴關係都可有限決定。
 
 Analog soll ein Relationszeichen entscheidungsdefinit heißen, 
 wenn es auf diese Weise einer entscheidungsdefiniten Relation 
@@ -3294,31 +3291,32 @@ zugeordnet ist.
 若它是以這種方式被配置一個可有限決定之關係。
 
 Es genügt nun für die Existenz unentscheidbarer Sätze, 
-von der Klasse χ vorauszusetzen, 
+von der Klasse 𝛘 vorauszusetzen, 
 daß sie ω-widerspruehsfrei und entscheidungsdefinit ist. 
 
-於是這滿足不可決定命題之存在，
-藉由假設正個類別χ，設定其為 ω-一致且可有限決定。
+藉由假設類別 𝛘 為 ω-一致且可有限決定，
+不可決定命題之存在是可滿足的。
 
 /190頁/
-Denn die Entscheidungsdefinitheit überträgt sich 
-von χ auf x Bχ y (vgl.(5),(6)) 
-und auf Q(x, y) (vgl. (8.1)) und nur dies wurde 
-in obigem Beweise verwendet. 
 
-因為可有限決定性自 χ 傳遞至 x Bχ y (依據(5),(6)) 及 Q(x,y) (依據(8.1))，
+Denn die Entscheidungsdefinitheit überträgt sich 
+von 𝛘 auf x B𝛘 y (vgl.(5),(6)) 
+und auf Q(x, y) (vgl. (8.1)) und 
+nur dies wurde in obigem Beweise verwendet. 
+
+因為有限決定性自 𝛘 傳遞至 x B𝛘 y (依據(5),(6)) 及 Q(x,y) (依據(8.1))，
 且上述證明僅應用到這些。 
 
 Der unentscheidbare Satz hat in diesem Fall die Gestalt v Gen r, 
 wo r ein entscheidungsdefinites Klassenzeichen ist 
 (es genügt übrigens sogar, 
-daß χ in dem durch χ erweiterten System entscheidungsdefinit ist).
+daß 𝛘 in dem durch 𝛘 erweiterten System entscheidungsdefinit ist).
 
 本例中，不可決定命題形式為 v Gen r，
 其中 r 是一個可有限決定之類別符號
-(因此它確實滿足 χ 在經由 χ 所擴展的系統下是可有限決定的)。
+(因此它確實滿足 𝛘 在經由 𝛘 所擴展的系統下是可有限決定的)。
 
-Setzt man von χ statt ω-Widerspruchsfreiheit, 
+Setzt man von 𝛘 statt ω-Widerspruchsfreiheit, 
 bloß Widerspruchsfreiheit voraus, 
 so folgt zwar nicht die Existenz eines unentscheidbaren Satzes, 
 wohl aber die Existenz einer Eigenschaft (r),
