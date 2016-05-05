@@ -3018,7 +3018,7 @@ wobei v die freie Variable des Klassenzeichens a ist.
 若不存在類別符號 a 如下，𝛘 稱為 ω-一致性：
 
    |  |    v |       |   |             |
-(n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
+(n)|Sb|a Z(n)|εFlg(𝛘)| & |Neg (v Gen a)| εFlg(𝛘)
 
 其中 v 是類別符號 a 之自由變數。
 
@@ -3027,13 +3027,13 @@ selbstverständlich auch widerspruchsfrei.
 Es gilt aber, wie später gezeigt werden wird, 
 nicht das Umgekehrte.
 
-每個 ω-一致系統當也為一致。
-但其反向是無效的，這將在之後證明。
+每個 ω-一致系統也可自我證明為一致。
+但將在之後證明其反向並不成立。
+
+譯註：證明在那?
 
 Das allgemeine Resultat über 
 die Existenz unentseheidbarer Sätze lautet:
-
-譯註：證明在那?
 
 存在不可決定命題之一般結果如下述：
 
@@ -3047,31 +3047,24 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse 𝛘 von Formeln
          使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
          (其中 v 是 r 中的自由變數)。
 
-譯註：命題VI說明ω-一致之系統存在不可決定之命題。
 
 Beweis: Sei 𝛘 eine beliebige rekursive ω-widerspruchsfreien Klasse
         von Formeln. Wir definieren:
 
 證明：  𝛘 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
-Bwχ(x) ≡ (n)[n≦ l(x) ⊃ Ax(n Gl x) 
-                      V (n Gl x)εχ 
-                      V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
+Bw𝛘(x) ≡ (n)[n≦l(x) ⊃ Ax(n Gl x) 
+                    ∨ (n Gl x)ε𝛘 
+                    ∨ (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
             & l(x) > 0                                               (5)
 
 (vgl. den analogen Begriff 44)
 
 (參閱相似的定義 44) 
 
-譯註：Bw𝛘(x) 指 x 在 𝛘 下可證。
-
 x B𝛘 y ≡ Bwχ(x) & [l(x)] Gl x=y      (6)
 
-譯註：x Bχ y 指 x 在 χ 下為 y 的證明。
-
 Bew𝛘(x) & [Ey]y B𝛘 x                 (6.1)
-
-譯註：Bewχ(x) 指 x 在 χ 下可證。
 
 (vgl. die analogen Begriffe 45, 46).
 
@@ -3079,10 +3072,10 @@ Bew𝛘(x) & [Ey]y B𝛘 x                 (6.1)
 
 Es gilt offenbar:
 
-以下明顯地有效：
+以下顯然成立：
 
-(x)[Bewχ(x) ~ xεFlg(χ)]  (7)
-(x)[ Bew(x) → Bewχ(x)]  (8)
+(x)[Bew𝛘(x) ~ xεFlg(𝛘)]  (7)
+(x)[ Bew(x) → Bewχ(x) ]  (8)
 
 /188頁/
 
@@ -3111,11 +3104,11 @@ Nach Satz V und (8) gibt es also ein Relationszeichen q
 故存在一個關係符號 q 「具自由變數 17, 19」使得：
 
 _______________
-   |  |    19||        |  |    17   19||
-xBχ|Sb|y Z(y)|| ⊃ Bewχ|Sb|q Z(x) Z(y)||     (9)
+   |  |    19||       |  |    17   19||
+xB𝛘|Sb|y Z(y)|| ⊃ Bew𝛘|Sb|q Z(x) Z(y)||     (9)
 
-   |  |    19||        |      |    17   19||
-xBχ|Sb|y Z(y)|| ⊃ Bewχ|Neg Sb|q Z(x) Z(y)|| (10)
+   |  |    19||       |      |    17   19||
+xB𝛘|Sb|y Z(y)|| ⊃ Bew𝛘|Neg Sb|q Z(x) Z(y)|| (10)
 
 譯註：推論端去除了否定，是因為根據關係 Q 之定義。
 
@@ -3170,11 +3163,11 @@ so entsteht unter Berücksichtigung von (13) und (14)
 「根據(12)」現在於 (9) 及 (10) 我們以 p 取代 y，
 財於 (13) 及 (14) 下可得：
 
-_____________         |  |   17 ||
-xBχ(17 Gen r) ⊃ Bewχ |Sb|r Z(x)||     (15)
+_____________        |  |   17 ||
+xB𝛘(17 Gen r) ⊃ Bew𝛘 |Sb|r Z(x)||     (15)
 
-                      |      |   17 ||
-xBχ(17 Gen r) ⊃ Bewχ |Neg Sb|r Z(x)|| (16)
+                     |      |   17 ||
+xB𝛘(17 Gen r) ⊃ Bew𝛘 |Neg Sb|r Z(x)|| (16)
 
 /189頁/
 
@@ -3182,47 +3175,47 @@ Daraus ergibt sich:
 
 由此可得：
 
-1. 17 Gen r ist nicht χ-beweisbar 45). 
+1. 17 Gen r ist nicht 𝛘-beweisbar 45). 
    Denn wäre dies der Fall, so gäbe es (nach 6.1) ein n, 
    so daß n Bχ (17 Gen r).  
    Nach (16) gälte also: 
 
-1.17 Gen r 不是 χ-可證 45).
-  因為若是 χ-可證，則(依據 6.1)存在一個 n 使得 n Bχ (17 Gen r)。 
+1.17 Gen r 不是 𝛘-可證 45).
+  因為若是 𝛘-可證，則(依據 6.1)存在一個 n 使得 n B𝛘 (17 Gen r)。 
   依據(16)下式成立：
  
        |      |  17 ||
-  Bewχ |Neg Sb|rZ(n)||, 
+  Bew𝛘 |Neg Sb|rZ(n)||, 
 
-  während andererseits aus der χ-Beweisbarkeit von 17 Gen r 
+  während andererseits aus der 𝛘-Beweisbarkeit von 17 Gen r 
 
                  |  17 |
   auch die von Sb|rZ(n)| folgt. 
 
-  然而另一面觀看從 17 Gen r 的 χ-可證性也可推得下式：
+  然而另一面觀看從 17 Gen r 的 𝛘-可證性也可推得下式：
 
     |  17 |
   Sb|rZ(n)|
 
-  χ wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+  𝛘 wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
 
-  故 χ 也是不一致(甚至為 ω-不一致)。 
+  故 𝛘 也是不一致(甚至為 ω-不一致)。 
 
-45) x ist χ-beweisbar, soll bedeuten: xεFlg(χ), 
+45) x ist 𝛘-beweisbar, soll bedeuten: xεFlg(χ), 
     was nach (7) dasselbe besagt wie: Bewχ(x).
 
-45) x 是 χ-可證，應意指：xεFlg(χ)，
-    是依據 (7) 等同於：Bewχ(x).
+45) x 是 𝛘-可證，應意指：xεFlg(𝛘)，
+    是依據 (7) 等同於：Bew𝛘(x).
 
-2.Neg(17 Gen r) ist nicht χ-beweisbar.
+2.Neg(17 Gen r) ist nicht 𝛘-beweisbar.
   Beweis: 
-  Wie eben bewiesen wurde, ist 17 Gen r nicht χ-beweisbar, 
-  d.h,(nach 6.1) es gilt 
+  Wie eben bewiesen wurde, ist 17 Gen r nicht 𝛘-beweisbar, 
+  d. h, (nach 6.1) es gilt 
 
 2.Neg(17 Gen r) 不是 χ-可證。
   證明：
   正如同前之證明方式，17 Gen r 也不是 χ-可證， 
-  即,(依據 6.1)下式成立：
+  即 (依據 6.1)下式成立：
 
      ________________
   (n) n Bχ (17 Gen r). 
@@ -3237,35 +3230,37 @@ Daraus ergibt sich:
   was zusammen mit Bewχ[Neg (17 Gen r)] 
   gegen die ω-Widerspruchsfreiheit von χ verstoßen würde.
 
-  與 Bewχ[Neg (17 Gen r)] 可反駁 χ 的 ω-一致性。
+  與 Bew𝛘[Neg (17 Gen r)] 可反駁 𝛘 的 ω-一致性。
 
   17 Gen r ist also aus χ unentscheidbar, 
   womit Satz VI bewiesen ist.
 
-  χ 中的 17 Gen r 也是不可決定的，
+  𝛘 中的 17 Gen r 也是不可決定的，
   由此命題 VI 得證。 
  
 Man kann sich leicht überzeugen, 
 daß der eben geführte Beweis konstruktiv ist 45a), 
-d.h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
-Sei eine beliebige rekursiv definierte Klasse χ von Formeln vorgelegt*. 
-Wenn dann eine formale Entscheidung (aus χ)
+d. h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
+
+Sei eine beliebige rekursiv definierte Klasse 𝛘 von Formeln vorgelegt*. 
+Wenn dann eine formale Entscheidung (aus 𝛘)
 für die (effektiv aufweisbare) SatzFormel 17 Gen r vorgelegt ist, 
 so kann man effektiv angeben:
+
+可以輕易說服我們前述的證明是可建構的 45a)，
+即直覺上可無反例證明以下：
+
+給定任一個以遞迴定義衍生自已定義公式之類別 𝛘，
+若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於χ)，
+則可以有效的聲明：
+
+譯註：英譯本未譯出 vorgelegt，即類別𝛘是自已定義公式衍生。
 
 1.Einen Beweis für Neg (17 Gen r).
                                            |   17 |
 2.Für jedes beliebige n einen Beweis für Sb|r Z(n)| 
   d.h. eine formale Entscheidung von 17 Gen r würde 
   die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
-
-可以輕易說服我們前述的證明是可建構的 45a)，
-即直覺上可無反例證明以下：
-給定任一個以遞迴定義衍生自已定義公式之類別χ，
-若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於χ)，
-則可以有效的聲明：
-
-譯註：英譯本未譯出 vorgelegt，即類別χ是自已定義公式衍生。
 
 1.Neg (17 Gen r) 的證明。
                        |   17 |
@@ -4619,18 +4614,19 @@ x B y       遞迴函數 45.         x 是否為公式 y 的證明，
                                  詞源為德文 Beweis。
 Bew(x)      遞迴函數 46.         x 是否為可證式，
                                  詞源為德文 beweisbar Formel。
+Satz VI                          ω-一致之系統存在不可決定之命題。
+Bw𝛘(x)      遞迴函數 建構不可判  x 是否為 𝛘-證明表示，
+                     定之命題    詞源為德文 𝛘-Bewisfigur。
+x B𝛘 y      遞迴函數 建構不可判  x 是否為 y 的 𝛘-證明，
+                     定之命題    詞源為德文 𝛘-Beweis。
+Bew𝛘(x)     遞迴函數 建構不可判  x 是否 𝛘-可證，
+                     定之命題    詞源為德文 𝛘-beweisbar。
 Q(x,y)      遞迴函數 (8.1)       ? 
 17 Gen r    遞迴函數 (13)        ? 
 𝛘           遞迴函數 建構不可判  任一公式集合。
                      定之命題    詞源?
 Flg(𝛘)      遞迴函數 建構不可判  𝛘 之推論集合。
                      定之命題    詞源為德文 Folgerungsmenge。
-Bw𝛘(x)      遞迴函數 建構不可判  x 在 𝛘 下為證明過程。
-                     定之命題    詞源為德文 Bewisfigur。
-x Bχ y      遞迴函數 建構不可判  x 在 𝛘 下為 y 的證明。
-                     定之命題    詞源為德文 Beweis。
-Bewχ(x)     遞迴函數 建構不可判  x 在 𝛘 下可證。
-                     定之命題    詞源為德文 beweisbar。
 +           算術     算術定義    加法
 .           算術     算術定義    乘法
 ∨           算術     算術定義    或
