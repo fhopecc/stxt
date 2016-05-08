@@ -1030,6 +1030,16 @@ die sich aus den Axiomen nicht entscheiden lassen.
 而是給定與前述系統都確實關連之簡易一般整數論問題，
 也不可從公理被決定。
 
+denn 因為
+
+aber 但是
+
+weder...noch... 即非...也非...
+
+sobald 只要...
+
+während 如同
+
 複雜句
 ......
 
@@ -1240,8 +1250,6 @@ bit
 
 sowie   與
 
-
-
 語序
 ----
 
@@ -1271,7 +1279,6 @@ sowie   與
 5. zu+不定式的狀況下，反身代名詞一定放在逗號後的第一位。
 
 ＊ Es ist sehr mühsam, sich auf dise Prüfung vorzubereiten.
-
 
 發音
 ----
