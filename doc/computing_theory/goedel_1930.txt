@@ -2598,9 +2598,9 @@ x 整除以 y 34)。
 
 /185/
 
-35.A1-Ax(x) ≡ (Ey)[ y≦ x
+35.A1-Ax(x) ≡ (Ey)[ y≦x
                   & Form(y)
-                  & x = (y Dis y) imp y]
+                  & x=(y Dis y) imp y]
        
    x ist eine durch Einsetzung in das Axiomenschema II, 1 
    entstehende Formel. 
@@ -2703,7 +2703,7 @@ x 整除以 y 34)。
 
 /186頁/
 
-44.Bw(x) ≡ (n){ 0<n≦ l(x) ⊃ Ax(n Gl x) 
+44.Bw(x) ≡ (n){ 0<n≦l(x) ⊃ Ax(n Gl x) 
               V (Ep,q)[ 0<p,q<n 
                       & Fl(n Gl x, p Gl x, q Gl x)]}
          & l(x) > 0
@@ -2848,7 +2848,14 @@ Für Funktionen erster Stufe
 
 對 1 級函數（即常數及函數 x+1）此定理是顯而成立的。
 
-譯註：1 級函數請先參見基礎遞迴函數該節
+譯註：定理 V 一直是我理解這篇論文最大的門檻，
+      因為始終沒有搞懂 P 系統的真正描述，
+      其實真正 P 系統的精確描述是放在前述46個函數及關係中。
+
+      定理 V 也說明關於遞迴函數，
+      其實在 P 系統中只要使用 2 型變數及 1 型變數。
+
+      1 級函數請先參見基礎遞迴函數該節
       
       定理 R31：0(x) 可由 P 系統證明。
         1.令R(x1,x2)~0=x2
@@ -2863,6 +2870,7 @@ Für Funktionen erster Stufe
         10.依 21) 0=y1 為上式之簡寫。
 
       命題 R32：x+1 可於 P 系統決定。
+
         1.令R(x1,x2)~x1=x2+1
         2.依 P 系統縮寫，可寫下 r(u1,u2) ≡ u1=fu2，
         3.u1=fu2 標準化為 x1=fy1
@@ -2876,10 +2884,13 @@ Für Funktionen erster Stufe
 
         舉例說明： 
         1.R(1,0) ~ 1 = 0+1
-
             |   u1 , u2 |
         2.Sb|r Z(1),Z(0)| = r(f0,0) ≡ f0=f(0)=f0 
-        3.由 P 系統縮寫可建構 f0=f0 之公式。
+        3.f0=f0 展開得 x2Πx2(f0)⊃x2(f0)，可知 f0=f0 為合式公式。
+        4.由 3 及 II.1. 得 f0=f0 ∨ f0=f0 ⊃ f0=f0 為公理。
+        5.
+
+        由 P 系統縮寫可建構 f0=f0 之公式。
         
 Habe also φ die m-te Stufe.
 Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
@@ -3247,17 +3258,13 @@ Daraus ergibt sich:
  
 Man kann sich leicht überzeugen, 
 daß der eben geführte Beweis konstruktiv ist 45a), 
-d.h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
-Sei eine beliebige rekursiv definierte Klasse χ von Formeln vorgelegt*. 
+d. h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
+
+Sei eine beliebige rekursiv definierte Klasse χ von 
+Formeln vorgelegt*. 
 Wenn dann eine formale Entscheidung (aus χ)
 für die (effektiv aufweisbare) SatzFormel 17 Gen r vorgelegt ist, 
 so kann man effektiv angeben:
-
-1.Einen Beweis für Neg (17 Gen r).
-                                           |   17 |
-2.Für jedes beliebige n einen Beweis für Sb|r Z(n)| 
-  d.h. eine formale Entscheidung von 17 Gen r würde 
-  die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
 
 可以輕易說服我們前述的證明是可建構的 45a)，
 即直覺上可無反例證明以下：
@@ -3266,6 +3273,13 @@ so kann man effektiv angeben:
 則可以有效的聲明：
 
 譯註：英譯本未譯出 vorgelegt，即類別χ是自已定義公式衍生。
+
+
+1.Einen Beweis für Neg (17 Gen r).
+                                           |   17 |
+2.Für jedes beliebige n einen Beweis für Sb|r Z(n)| 
+  d.h. eine formale Entscheidung von 17 Gen r würde 
+  die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
 
 1.Neg (17 Gen r) 的證明。
                        |   17 |
