@@ -3015,7 +3015,9 @@ abgeschlossen ist.
 wenn es kein /Klassenzeichen/ a gibt, so daß:
 
    |  |    v |       |   |             |
-(n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
+(n)|Sb|a Z(n)|εFlg(𝛘)| & |Neg (v Gen a)| εFlg(𝛘)
+
+
 
 wobei v die freie Variable des Klassenzeichens a ist.
 
@@ -3029,7 +3031,7 @@ wobei v die freie Variable des Klassenzeichens a ist.
 若不存在類別符號 a 如下，𝛘 稱為 ω-一致性：
 
    |  |    v |       |   |             |
-(n)|Sb|a Z(n)|εFlg(χ)| & |Neg (v Gen a)| εFlg(χ)
+(n)|Sb|a Z(n)|εFlg(𝛘)| & |Neg (v Gen a)| εFlg(𝛘)
 
 其中 v 是類別符號 a 之自由變數。
 
@@ -3038,13 +3040,13 @@ selbstverständlich auch widerspruchsfrei.
 Es gilt aber, wie später gezeigt werden wird, 
 nicht das Umgekehrte.
 
-每個 ω-一致系統當也為一致。
-但其反向是無效的，這將在之後證明。
+每個 ω-一致系統也可自我證明為一致。
+但將在之後證明其反向並不成立。
+
+譯註：證明在那?
 
 Das allgemeine Resultat über 
 die Existenz unentseheidbarer Sätze lautet:
-
-譯註：證明在那?
 
 存在不可決定命題之一般結果如下述：
 
@@ -3053,36 +3055,29 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse 𝛘 von Formeln
          so daß weder v Gen r noch Neg(v Gen r) zu Flg(𝛘) gehört 
          (wobei v die freie Variable aus r ist).
 
-命題VI： 對每個 ω-一致遞迴之公式類別 𝛘，
-         存在遞迴類別符號 r，
-         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
-         (其中 v 是 r 中的自由變數)。
+命題VI：對每個 ω-一致遞迴之公式類別 𝛘，
+        存在遞迴類別符號 r，
+        使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
+        (其中 v 是 r 中的自由變數)。
 
-譯註：命題VI說明ω-一致之系統存在不可決定之命題。
 
 Beweis: Sei 𝛘 eine beliebige rekursive ω-widerspruchsfreien Klasse
         von Formeln. Wir definieren:
 
 證明：  𝛘 為任意一個 ω-一致遞迴之公式類別。我們定義： 
 
-Bwχ(x) ≡ (n)[n≦ l(x) ⊃ Ax(n Gl x) 
-                      V (n Gl x)εχ 
-                      V (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
+Bw𝛘(x) ≡ (n)[n≦l(x) ⊃ Ax(n Gl x) 
+                    ∨ (n Gl x)ε𝛘 
+                    ∨ (Ep,q){0<p,q<n & Fl(n Gl x, p Gl x, q Gl x)}] 
             & l(x) > 0                                               (5)
 
 (vgl. den analogen Begriff 44)
 
 (參閱相似的定義 44) 
 
-譯註：Bw𝛘(x) 指 x 在 𝛘 下可證。
-
 x B𝛘 y ≡ Bwχ(x) & [l(x)] Gl x=y      (6)
 
-譯註：x Bχ y 指 x 在 χ 下為 y 的證明。
-
 Bew𝛘(x) & [Ey]y B𝛘 x                 (6.1)
-
-譯註：Bewχ(x) 指 x 在 χ 下可證。
 
 (vgl. die analogen Begriffe 45, 46).
 
@@ -3090,10 +3085,10 @@ Bew𝛘(x) & [Ey]y B𝛘 x                 (6.1)
 
 Es gilt offenbar:
 
-以下明顯地有效：
+以下顯然成立：
 
-(x)[Bewχ(x) ~ xεFlg(χ)]  (7)
-(x)[ Bew(x) → Bewχ(x)]  (8)
+(x)[Bew𝛘(x) ~ xεFlg(𝛘)]  (7)
+(x)[ Bew(x) → Bewχ(x) ]  (8)
 
 /188頁/
 
@@ -3122,11 +3117,11 @@ Nach Satz V und (8) gibt es also ein Relationszeichen q
 故存在一個關係符號 q 「具自由變數 17, 19」使得：
 
 _______________
-   |  |    19||        |  |    17   19||
-xBχ|Sb|y Z(y)|| ⊃ Bewχ|Sb|q Z(x) Z(y)||     (9)
+   |  |    19||       |  |    17   19||
+xB𝛘|Sb|y Z(y)|| ⊃ Bew𝛘|Sb|q Z(x) Z(y)||     (9)
 
-   |  |    19||        |      |    17   19||
-xBχ|Sb|y Z(y)|| ⊃ Bewχ|Neg Sb|q Z(x) Z(y)|| (10)
+   |  |    19||       |      |    17   19||
+xB𝛘|Sb|y Z(y)|| ⊃ Bew𝛘|Neg Sb|q Z(x) Z(y)|| (10)
 
 譯註：推論端去除了否定，是因為根據關係 Q 之定義。
 
@@ -3181,11 +3176,11 @@ so entsteht unter Berücksichtigung von (13) und (14)
 「根據(12)」現在於 (9) 及 (10) 我們以 p 取代 y，
 財於 (13) 及 (14) 下可得：
 
-_____________         |  |   17 ||
-xBχ(17 Gen r) ⊃ Bewχ |Sb|r Z(x)||     (15)
+_____________        |  |   17 ||
+xB𝛘(17 Gen r) ⊃ Bew𝛘 |Sb|r Z(x)||     (15)
 
-                      |      |   17 ||
-xBχ(17 Gen r) ⊃ Bewχ |Neg Sb|r Z(x)|| (16)
+                     |      |   17 ||
+xB𝛘(17 Gen r) ⊃ Bew𝛘 |Neg Sb|r Z(x)|| (16)
 
 /189頁/
 
@@ -3193,106 +3188,117 @@ Daraus ergibt sich:
 
 由此可得：
 
-1. 17 Gen r ist nicht χ-beweisbar 45). 
+1. 17 Gen r ist nicht 𝛘-beweisbar 45). 
    Denn wäre dies der Fall, so gäbe es (nach 6.1) ein n, 
-   so daß n Bχ (17 Gen r).  
+   so daß n B𝛘 (17 Gen r).
    Nach (16) gälte also: 
 
-1.17 Gen r 不是 χ-可證 45).
-  因為若是 χ-可證，則(依據 6.1)存在一個 n 使得 n Bχ (17 Gen r)。 
+        |      |  17 ||
+   Bew𝛘 |Neg Sb|rZ(n)||, 
+
+   während andererseits aus der 𝛘-Beweisbarkeit von 17 Gen r 
+                  |  17 |
+   auch die von Sb|rZ(n)| folgt. 
+   𝛘 wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+
+1.17 Gen r 不是 𝛘-可證 45).
+  因為若是 𝛘-可證，則（依據 6.1）存在一個 n 使得 n B𝛘 (17 Gen r)。 
   依據(16)下式成立：
- 
+
        |      |  17 ||
-  Bewχ |Neg Sb|rZ(n)||, 
+  Bew𝛘 |Neg Sb|rZ(n)||, 
 
-  während andererseits aus der χ-Beweisbarkeit von 17 Gen r 
-
-                 |  17 |
-  auch die von Sb|rZ(n)| folgt. 
-
-  然而另一面觀看從 17 Gen r 的 χ-可證性也可推得下式：
+  然而另外 17 Gen r 的 𝛘-可證性也可推得*：
 
     |  17 |
   Sb|rZ(n)|
 
-  χ wäre also widerspruchsvoll (umsomehr ω-widerspruchsvoll).
+  故 𝛘 也是不一致(甚至為 ω-不一致)。 
 
-  故 χ 也是不一致(甚至為 ω-不一致)。 
+  譯註：17 Gen r 可推得 Sb(r, 17, Z(n) 是依據 38. 之關係而來。
 
-45) x ist χ-beweisbar, soll bedeuten: xεFlg(χ), 
+        論文提到的不一致是指系統會推論出 a 也推論出 ~a。
+
+45) x ist 𝛘-beweisbar,  soll bedeuten: xεFlg(χ), 
     was nach (7) dasselbe besagt wie: Bewχ(x).
 
-45) x 是 χ-可證，應意指：xεFlg(χ)，
-    是依據 (7) 等同於：Bewχ(x).
+45) x 是 𝛘-可證，應意指：xεFlg(𝛘)，
+    是依據 (7) 等同於：Bew𝛘(x).
 
-2.Neg(17 Gen r) ist nicht χ-beweisbar.
+2.Neg(17 Gen r) ist nicht 𝛘-beweisbar.
   Beweis: 
-  Wie eben bewiesen wurde, ist 17 Gen r nicht χ-beweisbar, 
-  d.h,(nach 6.1) es gilt 
-
-2.Neg(17 Gen r) 不是 χ-可證。
-  證明：
-  正如同前之證明方式，17 Gen r 也不是 χ-可證， 
-  即,(依據 6.1)下式成立：
-
+  Wie eben bewiesen wurde, ist 17 Gen r nicht 𝛘-beweisbar, 
+  d. h, (nach 6.1) es gilt 
      ________________
-  (n) n Bχ (17 Gen r). 
+  (n) n B𝛘 (17 Gen r). 
                     
   Daraus folgt nach (15) 
-
-  由此且依據 (15) 可得
 
           |  |   17 ||
   (n) Bewχ|Sb|r z(n)||,
 
-  was zusammen mit Bewχ[Neg (17 Gen r)] 
-  gegen die ω-Widerspruchsfreiheit von χ verstoßen würde.
+  was zusammen mit Bew𝛘[Neg (17 Gen r)] 
+  gegen die ω-Widerspruchsfreiheit von 𝛘 verstoßen würde.
 
-  與 Bewχ[Neg (17 Gen r)] 可反駁 χ 的 ω-一致性。
+2.Neg(17 Gen r) 不是 𝛘-可證。
+  證明：
+  如前般證明 17 Gen r 不是 𝛘-可證， 
+  即（依據 6.1）下式成立：
+     ________________
+  (n) n B𝛘 (17 Gen r). 
+   
+  譯註：上式省略了一步，即展開存在量詞縮寫：
+        a.由 Bew𝛘(17 Gen r), (6.1) ⊢ (Ey)yB𝛘x
+                           ________________          
+        b.由前式及 (32.) ⊢ (n)nB𝛘(17 Gen r)
 
-  17 Gen r ist also aus χ unentscheidbar, 
-  womit Satz VI bewiesen ist.
+  由此並依據 (15) 可得
+          |  |   17 ||
+  (n) Bew𝛘|Sb|r z(n)||,
 
-  χ 中的 17 Gen r 也是不可決定的，
-  由此命題 VI 得證。 
+  並與 Bew𝛘[Neg (17 Gen r)] 違背 𝛘 的 ω-一致性。
+
+17 Gen r ist also aus 𝛘 unentscheidbar, 
+womit Satz VI bewiesen ist.
+
+17 Gen r 無法從 𝛘 決定，因此證明命題 VI。 
  
 Man kann sich leicht überzeugen, 
 daß der eben geführte Beweis konstruktiv ist 45a), 
 d. h. es ist intuitionistisch einwandfrei folgendes bewiesen: 
 
-Sei eine beliebige rekursiv definierte Klasse χ von 
-Formeln vorgelegt*. 
-Wenn dann eine formale Entscheidung (aus χ)
+Sei eine beliebige rekursiv definierte Klasse 𝛘 von Formeln vorgelegt*. 
+Wenn dann eine formale Entscheidung (aus 𝛘)
 für die (effektiv aufweisbare) SatzFormel 17 Gen r vorgelegt ist, 
 so kann man effektiv angeben:
-
-可以輕易說服我們前述的證明是可建構的 45a)，
-即直覺上可無反例證明以下：
-給定任一個以遞迴定義衍生自已定義公式之類別χ，
-若之後可給定一個對命題公式 17 Gen r (可有效論證)之形式決定(屬於χ)，
-則可以有效的聲明：
-
-譯註：英譯本未譯出 vorgelegt，即類別χ是自已定義公式衍生。
-
 
 1.Einen Beweis für Neg (17 Gen r).
                                            |   17 |
 2.Für jedes beliebige n einen Beweis für Sb|r Z(n)| 
-  d.h. eine formale Entscheidung von 17 Gen r würde 
-  die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
+
+d. h. eine formale Entscheidung von 17 Gen r würde 
+die effektive Aufweisbarkeit eines ω-Widerspruches zur Folge haben.
+
+可以輕易說服我們前述的證明是可建構的 45a)，
+即以下可直覺無誤地證明：
+
+給定任一個遞迴定義公式類別 𝛘，
+若之後可給定一個命題公式 17 Gen r
+（可有效論證）之形式決定（源自𝛘），
+則可以有效得出：
 
 1.Neg (17 Gen r) 的證明。
                        |   17 |
-2.對每個任意 n，一個 Sb|r Z(n)| 的證明，
-  即一個 17 Gen r 之形式決定將存有一個 ω-不一致之有效顯示之結果。
+2.對任意每個 n，一個 Sb|r Z(n)| 的證明，
 
+前 2 項即一個 17 Gen r 之形式決定會存有一個 ω-不一致推論之有效證明。
 
 45a) Denn alle im Beweise vorkommenden Existentialbehauptungen 
      beruhen auf Satz V, der, wie leicht zu sehen, 
      intuitionistisch einwandfrei ist.
 
-45a) 因為所有證明中的存在聲明均根植於命題 V，這可簡易的看出，
-     直覺上是是無反例的。
+45a) 因為證明中所有存在聲明均根植於命題 V，
+     可輕易看出直覺上是無誤的。
 
 Wir wollen eine Relation (Klasse) zwischen 
 natürlichen Zahlen R(x1...xn) entscheidungsdefinit nennen, 
@@ -3300,144 +3306,146 @@ wenn es ein n-stelliges Relationszeichen r gibt,
 so daß (3) und (4) (vgl. Satz V) gilt.
 Insbesondere ist also nach Satz V 
 jede rekursive Relation entscheidungsdefinit.
-
-我們將稱一個自然數之關係(類別) R(x1...xn) 可有限決定{1}，
-若存在一個 n-元類別符號 r 使得 (3) 及 (4) (參閱命題 V) 成立。
-因此，特別是依據命題 V，每個遞迴關係都是可有限決定。
-
 Analog soll ein Relationszeichen entscheidungsdefinit heißen, 
 wenn es auf diese Weise einer entscheidungsdefiniten Relation 
 zugeordnet ist. 
-
-同樣地一個關係符號應稱為可有限決定，
-若它是以這種方式被配置一個可有限決定之關係。
-
 Es genügt nun für die Existenz unentscheidbarer Sätze, 
-von der Klasse χ vorauszusetzen, 
+von der Klasse 𝛘 vorauszusetzen, 
 daß sie ω-widerspruehsfrei und entscheidungsdefinit ist. 
 
-於是這滿足不可決定命題之存在，
-藉由假設正個類別χ，設定其為 ω-一致且可有限決定。
+一個自然數之關係（類別） R(x1...xn) 將稱為確定，
+若存在一個 n-元類別符號 r 使得 (3) 及 (4) (參閱命題 V) 成立。
+特別是，依據命題 V 每個遞迴關係都為確定。
+同樣地一個關係符號應稱為確定，
+若其如此地對映一個確定關係。
+假定類別 𝛘 為 ω-一致且確定，
+不可決定命題之存在性是可滿足的。
 
 /190頁/
-Denn die Entscheidungsdefinitheit überträgt sich 
-von χ auf x Bχ y (vgl.(5),(6)) 
-und auf Q(x, y) (vgl. (8.1)) und nur dies wurde 
-in obigem Beweise verwendet. 
 
-因為可有限決定性自 χ 傳遞至 x Bχ y (依據(5),(6)) 及 Q(x,y) (依據(8.1))，
-且上述證明僅應用到這些。 
+Denn die Entscheidungsdefinitheit überträgt sich 
+von 𝛘 auf x B𝛘 y (vgl.(5),(6)) 
+und auf Q(x, y) (vgl. (8.1)) und 
+nur dies wurde in obigem Beweise verwendet. 
 
 Der unentscheidbare Satz hat in diesem Fall die Gestalt v Gen r, 
 wo r ein entscheidungsdefinites Klassenzeichen ist 
 (es genügt übrigens sogar, 
-daß χ in dem durch χ erweiterten System entscheidungsdefinit ist).
+daß 𝛘 in dem durch 𝛘 erweiterten System entscheidungsdefinit ist).
 
-本例中，不可決定命題形式為 v Gen r，
-其中 r 是一個可有限決定之類別符號
-(因此它確實滿足 χ 在經由 χ 所擴展的系統下是可有限決定的)。
+因為確定性自 𝛘 傳遞至 x B𝛘 y (依據(5),(6)) 及 Q(x,y) (依據(8.1))，
+且前述證明僅應用到這些。 
+這種情形中不可決定命題形式為 v Gen r，
+其中 r 是一個確定類別符號
+（甚至是 𝛘 在經由 𝛘 所擴展的系統下是確定的)。
 
-Setzt man von χ statt ω-Widerspruchsfreiheit, 
+Setzt man von 𝛘 statt ω-Widerspruchsfreiheit, 
 bloß Widerspruchsfreiheit voraus, 
 so folgt zwar nicht die Existenz eines unentscheidbaren Satzes, 
 wohl aber die Existenz einer Eigenschaft (r),
 für die weder ein Gegenbeispiel angebbar, 
 noch beweisbar ist, 
 daß sie allen Zahlen zukommt. 
-
-假設衍生自 χ 之式，除了 ω-一致外，僅有一致，
-則可推得實際上除了不可決定命題之存在性，
-更可推得 (r) 性質之存在性，
-其不存在被指定之反例，
-也對所有整數不可被證明。
-
-Denn zum Beweise, daß 17 Gen r nicht χ-beweisbar ist,
-wurde nur die Widerspruchsfreiheit von χ verwendet (vgl.S.189) und 
+Denn zum Beweise, daß 17 Gen r nicht 𝛘-beweisbar ist,
+wurde nur die Widerspruchsfreiheit von 𝛘 verwendet (vgl.S.189) und 
     ____
-aus Bewχ(17 Gen r) folgt nach (15),
+aus Bew𝛘(17 Gen r) folgt nach (15),
                       |   17 |
 daß für jede Zahl x Sb|r Z(x)|, 
                               |   17 |
 folglich für keine Zahl Neg Sb|r Z(x)| χ-beweisbar ist.
 
-因為對 17 Gen r 不是 χ-可證之證明僅應用了 χ 之一致性(見 189 頁)
-           ____
-且依據(15) Bewχ(17 Gen r) 可推論出，
+假設 𝛘 僅以一致性取代 ω-一致性，
+則無法得出不可決定命題之存在性，
+但可得出存在 (r) 性質，
+
+譯註：(r) 性質指 r 這個函數描述一個整數之性質，
+      此整數代表 r 函數是不可證的。      
+
+即無法找出反例也無法證明，
+且對所有整數都如此。
+因為對 17 Gen r 不是 𝛘-可證之證明僅應用了 𝛘 之一致性(見 189 頁)
+     ____
+且從 Bew𝛘(17 Gen r) 並依據(15)可得：
                       |   17 |
-對每個整數 x 都使得 Sb|r Z(x)| 是 χ-可證，
+對每個整數 x 都使得 Sb|r Z(x)| 
                        |   17 |
-以及沒有整數使得 Neg Sb|r Z(x)| 是 χ-可證。
+以及沒有整數使得 Neg Sb|r Z(x)| 之陳述是 𝛘-可證。
 
-Adjungiert* man Neg(17 Gen r) zu χ, 
+Adjungiert* man Neg(17 Gen r) zu 𝛘, 
 so erhält man eine widerspruchsfreie 
-aber nicht ω-widerspruchsfreie Formelklasse χ'. 
-
-將 Neg(17 Gen r) 加給 χ，
-可得一個一致但非 ω-一致之公式類別 χ'。
-
+aber nicht ω-widerspruchsfreie Formelklasse 𝛘'.
+𝛘' ist widerspruchsfrei, 
+denn sonst wäre 17 Gen r 𝛘-beweisbar, 
+𝛘' ist aber nicht ω-widerspruchsfrei,
+           ____
+denn wegen Bew𝛘(17 Gen r) und (15) gilt: 
+          |   17 |
+(x)Bew𝛘 Sb|r Z(x)|, umsomehr also: 
+           |   17 |
+(x)Bew𝛘' Sb|r Z(x)| und anderseits gilt natürlich: 
+Bew𝛘' [Neg (17 Gen r)]) 46).
+ 
 譯註：Adjungiert 指代數物件之擴充，
       指得是代數物件擴充原本不屬於其之元素。
-      
-χ' ist widerspruchsfrei, 
-denn sonst wäre 17 Gen r χ-beweisbar, 
-χ' ist aber nicht ω-widerspruchsfrei,
 
-χ' 是一致的，除非 17 Gen r 是 χ-可證，
-然而 χ' 並非 ω-一致。
-
-           ____
-denn wegen Bewχ(17 Gen r) und (15) gilt: 
-          |   17 |
-(x)Bewχ Sb|r Z(x)|, umsomehr also: 
-           |   17 |
-(x)Bewχ' Sb|r Z(x)| und anderseits gilt natürlich: 
-Bewχ' [Neg (17 Gen r)]) 46).
+將 Neg(17 Gen r) 加給 𝛘，
+可得一個一致但非 ω-一致之公式類別 𝛘'。
+𝛘' 是一致的且因為通常 17 Gen r 是 𝛘-可證，
+然而 𝛘' 並非 ω-一致，
          ____
-因為依據 Bewχ(17 Gen r) 及 (15) 使得： 
-
+因為依據 Bew𝛘(17 Gen r) 及 (15) 使得： 
           |   17 |
-(x)Bewχ Sb|r Z(x)|，更可得： 
+(x)Bew𝛘 Sb|r Z(x)|
+
+更可得： 
            |   17 |
-(x)Bewχ' Sb|r Z(x)| 且另一方面自然可得：
+(x)Bew𝛘' Sb|r Z(x)| 
 
-Bewχ'[Neg (17 Gen r)]) 46)。
+且另外顯然可得
+Bew𝛘'[Neg (17 Gen r)]) 46)。
 
-46) Die Existenz widerspruchsfreier und nicht ω-widerspruchsfreier χ ist 
+譯註：顯然可得是因為 Neg(17 Gen r) 已加給 𝛘'。
+
+46) Die Existenz widerspruchsfreier und nicht 
+    ω-widerspruchsfreier 𝛘 ist 
     damit natürlich nur unter der Voraussetzung bewiesen, 
-    daß es überhaupt widerspruchsfreie χ gibt (d.h. daß P widerspruchsfrei ist).
+    daß es überhaupt widerspruchsfreie 𝛘 gibt
+    (d. h. daß P widerspruchsfrei ist).
 
-46) 一致但非 ω-一致 χ 之存在性僅基於以下假定自然地被證明：
-    通常是存在一致的 χ(即 P 是一致地)。
+46) 一致但非 ω-一致 𝛘 之存在性顯然地僅基於以下假定證明：
+    一開始便存在一致的 𝛘（即 P 是一致地）。
 
 Ein Spezialfall von Satz VI ist der, 
-daß die Klasse χ aus endlich vielen Formeln 
+daß die Klasse 𝛘 aus endlich vielen Formeln 
 (und ev. den daraus durch Typenerhöhung entstehenden) besteht. 
 Jede endliche Klasse α ist natürlich rekursiv. 
-
-定理 VI 之特例存在有限公式之類別 χ
-(且可能經由型別提升產生)。 
-每個有限類別 α 自然是遞迴地。
-
 Sei a die größte in α enthaltene Zahl. 
-Dann gilt in diesem Fall für χ:
+Dann gilt in diesem Fall für 𝛘:
+
+定理 VI 之特例是由有限公式所建構之類別 𝛘
+（且可能經由型別提升建構）。 
+每個有限類別 α 顯然是遞迴地。
+
+譯註：「有限」類別是遞迴地是因為可以列舉其特徵矩陣來建構。
 
 令 a 是 α 中最大的整數。
-則對 χ 而言下式成立：
+則對 𝛘 而言下式成立：
 
-x ε χ (E m,n) [m≦ x & n≦ a & nεα & x = m Th n ]
+x ε 𝛘 (E m,n) [m≦x & n≦a & nεα & x = m Th n ]
 
-χ ist also rekursiv. 
+𝛘 ist also rekursiv. 
 Das erlaubt z. B. zu schließen, 
 daß auch mit Hilfe des Auswahlaxioms (für alle Typen) oder 
 der verallgemeinerten Kontinuumhypothese 
 nicht alle Sätze entscheidbar sind,
 vorausgesetzt, daß diese Hypothesen ω-widerspruchsfrei sind.
 
-χ 也是遞迴地。
-例如這允許推論如下：
-即使經由選擇公理(對所有型別)或一般化連續統假設之幫助下，
-不是所有命題都可被決定，
-這些假設都預設為 ω-一致。
+𝛘 也是遞迴地。
+這允許推論如下例：
+即使藉由選擇公理（對所有型別）或一般化連續統假設，
+不是所有命題都可決定，
+當預設這些假設都為 ω-一致。
 
 Beim Beweise von Satz VI wurden keine 
 anderen Eigenschaften des Systems P verwendet als die folgenden:
@@ -3445,89 +3453,92 @@ anderen Eigenschaften des Systems P verwendet als die folgenden:
 在命題 VI 的證明中僅應用 P 系統如下的性質：
 
 1.Die Klasse der Axiome und die Schlußregeln 
-  (d.h. die Relation "unmittelbare Folge") 
+  (d. h. die Relation "unmittelbare Folge") 
   sind rekursiv definierbar 
   (sobald man die Grundzeichen in irgend einer Weise 
    durch natürliche Zahlen ersetzt).
 
-1.公理之類別及推論規則(即「直接推論」關係)
-  是遞迴可定義(只要基礎符號以前面方法配置給自然數)。
-
 2.Jede rekursive Relation ist innerhalb des Systems P definierbar 
   (im Sinn von Satz V).
 
-2.每個遞迴關係可由系統 P 定義(依命題 V 之意義)。
+1.公理之類別及推論規則（即「直接推論」關係）
+  是遞迴可定義（只要基礎符號以前述方法配置給自然數）。
+
+2.每個遞迴關係可由系統 P 定義（以命題 V 之方式）。
 
 Daher gibt es in jedem formalen System, 
-das den Voraussetzungen l, 2 genügt und ω-widerspruchsfrei ist, 
+das den Voraussetzungen 1, 2 genügt und ω-widerspruchsfrei ist, 
 unentscheidbare Sätze der Form (x)F(x), 
 wo F eine rekursiv definierte Eigenschaft natürlieher Zahlen ist, 
 und ebenso in jeder Erweiterung eines solchen Systems 
-durch eine rekursiv definierbare ω-widerspruchsfreie Klasse von Axiomen. 
+durch eine rekursiv definierbare ω-widerspruchsfreie Klasse 
+von Axiomen. 
 
-由於滿足預設 1, 2 及 ω-一致性之每個形式系統中存在
+於是每個滿足預設 1, 2 且 ω-一致之形式系統中存在
 型式為 (x)F(x) 之不可決定命題，
 其中 F 是一個自然數的遞迴定義屬性，
-且對每個經由增加一個由公理遞迴定義
-且 ω-一致性之類別對前述系統之擴展也是如此。
+且對每個經由增加遞迴定義且 ω-一致公理類別所擴充之系統也是如此。
 
 /191頁/
 
 Zu den Systeman, welche die Voraussetzungen 1, 2 erfüllen,
-gehöran, wie man leicht bestätigen kann, 
+gehören, wie man leicht bestätigen kann, 
 das Zermelo-Fraenkalsche und 
 das v.Neumannsche Axiomensystem der Mengenlehre 47), 
 ferner das Axiomensystem der Zahlenthaorie, 
 welches aus den Peanosehen Axiomen, 
 der rekursiven Definition [nach Schema (2)] 
 und den logischen Regeln besteht 48). 
+Die Vorassetzung 1. erfüllt überhaupt jedes System,
+dessen Schlußregeln die gewöhnlichen sind und 
+dessen Axiome (analog wie in P) durch Einsetzung 
+aus endlich vielen Schemata entstehen 48a).
 
-對滿足預設 1, 2之系統，
-可輕易推論出其包含策梅諾-法蘭科西及馮紐曼之集合公理系統 47)，
-由皮亞諾公理之數論公理系統也是如此，
-遞迴定義[依據框架 (2)]及邏輯規則也成立 48)。
+對滿足預設 1, 2 系統，
+像是策梅諾-法蘭科西及馮紐曼之集合公理系統 47)，
+更如皮亞諾公理衍生之數論公理系統，
+可輕易建構出遞迴定義「依據框架 (2)」及邏輯規則 48)。
+預設 1 一般滿足每個系統如下，
+其書寫規則是普遍
+且其公理（如 P 中之公理）經由有限框架取代所建構 48a)。 
 
 47) Der Beweis von Voraussetzung 1. gestaltet sich hier 
     sogar einfacher als im Falle des Systems P, 
     da es nur eine Art von Grundvariablen gibt 
     (bzw.zwei bei J. v. Neumann).
 
-47) 預設 1 之證明在此甚至比系統 P 更簡單，
-    因為只存在一種基礎變數(或 2 種，根據馮紐曼)。
+47) 在此證明滿足預設 1 甚而比系統 P 更簡單，
+    因為只存在一種基礎變數（或 2 種，根據馮紐曼）。
 
 48) Vgl. Problem III in D. Hilberts Vortrag: 
     Probleme der Grundlegung der Mathematik. Math. Ann. 102.
 
 48) 參閱希爾伯特演講之問題 III：數學基礎之問題，數學年報，102。
 
-Die Vorassetzung 1. erfüllt überhaupt jedes System,
-dessen Schlußregeln die gewöhnlichen sind und 
-dessen Axiome (analog wie in P) durch Einsetzung 
-aus endlich vielen Schemata entstehen 48a).
-
-預設 1 一般滿足每個系統如下，
-其具有普遍之書寫規則
-且其公理(如 P 中之公理)由有限的框架之取代所產出 48a)。 
-
 48a) Der wahre Grund für die Unvollständigkeit, 
      welche allen formalen Systemen der Mathematik anhaftet, 
      liegt, wie im II. Teil dieser Abhandlung gezeigt werden wird, 
-     darin, daß die Bildung immer höherer Typen sich ins Transfinite fortsetzen läßt. 
+     darin, daß die Bildung immer höherer Typen sich 
+     ins Transfinite fortsetzen läßt. 
      (Vgl. D. Hilbert, Über das Unendliche, Math. Ann. 95, S. 184), 
-     während in jedem formalen System höchstens abzählbar viele vorhanden sind. 
-     Man kann nämlich zeigen, daß die hier aufgestellten unentscheidbaren Sätze 
-     durch Adjunktion passender höherer Typen (z. B. des Typus ω zum System P) 
+     während in jedem formalen System 
+     höchstens abzählbar viele vorhanden sind. 
+     Man kann nämlich zeigen, 
+     daß die hier aufgestellten unentscheidbaren Sätze 
+     durch Adjunktion passender höherer Typen 
+     (z. B. des Typus ω zum System P) 
      immer entscheidbar werden. 
      Analoges gilt auch für das Axiomensystem der Mengenlehre.
 
-48a) 連接在所有數學形式系統之不完備性的真正基礎在於，
-     如同此論文第 II. 部分所展示，
-     其甚至可提升型別到超限。
+48a) 所有數學形式系統固有之不完備性的真正基礎在於，
+     如同論文 II. 部分所展示，
+     總是存在更高型別之建構本身可提升至超限。
      (參閱希爾伯特，超越無限，數學年報 95，184 頁)，
-     而每個形式系統中至多出現有限多個型別。
+     其中每個形式系統中至多出現有限多個型別。
      同樣可以展示，
-     不可決定命題總是可透過擴展適合之更高型別(例如系統 P 的 ω 型別)而可被決定。
-     同樣地於集合公理系統也是成立。
+     已建構之不可決定命題總是可透過更適合更高之型別擴展
+     (例如系統 P 的 ω 型別)而可被決定。
+     同樣地集合公理系統也成立。
 
 推廣至算術系統
 --------------
@@ -3564,7 +3575,7 @@ Insbesondere sind z. B. die Relationen "größer" und
 
 「算術命題」概念可對應地定義出來。
 特別是如關係「大於」和對一個模數之「同餘」都是算術，
-由於以下關係成立：
+由以下關係可看出：
            ____
 x>y       ~(Ez)[y=x+z]
 
@@ -3926,17 +3937,17 @@ da der ganze Beweis von Satz VII sich (für jedes spezielle F)
 innerhalb des Systems P formalisieren läßt, 
 ist diese Äquivalenz in P beweisbar. Daher gilt:
 
-依據命題 VII 每個形式為 (x)F(x) 之問題（F 為遞迴）
-均存在一個等值算術問題，
-且由於命題 VII 整個證明本身（對每個特定之 F）可由系統 P 定義，
-此等值性在 P 中可證。因此可得：
+依據命題 VII，
+對每個形式為 (x)F(x) 之問題（F 遞迴）存在一個等值算術問題，
+由於命題 VII 整個證明本身（對每個特定之 F）
+能於系統 P 內形式化，故其等值性可於 P 內證明。
+因此可得：
 
 Satz VIII: 
 In jedem der in Satz VI genannten formalen Systeme 53) gibt es 
 unentscheidbare arithmetische Sätze.
 
 命題 VIII：
-
 在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
 
 Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
@@ -3946,33 +3957,33 @@ und dessen Erweiterungen durch
 Wir leiten schließlich noch folgendes Resultat her:
 
 （依據頁190之注釋）同樣可推廣至集合公理系統
-及其經由公理之ω-一致性遞迴類別所擴展之系統。
-最後可得以下這樣之結果：
-
-53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
-    welche aus P durch Hinzufügung einer rekursiv definierbaren Klasse 
-    von Axiomen entstehen.
-    
-53) 這些 ω-一致系統係由公理類別遞迴定義擴展 P 系統而來。
-
+及其經由ω-一致性遞迴公理類別所擴展之系統。
+總結可得以下結果：
 
 Satz IX: 
 In allen in Satz VI genannten formalen Systemen 53) gibt es 
 unentscheidbare Problem des engeren Funktionenkalküls 54)
-(d.h. Formeln des engeren Funktionenkalküls,
+(d. h. Formeln des engeren Funktionenkalküls,
  für die weder Allgemeingültigkeit 
  noch Existenz eines Gegenbeispiels beweisbar ist) 55).
 
 命題 IX:
-命題 VI 提到之所有形式系統 53)存在有限函數計算之不可決定問題 54)
-（即有限函數計算之公式，不只其有效性且其反例之存在均不可證明）55)。
+所有命題 VI 提到之形式系統 53)存在有限函數計算之不可決定問題 54)
+（即有限函數計算公式之有效性或反例存在性均不可證明）55)。
+
+53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
+    welche aus P durch Hinzufügung einer rekursiv 
+    definierbaren Klasse 
+    von Axiomen entstehen.
+    
+53) 即為此 ω-一致系統係 P 系統經由遞迴可定義公理類別擴展而來。
 
 54) Vgl. Hilbert-Ackermann, Grundzüge der theoretischen Logik.
     Im System P sind unter Formeln des engeren Funktionenkalküls 
     diejenigen zu verstehen, welche aus den Formeln 
     des engeren Funktionenkalküls der PM durch die 
-    auf S.176 angedeutete Ersetzung der Relationen durch Klassen höheren 
-    Typs entstehen.
+    auf S.176 angedeutete Ersetzung der Relationen 
+    durch Klassen höheren Typs entstehen.
 
 54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
     在系統 P 中，
@@ -3980,16 +3991,19 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
 
 55) In meiner Arbeit: 
-    Die Vollstiändigkeit der Axiome des logischen Funktionenkalküls, 
+    Die Vollstiändigkeit der Axiome 
+    des logischen Funktionenkalküls, 
     Monatsh. f. Math. u. Phys. XXXVII, 2, 
-    habe ich gezeigt, daß jede Formel des engeren Funktionenkalküls 
+    habe ich gezeigt, daß jede Formel 
+    des engeren Funktionenkalküls 
     entweder als allgemeingültig nachweisbar ist 
     oder ein Gegenbeispiel existiert; 
     die Existenz dieses Gegenbeispiels ist aber nach Satz IX 
     nicht immer nachweisbar (in den angeführten formalen Systemen).
     Monatsh. für Mathematik and Physik. XXXVIII. Band. 1
 
-55) 在我的工作：邏輯函數運算公理之完全性，數學與物理月刊 XXXVII, 2,
+55) 在我的工作：邏輯函數運算公理之完備性，
+    數學與物理月刊 XXXVII, 2,
     已指出每個受限函數計算之公式既非普遍可證也不存在任一反例；
     依據命題 IX 反例之存在並非總是可證（在前述形式系統內）。
     數學與物理月刊 XXXVIII, 2, Band. 1。
@@ -4633,18 +4647,19 @@ x B y       遞迴函數 45.         x 是否為公式 y 的證明，
                                  詞源為德文 Beweis。
 Bew(x)      遞迴函數 46.         x 是否為可證式，
                                  詞源為德文 beweisbar Formel。
+Satz VI                          ω-一致之系統存在不可決定之命題。
+Bw𝛘(x)      遞迴函數 建構不可判  x 是否為 𝛘-證明表示，
+                     定之命題    詞源為德文 𝛘-Bewisfigur。
+x B𝛘 y      遞迴函數 建構不可判  x 是否為 y 的 𝛘-證明，
+                     定之命題    詞源為德文 𝛘-Beweis。
+Bew𝛘(x)     遞迴函數 建構不可判  x 是否 𝛘-可證，
+                     定之命題    詞源為德文 𝛘-beweisbar。
 Q(x,y)      遞迴函數 (8.1)       ? 
 17 Gen r    遞迴函數 (13)        ? 
 𝛘           遞迴函數 建構不可判  任一公式集合。
                      定之命題    詞源?
 Flg(𝛘)      遞迴函數 建構不可判  𝛘 之推論集合。
                      定之命題    詞源為德文 Folgerungsmenge。
-Bw𝛘(x)      遞迴函數 建構不可判  x 在 𝛘 下為證明過程。
-                     定之命題    詞源為德文 Bewisfigur。
-x Bχ y      遞迴函數 建構不可判  x 在 𝛘 下為 y 的證明。
-                     定之命題    詞源為德文 Beweis。
-Bewχ(x)     遞迴函數 建構不可判  x 在 𝛘 下可證。
-                     定之命題    詞源為德文 beweisbar。
 +           算術     算術定義    加法
 .           算術     算術定義    乘法
 ∨           算術     算術定義    或
@@ -4656,6 +4671,7 @@ A           算術     算術定義    A 的否定，
 =           算術     算術定義    等於
 >           算術     算術命題    大於
 x≡y(mod n)  算術     算術命題    同餘
+Satz VII    算術     命題 VII           
 
            __
 邏輯常數 ∨,  , (x), = 所定義，
