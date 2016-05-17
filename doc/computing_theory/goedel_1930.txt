@@ -2598,9 +2598,9 @@ x 整除以 y 34)。
 
 /185/
 
-35.A1-Ax(x) ≡ (Ey)[ y≦ x
+35.A1-Ax(x) ≡ (Ey)[ y≦x
                   & Form(y)
-                  & x = (y Dis y) imp y]
+                  & x=(y Dis y) imp y]
        
    x ist eine durch Einsetzung in das Axiomenschema II, 1 
    entstehende Formel. 
@@ -2703,7 +2703,7 @@ x 整除以 y 34)。
 
 /186頁/
 
-44.Bw(x) ≡ (n){ 0<n≦ l(x) ⊃ Ax(n Gl x) 
+44.Bw(x) ≡ (n){ 0<n≦l(x) ⊃ Ax(n Gl x) 
               V (Ep,q)[ 0<p,q<n 
                       & Fl(n Gl x, p Gl x, q Gl x)]}
          & l(x) > 0
@@ -2848,7 +2848,14 @@ Für Funktionen erster Stufe
 
 對 1 級函數（即常數及函數 x+1）此定理是顯而成立的。
 
-譯註：1 級函數請先參見基礎遞迴函數該節
+譯註：定理 V 一直是我理解這篇論文最大的門檻，
+      因為始終沒有搞懂 P 系統的真正描述，
+      其實真正 P 系統的精確描述是放在前述46個函數及關係中。
+
+      定理 V 也說明關於遞迴函數，
+      其實在 P 系統中只要使用 2 型變數及 1 型變數。
+
+      1 級函數請先參見基礎遞迴函數該節
       
       定理 R31：0(x) 可由 P 系統證明。
         1.令R(x1,x2)~0=x2
@@ -2863,6 +2870,7 @@ Für Funktionen erster Stufe
         10.依 21) 0=y1 為上式之簡寫。
 
       命題 R32：x+1 可於 P 系統決定。
+
         1.令R(x1,x2)~x1=x2+1
         2.依 P 系統縮寫，可寫下 r(u1,u2) ≡ u1=fu2，
         3.u1=fu2 標準化為 x1=fy1
@@ -2876,10 +2884,13 @@ Für Funktionen erster Stufe
 
         舉例說明： 
         1.R(1,0) ~ 1 = 0+1
-
             |   u1 , u2 |
         2.Sb|r Z(1),Z(0)| = r(f0,0) ≡ f0=f(0)=f0 
-        3.由 P 系統縮寫可建構 f0=f0 之公式。
+        3.f0=f0 展開得 x2Πx2(f0)⊃x2(f0)，可知 f0=f0 為合式公式。
+        4.由 3 及 II.1. 得 f0=f0 ∨ f0=f0 ⊃ f0=f0 為公理。
+        5.
+
+        由 P 系統縮寫可建構 f0=f0 之公式。
         
 Habe also φ die m-te Stufe.
 Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
@@ -3044,10 +3055,10 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse 𝛘 von Formeln
          so daß weder v Gen r noch Neg(v Gen r) zu Flg(𝛘) gehört 
          (wobei v die freie Variable aus r ist).
 
-命題VI： 對每個 ω-一致遞迴之公式類別 𝛘，
-         存在遞迴類別符號 r，
-         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
-         (其中 v 是 r 中的自由變數)。
+命題VI：對每個 ω-一致遞迴之公式類別 𝛘，
+        存在遞迴類別符號 r，
+        使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
+        (其中 v 是 r 中的自由變數)。
 
 
 Beweis: Sei 𝛘 eine beliebige rekursive ω-widerspruchsfreien Klasse
@@ -3460,7 +3471,8 @@ das den Voraussetzungen 1, 2 genügt und ω-widerspruchsfrei ist,
 unentscheidbare Sätze der Form (x)F(x), 
 wo F eine rekursiv definierte Eigenschaft natürlieher Zahlen ist, 
 und ebenso in jeder Erweiterung eines solchen Systems 
-durch eine rekursiv definierbare ω-widerspruchsfreie Klasse von Axiomen. 
+durch eine rekursiv definierbare ω-widerspruchsfreie Klasse 
+von Axiomen. 
 
 於是每個滿足預設 1, 2 且 ω-一致之形式系統中存在
 型式為 (x)F(x) 之不可決定命題，
@@ -3563,7 +3575,7 @@ Insbesondere sind z. B. die Relationen "größer" und
 
 「算術命題」概念可對應地定義出來。
 特別是如關係「大於」和對一個模數之「同餘」都是算術，
-由於以下關係成立：
+由以下關係可看出：
            ____
 x>y       ~(Ez)[y=x+z]
 
@@ -3925,17 +3937,17 @@ da der ganze Beweis von Satz VII sich (für jedes spezielle F)
 innerhalb des Systems P formalisieren läßt, 
 ist diese Äquivalenz in P beweisbar. Daher gilt:
 
-依據命題 VII 每個形式為 (x)F(x) 之問題（F 為遞迴）
-均存在一個等值算術問題，
-且由於命題 VII 整個證明本身（對每個特定之 F）可由系統 P 定義，
-此等值性在 P 中可證。因此可得：
+依據命題 VII，
+對每個形式為 (x)F(x) 之問題（F 遞迴）存在一個等值算術問題，
+由於命題 VII 整個證明本身（對每個特定之 F）
+能於系統 P 內形式化，故其等值性可於 P 內證明。
+因此可得：
 
 Satz VIII: 
 In jedem der in Satz VI genannten formalen Systeme 53) gibt es 
 unentscheidbare arithmetische Sätze.
 
 命題 VIII：
-
 在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
 
 Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
@@ -3945,33 +3957,33 @@ und dessen Erweiterungen durch
 Wir leiten schließlich noch folgendes Resultat her:
 
 （依據頁190之注釋）同樣可推廣至集合公理系統
-及其經由公理之ω-一致性遞迴類別所擴展之系統。
-最後可得以下這樣之結果：
-
-53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
-    welche aus P durch Hinzufügung einer rekursiv definierbaren Klasse 
-    von Axiomen entstehen.
-    
-53) 這些 ω-一致系統係由公理類別遞迴定義擴展 P 系統而來。
-
+及其經由ω-一致性遞迴公理類別所擴展之系統。
+總結可得以下結果：
 
 Satz IX: 
 In allen in Satz VI genannten formalen Systemen 53) gibt es 
 unentscheidbare Problem des engeren Funktionenkalküls 54)
-(d.h. Formeln des engeren Funktionenkalküls,
+(d. h. Formeln des engeren Funktionenkalküls,
  für die weder Allgemeingültigkeit 
  noch Existenz eines Gegenbeispiels beweisbar ist) 55).
 
 命題 IX:
-命題 VI 提到之所有形式系統 53)存在有限函數計算之不可決定問題 54)
-（即有限函數計算之公式，不只其有效性且其反例之存在均不可證明）55)。
+所有命題 VI 提到之形式系統 53)存在有限函數計算之不可決定問題 54)
+（即有限函數計算公式之有效性或反例存在性均不可證明）55)。
+
+53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
+    welche aus P durch Hinzufügung einer rekursiv 
+    definierbaren Klasse 
+    von Axiomen entstehen.
+    
+53) 即為此 ω-一致系統係 P 系統經由遞迴可定義公理類別擴展而來。
 
 54) Vgl. Hilbert-Ackermann, Grundzüge der theoretischen Logik.
     Im System P sind unter Formeln des engeren Funktionenkalküls 
     diejenigen zu verstehen, welche aus den Formeln 
     des engeren Funktionenkalküls der PM durch die 
-    auf S.176 angedeutete Ersetzung der Relationen durch Klassen höheren 
-    Typs entstehen.
+    auf S.176 angedeutete Ersetzung der Relationen 
+    durch Klassen höheren Typs entstehen.
 
 54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
     在系統 P 中，
@@ -3979,21 +3991,25 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
 
 55) In meiner Arbeit: 
-    Die Vollstiändigkeit der Axiome des logischen Funktionenkalküls, 
+    Die Vollstiändigkeit der Axiome 
+    des logischen Funktionenkalküls, 
     Monatsh. f. Math. u. Phys. XXXVII, 2, 
-    habe ich gezeigt, daß jede Formel des engeren Funktionenkalküls 
+    habe ich gezeigt, daß jede Formel 
+    des engeren Funktionenkalküls 
     entweder als allgemeingültig nachweisbar ist 
     oder ein Gegenbeispiel existiert; 
     die Existenz dieses Gegenbeispiels ist aber nach Satz IX 
     nicht immer nachweisbar (in den angeführten formalen Systemen).
     Monatsh. für Mathematik and Physik. XXXVIII. Band. 1
 
-55) 在我的工作：邏輯函數運算公理之完全性，數學與物理月刊 XXXVII, 2,
+55) 在我的工作：邏輯函數運算公理之完備性，
+    數學與物理月刊 XXXVII, 2,
     已指出每個受限函數計算之公式既非普遍可證也不存在任一反例；
     依據命題 IX 反例之存在並非總是可證（在前述形式系統內）。
     數學與物理月刊 XXXVIII, 2, Band. 1。
 
 /194頁/
+
 Dies beruht auf:
 
 這基於：
@@ -4658,6 +4674,7 @@ A           算術     算術定義    A 的否定，
 =           算術     算術定義    等於
 >           算術     算術命題    大於
 x≡y(mod n)  算術     算術命題    同餘
+Satz VII    算術     命題 VII           
 
            __
 邏輯常數 ∨,  , (x), = 所定義，

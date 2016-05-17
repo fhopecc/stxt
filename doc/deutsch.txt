@@ -1102,6 +1102,8 @@ dass du es für nutzlose Dinge ausgibst.
 情況從句
 ++++++++
 
+情況從句用來補充主句背景之資訊。
+
 Dieser alte Mann hat sein Leben lang dafür gearbeitet, 
 dass sein Sohn ein besseres Leben haben kann als er selbst.
 
@@ -1111,9 +1113,8 @@ dass sein Sohn ein besseres Leben haben kann als er selbst.
 並由從屬連詞 daß 連接，該詞相當於英文的 that。 
 
 
-Ich machte die Betten, während meine Frau abwusch.我作床當我老婆在洗澡時。
-
-
+Ich machte die Betten, während meine Frau abwusch.
+我作床當我老婆在洗澡時。
 
 Während meine Frau abwusch, machte ich die Betten.當我老婆在洗澡時，我作床。
 主句動詞 machte 移到子句首。
@@ -2933,10 +2934,7 @@ auf den Tisch 往桌子上放
 über 若動詞為兩地間之移動用賓格，
      為表示停在某地用與格。
 
-bei
-...
-
-支配與格。 bei dem 簡寫作 beim。
+bei 支配與格。 bei dem 簡寫作 beim。
 
 1.在側，在旁；在，在某處
 
@@ -2969,6 +2967,15 @@ Selbst bei größter Anstrengung konnte er nicht mehr weiter.
 即使用盡全身力氣，他還是走不動了。
 
 Bei dem Verdienst kann er sich locker den Urlaub in der Karibik leisten.　用自己的收入，他完全可以去加勒比群島度假。
+
+gemäß + dat 
+
+Gemäß Satz VII gibt es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes arithmetisches Problem 
+
+依據命題 VII 對每個形式為 (x)F(x) 之問題（F 為遞迴）
+存在一個等值算術問題，
+
 
 6.每…
 （宣誓用語）借，於
