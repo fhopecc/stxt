@@ -4007,7 +4007,7 @@ des engeren Funktionenkalküls
  der Richtigkeit von (x)F(x) äquivalent ist).
 
 命題 X：
-每個形式如 (x)F(x) （F 遞迴）之問題可化約成受限函數運算公式可否滿足之問題。
+每個形式如 (x)F(x) （F 遞迴）之問題可化約成受限函數運算公式滿足問題。
 （即對每個遞迴 F 可給定一個受限函數運算之公式，
   其可滿足性等價於 (x)F(x) 之正確性）。
 
@@ -4019,18 +4019,35 @@ aufbauen 56), wobei (x) und = sich nur auf Individuen beziehen dürfen.
 Wir fügen zu diesen Zeichen noch eine dritte Art 
 von Variablen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
 die Gegenstandsfunktionen vertreten 
-(d.h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
+(d. h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
 deren Argumente und Werte Individuen sind 57).
 
 受限函數計算（以下稱為 e.F.）包含這些公式，
-其本身由下述基本符號建構 56)：
--,V,(x),=;
+其由下述基本符號建構 56)：
+-,∨,(x),=;
 x,y...（單元變數）
 F(x), G(x y), H(x, y, z)...（屬性變數及關係變數） 
-其中 (x) 及 = 僅可應用在個體。
+其中 (x) 及 = 僅能參照於個體。
 對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
-表示物件函數（即 φ(x), ψ(x y) 等等明確指向其參數與值為個體之函數。57) 
+表示物件函數（即 φ(x), ψ(x y) 等等用來表示參數與值為個體之單射函數。57) 
  
+譯註：第三種變數形式，因受限函數運算已定義個體及關係變數之形式，
+      故為第三種。
+
+Eine Formel, die außer den zuerst angeführten Zeichen des e. F.
+noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthält, 
+soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
+Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
+ohneweiters auf Formeln i.w.S. und es gilt der Satz, 
+daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
+so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
+
+除了首先引入受限函數計算之符號也包含第三種變數（如 φ(x), ψ(x y) 等等）
+之公式稱為較廣義公式（簡寫 i. w. S.） 58)。
+「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
+對每個較廣義公式 A 而言，可給定一個較受限函數計算之普通公式，
+使得 A 的可滿足性等價於 B 的。
+
 56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
     das Zeichen = nicht zum engeren Funktionenkalkül. 
     Es gibt aber zu jeder Formel, in der das Zeichen = vorkommt, 
@@ -4047,20 +4064,6 @@ F(x), G(x y), H(x, y, z)...（屬性變數及關係變數）
 57) Und zwar soll der Definitionsbereich immer der ganze individuenlbereich sein.
 
 57) 且事實上定義域總可為全部的個體域。
-
-Eine Formel, die außer den zuerst angeführten Zeichen des e.F.
-noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthät, 
-soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
-Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
-ohneweiters auf Formeln i.w.S. und es gilt der Satz, 
-daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
-so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
-
-除了前述第一個受限函數計算之符號也包含第三種變數（φ(x), ψ(x y) 等等）
-之公式稱為較廣意義（簡寫 i. w. S.） 58)。
-「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
-對每個較廣義公式 A 而言，可給定一個較受限函數計算之普通公式，
-使得 A 的可滿足性等價於 B 的。
 
 58) Variable dritter Art dürfen dabei 
     an allen Leerstellen für Individuenvariable stehen, 
@@ -4083,9 +4086,8 @@ B 可以下述方式從 A 推得，
 將 A 中出現的第三型之變數 φ(x), ψ(x y) 
 以 (ι z)F(z x),(ι z)G(z,xy)... 表示式來取代。 
 這是同 PM I*14 中之風格清除「描述」函數且
-將結果式與表示式作邏輯相乘59)，
-也就是說將 φ,ψ.. 全部的參數取代 F,G.. 第一個空參數是明確的。 
-
+將結果式與表示式作邏輯相乘 59)，
+也就是說將 φ, ψ.. 全部的參數取代 F,G.. 第一個空參數是明確的。 
 
 20151115 週日
 譯註：最後一句 B. Meltzer 譯本為：
