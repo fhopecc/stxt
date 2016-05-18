@@ -4041,14 +4041,18 @@ deren Argumente und Werte Individuen sind 57).
 受限函數計算（以下稱為 e.F.）包含這些公式，
 其由下述基本符號建構 56)：
 -,∨,(x),=;
-x,y...（單元變數）
+x,y...（個體變數）
 F(x), G(x y), H(x, y, z)...（屬性變數及關係變數） 
 其中 (x) 及 = 僅能參照於個體。
 對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
 表示物件函數（即 φ(x), ψ(x y) 等等用來表示參數與值為個體之單射函數。57) 
  
-譯註：第三種變數形式，因受限函數運算已定義個體及關係變數之形式，
-      故為第三種。
+譯註：哥德爾上面定義了三種變數形式：
+      1.個體變數 x,y,z
+      2.屬性或關係變數 F(x), G(x y), H(x,y,z)，注意到其值為邏輯值，
+        關於此種變數的問題是其是否為真（或可被滿足）。
+      3.物件函數φ(x), ψ(x y), χ(x y z)，其值為個體，且為單射函數，
+        即函數對所有參數都會回傳一個個體。
 
 Eine Formel, die außer den zuerst angeführten Zeichen des e. F.
 noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthält, 
@@ -4058,11 +4062,29 @@ ohneweiters auf Formeln i.w.S. und es gilt der Satz,
 daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
 so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
 
-除了首先引入受限函數計算之符號也包含第三種變數（如 φ(x), ψ(x y) 等等）
+除了一開始引入的受限函數計算之符號還包含第三種變數（φ(x), ψ(x y)...等）
 之公式稱為較廣義公式（簡寫 i. w. S.） 58)。
 「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
-對每個較廣義公式 A 而言，可給定一個較受限函數計算之普通公式，
-使得 A 的可滿足性等價於 B 的。
+對每個較廣義公式 A 而言，可給定一個較受限函數計算之正常公式，
+使得 A 的可滿足性與 B 等價。
+
+B erhält man aus A, 
+indem man die in A vorkommenden Variablen 
+dritter Art φ(x), ψ(x y).. durch Ausdrücke der Form: 
+('z)F(z x),('z)G(z,xy)... ersetzt, 
+die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und 
+die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
+der besagt, 
+daß sämtliche an Stelle der φ, ψ.. 
+gesetzte F, G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
+
+B 衍生自 A 如下，
+將 A 中出現的第三種變數 φ(x), ψ(x y)..
+以形式如 (ι z)F(z x), (ι z)G(z,xy)... 等表示式來取代。 
+以 PM I*14 之方式消去「描述」函數且
+將如此具有表示式之公式作邏輯相乘 59)，
+也就是說將 φ, ψ.. 全部的參數相對於 F, G.. 之第一個空參數
+一一配置其餘參數。 
 
 56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
     das Zeichen = nicht zum engeren Funktionenkalkül. 
@@ -4071,51 +4093,29 @@ so daß die Erfüllbarkeit von A mit der von B äquivalent ist.
     die mit der ursprünglichen gleichzeitig erfüllbar ist 
     (vgl. die in Fußnote 55) zitierte Arbeit).
 
-56) 希爾伯特及阿克曼在正引述的書中，
-    並未將符號 = 含於較受限函數運算。
-    對每個出現符號 = 之公式，存在一個沒有此符號，
-    卻自然可同時滿足之公式
+56) 在正引述的書中，
+    希爾伯特及阿克曼並未將符號 = 計入受限函數運算。
+    對每個出現符號 = 之公式，
+    卻存在一個沒有此符號公式，初始時便能同時被滿足
     （參閱腳註 55 引述之成果）。
 
-57) Und zwar soll der Definitionsbereich immer der ganze individuenlbereich sein.
+57) Und zwar soll der Definitionsbereich immer 
+    der ganze individuenbereich sein.
 
-57) 且事實上定義域總可為全部的個體域。
+57) 且事實上定義域總是整個個體域。
 
 58) Variable dritter Art dürfen dabei 
     an allen Leerstellen für Individuenvariable stehen, 
     z.B.: y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] usw.
 
-58) 第三類變數可作為個體變數參數之值，
+58) 第三種變數於此可配置於所有個體變數空位上，
     如： y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] 等等。
 
-B erhält man aus A, 
-indem man die in A vorkommenden Variablen 
-dritter Art φ(x), ψ(x y)..durch Ausdrücke der Form: 
-('z)F(z x),('z)G(z,xy)... ersetzt, 
-die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und 
-die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
-der besagt, 
-daß sämtliche an Stelle der φ,ψ.. 
-gesetzte F,G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
+譯註：因為第三種變數其值為個體，所以可以視為個體變數。
 
-B 可以下述方式從 A 推得，
-將 A 中出現的第三型之變數 φ(x), ψ(x y) 
-以 (ι z)F(z x),(ι z)G(z,xy)... 表示式來取代。 
-這是同 PM I*14 中之風格清除「描述」函數且
-將結果式與表示式作邏輯相乘 59)，
-也就是說將 φ, ψ.. 全部的參數取代 F,G.. 第一個空參數是明確的。 
+59) D. h. die Konjunktion bildet.
 
-20151115 週日
-譯註：最後一句 B. Meltzer 譯本為：
-      which states that all the F,G... substituted for the φ,ψ..
-      are strictly one-valued with respect to the first empty place.
-      完全譯錯 ~~
-      Stelle der φ,ψ.. 中 Stelle 是複數，用在說明 φ,ψ.. 中所有位置，
-      其實就是指所有參數。
-
-59) D.h. die Konjunktion bildet.
-
-59) 即建構合取操作。
+59) 即建構成合取式。
 
 Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
 (F rekursiv) ein äquivalentes betreffend 
@@ -4135,9 +4135,11 @@ so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
 又對 Φ 而言存在函數序列 Φ1 Φ2...Φn，其中 Φn=Φ, Φ1(x)=x+1，
 且對每個 Φk(1<k≦ n) 不是：
 
-1.  (x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
+1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
   (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
   p,q<k
+
+/195/
 
 oder:
 
@@ -4146,11 +4148,6 @@ oder:
 2.(x1...xm)[Φk(x1...xm)=Φr(Φi1(ξ1)...Φis(ξs))] 60) (19)
   r<k,iv<k(für v= 1,2...s)
 
-60)ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
-   x1,x2..xm, z.B.: x1 x3 x2.
-
-60)ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
-
 oder:
 或是：
 
@@ -4158,10 +4155,10 @@ oder:
 
 Ferner bilden wir die Sätze:
 
-更進一步我們建構以下命題：
+再來建構以下命題：
    _______
-(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)⊃x=y] (21)
-              (x)[Φn(x)=0]          (22)
+(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)→x=y] (21)
+              (x)[Φn(x)=0]         (22)
 
 Wir ersetzen nun in allen Formeln (18), (19), (20) (für k=2,3...n) und 
 in (21)(22) die Funktionen Φi durch Funktionsvariable φi, 
@@ -4169,20 +4166,21 @@ die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x0 und
 bilden die Konjunktion C sämtlicher so erhaltener Formeln.
 
 我們現在將公式 (18),(19),(20) (對 k=2,3...n), (21) 及 (22) 
-中的函數 Φi 以函數變數 φi 取代，數字 0 以未於其它地方出現之個體變數 x0 取代，
-並將所有得到的公式形成成合取式 C。 
+中的函數 Φi 以函數變數 φi 取代，
+數字 0 以未於其它地方出現之個體變數 x0 取代，
+並將所有得到的公式形成建構成合取式 C。 
 
 Die Formel (Ex0)C hat dann die verlangte Eigensehaft, d. h.
 
-此公式 (Ex0)C 於是具有必要的特性，即如下：
+公式 (Ex0)C 具有必要特質，即：
 
 1.Wenn (x)[Φ(x)=0] gilt, ist (Ex0)C erfüllbar, 
-denn die Funktionen Φ1,Φ2...Φn ergeben 
-dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt einen richtigen Satz.
+  denn die Funktionen Φ1,Φ2...Φn ergeben 
+  dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt einen richtigen Satz.
 
 1.若 (x)[Φ(x)=0] 成立，則 (Ex0)C 是可滿足的，
-因為將函數 Φ1,Φ2...Φn 取代 (Ex0)C 中的 φ1,φ2...φn 
-明顯可形成正確的命題。 
+  因為函數 Φ1,Φ2...Φn 明顯可插入至 (Ex0)C 中的 φ1,φ2...φn 
+  以形成正確的命題。 
 
 2.Wenn (Ex0)C erfüllbar ist, gilt (x)[Φ(x)=0].
 
@@ -4249,6 +4247,13 @@ was zu beweisen war 61).
 藉由此對映，所有 Ψi' 函數轉換成函數 Φi
 且因為 (22) 之正確性，對 Ψn' 及 a 而言，(x)[Φn(x)=0] 或 (x)[Φ(x)=0] 成立,
 這可被證明 61)。 
+
+60)ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
+   x1,x2..xm, z.B.: x1 x3 x2.
+
+60)ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
+
+
 
 61) Aus Satz X folgt z.B., 
     daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
@@ -4685,6 +4690,9 @@ Satz VII    算術     命題 VII
 譯詞規則
 --------
 Axiom       公理：預設為真之陳述
+Art         種
+Typ         形
+Klasse      類
 Satz        命題：可判定真假之陳述，
               英文譯為 Theorem 其中文一般譯為定理，
               「定理」一詞隱涵為真之意，
@@ -4694,12 +4702,13 @@ Satz        命題：可判定真假之陳述，
 Begriff     觀念或定義：引入一個新的詞代表某項事物
 Individuenbereich   定義域，函數之定義域
 Individuum  個體，可區分之成員
-Menge       集合
+Menge       集合論之公理化
 Stelle      位置
 tupel       值組
 Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
+
 
 P 系統之 BNF
 ------------
