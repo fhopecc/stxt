@@ -24,4 +24,4 @@ goto end
 copy %dst% %src%_vimrc 
 
 :end
-echo "備份完成"
+echo "設定完成"

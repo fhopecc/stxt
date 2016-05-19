@@ -4123,8 +4123,8 @@ die Erfüllbarkeit einer Formel i.w.S. gibt,
 woraus nach der eben gemachten Bemerkung Satz X folgt.
 
 現在可指出對每個形式 (x)F(x) （F 遞迴）之問題，
-存有一個相關較廣義公式其可滿足性等價於它，
-依據前述解譯可推得命題 X。
+存在一個問題等價於較廣義公式可滿足性，
+依據前述可推得命題 X。
 
 Da F rekursiv ist, 
 gibt es eine rekursive Funktion Φ(x), so daß F(x)~[Φ(x)=0], 
@@ -4133,7 +4133,7 @@ so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
 
 若 F 是遞迴的，則存在一個遞迴函數 Φ(x)，使得 F(x)~[Φ(x)=0]，
 又對 Φ 而言存在函數序列 Φ1 Φ2...Φn，其中 Φn=Φ, Φ1(x)=x+1，
-且對每個 Φk(1<k≦ n) 不是：
+且對每個 Φk(1<k≦n) 不是：
 
 1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
   (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}

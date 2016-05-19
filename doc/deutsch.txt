@@ -1439,11 +1439,15 @@ kommen
 unbestimmter Artikle
 表示此名詞是第一次提到。
 
-格      陽性    陰性    中性    
-主格    ein     eine    ein    
-屬格    eines   einer   eines 
-與格    einem   einer   einem 
-賓格    einen   eine    ein
+格 陽      陰      中    
+
+主 ein     eine    ein    
+
+屬 eines   einer   eines 
+
+與 einem   einer   einem 
+
+賓 einen   eine    ein
 
 例 1：
 
@@ -2506,17 +2510,17 @@ letzte 最後
 
         陽性    陰性    中性    複數
 
-主格    -er     -e      -es     -en     因為陽性及中性冠詞一樣，
-主格    ein     eine    ein     keine   所以形容詞需變格區分
+主格    -er     -e      -es     -e     因為陽性及中性冠詞一樣，
+        ein     eine    ein            所以形容詞需變格區分
 
-屬格    -en     -en     -en     -en  
-屬格    einer   eine    ein     keine
+屬格    -en     -en     -en     -er  
+        eines   einer   eines    
 
 與格    -en     -en     -en     -en
-與格    eines   einer   eines   keiner
+        einem   einer   einem   
 
-賓格    -en     -e      -es     -en     
-賓格    einem   eine    einem   keinem
+賓格    -en     -e      -es     -e     
+        einen   eine    ein
 
 由上可觀察到，名詞前之定語，不論冠詞及形容詞數量，
 只會出現一次字尾 r，或字尾 s。
