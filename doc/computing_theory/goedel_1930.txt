@@ -4172,29 +4172,32 @@ bilden die Konjunktion C sämtlicher so erhaltener Formeln.
 
 Die Formel (Ex0)C hat dann die verlangte Eigensehaft, d. h.
 
-公式 (Ex0)C 具有必要特質，即：
-
 1.Wenn (x)[Φ(x)=0] gilt, ist (Ex0)C erfüllbar, 
   denn die Funktionen Φ1,Φ2...Φn ergeben 
-  dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt einen richtigen Satz.
+  dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt 
+  einen richtigen Satz.
+
+2.Wenn (Ex0)C erfüllbar ist, gilt (x)[Φ(x)=0].
+
+公式 (Ex0)C 具有必要特質，即：
 
 1.若 (x)[Φ(x)=0] 成立，則 (Ex0)C 是可滿足的，
   因為函數 Φ1,Φ2...Φn 明顯可插入至 (Ex0)C 中的 φ1,φ2...φn 
   以形成正確的命題。 
 
-2.Wenn (Ex0)C erfüllbar ist, gilt (x)[Φ(x)=0].
-
 2.若 (Ex0)C 可滿足，則 (x)[Φ(x)=0] 成立。
 
 Beweis:
 
-證明：
-
 Seien Ψ1,Ψ2...Ψn die nach Voraussetzung existierenden Funktionen, 
-welche in (Ex0)C für φ1,φ2..φn eingesetzt einen richtigen Satz liefern. 
+welche in (Ex0)C für φ1,φ2..φn 
+eingesetzt einen richtigen Satz liefern. 
 Ihr Individuenbereich sei I. 
 
-假設存在 Ψ1,Ψ2...Ψn 函數可取代 (Ex0) C 中 φ1,φ2..φn 以形成一個正確命題。 
+證明：
+
+假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex0)C 中 φ1,φ2..φn 
+以形成一個正確命題。 
 其定義域為 I。
 
 Wegen der Richtigkeit von (Ex0)C für die Funktionen Φi gibt 
@@ -4203,7 +4206,7 @@ so daß sämtliche Formeln (18) bis (22) bei Ersetzung
 der Φi durch Ψi und 
 von 0 durch a in richtige Sätze (18') bis (22') übergehen.
 
-由於 (Ex0)C 對函數 Φi 之正確性，故存在一個個體 a (屬於 I)，
+依據 (Ex0)C 之正確性，對函數 Φi 存在一個個體 a (屬於 I)，
 對所有 (18) 至 (22) 之公式中的 Φi 以 Ψi 取代，
 其中的 0 以 a 取代轉換成正確命題 (18') 至 (22')。
 
