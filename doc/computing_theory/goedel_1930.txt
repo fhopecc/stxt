@@ -163,6 +163,8 @@ der Principia Mathematica und verwandter System I 1)
 但像是遞迴函數的定義，或是遞迴函數可由 P 系統表示，
 遞迴函數是算術的，含如何以 2 個數存取數列指定的數等，均不包括。
 
+這本書目標對象是高中生。
+
 20160429 週五
 
 P 系統要由其幾個算術定義的 P 系統而設。
@@ -3600,12 +3602,14 @@ x≡y(mod n)~(Ez)[x=y+z.n ∨ y=x+z.n]
     (不允許出現函數與集合變數)。
     (每個其它出現於 x 之前數目變數能自然地取代 x)。
 
-Es gilt der
 
+定理 VII：
+.........
+
+Es gilt der
 Satz VII: Jede rekursive Relation ist arithmetisch.
 
 這可得
-
 定理 VII：每個遞迴關係是算術的。
 
 Wir beweisen den Satz in der Gestalt: 
@@ -4010,6 +4014,9 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
 
 /194頁/
 
+命題 X
+......
+
 Dies beruht auf:
 
 這基於：
@@ -4122,7 +4129,7 @@ Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
 die Erfüllbarkeit einer Formel i.w.S. gibt, 
 woraus nach der eben gemachten Bemerkung Satz X folgt.
 
-現在可指出對每個形式 (x)F(x) （F 遞迴）之問題，
+現在指出對每個形式 (x)F(x) （F 遞迴）之問題，
 存在一個問題等價於較廣義公式可滿足性，
 依據前述可推得命題 X。
 
@@ -4192,79 +4199,73 @@ Beweis:
 Seien Ψ1,Ψ2...Ψn die nach Voraussetzung existierenden Funktionen, 
 welche in (Ex0)C für φ1,φ2..φn 
 eingesetzt einen richtigen Satz liefern. 
-Ihr Individuenbereich sei I. 
-
-證明：
-
-假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex0)C 中 φ1,φ2..φn 
-以形成一個正確命題。 
-其定義域為 I。
-
+Ihr Individuenbereich sei 𝕴. 
 Wegen der Richtigkeit von (Ex0)C für die Funktionen Φi gibt 
-es ein Individuum a (aus I),
+es ein Individuum a (aus 𝕴),
 so daß sämtliche Formeln (18) bis (22) bei Ersetzung 
 der Φi durch Ψi und 
 von 0 durch a in richtige Sätze (18') bis (22') übergehen.
 
-依據 (Ex0)C 之正確性，對函數 Φi 存在一個個體 a (屬於 I)，
+證明：
+
+假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex0)C 中 φ1,φ2..φn 
+可形成一個正確命題。
+其個體域為 𝕴。
+依據 (Ex0)C 之正確性，對函數 Ψi 存在一個個體 a（屬於 𝕴），
 對所有 (18) 至 (22) 之公式中的 Φi 以 Ψi 取代，
 其中的 0 以 a 取代轉換成正確命題 (18') 至 (22')。
 
-Wir bilden nun die kleinste Teilklasse von I, 
+譯註：𝕴 是德文字型的 I，表示個體的範圍。
+
+Wir bilden nun die kleinste Teilklasse von 𝕴, 
 welche a enthält und gegen die Operation Ψ1(x) abgeschlossen ist. 
-Diese Teilklasse (I') hat die Eigensehaft, 
-daß jede der Funktionen Ψi auf Elemente aus I' angewendet 
-wieder Elemente aus I' ergibt. 
-
-現在我們形成一個 I 的最小子類別，
-其包含 a 且對操作 Ψ1(x) 而言是封閉的。
-此子類別 (I') 具特性如下，
-對每個函數 Ψi 應用 I' 之元素將會產出 I' 之元素。
-
-Denn für Ψi gilt dies nach Definition von I' und 
+Diese Teilklasse (𝕴') hat die Eigensehaft, 
+daß jede der Funktionen Ψi auf Elemente aus 𝕴' angewendet 
+wieder Elemente aus 𝕴' ergibt. 
+Denn für Ψi gilt dies nach Definition von 𝕴' und 
 wegen (18'), (19'), (20') überträgt sich 
 diese Eigensehaft von Ψi mit niedrigerem Index auf solche mit höherem. 
 Die Funktionen, welche aus Ψi durch Beschränkung
-auf den Individuenbereich I' entstehen, nennen wir Ψi'. 
+auf den Individuenbereich 𝕴' entstehen, nennen wir Ψi'. 
 Auch für diese Funktion gelten sämtliche Formeln (18) bis (22) 
 (bei der Ersetzung von 0 durch a und Φi durch Ψi).
 
-因為依據 I' 之定義，對 Ψi 而言，這些成立，
-且依據 (18'),(19'),(20')，從較小下標至較高下標之 Ψi 均帶有這些特質。
-我們稱將 Φi 定義域限制為 I' 所衍生之函數稱為 ΨI'。
-對這些函數和(18)至(22)之全部公式均有效
-(藉由將 0 以 a 取代及 Φi 以 Ψi 取代)。
+現在建構一個 𝕴 的最小子類別，
+其包含 a 且封閉於操作 Ψ1(x) 下。
+此子類別 (𝕴') 具如下特性，
+每個函數 Ψi 應用 𝕴' 之元素將會產出 𝕴' 之元素。
+因為這依據 𝕴' 之定義對 Ψi 而言是成立的，
+且依據 (18'),(19'),(20') 這些特質從較小下標傳遞至較高下標之 Ψi。
+我們將限制 Ψi 個體域為 𝕴' 所衍生之函數稱為 Ψi'。
+且對這些函數 (18) 至 (22) 之全部公式均成立
+（藉由將 0 以 a 取代及 Φi 以 Ψi 取代）。
 
 Wegen der Riehtigkeit von (21) für Ψi' und a 
-kann man die Individuen aus I' eineindeutig auf die natürlichen Zahlen abbilden u.zw.
-so, daß a in 0 und die Funktion Ψi' in die Nachfolgerfunktion Φ1 übergeht. 
-
+kann man die Individuen aus I' eineindeutig auf die natürlichen Zahlen abbilden 
+u.zw. so, daß a in 0 und die Funktion Ψ1' in die Nachfolgerfunktion Φ1 übergeht. 
 Durch diese Abbildung gehen aber sämtliche Funktionen Ψi' in die Funktionen Φi über 
 und wegen der Richtigkeit von (22)
 für Ψn' und a gilt (x)[Φn(x)=0] oder (x)[Φ(x)=0], 
 was zu beweisen war 61).
 
-由於 (21) 對 Ψi' 及 a 之正確性，
-我們可以將 I' 之個體與自然數作 1 對 1 對映，
-實務上將 a 轉成 0 且函數 Ψi' 轉成後繼函數 Φ1。  
+依據 (21) 之正確性，
+對 Ψi' 及 a 可將 𝕴' 之個體與自然數間作 1 對 1 對映，
+實務上將 a 轉成 0 且函數 Ψ1' 轉成後繼函數 Φ1。
 藉由此對映，所有 Ψi' 函數轉換成函數 Φi
-且因為 (22) 之正確性，對 Ψn' 及 a 而言，(x)[Φn(x)=0] 或 (x)[Φ(x)=0] 成立,
-這可被證明 61)。 
+且依據 (22) 對 Ψn' 及 a 之正確性，
+(x)[Φn(x)=0] 或 (x)[Φ(x)=0] 可被證明成立 61)。 
 
-60)ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
-   x1,x2..xm, z.B.: x1 x3 x2.
+60) ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
+    x1,x2..xm, z. B.: x1 x3 x2.
 
-60)ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
+60) ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
 
-
-
-61) Aus Satz X folgt z.B., 
+61) Aus Satz X folgt z. B., 
     daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
     wenn man das Entscheidungsproblem des e. F. gelöst hätte.
 
 61) 從命題 X 導出，
     例如若已解出受限函數計算決定問題，則費馬及哥德巴赫問題可解。
-    
 
 /196/
 
@@ -4275,15 +4276,14 @@ und der Erfüllbarkeit der entsprechenden Formel des e. F. in P beweisbar
 und daher folgt aus der Unentscheidbarkeit des einen die des anderen, 
 womit Satz IX bewiesen ist. 62)
 
-因為導出命題 X 之脈絡也能於 P 系統（對每個特例 F）重新實現，
-所以形式如 (x)F(x)（F 遞迴） 之命題與
-在 P 中所對應受限函數計算公式之可滿足性之間的等價性是可證的，
+因為導出命題 X 之脈絡（對每個特例 F）也能於 P 系統重新實現，
+所以形式如 (x)F(x)（F 遞迴）之命題與
+所對應受限函數計算公式之可滿足性之間的等價性是 P 可證的，
 且於此推論出對立面之不可決定性，
-故命題 IX 是可證的。62)
+故證明命題 IX。62)
 
 62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre 
-    und 
-    dessen Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
+    und dessen Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
     Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
     der Form (x)F(x) (F rekursiv) gibt.
 
@@ -4683,7 +4683,10 @@ A           算術     算術定義    A 的否定，
 >           算術     算術命題    大於
 x≡y(mod n)  算術     算術命題    同餘
 Satz VII    算術     命題 VII           
-
+𝕴           算術     定理 X      個體域，
+                                 源自哥德字母 I 表個體 Individuum。
+𝕴'          算術     定理 X      包含 a 且於封閉於 Ψi 操作下之最小個體類別，
+                                 源自哥德字母 I 表個體 Individuum。
            __
 邏輯常數 ∨,  , (x), = 所定義，
 其中 (x) 和 = 僅能應用在自然數 50)。
