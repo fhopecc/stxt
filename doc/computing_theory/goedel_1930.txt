@@ -10,6 +10,9 @@ der Principia Mathematica und verwandter System I 1)
 
 譯序
 ----
+20160523 週一 稅局
+
+這本譯文的目標對象是高中生，
 
 20160424 週日 美崙
 
@@ -163,7 +166,6 @@ der Principia Mathematica und verwandter System I 1)
 但像是遞迴函數的定義，或是遞迴函數可由 P 系統表示，
 遞迴函數是算術的，含如何以 2 個數存取數列指定的數等，均不包括。
 
-這本書目標對象是高中生。
 
 20160429 週五
 
@@ -4291,43 +4293,31 @@ womit Satz IX bewiesen ist. 62)
     其經由公理之遞迴可定義ω-一致性類別之擴充有效，
     這是因為這些系統也確實存在形式如(x)F(x)（F 遞迴）之不可決定命題。 
 
+系統無法自我證明一致性
+......................
+
 4.
 
-Aus den Ergebnissen von Abschnitt 2 folgt ein merkwürdiges Resultat, 
+Aus den Ergebnissen von Abschnitt 2 folgt 
+ein merkwürdiges Resultat, 
 bezüglich eines Widerspruchslosigkeitsbeweises des Systems P
 (und seiner Erweiterungen), 
 das durch folgenden Satz ausgesprochen wird:
 
-由第 2 節之結論且對 P 系統（及其擴充）之邏輯一致性之證明，
-可推論出這特別的結果，
+由第 2 節之結論可得如下的特殊結果，
+關於 P 系統（及其擴充）邏輯一致之證明，
 其由以下命題表達：
 
 Satz XI: 
-Sei χ eine beliebige rekursive widerspruchsfreie 63) Klasse von Formeln, 
+Sei χ eine beliebige rekursive widerspruchsfreie 63) Klasse 
+von Formeln, 
 dann gilt: 
 Die Satzformel, welche besagt, daß χ widerspruchsfrei ist, 
 ist nicht χ-beweisbar; 
-insbesondere ist die Widerspruchsfreiheit von P in P unbeweisbar 64),
+insbesondere ist die Widerspruchsfreiheit von P 
+in P unbeweisbar 64),
 vorausgesetzt, daß P widerspruchsfrei ist 
 (im entgegengesetzten Fall ist natürlich jede Aussage beweisbar).
-
-命題 XI：
-χ 是一個任意遞迴一致公式 63) 類別使得：
-前述 χ 為一致之命題公式不是 χ-可證；
-特別是假設 P 是一致的（其反面自然是每個陳述都可證），
-P 的一致性在 P 中是不可證 64)。
-
-63) χ ist widerspruchsfrei (abgekürzt als Wid (χ)) wird 
-    folgendermaßen definiert: 
-
-63) χ 是一致的（簡寫為 Wid(χ)）定義如下：
-
-                        ____
-    Wid(χ)≡(Ex)[Form(x)&Bewχ(x)].
-
-64) Dies folgt, wenn man für χ die leere Klasse von Formeln einsetzt.
-
-64) 若以公式之空類別取代 χ 可推論出來。
 
 Der Beweis ist (in Umrissen skizziert) der folgende: 
 Sei χ eine beliebige für die folgenden Betrachtungen 
@@ -4335,30 +4325,51 @@ ein für allemal gewählte rekursive Klasse von Formeln
 (im einfachsten Falle die leere Klasse). 
 Zum Beweise der Tatsache, 
 daß 17 Gen r nicht χ-beweisbar ist 65), 
-wurde, wie aus 1. Seite 189 hervorgeht, nur die Widerspruchsfreiheit von χ benutzt, 
+wurde, wie aus 1. Seite 189 hervorgeht, 
+nur die Widerspruchsfreiheit von χ benutzt, 
 d. h. es gilt:
 
-證明（草繪出大綱）如下：
-令 χ 為以下論述中每次所選定的遞迴公式類別
+命題 XI：
+χ 是一個任意遞迴一致公式 63) 類別使得：
+命題公式，其陳述 χ 為一致，非 χ-可證；
+特別是 P 的一致性在 P 中是不可證 64), 
+以上假設 P 是一致的
+（其反面自然是每個陳述都可證）。
+
+證明（草繪大要）如下：
+令 χ 為以下論述中每次所選定的公式遞迴類別
 （最簡單的情形為空類別）。
-對 17 Gen r 非 χ-可證 65) 事實之證明將僅應用 χ 之一致性，
-如用 189 頁之 1. 節所呈現一般，
+對以下事實之證明，
+即 17 Gen r 非 χ-可證 65)，
+且如 189 頁之 1. 節之結果，
+僅應用 χ 之一致性，
 即如下：
-        ____
+       ____
 Wid(χ)⊃Bewχ(17 Gen r) (23)
-
-
-65) r hängt natürlich (ebenso wie p) von χ ab.
-
-65) r 取決於 χ （就如同 p 般）。
-
-譯註：von etw abhängt 取決於某物 depned on sth.
 
 d. h. nach (6.1):
 
 依據（6.1）即如下：
            ___
 Wid(χ)⊃(x)xBχ(17 Gen r)
+
+63) χ ist widerspruchsfrei (abgekürzt als Wid (χ)) wird 
+    folgendermaßen definiert: 
+
+63) χ 是一致的（簡寫為 Wid(χ)）如下定義：
+                        ____
+    Wid(χ)≡(Ex)[Form(x)&Bewχ(x)].
+
+64) Dies folgt, 
+    wenn man für χ die leere Klasse von Formeln einsetzt.
+
+64) 若配置空公式類別於 χ 可得如此結果。
+
+65) r hängt natürlich (ebenso wie p) von χ ab.
+
+65) r 取決於 χ （就如同 p 般）。
+
+譯註：von etw abhängt 取決於某物 depned on sth.
 
                          |   19 |
 Nach (13) ist 17 Gen r=Sb|p Z(p)| und daher:
@@ -4394,7 +4405,6 @@ Insbesondere ist χ (wie jede rekursive Klasse) in P definierbar.
 每處僅應用古典數學中一般的定義及證明方法。
 特別是 χ （如同每個遞迴類別）可定義於 P 中。
 
-
 66) Von der Definition für "rekursiv" auf Seite 179 bis 
     zum Beweis von Satz VI inkl.
 
@@ -4407,7 +4417,6 @@ folglich Q(x,p) durch r
                   |   19 |
 [da nach (12) r=Sb|q Z(p)|] 
 und der Satz (x)Q(x,p) durch 17 Gen r.
-
 
 令 w 為於 P 中表達 Wid(χ) 之命題式。
 按照 (8.1), (9), (10) 中以關係符號 q 表達關係 Q(x, y)，
