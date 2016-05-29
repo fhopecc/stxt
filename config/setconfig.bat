@@ -1,12 +1,12 @@
-rem 備份個人的設定
+rem 設定個人的設定
 
 echo off
 goto %COMPUTERNAME%
 
 :ASUS
 echo "家裡的筆電"
-copy C:\ProgramData\Boshiamy\liu.box d:\stxt\config\liu
-copy C:\vim\_vimrc d:\stxt\config\vim
+copy d:\stxt\config\liu\liu.box C:\ProgramData\Boshiamy
+copy d:\stxt\config\vim\_vimrc c:\vim 
 goto end
 
 :FRANKSHEN-PC

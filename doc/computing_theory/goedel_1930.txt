@@ -4247,7 +4247,7 @@ die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x0 und
 bilden die Konjunktion C sämtlicher so erhaltener Formeln.
 
 我們現在將公式 (18),(19),(20) (對 k=2,3...n), (21) 及 (22) 
-中的函數 Φi 以函數變數 φi 取代，
+中的函數 Φ i 以函數變數 φi 取代，
 數字 0 以未於其它地方出現之個體變數 x0 取代，
 並將所有得到的公式形成建構成合取式 C。 
 
@@ -4615,7 +4615,7 @@ Subst a|b|                       b 為與 v 同型之符號。
                                  且在裡面每處自由之 v，
                                  均由 b 取代。
 .           P 系統   P 系統縮寫  合取連接子。
-⊃           P 系統   P 系統縮寫  推論連接子。
+           P 系統   P 系統縮寫  推論連接子。
 ≡           P 系統   P 系統縮寫  等價關係。
 (Ex)        P 系統   P 系統縮寫  存在量詞
 =           P 系統   21)         相等關係，

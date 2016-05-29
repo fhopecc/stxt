@@ -14,7 +14,7 @@ set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 
 colo darkblue
-set guifont=DejaVu_Sans_Mono:h14:cANSI
+set guifont=Courier_New:h14:cANSI
 
 set tabstop=4
 set shiftwidth=4
