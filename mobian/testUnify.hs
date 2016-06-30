@@ -2,13 +2,13 @@ import Test.HUnit
 import Data.Either
 import Mobian
 import Parser
-import GHC.IO.Encoding.CP950
+--import GHC.IO.Encoding.CP950
 import System.IO
 import Control.Monad.Error
 import Mobian
 
 main = do
-    hSetEncoding stderr cp950
+    --hSetEncoding stderr cp950
     runTestTT testU
 
 a1 = Atom "甲"

@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts #-}
 module Mobian(Term(Atom, Var, Func), MobianError(MobianError),
        Rule((:-), Fact), Goal(Goal,NullGoal),
        Equ((:=)),
@@ -9,10 +10,9 @@ import Data.List
 import Debug.Trace
 import System.IO
 import System.Exit
-import GHC.IO.Encoding.CP950
+--import GHC.IO.Encoding.CP950
 import Control.Monad.Error
 import Data.Either
-
 type Label = String
 
 type Unifier = [Equ]
