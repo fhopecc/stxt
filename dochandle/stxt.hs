@@ -236,27 +236,27 @@ runSect1 input =
         Left err -> Sect1 0 (show err) [] []
         Right x  -> x
 
---runInclude :: FilePath -> String -> IO Doc
---runInclude srcdir input = do
---    let d = rawRun input
---    case d of  
---        (Doc _ _ _) -> do
---            d' <- execInclude srcdir d
---            return $ numberDoc d'
---        (Error msg) -> error msg 
+runInclude :: FilePath -> String -> IO Doc
+runInclude srcdir input = do
+    let d = rawRun input
+    case d of  
+        (Doc _ _ _) -> do
+            d' <- execInclude srcdir d
+            return $ numberDoc d'
+        (Error msg) -> error msg 
 
---execInclude :: FilePath -> Doc -> IO Doc
---execInclude srcdir d@(Doc t cs s1s)= do
---    ns1s <- forM s1s $ \s1 -> include2Sect1 s1
---    return $ Doc t cs ns1s
---    where
---        include2Sect1 (Include src) = do
---            f <- openFile (FP.combine srcdir src) ReadMode
---            hSetEncoding f utf8
---            c <- hGetContents f
---            return $ runSect1 c
+execInclude :: FilePath -> Doc -> IO Doc
+execInclude srcdir d@(Doc t cs s1s)= do
+    ns1s <- forM s1s $ \s1 -> include2Sect1 s1
+    return $ Doc t cs ns1s
+    where
+        include2Sect1 (Include src) = do
+            f <- openFile (FP.combine srcdir src) ReadMode
+            hSetEncoding f utf8
+            c <- hGetContents f
+            return $ runSect1 c
 
---        include2Sect1 s1 = return $ s1 
+        include2Sect1 s1 = return $ s1 
 
 numberDoc :: Doc -> Doc
 numberDoc (Doc t cs s1s) = Doc t cs (numberSect1s s1s)
@@ -281,5 +281,5 @@ main = do
     hSetEncoding f utf8
     c <- hGetContents f
     let o = run c
---    o' <- execInclude srcdir o
+    o' <- execInclude srcdir o
     putStr $ show o
