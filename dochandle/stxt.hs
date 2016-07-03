@@ -18,6 +18,7 @@ module STXT( run, rawRun, runPart, rawRunPart, runInclude
            , ParaObj(Str, Link, ILink)
            , paraLink, paraObj, paraObjs
            , getSect1, getSect2
+           , main
            ) 
 where
 
@@ -29,6 +30,7 @@ import Data.List
 import Data.Maybe
 import Network.URI
 import qualified System.FilePath as FP
+import System.Console.GetOpt
 
 class Accessable a where
     address :: a -> String 
@@ -118,6 +120,7 @@ sect2title = title '.'
 
 sect2 :: Parser Sect2
 sect2 = do notFollowedBy sect1title 
+           notFollowedBy include 
            t  <- sect2title
            cs <- content
            s3s <- sect3s
@@ -130,17 +133,16 @@ sect3title = title '+'
 sect3 :: Parser Sect3
 sect3 = do notFollowedBy sect1title 
            notFollowedBy sect2title
+           notFollowedBy include 
            t  <- sect3title
            cs <- content
            return $ Sect3 (0,0,0) t cs
 
-
 content = many theElement
 
 include :: Parser Sect1
-include = do filepath <- between (string "<") 
-                  (do {char '>'; many $ oneOf "\n"}) 
-                  (many (letter <|> oneOf "\\/.:_"))
+include = do filepath <- between (char '<') (do char '>';many $ char '\n') 
+                                 (many (letter <|> oneOf "\\/.:_"))
              return $ Include filepath
 
 theElement = choice [ codePara
@@ -195,9 +197,10 @@ paraObjs = many1 paraObj
 
 line :: Parser String
 line = do notFollowedBy sect1title
+          notFollowedBy include  
           notFollowedBy sect2title  
           notFollowedBy sect3title  
-          head <- noneOf "<\n"
+          head <- noneOf "\n"
           tail <- try (do str <- manyTill (noneOf "\n") 
                                           (lookAhead (string "：\n\n"))
                           return $ str ++ "："
@@ -207,9 +210,17 @@ line = do notFollowedBy sect1title
 
 title :: Char -> Parser Title
 title sep = do
-    t <- many1 $ noneOf "<\n"; char '\n'
-    string $ replicate 2 sep;many $ char sep; string "\n\n"
-    return t
+    t <- tline `endBy1` (char '\n')
+    string $ [sep,sep];many $ char sep; string "\n\n"
+    return $ unwords(t)
+
+-- title line
+tline :: Parser String
+tline = do
+    h0 <- noneOf "=-.+\n"
+    h1 <- noneOf "=-.+\n"
+    t  <- many $ noneOf $ "\n"
+    return ([h0,h1]++t)
 
 rawRunPart p input
     = case (parse p "" input) of
@@ -258,6 +269,10 @@ execInclude srcdir d@(Doc t cs s1s)= do
 
         include2Sect1 s1 = return $ s1 
 
+execInclude srcdir e@(Error msg)= do
+    error msg
+
+
 numberDoc :: Doc -> Doc
 numberDoc (Doc t cs s1s) = Doc t cs (numberSect1s s1s)
 
@@ -273,7 +288,7 @@ numberSect1s s1s =
 
         updateNumSect2 s1n s2n (Sect2 _ t cs s3s) = Sect2 (s1n, s2n) t cs s3s
    
-main = do
+printTree = do
     args <- getArgs 
     let src  = args !! 0
     let srcdir = FP.takeDirectory src
@@ -283,3 +298,46 @@ main = do
     let o = run c
     o' <- execInclude srcdir o
     putStr $ show o
+
+options :: [OptDescr [Char]]
+options = []
+
+ 
+
+main = do
+    args <- getArgs
+ 
+    let (actions, nonOptions, errors) = getOpt RequireOrder options args
+    
+    when (null nonOptions) 
+         (error "syntax: stxt options source")
+
+    let src = head nonOptions
+    let srcdir = FP.takeDirectory src
+    let basename = FP.takeBaseName src
+    let destname = "dir_" ++ basename
+    f <- openFile src ReadMode
+    hSetEncoding f utf8
+    c <- hGetContents f
+    doc <- STXT.runInclude srcdir c
+
+    f <- openFile destname WriteMode
+    hSetEncoding f utf8
+    hPutStr f (renderIndex doc)
+    hFlush f
+    hClose f
+
+
+
+renderIndex (Doc _ _ s1s) = concatMap sect1Index s1s 
+
+sect1Index (Sect1 n t _ s2s) = 
+    show(n) ++ "." ++ t ++ "\n" ++ concatMap sect2Index s2s
+
+sect2Index (Sect2 (n1,n2) t _ s3s) = 
+    show(n1) ++ "." ++ show(n2) ++ "." ++ t ++ "\n" ++ concatMap sect3Index s3s
+
+sect3Index (Sect3 (n1, n2, n3) t _) = 
+    show(n1) ++ "." ++ show(n2) ++ "." ++ show(n3) ++ "." 
+    ++ t ++ "\n"
+

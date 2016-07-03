@@ -180,16 +180,13 @@ braces  = between (char "{") (char "}")
 字元剖析器
 ----------
 
-字元剖析器
-..........
-
 char 'a' 會消化 a 字元，並傳回字元 a，
 若為其它字元則剖析失敗，如下碼：
 
 a = char 'a'
 
+anyChar 消化任意 1 個字元。
 
-anyChar
-.......
+noneOf "abc"  消化任意 1 個非 a, b, c 的字元。
 
-可符合任意字元。
+string "abc" 會消化 abc 字串，並傳回字串 abc。

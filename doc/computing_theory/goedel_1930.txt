@@ -7,9 +7,9 @@ der Principia Mathematica und verwandter System I 1)
 花蓮 2013/05/03 星期五 
 昭明 2015/11/29 星期六 初譯完畢
 
-
 譯序
 ----
+
 20160523 週一 稅局
 
 這是一篇我從 22 歲就希望讀懂的論文，
@@ -20,31 +20,35 @@ der Principia Mathematica und verwandter System I 1)
 感謝現在網路資訊的發達，讓我僅僅使用3年內的假日就完成翻譯。
 
 不同於一些大部頭的翻譯書，譯文不一致處能由前後文校正回原文之意，
-本論文相當精簡，任何一字譯錯，立即會導向錯誤結論。
+本論文相當精簡，任何一字譯錯，都必然導向錯誤結論。
 但也因為相當精簡，
 所以這篇論文我補充了許多背景資料，
-期望高中生也可以讀懂這篇論文，
-也省去查閱資料的時間去產生更深刻的理解。
+期望能讓高中生就可以讀懂這篇論文，
+一般人也能省去查閱資料的時間，並對本文的主題有更深刻的理解。
 
 文中最引人注目的就是建構不可決定之命題，
-大部分介紹本論文的書都著墨於這塊領域，
+大部分有關本論文的書都著墨於這塊領域，
 例如日本作家及程式設計師，結城浩，
 其創作的科普小說「數學女孩，哥德爾不完全定理」，
 對建構不可決定命題有詳盡說明，
 但卻未對形式系統相互表現和如何定義可決定性之技術細節多作著墨，
 讀者若未讀過原文，便失去對不可決定命題進一步理解的機會，
 但「數學女孩」系列書籍使用例子解釋深奧的觀念，
-讓我體悟到惟有能提出例子才算是理解，
-所以我把為了理解而製作的例子附註幫助您理解文中的觀念。
+並認為惟有能提出例子才算是理解，
+所以我附註了許多為了理解而製作的例子幫助您理解文中的觀念。
 
-資訊時代程式設計無所不在，
-世界各處也不斷的推廣學習程式語言應該從小就學，
-我國也準備將程式設計列為國高中必修課程，
-但是純粹的學習技術卻不了解其思想來源是無法將其深植於文化中，
-希望這篇經典論文能作為引子，
-讓大家對探究計算的極限，計算如何定義及用另一個系統去實現有更深入的討論。
+現今為物聯網時代，人類生活中的每樣器物，
+幾乎都開始殖入晶片了，在這個潮流下，程式設計無所不在，
+有著大量的需求，我國也準備將程式設計列為國高中課程。
 
-本文
+本篇論文雖然主題是形式證明，
+但其中包含了許多現代程式設計的概念，
+即更重要的，高級的技巧，
+我將會在譯註中一一說明，
+也希望這篇經典論文能作為引子，
+將計算理論深植於我們文化之中。
+
+摘要
 ----
 
 /173 頁/
@@ -59,9 +63,6 @@ Von Kurt Gödel in Wien.
    
 1) 參閱於維也納，1930 年 19 期的阿卡德．德．維斯期刊(math.-naturw. KI.) 
    發表這個工作成果的摘要。
-
-概要
-----
 
 1.
 
@@ -439,7 +440,6 @@ nεK ≡ Bew[R(n);n] 11a) (1)
 (這裡 Bew x 指 x 是一個可證式)。
 譯註：K 集合中的數字為 R 集合中不可證數之索引。
 
-
 11a) Durch Überstreichen wird die Negation bezeichnet.
                                                          
 11a) 覆寫線標記否定。                    
@@ -648,13 +648,13 @@ näher behandelt werden.
       entschieden 是 entscheiden 之過去分詞。
       bezüglich 有關於，介詞。
 
-建構不可決定命題
-----------------
+P 系統
+------
+
+基礎符
+......
 
 2.
-
-P 系統
-......
 
 Wir gehen nun an die exakte Durchführung des oben skizzierten Beweises 
 und gehen zunächst eine genaue Beschreibung des formalen Systems P, 
@@ -803,9 +803,6 @@ a, fa, ffa, fffa... 等等
 
       unter A verstehen B 片語：將 A 理解為 B。
 
-數符
-....
-
 Im ersten Fall nennen wir ein solches Zeichen Zahlzeichen.
 
 在第一種情形下，我們稱這種符號為數符。
@@ -835,7 +832,7 @@ a(b) 型式之符號組合，其中 b 為 n 型符號且 a 為 n+1 型符號，
       故強制集合的成員比集合本身的型別還低，
       故基本式形式如 a(b)，其中 b 為 n 型符號且 a 為 n+1 型符號，
       即以形式系統的文法限制，支援型別論。
-    
+
 公式類別
 ........
 
@@ -883,8 +880,8 @@ in der keine freie Variable vorkommt
 
 命題式為不含任何自由變數的式(自由變數定義如慣例)。
 
-n 元關係符與類別符
-..................
+關係符
+......
 
 Eine Formel mit genau n-freien Individuenvariablen
 (und sonst keinen freien Variablen) nennen wir 
@@ -1201,7 +1198,6 @@ daß eine Klasse durch ihre Elemente vollständig bestimmt ist.
       由前面的還原公理類別的元素由命題決定，
       此命題是由一個公式表示。
 
-
       為簡化說明，我引入屬於 ε 符號用較形式寫出外延公理。
       xi+1 Π (yi+1 Π ( zi Π 
                (zi ε xi+1 ~ zi ε yi+1) ⊃ xi+1 = yi+1
@@ -1264,8 +1260,8 @@ welche die Axiome enthält und gegen die Relation
       其中 pk 指第 k 個質數(漸增順序)。
  
 
-基礎符號對應到自然數
-....................
+基礎符對應到自然數
+..................
 
 Wir ordnen nun den Grundzeichen des Systems P in folgender
 Weise eineindeutig natürliche Zahlen zu:
@@ -1365,17 +1361,14 @@ P 系統中存在不可決定問題之命題，讀作如下：
       並將後設數學觀念對應到自然數的關係。
 
 遞迴函數
-.......
+--------
 
 Wir schalten nun eine Zwischenbetrachtung ein, 
 die mit dem formalen System P vorderhand nichts zu tun hat, 
 und geben zunächst folgende Definition: 
 
 現在先轉換至一個觀念，現在其與 P 系統沒有關聯，
-首先給定以下定義：
-
-遞迴定義
-........
+首先給定以下定義:
 
 Eine zahlentheoretische Funktion 25) 
 φ(x1,x2...xn) 
@@ -1398,9 +1391,6 @@ folgendes gilt:
       哥德爾提到 2 種方式，
       第 1 種稱為遞迴定義，
       前述 (2) 即說明 φ 函數定義自前項的 ψ 及 µ。
-
-數論函數
-........
 
 25) D. h. ihr Definitionsbereich ist die Klasse 
     der nicht negativen ganzen Zahlen (bzw. der n-tupel von solchen) 
@@ -1483,12 +1473,11 @@ heißt ihre Stufe.
      
       先看定理 R1 的證明 
       定理 R1：{0} 是遞迴的。
-
                令 χ{0}(0)   = f(0)
                   χ{0}(x+1) = 0(x)
                得證。
       因為χ{0}(x) 是經過一次的遞迴定義，故其級數為 2。
-     
+
 遞迴關係
 ........
 
@@ -1616,15 +1605,9 @@ IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind,
     其中 εxF(x) 指：
     最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
 
-定理 I 證明
-...........
-
 Satz I folgt unmittelbar aus der Definition von "rekursiv".
 
 定理 I 由遞迴之定義直接推得。
-
-定理 II 及 III 證明
-...................
 
 Satz II und III beruhen darauf, 
 daß die den logischen Begriffen -, ∨, = 
@@ -1663,14 +1646,21 @@ wie man sich leicht überzeugen kann.
 譯註：哥德爾將邏輯真以 0 表示，邏輯假以 1 表示。
 
       定理 R21：否定是遞迴
+
+      證明：
+
         α 即 {0} 的特徵函數，可由 R1 {0} 是遞迴，得證
 
       定理 R22：析取是遞迴
+
+      證明：
+
        令 β 定義如下：
        β(x,y) = α(α(x.y))  
        由 R21 否定是遞迴及R12乘法是遞迴得證。
 
        例子如下：
+
        β(0,0) = α(α(0.0))   
               = α(α(0))   
               = α(1)
@@ -1691,8 +1681,11 @@ wie man sich leicht überzeugen kann.
 相等關係為遞迴
 ..............
 
-譯註：證明如下：
+譯註：證明如後：
+
       定理 R3:前項函數是遞迴。
+      證明：
+
         前項函數 p 為後繼函數之對立函數。
         
         定義 p 如下：
@@ -1702,6 +1695,8 @@ wie man sich leicht überzeugen kann.
         得證。 
 
       定理 R4:隔斷減法是遞迴。
+      證明：
+
         隔斷減法 ㅗ定義如下（我以韓文字母 o 表示）：
 
         n ㅗ m = 0   : n < m       
@@ -1718,6 +1713,8 @@ wie man sich leicht überzeugen kann.
         由 R4 前項函數為遞迴，得證。
 
       定理 R5：絕對差是遞迴。
+      證明：
+
         絕對差 adf 定義如下：
         adf(n,m) = |n-m|
                  = (nㅗm) + (mㅗn) 
@@ -1727,6 +1724,8 @@ wie man sich leicht überzeugen kann.
         得證。
 
       命題 R6：相等關係是遞迴。
+      證明：
+
         哥德爾令 γ 為相等關係之特徵函數，
         令
         x=y ~ |x-y|=0 
@@ -1737,8 +1736,11 @@ wie man sich leicht überzeugen kann.
         得證。
 
       命題 R7：符號函數是遞迴。
+      證明：
+
         符號函數 sgn 用來判斷一數值的正負號，
         定義如下：
+
         sgn(n) = 1 : n > 0
                = 0 : n < 0
 
@@ -1808,7 +1810,6 @@ a=α[α(ρ(0,𝔶))].α[ρ(n+1,𝔶))].α[χ(n,𝔶)].
             and χ(n  ,𝔶) ≠ 0
           then 0
           else 1
-
 
 χ(n+1,𝔶) ist daher entweder =n+1 (wenn a = 1) 
 oder == χ(n, 𝔶) (wenn a = 0) 32) 
@@ -1941,8 +1942,8 @@ x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
         
         由 R1 {0} 是遞迴的及 R4 隔斷減法是遞迴，得證。
 
-後設觀念是遞迴
---------------
+以算術實作 P 系統
+-----------------
 
 Dabei sind meistens mehrere der nach Satz I bis IV 
 erlaubten Definitionsschritte 
@@ -1962,8 +1963,9 @@ unter denen z.B. die Begriffe "Formel", "Axiom",
 函數(關係) 1-45 其中出現的概念「公式」、「公理」、
 「直接後繼」，也是遞迴的。
 
-公式操作
-........
+基本算術操作
+............
+
 /182/
 
 1.x/y≡(Ez)[z≦x&x=y.z] 33)
@@ -2051,6 +2053,7 @@ x 整除以 y 34)。
 
 數列操作
 ........
+
                                    ________________ 
 6.n Gl x ≡ εy[y≦x & x/(n Pr x)^y & x/(n Pr x)^(y+1)]
 
@@ -2075,9 +2078,9 @@ x 整除以 y 34)。
     
   x*y 代表 2 個有限數列的串接。
 
-建構公式
-........
- 
+合式公式建構操作
+................
+
 9.R(x) ≡ 2^x
 
   R(x) entspricht der nur aus der Zahl x bestehenden Zahlenreihe
@@ -2133,9 +2136,6 @@ x 整除以 y 34)。
    （x 預設為一個變數）
 
    譯註：例如 x1Π(~(x1)∨(x1))
-
-建構數符
-........
 
 16.   0 N x ≡ x
    (n+1)N x ≡ R(3) * n N x
@@ -2448,14 +2448,16 @@ x 整除以 y 34)。
          將 x1 提昇 2 型，的確等於 17.17^(2) = 17^3，
          但若將 x2 提昇 2 型，17.(17^2)^(2) = 17^5 便錯了，
          所以要用 1 Pr (k Gl x) 將基底質數 17 取出再作次方。
-         
-   Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
-   die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
 
-   有 3 個特定數對應到公理 I 之 1 至 3 並分別以 z1, z2, z3 代表，
-   而我們定義如下：
-   
-    
+公理建構
+........
+
+Den Axiomen I, 1 bis 3 entsprechen drei bestimmte Zahlen,
+die wir mit z1, z2, z3 bezeiohnen, und wir definieren:
+
+有 3 個特定數對應到公理 I 之 1 至 3 並分別以 z1, z2, z3 代表，
+而我們定義如下：
+
 34.Z-Ax(x) ≡ (x=z1 v x=z2 v x=z3)
 
    譯註：公理 I 是皮亞諾公理，其並非公理框架，不會衍生太多公理，
@@ -2567,6 +2569,9 @@ x 整除以 y 34)。
    譯註：y.z → (z⊃x).z → x
          y   →  vΠ(y)  → x
 
+實作推論程序
+............
+
 /186頁/
 
 44.Bw(x) ≡ (n){ 0<n≦l(x) ⊃ Ax(n Gl x) 
@@ -2601,7 +2606,7 @@ x 整除以 y 34)。
          無法以定理 IV 推論其為遞迴的。
 
 表現定理
-........
+--------
 
 譯註：表現定理之名稱指出此定理
       證明所有遞迴函數均於 P 系統內表現，
@@ -2867,7 +2872,7 @@ zugeordnet ist 42), soll rekursiv heißen.
 42) 其於此內容解釋下也表達了此關係的存在。
 
 建構不可判定之命題
-..................
+------------------
 
 Wir kommen nun ans Ziel unserer Ausführungen. 
 Sei 𝛘 eine beliebige Klasse von /Formeln/. 
@@ -2882,8 +2887,6 @@ wenn es kein /Klassenzeichen/ a gibt, so daß:
 
    |  |    v |       |   |             |
 (n)|Sb|a Z(n)|εFlg(𝛘)| & |Neg (v Gen a)| εFlg(𝛘)
-
-
 
 wobei v die freie Variable des Klassenzeichens a ist.
 
@@ -2925,7 +2928,6 @@ Satz VI: Zu jeder ω-widerspruchsfreien rekursiven Klasse 𝛘 von Formeln
         存在遞迴類別符號 r，
         使得不論是 v Gen r 或是 Neg(v Gen r) 都不屬於 Flg(𝛘)。
         (其中 v 是 r 中的自由變數)。
-
 
 Beweis: Sei 𝛘 eine beliebige rekursive ω-widerspruchsfreien Klasse
         von Formeln. Wir definieren:
@@ -3406,20 +3408,17 @@ aus endlich vielen Schemata entstehen 48a).
      (例如系統 P 的 ω 型別)而可被決定。
      同樣地集合公理系統也成立。
 
-推廣至算術系統
---------------
+算術系統
+--------
 
 3.
-
-算術定義
-........
 
 Wir ziehen nun aus Satz VI weitere Folgerungen und 
 geben zu diesem Zweck folgende Definition:
 
 現在要從命題 VI 導出更廣泛的結論且因此給定以下定義：
 
-Eine Relation (Klasse) heißt arithmetisch, 
+Eine Relation (Klasse) heißt arithmetisch,
 wenn sie sich allein mittels der Begriffe +, . 
 [Addition und Multiplikation, bezogan auf natürliche Zahlen 49)] und 
                             __
@@ -3433,7 +3432,7 @@ wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 5O).
 其中 (x) 和 = 僅能應用在自然數 50)。
 
 算術命題
---------
+........
 
 Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
 Insbesondere sind z. B. die Relationen "größer" und
@@ -3466,9 +3465,8 @@ x≡y(mod n)~(Ez)[x=y+z.n ∨ y=x+z.n]
     (不允許出現函數與集合變數)。
     (每個其它出現於 x 之前數目變數能自然地取代 x)。
 
-
-定理 VII：
-.........
+定理 VII
+........
 
 Es gilt der
 Satz VII: Jede rekursive Relation ist arithmetisch.
@@ -3606,7 +3604,6 @@ Denn eine in zwei von diesen Zahlen enthaltene Primzahl müßte auch
 in der Differenz (i1-i2)l! und 
 daher wegen |i1-i2|<l in l! enthalten sein, was unmöglich ist. 
 Das Zahlenpaar n,l! leistet dann das Verlangte.
-
 
 證明：
 令 l 為 k,f0,f1...fk-1 中最大的整數，
@@ -4156,7 +4153,7 @@ womit Satz IX bewiesen ist. 62)
     這是因為這些系統也確實存在形式如(x)F(x)（F 遞迴）之不可決定命題。 
 
 系統無法自我證明一致性
-......................
+----------------------
 
 4.
 
@@ -4369,7 +4366,8 @@ Beweis von Satz XI ausführlich dargestellt werden.
 （接受日期： 17. XI. 1930.）
 
 符號意義對照表
-..............
+--------------
+
 20160417 週日 美崙
 
 此對照表用來快速檢閱論文使用到的符號之意義。
@@ -4559,10 +4557,9 @@ Satz VII    算術     命題 VII
 邏輯常數 ∨,  , (x), = 所定義，
 其中 (x) 和 = 僅能應用在自然數 50)。
 
-
-
 譯詞規則
 --------
+
 Axiom       公理：預設為真之陳述
 Art         種
 Typ         形
@@ -4583,9 +4580,9 @@ Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 
-
 P 系統之 BNF
 ------------
+
 用更精簡的 BNF 描述 P 系統之語法如下表：
 
 C    := '~' | 'v' | 'Π'       常數
@@ -4623,6 +4620,7 @@ F    := EF                   公式
 
 後記
 ----
+
 基於對原作者的祟敬，即論文的重要性，
 希望此篇論文如同佛教思想能融入中文思想圈中，
 20160424 週日 美崙
@@ -4871,5 +4869,4 @@ P 系統存在不可決定命題
 3.gribskoff,2013,Gödel's beta function, 
   http://planetmath.org/sites/default/files/texpdf/41307.pdf,
   PlanetMath.
-
 
