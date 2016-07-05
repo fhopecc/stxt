@@ -181,7 +181,7 @@ getPageHtml :: State Page (FilePath, Html)
 getPageHtml = do
     Page { pTitle   = title
          , pContent = content
-         , pSect3s  = sect3s
+         , pSect2s  = sect2s
          , pDoc     = Just doc
          } <- get
     titlebar <- getTitleBar
@@ -199,7 +199,7 @@ getPageHtml = do
                    +++ rightAds
                    +++ thediv ![identifier "content"]
                         << map (elem2Html doc) content 
-                       +++ map (sect32Html doc) sect3s
+                       +++ map (sect2ToHtml doc) sect2s
     f <- getFilePath
     return (f, html)
 
@@ -214,11 +214,17 @@ sect1Path (STXT.Sect1 n _ _ _) = show n ++ ".html"
 sect2Path (STXT.Sect2 (n1, n2) _ _ _) = 
     show n1 ++ "_" ++ show n2 ++ ".html"
 
-sect32Html :: STXT.Doc -> STXT.Sect3 -> Html
-
-sect32Html doc (STXT.Sect3 _ title content) = 
+sect2ToHtml :: STXT.Doc -> STXT.Sect2 -> Html
+sect2ToHtml doc (STXT.Sect2 (n1, n2) title content s3s) = 
     thediv ! [theclass "sect3"]
         << h1 << title
+       +++ map (elem2Html doc) content 
+       +++ map (sect32Html doc) s3s 
+
+sect32Html :: STXT.Doc -> STXT.Sect3 -> Html
+sect32Html doc (STXT.Sect3 _ title content) = 
+    thediv ! [theclass "sect3"]
+        << h2 << title
        +++ map (elem2Html doc) content 
 
 elem2Html :: STXT.Doc -> STXT.Elem -> Html
