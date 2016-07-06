@@ -87,8 +87,7 @@ getHtmls :: State Page [(FilePath, Html)]
 getHtmls = do
     ihtml <- getIndexHtml
     s1htmls <- getSect1Htmls  
-    s2htmls <- getSect2Htmls
-    return $ ihtml : s1htmls ++ s2htmls
+    return $ ihtml : s1htmls
 
 getIndexHtml :: State Page (FilePath, Html)
 getIndexHtml = do
@@ -195,8 +194,6 @@ getPageHtml = do
                +++ body 
                     << titlebar
                    +++ sect1bar 
-                   +++ sect2bar 
-                   +++ rightAds
                    +++ thediv ![identifier "content"]
                         << map (elem2Html doc) content 
                        +++ map (sect2ToHtml doc) sect2s
@@ -216,10 +213,11 @@ sect2Path (STXT.Sect2 (n1, n2) _ _ _) =
 
 sect2ToHtml :: STXT.Doc -> STXT.Sect2 -> Html
 sect2ToHtml doc (STXT.Sect2 (n1, n2) title content s3s) = 
-    thediv ! [theclass "sect3"]
+    thediv ! [theclass "sect2"]
         << h1 << title
        +++ map (elem2Html doc) content 
        +++ map (sect32Html doc) s3s 
+       +++ sectEndAds
 
 sect32Html :: STXT.Doc -> STXT.Sect3 -> Html
 sect32Html doc (STXT.Sect3 _ title content) = 
@@ -256,22 +254,22 @@ myLink = thelink ! [ rel  "stylesheet"
                    , href "web.css" 
                    ] << noHtml
 
-rightAds :: Html
-rightAds = thediv ! [identifier "rightbar"]
+sectEndAds :: Html
+sectEndAds = thediv ! [identifier "sect2endads"]
             << [ tag "script"  ! [thetype "text/javascript"] 
-                 << (primHtml $ concat [ "<!--\n"
-                                       , "google_ad_client = \"pub-7516968926110807\";\n"
-                                       , "/* Structed text left vertical unit */\n"
-                                       , "google_ad_slot = \"5496674888\";\n"
-                                       , "google_ad_width = 120;\n"
-                                       , "google_ad_height = 600;\n"
-                                       , "//-->\n"
-                                       ])
+                 << (primHtml $ concat 
+            [ "<!--\n"
+            , "google_ad_client = \"ca-pub-7516968926110807\";\n"
+            , "google_ad_slot = \"4663234483\";\n"
+            , "google_ad_width = 728;\n"
+            , "google_ad_height = 90;\n"
+            , "//-->\n"
+            ])
                , tag "script" ! [ thetype "text/javascript"
                                , src "http://pagead2.googlesyndication.com/pagead/show_ads.js"
                                ] << noHtml
                ]
-           
+
 label :: Bool -> Html -> Html
 label isSelected child = (if isSelected then
         td ! [theclass "selected"]   

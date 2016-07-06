@@ -1,9 +1,6 @@
 @import url("/css/pygments_style.css");
 body {font-family:"標楷體";font-size:14pt}
 
-#content  {padding: 0 13% 0 15%}
-#rightbar {float:right;width:13%}
-
 #sect1_bar {padding-left:15%}
 #sect1_bar table {border:0}
 #sect1_bar table tr {border:0;text-align:left}
@@ -19,7 +16,7 @@ body {font-family:"標楷體";font-size:14pt}
 .emphasis {font-weight:bold}
 
 .sect1 .title {font-size:24pt;font-weight:bold;}
-.sect2 .title {font-size:20pt;font-weight:bold;}
+.sect2 h1 {font-size:18;font-weight:bold;}
 .sect3 .title {font-size:16pt;font-weight:bold;}
 .sect4 .title {font-size:14pt;font-weight:bold;}
 .sect5 .title {font-size:14pt;font-weight:bold;}
