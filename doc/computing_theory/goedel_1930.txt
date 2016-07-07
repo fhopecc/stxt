@@ -185,7 +185,6 @@ auch zu entscheiden.
 
 因此似乎可假定這些公理及推論法可決定所有能完全以前述系統所表達的數學問題。
 
-譯註：die Vermutung nahe, daß ... 似乎可假定 ... 
 
 Im folgenden wird gezeigt, 
 daß dies nicht der Fall ist, 
@@ -1363,12 +1362,26 @@ P 系統中存在不可決定問題之命題，讀作如下：
 遞迴函數
 --------
 
+譯註：前面提到 P 系統含有數個公理及 2 個推論規則。
+      遞迴函數僅包含數個公理是 2 個推論規則，
+
+      遞迴函數的推論規則係能從已存在的函數衍生新的函數，
+      哥德爾提到 2 種方式，
+      第 1 種稱為遞迴定義，
+      前述 (2) 即說明 φ 函數定義自前項的 ψ 及 µ。
+
+      本論文中，哥德爾證明遞迴函數可由算術系統定義，
+      分別是函數合成及遞迴定義，
+      於是哥德爾證明這數個公理及2個推論規則
+      能以自然數的乘法、加法去表示，
+      這樣可推理出整個遞迴函數系統都能使用算術系統模擬。
+
+遞迴定義
+........
+
 Wir schalten nun eine Zwischenbetrachtung ein, 
 die mit dem formalen System P vorderhand nichts zu tun hat, 
 und geben zunächst folgende Definition: 
-
-現在先轉換至一個觀念，現在其與 P 系統沒有關聯，
-首先給定以下定義:
 
 Eine zahlentheoretische Funktion 25) 
 φ(x1,x2...xn) 
@@ -1377,6 +1390,9 @@ den zahlentheoretischen Funktionen
 ψ(x1,x2...x(n-1)) und μ(x1,x2...x(n+1)), 
 wenn für alle x2...xn,k 26)
 folgendes gilt:
+
+現在先轉換至一個觀念，其與 P 系統並無關聯，
+首先給定以下定義:
 
 一個數論函數 25) φ(x1,x2...xn) 
 稱作遞迴定義自數論函數
@@ -1387,13 +1403,9 @@ folgendes gilt:
 φ(0  ,x2...xn) = ψ(x2...xn)                          (2)
 φ(k+1,x2...xn) = μ(k,φ(k,x2...xn),x2...xn)
 
-譯註：遞迴函數的推論規則係能從已存在的函數衍生新的函數，
-      哥德爾提到 2 種方式，
-      第 1 種稱為遞迴定義，
-      前述 (2) 即說明 φ 函數定義自前項的 ψ 及 µ。
-
 25) D. h. ihr Definitionsbereich ist die Klasse 
-    der nicht negativen ganzen Zahlen (bzw. der n-tupel von solchen) 
+    der nicht negativen ganzen Zahlen 
+    (bzw. der n-tupel von solchen) 
     und ihre Werte sind nicht negative ganze Zahlen.
 
 25) 即其定義域為非負整數(或 n 元非負整數值組)
@@ -1406,7 +1418,6 @@ folgendes gilt:
 26) 小寫拉丁字母(可能帶有索引)於後文總是為非負整數變數
     (除非例外情形已被明確說明)
 
-譯註：ev. 為 eventuell 之縮寫，即可能地。
 
 /180/
 
@@ -4579,6 +4590,8 @@ tupel       值組
 Folge       序列，有序之數列
 wider-spruchs-freie 一致，源自沒有矛盾 
 Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
+ev.         為 eventuell 之縮寫，即可能地。
+die Vermutung nahe, daß ... 似乎可假定 ... 
 
 P 系統之 BNF
 ------------
@@ -4799,13 +4812,6 @@ F    := EF                   公式
 即正整數的唯一分解定理
 利用遞迴函數表現 P 系統，
 證明 P 系統可一步步計算出來。
-
-本論文中，哥德爾證明遞迴函數可由算術系統定義，
-遞迴函數僅包含數個公理是 2 個推論規則，
-分別是函數合成及遞迴定義，
-於是哥德爾證明這數個公理及2個推論規則
-能以自然數的乘法、加法去表示，
-這樣可推理出整個遞迴函數系統都能使用算術系統模擬。
 
 現今的遊戲，實作了力學幾個基本定律，
 模擬出許多現實世界於小小的畫面中。
