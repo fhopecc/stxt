@@ -24,6 +24,7 @@ data Page = Page
   , pSect2s   :: STXT.Sect2s
   , pSect2    :: Maybe STXT.Sect2
   , pSect3s   :: STXT.Sect3s
+  , pAds      :: Bool
   } 
 
 defaultPage = Page 
@@ -41,10 +42,15 @@ defaultPage = Page
   , pSect2s   = []     
   , pSect2    = Nothing
   , pSect3s   = []     
+  , pAds      = True
   }
 
 options :: [OptDescr (Page -> IO Page)]
-options = []
+options = 
+  [ Option ['A'] ["noads"]
+    (NoArg (\ page -> return $ page { pAds = False }))
+    "Don't show Adsense bar"
+  ]
 
 main = do
     args <- getArgs
@@ -52,7 +58,7 @@ main = do
     let (actions, nonOptions, errors) = getOpt RequireOrder options args
     
     when (null nonOptions) 
-        (error "syntax: stxt2html options source")
+         (error "syntax: stxt2html options source")
 
     let src = head nonOptions
     let srcdir = FP.takeDirectory src
@@ -63,7 +69,7 @@ main = do
     c <- hGetContents f
     doc <- STXT.runInclude srcdir c
 
-    page <- foldl (>>=) 
+    page <- foldl (>>=)
                   ( return defaultPage 
                             { pSource = src  
                             , pDoc    = Just doc
@@ -72,7 +78,12 @@ main = do
                   ) actions 
 
     mapM_ writeHtml (evalState getHtmls page)
-    
+    let cssSrc = "d:\\stxt\\dochandle\\web.css"
+    let cssDst = FP.combine basedir $ FP.combine basename "web.css"
+    putStrLn $ "copy " ++ cssSrc ++ " to " ++ cssDst
+    copyFile cssSrc cssDst
+    putStrLn "OK!"
+
 writeHtml :: (FilePath, Html) -> IO ()
 writeHtml (path, html) = do
     createDirectoryIfMissing True $ FP.takeDirectory path 
@@ -182,6 +193,7 @@ getPageHtml = do
          , pContent = content
          , pSect2s  = sect2s
          , pDoc     = Just doc
+         , pAds     = ads
          } <- get
     titlebar <- getTitleBar
     sect1bar <- getSect1Bar 
@@ -196,7 +208,7 @@ getPageHtml = do
                    +++ sect1bar 
                    +++ thediv ![identifier "content"]
                         << map (elem2Html doc) content 
-                       +++ map (sect2ToHtml doc) sect2s
+                       +++ map (sect2ToHtml ads doc ) sect2s
     f <- getFilePath
     return (f, html)
 
@@ -211,13 +223,13 @@ sect1Path (STXT.Sect1 n _ _ _) = show n ++ ".html"
 sect2Path (STXT.Sect2 (n1, n2) _ _ _) = 
     show n1 ++ "_" ++ show n2 ++ ".html"
 
-sect2ToHtml :: STXT.Doc -> STXT.Sect2 -> Html
-sect2ToHtml doc (STXT.Sect2 (n1, n2) title content s3s) = 
+sect2ToHtml :: Bool -> STXT.Doc -> STXT.Sect2 -> Html
+sect2ToHtml isAds doc (STXT.Sect2 (n1, n2) title content s3s) = 
     thediv ! [theclass "sect2"]
         << h1 << title
        +++ map (elem2Html doc) content 
        +++ map (sect32Html doc) s3s 
-       +++ sectEndAds
+       +++ (if isAds then sectEndAds else toHtml "")
 
 sect32Html :: STXT.Doc -> STXT.Sect3 -> Html
 sect32Html doc (STXT.Sect3 _ title content) = 

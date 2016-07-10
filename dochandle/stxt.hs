@@ -182,7 +182,7 @@ paraLink = between (char '[') (char ']') (
             else
                 return $ Link t uri
     )<|>(do r <- many $ noneOf "]\n"
-            return $ ILink $ r
+            return $ ILink $ "[" ++ r ++ "]"
         )
     )
 
@@ -302,8 +302,6 @@ printTree = do
 options :: [OptDescr [Char]]
 options = []
 
- 
-
 main = do
     args <- getArgs
  
@@ -326,8 +324,6 @@ main = do
     hPutStr f (renderIndex doc)
     hFlush f
     hClose f
-
-
 
 renderIndex (Doc _ _ s1s) = concatMap sect1Index s1s 
 
