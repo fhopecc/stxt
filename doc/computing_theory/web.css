@@ -2,5 +2,9 @@ body {font-family:"DFKai-sb";font-size:14pt}
 
 h1 {font-size:16pt;font-weight:bold}
 h2 {font-size:14pt;font-weight:bold}
+pre {font-size:14pt;font-family:consolas}
 .german {font-family:Arial;font-size:14pt}
 .chinese {font-family:PMingLiU;font-size:14pt}
+.overline {text-decoration:overline}
+table {border-collapse:collapse}
+table,th,td{font-size:14pt;border:1px solid black}

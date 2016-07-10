@@ -1,33 +1,42 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 FINAL//EN">
-<!--Rendered using the Haskell Html Library v0.2-->
-<HTML><HTML LANG = "zh-tw">
-<HEAD><META HTTP-EQUIV = "Content-Type" CONTENT = "text/html; charset=utf-8">
-</HEAD></HTML>
-<LINK REL = "stylesheet" HREF = "web.css">
-</LINK>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Example of MathML embedded in an XHTML file</title>
+		<meta name="description" content="Example of MathML embedded in an XHTML file" />
+		<meta name="keywords" content="Example of MathML embedded in an XHTML file" />
+	</head>
+<LINK REL = "stylesheet" HREF = "web.css"></LINK>
 <TITLE>
 Über formal unentsheidbare Sätze  der Principia Mathematica und verwandter System I 1) 
 論數學原理及相關系統中的形式無法決定陳述句 1)</TITLE>
 <BODY>
 <h1>遞迴函數</h1>
 <p>譯註：
-哥德爾引入遞迴函數，
-一種僅包含 3 個公理及 2 個推論規則的形式系統，
-因為簡單，所以能輕鬆使用其它形式系統來實作遞迴函數，
-也因為這個特性，若某事物能用遞迴函數所建構，
-可輕易證明可由另一個系統來實作。
+哥德爾引入遞迴函數系統，
+一種僅包含 3 個基礎遞迴函數及 2 個函數轉換規則的簡單形式系統，
+若某項事物可從基礎遞迴函數逐步經由函數轉換建構出來，
+代表此項事物可於遞迴函數系統內決定，換句話說，證明。
 </p>
 <p>
-本文中，作者先利用遞迴函數建構出 P 系統及形式不可決定命題，
-再證明普通的算術系統可實作遞迴函數，
-簡單的將不可決定命題推廣至算術系統。
+因為很簡單，
+若某一個形式系統只要能實作遞迴函數系統的基礎遞迴函數及函數轉換規則，
+所有能由遞迴函數系統內決定或證明的事物，
+可立即推論其也能於另一個形式系統內證明。
 </p>
 <p>
-遞迴函數系統可在現代資訊科學中的 LISP 等函數式語言找到，
-而遞迴函數觀念早已全面滲入現代所有的程式語言中了。
+本文中哥德爾先利用遞迴函數建構出 P 系統及形式不可決定命題，
+再證明普通的算術系統，即包含加法及乘法的自然數算術系統，
+可實作遞迴函數，便直接將不可決定命題推廣至算術系統。
 </p>
 <p>
-遞迴函數的推論規則係指能從已存在的函數衍生新的函數，
+遞迴函數系統對程式設計相當重要，
+其最早的實作就是 LISP 語言，
+且遞迴函數觀念早已全面滲入現代所有的程式語言中了。
+</p>
+<p>
+遞迴函數轉換規則係指能從已存在的函數衍生新的函數，
 哥德爾提到 2 種方式，
 第 1 種稱為遞迴定義，
 第 2 種稱為函數合成，詳如以下論文本文。 
@@ -51,15 +60,12 @@ folgendes gilt:
 </div>
 <div class="chinese">
 <p>
-現在先轉換至一個觀念，其與 P 系統並無關聯，
-首先給定以下定義:
+現在先轉換至一個觀念，其與 P 系統並無關聯，首先給定以下定義:
 </p>
 <p>
-一個數論函數 25) φ(x1,x2...xn) 
-稱作遞迴定義自數論函數
-ψ(x1,x2...x(n-1)) 及 
-μ(x1,x2...x(n+1))，
-若其對所有 x2...xn,k 26) 使得：
+一個數論函數 25) φ(x1,x2...xn) 稱作遞迴定義自數論函數
+ψ(x1,x2...x(n-1)) 及 μ(x1,x2...x(n+1))，
+若其對所有引數 x2...xn,k 26) 使得：
 </p>
 </div>
 <pre>
@@ -82,7 +88,7 @@ folgendes gilt:
     (falls nicht ausdrücklich das Gegenteil bemerkt ist).
 </p>
 <p class="chinese">
-26) 小寫拉丁字母(可能帶有索引)於後文總表示非負整數變數
+26) 小寫拉丁字母(可能帶有索引)於後文均表示非負整數變數
     (除非例外情形已被明確說明)。
 </p>
 <p>
@@ -102,12 +108,11 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 <p class="chinese">
 一個數論函數 φ 稱為遞迴的，
 若且惟若存在一個數論函數的有限序列 φ1,φ2...φn，
-其以 φ 結束而具備以下特性，
+其以 φ 結束且具備以下特性，
 序列中的每個函數 φk 不是由前兩項遞迴定義而來，
 就是由對前幾項執行取代操作而得 27)，
 不然就是一個常數或是後繼函數 x+1。
 </p>
-
 <h2>函數合成</h2>
 <p class="german">
 27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
@@ -121,179 +126,217 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
     φk(x1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r &lt; k).
     所有左側變數不一定要在右側出現(就如同遞迴框架(2))。
 </p>
-
 <h2>基礎遞迴函數</h2>
 <p>
-譯註：由前哥德爾的定義可知 φk 的初始不是一個常數或是後繼函數 x+1，
-      這兩個函數在現代術語為基礎遞迴函數公理，
-      基礎遞迴函數不是經由前項函數經遞迴定義或函數合成所得，
+譯註：由哥德爾的定義可知基礎遞迴函數公為常數或是後繼函數 x+1，
+      基礎遞迴函數不是經由遞迴定義或函數合成所得，
       而是預先就接受為遞迴函數，如同邏輯上，公理是預先就接受的定理。
-      哥德爾提到基本基礎遞迴函數如下：
+      哥德爾提到基本基礎遞迴函數如下表：
 </p>
-<dl><RA1.零函數或常數函數
-      0(x) = 0                        
+<table>
+<tr><th>編號</th><th>名稱</th><th>定義</th></tr>
+<tr><td>RA1</td><td>零函數或常數函數</td><td>0(x)=0</td></tr>
+<tr><td>RA2</td><td>後繼函數</td><td>f(x)=x+1</td></tr>
+<tr><td colspan="3">現代通常會包含投影函數：</td></tr>
+<tr><td>RA3</td><td>投影函數</td>
+    <td><math><mrow>
+            <msubsup>
+            <mn>p</mn><mn>k</mn><mn>j</mn>
+            </msubsup>
+            <mn>(x1,x2,...,xj,...,xk)=xj</mn>
+            </mrow>
+        </math>
+</td></tr>
 
-      RA2.後繼函數
-      f(x) = x+1                      
-      
-      現代通常會包含投影函數：
-
-      RA3.投影函數
-      p_k_j(x1,x2,...,xj,...,xk) = xj 
-
-級數
-....
-
-/180/
-
+</table>
+<math>
+				<mrow>
+					<mi>a</mi>
+					<mo>&InvisibleTimes;</mo>
+					<msup>
+						<mi>x</mi>
+						<mn>2</mn>
+					</msup>
+					<mo>+</mo>
+					<mi>b</mi>
+					<mo>&InvisibleTimes;</mo>
+					<mi>x</mi>
+					<mo>+</mo>
+					<mi>c</mi>
+					<mo>=</mo>
+					<mi>0</mi>
+				</mrow>
+			</math>
+<h2>級數</h2>
+<p>/180/</p>
+<p class="german">
 Die Länge der kürzesten Reihe von φi, 
 welche zu einer rekursiven Funktion φ gehört, 
 heißt ihre Stufe. 
-
+</p>
+<p class="chinese">
 定義遞迴函數 φ 的最短 φi 序列長度稱為其級數。
-
-譯註：依定義基礎遞迴函數的級數為 1，
-      即為 φ(x)=0(x) 及 φ(x)=x+1 的級數為 1。
-     
-      再看一個例子，集合 {0} 的級數為何？
-
-      定理 R1：{0} 是遞迴的。
-               令 χ{0}(0)   = f(0)
-                  χ{0}(x+1) = 0(x)
-               得證。
-
-      因為χ{0}(x) 是經過一次的遞迴定義，故其級數為 2。
-      遞迴函數 φ 之級數有限性可應用來定義 φ 是否可以證明，
-      有一個建構證明。
-
-遞迴關係
-........
-
+</p>
+<p>
+譯註：依定義可直接推得基礎遞迴函數的級數為 1，
+      再看一個例子，僅包含 0 的集合 {0} 的級數為何？
+      集合是單元關係可由建構特徵函數定義，
+      可看到其特徵函數 χ{0} 由1次遞迴定義建構如下：
+</p>
+<pre>
+χ{0}(0)   = f(0)
+χ{0}(x+1) = 0(x)            (R1)
+</pre>
+<p>
+因為 χ{0}(x) 是經過一次的遞迴定義，故其級數為 2，
+並證明集合 {0} 是遞迴的。
+遞迴函數 φ 之級數描述從基礎遞迴函數至少須經幾次函數轉換而得到φ。
+</p>
+<h2>遞迴關係</h2>
+<p class="german">
 Eine Relation zwischen natürlichen Zahlen 
 R(x1...xn) heißt rekursiv 28), 
 wenn es eine rekursive Funktion φ(x1...xn) gibt, 
 so daß für alle x1,x2...xn
-
+</p>
+<p class="chinese">
 一個自然數關係 R(x1...xn) 稱為遞迴 28)，
 若且惟若存在一個遞迴函數 φ(x1...xn)，
-使得所有的 x1,x2...xn 有下式成立：
-
+使得所有的 x1,x2...xn 滿足下式：
+</p>
+<pre>
 R(x1...xn) ~ [φ(x1...xn)=0] 29).
-
+</pre>
+<p class="german">
 28) Klassen rechnen wir mit zu den Relationen (einstellige Relationen).
     Rekursive Relationen R haben natürlich die Eigenschaft, 
     daß man für jedes spezielle Zahlen-n-tupel entscheiden kann, 
     ob R(x1...xn) gilt oder nicht.
-
-    類別也算此種關係(其為單元關係)，
+</p>
+<p class="chinese">
+28) 類別也算此種關係(其為單元關係)，
     遞迴關係 R 自然具備下列特性，
     對每個特定 n 元數對，可決定對 R(x1...xn) 是否成立。
-
+</p>
+<p>
 譯註：φ 函數稱為關係 R 的特徵函數，
-      哥德爾特徵函數 0 值表關係成立，
-      故定義 0 為邏輯真值，1 為邏輯假值。
-
-      類別(或集合)可視為單元關係，也可定義其特徵函數，
-      譯註中我們使用 χ{K} 表示類別 K 的特徵函數。
-      如下：
-
-      定理 R2：正整數類別是遞迴的。
-      證明：
-               令 ℕ* = ℕ \ {0}，
-               上式說明自然數類別不含 0 即為正整數類別。
-               已知下 2 式成立：
-               1.若 n = 0 則 χ{0}(n) = 1，
-                 可得 χ{0}(χ{0}(0)) = χ{0}(1) = 0
-               2.若 n > 0 則 χ{0}(n) = 0，
-                 可得 χ{0}(χ{0}(n)) = χ{0}(0) = 1
-               令 χℕ*(n) = χ{0}(χ{0}(n))，
-               由引理 R1 知 χℕ*(n) 為遞迴，
-               得證。
-
+      因為哥德爾定義關係成立時特徵函數為 0，
+      故知 0 為邏輯真值，1 為邏輯假值。
+      類別(或集合)可視為單元關係，故也具有特徵函數，
+      以下我們使用 χ{K} 表示類別 K 的特徵函數。
+      以下列舉幾個類別的遞迴函數建構：
+</p>
+<h3>定理 R2：正整數類別是遞迴的。</h3>
+<em>證明：</em>
+<p>令正整數類別 ℕ* = ℕ\{0}，即不含 0 之自然數類別。
+其特徵函數 χℕ*(n) 可遞迴定義如下：</p>
+<ul>
+<li>χℕ*(0)=f(0)
+<li>χℕ*(x+1)=0
+</ul>
+<p>故可知 ℕ* 為遞迴，得證。</p>
+<p class="german">
 29) Für alle inhaltlichen (insbes. auch die metamathematischen) 
     Überlegungen wird die Hilbertsche Symbolik verwendet. 
     Vgl. Hilbert-Ackermann, 
     Grundzüge der theoretischen Logik, Berlin 1928.
-
-    所有內容觀念(特別是後設數學)是使用希爾伯特符號。
+</p>
+<p class="chinese">
+29) 所有內容觀念(特別是後設數學)是使用希爾伯特符號。
     參考希爾伯特-阿克曼，
     理論邏輯基礎，柏林 1928。
-
-譯註：
-      哥德爾在後面建構算術系統除了 ≡ 外，
+</p>
+<p>
+譯註：哥德爾在後面建構算術系統除了 ≡ 外，
       都是使用希爾伯特的符號，可參閱註 33)，
       符號定義如下表：
-      符號 意義    
-      -    否定，此符號為命題符號上方的 bar
-      &    合取
-      ∨    析取
-      →    推論
-      ~    等值
-      (x)  全稱量詞
-      (Ex) 存在量詞
-
-遞迴定理
-........
-
+</p>
+<table>
+<tr><th>符號</th><th>意義</th></tr>    
+<tr><td class="overline">x</td><td>否定，此符號為命題符號上方的頂線</td></tr>    
+<tr><td>&</td><td>且，合取</td></tr>
+<tr><td>∨</td><td>或，析取</td></tr>
+<tr><td>→</td><td>推論</td></tr>
+<tr><td>~</td><td>等值</td></tr>
+<tr><td>(x)</td><td>全稱量詞</td></tr>
+<tr><td>(Ex)</td><td>存在量詞</td></tr>
+</table>
+<h2>遞迴定理</h2>
+<p class="german">
 Es gelten folgende Sätze:
-
+</p>
+<p class="chinese">
 以下定理成立：
-
+</p>
+<p class="german">
 I.  Jede aus rekursiven Funktionen (Relationen) 
     durch Einsetzung rekursiver Funktionen 
     an Stelle der Variablen entstehende Funktion (Relation) 
     ist rekursiv; 
     ebenso jede Funktion, die aus rekursiven Funktionen 
     durch rekursive Definition nach dem Schema (2) entsteht.
-   
+</p>
+<p class="chinese">
 I.  每個經由配置遞迴函數在根源函數(關係)變數位置而得之函數是遞迴的；
     同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
-
+</p>
+<p class="german">
 II. Wenn R und S rekursive Relationen sind, 
     dann auch R, R ∨ S (daher auch R & S).
-                             _
+</p>
+<p class="chinese">
 II. 若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
-
+</p>
+<p class="german">
 III.Wenn die Funktionen φ(𝔵), ψ(𝔶)  rekursiv sind,
     dann auch die Relation: φ(𝔵) =ψ(𝔶) 30) 
-
+</p>
+<p class="chinese">
 III.若φ(𝔵)及ψ(𝔶)是遞迴，則以下關係也是：φ(𝔵)=ψ(𝔶)30)
-
+</p>
+<p class="german">
 30) Wir verwenden deutsche Buchstaben 𝔵, 𝔶 als abkürzende 
     Bezeichnung für beliebige Variablen-n-tupel, z. B. x1 x2 ... xn.
-
-    利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
-
+</p>
+<p class="chinese">
+利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
+</p>
+<p class="german">
 IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
     dann auch die Relationen S,T
-
+</p>
+<p class="chinese">
+若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
+</p>
+<pre>
     S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
     T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
-
-    sowie die Funktion ψ
-    ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
+</pre>
+<p class="german">
+sowie die Funktion ψ
+</p>
+<p class="chinese">
+以及函數為 ψ：
+</p>
+<pre>
+ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
+</pre>
+<p class="german">
     wobei εxF(x) bedeutet: 
     Die kleinste Zahl x, für welche F(x) gilt 
     und 0, falls es keine solche Zahl gibt.
-
-    若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
-
-    S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
-    T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
-
-    以及函數為 ψ：
-
-    ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
-
-    其中 εxF(x) 指：
-    最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
-
+</p>
+<p class="chinese">
+其中 εxF(x) 指：
+最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
+</p>
+<p class="german">
 Satz I folgt unmittelbar aus der Definition von "rekursiv".
-
+</p>
+<p class="chinese">
 定理 I 由遞迴之定義直接推得。
-
-遞迴函數實作邏輯操作
-....................
+</p>
+<h2>遞迴函數實作邏輯操作</h2>
 
 Satz II und III beruhen darauf, 
 daß die den logischen Begriffen -, ∨, = 
