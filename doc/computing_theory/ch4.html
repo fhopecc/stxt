@@ -139,34 +139,9 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 <tr><td>RA2</td><td>後繼函數</td><td>f(x)=x+1</td></tr>
 <tr><td colspan="3">現代通常會包含投影函數：</td></tr>
 <tr><td>RA3</td><td>投影函數</td>
-    <td><math><mrow>
-            <msubsup>
-            <mn>p</mn><mn>k</mn><mn>j</mn>
-            </msubsup>
-            <mn>(x1,x2,...,xj,...,xk)=xj</mn>
-            </mrow>
-        </math>
-</td></tr>
+    <td>p_k_j(x1,x2,...,xj,...,xk)=xj</td></tr>
 
 </table>
-<math>
-				<mrow>
-					<mi>a</mi>
-					<mo>&InvisibleTimes;</mo>
-					<msup>
-						<mi>x</mi>
-						<mn>2</mn>
-					</msup>
-					<mo>+</mo>
-					<mi>b</mi>
-					<mo>&InvisibleTimes;</mo>
-					<mi>x</mi>
-					<mo>+</mo>
-					<mi>c</mi>
-					<mo>=</mo>
-					<mi>0</mi>
-				</mrow>
-			</math>
 <h2>級數</h2>
 <p>/180/</p>
 <p class="german">
@@ -269,23 +244,24 @@ Es gelten folgende Sätze:
 以下定理成立：
 </p>
 <p class="german">
-I.  Jede aus rekursiven Funktionen (Relationen) 
-    durch Einsetzung rekursiver Funktionen 
-    an Stelle der Variablen entstehende Funktion (Relation) 
-    ist rekursiv; 
-    ebenso jede Funktion, die aus rekursiven Funktionen 
-    durch rekursive Definition nach dem Schema (2) entsteht.
+I.Jede aus rekursiven Funktionen (Relationen) 
+  durch Einsetzung rekursiver Funktionen 
+  an Stelle der Variablen entstehende Funktion (Relation) 
+  ist rekursiv; 
+  ebenso jede Funktion, die aus rekursiven Funktionen 
+  durch rekursive Definition nach dem Schema (2) entsteht.
 </p>
 <p class="chinese">
-I.  每個經由配置遞迴函數在根源函數(關係)變數位置而得之函數是遞迴的；
-    同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
+I.每個經由插入遞迴函數在已建構之函數的變數位置而得之函數(關係)
+  是遞迴的；
+  同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
 </p>
 <p class="german">
 II. Wenn R und S rekursive Relationen sind, 
     dann auch R, R ∨ S (daher auch R & S).
 </p>
 <p class="chinese">
-II. 若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
+II.若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
 </p>
 <p class="german">
 III.Wenn die Funktionen φ(𝔵), ψ(𝔶)  rekursiv sind,
@@ -299,7 +275,7 @@ III.若φ(𝔵)及ψ(𝔶)是遞迴，則以下關係也是：φ(𝔵)=ψ(𝔶)3
     Bezeichnung für beliebige Variablen-n-tupel, z. B. x1 x2 ... xn.
 </p>
 <p class="chinese">
-利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
+30) 利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
 </p>
 <p class="german">
 IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
@@ -337,26 +313,33 @@ Satz I folgt unmittelbar aus der Definition von "rekursiv".
 定理 I 由遞迴之定義直接推得。
 </p>
 <h2>遞迴函數實作邏輯操作</h2>
-
+<div class="german">
+<p>
 Satz II und III beruhen darauf, 
 daß die den logischen Begriffen -, ∨, = 
 entsprechenden zahlentheoretischen Funktionen
-
-    α(x), β(x,y), γ(x,y)
-
+</p>
+<pre>
+α(x), β(x,y), γ(x,y)
+</pre>
+<p>
 nämlich:
-
+</p>
+<pre>
     α(0)=1         ; α(x)  =0 für x≠0
 
     β(0,x)=β(x,0)=0; β(x,y)=1, wenn x,y beide ≠0 sind
 
     γ(x,y)=0, wenn x=y;γ(x,y)=1, wenn x≠y 
-
+</pre>
+<p>
 /181/
-
+</p>
+<p>
 recursiv sind,
 wie man sich leicht überzeugen kann. 
-
+</p>
+</div>
 定理 II 及 III 根據邏輯觀念 -, ∨, = 對應到數論函數
 
     α(x), β(x,y), γ(x,y)
