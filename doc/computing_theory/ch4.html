@@ -252,9 +252,9 @@ I.Jede aus rekursiven Funktionen (Relationen)
   durch rekursive Definition nach dem Schema (2) entsteht.
 </p>
 <p class="chinese">
-I.每個經由插入遞迴函數在已建構之函數的變數位置而得之函數(關係)
-  是遞迴的；
-  同樣地每個藉由框架(2)遞迴定義自其它遞迴函數之函數也如此。 
+I.每個經由插入遞迴函數在已建構函數(關係)之變數位置上而得之遞迴函數(關係)
+是遞迴的；
+每個藉由框架(2)遞迴定義產出之遞迴函數也同樣如此。 
 </p>
 <p class="german">
 II. Wenn R und S rekursive Relationen sind, 
@@ -268,14 +268,14 @@ III.Wenn die Funktionen φ(𝔵), ψ(𝔶)  rekursiv sind,
     dann auch die Relation: φ(𝔵) =ψ(𝔶) 30) 
 </p>
 <p class="chinese">
-III.若φ(𝔵)及ψ(𝔶)是遞迴，則以下關係也是：φ(𝔵)=ψ(𝔶)30)
+III.若函數 φ(𝔵)及ψ(𝔶)是遞迴則以下關係也是：φ(𝔵)=ψ(𝔶)30)
 </p>
 <p class="german">
 30) Wir verwenden deutsche Buchstaben 𝔵, 𝔶 als abkürzende 
     Bezeichnung für beliebige Variablen-n-tupel, z. B. x1 x2 ... xn.
 </p>
 <p class="chinese">
-30) 利用哥德字母 𝔵, 𝔶記為 n 元數組變數，例如 x1 x2 ... xn。
+30) 利用哥德字母 𝔵, 𝔶表示 n 元數組變數(即 x1 x2 ... xn)。
 </p>
 <p class="german">
 IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
@@ -285,26 +285,26 @@ IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind,
 若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
 </p>
 <pre>
-    S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
-    T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
+S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
+T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
 </pre>
 <p class="german">
 sowie die Funktion ψ
 </p>
 <p class="chinese">
-以及函數為 ψ：
+以及函數 ψ 也是：
 </p>
 <pre>
 ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
 </pre>
 <p class="german">
-    wobei εxF(x) bedeutet: 
-    Die kleinste Zahl x, für welche F(x) gilt 
-    und 0, falls es keine solche Zahl gibt.
+wobei εxF(x) bedeutet: 
+Die kleinste Zahl x, für welche F(x) gilt 
+und 0, falls es keine solche Zahl gibt.
 </p>
 <p class="chinese">
 其中 εxF(x) 指：
-最小數 x 滿足 F(x) 或為 0，若不存在這樣的數。
+最小數 x 滿足 F(x)，而 0 表示不存在這樣的數。
 </p>
 <p class="german">
 Satz I folgt unmittelbar aus der Definition von "rekursiv".
@@ -312,7 +312,7 @@ Satz I folgt unmittelbar aus der Definition von "rekursiv".
 <p class="chinese">
 定理 I 由遞迴之定義直接推得。
 </p>
-<h2>遞迴函數實作邏輯操作</h2>
+<h2>基本邏輯操作是遞迴的</h2>
 <div class="german">
 <p>
 Satz II und III beruhen darauf, 
@@ -340,201 +340,217 @@ recursiv sind,
 wie man sich leicht überzeugen kann. 
 </p>
 </div>
+<div class="chinese">
+<p>
 定理 II 及 III 根據邏輯觀念 -, ∨, = 對應到數論函數
-
-    α(x), β(x,y), γ(x,y)
-
+</p>
+<pre>
+α(x), β(x,y), γ(x,y)
+</pre>
+<p>
 即：
+</p>
+<pre>
+α(0)=1         ; α(x)  =0 當 x≠0
 
-    α(0)=1         ; α(x)  =0 當 x≠0
+β(0,x)=β(x,0)=0; β(x,y)=1, 當 x,y 都 ≠0 
 
-    β(0,x)=β(x,0)=0; β(x,y)=1, 當 x,y 都 ≠0 
-
-    γ(x,y)=0, 當 x=y;γ(x,y)=1, 當 x≠y 
-
+γ(x,y)=0, 當 x=y;γ(x,y)=1, 當 x≠y 
+</pre>
+<p>
 前揭函數是遞迴能輕易證明。
-
-譯註：哥德爾將邏輯真以 0 表示，邏輯假以 1 表示，前揭函數的證明如下：
-
-      定理 R21：否定是遞迴
-
-      證明：
-
-        α 即 {0} 的特徵函數，可由定理 R1，{0} 是遞迴，得證
-
-      定理 R22：析取是遞迴
-
-      證明：
-
-       令 β 定義如下：
-       β(x,y) = α(α(x.y))  
-       由 R21 否定是遞迴及 R12 乘法是遞迴得證。
-
-       例子如下：
-
-       β(0,0) = α(α(0.0))   
-              = α(α(0))   
-              = α(1)
-              = 0
-       β(0,2) = α(α(0.1))   
-              = α(α(0))   
-              = α(1)
-              = 0
-       β(2,0) = α(α(2.0))   
-              = α(α(0))   
-              = α(1)
-              = 0
-       β(2,4) = α(α(2.4))   
-              = α(α(8))   
-              = α(0)
-              = 1
-
-相等關係為遞迴
-..............
-
+</p>
+</div>
+<p>
+譯註：雖然哥德爾說邏輯操作能輕易證明，我還是把證明作完整補充，
+讓讀者省下一些思考的時間。
+</p>
+<p>
+哥德爾將邏輯真以 0 表示，邏輯假以 1 表示，前揭函數的證明如下：
+</p>
+<h3>定理 R21：否定是遞迴</h3>
+<em>證明：</em>
+<p>
+α 即集合 {0} 的特徵函數，可由定理 R1，集合 {0} 是遞迴，得證。
+</p>
+<h3>定理 R22：析取是遞迴</h3>
+<em>證明：</em>
+<p>
+令 β 定義如下：<br/>
+β(x,y) = α(α(x.y))<br/> 
+由定理 R21 否定是遞迴及定理 R12 乘法是遞迴得證。<br/>
+例子如下：<br/>
+<pre>
+β(0,0) = α(α(0.0))   
+       = α(α(0))   
+       = α(1)
+       = 0
+β(0,2) = α(α(0.1))   
+       = α(α(0))   
+       = α(1)
+       = 0
+β(2,0) = α(α(2.0))   
+       = α(α(0))   
+       = α(1)
+       = 0
+β(2,4) = α(α(2.4))   
+       = α(α(8))   
+       = α(0)
+       = 1
+</pre>
+<h2>相等關係為遞迴</h2>
+<p>
 譯註：γ(x,y) 表示相等關係，詳細證明如後：
+</p>
+<h3>定理 R3:前項函數是遞迴。</h3>
+<em>證明：</em>
+<p>
+前項函數 p 為後繼函數之對立函數。<br/>
+定義 p 如下：<br/>
+</p>
+<pre>
+p(0) = 0
+p(x+1)=pr2_1(x,p(x))
+</pre>
+<p>
+由定理 RA1 常數 0 為遞迴及定理 RA3 投影函數為遞迴，得證。 
+</p>
+<h3>定理 R4:隔斷減法是遞迴。</h3>
+<em>證明：</em>
+<p>
+隔斷減法 ㅗ定義如下（我以韓文字母 ㅗ表示）：
+</p>
+<pre>
+n ㅗ m = 0   : n < m       
+       = n-m : n > m       
+</pre>
+<p>可得</p>
+<pre>
+n ㅗ m+1 = 0        : nㅗm = 0       
+         = (n-|m)-1 : nㅗm &gt; 0
+</pre>
+<p>可將 n ㅗ m 遞迴定義如下：</p>
+<pre>
+n ㅗ m = n           : m=0      
+       = p(nㅗ(m-1)) : m&gt;0       
+</pre>
+<p>由定理 R4 前項函數為遞迴，得證。</p>
+<h3>定理 R5：絕對差是遞迴。</h3>
+<em>證明：</em>
+<p>絕對差 adf 定義如下：</p>
+<pre>
+adf(n,m) = |n-m|
+         = (nㅗm) + (mㅗn) 
+         = (nㅗm) + (p2_2(n,m) -| p2_1(m,n))
+</pre>
+<p>
+由定理 RA3 投影函數為遞迴、
+定理R4 隔斷減法是遞迴及定理 RA11 加法為遞迴，得證。
+</p>
+<h3>定理 R6：相等關係是遞迴。</h3>
+<em>證明：</em>
+<p>哥德爾令 γ 為相等關係之特徵函數，令</p>
+<pre>
+x=y ~ |x-y|=0 
+x≠y ~ |x-y|>0
+</pre>  
+<p>
+令 γ(x,y) = χ{0}(|x-y|)，
+由定理 R1 集合 {0} 是遞迴及定理 R5 絕對差是遞迴，得證。
+</p>
+<h3>命題 R7：符號函數是遞迴。</h3>
+<em>證明：</em>
+<p>符號函數 sgn 用來判斷一數值的正負號，定義如下：</p>
+<pre>
+sgn(n) = 1 : n > 0
+       = 0 : n < 0
+</pre>
+<p>取 sgn(n) = χℕ*(n)，
+再依定理 R2 正整數類別是遞迴的，得證。</p>
 
-      定理 R3:前項函數是遞迴。
-      證明：
-
-        前項函數 p 為後繼函數之對立函數。
-        
-        定義 p 如下：
-        p(n) = 0                 : n = 0
-             = pr2_1(n-1,p(n-1)) : n >0
-        由 RA1 0 為遞迴及 RA3 投影函數為遞迴，
-        得證。 
-
-      定理 R4:隔斷減法是遞迴。
-      證明：
-
-        隔斷減法 ㅗ定義如下（我以韓文字母 ㅗ表示）：
-
-        n ㅗ m = 0   : n < m       
-               = n-m : n > m       
-        可得
-        n ㅗ m+1 = 0        : nㅗm = 0       
-                 = (n-|m)-1 : nㅗm > 0
-
-        可將 n ㅗ m 遞迴定義如下：
-
-        n ㅗ m = n           : m=0      
-               = p(nㅗ(m-1)) : m>0       
- 
-        由 R4 前項函數為遞迴，得證。
-
-      定理 R5：絕對差是遞迴。
-      證明：
-
-        絕對差 adf 定義如下：
-        adf(n,m) = |n-m|
-                 = (nㅗm) + (mㅗn) 
-                 = (nㅗm) + (p2_2(n,m) -| p2_1(m,n))
-        由 RA3 投影函數為遞迴、R4 隔斷減法是遞迴及
-           RA11 加法為遞迴，
-        得證。
-
-      命題 R6：相等關係是遞迴。
-      證明：
-
-        哥德爾令 γ 為相等關係之特徵函數，
-        令
-        x=y ~ |x-y|=0 
-        x≠y ~ |x-y|>0
-      
-        令 γ(x,y) = χ{0}(|x-y|)，
-        由 R1 {0} 是遞迴及 R5 絕對差是遞迴，
-        得證。
-
-      命題 R7：符號函數是遞迴。
-      證明：
-
-        符號函數 sgn 用來判斷一數值的正負號，
-        定義如下：
-
-        sgn(n) = 1 : n > 0
-               = 0 : n < 0
-
-        取 sgn(n) = χℕ*(n)，
-        再由 R2 正整數類別是遞迴的，
-        得證。
-
-定理 IV 證明
-............
-
+<h3>定理 IV 證明</h3>
+<p class="german">
 Der Beweis für Satz IV ist kurz der folgende: 
 Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
-
-命題 IV 之證明很簡短如下：
-
-設存在一個遞迴函數 ρ(x,𝔶) 使得：
-
+</p>
+<p class="chinese">
+命題 IV 之證明很簡短如下：<br/>
+設存在一個遞迴函數 ρ(x,𝔶) 使得：<br/>
     R(x,𝔶)~[ρ(x,𝔶) = 0].
-
+</p>
+<p>
+譯註：取 ρ 表 R 之特徵函數係其為 R 的希臘音字母。    
+</p>
+<p class="german">
 Wir definieren nun nach dem Rekursionsschema (2) 
 eine Funktion χ(x,𝔶) folgendermaßen:
-
-譯註：取 ρ 表 R 之特徵函數係其為 R 的希臘音字母。    
-
+</p>
+<p class="chinese">
 現在根據遞迴框架 (2) 定義函數 χ(0,𝔶) 如下：
-    
+</p>
+<pre>    
     χ(0,  𝔶)=0
     χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
-
+</pre>
+<p>
 譯註：χ 表特徵函數，德文為 charakteristische Funktion 
-      ，其為 ch 的希臘音字母。    
-
+，其為 ch 的希臘音字母。    
+</p>
+<p class="german">
 31) Wir setzen als bekannt voraus, 
     daß die Funktionen x+y (Addition), 
     x.y (Multiplikation) rekursiv sind.
-
-31) 假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。
-
-譯註：加法及乘法為遞迴證明補充如下：
-      引理 R11：加法是遞迴的。
-        x+y 可遞迴定義如下：
-        x+y = x          : y=0
-        x+y = f(x+(y-1)) : y>0
-            = f(p3_3(x,y-1,x+(y-1)))
-
-        由 RA2 後繼函數為遞迴及RA3 投影函數為遞迴，
-        得證。
-
-      引理 R12：乘法是遞迴的。
-        x.y 可遞迴定義如下：
-         x   .y = 0     : x=0
-        (x+1).y = x.y+y : x>0
-            = p3_2(x,x.y,y)+p3_3(x,x.y,y)
-
-        由 RA3 投影函數為遞迴及 R12 加法是遞迴的，
-        得證。
-
-wobei 
-
-其中  
-
+</p>
+<p>31) 假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。</p>
+<p>
+譯註：雖然哥德爾說是假設，但我還是把加法及乘法為遞迴證明補充如下：
+</p>
+<h3>定理 R11：加法是遞迴的。</h3>
+<p>x+y 可遞迴定義如下：</p>
+<pre>
+x+y = x          : y=0
+x+y = f(x+(y-1)) : y&gt;0
+    = f(p3_3(x,y-1,x+(y-1)))
+</pre>
+<p>由定理 RA2 後繼函數為遞迴及定理 RA3 投影函數為遞迴，得證。</p>
+<h3>定理 R12：乘法是遞迴的。</h3>
+<p>x.y 可遞迴定義如下：</p>
+<pre>
+ x   .y = 0     : x=0
+(x+1).y = x.y+y : x>0
+    = p3_2(x,x.y,y)+p3_3(x,x.y,y)
+</pre>
+<p>由定理 RA3 投影函數為遞迴及定理 R12 加法是遞迴的，得證。</p>
+<p class="german">wobei</p>
+<p class="chinese">
+其中<br/>
 a=α[α(ρ(0,𝔶))].α[ρ(n+1,𝔶))].α[χ(n,𝔶)].
-
-譯註：a 可由以下程式碼表達：
-
+</p>
+<p>譯註：a 可由以下程式碼表達：</p>
+<pre>
       a = if    ρ(0  ,𝔶) = 0 # ρ 是關係 R 的特徵函數，
                              # 此句表若 0     符合關係 R
             and ρ(n+1,𝔶) ≠ 0 # 此句表若 n+1 不符合關係 R
             and χ(n  ,𝔶) ≠ 0
           then 0
           else 1
-
+</pre>
+<p class="german">
 χ(n+1,𝔶) ist daher entweder =n+1 (wenn a = 1) 
 oder == χ(n, 𝔶) (wenn a = 0) 32) 
-
+</p>
+<p class="chinese">
 因此 χ(n+1,𝔶) 若非 =n+1 (當 a = 1 時) 
 則 = χ(n, 𝔶) (當 a = 0 時) 32)
-
+</p>
+<p class="german">
 32) Andere Werte als 0 und 1 kann a, 
     wie aus der Definition für α ersichtlich ist, 
     nicht annehmen.
-
+</p>
+<p class="chinese">
 32) 由 α 的定義明顯得知 a 不能接受 0 與 1 以外之值。
+</p>
 
 Der erste Fall tritt offenbar dann und
 nur dann ein, wenn sämtliche Faktoren von a 1 sind, 
