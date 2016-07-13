@@ -489,8 +489,8 @@ eine Funktion χ(x,𝔶) folgendermaßen:
 現在根據遞迴框架 (2) 定義函數 χ(0,𝔶) 如下：
 </p>
 <pre>    
-    χ(0,  𝔶)=0
-    χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
+χ(0,  𝔶)=0
+χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
 </pre>
 <p>
 譯註：χ 表特徵函數，德文為 charakteristische Funktion 
@@ -551,21 +551,26 @@ oder == χ(n, 𝔶) (wenn a = 0) 32)
 <p class="chinese">
 32) 由 α 的定義明顯得知 a 不能接受 0 與 1 以外之值。
 </p>
-
+<p class="german">
 Der erste Fall tritt offenbar dann und
 nur dann ein, wenn sämtliche Faktoren von a 1 sind, 
 d.h. wenn gilt:
-
+</p>
+<p class="chinese">
 第一種情形顯然僅在所有 a 的因數是 1 時才成立，
 即如下：
-    _
-    R(0,𝔶) & R(n+1,𝔶) & [χ(n,𝔶)=0].
-      _
-譯註：R(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
+</p>
+<p class="german">
+<span class="overline">R</span>(0,𝔶) & R(n+1,𝔶) & [χ(n,𝔶)=0].
+</p>
+<p>
+譯註：<span class="overline">R</span>(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
       即  
       ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 
       由上可知哥德爾以乘法代表合取，故取 0 表示邏輯假值，
 
+</p>
+<p class="german">
 Daraus folgt, daß die Funktion χ(n, 𝔶) 
 (als Funktion von n betrachtet) 0 bleibt bis zum kleinsten Wert von n, 
 für den R(n, 𝔶) gilt, 
@@ -573,23 +578,28 @@ und von da ab gleich diesem Weft ist
 (falls schon R(0,𝔶) gilt, 
 ist dem entsprechend χ(n,𝔶) konstant und =0).
 Demnach gilt:
-
+</p>
+<p class="chinese">
 可推得函數 χ(n, 𝔶) (視為 n 之單元函數 ) 
 保持為 0 直到 n 等於滿足 R(n, 𝔶) 的最小值，
 且開始恆等於此值。
 (若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0)。
 因此： 
-
+</p>
+<p class="german">
 ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)
 S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
-
+</p>
+<p class="german">
 Die Relation T läßt sich durch Negation auf einen 
 zu S analogen Fall zurückführen, 
 womit Satz IV bewiesen ist.
-
+</p>
+<p class="chinese">
 關係 T 可輕易以 S 的否定寫成，
 故命題 IV 得證。
-
+</p>
+<p>
 譯註：若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0。
       此句說明從 0 開始找符合 R 的數，
       若該數等於 0，則 χ 永遠為 0，
@@ -623,12 +633,11 @@ womit Satz IV bewiesen ist.
       while ρ(χ,𝔶)≠0  
         χ++ 
       return χ 
-
-基本算術是遞迴的
-................
-
+</p>
+<h3>基本算術是遞迴的</h3>
+<p class="german">
 Die Funktionen x+y, x.y, x^y, 
-ferner die Relationen x<y, x=y sind, 
+ferner die Relationen x&lt;y, x=y sind, 
 wie man sich leicht überzeugt, 
 rekursiv und wir definieren nun, 
 von diesen Begriffen ausgehend, 
@@ -636,12 +645,14 @@ eine Reihe von Funktionen (Relationen) 1-45,
 deren jede aus den vorhergehenden 
 mittels der in den Sätzen I bis IV genannten Verfahren 
 definiert ist. 
-
-x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
+</p>
+<p class="chinese">
+x+y, x.y, x^y 等函數，甚至 x&lt;y, x=y 等關係，
 可以輕易證明為遞迴的，
 後可從這些項目開始定義 1-45 一系列的函數(關係)，
 其中每項經由定理 I 至 IV 相關之操作自前項定義而來。
-
+</p>
+<p>
 譯註：genannten Verfahren 已提到的操作比已命名的操作好。
 
 譯註：引理 R13：次方是遞迴的。
@@ -667,5 +678,5 @@ x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
         χ≥(n,m) = χ{0}(mㅗn)
         
         由 R1 {0} 是遞迴的及 R4 隔斷減法是遞迴，得證。
-
+</p>
 </html>
