@@ -237,6 +237,17 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
 <tr><td>(Ex)</td><td>存在量詞</td></tr>
 </table>
 <h2>遞迴定理</h2>
+<p>譯註：哥德爾描述並略為證明了4個定理，
+描述以下的操作是封閉在遞迴函數系統內，
+I 陳述遞迴定義及函數合成具遞迴封閉性；
+II 陳述基本邏輯操作具遞迴封閉性，包含否定、合取及析取，
+其它的邏輯操作可從前三個操作衍生出來；
+III 描述了相等關係是具遞迴封閉性；
+IV 描述了最小操作具遞迴封閉性，這是最難證明的定理，
+但此定理卻給定之後的定理能有量化限制，
+此量化限制為一個定理能於有限步驟內建構的堅實基礎，
+若能有限步驟建構之定理，就是可判定的定理。
+</p>
 <p class="german">
 Es gelten folgende Sätze:
 </p>
@@ -257,11 +268,13 @@ I.每個經由插入遞迴函數在已建構函數(關係)之變數位置上而�
 每個藉由框架(2)遞迴定義產出之遞迴函數也同樣如此。 
 </p>
 <p class="german">
-II. Wenn R und S rekursive Relationen sind, 
-    dann auch R, R ∨ S (daher auch R & S).
+II. Wenn <span class="overline">R</span> und 
+S rekursive Relationen sind, 
+dann auch <span class="overline">R</span>, R ∨ S (daher auch R & S).
 </p>
 <p class="chinese">
-II.若 R 及 S 為遞迴關係，則 R, R ∨ S 也是(由此 R & S 也是) 。
+II.若 R 及 S 為遞迴關係，則 <span class="overline">R</span>, 
+R ∨ S 也是(由此 R & S 也是) 。
 </p>
 <p class="german">
 III.Wenn die Funktionen φ(𝔵), ψ(𝔶)  rekursiv sind,
@@ -363,15 +376,13 @@ wie man sich leicht überzeugen kann.
 </div>
 <p>
 譯註：雖然哥德爾說邏輯操作能輕易證明，我還是把證明作完整補充，
-讓讀者省下一些思考的時間。
-</p>
-<p>
+讓讀者省下一些思考的時間。與現代程式語言大大不同，
 哥德爾將邏輯真以 0 表示，邏輯假以 1 表示，前揭函數的證明如下：
 </p>
 <h3>定理 R21：否定是遞迴</h3>
 <em>證明：</em>
 <p>
-α 即集合 {0} 的特徵函數，可由定理 R1，集合 {0} 是遞迴，得證。
+α 即正整數集合 ℕ* 的特徵函數 χℕ*，可由定理 R2 知該函數是遞迴，得證。
 </p>
 <h3>定理 R22：析取是遞迴</h3>
 <em>證明：</em>
@@ -379,7 +390,7 @@ wie man sich leicht überzeugen kann.
 令 β 定義如下：<br/>
 β(x,y) = α(α(x.y))<br/> 
 由定理 R21 否定是遞迴及定理 R12 乘法是遞迴得證。<br/>
-例子如下：<br/>
+以實例說明如下：<br/>
 <pre>
 β(0,0) = α(α(0.0))   
        = α(α(0))   
@@ -400,13 +411,13 @@ wie man sich leicht überzeugen kann.
 </pre>
 <h2>相等關係為遞迴</h2>
 <p>
-譯註：γ(x,y) 表示相等關係，詳細證明如後：
+譯註：γ(x,y) 表示相等關係，詳細證明如定理R3 至 R6：
 </p>
 <h3>定理 R3:前項函數是遞迴。</h3>
 <em>證明：</em>
 <p>
 前項函數 p 為後繼函數之對立函數。<br/>
-定義 p 如下：<br/>
+建構 p 之遞迴定義如下：<br/>
 </p>
 <pre>
 p(0) = 0
@@ -421,8 +432,8 @@ p(x+1)=pr2_1(x,p(x))
 隔斷減法 ㅗ定義如下（我以韓文字母 ㅗ表示）：
 </p>
 <pre>
-n ㅗ m = 0   : n < m       
-       = n-m : n > m       
+n ㅗ m = 0   : n &lt; m       
+       = n-m : n &gt; m       
 </pre>
 <p>可得</p>
 <pre>
@@ -452,7 +463,7 @@ adf(n,m) = |n-m|
 <p>哥德爾令 γ 為相等關係之特徵函數，令</p>
 <pre>
 x=y ~ |x-y|=0 
-x≠y ~ |x-y|>0
+x≠y ~ |x-y|&gt;0
 </pre>  
 <p>
 令 γ(x,y) = χ{0}(|x-y|)，
@@ -462,15 +473,15 @@ x≠y ~ |x-y|>0
 <em>證明：</em>
 <p>符號函數 sgn 用來判斷一數值的正負號，定義如下：</p>
 <pre>
-sgn(n) = 1 : n > 0
-       = 0 : n < 0
+sgn(n) = 1 : n &gt; 0
+       = 0 : n &lt; 0
 </pre>
 <p>取 sgn(n) = χℕ*(n)，
 再依定理 R2 正整數類別是遞迴的，得證。</p>
 
 <h3>定理 IV 證明</h3>
 <p class="german">
-Der Beweis für Satz IV ist kurz der folgende: 
+Der Beweis für Satz IV ist kurz der folgende:
 Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
 </p>
 <p class="chinese">
@@ -658,7 +669,7 @@ x+y, x.y, x^y 等函數，甚至 x&lt;y, x=y 等關係，
 譯註：引理 R13：次方是遞迴的。
         x^y 可遞迴定義如下：
         x ^y     = 1     : y=0
-        x ^(y+1) = x^y.x : y>0
+        x ^(y+1) = x^y.x : y&gt;0
                  = p3_2(y,x^y,x).p3_3(y,x^y,x)
 
         由 RA3 投影函數為遞迴及 RA12 乘法是遞迴的，
@@ -666,11 +677,11 @@ x+y, x.y, x^y 等函數，甚至 x&lt;y, x=y 等關係，
 
       定理 R14：次序關係是遞迴的。
         次序關係等價於以下關係：
-        n<m ~ mㅗn>0
+        n&lt;m ~ mㅗn&gt;0
         n≥m ~ mㅗn=0
 
-        故可以定義 < 的特徵函數為
-        χ<(n,m) = sgn(mㅗn)
+        故可以定義 &lt; 的特徵函數為
+        χ&lt;(n,m) = sgn(mㅗn)
         
         由 R7 符號函數是遞迴的及 R4 隔斷減法是遞迴，得證。 
         
