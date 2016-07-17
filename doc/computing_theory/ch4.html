@@ -128,20 +128,36 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 </p>
 <h2>基礎遞迴函數</h2>
 <p>
-譯註：由哥德爾的定義可知基礎遞迴函數公為常數或是後繼函數 x+1，
+譯註：由哥德爾的定義可知基礎遞迴函數公為零或常數函數或是後繼函數 x+1，
       基礎遞迴函數不是經由遞迴定義或函數合成所得，
       而是預先就接受為遞迴函數，如同邏輯上，公理是預先就接受的定理。
-      哥德爾提到基本基礎遞迴函數如下表：
+      哥德爾提到基礎遞迴函數如下表：
 </p>
 <table>
 <tr><th>編號</th><th>名稱</th><th>定義</th></tr>
-<tr><td>RA1</td><td>零函數或常數函數</td><td>0(x)=0</td></tr>
+<tr><td>RA1</td><td>零函數或常數函數</td><td>0(x)=0 或 c(x)=c</td></tr>
 <tr><td>RA2</td><td>後繼函數</td><td>f(x)=x+1</td></tr>
 <tr><td colspan="3">現代通常會包含投影函數：</td></tr>
-<tr><td>RA3</td><td>投影函數</td>
-    <td>p_k_j(x1,x2,...,xj,...,xk)=xj</td></tr>
-
+<tr><td>RA3</td><td>投影函數</td><td>
+        p <span class="supsub"><sup class="sup">k</sup>
+            <sub class="sub">j</sub></span> 
+        (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>j</sub>,...,x<sub>k</sub>)=x<sub>j</sub></td></tr>
 </table>
+<p>
+但現在我們知道只要零函數接受為公理，可推論出常數函數具遞迴封閉性，
+所以基礎遞迴函數可以不須要常數函數，現在來看下面的證明：
+</p>
+<h3>R1：常數函數為遞迴</h3>
+<em>證明</em>
+<p>常數函數滿足 c(x)=c 其中 c 代表任意常數，
+例如 1(x) 為恆等於 1 之常數函數，
+2(x) 為恆等於 2 之常數函數等等。<br/>
+我們知道零函數及後繼函數為遞迴的，
+定義常數函數 1(x) = f(0(x))，可推得 1(x) 為遞迴。<br/>
+現在假設常數函數 c(x) = c 為遞迴，則有下式成立：<br/>
+(c+1)(x) = c+1 = f(c(x))</br>
+依數學歸納法，所有常數函數均為遞迴。
+</p>
 <h2>級數</h2>
 <p>/180/</p>
 <p class="german">
@@ -160,7 +176,7 @@ heißt ihre Stufe.
 </p>
 <pre>
 χ{0}(0)   = f(0)
-χ{0}(x+1) = 0(x)            (R1)
+χ{0}(x+1) = 0(x)            (R2)
 </pre>
 <p>
 因為 χ{0}(x) 是經過一次的遞迴定義，故其級數為 2，
@@ -201,7 +217,7 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
       以下我們使用 χ{K} 表示類別 K 的特徵函數。
       以下列舉幾個類別的遞迴函數建構：
 </p>
-<h3>定理 R2：正整數類別是遞迴的。</h3>
+<h3>定理 R3：正整數類別是遞迴的。</h3>
 <em>證明：</em>
 <p>令正整數類別 ℕ* = ℕ\{0}，即不含 0 之自然數類別。
 其特徵函數 χℕ*(n) 可遞迴定義如下：</p>
@@ -291,11 +307,11 @@ III.若函數 φ(𝔵)及ψ(𝔶)是遞迴則以下關係也是：φ(𝔵)=ψ(�
 30) 利用哥德字母 𝔵, 𝔶表示 n 元數組變數(即 x1 x2 ... xn)。
 </p>
 <p class="german">
-IV. Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
-    dann auch die Relationen S,T
+IV.Wenn die Funktion φ(𝔵) und die Relation R(x,𝔶) rekursiv sind, 
+   dann auch die Relationen S,T
 </p>
 <p class="chinese">
-若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
+IV.若函數 φ(𝔵) 及關係 R(x,𝔶) 是遞迴，則以下關係 S, T 也是：
 </p>
 <pre>
 S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
@@ -379,17 +395,17 @@ wie man sich leicht überzeugen kann.
 讓讀者省下一些思考的時間。與現代程式語言大大不同，
 哥德爾將邏輯真以 0 表示，邏輯假以 1 表示，前揭函數的證明如下：
 </p>
-<h3>定理 R21：否定是遞迴</h3>
+<h3>定理 R4：否定是遞迴</h3>
 <em>證明：</em>
 <p>
-α 即正整數集合 ℕ* 的特徵函數 χℕ*，可由定理 R2 知該函數是遞迴，得證。
+α 即正整數集合 ℕ* 的特徵函數 χℕ*，可由定理 R3 知該函數是遞迴，得證。
 </p>
-<h3>定理 R22：析取是遞迴</h3>
+<h3>定理 R5：析取是遞迴</h3>
 <em>證明：</em>
 <p>
 令 β 定義如下：<br/>
 β(x,y) = α(α(x.y))<br/> 
-由定理 R21 否定是遞迴及定理 R12 乘法是遞迴得證。<br/>
+由定理 R4 否定是遞迴及定理 R12 乘法是遞迴得證。<br/>
 以實例說明如下：<br/>
 <pre>
 β(0,0) = α(α(0.0))   
@@ -413,7 +429,7 @@ wie man sich leicht überzeugen kann.
 <p>
 譯註：γ(x,y) 表示相等關係，詳細證明如定理R3 至 R6：
 </p>
-<h3>定理 R3:前項函數是遞迴。</h3>
+<h3>定理 R6:前項函數是遞迴。</h3>
 <em>證明：</em>
 <p>
 前項函數 p 為後繼函數之對立函數。<br/>
@@ -426,7 +442,7 @@ p(x+1)=pr2_1(x,p(x))
 <p>
 由定理 RA1 常數 0 為遞迴及定理 RA3 投影函數為遞迴，得證。 
 </p>
-<h3>定理 R4:隔斷減法是遞迴。</h3>
+<h3>定理 R7:隔斷減法是遞迴。</h3>
 <em>證明：</em>
 <p>
 隔斷減法 ㅗ定義如下（我以韓文字母 ㅗ表示）：
@@ -445,36 +461,45 @@ n ㅗ m+1 = 0        : nㅗm = 0
 n ㅗ m = n           : m=0      
        = p(nㅗ(m-1)) : m&gt;0       
 </pre>
-<p>由定理 R4 前項函數為遞迴，得證。</p>
-<h3>定理 R5：絕對差是遞迴。</h3>
+<p>由定理 R6 前項函數為遞迴，得證。</p>
+<h3>定理 R8：絕對差是遞迴。</h3>
 <em>證明：</em>
-<p>絕對差 adf 定義如下：</p>
-<pre>
-adf(n,m) = |n-m|
-         = (nㅗm) + (mㅗn) 
-         = (nㅗm) + (p2_2(n,m) -| p2_1(m,n))
-</pre>
-<p>
+<p>n, m 的絕對差記為 |n-m|，為 2 數的差異值，
+例如 |1,2| 為 1，|4,2| 為 2。
+其建構定義如下：<br/>
+|n-m| = (nㅗm) + (mㅗn)<br/><br/>
+= (nㅗm) + (p
+<span class="supsub"><sup class="sup">2</sup>
+    <sub class="sub">2</sub></span>(n,m)ㅗ
+p <span class="supsub"><sup class="sup">2</sup>
+ <sub class="sub">1</sub></span>
+(m,n))<br/><br/>
 由定理 RA3 投影函數為遞迴、
-定理R4 隔斷減法是遞迴及定理 RA11 加法為遞迴，得證。
+定理 R7 隔斷減法是遞迴及定理 RA11 加法為遞迴，得證。
 </p>
-<h3>定理 R6：相等關係是遞迴。</h3>
+<h3>定理 R9：相等關係是遞迴。</h3>
 <em>證明：</em>
-<p>哥德爾令 γ 為相等關係之特徵函數，令</p>
-<pre>
-x=y ~ |x-y|=0 
-x≠y ~ |x-y|&gt;0
-</pre>  
+<p>2 數相等關係等價於 2 數絕對差是否等於 0，如以下所述：
+<ul class="code">
+    <li>x=y~|x-y|=0 </li>
+    <li>x≠y~|x-y|&gt;0</li>
+</ul>  
 <p>
-令 γ(x,y) = χ{0}(|x-y|)，
-由定理 R1 集合 {0} 是遞迴及定理 R5 絕對差是遞迴，得證。
+哥德爾定義 γ 為相等關係之特徵函數，令
+γ(x,y) = χ{0}(|x-y|)，
+由定理 R2 集合 {0} 是遞迴及定理 R8 絕對差是遞迴，得證。<br/>
+以幾個例子計算來檢核此定義是否正確，如下例：
+<ul class="code">
+    <li>γ(2,2) = χ{0}(|2-2|) =  χ{0}(0) = 0</li>
+    <li>γ(3,4) = χ{0}(|3-4|) =  χ{0}(1) = 1</li>
+</ul>
 </p>
-<h3>命題 R7：符號函數是遞迴。</h3>
+<h3>命題 R10：符號函數是遞迴。</h3>
 <em>證明：</em>
 <p>符號函數 sgn 用來判斷一數值的正負號，定義如下：</p>
 <pre>
-sgn(n) = 1 : n &gt; 0
-       = 0 : n &lt; 0
+sgn(n) = 0 : n &gt; 0
+       = 1 : n &lt; 0
 </pre>
 <p>取 sgn(n) = χℕ*(n)，
 再依定理 R2 正整數類別是遞迴的，得證。</p>
@@ -487,10 +512,14 @@ Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
 <p class="chinese">
 命題 IV 之證明很簡短如下：<br/>
 設存在一個遞迴函數 ρ(x,𝔶) 使得：<br/>
-    R(x,𝔶)~[ρ(x,𝔶) = 0].
+<code>
+R(x,𝔶)~[ρ(x,𝔶)=0].
+</code>
 </p>
 <p>
 譯註：取 ρ 表 R 之特徵函數係其為 R 的希臘音字母。    
+哥德爾說前揭證明很簡短，
+我想他認為 1,000 行以內的證明都算簡短:(
 </p>
 <p class="german">
 Wir definieren nun nach dem Rekursionsschema (2) 
@@ -499,10 +528,10 @@ eine Funktion χ(x,𝔶) folgendermaßen:
 <p class="chinese">
 現在根據遞迴框架 (2) 定義函數 χ(0,𝔶) 如下：
 </p>
-<pre>    
-χ(0,  𝔶)=0
-χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)
-</pre>
+<ul class="code">    
+    <li>χ(0,  𝔶)=0</li>
+    <li>χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a) 31)</li>
+</ul>
 <p>
 譯註：χ 表特徵函數，德文為 charakteristische Funktion 
 ，其為 ch 的希臘音字母。    
@@ -512,26 +541,29 @@ eine Funktion χ(x,𝔶) folgendermaßen:
     daß die Funktionen x+y (Addition), 
     x.y (Multiplikation) rekursiv sind.
 </p>
-<p>31) 假設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。</p>
+<p>31) 預設已知函數 x+y (加法)及 x.y (乘法) 是遞迴的。</p>
 <p>
-譯註：雖然哥德爾說是假設，但我還是把加法及乘法為遞迴證明補充如下：
+譯註：哥德爾說加法及乘法之遞迴封閉性是預設，
+表示將省略其證明，在此我補充證明如下：
 </p>
-<h3>定理 R11：加法是遞迴的。</h3>
+<h3>定理 R11：加法是遞迴的</h3>
 <p>x+y 可遞迴定義如下：</p>
-<pre>
-x+y = x          : y=0
-x+y = f(x+(y-1)) : y&gt;0
-    = f(p3_3(x,y-1,x+(y-1)))
-</pre>
+<ul class="code">
+<li>y=0 → x+y=x</li>
+<li>y&gt;0 → x+y=f(x+(y-1))=f(p <span class="supsub">
+            <sup class="sup">3</sup><sub class="sub">3</sub></span>(x,y-1,x+(y-1)))</li>
+</ul>
 <p>由定理 RA2 後繼函數為遞迴及定理 RA3 投影函數為遞迴，得證。</p>
 <h3>定理 R12：乘法是遞迴的。</h3>
 <p>x.y 可遞迴定義如下：</p>
-<pre>
- x   .y = 0     : x=0
-(x+1).y = x.y+y : x>0
-    = p3_2(x,x.y,y)+p3_3(x,x.y,y)
-</pre>
-<p>由定理 RA3 投影函數為遞迴及定理 R12 加法是遞迴的，得證。</p>
+<ul class="code">
+<li>x=0 → x.y=0</li>
+<li>x&gt;0 → (x+1).y=x.y+y=p 
+<span class="supsub"><sup class="sup">3</sup><sub class="sub">2</sub></span>
+(x,x.y,y)+p <span class="supsub"><sup class="sup">3</sup><sub class="sub">3</sub></span>
+(x,x.y,y)
+</ul>
+<p>由定理 RA3 投影函數為遞迴及定理 R11 加法是遞迴的，得證。</p>
 <p class="german">wobei</p>
 <p class="chinese">
 其中<br/>
@@ -539,12 +571,12 @@ a=α[α(ρ(0,𝔶))].α[ρ(n+1,𝔶))].α[χ(n,𝔶)].
 </p>
 <p>譯註：a 可由以下程式碼表達：</p>
 <pre>
-      a = if    ρ(0  ,𝔶) = 0 # ρ 是關係 R 的特徵函數，
-                             # 此句表若 0     符合關係 R
-            and ρ(n+1,𝔶) ≠ 0 # 此句表若 n+1 不符合關係 R
-            and χ(n  ,𝔶) ≠ 0
-          then 0
-          else 1
+# ρ 是關係 R 的特徵函數
+a = if    ρ(0  ,𝔶)≠0 # 0不滿足關係R，即<span class="overline">R</span>(0,𝔶)成立。
+      and ρ(n+1,𝔶)=0 # n+1 滿足關係R，即R(0,𝔶)成立。
+      and χ(n  ,𝔶)=0 # χ為0
+    then 0
+    else 1
 </pre>
 <p class="german">
 χ(n+1,𝔶) ist daher entweder =n+1 (wenn a = 1) 
@@ -568,18 +600,17 @@ nur dann ein, wenn sämtliche Faktoren von a 1 sind,
 d.h. wenn gilt:
 </p>
 <p class="chinese">
-第一種情形顯然僅在所有 a 的因數是 1 時才成立，
-即如下：
+第一種情形顯然僅在 a 的所有乘數為 1 時才成立，
+即下式成立：
 </p>
 <p class="german">
 <span class="overline">R</span>(0,𝔶) & R(n+1,𝔶) & [χ(n,𝔶)=0].
 </p>
 <p>
 譯註：<span class="overline">R</span>(0,𝔶)   & R(n+1,𝔶)   & [χ(n,𝔶)=0]
-      即  
-      ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 
-      由上可知哥德爾以乘法代表合取，故取 0 表示邏輯假值，
-
+即<br/>  
+ρ(0,𝔶)≠0 & ρ(n+1,𝔶)=0 & χ(n  ,𝔶)=0 <br/>
+由上可知哥德爾以乘法代表合取，故取 0 表示邏輯假值，
 </p>
 <p class="german">
 Daraus folgt, daß die Funktion χ(n, 𝔶) 
@@ -592,14 +623,26 @@ Demnach gilt:
 </p>
 <p class="chinese">
 可推得函數 χ(n, 𝔶) (視為 n 之單元函數 ) 
-保持為 0 直到 n 等於滿足 R(n, 𝔶) 的最小值，
+保持為 0 直到 n 為滿足 R(n, 𝔶) 的最小值，
 且開始恆等於此值。
 (若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0)。
 因此： 
 </p>
-<p class="german">
-ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)
-S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
+<ul class="code">
+<li>ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)</li>
+<li>S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]</li>
+</ul>
+<p>
+譯註：哥德爾寫了「若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0」，
+這是因為一開始 0 就滿足關係 R，則特徵函數 χ 永遠為 0，
+因為一開始就找到啦！
+以現代程式語言定義χ函數非常簡短，如下：
+<pre>
+def χ(n,𝔶)
+    for(i=0;i&lt;n;i++)
+        if R(i, 𝔶) then return i 
+    return 0    
+</pre>
 </p>
 <p class="german">
 Die Relation T läßt sich durch Negation auf einen 
@@ -611,43 +654,21 @@ womit Satz IV bewiesen ist.
 故命題 IV 得證。
 </p>
 <p>
-譯註：若 R(0,𝔶) 成立則 χ(n,𝔶) 對應到常數 0。
-      此句說明從 0 開始找符合 R 的數，
-      若該數等於 0，則 χ 永遠為 0，
-      因為一開始就找到啦！
+譯註：把目標與建構法擺近一點，讓讀者比較，因為相隔太遠，反而不利理解：<br/><br/>
+ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]<br/>
+可輕易以 χ 定義如下：<br/>
+ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)<br/><br/>
 
-      ψ(𝔵,𝔶)=εx[x≦φ(𝔵)&R(x,𝔶)]
-      可輕易以 χ 定義如下：
-      ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)
+S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]<br/>
+可輕易以 ψ 定義如下：<br/>
+S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]<br/><br/>
 
-      S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]
-      可輕易以 ψ 定義如下：
-      S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]
-
-      T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]
-      可輕易以 S 否定定義。
-
-      由以下得知：
-      χ(0,  𝔶)=0
-      χ(n+1,𝔶)=(n+1).a+χ(n,𝔶).α(a)
-
-      χ(n+1,𝔶) = if ρ(0  ,𝔶) = 0 # 此句表若 0     符合關係 R
-                and ρ(n+1,𝔶) ≠ 0 # 此句表若 n+1 不符合關係 R
-                and χ(n  ,𝔶) ≠ 0 
-              then n+1
-              else χ(n  ,𝔶) 
-
-      即在 n 尚未為符合 R 的數前，
-      會不停遞增，直到符合 R 後，便停止遞增。 
-      以虛擬碼表示如下：
-      χ=0
-      while ρ(χ,𝔶)≠0  
-        χ++ 
-      return χ 
+T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]<br/>
+可輕易以 S 否定定義。
 </p>
 <h3>基本算術是遞迴的</h3>
 <p class="german">
-Die Funktionen x+y, x.y, x^y, 
+Die Funktionen x+y, x.y, x<sup>y</sup>, 
 ferner die Relationen x&lt;y, x=y sind, 
 wie man sich leicht überzeugt, 
 rekursiv und wir definieren nun, 
@@ -658,36 +679,35 @@ mittels der in den Sätzen I bis IV genannten Verfahren
 definiert ist. 
 </p>
 <p class="chinese">
-x+y, x.y, x^y 等函數，甚至 x&lt;y, x=y 等關係，
+x+y, x.y, x<sup>y</sup> 等函數，甚至 x&lt;y, x=y 等關係，
 可以輕易證明為遞迴的，
 後可從這些項目開始定義 1-45 一系列的函數(關係)，
 其中每項經由定理 I 至 IV 相關之操作自前項定義而來。
 </p>
 <p>
-譯註：genannten Verfahren 已提到的操作比已命名的操作好。
-
-譯註：引理 R13：次方是遞迴的。
-        x^y 可遞迴定義如下：
-        x ^y     = 1     : y=0
-        x ^(y+1) = x^y.x : y&gt;0
-                 = p3_2(y,x^y,x).p3_3(y,x^y,x)
-
-        由 RA3 投影函數為遞迴及 RA12 乘法是遞迴的，
-        得證。
-
-      定理 R14：次序關係是遞迴的。
-        次序關係等價於以下關係：
-        n&lt;m ~ mㅗn&gt;0
-        n≥m ~ mㅗn=0
-
-        故可以定義 &lt; 的特徵函數為
-        χ&lt;(n,m) = sgn(mㅗn)
-        
-        由 R7 符號函數是遞迴的及 R4 隔斷減法是遞迴，得證。 
-        
-        令 ≥ 的特徵函數為
-        χ≥(n,m) = χ{0}(mㅗn)
-        
-        由 R1 {0} 是遞迴的及 R4 隔斷減法是遞迴，得證。
+譯註：同樣哥德爾又說次方、次序及相等關係可輕易證明，我仍備妥證明如下：
+</p>
+<h3>定理 R13：次方是遞迴的。</h3>
+<p>
+x<sup>y</sup>可遞迴定義如下：<br/>
+當y=0時，x<sup>y</sup>=1<br/>
+當y&gt;0時，x<sup>y+1</sup>=x<sup>y</sup>.x
+= p <span class="supsub"><sup class="sup">3</sup><sub class="sub">2</sub></span>
+(y,x<sup>y</sup>,x).p 
+<span class="supsub"><sup class="sup">3</sup><sub class="sub">3</sub></span>
+    (y,x<sup>y</sup>,x)<br/>
+由 RA3 投影函數為遞迴及 R12 乘法是遞迴的，得證。
+</p>
+<h4>定理 R14：次序關係是遞迴的</h4>
+<p>
+次序關係等價於以下關係：<br/>
+n&lt;m ~ mㅗn&gt;0<br/>
+n≥m ~ mㅗn=0<br/>
+故可以定義 &lt; 的特徵函數為<br/>
+χ&lt;(n,m) = χℕ*(mㅗn)<br/>
+由 R3 集合 ℕ* 是遞迴的及 R4 隔斷減法是遞迴，得證。<br/>
+令 ≥ 的特徵函數為<br/>
+χ≥(n,m) = χ0(mㅗn)<br/>
+由 R2 集合 0 是遞迴的及 R4 隔斷減法是遞迴，得證。<br/>
 </p>
 </html>

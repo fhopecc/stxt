@@ -649,6 +649,7 @@ näher behandelt werden.
 P 系統
 ------
 
+
 基礎符
 ......
 
@@ -1962,6 +1963,14 @@ x+y, x.y, x^y 等函數，甚至 x<y, x=y 等關係，
 
 以算術實作 P 系統
 -----------------
+譯註：
+定理 V 一直是我理解這篇論文最大的門檻，
+因為始終沒有搞懂 P 系統的真正描述，
+其實真正 P 系統的精確描述是放在前述46個函數及關係中。
+定理 V 也說明關於遞迴函數，
+其實在 P 系統中只要使用 2 型變數及 1 型變數。
+
+
 
 Dabei sind meistens mehrere der nach Satz I bis IV 
 erlaubten Definitionsschritte 
@@ -4600,6 +4609,21 @@ Widerspruch 矛盾源自 wider 反對及 Spruch 判斷之組合
 ev.         為 eventuell 之縮寫，即可能地。
 die Vermutung nahe, daß ... 似乎可假定 ... 
 etw auf eine Formel/Regel zurückführen to reduce sth to a formula/rule
+譯註：genannten Verfahren 已提到的操作比已命名的操作好。
+譯註：innerhalb(介詞) + 屬格：在什麼之中
+
+      Bezug nehmen auf + 賓格：參考到
+譯註：sich damit begnügen, etw zu tun 作某事可說服我們。
+
+      德語分離動詞之不定子句形式如下：
+      prefix+zu+verb
+      an+deuten → an+zu+deuten  建議、指示
+
+      bieteten Schwierigkeiten 具有或出現障礙困難
+      
+      ziemlich umständlich 合理的複雜
+譯註：beruht daruf, daß etw 基於某事
+譯註：an+wenden 應用
 
 
 P 系統之 BNF
