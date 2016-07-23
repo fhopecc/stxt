@@ -120,7 +120,7 @@ Für Funktionen erster Stufe
 最重要的是找出 P 系統表示該遞迴函數的合式公式，
 該對應的合式公式對所有滿足遞迴函數的數組而言，
 經由 Z 函數轉換成 P 系統之數組後，可由 P 系統證明為真，
-對所有為滿足遞迴函數的數組而言，
+對所有為不滿足遞迴函數的數組而言，
 經由 Z 函數轉換成 P 系統之數組後，可由 P 系統證明為假，
 其中 Z 函數為將整數轉為表示 P 系統之哥德爾數。
 </p>
@@ -128,7 +128,7 @@ Für Funktionen erster Stufe
 1 級函數就是基礎遞迴函數，
 不過哥德爾認為用 P 系統表達基礎遞迴函數是顯而成立的，
 那是因為他基本上已熟讀數學原理這本書，
-因為 P 系統如哥德爾已說明過，是數學原理與皮亞諾公理的綜合，
+P 系統如哥德爾已說明過，是數學原理與皮亞諾公理的綜合，
 所以以下證明都會引用到 x=x 自身相等的定理，
 但如何從 P 系統的公理去推論出 x=x 呢？
 證明寫在數學原理這本大書中，我會寫出頁數，
@@ -156,7 +156,7 @@ Für Funktionen erster Stufe
 3.執行取代得 Z(0)=Z(0)，再由定理 P1 得證。
 </pre>
 <h3>命題 R32：x+1 可於 P 系統決定。</h3>
-<ol>
+<ol class="code">
 <li>令後繼函數之標準化函數為 R(x1,x2)~x1=x2+1</li>
 <li>令 R 的 P 系統對應公式為 r(u1,u2) ≡ u1=fu2，</li>
 <li>顯然得證</li>
@@ -169,7 +169,7 @@ Für Funktionen erster Stufe
 3.由定理P1 知 f0=f0 為真。 
 </pre>
 </p>
-<h2>函數合成及遞迴定義可由 P 系統表達</h2>
+<h2>替換操作及遞迴定義可由 P 系統表達</h2>
 <p class="german">
 Habe also φ die m-te Stufe.
 Es entsteht aus Funktionen niedrigerer Stufe φ1...φk 
@@ -177,82 +177,18 @@ durch die Operationen der Einsetzung oder der rekursiven Definition.
 Da für φ1...φk nach induktiver Annahme bereits alles bewiesen ist, 
 gibt es zugehörige Relationszeichen r1...rk, 
 so daß (3), (4) gilt. 
-</p>
-<p class="chinese">
-接著當 φ 為 m 階時。
-它以替換操作或遞迴定義推論自較為低級之函數 φ1...φk。
-因為對 φ1...φk 而言，均可由遞迴假設證明，
-存在對映的關係符號 r1...rk 使得 (3)、(4) 成立。
-</p>
-<p>譯註：
-哥德爾於定理 VII 說明遞迴函數的替換操作(函數合成)及
-遞迴定義以算術系統表示的方法，
-於表現定理也可應用，說明如下。
-</p>
-<h3>定理 R33：替換操作可於 P 系統表示。</h3>
-<p>替換操作即為現代述語的函數合成。
-以下的定義以希臘字母代表遞迴函數，
-以拉丁字母代表 P 系統關係符號。
-</p>
-<pre> 
-1.若函數 η 為自遞迴函數 θ 及 γ1...γk 之函數合成，
-  則以下等式關係成立：
-
-          η(χ1...χn)=θ(γ1(χ1...χn)...γk(χ1...χn))
-
-        2.依據定理 V 之歸納假設，θ 與 γ1...γk 等函數為遞迴函數，
-          故於 P 系統存在以下公式 f, g1...gn，使得
-            f (y1...yk,y ) 為表示 υ =θ (υ1...υk) 之關係符號，
-            g1(x1...xn,y1) 為表示 υ1=γ1(χ1...χn) 之關係符號，
-            .
-            .
-            .
-            gk(x1...xn,yk) 為表示 υk=γk(χ1...χn) 之關係符號。
-
-        3.依據 P 系統縮寫定義可寫出下式：
-          (Ey1,...,yk)[f (y1,...,yk,y)
-                      .g1(x1,...,xn,y1)
-                      .
-                      .
-                      .
-                      .gk(x1,...,xn,yk)]
-
-        4.可於 P 系統中定義出新的關係符號 h 如下：
-            h(x1,...,xn,y)≡(Ey1,...,yk)[f (y1,...,yk,y)
-                                       .g1(x1,...,xn,y1)
-                                       .
-                                       .
-                                       .
-                                       .gk(x1,...,xn,yk)]
-</pre>
-<h3>定理 R34：遞迴定義可由 P 系統表示。</h3>
-<pre>
-        若函數 φ 為自函數 ψ 及 μ 之遞迴定義，
-        則以下等式關係成立：
-
-          φ(0  ,χ2...χn) = ψ(χ2...χn)
-          φ(κ+1,χ2...χn) = μ(κ,φ(κ,χ2...χn),χ2...χn)
-
-        依據定理 V 之歸納假設，ψ 與 μ 等函數為遞迴函數，
-        故於 P 系統存在以下公式 s, p, m，使得
-
-          p(x2...xn,y ) 為表示 υ=θ(χ1...χk) 之關係符號。
-
-        可於 P 系統寫出公式，
-        f(z,x2...xn,y)≡(Es)[|s|=z+1
-                           .p(  x2...xn,s(0))
-                           .(iΠ(i&lt;z)[m(i,x2...xn,s(i+1))
-                           . y=s(z)]
-</pre>
-<p class="german">
 Die Definitionsprozesse,
 durch die φ aus φ1...φk entsteht 
 (Einsetzung und rekursive Definition), 
 können sämtlich im System P formal nachgebildet werden. 
 </p>
 <p class="chinese">
-定義流程藉由衍生自 φ1...φk 之 φ (替代及遞迴定義)
-可全部於系統 P 形式模型化。
+φ 為 m 階也成立。
+它以替換操作或遞迴定義建構自較為前階之函數 φ1...φk。
+因為依據歸納假設 φ1...φk 全部都可以證明，
+所以存在對映的關係符號 r1...rk 使得 (3)、(4) 成立。
+定義流程，其自已成立的 φ1...φk (經由替代及遞迴定義)所衍生的 φ，
+均能於系統 P 找到形式對應。
 </p>
 <code>
 /187/
@@ -265,8 +201,8 @@ unter Verwendung der induktiven Annahme
 ohne Schwierigkeit beweisen kann. 
 </p>
 <p class="chinese">
-這些完成後，自 r1...rk 可得一個新的關係符號 r 41)，
-應用歸納假設之下可毫無困難的證明 (3)、(4) 是有效。
+至此可自 r1...rk 衍生一個新的關係符號 r 41)，
+並毫無困難應用歸納假設證明 (3)、(4) 是有效的。
 </p>
 <p class="german">
 41) Bei der genauen Durchführung dieses Beweises 
@@ -274,8 +210,8 @@ ohne Schwierigkeit beweisen kann.
     sondern durch seine rein formale Beschaffenheit definiert.
 </p>
 <p class="chinese">
-41) 這證明的精確發展中 r 自然地並非於此內容解釋之迂迴中，
-    而是經由其本身之純形式組成定義。
+41) 由證明的精確建構可知 r 本質上並非衍生自內容意義之迂迴中，
+    而是經由其本身之純形式組成所定義。
 </p>
 <p class="german">
 Ein Relationszeichen r, 
@@ -283,7 +219,7 @@ welches auf diesem Wege einer rekursiven Relation
 zugeordnet ist 42), soll rekursiv heißen.
 </p>
 <p class="chinese">
-源自這些方法之關係符號 r 其被對應到遞迴關係應稱為遞迴。
+關係符號 r 其可如此對應到遞迴關係 42)，應稱為遞迴。
 </p>
 <p class="german">
 42) Welches also, inhaltlich gedeutet, 
@@ -292,4 +228,80 @@ zugeordnet ist 42), soll rekursiv heißen.
 <p class="chinese">
 42) 其於此內容解釋下也表達了此關係的存在。
 </p>
+<p>譯註：
+哥德爾於定理 VII 說明遞迴函數的替換操作(函數合成)及
+遞迴定義以算術系統表示的方法，
+於表現定理也可應用來作為 P 系統的表示法，
+也就是如腳註 41)所說的一組形式定義，以下面 2 個定理說明：
+</p>
+<h3>定理 R33：替換操作可於 P 系統表示。</h3>
+<p>
+替換操作即為現代述語的函數合成。
+以下的定義以希臘字母代表遞迴函數，
+以拉丁字母代表 P 系統關係符號。
+</p>
+<ol> 
+<li>若函數 η 為自遞迴函數 θ 及 γ1...γk 之函數合成，
+    則以下等式關係成立：<br/>
+
+    η(χ1...χn)=θ(γ1(χ1...χn)...γk(χ1...χn))
+
+</li>
+<li>依據定理 V 之歸納假設，θ 與 γ1...γk 等函數為遞迴函數，
+    故於 P 系統存在以下公式 f, g1...gn，使得<br/>
+    f (y1...yk,y ) 為表示 υ =θ (υ1...υk) 之關係符號，<br/>
+    g1(x1...xn,y1) 為表示 υ1=γ1(χ1...χn) 之關係符號，<br/>
+    .                                                <br/>
+    .                                                <br/>
+    .                                                <br/>
+    gk(x1...xn,yk) 為表示 υk=γk(χ1...χn) 之關係符號。<br/>
+</li>
+<li>在 P 系統可以建構出下式：<br/>
+<pre>
+    (Ey1,...,yk)[f (y1,...,yk,y)
+                .g1(x1,...,xn,y1)
+                .
+                .
+                .
+                .gk(x1,...,xn,yk)]
+</pre>
+</li>
+<li>由上我們於 P 系統中定義出新的關係符號 h 如下：<br/>
+<pre>
+    h(x1,...,xn,y)≡(Ey1,...,yk)[f (y1,...,yk,y)
+                               .g1(x1,...,xn,y1)
+                               .
+                               .
+                               .
+                               .gk(x1,...,xn,yk)]
+</pre>
+</li>
+<li>得證</li>
+</ol>
+<h3>定理 R34：遞迴定義可由 P 系統表示。</h3>
+<ol>
+<li>
+若函數 φ 為自函數 ψ 及 μ 之遞迴定義，
+則以下等式關係成立：<br/>
+
+φ(0  ,χ2...χn) = ψ(χ2...χn)<br/>
+φ(κ+1,χ2...χn) = μ(κ,φ(κ,χ2...χn),χ2...χn)<br/>
+</li>
+<li>
+依據定理 V 之歸納假設，ψ 與 μ 等函數為遞迴函數，
+故於 P 系統存在以下公式 s, p, m，使得<br/>
+
+p(x2...xn,y ) 為表示 υ=θ(χ1...χk) 之關係符號。
+
+</li>
+<li>
+可於 P 系統寫出公式，
+<pre>
+f(z,x2...xn,y)≡(Es)[|s|=z+1
+                   .p(  x2...xn,s(0))
+                   .(iΠ(i&lt;z)[m(i,x2...xn,s(i+1))
+                   . y=s(z)]
+</pre>
+</li>
+</ol>
 </body></html>
