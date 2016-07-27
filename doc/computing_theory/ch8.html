@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head>
+<link rel="stylesheet" href="web.css"></link>
+<TITLE>
+Über formal unentsheidbare Sätze  der Principia Mathematica und verwandter System I 1) 
+論數學原理及相關系統中的形式無法決定陳述句 1)</TITLE>
+<body>
+<h1>算術系統</h1>
+<p class="german">
+3.<br/>
+Wir ziehen nun aus Satz VI weitere Folgerungen und 
+geben zu diesem Zweck folgende Definition:
+</p>
+<p class="chinese">
+現在要從命題 VI 導出更廣泛的結論且因此給定以下定義：
+</p>
+<p class="german">
+Eine Relation (Klasse) heißt arithmetisch,
+wenn sie sich allein mittels der Begriffe +, . 
+[Addition und Multiplikation, bezogan auf natürliche Zahlen 49)] 
+und den logischen Konstanten ∨,
+<span class="overline">x</span>, (x), = definieren läßt, 
+wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 5O). 
+</p>
+<p class="chinese">
+一個關係（類別）稱為算術，
+在於其本身僅由 +, .
+「自然數之加法和乘法 49)」
+之觀念和邏輯常數 ∨,<span class="overline">x</span>, (x), =
+所定義，其中 (x) 和 = 僅能應用在自然數 50)。
+</p>
+<h2>算術命題</h2>
+Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
+Insbesondere sind z. B. die Relationen "größer" und
+"kongruent" nach einem Modul" arithmetisch, denn es gilt:
+
+「算術命題」概念可對應地定義出來。
+特別是如關係「大於」和對一個模數之「同餘」都是算術，
+由以下關係可看出：
+           ____
+x>y       ~(Ez)[y=x+z]
+
+x≡y(mod n)~(Ez)[x=y+z.n ∨ y=x+z.n]
+
+譯註：上述是用算術來定義大於與同餘關係。
+  
+49) Die Null wird hier und im folgenden immer 
+    mit zu den natürlichen Zahlen gerechnet.
+
+49) 此後自然數包括零。
+
+50) Das Definiens eines solchen Begriffes muß sich also allein mittels 
+    der angeführten Zeichen, Variablen für natürliche Zahlen x, y,... 
+    und den Zeichen 0, 1 aufbauen 
+    (Funktions und Mengenvariable dürfen nicht vorkommen). 
+    (In den Präfixen darf statt x natürlich auch jede 
+     andere Zahlvariable stehen.)
+
+50) 這些概念之定義僅由已提過之符號、自然數變數 x, y,...及
+    符號 0, 1 建構。
+    (不允許出現函數與集合變數)。
+    (每個其它出現於 x 之前數目變數能自然地取代 x)。
+
+<h2>定理 VII</h2>
+
+Es gilt der
+Satz VII: Jede rekursive Relation ist arithmetisch.
+
+這可得
+定理 VII：每個遞迴關係是算術的。
+
+Wir beweisen den Satz in der Gestalt: 
+
+Jede Relation der Form x0=φ(x1...xn), 
+wo φ rekursiv ist, ist arithmetisch, 
+und wenden vollständige Induktion nach der Stufe von φ an. 
+
+φ habe die s-te Stufe(s>1). Dann gilt entweder:
+
+我們以下述論述證明此命題：
+
+每個形式如 x0=φ(x1...xn)（其中 φ 是遞迴的）之關係是算術的，
+且可對 φ 的級數作完整歸納法。 
+
+φ 為第 s-級(s>1)。因此除了下式成立：
+
+/192頁/
+
+1.φ(x1...xn)=ρ[χ1(x1...xn),χ2(x1...xn)...χm(x1...xn)]51)
+
+(wo ρ und sämtliche χi kleinere Stufe haben als s) oder:
+
+(其中 ρ 和所有的 χi 其級數小於 s) 
+
+另一式也成立：
+
+2.φ(0  ,x2...xn)=ψ(               x2...xn)
+  φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
+
+(wo ψ,μ niedrigere Stufe als s haben).
+
+(其中 ψ,μ 其級數小於 s)。
+
+譯註：1.式即為函數合成、
+      2.式即為遞迴定義。
+      等式右側的函數級數（ρ、χ、ψ 及 µ）均小於 φ
+      之級數 s，說明函數合成及遞迴定義須由已定義之遞迴函數生成。
+      此定義新的遞迴函數操作，即可利用作為推論規則之實作。
+
+51) Es brauchen natürlich nicht alle x1...xn 
+    in den χi tatsächlich vorzukommen 
+    [vgl. das Beispiel in Fußnote 27)].
+
+51) 不是所有於 χi 中的 x1...xn 都需要實際出現。
+    「參閱腳註 27) 之例子」。
+
+Im ersten Falle gilt:
+
+第一種情形有下式成立： 
+
+x0=φ(x1...xn)~(Ey1...ym)[ R(x0,y1...ym)&
+                         S1(y1,x1...xn)&...&Sm(y1,x1...xn)],
+
+wo R bzw. Si die nach induktiver Annahme existierenden mit
+x0=ρ(y1...ym) bzw. y=χ1(x1...xn) 
+äquivalenten arithmetischen Relationen sind.
+Daher ist x0=φ(x1,x2...xn) in diesem Fall arithmetisch.
+
+依據歸納假設，存在分別與 x0=ρ(y1...ym) 及 y=χ1(x1...xn)
+等值之算術關係  R 和 Si。
+因此於此情形下 x0=φ(x1,x2...xn) 為算術的。
+
+譯註：existierenden 為 existierend 現在分詞轉形容詞，
+      並對 Relationen 作複數與格變格，故於字尾加 en。
+
+Im zweiten Fall wenden wir folgendes Verfahren an: 
+Man kann die Relation x0=φ(x1,x2...xn) mit Hilfe 
+des Begriffes "Folge von Zahlen"
+(f) 52) folgendermaßen ausdrüeken:
+
+第二種情形應用以下程序：
+之後可藉由「整數序列」(f) 之觀念 52)來表達關係 x0=φ(x1,x2...xn)如下：
+
+x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) &
+         (k)[k<x1→fk+1=μ(k,fk,x2...xn)] & x0=fx1}
+
+52) f bedeutet hier eine Variable, 
+    deren Wertbereich die Folgen natürl. Zahlen sind. 
+    Mit fk wird das k+1-te Glied einer Folge f bezeichnet
+    (mit f0 das erste).
+
+52) f 於此指一個變數，其值域是自然數序列。
+    fk 用來表示 f 序列之第 k+1-個元素（f0 表示第一個）。
+
+Wenn S(y,x2...xn) bzw. T(z,x,...xn+l) die nach induktiver Annahme 
+existierenden mit y=ψ(x2...xn) bzw. z=μ(x1...xn+1) 
+äquivalenten arithmetische Relationen sind, 
+gilt daher:
+
+依據歸納假設，存在分別與 y=ψ(x2...xn) 及 z=μ(x1...xn+1)
+等值之算術關係 S(y,x2...xn) 和 T(z,x,...xn+l)。
+由此下述成立：
+
+x0=φ(x1...xn)~(Ef){S(       f0,x2...xn)  &
+          (k)[k<x1→T(fk+1,k,fk,x2...xn)] & x0=fx1} (17)
+
+Nun ersetzen wir den Begriff "Folge von Zahlen" 
+durch "Paar von Zahlen", 
+indem wir dam Zahlenpaar n, d 
+die Zahlenfolge f^(n, d)(fk^(n,d)=[n]1+(k+1)d) zuordnen,
+wobei [n] den kleinsten nicht negativen Rest von n modulo p 
+bedeutet.
+
+現在可用「整數對」替代「整數序列」之觀念，
+將整數對 n, d 對映到 f^(n, d)(fk^(n,d)=[n]1+(k+1)d)，
+其中 [n]p 指最小 n 除 p 之非負數餘數。 
+
+Es gilt dann der Hilfssatz 1: 
+Ist f eine beliebige Folge natürlicher Zahlen und k eine beliebige natürliche Zahl, 
+so gibt es ein Paar von natürlichen Zahlen n, d, 
+so daß f^(n,d) und f in den ersten k Gliedern übereinstimmen.
+
+則以下成立，輔助命題 1：
+f 是一個任意的自然數序列且 k 是一個任意自然數，
+存在一個自然數 n, d 之數對，
+使得 f^(n,d) 和 f 與第一個 k 項目一致。
+
+Beweis: 
+Sei l die größte der Zahlen k,f0,f1...fk-1. 
+Man bestimme n so, daß:
+
+n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
+
+/193頁/
+
+was möglich ist, 
+da je zwei der Zahlen 1+(i+1)l!(i=0,1...k-1) relativ prim sind. 
+Denn eine in zwei von diesen Zahlen enthaltene Primzahl müßte auch 
+in der Differenz (i1-i2)l! und 
+daher wegen |i1-i2|<l in l! enthalten sein, was unmöglich ist. 
+Das Zahlenpaar n,l! leistet dann das Verlangte.
+
+證明：
+令 l 為 k,f0,f1...fk-1 中最大的整數，
+
+可限定 n 為：
+
+n≡fi[mod(1+(i+1)l!)] für i=O,1...k-1
+
+這是因為數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
+
+因為若否，則數列中任 2 個數所包含的質數也應包含在 (i1-i2)l! 數段中，
+且因 |i1-i2|<1 故應包含於 l!中，這是不可能的。 
+
+數對 n,l! 滿足前面規範。
+
+譯註：我先舉一例說明哥德爾如何用上述方法以數對表示數列：
+      設有一數列 s 其元性為 2, 3, 2。
+
+      1.找出 l。
+        取 3(數列長度)及數列所有元素值 2, 3, 2 中最大數，得 l=3。
+      2.求出 n。
+        n 滿足以下的一元同餘方程組 S 如下：
+
+        n≡fi[mod(1+(i+1)l!   ]
+        n≡ 2[mod 1+(0+1)3!=7 ]
+        n≡ 3[mod 1+(1+1)3!=13]
+        n≡ 2[mod 1+(2+1)3!=19]
+
+        利用中國剩餘定理解 S 的最小解 n 如下：
+        n = 2.4.19.13 + 3.9.7.19 + 2.14.7.13 + kM (K 為任意整數)
+          = 8115 + k.7.13.19 = 8115 + (-4).1729 = 1199 
+
+      3.知道 n 及 l 後，數列 s 第 i 個元素值可使用以下算式求出：
+
+                    fi = n  mod 1+(i+1)l!
+        第 0 個元素 f1=1199 mod 1+(0+1)3! = 2 
+        第 1 個元素 f2=1199 mod 1+(1+1)3! = 3
+        第 2 個元素 f3=1199 mod 1+(2+1)3! = 2
+      
+      哥德爾對數列 1+(i+1)l! 任 2 數為互質，
+      僅用 2 句話即說明完成，但基本上已提示使用反證法來證明此命題，
+      但太精簡，讓人不容易理解，我將在以下的命題 41 詳細說明。
+      命題 41 之證明是參閱 gribskoff, 2013。
+
+      命題 41：數列 1+(i+1)l! (i=0,1...k-1) 中任 2 個數是互質的。
+        反證法
+        1.設反命題為真，即數列 1+(i+1)l! 存在 2 個數並非互質，
+          故存在質數 p 使得下式成立：
+          p | (i  +1)l!+1 
+          p | (i+j+1)l!+1, j 為任意整數。
+    
+          即等同以下同餘關係：
+
+          [(i+1)l!+1]≡[(i+j+1)l!+1] (mod p)
+
+          可推得下式成立：
+          p | [(i+j+1)l!+1]-[(i+1)l!+1] = kl! 
+        
+          再推得：
+          p|jl! → p|j ∨ p|l!
+        
+        2.若 p|l! 成立，則 p|l!(i+1) 成立，
+          但其與前述 p|(i+1)l!+1 不可能同時成立，
+          故 p 不整除 l!。 
+
+        3.若 p|j 成立，因為 j≦k≦max(1...k)
+          故對所有 j，以下成立：
+          j|l! 
+          由 p|j ∧ j|l! → p|l!
+          若 p|l! 成立，則 p|l!(i+1) 成立，
+          但其與前述 p|(i+1)l!+1 不可能同時成立，
+          故 p 不整除 j。 
+        4.依反證法得證。
+
+      定理 42：中國剩餘定理
+        已知任意數列 a1,a2...an 及 m1,m2...mn，
+        若 m1,m2...mn 任 2 數互質，
+        則下列一元線性同餘方程組 S
+        
+        x≡a1 (mod m1)
+        x≡a2 (mod m2)
+        .
+        .
+        .
+        x≡an (mod mn)
+
+        有解且可由下列通用程序解出：
+        1.設 M  = m1.m2...mn
+             Mi = M/mi 
+        2.令 tiMi = 1 (mod mi)，求得 ti。
+        3.方程組 S 的通解為
+          x = a1t1M1 + a2t2M2 +...+ antnMn + kM (K 為任意整數)
+
+      例子：
+        孫子算經「物不知數」問題，原文如下：
+        有物不知其數，三三數之剩二，五五數之剩三，
+        七七數之剩二。問物幾何？
+            
+      解：
+        x≡2 (mod 3)
+        x≡3 (mod 5)
+        x≡2 (mod 7)
+        M=3.5.7=105 
+        t1.35 = 1 (mod 3)    
+        t1 = 2
+
+        t2.21 = 1 (mod 5)    
+        t2 = 1
+
+        t2.15 = 1 (mod 7)    
+        t2 = 1
+
+        x=2.2.35+3.1.21+2.1.15=140+63+30=233
+         ≡ 23 (mod 105)
+
+      證明：
+            
+
+Da die Relation x=[n]p durch:
+x≡n (mod p) & x<p
+definiert und daher arithmetisch ist, 
+so ist auch 
+die folgendermaßen definierte Relation P(x0,xl...xn):
+
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                 & (k)[k<x1 → T([n]1+d(k+2)
+                               ,k
+                               ,[n]1+d(k+1)
+                               ,x2...xn] 
+                 & x0=[n]1+d(x1+1)}
+
+arithmetisch, welche nach (17) and Hilfssatz I mit: 
+x0=φ(x1...xn) äiquivalent ist 
+(es kommt bei der Folge f in (17) nur auf ihren Verlauf 
+ bis zum x1+1-ten Glied an). 
+Damit ist Satz VII bewiesen.
+
+譯註：bis 介詞，直到。
+      因為 bis 通常不直接連接一個冠詞，
+      所以通常與另一個介詞 zum 搭配。
+
+      Verlauf  進行、處理，源自動詞 verlaufen
+
+因為關係 x=[n]p 可由下式：
+
+x≡n (mod p) & x<p
+
+所定義且因該式為算術的，
+所以如下所定義的關係 P(x0,xl...xn) 也是算術的。
+
+P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                 & (k)[k<x1 → T([n]1+d(k+2)
+                               ,k
+                               ,[n]1+d(k+1)
+                               ,x2...xn] 
+                 & x0=[n]1+d(x1+1)}
+
+依據 (17) 與輔助定理 I 知關係 P 等價於 x0=φ(x1...xn)。
+(藉由 (17) 中之數列 f，只要對其前 x1+1 個元素進行運算便能推得)。
+據此命題 VII 已證明。
+
+譯註：20160417 週日 美崙
+      關係 P 是用來描述遞迴定義，
+      但論文中公式之轉換與說明交雜，不易看出轉換方式，
+      若將 4 個建構的公式並列一起，
+      便能簡易的看出 P 是如何建構的：
+      1.原遞迴定義：
+
+        φ(0  ,x2...xn)=ψ(               x2...xn)
+        φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
+        
+      2.導入 f 數列，f 數列為函數 φ 的前 k 階遞迴結果值。
+        x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) 
+                          &(k)[k<x1 → fk+1=μ(k,fk,x2...xn)] 
+                          & x0=fx1}
+  
+      3.去除右式等號，將其轉為一般化關係 S 及 T 之表示。
+        x0=φ(x1...xn)~(Ef){S(       f0,x2...xn)
+                          &(k)[k<x1 → T(fk+1
+                                       ,k
+                                       ,fk
+                                       ,x2...xn)] 
+                          & x0=fx1}
+  
+      4.導入數對 n 及 d 取代 f 來表示前 k 階結果數列。
+        P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
+                         & (k)[k<x1 → T([n]1+d(k+2)
+                                       ,k
+                                       ,[n]1+d(k+1)
+                                       ,x2...xn] 
+                         & x0=[n]1+d(x1+1)}
+
+Gemäß Satz VII gibt es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes arithmetisches Problem und 
+da der ganze Beweis von Satz VII sich (für jedes spezielle F) 
+innerhalb des Systems P formalisieren läßt, 
+ist diese Äquivalenz in P beweisbar. Daher gilt:
+
+依據命題 VII，
+對每個形式為 (x)F(x) 之問題（F 遞迴）存在一個等值算術問題，
+由於命題 VII 整個證明本身（對每個特定之 F）
+能於系統 P 內形式化，故其等值性可於 P 內證明。
+因此可得：
+
+Satz VIII: 
+In jedem der in Satz VI genannten formalen Systeme 53) gibt es 
+unentscheidbare arithmetische Sätze.
+
+命題 VIII：
+在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
+
+Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
+das Axiomensystem der Mengenlehre 
+und dessen Erweiterungen durch 
+ω-widerspruchsfreie rekursive Klassen von Axiomen.
+Wir leiten schließlich noch folgendes Resultat her:
+
+（依據頁190之注釋）同樣可推廣至集合公理系統
+及其經由ω-一致性遞迴公理類別所擴展之系統。
+總結可得以下結果：
+
+Satz IX: 
+In allen in Satz VI genannten formalen Systemen 53) gibt es 
+unentscheidbare Problem des engeren Funktionenkalküls 54)
+(d. h. Formeln des engeren Funktionenkalküls,
+ für die weder Allgemeingültigkeit 
+ noch Existenz eines Gegenbeispiels beweisbar ist) 55).
+
+命題 IX:
+所有命題 VI 提到之形式系統 53)存在有限函數計算之不可決定問題 54)
+（即有限函數計算公式之有效性或反例存在性均不可證明）55)。
+
+53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
+    welche aus P durch Hinzufügung einer rekursiv 
+    definierbaren Klasse 
+    von Axiomen entstehen.
+    
+53) 即為此 ω-一致系統係 P 系統經由遞迴可定義公理類別擴展而來。
+
+54) Vgl. Hilbert-Ackermann, Grundzüge der theoretischen Logik.
+    Im System P sind unter Formeln des engeren Funktionenkalküls 
+    diejenigen zu verstehen, welche aus den Formeln 
+    des engeren Funktionenkalküls der PM durch die 
+    auf S.176 angedeutete Ersetzung der Relationen 
+    durch Klassen höheren Typs entstehen.
+
+54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
+    在系統 P 中，
+    較受限函數計算之公式可理解為那些衍生自 176 頁所指出的，
+    PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
+
+55) In meiner Arbeit: 
+    Die Vollstiändigkeit der Axiome 
+    des logischen Funktionenkalküls, 
+    Monatsh. f. Math. u. Phys. XXXVII, 2, 
+    habe ich gezeigt, daß jede Formel 
+    des engeren Funktionenkalküls 
+    entweder als allgemeingültig nachweisbar ist 
+    oder ein Gegenbeispiel existiert; 
+    die Existenz dieses Gegenbeispiels ist aber nach Satz IX 
+    nicht immer nachweisbar (in den angeführten formalen Systemen).
+    Monatsh. für Mathematik and Physik. XXXVIII. Band. 1
+
+55) 在我的工作：邏輯函數運算公理之完備性，
+    數學與物理月刊 XXXVII, 2,
+    已指出每個受限函數計算之公式既非普遍可證也不存在任一反例；
+    依據命題 IX 反例之存在並非總是可證（在前述形式系統內）。
+    數學與物理月刊 XXXVIII, 2, Band. 1。
+
+/194頁/
+
+命題 X
+......
+
+Dies beruht auf:
+
+這基於：
+
+Satz X:
+Jedes Problem der Form (x)F(x) (F rekursiv) läßt sich 
+zurückführen auf die Frage nach der Erfüllbarkeit einer Formel 
+des engeren Funktionenkalküls 
+(d.h. zujedem rekursiven F kann man eine Formel des engeren 
+ Funktionenkalküls angeben, deren Erfüllbarkeit mit 
+ der Richtigkeit von (x)F(x) äquivalent ist).
+
+命題 X：
+每個形式如 (x)F(x) （F 遞迴）之問題可化約成受限函數運算公式滿足問題。
+（即對每個遞迴 F 可給定一個受限函數運算之公式，
+  其可滿足性等價於 (x)F(x) 之正確性）。
+
+Zum engeren Funktionenkalkül (e.F.) rechnen wir diejenigen Formeln, 
+welche sich aus den Grundzeichen: -,V, (x), =; 
+x,y...(Individuenvariable) 
+F(x), G(x y), H(x, y, z)... (Eigenschafts- und Relationsvariable) 
+aufbauen 56), wobei (x) und = sich nur auf Individuen beziehen dürfen. 
+Wir fügen zu diesen Zeichen noch eine dritte Art 
+von Variablen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
+die Gegenstandsfunktionen vertreten 
+(d. h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
+deren Argumente und Werte Individuen sind 57).
+
+受限函數計算（以下稱為 e.F.）包含這些公式，
+其由下述基本符號建構 56)：
+-,∨,(x),=;
+x,y...（個體變數）
+F(x), G(x y), H(x, y, z)...（屬性變數及關係變數） 
+其中 (x) 及 = 僅能參照於個體。
+對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
+表示物件函數（即 φ(x), ψ(x y) 等等用來表示參數與值為個體之單射函數。57) 
+ 
+譯註：哥德爾上面定義了三種變數形式：
+      1.個體變數 x,y,z
+      2.屬性或關係變數 F(x), G(x y), H(x,y,z)，注意到其值為邏輯值，
+        關於此種變數的問題是其是否為真（或可被滿足）。
+      3.物件函數φ(x), ψ(x y), χ(x y z)，其值為個體，且為單射函數，
+        即函數對所有參數都會回傳一個個體。
+
+Eine Formel, die außer den zuerst angeführten Zeichen des e. F.
+noch Variable dritter Art (φ(x), ψ(x y)... etc.) enthält, 
+soll eine Formel im weiteren Sinne (i. w. S.) heißen 58). 
+Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich 
+ohneweiters auf Formeln i.w.S. und es gilt der Satz, 
+daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
+so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
+
+除了一開始引入的受限函數計算之符號還包含第三種變數（φ(x), ψ(x y)...等）
+之公式稱為較廣義公式（簡寫 i. w. S.） 58)。
+「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
+對每個較廣義公式 A 而言，可給定一個較受限函數計算之正常公式，
+使得 A 的可滿足性與 B 等價。
+
+B erhält man aus A, 
+indem man die in A vorkommenden Variablen 
+dritter Art φ(x), ψ(x y).. durch Ausdrücke der Form: 
+('z)F(z x),('z)G(z,xy)... ersetzt, 
+die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und 
+die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
+der besagt, 
+daß sämtliche an Stelle der φ, ψ.. 
+gesetzte F, G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
+
+B 衍生自 A 如下，
+將 A 中出現的第三種變數 φ(x), ψ(x y)..
+以形式如 (ι z)F(z x), (ι z)G(z,xy)... 等表示式來取代。 
+以 PM I*14 之方式消去「描述」函數且
+將如此具有表示式之公式作邏輯相乘 59)，
+也就是說將 φ, ψ.. 全部的參數相對於 F, G.. 之第一個空參數
+一一配置其餘參數。 
+
+56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
+    das Zeichen = nicht zum engeren Funktionenkalkül. 
+    Es gibt aber zu jeder Formel, in der das Zeichen = vorkommt, 
+    eine solche ohne dieses Zeichen, 
+    die mit der ursprünglichen gleichzeitig erfüllbar ist 
+    (vgl. die in Fußnote 55) zitierte Arbeit).
+
+56) 在正引述的書中，
+    希爾伯特及阿克曼並未將符號 = 計入受限函數運算。
+    對每個出現符號 = 之公式，
+    卻存在一個沒有此符號公式，初始時便能同時被滿足
+    （參閱腳註 55 引述之成果）。
+
+57) Und zwar soll der Definitionsbereich immer 
+    der ganze individuenbereich sein.
+
+57) 且事實上定義域總是整個個體域。
+
+58) Variable dritter Art dürfen dabei 
+    an allen Leerstellen für Individuenvariable stehen, 
+    z.B.: y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] usw.
+
+58) 第三種變數於此可配置於所有個體變數空位上，
+    如： y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] 等等。
+
+譯註：因為第三種變數其值為個體，所以可以視為個體變數。
+
+59) D. h. die Konjunktion bildet.
+
+59) 即建構成合取式。
+
+Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
+(F rekursiv) ein äquivalentes betreffend 
+die Erfüllbarkeit einer Formel i.w.S. gibt, 
+woraus nach der eben gemachten Bemerkung Satz X folgt.
+
+現在指出對每個形式 (x)F(x) （F 遞迴）之問題，
+存在一個問題等價於較廣義公式可滿足性，
+依據前述可推得命題 X。
+
+Da F rekursiv ist, 
+gibt es eine rekursive Funktion Φ(x), so daß F(x)~[Φ(x)=0], 
+und für Φ gibt es eine Reihe von Funktionen Φ1 Φ2...Φn 
+so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
+
+若 F 是遞迴的，則存在一個遞迴函數 Φ(x)，使得 F(x)~[Φ(x)=0]，
+又對 Φ 而言存在函數序列 Φ1 Φ2...Φn，其中 Φn=Φ, Φ1(x)=x+1，
+且對每個 Φk(1<k≦n) 不是：
+
+1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
+  (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
+  p,q<k
+
+/195/
+
+oder:
+
+就是：
+
+2.(x1...xm)[Φk(x1...xm)=Φr(Φi1(ξ1)...Φis(ξs))] 60) (19)
+  r<k,iv<k(für v= 1,2...s)
+
+oder:
+或是：
+
+3.(x1...xm)[Φk(x1...xm)=Φ1(Φ1...Φ1(0))] (20)
+
+Ferner bilden wir die Sätze:
+
+再來建構以下命題：
+   _______
+(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)→x=y] (21)
+              (x)[Φn(x)=0]         (22)
+
+Wir ersetzen nun in allen Formeln (18), (19), (20) (für k=2,3...n) und 
+in (21)(22) die Funktionen Φi durch Funktionsvariable φi, 
+die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x0 und 
+bilden die Konjunktion C sämtlicher so erhaltener Formeln.
+
+我們現在將公式 (18),(19),(20) (對 k=2,3...n), (21) 及 (22) 
+中的函數 Φ i 以函數變數 φi 取代，
+數字 0 以未於其它地方出現之個體變數 x0 取代，
+並將所有得到的公式形成建構成合取式 C。 
+
+Die Formel (Ex0)C hat dann die verlangte Eigensehaft, d. h.
+
+1.Wenn (x)[Φ(x)=0] gilt, ist (Ex0)C erfüllbar, 
+  denn die Funktionen Φ1,Φ2...Φn ergeben 
+  dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt 
+  einen richtigen Satz.
+
+2.Wenn (Ex0)C erfüllbar ist, gilt (x)[Φ(x)=0].
+
+公式 (Ex0)C 具有必要特質，即：
+
+1.若 (x)[Φ(x)=0] 成立，則 (Ex0)C 是可滿足的，
+  因為函數 Φ1,Φ2...Φn 明顯可插入至 (Ex0)C 中的 φ1,φ2...φn 
+  以形成正確的命題。 
+
+2.若 (Ex0)C 可滿足，則 (x)[Φ(x)=0] 成立。
+
+Beweis:
+
+Seien Ψ1,Ψ2...Ψn die nach Voraussetzung existierenden Funktionen, 
+welche in (Ex0)C für φ1,φ2..φn 
+eingesetzt einen richtigen Satz liefern. 
+Ihr Individuenbereich sei 𝕴. 
+Wegen der Richtigkeit von (Ex0)C für die Funktionen Φi gibt 
+es ein Individuum a (aus 𝕴),
+so daß sämtliche Formeln (18) bis (22) bei Ersetzung 
+der Φi durch Ψi und 
+von 0 durch a in richtige Sätze (18') bis (22') übergehen.
+
+證明：
+
+假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex0)C 中 φ1,φ2..φn 
+可形成一個正確命題。
+其個體域為 𝕴。
+依據 (Ex0)C 之正確性，對函數 Ψi 存在一個個體 a（屬於 𝕴），
+對所有 (18) 至 (22) 之公式中的 Φi 以 Ψi 取代，
+其中的 0 以 a 取代轉換成正確命題 (18') 至 (22')。
+
+譯註：𝕴 是德文字型的 I，表示個體的範圍。
+
+Wir bilden nun die kleinste Teilklasse von 𝕴, 
+welche a enthält und gegen die Operation Ψ1(x) abgeschlossen ist. 
+Diese Teilklasse (𝕴') hat die Eigensehaft, 
+daß jede der Funktionen Ψi auf Elemente aus 𝕴' angewendet 
+wieder Elemente aus 𝕴' ergibt. 
+Denn für Ψi gilt dies nach Definition von 𝕴' und 
+wegen (18'), (19'), (20') überträgt sich 
+diese Eigensehaft von Ψi mit niedrigerem Index auf solche mit höherem. 
+Die Funktionen, welche aus Ψi durch Beschränkung
+auf den Individuenbereich 𝕴' entstehen, nennen wir Ψi'. 
+Auch für diese Funktion gelten sämtliche Formeln (18) bis (22) 
+(bei der Ersetzung von 0 durch a und Φi durch Ψi).
+
+現在建構一個 𝕴 的最小子類別，
+其包含 a 且封閉於操作 Ψ1(x) 下。
+此子類別 (𝕴') 具如下特性，
+每個函數 Ψi 應用 𝕴' 之元素將會產出 𝕴' 之元素。
+因為這依據 𝕴' 之定義對 Ψi 而言是成立的，
+且依據 (18'),(19'),(20') 這些特質從較小下標傳遞至較高下標之 Ψi。
+我們將限制 Ψi 個體域為 𝕴' 所衍生之函數稱為 Ψi'。
+且對這些函數 (18) 至 (22) 之全部公式均成立
+（藉由將 0 以 a 取代及 Φi 以 Ψi 取代）。
+
+Wegen der Riehtigkeit von (21) für Ψi' und a 
+kann man die Individuen aus I' eineindeutig auf die natürlichen Zahlen abbilden 
+u.zw. so, daß a in 0 und die Funktion Ψ1' in die Nachfolgerfunktion Φ1 übergeht. 
+Durch diese Abbildung gehen aber sämtliche Funktionen Ψi' in die Funktionen Φi über 
+und wegen der Richtigkeit von (22)
+für Ψn' und a gilt (x)[Φn(x)=0] oder (x)[Φ(x)=0], 
+was zu beweisen war 61).
+
+依據 (21) 之正確性，
+對 Ψi' 及 a 可將 𝕴' 之個體與自然數間作 1 對 1 對映，
+實務上將 a 轉成 0 且函數 Ψ1' 轉成後繼函數 Φ1。
+藉由此對映，所有 Ψi' 函數轉換成函數 Φi
+且依據 (22) 對 Ψn' 及 a 之正確性，
+(x)[Φn(x)=0] 或 (x)[Φ(x)=0] 可被證明成立 61)。 
+
+60) ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
+    x1,x2..xm, z. B.: x1 x3 x2.
+
+60) ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
+
+61) Aus Satz X folgt z. B., 
+    daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
+    wenn man das Entscheidungsproblem des e. F. gelöst hätte.
+
+61) 從命題 X 導出，
+    例如若已解出受限函數計算決定問題，則費馬及哥德巴赫問題可解。
+
+/196/
+
+Da man die Überlegungen, welche zu Satz X führen, 
+(für jedes spezielle F) auch innerhalb des Systems P durchführen kann,
+so ist die Äquivalenz zwischen einem Satz der Form (x)F(x)(F rekursiv) 
+und der Erfüllbarkeit der entsprechenden Formel des e. F. in P beweisbar 
+und daher folgt aus der Unentscheidbarkeit des einen die des anderen, 
+womit Satz IX bewiesen ist. 62)
+
+因為導出命題 X 之脈絡（對每個特例 F）也能於 P 系統重新實現，
+所以形式如 (x)F(x)（F 遞迴）之命題與
+所對應受限函數計算公式之可滿足性之間的等價性是 P 可證的，
+且於此推論出對立面之不可決定性，
+故證明命題 IX。62)
+
+62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre 
+    und dessen Erweiterungen durch rekursiv definierbare ω-widerspruchsfreie 
+    Klassen von Axiomen, da es ja auch in diesen Systemen unentscheidbare Sätze 
+    der Form (x)F(x) (F rekursiv) gibt.
+
+62) 命題 IX 自然也對集合公理系統及
+    其經由公理之遞迴可定義ω-一致性類別之擴充有效，
+    這是因為這些系統也確實存在形式如(x)F(x)（F 遞迴）之不可決定命題。 
+</body>
+</html>
