@@ -4624,6 +4624,15 @@ etw auf eine Formel/Regel zurückführen to reduce sth to a formula/rule
       ziemlich umständlich 合理的複雜
 譯註：beruht daruf, daß etw 基於某事
 譯註：an+wenden 應用
+譯註：existierenden 為 existierend 現在分詞轉形容詞，
+      並對 Relationen 作複數與格變格，故於字尾加 en。
+譯註：bis 介詞，直到。
+      因為 bis 通常不直接連接一個冠詞，
+      所以通常與另一個介詞 zum 搭配。
+
+      Verlauf  進行、處理，源自動詞 verlaufen
+
+
 
 
 P 系統之 BNF
