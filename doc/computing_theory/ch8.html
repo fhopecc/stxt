@@ -11,6 +11,25 @@
 </title>
 <body>
 <h1>算術系統</h1>
+<em>導讀</em>
+<p>
+哥德爾為了不完備定理推廣至所有算術系統，
+在本章精確定義「算術系統」為僅使用自然數之加法和乘法，
+四個邏輯常數 ∨,<span class="overline">x</span>, (x)及 =
+的數論系統。
+</p>
+<p>
+之後他證明了定理 VII：每個遞迴關係是算術的，
+證明此定理需要使用遞迴定義中的每個步驟結果值的數列，
+他利用了中國剩餘定理，成功將數列以數對表達，
+並由模數運算取出數列指定位置的元素值，
+完全破除我們認為陣列要用指標運算去存取的既定想法，
+因為有了電腦的我們，總視線性記憶體存取為理所當然，
+哥德爾的電腦就是數論，
+有興趣的讀者也可以在 C 語言中，
+用 int 數對實作一個數字陣列來練習，
+相當有趣，也定會使程式設計的能力大幅成長。
+</p>
 <h2>算術命題</h2>
 <p class="german">
 3.<br/>
@@ -18,7 +37,7 @@ Wir ziehen nun aus Satz VI weitere Folgerungen und
 geben zu diesem Zweck folgende Definition:
 </p>
 <p class="chinese">
-現在要從命題 VI 導出更廣泛的結論且因此給定以下定義：
+現在要從命題 VI 導出更廣泛的結論故給定以下定義：
 </p>
 <p class="german">
 Eine Relation (Klasse) heißt arithmetisch,
@@ -27,6 +46,9 @@ wenn sie sich allein mittels der Begriffe +, .
 und den logischen Konstanten ∨,
 <span class="overline">x</span>, (x), = definieren läßt, 
 wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 50). 
+Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
+Insbesondere sind z. B. die Relationen "größer" und
+"kongruent nach einem Modul" arithmetisch, denn es gilt:
 </p>
 <p class="chinese">
 一個關係（類別）稱為算術，
@@ -34,16 +56,9 @@ wobei (x) und = sich nur auf natürliche Zahlen beziehen dürfen 50).
 「自然數之加法和乘法 49)」
 之觀念和邏輯常數 ∨,<span class="overline">x</span>, (x), =
 所定義，其中 (x) 和 = 僅能應用在自然數 50)。
-</p>
-<p class="german">
-Entsprechend wird der Begriff "arithmetischer Satz" definiert. 
-Insbesondere sind z. B. die Relationen "größer" und
-"kongruent nach einem Modul" arithmetisch, denn es gilt:
-</p>
-<p class="chinese">
-「算術命題」概念能一一對映定義出來。
-特別是如關係「大於」和「單模數同餘」都是算術，
-故如下：
+「算術命題」項目能被相應的定義出，
+特別是如關係「大於」和「單模數同餘」均為算術，
+故如下成立：
 </p>
 <ul class="code">
 <li>
@@ -217,6 +232,11 @@ f 是一個任意的自然數序列且 k 是一個任意自然數，
 存在一個自然數 n, d 之數對，
 使得 f<sup>(n,d)</sup> 和 f 與第一個 k 項目一致。
 </p>
+<p>譯註：
+讀者可注意 f 及 f<sup>(n,d)</sup> 都是表示數列之符號，
+且 2 數列每個位置元素都一致，
+即陣列相等是定義為每個位置的元素都相同。
+</p>
 <p class="german">
 Beweis: 
 Sei l die größte der Zahlen k,f0,f1...fk-1. 
@@ -243,8 +263,7 @@ n≡fi[mod(1+(i+1)l!)] 對 i=0,1...k-1<br/><br/>
 這是因為數列 1+(i+1)l!(i=0,1...k-1) 中任 2 個數是互質的。
 
 因為若否，則數列中任 2 個數所包含的質數也應包含在 (i1-i2)l! 數段中，
-且因 |i1-i2|&lt;1 故應包含於 l!中，這是不可能的。 
-
+且因 |i1-i2|&lt;l 故應包含於 l!中，這是不可能的。 
 數對 n,l! 滿足前面規範。
 </p>
 <p>譯註：
@@ -283,16 +302,16 @@ n = 2.4.19.13 + 3.9.7.19 + 2.14.7.13 + kM (K 為任意整數)
 雖已提示應使用反證法來證明此命題，
 但太精簡，讓人不容易理解，我將在以下的定理 41 詳細說明。
 定理 41 之證明是參閱 gribskoff, 2013。
-
+</p>
 <h3>定理 41：數列 1+(i+1)l! (i=0,1...k-1) 中任 2 個數是互質的。</h3>
 <em>證明</em>
 <ol>
 <li>設反命題為真，
 即數列 1+(i+1)l! 存在 2 個數並非互質，故存在質數 p 使得下式成立：
-<pre>
-p | (i  +1)l!+1 
-p | (i+j+1)l!+1, j 為任意整數。
-</pre>    
+<ol>
+<li>p|(i  +1)l!+1</li>
+<li>p|(i+j+1)l!+1, j 為任意整數。</li>
+</ol>
 即等同以下同餘關係：<br/>
 
 [(i+1)l!+1]≡[(i+j+1)l!+1] (mod p)<br/>
@@ -303,20 +322,20 @@ p | [(i+j+1)l!+1]-[(i+1)l!+1] = jl!<br/>
 p|jl! → p|j ∨ p|l!
 </li>        
 <li>
-若 p|l! 成立，則 p|l!(i+1) 成立，
+若 p|l! 成立（即哥德爾說的「因 |i1-i2|&lt;l 故應包含於 l!中」），
+則 p|l!(i+1) 成立，
 但其與前述 p|(i+1)l!+1 不可能同時成立，
 故 p 不整除 l!。 
-
 </li>        
 <li>
-若 p|j 成立，因為 j≦max(1...k)=l
-故對所有 j，以下成立：<br/>
-j|l!<br/>
-由 p|j ∧ j|l! → p|l!<br/>
-若 p|l! 成立，則 p|l!(i+1) 成立，<br/>
+若 p|j 成立（即哥德爾說「質數也應包含在 (i1-i2)l! 數段中」）
+因為 j≦max(1...k)=l
+故對所有 j，j|l! 成立。
+<li>由 p|j ∧ j|l! → p|l!</li>
+<li>若 p|l! 成立，則 p|l!(i+1) 成立，
 但其與前述 p|(i+1)l!+1 不可能同時成立，
-故 p 不整除 j。 
-</li>        
+故 p 不整除 j</li>
+</li>      
 <li>依反證法得證。</li>
 </ol>
 <h3>定理 42：中國剩餘定理</h3>
