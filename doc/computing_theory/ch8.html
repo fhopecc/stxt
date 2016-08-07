@@ -24,7 +24,9 @@
 他利用了中國剩餘定理，成功將數列以數對表達，
 並由模數運算取出數列指定位置的元素值，
 完全破除我們認為陣列要用指標運算去存取的既定想法，
-因為有了電腦的我們，總視線性記憶體存取為理所當然，
+因為有了電腦的我們，
+總視以位址直接存取記憶體為理所當然，
+當然其背後的數位組合及序列邏輯基礎都相當複雜。
 哥德爾的電腦就是數論，
 有興趣的讀者也可以在 C 語言中，
 用 int 數對實作一個數字陣列來練習，
@@ -420,34 +422,32 @@ x=2.2.35+3.1.21+2.1.15=140+63+30=233
 但論文中公式之轉換與說明交雜，不易看出轉換方式，
 若將 4 個建構的公式並列一起，
 便能簡易的看出 P 是如何建構的：
+<ol>
+<li>原遞迴定義：
 <pre>
-1.原遞迴定義：
-
-  φ(0  ,x2...xn)=ψ(               x2...xn)
-  φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
-  
-2.導入 f 數列，f 數列為函數 φ 的前 k 階遞迴結果值。
-  x0=φ(x1...xn)~(Ef){f0  =ψ(     x2...xn) 
-                    &amp;(k)[k&lt;x1 → fk+1=μ(k,fk,x2...xn)] 
-                    &amp; x0=fx1}
-
-3.去除右式等號，將其轉為一般化關係 S 及 T 之表示。
-  x0=φ(x1...xn)~(Ef){S(       f0,x2...xn)
-                    &amp;(k)[k&lt;x1 → T(fk+1
-                                 ,k
-                                 ,fk
-                                 ,x2...xn)] 
-                    &amp; x0=fx1}
-
-4.導入數對 n 及 d 取代 f 來表示前 k 階結果數列。
-  P(x0...xn)≡(En,d){S([n]d+1,x2...xn) 
-                   &amp; (k)[k&lt;x1 → T([n]1+d(k+2)
-                                 ,k
-                                 ,[n]1+d(k+1)
-                                 ,x2...xn] 
-                   &amp; x0=[n]1+d(x1+1)}
-</pre>
+φ(0  ,x2...xn)=ψ(               x2...xn)
+φ(k+1,x2...xn)=μ[k,φ(k,x2...xn),x2...xn]
+</pre> 
+</li>
+<li>導入 f 數列，f 數列為函數 φ 的前 k 階遞迴結果值<br/>
+x0=φ(x1...xn)~(Ef){f<sub>0</sub>  =ψ(     x2...xn)<br/>
+&amp;(k)[k&lt;x1 → f<sub>k+1</sub>=μ(k,f<sub>k</sub>,x2...xn)]<br/>
+&amp; x0=f<sub>x1</sub>}
+</li>
+<li>去除右式等號，將其轉為一般化關係 S 及 T 之表示。<br/>
+x0=φ(x1...xn)~(Ef){S(f0,x2...xn)<br/>
+&amp;(k)[k&lt;x1 → T(f<sub>k+1</sub>,k,f<sub>k</sub>,x2...xn)] <br/>
+&amp; x0=f<sub>x1</sub>}
+</li>
+<li>導入數對 n 及 d 取代 f 來表示前 k 階結果數列。<br/>
+P(x0...xn)≡(En,d){S([n]<sub>d+1</sub>,x2...xn)<br/>
+&amp; (k)[k&lt;x1 → T([n]<sub>1+d(k+2)</sub>,k,<sub>[n]1+d(k+1)</sub>,
+x2...xn]<br/>
+&amp; x0=[n]<sub>1+d(x1+1)</sub>}
+</li>
+</ol>
 </p>
+<h2>存在無法決定之算術命題</h2>
 <p class="german">
 Gemäß Satz VII gibt es zu jedem Problem der Form (x)F(x)
 (F rekursiv) ein äquivalentes arithmetisches Problem und 
@@ -456,22 +456,22 @@ innerhalb des Systems P formalisieren läßt,
 ist diese Äquivalenz in P beweisbar. Daher gilt:
 </p>
 <p class="chinese">
-依據命題 VII，
+依據定理 VII，
 對每個形式為 (x)F(x) 之問題（F 遞迴）存在一個等值算術問題，
-由於命題 VII 整個證明本身（對每個特定之 F）
+由於（對每個特定之 F）定理 VII 整個證明本身
 能於系統 P 內形式化，故其等值性可於 P 內證明。
 因此可得：
 </p>
-<h3>定理 VIII</h3>
 <p class="german">
 Satz VIII: 
 In jedem der in Satz VI genannten formalen Systeme 53) gibt es 
 unentscheidbare arithmetische Sätze.
 </p>
 <p class="chinese">
-命題 VIII：
+定理 VIII：
 在每個命題 VI 所提到之形式系統 53) 存在無法決定之算術命題。
 </p>
+<h2>存在不可決定之受限函數計算命題</h2>
 <p class="german">
 Dasselbe gilt (nach der Bemerkung auf Seite 190) für 
 das Axiomensystem der Mengenlehre 
@@ -494,8 +494,8 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
 </p>
 <p class="chinese">
 命題 IX:
-所有命題 VI 提到之形式系統 53)存在有限函數計算之不可決定問題 54)
-（即有限函數計算公式之有效性或反例存在性均不可證明）55)。
+所有命題 VI 提到之形式系統 53)存在不可決定之受限函數計算問題 54)
+（即受限函數計算公式之有效性或反例存在性均不可證明）55)。
 </p>
 <p class="german">
 53) Das sind diejenigen ω-widerspruchsfreien Systeme, 
@@ -504,7 +504,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     von Axiomen entstehen.
 </p>
 <p class="chinese">
-53) 即為此 ω-一致系統係 P 系統經由遞迴可定義公理類別擴展而來。
+53) 這是 P 系統經由增加遞迴可定義之公理類別而得之 ω-一致系統 。
 </p>
 <p class="german">
 54) Vgl. Hilbert-Ackermann, Grundzüge der theoretischen Logik.
@@ -517,7 +517,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
 <p class="chinese">
 54) 參閱希爾伯特-阿克曼，理論邏輯基礎。
     在系統 P 中，
-    較受限函數計算之公式可理解為那些衍生自 176 頁所指出的，
+    受限函數計算之公式可理解為那些衍生自 176 頁所指出的，
     PM 中藉由以較高型別之類別替代關係較受限函數計算之公式。
 </p>
 <p class="german">
@@ -541,7 +541,7 @@ unentscheidbare Problem des engeren Funktionenkalküls 54)
     數學與物理月刊 XXXVIII, 2, Band. 1。<br/>
 /194頁/
 </p>
-<h3>命題 X</h3>
+<h3>形式如 (x)F(x) 之問題可化約成受限函數運算公式滿足問題。</h3>
 <p class="german">
 Dies beruht auf:
 </p>
@@ -554,16 +554,14 @@ Jedes Problem der Form (x)F(x) (F rekursiv) läßt sich
 zurückführen auf die Frage nach der Erfüllbarkeit einer Formel 
 des engeren Funktionenkalküls 
 (d.h. zujedem rekursiven F kann man eine Formel des engeren 
- Funktionenkalküls angeben, deren Erfüllbarkeit mit 
- der Richtigkeit von (x)F(x) äquivalent ist).
-
+Funktionenkalküls angeben, deren Erfüllbarkeit mit 
+der Richtigkeit von (x)F(x) äquivalent ist).
 </p>
 <p class="chinese">
 命題 X：
 每個形式如 (x)F(x) （F 遞迴）之問題可化約成受限函數運算公式滿足問題。
 （即對每個遞迴 F 可給定一個受限函數運算之公式，
   其可滿足性等價於 (x)F(x) 之正確性）。
-
 </p>
 <p class="german">
 Zum engeren Funktionenkalkül (e.F.) rechnen wir diejenigen Formeln, 
@@ -571,12 +569,6 @@ welche sich aus den Grundzeichen: -,V, (x), =;
 x,y...(Individuenvariable) 
 F(x), G(x y), H(x, y, z)... (Eigenschafts- und Relationsvariable) 
 aufbauen 56), wobei (x) und = sich nur auf Individuen beziehen dürfen. 
-Wir fügen zu diesen Zeichen noch eine dritte Art 
-von Variablen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
-die Gegenstandsfunktionen vertreten 
-(d. h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
-deren Argumente und Werte Individuen sind 57).
-
 </p>
 <p class="chinese">
 受限函數計算（以下稱為 e.F.）包含這些公式，
@@ -585,16 +577,6 @@ deren Argumente und Werte Individuen sind 57).
 x,y...（個體變數）
 F(x), G(x y), H(x, y, z)...（屬性變數及關係變數） 
 其中 (x) 及 = 僅能參照於個體。
-對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
-表示物件函數（即 φ(x), ψ(x y) 等等用來表示參數與值為個體之單射函數。57) 
- 
-譯註：哥德爾上面定義了三種變數形式：
-      1.個體變數 x,y,z
-      2.屬性或關係變數 F(x), G(x y), H(x,y,z)，注意到其值為邏輯值，
-        關於此種變數的問題是其是否為真（或可被滿足）。
-      3.物件函數φ(x), ψ(x y), χ(x y z)，其值為個體，且為單射函數，
-        即函數對所有參數都會回傳一個個體。
-
 </p>
 <p class="german">
 Eine Formel, die außer den zuerst angeführten Zeichen des e. F.
@@ -604,15 +586,31 @@ Die Begriffe "erfüllbar" , "allgemeingültig" übertragen sich
 ohneweiters auf Formeln i.w.S. und es gilt der Satz, 
 daß man zu jeder Formel i.w.S. A eine gewöhnliche Formel des e.F. B angeben kann, 
 so daß die Erfüllbarkeit von A mit der von B äquivalent ist. 
+Wir fügen zu diesen Zeichen noch eine dritte Art 
+von Variablen φ(x), ψ(x y), χ(x y z) etc. hinzu, 
+die Gegenstandsfunktionen vertreten 
+(d. h. φ(x), ψ(x y) etc. bezeichnen eindeutige Funktionen, 
+deren Argumente und Werte Individuen sind 57).
 
 </p>
 <p class="chinese">
+對這些符號增加第三種變數形式 φ(x), ψ(x y), χ(x y z) 等等，
+表示物件函數（即 φ(x), ψ(x y) 等等用來表示參數與值為個體之單射函數。57) 
 除了一開始引入的受限函數計算之符號還包含第三種變數（φ(x), ψ(x y)...等）
 之公式稱為較廣義公式（簡寫 i. w. S.） 58)。
 「可滿足性」、「普遍有效性」等觀念是直接傳給較廣義公式且對以下命題成立，
 對每個較廣義公式 A 而言，可給定一個較受限函數計算之正常公式，
 使得 A 的可滿足性與 B 等價。
-
+</p>
+<p>
+譯註：哥德爾上面定義了三種變數形式：
+<ol>
+<li>個體變數 x,y,z</li>
+<li>屬性或關係變數 F(x), G(x y), H(x,y,z)，注意到其值為邏輯值，
+    關於此種變數的問題是其是否為真（或可被滿足）。</li>
+<li>物件函數φ(x), ψ(x y), χ(x y z)，其值為個體，且為單射函數，
+    即函數對所有參數都會回傳一個個體。</li>
+</ol>
 </p>
 <p class="german">
 B erhält man aus A, 
@@ -623,8 +621,6 @@ die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und
 die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
 der besagt, 
 daß sämtliche an Stelle der φ, ψ.. 
-gesetzte F, G.. hinsichtlich der ersten Leerstelle genau eindeutig sind.
-
 </p>
 <p class="chinese">
 B 衍生自 A 如下，
@@ -634,7 +630,6 @@ B 衍生自 A 如下，
 將如此具有表示式之公式作邏輯相乘 59)，
 也就是說將 φ, ψ.. 全部的參數相對於 F, G.. 之第一個空參數
 一一配置其餘參數。 
-
 </p>
 <p class="german">
 56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
@@ -643,7 +638,6 @@ B 衍生自 A 如下，
     eine solche ohne dieses Zeichen, 
     die mit der ursprünglichen gleichzeitig erfüllbar ist 
     (vgl. die in Fußnote 55) zitierte Arbeit).
-
 </p>
 <p class="chinese">
 56) 在正引述的書中，
@@ -651,104 +645,87 @@ B 衍生自 A 如下，
     對每個出現符號 = 之公式，
     卻存在一個沒有此符號公式，初始時便能同時被滿足
     （參閱腳註 55 引述之成果）。
-
 </p>
 <p class="german">
 57) Und zwar soll der Definitionsbereich immer 
     der ganze individuenbereich sein.
-
 </p>
 <p class="chinese">
 57) 且事實上定義域總是整個個體域。
-
 </p>
 <p class="german">
 58) Variable dritter Art dürfen dabei 
     an allen Leerstellen für Individuenvariable stehen, 
     z.B.: y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] usw.
-
 </p>
 <p class="chinese">
 58) 第三種變數於此可配置於所有個體變數空位上，
     如： y=φ(x), F(x,φ(y)),G[ψ(x,ψ(y)),x] 等等。
-
+</p>
+<p>
 譯註：因為第三種變數其值為個體，所以可以視為個體變數。
-
 </p>
 <p class="german">
 59) D. h. die Konjunktion bildet.
-
 </p>
 <p class="chinese">
 59) 即建構成合取式。
-
+</p>
+<p class="german">
 Wir zeigen nun, daß es zu jedem Problem der Form (x)F(x)
 (F rekursiv) ein äquivalentes betreffend 
 die Erfüllbarkeit einer Formel i.w.S. gibt, 
 woraus nach der eben gemachten Bemerkung Satz X folgt.
-
 </p>
 <p class="chinese">
 現在指出對每個形式 (x)F(x) （F 遞迴）之問題，
 存在一個問題等價於較廣義公式可滿足性，
 依據前述可推得命題 X。
-
 </p>
 <p class="german">
 Da F rekursiv ist, 
 gibt es eine rekursive Funktion Φ(x), so daß F(x)~[Φ(x)=0], 
 und für Φ gibt es eine Reihe von Funktionen Φ1 Φ2...Φn 
-so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1<k≦ n) entweder:
-
+so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1&lt;k≦ n) entweder:
 </p>
 <p class="chinese">
 若 F 是遞迴的，則存在一個遞迴函數 Φ(x)，使得 F(x)~[Φ(x)=0]，
 又對 Φ 而言存在函數序列 Φ1 Φ2...Φn，其中 Φn=Φ, Φ1(x)=x+1，
 且對每個 Φk(1&lt;k≦n) 不是：
-
+</p>
+<pre>
 1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
   (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
   p,q&lt;k
-
-/195/
-
-</p>
-<p class="german">
-oder:
-
-</p>
-<p class="chinese">
-就是：
-
+</pre>
+<p>/195/</p>
+<p class="german">oder:</p>
+<p class="chinese">就是：</p>
+<pre>
 2.(x1...xm)[Φk(x1...xm)=Φr(Φi1(ξ1)...Φis(ξs))] 60) (19)
-  r<k,iv<k(für v= 1,2...s)
-
-oder:
-
-</p>
-<p class="chinese">
-或是：
-
-</p>
-<p class="german">
+  r&lt;k,iv&lt;k(für v= 1,2...s)
+</pre>
+<p>oder:</p>
+<p class="chinese">或是：</p>
+<pre>
 3.(x1...xm)[Φk(x1...xm)=Φ1(Φ1...Φ1(0))] (20)
-
+</pre>
+<p class="german">
 Ferner bilden wir die Sätze:
-
 </p>
 <p class="chinese">
 再來建構以下命題：
-   _______
 </p>
-<p class="german">
-(x)Φ1(x)=0 & (xy)[Φ1(x)=Φ1(y)→x=y] (21)
+<pre>
+________
+(x)Φ1(x)=0 &amp; (xy)[Φ1(x)=Φ1(y)→x=y] (21)
               (x)[Φn(x)=0]         (22)
-
+</pre>
+<p class="german">
 Wir ersetzen nun in allen Formeln (18), (19), (20) (für k=2,3...n) und 
 in (21)(22) die Funktionen Φi durch Funktionsvariable φi, 
 die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x0 und 
 bilden die Konjunktion C sämtlicher so erhaltener Formeln.
-
 </p>
 <p class="chinese">
 我們現在將公式 (18),(19),(20) (對 k=2,3...n), (21) 及 (22) 
