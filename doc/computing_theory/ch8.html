@@ -32,6 +32,13 @@
 用 int 數對實作一個數字陣列來練習，
 相當有趣，也定會使程式設計的能力大幅成長。
 </p>
+<!--
+<p>
+後面哥德爾又證明了定理 VIII 及 IX，
+分別說明存在無法決定之算術命題及無法決定之受限函數公式，
+而受限函數公式能輕易的以 P 系統表達。
+</p>
+-->
 <h2>算術命題</h2>
 <p class="german">
 3.<br/>
@@ -616,7 +623,7 @@ deren Argumente und Werte Individuen sind 57).
 B erhält man aus A, 
 indem man die in A vorkommenden Variablen 
 dritter Art φ(x), ψ(x y).. durch Ausdrücke der Form: 
-('z)F(z x),('z)G(z,xy)... ersetzt, 
+(ɿ z)F(z x),(ɿ z)G(z,xy)... ersetzt, 
 die "beschreibenden" Funktionen im Sinne der PM I*14 auflöst und 
 die so erhaltene Formel mit einem Ausdruck logisch multipliziert 59), 
 der besagt, 
@@ -625,12 +632,13 @@ daß sämtliche an Stelle der φ, ψ..
 <p class="chinese">
 B 衍生自 A 如下，
 將 A 中出現的第三種變數 φ(x), ψ(x y)..
-以形式如 (ι z)F(z x), (ι z)G(z,xy)... 等表示式來取代。 
+以形式如 (ɿ z)F(z x), (ɿ z)G(z,xy)... 等表示式來取代。 
 以 PM I*14 之方式消去「描述」函數且
 將如此具有表示式之公式作邏輯相乘 59)，
 也就是說將 φ, ψ.. 全部的參數相對於 F, G.. 之第一個空參數
 一一配置其餘參數。 
 </p>
+<p>譯註：ɿ 是倒過來的希臘字母ι，用來表示存在個體 z 滿足 F(z x)，羅素 PM 的符號。</p>
 <p class="german">
 56) D. Hilbert und W.Ackermann rechnen in dem eben zitierten Buch 
     das Zeichen = nicht zum engeren Funktionenkalkül. 
@@ -694,10 +702,11 @@ so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1&lt;k≦ n) entweder:
 且對每個 Φk(1&lt;k≦n) 不是：
 </p>
 <pre>
-1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] (18)
-  (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]}
+1.(x2...xm)[Φk(0,x2...xm)=Φp(x2...xm)] 
+  (x,x2...xm){Φk[Φ1(x),x2...xm)=Φq(x,Φk(x,x2...xm),x2...xm]} (18)
   p,q&lt;k
 </pre>
+<p>譯註：表達遞迴定義。</p>
 <p>/195/</p>
 <p class="german">oder:</p>
 <p class="chinese">就是：</p>
@@ -705,64 +714,76 @@ so daß: Φn=Φ, Φ1(x)=x+1 und für jedes Φk(1&lt;k≦ n) entweder:
 2.(x1...xm)[Φk(x1...xm)=Φr(Φi1(ξ1)...Φis(ξs))] 60) (19)
   r&lt;k,iv&lt;k(für v= 1,2...s)
 </pre>
+<p>譯註：表達遞迴合成。</p>
+<p class="german">
+60) ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
+    x1,x2..xm, z. B.: x1 x3 x2.
+</p>
+<p class="chinese">
+60) ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
+</p>
 <p>oder:</p>
 <p class="chinese">或是：</p>
 <pre>
 3.(x1...xm)[Φk(x1...xm)=Φ1(Φ1...Φ1(0))] (20)
 </pre>
+<p>譯註：表達常數函數。</p>
 <p class="german">
 Ferner bilden wir die Sätze:
 </p>
 <p class="chinese">
 再來建構以下命題：
 </p>
+<p>
+<span class="overline">(x)Φ1(x)=0</span> &amp; (xy)[Φ1(x)=Φ1(y)→x=y] (21)
+</p>
+<p>譯註：定義後繼函數Φ1。</p>
 <pre>
-________
-(x)Φ1(x)=0 &amp; (xy)[Φ1(x)=Φ1(y)→x=y] (21)
-              (x)[Φn(x)=0]         (22)
+(x)[Φn(x)=0]         (22)
 </pre>
+<p>譯註：定義 F 的遞迴特徵函數Φn。</p>
 <p class="german">
 Wir ersetzen nun in allen Formeln (18), (19), (20) (für k=2,3...n) und 
 in (21)(22) die Funktionen Φi durch Funktionsvariable φi, 
-die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x0 und 
+die Zahl 0 durch eine sonst nicht vorkommende Individuenvariable x<sub>0</sub> und 
 bilden die Konjunktion C sämtlicher so erhaltener Formeln.
 </p>
 <p class="chinese">
 我們現在將公式 (18),(19),(20) (對 k=2,3...n), (21) 及 (22) 
 中的函數 Φ i 以函數變數 φi 取代，
-數字 0 以未於其它地方出現之個體變數 x0 取代，
+數字 0 以未於其它地方出現之個體變數 x<sub>0</sub> 取代，
 並將所有得到的公式形成建構成合取式 C。 
-
 </p>
+<p>譯註：C 是一個受限函數系統之公式</p>
 <p class="german">
-Die Formel (Ex0)C hat dann die verlangte Eigensehaft, d. h.
+Die Formel (Ex<sub>0</sub>)C hat dann die verlangte Eigensehaft, d. h.<br/>
 
-1.Wenn (x)[Φ(x)=0] gilt, ist (Ex0)C erfüllbar, 
+1.Wenn (x)[Φ(x)=0] gilt, ist (Ex<sub>0</sub>)C erfüllbar, 
   denn die Funktionen Φ1,Φ2...Φn ergeben 
-  dann offenbar in (Ex0)C für φ1,φ2...φn eingesetzt 
-  einen richtigen Satz.
+  dann offenbar in (Ex<sub>0</sub>)C für φ1,φ2...φn eingesetzt 
+  einen richtigen Satz.<br/>
 
-2.Wenn (Ex0)C erfüllbar ist, gilt (x)[Φ(x)=0].
+2.Wenn (Ex<sub>0</sub>)C erfüllbar ist, gilt (x)[Φ(x)=0].
 
 </p>
 <p class="chinese">
-公式 (Ex0)C 具有必要特質，即：
+公式 (Ex<sub>0</sub>)C 具有必要特質，即：<br/>
 
-1.若 (x)[Φ(x)=0] 成立，則 (Ex0)C 是可滿足的，
-  因為函數 Φ1,Φ2...Φn 明顯可插入至 (Ex0)C 中的 φ1,φ2...φn 
-  以形成正確的命題。 
+1.若 (x)[Φ(x)=0] 成立，則 (Ex<sub>0</sub>)C 是可滿足的，
+  因為函數 Φ1,Φ2...Φn 明顯可插入至 (Ex<sub>0</sub>)C 中的 φ1,φ2...φn 
+  以形成正確的命題。<br/>
 
-2.若 (Ex0)C 可滿足，則 (x)[Φ(x)=0] 成立。
+2.若 (Ex<sub>0</sub>)C 可滿足，則 (x)[Φ(x)=0] 成立。
 
 </p>
 <p class="german">
 Beweis:
 
 Seien Ψ1,Ψ2...Ψn die nach Voraussetzung existierenden Funktionen, 
-welche in (Ex0)C für φ1,φ2..φn 
+welche in (Ex<sub>0</sub>)C für φ1,φ2..φn 
 eingesetzt einen richtigen Satz liefern. 
 Ihr Individuenbereich sei 𝕴. 
-Wegen der Richtigkeit von (Ex0)C für die Funktionen Φi gibt 
+Wegen der Richtigkeit von (Ex<sub>0</sub>)C für die Funktionen Φi gibt 
 es ein Individuum a (aus 𝕴),
 so daß sämtliche Formeln (18) bis (22) bei Ersetzung 
 der Φi durch Ψi und 
@@ -772,15 +793,15 @@ von 0 durch a in richtige Sätze (18') bis (22') übergehen.
 <p class="chinese">
 證明：
 
-假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex0)C 中 φ1,φ2..φn 
+假設存在 Ψ1,Ψ2...Ψn 函數被指定給 (Ex<sub>0</sub>)C 中 φ1,φ2..φn 
 可形成一個正確命題。
 其個體域為 𝕴。
-依據 (Ex0)C 之正確性，對函數 Ψi 存在一個個體 a（屬於 𝕴），
+依據 (Ex<sub>0</sub>)C 之正確性，對函數 Ψi 存在一個個體 a（屬於 𝕴），
 對所有 (18) 至 (22) 之公式中的 Φi 以 Ψi 取代，
 其中的 0 以 a 取代轉換成正確命題 (18') 至 (22')。
-
+</p>
+<p>
 譯註：𝕴 是德文字型的 I，表示個體的範圍。
-
 </p>
 <p class="german">
 Wir bilden nun die kleinste Teilklasse von 𝕴, 
@@ -829,15 +850,6 @@ was zu beweisen war 61).
 
 </p>
 <p class="german">
-60) ξi(i=1..s) vertreten irgend welche Komplexe der Variablen 
-    x1,x2..xm, z. B.: x1 x3 x2.
-
-</p>
-<p class="chinese">
-60) ξi(i=1..s) 代表任意變數 x1,x2..xm 之複數，例如： x1 x2 x3
-
-</p>
-<p class="german">
 61) Aus Satz X folgt z. B., 
     daß das Fermatsche und das Goldbachsche Problem lösbar wären, 
     wenn man das Entscheidungsproblem des e. F. gelöst hätte.
@@ -848,7 +860,6 @@ was zu beweisen war 61).
     例如若已解出受限函數計算決定問題，則費馬及哥德巴赫問題可解。
 
 /196/
-
 </p>
 <p class="german">
 Da man die Überlegungen, welche zu Satz X führen, 
@@ -857,15 +868,13 @@ so ist die Äquivalenz zwischen einem Satz der Form (x)F(x)(F rekursiv)
 und der Erfüllbarkeit der entsprechenden Formel des e. F. in P beweisbar 
 und daher folgt aus der Unentscheidbarkeit des einen die des anderen, 
 womit Satz IX bewiesen ist. 62)
-
 </p>
 <p class="chinese">
 因為導出命題 X 之脈絡（對每個特例 F）也能於 P 系統重新實現，
-所以形式如 (x)F(x)（F 遞迴）之命題與
-所對應受限函數計算公式之可滿足性之間的等價性是 P 可證的，
+所以形式如 (x)F(x)（F 遞迴）
+之命題與所對應受限函數計算公式之可滿足性之間的等價性是 P 可證的，
 且於此推論出對立面之不可決定性，
 故證明命題 IX。62)
-
 </p>
 <p class="german">
 62) Satz IX gilt natürlich auch für das Axiomensystem der Mengenlehre 
@@ -874,8 +883,8 @@ womit Satz IX bewiesen ist. 62)
     der Form (x)F(x) (F rekursiv) gibt.
 </p>
 <p class="chinese">
-62) 命題 IX 自然也對集合公理系統及
-    其經由公理之遞迴可定義ω-一致性類別之擴充有效，
+62) 命題 IX 自然也對集合公理系統及其經由公理之遞迴可定義
+    ω-一致性類別之擴充有效，
     這是因為這些系統也確實存在形式如(x)F(x)（F 遞迴）之不可決定命題。 
 </body>
 </html>
