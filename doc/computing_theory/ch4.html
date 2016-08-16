@@ -12,7 +12,7 @@
 Über formal unentsheidbare Sätze  der Principia Mathematica und verwandter System I 1) 
 論數學原理及相關系統中的形式無法決定陳述句 1)</TITLE>
 <BODY>
-<h1>遞迴函數</h1>
+<h1>4.遞迴函數</h1>
 <em>導讀</em>
 <p>
 哥德爾引入遞迴函數系統，
@@ -42,7 +42,7 @@
 第 1 種稱為遞迴定義，
 第 2 種稱為函數合成，詳如以下論文本文。 
 </p>
-<h2>遞迴定義</h2>
+<h2>4.1.遞迴定義</h2>
 <div class="german">
 <p>
 Wir schalten nun eine Zwischenbetrachtung ein, 
@@ -95,7 +95,7 @@ folgendes gilt:
 <p>
 /180/
 </p>
-<h2>遞迴數論函數</h2>
+<h2>4.2.遞迴數論函數</h2>
 <p class="german">
 Eine zahlentheoretische Funktion φ heißt rekursiv, 
 wenn es eine endliche Reihe 
@@ -114,7 +114,7 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 就是由對前幾項執行取代操作而得 27)，
 不然就是一個常數或是後繼函數 x+1。
 </p>
-<h2>函數合成</h2>
+<h2>4.3.函數合成</h2>
 <p class="german">
 27) Genauer: durch Einsetzung gewisser der vorhergehenden Funktionen
     an die Leerstellen einer der vorhergehenden, z.B. 
@@ -127,7 +127,7 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
     φk(x1, x2) = φp[φq(x1, x2), φr(x2)] (p, q, r &lt; k).
     所有左側變數不一定要在右側出現(就如同遞迴框架(2))。
 </p>
-<h2>基礎遞迴函數</h2>
+<h2>4.4.基礎遞迴函數</h2>
 <p>
 譯註：由哥德爾的定義可知基礎遞迴函數公為零或常數函數或是後繼函數 x+1，
       基礎遞迴函數不是經由遞迴定義或函數合成所得，
@@ -159,7 +159,7 @@ oder schließlich eine Konstante oder die Nachfolgerfunktion x+1 ist.
 (c+1)(x) = c+1 = f(c(x))</br>
 依數學歸納法，所有常數函數均為遞迴。
 </p>
-<h2>級數</h2>
+<h2>4.5.級數</h2>
 <p>/180/</p>
 <p class="german">
 Die Länge der kürzesten Reihe von φi, 
@@ -184,7 +184,7 @@ heißt ihre Stufe.
 並證明集合 {0} 是遞迴的。
 遞迴函數 φ 之級數描述從基礎遞迴函數至少須經幾次函數轉換而得到φ。
 </p>
-<h2>遞迴關係</h2>
+<h2>4.6.遞迴關係</h2>
 <p class="german">
 Eine Relation zwischen natürlichen Zahlen 
 R(x1...xn) heißt rekursiv 28), 
@@ -253,7 +253,7 @@ R(x1...xn) ~ [φ(x1...xn)=0] 29).
 <tr><td>(x)</td><td>全稱量詞</td></tr>
 <tr><td>(Ex)</td><td>存在量詞</td></tr>
 </table>
-<h2>遞迴定理</h2>
+<h2>4.7.遞迴定理</h2>
 <p>譯註：哥德爾描述並略為證明了4個定理，
 描述以下的操作是封閉在遞迴函數系統內，
 I 陳述遞迴定義及函數合成具遞迴封閉性；
@@ -342,7 +342,7 @@ Satz I folgt unmittelbar aus der Definition von "rekursiv".
 <p class="chinese">
 定理 I 由遞迴之定義直接推得。
 </p>
-<h2>基本邏輯操作是遞迴的</h2>
+<h2>4.8.基本邏輯操作是遞迴的</h2>
 <div class="german">
 <p>
 Satz II und III beruhen darauf, 
@@ -426,7 +426,7 @@ wie man sich leicht überzeugen kann.
        = α(0)
        = 1
 </pre>
-<h2>相等關係為遞迴</h2>
+<h2>4.9.相等關係為遞迴</h2>
 <p>
 譯註：γ(x,y) 表示相等關係，詳細證明如定理R3 至 R6：
 </p>
@@ -504,8 +504,7 @@ sgn(n) = 0 : n &gt; 0
 </pre>
 <p>取 sgn(n) = χℕ*(n)，
 再依定理 R2 正整數類別是遞迴的，得證。</p>
-
-<h3>定理 IV 證明</h3>
+<h2>4.10.定理 IV 證明</h2>
 <p class="german">
 Der Beweis für Satz IV ist kurz der folgende:
 Nach der Voraussetzung gibt es ein rekursives ρ(x,𝔶), so daß:
@@ -660,14 +659,14 @@ womit Satz IV bewiesen ist.
 可輕易以 χ 定義如下：<br/>
 ψ(𝔵,𝔶) = χ(φ(𝔵),𝔶)<br/><br/>
 
-S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&R(x,𝔶)]<br/>
+S(𝔵,𝔶)~(Ex)[x≦φ(𝔵)&amp;R(x,𝔶)]<br/>
 可輕易以 ψ 定義如下：<br/>
 S(𝔵,𝔶) ~ R[ψ(𝔵,𝔶),𝔶]<br/><br/>
 
 T(𝔵,𝔶)~(x) [x≦φ(𝔵)→R(x,𝔶)]<br/>
 可輕易以 S 否定定義。
 </p>
-<h3>基本算術是遞迴的</h3>
+<h2>4.11.基本算術是遞迴的</h2>
 <p class="german">
 Die Funktionen x+y, x.y, x<sup>y</sup>, 
 ferner die Relationen x&lt;y, x=y sind, 
