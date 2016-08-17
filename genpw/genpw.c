@@ -1,11 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+typedef enum {
+    mobile, 
+    phone, 
+    birthday
+}
 
 void genmobile();
 void genphone();
 
-void main() {
-    genmobile();
+int 
+main(int argc, char **argv) {
+    
+    int c;
+    while ((c = getopt(argc, argv, "mp:")) != -1) {
+        switch(c){
+            case 'p':
+
+
+    }
 }
 
 void genmobile() {
@@ -96,9 +111,10 @@ void genmobile() {
     fclose(f);
 }
 
-void genphone(void) {
+void prefixnum(const char * prefix) {
     FILE *f;
     int i;
+    
     f = fopen("phonenums", "w");
     
     if(f == NULL){
@@ -106,7 +122,7 @@ void genphone(void) {
         exit(1);
     }
 
-    for(i=0;i<=99999;i++)
-        fprintf(f, "0382%05d\n", i);
+    for(i=0;i<=999999;i++)
+        fprintf(f, "038%06d\n", i);
     fclose(f);
 }
