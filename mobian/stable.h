@@ -1,15 +1,15 @@
 /*
- * stable.h
- * Symbol table for mobian.
- * implemented using hashtable
+ * database.h
+ * 
+ * Analog to database in prolog. 
  *
  * 20160819 週五
- *
  */
+
 typedef enum {
     ATOM,
-    VAR,
-    FUNC  
+    FUNC, 
+    VAR
 } type;
 
 typedef {
@@ -17,3 +17,9 @@ typedef {
     type type;  
     w_char *definition; 
 } record;
+
+typedef {
+    record *
+}
+
+int get(str name);

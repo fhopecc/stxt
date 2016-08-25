@@ -19,4 +19,3 @@ var new_var(str name) {
     v -> name=name;
     return v;
 }
-
