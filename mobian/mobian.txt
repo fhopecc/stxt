@@ -4,10 +4,62 @@
 語法
 ----
 
+句 - Clause 
+頭 - Head
 項 - Term
 元 - Atom
+數 - Number
 符 - Variable
+函 - Function or Compound Term
 式 - Rule
-句 - Clause 
+體 - Body
+詞 - Word
+參 - Arguments
+串 - List
+枝 - Arity
+謂 - Predict
+
+句 = 頭|式.
+式 = 頭:-體
+頭 = 元|函
+體 = 項,體
+項 = 數|元|符|函|串
+數 = 0..9|數
+謂 = 詞
+元 = 謂
+符 = @詞
+參 = 項,參
+函 = 元(參)
 
 項
+--
+項有五種類型，
+
+typedef struct {
+    xiang_type type,
+    void* data; 
+};
+
+函
+--
+
+與函(han)最相近的資料結構是 C 的 struct，
+函具有一組固定數目之成員，其成員均為項(xiang)，
+成員集合稱為參(can)，取參數之義，成員數目稱為枝(zhi)。
+其名稱謂(wei)。
+
+typedef struct {
+    w_char * wei;  
+    int zhi;
+    xiang * can;
+} han;
+
+例子：
+
+函可用來表示一筆紀錄，如下：
+
+員工(張簡稜剛,183,85,B,私立南台科技大學)
+
+可描述員工張簡稜剛其身高 183
+公分，體重85公斤，血型為B型及畢業自私立南台科技大學。
+
