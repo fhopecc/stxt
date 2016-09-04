@@ -1,5 +1,7 @@
 #include <wchar.h>
 
+typedef wchar_t * str;
+
 typedef enum {
     YUAN,
     HAN 
@@ -11,7 +13,7 @@ typedef struct {
 } xiang; //項
 
 typedef struct {
-    wchar_t * wei;  // 謂
+    str wei;  // 謂
     int zhi;       // 枝
     xiang * can;   // 參
 } han; //函
