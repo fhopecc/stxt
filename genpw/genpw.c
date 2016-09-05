@@ -1,26 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-typedef enum {
-    mobile, 
-    phone, 
-    birthday
-}
+#include <time.h>
 
 void genmobile();
 void genphone();
+time_t parse_time(const char* input);
 
 int 
 main(int argc, char **argv) {
-    
-    int c;
-    while ((c = getopt(argc, argv, "mp:")) != -1) {
+    char c;
+    int r;
+    time_t sdate;
+    time_t edate;
+    struct tm bdtm; // broken down time
+     
+    while ((c = getopt(argc, argv, "s:e:")) != -1) {
         switch(c){
-            case 'p':
-
+            case 's':
+                sdate = parse_time(optarg);
+                printf("date is %d",sdate);
+                break;
+            case 'e':
+                edate = parse_time(optarg);
+                printf("date is %s", ctime(&edate));
+                break;
+            case '?':
+                if (optopt == 's')
+                    fprintf (stderr
+                            , "Option -%c requires an argument.\n"
+                            , optopt);
+                else if (isprint (optopt))
+                    fprintf (stderr
+                            , "Unknown option `-%c'.\n"
+                            , optopt);
+                else
+                    fprintf (stderr
+                            , "Unknown option character `\\x%x'.\n"
+                            , optopt);
+                return 1;
+            default:
+                abort();
+            }
 
     }
+}
+
+time_t parse_time(const char * input) {
+    int mday, mon, year; 
+    time_t t;
+    struct tm * bdtm;
+    t = time(NULL);
+    bdtm = localtime(&t);
+    printf(asctime(bdtm));
+    sscanf(input, "%d-%d-%d", &year, &mon, &mday);
+    bdtm->tm_mday = mday;
+    printf("mday is %d", mday);
+    bdtm->tm_mon = mon;
+    printf("mon is %d", mon);
+    bdtm->tm_year = year;
+    printf("year is %d", bdtm->tm_year);
+    t = mktime(bdtm);
+    printf("time_t is %d", t);
+    return t;
 }
 
 void genmobile() {

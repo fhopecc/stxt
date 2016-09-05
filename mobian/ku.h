@@ -6,7 +6,7 @@ extern xiang ku[MAX_XIANG_NUM]; /* 初始庫，庫用來儲存項 */
 
 int hash(xiang x); /* 產出項的散列值，其範圍為知識庫最大項數 */
 
-int add(xiang x); /* 將項加入至知識庫 */
+int add_yuan(str ming); /* 將項加入至知識庫 */
 
 int get_yuan(str ming); /* 以名判斷元是否存在，0 為不存在，1 為存在 */ 
 
