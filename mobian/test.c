@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-#include "dataobject.h"
+#include "ku.h"
 
 int main(void) {
     /*
@@ -11,7 +11,8 @@ int main(void) {
         .can
     };
     */
-    xin a;
-    a = HAN;
-    assert(a==HAN);
+    assert(hash(L"張簡稜剛")==239);
+    add_yuan(L"張簡稜剛");
+    assert(get_yuan(L"張簡稜剛")==1);
+    assert(get_yuan(L"沈懿嬅")==0);
 }
