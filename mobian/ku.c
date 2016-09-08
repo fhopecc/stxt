@@ -7,22 +7,21 @@ unsigned int hash(str s) {
    unsigned int i    = 0;
    unsigned int len = wcslen(s);
    for(i = 0; i < len; s++, i++)
-   {
       hash = (hash * seed) + (*s);
-   }
    return hash % MAX_XIANG_NUM ;
 }
 
 int add_yuan(str ming) {
     int h = hash(ming);
     xiang x = {.xin = YUAN, .zhi=(void *)ming};
+    printf("ku[h].xin is %d", ku[h].xin);
     ku[h] = x;
 }
 
 int get_yuan(str ming) {
     int h = hash(ming);
     xiang x = ku[h];
-    printf("xiang is %d", x.xin);
+    if(x.xin == 0) return 0;
     if(wcscmp(ming, (str)(x.zhi))==0)
         return 1;
     else

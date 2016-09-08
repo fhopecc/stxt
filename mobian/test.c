@@ -11,6 +11,7 @@ int main(void) {
         .can
     };
     */
+    //initialze_ku();
     assert(hash(L"張簡稜剛")==239);
     add_yuan(L"張簡稜剛");
     assert(get_yuan(L"張簡稜剛")==1);

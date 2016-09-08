@@ -3,9 +3,9 @@
 typedef wchar_t * str;
 
 typedef enum {
-    KONG, /* 空，表示未初始的項，僅用在庫，來表示未初始的位置 */
-    YUAN,
-    HAN 
+    KONG=0,//項結構初始時，型會設成0，因此0保留給空
+    YUAN=1,
+    HAN=2 
 } xin; //型
 
 typedef struct {
