@@ -3,6 +3,6 @@ test.exe : test.c ku.o error.o
 error.o : error.c
 	gcc -c error.c
 ku.o : ku.c
-	gcc -c mobian.c
+	gcc -c ku.c
 mobian.exe : mobian.c
 	gcc -o mobian.exe mobian.c

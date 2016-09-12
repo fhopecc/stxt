@@ -25,4 +25,4 @@ int add_yuan(str ming);
 bool has_yuan(str ming); 
 
 /* 以名找出所有的謂，並將謂存在 ws 位置  */ 
-/*int get_wei(str ming, wei* ws); */
+/* int get_wei(str ming, wei* ws); */

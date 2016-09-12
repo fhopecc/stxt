@@ -11,15 +11,14 @@
  * 20160911 週日
  */
 #include "ku.h"
-#include "mobian.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
 #define INITIAL_SIZE 1024 /* 陣列預設容量 */
 #define EXTENT_SIZE 2048 /* 陣列容量擴充單位 */
 
-size_t size;        // 目前陣列容量
-size_t used;        // 已配置的儲存格數
+size_t size;     // 目前陣列容量
+size_t used;     // 已配置的儲存格數
 xiang *ku=NULL;  // 動態陣列用來儲存項 
 
 void initialize_ku() {
@@ -38,7 +37,7 @@ void extend_ku() {
     ku = (xiang*)malloc(size* sizeof(xiang));
     if(ku==NULL) error(ALLOCATION_MEMROY_FAILED);
     // 複製陣列至新陣列，因為雜湊函數與容量有關，
-    // 所以容量改變，需全部重新加入。
+    // 所以容量改變，需全部重新加入，並將舊庫記憶體釋放。
     for(i=0; i<old_size; i++) {
         switch(old_ku[i].xin) {
             case YUAN:
@@ -48,6 +47,7 @@ void extend_ku() {
                 break;
         }
     }
+    free(old_ku); //釋放舊庫記憶體空間
 }
 
 unsigned int hash(str s) {
