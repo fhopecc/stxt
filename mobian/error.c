@@ -18,3 +18,7 @@ void error(error_code e) {
             abort();
     }
 }
+
+void raise_exception(exception e) {
+    last_exception=e;
+}

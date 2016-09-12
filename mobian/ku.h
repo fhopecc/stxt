@@ -18,8 +18,11 @@
 /* 產出項的散列值，其範圍為知識庫最大項數 */
 unsigned int hash(str ming); 
 
-// 將元加入至知識庫 
-int add_yuan(str ming); 
+// 加入元至庫 
+bool add_yuan(str ming); 
+
+// 加入函至庫
+bool add_han(str wei, int zhi, xiang* xs); 
 
 // 以名判斷元是否存在，0 為不存在，1 為存在  
 bool has_yuan(str ming); 

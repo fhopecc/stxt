@@ -1,7 +1,11 @@
 /* ku.c
  * 
- * 庫本質是符號表，故以雜湊表實作，
- * 為求彈性，其儲存為動態陣列，
+ * 庫的目標是讓使用都能簡單的以名去取出元和函，
+ * 類似於符號表，故以雜湊表實作。
+ *
+ * 為了節省空間，不會儲存相同的元或函。
+ *
+ * 為求不受預定大小的限制，其儲存以動態陣列實作，
  * 因為整個程式啟動只會有一個庫，
  * 所以並未有釋放記憶體的動作。
  * 考慮簡化記憶體的管理，
@@ -73,16 +77,24 @@ int probe(int i) {
         return probe((i+1) % size);
 }
 
-int add_yuan(str ming) {
+/* 元的本質就是字串 */
+bool add_yuan(str ming) {
     if(ku==NULL) initialize_ku();
+
+    //不可加入重覆的元，以節省空間。
+    if has_yuan(str ming) {
+        exception(ADD_EXISTING_XIANG);
+        return false;
+    }
 
     //若負載因子大於 0.75，擴展槽，避免存取效能降低。
     if(used/size > 0.75) extend_ku(); 
 
     int i = probe(hash(ming));
     ku[i].xin = YUAN;
-    ku[i].zhi = (void *)ming;
+    ku[i].zhi.ming = ming;
     used += 1;
+    return true;
 }
 
 bool has_yuan(str ming) {

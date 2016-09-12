@@ -11,9 +11,15 @@ int main(void) {
         .can
     };
     */
+    xiang h1;
+    h1.wei = L"男人";
+    h1.zhi = 1;
+    h1.can 
+
     add_yuan(L"張簡稜剛");
     assert(has_yuan(L"張簡稜剛"));
     assert(has_yuan(L"沈懿嬅")==false);
     add_yuan(L"Robert");
     assert(has_yuan(L"Robert"));
+    add_han(L"張簡稜剛"
 }
