@@ -11,21 +11,11 @@
  * 20160911 週日
  */
 #include "mobian.h"
-#include <stdbool.h>
 
 #define ALLOCATION_MEMROY_FAILED 1 /* 記憶體配置失敗 */
 
 /* 產出項的散列值，其範圍為知識庫最大項數 */
 unsigned int hash(str ming); 
-
-// 加入元至庫 
-bool add_yuan(str ming); 
-
-// 加入函至庫
-bool add_han(str wei, int zhi, xiang* xs); 
-
-// 以名判斷元是否存在，0 為不存在，1 為存在  
-bool has_yuan(str ming); 
 
 /* 以名找出所有的謂，並將謂存在 ws 位置  */ 
 /* int get_wei(str ming, wei* ws); */
