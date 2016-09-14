@@ -14,7 +14,7 @@
  * 枝指此謂的參數個數，
  * 而查詢上，以名及枝來找尋所有符合的參數集合。
  *
- *
+ * 實作上，所有的複合結構都是指標，並均動態配置物件。
  *
  * 使用者在查詢知識庫，會以名載入元或謂，
  *
@@ -29,7 +29,6 @@
 typedef wchar_t * str;
 
 typedef enum {
-    KONG=0,   //項結構初始時，型會設成0，因此0保留給空
     YUAN=1,
     WEI=2, 
     SHU=3
@@ -44,15 +43,15 @@ typedef union {
     void * data;
 } zhi;  
 
-typedef struct {
+typedef struct _xiang {
     xin xin;    //型
     zhi zhi;  //值
-} xiang; //項
+} * xiang; //項
 
 typedef struct _canlian {
     xiang* canzu; /* 參組為一組項 */
     struct _canlian * next; /* 下一筆參組 */
-} canlian_t;
+} *canlian;
 
 /*
  * 謂可由名、枝及參串所定義，
@@ -66,8 +65,8 @@ typedef struct _canlian {
 typedef struct {
     str ming;    /* 名表示謂的名稱*/
     int zhi;     /* 枝表示參的數目 */
-    canlian_t canlian; /* 參鏈，儲放紀錄，以鏈結串列實作，未來或許可以資料庫實作 */
-} wei;
+    canlian canlian; /* 參鏈，儲放紀錄，以鏈結串列實作，未來或許可以資料庫實作 */
+} * wei;
 
 // 加入元的定義 
 bool add_yuan(str ming); 
@@ -81,16 +80,18 @@ bool add_shi(str ming, int zhi, xiang* can);
 // 實是否存在，紀錄是否存在謂
 bool has_shi(str ming, int zhi, xiang* can); 
 
+str get_ming(xiang x);
+
 typedef enum {
     ALLOCATION_MEMROY_FAILED
-} error_code; //錯誤代碼
+} error; //錯誤代碼
 
 typedef enum {
     ADD_EXISTING_XIANG //試圖加入已存在的項至庫
 } exception;
 
 /* 印出錯誤，並結束程式 */
-void error(error_code e);
+void reaise_error(error e);
 void raise_exception(exception e);
 
 exception last_exception;

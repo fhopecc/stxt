@@ -11,7 +11,7 @@ void print_error(str errmsg) {
     printf(mbs);
 }
 
-void error(error_code e) {
+void raise_error(error e) {
     switch(e) {
         case ALLOCATION_MEMROY_FAILED:
             print_error(L"發生錯誤：記憶體配置失敗");

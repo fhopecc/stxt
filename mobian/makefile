@@ -1,8 +1,8 @@
 test.exe : test.c ku.o error.o
-	gcc -o test.exe ku.o error.o test.c
+	gcc -g -o test.exe ku.o error.o test.c
 error.o : error.c
-	gcc -c error.c
+	gcc -g -c error.c
 ku.o : ku.c
-	gcc -c ku.c
+	gcc -g -c ku.c
 mobian.exe : mobian.c
-	gcc -o mobian.exe mobian.c
+	gcc -g -o mobian.exe mobian.c

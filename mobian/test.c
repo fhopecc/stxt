@@ -9,3 +9,7 @@ int main(void) {
     add_yuan(L"Robert");
     assert(has_yuan(L"Robert"));
 }
+
+int test_accessor(void) {
+     
+}
