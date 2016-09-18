@@ -1,6 +1,61 @@
 C語言
 =====
 
+size_t
+......
+
+size_t 是至少 16 位元非負整數，通常用來作為記憶體大小及陣列索引使用。
+
+參閱 C99 7.17 & 7.18.3
+
+陣列
+----
+
+陣列初始式
+..........
+
+陣列初始生命期不同於字面字串，仍是遵守 C 的標準。
+
+//array_initializer.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int* getints1() {
+    return (int[4]){1, 2, 3, 4};
+}
+
+int* getints2() {
+    int* is = (int*)malloc(sizeof(int)*4);
+    is[0]=1;is[1]=2;is[2]=3;is[3]=4;
+    return is;
+}
+
+int main(void) {
+    int i, *is;
+    is=getints1();
+    printf("%s\n", "list getints1 array");
+    for(i=0;i<4;i++)
+        printf("%i\n", is[i]);
+    printf("%s\n", "list getints2 array");
+    is=getints2();
+    for(i=0;i<4;i++)
+        printf("%i\n", is[i]);
+}
+
+執行結果如下：
+
+D:\stxt\doc\prog>ai
+list getints1 array
+0
+6356668
+3
+6356940
+list getints2 array
+1
+2
+3
+4
+
 字串處理
 --------
 
@@ -8,3 +63,29 @@ C語言
 ......
 
 字串在 C 中是以 char 陣列
+
+字面字串
+........
+
+字面字串的生命期等同於 static，若我們異動字面字串的元串，
+其行為是不可預期的。
+
+參見 C99 standard 6.4.5/5 "String Literals - Semantics"
+
+
+//string_literal.c
+#include <stdio.h>
+
+char* getstr() {
+    return "string literal";
+}
+
+int main(void) {
+    char* str;
+    str = getstr();
+    printf("%s\n", str);
+}
+
+執行結果如下：
+D:\stxt\doc\prog>ai
+string literal
