@@ -25,20 +25,23 @@
 
 typedef wchar_t * str;
 
-typedef enum { SHU, FU, BIAN, ZU} lei; //類為項的類別名
+typedef enum { BIAN, SHU, FU, ZU} lei; //類為項的類別名
 typedef enum { SHI, FA } xin; //型為句的分類
 
-/* 項的實際值用指標，彈性較大 */
+/* 項 */
 typedef struct _xiang {
-    lei lei;    //型
-    void * zhi; //值
-    double shu; //數值
+    lei lei;     //類
+    void * data; // 實際儲存資料的地方
+    struct _xiang * zhi;   // 值，變數綁定項目儲存處
 } * xiang; //項
 
+typedef xiang *xiangs; // 項的複數
+
+/* 組 */
 typedef struct _zu {
-    str ming;    /* 名表示謂的名稱*/
-    size_t zhi;     /* 枝表示參的數目 */
-    xiang* can;  /* 參鏈，儲放紀錄，以鏈結串列實作，未來或許可以資料庫實作 */
+    str ming;   // 名
+    size_t wei; // 維 
+    xiangs can; // 參 
 } * zu;
 
 typedef struct _ju {
@@ -51,12 +54,22 @@ typedef struct _ju {
 xiang newshu(double shu); 
 xiang newfu(str fu); 
 xiang newbian(str bian); 
-xiang newzu(str ming, size_t zhi, xiang* can); 
 
 // 存取屬性
 double getshu(xiang x);
 str getming(xiang x);
-xiang* getcan(xiang x);
+
+/* 變 */
+/* 合一.2.1. */
+bool isbangdin(xiang b); 
+void bangdin(xiang b, xiang z); 
+void unbangdin(xiang b);//去綁定 
+xiang getzhi(xiang b);
+
+/* 組 */
+xiang newzu(str ming, size_t wei, xiangs can); 
+size_t getwei(xiang x); //1.1.
+xiangs getcan(xiang x); //1.
 
 // 建立句
 ju newshi(size_t chang, xiang* lie);
@@ -64,16 +77,20 @@ ju newfa(size_t chang, xiang* lie);
 
 // 存取句屬性
 double getchang(ju j);
-xiang* getlie(ju j);
+xiangs getlie(ju j);
 
 // 以名判斷元是否存在
 bool has_yuan(str ming); 
 
 // 加入實，擴增謂的定義
-bool add_shi(str ming, int zhi, xiang* can); 
+bool add_shi(str ming, size_t chang, xiang* can); 
 
 // 實是否存在，紀錄是否存在謂
-bool has_shi(str ming, int zhi, xiang* can); 
+bool has_shi(str ming, size_t chang, xiang* can); 
+
+/* 合一 */
+bool ismingeq(xiang x1, xiang x2);
+bool unify_xiang(xiang x1, xiang x2);
 
 typedef enum {
     ALLOCATION_MEMROY_FAILED

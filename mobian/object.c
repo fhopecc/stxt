@@ -8,38 +8,40 @@
 xiang newshu(double shu) {
     xiang x = (xiang)malloc(sizeof(struct _xiang));
     x->lei = SHU;
-    x->zhi = malloc(sizeof(double));
-    *(double *)(x->zhi) = shu;
+    x->data = malloc(sizeof(double));
+    *(double *)(x->data) = shu;
     return x;
 }
 
 xiang newfu(str fu) {
     xiang x = (xiang)malloc(sizeof(struct _xiang));
     x->lei = FU;
-    x->zhi = fu; 
+    x->data = fu; 
     return x;
 }
 
+/* 變 */
 xiang newbian(str bian) {
     xiang x = (xiang)malloc(sizeof(struct _xiang));
     x->lei = BIAN;
-    x->zhi = bian; 
+    x->data = bian; 
+    x->zhi = NULL; //合一.2.1.1.
     return x;
 } 
 
-xiang newzu(str ming, size_t zhi, xiang* can) {
+xiang newzu(str ming, size_t wei, xiang* can) {
     int i;
     xiang x = (xiang)malloc(sizeof(struct _xiang));
     x->lei = ZU;
     zu z = (zu)malloc(sizeof(struct _zu)); 
     z->ming = ming;
-    z->zhi = zhi;
+    z->wei = wei;
     // 複製參，參為陣列，傳入的參生命期若是 automatic，
     // 則在不同區塊時，其生命過期記憶體區塊會不可用。
-    z->can = malloc(zhi*sizeof(struct _xiang));
-    for(i=0;i<zhi;i++)
+    z->can = malloc(wei*sizeof(struct _xiang));
+    for(i=0;i<wei;i++)
         z->can[i]=can[i];
-    x->zhi = (void *)z; 
+    x->data = (void *)z; 
     return x;
 }
 
@@ -65,27 +67,54 @@ ju newfa(size_t chang, xiang* lie) {
 
 double getshu(xiang x) {
     assert(x->lei == SHU);
-    return *(double *)(x->zhi);
+    return *(double *)(x->data);
 }
 
 str getming(xiang x) {
     assert(x->lei == FU || x->lei==BIAN || x->lei==ZU);
     if(x->lei==ZU) {
-        zu z = (zu)x->zhi;
+        zu z = (zu)x->data;
         return (str)z->ming;
     } else
-        return (str)x->zhi;
+        return (str)x->data;
 }
 
-size_t getzhi(xiang x) {
+//合一.2.1.
+xiang getzhi(xiang b) {
+    assert(b->lei==BIAN);
+    return b->zhi;
+}
+
+//合一.2.1.1.
+bool isbangdin(xiang b) {
+    assert(b->lei==BIAN);
+    return getzhi(b) != NULL;
+}
+
+void bangdin(xiang b, xiang z) {
+    assert(b->lei==BIAN);
+    assert(!isbangdin(b));
+    b -> zhi = z;
+    if(z->lei==BIAN) //2.2.
+        z->zhi=b;
+}
+
+void unbangdin(xiang b) {
+    assert(b->lei==BIAN);
+    b -> zhi = NULL;
+}
+
+//合一.2.1.1.
+
+size_t getwei(xiang x) {
     assert(x->lei == ZU);
-    zu z = (zu)x->zhi;
-    return z->zhi;
+    zu z = (zu)x->data;
+    return z->wei;
 }
 
 xiang* getcan(xiang x) {
     assert(x->lei == ZU);
-    zu z = (zu)x->zhi;
+    zu z = (zu)x->data;
     return z->can;
 }
 
@@ -109,8 +138,8 @@ size_t xianghash(xiang x) {
         case BIAN:
             return strhash(getming(x));
         case ZU:
-            h = strhash(getming(x)) + getzhi(x);
-            for(i=0;i<getzhi(x);i++)
+            h = strhash(getming(x)) + getwei(x);
+            for(i=0;i<getwei(x);i++)
                 h+=xianghash(getcan(x)[i]);
             return h;
     }
@@ -142,3 +171,54 @@ size_t juhash(ju j) {
     }
     assert(-1);
 }
+
+// 合一
+bool ismingeq(xiang x1, xiang x2) {
+    assert(x1->lei==FU || x1->lei==BIAN || x1->lei==ZU);
+    assert(x2->lei==FU || x2->lei==BIAN || x2->lei==ZU);
+    return wcscmp(getming(x1), getming(x2)) == 0;
+}
+bool unify_xiang(xiang x1, xiang x2) {
+    int i;
+    // 0.合一的交換性
+    // 合一的交換性使 x1 及 x2 的順序不重要。
+    // 只列舉可合一的情形，其它情形均不可合一
+        
+    switch(x1->lei) {
+    case SHU://0.1
+        switch(x2->lei) {
+        case SHU:
+            return getshu(x1)==getshu(x2);
+        case BIAN: //2.1
+            return unify_xiang(x2, x1); 
+        }
+        break;
+    case FU:
+        switch(x2->lei) { 
+        case FU:
+            return wcscmp(getming(x1), getming(x2)) == 0;
+        case BIAN: //2.1
+            return unify_xiang(x2, x1); 
+        }
+        break;
+    case BIAN: 
+        if(!isbangdin(x1)) { //2.1.
+            bangdin(x1, x2);
+            return true;
+        } else //2.3.
+            return unify_xiang(getzhi(x1), x2);
+        break;
+    case ZU:
+        if( x2->lei==ZU 
+         && ismingeq(x1, x2)
+         && getwei(x1) == getwei(x2)) {
+            for(i=0;i<getwei(x1);i++) {
+                if(!unify_xiang(getcan(x1)[i], getcan(x2)[i]))
+                   return false; 
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
