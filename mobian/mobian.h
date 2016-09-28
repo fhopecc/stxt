@@ -44,11 +44,25 @@ typedef struct _zu {
     xiangs can; // 參 
 } * zu;
 
+/* 2.1. */
 typedef struct _ju {
     xin xin;    
     size_t chang;  //長，表示句子的項數，若為法，則第一個項是頭
-    xiang* lie; //列，表示句子的項陣列。
+    xiangs lie; //列，表示句子的項陣列。
 } * ju;
+
+/* 句鏈 */
+typedef struct _jus { //因為詞的句集合，僅由定義的先後逐筆核對，故以鏈實作。
+    ju ju;
+    struct _jus *next;
+} * jus;
+
+/* 詞 */
+typedef struct _ci { //2.3.2
+    str ming;
+    size_t wei;
+    jus jus;
+} * ci;
 
 // 建立項
 xiang newshu(double shu); 
@@ -71,10 +85,6 @@ xiang newzu(str ming, size_t wei, xiangs can);
 size_t getwei(xiang x); //1.1.
 xiangs getcan(xiang x); //1.
 
-// 建立句
-ju newshi(size_t chang, xiang* lie);
-ju newfa(size_t chang, xiang* lie);
-
 // 存取句屬性
 double getchang(ju j);
 xiangs getlie(ju j);
@@ -82,11 +92,15 @@ xiangs getlie(ju j);
 // 以名判斷元是否存在
 bool has_yuan(str ming); 
 
-// 加入實，擴增謂的定義
-bool add_shi(str ming, size_t chang, xiang* can); 
+/* 句 */
+void newshi(xiang x); //2.1.
+void newfa(xiang tou, size_t chang, xiangs ti); //2.2.
 
-// 實是否存在，紀錄是否存在謂
-bool has_shi(str ming, size_t chang, xiang* can); 
+/* 庫 */
+void add(ju j);
+
+/* 詞 */
+ci getci(str ming, size_t wei); //2.3.2
 
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);

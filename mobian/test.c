@@ -19,30 +19,6 @@ void test_object(void) {
     assert(getwei(x)==3);
     assert(getcan(x)[2]->lei==SHU);
     assert(wcscmp(L"男", getming(getcan(x)[1]))==0);
-
-
-    ju j = newshi(3,(xiang[3]){newfu(L"張簡稜剛"), newfu(L"男"), newshu(1979)});
-    assert(getchang(j)==3);
-    assert(getming(getlie(j)[1])==L"男");
-    assert(getlie(j)[1]->lei==FU);
-    assert(getshu(getlie(j)[2])==1979);
-}
-
-void test_hash() {
-    assert(xianghash(newshu(1979))==1979);
-    assert(xianghash(newshu(181.3))==181);
-    assert(xianghash(newshu(-1457))==-1457);
-    assert(strhash(L"張簡稜剛")==-492411665);
-    assert(xianghash(newfu(L"張簡稜剛"))==-492411665);
-    assert(-488049750== 
-            xianghash(newzu(L"職員", 3, (xiang[3]){ newfu(L"張簡稜剛")
-                                                  , newfu(L"男")
-                                                  , newshu(1979)})));
-    assert(-492379676==
-                 juhash(newshi(3, (xiang[3])
-                                { newfu(L"張簡稜剛")
-                                , newfu(L"男")
-                                , newshu(1979)})));
 }
 
 /* 合一 */
@@ -110,8 +86,13 @@ void test_unify_xiang() {
 
 }
 
-int main(void) {
+void test_wen() {
+    add(newshi(newfu(L"墨子又稱墨翟")));
+    assert(wen((xiang[1]){newfu(L"墨子又稱墨翟")}));
+}
+
+int main() {
     test_object();
-    test_hash();
     test_unify_xiang();
+    test_wen();
 }
