@@ -26,7 +26,10 @@
 typedef wchar_t * str;
 
 typedef enum { BIAN, SHU, FU, ZU} lei; //類為項的類別名
-typedef enum { SHI, FA } xin; //型為句的分類
+typedef enum { SHI, 
+               FA, 
+               WEN //2.4.1.問句 
+             } xin; //型為句的分類
 
 /* 項 */
 typedef struct _xiang {
@@ -93,8 +96,9 @@ xiangs getlie(ju j);
 bool has_yuan(str ming); 
 
 /* 句 */
-void newshi(xiang x); //2.1.
-void newfa(xiang tou, size_t chang, xiangs ti); //2.2.
+ju newshi(xiang x); //2.1.
+ju newfa(xiang tou, size_t chang, xiangs ti); //2.2.
+ju newwen(size_t chang, xiangs zi); //2.4.1.問句
 
 /* 庫 */
 void add(ju j);

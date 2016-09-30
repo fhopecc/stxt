@@ -45,8 +45,15 @@ xiang newzu(str ming, size_t wei, xiang* can) {
     return x;
 }
 
-// 建立句
-ju newshi(size_t chang, xiang* lie) {
+/* 句 */
+ju newshi(xiang x) {
+    ju j = newwen(1, xs);
+    xiang xs[1]={x};
+    j->xin = SHI;
+    return j;
+}
+
+ju newwen(size_t chang, xiangs xs) {
     int i;
     ju j = (ju)malloc(sizeof(struct _ju));
     j->chang = chang;
@@ -55,12 +62,17 @@ ju newshi(size_t chang, xiang* lie) {
     j->lie = (xiang*)malloc(chang*sizeof(struct _xiang));
     for(i=0;i<chang;i++)
         j->lie[i] = lie[i];
-    j->xin = SHI;
+    j->xin = WEN;
     return j;
 }
  
-ju newfa(size_t chang, xiang* lie) {
-    ju j = newshi(chang, lie);
+ju newfa(xiang tou, size_t chang, xiangs ti) {
+    int i;
+    xiang lie[chang+1]={xiang}; //把頭加進去
+    for(i=0;i<chang;i++) {
+        lie[i+1]=ti[i];
+    }
+    ju j = newwen(chang, lie);
     j->xin = FA;
     return j;
 }
