@@ -83,16 +83,30 @@ void test_unify_xiang() {
     b2 = newbian(L"@乙");
     x2 = newzu(L"職員", 3, (xiang[3]){b1, newfu(L"科長"), b2});
     assert(!unify_xiang(x1,x2));
-
 }
 
+void test_ju() {
+    //2.1.1.
+    assert(wcscmp(getming(gettou(newshi(newfu(L"花紅")))),L"花紅")==0);
+    //2.2.1.
+    //祖孫(@祖, @孫) :- 父子(@祖, @父), 父子(@父, @孫).
+    ju j =newfa(newzu(L"祖孫", 2, (xiang[2]){newbian(L"@祖"), newbian(L"@孫")}), 2
+         ,(xiang[2]){newzu(L"父子", 2, (xiang[2]){newbian(L"@祖"), newbian(L"@父")})
+         ,newzu(L"父子", 2, (xiang[2]){newbian(L"@父"), newbian(L"@孫")})
+         });
+    assert(getchang(j)==2);
+    assert(wcscmp(getming(getzi(j, 0)),L"父子")==0);
+
+}
 void test_wen() {
-    add(newshi(newfu(L"墨子又稱墨翟")));
-    assert(wen((xiang[1]){newfu(L"墨子又稱墨翟")}));
+    //add(newshi(newfu(L"墨子又稱墨翟")));
+    //assert(wen((xiang[1]){newfu(L"墨子又稱墨翟")}));
 }
+
 
 int main() {
     test_object();
     test_unify_xiang();
+    test_ju();
     test_wen();
 }

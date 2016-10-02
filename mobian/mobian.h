@@ -88,17 +88,19 @@ xiang newzu(str ming, size_t wei, xiangs can);
 size_t getwei(xiang x); //1.1.
 xiangs getcan(xiang x); //1.
 
-// 存取句屬性
-double getchang(ju j);
-xiangs getlie(ju j);
-
 // 以名判斷元是否存在
 bool has_yuan(str ming); 
 
 /* 句 */
-ju newshi(xiang x); //2.1.
+ju newshi(xiang tou); //2.1.
 ju newfa(xiang tou, size_t chang, xiangs ti); //2.2.
 ju newwen(size_t chang, xiangs zi); //2.4.1.問句
+
+// 存取句屬性
+size_t getchang(ju j);
+xiang gettou(ju j);
+xiang getzi(ju j, size_t i);
+xiangs getlie(ju j);
 
 /* 庫 */
 void add(ju j);

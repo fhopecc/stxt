@@ -4,6 +4,9 @@
 #include <assert.h>
 #include "mobian.h"
 
+/* 庫 */
+jus ku;
+
 // 建立項
 xiang newshu(double shu) {
     xiang x = (xiang)malloc(sizeof(struct _xiang));
@@ -47,8 +50,8 @@ xiang newzu(str ming, size_t wei, xiang* can) {
 
 /* 句 */
 ju newshi(xiang x) {
-    ju j = newwen(1, xs);
     xiang xs[1]={x};
+    ju j = newwen(1, xs);
     j->xin = SHI;
     return j;
 }
@@ -61,20 +64,48 @@ ju newwen(size_t chang, xiangs xs) {
     // 其變數生命周期失效，記憶體區塊會不可用。
     j->lie = (xiang*)malloc(chang*sizeof(struct _xiang));
     for(i=0;i<chang;i++)
-        j->lie[i] = lie[i];
+        j->lie[i] = xs[i];
     j->xin = WEN;
     return j;
 }
  
 ju newfa(xiang tou, size_t chang, xiangs ti) {
     int i;
-    xiang lie[chang+1]={xiang}; //把頭加進去
+    xiang lie[chang+1]; 
+    lie[0] = tou; //把頭加進去
     for(i=0;i<chang;i++) {
         lie[i+1]=ti[i];
     }
     ju j = newwen(chang, lie);
     j->xin = FA;
     return j;
+}
+
+xiang gettou(ju j) {
+    assert(j->xin==SHI || j->xin==FA);
+    return j->lie[0];
+}
+
+size_t getchang(ju j) {
+    return j->chang;
+}
+
+xiang getzi(ju j, size_t i) {
+    switch(j->xin) {
+    case FA:
+        return j->lie[i+1];
+    case WEN:
+        return j->lie[i];
+    }
+    assert(false); // xin must be in FA or WEN
+}
+
+xiang* getlie(ju j) {
+    return j->lie;
+}
+
+xin getxin(ju j) {
+    return j->xin;
 }
 
 double getshu(xiang x) {
@@ -156,19 +187,6 @@ size_t xianghash(xiang x) {
             return h;
     }
     assert(-1);
-}
-
-// 存取句屬性
-double getchang(ju j) {
-    return j->chang;
-}
-
-xiang* getlie(ju j) {
-    return j->lie;
-}
-
-xin getxin(ju j) {
-    return j->xin;
 }
 
 size_t juhash(ju j) {
