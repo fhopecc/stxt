@@ -1,29 +1,35 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <time.h>
+#include "date.h"
 
 void genmobile();
 void genphone();
-time_t parse_time(const char* input);
+void gendates(date d1, date d2);
 
 int 
 main(int argc, char **argv) {
-    char c;
+    char c, output[9];
     int r;
-    time_t sdate;
-    time_t edate;
-    struct tm bdtm; // broken down time
+    date sdate = NULL;
+    date edate = NULL; 
      
     while ((c = getopt(argc, argv, "s:e:")) != -1) {
         switch(c){
             case 's':
-                sdate = parse_time(optarg);
-                printf("date is %d",sdate);
+                sdate = dateparse(optarg);
+                printf("sdate->year %d ->mon %d ->mday %d\n"
+                      , sdate->tm_year
+                      , sdate->tm_mon
+                      , sdate->tm_mday);
                 break;
             case 'e':
-                edate = parse_time(optarg);
-                printf("date is %s", ctime(&edate));
+                edate = dateparse(optarg);
+                printf("edate->year %d ->mon %d ->mday %d\n"
+                      , edate->tm_year
+                      , edate->tm_mon
+                      , edate->tm_mday);
                 break;
             case '?':
                 if (optopt == 's')
@@ -42,27 +48,28 @@ main(int argc, char **argv) {
             default:
                 abort();
             }
-
     }
+    if(sdate!=NULL && edate!=NULL)
+        gendates(sdate, edate);
 }
 
-time_t parse_time(const char * input) {
-    int mday, mon, year; 
-    time_t t;
-    struct tm * bdtm;
-    t = time(NULL);
-    bdtm = localtime(&t);
-    printf(asctime(bdtm));
-    sscanf(input, "%d-%d-%d", &year, &mon, &mday);
-    bdtm->tm_mday = mday;
-    printf("mday is %d", mday);
-    bdtm->tm_mon = mon;
-    printf("mon is %d", mon);
-    bdtm->tm_year = year;
-    printf("year is %d", bdtm->tm_year);
-    t = mktime(bdtm);
-    printf("time_t is %d", t);
-    return t;
+void gendates(date d1, date d2) {
+    FILE *f;
+    int i, j;
+    printf("gendates start:\n");
+
+    f = fopen("dates", "w");
+    
+    if(f == NULL){
+        fprintf(stderr, "can't open file:[dates]");
+        exit(1);
+    }
+    
+    do {
+        fprintf(f, "%s\n", strdate(d1));
+        next_day(d1);
+    } while(datecmp(d1, d2)<=0);
+    fclose(f);
 }
 
 void genmobile() {
