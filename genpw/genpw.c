@@ -6,10 +6,9 @@
 #include <unistd.h>
 #include "date.h"
 
-void genmobile();
-void genphone();
-void gendates(date d1, date d2);
 void prefixnums(const char * prefix, int digits);
+void genmobile();
+void gendates(date d1, date d2);
 
 int 
 main(int argc, char **argv) {
