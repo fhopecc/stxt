@@ -1,12 +1,15 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 #include <unistd.h>
 #include "date.h"
 
 void genmobile();
 void genphone();
 void gendates(date d1, date d2);
+void prefixnums(const char * prefix, int digits);
 
 int 
 main(int argc, char **argv) {
@@ -14,22 +17,22 @@ main(int argc, char **argv) {
     int r;
     date sdate = NULL;
     date edate = NULL; 
+    char *prefix = NULL;
+    int digits;
      
-    while ((c = getopt(argc, argv, "s:e:")) != -1) {
+    while ((c = getopt(argc, argv, "p:d:s:e:")) != -1) {
         switch(c){
             case 's':
                 sdate = dateparse(optarg);
-                printf("sdate->year %d ->mon %d ->mday %d\n"
-                      , sdate->tm_year
-                      , sdate->tm_mon
-                      , sdate->tm_mday);
                 break;
             case 'e':
                 edate = dateparse(optarg);
-                printf("edate->year %d ->mon %d ->mday %d\n"
-                      , edate->tm_year
-                      , edate->tm_mon
-                      , edate->tm_mday);
+                break;
+            case 'p':
+                prefix = optarg;
+                break;
+            case 'd':
+                sscanf(optarg, "%d", &digits);
                 break;
             case '?':
                 if (optopt == 's')
@@ -51,6 +54,8 @@ main(int argc, char **argv) {
     }
     if(sdate!=NULL && edate!=NULL)
         gendates(sdate, edate);
+    if(prefix!=NULL && digits!=0)
+        prefixnums(prefix, digits);
 }
 
 void gendates(date d1, date d2) {
@@ -70,6 +75,27 @@ void gendates(date d1, date d2) {
         next_day(d1);
     } while(datecmp(d1, d2)<=0);
     fclose(f);
+}
+
+void prefixnums(const char * prefix, int digits) {
+    FILE *f;
+    int i;
+    assert(digits < 100);
+    int fslen = strlen(prefix)+5+1;//format string length
+    char *fmtstr = (char *)malloc(sizeof(char)*fslen);
+    sprintf(fmtstr, "%%s%%%02dd\n", digits);
+    int max = (int)pow(10, digits) - 1;
+    printf("Phonenums prefix is %s and digits is %d.\n", prefix, digits);
+
+    f = fopen("phonenums", "w");
+    if(f == NULL){
+        fprintf(stderr, "can't open file:[phonenums]");
+        exit(1);
+    }
+    for(i=0;i<=max;i++)
+        fprintf(f, fmtstr, prefix, i);
+    fclose(f);
+    puts("Create phonenums ok.\n");
 }
 
 void genmobile() {
@@ -160,18 +186,4 @@ void genmobile() {
     fclose(f);
 }
 
-void prefixnum(const char * prefix) {
-    FILE *f;
-    int i;
-    
-    f = fopen("phonenums", "w");
-    
-    if(f == NULL){
-        fprintf(stderr, "can't open file:[phonenums]");
-        exit(1);
-    }
 
-    for(i=0;i<=999999;i++)
-        fprintf(f, "038%06d\n", i);
-    fclose(f);
-}
