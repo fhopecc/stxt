@@ -19,7 +19,7 @@ main(int argc, char **argv) {
     char *prefix = NULL;
     int digits;
      
-    while ((c = getopt(argc, argv, "p:d:s:e:")) != -1) {
+    while ((c = getopt(argc, argv, "mp:d:s:e:")) != -1) {
         switch(c){
             case 's':
                 sdate = dateparse(optarg);
@@ -32,6 +32,9 @@ main(int argc, char **argv) {
                 break;
             case 'd':
                 sscanf(optarg, "%d", &digits);
+                break;
+            case 'm':
+                genmobile();
                 break;
             case '?':
                 if (optopt == 's')
