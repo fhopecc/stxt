@@ -122,6 +122,34 @@ str getming(xiang x) {
         return (str)x->data;
 }
 
+bool xiangeq(xiang x1, xiang x2) {
+    int i;
+    if(x1->lei != x2->lei) return false;
+    switch(x1->lei) {
+    case SHU:
+        return getshu(x1)==getshu(x2);
+    case FU:
+    case BIAN:
+        return streq(getming(x1), getming(x2));
+    case ZU:
+        if(getwei(x1)!=getwei(x2)) return false;
+        for(i=0;i<getwei(x1);i++) 
+            if(!xiangeq(getcan(x1)[i], getcan(x2)[i])) return false;
+        return true;
+   }
+   return false;
+}
+
+bool jueq(ju j1, ju j2) {
+    int i;
+    if(j1->xin != j2->xin) return false;
+    if(j1->chang != j2->chang) return false;
+    for(i=0;i<j1->chang;i++)
+        if(!xiangeq(j1->lie[i], j2->lie[i]))
+            return false;
+    return true;
+}
+
 //合一.2.1.
 xiang getzhi(xiang b) {
     assert(b->lei==BIAN);
@@ -252,3 +280,44 @@ bool unify_xiang(xiang x1, xiang x2) {
     return false;
 }
 
+// 2.3.2.詞
+ci newci(str ming, size_t wei) {
+    ci c = (ci)malloc(sizeof(struct _ci));
+    c->ming = ming;
+    c->wei = wei;
+    c->jus = NULL;    
+    return c;
+}
+
+jus newjus(ju j) {
+    jus js = (jus)malloc(sizeof(struct _jus));
+    js->ju = j;
+    js->next = NULL;
+    return js;
+}
+
+void addju(ci c, ju j) {
+    jus tail;
+    if(c->jus == NULL) {
+        c->jus = newjus(j);
+    } else {
+        tail = c->jus;
+        while(tail->next) tail=tail->next;
+        tail->next = newjus(j);
+    }
+}
+
+bool hasju(ci c, ju j) {
+    assert(c->jus != NULL);
+    jus js = c->jus;
+    do {
+        if(jueq(js->ju, j))
+            return true;
+        js = js->next;
+    } while(js);
+    return false;
+}
+
+bool streq(const str s1, const str s2) {
+    return wcscmp(s1, s2)==0;
+}

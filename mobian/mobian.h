@@ -106,7 +106,9 @@ xiangs getlie(ju j);
 void add(ju j);
 
 /* 詞 */
-ci getci(str ming, size_t wei); //2.3.2
+ci newci(str ming, size_t wei);
+void addju(ci c, ju j);
+bool hasju(ci c, ju j);
 
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);
@@ -119,6 +121,9 @@ typedef enum {
 typedef enum {
     ADD_EXISTING_XIANG //試圖加入已存在的項至庫
 } exception;
+
+
+bool streq(const str s1, const str s2);
 
 /* 印出錯誤，並結束程式 */
 void reaise_error(error e);

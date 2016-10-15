@@ -4,12 +4,25 @@
 #include <assert.h>
 #include "mobian.h"
 
-void test_object(void) {
+void test_ci();
+void test_unify_xiang();
+void test_ju();
+void test_object();
+
+int main() {
+    test_object();
+    test_unify_xiang();
+    test_ju();
+    test_ci();
+}
+
+
+void test_object() {
     size_t h;
     xiang x = newshu(1979);
     assert(getshu(x)==1979);   
     x = newfu(L"張簡稜剛");
-    assert(wcscmp(getming(x), L"張簡稜剛")==0);
+    assert(streq(getming(x), L"張簡稜剛"));
     x = newbian(L"@甲");
     assert(wcscmp(getming(x), L"@甲")==0);
     /* 組 */
@@ -98,15 +111,13 @@ void test_ju() {
     assert(wcscmp(getming(getzi(j, 0)),L"父子")==0);
 
 }
-void test_wen() {
-    //add(newshi(newfu(L"墨子又稱墨翟")));
-    //assert(wen((xiang[1]){newfu(L"墨子又稱墨翟")}));
+
+void test_ci() {
+    ci c = newci(L"墨子又稱墨翟", 0);
+    addju(c, newshi(newfu(L"墨子又稱墨翟")));
+    assert(hasju(c, newshi(newfu(L"墨子又稱墨翟"))));
+    assert(!hasju(c, newshi(newfu(L"墨子又稱孔子"))));
 }
 
 
-int main() {
-    test_object();
-    test_unify_xiang();
-    test_ju();
-    test_wen();
-}
+
