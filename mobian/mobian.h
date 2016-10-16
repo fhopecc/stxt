@@ -1,23 +1,9 @@
 /* mobian.h
  *
- * 墨辨的基礎類型定義、錯誤處理
- * 
- * 
- * 墨辨中最基本的物件稱為項，有以下幾類：
- *
-*
- * 組是一種複合物件，由其它項所組成，
- * 實作以名、枝及參數陣列來表示，
- * 枝指此謂的參數個數，
- * 而查詢上，以名及枝來找尋所有符合的參數集合。
- *
- * 實作上，所有的複合結構都是指標，並均動態配置物件。
- *
- * 使用者在查詢知識庫，會以名載入元或謂，
- *
  * 稜於花蓮美崙
  * 20160819 週五
  * 20160913 週二
+ * 20161016 週日
  *
  */
 #include <wchar.h>
@@ -111,34 +97,21 @@ ju newwen(size_t chang, xiangs zi); //2.4.1.問句
 size_t getchang(ju j);
 xiang gettou(ju j);
 xiang getzi(ju j, size_t i);
+xiang getcheng(ju j);
 xiangs getlie(ju j);
+size_t juhash(ju j);
 
 /* 詞 */
 ci newci(str ming, size_t wei);
-error addju(ci c, ju j);
-bool hasju(ci c, ju j);
+error addju2ci(ci c, ju j);
+bool cihasju(ci c, ju j);
 
 /* 材 */
 cai newcai();
-void addci(cai cai, ci c);
+void addju(cai cai, ju j);
+bool hasju(cai cai, ju j);
 
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);
 bool unify_xiang(xiang x1, xiang x2);
-
-typedef enum {
-    ALLOCATION_MEMROY_FAILED
-} error; //錯誤代碼
-
-typedef enum {
-    ADD_EXISTING_XIANG //試圖加入已存在的項至庫
-} exception;
-
-
 bool streq(const str s1, const str s2);
-
-/* 印出錯誤，並結束程式 */
-void reaise_error(error e);
-void raise_exception(exception e);
-
-exception last_exception;

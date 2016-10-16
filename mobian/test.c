@@ -15,6 +15,7 @@ int main() {
     test_unify_xiang();
     test_ju();
     test_ci();
+    test_cai();
 }
 
 void test_object() {
@@ -108,23 +109,26 @@ void test_ju() {
          ,newzu(L"父子", 2, (xiang[2]){newbian(L"@父"), newbian(L"@孫")})
          });
     assert(getchang(j)==2);
-    assert(wcscmp(getming(getzi(j, 0)),L"父子")==0);
-
+    assert(streq(getming(getzi(j, 0)),L"父子"));
 }
 
 void test_ci() {
     ci c = newci(L"花紅", 0);
-    addju(c, newshi(newfu(L"花紅")));
-    addju(c, newshi(newfu(L"柳綠")));
-    assert(hasju(c, newshi(newfu(L"花紅"))));
-    assert(!hasju(c, newshi(newfu(L"花綠"))));
-    assert(hasju(c, newshi(newfu(L"柳綠"))));
-
+    addju2ci(c, newshi(newfu(L"花紅")));
+    addju2ci(c, newshi(newfu(L"柳綠")));
+    assert(cihasju(c, newshi(newfu(L"花紅"))));
+    assert(!cihasju(c, newshi(newfu(L"花綠"))));
+    assert(cihasju(c, newshi(newfu(L"柳綠"))));
 }
 
 void test_cai() {
     cai c = newcai();
-    ci ci = newci(L"花紅", 0);
-    addju(c, newshi(newfu(L"花紅")));
-    addci(c, ci); 
+    assert(c->size == 1024);
+    addju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"金水"), newfu(L"稜剛")})));
+    addju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"稜剛"), newfu(L"弼叡")})));
+    addju(c, newfa(newzu(L"祖孫", 2, (xiang[2]){newbian(L"@祖"), newbian(L"@孫")}), 2
+         ,(xiang[2]){newzu(L"父子", 2, (xiang[2]){newbian(L"@祖"), newbian(L"@父")})
+         ,newzu(L"父子", 2, (xiang[2]){newbian(L"@父"), newbian(L"@孫")})
+         }));
+    assert(hasju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"稜剛"), newfu(L"弼叡")}))));
 }

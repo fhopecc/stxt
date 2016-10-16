@@ -86,6 +86,10 @@ xiang gettou(ju j) {
     return j->lie[0];
 }
 
+xiang getcheng(ju j) {
+    return gettou(j);
+}
+
 size_t getchang(ju j) {
     return j->chang;
 }
@@ -217,19 +221,6 @@ size_t xianghash(xiang x) {
     assert(-1);
 }
 
-size_t juhash(ju j) {
-    size_t i, h;
-    switch(j->xin) {
-        case SHI:
-        case FA:
-            h = getxin(j) + getchang(j);
-            for(i=0;i<getchang(j);i++)
-                h+=xianghash(getlie(j)[i]);
-            return h;
-    }
-    assert(-1);
-}
-
 // 合一
 bool ismingeq(xiang x1, xiang x2) {
     assert(x1->lei==FU || x1->lei==BIAN || x1->lei==ZU);
@@ -296,18 +287,18 @@ jus newjus(ju j) {
     return js;
 }
 
-error addju(ci c, ju j) {
-    jus tail;
+error addju2ci(ci c, ju j) {
+    jus node;
     if(c->jus == NULL) {
         c->jus = newjus(j);
     } else {
-        tail = c->jus;
-        while(tail->next) tail=tail->next;
-        tail->next = newjus(j);
+        node = c->jus;
+        while(node->next) node=node->next;
+        node->next = newjus(j);
     }
 }
 
-bool hasju(ci c, ju j) {
+bool cihasju(ci c, ju j) {
     assert(c->jus != NULL);
     jus js = c->jus;
     do {
@@ -315,6 +306,45 @@ bool hasju(ci c, ju j) {
             return true;
         js = js->next;
     } while(js);
+    return false;
+}
+
+cai newcai() {
+    int i;
+    cai c = (cai)malloc(sizeof(struct _cai));
+    ci *cis = (ci *)malloc(sizeof(struct _ci)*1024);
+    c->size = 1024;
+    for(i=0;i<c->size;i++)
+        cis[i]=NULL;
+    c->cis = cis;
+    return c;
+}
+
+size_t juhash(ju j) {
+   xiang x = getcheng(j);  
+   return strhash(getming(x)) + getwei(x);
+}
+
+void addju(cai c, ju j) {
+    // 動態陣列測試，尚未完成  
+    xiang x;
+    int i = juhash(j) % c->size;
+    ci ci = c->cis[i];
+    if(ci==NULL) {
+        xiang x = getcheng(j);
+        ci = newci(getming(x), getwei(x));
+        addju2ci(ci, j); 
+        c->cis[i] = ci;
+    } else 
+        addju2ci(ci, j);
+}
+
+bool hasju(cai c, ju j) {
+    int i = juhash(j) % c->size;
+    ci ci = c->cis[i];
+    if(ci!=NULL) {
+        return cihasju(ci, j);
+    }
     return false;
 }
 
