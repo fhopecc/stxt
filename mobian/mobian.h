@@ -23,6 +23,11 @@
 #include <wchar.h>
 #include <stdbool.h>
 
+typedef enum {
+    OK,
+    MEMORY_OVERFLOW
+} error;
+
 typedef wchar_t * str;
 
 typedef enum { BIAN, SHU, FU, ZU} lei; //類為項的類別名
@@ -67,6 +72,12 @@ typedef struct _ci { //2.3.2
     jus jus;
 } * ci;
 
+/* 材 */
+typedef struct _cai {
+    size_t size;
+    ci *cis;
+} * cai;
+
 // 建立項
 xiang newshu(double shu); 
 xiang newfu(str fu); 
@@ -102,13 +113,14 @@ xiang gettou(ju j);
 xiang getzi(ju j, size_t i);
 xiangs getlie(ju j);
 
-/* 庫 */
-void add(ju j);
-
 /* 詞 */
 ci newci(str ming, size_t wei);
-void addju(ci c, ju j);
+error addju(ci c, ju j);
 bool hasju(ci c, ju j);
+
+/* 材 */
+cai newcai();
+void addci(cai cai, ci c);
 
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);

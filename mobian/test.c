@@ -4,10 +4,11 @@
 #include <assert.h>
 #include "mobian.h"
 
-void test_ci();
-void test_unify_xiang();
-void test_ju();
 void test_object();
+void test_ju();
+void test_ci();
+void test_cai();
+void test_unify_xiang();
 
 int main() {
     test_object();
@@ -15,7 +16,6 @@ int main() {
     test_ju();
     test_ci();
 }
-
 
 void test_object() {
     size_t h;
@@ -113,11 +113,18 @@ void test_ju() {
 }
 
 void test_ci() {
-    ci c = newci(L"墨子又稱墨翟", 0);
-    addju(c, newshi(newfu(L"墨子又稱墨翟")));
-    assert(hasju(c, newshi(newfu(L"墨子又稱墨翟"))));
-    assert(!hasju(c, newshi(newfu(L"墨子又稱孔子"))));
+    ci c = newci(L"花紅", 0);
+    addju(c, newshi(newfu(L"花紅")));
+    addju(c, newshi(newfu(L"柳綠")));
+    assert(hasju(c, newshi(newfu(L"花紅"))));
+    assert(!hasju(c, newshi(newfu(L"花綠"))));
+    assert(hasju(c, newshi(newfu(L"柳綠"))));
+
 }
 
-
-
+void test_cai() {
+    cai c = newcai();
+    ci ci = newci(L"花紅", 0);
+    addju(c, newshi(newfu(L"花紅")));
+    addci(c, ci); 
+}

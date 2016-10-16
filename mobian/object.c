@@ -296,7 +296,7 @@ jus newjus(ju j) {
     return js;
 }
 
-void addju(ci c, ju j) {
+error addju(ci c, ju j) {
     jus tail;
     if(c->jus == NULL) {
         c->jus = newjus(j);
