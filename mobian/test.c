@@ -123,7 +123,6 @@ void test_ci() {
 
 void test_cai() {
     cai c = newcai();
-    assert(c->size == 1024);
     addju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"金水"), newfu(L"稜剛")})));
     addju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"稜剛"), newfu(L"弼叡")})));
     addju(c, newfa(newzu(L"祖孫", 2, (xiang[2]){newbian(L"@祖"), newbian(L"@孫")}), 2
@@ -131,4 +130,5 @@ void test_cai() {
          ,newzu(L"父子", 2, (xiang[2]){newbian(L"@父"), newbian(L"@孫")})
          }));
     assert(hasju(c, newshi(newzu(L"父子", 2, (xiang[2]){newfu(L"稜剛"), newfu(L"弼叡")}))));
+    assert(!hasju(c, newshi(newzu(L"父女", 2, (xiang[2]){newfu(L"稜剛"), newfu(L"弼叡")}))));
 }

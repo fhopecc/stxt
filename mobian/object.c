@@ -309,6 +309,7 @@ bool cihasju(ci c, ju j) {
     return false;
 }
 
+/* 2.3.材 */
 cai newcai() {
     int i;
     cai c = (cai)malloc(sizeof(struct _cai));
