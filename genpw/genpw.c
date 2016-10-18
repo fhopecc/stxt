@@ -79,6 +79,13 @@ void gendates(date d1, date d2) {
     fclose(f);
 }
 
+void fixednums(int digits) {
+    FILE *f;
+    int i;
+    assert(digits < 100);
+
+}
+
 void prefixnums(const char * prefix, int digits) {
     FILE *f;
     int i;
