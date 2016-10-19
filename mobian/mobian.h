@@ -111,6 +111,9 @@ cai newcai();
 void addju(cai cai, ju j);
 bool hasju(cai cai, ju j);
 
+/* 2.3.2.慮：從材取出符合特定項的詞 */
+ci lu(cai c, xiang x);
+
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);
 bool unify_xiang(xiang x1, xiang x2);

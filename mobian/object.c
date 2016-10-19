@@ -349,6 +349,15 @@ bool hasju(cai c, ju j) {
     return false;
 }
 
+size_t cihash(cai c, xiang x) {
+    return (strhash(getming(x)) + getwei(x)) % c->size;
+}
+
+ci lu(cai c, xiang x) {
+    int i = cihash(c, x);
+    return c->cis[i];
+}
+
 bool streq(const str s1, const str s2) {
     return wcscmp(s1, s2)==0;
 }
