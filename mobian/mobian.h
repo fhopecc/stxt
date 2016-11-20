@@ -61,6 +61,7 @@ typedef struct _ci { //2.3.2
 /* 材 */
 typedef struct _cai {
     size_t size;
+    size_t capacity;
     ci *cis;
 } * cai;
 
@@ -105,11 +106,13 @@ size_t juhash(ju j);
 ci newci(str ming, size_t wei);
 error addju2ci(ci c, ju j);
 bool cihasju(ci c, ju j);
+jus getjus(ci);
 
 /* 材 */
 cai newcai();
 void addju(cai cai, ju j);
 bool hasju(cai cai, ju j);
+ci getci(cai cai, str ming, size_t wei);
 
 /* 合一 */
 bool ismingeq(xiang x1, xiang x2);

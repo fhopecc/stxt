@@ -312,13 +312,48 @@ bool cihasju(ci c, ju j) {
 /* 2.3.材 */
 cai newcai() {
     int i;
+    c->capacity = 1024; 
     cai c = (cai)malloc(sizeof(struct _cai));
     ci *cis = (ci *)malloc(sizeof(struct _ci)*1024);
-    c->size = 1024;
-    for(i=0;i<c->size;i++)
+    c->size = 0;
+    for(i=0;i < c->capacity;i++)
         cis[i]=NULL;
     c->cis = cis;
     return c;
+}
+
+//動態陣列
+void extendcai(cai c) {
+    c->capacity *= 1.5; 
+    ci *ocis = c->cis; // old ci
+
+    ci *ncis = (ci *)malloc(sizeof(struct _ci)*c->capacity); // new ci
+    for(i=0; i < c->size;i++) {
+        if(ocis[i] != NULL) {
+            ocis[i];
+        }
+    }
+    free(ocis);    
+}
+
+/* 材以雜湊表實作 */
+/* 材是以名及維作為鍵值，名及維定義一個詞 */
+/* 材是以名及維作為鍵值，名及維定義一個詞 */
+
+size_t findci(cai c, str ming, size_t wei) {
+    size_t i;
+    size_t hash = (strhash(getming(x)) + getwei(x)) % c->capacity;
+    ci ci = c->cis[hash]
+    
+    for(i=0;i < c->capacity;i++) {
+        hash += i;
+        ci = c->cis[hash] 
+        if(ci==NULL)
+            return hash; 
+        if(streq(ci->ming, ming) && ci->wei == wei)
+            return hash;
+    }
+    assert(false);
 }
 
 size_t juhash(ju j) {
@@ -327,9 +362,12 @@ size_t juhash(ju j) {
 }
 
 void addju(cai c, ju j) {
-    // 動態陣列測試，尚未完成  
+    // 動態陣列
+    if(c->size==c->capacity)
+        c = extendcai(c);
+
     xiang x;
-    int i = juhash(j) % c->size;
+    int i = juhash(j) % c->capacity;
     ci ci = c->cis[i];
     if(ci==NULL) {
         xiang x = getcheng(j);
@@ -341,12 +379,16 @@ void addju(cai c, ju j) {
 }
 
 bool hasju(cai c, ju j) {
-    int i = juhash(j) % c->size;
+    int i = juhash(j) % c->capacity;
     ci ci = c->cis[i];
     if(ci!=NULL) {
         return cihasju(ci, j);
     }
     return false;
+}
+
+ci getci(cai c, ju) {
+
 }
 
 bool streq(const str s1, const str s2) {
