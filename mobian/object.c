@@ -387,8 +387,18 @@ bool hasju(cai c, ju j) {
     return false;
 }
 
+<<<<<<< HEAD
 ci getci(cai c, ju) {
 
+=======
+size_t cihash(cai c, xiang x) {
+    return (strhash(getming(x)) + getwei(x)) % c->size;
+}
+
+ci lu(cai c, xiang x) {
+    int i = cihash(c, x);
+    return c->cis[i];
+>>>>>>> 97468cc077a880bb30f19fe794ebd15509824151
 }
 
 bool streq(const str s1, const str s2) {
