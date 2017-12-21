@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh-Hant-TW">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<STYLE TYPE="text/css"> 
+table {
+    border-collapse:collapse;
+}
+table, th, td
+{
+    border: 1px solid black;
+}
+</STYLE>
+<script language="javascript" id="list" src="winners_print.js"></script>
+<script type="text/javascript">
+/* 設定 */
+var rank_texts = ["頭獎"
+                 ,"二獎", "二獎"
+                 ,"三獎", "三獎", "三獎", "三獎", "三獎"
+                 ,"三獎", "三獎", "三獎", "三獎", "三獎"
+                 ,"幸運獎", "幸運獎", "幸運獎", "幸運獎", "幸運獎"
+                 ,"幸運獎", "幸運獎", "幸運獎", "幸運獎", "幸運獎"
+                 ,"備取1" , "備取2", "備取3", "備取4", "備取5"    
+                 ,"備取6" , "備取7", "備取8", "備取9", "備取10"    
+                 ,"備取11" , "備取12", "備取13", "備取14", "備取15"    
+                 ,"備取16" , "備取17", "備取18", "備取19", "備取20"    
+ 
+                 ]
+var stop = false;
+
+function time_text(d)
+{
+    return ""
+          + d.getFullYear() + "年" 
+          + (d.getMonth()+1) + "月" 
+          + d.getDate() + "日" 
+          + d.getHours() + ":" 
+          + d.getMinutes() + ":" 
+          + d.getSeconds()
+}
+
+function get_rank_text(i)
+{
+   return rank_texts[i] 
+}
+
+function make_table_string(l)
+{
+    str = '<table>'
+    for(i=0;i<l.length;i++) {
+        str += '<tr>'
+        str += "<td>" + get_rank_text(i) + "</td>"
+        str += "<td>" + l[i] + "</td>"
+        str += "</tr>"
+    }
+    str += "</table>"
+    return str
+}
+
+function onload()
+{
+    print_winners()
+}
+
+function print_winners()
+{
+    html =  time_text(new Date()) + "抽出得獎名單如下："
+    html += make_table_string(winners)
+    document.getElementById('content').innerHTML = html
+    stop = true
+}
+
+</script>
+</head>
+<body onload="onload()">
+
+<center>
+<img src="hltb_logo_ie.bmp" alt="花蓮縣地方稅務局"/>
+<div style="font-size:26pt;font-weight:bold;">
+<span style="font-family:標楷體">
+106年地價稅如期繳納抽獎活動
+</span></div>
+<!--
+<div id="time">目前時間:<span id="clock"></span></div>
+-->
+<input type="hidden" id="gifts_number" value="4"/><br/>
+<script type="text/javascript">
+function refreshClock()
+{
+    d = new Date()
+    str = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+    document.getElementById('clock').innerHTML = str
+    t=setTimeout("refreshClock()", 1000);
+}
+refreshClock()
+
+</script>
+<center>
+<div id="content" style="font-size:20pt;font-family:標楷體">
+</div>
+</center>
+</body>
+</html>
