@@ -63,3 +63,4 @@ def import_csv(db):
     db.close()
 
 import_xls('ais.db')
+import_csv('ais.db')
