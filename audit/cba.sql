@@ -91,3 +91,29 @@ from 總分類帳
 where 摘要 like '%我和我的%')
 and a.傳票編號 = b.傳票編號
 and a.金額=b.支付金額
+--預算明細分類帳去除重覆
+--1.建立去除重覆紀錄之暫存表
+create table temp as 
+select distinct * from 預算明細分類帳
+--2.刪除舊表
+drop table 預算明細分類帳
+--3.將暫存表命名為預算明細分類帳
+alter table temp rename to 預算明細分類帳
+--經費類科目預算執行數
+--要取借貸淨值係貸方有可能作轉正
+--如家庭教育中心「中央補助家庭教育業務」尚未核撥前，
+--會先以「推展家庭教育」先支臨時人員1至4月之薪水，
+--再於5月轉正至補助款科目
+-- 1070723
+with d as (select 預算科目名稱, sum(金額) 金額
+  from 預算明細分類帳
+  where 會計分類='經費類'
+  and 借貸='借'
+  group by 預算科目名稱), 
+c as (select 預算科目名稱, sum(金額) 金額
+  from 預算明細分類帳
+  where 會計分類='經費類'
+  and 借貸='貸'
+  group by 預算科目名稱)
+select d.預算科目名稱, d.金額-ifnull(c.金額, 0) 借貸淨值 
+from d left outer join c on d.預算科目名稱 = c.預算科目名稱
