@@ -1,21 +1,75 @@
 import os
+import re
 import csv
 import xlrd
 import sqlite3 as sqlite3
+
+def parse_table_name(filename):
+    pat = "\w+ *- *\d+\.(\w+) *- *\d+\.csv"
+    m = re.match(pat, filename)
+    if m == None:
+        pat = "\w+-\d+-(\w+).csv"
+        m = re.match(pat, filename)
+    if m == None:
+        print("wrong file name: %s" % filename)
+    return m.group(1)
 
 def is_duplicated_table(db, table):
     c = db.cursor()
     sql = "select count(*) from %s union select count(*) from (select distinct * from %s)" % (table, table)
     c.execute(sql)
-    l = len(c.fetchall())
-    if l==2: print("duplicated table %s: %s, %s"%(table, l[0], l[1]))
-    return (l == 2)
+    l = c.fetchall()
+    if len(l)==2: print("duplicated table %s: %s, %s"%(table, l[0][0], l[1][0]))
+    return (len(l) == 2)
 
 def table_names(db):
     c = db.cursor()
     sql = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY Name"
     c.execute(sql)
     return map(lambda x:x[0], c.fetchall())
+
+def fill_code_name(dbf):
+    db = sqlite3.connect(dbf)
+    for tn in table_names(db):
+        sql = ""
+        if tn == '法定預算檔':
+            print("表格「%s」補代碼名稱欄位"%tn)
+            sql = """create table temp as select a.*, b.名稱 預算科目名稱, c.名稱 用途別名稱
+                     from 法定預算檔 a join (select * from 基本代碼檔 where 代碼分類='1') b 
+                     on a.機關編碼 = b.機關編碼
+                     and a.送審月 = b.送審月
+                     and a.預算科目代碼 = b.代碼 join (select * from 基本代碼檔 where 代碼分類='4') c
+                     on a.機關編碼 = c.機關編碼
+                     and a.送審月 = c.送審月
+                     and a.用途別代碼 = c.代碼"""
+        if tn == '明細分類帳':
+            print("表格「%s」補代碼名稱欄位"%tn)
+            sql = """select b.名稱 總帳科目名稱, c.名稱 用途別名稱, a.*
+                     from 明細分類帳 a left outer join (select * from 基本代碼檔 where 代碼分類 in ('1', '2')) b 
+                     on a.機關編碼 = b.機關編碼
+                     and a.送審月 = b.送審月
+                     and a.總帳科目 = b.代碼
+                     left outer join (select * from 基本代碼檔 where 代碼分類='4') c
+                     on a.機關編碼 = c.機關編碼
+                     and a.送審月 = c.送審月
+                     and a.用途別代碼 = c.代碼"""
+        if sql != "":
+            try: 
+                #1.建立去除重覆紀錄之暫存表
+                db.execute(sql)
+                #2.刪除舊表
+                sql = "drop table %s" % tn
+                db.execute(sql)
+                #3.將暫存表命名為新表
+                sql = "alter table temp rename to %s" % tn
+                db.execute(sql)
+            except sqlite3.OperationalError as err:
+                with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
+                    errorlog.write("{}".format(err))
+                    errorlog.write(sql)
+    db.commit()
+    db.close()
+
 
 def deduplicat_tables(dbf):
     db = sqlite3.connect(dbf)
@@ -24,13 +78,13 @@ def deduplicat_tables(dbf):
             print("表格「%s」去除重複紀錄"%tn)
             try: 
                 #1.建立去除重覆紀錄之暫存表
-                sql = "create table temp as select distinct * from %s" % table
+                sql = "create table temp as select distinct * from %s" % tn
                 db.execute(sql)
                 #2.刪除舊表
-                sql = "drop table %s" % table
+                sql = "drop table %s" % tn
                 db.execute(sql)
                 #3.將暫存表命名為新表
-                sql = "alter table temp rename to %s" % table
+                sql = "alter table temp rename to %s" % tn
                 db.execute(sql)
             except sqlite3.OperationalError as err:
                 with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
@@ -43,7 +97,7 @@ def import_xls(db):
     db = sqlite3.connect(db)
     for f in [x for x in os.listdir() if x.endswith('.xls')]:
         book = xlrd.open_workbook(f)
-        sheet = book.sheet_by_name('gv_Analysis1')
+        sheet = book.sheet_by_index(0)
         tn = f.split('-')[1].split('.')[1] #table name
 
         for r in range(0, sheet.nrows): # r for row number
@@ -76,28 +130,28 @@ def import_csv(db):
 
         with open(f, newline='', encoding = 'utf-8-sig') as csvfile:
             data = csv.reader(csvfile, delimiter=',')
-            tn = f.split('-')[2].split('.')[0] 
+            tn = parse_table_name(f)
             isfirst = True
 
             for row in data:
-                if isfirst:
-                    # cn for column name
-                    db.execute("create table %s (%s);" % 
-                              (tn, ' text, '.join(map(lambda cn: '`%s`'%cn, row))))
-                    isfirst=False
-                else:
-                    # v for value
-                    try:
-                        db.execute("insert into %s values(%s)" % 
-                                  (tn, ', '.join(map(lambda v: "'%s'"%v, row))))
-                    except sqlite3.OperationalError:
-                        with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
-                            errorlog.write("insert into %s values(%s);\n" % 
-                                  (tn, ', '.join(map(lambda v: "'%s'"%v, row))))
-
+                try:
+                    sql = ""
+                    if isfirst:
+                        # cn for column name
+                        sql = "create table %s (%s);" % (tn, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
+                        db.execute(sql)
+                        isfirst = False
+                    else:
+                        # v for value
+                        sql = "insert into %s values(%s)" % (tn, ', '.join(map(lambda v: "'%s'"%v.strip(), row)))
+                        db.execute(sql)
+                except sqlite3.OperationalError as e:
+                    with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
+                        errorlog.write("msg %s: %s" % (e.strerror, sql))
     db.commit()
     db.close()
 
 #import_xls('ais.db')
 #import_csv('ais.db')
-deduplicat_tables('ais.db')
+#deduplicat_tables('ais.db')
+fill_code_name('ais.db')
