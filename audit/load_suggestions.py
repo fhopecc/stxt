@@ -5,7 +5,10 @@ import os
 import re
 
 def escape_sql_string(str):
-    return str.replace("'", "''")
+    try:
+        return str.replace("'", "''")
+    except:
+        return str
 
 def insert_page(rs, db):
     try:
@@ -14,9 +17,11 @@ def insert_page(rs, db):
 ,election_year ,suggest_year ,suggest_month ,suggestion   ,suggest_expense 
 ,approved_expense ,expend_on ,brought_by ,bid_type) values('%s'
 ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s' ,'%s')
-""" % ( r['county'] ,r['suggestor_name'] ,",".join(r['bid_by']) ,r['election_year'] 
-,r['suggest_year'] ,r['suggest_month'] ,r['suggestion']   ,r['suggest_expense'] 
-,r['approved_expense'] ,r['expend_on'] ,r['brought_by'] ,r['bid_type'])
+""" % ( escape_sql_string(r['county']) ,escape_sql_string(r['suggestor_name']) ,
+        ",".join(list(map(escape_sql_string,r['bid_by']))) ,r['election_year'] 
+,r['suggest_year'] ,r['suggest_month'] ,escape_sql_string(r['suggestion'])   ,r['suggest_expense'] 
+,r['approved_expense'] ,escape_sql_string(r['expend_on']) ,escape_sql_string(r['brought_by']) ,
+escape_sql_string(r['bid_type']))
             db.execute(sql)
         db.commit()
     except sqlite3.OperationalError as e:
@@ -31,12 +36,12 @@ if __name__ == '__main__':
     sql = """create table suggestions(county text
 ,suggestor_name text
 ,bid_by text
-,election_year text
-,suggest_year text
-,suggest_month text
+,election_year integer
+,suggest_year integer
+,suggest_month integer
 ,suggestion text  
-,suggest_expense text
-,approved_expense text
+,suggest_expense integer
+,approved_expense integer
 ,expend_on text
 ,brought_by text
 ,bid_type text)
