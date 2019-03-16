@@ -1,0 +1,26 @@
+=if(IFERROR(FIND("檢舉", D3,1),False),"檢舉", 
+ if(IFERROR(FIND("施工", D3,1),False),"施工", 
+ if(IFERROR(FIND("安全", D3,1),False),"安全", 
+ if(IFERROR(FIND("路口", D3,1),False),"路口", 
+ if(IFERROR(FIND("道路", D3,1),False),"道路", 
+ if(IFERROR(FIND("停車", D3,1),False),"停車", 
+ if(IFERROR(FIND("違建", D3,1),False),"違建", 
+ if(IFERROR(FIND("路燈", D3,1),False),"路燈", 
+ if(IFERROR(FIND("垃圾", D3,1),False),"垃圾", 
+ if(IFERROR(FIND("交通", D3,1),False),"交通", 
+ if(IFERROR(FIND("環保", D3,1),False),"環保", 
+ if(IFERROR(FIND("機車", D3,1),False),"機車", 
+ if(IFERROR(FIND("環保局", D3,1),False),"環保局", 
+ if(IFERROR(FIND("噪音", D3,1),False),"噪音", 
+ if(IFERROR(FIND("環境", D3,1),False),"環境", 
+ if(IFERROR(FIND("水溝", D3,1),False),"水溝", 
+ if(IFERROR(FIND("污水", D3,1),False),"污水", 
+ if(IFERROR(FIND("投訴", D3,1),False),"投訴", 
+ if(IFERROR(FIND("補助", D3,1),False),"補助", 
+ if(IFERROR(FIND("下水", D3,1),False),"下水", 
+"其他"))))))))))))))))))))
+
+
+
+
+

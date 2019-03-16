@@ -11,4 +11,6 @@ from aisimporter import chinese_word_count
 #              ,end_row_str=''
 #              )
 
-chinese_word_count("縣長信箱及1999專線資料分析 - 工作表4.csv","案件詞數表2.csv")
+#chinese_word_count("縣長信箱及1999專線資料分析 - 工作表4.csv","案件詞數表2.csv")
+
+import_dir_xls('廢食用油勾稽產源清冊查無營運紀錄', '廢食用油產源無營運紀錄', 'epb.db')

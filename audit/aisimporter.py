@@ -173,6 +173,7 @@ def import_xls1(f, t, db,
                     sql = "create table `%s` (%s);" % (t, ' text, '.join(map(lambda c: '`%s`'%sheet.cell(r, c).value, range(0, sheet.ncols))))
                 else:
                     sql = "create table `%s` (%s);" % (t, ' text, '.join(map(lambda c: 'f%d'%c, range(0, sheet.ncols))))
+                print(sql)
                 db.execute(sql)
             except sqlite3.OperationalError as err:
                 with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
