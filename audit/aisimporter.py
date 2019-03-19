@@ -240,12 +240,12 @@ def import_csv(db):
                     sql = ""
                     if isfirst:
                         # cn for column name
-                        sql = "create table %s (%s);" % (tn, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
+                        sql = "create table `%s` (%s);" % (tn, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
                         db.execute(sql)
                         isfirst = False
                     else:
                         # v for value
-                        sql = "insert into %s values(%s)" % (tn, ', '.join(map(lambda v: "'%s'"%v.strip(), row)))
+                        sql = "insert into `%s` values(%s)" % (tn, ', '.join(map(lambda v: "'%s'"%v.strip(), row)))
                         db.execute(sql)
                 except sqlite3.OperationalError as e:
                     with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
@@ -267,7 +267,7 @@ def import_csv2(f, table_name, db, is_append=False):
                 sql = ""
                 if isfirst and not is_append:
                     # cn for column name
-                    sql = "create table %s (%s);" % (table_name, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
+                    sql = "create table `%s` (%s);" % (table_name, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
                     db.execute(sql)
                     isfirst = False
                 else:
