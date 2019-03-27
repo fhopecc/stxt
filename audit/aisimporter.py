@@ -225,35 +225,19 @@ def import_gba_xls(db):
     db.commit()
     db.close()
 
-def import_csv(db):
+# import_gba_csv
+# import gba audit system export csv datasets into a sqlite database.
+def import_gba_csv(srcdir, db):
     db = sqlite3.connect(db)
 
-    for f in [x for x in os.listdir() if x.endswith('.csv')]:
-
-        with open(f, newline='', encoding = 'utf-8-sig') as csvfile:
-            data = csv.reader(csvfile, delimiter=',')
-            tn = parse_table_name(f)
-            isfirst = True
-
-            for row in data:
-                try:
-                    sql = ""
-                    if isfirst:
-                        # cn for column name
-                        sql = "create table %s (%s);" % (tn, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
-                        db.execute(sql)
-                        isfirst = False
-                    else:
-                        # v for value
-                        sql = "insert into %s values(%s)" % (tn, ', '.join(map(lambda v: "'%s'"%v.strip(), row)))
-                        db.execute(sql)
-                except sqlite3.OperationalError as e:
-                    with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
-                        errorlog.write("msg %s: %s" % (e.strerror, sql))
+    for f in [x for x in os.listdir(srcdir) if x.endswith('.csv')]:
+        import_csv(f, parse_table_name(f), db)
     db.commit()
     db.close()
 
-def import_csv2(f, table_name, db, is_append=False):
+# import_csv
+# import a csv file into a sqlite database.
+def import_csv(f, table_name, db, is_append=False):
     db = sqlite3.connect(db)
 
     if table_name == '':
@@ -267,7 +251,7 @@ def import_csv2(f, table_name, db, is_append=False):
                 sql = ""
                 if isfirst and not is_append:
                     # cn for column name
-                    sql = "create table %s (%s);" % (table_name, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
+                    sql = "create table `%s` (%s);" % (table_name, ' text, '.join(map(lambda cn: '`%s`'%cn, row)))
                     db.execute(sql)
                     isfirst = False
                 else:
