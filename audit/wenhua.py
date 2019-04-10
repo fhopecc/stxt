@@ -1,6 +1,8 @@
-#¤å¤Æ§½¨Mºâ
+#æ–‡åŒ–å±€æ±ºç®—
 from pathlib import Path, PureWindowsPath
+from aisimporter import import_cba_csv
 
-dir = PureWindowsPath('C:\Users\fhopecc\Google ¶³ºÝµwºÐ\¤å¤Æ§½107¦~¨Mºâ\¸ê°TÀÉ®×')
-
-import_gba_csv(dir, 
+dir = PureWindowsPath("C:\\Users\\fhopecc\\Google é›²ç«¯ç¡¬ç¢Ÿ\\æ–‡åŒ–å±€107å¹´æ±ºç®—\\dataset")
+print(dir.as_posix())
+print(dir / "cba.db")
+import_cba_csv(str(dir.as_posix()),  str((dir / "cba.db").as_posix()))

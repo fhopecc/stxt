@@ -194,7 +194,7 @@ def import_xls1(f, t, db,
     db.commit()
     db.close()
 
-def import_gba_xls(db):
+def import_cba_xls(db):
     db = sqlite3.connect(db)
     for f in [x for x in os.listdir() if x.endswith('.xls')]:
         book = xlrd.open_workbook(f)
@@ -225,21 +225,19 @@ def import_gba_xls(db):
     db.commit()
     db.close()
 
-# import_gba_csv
-# import gba audit system export csv datasets into a sqlite database.
-def import_gba_csv(srcdir, db):
+# import_cba_csv
+# import cba audit system export csv datasets into a sqlite database.
+def import_cba_csv(srcdir, db):
     db = sqlite3.connect(db)
 
     for f in [x for x in os.listdir(srcdir) if x.endswith('.csv')]:
-        import_csv(f, parse_table_name(f), db)
+        import_csv("%s/%s" % (srcdir,f), parse_table_name(f), db)
     db.commit()
     db.close()
 
 # import_csv
 # import a csv file into a sqlite database.
 def import_csv(f, table_name, db, is_append=False):
-    db = sqlite3.connect(db)
-
     if table_name == '':
         table_name = os.path.splitext("path_to_file")[0]
 
@@ -261,8 +259,6 @@ def import_csv(f, table_name, db, is_append=False):
             except sqlite3.OperationalError as e:
                 with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
                     errorlog.write("msg %s: %s" % (e.strerror, sql))
-    db.commit()
-    db.close()
 
 #import_csv2('opendata99.csv', 'death', 'death.db', False)
 #import_csv2('opendata97.csv', 'death', 'death.db', True)
