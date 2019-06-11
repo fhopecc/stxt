@@ -228,6 +228,7 @@ def import_cba_xls(db):
 # import_cba_csv
 # import cba audit system export csv datasets into a sqlite database.
 def import_cba_csv(srcdir, db):
+    print(db)
     db = sqlite3.connect(db)
 
     for f in [x for x in os.listdir(srcdir) if x.endswith('.csv')]:
@@ -258,7 +259,7 @@ def import_csv(f, table_name, db, is_append=False):
                     db.execute(sql)
             except sqlite3.OperationalError as e:
                 with open("error.log", 'a', newline='', encoding = 'utf-8-sig') as errorlog:
-                    errorlog.write("msg %s: %s" % (e.strerror, sql))
+                    errorlog.write("msg %s: %s" % (e, sql))
 
 #import_csv2('opendata99.csv', 'death', 'death.db', False)
 #import_csv2('opendata97.csv', 'death', 'death.db', True)
