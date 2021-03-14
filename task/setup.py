@@ -1,19 +1,32 @@
 '''
 環境設定
+安裝使用套件
+至 jupyter lab 的命令提示字元查看執行情形
 '''
-import sys, os, shutil
+import sys, os, subprocess
 from pathlib import Path
-
+from shutil import copyfile
+version = 0.1
 disk = Path(r'C:\\')
 r = Path(os.path.dirname(__file__))
+configdir = r / '..' / 'config'
 
-def setup_vim():
+def custom_vim():
     '設定 Vim 環境'
     _vimrc = r / '..' / 'config' / 'vim' / '_vimrc'
     vimdir = next(disk.glob('*x86*\\*[V]im*'))
     cmd = f'copy "{_vimrc}" "{vimdir}"'
     print(cmd)
     os.system(cmd)
+
+def custom_rime():
+    '''自訂小狼毫輸入法環境'''
+    p = Path(r'C:\Program Files (x86)\Rime\weasel-0.14.3')
+    fdir = configdir / 'rime' 
+    fs = ['symbols.yaml', 'weasel.custom.yaml']
+    print('開始設定小狼毫輸入法環境……')
+    for f in fs:
+        cp(fdir / f, p / 'data')
 
 def set_sysenv(var, val):
     cmd = 'setx %s "%s" /M >nul 2>nul' % (var, val)
@@ -33,6 +46,39 @@ def add_path(p):
 
 #add_path(r'C:\Program Files\GnuWin32\bin')
 
+def install(package):
+    '安裝套件'
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def upgrade(package):
+    '升級套件'
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
+def setup_package():
+    '設定套件'
+    upgrade('pip')
+    install('backupy')
+    upgrade('backupy')
+#   install('functional_pipeline')
+#   install('modin[ray]')
+    install('scipy')
+    install('bs4')
+    install('pymongo')
+    install('invoke')
+    install('google-api-python-client')
+    install('oauth2client')
+    install('httplib2')
+
+def cp(f, t):
+    '''更新檔案f至目錄t。且異動原檔前，先備份舊檔，再覆蓋原檔'''
+    d = t / f.name
+    b = t / f'{f.stem}_bk{f.suffix}'
+    if d.exists():
+        copyfile(d, b)
+    copyfile(f, d)
+    print(f'替換自訂{f.name}完成！')
+
+def setup():
+    print('開始自訂環境……')
+    custom_rime()
 
 '''
 0.1:將路徑加入程式搜尋路徑 environ['PATH']
@@ -49,4 +95,5 @@ if __name__ == "__main__":
 #    (options, args) = parser.parse_args()
 #
 #    if options.path: add_path(options.path)
-    setup_vim()
+    #setup_vim()
+    custom_rime()

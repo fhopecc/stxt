@@ -1,0 +1,4 @@
+# example weasel.custom.yaml
+patch:
+  app_options/gvim.exe:  # 程序名字全用小寫字母
+    ascii_mode: true
