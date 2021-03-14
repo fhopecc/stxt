@@ -1,5 +1,5 @@
-cd d:\stxt
-source $VIM/vimfiles/format.vim
+cd C:\stxt
+" source $VIM/vimfiles/format.vim
 let g:xml_namespace_transparent=1
 let g:xml_syntax_folding = 1
 set foldmethod=syntax
@@ -14,7 +14,7 @@ set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 
 colo darkblue
-set guifont=Courier_New:h14:cANSI
+set guifont=Lucida_Console:h16:cANSI
 
 set tabstop=4
 set shiftwidth=4
