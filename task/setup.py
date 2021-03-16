@@ -52,6 +52,7 @@ def install(package):
 def upgrade(package):
     '升級套件'
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
+
 def setup_package():
     '設定套件'
     upgrade('pip')
@@ -66,6 +67,7 @@ def setup_package():
     install('google-api-python-client')
     install('oauth2client')
     install('httplib2')
+    install('easyblogger')
 
 def cp(f, t):
     '''更新檔案f至目錄t。且異動原檔前，先備份舊檔，再覆蓋原檔'''
@@ -96,4 +98,5 @@ if __name__ == "__main__":
 #
 #    if options.path: add_path(options.path)
     #setup_vim()
-    custom_rime()
+#    custom_rime()
+    setup_package()
