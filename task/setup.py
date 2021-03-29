@@ -10,6 +10,7 @@ version = 0.1
 disk = Path(r'C:\\')
 r = Path(os.path.dirname(__file__))
 configdir = r / '..' / 'config'
+bindir = r / '..' / 'bin'
 
 def custom_vim():
     '設定 Vim 環境'
@@ -23,10 +24,19 @@ def custom_rime():
     '''自訂小狼毫輸入法環境'''
     p = Path(r'C:\Program Files (x86)\Rime\weasel-0.14.3')
     fdir = configdir / 'rime' 
-    fs = ['symbols.yaml', 'weasel.custom.yaml']
+    fs = ['symbols.yaml', 'weasel.custom.yaml', 'default.yaml']
     print('開始設定小狼毫輸入法環境……')
     for f in fs:
         cp(fdir / f, p / 'data')
+
+def backup_rime():
+    '''備份小狼毫輸入法設定檔'''
+    p = Path(r'C:\Program Files (x86)\Rime\weasel-0.14.3')
+    fs = ['default.yaml']
+    fdir = configdir / 'rime' 
+    print('備份小狼毫輸入法設定檔……')
+    for f in fs:
+        cp(p / 'data' / f, fdir)
 
 def set_sysenv(var, val):
     cmd = 'setx %s "%s" /M >nul 2>nul' % (var, val)
@@ -49,16 +59,21 @@ def add_path(p):
 def install(package):
     '安裝套件'
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
 def upgrade(package):
     '升級套件'
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", package])
+
 def setup_package():
     '設定套件'
     upgrade('pip')
+    install('lxml')
+    install('pandas_ods_reader')
+    install('xlrd')
+    install('openpyxl')
+    install('pandas')
+    install('pyarrow')
     install('backupy')
-    upgrade('backupy')
-#   install('functional_pipeline')
-#   install('modin[ray]')
     install('scipy')
     install('bs4')
     install('pymongo')
@@ -66,6 +81,30 @@ def setup_package():
     install('google-api-python-client')
     install('oauth2client')
     install('httplib2')
+    install('jupyterlab')
+    setup_geopandas()
+
+def setup_gdal():
+    fname =  'GDAL-3.2.2-cp39-cp39-win_amd64.whl'
+    gdal = bindir / fname
+    if gdal.exists():
+        install(str(gdal))
+    else:
+       raise Exception(f'需先下載{fname}至本機')
+
+def setup_fiona():
+    setup_gdal()
+
+    fname =  'Fiona-1.8.18-cp39-cp39-win_amd64.whl'
+    fiona = bindir / fname
+    if fiona.exists():
+        install(str(fiona))
+    else:
+       raise Exception(f'需先下載{fname}至本機')
+ 
+def setup_geopandas():
+    setup_fiona()
+    install('geopandas')
 
 def cp(f, t):
     '''更新檔案f至目錄t。且異動原檔前，先備份舊檔，再覆蓋原檔'''
@@ -80,20 +119,5 @@ def setup():
     print('開始自訂環境……')
     custom_rime()
 
-'''
-0.1:將路徑加入程式搜尋路徑 environ['PATH']
-'''
 if __name__ == "__main__":
-#    from optparse import OptionParser
-#    usage = u"usage: %prog log [options]"
-#    parser = OptionParser(usage, version="%prog 0.1", 
-#             description=u"環境設定自動化工具組"
-#        )
-#    parser.add_option("-p", "--path", dest="path", 
-#                       help=u"將路徑加入程式搜尋路徑 environ['PATH']")
-#
-#    (options, args) = parser.parse_args()
-#
-#    if options.path: add_path(options.path)
-    #setup_vim()
-    custom_rime()
+    setup_package()
