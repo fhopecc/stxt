@@ -82,6 +82,7 @@ def setup_package():
     install('oauth2client')
     install('httplib2')
     install('jupyterlab')
+    install('easyblogger')
     setup_geopandas()
 
 def setup_gdal():
