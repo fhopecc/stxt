@@ -2,6 +2,8 @@
 環境設定
 安裝使用套件
 至 jupyter lab 的命令提示字元查看執行情形
+ 下載編好的wheel網址
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal
 '''
 import sys, os, subprocess
 from pathlib import Path
@@ -84,14 +86,20 @@ def setup_package():
     install('jupyterlab')
     install('easyblogger')
     setup_geopandas()
+    setup_levenshtein()
 
 def setup_gdal():
+    'http://download.osgeo.org/osgeo4w/osgeo4w-setup-x86_64.exe'
     fname =  'GDAL-3.2.2-cp39-cp39-win_amd64.whl'
     gdal = bindir / fname
     if gdal.exists():
         install(str(gdal))
     else:
        raise Exception(f'需先下載{fname}至本機')
+
+def setup_levenshtein():
+    fname = 'c:\Python39\wheel\python_Levenshtein-0.12.2-cp39-cp39-win_amd64.whl'
+    install(fname)
 
 def setup_fiona():
     setup_gdal()
