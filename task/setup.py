@@ -67,7 +67,9 @@ def upgrade(package):
 def setup_package():
     '設定套件'
     upgrade('pip')
+    install('statsmodels')
     install('lxml')
+    install('seaborn')
     install('pandas_ods_reader')
     install('xlrd')
     install('openpyxl')
