@@ -79,6 +79,7 @@ def upgrade(package):
 def setup_package():
     '設定套件'
     upgrade('pip')
+    install('mprop')
     install('statsmodels')
     install('lxml')
     install('seaborn')
