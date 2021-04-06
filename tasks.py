@@ -14,3 +14,13 @@ def backup_hlao(c):
 def example(c, name):
     '範例'
     c.run(f"echo {name}加油!")
+
+@task
+def markdown(c):
+    '要轉檔的markdown檔'
+    import markdown
+    from pathlib import Path
+    m = Path(r'C:\\') / 'gd' / '110農地專調' / '納管輔導金.txt'
+    with m.open('r', encoding='utf8') as f:
+        html = markdown.markdown(f.read())
+        print(html)

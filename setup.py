@@ -21,8 +21,8 @@ def add_os_path(path):
         print('%s failed!' % cmd)
     print("add %s into os executing path." % cmd) 
 # add python install path into OS path
-python_dir = os.path.dirname(sys.executable) 
-add_os_path(os.path.join(python_dir, 'Scripts'))
+# python_dir = os.path.dirname(sys.executable) 
+# add_os_path(os.path.join(python_dir, 'Scripts'))
 
 def custom_vim():
     '設定 Vim 環境'
@@ -79,7 +79,8 @@ def upgrade(package):
 def setup_package():
     '設定套件'
     upgrade('pip')
-    install('mprop')
+    upgrade('requests[socks]')
+    install('markdown')
     install('statsmodels')
     install('lxml')
     install('seaborn')
